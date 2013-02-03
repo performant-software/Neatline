@@ -30,7 +30,6 @@ _.extend(Neatline.Map.View.prototype, {
    * layers for existing records from being wiped out by server data.
    *
    * @param {Object} records: The records collection.
-   * @unittest
    */
   ingest: function(records) {
 
