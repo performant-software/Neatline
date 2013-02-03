@@ -18,6 +18,9 @@
 
   form.record
 
+    label
+      font-weight 500
+
     div.controls
       margin-bottom 10px
 
@@ -33,6 +36,7 @@
 
       label.radio
       label.checkbox
+        margin-bottom 10px
         cursor pointer
 
         &:hover
@@ -42,12 +46,16 @@
         margin-left 0.5em
 
       div.control-group.indent
-        margin-left 1.4em
+        margin 1em 2em
+
+        label
+        .inline-inputs
+          font-weight 300
 
         &.regular-polygon
 
           .inline-inputs
-            margin-bottom 5px
+            margin-bottom 10px
 
           input[type="text"]
             display inline

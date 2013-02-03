@@ -93,7 +93,7 @@
     <input type="radio" name="mode" value="remove">
     Delete Shape
   </label>
-
+  <!--
   <hr>
 
   <?php echo $this->partial(
@@ -101,6 +101,7 @@
       'name'  => 'svg',
       'label' => 'SVG (Scalable Vector Graphics)'
   )); ?>
+  -->
 
   <hr>
 
