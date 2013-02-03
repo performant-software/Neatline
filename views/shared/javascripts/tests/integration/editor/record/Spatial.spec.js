@@ -349,14 +349,14 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
-    var pt1   = new OpenLayers.Geometry.Point(1,2);
-    var pt2   = new OpenLayers.Geometry.Point(3,4);
+    var pt1   = new OpenLayers.Geometry.Point(3,4);
+    var pt2   = new OpenLayers.Geometry.Point(5,6);
     var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
     _t.vw.map.controls.line.drawFeature(line);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(1 2,3 4))'
+      'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(3 4,5 6))'
     );
 
   });
@@ -370,16 +370,36 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
-    var pt1   = new OpenLayers.Geometry.Point(1,2);
-    var pt2   = new OpenLayers.Geometry.Point(3,4);
-    var pt3   = new OpenLayers.Geometry.Point(5,6);
+    var pt1   = new OpenLayers.Geometry.Point(3,4);
+    var pt2   = new OpenLayers.Geometry.Point(5,6);
+    var pt3   = new OpenLayers.Geometry.Point(7,8);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
     _t.vw.map.controls.poly.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
-      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
+      'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((3 4,5 6,7 8,3 4)))'
+    );
+
+  });
+
+
+  it('should update coverage on svg add', function() {
+
+    // --------------------------------------------------------------------
+    // When a new SVG-backed geometry collection is added to the map, the
+    // coverage text area should be updated with the new WKT string.
+    // --------------------------------------------------------------------
+
+    var pt1 = new OpenLayers.Geometry.Point(3,4);
+    var pt2 = new OpenLayers.Geometry.Point(5,6);
+    var collection = new OpenLayers.Geometry.Collection([pt1, pt2]);
+    _t.vw.map.controls.svg.drawFeature(collection);
+
+    // "Coverage" should be updated.
+    expect(els.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4),POINT(5 6))'
     );
 
   });

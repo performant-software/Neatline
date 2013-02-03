@@ -52,8 +52,7 @@ describe('Map Editing', function() {
   it('should create edit layer for new record', function() {
 
     // --------------------------------------------------------------------
-    // When a new record is added, a new layer should be created and set
-    // to be the edit layer.
+    // When a new record is added, a new edit layer should be created.
     // --------------------------------------------------------------------
 
     // Add new record.
@@ -161,9 +160,9 @@ describe('Map Editing', function() {
   it('should clear unsaved edit layer when edit ends', function() {
 
     // --------------------------------------------------------------------
-    // When the add record flow is initated, but then the form is closed
-    // without being saved, the edit layer that was created for the model
-    // should be garbage collected in the next layer refresh.
+    // When a new record is added, but then the form is closed without
+    // being saved, the edit layer that was created for the model should
+    // be garbage collected in the next layer refresh.
     // --------------------------------------------------------------------
 
     // Create new record.
