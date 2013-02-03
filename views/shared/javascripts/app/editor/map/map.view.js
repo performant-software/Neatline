@@ -288,27 +288,31 @@ _.extend(Neatline.Map.View.prototype, {
    */
   publish: function() {
 
+    var features = [];
     var wkt = null;
 
-    // Filter out editing geometry.
-    var features = _.filter(this.editLayer.features, function(f) {
-      return !f._sketch;
+    // Get features from the edit layer.
+    _.each(this.editLayer.features, function(f) {
+      if (!f._sketch) {
+
+        // If the feature's `geometry` is a collection, not an individual
+        // geometry, extract the component geometries and build separate
+        // features for each of them. This prevents the WKT formatter from
+        // creating nested GEOMETRYCOLLECTION()'s, which break in MySQL.
+        if (f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Collection') {
+          _.each(f.geometry.components, function(geometry) {
+            var feature = new OpenLayers.Feature.Vector();
+            feature.geometry = geometry;
+            features.push(feature);
+          });
+        }
+
+        else features.push(f);
+
+      }
     });
 
-    // TODO: Implement.
-    // _.each(this.editLayer.features, function(feature) {
-      // if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry') {
-        // features.push(feature);
-      // } else {
-        // _.each(feature.geometry.components, function(geometry) {
-          // var feature = new OpenLayers.Feature.Vector();
-          // feature.geometry = geometry;
-          // features.push(feature);
-        // });
-      // }
-    // });
-
-    // Get the WKT string.
+    // Convert to WKT.
     if (!_.isEmpty(features)) {
       var formatWKT = new OpenLayers.Format.WKT();
       var wkt = formatWKT.write(features);
