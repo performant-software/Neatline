@@ -20,7 +20,20 @@
   </div>
 
   <div class="modal-body">
-    <textarea name="svg" class="code"></textarea>
+
+    <?php echo $this->partial(
+      'exhibits/underscore/helpers/_textarea.php', array(
+        'name'  => 'svg',
+        'label' => 'SVG',
+        'class' => 'code'
+    )); ?>
+
+    <?php echo $this->partial(
+      'exhibits/underscore/helpers/_text_input.php', array(
+        'name'  => 'density',
+        'label' => 'Density'
+    )); ?>
+
   </div>
 
   <div class="modal-footer">
