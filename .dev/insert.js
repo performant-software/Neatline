@@ -4,8 +4,12 @@
 
 var mysql = require('mysql');
 var randy = require('randy');
+var _s = require('underscore.string');
 var _ = require('underscore');
+var fs = require('fs');
 
+
+// Connect to MySQL.
 var client = mysql.createConnection({
   host: 'localhost',
   user: 'omeka',
@@ -22,7 +26,9 @@ function records(exhibit_id, count, zoom, color, tags) {
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
       'exhibit_id,'+
+      'title,'+
       '_title,'+
+      'body,'+
       '_body,'+
       'tags,'+
       'vector_color,'+
@@ -45,11 +51,14 @@ function records(exhibit_id, count, zoom, color, tags) {
     var lon = randy.randInt(-20000000,20000000);
     var geo = 'GeomFromText("POINT('+lon+' '+lat+')")';
     var rad = randy.randInt(10,100);
+    var bod = randy.choice(wp);
 
     sql += '(' +
       exhibit_id+','+
       '"Record'+n+'",'+
-      '"Body'+n+'",'+
+      '"Record'+n+'",'+
+      '"'+bod+'",'+
+      '"'+bod+'",'+
       '"'+tags+'",'+
       '"'+color+'",'+
       '"#000000",'+
@@ -74,28 +83,7 @@ function records(exhibit_id, count, zoom, color, tags) {
 }
 
 
-function tags(exhibit_id, count) {
-
-  var sql = 'INSERT INTO omeka_neatline_tags (' +
-      'exhibit_id,'+
-      'tag'+
-      ') VALUES';
-
-  _(count).times(function(n) {
-
-    sql += '(' +
-      exhibit_id+','+
-      '"tag'+n+'"'+
-    ')';
-
-    if (n != count-1) sql += ',';
-
-  });
-
-  client.query(sql);
-
-}
-
+var wp;
 
 // Create exhibit.
 var sql = 'INSERT INTO omeka_neatline_exhibits ' +
@@ -103,15 +91,22 @@ var sql = 'INSERT INTO omeka_neatline_exhibits ' +
 
 client.query(sql, function(err, res) {
 
-  records(res.insertId, 200, 3, '#00ff24', 'level3');
-  records(res.insertId, 400, 4, '#00aeff', 'level4');
-  records(res.insertId, 5000, 5, '#0006ff', 'level5');
-  records(res.insertId, 20000, 6, '#7800ff', 'level6');
-  records(res.insertId, 50000, 7, '#f000ff', 'level7');
-  records(res.insertId, 100000, 8, '#ff0000', 'level8');
+  // Read War and Peace.
+  fs.readFile('./war-and-peace.txt', 'utf8', function(err, text) {
 
-  client.end(function() {
-    process.exit();
+    wp = _s.lines(text);
+
+    records(res.insertId, 200, 3, '#00ff24', 'level3');
+    records(res.insertId, 400, 4, '#00aeff', 'level4');
+    records(res.insertId, 5000, 5, '#0006ff', 'level5');
+    records(res.insertId, 20000, 6, '#7800ff', 'level6');
+    records(res.insertId, 50000, 7, '#f000ff', 'level7');
+    records(res.insertId, 100000, 8, '#ff0000', 'level8');
+
+    client.end(function() {
+      process.exit();
+    });
+
   });
 
 });
