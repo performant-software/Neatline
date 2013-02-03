@@ -27,12 +27,11 @@ class Neatline_NeatlineRecordTest_FieldAccess
         // Set fields.
         $record->item_id            = 1;
         $record->exhibit_id         = 2;
-        $record->slug               = '3';
-        $record->title              = '4';
-        $record->body               = '5';
-        $record->tags               = '6';
-        $record->coverage           = 'POINT(1 1)';
-        $record->svg                = '7';
+        $record->title              = '3';
+        $record->body               = '4';
+        $record->coverage           = 'POINT(5 5)';
+        $record->slug               = '6';
+        $record->tags               = '7';
         $record->map_focus          = '8';
         $record->map_zoom           = 9;
         $record->vector_color       = '10';
@@ -55,12 +54,11 @@ class Neatline_NeatlineRecordTest_FieldAccess
         // Fields should be set.
         $this->assertEquals($record->item_id,           1);
         $this->assertEquals($record->exhibit_id,        2);
-        $this->assertEquals($record->slug,              '3');
-        $this->assertEquals($record->title,             '4');
-        $this->assertEquals($record->body,              '5');
-        $this->assertEquals($record->tags,              '6');
-        $this->assertEquals($record->coverage,          'POINT(1 1)');
-        $this->assertEquals($record->svg,               '7');
+        $this->assertEquals($record->title,             '3');
+        $this->assertEquals($record->body,              '4');
+        $this->assertEquals($record->coverage,          'POINT(5 5)');
+        $this->assertEquals($record->slug,              '6');
+        $this->assertEquals($record->tags,              '7');
         $this->assertEquals($record->map_focus,         '8');
         $this->assertEquals($record->map_zoom,          9);
         $this->assertEquals($record->vector_color,      '10');

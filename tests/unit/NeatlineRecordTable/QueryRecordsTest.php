@@ -37,14 +37,14 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record1->body              = '3';
         $record2->body              = '4';
         //-----------------------------------------------------------------
-        $record1->svg               = '5';
-        $record2->svg               = '6';
+        $record1->coverage          = 'POINT(5 5)';
+        $record2->coverage          = 'POINT(6 6)';
         //-----------------------------------------------------------------
-        $record1->tags              = '7';
-        $record2->tags              = '8';
+        $record1->slug              = '7';
+        $record2->slug              = '8';
         //-----------------------------------------------------------------
-        $record1->slug              = '9';
-        $record2->slug              = '10';
+        $record1->tags              = '9';
+        $record2->tags              = '10';
         //-----------------------------------------------------------------
         $record1->vector_color      = '11';
         $record2->vector_color      = '12';
@@ -88,9 +88,6 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $record1->map_zoom          = 37;
         $record2->map_zoom          = 38;
         //-----------------------------------------------------------------
-        $record1->coverage          = 'POINT(1 1)';
-        $record2->coverage          = 'POINT(2 2)';
-        //-----------------------------------------------------------------
 
         $record1->save();
         $record2->save();
@@ -109,10 +106,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertEquals($records[0]['_title'],          '1');
         $this->assertEquals($records[0]['body'],            '3');
         $this->assertEquals($records[0]['_body'],           '3');
-        $this->assertEquals($records[0]['coverage'],        'POINT(1 1)');
-        $this->assertEquals($records[0]['svg'],             '5');
-        $this->assertEquals($records[0]['tags'],            '7');
-        $this->assertEquals($records[0]['slug'],            '9');
+        $this->assertEquals($records[0]['coverage'],        'POINT(5 5)');
+        $this->assertEquals($records[0]['slug'],            '7');
+        $this->assertEquals($records[0]['tags'],            '9');
         $this->assertEquals($records[0]['vector_color'],    '11');
         $this->assertEquals($records[0]['stroke_color'],    '13');
         $this->assertEquals($records[0]['select_color'],    '15');
@@ -135,10 +131,9 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $this->assertEquals($records[1]['_title'],          '2');
         $this->assertEquals($records[1]['body'],            '4');
         $this->assertEquals($records[1]['_body'],           '4');
-        $this->assertEquals($records[1]['coverage'],        'POINT(2 2)');
-        $this->assertEquals($records[1]['svg'],             '6');
-        $this->assertEquals($records[1]['tags'],            '8');
-        $this->assertEquals($records[1]['slug'],            '10');
+        $this->assertEquals($records[1]['coverage'],        'POINT(6 6)');
+        $this->assertEquals($records[1]['slug'],            '8');
+        $this->assertEquals($records[1]['tags'],            '10');
         $this->assertEquals($records[1]['vector_color'],    '12');
         $this->assertEquals($records[1]['stroke_color'],    '14');
         $this->assertEquals($records[1]['select_color'],    '16');

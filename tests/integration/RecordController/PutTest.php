@@ -27,8 +27,8 @@ class Neatline_RecordControllerTest_Put
         $record->item_id            = '1';
         $record->title              = '2';
         $record->body               = '3';
-        $record->slug               = '4';
-        $record->svg                = '5';
+        $record->coverage           = 'POINT(4 4)';
+        $record->slug               = '5';
         $record->tags               = '6';
         $record->vector_color       = '7';
         $record->stroke_color       = '8';
@@ -44,14 +44,14 @@ class Neatline_RecordControllerTest_Put
         $record->max_zoom           = 18;
         $record->map_focus          = '19';
         $record->map_zoom           = 20;
-        $record->coverage           = 'POINT(21 21)';
         $record->save();
 
         $values = array(
-            'title'                 => '22',
-            'body'                  => '23',
+            'title'                 => '21',
+            'body'                  => '22',
+            'coverage'              => 'POINT(23 23)',
             'slug'                  => '24',
-            'svg'                   => '25',
+            'tags'                  => '25',
             'vector_color'          => '26',
             'stroke_color'          => '27',
             'select_color'          => '28',
@@ -65,8 +65,7 @@ class Neatline_RecordControllerTest_Put
             'min_zoom'              => '36',
             'max_zoom'              => '37',
             'map_focus'             => '38',
-            'map_zoom'              => '39',
-            'coverage'              => 'POINT(40 40)'
+            'map_zoom'              => '39'
         );
 
         $this->writePut($values);
@@ -76,10 +75,11 @@ class Neatline_RecordControllerTest_Put
         $record = $this->_recordsTable->find($record->id);
 
         // Should update fields.
-        $this->assertEquals($record->title,             '22');
-        $this->assertEquals($record->body,              '23');
+        $this->assertEquals($record->title,             '21');
+        $this->assertEquals($record->body,              '22');
+        $this->assertEquals($record->coverage,          'POINT(23 23)');
         $this->assertEquals($record->slug,              '24');
-        $this->assertEquals($record->svg,               '25');
+        $this->assertEquals($record->tags,              '25');
         $this->assertEquals($record->vector_color,      '26');
         $this->assertEquals($record->stroke_color,      '27');
         $this->assertEquals($record->select_color,      '28');
@@ -94,7 +94,6 @@ class Neatline_RecordControllerTest_Put
         $this->assertEquals($record->max_zoom,          37);
         $this->assertEquals($record->map_focus,         '38');
         $this->assertEquals($record->map_zoom,          39);
-        $this->assertEquals($record->coverage,          'POINT(40 40)');
 
     }
 

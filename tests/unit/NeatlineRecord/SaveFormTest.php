@@ -27,9 +27,8 @@ class Neatline_NeatlineRecordTest_SaveForm
         $values = array(
             'item_id'           => 1,
             'title'             => '2',
-            'coverage'          => 'POINT(1 1)',
-            'svg'               => '3',
-            'body'              => '4',
+            'body'              => '3',
+            'coverage'          => 'POINT(4 4)',
             'slug'              => '5',
             'tags'              => '6',
             'map_focus'         => '7',
@@ -53,9 +52,8 @@ class Neatline_NeatlineRecordTest_SaveForm
 
         $this->assertEquals($record->item_id,           1);
         $this->assertEquals($record->title,             '2');
-        $this->assertEquals($record->coverage,          'POINT(1 1)');
-        $this->assertEquals($record->svg,               '3');
-        $this->assertEquals($record->body,              '4');
+        $this->assertEquals($record->body,              '3');
+        $this->assertEquals($record->coverage,          'POINT(4 4)');
         $this->assertEquals($record->slug,              '5');
         $this->assertEquals($record->tags,              '6');
         $this->assertEquals($record->map_focus,         '7');

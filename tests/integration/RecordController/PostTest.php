@@ -31,8 +31,8 @@ class Neatline_RecordControllerTest_Post
             'item_id'           => '1',
             'title'             => '2',
             'body'              => '3',
-            'slug'              => '4',
-            'svg'               => '5',
+            'coverage'          => 'POINT(4 4)',
+            'slug'              => '5',
             'tags'              => '6',
             'vector_color'      => '7',
             'stroke_color'      => '8',
@@ -47,8 +47,7 @@ class Neatline_RecordControllerTest_Post
             'min_zoom'          => '17',
             'max_zoom'          => '18',
             'map_focus'         => '19',
-            'map_zoom'          => '20',
-            'coverage'          => 'POINT(21 21)'
+            'map_zoom'          => '20'
         )));
 
         // Hit /records with POST.
@@ -72,8 +71,8 @@ class Neatline_RecordControllerTest_Post
         $this->assertEquals($record->item_id,           '1');
         $this->assertEquals($record->title,             '2');
         $this->assertEquals($record->body,              '3');
-        $this->assertEquals($record->slug,              '4');
-        $this->assertEquals($record->svg,               '5');
+        $this->assertEquals($record->coverage,          'POINT(4 4)');
+        $this->assertEquals($record->slug,              '5');
         $this->assertEquals($record->tags,              '6');
         $this->assertEquals($record->vector_color,      '7');
         $this->assertEquals($record->stroke_color,      '8');
@@ -89,7 +88,6 @@ class Neatline_RecordControllerTest_Post
         $this->assertEquals($record->max_zoom,          18);
         $this->assertEquals($record->map_focus,         '19');
         $this->assertEquals($record->map_zoom,          20);
-        $this->assertEquals($record->coverage,          'POINT(21 21)');
 
     }
 
