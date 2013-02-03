@@ -38,7 +38,7 @@
 
   <label class="radio">
     <input type="radio" name="mode" value="svg">
-    Draw SVG ( <a href="#">Enter Markup</a> )
+    Draw SVG ( <a href="#svg-modal" data-toggle="modal">Enter Markup</a> )
   </label>
 
   <label class="radio">

@@ -38,8 +38,7 @@ Neatline.module('Editor.Record', function(
       'keyup div.spatial input':        'onControlChange',
 
       // Parse SVG geometry.
-      'change textarea[name="svg"]':    'onSVGChange',
-      'keyup textarea[name="svg"]':     'onSVGChange',
+      'click a[name="parse"]':          'onParseClick',
 
       // Preview styles.
       'change input.preview':           'onStyleChange',
@@ -51,32 +50,41 @@ Neatline.module('Editor.Record', function(
     },
 
     selectors: {
-      mode:   'input[name="mode"]',
-      modify: 'input[name="modify"]'
+      mode:       'input[name="mode"]',
+      modify:     'input[name="modify"]'
     },
 
     ui: {
+
+      // "Text" tab.
       text: {
-        tab:    'a[href="#record-form-text"]',
-        region: '#record-form-text'
+        tab:      'a[href="#record-form-text"]',
+        region:   '#record-form-text'
       },
+
+      // "Spatial" tab.
       spatial: {
-        pan:    'input[value="pan"]',
-        sides:  'input[name="sides"]',
-        snap:   'input[name="snap"]',
-        irreg:  'input[name="irreg"]',
-        svg:    'textarea[name="svg"]',
-        valid:  'span.valid'
+        pan:      'input[value="pan"]',
+        sides:    'input[name="sides"]',
+        snap:     'input[name="snap"]',
+        irreg:    'input[name="irreg"]',
+        svg:      'textarea[name="svg"]',
+        modal:    '#svg-modal',
       },
+
+      // "Style" tab.
       style: {
         minZoom:  'input[name="min-zoom"]',
         maxZoom:  'input[name="max-zoom"]',
         mapFocus: 'input[name="map-focus"]',
         mapZoom:  'input[name="map-zoom"]'
       },
+
+      // Delete flow.
       remove: {
-        modal:  '#delete-modal'
+        modal:    '#delete-modal'
       }
+
     },
 
 
@@ -286,13 +294,14 @@ Neatline.module('Editor.Record', function(
     /**
      * Convert new SVG to WKT and update the map handler.
      */
-    onSVGChange: function() {
+    onParseClick: function() {
 
       var val = this.__ui.spatial.svg.val();
 
       try {
         var wkt = SVGtoWKT.convert(val);
         Neatline.execute('editor:map:updateWKT', wkt);
+        this.__ui.spatial.modal.modal('hide');
       } catch (e) {}
 
     },

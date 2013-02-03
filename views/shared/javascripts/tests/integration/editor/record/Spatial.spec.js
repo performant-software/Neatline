@@ -37,6 +37,7 @@ describe('Record Form Spatial Tab', function() {
       remove:   _t.vw.record.$('input[value="remove"]'),
       coverage: _t.vw.record.$('textarea[name="coverage"]'),
       svg2:     _t.vw.record.$('textarea[name="svg"]'),
+      parse:    _t.vw.record.$('a[name="parse"]'),
       sides:    _t.vw.record.__ui.spatial.sides,
       snap:     _t.vw.record.__ui.spatial.snap,
       irreg:    _t.vw.record.__ui.spatial.irreg
@@ -289,31 +290,20 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should set SVG geometry on `change` and `keyup`', function() {
+  it('should set SVG geometry when "Parse SVG" is clicked', function() {
 
     // --------------------------------------------------------------------
-    // When `change` or `keyup` triggers on the SVG text area, the value
-    // should be coverted to WKT and set on the Geometry handler.
+    // When the "Parse SVG" button is clicked, the markup in the textarea
+    // should be parsed and the map handler geometry should be updated.
     // --------------------------------------------------------------------
 
     var formatWKT = new OpenLayers.Format.WKT();
     var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
     var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
 
-    // Trigger `change`.
+    // Update SVG.
     els.svg2.val(svg);
-    els.svg2.trigger('change');
-
-    // `geometry` on handler should be set.
-    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
-      toBeTruthy();
-
-    svg = '<svg><polygon points="7,8 9,10 11,12" /></svg>';
-    geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
-
-    // Trigger `keyup`.
-    els.svg2.val(svg);
-    els.svg2.trigger('keyup');
+    els.parse.trigger('click');
 
     // `geometry` on handler should be set.
     expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).

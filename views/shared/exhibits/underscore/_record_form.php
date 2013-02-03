@@ -64,11 +64,22 @@
 
   </div>
 
+  <!-- Save/Delete buttons. -->
   <?php echo $this->partial(
-    'exhibits/underscore/partials/_form_actions.php', array('warning' =>
+    'exhibits/underscore/partials/_form_actions.php'
+  ); ?>
+
+  <!-- Delete modal. -->
+  <?php echo $this->partial(
+    'exhibits/underscore/partials/_delete_modal.php', array('warning' =>
       "This will delete the record from the database and remove all
       associated metadata. This action cannot be undone."
     )
+  ); ?>
+
+  <!-- SVG modal. -->
+  <?php echo $this->partial(
+    'exhibits/underscore/partials/_svg_modal.php'
   ); ?>
 
 </script>

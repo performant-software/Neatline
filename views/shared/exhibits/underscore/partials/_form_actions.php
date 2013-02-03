@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Save/Delete buttons for edit forms.
+ * Save/Delete buttons for recrord edit form.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -19,33 +19,11 @@
     <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" name="delete1" class="btn btn-large btn-inverse"
-    data-toggle="modal">
-      <i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?>
-  </a>
-
-</div>
-
-<div id="delete-modal" class="modal hide">
-
-  <div class="modal-header">
-    <h4>Are you sure?</h4>
-  </div>
-
-  <div class="modal-body">
-    <p><?php echo $warning; ?></p>
-  </div>
-
-  <div class="modal-footer">
-
-    <a name="cancel" class="btn" data-dismiss="modal">
-      <i class="icon-ban-circle"></i> Cancel
-    </a>
-
-    <a name="delete2" class="btn btn-danger">
-      <i class="icon-trash icon-white"></i> Yes, delete
-    </a>
-
-  </div>
+  <a
+    href="#delete-modal"
+    name="delete1"
+    class="btn btn-large btn-inverse"
+    data-toggle="modal"
+  ><i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?></a>
 
 </div>
