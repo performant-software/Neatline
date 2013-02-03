@@ -28,7 +28,7 @@ describe('Record Form Spatial Tab', function() {
       point:    _t.vw.record.$('input[value="point"]'),
       line:     _t.vw.record.$('input[value="line"]'),
       poly:     _t.vw.record.$('input[value="poly"]'),
-      svg1:     _t.vw.record.$('input[value="svg"]'),
+      svg:     _t.vw.record.$('input[value="svg"]'),
       regPoly:  _t.vw.record.$('input[value="regPoly"]'),
       modify:   _t.vw.record.$('input[value="modify"]'),
       rotate:   _t.vw.record.$('input[value="rotate"]'),
@@ -36,7 +36,7 @@ describe('Record Form Spatial Tab', function() {
       drag:     _t.vw.record.$('input[value="drag"]'),
       remove:   _t.vw.record.$('input[value="remove"]'),
       coverage: _t.vw.record.$('textarea[name="coverage"]'),
-      svg2:     _t.vw.record.$('textarea[name="svg"]'),
+      clear:    _t.vw.record.$('a[name="clear"]'),
       parse:    _t.vw.record.$('a[name="parse"]'),
       sides:    _t.vw.record.__ui.spatial.sides,
       snap:     _t.vw.record.__ui.spatial.snap,
@@ -109,8 +109,8 @@ describe('Record Form Spatial Tab', function() {
 
     // Check "Draw SVG".
     els.pan.removeAttr('checked');
-    els.svg1.attr('checked', 'checked');
-    els.svg1.trigger('change');
+    els.svg.attr('checked', 'checked');
+    els.svg.trigger('change');
 
     // "Draw SVG" should be active.
     expect(_t.vw.map.controls.svg.active).toBeTruthy();
@@ -455,6 +455,25 @@ describe('Record Form Spatial Tab', function() {
 
     // Trigger modification.
     _t.vw.map.controls.remove.selectFeature(feature);
+
+    // "Coverage" should be updated.
+    expect(els.coverage.val()).toEqual('');
+
+  });
+
+
+  it('should remove all features on reset', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Clear all Geometry" button is clicked, all features on
+    // the edit layer should be deleted.
+    // --------------------------------------------------------------------
+
+    // Click "Clear all Geometry".
+    els.clear.trigger('click');
+
+    // All features should be removed.
+    expect(_t.vw.map.editLayer.features.length).toEqual(0);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual('');

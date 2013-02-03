@@ -75,6 +75,16 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
+   * Delete all features on the edit layer.
+   */
+  var clear = function() {
+    Map.__view.clear();
+  };
+
+  Neatline.commands.addHandler('editor:map:clear', clear);
+
+
+  /**
    * Remove a model's layer from the map.
    *
    * @param {Object} model: The record model.

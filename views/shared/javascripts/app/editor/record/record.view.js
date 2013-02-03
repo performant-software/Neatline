@@ -40,6 +40,9 @@ Neatline.module('Editor.Record', function(
       // Parse SVG geometry.
       'click a[name="parse"]':          'onParseClick',
 
+      // Clear all geometries.
+      'click a[name="clear"]':          'onClearClick',
+
       // Preview styles.
       'change input.preview':           'onStyleChange',
       'keyup input.preview':            'onStyleKeyup',
@@ -80,7 +83,7 @@ Neatline.module('Editor.Record', function(
         mapZoom:  'input[name="map-zoom"]'
       },
 
-      // Delete flow.
+      // Delete.
       remove: {
         modal:    '#delete-modal'
       }
@@ -318,6 +321,14 @@ Neatline.module('Editor.Record', function(
         );
       }
 
+    },
+
+
+    /**
+     * Clear all features on the edit layer.
+     */
+    onClearClick: function() {
+      Neatline.execute('editor:map:clear', this.model);
     },
 
 

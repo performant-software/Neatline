@@ -360,4 +360,13 @@ _.extend(Neatline.Map.View.prototype, {
   },
 
 
+  /**
+   * Delete all features on the edit layer, publish empty WKT.
+   */
+  clear: function() {
+    this.editLayer.destroyFeatures();
+    this.publish();
+  }
+
+
 });

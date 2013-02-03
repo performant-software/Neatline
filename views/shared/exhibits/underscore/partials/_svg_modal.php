@@ -30,7 +30,7 @@
     </a>
 
     <a name="parse" class="btn btn-primary">
-      <i class="icon-ok icon-white"></i> Parse SVG
+      <i class="icon-ok icon-white"></i> Parse
     </a>
 
   </div>
