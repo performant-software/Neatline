@@ -295,15 +295,10 @@ _.extend(Neatline.Map.View.prototype, {
     _.each(this.editLayer.features, function(f) {
       if (!f._sketch) {
 
-        // If the feature's `geometry` is a collection, not an individual
-        // geometry, extract the component geometries and build separate
-        // features for each of them. This prevents the WKT formatter from
-        // creating nested GEOMETRYCOLLECTION()'s, which break in MySQL.
+        // Split collections into individual features.
         if (f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Collection') {
-          _.each(f.geometry.components, function(geometry) {
-            var feature = new OpenLayers.Feature.Vector();
-            feature.geometry = geometry;
-            features.push(feature);
+          _.each(f.geometry.components, function(geo) {
+            features.push(new OpenLayers.Feature.Vector(geo));
           });
         }
 
