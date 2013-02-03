@@ -38,7 +38,7 @@
 
   <label class="radio">
     <input type="radio" name="mode" value="svg">
-    Draw SVG
+    Draw SVG ( <a href="#">Enter Markup</a> )
   </label>
 
   <label class="radio">
@@ -98,14 +98,8 @@
 
   <?php echo $this->partial(
     'exhibits/underscore/helpers/_textarea.php', array(
-      'name'  => 'svg',
-      'label' => 'SVG (Scalable Vector Graphics)'
-  )); ?>
-
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_textarea.php', array(
       'name'  => 'coverage',
-      'label' => 'WKT (Well-Known Text)',
+      'label' => 'Geometry ( Well-Known Text )',
       'bind'  => 'record.coverage'
   )); ?>
 
