@@ -20,8 +20,8 @@
   </label>
   <div class="controls">
     <textarea
-      name="<?php echo $name; ?>"
-      data-value="<?php echo $bind; ?>">
-    </textarea>
+      <?php if (isset($name)) echo "name='$name'"; ?>
+      <?php if (isset($bind)) echo "data-value='$bind'"; ?>
+    ></textarea>
   </div>
 </div>

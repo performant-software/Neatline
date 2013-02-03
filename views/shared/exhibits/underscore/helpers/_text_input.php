@@ -24,9 +24,9 @@
   <div class="inline-inputs">
     <input
       type="<?php echo isset($type) ? $type : 'text'; ?>"
-      name="<?php echo $name; ?>"
-      class="<?php echo isset($class) ? $class : ''; ?>"
-      data-value="<?php echo $bind; ?>"
+      <?php if (isset($name)) echo "name='$name'"; ?>
+      <?php if (isset($class)) echo "class='$class'"; ?>
+      <?php if (isset($bind)) echo "data-value='$bind'"; ?>
     />
   </div>
 </div>

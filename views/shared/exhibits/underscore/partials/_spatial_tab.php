@@ -99,8 +99,7 @@
   <?php echo $this->partial(
     'exhibits/underscore/helpers/_textarea.php', array(
       'name'  => 'svg',
-      'label' => 'SVG (Scalable Vector Graphics)',
-      'bind'  => 'record.svg'
+      'label' => 'SVG (Scalable Vector Graphics)'
   )); ?>
 
   <hr>
