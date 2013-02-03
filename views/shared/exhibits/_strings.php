@@ -37,7 +37,8 @@
     },
     svg: {
       parse: {
-        success: '<?php echo __('SVG parsed successfully!'); ?>'
+        success: '<?php echo __('SVG parsed successfully!'); ?>',
+        error: '<?php echo __('There was an error; SVG could not be parsed.'); ?>'
       }
     },
     placeholders: {

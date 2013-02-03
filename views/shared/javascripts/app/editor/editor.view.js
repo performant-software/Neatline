@@ -25,7 +25,7 @@ Neatline.module('Editor', { startWithParent: false,
 
     options: {
       toastr: {
-        timeOut:  1500,
+        timeOut:  2500,
         fadeIn:   200,
         fadeOut:  200
       }

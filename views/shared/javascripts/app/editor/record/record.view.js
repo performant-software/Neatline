@@ -299,10 +299,24 @@ Neatline.module('Editor.Record', function(
       var val = this.__ui.spatial.svg.val();
 
       try {
+
+        // Covnert SVG, update handler.
         var wkt = SVGtoWKT.convert(val);
         Neatline.execute('editor:map:updateWKT', wkt);
+
+        // Flash success.
+        Neatline.execute('editor:notifySuccess',
+          STRINGS.svg.parse.success
+        );
+
+        // Close the modal.
         this.__ui.spatial.modal.modal('hide');
-      } catch (e) {}
+
+      } catch (e) {
+        Neatline.execute('editor:notifyError',
+          STRINGS.svg.parse.error
+        );
+      }
 
     },
 

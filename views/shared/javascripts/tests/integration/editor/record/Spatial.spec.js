@@ -290,28 +290,6 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should set SVG geometry when "Parse SVG" is clicked', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Parse SVG" button is clicked, the markup in the textarea
-    // should be parsed and the map handler geometry should be updated.
-    // --------------------------------------------------------------------
-
-    var formatWKT = new OpenLayers.Format.WKT();
-    var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
-    var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
-
-    // Update SVG.
-    els.svg2.val(svg);
-    els.parse.trigger('click');
-
-    // `geometry` on handler should be set.
-    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
-      toBeTruthy();
-
-  });
-
-
   it('should update coverage on point add', function() {
 
     // --------------------------------------------------------------------

@@ -27,7 +27,7 @@ describe('Record Form Delete', function() {
       delete1:  _t.vw.record.$('a[name="delete1"]'),
       delete2:  _t.vw.record.$('a[name="delete2"]'),
       cancel:   _t.vw.record.$('a[name="cancel"]'),
-      modal:    _t.vw.record.$('div.modal')
+      modal:    _t.vw.record.$('#delete-modal')
     };
 
   });
