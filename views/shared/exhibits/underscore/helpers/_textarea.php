@@ -21,6 +21,7 @@
   <div class="controls">
     <textarea
       <?php if (isset($name)) echo "name='$name'"; ?>
+      <?php if (isset($class)) echo "class='$class'"; ?>
       <?php if (isset($bind)) echo "data-value='$bind'"; ?>
     ></textarea>
   </div>

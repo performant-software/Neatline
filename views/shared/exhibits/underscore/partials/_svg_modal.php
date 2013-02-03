@@ -20,7 +20,7 @@
   </div>
 
   <div class="modal-body">
-    <textarea name="svg" rows="15"></textarea>
+    <textarea name="svg" class="code" rows="15"></textarea>
   </div>
 
   <div class="modal-footer">

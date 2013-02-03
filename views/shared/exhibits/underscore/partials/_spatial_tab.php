@@ -100,7 +100,8 @@
     'exhibits/underscore/helpers/_textarea.php', array(
       'name'  => 'coverage',
       'label' => 'Geometry ( Well-Known Text )',
-      'bind'  => 'record.coverage'
+      'bind'  => 'record.coverage',
+      'class' => 'code'
   )); ?>
 
 </div>
