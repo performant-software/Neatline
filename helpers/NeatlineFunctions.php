@@ -104,6 +104,17 @@ function neatline_getStyles()
 
 
 /**
+ * Gather the column names for all taggable styles.
+ *
+ * @return array The array of column names.
+ */
+function neatline_getStyleCols()
+{
+  return array_values(neatline_getStyles());
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute name being requested.

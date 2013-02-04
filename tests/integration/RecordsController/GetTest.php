@@ -45,7 +45,7 @@ class Neatline_RecordsControllerTest_Get
         $this->assertObjectHasAttribute('slug',     $records[0]);
 
         // Should emit styles.
-        foreach (neatline_getStyles() as $s) {
+        foreach (neatline_getStyleCols() as $s) {
             $this->assertObjectHasAttribute($s, $records[0]);
         }
 
