@@ -95,7 +95,7 @@ function neatline_editorGlobals($exhibit)
 /**
  * Gather style columns exposed via the `neatline_links` filter.
  *
- * @return array The array of column name => label.
+ * @return array The array of label => column name.
  */
 function neatline_getStyles()
 {
@@ -111,6 +111,28 @@ function neatline_getStyles()
 function neatline_getStyleCols()
 {
   return array_values(neatline_getStyles());
+}
+
+
+/**
+ * Gather presenters exposed via the `neatline_presenters` filter.
+ *
+ * @return array The array of label => column name.
+ */
+function neatline_getPresenters()
+{
+  return apply_filters('neatline_presenters', array());
+}
+
+
+/**
+ * Gather the column names for all taggable styles.
+ *
+ * @return array The array of column names.
+ */
+function neatline_getPresenterCols()
+{
+  return array_values(neatline_getPresenters());
 }
 
 

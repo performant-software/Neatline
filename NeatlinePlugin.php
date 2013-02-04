@@ -29,7 +29,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     // Filters.
     protected $_filters = array(
         'admin_navigation_main',
-        'neatline_styles'
+        'neatline_styles',
+        'neatline_presenters'
     );
 
 
@@ -205,7 +206,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register the taggable styles.
      *
-     * @param array $styles Array of column name => label pairs.
+     * @param array $styles Array of label => column name pairs.
      * @return array The updated array.
      */
     public function filterNeatlineStyles($styles)
@@ -226,6 +227,23 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'Max Zoom'          => 'max_zoom',
             'Default Focus'     => 'map_focus',
             'Default Zoom'      => 'map_zoom'
+        ));
+    }
+
+
+    /**
+     * Register the presenters slugs.
+     *
+     * @param array $styles Array of pairs => slug pairs.
+     * @return array The updated array.
+     */
+    public function filterNeatlinePresenters($presenters)
+    {
+        return array_merge($presenters, array(
+            'None'              => 'none',
+            'Small Bubble'      => 'small_bubble',
+            'Medium Bubble'     => 'medium_bubble',
+            'Large Bubble'      => 'large_bubble'
         ));
     }
 
