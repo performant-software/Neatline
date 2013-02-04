@@ -93,24 +93,13 @@ function neatline_editorGlobals($exhibit)
 
 
 /**
- * Gather all taggable styles exposed via the `neatline_links` filter.
+ * Gather style columns exposed via the `neatline_links` filter.
  *
  * @return array The array of column name => label.
  */
 function neatline_getStyles()
 {
   return apply_filters('neatline_styles', array());
-}
-
-
-/**
- * Gather the column names for all taggable styles.
- *
- * @return array The array of column names.
- */
-function neatline_getStyleCols()
-{
-  return array_keys(neatline_getStyles());
 }
 
 

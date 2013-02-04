@@ -119,6 +119,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Add styles.
         // -----------
+        self::addStyle('presenter',         'VARCHAR(100) NULL');
         self::addStyle('vector_color',      'TINYTEXT NULL');
         self::addStyle('stroke_color',      'TINYTEXT NULL');
         self::addStyle('select_color',      'TINYTEXT NULL');
@@ -210,22 +211,21 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineStyles($styles)
     {
         return array_merge($styles, array(
-
-            'vector_color'      => 'Shape Color',
-            'stroke_color'      => 'Line Color',
-            'select_color'      => 'Selected Color',
-            'vector_opacity'    => 'Shape Opacity',
-            'select_opacity'    => 'Selected Opacity',
-            'stroke_opacity'    => 'Line Opacity',
-            'image_opacity'     => 'Image Opacity',
-            'stroke_width'      => 'Line Width',
-            'point_radius'      => 'Point Radius',
-            'point_image'       => 'Point Image',
-            'min_zoom'          => 'Min Zoom',
-            'max_zoom'          => 'Max Zoom',
-            'map_focus'         => 'Focus Coordinates',
-            'map_zoom'          => 'Focus Zoom'
-
+            'presenter',
+            'vector_color',
+            'stroke_color',
+            'select_color',
+            'vector_opacity',
+            'select_opacity',
+            'stroke_opacity',
+            'image_opacity',
+            'stroke_width',
+            'point_radius',
+            'point_image',
+            'min_zoom',
+            'max_zoom',
+            'map_focus',
+            'map_zoom'
         ));
     }
 

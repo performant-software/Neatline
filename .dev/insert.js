@@ -47,11 +47,12 @@ function records(exhibit_id, count, zoom, color, tags) {
 
   _(count).times(function(n) {
 
+    var off = randy.randInt(0,len-500)
     var lat = randy.randInt(-20000000,20000000);
     var lon = randy.randInt(-20000000,20000000);
     var geo = 'GeomFromText("POINT('+lon+' '+lat+')")';
     var rad = randy.randInt(10,100);
-    var bod = randy.choice(wp);
+    var bod = wp.slice(off, off+500);
 
     sql += '(' +
       exhibit_id+','+
@@ -83,7 +84,7 @@ function records(exhibit_id, count, zoom, color, tags) {
 }
 
 
-var wp;
+var wp, len;
 
 // Create exhibit.
 var sql = 'INSERT INTO omeka_neatline_exhibits ' +
@@ -92,9 +93,10 @@ var sql = 'INSERT INTO omeka_neatline_exhibits ' +
 client.query(sql, function(err, res) {
 
   // Read War and Peace.
-  fs.readFile('./war-and-peace.txt', 'utf8', function(err, text) {
+  fs.readFile('./wp.txt', 'utf8', function(err, text) {
 
-    wp = _s.lines(text);
+    wp = text;
+    len = text.length
 
     records(res.insertId, 200, 3, '#00ff24', 'level3');
     records(res.insertId, 400, 4, '#00aeff', 'level4');
@@ -102,6 +104,9 @@ client.query(sql, function(err, res) {
     records(res.insertId, 20000, 6, '#7800ff', 'level6');
     records(res.insertId, 50000, 7, '#f000ff', 'level7');
     records(res.insertId, 100000, 8, '#ff0000', 'level8');
+    records(res.insertId, 100000, 9, '#00aeff', 'level9');
+    records(res.insertId, 100000, 10, '#7800ff', 'level10');
+    records(res.insertId, 124400, 11, '#7800ff', 'level11');
 
     client.end(function() {
       process.exit();

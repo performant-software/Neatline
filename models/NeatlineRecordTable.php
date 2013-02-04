@@ -35,8 +35,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Prase the styles YAML.
         $yaml = Spyc::YAMLLoad($exhibit->styles);
 
-        // Gather list of valid styles.
-        $valid = neatline_getStyleCols();
+        // Gather list of styles.
+        $valid = neatline_getStyles();
 
         foreach ($yaml as $tag => $styles) {
 
@@ -84,8 +84,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Prase the styles YAML.
         $yaml = Spyc::YAMLLoad($record->getExhibit()->styles);
 
-        // Gather list of valid styles.
-        $valid = neatline_getStyleCols();
+        // Gather list of styles.
+        $valid = neatline_getStyles();
 
         foreach ($yaml as $tag => $styles) {
 
