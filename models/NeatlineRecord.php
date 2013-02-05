@@ -15,19 +15,19 @@ class NeatlineRecord extends Neatline_AbstractRecord
 {
 
 
-    public $item_id;            // INT(10) UNSIGNED NULL
-    public $exhibit_id;         // INT(10) UNSIGNED NULL
+    public $item_id;        // INT(10) UNSIGNED NULL
+    public $exhibit_id;     // INT(10) UNSIGNED NULL
 
-    public $added;              // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    public $modified;           // TIMESTAMP NULL
+    public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    public $modified;       // TIMESTAMP NULL
 
-    public $title;              // MEDIUMTEXT NULL
-    public $_title;             // MEDIUMTEXT NULL
-    public $body;               // MEDIUMTEXT NULL
-    public $_body;              // MEDIUMTEXT NULL
-    public $coverage;           // GEOMETRY NOT NULL
-    public $slug;               // VARCHAR(100) NULL
-    public $tags;               // TEXT NULL
+    public $title;          // MEDIUMTEXT NULL
+    public $_title;         // MEDIUMTEXT NULL
+    public $body;           // MEDIUMTEXT NULL
+    public $_body;          // MEDIUMTEXT NULL
+    public $coverage;       // GEOMETRY NOT NULL
+    public $slug;           // VARCHAR(100) NULL
+    public $tags;           // TEXT NULL
 
 
     private $styles = array();

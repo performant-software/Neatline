@@ -36,8 +36,11 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $pluginHelper->setUp('Neatline');
 
         // Get plugin tables.
-        $this->_recordsTable =  $this->db->getTable('NeatlineRecord');
-        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
+        $this->_recordsTable    = $this->db->getTable('NeatlineRecord');
+        $this->_exhibitsTable   = $this->db->getTable('NeatlineExhibit');
+        $this->_layersTable     = $this->db->getTable('NeatlineLayer');
+        $this->_layerPropertiesTable = $this->db->getTable(
+            'NeatlineLayerProperty');
 
     }
 

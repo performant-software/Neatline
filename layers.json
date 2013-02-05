@@ -1,0 +1,44 @@
+{
+
+  "OpenStreetMap": {
+    "type": "OpenStreetMap"
+  },
+
+  "Google Physical": {
+    "type": "GooglePhysical"
+  },
+
+  "Google Streets": {
+    "type": "GoogleStreets"
+  },
+
+  "Google Hybrid": {
+    "type": "GoogleHybrid"
+  },
+
+  "Google Sattelite": {
+    "type": "GoogleSattelite"
+  },
+
+  "Stamen Watercolor": {
+    "type": "stamen",
+    "properties": {
+      "provider": "watercolor"
+    }
+  },
+
+  "Stamen Toner": {
+    "type": "stamen",
+    "properties": {
+      "provider": "toner"
+    }
+  },
+
+  "Stamen Toner": {
+    "type": "stamen",
+    "properties": {
+      "provider": "terrain"
+    }
+  },
+
+}

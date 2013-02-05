@@ -44,14 +44,4 @@
       'bind'  => 'record.body'
   )); ?>
 
-  <!--
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_select.php', array(
-      'name'  => 'presenter',
-      'label' => 'Presenter',
-      'bind'  => 'record.presenter',
-      'options' => neatline_getPresenters()
-  )); ?>
-  -->
-
 </div>
