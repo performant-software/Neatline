@@ -75,9 +75,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertQueryContentContains(
-            'ul.error li',
-            'Enter a title.'
+        $this->assertXpath('//input[@name="title"]/following-sibling::
+            ul[@class="error"]'
         );
 
         // Should not save exhibit.
@@ -105,9 +104,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertQueryContentContains(
-            'ul.error li',
-            'The slug cannot be empty.'
+        $this->assertXpath('//input[@name="slug"]/following-sibling::
+            ul[@class="error"]'
         );
 
         // Should not save exhibit.
@@ -135,9 +133,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertQueryContentContains(
-            'ul.error li',
-            'The slug can only contain letters, numbers, and hyphens.'
+        $this->assertXpath('//input[@name="slug"]/following-sibling::
+            ul[@class="error"]'
         );
 
         // Should not save exhibit.
@@ -165,9 +162,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertQueryContentContains(
-            'ul.error li',
-            'The slug can only contain letters, numbers, and hyphens.'
+        $this->assertXpath('//input[@name="slug"]/following-sibling::
+            ul[@class="error"]'
         );
 
         // Should not save exhibit.
@@ -195,9 +191,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertQueryContentContains(
-            'ul.error li',
-            'The slug can only contain letters, numbers, and hyphens.'
+        $this->assertXpath('//input[@name="slug"]/following-sibling::
+            ul[@class="error"]'
         );
 
         // Should not save exhibit.
@@ -225,9 +220,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertQueryContentContains(
-            'ul.error li',
-            'The slug is already in use.'
+        $this->assertXpath('//input[@name="slug"]/following-sibling::
+            ul[@class="error"]'
         );
 
         // Should not save exhibit.

@@ -34,7 +34,7 @@ class Neatline_ExhibitsController
     {
 
         $exhibit = new NeatlineExhibit;
-        $form = $this->_getNeatlineDetailsForm($exhibit);
+        $form = $this->_getExhibitForm($exhibit);
 
         // If form was submitted.
         if ($this->_request->isPost()) {
@@ -56,7 +56,7 @@ class Neatline_ExhibitsController
     {
 
         $exhibit = $this->_helper->db->findById();
-        $form = $this->_getNeatlineDetailsForm($exhibit);
+        $form = $this->_getExhibitForm($exhibit);
 
         // If form was submitted.
         if ($this->_request->isPost()) {
@@ -153,7 +153,7 @@ class Neatline_ExhibitsController
     /**
      * Construct the details form.
      */
-    private function _getNeatlineDetailsForm($exhibit)
+    private function _getExhibitForm($exhibit)
     {
         return new Neatline_ExhibitForm(array(
             'exhibit' => $exhibit

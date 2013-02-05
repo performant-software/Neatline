@@ -37,6 +37,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             'size'          => 40,
             'value'         => $this->_exhibit->title,
             'required'      => true,
+            'class'         => 'title',
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
@@ -82,9 +83,9 @@ class Neatline_ExhibitForm extends Omeka_Form
                 ),
                 array('validator' => 'Db_NoRecordExists', 'options' =>
                     array(
-                        'table'     =>  $this->_exhibit->getTable()->getTableName(),
-                        'field'     =>  'slug',
-                        'adapter'   =>  $this->_exhibit->getDb()->getAdapter(),
+                        'table'     => $this->_exhibit->getTable()->getTableName(),
+                        'adapter'   => $this->_exhibit->getDb()->getAdapter(),
+                        'field'     => 'slug',
                         'exclude'   => array(
                             'field' => 'id',
                             'value' => (int)$this->_exhibit->id
