@@ -20,15 +20,11 @@
   <ul class="nav nav-pills">
 
     <li class="records">
-      <a href="#records">
-        <i class="icon-file"></i> Records
-      </a>
+      <a href="#records">Records</a>
     </li>
 
     <li class="styles">
-      <a href="#styles">
-        <i class="icon-tags"></i> Styles
-      </a>
+      <a href="#styles">Styles</a>
     </li>
 
   </ul>

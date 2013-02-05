@@ -17,7 +17,7 @@
  */
 function neatline_queueNeatlineAssets()
 {
-    neatline_queueGoogleMapsApi();
+    neatline_queueMapApis();
     queue_css_file('payloads/neatline');
     queue_js_file('payloads/neatline');
     queue_js_file('bootstrap');
@@ -29,6 +29,7 @@ function neatline_queueNeatlineAssets()
  */
 function neatline_queueEditorAssets()
 {
+    neatline_queueMapApis();
     queue_css_file('payloads/editor');
     queue_js_file('payloads/editor');
     queue_js_file('bootstrap');
@@ -38,11 +39,12 @@ function neatline_queueEditorAssets()
 /**
  * Include the Google Maps API.
  */
-function neatline_queueGoogleMapsApi()
+function neatline_queueMapApis()
 {
-    $url = 'http://maps.google.com/maps/api/js?v=3.8&sensor=false';
-    $headScript = get_view()->headScript();
-    $headScript->appendScript('','text/javascript',array('src'=>$url));
+    $head = get_view()->headScript();
+    $head->appendScript('', 'text/javascript', array('src' =>
+        'http://maps.google.com/maps/api/js?sensor=false')
+    );
 }
 
 

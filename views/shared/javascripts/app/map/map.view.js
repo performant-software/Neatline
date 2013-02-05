@@ -58,9 +58,9 @@ Neatline.module('Map', function(
       this.map = new OpenLayers.Map(this.el, options);
 
       // Add OSM base layer.
-      this.osm = new OpenLayers.Layer.OSM();
-      this.map.addLayer(this.osm);
-      this.map.setBaseLayer(this.osm);
+      this.baseLayer = Neatline.request('map:layers:OpenStreetMap');
+      this.map.addLayer(this.baseLayer);
+      this.map.setBaseLayer(this.baseLayer);
 
       // Startup routines.
       this.addControls();

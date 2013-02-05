@@ -21,12 +21,7 @@ Neatline.module('Map.Layers.Stamen', function(
    * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
    */
   Neatline.reqres.addHandler('map:layers:Stamen', function(options) {
-    return new OpenLayers.Layers.Stamen(options.name, {
-      provider: options.provider,
-      tileOptions: {
-        crossOriginKeyword: null
-      }
-    });
+    return new OpenLayers.Layer.Stamen(options.provider);
   });
 
 
