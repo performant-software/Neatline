@@ -1,52 +1,62 @@
 {
+  [
 
-  "OpenStreetMap": {
-    "id": "OpenStreetMap",
-    "type": "OpenStreetMap"
-  },
+    {
+      "name": "OpenStreetMap",
+      "id": "OpenStreetMap",
+      "type": "OpenStreetMap"
+    },
 
-  "Google Physical": {
-    "id": "GooglePhysical",
-    "type": "GooglePhysical"
-  },
+    {
+      "name": "Google Physical",
+      "id": "GooglePhysical",
+      "type": "GooglePhysical"
+    },
 
-  "Google Streets": {
-    "id": "GoogleStreets",
-    "type": "GoogleStreets"
-  },
+    {
+      "name": "Google Streets",
+      "id": "GoogleStreets",
+      "type": "GoogleStreets"
+    },
 
-  "Google Hybrid": {
-    "id": "GoogleHybrid",
-    "type": "GoogleHybrid"
-  },
+    {
+      "name": "Google Hybrid",
+      "id": "GoogleHybrid",
+      "type": "GoogleHybrid"
+    },
 
-  "Google Sattelite": {
-    "id": "GoogleSattelite",
-    "type": "GoogleSattelite"
-  },
+    {
+      "name": "Google Sattelite",
+      "id": "GoogleSattelite",
+      "type": "GoogleSattelite"
+    },
 
-  "Stamen Toner": {
-    "id": "StamenToner",
-    "type": "Stamen",
-    "properties": {
-      "provider": "toner"
-    }
-  },
+    {
+      "name": "Stamen Toner",
+      "id": "StamenToner",
+      "type": "Stamen",
+      "properties": {
+        "provider": "toner"
+      }
+    },
 
-  "Stamen Watercolor": {
-    "id": "StamenWatercolor",
-    "type": "Stamen",
-    "properties": {
-      "provider": "watercolor"
-    }
-  },
+    {
+      "name": "Stamen Watercolor",
+      "id": "StamenWatercolor",
+      "type": "Stamen",
+      "properties": {
+        "provider": "watercolor"
+      }
+    },
 
-  "Stamen Terrain": {
-    "id": "StamenTerrain",
-    "type": "Stamen",
-    "properties": {
-      "provider": "terrain"
-    }
-  },
+    {
+      "name": "Stamen Terrain",
+      "id": "StamenTerrain",
+      "type": "Stamen",
+      "properties": {
+        "provider": "terrain"
+      }
+    },
 
+  ]
 }

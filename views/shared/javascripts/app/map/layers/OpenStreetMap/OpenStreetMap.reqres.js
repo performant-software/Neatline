@@ -11,11 +11,11 @@
  */
 
 Neatline.module('Map.Layers.OpenStreetMap', function(
-  Layers, Neatline, Backbone, Marionette, $, _) {
+  OpenStreetMap, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
-   * Emit the OpenLayers map instance.
+   * Construct an OpenStreetMap layer.
    *
    * @return {OpenLayers.Layer.OSM}: The OSM layer.
    */
