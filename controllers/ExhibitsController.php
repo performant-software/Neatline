@@ -155,8 +155,8 @@ class Neatline_ExhibitsController
      */
     private function _getNeatlineDetailsForm($exhibit)
     {
-        return new Neatline_Form_NeatlineDetails(array(
-            'neatline' => $exhibit
+        return new Neatline_ExhibitForm(array(
+            'exhibit' => $exhibit
         ));
     }
 

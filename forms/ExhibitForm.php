@@ -11,11 +11,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_Form_NeatlineDetails extends Omeka_Form
+class Neatline_ExhibitForm extends Omeka_Form
 {
 
 
-    private $_neatline;
+    private $_exhibit;
 
 
     /**
@@ -35,7 +35,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
             'label'         => __('Title'),
             'description'   => __('The title is displayed at the top of the exhibit.'),
             'size'          => 40,
-            'value'         => $this->_neatline->title,
+            'value'         => $this->_exhibit->title,
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -52,7 +52,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
         $this->addElement('textarea', 'description', array(
             'label'         => __('Description'),
             'description'   => __('Supporting prose to describe the exhibit.'),
-            'value'         => $this->_neatline->description,
+            'value'         => $this->_exhibit->description,
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
 
@@ -62,7 +62,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
             'description'   => __('The URL slug is used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
-            'value'         => $this->_neatline->slug,
+            'value'         => $this->_exhibit->slug,
             'filters'       => array('StringTrim'),
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -82,12 +82,12 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
                 ),
                 array('validator' => 'Db_NoRecordExists', 'options' =>
                     array(
-                        'table'     =>  $this->_neatline->getTable()->getTableName(),
+                        'table'     =>  $this->_exhibit->getTable()->getTableName(),
                         'field'     =>  'slug',
-                        'adapter'   =>  $this->_neatline->getDb()->getAdapter(),
+                        'adapter'   =>  $this->_exhibit->getDb()->getAdapter(),
                         'exclude'   => array(
                             'field' => 'id',
-                            'value' => (int)$this->_neatline->id
+                            'value' => (int)$this->_exhibit->id
                         ),
                         'messages'  =>  array(
                             'recordFound' => __('The slug is already in use.')
@@ -101,7 +101,7 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
             'description'   => __('By default, exhibits are only visible to you.'),
-            'value'         => $this->_neatline->public
+            'value'         => $this->_exhibit->public
         ));
 
         // Submit.
@@ -128,9 +128,9 @@ class Neatline_Form_NeatlineDetails extends Omeka_Form
     /**
      * Bind an exhibit record to the form.
      */
-    public function setNeatline(NeatlineExhibit $neatline)
+    public function setExhibit(NeatlineExhibit $exhibit)
     {
-        $this->_neatline = $neatline;
+        $this->_exhibit = $exhibit;
     }
 
 
