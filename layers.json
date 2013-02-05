@@ -1,41 +1,49 @@
 {
 
   "OpenStreetMap": {
+    "id": "OpenStreetMap",
     "type": "OpenStreetMap"
   },
 
   "Google Physical": {
+    "id": "GooglePhysical",
     "type": "GooglePhysical"
   },
 
   "Google Streets": {
+    "id": "GoogleStreets",
     "type": "GoogleStreets"
   },
 
   "Google Hybrid": {
+    "id": "GoogleHybrid",
     "type": "GoogleHybrid"
   },
 
   "Google Sattelite": {
+    "id": "GoogleSattelite",
     "type": "GoogleSattelite"
   },
 
-  "Stamen Watercolor": {
-    "type": "stamen",
-    "properties": {
-      "provider": "watercolor"
-    }
-  },
-
   "Stamen Toner": {
-    "type": "stamen",
+    "id": "StamenToner",
+    "type": "Stamen",
     "properties": {
       "provider": "toner"
     }
   },
 
-  "Stamen Toner": {
-    "type": "stamen",
+  "Stamen Watercolor": {
+    "id": "StamenWatercolor",
+    "type": "Stamen",
+    "properties": {
+      "provider": "watercolor"
+    }
+  },
+
+  "Stamen Terrain": {
+    "id": "StamenTerrain",
+    "type": "Stamen",
     "properties": {
       "provider": "terrain"
     }
