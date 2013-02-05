@@ -326,30 +326,41 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     {
 
         $exhibit = $this->__exhibit();
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
-        $record3 = $this->__record($exhibit);
-        $record4 = $this->__record($exhibit);
-        $record5 = $this->__record($exhibit);
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
+        $record4 = new NeatlineRecord($exhibit);
+        $record5 = new NeatlineRecord($exhibit);
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
+        $record4->added = '2004-01-01';
+        $record5->added = '2005-01-01';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+        $record4->save();
+        $record5->save();
 
         // Records 1-2.
         $result = $this->_recordsTable->queryRecords($exhibit,
             array('limit' => 2, 'offset' => 0));
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record5->id);
+        $this->assertEquals($result['records'][1]['id'], $record4->id);
         $this->assertCount(2, $result['records']);
 
         // Records 3-4.
         $result = $this->_recordsTable->queryRecords($exhibit,
             array('limit' => 2, 'offset' => 2));
         $this->assertEquals($result['records'][0]['id'], $record3->id);
-        $this->assertEquals($result['records'][1]['id'], $record4->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
         $this->assertCount(2, $result['records']);
 
         // Record 5.
         $result = $this->_recordsTable->queryRecords($exhibit,
             array('limit' => 2, 'offset' => 4));
-        $this->assertEquals($result['records'][0]['id'], $record5->id);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
         $this->assertCount(1, $result['records']);
 
     }
