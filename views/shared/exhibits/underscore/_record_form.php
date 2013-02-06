@@ -25,7 +25,8 @@
   <p class="lead" data-text="record.title | title"></p>
 
   <ul class="nav nav-pills">
-    <li><a href="#record-form-text" data-toggle="tab">Text</a></li>
+    <li>
+      <a href="#record-form-text" data-toggle="tab">Text</a></li>
     <li><a href="#record-form-spatial" data-toggle="tab">Spatial</a></li>
     <li><a href="#record-form-style" data-toggle="tab">Style</a></li>
   </ul>

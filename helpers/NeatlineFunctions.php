@@ -117,28 +117,6 @@ function neatline_getStyleCols()
 
 
 /**
- * Gather presenters exposed via the `neatline_presenters` filter.
- *
- * @return array The array of label => column name.
- */
-function neatline_getPresenters()
-{
-  return apply_filters('neatline_presenters', array());
-}
-
-
-/**
- * Gather the column names for all taggable styles.
- *
- * @return array The array of column names.
- */
-function neatline_getPresenterCols()
-{
-  return array_values(neatline_getPresenters());
-}
-
-
-/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute name being requested.
