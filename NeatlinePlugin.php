@@ -20,6 +20,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'define_acl',
         'define_routes',
         'initialize',
         'after_save_item'
@@ -158,9 +159,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
+     * Define the ACL.
+     *
+     * @param array $args Zend_Acl instance under `acl` key.
+     */
+    public function hookDefineAcl($args)
+    {
+
+    }
+
+
+    /**
      * Register routes.
      *
-     * @param array $args Array of hook parameters, with 'router' key.
+     * @param array $args Zend_Config instance under `router` key.
      */
     public function hookDefineRoutes($args)
     {
