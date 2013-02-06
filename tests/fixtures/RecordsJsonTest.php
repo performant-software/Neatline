@@ -129,7 +129,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
             'records.standard.json');
 
         // `records.changed.json`
-        // Coverage data for #2 has changed.
+        // Data for #2 has changed.
 
         $record2->coverage = 'POINT(7 8)';
         $record2->__save();

@@ -118,6 +118,26 @@ describe('Map Editing', function() {
   });
 
 
+  it('should update edit layer model', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is being edited and a new set of records is ingested
+    // on the map, the model tied to the edit layer should be replaced by
+    // the updated version.
+    // --------------------------------------------------------------------
+
+    // Open form for record 2.
+    _t.navigate('records/'+recordModels[1].get('id'));
+
+    // Reload map with updated record 2.
+    _t.refreshMap(_t.json.records.changed);
+
+    // Edit layer model should be updated.
+    expect(_t.vw.map.editLayer.nModel.get('coverage')).
+      toEqual('POINT(7 8)');
+
+  });
+
   it('should not remove edit layer for new record', function() {
 
     // --------------------------------------------------------------------

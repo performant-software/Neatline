@@ -53,9 +53,16 @@ _.extend(Neatline.Map.View.prototype, {
     // CREATE
     records.each(_.bind(function(record) {
 
+      var id = record.get('id');
+
       // Add if the layer is not the edit layer.
-      if (!this.editLayer || (record.get('id') != this.editLayer.nId)) {
+      if (!this.editLayer || (id != this.editLayer.nId)) {
         this.buildLayer(record);
+      }
+
+      // Update the edit layer model.
+      else if (id == this.editLayer.nId) {
+        this.editLayer.nModel = record;
       }
 
     }, this));
