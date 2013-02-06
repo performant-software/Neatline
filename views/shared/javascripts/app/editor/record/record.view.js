@@ -136,6 +136,11 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('editor:map:startEdit', model);
       rivets.bind(this.$el, { record: model });
 
+      // Update map on model change.
+      model.bind('change', function() {
+        Neatline.execute('editor:map:updateModel', model);
+      });
+
       this.setBubbleStatus();
       this.resetEditMode();
 

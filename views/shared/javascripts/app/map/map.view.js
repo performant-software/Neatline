@@ -297,8 +297,8 @@ Neatline.module('Map', function(
       }
 
       // Store model, id.
-      layer.nModel = record;
       layer.nId = record.get('id');
+      layer.nModel = record;
 
       // Add to map, track.
       this.map.addLayer(layer);

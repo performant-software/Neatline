@@ -75,6 +75,18 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
+   * Update edit layer model.
+   *
+   * @param {Object} model: The updated model.
+   */
+  var updateModel = function(model) {
+    Map.__view.updateModel(model);
+  };
+
+  Neatline.commands.addHandler('editor:map:updateModel', updateModel);
+
+
+  /**
    * Delete all features on the edit layer.
    */
   var clear = function() {

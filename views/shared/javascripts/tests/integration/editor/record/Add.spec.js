@@ -147,11 +147,11 @@ describe('Record Form Add', function() {
     els.save.trigger('click');
     _t.respondNewRecord();
 
-    // Get the id of the new record.
-    var id = $.parseJSON(_t.json.record.add).id;
+    // Get the id of the record.
+    var newId = _t.getNewRecordId();
 
     // Route should be updated to records/:id.
-    expect(Backbone.history.fragment).toEqual('records/'+id);
+    expect(Backbone.history.fragment).toEqual('records/'+newId);
 
   });
 

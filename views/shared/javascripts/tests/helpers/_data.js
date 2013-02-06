@@ -45,6 +45,16 @@ _t.getVectorLayerByTitle = function(title) {
 
 
 /**
+ * Get the record id from the new record JSON fixture.
+ *
+ * @return {Number}: The id.
+ */
+_t.getNewRecordId = function() {
+  return $.parseJSON(_t.json.record.add).id;
+};
+
+
+/**
  * Construct a record model instance from a JSON string.
  *
  * @param {String} json: The JSON string.

@@ -284,6 +284,17 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
+   * Update `nModel` and `nId` on the edit layer.
+   *
+   * @param {Object} model: The updated model.
+   */
+  updateModel: function(model) {
+    this.editLayer.nId = model.get('id');
+    this.editLayer.nModel = model;
+  },
+
+
+  /**
    * Publish updated KML.
    */
   publish: function() {
