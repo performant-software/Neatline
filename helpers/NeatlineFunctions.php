@@ -112,26 +112,14 @@ function _nl_getStyleCols()
 /**
  * Return specific field for a neatline record.
  *
- * @param string $fieldname The model attribute name being requested.
- * @param array $options An array of options.
- * @param Omeka_Record $neatline|null The exhibit.
+ * @param string $fieldname The model attribute.
+ * @param NeatlineExhibit $exhibit The exhibit.
  * @return string The field value.
  */
-function neatline($fieldname, $options = array(), $neatline = null)
+function _nl_field($fieldname, $exhibit = null)
 {
-
-    // Get the exhibit and raw field value.
-    $neatline = $neatline ? $neatline : _nl_currentExhibit();
-    $fieldname = strtolower($fieldname);
-    $text = $neatline->$fieldname;
-
-    // Truncate if snippet.
-    if(isset($options['snippet'])) {
-        $text = nls2p(snippet($text, 0, (int)$options['snippet']));
-    }
-
-    return $text;
-
+    $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
+    return $exhibit->$fieldname;
 }
 
 
@@ -188,7 +176,7 @@ function link_to_neatline(
 
     // Get the exhibit, form the link text.
     $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
-    $text = $text ? $text : strip_formatting(neatline('title', $exhibit));
+    $text = $text ? $text : strip_formatting(_nl_field('title', $exhibit));
 
     // Form the identified (id or slug).
     if ($action == 'show') { $slug = $exhibit->slug; }

@@ -29,9 +29,9 @@
   <div class="pagination"><?php echo pagination_links(); ?></div>
 
     <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>
-    <div id="neatline-<?php echo neatline('id'); ?>">
+    <div id="neatline-<?php echo _nl_field('id'); ?>">
       <h2 class="title"><?php echo link_to_neatline(); ?></h2>
-      <?php echo neatline('description'); ?>
+      <?php echo _nl_field('description'); ?>
     </div>
     <?php endforeach; ?>
 

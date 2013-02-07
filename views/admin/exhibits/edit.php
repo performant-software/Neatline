@@ -20,7 +20,7 @@
 
 <?php
   echo head(array(
-    'title' => __('Neatline | Edit "%s"', neatline('title')),
+    'title' => __('Neatline | Edit "%s"', _nl_field('title')),
     'content_class' => 'neatline'
   ));
 ?>
@@ -32,7 +32,7 @@
 
 <script>
   jQuery(document).ready(function($){
-      Omeka.wysiwyg();
+    Omeka.wysiwyg();
   });
 </script>
 

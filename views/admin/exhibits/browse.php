@@ -71,9 +71,9 @@
             </ul>
           </td>
 
-          <td><?php echo format_date(neatline('modified')); ?></td>
+          <td><?php echo format_date(_nl_field('modified')); ?></td>
           <td><?php echo total_records_for_neatline(); ?></td>
-          <td><?php echo neatline('public')?__('Yes'):__('No'); ?></td>
+          <td><?php echo _nl_field('public')?__('Yes'):__('No'); ?></td>
 
           <td><?php echo link_to_neatline($e, __('Edit'),
                 array('class'=>'edit'), 'editor', false); ?>
