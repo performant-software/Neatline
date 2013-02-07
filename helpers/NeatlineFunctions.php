@@ -27,6 +27,15 @@ function _nl_mapApis()
 /**
  * Include the static files for the Neatline.
  */
+function _nl_formAssets()
+{
+    queue_js_file('payloads/form');
+}
+
+
+/**
+ * Include the static files for the Neatline.
+ */
 function _nl_exhibitAssets()
 {
     _nl_mapApis();

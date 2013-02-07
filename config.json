@@ -9,13 +9,16 @@
     "jasmine":            "./views/shared/javascripts/tests"
   },
 
-  "payload": {
+  "payloads": {
     "app": {
       "js": {
         "admin":          "./views/admin/javascripts/payloads",
         "shared":         "./views/shared/javascripts/payloads"
       },
-      "css":              "./views/shared/css/payloads"
+      "css": {
+        "admin":          "./views/admin/css/payloads",
+        "shared":         "./views/shared/css/payloads"
+      }
     },
     "test": {
       "js":               "./views/shared/javascripts/tests/payloads/js",
@@ -31,7 +34,8 @@
 
   "build": {
     "openlayers":         "./views/shared/javascripts/components/openlayers/build",
-    "bootstrap":          "./views/shared/javascripts/components/bootstrap"
+    "bootstrap":          "./views/shared/javascripts/components/bootstrap",
+    "chosen":             "./views/shared/javascripts/components/chosen/chosen"
   },
 
   "vendor": {

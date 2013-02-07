@@ -85,6 +85,13 @@ module.exports = function(grunt) {
           cwd: config.build.bootstrap
         }
       },
+      move_chosen_css: {
+        command: 'cp chosen.css ../../../../css/payloads',
+        stdout: true,
+        execOptions: {
+          cwd: config.build.chosen
+        }
+      },
 
       // TEST
       phpunit: {
@@ -134,20 +141,20 @@ module.exports = function(grunt) {
         config.bower.javascript+'/components',
         config.bower.jasmine+'/components'
       ],
-      payload: [
-        config.payload.app.css,
-        config.payload.app.js.shared,
+      payloads: [
+        config.payloads.app.css.shared,
+        config.payloads.app.js.shared,
       ]
     },
 
     concat: {
-      exhibit: {
+      form: {
         src: [
           config.vendor.js.underscore_s,
           config.vendor.js.chosen,
           config.base.js.admin+'/*.js',
         ],
-        dest: config.payload.app.js.admin+'/exhibit.js',
+        dest: config.payloads.app.js.admin+'/form.js',
         separator: ';'
       },
       neatline: {
@@ -171,7 +178,7 @@ module.exports = function(grunt) {
           config.base.js.shared+'/bubble/**/*.js'
 
         ],
-        dest: config.payload.app.js.shared+'/neatline.js',
+        dest: config.payloads.app.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
@@ -213,15 +220,15 @@ module.exports = function(grunt) {
           config.base.js.shared+'/editor/styles/*.js'
 
         ],
-        dest: config.payload.app.js.shared+'/editor.js',
+        dest: config.payloads.app.js.shared+'/editor.js',
         separator: ';'
       },
       neatline_css: {
         src: [
-          config.payload.app.css+'/public/*.css',
+          config.payloads.app.css.shared+'/public/*.css',
           config.vendor.css.openlayers,
         ],
-        dest: config.payload.app.css+'/neatline.css',
+        dest: config.payloads.app.css.shared+'/neatline.css',
       },
       editor_css: {
         src: [
@@ -230,26 +237,26 @@ module.exports = function(grunt) {
           config.vendor.css.toastr,
           config.vendor.css.chosen,
           config.vendor.css.codemirror,
-          config.payload.app.css+'/editor/*.css'
+          config.payloads.app.css.shared+'/editor/*.css'
         ],
-        dest: config.payload.app.css+'/editor.css',
+        dest: config.payloads.app.css.shared+'/editor.css',
       }
     },
 
     min: {
-      exhibit: {
-        src: '<config:concat.exhibit.src>',
-        dest: config.payload.app.js.admin+'/exhibit.js',
+      form: {
+        src: '<config:concat.form.src>',
+        dest: config.payloads.app.js.admin+'/form.js',
         separator: ';'
       },
       neatline: {
         src: '<config:concat.neatline.src>',
-        dest: config.payload.app.js.shared+'/neatline.js',
+        dest: config.payloads.app.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
         src: '<config:concat.editor.src>',
-        dest: config.payload.app.js.shared+'/editor.js',
+        dest: config.payloads.app.js.shared+'/editor.js',
         separator: ';'
       }
     },
@@ -289,6 +296,7 @@ module.exports = function(grunt) {
     watch: {
       payload: {
         files: [
+          '<config:concat.form.src>',
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
           config.base.stylus+'/**/*.styl',
@@ -324,8 +332,8 @@ module.exports = function(grunt) {
 
   // Assemble static assets.
   grunt.registerTask('compile:concat', [
-    'clean:payload',
-    'concat:exhibit',
+    'clean:payloads',
+    'concat:form',
     'concat:neatline',
     'concat:editor',
     'stylus',
@@ -337,8 +345,8 @@ module.exports = function(grunt) {
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
-    'clean:payload',
-    'min:exhibit',
+    'clean:payloads',
+    'min:form',
     'min:neatline',
     'min:editor',
     'stylus',
@@ -359,6 +367,7 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
+    'shell:move_chosen_css',
     'compile:min'
   ]);
 

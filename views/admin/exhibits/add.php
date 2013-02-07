@@ -13,10 +13,7 @@
 
 ?>
 
-<?php
-  queue_js_file('slugBuilder');
-  queue_js_file('_constructAdd');
-?>
+<?php _nl_formAssets(); ?>
 
 <?php
   echo head(array(
