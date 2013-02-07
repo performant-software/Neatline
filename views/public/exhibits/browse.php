@@ -25,7 +25,7 @@
   <?php echo flash(); ?>
   <h1><?php echo __('Neatline | Browse Exhibits'); ?></h1>
 
-  <?php if(has_neatlines_for_loop()): ?>
+  <?php if(_nl_areExhibits()): ?>
   <div class="pagination"><?php echo pagination_links(); ?></div>
 
     <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>

@@ -135,25 +135,16 @@ function _nl_currentExhibit()
 
 
 /**
- * Determine whether there are any neatlines to loop on the view.
+ * Are there any exhibits bound on the view.
  *
  * @return boolean
  */
-function has_neatlines_for_loop()
+function _nl_areExhibits()
 {
     $view = get_view();
-    return ($view->neatline_exhibits and count($view->neatline_exhibits));
-}
-
-
-/**
- * Returns the total number of exhibits in the database.
- *
- * @return integer
- */
-function total_neatlines()
-{
-    return get_db()->getTable('NeatlineExhibits')->count();
+    return ($view->neatline_exhibits &&
+        count($view->neatline_exhibits)
+    );
 }
 
 
@@ -166,28 +157,21 @@ function total_neatlines()
  * @param string $action The action for the link. Default is 'show'.
  * @return string The HTML link.
  */
-function link_to_neatline(
-    $exhibit  = null,
-    $text     = null,
-    $props    = array(),
-    $action   = 'show',
-    $public   = true)
-{
+function _nl_link($exhibit=null, $text=null, $props=array(),
+    $action='show', $public=true) {
 
-    // Get the exhibit, form the link text.
+    // Get the text and slug.
     $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
-    $text = $text ? $text : strip_formatting(_nl_field('title', $exhibit));
-
-    // Form the identified (id or slug).
+    $text = $text ? $text : _nl_field('title', $exhibit);
     if ($action == 'show') { $slug = $exhibit->slug; }
     else { $slug = $exhibit->id; }
 
-    // Form the route and link tag.
-    $route = 'neatline/' . $action . '/' . $slug;
+    // Form the route.
+    $route = 'neatline/'.$action.'/'.$slug;
     $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
 
-    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
+    return '<a '.tag_attributes($props).'>'.$text.'</a>';
 
 }
 
@@ -195,10 +179,10 @@ function link_to_neatline(
 /**
  * Returns the number of records used in a given Neatline.
  *
- * @param NeatlineExhibit|null $neatline The exhibit record.
+ * @param NeatlineExhibit $neatline The exhibit record.
  * @return integer
  */
-function total_records_for_neatline($neatline = null)
+function _nl_totalRecords($neatline = null)
 {
     $neatline = $neatline ? $neatline : _nl_currentExhibit();
     return (int)$neatline->getNumberOfRecords();

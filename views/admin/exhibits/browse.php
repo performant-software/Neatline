@@ -30,7 +30,7 @@
 
   <?php echo flash(); ?>
 
-  <?php if(has_neatlines_for_loop()): ?>
+  <?php if(_nl_areExhibits()): ?>
   <div class="pagination"><?php echo pagination_links(); ?></div>
     <table class="neatline">
 
@@ -56,15 +56,15 @@
         <tr>
 
           <td class="title">
-            <?php echo link_to_neatline(); ?>
+            <?php echo _nl_link(); ?>
             <ul class="action-links group">
               <li>
-                <?php echo link_to_neatline($e, __('Edit Details'),
+                <?php echo _nl_link($e, __('Edit Details'),
                   array('class' => 'edit'), 'edit', false); ?>
                 </a>
               </li>
               <li>
-                <?php echo link_to_neatline($e, __('Delete'),
+                <?php echo _nl_link($e, __('Delete'),
                   array('class'=>'delete delete-confirm'),
                   'delete-confirm', false); ?>
               </li>
@@ -72,10 +72,10 @@
           </td>
 
           <td><?php echo format_date(_nl_field('modified')); ?></td>
-          <td><?php echo total_records_for_neatline(); ?></td>
+          <td><?php echo _nl_totalRecords(); ?></td>
           <td><?php echo _nl_field('public')?__('Yes'):__('No'); ?></td>
 
-          <td><?php echo link_to_neatline($e, __('Edit'),
+          <td><?php echo _nl_link($e, __('Edit'),
                 array('class'=>'edit'), 'editor', false); ?>
           </td>
 
