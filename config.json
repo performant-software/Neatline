@@ -2,13 +2,13 @@
 
   "src": {
     "shared":             "./views/shared/javascripts/app",
-    "admin":              "./views/admin/javascripts",
+    "admin":              "./views/admin/javascripts"
   },
 
   "jasmine":              "./views/shared/javascripts/tests",
   "stylus":               "./views/shared/css/stylus",
 
-  "payload": {
+  "payloads": {
     "js":                 "./views/shared/javascripts/payloads",
     "css":                "./views/shared/css/payloads"
   },
@@ -20,6 +20,7 @@
   },
 
   "vendor": {
+
     "js": {
       "jquery":           "./components/jquery/jquery.js",
       "underscore":       "./components/underscore/underscore.js",
@@ -40,6 +41,7 @@
       "codemirror":       "./components/codemirror/lib/codemirror.js",
       "codemirror_yaml":  "./components/codemirror/mode/yaml/yaml.js"
     },
+
     "css": {
       "openlayers":       "./components/openlayers/theme/default/style.css",
       "bootstrap":        "./components/bootstrap/bootstrap/css/bootstrap.min.css",
@@ -47,6 +49,7 @@
       "chosen":           "./components/chosen/chosen/chosen.css",
       "codemirror":       "./components/codemirror/lib/codemirror.css"
     }
+
   }
 
 }

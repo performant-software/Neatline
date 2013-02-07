@@ -102,8 +102,13 @@ module.exports = function(grunt) {
     clean: {
       bower: './components',
       payloads: [
-        config.payloads.app.css.shared,
-        config.payloads.app.js.shared,
+        config.payloads.css,
+        config.payloads.js,
+      ],
+      jasmine: [
+        config.jasmine+'/payloads',
+        config.jasmine+'/node_modules',
+        config.jasmine+'/components'
       ]
     },
 
@@ -129,7 +134,7 @@ module.exports = function(grunt) {
           config.src.shared+'/bubble/**/*.js'
 
         ],
-        dest: config.payloads.app.js.shared+'/neatline.js',
+        dest: config.payloads.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
@@ -171,15 +176,15 @@ module.exports = function(grunt) {
           config.src.shared+'/editor/styles/*.js'
 
         ],
-        dest: config.payloads.app.js+'/editor.js',
+        dest: config.payloads.js+'/editor.js',
         separator: ';'
       },
       neatline_css: {
         src: [
-          config.payloads.app.css+'/public/*.css',
+          config.payloads.css+'/public/*.css',
           config.vendor.css.openlayers,
         ],
-        dest: config.payloads.app.css+'/neatline.css',
+        dest: config.payloads.css+'/neatline.css',
       },
       editor_css: {
         src: [
@@ -188,21 +193,21 @@ module.exports = function(grunt) {
           config.vendor.css.toastr,
           config.vendor.css.chosen,
           config.vendor.css.codemirror,
-          config.payloads.app.css+'/editor/*.css'
+          config.payloads.css+'/editor/*.css'
         ],
-        dest: config.payloads.app.css+'/editor.css',
+        dest: config.payloads.css+'/editor.css',
       }
     },
 
     min: {
       neatline: {
         src: '<config:concat.neatline.src>',
-        dest: config.payloads.app.js+'/neatline.js',
+        dest: config.payloads.js+'/neatline.js',
         separator: ';'
       },
       editor: {
         src: '<config:concat.editor.src>',
-        dest: config.payloads.app.js+'/editor.js',
+        dest: config.payloads.js+'/editor.js',
         separator: ';'
       }
     },
@@ -229,13 +234,29 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      jasmine: {
-        files: {
-          './views/shared/javascripts/tests/payloads/js/':
-          config.payload.js+'/*.js',
-          './views/shared/javascripts/tests/payloads/css/':
-          config.payload.css+'/*.css'
-        }
+      build: {
+        files: [
+          {
+            src: './components/**',
+            dest: config.jasmine+'/components/'
+          },
+          {
+            src: './node_modules/**',
+            dest: config.jasmine+'/node_modules/'
+          }
+        ]
+      },
+      payload: {
+        files: [
+          {
+            src: config.payloads.js+'/*.js',
+            dest: config.jasmine+'/payloads/js/'
+          },
+          {
+            src: config.payloads.css+'/*.css',
+            dest: config.jasmine+'/payloads/css/'
+          }
+        ]
       }
     },
 
@@ -277,38 +298,36 @@ module.exports = function(grunt) {
 
   // Assemble static assets.
   grunt.registerTask('compile:concat', [
-    'clean:payloads',
     'concat:neatline',
     'concat:editor',
     'stylus',
     'concat:neatline_css',
     'concat:editor_css',
-    'copy',
+    'copy:payload',
     'rig'
   ]);
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
-    'clean:payloads',
     'min:neatline',
     'min:editor',
     'stylus',
     'concat:neatline_css',
     'concat:editor_css',
-    'copy',
+    'copy:payload',
     'rig'
   ]);
 
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'shell:npm_jasmine',
     'shell:bower_cache_clean',
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
-    'compile:min'
+    'compile:min',
+    'copy:build'
   ]);
 
   // Run all tests.

@@ -5,7 +5,7 @@
 
       "spyc":                   "https://github.com/mustangostang/spyc.git"
 
-    , "jquery":                 ">= 1.9.1"
+    , "jquery":                 ">= 1.8.2"
     , "underscore":             ">= 1.4.2"
     , "underscore.string":      ">= 2.3.0"
     , "backbone":               ">= 0.9.2"
