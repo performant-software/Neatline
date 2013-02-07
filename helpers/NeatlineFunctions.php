@@ -29,7 +29,7 @@ function _nl_mapApis()
  */
 function _nl_formAssets()
 {
-    queue_js_file('payloads/form');
+    // queue_js_file('payloads/form');
 }
 
 

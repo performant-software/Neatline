@@ -48,14 +48,21 @@ module.exports = function(grunt) {
         command: 'bower install',
         stdout: true
       },
-      bower_javascript: {
+      bower_shared: {
         command: 'bower install',
         stdout: true,
         execOptions: {
-          cwd: config.bower.javascript
+          cwd: config.bower.shared
         }
       },
-      bower_tests: {
+      bower_admin: {
+        command: 'bower install',
+        stdout: true,
+        execOptions: {
+          cwd: config.bower.admin
+        }
+      },
+      bower_jasmine: {
         command: 'bower install',
         stdout: true,
         execOptions: {
@@ -83,13 +90,6 @@ module.exports = function(grunt) {
         stdout: true,
         execOptions: {
           cwd: config.build.bootstrap
-        }
-      },
-      move_chosen_css: {
-        command: 'cp chosen.css ../../../../css/payloads',
-        stdout: true,
-        execOptions: {
-          cwd: config.build.chosen
         }
       },
 
@@ -362,12 +362,11 @@ module.exports = function(grunt) {
     'shell:npm_jasmine',
     'shell:bower_cache_clean',
     'shell:bower_php',
-    'shell:bower_javascript',
-    'shell:bower_tests',
+    'shell:bower_shared',
+    'shell:bower_jasmine',
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
-    'shell:move_chosen_css',
     'compile:min'
   ]);
 
