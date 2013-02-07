@@ -1,0 +1,43 @@
+{
+
+  "group1": [
+    {
+      "name": "Layer 1",
+      "id": "Layer1",
+      "type": "Type1"
+    },
+    {
+      "name": "Layer 2",
+      "id": "Layer2",
+      "type": "Type2"
+    }
+  ],
+
+  "group2": [
+    {
+      "name": "Layer 3",
+      "id": "Layer3",
+      "type": "Type3"
+    },
+    {
+      "name": "Layer 4",
+      "id": "Layer4",
+      "type": "Type4"
+    }
+  ],
+
+  "group3": [
+    {
+      "name": "Layer 5",
+      "id": "Layer5",
+      "type": "Type5"
+    },
+    {
+      "name": "Layer 6",
+      "id": "Layer6",
+      "type": "Type6"
+    }
+  ]
+
+}
+
