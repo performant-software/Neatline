@@ -188,7 +188,6 @@ module.exports = function(grunt) {
           config.vendor.js.svgtowkt,
           config.vendor.js.routefilter,
           config.vendor.js.toastr,
-          config.vendor.js.minicolors,
           config.vendor.js.draggable,
           config.vendor.js.bootstrap,
           config.vendor.js.rivets,
@@ -227,7 +226,7 @@ module.exports = function(grunt) {
           '<config:concat.neatline_css.src>',
           config.vendor.css.bootstrap,
           config.vendor.css.toastr,
-          config.vendor.css.minicolors,
+          config.vendor.css.chosen,
           config.vendor.css.codemirror,
           config.payloads.app.css+'/editor/*.css'
         ],

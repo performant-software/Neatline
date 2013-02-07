@@ -153,9 +153,16 @@ class Neatline_RecordsControllerTest_Get
     {
 
         $exhibit = $this->__exhibit();
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
-        $record3 = $this->__record($exhibit);
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
 
         // Set `limit` and `offset` parameters.
         $this->request->setQuery(array('limit' => 1, 'offset' => 1));

@@ -15,7 +15,7 @@
     , "backbone.routefilter":   "https://github.com/boazsender/backbone.routefilter.git"
     , "toastr":                 "https://github.com/CodeSeven/toastr.git"
     , "jquery-draggable-input": "https://github.com/saschagehlich/jquery-draggable-input.git"
-    , "jquery-minicolors":      ">= 2.0.0-beta.3"
+    , "chosen":                 ">= 0.9.11"
     , "codemirror":             "latest"
     , "bootstrap":              ">= 2.2.0"
     , "rivets":                 ">= 0.4.3"

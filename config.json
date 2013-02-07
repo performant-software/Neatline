@@ -42,8 +42,8 @@
       "svgtowkt":         "./views/shared/javascripts/components/svg-to-wkt/svg-to-wkt.js",
       "routefilter":      "./views/shared/javascripts/components/backbone.routefilter/dist/backbone.routefilter.js",
       "toastr":           "./views/shared/javascripts/components/toastr/toastr.js",
-      "minicolors":       "./views/shared/javascripts/components/jquery-minicolors/jquery.minicolors.js",
       "draggable":        "./views/shared/javascripts/components/jquery-draggable-input/jquery-draggable-input.js",
+      "chosen":           "./views/shared/javascripts/components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./views/shared/javascripts/components/bootstrap/bootstrap/js/bootstrap.js",
       "rivets":           "./views/shared/javascripts/components/rivets/lib/rivets.js",
       "codemirror":       "./views/shared/javascripts/components/codemirror/lib/codemirror.js",
@@ -53,7 +53,7 @@
       "openlayers":       "./views/shared/javascripts/components/openlayers/theme/default/style.css",
       "bootstrap":        "./views/shared/javascripts/components/bootstrap/bootstrap/css/bootstrap.min.css",
       "toastr":           "./views/shared/javascripts/components/toastr/toastr.css",
-      "minicolors":       "./views/shared/javascripts/components/jquery-minicolors/jquery.minicolors.css",
+      "chosen":           "./views/shared/javascripts/components/chosen/chosen/chosen.css",
       "codemirror":       "./views/shared/javascripts/components/codemirror/lib/codemirror.css"
     }
   }
