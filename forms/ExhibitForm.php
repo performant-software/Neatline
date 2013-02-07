@@ -49,14 +49,6 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
-        // Description.
-        $this->addElement('textarea', 'description', array(
-            'label'         => __('Description'),
-            'description'   => __('Supporting prose to describe the exhibit.'),
-            'value'         => $this->_exhibit->description,
-            'attribs'       => array('class' => 'html-editor', 'rows' => '10')
-        ));
-
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
@@ -98,6 +90,21 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
+        // Layers.
+        $this->addElement('multiselect', 'layers', array(
+            'label'         => __('Base Layers'),
+            'description'   => __('Select the base layers available in the exhibit.'),
+            'multiOptions'  => _nl_getLayersForSelect()
+        ));
+
+        // Description.
+        $this->addElement('textarea', 'description', array(
+            'label'         => __('Description'),
+            'description'   => __('Supporting prose to describe the exhibit.'),
+            'value'         => $this->_exhibit->description,
+            'attribs'       => array('class' => 'html-editor', 'rows' => '10')
+        ));
+
         // Public.
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
@@ -112,9 +119,10 @@ class Neatline_ExhibitForm extends Omeka_Form
 
         // Group the metadata fields.
         $this->addDisplayGroup(array(
-            'name',
-            'description',
+            'title',
             'slug',
+            'description',
+            'layers',
             'public'
         ), 'exhibit_info');
 

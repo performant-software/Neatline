@@ -123,6 +123,30 @@ function _nl_getAllLayers($file=null)
 
 
 /**
+ * Get an array of grouped id => name layer pairs for form select.
+ *
+ * @param string $file The layers file.
+ * @return array The layers.
+ */
+function _nl_getLayersForSelect($file=null)
+{
+
+    $all = _nl_getAllLayers($file);
+
+    $options = array();
+    foreach ($all as $group => $layers) {
+        $options[$group] = array();
+        foreach ($layers as $layer) {
+            $options[$group][$layer['id']] = $layer['name'];
+        }
+    }
+
+    return $options;
+
+}
+
+
+/**
  * Get just the layers included in a comma-delimited string.
  *
  * @param string $ids A comma-delimited list of layer ids.
@@ -135,12 +159,10 @@ function _nl_getLayers($ids, $file=null)
     $all = _nl_getAllLayers($file);
     $ids = explode(',', trim(str_replace(' ', '', $ids)));
 
-    $layers = array();
-    foreach ($all as $group => $members) {
-        foreach ($members as $layer) {
-            if (in_array($layer['id'], $ids)) {
-                $layers[] = $layer;
-            }
+    $subset = array();
+    foreach ($all as $group => $layers) {
+        foreach ($layers as $layer) {
+            if (in_array($layer['id'], $ids)) $subset[] = $layer;
         }
     }
 
