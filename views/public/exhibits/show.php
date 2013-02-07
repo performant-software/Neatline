@@ -12,7 +12,7 @@
  */
 ?>
 
-<?php neatline_queueNeatlineAssets(get_current_neatline()); ?>
+<?php _nl_exhibitAssets(get_current_neatline()); ?>
 <?php echo head(array('title' => neatline('title'))); ?>
 
 <!-- The core Neatline partial. -->

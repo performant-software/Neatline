@@ -13,33 +13,9 @@
 
 
 /**
- * Include the static files for the Neatline.
- */
-function neatline_queueNeatlineAssets()
-{
-    neatline_queueMapApis();
-    queue_css_file('payloads/neatline');
-    queue_js_file('payloads/neatline');
-    queue_js_file('bootstrap');
-}
-
-
-/**
- * Include the static files for the editor.
- */
-function neatline_queueEditorAssets()
-{
-    neatline_queueMapApis();
-    queue_css_file('payloads/editor');
-    queue_js_file('payloads/editor');
-    queue_js_file('bootstrap');
-}
-
-
-/**
  * Include the Google Maps API.
  */
-function neatline_queueMapApis()
+function _nl_mapApis()
 {
     $head = get_view()->headScript();
     $head->appendScript('', 'text/javascript', array('src' =>
@@ -49,27 +25,47 @@ function neatline_queueMapApis()
 
 
 /**
+ * Include the static files for the Neatline.
+ */
+function _nl_exhibitAssets()
+{
+    _nl_mapApis();
+    queue_css_file('payloads/neatline');
+    queue_js_file('payloads/neatline');
+    queue_js_file('bootstrap');
+}
+
+
+/**
+ * Include the static files for the editor.
+ */
+function _nl_editorAssets()
+{
+    _nl_mapApis();
+    queue_css_file('payloads/editor');
+    queue_js_file('payloads/editor');
+    queue_js_file('bootstrap');
+}
+
+
+/**
  * Construct exhibit globals.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return string JSON exhibit defaults.
  */
-function neatline_exhibitGlobals($exhibit)
+function _nl_exhibitGlobals($exhibit)
 {
     return json_encode(array(
-
         'id'  => $exhibit->id,
-
         'api' => array(
             'records' => public_url('neatline/records/'.$exhibit->id),
             'record'  => public_url('neatline/record')
         ),
-
         'map' => array(
             'focus' => $exhibit->map_focus,
             'zoom'  => $exhibit->map_zoom
         )
-
     ));
 }
 
@@ -80,26 +76,23 @@ function neatline_exhibitGlobals($exhibit)
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return string JSON exhibit defaults.
  */
-function neatline_editorGlobals($exhibit)
+function _nl_editorGlobals($exhibit)
 {
     return json_encode(array(
-
         'api' => array(
             'styles' => url('neatline/styles/'.$exhibit->id),
         ),
-
         'perPage' => (int) get_plugin_ini('Neatline', 'records_per_page')
-
     ));
 }
 
 
 /**
- * Gather style columns exposed via the `neatline_links` filter.
+ * Gather style columns exposed via the `_nl_links` filter.
  *
  * @return array The array of label => column name.
  */
-function neatline_getStyles()
+function _nl_getStyles()
 {
   return apply_filters('neatline_styles', array());
 }
@@ -110,9 +103,9 @@ function neatline_getStyles()
  *
  * @return array The array of column names.
  */
-function neatline_getStyleCols()
+function _nl_getStyleCols()
 {
-  return array_values(neatline_getStyles());
+  return array_values(_nl_getStyles());
 }
 
 

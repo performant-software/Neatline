@@ -22,8 +22,8 @@ class Neatline_RecordControllerTest_Get
     public function testGet()
     {
 
-        $exhibit    = $this->__exhibit();
-        $record     = $this->__record($exhibit);
+        $exhibit = $this->__exhibit();
+        $record = $this->__record($exhibit);
 
         // Hit /record/:id.
         $this->dispatch('neatline/record/'.$record->id);
@@ -40,7 +40,7 @@ class Neatline_RecordControllerTest_Get
         $this->assertObjectHasAttribute('tags',     $response);
 
         // Should emit styles.
-        foreach (neatline_getStyleCols() as $s) {
+        foreach (_nl_getStyleCols() as $s) {
             $this->assertObjectHasAttribute($s, $response);
         }
 

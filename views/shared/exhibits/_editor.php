@@ -24,7 +24,7 @@
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-  __editor = <?php echo neatline_editorGlobals($exhibit); ?>
+  __editor = <?php echo _nl_editorGlobals($exhibit); ?>
 </script>
 
 <!-- Templates. -->

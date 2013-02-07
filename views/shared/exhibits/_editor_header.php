@@ -22,7 +22,7 @@
 
   <?php
   fire_plugin_hook('admin_theme_header');
-  neatline_queueEditorAssets();
+  _nl_editorAssets();
   echo head_js();
   echo head_css();
   ?>

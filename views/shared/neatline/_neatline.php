@@ -19,7 +19,7 @@
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-  __exhibit = <?php echo neatline_exhibitGlobals($exhibit); ?>
+  __exhibit = <?php echo _nl_exhibitGlobals($exhibit); ?>
 </script>
 
 <!-- Underscore templates. -->
