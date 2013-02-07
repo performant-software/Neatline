@@ -137,8 +137,7 @@ module.exports = function(grunt) {
         config.base.jasmine+'/node_modules',
       ],
       bower: [
-        config.bower.php+'/components',
-        config.bower.javascript+'/components',
+        config.bower.app+'/components',
         config.bower.jasmine+'/components'
       ],
       payloads: [
