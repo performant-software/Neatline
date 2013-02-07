@@ -62,5 +62,15 @@ class NeatlineExhibit extends Neatline_AbstractRecord
         );
     }
 
+    /**
+     * Required by Zend_Acl_Resource_Interface.
+     *
+     * @return string
+     */
+    public function getResourceId()
+    {
+        return 'NLExhibit';
+    }
+
 
 }

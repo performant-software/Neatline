@@ -17,10 +17,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
     public $item_id;        // INT(10) UNSIGNED NULL
     public $exhibit_id;     // INT(10) UNSIGNED NULL
-
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
-
     public $title;          // MEDIUMTEXT NULL
     public $_title;         // MEDIUMTEXT NULL
     public $body;           // MEDIUMTEXT NULL
@@ -141,7 +139,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
      * Assemble record data for the front-end application.
      *
      * @return array The data array.
-     **/
+     */
     public function buildJsonData() {
         return array_merge(parent::toArray(), $this->styles);
     }
@@ -154,7 +152,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
      * `[item:"<element>"]`
      * `[item:files]`
      *
-     **/
+     */
     public function compile() {
 
         // Copy raw -> compiled.
@@ -196,7 +194,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
     /**
      * Expose unmodified save (used for testing).
-     **/
+     */
     public function __save() {
         parent::save();
     }
@@ -204,7 +202,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
     /**
      * Compile `title` and `body` before saving.
-     **/
+     */
     public function save() {
         $this->compile();
         parent::save();
