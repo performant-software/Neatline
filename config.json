@@ -1,32 +1,37 @@
 {
 
-  "app":            "./views/shared/javascripts/app",
-  "stylus":         "./views/shared/css/stylus",
-  "jasmine":        "./views/shared/javascripts/tests",
+  "base": {
+    "js": {
+      "admin":            "./views/admin/javascripts",
+      "shared":           "./views/shared/javascripts/app"
+    },
+    "stylus":             "./views/shared/css/stylus",
+    "jasmine":            "./views/shared/javascripts/tests"
+  },
 
   "payloads": {
     "app": {
-      "js":         "./views/shared/javascripts/payloads",
-      "css":        "./views/shared/css/payloads"
+      "js": {
+        "admin":          "./views/admin/javascripts/payloads",
+        "shared":         "./views/shared/javascripts/payloads"
+      },
+      "css":              "./views/shared/css/payloads"
     },
     "test": {
-      "root":       "./views/shared/javascripts/tests/payloads",
-      "js":         "./views/shared/javascripts/tests/payloads/js",
-      "css":        "./views/shared/javascripts/tests/payloads/css"
+      "js":               "./views/shared/javascripts/tests/payloads/js",
+      "css":              "./views/shared/javascripts/tests/payloads/css"
     }
   },
 
   "bower": {
-    "php":          "./",
-    "admin":        "./views/admin/javascripts",
-    "shared":       "./views/shared/javascripts",
-    "jasmine":      "./views/shared/javascripts/tests/helpers"
+    "php":                "./",
+    "javascript":         "./views/shared/javascripts",
+    "jasmine":            "./views/shared/javascripts/tests/helpers"
   },
 
   "build": {
-    "openlayers":   "./views/shared/javascripts/components/openlayers/build",
-    "bootstrap":    "./views/shared/javascripts/components/bootstrap",
-    "minicolors":   "./views/shared/javascripts/components/jquery-minicolors"
+    "openlayers":         "./views/shared/javascripts/components/openlayers/build",
+    "bootstrap":          "./views/shared/javascripts/components/bootstrap"
   },
 
   "vendor": {

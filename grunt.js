@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         command: 'npm install',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine
+          cwd: config.base.jasmine
         }
       },
 
@@ -41,25 +41,18 @@ module.exports = function(grunt) {
         command: 'rm -rf ~/.bower',
         stdout: true,
         execOptions: {
-          cwd: config.bower.shared
+          cwd: config.bower.javascript
         }
       },
       bower_php: {
         command: 'bower install',
         stdout: true
       },
-      bower_admin: {
+      bower_javascript: {
         command: 'bower install',
         stdout: true,
         execOptions: {
-          cwd: config.bower.admin
-        }
-      },
-      bower_shared: {
-        command: 'bower install',
-        stdout: true,
-        execOptions: {
-          cwd: config.bower.shared
+          cwd: config.bower.javascript
         }
       },
       bower_tests: {
@@ -92,13 +85,6 @@ module.exports = function(grunt) {
           cwd: config.build.bootstrap
         }
       },
-      move_minicolors_images: {
-        command: 'cp jquery.minicolors.png ../../../css/img',
-        stdout: true,
-        execOptions: {
-          cwd: config.build.minicolors
-        }
-      },
 
       // TEST
       phpunit: {
@@ -112,28 +98,28 @@ module.exports = function(grunt) {
         command: 'grunt --config gruntPublic.js jasmine',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine
+          cwd: config.base.jasmine
         }
       },
       jasmine_public_server: {
         command: 'grunt --config gruntPublic.js jasmine-server',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine
+          cwd: config.base.jasmine
         }
       },
       jasmine_editor: {
         command: 'grunt --config gruntEditor.js jasmine',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine
+          cwd: config.base.jasmine
         }
       },
       jasmine_editor_server: {
         command: 'grunt --config gruntEditor.js jasmine-server',
         stdout: true,
         execOptions: {
-          cwd: config.jasmine
+          cwd: config.base.jasmine
         }
       }
 
@@ -141,22 +127,29 @@ module.exports = function(grunt) {
 
     clean: {
       npm: [
-        config.jasmine+'/node_modules',
+        config.base.jasmine+'/node_modules',
       ],
       bower: [
         config.bower.php+'/components',
-        config.bower.admin+'/components',
-        config.bower.shared+'/components',
+        config.bower.javascript+'/components',
         config.bower.jasmine+'/components'
       ],
       payload: [
         config.payloads.app.css,
-        config.payloads.app.js,
-        config.payloads.test.root
+        config.payloads.app.js.shared,
       ]
     },
 
     concat: {
+      form: {
+        src: [
+          config.vendor.js.underscore_s,
+          config.vendor.js.chosen,
+          config.base.js.admin+'/*.js',
+        ],
+        dest: config.payloads.app.js.shared+'/form.js',
+        separator: ';'
+      },
       neatline: {
         src: [
 
@@ -171,14 +164,14 @@ module.exports = function(grunt) {
           config.vendor.js.rivets,
 
           // Neatline:
-          config.app+'/*.js',
-          config.app+'/shared/record/record.model.js',
-          config.app+'/shared/record/record.collection.js',
-          config.app+'/map/**/*.js',
-          config.app+'/bubble/**/*.js'
+          config.base.js.shared+'/*.js',
+          config.base.js.shared+'/shared/record/record.model.js',
+          config.base.js.shared+'/shared/record/record.collection.js',
+          config.base.js.shared+'/map/**/*.js',
+          config.base.js.shared+'/bubble/**/*.js'
 
         ],
-        dest: config.payloads.app.js+'/neatline.js',
+        dest: config.payloads.app.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
@@ -197,29 +190,30 @@ module.exports = function(grunt) {
           config.vendor.js.routefilter,
           config.vendor.js.toastr,
           config.vendor.js.draggable,
+          config.vendor.js.chosen,
           config.vendor.js.bootstrap,
           config.vendor.js.rivets,
           config.vendor.js.codemirror,
           config.vendor.js.codemirror_yaml,
 
           // Neatline:
-          config.app+'/*.js',
-          config.app+'/shared/record/record.model.js',
-          config.app+'/shared/record/record.collection.js',
-          config.app+'/map/**/*.js',
-          config.app+'/bubble/**/*.js',
+          config.base.js.shared+'/*.js',
+          config.base.js.shared+'/shared/record/record.model.js',
+          config.base.js.shared+'/shared/record/record.collection.js',
+          config.base.js.shared+'/map/**/*.js',
+          config.base.js.shared+'/bubble/**/*.js',
 
           // Editor:
-          config.app+'/editor/*.js',
-          config.app+'/editor/map/*.js',
-          config.app+'/editor/menu/*.js',
-          config.app+'/editor/record/*.js',
-          config.app+'/editor/records/*.js',
-          config.app+'/editor/search/*.js',
-          config.app+'/editor/styles/*.js'
+          config.base.js.shared+'/editor/*.js',
+          config.base.js.shared+'/editor/map/*.js',
+          config.base.js.shared+'/editor/menu/*.js',
+          config.base.js.shared+'/editor/record/*.js',
+          config.base.js.shared+'/editor/records/*.js',
+          config.base.js.shared+'/editor/search/*.js',
+          config.base.js.shared+'/editor/styles/*.js'
 
         ],
-        dest: config.payloads.app.js+'/editor.js',
+        dest: config.payloads.app.js.shared+'/editor.js',
         separator: ';'
       },
       neatline_css: {
@@ -245,12 +239,12 @@ module.exports = function(grunt) {
     min: {
       neatline: {
         src: '<config:concat.neatline.src>',
-        dest: config.payloads.app.js+'/neatline.js',
+        dest: config.payloads.app.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
         src: '<config:concat.editor.src>',
-        dest: config.payloads.app.js+'/editor.js',
+        dest: config.payloads.app.js.shared+'/editor.js',
         separator: ';'
       }
     },
@@ -258,12 +252,12 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {
-          paths: [config.stylus]
+          paths: [config.base.stylus]
         },
         files: {
           './views/shared/css/payloads/*.css': [
-            config.stylus+'/public/*.styl',
-            config.stylus+'/editor/*.styl'
+            config.base.stylus+'/public/*.styl',
+            config.base.stylus+'/editor/*.styl'
           ]
         }
       }
@@ -271,8 +265,8 @@ module.exports = function(grunt) {
 
     rig: {
       jasmine: {
-        src: config.jasmine+'/helpers/_helpers.js',
-        dest: config.jasmine+'/helpers/helpers.js',
+        src: config.base.jasmine+'/helpers/_helpers.js',
+        dest: config.base.jasmine+'/helpers/helpers.js',
       }
     },
 
@@ -292,8 +286,8 @@ module.exports = function(grunt) {
         files: [
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
-          config.stylus+'/**/*.styl',
-          config.jasmine+'/helpers/*.js'
+          config.base.stylus+'/**/*.styl',
+          config.base.jasmine+'/helpers/*.js'
         ],
         tasks: [
           'compile:concat'
@@ -303,9 +297,9 @@ module.exports = function(grunt) {
         files: [
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
-          config.stylus+'/**/*.styl',
-          config.jasmine+'/helpers/*.js',
-          config.jasmine+'/tests/**/*.js'
+          config.base.stylus+'/**/*.styl',
+          config.base.jasmine+'/helpers/*.js',
+          config.base.jasmine+'/tests/**/*.js'
         ],
         tasks: [
           'compile:concat',
@@ -353,13 +347,11 @@ module.exports = function(grunt) {
     'shell:npm_jasmine',
     'shell:bower_cache_clean',
     'shell:bower_php',
-    'shell:bower_admin',
-    'shell:bower_shared',
+    'shell:bower_javascript',
     'shell:bower_tests',
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
-    'shell:move_minicolors_images',
     'compile:min'
   ]);
 
