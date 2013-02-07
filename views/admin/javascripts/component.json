@@ -1,0 +1,8 @@
+{
+    "name": "Neatline"
+  , "version": "2.0"
+  , "dependencies": {
+      "underscore.string":  ">= 2.3.0"
+    , "chosen":             ">= 0.9.11"
+  }
+}

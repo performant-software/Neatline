@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 components/
+views/admin/javascripts/components/
 views/shared/javascripts/components/
 views/shared/javascripts/tests/helpers/components/
 views/shared/javascripts/payloads/

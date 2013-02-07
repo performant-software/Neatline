@@ -166,7 +166,7 @@ function _nl_getLayers($ids, $file=null)
         }
     }
 
-    return $layers;
+    return $subset;
 
 }
 

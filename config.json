@@ -18,7 +18,8 @@
 
   "bower": {
     "php":          "./",
-    "javascript":   "./views/shared/javascripts",
+    "admin":        "./views/admin/javascripts",
+    "shared":       "./views/shared/javascripts",
     "jasmine":      "./views/shared/javascripts/tests/helpers"
   },
 
