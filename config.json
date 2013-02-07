@@ -1,29 +1,16 @@
 {
 
-  "base": {
-    "js": {
-      "admin":            "./views/admin/javascripts",
-      "shared":           "./views/shared/javascripts/app"
-    },
-    "stylus":             "./views/shared/css/stylus",
-    "jasmine":            "./views/shared/javascripts/tests"
+  "src": {
+    "shared":             "./views/shared/javascripts/app",
+    "admin":              "./views/admin/javascripts",
   },
 
-  "payloads": {
-    "app": {
-      "js": {
-        "admin":          "./views/admin/javascripts/payloads",
-        "shared":         "./views/shared/javascripts/payloads"
-      },
-      "css": {
-        "admin":          "./views/admin/css/payloads",
-        "shared":         "./views/shared/css/payloads"
-      }
-    },
-    "test": {
-      "js":               "./views/shared/javascripts/tests/payloads/js",
-      "css":              "./views/shared/javascripts/tests/payloads/css"
-    }
+  "jasmine":              "./views/shared/javascripts/tests",
+  "stylus":               "./views/shared/css/stylus",
+
+  "payload": {
+    "js":                 "./views/shared/javascripts/payloads",
+    "css":                "./views/shared/css/payloads"
   },
 
   "build": {
