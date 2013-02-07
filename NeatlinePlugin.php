@@ -166,6 +166,16 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookDefineAcl($args)
     {
 
+        $acl = $args['acl'];
+
+        // Register exhibit and record resources.
+        if (!$acl->has('NLExhibit')) $acl->addResource('NLExhibit');
+        if (!$acl->has('NLRecord')) $acl->addResource('NLRecord');
+
+        // Supers and admins can do everything.
+        $acl->allow(array('super', 'admin'), 'NLExhibit');
+        $acl->allow(array('super', 'admin'), 'NLRecord');
+
     }
 
 
