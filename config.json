@@ -9,7 +9,7 @@
     "jasmine":            "./views/shared/javascripts/tests"
   },
 
-  "payloads": {
+  "payload": {
     "app": {
       "js": {
         "admin":          "./views/admin/javascripts/payloads",

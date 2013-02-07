@@ -135,19 +135,19 @@ module.exports = function(grunt) {
         config.bower.jasmine+'/components'
       ],
       payload: [
-        config.payloads.app.css,
-        config.payloads.app.js.shared,
+        config.payload.app.css,
+        config.payload.app.js.shared,
       ]
     },
 
     concat: {
-      form: {
+      exhibit: {
         src: [
           config.vendor.js.underscore_s,
           config.vendor.js.chosen,
           config.base.js.admin+'/*.js',
         ],
-        dest: config.payloads.app.js.shared+'/form.js',
+        dest: config.payload.app.js.admin+'/exhibit.js',
         separator: ';'
       },
       neatline: {
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
           config.base.js.shared+'/bubble/**/*.js'
 
         ],
-        dest: config.payloads.app.js.shared+'/neatline.js',
+        dest: config.payload.app.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
@@ -213,15 +213,15 @@ module.exports = function(grunt) {
           config.base.js.shared+'/editor/styles/*.js'
 
         ],
-        dest: config.payloads.app.js.shared+'/editor.js',
+        dest: config.payload.app.js.shared+'/editor.js',
         separator: ';'
       },
       neatline_css: {
         src: [
-          config.payloads.app.css+'/public/*.css',
+          config.payload.app.css+'/public/*.css',
           config.vendor.css.openlayers,
         ],
-        dest: config.payloads.app.css+'/neatline.css',
+        dest: config.payload.app.css+'/neatline.css',
       },
       editor_css: {
         src: [
@@ -230,21 +230,26 @@ module.exports = function(grunt) {
           config.vendor.css.toastr,
           config.vendor.css.chosen,
           config.vendor.css.codemirror,
-          config.payloads.app.css+'/editor/*.css'
+          config.payload.app.css+'/editor/*.css'
         ],
-        dest: config.payloads.app.css+'/editor.css',
+        dest: config.payload.app.css+'/editor.css',
       }
     },
 
     min: {
+      exhibit: {
+        src: '<config:concat.exhibit.src>',
+        dest: config.payload.app.js.admin+'/exhibit.js',
+        separator: ';'
+      },
       neatline: {
         src: '<config:concat.neatline.src>',
-        dest: config.payloads.app.js.shared+'/neatline.js',
+        dest: config.payload.app.js.shared+'/neatline.js',
         separator: ';'
       },
       editor: {
         src: '<config:concat.editor.src>',
-        dest: config.payloads.app.js.shared+'/editor.js',
+        dest: config.payload.app.js.shared+'/editor.js',
         separator: ';'
       }
     },
@@ -320,6 +325,7 @@ module.exports = function(grunt) {
   // Assemble static assets.
   grunt.registerTask('compile:concat', [
     'clean:payload',
+    'concat:exhibit',
     'concat:neatline',
     'concat:editor',
     'stylus',
@@ -332,6 +338,7 @@ module.exports = function(grunt) {
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
     'clean:payload',
+    'min:exhibit',
     'min:neatline',
     'min:editor',
     'stylus',

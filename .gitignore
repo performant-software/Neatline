@@ -1,11 +1,11 @@
 .DS_Store
 node_modules/
 components/
-views/admin/javascripts/components/
 views/shared/javascripts/components/
 views/shared/javascripts/tests/helpers/components/
+views/shared/javascripts/tests/helpers/helpers.js
+views/admin/javascripts/payloads/
 views/shared/javascripts/payloads/
 views/shared/javascripts/tests/payloads/
-views/shared/javascripts/tests/helpers/helpers.js
 views/shared/css/payloads/
 views/shared/css/img/
