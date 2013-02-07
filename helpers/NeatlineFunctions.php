@@ -115,7 +115,7 @@ function _nl_getStyleCols()
  * @param string $file The layers file.
  * @return array The layers.
  */
-function _nl_getAllLayers($file)
+function _nl_getAllLayers($file=null)
 {
     $file = $file ? $file : NL_DIR . '/layers.json';
     return Zend_Json::decode(file_get_contents($file));
@@ -126,18 +126,19 @@ function _nl_getAllLayers($file)
  * Get just the layers included in a comma-delimited string.
  *
  * @param string $ids A comma-delimited list of layer ids.
+ * @param string $file The layers file.
  * @return array The layers.
  */
-function _nl_getLayers($ids)
+function _nl_getLayers($ids, $file=null)
 {
 
-    $all = _nl_getAllLayers();
-    $ids = explode(',', $ids);
+    $all = _nl_getAllLayers($file);
+    $ids = explode(',', trim(str_replace(' ', '', $ids)));
 
     $layers = array();
     foreach ($all as $group => $members) {
         foreach ($members as $layer) {
-            if (array_key_exists($layer['id'], $ids)) {
+            if (in_array($layer['id'], $ids)) {
                 $layers[] = $layer;
             }
         }
