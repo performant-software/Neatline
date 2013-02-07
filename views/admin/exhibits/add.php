@@ -30,10 +30,4 @@
   <?php echo $form; ?>
 </div>
 
-<script>
-  jQuery(document).ready(function($){
-    Omeka.wysiwyg();
-  });
-</script>
-
 <?php echo foot(); ?>
