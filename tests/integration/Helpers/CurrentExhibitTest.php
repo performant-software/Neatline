@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `get_current_neatline()` helper.
+ * Tests for `_nl_currentExhibit()` helper.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -20,18 +20,16 @@ class Neatline_HelpersTest_GetCurrentNeatline
 
 
     /**
-     * get_current_neatline() should return the exhibit record currently
+     * _nl_currentExhibit() should return the exhibit record currently
      * bound to the view.
      */
     public function testGetCurrentNeatline()
     {
 
-        // Create exhibit, hit /show.
         $exhibit = $this->__exhibit('test-exhibit');
         $this->dispatch('neatline/show/test-exhibit');
 
-        // `get_current_neatline` gets the exhibit.
-        $retrieved = get_current_neatline();
+        $retrieved = _nl_currentExhibit();
         $this->assertEquals($retrieved->id, $exhibit->id);
 
     }

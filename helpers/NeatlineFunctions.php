@@ -121,7 +121,7 @@ function neatline($fieldname, $options = array(), $neatline = null)
 {
 
     // Get the exhibit and raw field value.
-    $neatline = $neatline ? $neatline : get_current_neatline();
+    $neatline = $neatline ? $neatline : _nl_currentExhibit();
     $fieldname = strtolower($fieldname);
     $text = $neatline->$fieldname;
 
@@ -140,7 +140,7 @@ function neatline($fieldname, $options = array(), $neatline = null)
  *
  * @return NeatlineExhibit|null
  */
-function get_current_neatline()
+function _nl_currentExhibit()
 {
     return get_view()->neatline_exhibit;
 }
@@ -187,7 +187,7 @@ function link_to_neatline(
 {
 
     // Get the exhibit, form the link text.
-    $exhibit = $exhibit ? $exhibit : get_current_neatline();
+    $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
     $text = $text ? $text : strip_formatting(neatline('title', $exhibit));
 
     // Form the identified (id or slug).
@@ -212,6 +212,6 @@ function link_to_neatline(
  */
 function total_records_for_neatline($neatline = null)
 {
-    $neatline = $neatline ? $neatline : get_current_neatline();
+    $neatline = $neatline ? $neatline : _nl_currentExhibit();
     return (int)$neatline->getNumberOfRecords();
 }
