@@ -110,13 +110,52 @@ function _nl_getStyleCols()
 
 
 /**
+ * Read and parse the `layers.json` file.
+ *
+ * @param string $file The layers file.
+ * @return array The layers.
+ */
+function _nl_getAllLayers($file)
+{
+    $file = $file ? $file : NL_DIR . '/layers.json';
+    return Zend_Json::decode(file_get_contents($file));
+}
+
+
+/**
+ * Get just the layers included in a comma-delimited string.
+ *
+ * @param string $ids A comma-delimited list of layer ids.
+ * @return array The layers.
+ */
+function _nl_getLayers($ids)
+{
+
+    $all = _nl_getAllLayers();
+    $ids = explode(',', $ids);
+
+    $layers = array();
+    foreach ($all as $group => $members) {
+        foreach ($members as $layer) {
+            if (array_key_exists($layer['id'], $ids)) {
+                $layers[] = $layer;
+            }
+        }
+    }
+
+    return $layers;
+
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute.
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return string The field value.
  */
-function _nl_field($fieldname, $exhibit = null)
+function _nl_field($fieldname, $exhibit=null)
 {
     $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
     return $exhibit->$fieldname;
