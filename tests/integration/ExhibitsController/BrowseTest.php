@@ -31,7 +31,7 @@ class Neatline_ExhibitsControllerTest_Browse
     /**
      * Browse should display a button to create a new exhibit.
      */
-    public function testBrowseBaseMarkup()
+    public function testBaseMarkup()
     {
         $this->dispatch('neatline');
         $this->assertXpath('//a[@href="'.url('neatline/add').'"]');
@@ -42,7 +42,7 @@ class Neatline_ExhibitsControllerTest_Browse
      * Browse should display a list of exhibits with links to the public
      * show views and editor views.
      */
-    public function testBrowseExhibitList()
+    public function testExhibitList()
     {
 
         $exhibit1 = $this->__exhibit('slug1');
@@ -95,7 +95,7 @@ class Neatline_ExhibitsControllerTest_Browse
      * limit, the maximum number of exhibits that can fit on a page should
      * be listed and pagination links should be displayed.
      */
-    public function testBrowsePagination()
+    public function testPagination()
     {
 
         // Create 4 exhibits, set paging limit = 2.

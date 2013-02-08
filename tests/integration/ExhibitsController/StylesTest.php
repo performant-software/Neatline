@@ -46,10 +46,10 @@ class Neatline_ExhibitsControllerTest_Styles
         $record->tags = 'tag';
         $record->save();
 
-        $yaml = <<<EOD
-tag:
- - vector_color: 'color'
-EOD;
+        $yaml = "
+        tag:
+         - vector_color: 'color'
+         ";
 
         // Issue POST with styles string, reload exhibit.
         $this->request->setMethod('POST')->setRawBody($yaml);

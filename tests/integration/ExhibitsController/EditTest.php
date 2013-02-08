@@ -19,7 +19,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * /edit/:id should display the edit form populated with values.
      */
-    public function testEditBaseMarkup()
+    public function testBaseMarkup()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -58,7 +58,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should require a title.
      */
-    public function testEditNoTitleError()
+    public function testNoTitleError()
     {
 
         $exhibit = $this->__exhibit();
@@ -89,7 +89,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should require a slug.
      */
-    public function testEditNoSlugError()
+    public function testNoSlugError()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -118,7 +118,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should block a slug with spaces.
      */
-    public function testEditInvalidSlugWithSpacesError()
+    public function testInvalidSlugWithSpacesError()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -147,7 +147,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should block a slug with capitals.
      */
-    public function testEditInvalidSlugWithCapsError()
+    public function testInvalidSlugWithCapsError()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -176,7 +176,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should block a slug with non-alphanumeric characters.
      */
-    public function testEditInvalidSlugWithNonAlphasError()
+    public function testInvalidSlugWithNonAlphasError()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -204,7 +204,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should block a duplicate slug.
      */
-    public function testEditDuplicateSlugError()
+    public function testDuplicateSlugError()
     {
 
         $exhibit1 = $this->__exhibit('slug-1');
@@ -233,7 +233,7 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * Edit form should not block an unchanged slug.
      */
-    public function testEditUnchangedSlug()
+    public function testUnchangedSlug()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -258,7 +258,7 @@ class Neatline_ExhibitsControllerTest_Edit
      * Edit form should update an exhibit when a valid title, description,
      * and slug are provided.
      */
-    public function testEditSuccess()
+    public function testSuccess()
     {
 
         $exhibit = $this->__exhibit();

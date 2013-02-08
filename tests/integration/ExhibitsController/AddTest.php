@@ -20,7 +20,7 @@ class Neatline_ExhibitsControllerTest_Add
      * The /add route should display form elements for the exhibit title,
      * description, and slug, and a checkbox to set the exhibit public.
      */
-    public function testAddBaseMarkup()
+    public function testBaseMarkup()
     {
         $this->dispatch('neatline/add');
         $this->assertQuery('input[name="title"]');
@@ -33,7 +33,7 @@ class Neatline_ExhibitsControllerTest_Add
     /**
      * Add form should require a title.
      */
-    public function testAddNoTitleError()
+    public function testNoTitleError()
     {
 
         // Missing title.
@@ -62,7 +62,7 @@ class Neatline_ExhibitsControllerTest_Add
     /**
      * Add form should require a slug.
      */
-    public function testAddNoSlugError()
+    public function testNoSlugError()
     {
 
         // Missing slug.
@@ -91,7 +91,7 @@ class Neatline_ExhibitsControllerTest_Add
     /**
      * Add form should block a slug with spaces.
      */
-    public function testAddInvalidSlugWithSpacesError()
+    public function testInvalidSlugWithSpacesError()
     {
 
         // Spaces.
@@ -120,7 +120,7 @@ class Neatline_ExhibitsControllerTest_Add
     /**
      * Add form should block a slug with capitals.
      */
-    public function testAddInvalidSlugWithCapsError()
+    public function testInvalidSlugWithCapsError()
     {
 
         // Spaces.
@@ -149,7 +149,7 @@ class Neatline_ExhibitsControllerTest_Add
     /**
      * Add form should block a slug with non-alphanumeric characters.
      */
-    public function testAddInvalidSlugWithNonAlphasError()
+    public function testInvalidSlugWithNonAlphasError()
     {
 
         // Spaces.
@@ -178,7 +178,7 @@ class Neatline_ExhibitsControllerTest_Add
     /**
      * Add form should block a duplicate slug.
      */
-    public function testAddDuplicateSlugError()
+    public function testDuplicateSlugError()
     {
 
         // Create an exhibit.
@@ -211,7 +211,7 @@ class Neatline_ExhibitsControllerTest_Add
      * Add form should create and populate an exhibit when a valid title,
      * description, and slug are provided.
      */
-    public function testAddSuccess()
+    public function testSuccess()
     {
 
         $this->request->setMethod('POST')->setPost(array(
