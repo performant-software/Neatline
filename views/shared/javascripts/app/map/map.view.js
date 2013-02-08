@@ -30,7 +30,11 @@ Neatline.module('Map', function(
       this.records = null   // The current collection of records.
       this.layers = [];     // An array of record-backed vector layers.
 
-      this.initializeOpenLayers();
+      this.__initMap();
+      this.__initControls();
+      this.__initViewport();
+      this.__initEvents();
+
       this.publishPosition();
 
     },
@@ -41,7 +45,7 @@ Neatline.module('Map', function(
      * and call component start-up routines that add cursor controls, set
      * the default focus/zoom, and listen for movement events.
      */
-    initializeOpenLayers: function() {
+    __initMap: function() {
 
       // Widgets.
       var options = {
@@ -62,11 +66,6 @@ Neatline.module('Map', function(
       this.map.addLayer(this.baseLayer);
       this.map.setBaseLayer(this.baseLayer);
 
-      // Startup routines.
-      this.addControls();
-      this.setDefaultViewport();
-      this.registerMapEvents();
-
     },
 
 
@@ -74,7 +73,7 @@ Neatline.module('Map', function(
      * Construct, add, and activate hover and click controls to the map.
      * `hoverControl` handles highlighting, `clickControl` handles clicks.
      */
-    addControls: function() {
+    __initControls: function() {
 
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
@@ -109,6 +108,39 @@ Neatline.module('Map', function(
 
 
     /**
+     * Set the starting focus and zoom. If `mapFocus` is non-null on the
+     * global __exhibit object, then we know that a default focus and zoom
+     * has been set for the exhibit and should be manifested. If no
+     * default exists, apply the default zoom and geolocate the focus.
+     */
+    __initViewport: function() {
+
+      // If defaults are defined.
+      if (!_.isNull(__exhibit.map.focus)) {
+        this.setViewport(__exhibit.map.focus, __exhibit.map.zoom);
+      }
+
+      else {
+        this.map.zoomTo(this.options.defaultZoom);
+        this.geolocate();
+      }
+
+    },
+
+
+    /**
+     * Add a listener for the `moveend` event on the map, which is called
+     * when a pan or zoom is completed. Bind to `publishPosition`, which
+     * emits the current focus of the map and triggers off a data reload.
+     */
+    __initEvents: function() {
+      this.map.events.register('moveend', this.map,
+        _.bind(this.publishPosition, this)
+      );
+    },
+
+
+    /**
      * Activate the hover and click controls.
      */
     activateControls: function() {
@@ -134,39 +166,6 @@ Neatline.module('Map', function(
     updateControls: function() {
       this.hoverControl.setLayer(this.layers);
       this.clickControl.setLayer(this.layers);
-    },
-
-
-    /**
-     * Set the starting focus and zoom. If `mapFocus` is non-null on the
-     * global __exhibit object, then we know that a default focus and zoom
-     * has been set for the exhibit and should be manifested. If no
-     * default exists, apply the default zoom and geolocate the focus.
-     */
-    setDefaultViewport: function() {
-
-      // If defaults are defined.
-      if (!_.isNull(__exhibit.map.focus)) {
-        this.setViewport(__exhibit.map.focus, __exhibit.map.zoom);
-      }
-
-      else {
-        this.map.zoomTo(this.options.defaultZoom);
-        this.geolocate();
-      }
-
-    },
-
-
-    /**
-     * Add a listener for the `moveend` event on the map, which is called
-     * when a pan or zoom is completed. Bind to `publishPosition`, which
-     * emits the current focus of the map and triggers off a data reload.
-     */
-    registerMapEvents: function() {
-      this.map.events.register('moveend', this.map,
-        _.bind(this.publishPosition, this)
-      );
     },
 
 
