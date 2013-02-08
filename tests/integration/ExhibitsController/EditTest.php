@@ -255,6 +255,15 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
+     * Edit form should block empty base layers.
+     */
+    public function testNoLayersError()
+    {
+
+    }
+
+
+    /**
      * Edit form should update an exhibit when a valid title, description,
      * and slug are provided.
      */

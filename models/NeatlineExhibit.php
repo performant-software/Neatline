@@ -18,8 +18,9 @@ class NeatlineExhibit extends Neatline_AbstractRecord
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
     public $title;          // TINYTEXT NULL
-    public $description;    // TEXT NULL
     public $slug;           // VARCHAR(100) NOT NULL
+    public $description;    // TEXT NULL
+    public $layers;         // TEXT NULL
     public $public = 0;     // TINYINT(1) NOT NULL
     public $query;          // TEXT NULL
     public $styles;         // TEXT NULL

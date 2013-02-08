@@ -73,8 +73,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `modified`          TIMESTAMP NULL,
 
             `title`             TINYTEXT NULL,
-            `description`       TEXT NULL,
             `slug`              VARCHAR(100) NOT NULL,
+            `description`       TEXT NULL,
+            `layers`            TEXT NULL,
             `public`            TINYINT(1) NOT NULL,
             `query`             TEXT NULL,
             `styles`            TEXT NULL,

@@ -208,16 +208,45 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
+     * Add form should block empty base layers.
+     */
+    public function testNoLayersError()
+    {
+
+        // // Empty layers.
+        // $this->request->setMethod('POST')->setPost(array(
+        //     'layers' => array()
+        // ));
+
+        // // Submit the form, check for no new exhibits.
+        // $this->assertEquals($this->_exhibitsTable->count(), 0);
+        // $this->dispatch('neatline/add');
+        // $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // // Should redisplay the form.
+        // $this->assertModule('neatline');
+        // $this->assertController('exhibits');
+        // $this->assertAction('add');
+
+        // // Should flash error.
+        // $this->assertXpath('//input[@name="layers"]/following-sibling::
+        //     ul[@class="error"]'
+        // );
+
+    }
+
+
+    /**
      * Add form should create and populate an exhibit when a valid title,
-     * description, and slug are provided.
+     * slug, description, and layers list are provided.
      */
     public function testSuccess()
     {
 
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Test Exhibit',
-            'description'   => 'Test description.',
             'slug'          => 'test-exhibit',
+            'description'   => 'Test description.',
             'public'        => 1
         ));
 
