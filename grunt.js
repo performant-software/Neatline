@@ -250,13 +250,12 @@ module.exports = function(grunt) {
           paths: [config.stylus.shared]
         },
         files: {
-          './views/shared/css/payloads/*.css': [
+          './views/shared/css/payloads/public/*.css':
             config.stylus.shared+'/public/*.styl',
-            config.stylus.shared+'/editor/*.styl'
-          ],
-          './views/admin/css/payloads/form/*.css': [
+          './views/shared/css/payloads/editor/*.css':
+            config.stylus.shared+'/editor/*.styl',
+          './views/admin/css/payloads/form/*.css':
             config.stylus.admin+'/form/*.styl'
-          ]
         }
       }
     },
