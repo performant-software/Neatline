@@ -13,26 +13,7 @@
 describe('Map Exhibit Defaults', function() {
 
 
-  it('should construct base layers', function() {
-
-    // --------------------------------------------------------------------
-    // When the exhibit loads, the map should add each of the base layers
-    // in the `layers` array on the __exhibit global object.
-    // --------------------------------------------------------------------
-
-    loadFixtures('neatline-partial.html');
-
-    // Set layers.
-    __exhibit.map.layers = ['OpenStreetMap', 'GooglePhysical'];
-
-    // Start map.
-    Neatline.Map.init();
-
-    // TODO
-
-  });
-
-
+  it('should construct base layers');
   it('should set default base layers');
 
 
@@ -59,10 +40,6 @@ describe('Map Exhibit Defaults', function() {
     expect(center.lat).toEqual(2);
 
   });
-
-
-  // TODO: How to test geolocation?
-  it('should geolocate and set zoom when no defaults');
 
 
 });
