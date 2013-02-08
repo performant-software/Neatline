@@ -59,6 +59,14 @@ module.exports = function(grunt) {
           cwd: config.build.bootstrap
         }
       },
+      move_chosen_images: {
+        command: 'cp chosen-sprite.png ../../../'+
+          config.payloads.admin.css,
+        stdout: true,
+        execOptions: {
+          cwd: config.build.chosen
+        }
+      },
 
       // TEST
       phpunit: {
@@ -101,9 +109,12 @@ module.exports = function(grunt) {
 
     clean: {
       bower: './components',
+      images: './views/shared/css/img',
       payloads: [
-        config.payloads.css,
-        config.payloads.js,
+        config.payloads.shared.js,
+        config.payloads.shared.css,
+        config.payloads.admin.js,
+        config.payloads.admin.css,
       ],
       jasmine: [
         config.jasmine+'/payloads',
@@ -113,6 +124,15 @@ module.exports = function(grunt) {
     },
 
     concat: {
+      form: {
+        src: [
+          config.vendor.js.underscore_s,
+          config.vendor.js.chosen,
+          config.src.admin+'/*.js'
+        ],
+        dest: config.payloads.admin.js+'/form.js',
+        separator: ';'
+      },
       neatline: {
         src: [
 
@@ -134,7 +154,7 @@ module.exports = function(grunt) {
           config.src.shared+'/bubble/**/*.js'
 
         ],
-        dest: config.payloads.js.shared+'/neatline.js',
+        dest: config.payloads.shared.js+'/neatline.js',
         separator: ';'
       },
       editor: {
@@ -176,15 +196,22 @@ module.exports = function(grunt) {
           config.src.shared+'/editor/styles/*.js'
 
         ],
-        dest: config.payloads.js+'/editor.js',
+        dest: config.payloads.shared.js+'/editor.js',
         separator: ';'
+      },
+      form_css: {
+        src: [
+          config.payloads.admin.css+'/*.css',
+          config.vendor.css.chosen,
+        ],
+        dest: config.payloads.admin.css+'/form.css',
       },
       neatline_css: {
         src: [
-          config.payloads.css+'/public/*.css',
+          config.payloads.shared.css+'/public/*.css',
           config.vendor.css.openlayers,
         ],
-        dest: config.payloads.css+'/neatline.css',
+        dest: config.payloads.shared.css+'/neatline.css',
       },
       editor_css: {
         src: [
@@ -193,21 +220,26 @@ module.exports = function(grunt) {
           config.vendor.css.toastr,
           config.vendor.css.chosen,
           config.vendor.css.codemirror,
-          config.payloads.css+'/editor/*.css'
+          config.payloads.shared.css+'/editor/*.css'
         ],
-        dest: config.payloads.css+'/editor.css',
+        dest: config.payloads.shared.css+'/editor.css',
       }
     },
 
     min: {
+      form: {
+        src: '<config:concat.form.src>',
+        dest: config.payloads.admin.js+'/form.js',
+        separator: ';'
+      },
       neatline: {
         src: '<config:concat.neatline.src>',
-        dest: config.payloads.js+'/neatline.js',
+        dest: config.payloads.shared.js+'/neatline.js',
         separator: ';'
       },
       editor: {
         src: '<config:concat.editor.src>',
-        dest: config.payloads.js+'/editor.js',
+        dest: config.payloads.shared.js+'/editor.js',
         separator: ';'
       }
     },
@@ -215,12 +247,15 @@ module.exports = function(grunt) {
     stylus: {
       compile: {
         options: {
-          paths: [config.stylus]
+          paths: [config.stylus.shared]
         },
         files: {
           './views/shared/css/payloads/*.css': [
-            config.stylus+'/public/*.styl',
-            config.stylus+'/editor/*.styl'
+            config.stylus.shared+'/public/*.styl',
+            config.stylus.shared+'/editor/*.styl'
+          ],
+          './views/admin/css/payloads/*.css': [
+            config.stylus.admin+'/*.styl',
           ]
         }
       }
@@ -249,11 +284,11 @@ module.exports = function(grunt) {
       payload: {
         files: [
           {
-            src: config.payloads.js+'/*.js',
+            src: config.payloads.shared.js+'/*.js',
             dest: config.jasmine+'/payloads/js/'
           },
           {
-            src: config.payloads.css+'/*.css',
+            src: config.payloads.shared.css+'/*.css',
             dest: config.jasmine+'/payloads/css/'
           }
         ]
@@ -265,24 +300,12 @@ module.exports = function(grunt) {
         files: [
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
-          config.stylus+'/**/*.styl',
+          config.stylus.shared+'/**/*.styl',
+          config.stylus.admin+'/**/*.styl',
           config.jasmine+'/helpers/*.js'
         ],
         tasks: [
           'compile:concat'
-        ]
-      },
-      jasmine: {
-        files: [
-          '<config:concat.neatline.src>',
-          '<config:concat.editor.src>',
-          config.stylus+'/**/*.styl',
-          config.jasmine+'/helpers/*.js',
-          config.jasmine+'/tests/**/*.js'
-        ],
-        tasks: [
-          'compile:concat',
-          'jasmine'
         ]
       }
     }
@@ -298,9 +321,11 @@ module.exports = function(grunt) {
 
   // Assemble static assets.
   grunt.registerTask('compile:concat', [
+    'concat:form',
     'concat:neatline',
     'concat:editor',
     'stylus',
+    'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css',
     'copy:payload',
@@ -309,9 +334,11 @@ module.exports = function(grunt) {
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
+    'min:form',
     'min:neatline',
     'min:editor',
     'stylus',
+    'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css',
     'copy:payload',
@@ -327,6 +354,7 @@ module.exports = function(grunt) {
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
     'compile:min',
+    'shell:move_chosen_images',
     'copy:build'
   ]);
 

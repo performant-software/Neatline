@@ -6,11 +6,21 @@
   },
 
   "jasmine":              "./views/shared/javascripts/tests",
-  "stylus":               "./views/shared/css/stylus",
+
+  "stylus": {
+    "shared":             "./views/shared/css/stylus",
+    "admin":              "./views/admin/css/stylus"
+  },
 
   "payloads": {
-    "js":                 "./views/shared/javascripts/payloads",
-    "css":                "./views/shared/css/payloads"
+    "shared": {
+      "js":               "./views/shared/javascripts/payloads",
+      "css":              "./views/shared/css/payloads"
+    },
+    "admin": {
+      "js":               "./views/admin/javascripts/payloads",
+      "css":              "./views/admin/css/payloads"
+    }
   },
 
   "build": {
