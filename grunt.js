@@ -124,15 +124,6 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      form: {
-        src: [
-          config.vendor.js.underscore_s,
-          config.vendor.js.chosen,
-          config.src.admin+'/*.js'
-        ],
-        dest: config.payloads.admin.js+'/form.js',
-        separator: ';'
-      },
       neatline: {
         src: [
 
@@ -199,13 +190,6 @@ module.exports = function(grunt) {
         dest: config.payloads.shared.js+'/editor.js',
         separator: ';'
       },
-      form_css: {
-        src: [
-          config.vendor.css.chosen,
-          config.payloads.admin.css+'/form/*.css'
-        ],
-        dest: config.payloads.admin.css+'/form.css',
-      },
       neatline_css: {
         src: [
           config.vendor.css.openlayers,
@@ -227,11 +211,6 @@ module.exports = function(grunt) {
     },
 
     min: {
-      form: {
-        src: '<config:concat.form.src>',
-        dest: config.payloads.admin.js+'/form.js',
-        separator: ';'
-      },
       neatline: {
         src: '<config:concat.neatline.src>',
         dest: config.payloads.shared.js+'/neatline.js',
@@ -253,9 +232,7 @@ module.exports = function(grunt) {
           './views/shared/css/payloads/public/*.css':
             config.stylus.shared+'/public/*.styl',
           './views/shared/css/payloads/editor/*.css':
-            config.stylus.shared+'/editor/*.styl',
-          './views/admin/css/payloads/form/*.css':
-            config.stylus.admin+'/form/*.styl'
+            config.stylus.shared+'/editor/*.styl'
         }
       }
     },
@@ -297,7 +274,6 @@ module.exports = function(grunt) {
     watch: {
       payload: {
         files: [
-          '<config:concat.form.src>',
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
           config.stylus.shared+'/**/*.styl',
@@ -321,11 +297,9 @@ module.exports = function(grunt) {
 
   // Assemble static assets.
   grunt.registerTask('compile:concat', [
-    'concat:form',
     'concat:neatline',
     'concat:editor',
     'stylus',
-    'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css',
     'copy:payload',
@@ -334,11 +308,9 @@ module.exports = function(grunt) {
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
-    'min:form',
     'min:neatline',
     'min:editor',
     'stylus',
-    'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css',
     'copy:payload',

@@ -27,16 +27,6 @@ function _nl_mapApis()
 /**
  * Include the static files for the Neatline.
  */
-function _nl_formAssets()
-{
-    queue_css_file('payloads/form');
-    queue_js_file('payloads/form');
-}
-
-
-/**
- * Include the static files for the Neatline.
- */
 function _nl_exhibitAssets()
 {
     _nl_mapApis();
@@ -73,7 +63,7 @@ function _nl_exhibitGlobals($exhibit)
             'record'  => public_url('neatline/record')
         ),
         'map' => array(
-            'layers' => _nl_getLayers($exhibit->layers),
+            'layers' => _nl_getLayers($exhibit->base_layers),
             'focus'  => $exhibit->map_focus,
             'zoom'   => $exhibit->map_zoom
         )
@@ -158,7 +148,7 @@ function _nl_getLayersForSelect()
     foreach ($all as $group => $layers) {
         $options[$group] = array();
         foreach ($layers as $layer) {
-            $options[$group][$layer['id']] = $layer['name'];
+            $options[$group][$layer['id']] = $layer['title'];
         }
     }
 

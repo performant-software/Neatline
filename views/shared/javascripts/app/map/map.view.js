@@ -63,9 +63,9 @@ Neatline.module('Map', function(
       this.map = new OpenLayers.Map(this.el, options);
 
       // Add OSM base layer.
-      this.baseLayer = Neatline.request('map:layers:OpenStreetMap');
-      this.map.addLayer(this.baseLayer);
-      this.map.setBaseLayer(this.baseLayer);
+      var osm = new OpenLayers.Layer.OSM();
+      this.map.addLayer(osm);
+      this.map.setBaseLayer(osm);
 
     },
 
@@ -74,10 +74,7 @@ Neatline.module('Map', function(
      * Add the baselayers defined on the `__exhibit` global.
      */
     __initLayers: function() {
-      // _.each(__exhibit.map.layers, _.bind(function(l) {
-        // var layer = Neatline.request('map:layers:'+l.type, l.properties);
-        // this.map.addLayer(layer);
-      // }, this));
+      // TODO
     },
 
 

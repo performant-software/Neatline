@@ -37,17 +37,17 @@ class Neatline_NeatlineExhibitTest_GetLayers
 
         $this->assertEquals($layers, array(
             array(
-                'name'  => 'Layer 1',
+                'title'  => 'Layer 1',
                 'id'    => 'Layer1',
                 'type'  => 'Type1'
             ),
             array(
-                'name'  => 'Layer 3',
+                'title'  => 'Layer 3',
                 'id'    => 'Layer3',
                 'type'  => 'Type3'
             ),
             array(
-                'name'  => 'Layer 5',
+                'title'  => 'Layer 5',
                 'id'    => 'Layer5',
                 'type'  => 'Type5'
             )

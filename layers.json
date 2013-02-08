@@ -2,13 +2,13 @@
   "Default Layers": [
 
     {
-      "name": "OpenStreetMap",
+      "title": "OpenStreetMap",
       "id": "OpenStreetMap",
       "type": "OpenStreetMap"
     },
 
     {
-      "name": "Google Physical",
+      "title": "Google Physical",
       "id": "GooglePhysical",
       "type": "Google",
       "properties": {
@@ -17,7 +17,7 @@
     },
 
     {
-      "name": "Google Streets",
+      "title": "Google Streets",
       "id": "GoogleStreets",
       "type": "Google",
       "properties": {
@@ -26,7 +26,7 @@
     },
 
     {
-      "name": "Google Hybrid",
+      "title": "Google Hybrid",
       "id": "GoogleHybrid",
       "type": "Google",
       "properties": {
@@ -35,7 +35,7 @@
     },
 
     {
-      "name": "Google Sattelite",
+      "title": "Google Sattelite",
       "id": "GoogleSattelite",
       "type": "Google",
       "properties": {
@@ -44,7 +44,7 @@
     },
 
     {
-      "name": "Stamen Toner",
+      "title": "Stamen Toner",
       "id": "StamenToner",
       "type": "Stamen",
       "properties": {
@@ -53,7 +53,7 @@
     },
 
     {
-      "name": "Stamen Watercolor",
+      "title": "Stamen Watercolor",
       "id": "StamenWatercolor",
       "type": "Stamen",
       "properties": {
@@ -62,7 +62,7 @@
     },
 
     {
-      "name": "Stamen Terrain",
+      "title": "Stamen Terrain",
       "id": "StamenTerrain",
       "type": "Stamen",
       "properties": {

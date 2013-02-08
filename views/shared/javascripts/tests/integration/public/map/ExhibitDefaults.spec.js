@@ -13,11 +13,34 @@
 describe('Map Exhibit Defaults', function() {
 
 
+  it('should construct base layers', function() {
+
+    // --------------------------------------------------------------------
+    // When the exhibit loads, the map should add each of the base layers
+    // in the `layers` array on the __exhibit global object.
+    // --------------------------------------------------------------------
+
+    loadFixtures('neatline-partial.html');
+
+    // Set layers.
+    __exhibit.map.layers = ['OpenStreetMap', 'GooglePhysical'];
+
+    // Start map.
+    Neatline.Map.init();
+
+    // TODO
+
+  });
+
+
+  it('should set default base layers');
+
+
   it('should set exhibit default focus and zoom', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit loads, the map should manifest the zoom and focus
-    // set in `mapZoom` and `mapFocus` on the __exhibit global object.
+    // set in `zoom` and `focus` on the __exhibit global object.
     // --------------------------------------------------------------------
 
     loadFixtures('neatline-partial.html');

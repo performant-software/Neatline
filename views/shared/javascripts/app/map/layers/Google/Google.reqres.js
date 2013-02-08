@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Stamen layer constructor.
+ * Google layer constructor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,17 +10,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.Stamen', function(
-  Stamen, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.Google', function(
+  Google, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
-   * Construct a Stamen layer - http://maps.stamen.com/.
+   * Construct a Google layer.
    *
    * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
+   * @return {OpenLayers.Layer.Google}: The Google layer.
    */
-  Neatline.reqres.addHandler('map:layers:Stamen', function(json) {
+  Neatline.reqres.addHandler('map:layers:Google', function(json) {
     // TODO
   });
 
