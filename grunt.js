@@ -114,7 +114,7 @@ module.exports = function(grunt) {
         config.payloads.shared.js,
         config.payloads.shared.css,
         config.payloads.admin.js,
-        config.payloads.admin.css,
+        config.payloads.admin.css
       ],
       jasmine: [
         config.jasmine+'/payloads',
@@ -201,15 +201,15 @@ module.exports = function(grunt) {
       },
       form_css: {
         src: [
-          config.payloads.admin.css+'/*.css',
           config.vendor.css.chosen,
+          config.payloads.admin.css+'/form/*.css'
         ],
         dest: config.payloads.admin.css+'/form.css',
       },
       neatline_css: {
         src: [
-          config.payloads.shared.css+'/public/*.css',
           config.vendor.css.openlayers,
+          config.payloads.shared.css+'/public/*.css'
         ],
         dest: config.payloads.shared.css+'/neatline.css',
       },
@@ -254,8 +254,8 @@ module.exports = function(grunt) {
             config.stylus.shared+'/public/*.styl',
             config.stylus.shared+'/editor/*.styl'
           ],
-          './views/admin/css/payloads/*.css': [
-            config.stylus.admin+'/*.styl',
+          './views/admin/css/payloads/form/*.css': [
+            config.stylus.admin+'/form/*.styl'
           ]
         }
       }
