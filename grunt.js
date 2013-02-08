@@ -46,7 +46,7 @@ module.exports = function(grunt) {
         }
       },
       build_bootstrap: {
-        command: 'make bootstrap',
+        command: 'npm install && make bootstrap',
         stdout: true,
         execOptions: {
           cwd: config.build.bootstrap
@@ -298,6 +298,7 @@ module.exports = function(grunt) {
     watch: {
       payload: {
         files: [
+          '<config:concat.form.src>',
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
           config.stylus.shared+'/**/*.styl',

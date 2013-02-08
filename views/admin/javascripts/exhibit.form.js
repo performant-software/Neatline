@@ -11,5 +11,5 @@
  */
 
 jQuery(function($) {
-  $('#layers').chosen();
+  $('.chosen').chosen();
 });
