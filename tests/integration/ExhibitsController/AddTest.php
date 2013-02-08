@@ -17,6 +17,16 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
+     * Inject mock layers JSON.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
+    }
+
+
+    /**
      * The /add route should display form elements for the exhibit title,
      * description, and slug, and a checkbox to set the exhibit public.
      */
@@ -248,7 +258,7 @@ class Neatline_ExhibitsControllerTest_Add
             'title'         => 'title',
             'slug'          => 'slug',
             'description'   => 'description',
-            'layers'        => array('layer1', 'layer2'),
+            'layers'        => array('Layer1', 'Layer2'),
             'public'        => 1
         ));
 
@@ -262,7 +272,7 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->description,  'description');
-        $this->assertEquals($exhibit->layers,       'layer1,layer2');
+        $this->assertEquals($exhibit->layers,       'Layer1,Layer2');
         $this->assertEquals($exhibit->public,       1);
 
     }

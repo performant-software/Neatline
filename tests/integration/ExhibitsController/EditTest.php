@@ -17,6 +17,16 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
+     * Inject mock layers JSON.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
+    }
+
+
+    /**
      * /edit/:id should display the edit form populated with values.
      */
     public function testBaseMarkup()
@@ -25,7 +35,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'title';
         $exhibit->description   = 'description';
-        $exhibit->layers        = 'OpenStreetMap,GooglePhysical';
+        $exhibit->layers        = 'Layer1,Layer2';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -48,10 +58,10 @@ class Neatline_ExhibitsControllerTest_Edit
         // Layers:
         $this->assertXpath(
             '//select[@name="layers[]"]/optgroup/
-            option[@value="OpenStreetMap"][@selected="selected"]');
+            option[@value="Layer1"][@selected="selected"]');
         $this->assertXpath(
             '//select[@name="layers[]"]/optgroup/
-            option[@value="GooglePhysical"][@selected="selected"]');
+            option[@value="Layer2"][@selected="selected"]');
 
         // Public.
         $this->assertXpath(
@@ -247,7 +257,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->request->setMethod('POST')->setPost(array(
             'title'     => 'title',
             'slug'      => 'slug',
-            'layers'    => array('layer1', 'layer2')
+            'layers'    => array('Layer1', 'Layer2')
         ));
 
         // Submit the form.
@@ -305,7 +315,7 @@ class Neatline_ExhibitsControllerTest_Edit
             'title'         => 'title2',
             'slug'          => 'slug2',
             'description'   => 'description2',
-            'layers'        => array('layer1', 'layer2'),
+            'layers'        => array('Layer1', 'Layer2'),
             'public'        => 0
         ));
 
@@ -317,7 +327,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertEquals($exhibit->title,        'title2');
         $this->assertEquals($exhibit->slug,         'slug2');
         $this->assertEquals($exhibit->description,  'description2');
-        $this->assertEquals($exhibit->layers,       'layer1,layer2');
+        $this->assertEquals($exhibit->layers,       'Layer1,Layer2');
         $this->assertEquals($exhibit->public,       0);
 
     }
