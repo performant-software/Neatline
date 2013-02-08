@@ -36,7 +36,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit->title         = 'title';
         $exhibit->description   = 'description';
         $exhibit->base_layers   = 'Layer1,Layer2';
-        $exhibit->base_layer    = 'Layer1';
+        $exhibit->base_layer    = 'Layer2';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -67,7 +67,7 @@ class Neatline_ExhibitsControllerTest_Edit
         // Default Layer:
         $this->assertXpath(
             '//select[@name="base_layer"]/optgroup/
-            option[@value="Layer1"][@selected="selected"]');
+            option[@value="Layer2"][@selected="selected"]');
 
         // Public.
         $this->assertXpath(
