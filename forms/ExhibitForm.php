@@ -95,6 +95,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             'label'         => __('Base Layers'),
             'description'   => __('Select the base layers available in the exhibit.'),
             'multiOptions'  => _nl_getLayersForSelect()
+            // 'value'         => array('OpenStreetMap')
         ));
 
         // Description.

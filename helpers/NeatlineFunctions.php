@@ -120,6 +120,18 @@ function _nl_getStyleCols()
 
 
 /**
+ * Explode a comma-delimited string. Trim and strip whitespace.
+ *
+ * @param string $list A comma-delimited list.
+ * @return array The array of strings.
+ */
+function _nl_explode($list)
+{
+    return explode(',', trim(str_replace(' ', '', $list)));
+}
+
+
+/**
  * Read and parse the `layers.json` file.
  *
  * @param string $file The layers file.
@@ -167,7 +179,7 @@ function _nl_getLayers($ids, $file=null)
 {
 
     $all = _nl_getAllLayers($file);
-    $ids = explode(',', trim(str_replace(' ', '', $ids)));
+    $ids = _nl_explode($ids);
 
     $subset = array();
     foreach ($all as $group => $layers) {

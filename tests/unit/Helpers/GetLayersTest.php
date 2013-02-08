@@ -47,34 +47,4 @@ class Neatline_NeatlineExhibitTest_GetLayers
     }
 
 
-    /**
-     * _nl_getLayers() should scrub whitespace from the layers string.
-     */
-    public function testScrubWhitespace()
-    {
-
-        $file = NL_DIR . '/tests/mocks/layers.json';
-        $layers = _nl_getLayers(' Layer1, Layer3, Layer5 ', $file);
-
-        $this->assertEquals($layers, array(
-            array(
-                'name'  => 'Layer 1',
-                'id'    => 'Layer1',
-                'type'  => 'Type1'
-            ),
-            array(
-                'name'  => 'Layer 3',
-                'id'    => 'Layer3',
-                'type'  => 'Type3'
-            ),
-            array(
-                'name'  => 'Layer 5',
-                'id'    => 'Layer5',
-                'type'  => 'Type5'
-            )
-        ));
-
-    }
-
-
 }
