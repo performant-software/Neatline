@@ -68,14 +68,14 @@ function _nl_exhibitGlobals($exhibit)
 {
     return json_encode(array(
         'id' => $exhibit->id,
-        'layers' => _nl_getLayers($exhibit->layers),
         'api' => array(
             'records' => public_url('neatline/records/'.$exhibit->id),
             'record'  => public_url('neatline/record')
         ),
         'map' => array(
-            'focus' => $exhibit->map_focus,
-            'zoom'  => $exhibit->map_zoom
+            'layers' => _nl_getLayers($exhibit->layers),
+            'focus'  => $exhibit->map_focus,
+            'zoom'   => $exhibit->map_zoom
         )
     ));
 }

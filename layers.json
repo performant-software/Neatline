@@ -10,25 +10,37 @@
     {
       "name": "Google Physical",
       "id": "GooglePhysical",
-      "type": "GooglePhysical"
+      "type": "Google",
+      "properties": {
+        "provider": "physical"
+      }
     },
 
     {
       "name": "Google Streets",
       "id": "GoogleStreets",
-      "type": "GoogleStreets"
+      "type": "Google",
+      "properties": {
+        "provider": "streets"
+      }
     },
 
     {
       "name": "Google Hybrid",
       "id": "GoogleHybrid",
-      "type": "GoogleHybrid"
+      "type": "Google",
+      "properties": {
+        "provider": "hybrid"
+      }
     },
 
     {
       "name": "Google Sattelite",
       "id": "GoogleSattelite",
-      "type": "GoogleSattelite"
+      "type": "Google",
+      "properties": {
+        "provider": "sattelite"
+      }
     },
 
     {
