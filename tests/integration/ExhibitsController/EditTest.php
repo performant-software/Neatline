@@ -25,6 +25,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'title';
         $exhibit->description   = 'description';
+        $exhibit->layers        = 'OpenStreetMap,GooglePhysical';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -33,24 +34,28 @@ class Neatline_ExhibitsControllerTest_Edit
 
         // Title:
         $this->assertXpath(
-            '//input[@name="title"][@value="title"]'
-        );
+            '//input[@name="title"][@value="title"]');
+
+        // Slug:
+        $this->assertXpath(
+            '//input[@name="slug"][@value="slug"]');
 
         // Description:
         $this->assertXpathContentContains(
             '//textarea[@name="description"]',
-            'description'
-        );
+            'description');
 
-        // Slug:
+        // Layers:
         $this->assertXpath(
-            '//input[@name="slug"][@value="slug"]'
-        );
+            '//select[@name="layers[]"]/optgroup/
+            option[@value="OpenStreetMap"][@selected="selected"]');
+        $this->assertXpath(
+            '//select[@name="layers[]"]/optgroup/
+            option[@value="GooglePhysical"][@selected="selected"]');
 
         // Public.
         $this->assertXpath(
-            '//input[@name="public"][@checked="checked"]'
-        );
+            '//input[@name="public"][@checked="checked"]');
 
     }
 
@@ -62,7 +67,7 @@ class Neatline_ExhibitsControllerTest_Edit
     {
 
         $exhibit = $this->__exhibit();
-        $exhibit->title = "title";
+        $exhibit->title = 'title';
         $exhibit->save();
 
         // Missing title.
@@ -240,8 +245,9 @@ class Neatline_ExhibitsControllerTest_Edit
 
         // Unchanged slug.
         $this->request->setMethod('POST')->setPost(array(
-            'title' => 'title',
-            'slug'  => 'slug'
+            'title'     => 'title',
+            'slug'      => 'slug',
+            'layers'    => array('layer1', 'layer2')
         ));
 
         // Submit the form.
@@ -260,6 +266,28 @@ class Neatline_ExhibitsControllerTest_Edit
     public function testNoLayersError()
     {
 
+        $exhibit = $this->__exhibit();
+        $exhibit->layers = 'OpenStreetMap';
+        $exhibit->save();
+
+        // Empty layers.
+        $this->request->setMethod('POST')->setPost(array(
+            'layers' => array()
+        ));
+
+        // Submit the form.
+        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->assertAction('edit');
+
+        // Should flash error.
+        $this->assertXpath('//select[@name="layers[]"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+        // Should not save exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->layers, 'OpenStreetMap');
+
     }
 
 
@@ -275,9 +303,10 @@ class Neatline_ExhibitsControllerTest_Edit
         // Valid form.
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'title2',
-            'description'   => 'desc2',
             'slug'          => 'slug2',
-            'public'        => 1
+            'description'   => 'description2',
+            'layers'        => array('layer1', 'layer2'),
+            'public'        => 0
         ));
 
         // Submit the form, reload exhibit.
@@ -286,9 +315,10 @@ class Neatline_ExhibitsControllerTest_Edit
 
         // Should save fields.
         $this->assertEquals($exhibit->title,        'title2');
-        $this->assertEquals($exhibit->description,  'desc2');
         $this->assertEquals($exhibit->slug,         'slug2');
-        $this->assertEquals($exhibit->public,       1);
+        $this->assertEquals($exhibit->description,  'description2');
+        $this->assertEquals($exhibit->layers,       'layer1,layer2');
+        $this->assertEquals($exhibit->public,       0);
 
     }
 

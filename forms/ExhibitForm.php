@@ -61,7 +61,7 @@ class Neatline_ExhibitForm extends Omeka_Form
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
                         'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => __('The slug cannot be empty.')
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a slug.')
                         )
                     )
                 ),
@@ -90,20 +90,31 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
-        // Layers.
-        $this->addElement('multiselect', 'layers', array(
-            'label'         => __('Base Layers'),
-            'description'   => __('Select the base layers available in the exhibit.'),
-            'multiOptions'  => _nl_getLayersForSelect()
-            // 'value'         => array('OpenStreetMap')
-        ));
-
         // Description.
         $this->addElement('textarea', 'description', array(
             'label'         => __('Description'),
             'description'   => __('Supporting prose to describe the exhibit.'),
             'value'         => $this->_exhibit->description,
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
+        ));
+
+        // Layers.
+        $this->addElement('multiselect', 'layers', array(
+            'label'         => __('Base Layers'),
+            'description'   => __('Select the base layers available in the exhibit.'),
+            'multiOptions'  => _nl_getLayersForSelect(),
+            'attribs'       => array('data-placeholder' => 'Select one or more layers'),
+            'value'         => _nl_explode($this->_exhibit->layers),
+            'required'      => true,
+            'validators'    => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Select at least one layer.')
+                        )
+                    )
+                )
+            )
         ));
 
         // Public.

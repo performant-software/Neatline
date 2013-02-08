@@ -38,7 +38,7 @@ class Neatline_ExhibitsController
 
         // If form was submitted.
         if ($this->_request->isPost()) {
-            if ($form->isValid($_POST)) {
+            if ($form->isValid($this->_request->getPost())) {
                 $exhibit->saveForm($form->getValues());
                 $this->_redirect('neatline');
             }

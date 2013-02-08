@@ -17,15 +17,24 @@ class Neatline_NeatlineExhibitTest_GetAllLayers
 
 
     /**
+     * Inject mock layers JSON.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
+    }
+
+
+    /**
      * _nl_getAllLayers() should parse the JSON in the passed file.
      */
     public function testGetAllLayers()
     {
 
-        $file = NL_DIR . '/tests/mocks/layers.json';
-        $layers = _nl_getAllLayers($file);
+        $layers = _nl_getAllLayers();
 
-        $this->assertEquals(_nl_getAllLayers($file), array(
+        $this->assertEquals(_nl_getAllLayers(), array(
             'group1' => array(
                 array(
                     'name'  => 'Layer 1',

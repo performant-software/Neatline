@@ -21,6 +21,7 @@ require_once NL_DIR . '/forms/ExhibitForm.php';
 require_once NL_DIR . '/helpers/NeatlineFunctions.php';
 require_once NL_DIR . '/components/spyc/Spyc.php';
 
+Zend_Registry::set('layers', NL_DIR . '/layers.json');
 Zend_Registry::set('fileIn', 'php://input');
 
 $neatline = new NeatlinePlugin();

@@ -134,12 +134,11 @@ function _nl_explode($list)
 /**
  * Read and parse the `layers.json` file.
  *
- * @param string $file The layers file.
  * @return array The layers.
  */
-function _nl_getAllLayers($file=null)
+function _nl_getAllLayers()
 {
-    $file = $file ? $file : NL_DIR . '/layers.json';
+    $file = Zend_Registry::get('layers');
     return Zend_Json::decode(file_get_contents($file));
 }
 
@@ -147,13 +146,12 @@ function _nl_getAllLayers($file=null)
 /**
  * Get an array of grouped id => name layer pairs for form select.
  *
- * @param string $file The layers file.
  * @return array The layers.
  */
-function _nl_getLayersForSelect($file=null)
+function _nl_getLayersForSelect()
 {
 
-    $all = _nl_getAllLayers($file);
+    $all = _nl_getAllLayers();
 
     $options = array();
     foreach ($all as $group => $layers) {
@@ -172,13 +170,12 @@ function _nl_getLayersForSelect($file=null)
  * Get just the layers included in a comma-delimited string.
  *
  * @param string $ids A comma-delimited list of layer ids.
- * @param string $file The layers file.
  * @return array The layers.
  */
-function _nl_getLayers($ids, $file=null)
+function _nl_getLayers($ids)
 {
 
-    $all = _nl_getAllLayers($file);
+    $all = _nl_getAllLayers();
     $ids = _nl_explode($ids);
 
     $subset = array();

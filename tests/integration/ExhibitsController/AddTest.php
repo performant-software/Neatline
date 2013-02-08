@@ -24,8 +24,9 @@ class Neatline_ExhibitsControllerTest_Add
     {
         $this->dispatch('neatline/add');
         $this->assertQuery('input[name="title"]');
-        $this->assertQuery('textarea[name="description"]');
         $this->assertQuery('input[name="slug"]');
+        $this->assertQuery('textarea[name="description"]');
+        $this->assertQuery('select[name="layers[]"]');
         $this->assertQuery('input[name="public"]');
     }
 
@@ -213,25 +214,25 @@ class Neatline_ExhibitsControllerTest_Add
     public function testNoLayersError()
     {
 
-        // // Empty layers.
-        // $this->request->setMethod('POST')->setPost(array(
-        //     'layers' => array()
-        // ));
+        // Empty layers.
+        $this->request->setMethod('POST')->setPost(array(
+            'layers' => array()
+        ));
 
-        // // Submit the form, check for no new exhibits.
-        // $this->assertEquals($this->_exhibitsTable->count(), 0);
-        // $this->dispatch('neatline/add');
-        // $this->assertEquals($this->_exhibitsTable->count(), 0);
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
 
-        // // Should redisplay the form.
-        // $this->assertModule('neatline');
-        // $this->assertController('exhibits');
-        // $this->assertAction('add');
+        // Should redisplay the form.
+        $this->assertModule('neatline');
+        $this->assertController('exhibits');
+        $this->assertAction('add');
 
-        // // Should flash error.
-        // $this->assertXpath('//input[@name="layers"]/following-sibling::
-        //     ul[@class="error"]'
-        // );
+        // Should flash error.
+        $this->assertXpath('//select[@name="layers[]"]/
+            following-sibling::ul[@class="error"]'
+        );
 
     }
 
@@ -244,9 +245,10 @@ class Neatline_ExhibitsControllerTest_Add
     {
 
         $this->request->setMethod('POST')->setPost(array(
-            'title'         => 'Test Exhibit',
-            'slug'          => 'test-exhibit',
-            'description'   => 'Test description.',
+            'title'         => 'title',
+            'slug'          => 'slug',
+            'description'   => 'description',
+            'layers'        => array('layer1', 'layer2'),
             'public'        => 1
         ));
 
@@ -257,10 +259,11 @@ class Neatline_ExhibitsControllerTest_Add
 
         // Should set exhibit fields.
         $exhibit = $this->getFirstExhibit();
-        $this->assertEquals($exhibit->title, 'Test Exhibit');
-        $this->assertEquals($exhibit->description, 'Test description.');
-        $this->assertEquals($exhibit->slug, 'test-exhibit');
-        $this->assertEquals($exhibit->public, 1);
+        $this->assertEquals($exhibit->title,        'title');
+        $this->assertEquals($exhibit->slug,         'slug');
+        $this->assertEquals($exhibit->description,  'description');
+        $this->assertEquals($exhibit->layers,       'layer1,layer2');
+        $this->assertEquals($exhibit->public,       1);
 
     }
 

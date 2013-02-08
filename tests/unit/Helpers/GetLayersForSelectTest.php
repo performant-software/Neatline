@@ -17,16 +17,25 @@ class Neatline_NeatlineExhibitTest_GetLayersForSelect
 
 
     /**
+     * Inject mock layers JSON.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
+    }
+
+
+    /**
      * _nl_getLayersForSelect() should convert the layers JSON to an array
      * of `id` => `name` pairs.
      */
     public function testGetLayersForSelect()
     {
 
-        $file = NL_DIR . '/tests/mocks/layers.json';
-        $layers = _nl_getAllLayers($file);
+        $layers = _nl_getAllLayers();
 
-        $this->assertEquals(_nl_getLayersForSelect($file), array(
+        $this->assertEquals(_nl_getLayersForSelect(), array(
             'group1' => array(
                 'Layer1' => 'Layer 1',
                 'Layer2' => 'Layer 2'

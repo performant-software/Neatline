@@ -26,15 +26,17 @@ class Neatline_NeatlineExhibitTest_SaveForm
 
         $exhibit->saveForm(array(
             'title'         => 'title',
-            'description'   => 'desc',
             'slug'          => 'slug',
+            'description'   => 'desc',
+            'layers'        => array('layer1', 'layer2'),
             'public'        => 1
         ));
 
         // Should set values.
         $this->assertEquals($exhibit->title,        'title');
-        $this->assertEquals($exhibit->description,  'desc');
         $this->assertEquals($exhibit->slug,         'slug');
+        $this->assertEquals($exhibit->description,  'desc');
+        $this->assertEquals($exhibit->layers,       'layer1,layer2');
         $this->assertEquals($exhibit->public,       1);
 
     }
