@@ -31,6 +31,7 @@ Neatline.module('Map', function(
       this.layers = [];     // An array of record-backed vector layers.
 
       this.__initMap();
+      this.__initLayers();
       this.__initControls();
       this.__initViewport();
       this.__initEvents();
@@ -66,6 +67,17 @@ Neatline.module('Map', function(
       this.map.addLayer(this.baseLayer);
       this.map.setBaseLayer(this.baseLayer);
 
+    },
+
+
+    /**
+     * Add the baselayers defined on the `__exhibit` global.
+     */
+    __initLayers: function() {
+      // _.each(__exhibit.map.layers, _.bind(function(l) {
+        // var layer = Neatline.request('map:layers:'+l.type, l.properties);
+        // this.map.addLayer(layer);
+      // }, this));
     },
 
 
