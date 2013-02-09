@@ -29,9 +29,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     // Filters.
     protected $_filters = array(
         'admin_navigation_main',
-        'neatline_styles',
-        'neatline_exhibit_globals',
-        'neatline_editor_globals'
+        'neatline_styles'
     );
 
 
@@ -229,34 +227,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'max_zoom',
             'map_focus',
             'map_zoom'
-        ));
-    }
-
-
-    /**
-     * Register exhibit Javascript globals.
-     *
-     * @param array $globals Associative array of globals.
-     * @return array The modified array.
-     */
-    public function filterNeatlineExhibitGlobals($globals)
-    {
-        return array_merge($globals, array(
-            // TODO
-        ));
-    }
-
-
-    /**
-     * Register editor Javascript globals.
-     *
-     * @param array $globals Associative array of globals.
-     * @return array The modified array.
-     */
-    public function filterNeatlineEditorGlobals($globals)
-    {
-        return array_merge($globals, array(
-            // TODO
         ));
     }
 
