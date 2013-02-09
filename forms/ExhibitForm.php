@@ -98,26 +98,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
 
-        // Base Layers.
-        $this->addElement('multiselect', 'base_layers', array(
-            'label'         => __('Layers'),
-            'description'   => __('Select the base layers available in the exhibit.'),
-            'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
-            'multiOptions'  => _nl_getLayersForSelect(),
-            'value'         => _nl_explode($this->_exhibit->base_layers),
-            'required'      => true,
-            'validators'    => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => __('Select at least one layer.')
-                        )
-                    )
-                )
-            )
-        ));
-
-        // Default Layer.
+        // Layer.
         $this->addElement('select', 'base_layer', array(
             'label'         => __('Default Layer'),
             'description'   => __('Select which layer is visible by default when the exhibit loads.'),

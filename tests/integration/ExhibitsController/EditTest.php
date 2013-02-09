@@ -35,7 +35,6 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'title';
         $exhibit->description   = 'description';
-        $exhibit->base_layers   = 'Layer1,Layer2';
         $exhibit->base_layer    = 'Layer2';
         $exhibit->public        = 1;
         $exhibit->save();
@@ -56,15 +55,7 @@ class Neatline_ExhibitsControllerTest_Edit
             '//textarea[@name="description"]',
             'description');
 
-        // Base Layers:
-        $this->assertXpath(
-            '//select[@name="base_layers[]"]/optgroup/
-            option[@value="Layer1"][@selected="selected"]');
-        $this->assertXpath(
-            '//select[@name="base_layers[]"]/optgroup/
-            option[@value="Layer2"][@selected="selected"]');
-
-        // Default Layer:
+        // Layer:
         $this->assertXpath(
             '//select[@name="base_layer"]/optgroup/
             option[@value="Layer2"][@selected="selected"]');
@@ -278,37 +269,6 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
-     * Edit form should block empty base layers.
-     */
-    public function testNoLayersError()
-    {
-
-        $exhibit = $this->__exhibit();
-        $exhibit->base_layers = 'OpenStreetMap';
-        $exhibit->save();
-
-        // Empty layers.
-        $this->request->setMethod('POST')->setPost(array(
-            'base_layers' => array()
-        ));
-
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//select[@name="base_layers[]"]/
-            following-sibling::ul[@class="error"]'
-        );
-
-        // Should not save exhibit.
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
-        $this->assertEquals($exhibit->base_layers, 'OpenStreetMap');
-
-    }
-
-
-    /**
      * Edit form should update an exhibit when a valid title, description,
      * and slug are provided.
      */
@@ -322,7 +282,6 @@ class Neatline_ExhibitsControllerTest_Edit
             'title'         => 'title2',
             'slug'          => 'slug2',
             'description'   => 'description2',
-            'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer1',
             'public'        => 0
         ));
@@ -335,7 +294,6 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertEquals($exhibit->title,        'title2');
         $this->assertEquals($exhibit->slug,         'slug2');
         $this->assertEquals($exhibit->description,  'description2');
-        $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer1');
         $this->assertEquals($exhibit->public,       0);
 

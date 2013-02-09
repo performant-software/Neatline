@@ -36,7 +36,6 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertQuery('input[name="title"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('textarea[name="description"]');
-        $this->assertQuery('select[name="base_layers[]"]');
         $this->assertQuery('select[name="base_layer"]');
         $this->assertQuery('input[name="public"]');
     }
@@ -220,35 +219,6 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
-     * Add form should block empty base layers.
-     */
-    public function testNoLayersError()
-    {
-
-        // Empty layers.
-        $this->request->setMethod('POST')->setPost(array(
-            'base_layers' => array()
-        ));
-
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-        $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
-        $this->assertAction('add');
-
-        // Should flash error.
-        $this->assertXpath('//select[@name="base_layers[]"]/
-            following-sibling::ul[@class="error"]'
-        );
-
-    }
-
-
-    /**
      * Add form should create and populate an exhibit when a valid title,
      * slug, description, and layers list are provided.
      */
@@ -259,7 +229,6 @@ class Neatline_ExhibitsControllerTest_Add
             'title'         => 'title',
             'slug'          => 'slug',
             'description'   => 'description',
-            'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer1',
             'public'        => 1
         ));
@@ -274,7 +243,6 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->description,  'description');
-        $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer1');
         $this->assertEquals($exhibit->public,       1);
 
