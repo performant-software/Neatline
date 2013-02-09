@@ -53,18 +53,10 @@ module.exports = function(grunt) {
         }
       },
       move_bootstrap_images: {
-        command: 'cp -r img ../../../css/img',
+        command: 'cp -r img ../../views/shared/css/img',
         stdout: true,
         execOptions: {
           cwd: config.build.bootstrap
-        }
-      },
-      move_chosen_images: {
-        command: 'cp chosen-sprite.png ../../../'+
-          config.payloads.admin.css,
-        stdout: true,
-        execOptions: {
-          cwd: config.build.chosen
         }
       },
 
@@ -277,7 +269,6 @@ module.exports = function(grunt) {
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
           config.stylus.shared+'/**/*.styl',
-          config.stylus.admin+'/**/*.styl',
           config.jasmine+'/helpers/*.js'
         ],
         tasks: [
@@ -326,7 +317,6 @@ module.exports = function(grunt) {
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
     'compile:min',
-    'shell:move_chosen_images',
     'copy:build'
   ]);
 
