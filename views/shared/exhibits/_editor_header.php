@@ -21,9 +21,8 @@
   <title><?php echo $title; ?></title>
 
   <?php
-  fire_plugin_hook('admin_theme_header');
   _nl_editorAssets();
-  echo head_js();
+  echo head_js(false);
   echo head_css();
   ?>
 
