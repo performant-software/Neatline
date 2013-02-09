@@ -35,7 +35,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'title';
         $exhibit->description   = 'description';
-        $exhibit->base_layer    = 'Layer2';
+        $exhibit->layer    = 'Layer2';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -57,7 +57,7 @@ class Neatline_ExhibitsControllerTest_Edit
 
         // Layer:
         $this->assertXpath(
-            '//select[@name="base_layer"]/optgroup/
+            '//select[@name="layer"]/optgroup/
             option[@value="Layer2"][@selected="selected"]');
 
         // Public.
@@ -252,10 +252,9 @@ class Neatline_ExhibitsControllerTest_Edit
 
         // Unchanged slug.
         $this->request->setMethod('POST')->setPost(array(
-            'title'         => 'title',
-            'slug'          => 'slug',
-            'base_layers'   => array('Layer1', 'Layer2'),
-            'base_layer'    => 'Layer1'
+            'title' => 'title',
+            'slug'  => 'slug',
+            'layer' => 'Layer1'
         ));
 
         // Submit the form.
@@ -282,7 +281,7 @@ class Neatline_ExhibitsControllerTest_Edit
             'title'         => 'title2',
             'slug'          => 'slug2',
             'description'   => 'description2',
-            'base_layer'    => 'Layer1',
+            'layer'         => 'Layer1',
             'public'        => 0
         ));
 
@@ -294,7 +293,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertEquals($exhibit->title,        'title2');
         $this->assertEquals($exhibit->slug,         'slug2');
         $this->assertEquals($exhibit->description,  'description2');
-        $this->assertEquals($exhibit->base_layer,   'Layer1');
+        $this->assertEquals($exhibit->layer,        'Layer1');
         $this->assertEquals($exhibit->public,       0);
 
     }

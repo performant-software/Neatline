@@ -63,9 +63,9 @@ function _nl_exhibitGlobals($exhibit)
             'record'  => public_url('neatline/record')
         ),
         'map' => array(
-            'layers' => _nl_getLayers($exhibit->base_layers),
-            'focus'  => $exhibit->map_focus,
-            'zoom'   => $exhibit->map_zoom
+            'layer' => _nl_getLayers($exhibit->layer),
+            'focus' => $exhibit->map_focus,
+            'zoom'  => $exhibit->map_zoom
         )
     ));
 }
@@ -96,17 +96,6 @@ function _nl_editorGlobals($exhibit)
 function _nl_getStyles()
 {
   return apply_filters('neatline_styles', array());
-}
-
-
-/**
- * Gather the column names for all taggable styles.
- *
- * @return array The array of column names.
- */
-function _nl_getStyleCols()
-{
-  return array_values(_nl_getStyles());
 }
 
 

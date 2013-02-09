@@ -75,7 +75,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `title`             TINYTEXT NULL,
             `slug`              VARCHAR(100) NOT NULL,
             `description`       TEXT NULL,
-            `base_layer`        VARCHAR(100) NULL,
+            `layer`             VARCHAR(100) NULL,
             `public`            TINYINT(1) NOT NULL,
             `query`             TEXT NULL,
             `styles`            TEXT NULL,
@@ -206,27 +206,27 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register the taggable styles.
      *
-     * @param array $styles Array of label => column name pairs.
+     * @param array $styles Array of column names.
      * @return array The updated array.
      */
     public function filterNeatlineStyles($styles)
     {
         return array_merge($styles, array(
-            'Presenter'         => 'presenter',
-            'Shape Color'       => 'vector_color',
-            'Line Color'        => 'stroke_color',
-            'Selected Color'    => 'select_color',
-            'Shape Opacity'     => 'vector_opacity',
-            'Selected Opacity'  => 'select_opacity',
-            'Line Opacity'      => 'stroke_opacity',
-            'Image Opacity'     => 'image_opacity',
-            'Line Width'        => 'stroke_width',
-            'Point Radius'      => 'point_radius',
-            'Point Image'       => 'point_image',
-            'Min Zoom'          => 'min_zoom',
-            'Max Zoom'          => 'max_zoom',
-            'Default Focus'     => 'map_focus',
-            'Default Zoom'      => 'map_zoom'
+            'presenter',
+            'vector_color',
+            'stroke_color',
+            'select_color',
+            'vector_opacity',
+            'select_opacity',
+            'stroke_opacity',
+            'image_opacity',
+            'stroke_width',
+            'point_radius',
+            'point_image',
+            'min_zoom',
+            'max_zoom',
+            'map_focus',
+            'map_zoom'
         ));
     }
 

@@ -27,7 +27,7 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit->title         = '1';
         $exhibit->slug          = '2';
         $exhibit->description   = '3';
-        $exhibit->base_layer    = '4';
+        $exhibit->layer         = '4';
         $exhibit->public        = 5;
         $exhibit->query         = '6';
         $exhibit->styles        = '7';
@@ -40,7 +40,7 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $this->assertEquals($exhibit->title,        '1');
         $this->assertEquals($exhibit->slug,         '2');
         $this->assertEquals($exhibit->description,  '3');
-        $this->assertEquals($exhibit->base_layer,   '4');
+        $this->assertEquals($exhibit->layer,        '4');
         $this->assertEquals($exhibit->public,       5);
         $this->assertEquals($exhibit->query,        '6');
         $this->assertEquals($exhibit->styles,       '7');

@@ -36,7 +36,7 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertQuery('input[name="title"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('textarea[name="description"]');
-        $this->assertQuery('select[name="base_layer"]');
+        $this->assertQuery('select[name="layer"]');
         $this->assertQuery('input[name="public"]');
     }
 
@@ -229,7 +229,7 @@ class Neatline_ExhibitsControllerTest_Add
             'title'         => 'title',
             'slug'          => 'slug',
             'description'   => 'description',
-            'base_layer'    => 'Layer1',
+            'layer'         => 'Layer1',
             'public'        => 1
         ));
 
@@ -243,7 +243,7 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->description,  'description');
-        $this->assertEquals($exhibit->base_layer,   'Layer1');
+        $this->assertEquals($exhibit->layer,        'Layer1');
         $this->assertEquals($exhibit->public,       1);
 
     }

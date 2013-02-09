@@ -40,7 +40,7 @@ class Neatline_RecordControllerTest_Get
         $this->assertObjectHasAttribute('tags',     $response);
 
         // Should emit styles.
-        foreach (_nl_getStyleCols() as $s) {
+        foreach (_nl_getStyles() as $s) {
             $this->assertObjectHasAttribute($s, $response);
         }
 
