@@ -250,7 +250,7 @@ function _nl_link($exhibit=null, $text=null, $props=array(),
  * @param NeatlineExhibit $neatline The exhibit record.
  * @return integer
  */
-function _nl_totalRecords($neatline = null)
+function _nl_totalRecords($neatline=null)
 {
     $neatline = $neatline ? $neatline : _nl_currentExhibit();
     return (int)$neatline->getNumberOfRecords();
