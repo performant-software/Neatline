@@ -233,7 +233,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Register properties on `Neatline.globals`.
+     * Register properties on `Neatline.global`.
      *
      * @param array $exhibit The exhibit.
      * @param array $args Array of arguments, with `exhibit` key.
@@ -242,20 +242,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineGlobals($globals, $args)
     {
         $exhibit = $args['exhibit'];
-        return array_merge($globals, array(
-
-            // Public:
-            'exhibit_id'  => $exhibit->id,
-            'records_api' => public_url('neatline/records/'.$exhibit->id),
-            'record_api'  => public_url('neatline/record'),
-            'map_focus'   => $exhibit->map_focus,
-            'map_zoom'    => $exhibit->map_zoom,
-
-            // Editor:
-            'styles_api'  => url('neatline/styles/'.$exhibit->id),
-            'page_length' => (int)get_plugin_ini('Neatline','page_length')
-
-        ));
+        $globals = array_merge($globals, _nl_exhibitGlobals($exhibit));
+        $globals = array_merge($globals, _nl_editorGlobals($exhibit));
+        return $globals;
     }
 
 

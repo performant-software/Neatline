@@ -49,6 +49,39 @@ function _nl_editorAssets()
 
 
 /**
+ * Construct exhibit globals array.
+ *
+ * @param NeatlineExhibit The exhibit.
+ * @return array The array of globals.
+ */
+function _nl_exhibitGlobals($exhibit)
+{
+    return array(
+        'exhibit_id'    => $exhibit->id,
+        'records_api'   => public_url('neatline/records/'.$exhibit->id),
+        'record_api'    => public_url('neatline/record'),
+        'map_zoom'      => $exhibit->map_zoom,
+        'map_focus'     => $exhibit->map_focus
+    );
+}
+
+
+/**
+ * Construct editor globals array.
+ *
+ * @param NeatlineExhibit The exhibit.
+ * @return array The array of globals.
+ */
+function _nl_editorGlobals($exhibit)
+{
+    return array(
+        'styles_api'    => url('neatline/styles/'.$exhibit->id),
+        'page_length'   => (int) get_plugin_ini('Neatline', 'page_length')
+    );
+}
+
+
+/**
  * Gather style columns exposed via the `neatline_links` filter.
  *
  * @return array The array of column names.
