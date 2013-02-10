@@ -30,7 +30,7 @@ Neatline.module('Map', function(
       this.records = null   // The current collection of records.
       this.layers = [];     // An array of record-backed vector layers.
 
-      this.__initMap();
+      this.__initOpenLayers();
       this.__initLayers();
       this.__initControls();
       this.__initViewport();
@@ -46,7 +46,7 @@ Neatline.module('Map', function(
      * and call component start-up routines that add cursor controls, set
      * the default focus/zoom, and listen for movement events.
      */
-    __initMap: function() {
+    __initOpenLayers: function() {
 
       // Widgets.
       var options = {
