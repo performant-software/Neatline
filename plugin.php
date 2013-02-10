@@ -15,11 +15,11 @@
 if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
 require_once NL_DIR . '/NeatlinePlugin.php';
+require_once NL_DIR . '/components/spyc/Spyc.php';
 require_once NL_DIR . '/controllers/abstract/NeatlineRestController.php';
 require_once NL_DIR . '/models/abstract/NeatlineAbstractRecord.php';
-require_once NL_DIR . '/forms/ExhibitForm.php';
 require_once NL_DIR . '/helpers/NeatlineFunctions.php';
-require_once NL_DIR . '/components/spyc/Spyc.php';
+require_once NL_DIR . '/forms/ExhibitForm.php';
 
 Zend_Registry::set('layers', NL_DIR . '/layers.json');
 Zend_Registry::set('fileIn', 'php://input');
