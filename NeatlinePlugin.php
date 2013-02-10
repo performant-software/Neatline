@@ -29,8 +29,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     // Filters.
     protected $_filters = array(
         'admin_navigation_main',
-        'neatline_styles',
-        'neatline_globals'
+        'neatline_globals',
+        'neatline_styles'
     );
 
 
@@ -205,6 +205,22 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
+     * Register properties on `Neatline.global`.
+     *
+     * @param array $exhibit The exhibit.
+     * @param array $args Array of arguments, with `exhibit` key.
+     * @return array The modified array.
+     */
+    public function filterNeatlineGlobals($globals, $args)
+    {
+        $exhibit = $args['exhibit'];
+        $globals = array_merge($globals, _nl_exhibitGlobals($exhibit));
+        $globals = array_merge($globals, _nl_editorGlobals($exhibit));
+        return $globals;
+    }
+
+
+    /**
      * Register the taggable styles.
      *
      * @param array $styles Array of column names.
@@ -229,22 +245,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'map_focus',
             'map_zoom'
         ));
-    }
-
-
-    /**
-     * Register properties on `Neatline.global`.
-     *
-     * @param array $exhibit The exhibit.
-     * @param array $args Array of arguments, with `exhibit` key.
-     * @return array The modified array.
-     */
-    public function filterNeatlineGlobals($globals, $args)
-    {
-        $exhibit = $args['exhibit'];
-        $globals = array_merge($globals, _nl_exhibitGlobals($exhibit));
-        $globals = array_merge($globals, _nl_editorGlobals($exhibit));
-        return $globals;
     }
 
 
