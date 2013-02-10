@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `countActiveRecordsByExhibit()` on NeatlineRecordTable.
+ * Tests for `countActiveRecordsByExhibit` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTableTest_CountActiveRecordsByExhibit
 
 
     /**
-     * countActiveRecordsByExhibit() should number of map-active records
+     * `countActiveRecordsByExhibit` should number of map-active records
      * in the exhibit.
      */
     public function testCountActiveRecordsByExhibit()

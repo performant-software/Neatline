@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `setNotEmpty()` on NeatlineRecord.
+ * Tests for `setNotEmpty` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_SetNotEmpty
 
 
     /**
-     * setNotEmpty() should set the field with the passed value when value
+     * `setNotEmpty` should set the field with the passed value when value
      * is not an empty string or NULL.
      */
     public function testSetNotEmptyWithNonEmptyValue()
@@ -29,7 +29,7 @@ class Neatline_NeatlineRecordTest_SetNotEmpty
 
 
     /**
-     * setNotEmpty() should set the field to NULL when the passed value is
+     * `setNotEmpty` should set the field to NULL when the passed value is
      * an empty string or NULL.
      */
     public function testSetNotEmptyWithEmptyValue()

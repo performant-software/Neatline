@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `saveForm()` on NeatlineRecord.
+ * Tests for `saveForm` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * saveForm() should update fields to match the input array.
+     * `saveForm` should update fields to match the input array.
      */
     public function testUpdate()
     {
@@ -75,7 +75,7 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * saveForm() should set empty strings as null.
+     * `saveForm` should set empty strings as null.
      */
     public function testEmptyValueBlocking()
     {

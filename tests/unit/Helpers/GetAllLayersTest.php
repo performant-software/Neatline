@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_getAllLayers()`.
+ * Tests for `_nl_getAllLayers`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -27,7 +27,7 @@ class Neatline_NeatlineExhibitTest_GetAllLayers
 
 
     /**
-     * _nl_getAllLayers() should parse the JSON in the passed file.
+     * `_nl_getAllLayers` should parse the JSON in the passed file.
      */
     public function testGetAllLayers()
     {

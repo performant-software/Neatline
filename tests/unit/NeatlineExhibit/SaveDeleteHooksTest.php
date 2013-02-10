@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `delete()` on NeatlineExhibit.
+ * Tests for `delete` on `NeatlineExhibit`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
 
 
     /**
-     * delete() should delete all child records.
+     * `delete` should delete all child records.
      */
     public function testDelete()
     {

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `queryRecords()` on NeatlineRecordTable.
+ * Tests for `queryRecords` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -18,7 +18,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
     /**
      * When just an exhibit record (and no filter parameters) is passed,
-     * queryRecords() should fetch all of the records that belong to the
+     * `queryRecords` should fetch all of the records that belong to the
      * exhibit and emit them as an an array of associative arrays.
      */
     public function testQueryRecords()
@@ -153,7 +153,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should retrieve records that belong to the passed
+     * `queryRecords` should retrieve records that belong to the passed
      * exhibit. Records in other exhibits should be excluded.
      */
     public function testExhibitFilter()
@@ -181,7 +181,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should filter on zoom.
+     * `queryRecords` should filter on zoom.
      */
     public function testZoomFilter()
     {
@@ -247,7 +247,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should filter on extent.
+     * `queryRecords` should filter on extent.
      */
     public function testExtentFilter()
     {
@@ -290,7 +290,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * When an `extent` polygon is passed to queryRecords(), records that
+     * When an `extent` polygon is passed to `queryRecords`, records that
      * have a plaintext coverage value of `POINT(0 0)` should never be
      * returned in the result set, even when the `extent` includes the 0,0
      * point. (`POINT(0 0)` is used as a WKT "null" value that is inserted
@@ -318,7 +318,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * When a `limit` and `offset` values are passed to queryRecords(),
+     * When a `limit` and `offset` values are passed to `queryRecords`,
      * the result set should be truncated to the `limit` length, starting
      * from the `offset` value.
      */
@@ -367,7 +367,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should filter on a search query.
+     * `queryRecords` should filter on a search query.
      */
     public function testKeywordsFilter()
     {
@@ -404,7 +404,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * queryRecords() should filter on a tags query.
+     * `queryRecords` should filter on a tags query.
      */
     public function testTagsFilter()
     {
@@ -431,7 +431,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
 
 
     /**
-     * When a `limit` and `offset` values are passed to queryRecords(),
+     * When a `limit` and `offset` values are passed to `queryRecords`,
      * the result set should include a `count` key with the original size
      * of the result set before the limit was applied.
      */

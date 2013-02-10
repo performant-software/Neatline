@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `beforeSave()` on NeatlineRecord.
+ * Tests for `beforeSave` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_BeforeSave
 
 
     /**
-     * beforeSave() should compile `_title` and `_body`.
+     * `beforeSave` should compile `_title` and `_body`.
      */
     public function testParentReferences()
     {

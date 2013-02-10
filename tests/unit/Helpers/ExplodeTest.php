@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_explode()`.
+ * Tests for `_nl_explode`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineExhibitTest_Explode
 
 
     /**
-     * _nl_explode() should trim a string, scrub spaces, and split on ','.
+     * `_nl_explode` should trim a string, scrub spaces, and split on ','.
      */
     public function testExplode()
     {

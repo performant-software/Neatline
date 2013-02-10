@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `compile()` on NeatlineRecord.
+ * Tests for `compile` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline

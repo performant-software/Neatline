@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `applyStyles()` on NeatlineRecordTable.
+ * Tests for `applyStyles` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
 
 
     /**
-     * applyStyles() should propagate styles to records in the exhibit.
+     * `applyStyles` should propagate styles to records in the exhibit.
      */
     public function testApplyStyles()
     {
@@ -61,7 +61,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
 
 
     /**
-     * applyStyles() should ignore styles that do not have values.
+     * `applyStyles` should ignore styles that do not have values.
      */
     public function testIgnoreStylesWithoutValues()
     {
@@ -117,7 +117,7 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
 
 
     /**
-     * applyStyles() should only update records in the passed exhibit.
+     * `applyStyles` should only update records in the passed exhibit.
      */
     public function testExhibitIsolation()
     {

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `queryRecord()` on NeatlineRecordTable.
+ * Tests for `queryRecord` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -18,7 +18,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
 
     /**
      * --------------------------------------------------------------------
-     * queryRecord() should retrieve the data record with a given id and
+     * `queryRecord` should retrieve the data record with a given id and
      * construct an associative array that contains all of the information
      * about the record needed by the front end application.
      * --------------------------------------------------------------------

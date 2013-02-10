@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `buildJsonData()` on NeatlineRecord.
+ * Tests for `buildJsonData` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_BuildJsonData
 
 
     /**
-     * buildJsonData() should construct a well-formed array object with
+     * `buildJsonData` should construct a well-formed array object with
      * all attributes necessary for the front-end application.
      */
     public function testBuildJsonData()

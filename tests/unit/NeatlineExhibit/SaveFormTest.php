@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `saveForm()` on NeatlineExhibit.
+ * Tests for `saveForm` on `NeatlineExhibit`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineExhibitTest_SaveForm
 
 
     /**
-     * saveForm() should save all key => value pairs in the form data.
+     * `saveForm` should save all key => value pairs in the form data.
      */
     public function testSaveForm()
     {
@@ -28,7 +28,7 @@ class Neatline_NeatlineExhibitTest_SaveForm
             'title'         => 'title',
             'slug'          => 'slug',
             'description'   => 'desc',
-            'base_layer'    => 'layer1',
+            'layer'         => 'layer',
             'public'        => 1
         ));
 
@@ -36,7 +36,7 @@ class Neatline_NeatlineExhibitTest_SaveForm
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->description,  'desc');
-        $this->assertEquals($exhibit->base_layer,   'layer1');
+        $this->assertEquals($exhibit->layer,        'layer');
         $this->assertEquals($exhibit->public,       1);
 
     }

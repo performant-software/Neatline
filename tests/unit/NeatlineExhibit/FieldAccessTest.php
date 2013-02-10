@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Field set/get tests for NeatlineExhibit.
+ * Field set/get tests for `NeatlineExhibit`.
  *
  * @package     omeka
  * @subpackage  neatline

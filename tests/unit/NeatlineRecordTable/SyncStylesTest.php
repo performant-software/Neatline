@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `syncStyles()` on NeatlineRecordTable.
+ * Tests for `syncStyles` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
 
 
     /**
-     * syncStyles() should synchronize styles on sibling records.
+     * `syncStyles` should synchronize styles on sibling records.
      */
     public function testSyncStyles()
     {
@@ -59,7 +59,7 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
 
 
     /**
-     * syncStyles() should ignore styles that have values.
+     * `syncStyles` should ignore styles that have values.
      */
     public function testIgnoreStylesWithValues()
     {
@@ -94,7 +94,7 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
 
 
     /**
-     * syncStyles() should only update records that belong to the exhibit
+     * `syncStyles` should only update records that belong to the exhibit
      * of the passed record.
      */
     public function testExhibitIsolation()

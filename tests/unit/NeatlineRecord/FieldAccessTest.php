@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Field set/get tests for NeatlineRecord.
+ * Field set/get tests for `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -24,7 +24,6 @@ class Neatline_NeatlineRecordTest_FieldAccess
 
         $record = $this->__record();
 
-        // Set fields.
         $record->item_id            = 1;
         $record->exhibit_id         = 2;
         $record->title              = '3';
@@ -50,10 +49,8 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->min_zoom           = 23;
         $record->__save();
 
-        // Reload record.
         $record = $this->_recordsTable->find($record->id);
 
-        // Fields should be set.
         $this->assertEquals($record->item_id,           1);
         $this->assertEquals($record->exhibit_id,        2);
         $this->assertEquals($record->title,             '3');

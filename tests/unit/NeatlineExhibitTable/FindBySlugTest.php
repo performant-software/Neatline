@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `findBySlug()` on NeatlineExhibitTable.
+ * Tests for `findBySlug` on `NeatlineExhibitTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
 
 
     /**
-     * findBySlug() should return the exhibit with the passed slug.
+     * `findBySlug` should return the exhibit with the passed slug.
      */
     public function testFindBySlug()
     {
@@ -28,7 +28,7 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
 
 
     /**
-     * findBySlug() should escape input before passing it to SQL.
+     * `findBySlug` should escape input before passing it to SQL.
      */
     public function testFindBySlugEscaping()
     {

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `__construct()` on NeatlineRecord.
+ * Tests for `__construct` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_Construct
 
 
     /**
-     * __construct() should set foreign keys.
+     * `__construct` should set foreign keys.
      */
     public function testParentReferences()
     {

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `getSelect()` on NeatlineRecordTable.
+ * Tests for `getSelect` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTableTest_GetSelect
 
 
     /**
-     * getSelect() should select the plain-text value of `coverage` when
+     * `getSelect` should select the plain-text value of `coverage` when
      * the field is defined.
      */
     public function testCoverageWithDefinedValue()
@@ -39,7 +39,7 @@ class Neatline_NeatlineRecordTableTest_GetSelect
 
 
     /**
-     * getSelect() should select NULL for `coverage` when the plain-text
+     * `getSelect` should select NULL for `coverage` when the plain-text
      * value of the field is `POINT(0 0)`.
      */
     public function testCoverageWithPoint00Value()
@@ -61,7 +61,7 @@ class Neatline_NeatlineRecordTableTest_GetSelect
 
 
     /**
-     * getSelect() should order records by `added`.
+     * `getSelect` should order records by `added`.
      */
     public function testAddedOrdering()
     {

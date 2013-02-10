@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `getExhibit()` on NeatlineRecord.
+ * Tests for `getExhibit` on `NeatlineRecord`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineRecordTest_GetExhibit
 
 
     /**
-     * getExhibit() should return the parent exhibit.
+     * `getExhibit` should return the parent exhibit.
      */
     public function testGetExhibit()
     {

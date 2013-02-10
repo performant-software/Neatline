@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `getNumberOfRecords()` on NeatlineExhibit.
+ * Tests for `getNumberOfRecords` on `NeatlineExhibit`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,7 @@ class Neatline_NeatlineExhibitTest_GetNumberOfRecords
 
 
     /**
-     * getNumberOfRecords() should return the number of records.
+     * `getNumberOfRecords` should return the number of records.
      */
     public function testGetNumberOfRecords()
     {
