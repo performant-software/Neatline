@@ -395,7 +395,7 @@ _t = (function() {
   _t.assertMapRefreshed = function() {
   
     // Route should be /records/:id, method GET.
-    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
   
     // Request should include map focus.

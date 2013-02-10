@@ -29,7 +29,7 @@ Neatline.module('Editor.Search', function(
     // Load the record list.
     Neatline.execute('editor:records:load', _.extend(
       Search.__view.query, {
-        limit:  __editor.perPage,
+        limit:  Neatline.global.page_length,
         offset: offset
       }
     ));

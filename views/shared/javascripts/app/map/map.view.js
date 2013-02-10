@@ -31,7 +31,6 @@ Neatline.module('Map', function(
       this.layers = [];     // An array of record-backed vector layers.
 
       this.__initOpenLayers();
-      this.__initLayers();
       this.__initControls();
       this.__initViewport();
       this.__initEvents();
@@ -67,14 +66,6 @@ Neatline.module('Map', function(
       this.map.addLayer(osm);
       this.map.setBaseLayer(osm);
 
-    },
-
-
-    /**
-     * Add the baselayers defined on the `__exhibit` global.
-     */
-    __initLayers: function() {
-      // TODO
     },
 
 
@@ -117,19 +108,21 @@ Neatline.module('Map', function(
 
 
     /**
-     * Set the starting focus and zoom. If `mapFocus` is non-null on the
-     * global __exhibit object, then we know that a default focus and zoom
-     * has been set for the exhibit and should be manifested. If no
-     * default exists, apply the default zoom and geolocate the focus.
+     * Set the starting focus and zoom.
      */
     __initViewport: function() {
 
-      // If defaults are defined.
-      if (!_.isNull(__exhibit.map.focus)) {
-        this.setViewport(__exhibit.map.focus, __exhibit.map.zoom);
+      // Apply defaults if they exist.
+      if (_.isString(Neatline.global.map_focus) &&
+          _.isNumber(Neatline.global.map_zoom)) {
+          this.setViewport(
+            Neatline.global.map_focus,
+            Neatline.global.map_zoom
+          );
       }
 
       else {
+        // Otherwise, geolocate.
         this.map.zoomTo(this.options.defaultZoom);
         this.geolocate();
       }

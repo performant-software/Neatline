@@ -22,11 +22,6 @@
   'exhibit' => $exhibit
 )); ?>
 
-<!-- JSON globals. -->
-<script type="text/javascript">
-  __editor = <?php echo _nl_editorGlobals($exhibit); ?>
-</script>
-
 <!-- Templates. -->
 <?php echo $this->partial('exhibits/_strings.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>

@@ -15,7 +15,7 @@ describe('Records Pagination', function() {
 
   beforeEach(function() {
     _t.loadEditor();
-    __editor.perPage = 2;
+    Neatline.global.page_length = 2;
   });
 
 
@@ -26,7 +26,7 @@ describe('Records Pagination', function() {
     // can fit into a single screen.
     // --------------------------------------------------------------------
 
-    __editor.perPage = 10;
+    Neatline.global.page_length = 10;
 
     // Load 2 records.
     _t.navigate('records');

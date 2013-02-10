@@ -39,7 +39,7 @@ describe('Styles Form Save', function() {
     els.save.trigger('click');
 
     // Route should be /record/:id, method PUT.
-    _t.assertLastRequestRoute(__editor.api.styles);
+    _t.assertLastRequestRoute(Neatline.global.styles_api);
     _t.assertLastRequestMethod('PUT');
 
     // Request body should be editor value.

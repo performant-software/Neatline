@@ -49,7 +49,7 @@ Neatline.module('Editor.Styles', function(
     save: function() {
       $.ajax({
         data:     this.editor.getValue(),
-        url:      __editor.api.styles,
+        url:      Neatline.global.styles_api,
         success:  _.bind(this.onSuccess, this),
         error:    _.bind(this.onError, this),
         type:     'PUT'

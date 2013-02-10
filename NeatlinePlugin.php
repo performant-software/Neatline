@@ -20,8 +20,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
-        'define_routes',
         'initialize',
+        'define_routes',
         'after_save_item'
     );
 
@@ -29,7 +29,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     // Filters.
     protected $_filters = array(
         'admin_navigation_main',
-        'neatline_styles'
+        'neatline_styles',
+        'neatline_globals'
     );
 
 
@@ -159,6 +160,15 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
+     * Add translation source.
+     */
+    public function hookInitialize()
+    {
+        add_translation_source(dirname(__FILE__) . '/languages');
+    }
+
+
+    /**
      * Register routes.
      *
      * @param array $args Zend_Config instance under `router` key.
@@ -168,15 +178,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $args['router']->addConfig(new Zend_Config_Ini(
             NL_DIR . '/routes.ini', 'routes')
         );
-    }
-
-
-    /**
-     * Add translation source.
-     */
-    public function hookInitialize()
-    {
-        add_translation_source(dirname(__FILE__) . '/languages');
     }
 
 
@@ -227,6 +228,33 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'max_zoom',
             'map_focus',
             'map_zoom'
+        ));
+    }
+
+
+    /**
+     * Register properties on `Neatline.globals`.
+     *
+     * @param array $exhibit The exhibit.
+     * @param array $args Array of arguments, with `exhibit` key.
+     * @return array The modified array.
+     */
+    public function filterNeatlineGlobals($globals, $args)
+    {
+        $exhibit = $args['exhibit'];
+        return array_merge($globals, array(
+
+            // Public:
+            'exhibit_id'  => $exhibit->id,
+            'records_api' => public_url('neatline/records/'.$exhibit->id),
+            'record_api'  => public_url('neatline/record'),
+            'map_focus'   => $exhibit->map_focus,
+            'map_zoom'    => $exhibit->map_zoom,
+
+            // Editor:
+            'styles_api'  => url('neatline/styles/'.$exhibit->id),
+            'page_length' => (int)get_plugin_ini('Neatline','page_length')
+
         ));
     }
 

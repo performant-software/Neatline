@@ -23,7 +23,7 @@ Neatline.module('Shared.Record', function(
      * @return {String}: The url.
      */
     url: function() {
-      var url = __exhibit.api.record;
+      var url = Neatline.global.record_api;
       if (this.get('id')) url += ('/'+this.get('id'));
       return url;
     },
@@ -33,7 +33,7 @@ Neatline.module('Shared.Record', function(
 
     defaults: function() {
       return {
-        exhibit_id:     __exhibit.id,
+        exhibit_id:     Neatline.global.exhibit_id,
         vector_color:   '#00aeff',
         stroke_color:   '#000000',
         select_color:   '#00aeff',

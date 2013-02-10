@@ -77,7 +77,7 @@ describe('Map Incoming Events', function() {
 
       // Check request formation.
       expect(request.method).toEqual('GET');
-      expect(request.url).toEqual(__exhibit.api.record+'/999');
+      expect(request.url).toEqual(Neatline.global.record_api+'/999');
 
       // New layer should be created for model.
       expect(_t.vw.map.layers.length).toEqual(4);

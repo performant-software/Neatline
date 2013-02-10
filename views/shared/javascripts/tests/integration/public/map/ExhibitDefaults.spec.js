@@ -20,15 +20,15 @@ describe('Map Exhibit Defaults', function() {
   it('should set exhibit default focus and zoom', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit loads, the map should manifest the zoom and focus
-    // set in `zoom` and `focus` on the __exhibit global object.
+    // When the exhibit loads, the map should manifest the `map_focus` and
+    // `map_zoom` parameters on the globals object.
     // --------------------------------------------------------------------
 
     loadFixtures('neatline-partial.html');
 
     // Set exhibit defaults.
-    __exhibit.map.zoom = 10;
-    __exhibit.map.focus = '1,2';
+    Neatline.global.map_focus = '1,2';
+    Neatline.global.map_zoom = 10;
 
     // Start map.
     Neatline.Map.init();

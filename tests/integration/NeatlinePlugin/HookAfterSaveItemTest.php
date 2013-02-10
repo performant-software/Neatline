@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for NeatlinePlugin::addStyle.
+ * Tests for `hookAfterSaveItem` on `NeatlinePlugin`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,16 +11,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlinePluginTest_AfterSaveItem
+class Neatline_NeatlinePluginTest_HookAfterSaveItem
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * hookAfterSaveItem() should update records that reference the item.
-     * @group compile
+     * `hookAfterSaveItem` should update records that reference the item.
      */
-    public function testAfterSaveItem()
+    public function testHookAfterSaveItem()
     {
 
         $item = insert_item();

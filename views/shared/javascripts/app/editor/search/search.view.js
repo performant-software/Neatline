@@ -137,7 +137,7 @@ Neatline.module('Editor.Search', function(
       if (!this.mirroring) {
         Neatline.execute('editor:records:load', _.extend(
           Search.__view.query, {
-            limit:  __editor.perPage,
+            limit: Neatline.global.page_length,
             offset: 0
           }
         ));

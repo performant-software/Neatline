@@ -44,10 +44,10 @@ Neatline.module('Editor.Records', function(
       this.$el.html(this.records({ records: records }));
 
       // If necessary, render pagination.
-      if (records.count > __editor.perPage) {
+      if (records.count > Neatline.global.page_length) {
         this.$('.pagination').html(this.pagination({
           query: Neatline.request('editor:search:getQueryForUrl'),
-          limit: __editor.perPage,
+          limit: Neatline.global.page_length,
           records: records
         }));
       }

@@ -15,7 +15,7 @@ describe('Search Map Mirroring', function() {
 
   beforeEach(function() {
     _t.loadEditor();
-    __editor.perPage = 1;
+    Neatline.global.page_length = 1;
   });
 
 

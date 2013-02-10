@@ -49,53 +49,27 @@ function _nl_editorAssets()
 
 
 /**
- * Construct exhibit globals.
+ * Gather style columns exposed via the `neatline_links` filter.
  *
- * @param NeatlineExhibit $exhibit The exhibit.
- * @return string JSON exhibit defaults.
- */
-function _nl_exhibitGlobals($exhibit)
-{
-    return json_encode(array(
-        'id' => $exhibit->id,
-        'api' => array(
-            'records' => public_url('neatline/records/'.$exhibit->id),
-            'record'  => public_url('neatline/record')
-        ),
-        'map' => array(
-            'layer' => _nl_getLayers($exhibit->layer),
-            'focus' => $exhibit->map_focus,
-            'zoom'  => $exhibit->map_zoom
-        )
-    ));
-}
-
-
-/**
- * Construct editor globals.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- * @return string JSON exhibit defaults.
- */
-function _nl_editorGlobals($exhibit)
-{
-    return json_encode(array(
-        'api' => array(
-            'styles' => url('neatline/styles/'.$exhibit->id),
-        ),
-        'perPage' => (int) get_plugin_ini('Neatline', 'records_per_page')
-    ));
-}
-
-
-/**
- * Gather style columns exposed via the `_nl_links` filter.
- *
- * @return array The array of label => column name.
+ * @return array The array of column names.
  */
 function _nl_getStyles()
 {
-  return apply_filters('neatline_styles', array());
+    return apply_filters('neatline_styles', array());
+}
+
+
+/**
+ * Gather global properties exposed via the `neatline_globals` filter.
+ *
+ * @param NeatlineExhibit The exhibit.
+ * @return array The array of key => values.
+ */
+function _nl_getGlobals($exhibit)
+{
+    return apply_filters('neatline_globals', array(), array(
+        'exhibit' => $exhibit
+    ));
 }
 
 

@@ -63,7 +63,7 @@ describe('Map Data Rendering', function() {
     _t.respondLast200(_t.json.records.changed);
 
     // Route should be /records/:id, method GET.
-    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
@@ -101,7 +101,7 @@ describe('Map Data Rendering', function() {
     _t.respondLast200(_t.json.records.removed);
 
     // Route should be /records/:id, method GET.
-    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.

@@ -26,7 +26,7 @@ Neatline.module('Shared.Record', function(
      * @return {String}: The url.
      */
     url: function() {
-      return __exhibit.api.records;
+      return Neatline.global.records_api;
     },
 
 

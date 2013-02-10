@@ -19,7 +19,9 @@
 
 <!-- JSON globals. -->
 <script type="text/javascript">
-  __exhibit = <?php echo _nl_exhibitGlobals($exhibit); ?>
+  Neatline.global = <?php echo Zend_Json::encode(
+    _nl_getGlobals($exhibit)
+  ); ?>
 </script>
 
 <!-- Underscore templates. -->

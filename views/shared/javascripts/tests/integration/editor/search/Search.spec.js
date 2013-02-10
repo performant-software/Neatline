@@ -13,8 +13,12 @@
 describe('Search', function() {
 
 
+  var pageLength;
+
+
   beforeEach(function() {
     _t.loadEditor();
+    pageLength = Neatline.global.page_length;
   });
 
 
@@ -94,12 +98,12 @@ describe('Search', function() {
     _t.vw.search.__ui.search.trigger('keyup');
 
     // Should produce GET request to /records.
-    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
     // `query`=word, default `limit` and `offset`.
     _t.assertLastRequestHasGetParameter('query', 'word1+word2');
-    _t.assertLastRequestHasGetParameter('limit', __editor.perPage);
+    _t.assertLastRequestHasGetParameter('limit', pageLength);
     _t.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
@@ -125,7 +129,7 @@ describe('Search', function() {
     _t.vw.search.__ui.search.trigger('keyup');
 
     // Should produce GET request to /records.
-    _t.assertLastRequestRoute(__exhibit.api.records);
+    _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
     // `tags[]`=tag1, `tags[]`=tag2.
@@ -133,7 +137,7 @@ describe('Search', function() {
     expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
     // Default `limit` and `offset`.
-    _t.assertLastRequestHasGetParameter('limit', __editor.perPage);
+    _t.assertLastRequestHasGetParameter('limit', pageLength);
     _t.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.

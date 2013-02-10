@@ -61,7 +61,7 @@ describe('Record Form Add', function() {
 
     // Model should have exhibit id.
     var record = _t.vw.record.model;
-    expect(record.get('exhibit_id')).toEqual(__exhibit.id);
+    expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit_id);
 
     // Model should have defined styles.
     expect(_.isString(record.get('vector_color'))).   toBeTruthy();
@@ -124,7 +124,7 @@ describe('Record Form Add', function() {
     els.save.trigger('click');
 
     // Route should be /record, method POST.
-    _t.assertLastRequestRoute(__exhibit.api.record);
+    _t.assertLastRequestRoute(Neatline.global.record_api);
     _t.assertLastRequestMethod('POST');
 
     // Request should have exhibit id.
