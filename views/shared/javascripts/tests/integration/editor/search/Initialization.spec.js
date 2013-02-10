@@ -65,7 +65,7 @@ describe('Search Initialization', function() {
     });
 
 
-    it('should load #', function() {
+    it('#', function() {
 
       _t.navigate('');
 
@@ -80,7 +80,7 @@ describe('Search Initialization', function() {
     });
 
 
-    it('should load #records', function() {
+    it('#records', function() {
 
       _t.navigate('records');
 
@@ -95,7 +95,7 @@ describe('Search Initialization', function() {
     });
 
 
-    it('should load #records/search/start=X', function() {
+    it('#records/search/start=X', function() {
 
       _t.navigate('records/search/start=10');
 
@@ -110,7 +110,7 @@ describe('Search Initialization', function() {
     });
 
 
-    it('should load #records/search/query=X', function() {
+    it('#records/search/query=X', function() {
 
       _t.navigate('records/search/query=keywords');
 
@@ -145,7 +145,7 @@ describe('Search Initialization', function() {
     });
 
 
-    it('should load #records/search/query=X/start=Y', function() {
+    it('#records/search/query=X/start=Y', function() {
 
       _t.navigate('records/search/query=keywords/start=10');
 
