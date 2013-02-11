@@ -60,10 +60,6 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->tags              = 'tags2';
         $record3->tags              = 'tags3';
         // ----------------------------------------------------------------
-        $record1->slug              = 'slug1';
-        $record2->slug              = 'slug2';
-        $record3->slug              = 'slug3';
-        // ----------------------------------------------------------------
         $record1->coverage          = 'POINT(1 2)';
         $record2->coverage          = 'POINT(3 4)';
         $record3->coverage          = 'POINT(5 6)';

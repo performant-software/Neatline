@@ -333,7 +333,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function _filterByKeywords($select, $query)
     {
         $select->where(
-            "MATCH (_title,_body,slug) AGAINST (? IN BOOLEAN MODE)",
+            "MATCH (_title,_body) AGAINST (? IN BOOLEAN MODE)",
             $query);
         return $select;
     }

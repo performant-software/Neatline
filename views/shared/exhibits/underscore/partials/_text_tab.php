@@ -24,13 +24,6 @@
   )); ?>
 
   <?php echo $this->partial(
-    'exhibits/underscore/helpers/_text_input.php', array(
-      'name'  => 'slug',
-      'label' => 'Slug',
-      'bind'  => 'record.slug'
-  )); ?>
-
-  <?php echo $this->partial(
     'exhibits/underscore/helpers/_textarea.php', array(
       'name'  => 'title',
       'label' => 'Title',

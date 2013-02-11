@@ -34,7 +34,6 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->body               = 'body';
         $record->_body              = '_body';
         $record->tags               = 'tags';
-        $record->slug               = 'slug';
         $record->coverage           = 'POINT(1 2)';
         $record->map_focus          = '100,200';
         $record->map_zoom           = 10;

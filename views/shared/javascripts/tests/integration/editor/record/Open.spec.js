@@ -96,7 +96,6 @@ describe('Record Form Open', function() {
     expect(inputs.lead).            toHaveText('title1');
     expect(inputs.title).           toHaveValue('title1');
     expect(inputs.body).            toHaveValue('body1');
-    expect(inputs.slug).            toHaveValue('slug1');
     expect(inputs.itemId).          toHaveValue('1');
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
     expect(inputs.tags).            toHaveValue('tags1');

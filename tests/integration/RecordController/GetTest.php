@@ -36,7 +36,6 @@ class Neatline_RecordControllerTest_Get
         $this->assertObjectHasAttribute('title',    $response);
         $this->assertObjectHasAttribute('body',     $response);
         $this->assertObjectHasAttribute('coverage', $response);
-        $this->assertObjectHasAttribute('slug',     $response);
         $this->assertObjectHasAttribute('tags',     $response);
 
         // Should emit styles.

@@ -41,20 +41,6 @@ Neatline.module('Map', function(
 
 
   /**
-   * Focus the map on the data extent for a record, identified by id.
-   *
-   * @param {Number} id: The record id.
-   */
-  var focusById = function(id) {
-    Map.__collection.getOrFetch(id, function(model) {
-      Map.__view.focusByModel(model);
-    });
-  };
-
-  Neatline.commands.addHandler('map:focusById', focusById);
-
-
-  /**
    * Focus the map on the data extent for a record, identified by model.
    *
    * @param {Object} model: The record model.
@@ -67,15 +53,17 @@ Neatline.module('Map', function(
 
 
   /**
-   * Focus the map on the data extent for a record, identified by slug.
+   * Focus the map on the data extent for a record, identified by id.
    *
-   * @param {String} slug: The record slug.
+   * @param {Number} id: The record id.
    */
-  var focusBySlug = function(slug) {
-    // TODO
+  var focusById = function(id) {
+    Map.__collection.getOrFetch(id, function(model) {
+      focusByModel(model);
+    });
   };
 
-  Neatline.commands.addHandler('map:focusBySlug', focusBySlug);
+  Neatline.commands.addHandler('map:focusById', focusById);
 
 
 });

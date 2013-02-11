@@ -42,7 +42,6 @@ class Neatline_RecordsControllerTest_Get
         $this->assertObjectHasAttribute('body',     $records[0]);
         $this->assertObjectHasAttribute('coverage', $records[0]);
         $this->assertObjectHasAttribute('tags',     $records[0]);
-        $this->assertObjectHasAttribute('slug',     $records[0]);
 
         // Should emit styles.
         foreach (_nl_getStyles() as $s) {

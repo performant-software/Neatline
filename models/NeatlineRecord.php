@@ -24,7 +24,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $body;           // MEDIUMTEXT NULL
     public $_body;          // MEDIUMTEXT NULL
     public $coverage;       // GEOMETRY NOT NULL
-    public $slug;           // VARCHAR(100) NULL
     public $tags;           // TEXT NULL
 
 
