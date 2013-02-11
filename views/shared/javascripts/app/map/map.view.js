@@ -192,12 +192,11 @@ Neatline.module('Map', function(
      *   the model's geometries, except when coverage is `POINT(0 0)`.
      *
      * @param {Object} model: The record model.
-     * @unittest
      */
     focusByModel: function(model) {
 
       // Get a layer for the model.
-      var layer = this.getLayer(model);
+      var layer = this.getLayerByModel(model);
       if (!layer) layer = this.buildLayer(model);
 
       // Try to get a focus and zoom.
@@ -374,7 +373,7 @@ Neatline.module('Map', function(
      * @param {Object} model: The record model.
      * @return {Object}: The vector layer.
      */
-    getLayer: function(model) {
+    getLayerByModel: function(model) {
       var id = String(model.get('id'));
       return _.first(this.map.getLayersBy('nId', id));
     },

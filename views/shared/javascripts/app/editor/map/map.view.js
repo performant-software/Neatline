@@ -80,7 +80,8 @@ _.extend(Neatline.Map.View.prototype, {
   startEdit: function(model) {
 
     // Find or create a layer for the model.
-    this.editLayer = this.getLayer(model) || this.buildLayer(model);
+    this.editLayer = this.getLayerByModel(model) ||
+      this.buildLayer(model);
 
     this.controls = {
 
@@ -355,7 +356,7 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} model: The model of the deleted record.
    */
   removeLayerByModel: function(model) {
-    var layer = this.getLayer(model);
+    var layer = this.getLayerByModel(model);
     if (layer) this.removeLayer(layer);
   },
 
