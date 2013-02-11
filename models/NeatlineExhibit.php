@@ -20,9 +20,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
     public $title;          // TINYTEXT NULL
     public $slug;           // VARCHAR(100) NOT NULL
     public $description;    // TEXT NULL
-    public $layer;          // VARCHAR(100) NULL
     public $public = 0;     // TINYINT(1) NOT NULL
-    public $query;          // TEXT NULL
     public $styles;         // TEXT NULL
     public $map_focus;      // VARCHAR(100) NULL
     public $map_zoom;       // INT(10) UNSIGNED NULL
@@ -61,16 +59,6 @@ class NeatlineExhibit extends Neatline_AbstractRecord
         $recordsTable->delete("{$this->_db->prefix}neatline_records",
             array('exhibit_id = ?' => $this->id)
         );
-    }
-
-    /**
-     * Required by Zend_Acl_Resource_Interface.
-     *
-     * @return string
-     */
-    public function getResourceId()
-    {
-        return 'NLExhibit';
     }
 
 

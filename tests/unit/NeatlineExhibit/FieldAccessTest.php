@@ -27,12 +27,10 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit->title         = '1';
         $exhibit->slug          = '2';
         $exhibit->description   = '3';
-        $exhibit->layer         = '4';
-        $exhibit->public        = 5;
-        $exhibit->query         = '6';
-        $exhibit->styles        = '7';
-        $exhibit->map_focus     = '8';
-        $exhibit->map_zoom      = 9;
+        $exhibit->public        = 4;
+        $exhibit->styles        = '5';
+        $exhibit->map_focus     = '6';
+        $exhibit->map_zoom      = 7;
         $exhibit->save();
 
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
@@ -40,12 +38,10 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $this->assertEquals($exhibit->title,        '1');
         $this->assertEquals($exhibit->slug,         '2');
         $this->assertEquals($exhibit->description,  '3');
-        $this->assertEquals($exhibit->layer,        '4');
-        $this->assertEquals($exhibit->public,       5);
-        $this->assertEquals($exhibit->query,        '6');
-        $this->assertEquals($exhibit->styles,       '7');
-        $this->assertEquals($exhibit->map_focus,    '8');
-        $this->assertEquals($exhibit->map_zoom,     9);
+        $this->assertEquals($exhibit->public,       4);
+        $this->assertEquals($exhibit->styles,       '5');
+        $this->assertEquals($exhibit->map_focus,    '6');
+        $this->assertEquals($exhibit->map_zoom,     7);
 
     }
 

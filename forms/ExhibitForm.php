@@ -98,25 +98,6 @@ class Neatline_ExhibitForm extends Omeka_Form
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
 
-        // Layer.
-        $this->addElement('select', 'layer', array(
-            'label'         => __('Default Layer'),
-            'description'   => __('Select which layer is visible by default when the exhibit loads.'),
-            'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
-            'multiOptions'  => _nl_getLayersForSelect(),
-            'value'         => _nl_explode($this->_exhibit->layer),
-            'required'      => true,
-            'validators'    => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => __('Select a layer.')
-                        )
-                    )
-                )
-            )
-        ));
-
         // Public.
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
@@ -134,8 +115,6 @@ class Neatline_ExhibitForm extends Omeka_Form
             'title',
             'slug',
             'description',
-            'layers',
-            'layer',
             'public'
         ), 'exhibit_info');
 

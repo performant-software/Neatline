@@ -36,7 +36,6 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertQuery('input[name="title"]');
         $this->assertQuery('input[name="slug"]');
         $this->assertQuery('textarea[name="description"]');
-        $this->assertQuery('select[name="layer"]');
         $this->assertQuery('input[name="public"]');
     }
 
@@ -220,7 +219,7 @@ class Neatline_ExhibitsControllerTest_Add
 
     /**
      * Add form should create and populate an exhibit when a valid title,
-     * slug, description, and layers list are provided.
+     * slug, and description are provided.
      */
     public function testSuccess()
     {
@@ -229,7 +228,6 @@ class Neatline_ExhibitsControllerTest_Add
             'title'         => 'title',
             'slug'          => 'slug',
             'description'   => 'description',
-            'layer'         => 'Layer1',
             'public'        => 1
         ));
 
@@ -243,7 +241,6 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->description,  'description');
-        $this->assertEquals($exhibit->layer,        'Layer1');
         $this->assertEquals($exhibit->public,       1);
 
     }

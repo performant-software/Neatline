@@ -28,7 +28,6 @@ class Neatline_NeatlineExhibitTest_SaveForm
             'title'         => 'title',
             'slug'          => 'slug',
             'description'   => 'desc',
-            'layer'         => 'layer',
             'public'        => 1
         ));
 
@@ -36,7 +35,6 @@ class Neatline_NeatlineExhibitTest_SaveForm
         $this->assertEquals($exhibit->title,        'title');
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->description,  'desc');
-        $this->assertEquals($exhibit->layer,        'layer');
         $this->assertEquals($exhibit->public,       1);
 
     }

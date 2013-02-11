@@ -17,16 +17,6 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
-     * Inject mock layers JSON.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
-    }
-
-
-    /**
      * /edit/:id should display the edit form populated with values.
      */
     public function testBaseMarkup()
@@ -35,7 +25,6 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'title';
         $exhibit->description   = 'description';
-        $exhibit->layer    = 'Layer2';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -54,11 +43,6 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertXpathContentContains(
             '//textarea[@name="description"]',
             'description');
-
-        // Layer:
-        $this->assertXpath(
-            '//select[@name="layer"]/optgroup/
-            option[@value="Layer2"][@selected="selected"]');
 
         // Public.
         $this->assertXpath(
@@ -253,8 +237,7 @@ class Neatline_ExhibitsControllerTest_Edit
         // Unchanged slug.
         $this->request->setMethod('POST')->setPost(array(
             'title' => 'title',
-            'slug'  => 'slug',
-            'layer' => 'Layer1'
+            'slug'  => 'slug'
         ));
 
         // Submit the form.
@@ -281,7 +264,6 @@ class Neatline_ExhibitsControllerTest_Edit
             'title'         => 'title2',
             'slug'          => 'slug2',
             'description'   => 'description2',
-            'layer'         => 'Layer1',
             'public'        => 0
         ));
 
@@ -293,7 +275,6 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertEquals($exhibit->title,        'title2');
         $this->assertEquals($exhibit->slug,         'slug2');
         $this->assertEquals($exhibit->description,  'description2');
-        $this->assertEquals($exhibit->layer,        'Layer1');
         $this->assertEquals($exhibit->public,       0);
 
     }
