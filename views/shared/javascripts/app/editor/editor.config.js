@@ -23,11 +23,22 @@ rivets.formatters.recordLink = function(id) {
 
 
 /**
- * If a record/tag title is null, apply a placeholder string.
+ * If a record/tag title is null, inject a placeholder string.
  *
- * @param {Mixed} title: The title.
- * @return {String}: The placeholder, if the title is null .
+ * @param {String|null} title: The title.
+ * @return {String}: If the title is null, return the placeholder.
  */
 rivets.formatters.title = function(title) {
   return title ? title : STRINGS.placeholders.title;
+};
+
+
+/**
+ * If the passed id is non-null, return format '#<id>:'.
+ *
+ * @param {Number|null} id: The record id.
+ * @return {String}: The formatted id.
+ */
+rivets.formatters.id = function(id) {
+  return id ? '#'+id+':' : null;
 };

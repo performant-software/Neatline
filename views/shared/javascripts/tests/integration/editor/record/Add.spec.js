@@ -34,10 +34,17 @@ describe('Record Form Add', function() {
         style:    _t.vw.record.$('#record-form-style')
       },
 
-      add:        _t.vw.records.$('a[href="#records/add"]'),
-      close:      _t.vw.record.$('a[name="close"]'),
-      save:       _t.vw.record.$('a[name="save"]'),
-      lead:       _t.vw.record.$('p.lead')
+      buttons: {
+        add:      _t.vw.records.$('a[href="#records/add"]'),
+        close:    _t.vw.record.$('a[name="close"]'),
+        save:     _t.vw.record.$('a[name="save"]')
+      },
+
+      lead: {
+        id:       _t.vw.record.$('p.lead span.id'),
+        title:    _t.vw.record.$('p.lead span.title')
+      }
+
     };
 
   });
@@ -51,13 +58,16 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(els.add);
+    _t.click(els.buttons.add);
 
     // Record form should be visible.
     expect(_t.el.editor).toContain(_t.el.record);
 
-    // Lead should show placeholder title.
-    expect(els.lead.text()).toEqual(STRINGS.placeholders.title);
+    // Form id should be empty.
+    expect(els.lead.id).toBeEmpty();
+
+    // Form title should display placeholder.
+    expect(els.lead.title.text()).toEqual(STRINGS.placeholders.title);
 
     // Model should have exhibit id.
     var record = _t.vw.record.model;
@@ -91,10 +101,10 @@ describe('Record Form Add', function() {
     els.labels.style.tab('show');
 
     // Close the form.
-    els.close.trigger('click');
+    els.buttons.close.trigger('click');
 
     // Add record.
-    _t.click(els.add);
+    _t.click(els.buttons.add);
 
     // "Text" tab should be active.
     expect(els.labels.text.parent('li')).toHaveClass('active');
@@ -118,10 +128,10 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(els.add);
+    _t.click(els.buttons.add);
 
     // Click "Save".
-    els.save.trigger('click');
+    els.buttons.save.trigger('click');
 
     // Route should be /record, method POST.
     _t.assertLastRequestRoute(Neatline.global.record_api);
@@ -141,10 +151,10 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(els.add);
+    _t.click(els.buttons.add);
 
     // Click "Save".
-    els.save.trigger('click');
+    els.buttons.save.trigger('click');
     _t.respondNewRecord();
 
     // Get the id of the record.

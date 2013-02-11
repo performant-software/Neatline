@@ -93,8 +93,12 @@ describe('Record Form Open', function() {
     _t.click($(recordRows[1]));
     var inputs = _t.getRecordFormElements();
 
-    expect(inputs.lead).            toHaveText('title1');
-    expect(inputs.title).           toHaveValue('title1');
+    // Get the form model id.
+    var id = recordModels[0].get('id');
+
+    expect(inputs.id).              toHaveText('#'+id+':'),
+    expect(inputs.titleHeader).     toHaveText('title1');
+    expect(inputs.titleInput).      toHaveValue('title1');
     expect(inputs.body).            toHaveValue('body1');
     expect(inputs.itemId).          toHaveValue('1');
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');

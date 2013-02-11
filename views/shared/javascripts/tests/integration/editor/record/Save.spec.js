@@ -40,7 +40,7 @@ describe('Record Form Save', function() {
     var id = _t.vw.record.model.get('id');
     var inputs = _t.getRecordFormElements();
 
-    inputs.title.           val('1').       trigger('change');
+    inputs.titleInput.      val('1').       trigger('change');
     inputs.body.            val('2').       trigger('change');
     inputs.itemId.          val('3').       trigger('change');
     inputs.coverage.        val('4').       trigger('change');

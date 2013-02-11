@@ -485,11 +485,11 @@ _t = (function() {
    */
   _t.getRecordFormElements = function() {
     return {
-      lead:           _t.el.record.find('p.lead'),
-      title:          _t.el.record.find('textarea[name="title"]'),
-      body:           _t.el.record.find('textarea[name="body"]'),
-      slug:           _t.el.record.find('input[name="slug"]'),
+      id:             _t.el.record.find('p.lead span.id'),
+      titleHeader:    _t.el.record.find('p.lead span.title'),
+      titleInput:     _t.el.record.find('textarea[name="title"]'),
       itemId:         _t.el.record.find('input[name="item-id"]'),
+      body:           _t.el.record.find('textarea[name="body"]'),
       coverage:       _t.el.record.find('textarea[name="coverage"]'),
       tags:           _t.el.record.find('input[name="tags"]'),
       vectorColor:    _t.el.record.find('input[name="vector-color"]'),
