@@ -66,4 +66,16 @@ Neatline.module('Map', function(
   Neatline.commands.addHandler('map:focusByModel', focusByModel);
 
 
+  /**
+   * Focus the map on the data extent for a record, identified by slug.
+   *
+   * @param {String} slug: The record slug.
+   */
+  var focusBySlug = function(slug) {
+    // TODO
+  };
+
+  Neatline.commands.addHandler('map:focusBySlug', focusBySlug);
+
+
 });
