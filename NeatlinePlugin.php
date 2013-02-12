@@ -73,6 +73,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
 
+            `layers`            TEXT NULL,
+            `default_layer`     VARCHAR(100) NULL,
+
             `title`             TINYTEXT NULL,
             `slug`              VARCHAR(100) NOT NULL,
             `description`       TEXT NULL,
