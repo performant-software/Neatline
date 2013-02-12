@@ -33,15 +33,15 @@ class Neatline_NeatlineExhibitTest_GetLayersForSelect
     public function testGetLayersForSelect()
     {
         $this->assertEquals(_nl_getLayersForSelect(), array(
-            'group1' => array(
+            'Group1' => array(
                 'Layer1' => 'Layer 1',
                 'Layer2' => 'Layer 2'
             ),
-            'group2' => array(
+            'Group2' => array(
                 'Layer3' => 'Layer 3',
                 'Layer4' => 'Layer 4'
             ),
-            'group3' => array(
+            'Group3' => array(
                 'Layer5' => 'Layer 5',
                 'Layer6' => 'Layer 6'
             )

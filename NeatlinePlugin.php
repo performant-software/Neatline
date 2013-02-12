@@ -67,15 +67,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // ---------------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
-
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
-
             `layers`            TEXT NULL,
             `default_layer`     VARCHAR(100) NULL,
-
             `title`             TINYTEXT NULL,
             `slug`              VARCHAR(100) NOT NULL,
             `description`       TEXT NULL,
@@ -83,9 +79,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `styles`            TEXT NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
-
              PRIMARY KEY        (`id`)
-
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
@@ -95,25 +89,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // --------------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
-
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `item_id`           INT(10) UNSIGNED NULL,
             `exhibit_id`        INT(10) UNSIGNED NULL,
-
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
-
             `title`             MEDIUMTEXT NULL,
             `_title`            MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,
             `_body`             MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `tags`              TEXT NULL,
-
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`_title`, `_body`),
              SPATIAL INDEX      (`coverage`)
-
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);

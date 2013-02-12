@@ -32,7 +32,7 @@ class Neatline_NeatlineExhibitTest_GetLayers
     public function testGetLayers()
     {
         $this->assertEquals(_nl_getLayers(), array(
-            'group1' => array(
+            'Group1' => array(
                 array(
                     'title'  => 'Layer 1',
                     'id'    => 'Layer1',
@@ -44,7 +44,7 @@ class Neatline_NeatlineExhibitTest_GetLayers
                     'type'  => 'Type2'
                 )
             ),
-            'group2' => array(
+            'Group2' => array(
                 array(
                     'title'  => 'Layer 3',
                     'id'    => 'Layer3',
@@ -56,7 +56,7 @@ class Neatline_NeatlineExhibitTest_GetLayers
                     'type'  => 'Type4'
                 )
             ),
-            'group3' => array(
+            'Group3' => array(
                 array(
                     'title'  => 'Layer 5',
                     'id'    => 'Layer5',

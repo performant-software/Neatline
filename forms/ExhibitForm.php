@@ -90,6 +90,44 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
+        // Layers.
+        $this->addElement('multiselect', 'layers', array(
+            'label'         => __('Base Layers'),
+            'description'   => __('Select the base layers available in the exhibit.'),
+            'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
+            'multiOptions'  => _nl_getLayersForSelect(),
+            'value'         => _nl_explode($this->_exhibit->layers),
+            'required'      => true,
+            'validators'    => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Select at least one layer.')
+                        )
+                    )
+                )
+            )
+        ));
+
+        // Default Layer.
+        $this->addElement('select', 'default_layer', array(
+            'label'         => __('Default Layer'),
+            'description'   => __('Select which layer is visible by default when the exhibit loads.'),
+            'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
+            'multiOptions'  => _nl_getLayersForSelect(),
+            'value'         => _nl_explode($this->_exhibit->default_layer),
+            'required'      => true,
+            'validators'    => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Select a layer.')
+                        )
+                    )
+                )
+            )
+        ));
+
         // Description.
         $this->addElement('textarea', 'description', array(
             'label'         => __('Description'),
@@ -114,6 +152,8 @@ class Neatline_ExhibitForm extends Omeka_Form
         $this->addDisplayGroup(array(
             'title',
             'slug',
+            'layers',
+            'default_layer',
             'description',
             'public'
         ), 'exhibit_info');

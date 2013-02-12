@@ -32,11 +32,45 @@ class Neatline_ExhibitsControllerTest_Add
      */
     public function testBaseMarkup()
     {
+
         $this->dispatch('neatline/add');
+
+        // Title:
         $this->assertQuery('input[name="title"]');
+
+        // Slug:
         $this->assertQuery('input[name="slug"]');
+
+        // Description:
         $this->assertQuery('textarea[name="description"]');
+
+        // Layers:
+        $root = '//select[@name="layers[]"]';
+        $this->assertXpath($root.'/optgroup[@label="Group1"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer2"]');
+        $this->assertXpath($root.'/optgroup[@label="Group2"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer3"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer4"]');
+        $this->assertXpath($root.'/optgroup[@label="Group3"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
+
+        // Default Layer:
+        $root = '//select[@name="default_layer"]';
+        $this->assertXpath($root.'/optgroup[@label="Group1"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer2"]');
+        $this->assertXpath($root.'/optgroup[@label="Group2"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer3"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer4"]');
+        $this->assertXpath($root.'/optgroup[@label="Group3"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
+        $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
+
+        // Public:
         $this->assertQuery('input[name="public"]');
+
     }
 
 
@@ -218,6 +252,35 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
+     * Add form should require at least one base layer.
+     */
+    public function testNoLayersError()
+    {
+
+        // Missing slug.
+        $this->request->setMethod('POST')->setPost(array(
+            'layers' => ''
+        ));
+
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+
+        // Should redisplay the form.
+        $this->assertModule('neatline');
+        $this->assertController('exhibits');
+        $this->assertAction('add');
+
+        // Should flash error.
+        $this->assertXpath('//select[@name="layers[]"]/following-sibling::
+            ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
      * Add form should create and populate an exhibit when a valid title,
      * slug, and description are provided.
      */
@@ -225,9 +288,11 @@ class Neatline_ExhibitsControllerTest_Add
     {
 
         $this->request->setMethod('POST')->setPost(array(
-            'title'         => 'title',
+            'title'         => 'Title',
             'slug'          => 'slug',
-            'description'   => 'description',
+            'layers'        => array('Layer1', 'Layer3'),
+            'default_layer' => 'Layer3',
+            'description'   => 'Description.',
             'public'        => 1
         ));
 
@@ -238,10 +303,12 @@ class Neatline_ExhibitsControllerTest_Add
 
         // Should set exhibit fields.
         $exhibit = $this->getFirstExhibit();
-        $this->assertEquals($exhibit->title,        'title');
-        $this->assertEquals($exhibit->slug,         'slug');
-        $this->assertEquals($exhibit->description,  'description');
-        $this->assertEquals($exhibit->public,       1);
+        $this->assertEquals($exhibit->layers,         'Layer1,Layer3');
+        $this->assertEquals($exhibit->default_layer,  'Layer3');
+        $this->assertEquals($exhibit->title,          'Title');
+        $this->assertEquals($exhibit->slug,           'slug');
+        $this->assertEquals($exhibit->description,    'Description.');
+        $this->assertEquals($exhibit->public,         1);
 
     }
 

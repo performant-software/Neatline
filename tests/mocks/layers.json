@@ -1,6 +1,6 @@
 {
 
-  "group1": [
+  "Group1": [
     {
       "title": "Layer 1",
       "id": "Layer1",
@@ -13,7 +13,7 @@
     }
   ],
 
-  "group2": [
+  "Group2": [
     {
       "title": "Layer 3",
       "id": "Layer3",
@@ -26,7 +26,7 @@
     }
   ],
 
-  "group3": [
+  "Group3": [
     {
       "title": "Layer 5",
       "id": "Layer5",

@@ -35,6 +35,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
      */
     public function saveForm($values)
     {
+        $values['layers'] = implode(',', $values['layers']);
         foreach ($values as $key => $value) $this->$key = $value;
         $this->save();
     }
