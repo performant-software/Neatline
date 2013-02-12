@@ -17,22 +17,26 @@ class Neatline_FixturesController
 
 
     /**
+     * Create an exhibit.
+     */
+    public function init()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->exhibit = new NeatlineExhibit();
+        $this->exhibit->base_layer  = 'OpenStreetMap';
+        $this->exhibit->slug        = 'slug';
+        $this->exhibit->save();
+    }
+
+
+    /**
      * Generate exhibit markup.
      */
     public function neatlineAction()
     {
-
-        $this->_helper->viewRenderer->setNoRender(true);
-
-        $exhibit = new NeatlineExhibit();
-        $exhibit->base_layer = 'OpenStreetMap';
-        $exhibit->slug = 'slug';
-        $exhibit->save();
-
         echo $this->view->partial('neatline/_neatline.php', array(
-            'exhibit' => $exhibit
+            'exhibit' => $this->exhibit
         ));
-
     }
 
 
@@ -41,18 +45,9 @@ class Neatline_FixturesController
      */
     public function editorAction()
     {
-
-        $this->_helper->viewRenderer->setNoRender(true);
-
-        $exhibit = new NeatlineExhibit();
-        $exhibit->base_layer = 'OpenStreetMap';
-        $exhibit->slug = 'slug';
-        $exhibit->save();
-
         echo $this->view->partial('exhibits/_editor.php', array(
-            'exhibit' => $exhibit
+            'exhibit' => $this->exhibit
         ));
-
     }
 
 
