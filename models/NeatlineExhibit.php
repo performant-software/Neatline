@@ -17,9 +17,9 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
-    public $layers;         // TEXT NULL
-    public $default_layer;  // VARCHAR(100) NULL
-    public $title;          // TINYTEXT NULL
+    public $base_layers;    // VARCHAR(100) NULL
+    public $base_layer;     // TINYTEXT NULL
+    public $title;          // TEXT NULL
     public $slug;           // VARCHAR(100) NOT NULL
     public $description;    // TEXT NULL
     public $public = 0;     // TINYINT(1) NOT NULL
@@ -35,7 +35,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
      */
     public function saveForm($values)
     {
-        $values['layers'] = implode(',', $values['layers']);
+        $values['base_layers'] = implode(',', $values['base_layers']);
         foreach ($values as $key => $value) $this->$key = $value;
         $this->save();
     }

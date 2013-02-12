@@ -35,8 +35,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'Title';
         $exhibit->description   = 'Description.';
-        $exhibit->layers        = 'Layer1,Layer3';
-        $exhibit->default_layer = 'Layer3';
+        $exhibit->base_layers   = 'Layer1,Layer3';
+        $exhibit->base_layer    = 'Layer3';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -55,17 +55,17 @@ class Neatline_ExhibitsControllerTest_Edit
             '//textarea[@name="description"]',
             'Description.');
 
-        // Layers:
+        // Base Layers:
         $this->assertXpath(
-            '//select[@name="layers[]"]/optgroup/
+            '//select[@name="base_layers[]"]/optgroup/
             option[@selected="selected"][@value="Layer1"]');
         $this->assertXpath(
-            '//select[@name="layers[]"]/optgroup/
+            '//select[@name="base_layers[]"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
 
-        // Default Layer:
+        // Default Base Layer:
         $this->assertXpath(
-            '//select[@name="default_layer"]/optgroup/
+            '//select[@name="base_layer"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
 
         // Public.
@@ -236,8 +236,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'title',
             'slug'          => 'slug',
-            'layers'        => array('Layer1', 'Layer2'),
-            'default_layer' => 'Layer2'
+            'base_layers'   => array('Layer1', 'Layer2'),
+            'base_layer'    => 'Layer2'
         ));
 
         // Submit the form.
@@ -253,14 +253,14 @@ class Neatline_ExhibitsControllerTest_Edit
     /**
      * At least one base layer must be selected.
      */
-    public function testNoLayersError()
+    public function testNoBaseLayersError()
     {
 
         $exhibit = $this->__exhibit();
 
         // Missing title.
         $this->request->setMethod('POST')->setPost(array(
-            'layers' => ''
+            'base_layers' => ''
         ));
 
         // Submit the form.
@@ -268,7 +268,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//select[@name="layers[]"]/
+        $this->assertXpath('//select[@name="base_layers[]"]/
             following-sibling::ul[@class="error"]'
         );
 
@@ -287,8 +287,8 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title 2',
             'slug'          => 'slug-2',
-            'layers'        => array('Layer1', 'Layer2'),
-            'default_layer' => 'Layer2',
+            'base_layers'   => array('Layer1', 'Layer2'),
+            'base_layer'    => 'Layer2',
             'description'   => 'Description 2.',
             'public'        => 0
         ));
@@ -298,12 +298,12 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
         // Should save fields.
-        $this->assertEquals($exhibit->title,          'Title 2');
-        $this->assertEquals($exhibit->slug,           'slug-2');
-        $this->assertEquals($exhibit->layers,         'Layer1,Layer2');
-        $this->assertEquals($exhibit->default_layer,  'Layer2');
-        $this->assertEquals($exhibit->description,    'Description 2.');
-        $this->assertEquals($exhibit->public,         0);
+        $this->assertEquals($exhibit->title,        'Title 2');
+        $this->assertEquals($exhibit->slug,         'slug-2');
+        $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
+        $this->assertEquals($exhibit->base_layer,   'Layer2');
+        $this->assertEquals($exhibit->description,  'Description 2.');
+        $this->assertEquals($exhibit->public,       0);
 
     }
 

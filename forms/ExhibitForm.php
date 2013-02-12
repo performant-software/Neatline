@@ -91,12 +91,12 @@ class Neatline_ExhibitForm extends Omeka_Form
         ));
 
         // Base Layers.
-        $this->addElement('multiselect', 'layers', array(
+        $this->addElement('multiselect', 'base_layers', array(
             'label'         => __('Base Layers'),
             'description'   => __('Select the base layers available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => _nl_getLayersForSelect(),
-            'value'         => _nl_explode($this->_exhibit->layers),
+            'value'         => _nl_explode($this->_exhibit->base_layers),
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -110,12 +110,12 @@ class Neatline_ExhibitForm extends Omeka_Form
         ));
 
         // Default Layer.
-        $this->addElement('select', 'default_layer', array(
+        $this->addElement('select', 'base_layer', array(
             'label'         => __('Default Layer'),
             'description'   => __('Select which layer is visible by default when the exhibit loads.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => _nl_getLayersForSelect(),
-            'value'         => _nl_explode($this->_exhibit->default_layer),
+            'value'         => _nl_explode($this->_exhibit->base_layer),
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>

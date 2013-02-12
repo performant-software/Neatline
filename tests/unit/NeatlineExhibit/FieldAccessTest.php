@@ -24,8 +24,8 @@ class Neatline_NeatlineExhibitTest_FieldAccess
 
         $exhibit = new NeatlineExhibit();
 
-        $exhibit->layers        = '1';
-        $exhibit->default_layer = '2';
+        $exhibit->base_layers   = '1';
+        $exhibit->base_layer    = '2';
         $exhibit->title         = '3';
         $exhibit->slug          = '4';
         $exhibit->description   = '5';
@@ -37,15 +37,15 @@ class Neatline_NeatlineExhibitTest_FieldAccess
 
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
-        $this->assertEquals($exhibit->layers,           '1');
-        $this->assertEquals($exhibit->default_layer,    '2');
-        $this->assertEquals($exhibit->title,            '3');
-        $this->assertEquals($exhibit->slug,             '4');
-        $this->assertEquals($exhibit->description,      '5');
-        $this->assertEquals($exhibit->public,           6);
-        $this->assertEquals($exhibit->styles,           '7');
-        $this->assertEquals($exhibit->map_focus,        '8');
-        $this->assertEquals($exhibit->map_zoom,         9);
+        $this->assertEquals($exhibit->base_layers,  '1');
+        $this->assertEquals($exhibit->base_layer,   '2');
+        $this->assertEquals($exhibit->title,        '3');
+        $this->assertEquals($exhibit->slug,         '4');
+        $this->assertEquals($exhibit->description,  '5');
+        $this->assertEquals($exhibit->public,       6);
+        $this->assertEquals($exhibit->styles,       '7');
+        $this->assertEquals($exhibit->map_focus,    '8');
+        $this->assertEquals($exhibit->map_zoom,     9);
 
     }
 
