@@ -107,6 +107,77 @@ function _nl_getGlobals($exhibit)
 
 
 /**
+ * Explode a comma-delimited string. Trim and strip whitespace.
+ *
+ * @param string $list A comma-delimited list.
+ * @return array The array of strings.
+ */
+function _nl_explode($list)
+{
+    return explode(',', trim(str_replace(' ', '', $list)));
+}
+
+
+/**
+ * Read and parse the `layers.json` file.
+ *
+ * @return array The layers.
+ */
+function _nl_getLayers()
+{
+    $file = Zend_Registry::get('layers');
+    return Zend_Json::decode(file_get_contents($file));
+}
+
+
+/**
+ * Get an array of grouped id => name layer pairs for form select.
+ *
+ * @return array The layers.
+ */
+function _nl_getLayersForSelect()
+{
+
+    $all = _nl_getLayers();
+
+    $options = array();
+    foreach ($all as $group => $layers) {
+        $options[$group] = array();
+        foreach ($layers as $layer) {
+            $options[$group][$layer['id']] = $layer['title'];
+        }
+    }
+
+    return $options;
+
+}
+
+
+/**
+ * Get just the layers included in a comma-delimited string.
+ *
+ * @param string $ids A comma-delimited list of layer ids.
+ * @return array The layers.
+ */
+function _nl_getLayersByIds($ids)
+{
+
+    $all = _nl_getLayers();
+    $ids = _nl_explode($ids);
+
+    $subset = array();
+    foreach ($all as $group => $layers) {
+        foreach ($layers as $layer) {
+            if (in_array($layer['id'], $ids)) $subset[] = $layer;
+        }
+    }
+
+    return $subset;
+
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute.
