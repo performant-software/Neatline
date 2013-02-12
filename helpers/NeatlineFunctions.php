@@ -60,6 +60,8 @@ function _nl_exhibitGlobals($exhibit)
         'exhibit_id'    => $exhibit->id,
         'records_api'   => public_url('neatline/records/'.$exhibit->id),
         'record_api'    => public_url('neatline/record'),
+        'base_layers'   => _nl_getLayersForExhibit($exhibit),
+        'base_layer'    => $exhibit->base_layer,
         'map_zoom'      => $exhibit->map_zoom,
         'map_focus'     => $exhibit->map_focus
     );
@@ -154,16 +156,17 @@ function _nl_getLayersForSelect()
 
 
 /**
- * Get just the layers included in a comma-delimited string.
+ * Get an array of layer definitions for an exhibit.
  *
- * @param string $ids A comma-delimited list of layer ids.
+ * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The layers.
  */
-function _nl_getLayersByIds($ids)
+function _nl_getLayersForExhibit($exhibit)
 {
 
+    $ids = _nl_explode($exhibit->base_layers);
+    $ids = array_merge($ids, array($exhibit->base_layer));
     $all = _nl_getLayers();
-    $ids = _nl_explode($ids);
 
     $subset = array();
     foreach ($all as $group => $layers) {
@@ -210,9 +213,7 @@ function _nl_currentExhibit()
 function _nl_areExhibits()
 {
     $view = get_view();
-    return ($view->neatline_exhibits &&
-        count($view->neatline_exhibits)
-    );
+    return $view->neatline_exhibits && count($view->neatline_exhibits);
 }
 
 
