@@ -27,7 +27,7 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
-     * /edit/:id should display the edit form populated with values.
+     * The /edit/:id route should display the edit form.
      */
     public function testBaseMarkup()
     {
@@ -76,7 +76,7 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
-     * Edit form should require a title.
+     * A title is required.
      */
     public function testNoTitleError()
     {
@@ -93,15 +93,15 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="title"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="title"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Edit form should require a slug.
+     * A slug is required.
      */
     public function testNoSlugError()
     {
@@ -118,15 +118,15 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Edit form should block a slug with spaces.
+     * The slug cannot have spaces.
      */
     public function testInvalidSlugWithSpacesError()
     {
@@ -143,15 +143,15 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Edit form should block a slug with capitals.
+     * The slug cannot have capitals.
      */
     public function testInvalidSlugWithCapsError()
     {
@@ -168,15 +168,15 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Edit form should block a slug with non-alphanumeric characters.
+     * The slug cannot have non-alphanumeric characters.
      */
     public function testInvalidSlugWithNonAlphasError()
     {
@@ -193,14 +193,14 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
     /**
-     * Edit form should block a duplicate slug.
+     * The slug cannot be the same as the slug for another exhibit.
      */
     public function testDuplicateSlugError()
     {
@@ -218,14 +218,14 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
     /**
-     * Edit form should not block an unchanged slug.
+     * The new slug can be the same as the current slug.
      */
     public function testUnchangedSlug()
     {
@@ -243,11 +243,15 @@ class Neatline_ExhibitsControllerTest_Edit
         // Submit the form.
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
+        // Should save exhibit.
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $this->assertEquals($exhibit->title, 'title');
+
     }
 
 
     /**
-     * Edit form should require at lease one base layer.
+     * At least one base layer must be selected.
      */
     public function testNoLayersError()
     {
@@ -264,16 +268,42 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertAction('edit');
 
         // Should flash error.
-        $this->assertXpath('//select[@name="layers[]"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//select[@name="layers[]"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Edit form should update an exhibit when a valid title, description,
-     * and slug are provided.
+     * The layer selected as the default base layer should be selected in
+     * the list of base layers included in the exhibit.
+     */
+    public function testDefaultLayerNotEnabledError()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // Default layer not included in exhibit.
+        $this->request->setMethod('POST')->setPost(array(
+            'layers'        => array('Layer1', 'Layer2'),
+            'default_layer' => 'Layer3'
+        ));
+
+        // Submit the form.
+        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->assertAction('edit');
+
+        // Should flash error.
+        $this->assertXpath('//select[@name="default_layer"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * When all fields are valid, the exhibit should be updated.
      */
     public function testSuccess()
     {

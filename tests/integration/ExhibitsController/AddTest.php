@@ -27,8 +27,7 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
-     * The /add route should display form elements for the exhibit title,
-     * description, and slug, and a checkbox to set the exhibit public.
+     * The /add route should display the add exhibit form.
      */
     public function testBaseMarkup()
     {
@@ -75,7 +74,7 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
-     * Add form should require a title.
+     * A title is required.
      */
     public function testNoTitleError()
     {
@@ -89,22 +88,18 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="title"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="title"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should require a slug.
+     * A slug is required.
      */
     public function testNoSlugError()
     {
@@ -118,22 +113,18 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should block a slug with spaces.
+     * The slug cannot have spaces.
      */
     public function testInvalidSlugWithSpacesError()
     {
@@ -147,22 +138,18 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should block a slug with capitals.
+     * The slug cannot have capitals.
      */
     public function testInvalidSlugWithCapsError()
     {
@@ -176,22 +163,18 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should block a slug with non-alphanumeric characters.
+     * The slug cannot have non-alphanumeric characters.
      */
     public function testInvalidSlugWithNonAlphasError()
     {
@@ -205,22 +188,18 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should block a duplicate slug.
+     * The slug cannot be the same as the slug for another exhibit.
      */
     public function testDuplicateSlugError()
     {
@@ -237,22 +216,18 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 1);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 1);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//input[@name="slug"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should require at least one base layer.
+     * At least one base layer must be selected.
      */
     public function testNoLayersError()
     {
@@ -266,23 +241,45 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 0);
-
-        // Should redisplay the form.
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//select[@name="layers[]"]/following-sibling::
-            ul[@class="error"]'
+        $this->assertXpath('//select[@name="layers[]"]/
+            following-sibling::ul[@class="error"]'
         );
 
     }
 
 
     /**
-     * Add form should create and populate an exhibit when a valid title,
-     * slug, and description are provided.
+     * The layer selected as the default base layer should be selected in
+     * the list of base layers included in the exhibit.
+     */
+    public function testDefaultLayerNotEnabledError()
+    {
+
+        // Default layer not included in exhibit.
+        $this->request->setMethod('POST')->setPost(array(
+            'layers'        => array('Layer1', 'Layer2'),
+            'default_layer' => 'Layer3'
+        ));
+
+        // Submit the form, check for no new exhibits.
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->dispatch('neatline/add');
+        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertAction('add');
+
+        // Should flash error.
+        $this->assertXpath('//select[@name="default_layer"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * When all fields are valid, a new exhibit should be created.
      */
     public function testSuccess()
     {

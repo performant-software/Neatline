@@ -90,7 +90,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
-        // Layers.
+        // Base Layers.
         $this->addElement('multiselect', 'layers', array(
             'label'         => __('Base Layers'),
             'description'   => __('Select the base layers available in the exhibit.'),
