@@ -31,6 +31,7 @@ Neatline.module('Map', function(
       this.layers = [];     // An array of record-backed vector layers.
 
       this.__initOpenLayers();
+      this.__initBaseLayers();
       this.__initControls();
       this.__initViewport();
       this.__initEvents();
@@ -61,10 +62,23 @@ Neatline.module('Map', function(
       // Instantiate map.
       this.map = new OpenLayers.Map(this.el, options);
 
-      // Add OSM base layer.
-      var osm = new OpenLayers.Layer.OSM();
-      this.map.addLayer(osm);
-      this.map.setBaseLayer(osm);
+    },
+
+
+    /**
+     * Construct the base layers and set the default.
+     */
+    __initBaseLayers: function() {
+
+      this.baseLayers = {};
+
+      // Get the array of base layer instances.
+      _.each(Neatline.global.base_layers, _.bind(function(json) {
+        var layer = Neatline.request('map:layers:getLayer', json);
+        if (!_.isNull(layer)) this.baseLayers[json.id] = layer;
+      }, this));
+
+      this.map.addLayers(_.values(this.baseLayers));
 
     },
 

@@ -24,7 +24,8 @@ class Neatline_FixturesController
 
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $exhibit = new NeatlineExhibit;
+        $exhibit = new NeatlineExhibit();
+        $exhibit->base_layer = 'OpenStreetMap';
         $exhibit->slug = 'slug';
         $exhibit->save();
 
@@ -43,7 +44,8 @@ class Neatline_FixturesController
 
         $this->_helper->viewRenderer->setNoRender(true);
 
-        $exhibit = new NeatlineExhibit;
+        $exhibit = new NeatlineExhibit();
+        $exhibit->base_layer = 'OpenStreetMap';
         $exhibit->slug = 'slug';
         $exhibit->save();
 

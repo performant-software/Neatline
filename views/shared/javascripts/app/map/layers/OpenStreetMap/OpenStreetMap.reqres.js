@@ -21,7 +21,7 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
    * @return {OpenLayers.Layer.OSM}: The OSM layer.
    */
   Neatline.reqres.addHandler('map:layers:OpenStreetMap', function(json) {
-    // TODO
+    return new OpenLayers.Layer.OSM();
   });
 
 
