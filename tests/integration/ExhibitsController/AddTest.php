@@ -252,33 +252,6 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
-     * The layer selected as the default base layer should be selected in
-     * the list of base layers included in the exhibit.
-     */
-    public function testDefaultLayerNotEnabledError()
-    {
-
-        // Default layer not included in exhibit.
-        $this->request->setMethod('POST')->setPost(array(
-            'layers'        => array('Layer1', 'Layer2'),
-            'default_layer' => 'Layer3'
-        ));
-
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-        $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
-        $this->assertAction('add');
-
-        // Should flash error.
-        $this->assertXpath('//select[@name="default_layer"]/
-            following-sibling::ul[@class="error"]'
-        );
-
-    }
-
-
-    /**
      * When all fields are valid, a new exhibit should be created.
      */
     public function testSuccess()
