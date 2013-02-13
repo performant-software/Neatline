@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Layer Request', function() {
+describe('Layers API', function() {
 
 
   beforeEach(function() {

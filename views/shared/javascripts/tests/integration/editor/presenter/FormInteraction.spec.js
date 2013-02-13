@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for bubble interactions with the editing form.
+ * Tests for presenter interactions with the record form.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Bubble Form Interaction', function() {
+describe('Presenter Form Interaction', function() {
 
 
   var layer, feature, els;
@@ -53,33 +53,11 @@ describe('Bubble Form Interaction', function() {
   });
 
 
-  it('should hide bubble when the form is closed', function() {
-
-    // --------------------------------------------------------------------
-    // An open bubble should be closed when the form is closed.
-    // --------------------------------------------------------------------
-
-    // Select a feature, open bubble.
-    _t.hoverOnMapFeature(layer, feature);
-    _t.clickOnMapFeature(layer, feature);
-
-    // Close the form.
-    els.close.trigger('click');
-    _t.respondRecords();
-
-    // Bubble should be hidden
-    expect(_t.el.smallBubble).not.toBeVisible();
-
-  });
-
-
   it('should not show bubble when the spatial tab is active', function() {
 
     // --------------------------------------------------------------------
     // While the spatial tab is active, the bubble should not be displayed
-    // or frozen when the cursor interacts with map geometries. This is to
-    // prevent confusing interactions with the bubble while geometries are
-    // being created or edited.
+    // or frozen when the cursor interacts with map geometries.
     // --------------------------------------------------------------------
 
     // Click "Spatial" tab.
@@ -116,6 +94,26 @@ describe('Bubble Form Interaction', function() {
 
     // Bubble should be visible.
     expect(_t.el.smallBubble).toBeVisible();
+
+  });
+
+
+  it('should hide bubble when the form is closed', function() {
+
+    // --------------------------------------------------------------------
+    // An open bubble should be closed when the form is closed.
+    // --------------------------------------------------------------------
+
+    // Select a feature, open bubble.
+    _t.hoverOnMapFeature(layer, feature);
+    _t.clickOnMapFeature(layer, feature);
+
+    // Close the form.
+    els.close.trigger('click');
+    _t.respondRecords();
+
+    // Bubble should be hidden
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
