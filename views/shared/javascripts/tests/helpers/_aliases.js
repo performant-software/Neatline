@@ -17,13 +17,11 @@
 _t.aliasNeatline = function() {
 
   this.vw = {
-    map:    Neatline.Map.     __view,
-    bubble: Neatline.Bubble.  __view
+    map:    Neatline.Map.__view
   };
 
   this.el = {
-    map:    Neatline.Map.     __view.$el,
-    bubble: Neatline.Bubble.  __view.$el
+    map:    Neatline.Map.__view.$el
   };
 
 };
@@ -36,7 +34,6 @@ _t.aliasEditor = function() {
 
   this.vw = {
     map:      Neatline.Map.             __view,
-    bubble:   Neatline.Bubble.          __view,
     editor:   Neatline.Editor.          __view,
     menu:     Neatline.Editor.Menu.     __view,
     search:   Neatline.Editor.Search.   __view,
@@ -48,7 +45,6 @@ _t.aliasEditor = function() {
 
   this.el = {
     map:      Neatline.Map.             __view.$el,
-    bubble:   Neatline.Bubble.          __view.$el,
     editor:   Neatline.Editor.          __view.__ui.editor,
     menu:     Neatline.Editor.Menu.     __view.$el,
     search:   Neatline.Editor.Search.   __view.$el,

@@ -20,9 +20,11 @@ Neatline.module('Presenter', function(
    * @param {Object} model: The record model.
    */
   var show = function(model) {
-    Neatline.vent.trigger(
-      'presenter:show:'+model.get('presenter'), model
-    );
+    try {
+      Neatline.execute(
+        'presenter:'+model.get('presenter')+':show', model
+      );
+    } catch (e) {}
   };
 
   Neatline.commands.addHandler('presenter:show', show);
@@ -35,9 +37,11 @@ Neatline.module('Presenter', function(
    * @param {Object} model: The record model.
    */
   var hide = function(model) {
-    Neatline.vent.trigger(
-      'presenter:hide:'+model.get('presenter')
-    );
+    try {
+      Neatline.execute(
+        'presenter:'+model.get('presenter')+':hide'
+      );
+    } catch(e) {}
   };
 
   Neatline.commands.addHandler('presenter:hide', hide);
@@ -50,9 +54,11 @@ Neatline.module('Presenter', function(
    * @param {Object} model: The record model.
    */
   var select = function(model) {
-    Neatline.vent.trigger(
-      'presenter:select:'+model.get('presenter')
-    );
+    try {
+      Neatline.execute(
+        'presenter:'+model.get('presenter')+':select'
+      );
+    } catch (e) {}
   };
 
   Neatline.commands.addHandler('presenter:select', select);
@@ -65,9 +71,11 @@ Neatline.module('Presenter', function(
    * @param {Object} model: The record model.
    */
   var unselect = function(model) {
-    Neatline.vent.trigger(
-      'presenter:unselect:'+model.get('presenter')
-    );
+    try {
+      Neatline.execute(
+        'presenter:'+model.get('presenter')+':unselect'
+      );
+    } catch (e) {}
   };
 
   Neatline.commands.addHandler('presenter:unselect', unselect);
@@ -80,6 +88,7 @@ Neatline.module('Presenter', function(
   var activate = function() {
     Neatline.vent.trigger('presenter:activate');
   };
+
   Neatline.commands.addHandler('presenter:activate', activate);
 
 

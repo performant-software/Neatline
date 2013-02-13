@@ -1,9 +1,8 @@
-<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Bubble partial.
+ * Bubble styles.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,10 +10,16 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-?>
 
+#small-bubble
+  overflow hidden
+  position fixed
+  z-index 999
+  border 1px solid rgba(0, 0, 0, 0.2)
+  box-shadow 0 3px 8px rgba(0, 0, 0, 0.3)
+  background #fcfcfc
+  padding 5px 10px
+  max-width 400px
 
-<script id="bubble-template" type="text/templates">
-  <div class="title" data-html="record._title"></div>
-  <div class="body" data-html="record._body"></div>
-</script>
+  .title
+    font-weight bold

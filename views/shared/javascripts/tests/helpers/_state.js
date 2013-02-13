@@ -22,7 +22,6 @@ _t.loadNeatline = function() {
 
   // Start modules.
   Neatline.Map.init();
-  Neatline.Bubble.init();
 
   // Inject fixtures, alias components.
   this.respondAll200(this.json.records.standard);
@@ -50,7 +49,6 @@ _t.loadEditor = function() {
   Neatline.Editor.Styles.init();
   Neatline.Editor.init();
   Neatline.Map.init();
-  Neatline.Bubble.init();
   Neatline.Editor.Map.init();
 
   // Reset history.
@@ -62,7 +60,6 @@ _t.loadEditor = function() {
   _t.aliasNeatline();
   _t.aliasEditor();
 
-  // Def route.
   _t.navigate('');
 
 };

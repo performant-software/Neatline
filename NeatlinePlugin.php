@@ -219,10 +219,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlinePresenters($presenters)
     {
         return array_merge($presenters, array(
-            'None'                  => 'None',
-            'Small-Content Bubble'  => 'SmallContentBubble',
-            'Medium-Content Bubble' => 'MediumContentBubble',
-            'Large-Content Bubble'  => 'LargeContentBubble'
+            'None'          => 'None',
+            'Small Bubble'  => 'SmallBubble',
+            'Medium Bubble' => 'MediumBubble',
+            'Large Bubble'  => 'LargeBubble'
         ));
     }
 

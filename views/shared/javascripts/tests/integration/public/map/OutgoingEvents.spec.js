@@ -28,11 +28,6 @@ describe('Map Outgoing Events', function() {
   });
 
 
-  afterEach(function() {
-    _t.el.bubble.remove();
-  });
-
-
   it('should render and publish feature hover', function() {
 
     // --------------------------------------------------------------------

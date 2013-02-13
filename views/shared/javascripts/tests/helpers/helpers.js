@@ -37,7 +37,6 @@ _t = (function() {
   
     // Start modules.
     Neatline.Map.init();
-    Neatline.Bubble.init();
   
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
@@ -65,7 +64,6 @@ _t = (function() {
     Neatline.Editor.Styles.init();
     Neatline.Editor.init();
     Neatline.Map.init();
-    Neatline.Bubble.init();
     Neatline.Editor.Map.init();
   
     // Reset history.
@@ -77,7 +75,6 @@ _t = (function() {
     _t.aliasNeatline();
     _t.aliasEditor();
   
-    // Def route.
     _t.navigate('');
   
   };
@@ -215,13 +212,11 @@ _t = (function() {
   _t.aliasNeatline = function() {
   
     this.vw = {
-      map:    Neatline.Map.     __view,
-      bubble: Neatline.Bubble.  __view
+      map:    Neatline.Map.__view
     };
   
     this.el = {
-      map:    Neatline.Map.     __view.$el,
-      bubble: Neatline.Bubble.  __view.$el
+      map:    Neatline.Map.__view.$el
     };
   
   };
@@ -234,7 +229,6 @@ _t = (function() {
   
     this.vw = {
       map:      Neatline.Map.             __view,
-      bubble:   Neatline.Bubble.          __view,
       editor:   Neatline.Editor.          __view,
       menu:     Neatline.Editor.Menu.     __view,
       search:   Neatline.Editor.Search.   __view,
@@ -246,7 +240,6 @@ _t = (function() {
   
     this.el = {
       map:      Neatline.Map.             __view.$el,
-      bubble:   Neatline.Bubble.          __view.$el,
       editor:   Neatline.Editor.          __view.__ui.editor,
       menu:     Neatline.Editor.Menu.     __view.$el,
       search:   Neatline.Editor.Search.   __view.$el,

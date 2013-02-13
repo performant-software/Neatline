@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Bubble view.
+ * Small-content bubble view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Bubble', function(
-  Bubble, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.SmallBubble', function(
+  SmallBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  Bubble.View = Backbone.Neatline.View.extend({
+  SmallBubble.View = Backbone.Neatline.View.extend({
 
 
-    template: '#bubble-template',
-    id:       'bubble',
+    template: '#small-bubble-template',
+    id:       'small-bubble',
 
     options: {
       padding: {

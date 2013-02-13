@@ -141,7 +141,7 @@ Neatline.module('Editor.Record', function(
         Neatline.execute('editor:map:updateModel', model);
       });
 
-      this.setBubbleStatus();
+      this.setPresenterStatus();
       this.resetEditMode();
 
       this.model = model;
@@ -151,16 +151,16 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * End the map edit session, reset the bubble.
+     * End the map edit session, reset the presenter.
      */
     deactivate: function() {
 
       // Deactivate map editing.
       Neatline.execute('editor:map:endEdit', this.model);
 
-      // Close and activate the bubble.
-      Neatline.execute('bubble:activate');
-      Neatline.execute('bubble:unselect');
+      // Close and activate the presenter.
+      Neatline.execute('presenter:activate');
+      Neatline.execute('presenter:unselect');
 
       this.model = null;
       this.open  = false;
@@ -362,25 +362,25 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Cache the current tab hash, (de)activate the bubble.
+     * Cache the current tab hash, (de)activate the presenter.
      *
      * @param {Object} event: The `shown` event.
      */
     onTabChange: function(event) {
       this.hash = event.target.hash;
-      this.setBubbleStatus();
+      this.setPresenterStatus();
       this.resetEditMode();
       this.buildUi();
     },
 
 
     /**
-     * Deactivate the bubble when the "Spatial" tab is active.
+     * Deactivate the presenter when the "Spatial" tab is active.
      */
-    setBubbleStatus: function() {
+    setPresenterStatus: function() {
       Neatline.execute(this.spatialTabActive() ?
-        'bubble:deactivate' :
-        'bubble:activate'
+        'presenter:deactivate' :
+        'presenter:activate'
       );
     },
 
