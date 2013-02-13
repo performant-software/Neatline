@@ -53,11 +53,9 @@ module.exports = function(grunt) {
         }
       },
       move_bootstrap_images: {
-        command: 'cp -r img ../../views/shared/css/img',
-        stdout: true,
-        execOptions: {
-          cwd: config.build.bootstrap
-        }
+        command: 'cp -r ' + config.build.bootstrap + '/img ' +
+          './views/shared/css/img',
+        stdout: true
       },
       move_chosen_images: {
         command: 'cp ' + config.build.chosen+'/chosen-sprite.png ' +
@@ -293,8 +291,10 @@ module.exports = function(grunt) {
     watch: {
       payload: {
         files: [
+          '<config:concat.form.src>',
           '<config:concat.neatline.src>',
           '<config:concat.editor.src>',
+          config.stylus.admin+'/**/*.styl',
           config.stylus.shared+'/**/*.styl',
           config.jasmine+'/helpers/*.js'
         ],
@@ -346,9 +346,9 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
+    'compile:min',
     'shell:move_bootstrap_images',
     'shell:move_chosen_images',
-    'compile:min',
     'copy:build'
   ]);
 
