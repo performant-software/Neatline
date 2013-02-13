@@ -25,7 +25,16 @@ function _nl_mapApis()
 
 
 /**
- * Include the static files for the Neatline.
+ * Include static files for the exhibit form.
+ */
+function _nl_formAssets()
+{
+    queue_js_file('payloads/form');
+}
+
+
+/**
+ * Include static files for the exhibit.
  */
 function _nl_exhibitAssets()
 {
@@ -37,7 +46,7 @@ function _nl_exhibitAssets()
 
 
 /**
- * Include the static files for the editor.
+ * Include static files for the editor.
  */
 function _nl_editorAssets()
 {

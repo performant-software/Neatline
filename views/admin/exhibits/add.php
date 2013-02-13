@@ -13,6 +13,8 @@
 
 ?>
 
+<?php _nl_formAssets(); ?>
+
 <?php
   echo head(array(
     'title' => __('Neatline | Create an Exhibit'),

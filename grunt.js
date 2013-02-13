@@ -116,6 +116,14 @@ module.exports = function(grunt) {
     },
 
     concat: {
+      form: {
+        src: [
+          config.vendor.js.chosen,
+          config.src.admin+'/*.js'
+        ],
+        dest: config.payloads.admin.js+'/form.js',
+        separator: ';'
+      },
       neatline: {
         src: [
 
@@ -203,6 +211,11 @@ module.exports = function(grunt) {
     },
 
     min: {
+      form: {
+        src: '<config:concat.form.src>',
+        dest: config.payloads.admin.js+'/form.js',
+        separator: ';'
+      },
       neatline: {
         src: '<config:concat.neatline.src>',
         dest: config.payloads.shared.js+'/neatline.js',
@@ -288,6 +301,7 @@ module.exports = function(grunt) {
 
   // Assemble static assets.
   grunt.registerTask('compile:concat', [
+    'concat:form',
     'concat:neatline',
     'concat:editor',
     'stylus',
@@ -299,6 +313,7 @@ module.exports = function(grunt) {
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
+    'min:form',
     'min:neatline',
     'min:editor',
     'stylus',
