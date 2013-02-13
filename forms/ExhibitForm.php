@@ -97,7 +97,6 @@ class Neatline_ExhibitForm extends Omeka_Form
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => _nl_getLayersForSelect(),
             'value'         => _nl_explode($this->_exhibit->base_layers),
-            'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(

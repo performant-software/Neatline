@@ -13,18 +13,60 @@
 describe('Map Exhibit Defaults', function() {
 
 
-  it('should construct base layers');
-  it('should set default base layers');
+  beforeEach(function() {
+    loadFixtures('neatline-partial.html');
+  });
+
+
+  it('should construct base layers and set default', function() {
+
+    // --------------------------------------------------------------------
+    // When the exhibit loads, the map should create the layers defined by
+    // `base_layers` and set the default layer defined by `base_layer`.
+    // --------------------------------------------------------------------
+
+    // Set the base layers.
+    Neatline.global.base_layers = [
+      {
+        title:  'Layer1',
+        id:     'Layer1',
+        type:   'OpenStreetMap'
+      },
+      {
+        title:  'Layer2',
+        id:     'Layer2',
+        type:   'OpenStreetMap'
+      },
+      {
+        title:  'Layer3',
+        id:     'Layer3',
+        type:   'OpenStreetMap'
+      }
+    ];
+
+    // Set the default base layer.
+    Neatline.global.base_layer = 'Layer2';
+
+    // Start map.
+    Neatline.Map.init();
+
+    // Base layers should be added to map.
+    expect(Neatline.Map.__view.map.layers[0].name).toEqual('Layer1');
+    expect(Neatline.Map.__view.map.layers[1].name).toEqual('Layer2');
+    expect(Neatline.Map.__view.map.layers[2].name).toEqual('Layer3');
+
+    // Default layer should be set.
+    expect(Neatline.Map.__view.map.baseLayer.name).toEqual('Layer2');
+
+  });
 
 
   it('should set exhibit default focus and zoom', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit loads, the map should manifest the `map_focus` and
-    // `map_zoom` parameters on the globals object.
+    // When the exhibit loads, the map should manifest the focus and zoom
+    // defined by the `map_focus` and `map_zoom` global parameters.
     // --------------------------------------------------------------------
-
-    loadFixtures('neatline-partial.html');
 
     // Set exhibit defaults.
     Neatline.global.map_focus = '1,2';

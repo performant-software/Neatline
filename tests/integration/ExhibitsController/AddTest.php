@@ -81,7 +81,7 @@ class Neatline_ExhibitsControllerTest_Add
 
         // Missing title.
         $this->request->setMethod('POST')->setPost(array(
-            'title' => ''
+            'title'
         ));
 
         // Submit the form, check for no new exhibits.
@@ -106,7 +106,7 @@ class Neatline_ExhibitsControllerTest_Add
 
         // Missing slug.
         $this->request->setMethod('POST')->setPost(array(
-            'slug' => ''
+            'slug'
         ));
 
         // Submit the form, check for no new exhibits.
@@ -227,14 +227,14 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
-     * At least one base layer must be selected.
+     * A default base layer must be selected.
      */
-    public function testNoBaseLayersError()
+    public function testNoDefaltLayerError()
     {
 
         // Missing slug.
         $this->request->setMethod('POST')->setPost(array(
-            'base_layers' => ''
+            'base_layer'
         ));
 
         // Submit the form, check for no new exhibits.
@@ -244,7 +244,7 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//select[@name="base_layers[]"]/
+        $this->assertXpath('//select[@name="base_layer"]/
             following-sibling::ul[@class="error"]'
         );
 
