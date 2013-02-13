@@ -21,7 +21,9 @@ Neatline.module('Map.Layers.Stamen', function(
    * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
    */
   Neatline.reqres.addHandler('map:layers:Stamen', function(json) {
-    // TODO
+    var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
+    layer.name = json.title;
+    return layer;
   });
 
 

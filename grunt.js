@@ -127,6 +127,7 @@ module.exports = function(grunt) {
           config.vendor.js.neatline,
           config.vendor.js.safesync,
           config.vendor.js.openlayers,
+          config.vendor.js.stamen,
           config.vendor.js.rivets,
 
           // Neatline:
@@ -151,7 +152,6 @@ module.exports = function(grunt) {
           config.vendor.js.marionette,
           config.vendor.js.neatline,
           config.vendor.js.openlayers,
-          config.vendor.js.stamen,
           config.vendor.js.svgtowkt,
           config.vendor.js.routefilter,
           config.vendor.js.toastr,
