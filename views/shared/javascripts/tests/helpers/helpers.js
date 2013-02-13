@@ -35,8 +35,9 @@ _t = (function() {
     this.loadFixtures('neatline-partial.html', 'neatline.css');
     this.server = sinon.fakeServer.create();
   
-    // Start modules.
+    // Public modules.
     Neatline.Map.init();
+    Neatline.Presenter.SmallBubble.init();
   
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
@@ -56,14 +57,19 @@ _t = (function() {
     this.loadFixtures('editor-partial.html', 'neatline.css');
     this.server = sinon.fakeServer.create();
   
-    // Start modules.
+    // Editor modules.
     Neatline.Editor.Menu.init();
     Neatline.Editor.Search.init();
     Neatline.Editor.Record.init();
     Neatline.Editor.Records.init();
     Neatline.Editor.Styles.init();
     Neatline.Editor.init();
+  
+    // Public modules.
     Neatline.Map.init();
+    Neatline.Presenter.SmallBubble.init();
+  
+    // Map edit module.
     Neatline.Editor.Map.init();
   
     // Reset history.
