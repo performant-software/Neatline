@@ -14,18 +14,10 @@ describe('Map Exhibit Defaults', function() {
 
 
   beforeEach(function() {
+
     loadFixtures('neatline-partial.html');
-  });
 
-
-  it('should construct base layers and set default', function() {
-
-    // --------------------------------------------------------------------
-    // When the exhibit loads, the map should create the layers defined by
-    // `base_layers` and set the default layer defined by `base_layer`.
-    // --------------------------------------------------------------------
-
-    // Set the base layers.
+    // Mock the base layers.
     Neatline.global.base_layers = [
       {
         title:  'Layer1',
@@ -44,8 +36,15 @@ describe('Map Exhibit Defaults', function() {
       }
     ];
 
-    // Set the default base layer.
-    Neatline.global.base_layer = 'Layer2';
+  });
+
+
+  it('should construct base layers', function() {
+
+    // --------------------------------------------------------------------
+    // When the exhibit loads, the map should create the layers defined by
+    // the `base_layers` global.
+    // --------------------------------------------------------------------
 
     // Start map.
     Neatline.Map.init();
@@ -54,6 +53,22 @@ describe('Map Exhibit Defaults', function() {
     expect(Neatline.Map.__view.map.layers[0].name).toEqual('Layer1');
     expect(Neatline.Map.__view.map.layers[1].name).toEqual('Layer2');
     expect(Neatline.Map.__view.map.layers[2].name).toEqual('Layer3');
+
+  });
+
+
+  it('should set default base layer', function() {
+
+    // --------------------------------------------------------------------
+    // When the exhibit loads, the map default to the base layer defined
+    // by the `base_layer` global.
+    // --------------------------------------------------------------------
+
+    // Set the default base layer.
+    Neatline.global.base_layer = 'Layer2';
+
+    // Start map.
+    Neatline.Map.init();
 
     // Default layer should be set.
     expect(Neatline.Map.__view.map.baseLayer.name).toEqual('Layer2');
