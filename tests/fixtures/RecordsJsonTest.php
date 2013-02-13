@@ -69,8 +69,8 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         // ** No default focus for #2 and #3.
         // ----------------------------------------------------------------
         $record1->presenter         = 'SmallBubble';
-        $record2->presenter         = 'MediumBubble';
-        $record3->presenter         = 'LargeBubble';
+        $record2->presenter         = 'SmallBubble';
+        $record3->presenter         = 'SmallBubble';
         // ----------------------------------------------------------------
         $record1->vector_color      = '#444444';
         $record2->vector_color      = '#555555';

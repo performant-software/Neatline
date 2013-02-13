@@ -17,11 +17,13 @@
 _t.aliasNeatline = function() {
 
   this.vw = {
-    map:    Neatline.Map.__view
+    map:          Neatline.Map.                   __view,
+    smallBubble:  Neatline.Presenter.SmallBubble. __view
   };
 
   this.el = {
-    map:    Neatline.Map.__view.$el
+    map:          Neatline.Map.                   __view.$el,
+    smallBubble:  Neatline.Presenter.SmallBubble. __view.$el
   };
 
 };
@@ -33,24 +35,26 @@ _t.aliasNeatline = function() {
 _t.aliasEditor = function() {
 
   this.vw = {
-    map:      Neatline.Map.             __view,
-    editor:   Neatline.Editor.          __view,
-    menu:     Neatline.Editor.Menu.     __view,
-    search:   Neatline.Editor.Search.   __view,
-    mapedit:  Neatline.Editor.Map.      __view,
-    records:  Neatline.Editor.Records.  __view,
-    record:   Neatline.Editor.Record.   __view,
-    styles:   Neatline.Editor.Styles.   __view
+    map:          Neatline.Map.                   __view,
+    smallBubble:  Neatline.Presenter.SmallBubble. __view,
+    editor:       Neatline.Editor.                __view,
+    menu:         Neatline.Editor.Menu.           __view,
+    search:       Neatline.Editor.Search.         __view,
+    mapedit:      Neatline.Editor.Map.            __view,
+    records:      Neatline.Editor.Records.        __view,
+    record:       Neatline.Editor.Record.         __view,
+    styles:       Neatline.Editor.Styles.         __view
   };
 
   this.el = {
-    map:      Neatline.Map.             __view.$el,
-    editor:   Neatline.Editor.          __view.__ui.editor,
-    menu:     Neatline.Editor.Menu.     __view.$el,
-    search:   Neatline.Editor.Search.   __view.$el,
-    records:  Neatline.Editor.Records.  __view.$el,
-    record:   Neatline.Editor.Record.   __view.$el,
-    styles:   Neatline.Editor.Styles.   __view.$el
+    map:          Neatline.Map.                   __view.$el,
+    smallBubble:  Neatline.Presenter.SmallBubble. __view.$el,
+    editor:       Neatline.Editor.                __view.__ui.editor,
+    menu:         Neatline.Editor.Menu.           __view.$el,
+    search:       Neatline.Editor.Search.         __view.$el,
+    records:      Neatline.Editor.Records.        __view.$el,
+    record:       Neatline.Editor.Record.         __view.$el,
+    styles:       Neatline.Editor.Styles.         __view.$el
   };
 
 };

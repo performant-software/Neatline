@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Show/hide tests for bubble.
+ * Rendering tests for small bubble.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Bubble Show/Hide', function() {
+describe('Small Bubble', function() {
 
 
   var layer1, layer2, feature1, feature2, els;
@@ -27,15 +27,15 @@ describe('Bubble Show/Hide', function() {
     feature2 = layer2.features[0];
 
     els = {
-      title:  _t.vw.bubble.$('.title'),
-      body:   _t.vw.bubble.$('.body')
+      title:  _t.vw.smallBubble.$('.title'),
+      body:   _t.vw.smallBubble.$('.body')
     };
 
   });
 
 
   afterEach(function() {
-    _t.el.bubble.remove();
+    _t.el.smallBubble.remove();
   });
 
 
@@ -49,7 +49,7 @@ describe('Bubble Show/Hide', function() {
     _t.hoverOnMapFeature(layer1, feature1);
 
     // Bubble should be visible.
-    expect(_t.el.bubble).toBeVisible();
+    expect(_t.el.smallBubble).toBeVisible();
 
     // Title and body should be rendered.
     expect(els.title.text()).toEqual('_title1');
@@ -75,9 +75,9 @@ describe('Bubble Show/Hide', function() {
     });
 
     // Bubble should follow.
-    var offset = _t.el.bubble.offset();
-    expect(offset.left).toEqual(3+_t.vw.bubble.options.padding.x);
-    expect(offset.top).toEqual(4-_t.vw.bubble.options.padding.y);
+    var offset = _t.el.smallBubble.offset();
+    expect(offset.left).toEqual(3+_t.vw.smallBubble.options.padding.x);
+    expect(offset.top).toEqual(4-_t.vw.smallBubble.options.padding.y);
 
   });
 
@@ -93,7 +93,7 @@ describe('Bubble Show/Hide', function() {
     _t.unHoverOnMapFeature(_t.vw.map.layers);
 
     // Bubble should be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
@@ -109,7 +109,7 @@ describe('Bubble Show/Hide', function() {
     _t.triggerMapMouseout();
 
     // Bubble should be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
@@ -125,7 +125,7 @@ describe('Bubble Show/Hide', function() {
     // Highlight feature, then select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
-    var offset = _t.el.bubble.offset();
+    var offset = _t.el.smallBubble.offset();
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {
@@ -135,11 +135,11 @@ describe('Bubble Show/Hide', function() {
     });
 
     // Bubble should not move.
-    expect(_t.el.bubble.offset()).toEqual(offset);
+    expect(_t.el.smallBubble.offset()).toEqual(offset);
 
     // Bubble should be visible after unhover.
     _t.unHoverOnMapFeature(_t.vw.map.layers);
-    expect(_t.el.bubble).toBeVisible();
+    expect(_t.el.smallBubble).toBeVisible();
 
   });
 
@@ -155,10 +155,10 @@ describe('Bubble Show/Hide', function() {
     // Hover on feature, then select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
-    var offset = _t.el.bubble.offset();
+    var offset = _t.el.smallBubble.offset();
 
     // Hover on a different feature.
-    _t.hoverOnMapFeature(layer1, feature2);
+    _t.hoverOnMapFeature(layer2, feature2);
 
     // Bubble values should be unchanged.
     expect(els.title.text()).toEqual('_title1');
@@ -172,7 +172,7 @@ describe('Bubble Show/Hide', function() {
     });
 
     // Bubble should not move.
-    expect(_t.el.bubble.offset()).toEqual(offset);
+    expect(_t.el.smallBubble.offset()).toEqual(offset);
 
   });
 
@@ -192,11 +192,11 @@ describe('Bubble Show/Hide', function() {
     _t.clickOffMapFeature(_t.vw.map.layers);
 
     // Bubble should disappear.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
     // Hover on a different feature.
-    _t.hoverOnMapFeature(layer1, feature2);
-    var offset = _t.el.bubble.offset();
+    _t.hoverOnMapFeature(layer2, feature2);
+    var offset = _t.el.smallBubble.offset();
 
     // Bubble values should be changed.
     expect(els.title.text()).toEqual('_title2');
@@ -209,7 +209,7 @@ describe('Bubble Show/Hide', function() {
     });
 
     // Bubble should track the cursor.
-    expect(_t.el.bubble.offset()).not.toEqual(offset);
+    expect(_t.el.smallBubble.offset()).not.toEqual(offset);
 
   });
 
