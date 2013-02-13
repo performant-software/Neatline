@@ -59,6 +59,11 @@ module.exports = function(grunt) {
           cwd: config.build.bootstrap
         }
       },
+      move_chosen_images: {
+        command: 'cp ' + config.build.chosen+'/chosen-sprite.png ' +
+          config.payloads.admin.css,
+        stdout: true
+      },
 
       // TEST
       phpunit: {
@@ -190,6 +195,13 @@ module.exports = function(grunt) {
         dest: config.payloads.shared.js+'/editor.js',
         separator: ';'
       },
+      form_css: {
+        src: [
+          config.vendor.css.chosen,
+          config.payloads.admin.css+'/form/*.css'
+        ],
+        dest: config.payloads.admin.css+'/form.css',
+      },
       neatline_css: {
         src: [
           config.vendor.css.openlayers,
@@ -237,7 +249,9 @@ module.exports = function(grunt) {
           './views/shared/css/payloads/public/*.css':
             config.stylus.shared+'/public/*.styl',
           './views/shared/css/payloads/editor/*.css':
-            config.stylus.shared+'/editor/*.styl'
+            config.stylus.shared+'/editor/*.styl',
+          './views/admin/css/payloads/form/*.css':
+            config.stylus.admin+'/form/*.styl'
         }
       }
     },
@@ -305,6 +319,7 @@ module.exports = function(grunt) {
     'concat:neatline',
     'concat:editor',
     'stylus',
+    'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css',
     'copy:payload',
@@ -317,6 +332,7 @@ module.exports = function(grunt) {
     'min:neatline',
     'min:editor',
     'stylus',
+    'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css',
     'copy:payload',
@@ -331,6 +347,7 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'shell:move_bootstrap_images',
+    'shell:move_chosen_images',
     'compile:min',
     'copy:build'
   ]);
