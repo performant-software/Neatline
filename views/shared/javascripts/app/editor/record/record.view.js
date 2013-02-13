@@ -158,9 +158,9 @@ Neatline.module('Editor.Record', function(
       // Deactivate map editing.
       Neatline.execute('editor:map:endEdit', this.model);
 
-      // Close and activate the presenter.
+      // Activate and close the presenter.
       Neatline.execute('presenter:activate');
-      Neatline.execute('presenter:unselect');
+      Neatline.execute('presenter:unselect', this.model);
 
       this.model = null;
       this.open  = false;

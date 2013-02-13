@@ -34,11 +34,6 @@ describe('Bubble Form Interaction', function() {
   });
 
 
-  afterEach(function() {
-    _t.el.bubble.remove();
-  });
-
-
   it('should hide bubble when the spatial tab is selected', function() {
 
     // --------------------------------------------------------------------
@@ -53,7 +48,7 @@ describe('Bubble Form Interaction', function() {
     els.spatial.tab('show');
 
     // Bubble should be hidden
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
@@ -73,7 +68,7 @@ describe('Bubble Form Interaction', function() {
     _t.respondRecords();
 
     // Bubble should be hidden
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
@@ -92,14 +87,14 @@ describe('Bubble Form Interaction', function() {
 
     // Hover on feature, check no bubble.
     _t.hoverOnMapFeature(layer, feature);
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
     // Select feature.
     _t.hoverOnMapFeature(layer, feature);
     _t.clickOnMapFeature(layer, feature);
 
     // Bubble should be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
@@ -120,7 +115,7 @@ describe('Bubble Form Interaction', function() {
     _t.hoverOnMapFeature(layer, feature);
 
     // Bubble should be visible.
-    expect(_t.el.bubble).toBeVisible();
+    expect(_t.el.smallBubble).toBeVisible();
 
   });
 
@@ -144,7 +139,7 @@ describe('Bubble Form Interaction', function() {
     _t.hoverOnMapFeature(layer, feature);
 
     // Bubble should be visible.
-    expect(_t.el.bubble).toBeVisible();
+    expect(_t.el.smallBubble).toBeVisible();
 
   });
 
@@ -170,7 +165,7 @@ describe('Bubble Form Interaction', function() {
     _t.hoverOnMapFeature(layer, feature);
 
     // Bubble should not be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 

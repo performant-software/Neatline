@@ -58,7 +58,7 @@ Neatline.module('Presenter.SmallBubble', function(
 
         // Render template, inject bubble.
         rivets.bind(this.$el, { record: model });
-        this.$el.appendTo($('body'));
+        this.$el.appendTo(Neatline.Map.__view.$el);
 
       }
     },

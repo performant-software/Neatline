@@ -13,7 +13,7 @@
 describe('Map Outgoing Events', function() {
 
 
-  var layer, feature, spy;
+  var layer, feature, vent;
 
 
   beforeEach(function() {
@@ -23,7 +23,7 @@ describe('Map Outgoing Events', function() {
     layer = _t.vw.map.layers[0];
     feature = layer.features[0];
 
-    spy = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
   });
 
@@ -42,9 +42,7 @@ describe('Map Outgoing Events', function() {
     expect(feature.renderIntent).toEqual('temporary');
 
     // Should publish `map:highlight`.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-      'map:highlight', layer.nModel
-    );
+    expect(vent).toHaveBeenCalledWith('map:highlight', layer.nModel);
 
   });
 
@@ -64,9 +62,7 @@ describe('Map Outgoing Events', function() {
     expect(feature.renderIntent).toEqual('default');
 
     // Should publish `map:unhighlight`.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-      'map:unhighlight', layer.nModel
-    );
+    expect(vent).toHaveBeenCalledWith('map:unhighlight', layer.nModel);
 
   });
 
@@ -85,9 +81,7 @@ describe('Map Outgoing Events', function() {
     expect(feature.renderIntent).toEqual('select');
 
     // Should publish `map:select`.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-      'map:select', layer.nModel
-    );
+    expect(vent).toHaveBeenCalledWith('map:select', layer.nModel);
 
   });
 
@@ -110,9 +104,7 @@ describe('Map Outgoing Events', function() {
     expect(feature.renderIntent).toEqual('default');
 
     // Should publish `map:unselect`.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith(
-      'map:unselect', layer.nModel
-    );
+    expect(vent).toHaveBeenCalledWith('map:unselect', layer.nModel);
 
   });
 
@@ -132,9 +124,9 @@ describe('Map Outgoing Events', function() {
     var zoom = _t.vw.map.getZoom();
 
     // Should publish `map:move`.
-    expect(spy.argsForCall[0][0]).toEqual('map:move');
-    expect(spy.argsForCall[0][1].extent).toEqual(extent);
-    expect(spy.argsForCall[0][1].zoom).toEqual(zoom);
+    expect(vent.argsForCall[0][0]).toEqual('map:move');
+    expect(vent.argsForCall[0][1].extent).toEqual(extent);
+    expect(vent.argsForCall[0][1].zoom).toEqual(zoom);
 
   });
 
