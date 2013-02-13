@@ -492,6 +492,7 @@ _t = (function() {
       body:           _t.el.record.find('textarea[name="body"]'),
       coverage:       _t.el.record.find('textarea[name="coverage"]'),
       tags:           _t.el.record.find('input[name="tags"]'),
+      presenter:      _t.el.record.find('select[name="presenter"]'),
       vectorColor:    _t.el.record.find('input[name="vector-color"]'),
       strokeColor:    _t.el.record.find('input[name="stroke-color"]'),
       selectColor:    _t.el.record.find('input[name="select-color"]'),

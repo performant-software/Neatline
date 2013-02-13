@@ -45,6 +45,7 @@ describe('Record Form Save', function() {
     inputs.itemId.          val('3').       trigger('change');
     inputs.coverage.        val('4').       trigger('change');
     inputs.tags.            val('5').       trigger('change');
+    inputs.presenter.       val('None').    trigger('change');
     inputs.vectorColor.     val('#666666'). trigger('change');
     inputs.strokeColor.     val('#777777'). trigger('change');
     inputs.selectColor.     val('#888888'). trigger('change');
@@ -76,6 +77,7 @@ describe('Record Form Save', function() {
     expect(params.item_id).         toEqual('3');
     expect(params.coverage).        toEqual('4');
     expect(params.tags).            toEqual('5');
+    expect(params.presenter).       toEqual('None');
     expect(params.vector_color).    toEqual('#666666');
     expect(params.stroke_color).    toEqual('#777777');
     expect(params.select_color).    toEqual('#888888');

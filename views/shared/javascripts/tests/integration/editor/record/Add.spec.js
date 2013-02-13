@@ -74,6 +74,7 @@ describe('Record Form Add', function() {
     expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit_id);
 
     // Model should have defined styles.
+    expect(_.isString(record.get('presenter'))).      toBeTruthy();
     expect(_.isString(record.get('vector_color'))).   toBeTruthy();
     expect(_.isString(record.get('stroke_color'))).   toBeTruthy();
     expect(_.isString(record.get('select_color'))).   toBeTruthy();

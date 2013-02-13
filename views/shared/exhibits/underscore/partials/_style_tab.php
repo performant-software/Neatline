@@ -22,6 +22,14 @@
 )); ?>
 
 <?php echo $this->partial(
+  'exhibits/underscore/helpers/_select.php', array(
+    'name'  => 'presenter',
+    'label' => 'Presenter',
+    'bind'  => 'record.presenter',
+    'options'   => _nl_getPresenters()
+)); ?>
+
+<?php echo $this->partial(
   'exhibits/underscore/helpers/_text_input.php', array(
     'name'  => 'vector-color',
     'label' => 'Shape Color',
