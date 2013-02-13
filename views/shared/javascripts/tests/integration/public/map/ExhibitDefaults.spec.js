@@ -76,6 +76,53 @@ describe('Map Exhibit Defaults', function() {
   });
 
 
+  it('should show layer switcher for multiple layers', function() {
+
+    // --------------------------------------------------------------------
+    // When 2 or more base layers are enabled in an exhibit, the layer
+    // switcher control should be added to the map.
+    // --------------------------------------------------------------------
+
+    // Start map.
+    Neatline.Map.init();
+    _t.aliasNeatline();
+
+    // Layer switcher should be enabled.
+    expect(_t.getMapControlClassNames()).toContain(
+      'OpenLayers.Control.LayerSwitcher'
+    );
+
+  });
+
+
+  it('should not show layer switcher for 1 layer', function() {
+
+    // --------------------------------------------------------------------
+    // When just 1 base layer is enabled in an exhibit, the layer switcher
+    // control should not be added to the map.
+    // --------------------------------------------------------------------
+
+    // Just 1 base layer.
+    Neatline.global.base_layers = [
+      {
+        title:  'Layer',
+        id:     'Layer',
+        type:   'OpenStreetMap'
+      }
+    ];
+
+    // Start map.
+    Neatline.Map.init();
+    _t.aliasNeatline();
+
+    // Layer switcher should not be enabled.
+    expect(_t.getMapControlClassNames()).not.toContain(
+      'OpenLayers.Control.LayerSwitcher'
+    );
+
+  });
+
+
   it('should set exhibit default focus and zoom', function() {
 
     // --------------------------------------------------------------------

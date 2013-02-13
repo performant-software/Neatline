@@ -53,8 +53,7 @@ Neatline.module('Map', function(
         controls: [
           new OpenLayers.Control.MousePosition(),
           new OpenLayers.Control.PanZoomBar(),
-          new OpenLayers.Control.Navigation({ documentDrag: true }),
-          new OpenLayers.Control.LayerSwitcher()
+          new OpenLayers.Control.Navigation({ documentDrag: true })
         ],
         theme: null
       };
@@ -84,6 +83,11 @@ Neatline.module('Map', function(
       // Set the default layer.
       this.defaultLayer = this.baseLayers[Neatline.global.base_layer];
       this.map.setBaseLayer(this.defaultLayer);
+
+      // Add switcher for more than 1 layer.
+      if (_.values(this.baseLayers).length > 1) {
+        this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+      }
 
     },
 

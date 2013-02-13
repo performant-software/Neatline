@@ -151,6 +151,18 @@ _t.setMapZoom = function(zoom) {
 
 
 /**
+ * Get `CLASS_NAME`s for the map controls.
+ *
+ * @param {Array}: A list of control `CLASS_NAME`s.
+ */
+_t.getMapControlClassNames = function() {
+  return _.map(_t.vw.map.map.controls, function(control) {
+    return control.CLASS_NAME;
+  });
+};
+
+
+/**
  * Mock the Google Maps API.
  */
 _t.mockGoogleApi = function() {
