@@ -30,6 +30,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_filters = array(
         'admin_navigation_main',
         'neatline_globals',
+        'neatline_presenters',
         'neatline_styles'
     );
 
@@ -206,6 +207,23 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $globals = array_merge($globals, _nl_exhibitGlobals($exhibit));
         $globals = array_merge($globals, _nl_editorGlobals($exhibit));
         return $globals;
+    }
+
+
+    /**
+     * Register record presenters.
+     *
+     * @param array $presenters Array of presenter name => ids.
+     * @return array The modified array.
+     */
+    public function filterNeatlinePresenters($presenters)
+    {
+        return array_merge($presenters, array(
+            'None'                  => 'None',
+            'Small-Content Bubble'  => 'SmallContentBubble',
+            'Medium-Content Bubble' => 'MediumContentBubble',
+            'Large-Content Bubble'  => 'LargeContentBubble'
+        ));
     }
 
 

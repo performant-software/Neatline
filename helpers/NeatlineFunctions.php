@@ -94,9 +94,20 @@ function _nl_editorGlobals($exhibit)
 
 
 /**
+ * Gather presenters exposed via the `neatline_presenters` filter.
+ *
+ * @return array An array of presenter name => ids.
+ */
+function _nl_getPresenters()
+{
+    return apply_filters('neatline_presenters', array());
+}
+
+
+/**
  * Gather style columns exposed via the `neatline_links` filter.
  *
- * @return array The array of column names.
+ * @return array An array of column names.
  */
 function _nl_getStyles()
 {
