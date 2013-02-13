@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for Google layer handler.
+ * Tests for the Google layer handler.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,64 +13,73 @@
 describe('Google Layer Handler', function() {
 
 
-  var google;
+  var layer;
 
 
   beforeEach(function() {
     _t.loadNeatline();
+    _t.mockGoogleApi();
   });
 
 
   afterEach(function() {
-    expect(google.CLASS_NAME).toEqual('OpenLayers.Layer.Google');
-    expect(google.name).toEqual('Title');
+    expect(layer.CLASS_NAME).toEqual('OpenLayers.Layer.Google');
+    expect(layer.name).toEqual('Title');
   });
 
 
   it('should construct a `physical` layer', function() {
 
-    google = Neatline.request('map:layers:Google', {
-      provider: 'physical',
-      title:    'Title'
+    layer = Neatline.request('map:layers:Google', {
+      title: 'Title',
+      properties: {
+        provider: 'physical'
+      }
     });
 
-    expect(google.type).toEqual(google.maps.MapTypeId.TERRAIN);
+    expect(layer.type).toEqual(google.maps.MapTypeId.TERRAIN);
 
   });
 
 
   it('should construct a `streets` layer', function() {
 
-    google = Neatline.request('map:layers:Google', {
-      provider: 'streets',
-      title:    'Title'
+    layer = Neatline.request('map:layers:Google', {
+      title: 'Title',
+      properties: {
+        provider: 'streets'
+      }
     });
 
-    expect(google.type).toEqual(google.maps.MapTypeId.ROADMAP);
+    expect(layer.type).toEqual(google.maps.MapTypeId.ROADMAP);
 
   });
 
 
   it('should construct a `satellite` layer', function() {
 
-    google = Neatline.request('map:layers:Google', {
-      provider: 'satellite',
-      title:    'Title'
+    layer = Neatline.request('map:layers:Google', {
+      title: 'Title',
+      properties: {
+        provider: 'satellite'
+      }
     });
 
-    expect(google.type).toEqual(google.maps.MapTypeId.SATELLITE);
+    expect(layer.type).toEqual(google.maps.MapTypeId.SATELLITE);
 
   });
 
 
   it('should construct a `hybrid` layer', function() {
 
-    google = Neatline.request('map:layers:Google', {
-      provider: 'hybrid',
-      title:    'Title'
+    layer = Neatline.request('map:layers:Google', {
+      title: 'Title',
+      properties: {
+        provider: 'hybrid'
+      }
     });
 
-    expect(google.type).toEqual(google.maps.MapTypeId.HYBRID);
+    expect(layer.type).toEqual(google.maps.MapTypeId.HYBRID);
 
   });
 

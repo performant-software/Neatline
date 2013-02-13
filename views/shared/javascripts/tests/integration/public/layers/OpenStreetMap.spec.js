@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for OpenStreetMap layer handler.
+ * Tests for the OpenStreetMap layer handler.
  *
  * @package     omeka
  * @subpackage  neatline

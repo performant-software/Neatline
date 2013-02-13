@@ -35,11 +35,11 @@
     },
 
     {
-      "title": "Google Sattelite",
-      "id": "GoogleSattelite",
+      "title": "Google Satellite",
+      "id": "GoogleSatellite",
       "type": "Google",
       "properties": {
-        "provider": "sattelite"
+        "provider": "satellite"
       }
     },
 

@@ -21,7 +21,28 @@ Neatline.module('Map.Layers.Google', function(
    * @return {OpenLayers.Layer.Google}: The Google layer.
    */
   Neatline.reqres.addHandler('map:layers:Google', function(json) {
-    // TODO
+    switch (json.properties.provider) {
+      case 'physical':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.TERRAIN
+        });
+        break;
+      case 'streets':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.ROADMAP
+        });
+        break;
+      case 'satellite':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.SATELLITE
+        });
+        break;
+      case 'hybrid':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.HYBRID
+        });
+        break;
+    }
   });
 
 

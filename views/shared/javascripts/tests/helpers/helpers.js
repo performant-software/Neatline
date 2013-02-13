@@ -767,5 +767,22 @@ _t = (function() {
     this.vw.map.map.zoomTo(zoom);
   };
   
+  
+  /**
+   * Mock the Google Maps API.
+   */
+  _t.mockGoogleApi = function() {
+    window.google = {
+      maps: {
+        MapTypeId: {
+          TERRAIN:    'terrain',
+          ROADMAP:    'roadmap',
+          SATELLITE:  'satellite',
+          HYBRID:     'hybrid'
+        }
+      }
+    }
+  };
+  
   return _t;
 })();

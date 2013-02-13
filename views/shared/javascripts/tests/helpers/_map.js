@@ -148,3 +148,20 @@ _t.setMapCenter = function(lon, lat, zoom) {
 _t.setMapZoom = function(zoom) {
   this.vw.map.map.zoomTo(zoom);
 };
+
+
+/**
+ * Mock the Google Maps API.
+ */
+_t.mockGoogleApi = function() {
+  window.google = {
+    maps: {
+      MapTypeId: {
+        TERRAIN:    'terrain',
+        ROADMAP:    'roadmap',
+        SATELLITE:  'satellite',
+        HYBRID:     'hybrid'
+      }
+    }
+  }
+};
