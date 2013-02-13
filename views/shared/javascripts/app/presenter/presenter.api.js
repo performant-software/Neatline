@@ -20,7 +20,9 @@ Neatline.module('Presenter', function(
    * @param {Object} model: The record model.
    */
   var show = function(model) {
-    // TODO
+    Neatline.vent.trigger(
+      'presenter:show:'+model.get('presenter'), model
+    );
   };
 
   Neatline.commands.addHandler('presenter:show', show);
@@ -29,9 +31,13 @@ Neatline.module('Presenter', function(
 
   /**
    * Hide the record.
+   *
+   * @param {Object} model: The record model.
    */
-  var hide = function() {
-    // TODO
+  var hide = function(model) {
+    Neatline.vent.trigger(
+      'presenter:hide:'+model.get('presenter')
+    );
   };
 
   Neatline.commands.addHandler('presenter:hide', hide);
@@ -40,9 +46,13 @@ Neatline.module('Presenter', function(
 
   /**
    * Freeze the record.
+   *
+   * @param {Object} model: The record model.
    */
-  var select = function() {
-    // TODO
+  var select = function(model) {
+    Neatline.vent.trigger(
+      'presenter:select:'+model.get('presenter')
+    );
   };
 
   Neatline.commands.addHandler('presenter:select', select);
@@ -51,9 +61,13 @@ Neatline.module('Presenter', function(
 
   /**
    * Unfreeze and hide the record.
+   *
+   * @param {Object} model: The record model.
    */
-  var unselect = function() {
-    // TODO
+  var unselect = function(model) {
+    Neatline.vent.trigger(
+      'presenter:unselect:'+model.get('presenter')
+    );
   };
 
   Neatline.commands.addHandler('presenter:unselect', unselect);
@@ -64,7 +78,7 @@ Neatline.module('Presenter', function(
    * Activate the record.
    */
   var activate = function() {
-    // TODO
+    Neatline.vent.trigger('presenter:activate');
   };
   Neatline.commands.addHandler('presenter:activate', activate);
 
@@ -73,7 +87,7 @@ Neatline.module('Presenter', function(
    * Deactivate and close the bubble.
    */
   var deactivate = function() {
-    // TODO
+    Neatline.vent.trigger('presenter:deactivate');
   };
 
   Neatline.commands.addHandler('presenter:deactivate', deactivate);
