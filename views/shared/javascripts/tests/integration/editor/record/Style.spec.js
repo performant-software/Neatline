@@ -30,6 +30,7 @@ describe('Record Form Style Tab', function() {
     _t.openRecordForm();
 
     els = {
+      presenter:      _t.vw.record.$('select[name="presenter"]'),
       vectorColor:    _t.vw.record.$('input[name="vector-color"]'),
       strokeColor:    _t.vw.record.$('input[name="stroke-color"]'),
       selectColor:    _t.vw.record.$('input[name="select-color"]'),
@@ -48,6 +49,8 @@ describe('Record Form Style Tab', function() {
       setMaxZoom:     _t.vw.record.$('a[name="set-max-zoom"]'),
       setFocus:       _t.vw.record.$('a[name="set-focus"]')
     };
+
+    model = _t.vw.map.editLayer.nModel;
 
   });
 
