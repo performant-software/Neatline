@@ -214,4 +214,40 @@ describe('Small Bubble', function() {
   });
 
 
+  it('should hide the bubble on deactivate', function() {
+
+    // --------------------------------------------------------------------
+    // When the bubble is visible and the presenter is deactivated, the
+    // bubble should disappear.
+    // --------------------------------------------------------------------
+
+    // TODO
+
+  });
+
+
+  it('should not respond to cursor events when deactivated', function() {
+
+    // --------------------------------------------------------------------
+    // When the presenter is deactivated, the bubble should not respond to
+    // hover or select events.
+    // --------------------------------------------------------------------
+
+    // TODO
+
+  });
+
+
+  it('should start responding to cursor events when activated', function() {
+
+    // --------------------------------------------------------------------
+    // When the presenter is re-activated after being deactivated, the
+    // bubble should start responding to hover or select events again.
+    // --------------------------------------------------------------------
+
+    // TODO
+
+  });
+
+
 });
