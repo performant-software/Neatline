@@ -74,7 +74,7 @@ describe('Small Bubble', function() {
       clientY: 4
     });
 
-    // Bubble should follow.
+    // Bubble should track the cursor.
     var offset = _t.el.smallBubble.offset();
     expect(offset.left).toEqual(3+_t.vw.smallBubble.options.padding.x);
     expect(offset.top).toEqual(4-_t.vw.smallBubble.options.padding.y);
@@ -221,7 +221,15 @@ describe('Small Bubble', function() {
     // bubble should disappear.
     // --------------------------------------------------------------------
 
-    // TODO
+    // Hover on feature, then select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Deactivate the presenter.
+    Neatline.execute('presenter:deactivate');
+
+    // Bubble should disappear.
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
@@ -233,19 +241,40 @@ describe('Small Bubble', function() {
     // hover or select events.
     // --------------------------------------------------------------------
 
-    // TODO
+    // Deactivate the presenter.
+    Neatline.execute('presenter:deactivate');
+
+    // Hover on feature1.
+    _t.hoverOnMapFeature(layer1, feature1);
+
+    // Bubble should not be visible.
+    expect(_t.el.smallBubble).not.toBeVisible();
+
+    // Click on feature1.
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Bubble should not be visible.
+    expect(_t.el.smallBubble).not.toBeVisible();
 
   });
 
 
-  it('should start responding to cursor events when activated', function() {
+  it('should responding to hover events when activated', function() {
 
     // --------------------------------------------------------------------
     // When the presenter is re-activated after being deactivated, the
-    // bubble should start responding to hover or select events again.
+    // bubble should start responding to hover and select events.
     // --------------------------------------------------------------------
 
-    // TODO
+    // Deactivate and activate the presenter.
+    Neatline.execute('presenter:deactivate');
+    Neatline.execute('presenter:activate');
+
+    // Hover on feature1.
+    _t.hoverOnMapFeature(layer1, feature1);
+
+    // Bubble should be visible.
+    expect(_t.el.smallBubble).toBeVisible();
 
   });
 
