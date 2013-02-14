@@ -42,7 +42,7 @@ describe('Layers API', function() {
     // the request should return the layer.
     // --------------------------------------------------------------------
 
-    // Register a handler for `LayerType`.
+    // Register a handler for `LayerType` that returns `true`.
     Neatline.reqres.addHandler('map:layers:LayerType', function() {
       return true;
     });
