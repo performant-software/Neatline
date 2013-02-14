@@ -25,9 +25,9 @@ describe('Map Editing', function() {
   it('should create edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
-    // When an edit form is opened for an existing record that does not
-    // have a map layer, a new layer should be created for the record and
-    // set to be the edit layer.
+    // When an record form is opened for an existing record that is not
+    // loaded on the map, a new layer should be created for the record and
+    // set at the edit layer.
     // --------------------------------------------------------------------
 
     // Load map without record 2.
@@ -71,7 +71,7 @@ describe('Map Editing', function() {
   it('should not update edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
-    // When a record is being edited, the edit layer should not be rebuilt
+    // When a record form is open, the edit layer should not be rebuilt
     // when new data is ingested in response to move events.
     // --------------------------------------------------------------------
 
@@ -99,31 +99,12 @@ describe('Map Editing', function() {
   });
 
 
-  it('should not remove edit layer for existing record', function() {
-
-    // --------------------------------------------------------------------
-    // When a record is being edited, the edit layer should not be removed
-    // when new data is ingested that does not include the record.
-    // --------------------------------------------------------------------
-
-    // Open form for record 2.
-    _t.navigate('records/'+recordModels[1].get('id'));
-
-    // Reload map without record 2.
-    _t.refreshMap(_t.json.records.removed);
-
-    // Record 2 layer should still be present.
-    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
-
-  });
-
-
   it('should update edit layer model', function() {
 
     // --------------------------------------------------------------------
-    // When a record is being edited and a new set of records is ingested
-    // on the map, the model tied to the edit layer should be replaced by
-    // the updated version.
+    // When a record is being edited and a new collection of records is
+    // ingested on the map, the model tied with the edit layer should be
+    // replaced by the updated version.
     // --------------------------------------------------------------------
 
     // Open form for record 2.
@@ -138,11 +119,30 @@ describe('Map Editing', function() {
 
   });
 
+
+  it('should not remove edit layer for existing record', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is being edited, the edit layer should not be removed
+    // if new data is ingested that does not include the record.
+    // --------------------------------------------------------------------
+
+    // Open form for record 2.
+    _t.navigate('records/'+recordModels[1].get('id'));
+
+    // Reload map without record 2.
+    _t.refreshMap(_t.json.records.removed);
+
+    // Record 2 layer should still be present.
+    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+
+  });
+
   it('should not remove edit layer for new record', function() {
 
     // --------------------------------------------------------------------
     // When a new record is created, the edit layer should not be removed
-    // when new data is ingested that does not include the record.
+    // when new data is ingested.
     // --------------------------------------------------------------------
 
     // Add new record.
@@ -182,7 +182,7 @@ describe('Map Editing', function() {
     // --------------------------------------------------------------------
     // When a new record is added, but then the form is closed without
     // being saved, the edit layer that was created for the model should
-    // be garbage collected in the next layer refresh.
+    // be garbage collected by the next data ingest.
     // --------------------------------------------------------------------
 
     // Create new record.

@@ -20,10 +20,6 @@ describe('Router', function() {
 
   describe('#records', function() {
 
-    // --------------------------------------------------------------------
-    // #records should display the editor menu, search, and record list.
-    // --------------------------------------------------------------------
-
     afterEach(function() {
 
       // Menu, search, records should be visible.
@@ -57,10 +53,6 @@ describe('Router', function() {
 
   it('#record/:id', function() {
 
-    // --------------------------------------------------------------------
-    // #records/:id should display a record edit form.
-    // --------------------------------------------------------------------
-
     _t.navigate($(_t.getRecordRows()[1]).attr('href'));
 
     // Record form should be visible.
@@ -71,10 +63,6 @@ describe('Router', function() {
 
   it('#record/add', function() {
 
-    // --------------------------------------------------------------------
-    // #records/add should display a record add form.
-    // --------------------------------------------------------------------
-
     _t.navigate('records/add');
 
     // Record form should be visible.
@@ -84,10 +72,6 @@ describe('Router', function() {
 
 
   it('#styles', function() {
-
-    // --------------------------------------------------------------------
-    // #styles should display the style editor.
-    // --------------------------------------------------------------------
 
     _t.navigate('styles');
 

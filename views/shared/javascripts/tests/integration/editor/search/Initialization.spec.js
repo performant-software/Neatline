@@ -69,7 +69,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
@@ -84,7 +84,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('records');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
@@ -99,7 +99,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('records/search/start=10');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
@@ -114,7 +114,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('records/search/query=keywords');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
@@ -130,7 +130,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('records/search/query=tags:+tag1,+tag2');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
@@ -149,7 +149,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('records/search/query=keywords/start=10');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
@@ -165,7 +165,7 @@ describe('Search Initialization', function() {
 
       _t.navigate('records/search/query=tags:+tag1,+tag2/start=10');
 
-      // Should produce GET request to /records.
+      // Should trigger GET request to /records.
       _t.assertLastRequestRoute(Neatline.global.records_api);
       _t.assertLastRequestMethod('GET');
 
