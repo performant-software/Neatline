@@ -71,7 +71,7 @@ Neatline.module('Presenter.SmallBubble', function(
     SmallBubble.__view.activate();
   };
 
-  Neatline.commands.addHandler(
+  Neatline.vent.on(
     'presenter:activate', activate
   );
 
@@ -84,7 +84,7 @@ Neatline.module('Presenter.SmallBubble', function(
     SmallBubble.__view.unselect();
   };
 
-  Neatline.commands.addHandler(
+  Neatline.vent.on(
     'presenter:deactivate', deactivate
   );
 

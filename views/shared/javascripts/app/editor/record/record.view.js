@@ -159,7 +159,7 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('editor:map:endEdit', this.model);
 
       // Activate and close the presenter.
-      Neatline.execute('presenter:activate');
+      Neatline.vent.trigger('presenter:activate');
       Neatline.execute('presenter:unselect', this.model);
 
       this.model = null;
@@ -378,7 +378,7 @@ Neatline.module('Editor.Record', function(
      * Deactivate the presenter when the "Spatial" tab is active.
      */
     setPresenterStatus: function() {
-      Neatline.execute(this.spatialTabActive() ?
+      Neatline.vent.trigger(this.spatialTabActive() ?
         'presenter:deactivate' :
         'presenter:activate'
       );

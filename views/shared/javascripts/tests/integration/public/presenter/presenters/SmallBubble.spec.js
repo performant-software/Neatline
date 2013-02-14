@@ -224,7 +224,7 @@ describe('Small Bubble', function() {
     _t.clickOnMapFeature(layer1, feature1);
 
     // Deactivate the presenter.
-    Neatline.execute('presenter:deactivate');
+    Neatline.vent.trigger('presenter:deactivate');
 
     // Bubble should disappear.
     expect(_t.el.smallBubble).not.toBeVisible();
@@ -239,7 +239,7 @@ describe('Small Bubble', function() {
     // --------------------------------------------------------------------
 
     // Deactivate the presenter.
-    Neatline.execute('presenter:deactivate');
+    Neatline.vent.trigger('presenter:deactivate');
 
     // Hover on feature.
     _t.hoverOnMapFeature(layer1, feature1);
@@ -264,8 +264,8 @@ describe('Small Bubble', function() {
     // --------------------------------------------------------------------
 
     // Deactivate, activate the presenter.
-    Neatline.execute('presenter:deactivate');
-    Neatline.execute('presenter:activate');
+    Neatline.vent.trigger('presenter:deactivate');
+    Neatline.vent.trigger('presenter:activate');
 
     // Hover on feature.
     _t.hoverOnMapFeature(layer1, feature1);

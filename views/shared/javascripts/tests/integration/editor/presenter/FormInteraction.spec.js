@@ -44,14 +44,14 @@ describe('Presenter Form Interaction', function() {
     els.close.trigger('click');
     _t.respondRecords();
 
-    // Spy on execute.
-    var exec = spyOn(Neatline, 'execute').andCallThrough();
+    // Spy on trigger.
+    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Reopen the form.
     _t.openRecordForm();
 
     // Presenter should deactivate.
-    expect(exec).toHaveBeenCalledWith('presenter:deactivate');
+    expect(vent).toHaveBeenCalledWith('presenter:deactivate');
 
   });
 
@@ -63,14 +63,14 @@ describe('Presenter Form Interaction', function() {
     // presenter should be deactivated.
     // --------------------------------------------------------------------
 
-    // Spy on execute.
-    var exec = spyOn(Neatline, 'execute').andCallThrough();
+    // Spy on trigger.
+    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Select "Spatial".
     els.spatial.tab('show');
 
     // Presenter should deactivate.
-    expect(exec).toHaveBeenCalledWith('presenter:deactivate');
+    expect(vent).toHaveBeenCalledWith('presenter:deactivate');
 
   });
 
@@ -82,8 +82,8 @@ describe('Presenter Form Interaction', function() {
     // the presenter should be activated.
     // --------------------------------------------------------------------
 
-    // Spy on execute.
-    var exec = spyOn(Neatline, 'execute').andCallThrough();
+    // Spy on trigger.
+    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Select "Spatial".
     els.spatial.tab('show');
@@ -92,7 +92,7 @@ describe('Presenter Form Interaction', function() {
     els.text.tab('show');
 
     // Presenter should activate.
-    expect(exec).toHaveBeenCalledWith('presenter:activate');
+    expect(vent).toHaveBeenCalledWith('presenter:activate');
 
   });
 
@@ -107,7 +107,8 @@ describe('Presenter Form Interaction', function() {
     // Select "Spatial".
     els.spatial.tab('show');
 
-    // Spy on execute.
+    // Spy on trigger and execute.
+    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
     var exec = spyOn(Neatline, 'execute').andCallThrough();
 
     // Capture the form model.
@@ -118,7 +119,7 @@ describe('Presenter Form Interaction', function() {
     _t.respondRecords();
 
     // Presenter should activate.
-    expect(exec).toHaveBeenCalledWith('presenter:activate');
+    expect(vent).toHaveBeenCalledWith('presenter:activate');
     expect(exec).toHaveBeenCalledWith('presenter:unselect', model);
 
   });
