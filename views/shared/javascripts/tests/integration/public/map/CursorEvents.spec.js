@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for event flows initiated by the map.
+ * Tests for map cursor events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Outgoing Events', function() {
+describe('Map Cursor Events', function() {
 
 
   var layer, feature, vent;
@@ -30,11 +30,6 @@ describe('Map Outgoing Events', function() {
 
   it('should render and publish feature hover', function() {
 
-    // --------------------------------------------------------------------
-    // When the cursor enters a map feature, the `map:highlight` event
-    // should be triggered with the parent model of the feature.
-    // --------------------------------------------------------------------
-
     // Hover on feature.
     _t.hoverOnMapFeature(layer, feature);
 
@@ -49,12 +44,7 @@ describe('Map Outgoing Events', function() {
 
   it('should render and publish feature unhover', function() {
 
-    // --------------------------------------------------------------------
-    // When the cursor leaves a map feature, the `map:unhighlight` event
-    // should be triggered with the parent model of the feature.
-    // --------------------------------------------------------------------
-
-    // Simulate unhover on feature.
+    // Unhover on feature.
     _t.hoverOnMapFeature(layer, feature);
     _t.unHoverOnMapFeature(_t.vw.map.layers);
 
@@ -69,12 +59,7 @@ describe('Map Outgoing Events', function() {
 
   it('should render and publish feature select', function() {
 
-    // --------------------------------------------------------------------
-    // When a map feature is clicked on and selected, the `map:select`
-    // event should be triggered with the parent model of the feature.
-    // --------------------------------------------------------------------
-
-    // Simulate click on feature.
+    // Click on feature.
     _t.clickOnMapFeature(layer, feature);
 
     // Should render `select` intent.
@@ -88,16 +73,8 @@ describe('Map Outgoing Events', function() {
 
   it('should render and publish feature unselect', function() {
 
-    // --------------------------------------------------------------------
-    // When a map feature is unselected with a click elsewhere on the map,
-    // the `map:unhighlight` event should be triggered with the parent
-    // model of the feature.
-    // --------------------------------------------------------------------
-
-    // Simulate click on feature.
+    // Click on feature, then off.
     _t.clickOnMapFeature(layer, feature);
-
-    // Simulate unhover on feature.
     _t.clickOffMapFeature(_t.vw.map.layers);
 
     // Should render `default` intent.
@@ -111,12 +88,7 @@ describe('Map Outgoing Events', function() {
 
   it('should publish map move', function() {
 
-    // --------------------------------------------------------------------
-    // When the map is panned or zoomed, the `map:move` event should be
-    // triggered with the current extent and zoom of the viewport.
-    // --------------------------------------------------------------------
-
-    // Trigger pan.
+    // Move the map.
     _t.refreshMap(_t.json.records.changed);
 
     // Get extent and zoom.
