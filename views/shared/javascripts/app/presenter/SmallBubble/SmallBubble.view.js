@@ -17,8 +17,9 @@ Neatline.module('Presenter.SmallBubble', function(
   SmallBubble.View = Backbone.Neatline.View.extend({
 
 
-    template: '#small-bubble-template',
-    id:       'small-bubble',
+    template:   '#small-bubble-template',
+    className:  'bubble',
+    id:         'small-bubble',
 
     options: {
       padding: {

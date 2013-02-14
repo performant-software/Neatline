@@ -23,6 +23,7 @@ _t.loadNeatline = function() {
   // Public modules.
   Neatline.Map.init();
   Neatline.Presenter.SmallBubble.init();
+  Neatline.Presenter.MediumBubble.init();
 
   // Inject fixtures, alias components.
   this.respondAll200(this.json.records.standard);
@@ -53,6 +54,7 @@ _t.loadEditor = function() {
   // Public modules.
   Neatline.Map.init();
   Neatline.Presenter.SmallBubble.init();
+  Neatline.Presenter.MediumBubble.init();
 
   // Map edit module.
   Neatline.Editor.Map.init();

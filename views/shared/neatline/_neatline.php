@@ -26,3 +26,4 @@
 
 <!-- Underscore templates. -->
 <?php echo $this->partial('neatline/underscore/_small_bubble.php'); ?>
+<?php echo $this->partial('neatline/underscore/_medium_bubble.php'); ?>

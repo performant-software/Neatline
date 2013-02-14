@@ -146,8 +146,10 @@ module.exports = function(grunt) {
           config.src.shared+'/shared/record/record.model.js',
           config.src.shared+'/shared/record/record.collection.js',
           config.src.shared+'/map/**/*.js',
-          config.src.shared+'/presenter/**/*.js',
-          config.src.shared+'/bubble/**/*.js'
+          config.src.shared+'/presenter/*.js',
+          config.src.shared+'/presenter/None/*.js',
+          config.src.shared+'/presenter/SmallBubble/*.js',
+          config.src.shared+'/presenter/MediumBubble/*.js',
 
         ],
         dest: config.payloads.shared.js+'/neatline.js',
@@ -180,8 +182,10 @@ module.exports = function(grunt) {
           config.src.shared+'/shared/record/record.model.js',
           config.src.shared+'/shared/record/record.collection.js',
           config.src.shared+'/map/**/*.js',
-          config.src.shared+'/presenter/**/*.js',
-          config.src.shared+'/bubble/**/*.js',
+          config.src.shared+'/presenter/*.js',
+          config.src.shared+'/presenter/None/*.js',
+          config.src.shared+'/presenter/SmallBubble/*.js',
+          config.src.shared+'/presenter/MediumBubble/*.js',
 
           // Editor:
           config.src.shared+'/editor/*.js',
