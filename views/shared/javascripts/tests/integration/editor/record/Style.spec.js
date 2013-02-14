@@ -55,6 +55,16 @@ describe('Record Form Style Tab', function() {
   });
 
 
+  describe('presenter', function() {
+
+    it('should update on `change`', function() {
+      els.presenter.val('None').trigger('change');
+      expect(_t.vw.map.editLayer.nModel.get('presenter')).toEqual('None');
+    });
+
+  });
+
+
   describe('shape color', function() {
 
     it('should update on `change`', function() {
