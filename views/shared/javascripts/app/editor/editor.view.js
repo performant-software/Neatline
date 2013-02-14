@@ -45,7 +45,7 @@ Neatline.module('Editor', { startWithParent: false,
       // Listen for resize.
       this.window = $(window);
       this.window.resize(_.bind(this.position, this));
-      this.window.trigger('resize');
+      this.position();
 
     },
 

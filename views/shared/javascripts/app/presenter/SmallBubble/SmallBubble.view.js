@@ -33,10 +33,26 @@ Neatline.module('Presenter.SmallBubble', function(
      * Initialize trackers, get markup.
      */
     initialize: function() {
+
       this.active = true;   // True when bubble should be displayed.
       this.frozen = false;  // True when bubble is frozen after a click.
       this.getTemplate();
       this.getUi();
+
+      // Track window size.
+      this.window = $(window);
+      this.window.resize(_.bind(this.measureWindow, this));
+      this.measureWindow();
+
+    },
+
+
+    /**
+     * Get the window height and width.
+     */
+    measureWindow: function() {
+      this.windowH = this.window.outerHeight();
+      this.windowW = this.window.outerWidth();
     },
 
 
@@ -49,7 +65,7 @@ Neatline.module('Presenter.SmallBubble', function(
       if (!this.frozen && this.active) {
 
         // Create reference-able event callbacks.
-        this.onMouseMove = _.bind(this.update, this);
+        this.onMouseMove = _.bind(this.position, this);
         this.onMouseOut  = _.bind(this.hide, this);
 
         // Bind to mousemove and mouseout.
@@ -116,11 +132,27 @@ Neatline.module('Presenter.SmallBubble', function(
      *
      * @param {Object} evt: The mousemove event.
      */
-    update: function(evt) {
-      this.$el.css({
-        left: evt.clientX + this.options.padding.x,
-        top:  evt.clientY - this.options.padding.y
-      });
+    position: function(evt) {
+
+      var h = this.$el.outerHeight();
+      var w = this.$el.outerWidth();
+
+      // LEFT:
+      if (evt.clientX + this.options.padding.x + w > this.windowW) {
+        this.$el.css({
+          left: evt.clientX - this.options.padding.x - w,
+          top:  evt.clientY - this.options.padding.y
+        });
+      }
+
+      // RIGHT:
+      else {
+        this.$el.css({
+          left: evt.clientX + this.options.padding.x,
+          top:  evt.clientY - this.options.padding.y
+        });
+      }
+
     },
 
 

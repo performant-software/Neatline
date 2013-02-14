@@ -16,5 +16,4 @@
 
 <script id="medium-bubble-template" type="text/templates">
   <div class="title" data-html="record._title"></div>
-  <div class="body" data-html="record._body"></div>
 </script>
