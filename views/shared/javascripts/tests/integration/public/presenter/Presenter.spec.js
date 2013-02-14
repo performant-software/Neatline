@@ -19,7 +19,6 @@ describe('Presenter API', function() {
   beforeEach(function() {
     _t.loadNeatline();
     model = new Neatline.Shared.Record.Model({ presenter: 'P' });
-    vent  = spyOn(Neatline.vent, 'trigger').andCallThrough();
     exec  = spyOn(Neatline, 'execute').andCallThrough();
   });
 
