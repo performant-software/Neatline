@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for default map state on initialization.
+ * Tests for default map state.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,7 +17,6 @@ describe('Map Exhibit Defaults', function() {
 
     loadFixtures('neatline-partial.html');
 
-    // Mock the base layers.
     Neatline.global.base_layers = [
       {
         title:  'Layer1',
@@ -42,14 +41,14 @@ describe('Map Exhibit Defaults', function() {
   it('should construct base layers', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit loads, the map should create the layers defined by
-    // the `base_layers` global.
+    // When the exhibit starts, the map should construct all of the base
+    // layers defined in the `base_layers` global.
     // --------------------------------------------------------------------
 
-    // Start map.
+    // Start the map.
     Neatline.Map.init();
 
-    // Base layers should be added to map.
+    // Base layers should be added to the map.
     expect(Neatline.Map.__view.map.layers[0].name).toEqual('Layer1');
     expect(Neatline.Map.__view.map.layers[1].name).toEqual('Layer2');
     expect(Neatline.Map.__view.map.layers[2].name).toEqual('Layer3');
@@ -60,14 +59,14 @@ describe('Map Exhibit Defaults', function() {
   it('should set default base layer', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit loads, the map default to the base layer defined
-    // by the `base_layer` global.
+    // When the exhibit starts, the map should set the defalt base layer
+    // to the layer with the `id` defined by the `base_layer` global.
     // --------------------------------------------------------------------
 
     // Set the default base layer.
     Neatline.global.base_layer = 'Layer2';
 
-    // Start map.
+    // Start the map.
     Neatline.Map.init();
 
     // Default layer should be set.
@@ -79,11 +78,12 @@ describe('Map Exhibit Defaults', function() {
   it('should show layer switcher for multiple layers', function() {
 
     // --------------------------------------------------------------------
-    // When 2 or more base layers are enabled in an exhibit, the layer
-    // switcher control should be added to the map.
+    // When multiple base layers are enabled for the exhibit (when more
+    // than one layer definition is included in the `base_layers` global),
+    // the layer switcher control should be added to the map.
     // --------------------------------------------------------------------
 
-    // Start map.
+    // Start the map.
     Neatline.Map.init();
     _t.aliasNeatline();
 
@@ -98,8 +98,8 @@ describe('Map Exhibit Defaults', function() {
   it('should not show layer switcher for 1 layer', function() {
 
     // --------------------------------------------------------------------
-    // When just 1 base layer is enabled in an exhibit, the layer switcher
-    // control should not be added to the map.
+    // When just a single base layer is enabled for the exhibit, the layer
+    // switcher control should not be added to the map.
     // --------------------------------------------------------------------
 
     // Just 1 base layer.
@@ -111,7 +111,7 @@ describe('Map Exhibit Defaults', function() {
       }
     ];
 
-    // Start map.
+    // Start the map.
     Neatline.Map.init();
     _t.aliasNeatline();
 
@@ -126,8 +126,8 @@ describe('Map Exhibit Defaults', function() {
   it('should set exhibit default focus and zoom', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit loads, the map should manifest the focus and zoom
-    // defined by the `map_focus` and `map_zoom` global parameters.
+    // When the exhibit starts, the viewport defined by the `map_focus`
+    // and `map_zoom` should be manifested on the map.
     // --------------------------------------------------------------------
 
     // Set exhibit defaults.

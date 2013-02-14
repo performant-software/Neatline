@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for map data manifestation.
+ * Tests for map data rendering.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -30,8 +30,17 @@ describe('Map Data Rendering', function() {
   it('should load layers when the exhibit is started', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit started, the map should query and render records.
+    // When the exhibit starts, the map should automatically load records
+    // that fall within the default viewport.
     // --------------------------------------------------------------------
+
+    // Route should be /records/:id, method GET.
+    _t.assertLastRequestRoute(Neatline.global.records_api);
+    _t.assertLastRequestMethod('GET');
+
+    // Request should include map focus.
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
 
     expect(_t.vw.map.layers.length).toEqual(3);
     expect(layer1.features[0].geometry.x).toEqual(1);
@@ -40,14 +49,16 @@ describe('Map Data Rendering', function() {
     expect(layer2.features[0].geometry.y).toEqual(4);
     expect(layer3.features[0].geometry.x).toEqual(5);
     expect(layer3.features[0].geometry.y).toEqual(6);
+
   });
 
 
   it('should update layers when the map is moved', function() {
 
     // --------------------------------------------------------------------
-    // Layers should be updated when the map is moved and the record data
-    // has changed since the last data ingest.
+    // When the map is moved or zoomed and records are requested for the
+    // new viewport, layers for records that have _changed_ since the last
+    // data ingest should be rebuilt to manifest the new data.
     // --------------------------------------------------------------------
 
     var record2Layer = _t.getVectorLayerByTitle('title2');
@@ -84,8 +95,10 @@ describe('Map Data Rendering', function() {
   it('should remove layers when the map is moved', function() {
 
     // --------------------------------------------------------------------
-    // Layers should be removed when the map is moved and records have
-    // been removed since the last data ingest.
+    // When the map is moved or zoomed and records are requested for the
+    // new viewport, layers for records that are no longer present in the
+    // collection - either because they no longer intersect the viewport
+    // or because they were deleted - should be removed from the map.
     // --------------------------------------------------------------------
 
     var record2Layer = _t.getVectorLayerByTitle('title2');
