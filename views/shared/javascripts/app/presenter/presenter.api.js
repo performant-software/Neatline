@@ -39,7 +39,7 @@ Neatline.module('Presenter', function(
   var hide = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':hide'
+        'presenter:'+model.get('presenter')+':hide', model
       );
     } catch(e) {}
   };
@@ -56,7 +56,7 @@ Neatline.module('Presenter', function(
   var select = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':select'
+        'presenter:'+model.get('presenter')+':select', model
       );
     } catch (e) {}
   };
@@ -73,33 +73,13 @@ Neatline.module('Presenter', function(
   var unselect = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':unselect'
+        'presenter:'+model.get('presenter')+':unselect', model
       );
     } catch (e) {}
   };
 
   Neatline.commands.addHandler('presenter:unselect', unselect);
   Neatline.vent.on('map:unselect', unselect);
-
-
-  /**
-   * Activate the record.
-   */
-  var activate = function() {
-    Neatline.vent.trigger('presenter:activate');
-  };
-
-  Neatline.commands.addHandler('presenter:activate', activate);
-
-
-  /**
-   * Deactivate and close the bubble.
-   */
-  var deactivate = function() {
-    Neatline.vent.trigger('presenter:deactivate');
-  };
-
-  Neatline.commands.addHandler('presenter:deactivate', deactivate);
 
 
 });
