@@ -120,16 +120,13 @@ describe('Small Bubble', function() {
   it('should freeze bubble on feature select', function() {
 
     // --------------------------------------------------------------------
-    // When a feature is selected. It should stop tracking the cursor and
+    // When a feature is selected, it should stop tracking the cursor and
     // stay visible when the cursor leaves the feature.
     // --------------------------------------------------------------------
 
     // Highlight feature, then select.
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
-
-    // Should add `frozen` class.
-    expect(_t.el.smallBubble).toHaveClass('frozen');
 
     // Capture the offset.
     var offset = _t.el.smallBubble.offset();
@@ -147,6 +144,22 @@ describe('Small Bubble', function() {
     // Bubble should be visible after unhover.
     _t.unHoverOnMapFeature(_t.vw.map.layers);
     expect(_t.el.smallBubble).toBeVisible();
+
+  });
+
+
+  it('should add `frozen` class on feature select', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is selected, the `frozen` class should be added.
+    // --------------------------------------------------------------------
+
+    // Highlight feature, then select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Should add `frozen` class.
+    expect(_t.el.smallBubble).toHaveClass('frozen');
 
   });
 
@@ -203,9 +216,6 @@ describe('Small Bubble', function() {
     // Bubble should disappear.
     expect(_t.el.smallBubble).not.toBeVisible();
 
-    // Should remove `frozen` class.
-    expect(_t.el.smallBubble).not.toHaveClass('frozen');
-
     // Hover on a different feature.
     _t.hoverOnMapFeature(layer2, feature2);
     var offset = _t.el.smallBubble.offset();
@@ -222,6 +232,25 @@ describe('Small Bubble', function() {
 
     // Bubble should track the cursor.
     expect(_t.el.smallBubble.offset()).not.toEqual(offset);
+
+  });
+
+
+  it('should remove `frozen` class on feature unselect', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is selected, the `frozen` class should be added.
+    // --------------------------------------------------------------------
+
+    // Hover on feature, then select.
+    _t.hoverOnMapFeature(layer1, feature1);
+    _t.clickOnMapFeature(layer1, feature1);
+
+    // Unselect the feature.
+    _t.clickOffMapFeature(_t.vw.map.layers);
+
+    // Should remove `frozen` class.
+    expect(_t.el.smallBubble).not.toHaveClass('frozen');
 
   });
 
