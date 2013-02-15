@@ -281,7 +281,24 @@ describe('Small Bubble', function() {
 
 
     beforeEach(function() {
+
+      // Hover on a feature.
       _t.hoverOnMapFeature(layer1, feature1);
+
+      // Mock padding.
+      _t.vw.smallBubble.options.pad.y = 1;
+      _t.vw.smallBubble.options.pad.x = 2;
+
+      // Mock window size.
+      _t.vw.smallBubble.windowH = 500;
+      _t.vw.smallBubble.windowW = 500;
+
+      // Mock bubble size.
+      _t.vw.smallBubble.$el.height(100);
+      _t.vw.smallBubble.bubbleH = 100;
+      _t.vw.smallBubble.$el.width(200);
+      _t.vw.smallBubble.bubbleW = 200;
+
     });
 
 
@@ -292,14 +309,6 @@ describe('Small Bubble', function() {
       // to the right of the cursor with padding.
       // ------------------------------------------------------------------
 
-      _t.vw.smallBubble.options.pad.x = 1;
-      _t.vw.smallBubble.options.pad.y = 2;
-      _t.vw.smallBubble.$el.height(100);
-      _t.vw.smallBubble.windowH = 500;
-      _t.vw.smallBubble.windowW = 500;
-      _t.vw.smallBubble.bubbleW = 100;
-      _t.vw.smallBubble.bubbleH = 100;
-
       var e = {
         clientX: 50,
         clientY: 50
@@ -307,16 +316,86 @@ describe('Small Bubble', function() {
 
       _t.vw.smallBubble.position(e);
       expect(_t.vw.smallBubble.$el.css('height')).toEqual('100px');
-      expect(_t.vw.smallBubble.$el.css('top')).toEqual('48px');
-      expect(_t.vw.smallBubble.$el.css('left')).toEqual('51px');
+      expect(_t.vw.smallBubble.$el.css('top')).toEqual(50-1+'px');
+      expect(_t.vw.smallBubble.$el.css('left')).toEqual(50+2+'px');
 
     });
 
 
-    it('switched to left');
-    it('flush with top');
-    it('flush with bottom');
-    it('full-height');
+    it('switched to left', function() {
+
+      // ------------------------------------------------------------------
+      // When the right edge of the bubble is occluded by the right edge
+      // of the screen, the bubble should be switched to the left side.
+      // ------------------------------------------------------------------
+
+      var e = {
+        clientX: 450,
+        clientY: 50
+      }
+
+      _t.vw.smallBubble.position(e);
+      expect(_t.vw.smallBubble.$el.css('left')).toEqual(450-200-2+'px');
+
+    });
+
+
+    it('flush with top', function() {
+
+      // ------------------------------------------------------------------
+      // When the top of the bubble is occluded by the top of the screen,
+      // the bubble should be flush with the top of the screen.
+      // ------------------------------------------------------------------
+
+      var e = {
+        clientX: 50,
+        clientY: 0
+      }
+
+      _t.vw.smallBubble.position(e);
+      expect(_t.vw.smallBubble.$el.css('top')).toEqual('0px');
+
+    });
+
+
+    it('flush with bottom', function() {
+
+      // ------------------------------------------------------------------
+      // When the bottom of the bubble is occluded by the bottom of the
+      // screen, the bubble should be flush with the bottom of the screen.
+      // ------------------------------------------------------------------
+
+      var e = {
+        clientX: 50,
+        clientY: 500
+      }
+
+      _t.vw.smallBubble.position(e);
+      expect(_t.vw.smallBubble.$el.css('top')).toEqual(500-100+'px');
+
+    });
+
+
+    it('full-height', function() {
+
+      // ------------------------------------------------------------------
+      // When the height of the bubble content is larger than the height
+      // of the window, the bubble should be set to fill the entire height
+      // of the window and vertical scrolling should be enabled.
+      // ------------------------------------------------------------------
+
+      _t.vw.smallBubble.bubbleH = 1000;
+
+      var e = {
+        clientX: 50,
+        clientY: 50
+      }
+
+      _t.vw.smallBubble.position(e);
+      expect(_t.vw.smallBubble.$el.css('height')).toEqual('500px');
+      expect(_t.vw.smallBubble.$el.css('overflow-y')).toEqual('scroll');
+
+    });
 
 
   });
