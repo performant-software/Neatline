@@ -60,20 +60,21 @@ describe('Small Bubble', function() {
     // the movement of the cursor.
     // --------------------------------------------------------------------
 
+    // Spy on the `position` method.
+    var position = spyOn(_t.vw.smallBubble, 'position');
+
     // Hover on feature.
     _t.hoverOnMapFeature(layer1, feature1);
 
     // Move the cursor.
     _t.vw.map.map.events.triggerEvent('mousemove', {
       xy: new OpenLayers.Pixel(0,0),
-      clientX: 3,
-      clientY: 4
+      clientX: 1,
+      clientY: 1
     });
 
-    // Bubble should track the cursor.
-    var offset = _t.el.smallBubble.offset();
-    expect(offset.left).toEqual(3+_t.vw.smallBubble.options.padding.x);
-    expect(offset.top).toEqual(4-_t.vw.smallBubble.options.padding.y);
+    // `position` should be called.
+    expect(position).toHaveBeenCalled();
 
   });
 

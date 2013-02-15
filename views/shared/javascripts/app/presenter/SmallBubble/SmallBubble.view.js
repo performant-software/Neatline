@@ -22,7 +22,7 @@ Neatline.module('Presenter.SmallBubble', function(
     id:         'small-bubble',
 
     options: {
-      padding: {
+      pad: {
         x: 40,
         y: 15
       }
@@ -57,6 +57,16 @@ Neatline.module('Presenter.SmallBubble', function(
 
 
     /**
+     * Get the bubble height and width.
+     */
+    measureBubble: function() {
+      this.$el.height('');
+      this.bubbleH = this.el.scrollHeight;
+      this.bubbleW = this.$el.outerWidth();
+    },
+
+
+    /**
      * Render values, inject bubble, add move listener.
      *
      * @param {Object} model: The record model.
@@ -76,6 +86,9 @@ Neatline.module('Presenter.SmallBubble', function(
         // Render template, inject bubble.
         rivets.bind(this.$el, { record: model });
         this.$el.appendTo(Neatline.Map.__view.$el);
+
+        // Measure the new content.
+        this.measureBubble();
 
       }
     },
@@ -130,28 +143,44 @@ Neatline.module('Presenter.SmallBubble', function(
     /**
      * Render position.
      *
-     * @param {Object} evt: The mousemove event.
+     * @param {Object} e: The mousemove event.
      */
-    position: function(evt) {
+    position: function(e) {
 
-      var h = this.$el.outerHeight();
-      var w = this.$el.outerWidth();
+      var css = {
+        left:         e.clientX + this.options.pad.x,
+        top:          e.clientY - this.options.pad.y,
+        'overflow-y': 'hidden'
+      };
 
-      // LEFT:
-      if (evt.clientX + this.options.padding.x + w > this.windowW) {
-        this.$el.css({
-          left: evt.clientX - this.options.padding.x - w,
-          top:  evt.clientY - this.options.padding.y
-        });
+      // If the left edge of the bubble is off-screen, move the bubble to
+      // this right side of the cursor.
+      if (css.left + this.bubbleW > this.windowW) {
+        css.left = e.clientX - this.options.pad.x - this.bubbleW;
       }
 
-      // RIGHT:
-      else {
-        this.$el.css({
-          left: evt.clientX + this.options.padding.x,
-          top:  evt.clientY - this.options.padding.y
-        });
+      // If the height of the bubble content is larger then the height of
+      // the window, set the bubble to occupy the height of the window and
+      // enable vertical scrolling on the content.
+      if (this.bubbleH > this.windowH) {
+        css['overflow-y'] = 'scroll';
+        css.height = this.windowH;
+        css.top = 0;
       }
+
+      // If the bottom of the bubble is off-screen, stick the bubble at
+      // the bottom of the screen
+      else if (css.top + this.bubbleH > this.windowH) {
+        css.top = this.windowH - this.bubbleH;
+      }
+
+      // If the top of the bubble is off-screen, stick the bubble at the
+      // top of the screen.
+      else if (css.top < 0) {
+        css.top = 0;
+      }
+
+      this.$el.css(css);
 
     },
 
