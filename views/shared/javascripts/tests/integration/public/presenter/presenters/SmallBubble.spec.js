@@ -20,11 +20,17 @@ describe('Small Bubble', function() {
 
     _t.loadNeatline();
 
+    // Get layers.
     layer1 = _t.vw.map.layers[0];
     layer2 = _t.vw.map.layers[1];
 
+    // Get features.
     feature1 = layer1.features[0];
     feature2 = layer2.features[0];
+
+    // Set presenters.
+    layer1.nModel.set('presenter', 'SmallBubble');
+    layer2.nModel.set('presenter', 'SmallBubble');
 
     els = {
       title:  _t.vw.smallBubble.$('.title'),
@@ -122,6 +128,9 @@ describe('Small Bubble', function() {
     _t.hoverOnMapFeature(layer1, feature1);
     _t.clickOnMapFeature(layer1, feature1);
 
+    // Should add `frozen` class.
+    expect(_t.el.smallBubble).toHaveClass('frozen');
+
     // Capture the offset.
     var offset = _t.el.smallBubble.offset();
 
@@ -193,6 +202,9 @@ describe('Small Bubble', function() {
 
     // Bubble should disappear.
     expect(_t.el.smallBubble).not.toBeVisible();
+
+    // Should remove `frozen` class.
+    expect(_t.el.smallBubble).not.toHaveClass('frozen');
 
     // Hover on a different feature.
     _t.hoverOnMapFeature(layer2, feature2);
@@ -392,7 +404,7 @@ describe('Small Bubble', function() {
       }
 
       _t.vw.smallBubble.position(e);
-      expect(_t.vw.smallBubble.$el.css('height')).toEqual('500px');
+      expect(_t.vw.smallBubble.$el.outerHeight()).toEqual(500);
       expect(_t.vw.smallBubble.$el.css('overflow-y')).toEqual('scroll');
 
     });

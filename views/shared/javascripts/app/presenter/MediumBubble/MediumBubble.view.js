@@ -18,7 +18,50 @@ Neatline.module('Presenter.MediumBubble', function(
 
 
     template: '#medium-bubble-template',
-    id:       'medium-bubble'
+    id:       'medium-bubble',
+
+    ui: {
+      body: '.body'
+    },
+
+
+    /**
+     * Display the body and reposition.
+     */
+    select: function() {
+      MediumBubble.View.__super__.select.apply(this, arguments);
+      this.__ui.body.show();
+      this.measureBubble();
+      this.reposition();
+    },
+
+
+    /**
+     * Hide the body.
+     */
+    unselect: function() {
+      MediumBubble.View.__super__.unselect.apply(this, arguments);
+      this.__ui.body.hide();
+    },
+
+
+    /**
+     * Reposition using the last cached move event.
+     *
+     * @param {Object} e: The mousemove event.
+     */
+    position: function(e) {
+      MediumBubble.View.__super__.position.apply(this, arguments);
+      this.e = e;
+    },
+
+
+    /**
+     * Reposition using the last cached move event.
+     */
+    reposition: function() {
+      this.position(this.e);
+    }
 
 
   });

@@ -18,12 +18,14 @@ _t.aliasNeatline = function() {
 
   this.vw = {
     map:          Neatline.Map.                   __view,
-    smallBubble:  Neatline.Presenter.SmallBubble. __view
+    smallBubble:  Neatline.Presenter.SmallBubble. __view,
+    mediumBubble: Neatline.Presenter.MediumBubble.__view
   };
 
   this.el = {
     map:          Neatline.Map.                   __view.$el,
-    smallBubble:  Neatline.Presenter.SmallBubble. __view.$el
+    smallBubble:  Neatline.Presenter.SmallBubble. __view.$el,
+    mediumBubble: Neatline.Presenter.MediumBubble.__view.$el
   };
 
 };
@@ -37,6 +39,7 @@ _t.aliasEditor = function() {
   this.vw = {
     map:          Neatline.Map.                   __view,
     smallBubble:  Neatline.Presenter.SmallBubble. __view,
+    mediumBubble: Neatline.Presenter.MediumBubble.__view,
     editor:       Neatline.Editor.                __view,
     menu:         Neatline.Editor.Menu.           __view,
     search:       Neatline.Editor.Search.         __view,
@@ -49,6 +52,7 @@ _t.aliasEditor = function() {
   this.el = {
     map:          Neatline.Map.                   __view.$el,
     smallBubble:  Neatline.Presenter.SmallBubble. __view.$el,
+    mediumBubble: Neatline.Presenter.MediumBubble.__view.$el,
     editor:       Neatline.Editor.                __view.__ui.editor,
     menu:         Neatline.Editor.Menu.           __view.$el,
     search:       Neatline.Editor.Search.         __view.$el,

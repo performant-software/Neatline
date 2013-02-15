@@ -80,8 +80,8 @@ Neatline.module('Presenter.SmallBubble', function(
 
         // Bind to mousemove and mouseout.
         var map = Neatline.request('map:getMap');
-        map.events.register('mousemove', null, this.onMouseMove);
-        map.events.register('mouseout',  null, this.onMouseOut);
+        map.events.register('mousemove',  null, this.onMouseMove);
+        map.events.register('mouseout',   null, this.onMouseOut);
 
         // Render template, inject bubble.
         rivets.bind(this.$el, { record: model });
@@ -111,6 +111,7 @@ Neatline.module('Presenter.SmallBubble', function(
      */
     select: function() {
       this.frozen = true;
+      this.$el.addClass('frozen');
       this.unbind();
     },
 
@@ -120,6 +121,7 @@ Neatline.module('Presenter.SmallBubble', function(
      */
     unselect: function() {
       this.frozen = false;
+      this.$el.removeClass('frozen');
       this.hide();
     },
 
@@ -163,8 +165,8 @@ Neatline.module('Presenter.SmallBubble', function(
       // the window, set the bubble to occupy the height of the window and
       // enable vertical scrolling on the content.
       if (this.bubbleH > this.windowH) {
+        this.$el.outerHeight(this.windowH);
         css['overflow-y'] = 'scroll';
-        css.height = this.windowH;
         css.top = 0;
       }
 
