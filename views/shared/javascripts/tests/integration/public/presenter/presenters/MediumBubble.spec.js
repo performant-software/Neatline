@@ -28,15 +28,69 @@ describe('Medium Bubble', function() {
     layer.nModel.set('presenter', 'MediumBubble');
 
     els = {
-      title:  _t.vw.smallBubble.$('.title'),
-      body:   _t.vw.smallBubble.$('.body')
+      title:  _t.vw.mediumBubble.$('.title'),
+      body:   _t.vw.mediumBubble.$('.body')
     };
 
   });
 
 
-  it('should show the body and reposition on select');
-  it('should hide the body on unselect');
+  it('should show the title but not the body on hover', function() {
+
+    // --------------------------------------------------------------------
+    // When the cursor hovers on a feature, the title should be displayed
+    // but the body should be hidden.
+    // --------------------------------------------------------------------
+
+    // Hover on feature.
+    _t.hoverOnMapFeature(layer, feature);
+
+    // Title should be visible.
+    expect(els.title).toBeVisible();
+
+    // Body should be hidden.
+    expect(els.body).not.toBeVisible();
+
+  });
+
+
+  it('should show the body on select', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is selected, the body should be displayed.
+    // --------------------------------------------------------------------
+
+    // Hover on feature, then select.
+    _t.hoverOnMapFeature(layer, feature);
+    _t.clickOnMapFeature(layer, feature);
+
+    // Body should be visible.
+    expect(els.body).toBeVisible();
+
+  });
+
+
+  it('should hide the body on unselect', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is unselected, the body should be hidden, so that it
+    // is not visible the next time the cursor hovers on a feature.
+    // --------------------------------------------------------------------
+
+    // Hover on feature, then select.
+    _t.hoverOnMapFeature(layer, feature);
+    _t.clickOnMapFeature(layer, feature);
+
+    // Unselect the feature.
+    _t.clickOffMapFeature(_t.vw.map.layers);
+
+    // Hover on feature again.
+    _t.hoverOnMapFeature(layer, feature);
+
+    // Body should be hidden.
+    expect(els.body).not.toBeVisible();
+
+  });
 
 
 });
