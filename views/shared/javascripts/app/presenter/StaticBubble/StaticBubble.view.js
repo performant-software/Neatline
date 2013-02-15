@@ -37,17 +37,10 @@ Neatline.module('Presenter.StaticBubble', function(
      * Initialize trackers, get markup.
      */
     initialize: function() {
-
       this.active = true;   // True when bubble should be displayed.
       this.frozen = false;  // True when bubble is frozen after a click.
       this.getTemplate();
       this.getUi();
-
-      // Track window size.
-      this.window = $(window);
-      this.window.resize(_.bind(this.measureWindow, this));
-      this.measureWindow();
-
     },
 
 
