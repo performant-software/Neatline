@@ -51,7 +51,6 @@ Neatline.module('Map', function(
       // Widgets.
       var options = {
         controls: [
-          new OpenLayers.Control.MousePosition(),
           new OpenLayers.Control.PanZoomBar(),
           new OpenLayers.Control.Navigation({ documentDrag: true })
         ],
