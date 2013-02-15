@@ -280,11 +280,43 @@ describe('Small Bubble', function() {
   describe('position', function() {
 
 
-    it('should render default position');
-    it('should switch bubble to left when right edge is off-screen');
-    it('should stick at top when top is off-screen');
-    it('should stick at bottom when bottom is off-screen');
-    it('should fill height when bubble is taller than window');
+    beforeEach(function() {
+      _t.hoverOnMapFeature(layer1, feature1);
+    });
+
+
+    it('default', function() {
+
+      // ------------------------------------------------------------------
+      // When the bubble completely fits on screen, it should be rendered
+      // to the right of the cursor with padding.
+      // ------------------------------------------------------------------
+
+      _t.vw.smallBubble.options.pad.x = 1;
+      _t.vw.smallBubble.options.pad.y = 2;
+      _t.vw.smallBubble.$el.height(100);
+      _t.vw.smallBubble.windowH = 500;
+      _t.vw.smallBubble.windowW = 500;
+      _t.vw.smallBubble.bubbleW = 100;
+      _t.vw.smallBubble.bubbleH = 100;
+
+      var e = {
+        clientX: 50,
+        clientY: 50
+      }
+
+      _t.vw.smallBubble.position(e);
+      expect(_t.vw.smallBubble.$el.css('height')).toEqual('100px');
+      expect(_t.vw.smallBubble.$el.css('top')).toEqual('48px');
+      expect(_t.vw.smallBubble.$el.css('left')).toEqual('51px');
+
+    });
+
+
+    it('switched to left');
+    it('flush with top');
+    it('flush with bottom');
+    it('full-height');
 
 
   });
