@@ -12,26 +12,24 @@
 
 
 #static-bubble
-  overflow hidden
+  overflow-y auto
   position absolute
   z-index 999
   border 1px solid rgba(0, 0, 0, 0.2)
   box-shadow 0 3px 8px rgba(0, 0, 0, 0.3)
   background #fcfcfc
   padding 1.3em 1em
+  max-height 90%
   max-width 300px
   left 70px
   top 15px
 
   .title
     font-size 2em
+    line-height 1em
     font-weight bold
 
   .body
     display none
+    margin-top 0.4em
     white-space pre-wrap
-
-  &.frozen
-
-    .title
-      margin-bottom 0.4em
