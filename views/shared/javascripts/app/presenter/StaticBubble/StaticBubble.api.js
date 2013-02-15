@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Small bubble events.
+ * Static bubble events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,8 +10,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.MediumBubble', function(
-  MediumBubble, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.StaticBubble', function(
+  StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
@@ -20,11 +20,11 @@ Neatline.module('Presenter.MediumBubble', function(
    * @param {Object} model: The record model.
    */
   var show = function(model) {
-    MediumBubble.__view.show(model);
+    StaticBubble.__view.show(model);
   };
 
   Neatline.commands.addHandler(
-    'presenter:MediumBubble:show', show
+    'presenter:StaticBubble:show', show
   );
 
 
@@ -32,11 +32,11 @@ Neatline.module('Presenter.MediumBubble', function(
    * Hide the bubble.
    */
   var hide = function() {
-    MediumBubble.__view.hide();
+    StaticBubble.__view.hide();
   };
 
   Neatline.commands.addHandler(
-    'presenter:MediumBubble:hide', hide
+    'presenter:StaticBubble:hide', hide
   );
 
 
@@ -44,11 +44,11 @@ Neatline.module('Presenter.MediumBubble', function(
    * Freeze the bubble.
    */
   var select = function() {
-    MediumBubble.__view.select();
+    StaticBubble.__view.select();
   };
 
   Neatline.commands.addHandler(
-    'presenter:MediumBubble:select', select
+    'presenter:StaticBubble:select', select
   );
 
 
@@ -56,11 +56,11 @@ Neatline.module('Presenter.MediumBubble', function(
    * Unfreeze and hide the bubble.
    */
   var unselect = function() {
-    MediumBubble.__view.unselect();
+    StaticBubble.__view.unselect();
   };
 
   Neatline.commands.addHandler(
-    'presenter:MediumBubble:unselect', unselect
+    'presenter:StaticBubble:unselect', unselect
   );
 
 
@@ -68,7 +68,7 @@ Neatline.module('Presenter.MediumBubble', function(
    * Activate the bubble.
    */
   var activate = function() {
-    MediumBubble.__view.activate();
+    StaticBubble.__view.activate();
   };
 
   Neatline.vent.on(
@@ -80,8 +80,8 @@ Neatline.module('Presenter.MediumBubble', function(
    * Deactivate and close the bubble.
    */
   var deactivate = function() {
-    MediumBubble.__view.deactivate();
-    MediumBubble.__view.unselect();
+    StaticBubble.__view.deactivate();
+    StaticBubble.__view.unselect();
   };
 
   Neatline.vent.on(

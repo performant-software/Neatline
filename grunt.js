@@ -148,8 +148,7 @@ module.exports = function(grunt) {
           config.src.shared+'/map/**/*.js',
           config.src.shared+'/presenter/*.js',
           config.src.shared+'/presenter/None/*.js',
-          config.src.shared+'/presenter/SmallBubble/*.js',
-          config.src.shared+'/presenter/MediumBubble/*.js',
+          config.src.shared+'/presenter/StaticBubble/*.js',
 
         ],
         dest: config.payloads.shared.js+'/neatline.js',
@@ -184,8 +183,7 @@ module.exports = function(grunt) {
           config.src.shared+'/map/**/*.js',
           config.src.shared+'/presenter/*.js',
           config.src.shared+'/presenter/None/*.js',
-          config.src.shared+'/presenter/SmallBubble/*.js',
-          config.src.shared+'/presenter/MediumBubble/*.js',
+          config.src.shared+'/presenter/StaticBubble/*.js',
 
           // Editor:
           config.src.shared+'/editor/*.js',

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Small bubble initializer.
+ * Static bubble initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.SmallBubble', function(
-  SmallBubble, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.StaticBubble', function(
+  StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  SmallBubble.init = function() {
-    this.__view = new SmallBubble.View();
+  StaticBubble.init = function() {
+    this.__view = new StaticBubble.View();
   };
 
-  SmallBubble.addInitializer(SmallBubble.init);
+  StaticBubble.addInitializer(StaticBubble.init);
 
 
 });

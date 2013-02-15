@@ -220,9 +220,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         return array_merge($presenters, array(
             'None'          => 'None',
-            'Small Bubble'  => 'SmallBubble',
-            'Medium Bubble' => 'MediumBubble',
-            'Large Bubble'  => 'LargeBubble'
+            'Static Bubble' => 'StaticBubble'
         ));
     }
 

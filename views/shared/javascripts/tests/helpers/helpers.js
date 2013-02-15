@@ -37,8 +37,7 @@ _t = (function() {
   
     // Public modules.
     Neatline.Map.init();
-    Neatline.Presenter.SmallBubble.init();
-    Neatline.Presenter.MediumBubble.init();
+    Neatline.Presenter.StaticBubble.init();
   
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
@@ -68,8 +67,7 @@ _t = (function() {
   
     // Public modules.
     Neatline.Map.init();
-    Neatline.Presenter.SmallBubble.init();
-    Neatline.Presenter.MediumBubble.init();
+    Neatline.Presenter.StaticBubble.init();
   
     // Map edit module.
     Neatline.Editor.Map.init();
@@ -221,14 +219,12 @@ _t = (function() {
   
     this.vw = {
       map:          Neatline.Map.                   __view,
-      smallBubble:  Neatline.Presenter.SmallBubble. __view,
-      mediumBubble: Neatline.Presenter.MediumBubble.__view
+      staticBubble: Neatline.Presenter.StaticBubble.__view
     };
   
     this.el = {
       map:          Neatline.Map.                   __view.$el,
-      smallBubble:  Neatline.Presenter.SmallBubble. __view.$el,
-      mediumBubble: Neatline.Presenter.MediumBubble.__view.$el
+      staticBubble: Neatline.Presenter.StaticBubble.__view.$el
     };
   
   };
@@ -241,8 +237,7 @@ _t = (function() {
   
     this.vw = {
       map:          Neatline.Map.                   __view,
-      smallBubble:  Neatline.Presenter.SmallBubble. __view,
-      mediumBubble: Neatline.Presenter.MediumBubble.__view,
+      staticBubble: Neatline.Presenter.StaticBubble.__view,
       editor:       Neatline.Editor.                __view,
       menu:         Neatline.Editor.Menu.           __view,
       search:       Neatline.Editor.Search.         __view,
@@ -254,8 +249,7 @@ _t = (function() {
   
     this.el = {
       map:          Neatline.Map.                   __view.$el,
-      smallBubble:  Neatline.Presenter.SmallBubble. __view.$el,
-      mediumBubble: Neatline.Presenter.MediumBubble.__view.$el,
+      staticBubble: Neatline.Presenter.StaticBubble.__view.$el,
       editor:       Neatline.Editor.                __view.__ui.editor,
       menu:         Neatline.Editor.Menu.           __view.$el,
       search:       Neatline.Editor.Search.         __view.$el,

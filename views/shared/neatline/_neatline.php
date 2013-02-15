@@ -25,5 +25,4 @@
 </script>
 
 <!-- Underscore templates. -->
-<?php echo $this->partial('neatline/underscore/_small_bubble.php'); ?>
-<?php echo $this->partial('neatline/underscore/_medium_bubble.php'); ?>
+<?php echo $this->partial('neatline/underscore/_static_bubble.php'); ?>

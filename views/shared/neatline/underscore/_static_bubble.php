@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Small bubble partial.
+ * Static bubble partial.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,7 +14,7 @@
 ?>
 
 
-<script id="small-bubble-template" type="text/templates">
+<script id="static-bubble-template" type="text/templates">
   <div class="title" data-html="record._title"></div>
   <div class="body" data-html="record._body"></div>
 </script>
