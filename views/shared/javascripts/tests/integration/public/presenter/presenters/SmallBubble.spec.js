@@ -277,4 +277,17 @@ describe('Small Bubble', function() {
   });
 
 
+  describe('position', function() {
+
+
+    it('should render default position');
+    it('should switch bubble to left when right edge is off-screen');
+    it('should stick at top when top is off-screen');
+    it('should stick at bottom when bottom is off-screen');
+    it('should fill height when bubble is taller than window');
+
+
+  });
+
+
 });

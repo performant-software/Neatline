@@ -153,8 +153,8 @@ Neatline.module('Presenter.SmallBubble', function(
         'overflow-y': 'hidden'
       };
 
-      // If the left edge of the bubble is off-screen, move the bubble to
-      // this right side of the cursor.
+      // If the right edge of the bubble is off-screen, move the bubble to
+      // this left side of the cursor.
       if (css.left + this.bubbleW > this.windowW) {
         css.left = e.clientX - this.options.pad.x - this.bubbleW;
       }
