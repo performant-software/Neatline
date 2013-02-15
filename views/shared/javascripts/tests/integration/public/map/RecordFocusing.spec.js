@@ -101,10 +101,13 @@ describe('Map Record Focusing', function() {
 
     it('focusById', function() {
 
+      var done = false;
+      Neatline.vent.on('map:focused', function() { done = true; });
       Neatline.execute('map:focusById', 999);
 
       // Respond to the GET request.
       var request = _t.respondLast200(_t.json.record.standard);
+      waitsFor(function() { return done; });
 
       // Should load record from server.
       expect(request.method).toEqual('GET');
