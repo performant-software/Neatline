@@ -36,10 +36,13 @@ function _nl_formAssets()
 
 /**
  * Include static files for the exhibit.
+ *
+ * @param NeatlineExhibit The exhibit.
  */
-function _nl_exhibitAssets()
+function _nl_exhibitAssets($exhibit)
 {
     _nl_mapApis();
+    _nl_exhibitCss($exhibit);
     queue_css_file('payloads/neatline');
     queue_js_file('payloads/neatline');
     queue_js_file('bootstrap');
@@ -55,6 +58,19 @@ function _nl_editorAssets()
     queue_css_file('payloads/editor');
     queue_js_file('payloads/editor');
     queue_js_file('bootstrap');
+}
+
+
+/**
+ * Try to load an exhibit-specific css file.
+ *
+ * @param NeatlineExhibit The exhibit.
+ */
+function _nl_exhibitCss($exhibit)
+{
+    try {
+        queue_css_file($exhibit->slug);
+    } catch (Exception $e) {}
 }
 
 

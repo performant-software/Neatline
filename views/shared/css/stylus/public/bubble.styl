@@ -24,6 +24,12 @@
   top 20px
   opacity 0.9
 
+  .close
+    cursor pointer
+    display none
+    float right
+    font-size 2em
+
   .title
     font-size 3em
     line-height 1em
@@ -31,5 +37,9 @@
 
   .body
     display none
-    margin-top 0.4em
+    margin-top 0.7em
     white-space pre-wrap
+
+  &.frozen
+    .close
+      display block

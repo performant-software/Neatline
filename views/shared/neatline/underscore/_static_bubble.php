@@ -15,6 +15,7 @@
 
 
 <script id="static-bubble-template" type="text/templates">
+  <a name="close" class="close">&times;</a>
   <div class="title" data-html="record._title"></div>
   <div class="body" data-html="record._body"></div>
 </script>

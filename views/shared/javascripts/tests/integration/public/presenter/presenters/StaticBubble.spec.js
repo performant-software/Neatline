@@ -34,7 +34,8 @@ describe('Static Bubble', function() {
 
     els = {
       title:  _t.vw.staticBubble.$('.title'),
-      body:   _t.vw.staticBubble.$('.body')
+      body:   _t.vw.staticBubble.$('.body'),
+      close:  _t.vw.staticBubble.$('.close')
     };
 
   });
@@ -193,29 +194,42 @@ describe('Static Bubble', function() {
   });
 
 
-  it('should unfreeze bubble on feature unselect', function() {
+  describe('close', function() {
 
     // --------------------------------------------------------------------
-    // When a feature is unselected, the bubble should disappear and start
-    // responding to new cursor events.
+    // When a bubble is unfrozen by clicking on the map or the close "X",
+    // the bubble should disappear and start responding to hover events.
     // --------------------------------------------------------------------
 
-    // Hover on feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    beforeEach(function() {
 
-    // Unselect the feature.
-    _t.clickOffMapFeature(_t.vw.map.layers);
+      // Hover on feature, then select.
+      _t.hoverOnMapFeature(layer1, feature1);
+      _t.clickOnMapFeature(layer1, feature1);
 
-    // Bubble should disappear.
-    expect(_t.el.staticBubble).not.toBeVisible();
+    });
 
-    // Hover on a different feature.
-    _t.hoverOnMapFeature(layer2, feature2);
+    afterEach(function() {
 
-    // Bubble values should be changed.
-    expect(els.title.text()).toEqual('_title2');
-    expect(els.body.text()).toEqual('_body2');
+      // Bubble should disappear.
+      expect(_t.el.staticBubble).not.toBeVisible();
+
+      // Hover on a different feature.
+      _t.hoverOnMapFeature(layer2, feature2);
+
+      // Bubble values should be changed.
+      expect(els.title.text()).toEqual('_title2');
+      expect(els.body.text()).toEqual('_body2');
+
+    });
+
+    it('should unfreeze bubble on close click', function() {
+      els.close.trigger('click');
+    });
+
+    it('should unfreeze bubble on feature unselect', function() {
+      _t.clickOffMapFeature(_t.vw.map.layers);
+    });
 
   });
 

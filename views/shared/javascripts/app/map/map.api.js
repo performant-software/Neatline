@@ -66,4 +66,14 @@ Neatline.module('Map', function(
   Neatline.commands.addHandler('map:focusById', focusById);
 
 
+  /**
+   * Unselect all features.
+   */
+  var unselect = function() {
+    Map.__view.unselectAll();
+  };
+
+  Neatline.commands.addHandler('map:unselect', unselect);
+
+
 });

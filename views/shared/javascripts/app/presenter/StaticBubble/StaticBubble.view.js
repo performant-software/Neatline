@@ -21,8 +21,13 @@ Neatline.module('Presenter.StaticBubble', function(
     className:  'bubble',
     id:         'static-bubble',
 
+    events: {
+      'click .close': 'unselect'
+    },
+
     ui: {
-      body: '.body'
+      close:  '.close',
+      body:   '.body'
     },
 
 
@@ -105,6 +110,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Unfreeze and hide the bubble.
      */
     unselect: function() {
+      Neatline.execute('map:unselect');
       this.__ui.body.hide();
       this.$el.removeClass('frozen');
       this.frozen = false;

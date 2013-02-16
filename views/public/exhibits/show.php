@@ -12,7 +12,7 @@
  */
 ?>
 
-<?php _nl_exhibitAssets(); ?>
+<?php _nl_exhibitAssets(_nl_currentExhibit()); ?>
 <?php echo head(array('title' => _nl_field('title'))); ?>
 
 <!-- The core Neatline partial. -->
