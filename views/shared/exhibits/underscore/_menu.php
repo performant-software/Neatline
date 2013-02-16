@@ -18,15 +18,9 @@
   <p class="lead"><?php echo $exhibit->title; ?></p>
 
   <ul class="nav nav-pills">
-
-    <li class="records">
-      <a href="#records">Records</a>
-    </li>
-
-    <li class="styles">
-      <a href="#styles">Styles</a>
-    </li>
-
+    <li class="records"><a href="#records">Records</a></li>
+    <li class="styles"><a href="#styles">Stylesheet</a></li>
+    <li class="exhibit"><a href="#exhibit">Exhibit</a></li>
   </ul>
 
 </script>
