@@ -11,5 +11,19 @@
  */
 
 jQuery(function($) {
+
   $('.chosen').chosen();
+
+  var title = $('input[name="title"]');
+  var slug  = $('input[name="slug"]');
+  var typed = false;
+
+  slug.keyup(function() {
+    typed = true;
+  });
+
+  title.keyup(function() {
+    if (!typed) slug.val(_.string.slugify(title.val()));
+  });
+
 });

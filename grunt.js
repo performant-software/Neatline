@@ -122,6 +122,7 @@ module.exports = function(grunt) {
       form: {
         src: [
           config.vendor.js.chosen,
+          config.vendor.js.underscore_s,
           config.src.admin+'/*.js'
         ],
         dest: config.payloads.admin.js+'/form.js',
@@ -148,7 +149,7 @@ module.exports = function(grunt) {
           config.src.shared+'/map/**/*.js',
           config.src.shared+'/presenter/*.js',
           config.src.shared+'/presenter/None/*.js',
-          config.src.shared+'/presenter/StaticBubble/*.js',
+          config.src.shared+'/presenter/StaticBubble/*.js'
 
         ],
         dest: config.payloads.shared.js+'/neatline.js',
@@ -203,14 +204,14 @@ module.exports = function(grunt) {
           config.vendor.css.chosen,
           config.payloads.admin.css+'/form/*.css'
         ],
-        dest: config.payloads.admin.css+'/form.css',
+        dest: config.payloads.admin.css+'/form.css'
       },
       neatline_css: {
         src: [
           config.vendor.css.openlayers,
           config.payloads.shared.css+'/public/*.css'
         ],
-        dest: config.payloads.shared.css+'/neatline.css',
+        dest: config.payloads.shared.css+'/neatline.css'
       },
       editor_css: {
         src: [
@@ -221,7 +222,7 @@ module.exports = function(grunt) {
           config.vendor.css.codemirror,
           config.payloads.shared.css+'/editor/*.css'
         ],
-        dest: config.payloads.shared.css+'/editor.css',
+        dest: config.payloads.shared.css+'/editor.css'
       }
     },
 
@@ -262,7 +263,7 @@ module.exports = function(grunt) {
     rig: {
       jasmine: {
         src: config.jasmine+'/helpers/_helpers.js',
-        dest: config.jasmine+'/helpers/helpers.js',
+        dest: config.jasmine+'/helpers/helpers.js'
       }
     },
 
