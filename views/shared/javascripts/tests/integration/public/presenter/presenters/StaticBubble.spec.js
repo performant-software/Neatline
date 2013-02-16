@@ -173,7 +173,7 @@ describe('Static Bubble', function() {
   });
 
 
-  it('should not respond to cursor events when frozen', function() {
+  it('should not respond to hover events when frozen', function() {
 
     // --------------------------------------------------------------------
     // When the bubble is frozen and the cursor hovers over a feature for
@@ -190,6 +190,27 @@ describe('Static Bubble', function() {
     // Bubble values should be unchanged.
     expect(els.title.text()).toEqual('_title1');
     expect(els.body.text()).toEqual('_body1');
+
+  });
+
+
+  it('should respond to click events when frozen', function() {
+
+    // --------------------------------------------------------------------
+    // When the bubble is frozen and a different feature is clicked, the
+    // bubble should render the new record.
+    // --------------------------------------------------------------------
+
+    // Hover on feature, then select.
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
+
+    // Hover on a different feature.
+    _t.clickOnMapFeature(feature2);
+
+    // Bubble values should change.
+    expect(els.title.text()).toEqual('_title2');
+    expect(els.body.text()).toEqual('_body2');
 
   });
 

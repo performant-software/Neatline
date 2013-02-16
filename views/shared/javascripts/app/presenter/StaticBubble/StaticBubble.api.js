@@ -41,10 +41,12 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
   /**
-   * Freeze the bubble.
+   * Select the bubble.
+   *
+   * @param {Object} model: The record model.
    */
-  var select = function() {
-    StaticBubble.__view.select();
+  var select = function(model) {
+    StaticBubble.__view.select(model);
   };
 
   Neatline.commands.addHandler(
@@ -53,7 +55,7 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
   /**
-   * Unfreeze and hide the bubble.
+   * Unselect the bubble.
    */
   var unselect = function() {
     StaticBubble.__view.unselect();
