@@ -83,7 +83,7 @@ function _nl_exhibitCss($exhibit)
 function _nl_exhibitGlobals($exhibit)
 {
     return array(
-        'exhibit_id'    => $exhibit->id,
+        'exhibit'       => $exhibit->toArray(),
         'records_api'   => public_url('neatline/records/'.$exhibit->id),
         'record_api'    => public_url('neatline/record'),
         'base_layers'   => _nl_getLayersForExhibit($exhibit),

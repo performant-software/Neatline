@@ -71,7 +71,7 @@ describe('Record Form Add', function() {
 
     // Model should have exhibit id.
     var record = _t.vw.record.model;
-    expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit_id);
+    expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.
     expect(_.isString(record.get('presenter'))).      toBeTruthy();

@@ -33,7 +33,7 @@ Neatline.module('Shared.Record', function(
 
     defaults: function() {
       return {
-        exhibit_id:     Neatline.global.exhibit_id,
+        exhibit_id:     Neatline.global.exhibit.id,
         presenter:      'StaticBubble',
         vector_color:   '#00aeff',
         stroke_color:   '#000000',
