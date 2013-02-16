@@ -21,13 +21,6 @@ Neatline.module('Presenter.StaticBubble', function(
     className:  'bubble',
     id:         'static-bubble',
 
-    options: {
-      pad: {
-        x: 40,
-        y: 15
-      }
-    },
-
     ui: {
       body: '.body'
     },
@@ -70,8 +63,19 @@ Neatline.module('Presenter.StaticBubble', function(
      */
     show: function(model) {
       if (!this.frozen && this.active) {
+
+        // Store reference to mouseout callback.
+        this.onMouseOut  = _.bind(this.hide, this);
+
+        // Bind to mousemove and mouseout.
+        var map = Neatline.request('map:getMap');
+        map.events.register('mouseout', null, this.onMouseOut);
+
+        // Render template, inject bubble.
         rivets.bind(this.$el, { record: model });
         Neatline.Map.__view.$el.append(this.$el);
+        this.model = model;
+
       }
     },
 
@@ -80,7 +84,10 @@ Neatline.module('Presenter.StaticBubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (!this.frozen) this.$el.detach();
+      if (!this.frozen) {
+        this.$el.detach();
+        this.unbind();
+      }
     },
 
 
@@ -88,9 +95,9 @@ Neatline.module('Presenter.StaticBubble', function(
      * Freeze the bubble.
      */
     select: function() {
-      this.frozen = true;
+      if (!_.isNull(this.model.get('body'))) this.__ui.body.show();
       this.$el.addClass('frozen');
-      this.__ui.body.show();
+      this.frozen = true;
     },
 
 
@@ -98,9 +105,9 @@ Neatline.module('Presenter.StaticBubble', function(
      * Unfreeze and hide the bubble.
      */
     unselect: function() {
-      this.frozen = false;
-      this.$el.removeClass('frozen');
       this.__ui.body.hide();
+      this.$el.removeClass('frozen');
+      this.frozen = false;
       this.hide();
     },
 
@@ -118,6 +125,15 @@ Neatline.module('Presenter.StaticBubble', function(
      */
     deactivate: function() {
       this.active = false;
+    },
+
+
+    /**
+     * Unbind move and leave listeners.
+     */
+    unbind: function() {
+      var map = Neatline.request('map:getMap');
+      map.events.unregister('mouseout', null, this.onMouseOut);
     }
 
 
