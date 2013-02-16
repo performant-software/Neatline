@@ -29,6 +29,12 @@
         error: '<?php echo __('There was an error; a new record was not created.'); ?>'
       }
     },
+    exhibit: {
+      save: {
+        success: '<?php echo __('The exhibit was saved successfully!'); ?>',
+        error: '<?php echo __('There was an error; the exhibit was not saved.'); ?>'
+      }
+    },
     styles: {
       save: {
         success: '<?php echo __('The styles were saved successfully!'); ?>',

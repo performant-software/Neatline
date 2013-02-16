@@ -31,6 +31,8 @@ Neatline.module('Editor.Exhibit', function(
      */
     initialize: function() {
       this.getTemplate();
+      this.exhibit = new Neatline.Shared.Exhibit.Model();
+      rivets.bind(this.$el, { exhibit: this.exhibit });
     },
 
 
@@ -38,36 +40,30 @@ Neatline.module('Editor.Exhibit', function(
      * Save the settings.
      */
     save: function() {
-      // TODO
-      // $.ajax({
-      //   data:     this.editor.getValue(),
-      //   url:      Neatline.global.styles_api,
-      //   success:  _.bind(this.onSuccess, this),
-      //   error:    _.bind(this.onError, this),
-      //   type:     'PUT'
-      // });
+      this.exhibit.save(null, {
+        success:  _.bind(this.onSaveSuccess, this),
+        error:    _.bind(this.onSaveError, this)
+      });
     },
 
 
     /**
      * When a save succeeds.
      */
-    onSuccess: function() {
-      // TODO
-      // Neatline.execute('editor:notifySuccess',
-        // STRINGS.styles.save.success
-      // );
+    onSaveSuccess: function() {
+      Neatline.execute('editor:notifySuccess',
+        STRINGS.exhibit.save.success
+      );
     },
 
 
     /**
      * When a save fails.
      */
-    onError: function() {
-      // TODO
-      // Neatline.execute('editor:notifyError',
-        // STRINGS.styles.save.error
-      // );
+    onSaveError: function() {
+      Neatline.execute('editor:notifyError',
+        STRINGS.exhibit.save.error
+      );
     }
 
 

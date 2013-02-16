@@ -73,7 +73,7 @@ Neatline.module('Editor.Record', function(
         irreg:    'input[name="irreg"]',
         svg:      'textarea[name="svg"]',
         density:  'input[name="density"]',
-        modal:    '#svg-modal',
+        modal:    '#svg-modal'
       },
 
       // "Style" tab.
@@ -194,7 +194,7 @@ Neatline.module('Editor.Record', function(
     onDeleteClick: function() {
       this.model.destroy({
         success:  _.bind(this.onDeleteSuccess, this),
-        error:    _.bind(this.onDeleteError, this),
+        error:    _.bind(this.onDeleteError, this)
       });
     },
 

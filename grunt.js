@@ -181,6 +181,7 @@ module.exports = function(grunt) {
           config.src.shared+'/*.js',
           config.src.shared+'/shared/record/record.model.js',
           config.src.shared+'/shared/record/record.collection.js',
+          config.src.shared+'/shared/exhibit/*.js',
           config.src.shared+'/map/**/*.js',
           config.src.shared+'/presenter/*.js',
           config.src.shared+'/presenter/None/*.js',

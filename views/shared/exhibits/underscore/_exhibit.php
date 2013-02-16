@@ -20,15 +20,15 @@
     <?php echo $this->partial(
       'exhibits/underscore/helpers/_text_input.php', array(
         'name'  => 'map-focus',
-        'label' => 'Default Map Focus'
-        // 'bind'  => 'record.map_focus'
+        'label' => 'Default Map Focus',
+        'bind'  => 'exhibit.map_focus'
     )); ?>
 
     <?php echo $this->partial(
       'exhibits/underscore/helpers/_text_input.php', array(
         'name'  => 'map-zoom',
-        'label' => 'Default Map Zoom'
-        // 'bind'  => 'record.map_zoom'
+        'label' => 'Default Map Zoom',
+        'bind'  => 'exhibit.map_zoom'
     )); ?>
 
     <div class="controls">

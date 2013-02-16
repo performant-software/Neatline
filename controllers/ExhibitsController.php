@@ -36,10 +36,11 @@ class Neatline_ExhibitsController
         $exhibit = new NeatlineExhibit;
         $form = $this->_getExhibitForm($exhibit);
 
-        // If form was submitted.
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
-                $exhibit->saveForm($form->getValues());
+                $vals = $form->getValues();
+                $vals['base_layers'] = implode(',',$vals['base_layers']);
+                $exhibit->saveForm($vals);
                 $this->_redirect('neatline');
             }
         }
@@ -58,10 +59,11 @@ class Neatline_ExhibitsController
         $exhibit = $this->_helper->db->findById();
         $form = $this->_getExhibitForm($exhibit);
 
-        // If form was submitted.
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
-                $exhibit->saveForm($form->getValues());
+                $vals = $form->getValues();
+                $vals['base_layers'] = implode(',',$vals['base_layers']);
+                $exhibit->saveForm($vals);
                 $this->_redirect('neatline');
             }
         }
@@ -69,6 +71,19 @@ class Neatline_ExhibitsController
         $this->view->neatline_exhibit = $exhibit;
         $this->view->form = $form;
 
+    }
+
+
+    /**
+     * Update exhibit via PUT. Used by Backbone.
+     */
+    public function putAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
+            Zend_Registry::get('fileIn')), true
+        ));
     }
 
 

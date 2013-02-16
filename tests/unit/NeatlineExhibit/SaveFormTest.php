@@ -27,7 +27,7 @@ class Neatline_NeatlineExhibitTest_SaveForm
         $exhibit->saveForm(array(
             'title'         => 'title',
             'slug'          => 'slug',
-            'base_layers'   => array('1','2','3'),
+            'base_layers'   => '1,2,3',
             'base_layer'    => '2',
             'description'   => 'desc',
             'public'        => 1
