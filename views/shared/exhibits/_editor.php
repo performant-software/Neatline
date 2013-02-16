@@ -29,10 +29,6 @@
 <?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_search.php'); ?>
 
-<?php echo $this->partial('exhibits/underscore/_styles.php', array(
-  'styles'  => $exhibit->styles
-)); ?>
-
 <?php echo $this->partial('exhibits/underscore/_exhibit.php', array(
   'exhibit' => $exhibit
 )); ?>

@@ -22,7 +22,6 @@ Neatline.module('Editor', { startWithParent: false,
       'records(/search)(/query=:q)(/start=:s)': 'records',
       'records/add':                            'records/add',
       'records/:id':                            'records/:id',
-      'stylesheet':                             'stylesheet',
       'exhibit':                                'exhibit'
     },
 
@@ -39,7 +38,6 @@ Neatline.module('Editor', { startWithParent: false,
         search:   Editor.Search.  __view,
         records:  Editor.Records. __view,
         record:   Editor.Record.  __view,
-        styles:   Editor.Styles.  __view,
         exhibit:  Editor.Exhibit. __view
       };
 
@@ -82,16 +80,6 @@ Neatline.module('Editor', { startWithParent: false,
       id = parseInt(id, 10);
       this.views.record.  showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records/:id', id);
-    },
-
-
-    /**
-     * Show the style editor.
-     */
-    'stylesheet': function() {
-      this.views.menu.    showIn(this.editor);
-      this.views.styles.  showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#stylesheet');
     },
 
 

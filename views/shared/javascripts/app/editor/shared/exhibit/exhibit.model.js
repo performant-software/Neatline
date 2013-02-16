@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Exhibit', function(
+Neatline.module('Editor.Shared.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
@@ -23,7 +23,7 @@ Neatline.module('Shared.Exhibit', function(
      * @return {String}: The url.
      */
     url: function() {
-      return Neatline.global.exhibit_api;
+      return Neatline.global.exhibit_put;
     },
 
 

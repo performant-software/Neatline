@@ -71,20 +71,6 @@ describe('Router', function() {
   });
 
 
-  it('#stylesheet', function() {
-
-    _t.navigate('stylesheet');
-
-    // Style editor should be visible.
-    expect(_t.el.editor).toContain(_t.el.menu);
-    expect(_t.el.editor).toContain(_t.el.styles);
-
-    // "Stylesheet" tab should be active.
-    expect(_t.vw.menu.__ui.tabs.styles).toHaveClass('active');
-
-  });
-
-
   it('#exhibit', function() {
 
     _t.navigate('exhibit');

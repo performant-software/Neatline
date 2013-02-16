@@ -181,7 +181,6 @@ module.exports = function(grunt) {
           config.src.shared+'/*.js',
           config.src.shared+'/shared/record/record.model.js',
           config.src.shared+'/shared/record/record.collection.js',
-          config.src.shared+'/shared/exhibit/*.js',
           config.src.shared+'/map/**/*.js',
           config.src.shared+'/presenter/*.js',
           config.src.shared+'/presenter/None/*.js',
@@ -189,12 +188,12 @@ module.exports = function(grunt) {
 
           // Editor:
           config.src.shared+'/editor/*.js',
+          config.src.shared+'/editor/shared/exhibit/*.js',
           config.src.shared+'/editor/map/*.js',
           config.src.shared+'/editor/menu/*.js',
           config.src.shared+'/editor/record/*.js',
           config.src.shared+'/editor/records/*.js',
           config.src.shared+'/editor/search/*.js',
-          config.src.shared+'/editor/styles/*.js',
           config.src.shared+'/editor/exhibit/*.js'
 
         ],

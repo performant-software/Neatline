@@ -18,6 +18,14 @@
   <div class="control-group">
 
     <?php echo $this->partial(
+      'exhibits/underscore/helpers/_textarea.php', array(
+        'id'    => 'styles',
+        'name'  => 'styles',
+        'label' => 'Stylesheet',
+        'bind'  => 'exhibit.styles'
+    )); ?>
+
+    <?php echo $this->partial(
       'exhibits/underscore/helpers/_text_input.php', array(
         'name'  => 'map-focus',
         'label' => 'Default Map Focus',

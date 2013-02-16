@@ -25,14 +25,43 @@ Neatline.module('Editor.Exhibit', function(
       'click a[name="save"]': 'save'
     },
 
+    ui: {
+      styles:   '#styles'
+    },
+
 
     /**
      * Render template.
      */
     initialize: function() {
+
       this.getTemplate();
-      this.exhibit = new Neatline.Shared.Exhibit.Model();
+      this.getUi();
+
+      // Create exhibit model from global, bind to form.
+      this.exhibit = new Neatline.Editor.Shared.Exhibit.Model();
       rivets.bind(this.$el, { exhibit: this.exhibit });
+
+      // Instantiate CodeMirror on the stylesheet.
+      this.editor = CodeMirror.fromTextArea(this.$('#styles')[0]);
+
+    },
+
+
+    /**
+     * Refresh the editor.
+     */
+    refresh: function() {
+      this.editor.refresh();
+    },
+
+
+    /**
+     * Push the stylesheet into the model.
+     */
+    sync: function() {
+      this.editor.save();
+      this.__ui.styles.trigger('change');
     },
 
 
@@ -40,6 +69,7 @@ Neatline.module('Editor.Exhibit', function(
      * Save the settings.
      */
     save: function() {
+      this.sync();
       this.exhibit.save(null, {
         success:  _.bind(this.onSaveSuccess, this),
         error:    _.bind(this.onSaveError, this)

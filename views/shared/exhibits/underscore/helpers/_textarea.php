@@ -14,15 +14,14 @@
 ?>
 
 
-<div class="control-group">
-  <label for="<?php echo $name; ?>">
-    <?php echo __($label); ?>
-  </label>
-  <div class="controls">
-    <textarea
-      <?php if (isset($name)) echo "name='$name'"; ?>
-      <?php if (isset($class)) echo "class='$class'"; ?>
-      <?php if (isset($bind)) echo "data-value='$bind'"; ?>
-    ></textarea>
-  </div>
+<label for="<?php echo $name; ?>">
+<?php echo __($label); ?>
+</label>
+<div class="controls">
+  <textarea
+    <?php if (isset($id)) echo "id='$id'"; ?>
+    <?php if (isset($name)) echo "name='$name'"; ?>
+    <?php if (isset($class)) echo "class='$class'"; ?>
+    <?php if (isset($bind)) echo "data-value='$bind'"; ?>
+  ></textarea>
 </div>

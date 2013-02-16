@@ -14,7 +14,15 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  // TODO
+  /**
+   * Refresh the editor.
+   */
+  var refresh = function() {
+    Exhibit.__view.refresh();
+  };
+
+  Neatline.commands.addHandler('editor:exhibit:refresh', refresh);
+  Neatline.vent.on('editor:router:#exhibit', refresh);
 
 
 });
