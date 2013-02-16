@@ -193,7 +193,8 @@ module.exports = function(grunt) {
           config.src.shared+'/editor/record/*.js',
           config.src.shared+'/editor/records/*.js',
           config.src.shared+'/editor/search/*.js',
-          config.src.shared+'/editor/styles/*.js'
+          config.src.shared+'/editor/styles/*.js',
+          config.src.shared+'/editor/exhibit/*.js'
 
         ],
         dest: config.payloads.shared.js+'/editor.js',
