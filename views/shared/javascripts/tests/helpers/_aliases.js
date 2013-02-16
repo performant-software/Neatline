@@ -43,7 +43,8 @@ _t.aliasEditor = function() {
     mapedit:      Neatline.Editor.Map.            __view,
     records:      Neatline.Editor.Records.        __view,
     record:       Neatline.Editor.Record.         __view,
-    styles:       Neatline.Editor.Styles.         __view
+    styles:       Neatline.Editor.Styles.         __view,
+    exhibit:      Neatline.Editor.Exhibit.        __view
   };
 
   this.el = {
@@ -54,7 +55,8 @@ _t.aliasEditor = function() {
     search:       Neatline.Editor.Search.         __view.$el,
     records:      Neatline.Editor.Records.        __view.$el,
     record:       Neatline.Editor.Record.         __view.$el,
-    styles:       Neatline.Editor.Styles.         __view.$el
+    styles:       Neatline.Editor.Styles.         __view.$el,
+    exhibit:      Neatline.Editor.Exhibit.        __view.$el
   };
 
 };

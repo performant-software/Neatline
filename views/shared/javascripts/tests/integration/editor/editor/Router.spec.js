@@ -71,16 +71,30 @@ describe('Router', function() {
   });
 
 
-  it('#styles', function() {
+  it('#stylesheet', function() {
 
-    _t.navigate('styles');
+    _t.navigate('stylesheet');
 
     // Style editor should be visible.
     expect(_t.el.editor).toContain(_t.el.menu);
     expect(_t.el.editor).toContain(_t.el.styles);
 
-    // "Styles" tab should be active.
+    // "Stylesheet" tab should be active.
     expect(_t.vw.menu.__ui.tabs.styles).toHaveClass('active');
+
+  });
+
+
+  it('#exhibit', function() {
+
+    _t.navigate('exhibit');
+
+    // Style editor should be visible.
+    expect(_t.el.editor).toContain(_t.el.menu);
+    expect(_t.el.editor).toContain(_t.el.exhibit);
+
+    // "Exhibit" tab should be active.
+    expect(_t.vw.menu.__ui.tabs.exhibit).toHaveClass('active');
 
   });
 

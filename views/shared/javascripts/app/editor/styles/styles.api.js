@@ -22,7 +22,7 @@ Neatline.module('Editor.Styles', function(
   };
 
   Neatline.commands.addHandler('editor:styles:refresh', refresh);
-  Neatline.vent.on('editor:router:#styles', refresh);
+  Neatline.vent.on('editor:router:#stylesheet', refresh);
 
 
 });

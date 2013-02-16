@@ -22,7 +22,8 @@ Neatline.module('Editor', { startWithParent: false,
       'records(/search)(/query=:q)(/start=:s)': 'records',
       'records/add':                            'records/add',
       'records/:id':                            'records/:id',
-      'styles':                                 'styles'
+      'stylesheet':                             'stylesheet',
+      'exhibit':                                'exhibit'
     },
 
 
@@ -38,7 +39,8 @@ Neatline.module('Editor', { startWithParent: false,
         search:   Editor.Search.  __view,
         records:  Editor.Records. __view,
         record:   Editor.Record.  __view,
-        styles:   Editor.Styles.  __view
+        styles:   Editor.Styles.  __view,
+        exhibit:  Editor.Exhibit. __view
       };
 
     },
@@ -66,7 +68,7 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     'records/add': function() {
-      this.views.record.showIn(this.editor);
+      this.views.record.  showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records/add');
     },
 
@@ -78,7 +80,7 @@ Neatline.module('Editor', { startWithParent: false,
      */
     'records/:id': function(id) {
       id = parseInt(id, 10);
-      this.views.record.showIn(this.editor);
+      this.views.record.  showIn(this.editor);
       Neatline.vent.trigger('editor:router:#records/:id', id);
     },
 
@@ -86,10 +88,20 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show the style editor.
      */
-    'styles': function() {
-      this.views.menu.  showIn(this.editor);
-      this.views.styles.showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#styles');
+    'stylesheet': function() {
+      this.views.menu.    showIn(this.editor);
+      this.views.styles.  showIn(this.editor);
+      Neatline.vent.trigger('editor:router:#stylesheet');
+    },
+
+
+    /**
+     * Show the exhibit defaults form.
+     */
+    'exhibit': function() {
+      this.views.menu.    showIn(this.editor);
+      this.views.exhibit. showIn(this.editor);
+      Neatline.vent.trigger('editor:router:#exhibit');
     }
 
 

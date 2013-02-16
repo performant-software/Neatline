@@ -25,10 +25,18 @@
 <!-- Templates. -->
 <?php echo $this->partial('exhibits/_strings.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_pagination.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_search.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_pagination.php'); ?>
+
 <?php echo $this->partial('exhibits/underscore/_styles.php', array(
-  'styles'  => $exhibit->styles)); ?>
+  'styles'  => $exhibit->styles
+)); ?>
+
+<?php echo $this->partial('exhibits/underscore/_exhibit.php', array(
+  'exhibit' => $exhibit
+)); ?>
+
 <?php echo $this->partial('exhibits/underscore/_menu.php', array(
-  'exhibit' => $exhibit)); ?>
+  'exhibit' => $exhibit
+)); ?>

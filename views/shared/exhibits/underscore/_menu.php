@@ -19,8 +19,8 @@
 
   <ul class="nav nav-pills">
     <li class="records"><a href="#records">Records</a></li>
-    <li class="styles"><a href="#styles">Stylesheet</a></li>
-    <li class="defaults"><a href="#defaults">Exhibit</a></li>
+    <li class="styles"><a href="#stylesheet">Stylesheet</a></li>
+    <li class="exhibit"><a href="#exhibit">Exhibit</a></li>
   </ul>
 
 </script>
