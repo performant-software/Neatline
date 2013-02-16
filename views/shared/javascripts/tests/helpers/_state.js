@@ -48,7 +48,6 @@ _t.loadEditor = function() {
   Neatline.Editor.Record.init();
   Neatline.Editor.Records.init();
   Neatline.Editor.Styles.init();
-  Neatline.Editor.Exhibit.init();
   Neatline.Editor.init();
 
   // Public modules.

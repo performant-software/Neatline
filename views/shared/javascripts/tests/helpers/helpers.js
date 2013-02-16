@@ -63,7 +63,6 @@ _t = (function() {
     Neatline.Editor.Record.init();
     Neatline.Editor.Records.init();
     Neatline.Editor.Styles.init();
-    Neatline.Editor.Exhibit.init();
     Neatline.Editor.init();
   
     // Public modules.
@@ -245,8 +244,7 @@ _t = (function() {
       mapedit:      Neatline.Editor.Map.            __view,
       records:      Neatline.Editor.Records.        __view,
       record:       Neatline.Editor.Record.         __view,
-      styles:       Neatline.Editor.Styles.         __view,
-      exhibit:      Neatline.Editor.Exhibit.        __view
+      styles:       Neatline.Editor.Styles.         __view
     };
   
     this.el = {
@@ -257,8 +255,7 @@ _t = (function() {
       search:       Neatline.Editor.Search.         __view.$el,
       records:      Neatline.Editor.Records.        __view.$el,
       record:       Neatline.Editor.Record.         __view.$el,
-      styles:       Neatline.Editor.Styles.         __view.$el,
-      exhibit:      Neatline.Editor.Exhibit.        __view.$el
+      styles:       Neatline.Editor.Styles.         __view.$el
     };
   
   };

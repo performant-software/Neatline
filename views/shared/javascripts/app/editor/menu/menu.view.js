@@ -24,8 +24,7 @@ Neatline.module('Editor.Menu', function(
       tabs: {
         all:      'ul.nav li',
         records:  'li.records',
-        styles:   'li.styles',
-        exhibit:  'li.exhibit'
+        styles:   'li.styles'
       }
     },
 
