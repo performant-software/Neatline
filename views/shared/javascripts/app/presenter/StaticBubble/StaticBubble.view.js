@@ -111,8 +111,8 @@ Neatline.module('Presenter.StaticBubble', function(
      */
     unselect: function() {
       Neatline.execute('map:unselect');
-      this.__ui.body.hide();
       this.$el.removeClass('frozen');
+      this.__ui.body.hide();
       this.frozen = false;
       this.hide();
     },

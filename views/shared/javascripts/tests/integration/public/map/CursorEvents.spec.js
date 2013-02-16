@@ -31,7 +31,7 @@ describe('Map Cursor Events', function() {
   it('should render and publish feature hover', function() {
 
     // Hover on feature.
-    _t.hoverOnMapFeature(layer, feature);
+    _t.hoverOnMapFeature(feature);
 
     // Should render `temporary` intent.
     expect(feature.renderIntent).toEqual('temporary');
@@ -45,8 +45,8 @@ describe('Map Cursor Events', function() {
   it('should render and publish feature unhover', function() {
 
     // Unhover on feature.
-    _t.hoverOnMapFeature(layer, feature);
-    _t.unHoverOnMapFeature(_t.vw.map.layers);
+    _t.hoverOnMapFeature(feature);
+    _t.unHoverOnMapFeature();
 
     // Should render `default` intent.
     expect(feature.renderIntent).toEqual('default');
@@ -60,7 +60,7 @@ describe('Map Cursor Events', function() {
   it('should render and publish feature select', function() {
 
     // Click on feature.
-    _t.clickOnMapFeature(layer, feature);
+    _t.clickOnMapFeature(feature);
 
     // Should render `select` intent.
     expect(feature.renderIntent).toEqual('select');
@@ -74,8 +74,8 @@ describe('Map Cursor Events', function() {
   it('should render and publish feature unselect', function() {
 
     // Click on feature, then off.
-    _t.clickOnMapFeature(layer, feature);
-    _t.clickOffMapFeature(_t.vw.map.layers);
+    _t.clickOnMapFeature(feature);
+    _t.clickOffMapFeature();
 
     // Should render `default` intent.
     expect(feature.renderIntent).toEqual('default');

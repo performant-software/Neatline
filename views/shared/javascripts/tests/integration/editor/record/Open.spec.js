@@ -156,7 +156,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Trigger click.
-    _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
     expect(_t.el.editor).toContain(_t.el.record);
@@ -177,14 +177,14 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Trigger click on Record 1 feature.
-    _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
     expect(_t.el.editor).toContain(_t.el.record);
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
-    _t.clickOnMapFeature(_t.vw.map.layers[0], feature2);
+    _t.clickOnMapFeature(feature2);
 
     // Form should not display new model.
     expect(_t.vw.record.model.get('title')).toEqual('title1');
@@ -232,7 +232,7 @@ describe('Record Form Open', function() {
     _t.setMapCenter(200, 300, 15);
 
     // Trigger click on Record 1 feature.
-    _t.clickOnMapFeature(_t.vw.map.layers[0], feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Get focus and zoom.
     var center  = _t.vw.map.map.getCenter();

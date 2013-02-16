@@ -41,15 +41,16 @@ _t.refreshMap = function(response) {
 /**
  * Simulate a click on a map feature.
  *
- * @param {Object} layer: The feature parent layer.
  * @param {Object} feature: The feature to be clicked on.
  */
-_t.clickOnMapFeature = function(layer, feature) {
+_t.clickOnMapFeature = function(feature) {
 
   // Mock getFeaturesFromEvent().
-  layer.getFeatureFromEvent = function(evt) {
-    return feature;
-  };
+  _.each(this.vw.map.layers, function(layer) {
+    layer.getFeatureFromEvent = function(evt) {
+      return feature;
+    };
+  });
 
   // Mock cursor event.
   var evt = {
@@ -65,13 +66,11 @@ _t.clickOnMapFeature = function(layer, feature) {
 
 /**
  * Simulate a click out on a map feature.
- *
- * @param {Array} layers: All vector layers on the map.
  */
-_t.clickOffMapFeature = function(layers) {
+_t.clickOffMapFeature = function() {
 
   // Mock getFeaturesFromEvent().
-  _.each(layers, function(layer) {
+  _.each(this.vw.map.layers, function(layer) {
     layer.getFeatureFromEvent = function(evt) {
       return null;
     };
@@ -88,15 +87,16 @@ _t.clickOffMapFeature = function(layers) {
 /**
  * Simulate a mouseenter on a map feature.
  *
- * @param {Object} layer: The feature parent layer.
  * @param {Object} feature: The feature to be clicked on.
  */
-_t.hoverOnMapFeature = function(layer, feature) {
+_t.hoverOnMapFeature = function(feature) {
 
   // Mock getFeaturesFromEvent().
-  layer.getFeatureFromEvent = function(evt) {
-    return feature;
-  };
+  _.each(this.vw.map.layers, function(layer) {
+    layer.getFeatureFromEvent = function(evt) {
+      return feature;
+    };
+  });
 
   // Trigger click.
   this.vw.map.map.events.triggerEvent('mousemove', {
@@ -108,13 +108,11 @@ _t.hoverOnMapFeature = function(layer, feature) {
 
 /**
  * Simulate a mouseleave on a map feature.
- *
- * @param {Array} layers: All vector layers on the map.
  */
-_t.unHoverOnMapFeature = function(layers) {
+_t.unHoverOnMapFeature = function() {
 
   // Mock getFeaturesFromEvent().
-  _.each(layers, function(layer) {
+  _.each(this.vw.map.layers, function(layer) {
     layer.getFeatureFromEvent = function(evt) {
       return null;
     };
@@ -175,5 +173,5 @@ _t.mockGoogleApi = function() {
         HYBRID:     'hybrid'
       }
     }
-  }
+  };
 };

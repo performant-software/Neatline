@@ -27,7 +27,7 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      this.records = null   // The current collection of records.
+      this.records = null;  // The current collection of records.
       this.layers = [];     // An array of record-backed vector layers.
 
       this.__initOpenLayers();

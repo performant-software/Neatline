@@ -49,7 +49,7 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Hover on feature.
-    _t.hoverOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
 
     // Title and body should be rendered.
     expect(els.title.text()).toEqual('_title1');
@@ -74,8 +74,8 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Highlight, unhighlight feature.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.unHoverOnMapFeature(_t.vw.map.layers);
+    _t.hoverOnMapFeature(feature1);
+    _t.unHoverOnMapFeature();
 
     // Bubble should not be visible.
     expect(_t.el.staticBubble).not.toBeVisible();
@@ -90,7 +90,7 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Move cursor out of the exhibit.
-    _t.hoverOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
     _t.triggerMapMouseout();
 
     // Bubble should not be visible.
@@ -107,11 +107,11 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Highlight feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Bubble should be visible on unhover.
-    _t.unHoverOnMapFeature(_t.vw.map.layers);
+    _t.unHoverOnMapFeature();
     expect(_t.el.staticBubble).toBeVisible();
 
   });
@@ -128,8 +128,8 @@ describe('Static Bubble', function() {
     layer1.nModel.set('body', 'content');
 
     // Highlight feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Body should be visible.
     expect(els.body).toBeVisible();
@@ -148,8 +148,8 @@ describe('Static Bubble', function() {
     layer1.nModel.set('body', null);
 
     // Highlight feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Body should be not visible.
     expect(els.body).not.toBeVisible();
@@ -164,8 +164,8 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Highlight feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Should add `frozen` class.
     expect(_t.el.staticBubble).toHaveClass('frozen');
@@ -181,11 +181,11 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Hover on feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Hover on a different feature.
-    _t.hoverOnMapFeature(layer2, feature2);
+    _t.hoverOnMapFeature(feature2);
 
     // Bubble values should be unchanged.
     expect(els.title.text()).toEqual('_title1');
@@ -204,8 +204,8 @@ describe('Static Bubble', function() {
     beforeEach(function() {
 
       // Hover on feature, then select.
-      _t.hoverOnMapFeature(layer1, feature1);
-      _t.clickOnMapFeature(layer1, feature1);
+      _t.hoverOnMapFeature(feature1);
+      _t.clickOnMapFeature(feature1);
 
     });
 
@@ -215,7 +215,7 @@ describe('Static Bubble', function() {
       expect(_t.el.staticBubble).not.toBeVisible();
 
       // Hover on a different feature.
-      _t.hoverOnMapFeature(layer2, feature2);
+      _t.hoverOnMapFeature(feature2);
 
       // Bubble values should be changed.
       expect(els.title.text()).toEqual('_title2');
@@ -228,7 +228,7 @@ describe('Static Bubble', function() {
     });
 
     it('should unfreeze bubble on feature unselect', function() {
-      _t.clickOffMapFeature(_t.vw.map.layers);
+      _t.clickOffMapFeature();
     });
 
   });
@@ -242,14 +242,14 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Hover on feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Unselect the feature.
-    _t.clickOffMapFeature(_t.vw.map.layers);
+    _t.clickOffMapFeature();
 
     // Hover on feature again.
-    _t.hoverOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
 
     // Body should be hidden.
     expect(els.body).not.toBeVisible();
@@ -264,11 +264,11 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Hover on feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Unselect the feature.
-    _t.clickOffMapFeature(_t.vw.map.layers);
+    _t.clickOffMapFeature();
 
     // Should remove `frozen` class.
     expect(_t.el.staticBubble).not.toHaveClass('frozen');
@@ -283,8 +283,8 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Hover on feature, then select.
-    _t.hoverOnMapFeature(layer1, feature1);
-    _t.clickOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
+    _t.clickOnMapFeature(feature1);
 
     // Deactivate the presenter.
     Neatline.vent.trigger('presenter:deactivate');
@@ -305,7 +305,7 @@ describe('Static Bubble', function() {
     Neatline.vent.trigger('presenter:deactivate');
 
     // Hover on feature.
-    _t.hoverOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
 
     // Bubble should not be visible.
     expect(_t.el.staticBubble).not.toBeVisible();
@@ -325,7 +325,7 @@ describe('Static Bubble', function() {
     Neatline.vent.trigger('presenter:activate');
 
     // Hover on feature.
-    _t.hoverOnMapFeature(layer1, feature1);
+    _t.hoverOnMapFeature(feature1);
 
     // Bubble should be visible.
     expect(_t.el.staticBubble).toBeVisible();
