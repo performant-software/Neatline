@@ -22,11 +22,14 @@ Neatline.module('Editor.Exhibit', function(
     tagName:    'form',
 
     events: {
-      'click a[name="save"]': 'save'
+      'click a[name="set-focus"]':  'onSetFocus',
+      'click a[name="save"]':       'save'
     },
 
     ui: {
-      styles:   '#styles'
+      styles:   '#styles',
+      mapFocus: 'input[name="map-focus"]',
+      mapZoom:  'input[name="map-zoom"]'
     },
 
 
@@ -45,6 +48,17 @@ Neatline.module('Editor.Exhibit', function(
       // Start CodeMirror on the stylesheet.
       this.editor = CodeMirror.fromTextArea(this.__ui.styles[0]);
 
+    },
+
+
+    /**
+     * Populate "Default Focus" with current map center.
+     */
+    onSetFocus: function() {
+      var center  = Neatline.request('map:getCenter');
+      var zoom    = Neatline.request('map:getZoom');
+      this.__ui.mapFocus.val(center.lon+','+center.lat).change();
+      this.__ui.mapZoom.val(zoom).change();
     },
 
 
@@ -81,6 +95,7 @@ Neatline.module('Editor.Exhibit', function(
      * When a save succeeds.
      */
     onSaveSuccess: function() {
+      Neatline.execute('map:refresh');
       Neatline.execute('editor:notifySuccess',
         STRINGS.exhibit.save.success
       );

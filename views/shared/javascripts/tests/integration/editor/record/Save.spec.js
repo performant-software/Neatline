@@ -22,7 +22,7 @@ describe('Record Form Save', function() {
     _t.openRecordForm();
 
     els = {
-      save: _t.vw.record.$('a[name="save"]'),
+      save: _t.vw.record.$('a[name="save"]')
     };
 
   });
@@ -31,9 +31,8 @@ describe('Record Form Save', function() {
   it('should issue PUT request when "Save" is clicked', function() {
 
     // --------------------------------------------------------------------
-    // When the user clicks the "Save" button at the bottom of the edit
-    // form for a record, the form should gather the updated values from
-    // the input fields and issue a PUT request with the new data.
+    // When the "Save" button is clicked, a well-formed PUT request should
+    // be issued to the record API with the new data.
     // --------------------------------------------------------------------
 
     // Get the model id and form elements.

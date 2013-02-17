@@ -18,10 +18,10 @@ describe('Record Form Style Tab', function() {
 
   var getStyles = function() {
     var styles  = _t.vw.map.editLayer.styleMap.styles;
-    standard    = styles.default.defaultStyle;
+    standard    = styles['default'].defaultStyle;
     temporary   = styles.temporary.defaultStyle;
     select      = styles.select.defaultStyle;
-  }
+  };
 
 
   beforeEach(function() {
@@ -309,7 +309,7 @@ describe('Record Form Style Tab', function() {
 
     // --------------------------------------------------------------------
     // When the "Use Current Viewport as Default" button is clicked, the
-    // "Focus Coordinates" and "Focus Zoom" inputs should be populated.
+    // default focus and zoom inputs should be populated.
     // --------------------------------------------------------------------
 
     _t.setMapCenter(1, 2, 3);

@@ -278,7 +278,7 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Populate "Default Focus" with current map center.
+     * Populate default focus and zoom with current map center.
      */
     onSetFocus: function() {
       var center  = Neatline.request('map:getCenter');
