@@ -79,11 +79,19 @@ class Neatline_ExhibitsController
      */
     public function putAction()
     {
+
         $this->_helper->viewRenderer->setNoRender(true);
+
+        // Update the exhibit.
         $exhibit = $this->_helper->db->findById();
         $exhibit->saveForm(Zend_Json::decode(file_get_contents(
             Zend_Registry::get('fileIn')), true
         ));
+
+        // Propagate the stylesheet.
+        $records = $this->_helper->db->getTable('NeatlineRecord');
+        $records->applyStyles($exhibit);
+
     }
 
 

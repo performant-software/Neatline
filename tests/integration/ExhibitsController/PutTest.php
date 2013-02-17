@@ -49,4 +49,30 @@ class Neatline_ExhibitsControllerTest_Put
     }
 
 
+    /**
+     * The styles should be propagated.
+     */
+    public function testUpdateStyles()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record  = new NeatlineRecord($exhibit);
+        $record->tags = 'tag';
+        $record->save();
+
+        $values = array('styles' => "
+        tag:
+         - vector_color: 'color'
+        ");
+
+        $this->writePut($values);
+        $this->dispatch('neatline/put/'.$exhibit->id);
+
+        // `styles` column should be updated.
+        $record = $this->_recordsTable->find($record->id);
+        $this->assertEquals($record->vector_color, 'color');
+
+    }
+
+
 }
