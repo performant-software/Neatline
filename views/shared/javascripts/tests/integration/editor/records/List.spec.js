@@ -31,10 +31,10 @@ describe('Records List', function() {
     // Record titles and bodies should be listed.
     expect(recordRows.length).toEqual(4);
     expect($(recordRows[1]).find('.title')).toHaveText('_title1');
-    expect($(recordRows[1]).find('.body')).toHaveText('_body1')
+    expect($(recordRows[1]).find('.body')).toHaveText('_body1');
     expect($(recordRows[2]).find('.title')).toHaveText('_title2');
     expect($(recordRows[2]).find('.body')).toHaveText('_body2');
-    expect($(recordRows[3]).find('.title')).toHaveText('_title3')
+    expect($(recordRows[3]).find('.title')).toHaveText('_title3');
     expect($(recordRows[3]).find('.body')).toHaveText('_body3');
 
     // Record edit form links should be listed.
@@ -60,7 +60,7 @@ describe('Records List', function() {
 
     // Tags should be removed.
     expect($(recordRows[1]).find('.title')).toHaveText('title');
-    expect($(recordRows[1]).find('.body')).toHaveText('body')
+    expect($(recordRows[1]).find('.body')).toHaveText('body');
 
   });
 

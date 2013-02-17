@@ -38,11 +38,11 @@ Neatline.module('Editor.Exhibit', function(
       this.getTemplate();
       this.getUi();
 
-      // Create exhibit model from global, bind to form.
+      // Create exhibit model, bind to form.
       this.exhibit = new Neatline.Editor.Shared.Exhibit.Model();
       rivets.bind(this.$el, { exhibit: this.exhibit });
 
-      // Instantiate CodeMirror on the stylesheet.
+      // Start CodeMirror on the stylesheet.
       this.editor = CodeMirror.fromTextArea(this.$('#styles')[0]);
 
     },
@@ -59,7 +59,7 @@ Neatline.module('Editor.Exhibit', function(
     /**
      * Push the stylesheet into the model.
      */
-    sync: function() {
+    syncStyles: function() {
       this.editor.save();
       this.__ui.styles.trigger('change');
     },
@@ -69,7 +69,7 @@ Neatline.module('Editor.Exhibit', function(
      * Save the settings.
      */
     save: function() {
-      this.sync();
+      this.syncStyles();
       this.exhibit.save(null, {
         success:  _.bind(this.onSaveSuccess, this),
         error:    _.bind(this.onSaveError, this)
