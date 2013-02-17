@@ -16,8 +16,13 @@
  */
 _t.loadNeatline = function() {
 
-  // Load fixtures, mock server.
-  this.loadFixtures('neatline-partial.html', 'neatline.css');
+  // Load fixtures.
+  this.setFixturesPath();
+  this.loadJsonFixtures();
+  loadFixtures('neatline-partial.html');
+  loadStyleFixtures('neatline.css');
+
+  // Mock the server.
   this.server = sinon.fakeServer.create();
 
   // Public modules.
@@ -38,8 +43,13 @@ _t.loadEditor = function() {
 
   _t.resetHash();
 
-  // Load fixtures, mock server.
-  this.loadFixtures('editor-partial.html', 'neatline.css');
+  // Load fixtures.
+  this.setFixturesPath();
+  this.loadJsonFixtures();
+  loadFixtures('editor-partial.html');
+  loadStyleFixtures('editor.css');
+
+  // Mock the server.
   this.server = sinon.fakeServer.create();
 
   // Editor modules.

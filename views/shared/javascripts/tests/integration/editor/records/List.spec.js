@@ -52,7 +52,7 @@ describe('Records List', function() {
   it('should strip tags out of title and body fields', function() {
 
     // --------------------------------------------------------------------
-    // Tags should be removed from title and body fields.
+    // HTML tags should be removed from title and body fields.
     // --------------------------------------------------------------------
 
     _t.showRecordList(_t.json.records.tags);

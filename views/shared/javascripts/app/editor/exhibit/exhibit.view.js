@@ -43,7 +43,7 @@ Neatline.module('Editor.Exhibit', function(
       rivets.bind(this.$el, { exhibit: this.exhibit });
 
       // Start CodeMirror on the stylesheet.
-      this.editor = CodeMirror.fromTextArea(this.$('#styles')[0]);
+      this.editor = CodeMirror.fromTextArea(this.__ui.styles[0]);
 
     },
 

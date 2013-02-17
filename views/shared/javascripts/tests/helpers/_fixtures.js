@@ -12,20 +12,6 @@
 
 
 /**
- * Read HTML fixtures.
- *
- * @param {String} html: The name of the HTML fixture.
- * @param {String} css: The name of the css fixture.
- */
-_t.loadFixtures = function(html, css) {
-  this.setFixturesPath();
-  this.loadJsonFixtures();
-  loadFixtures(html);
-  loadStyleFixtures(css);
-};
-
-
-/**
  * Set the fixtures path.
  */
 _t.setFixturesPath = function() {

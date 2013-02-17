@@ -15,6 +15,7 @@ describe('Map Exhibit Defaults', function() {
 
   beforeEach(function() {
 
+    _t.setFixturesPath();
     loadFixtures('neatline-partial.html');
 
     Neatline.global.base_layers = [
