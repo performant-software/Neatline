@@ -75,7 +75,7 @@ Neatline.module('Editor.Exhibit', function(
      */
     syncStyles: function() {
       this.editor.save();
-      this.__ui.styles.trigger('change');
+      this.__ui.styles.change();
     },
 
 
