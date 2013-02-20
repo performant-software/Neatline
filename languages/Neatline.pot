@@ -15,213 +15,167 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: build/tmp/Neatline/controllers/IndexController.php:81
-#: build/tmp/Neatline/controllers/IndexController.php:114
 #: controllers/IndexController.php:81 controllers/IndexController.php:114
 msgid "There were problems with your form."
 msgstr ""
 
-#: build/tmp/Neatline/controllers/IndexController.php:231
 #: controllers/IndexController.php:231
 #, php-format
 msgid "The Neatline \"%s\" was successfully added!"
 msgstr ""
 
-#: build/tmp/Neatline/controllers/IndexController.php:239
 #: controllers/IndexController.php:239
 #, php-format
 msgid "The Neatline \"%s\" was successfully changed!"
 msgstr ""
 
-#: build/tmp/Neatline/controllers/IndexController.php:247
 #: controllers/IndexController.php:247
 #, php-format
 msgid "The Neatline \"%s\" was successfully deleted!"
 msgstr ""
 
-#: build/tmp/Neatline/controllers/IndexController.php:255
 #: controllers/IndexController.php:255
 #, php-format
 msgid "This will delete the Neatline \"%s\" and its associated metadata."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:49
 #: forms/NeatlineDetails.php:49
 msgid "The title is displayed at the top of the exhibit."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:57
 #: forms/NeatlineDetails.php:57
 msgid "Enter a title."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:67
 #: forms/NeatlineDetails.php:67
 msgid "Supporting prose to describe the exhibit."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:74
 #: forms/NeatlineDetails.php:74
 msgid "URL Slug"
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:75
 #: forms/NeatlineDetails.php:75
 msgid ""
 "The URL slug is used to form the public URL for the exhibit. Can contain "
 "letters, numbers, and hyphens."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:84
-#: build/tmp/Neatline/models/NeatlineExhibit.php:455
 #: forms/NeatlineDetails.php:84 models/NeatlineExhibit.php:455
 msgid "The slug cannot be empty."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:92
-#: build/tmp/Neatline/models/NeatlineExhibit.php:459
 #: forms/NeatlineDetails.php:92 models/NeatlineExhibit.php:459
 msgid "The slug can only contain lowercase letters, numbers, and hyphens."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:106
 #: forms/NeatlineDetails.php:106
 msgid "The slug is already in use."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:116
 #: forms/NeatlineDetails.php:116
 msgid "By default, exhibits are only visible to you."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:122
 #: forms/NeatlineDetails.php:122
 msgid "(Optional): Static Image"
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:123
 #: forms/NeatlineDetails.php:123
 msgid "Select a file to build the exhibit on a static image."
 msgstr ""
 
-#: build/tmp/Neatline/forms/NeatlineDetails.php:131
 #: forms/NeatlineDetails.php:131
 msgid "Save Neatline"
 msgstr ""
 
-#: build/tmp/Neatline/helpers/NeatlineFunctions.php:249
 #: helpers/NeatlineFunctions.php:249
 msgid "Warning"
 msgstr ""
 
-#: build/tmp/Neatline/helpers/NeatlineFunctions.php:250
 #: helpers/NeatlineFunctions.php:250
 msgid ""
 "Uninstalling the Neatline plugin will permanently delete all Neatline "
 "exhibits."
 msgstr ""
 
-#: build/tmp/Neatline/models/NeatlineExhibit.php:494
 #: models/NeatlineExhibit.php:494
 msgid "Cannot associate a Neatline with a user who doesn't exist."
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/add.php:35
 #: views/admin/index/add.php:35
 msgid "Neatline | Create an Exhibit"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:29
-#: build/tmp/Neatline/views/public/index/browse.php:2
 #: views/admin/index/browse.php:29 views/public/index/browse.php:2
 msgid "Neatline | Browse Exhibits"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:37
 #: views/admin/index/browse.php:37
 msgid "Create an Exhibit"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:55
 #: views/admin/index/browse.php:55
 msgid "Exhibit"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:56
 #: views/admin/index/browse.php:56
 msgid "Items Query"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:57
 #: views/admin/index/browse.php:57
 msgid "Modified"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:58
 #: views/admin/index/browse.php:58
 msgid "# Items"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:81
 #: views/admin/index/browse.php:81
 msgid "Edit Details"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:92
 #: views/admin/index/browse.php:92
 msgid "Edit Query"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:98
 #: views/admin/index/browse.php:98
 msgid "No"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:98
 #: views/admin/index/browse.php:98
 msgid "Yes"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:114
 #: views/admin/index/browse.php:114
 msgid "There are no Neatline exhibits yet."
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/browse.php:116
 #: views/admin/index/browse.php:116
 msgid "Create one!"
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/edit.php:35
 #: views/admin/index/edit.php:35
 #, php-format
 msgid "Neatline | Edit \"%s\""
 msgstr ""
 
-#: build/tmp/Neatline/views/admin/index/query.php:29
 #: views/admin/index/query.php:29
 msgid "Neatline | Edit Items Query"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_back_button.php:30
 #: views/shared/editor/_back_button.php:30
 msgid "Back to Omeka"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_items.php:29
 #: views/shared/editor/_configure_items.php:29
 msgid "Edit Item Order"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_items.php:30
 #: views/shared/editor/_configure_items.php:30
 msgid "Click to edit the ordering of the items in the description tray."
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_items.php:33
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:120
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:52
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:257
 #: views/shared/editor/_configure_items.php:33
 #: views/shared/editor/_configure_map.php:120
 #: views/shared/editor/_configure_timeline.php:52
@@ -229,31 +183,24 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_layout.php:29
-#: build/tmp/Neatline/views/shared/editor/_item_browser.php:37
 #: views/shared/editor/_configure_layout.php:29
 #: views/shared/editor/_item_browser.php:37
 msgid "Map"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_layout.php:30
-#: build/tmp/Neatline/views/shared/editor/_item_browser.php:38
 #: views/shared/editor/_configure_layout.php:30
 #: views/shared/editor/_item_browser.php:38
 msgid "Timeline"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_layout.php:36
 #: views/shared/editor/_configure_layout.php:36
 msgid "Save arrangement"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_layout.php:37
 #: views/shared/editor/_configure_layout.php:37
 msgid "Fix starting viewport positions"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_layout.php:41
 #: views/shared/editor/_configure_layout.php:41
 msgid ""
 "Use the toggle buttons to activate and deactivate blocks; drag the\n"
@@ -262,318 +209,247 @@ msgid ""
 "to store the current viewport settings as the public defaults."
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:31
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:143
 #: views/shared/editor/_configure_map.php:31
 #: views/shared/editor/_edit_form.php:143
 msgid "Shape Color"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:39
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:151
 #: views/shared/editor/_configure_map.php:39
 #: views/shared/editor/_edit_form.php:151
 msgid "Line Color"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:47
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:159
 #: views/shared/editor/_configure_map.php:47
 #: views/shared/editor/_edit_form.php:159
 msgid "Selected Color"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:57
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:169
 #: views/shared/editor/_configure_map.php:57
 #: views/shared/editor/_edit_form.php:169
 msgid "Shape Opacity"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:65
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:177
 #: views/shared/editor/_configure_map.php:65
 #: views/shared/editor/_edit_form.php:177
 msgid "Selected Opacity"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:73
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:185
 #: views/shared/editor/_configure_map.php:73
 #: views/shared/editor/_edit_form.php:185
 msgid "Line Opacity"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:83
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:195
 #: views/shared/editor/_configure_map.php:83
 #: views/shared/editor/_edit_form.php:195
 msgid "Graphic Opacity"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:91
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:203
 #: views/shared/editor/_configure_map.php:91
 #: views/shared/editor/_edit_form.php:203
 msgid "Line Width"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:99
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:211
 #: views/shared/editor/_configure_map.php:99
 #: views/shared/editor/_edit_form.php:211
 msgid "Point Radius"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_map.php:110
 #: views/shared/editor/_configure_map.php:110
 msgid "Default Base Layer"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:30
 #: views/shared/editor/_configure_timeline.php:30
 msgid "Enable Context Band"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:34
 #: views/shared/editor/_configure_timeline.php:34
 msgid "Context Band Unit"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:37
 #: views/shared/editor/_configure_timeline.php:37
 msgid "Hour"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:38
 #: views/shared/editor/_configure_timeline.php:38
 msgid "Day"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:39
 #: views/shared/editor/_configure_timeline.php:39
 msgid "Week"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:40
 #: views/shared/editor/_configure_timeline.php:40
 msgid "Month"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:41
 #: views/shared/editor/_configure_timeline.php:41
 msgid "Year"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:42
 #: views/shared/editor/_configure_timeline.php:42
 msgid "Decade"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:43
 #: views/shared/editor/_configure_timeline.php:43
 msgid "Century"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_configure_timeline.php:48
 #: views/shared/editor/_configure_timeline.php:48
 msgid "Context Band Height %"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:33
 #: views/shared/editor/_edit_form.php:33
 msgid "Text"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:34
 #: views/shared/editor/_edit_form.php:34
 msgid "Spatial"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:35
 #: views/shared/editor/_edit_form.php:35
 msgid "Temporal"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:36
 #: views/shared/editor/_edit_form.php:36
 msgid "Styling"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:37
 #: views/shared/editor/_edit_form.php:37
 msgid "Relations"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:59
 #: views/shared/editor/_edit_form.php:59
 msgid "Show pop-up bubble."
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:63
 #: views/shared/editor/_edit_form.php:63
 msgid "Use default item metadata."
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:72
 #: views/shared/editor/_edit_form.php:72
 msgid "Geocoverage"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:84
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:87
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:105
 #: views/shared/editor/_edit_form.php:84 views/shared/editor/_edit_form.php:87
 #: views/shared/editor/_edit_form.php:105
 msgid "Start Date"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:93
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:96
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:114
 #: views/shared/editor/_edit_form.php:93 views/shared/editor/_edit_form.php:96
 #: views/shared/editor/_edit_form.php:114
 msgid "End Date"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:102
 #: views/shared/editor/_edit_form.php:102
 msgid "Start Visible Date"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:111
 #: views/shared/editor/_edit_form.php:111
 msgid "End Visible Date"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:120
 #: views/shared/editor/_edit_form.php:120
 msgid "Date Ambiguity"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:222
 #: views/shared/editor/_edit_form.php:222
 msgid "Point Graphic"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:225
 #: views/shared/editor/_edit_form.php:225
 msgid "An external graphic to represent a point"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:233
 #: views/shared/editor/_edit_form.php:233
 msgid "Reset Item Styles"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:243
+#: views/shared/editor/_edit_form.php:237
+msgid "Set Map Focus"
+msgstr ""
+
 #: views/shared/editor/_edit_form.php:247
 msgid "Parent Record"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_form.php:258
-#: build/tmp/Neatline/views/shared/neatline/_bubbles.php:31
 #: views/shared/editor/_edit_form.php:262
 #: views/shared/neatline/_bubbles.php:31
 msgid "Close"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_geometry.php:29
 #: views/shared/editor/_edit_geometry.php:29
 msgid "Drag"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_geometry.php:30
 #: views/shared/editor/_edit_geometry.php:30
 msgid "Rotate"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_geometry.php:31
 #: views/shared/editor/_edit_geometry.php:31
 msgid "Scale"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_geometry.php:37
 #: views/shared/editor/_edit_geometry.php:37
 msgid "rectangle"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_edit_geometry.php:38
 #: views/shared/editor/_edit_geometry.php:38
 msgid "elipse"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_item_browser.php:34
 #: views/shared/editor/_item_browser.php:34
 msgid "New Record"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_tooltips.php:30
 #: views/shared/editor/_tooltips.php:30
 msgid "Click to drag."
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_tooltips.php:40
 #: views/shared/editor/_tooltips.php:40
 msgid "Space"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_tooltips.php:45
 #: views/shared/editor/_tooltips.php:45
 msgid "Time"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_topbar_navigation.php:33
 #: views/shared/editor/_topbar_navigation.php:33
 msgid "Item Settings"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_topbar_navigation.php:40
 #: views/shared/editor/_topbar_navigation.php:40
 msgid "Map Settings"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_topbar_navigation.php:50
 #: views/shared/editor/_topbar_navigation.php:50
 msgid "Timeline Settings"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/_topbar_navigation.php:59
 #: views/shared/editor/_topbar_navigation.php:59
 msgid "Layout Editor"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/index.php:35
 #: views/shared/editor/index.php:35
 #, php-format
 msgid "Neatline Editor: %s"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/items-ajax.php:42
 #: views/shared/editor/items-ajax.php:42
 msgid "Neatline Records"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/editor/items-ajax.php:71
 #: views/shared/editor/items-ajax.php:71
 msgid "Omeka Records"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/index/_neatline_header.php:31
 #: views/shared/index/_neatline_header.php:31
 msgid "View Fullscreen"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/neatline/_bubbles.php:30
 #: views/shared/neatline/_bubbles.php:30
 msgid "Click to freeze"
 msgstr ""
 
-#: build/tmp/Neatline/views/shared/neatline/_bubbles.php:33
 #: views/shared/neatline/_bubbles.php:33
 msgid "Click for more information."
-msgstr ""
-
-#: views/shared/editor/_edit_form.php:237
-msgid "Set Map Focus"
 msgstr ""
