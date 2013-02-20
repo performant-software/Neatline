@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit defaults initialization tests.
+ * Styles initialization tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Exhibit Defaults Initialization', function() {
+describe('Styles Initialization', function() {
 
 
   beforeEach(function() {
@@ -32,8 +32,8 @@ describe('Exhibit Defaults Initialization', function() {
     };
 
     // Start form module.
-    Neatline.Editor.Exhibit.init();
-    var view = Neatline.Editor.Exhibit.__view;
+    Neatline.Editor.Styles.init();
+    var view = Neatline.Editor.Styles.__view;
 
     // Form should be populated.
     expect(view.editor.getValue()).toEqual('1');

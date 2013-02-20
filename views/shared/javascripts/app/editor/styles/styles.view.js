@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit defaults view.
+ * Styles view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit', function(
-  Exhibit, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Styles', function(
+  Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.View = Backbone.Neatline.View.extend({
+  Styles.View = Backbone.Neatline.View.extend({
 
 
-    template:   '#exhibit-template',
-    className:  'form-stacked exhibit',
+    template:   '#styles-template',
+    className:  'form-stacked styles',
     tagName:    'form',
 
     events: {

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit defaults save tests.
+ * Styles save tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Exhibit Defaults Save', function() {
+describe('Styles Save', function() {
 
 
   var els;
@@ -21,8 +21,8 @@ describe('Exhibit Defaults Save', function() {
     _t.loadEditor();
 
     els = {
-      setFocus: _t.vw.exhibit.$('a[name="set-focus"]'),
-      save:     _t.vw.exhibit.$('a[name="save"]')
+      setFocus: _t.vw.styles.$('a[name="set-focus"]'),
+      save:     _t.vw.styles.$('a[name="save"]')
     };
 
   });
@@ -39,12 +39,12 @@ describe('Exhibit Defaults Save', function() {
     els.setFocus.trigger('click');
 
     // Inputs should be updated.
-    expect(_t.vw.exhibit.__ui.mapFocus).toHaveValue('1,2');
-    expect(_t.vw.exhibit.__ui.mapZoom).toHaveValue(3);
+    expect(_t.vw.styles.__ui.mapFocus).toHaveValue('1,2');
+    expect(_t.vw.styles.__ui.mapZoom).toHaveValue(3);
 
     // Model should be updated.
-    expect(_t.vw.exhibit.exhibit.get('map_focus')).toEqual('1,2');
-    expect(_t.vw.exhibit.exhibit.get('map_zoom')).toEqual('3');
+    expect(_t.vw.styles.exhibit.get('map_focus')).toEqual('1,2');
+    expect(_t.vw.styles.exhibit.get('map_zoom')).toEqual('3');
 
   });
 
@@ -56,9 +56,9 @@ describe('Exhibit Defaults Save', function() {
     // be issued to the exhibit API with the new data.
     // --------------------------------------------------------------------
 
-    _t.vw.exhibit.editor.setValue('1');
-    _t.vw.exhibit.__ui.mapFocus.val('2').trigger('change');
-    _t.vw.exhibit.__ui.mapZoom. val('3').trigger('change');
+    _t.vw.styles.editor.setValue('1');
+    _t.vw.styles.__ui.mapFocus.val('2').trigger('change');
+    _t.vw.styles.__ui.mapZoom. val('3').trigger('change');
 
     // Click "Save" button.
     els.save.trigger('click');

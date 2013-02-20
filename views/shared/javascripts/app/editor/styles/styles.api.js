@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit defaults event handlers.
+ * Styles event handlers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,19 +10,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit', function(
-  Exhibit, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Styles', function(
+  Styles, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
    * Refresh the editor.
    */
   var refresh = function() {
-    Exhibit.__view.refresh();
+    Styles.__view.refresh();
   };
 
-  Neatline.commands.addHandler('editor:exhibit:refresh', refresh);
-  Neatline.vent.on('editor:router:#exhibit', refresh);
+  Neatline.commands.addHandler('editor:styles:refresh', refresh);
+  Neatline.vent.on('editor:router:#styles', refresh);
 
 
 });

@@ -33,18 +33,7 @@ Neatline.module('Editor.Menu', function(
   };
 
   Neatline.commands.addHandler('editor:menu:styles', activateStyles);
-  Neatline.vent.on('editor:router:#stylesheet', activateStyles);
-
-
-  /**
-   * Activate "Exhibit" tab.
-   */
-  var activateExhibit = function() {
-    Menu.__view.activateTab('exhibit');
-  };
-
-  Neatline.commands.addHandler('editor:menu:exhibit', activateExhibit);
-  Neatline.vent.on('editor:router:#exhibit', activateExhibit);
+  Neatline.vent.on('editor:router:#styles', activateStyles);
 
 
 });

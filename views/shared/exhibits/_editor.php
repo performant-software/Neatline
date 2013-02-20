@@ -29,7 +29,7 @@
 <?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_search.php'); ?>
 
-<?php echo $this->partial('exhibits/underscore/_exhibit.php', array(
+<?php echo $this->partial('exhibits/underscore/_styles.php', array(
   'exhibit' => $exhibit
 )); ?>
 
