@@ -40,14 +40,13 @@ class Neatline_RecordControllerTest_Post
             'vector_opacity'    => '10',
             'select_opacity'    => '11',
             'stroke_opacity'    => '12',
-            'image_opacity'     => '13',
-            'stroke_width'      => '14',
-            'point_radius'      => '15',
-            'point_image'       => '16',
-            'min_zoom'          => '17',
-            'max_zoom'          => '18',
-            'map_focus'         => '19',
-            'map_zoom'          => '20'
+            'stroke_width'      => '13',
+            'point_radius'      => '14',
+            'point_image'       => '15',
+            'min_zoom'          => '16',
+            'max_zoom'          => '17',
+            'map_focus'         => '18',
+            'map_zoom'          => '19'
         )));
 
         // Hit /records with POST.
@@ -80,14 +79,13 @@ class Neatline_RecordControllerTest_Post
         $this->assertEquals($record->vector_opacity,    10);
         $this->assertEquals($record->select_opacity,    11);
         $this->assertEquals($record->stroke_opacity,    12);
-        $this->assertEquals($record->image_opacity,     13);
-        $this->assertEquals($record->stroke_width,      14);
-        $this->assertEquals($record->point_radius,      15);
-        $this->assertEquals($record->point_image,       '16');
-        $this->assertEquals($record->min_zoom,          17);
-        $this->assertEquals($record->max_zoom,          18);
-        $this->assertEquals($record->map_focus,         '19');
-        $this->assertEquals($record->map_zoom,          20);
+        $this->assertEquals($record->stroke_width,      13);
+        $this->assertEquals($record->point_radius,      14);
+        $this->assertEquals($record->point_image,       '15');
+        $this->assertEquals($record->min_zoom,          16);
+        $this->assertEquals($record->max_zoom,          17);
+        $this->assertEquals($record->map_focus,         '18');
+        $this->assertEquals($record->map_zoom,          19);
 
     }
 

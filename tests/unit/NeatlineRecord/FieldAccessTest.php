@@ -41,12 +41,11 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->vector_opacity     = 15;
         $record->select_opacity     = 16;
         $record->stroke_opacity     = 17;
-        $record->image_opacity      = 18;
-        $record->stroke_width       = 19;
-        $record->point_radius       = 20;
-        $record->point_image        = '21';
-        $record->max_zoom           = 22;
-        $record->min_zoom           = 23;
+        $record->stroke_width       = 18;
+        $record->point_radius       = 19;
+        $record->point_image        = '20';
+        $record->max_zoom           = 21;
+        $record->min_zoom           = 22;
         $record->__save();
 
         $record = $this->_recordsTable->find($record->id);
@@ -68,12 +67,11 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $this->assertEquals($record->vector_opacity,    15);
         $this->assertEquals($record->select_opacity,    16);
         $this->assertEquals($record->stroke_opacity,    17);
-        $this->assertEquals($record->image_opacity,     18);
-        $this->assertEquals($record->stroke_width,      19);
-        $this->assertEquals($record->point_radius,      20);
-        $this->assertEquals($record->point_image,       '21');
-        $this->assertEquals($record->max_zoom,          22);
-        $this->assertEquals($record->min_zoom,          23);
+        $this->assertEquals($record->stroke_width,      18);
+        $this->assertEquals($record->point_radius,      19);
+        $this->assertEquals($record->point_image,       '20');
+        $this->assertEquals($record->max_zoom,          21);
+        $this->assertEquals($record->min_zoom,          22);
 
     }
 

@@ -36,7 +36,6 @@ function records(exhibit_id, count, zoom, color, tags) {
       'select_color,'+
       'point_radius,'+
       'stroke_opacity,'+
-      'image_opacity,'+
       'vector_opacity,'+
       'select_opacity,'+
       'stroke_width,'+
@@ -47,7 +46,7 @@ function records(exhibit_id, count, zoom, color, tags) {
 
   _(count).times(function(n) {
 
-    var off = randy.randInt(0,len-500)
+    var off = randy.randInt(0,len-500);
     var lat = randy.randInt(-20000000,20000000);
     var lon = randy.randInt(-20000000,20000000);
     var geo = 'GeomFromText("POINT('+lon+' '+lat+')")';
@@ -65,7 +64,6 @@ function records(exhibit_id, count, zoom, color, tags) {
       '"#000000",'+
       '"'+color+'",'+
       rad+','+
-      100+','+
       100+','+
       30+','+
       50+','+

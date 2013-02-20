@@ -84,14 +84,6 @@
 
   <?php echo $this->partial(
     'exhibits/underscore/helpers/_text_input.php', array(
-      'name'  => 'image-opacity',
-      'label' => 'Image Opacity',
-      'bind'  => 'record.image_opacity',
-      'class' => 'preview opacity'
-  )); ?>
-
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_text_input.php', array(
       'name'  => 'stroke-width',
       'label' => 'Line Width',
       'bind'  => 'record.stroke_width',

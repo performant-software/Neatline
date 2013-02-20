@@ -42,14 +42,13 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $record->vector_opacity     = 9;
         $record->select_opacity     = 10;
         $record->stroke_opacity     = 11;
-        $record->image_opacity      = 12;
-        $record->stroke_width       = 13;
-        $record->point_radius       = 14;
-        $record->point_image        = '15';
-        $record->min_zoom           = 16;
-        $record->max_zoom           = 17;
-        $record->map_focus          = '18';
-        $record->map_zoom           = 19;
+        $record->stroke_width       = 12;
+        $record->point_radius       = 13;
+        $record->point_image        = '14';
+        $record->min_zoom           = 15;
+        $record->max_zoom           = 16;
+        $record->map_focus          = '17';
+        $record->map_zoom           = 18;
         $record->save();
 
         $records = $this->_recordsTable->queryRecord($record->id);
@@ -69,14 +68,13 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $this->assertEquals($records['vector_opacity'],     9);
         $this->assertEquals($records['select_opacity'],     10);
         $this->assertEquals($records['stroke_opacity'],     11);
-        $this->assertEquals($records['image_opacity'],      12);
-        $this->assertEquals($records['stroke_width'],       13);
-        $this->assertEquals($records['point_radius'],       14);
-        $this->assertEquals($records['point_image'],        '15');
-        $this->assertEquals($records['min_zoom'],           16);
-        $this->assertEquals($records['max_zoom'],           17);
-        $this->assertEquals($records['map_focus'],          '18');
-        $this->assertEquals($records['map_zoom'],           19);
+        $this->assertEquals($records['stroke_width'],       12);
+        $this->assertEquals($records['point_radius'],       13);
+        $this->assertEquals($records['point_image'],        '14');
+        $this->assertEquals($records['min_zoom'],           15);
+        $this->assertEquals($records['max_zoom'],           16);
+        $this->assertEquals($records['map_focus'],          '17');
+        $this->assertEquals($records['map_zoom'],           18);
 
     }
 

@@ -81,7 +81,6 @@ describe('Record Form Add', function() {
     expect(_.isNumber(record.get('vector_opacity'))). toBeTruthy();
     expect(_.isNumber(record.get('stroke_opacity'))). toBeTruthy();
     expect(_.isNumber(record.get('select_opacity'))). toBeTruthy();
-    expect(_.isNumber(record.get('image_opacity'))).  toBeTruthy();
     expect(_.isNumber(record.get('point_radius'))).   toBeTruthy();
     expect(_.isNumber(record.get('stroke_width'))).   toBeTruthy();
 

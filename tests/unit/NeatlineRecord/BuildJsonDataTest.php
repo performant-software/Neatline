@@ -37,15 +37,14 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $record->vector_opacity     = 7;
         $record->select_opacity     = 8;
         $record->stroke_opacity     = 9;
-        $record->image_opacity      = 10;
-        $record->stroke_width       = 11;
-        $record->point_radius       = 12;
-        $record->point_image        = '13';
-        $record->min_zoom           = 14;
-        $record->max_zoom           = 15;
-        $record->map_focus          = '16';
-        $record->map_zoom           = 17;
-        $record->coverage           = 'POINT(18 18)';
+        $record->stroke_width       = 10;
+        $record->point_radius       = 11;
+        $record->point_image        = '12';
+        $record->min_zoom           = 13;
+        $record->max_zoom           = 14;
+        $record->map_focus          = '15';
+        $record->map_zoom           = 16;
+        $record->coverage           = 'POINT(17 17)';
         $record->save();
 
         $data = $record->buildJsonData();
@@ -63,15 +62,14 @@ class Neatline_NeatlineRecordTest_BuildJsonData
         $this->assertEquals($data['vector_opacity'],    7);
         $this->assertEquals($data['select_opacity'],    8);
         $this->assertEquals($data['stroke_opacity'],    9);
-        $this->assertEquals($data['image_opacity'],     10);
-        $this->assertEquals($data['stroke_width'],      11);
-        $this->assertEquals($data['point_radius'],      12);
-        $this->assertEquals($data['point_image'],       '13');
-        $this->assertEquals($data['min_zoom'],          14);
-        $this->assertEquals($data['max_zoom'],          15);
-        $this->assertEquals($data['map_focus'],         '16');
-        $this->assertEquals($data['map_zoom'],          17);
-        $this->assertEquals($data['coverage'],          'POINT(18 18)');
+        $this->assertEquals($data['stroke_width'],      10);
+        $this->assertEquals($data['point_radius'],      11);
+        $this->assertEquals($data['point_image'],       '12');
+        $this->assertEquals($data['min_zoom'],          13);
+        $this->assertEquals($data['max_zoom'],          14);
+        $this->assertEquals($data['map_focus'],         '15');
+        $this->assertEquals($data['map_zoom'],          16);
+        $this->assertEquals($data['coverage'],          'POINT(17 17)');
 
     }
 

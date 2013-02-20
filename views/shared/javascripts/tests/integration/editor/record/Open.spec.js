@@ -110,12 +110,11 @@ describe('Record Form Open', function() {
     expect(inputs.vectorOpacity).   toHaveValue('13');
     expect(inputs.selectOpacity).   toHaveValue('16');
     expect(inputs.strokeOpacity).   toHaveValue('19');
-    expect(inputs.imageOpacity).    toHaveValue('22');
-    expect(inputs.strokeWidth).     toHaveValue('25');
-    expect(inputs.pointRadius).     toHaveValue('28');
-    expect(inputs.pointImage).      toHaveValue('31');
-    expect(inputs.minZoom).         toHaveValue('34');
-    expect(inputs.maxZoom).         toHaveValue('37');
+    expect(inputs.strokeWidth).     toHaveValue('22');
+    expect(inputs.pointRadius).     toHaveValue('25');
+    expect(inputs.pointImage).      toHaveValue('28');
+    expect(inputs.minZoom).         toHaveValue('31');
+    expect(inputs.maxZoom).         toHaveValue('34');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
 

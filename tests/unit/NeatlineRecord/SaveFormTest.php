@@ -39,12 +39,11 @@ class Neatline_NeatlineRecordTest_SaveForm
             'vector_opacity'    => 12,
             'select_opacity'    => 13,
             'stroke_opacity'    => 14,
-            'image_opacity'     => 15,
-            'stroke_width'      => 16,
-            'point_radius'      => 17,
-            'point_image'       => '18',
-            'max_zoom'          => 19,
-            'min_zoom'          => 20
+            'stroke_width'      => 15,
+            'point_radius'      => 16,
+            'point_image'       => '17',
+            'max_zoom'          => 18,
+            'min_zoom'          => 19
         );
 
         $record->saveForm($values);
@@ -64,12 +63,11 @@ class Neatline_NeatlineRecordTest_SaveForm
         $this->assertEquals($record->vector_opacity,    12);
         $this->assertEquals($record->select_opacity,    13);
         $this->assertEquals($record->stroke_opacity,    14);
-        $this->assertEquals($record->image_opacity,     15);
-        $this->assertEquals($record->stroke_width,      16);
-        $this->assertEquals($record->point_radius,      17);
-        $this->assertEquals($record->point_image,       '18');
-        $this->assertEquals($record->max_zoom,          19);
-        $this->assertEquals($record->min_zoom,          20);
+        $this->assertEquals($record->stroke_width,      15);
+        $this->assertEquals($record->point_radius,      16);
+        $this->assertEquals($record->point_image,       '17');
+        $this->assertEquals($record->max_zoom,          18);
+        $this->assertEquals($record->min_zoom,          19);
 
     }
 

@@ -37,7 +37,6 @@ describe('Record Form Style Tab', function() {
       vectorOpacity:  _t.vw.record.$('input[name="vector-opacity"]'),
       strokeOpacity:  _t.vw.record.$('input[name="stroke-opacity"]'),
       selectOpacity:  _t.vw.record.$('input[name="select-opacity"]'),
-      imageOpacity:   _t.vw.record.$('input[name="image-opacity"]'),
       strokeWidth:    _t.vw.record.$('input[name="stroke-width"]'),
       pointRadius:    _t.vw.record.$('input[name="point-radius"]'),
       pointImage:     _t.vw.record.$('input[name="point-image"]'),
@@ -178,27 +177,6 @@ describe('Record Form Style Tab', function() {
     afterEach(function() {
       expect(temporary.fillOpacity).toEqual(0.5);
       expect(select.fillOpacity).toEqual(0.5);
-    });
-
-  });
-
-
-  describe('image opacity', function() {
-
-    it('should update on `change`', function() {
-      els.imageOpacity.val(50).trigger('change');
-      getStyles();
-    });
-
-    it('should update on `keyup`', function() {
-      els.imageOpacity.val(50).trigger('keyup');
-      getStyles();
-    });
-
-    afterEach(function() {
-      expect(standard.graphicOpacity).toEqual(0.5);
-      expect(temporary.graphicOpacity).toEqual(0.5);
-      expect(select.graphicOpacity).toEqual(0.5);
     });
 
   });

@@ -41,7 +41,6 @@ Neatline.module('Shared.Record', function(
         vector_opacity: 30,
         stroke_opacity: 90,
         select_opacity: 50,
-        image_opacity:  90,
         point_radius:   10,
         stroke_width:   2
       };

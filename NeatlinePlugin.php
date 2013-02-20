@@ -119,7 +119,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         self::addStyle('vector_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('select_opacity',    'INT(10) UNSIGNED NULL');
         self::addStyle('stroke_opacity',    'INT(10) UNSIGNED NULL');
-        self::addStyle('image_opacity',     'INT(10) UNSIGNED NULL');
         self::addStyle('stroke_width',      'INT(10) UNSIGNED NULL');
         self::addStyle('point_radius',      'INT(10) UNSIGNED NULL');
         self::addStyle('max_zoom',          'INT(10) UNSIGNED NULL');
@@ -241,7 +240,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'vector_opacity',
             'select_opacity',
             'stroke_opacity',
-            'image_opacity',
             'stroke_width',
             'point_radius',
             'point_image',

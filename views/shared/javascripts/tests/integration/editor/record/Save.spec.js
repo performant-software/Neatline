@@ -51,14 +51,13 @@ describe('Record Form Save', function() {
     inputs.vectorOpacity.   val('9').       trigger('change');
     inputs.selectOpacity.   val('10').      trigger('change');
     inputs.strokeOpacity.   val('11').      trigger('change');
-    inputs.imageOpacity.    val('12').      trigger('change');
-    inputs.strokeWidth.     val('13').      trigger('change');
-    inputs.pointRadius.     val('14').      trigger('change');
-    inputs.pointImage.      val('15').      trigger('change');
-    inputs.minZoom.         val('16').      trigger('change');
-    inputs.maxZoom.         val('17').      trigger('change');
-    inputs.mapFocus.        val('18').      trigger('change');
-    inputs.mapZoom.         val('19').      trigger('change');
+    inputs.strokeWidth.     val('12').      trigger('change');
+    inputs.pointRadius.     val('13').      trigger('change');
+    inputs.pointImage.      val('14').      trigger('change');
+    inputs.minZoom.         val('15').      trigger('change');
+    inputs.maxZoom.         val('16').      trigger('change');
+    inputs.mapFocus.        val('17').      trigger('change');
+    inputs.mapZoom.         val('18').      trigger('change');
 
     // Click "Save" button.
     els.save.trigger('click');
@@ -83,14 +82,13 @@ describe('Record Form Save', function() {
     expect(params.vector_opacity).  toEqual('9');
     expect(params.select_opacity).  toEqual('10');
     expect(params.stroke_opacity).  toEqual('11');
-    expect(params.image_opacity).   toEqual('12');
-    expect(params.stroke_width).    toEqual('13');
-    expect(params.point_radius).    toEqual('14');
-    expect(params.point_image).     toEqual('15');
-    expect(params.min_zoom).        toEqual('16');
-    expect(params.max_zoom).        toEqual('17');
-    expect(params.map_focus).       toEqual('18');
-    expect(params.map_zoom).        toEqual('19');
+    expect(params.stroke_width).    toEqual('12');
+    expect(params.point_radius).    toEqual('13');
+    expect(params.point_image).     toEqual('14');
+    expect(params.min_zoom).        toEqual('15');
+    expect(params.max_zoom).        toEqual('16');
+    expect(params.map_focus).       toEqual('17');
+    expect(params.map_zoom).        toEqual('18');
 
   });
 

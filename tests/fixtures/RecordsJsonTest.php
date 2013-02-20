@@ -96,29 +96,25 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->stroke_opacity    = 20;
         $record3->stroke_opacity    = 21;
         // ----------------------------------------------------------------
-        $record1->image_opacity     = 22;
-        $record2->image_opacity     = 23;
-        $record3->image_opacity     = 24;
+        $record1->stroke_width      = 22;
+        $record2->stroke_width      = 23;
+        $record3->stroke_width      = 24;
         // ----------------------------------------------------------------
-        $record1->stroke_width      = 25;
-        $record2->stroke_width      = 26;
-        $record3->stroke_width      = 27;
+        $record1->point_radius      = 25;
+        $record2->point_radius      = 26;
+        $record3->point_radius      = 27;
         // ----------------------------------------------------------------
-        $record1->point_radius      = 28;
-        $record2->point_radius      = 29;
-        $record3->point_radius      = 30;
+        $record1->point_image       = '28';
+        $record2->point_image       = '29';
+        $record3->point_image       = '30';
         // ----------------------------------------------------------------
-        $record1->point_image       = '31';
-        $record2->point_image       = '32';
-        $record3->point_image       = '33';
+        $record1->min_zoom          = 31;
+        $record2->min_zoom          = 32;
+        $record3->min_zoom          = 33;
         // ----------------------------------------------------------------
-        $record1->min_zoom          = 34;
-        $record2->min_zoom          = 35;
-        $record3->min_zoom          = 36;
-        // ----------------------------------------------------------------
-        $record1->max_zoom          = 37;
-        $record2->max_zoom          = 38;
-        $record3->max_zoom          = 39;
+        $record1->max_zoom          = 34;
+        $record2->max_zoom          = 35;
+        $record3->max_zoom          = 36;
         // ----------------------------------------------------------------
 
         $record1->__save();

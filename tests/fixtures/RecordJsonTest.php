@@ -44,12 +44,11 @@ class Neatline_RecordJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->vector_opacity     = 4;
         $record->select_opacity     = 5;
         $record->stroke_opacity     = 6;
-        $record->image_opacity      = 7;
-        $record->stroke_width       = 8;
-        $record->point_radius       = 9;
-        $record->point_image        = '10';
-        $record->min_zoom           = 11;
-        $record->max_zoom           = 12;
+        $record->stroke_width       = 7;
+        $record->point_radius       = 8;
+        $record->point_image        = '9';
+        $record->min_zoom           = 10;
+        $record->max_zoom           = 11;
         $record->__save();
 
         $this->writeFixture('neatline/record/'.$record->id,
