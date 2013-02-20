@@ -152,17 +152,17 @@ describe('Map Data Rendering', function() {
     expect(layer2.styleMap.styles['default'].defaultStyle.fillOpacity).
       toEqual(0.14);
 
+    // Graphic opacity (same as fill opacity)
+    expect(layer1.styleMap.styles['default'].defaultStyle.graphicOpacity).
+      toEqual(0.13);
+    expect(layer2.styleMap.styles['default'].defaultStyle.graphicOpacity).
+      toEqual(0.14);
+
     // Stroke opacity
     expect(layer1.styleMap.styles['default'].defaultStyle.strokeOpacity).
       toEqual(0.19);
     expect(layer2.styleMap.styles['default'].defaultStyle.strokeOpacity).
       toEqual(0.20);
-
-    // Graphic opacity
-    // expect(layer1.styleMap.styles['default'].defaultStyle.graphicOpacity).
-      // toEqual(0.22);
-    // expect(layer2.styleMap.styles['default'].defaultStyle.graphicOpacity).
-      // toEqual(0.23);
 
     // Stroke width.
     expect(layer1.styleMap.styles['default'].defaultStyle.strokeWidth).
@@ -198,17 +198,17 @@ describe('Map Data Rendering', function() {
     expect(layer2.styleMap.styles.select.defaultStyle.fillOpacity).
       toEqual(0.17);
 
+    // Graphic opacity (same as fill opacity)
+    expect(layer1.styleMap.styles.select.defaultStyle.graphicOpacity).
+      toEqual(0.16);
+    expect(layer2.styleMap.styles.select.defaultStyle.graphicOpacity).
+      toEqual(0.17);
+
     // Stroke opacity
     expect(layer1.styleMap.styles.select.defaultStyle.strokeOpacity).
       toEqual(0.19);
     expect(layer2.styleMap.styles.select.defaultStyle.strokeOpacity).
       toEqual(0.20);
-
-    // Graphic opacity
-    // expect(layer1.styleMap.styles.select.defaultStyle.graphicOpacity).
-      // toEqual(0.22);
-    // expect(layer2.styleMap.styles.select.defaultStyle.graphicOpacity).
-      // toEqual(0.23);
 
     // Stroke width.
     expect(layer1.styleMap.styles.select.defaultStyle.strokeWidth).
@@ -244,17 +244,17 @@ describe('Map Data Rendering', function() {
     expect(layer2.styleMap.styles.temporary.defaultStyle.fillOpacity).
       toEqual(0.17);
 
+    // Graphic opacity (same as fill opacity)
+    expect(layer1.styleMap.styles.temporary.defaultStyle.graphicOpacity).
+      toEqual(0.16);
+    expect(layer2.styleMap.styles.temporary.defaultStyle.graphicOpacity).
+      toEqual(0.17);
+
     // Stroke opacity
     expect(layer1.styleMap.styles.temporary.defaultStyle.strokeOpacity).
       toEqual(0.19);
     expect(layer2.styleMap.styles.temporary.defaultStyle.strokeOpacity).
       toEqual(0.20);
-
-    // Graphic opacity
-    // expect(layer1.styleMap.styles.temporary.defaultStyle.graphicOpacity).
-      // toEqual(0.22);
-    // expect(layer2.styleMap.styles.temporary.defaultStyle.graphicOpacity).
-      // toEqual(0.23);
 
     // Stroke width.
     expect(layer1.styleMap.styles.temporary.defaultStyle.strokeWidth).

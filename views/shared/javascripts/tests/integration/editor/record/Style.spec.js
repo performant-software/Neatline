@@ -136,6 +136,7 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       expect(standard.fillOpacity).toEqual(0.5);
+      expect(standard.graphicOpacity).toEqual(0.5);
     });
 
   });

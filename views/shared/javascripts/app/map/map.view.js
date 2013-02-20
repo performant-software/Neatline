@@ -350,7 +350,6 @@ Neatline.module('Map', function(
 
       // Ensure integers.
       var vectorOpacity = parseInt(record.get('vector_opacity'),  10);
-      var imageOpacity  = parseInt(record.get('image_opacity'),   10);
       var selectOpacity = parseInt(record.get('select_opacity'),  10);
       var strokeOpacity = parseInt(record.get('stroke_opacity'),  10);
       var pointRadius   = parseInt(record.get('point_radius'),    10);
@@ -358,7 +357,6 @@ Neatline.module('Map', function(
 
       // Decimal opacities.
       vectorOpacity /= 100;
-      imageOpacity  /= 100;
       selectOpacity /= 100;
       strokeOpacity /= 100;
 
@@ -370,7 +368,7 @@ Neatline.module('Map', function(
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
           fillOpacity:      vectorOpacity,
-          graphicOpacity:   imageOpacity,
+          graphicOpacity:   vectorOpacity,
           strokeOpacity:    strokeOpacity
         }),
         'select': new OpenLayers.Style({
@@ -380,7 +378,7 @@ Neatline.module('Map', function(
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
           fillOpacity:      selectOpacity,
-          graphicOpacity:   imageOpacity,
+          graphicOpacity:   selectOpacity,
           strokeOpacity:    strokeOpacity
         }),
         'temporary': new OpenLayers.Style({
@@ -390,7 +388,7 @@ Neatline.module('Map', function(
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
           fillOpacity:      selectOpacity,
-          graphicOpacity:   imageOpacity,
+          graphicOpacity:   selectOpacity,
           strokeOpacity:    strokeOpacity
         })
       });
