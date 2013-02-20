@@ -316,7 +316,7 @@
                 'mousedown': function() {
 
                     // Only delete if record is Neatline-endemic.
-                    if (_.isUndefined(this.itemId)) {
+                    if (!_.isNumber(this.itemId)) {
                         self._fadeDown();
                         self.postRecordDelete();
                     }
@@ -395,9 +395,6 @@
             this.textSpan =                 this.item.find('.item-title-text');
             this.time =                     this.item.find('.time input');
             this.space =                    this.item.find('.space input');
-
-            // TODO|dev
-            console.log(recordRaw);
 
             // For record ids, fall back to null if undefined.
             this.itemId = itemRaw === '' ?
