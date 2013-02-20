@@ -280,7 +280,7 @@
          */
         cancelSketch: function() {
             _.each(this.panelControls.slice(1,4), function(control) {
-                control.cancel();
+                control.deactivate();
             });
         },
 

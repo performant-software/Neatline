@@ -316,7 +316,7 @@
                 'mousedown': function() {
 
                     // Only delete if record is Neatline-endemic.
-                    if (_.isUndefined(this.itemId)) {
+                    if (!_.isNumber(this.itemId)) {
                         self._fadeDown();
                         self.postRecordDelete();
                     }

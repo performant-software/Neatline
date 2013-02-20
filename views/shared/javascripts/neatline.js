@@ -931,6 +931,15 @@
         },
 
         /*
+         * Unselect the currently selected record on the map.
+         *
+         * - return void.
+         */
+        unselectMapSelectedRecord: function() {
+            this.map.neatlinemap('unselectSelectedRecord');
+        },
+
+        /*
          * Get the current focus extent on the map.
          *
          * - return string: The extent.

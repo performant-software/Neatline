@@ -50,7 +50,7 @@
             this.background = null;
             this.opacity = null;
             this.frozen = false;
-            this.connector = false;
+            // this.connector = false;
             this.onBubble = false;
 
             // When the cursor leaves the window, hide.
@@ -144,7 +144,7 @@
 
             // Remove bubble.
             this.bubble.remove();
-            this.connector.remove();
+            // this.connector.remove();
             this.bubble = null;
 
             // Strip move listener, trigger out.
@@ -239,11 +239,11 @@
 
             // Build starting bubble offsets.
             var bubbleY = containerY - (this.bubbleHeight/3);
-            var bubbleX = containerX + 100;
+            var bubbleX = containerX + 20;
 
             // If necessary, switch to left side.
             if (bubbleX + this.bubbleWidth > containerWidth) {
-                bubbleX = containerX - this.bubbleWidth - 100;
+                bubbleX = containerX - this.bubbleWidth - 20;
             }
 
             // Block top cropping.
@@ -270,61 +270,61 @@
                 top: bubbleY
             });
 
-            // Remove existing connector.
-            if (this.connector) this.connector.remove();
+            // // Remove existing connector.
+            // if (this.connector) this.connector.remove();
 
-            // If the bubble is on the right.
-            if (bubbleX > containerX) {
+            // // If the bubble is on the right.
+            // if (bubbleX > containerX) {
 
-                // Build connector paper.
-                var offsetX = event.clientX+20;
-                var offsetY = offset.top+bubbleY;
-                var width = bubbleX-containerX-20;
-                this.connector = Raphael(
-                    offsetX, offsetY, width, this.bubbleHeight
-                );
+            //     // Build connector paper.
+            //     var offsetX = event.clientX+20;
+            //     var offsetY = offset.top+bubbleY;
+            //     var width = bubbleX-containerX-20;
+            //     this.connector = Raphael(
+            //         offsetX, offsetY, width, this.bubbleHeight
+            //     );
 
-                // Get connector coordinates.
-                var cursorY = containerY - bubbleY;
-                var bubbleY1 = this.bubbleHeight*0.2;
-                var bubbleY2 = this.bubbleHeight*0.6;
+            //     // Get connector coordinates.
+            //     var cursorY = containerY - bubbleY;
+            //     var bubbleY1 = this.bubbleHeight*0.2;
+            //     var bubbleY2 = this.bubbleHeight*0.6;
 
-                // Render coordinates.
-                this.triangle = this.connector.path(
-                    'M1,'+cursorY+'L99,'+bubbleY1+' 99,'+bubbleY2+'Z'
-                );
+            //     // Render coordinates.
+            //     this.triangle = this.connector.path(
+            //         'M1,'+cursorY+'L99,'+bubbleY1+' 99,'+bubbleY2+'Z'
+            //     );
 
-            }
+            // }
 
-            // If the bubble is on the left.
-            else {
+            // // If the bubble is on the left.
+            // else {
 
-                // Build connector.
-                var offsetX = bubbleX+this.bubbleWidth+offset.left;
-                var offsetY = offset.top+bubbleY;
-                var width = containerX-(bubbleX+this.bubbleWidth)-20;
-                this.connector = Raphael(
-                    offsetX, offsetY, width, this.bubbleHeight
-                );
+            //     // Build connector.
+            //     var offsetX = bubbleX+this.bubbleWidth+offset.left;
+            //     var offsetY = offset.top+bubbleY;
+            //     var width = containerX-(bubbleX+this.bubbleWidth)-20;
+            //     this.connector = Raphael(
+            //         offsetX, offsetY, width, this.bubbleHeight
+            //     );
 
-                // Get connector coordinates.
-                var cursorY = containerY - bubbleY;
-                var bubbleY1 = this.bubbleHeight*0.2;
-                var bubbleY2 = this.bubbleHeight*0.6;
+            //     // Get connector coordinates.
+            //     var cursorY = containerY - bubbleY;
+            //     var bubbleY1 = this.bubbleHeight*0.2;
+            //     var bubbleY2 = this.bubbleHeight*0.6;
 
-                // Render coordinates.
-                this.triangle = this.connector.path(
-                    'M0,'+bubbleY1+'L'+width+','+cursorY+' 0,'+bubbleY2+'Z'
-                );
+            //     // Render coordinates.
+            //     this.triangle = this.connector.path(
+            //         'M0,'+bubbleY1+'L'+width+','+cursorY+' 0,'+bubbleY2+'Z'
+            //     );
 
-            }
+            // }
 
-            // Set connector styles.
-            this.triangle.attr({
-                fill: this.background,
-                stroke: this.background,
-                opacity: this.opacity
-            });
+            // // Set connector styles.
+            // this.triangle.attr({
+            //     fill: this.background,
+            //     stroke: this.background,
+            //     opacity: this.opacity
+            // });
 
         },
 

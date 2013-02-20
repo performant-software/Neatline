@@ -25,5 +25,6 @@ It's easiest to start with a fresh repository, so the instructions start there.
 1. test the zip
 1. `git flow release finish $VERSION`
 1. `git push`
+1. `git push --tags`
 1. upload the zip to http://omeka.org/add-ons/plugins/.
 
