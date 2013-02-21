@@ -41,13 +41,18 @@ Neatline.module('Editor.Styles', function(
       this.getTemplate();
       this.getUi();
 
-      // Create exhibit model, bind to form.
       this.exhibit = new Neatline.Editor.Shared.Exhibit.Model();
-      rivets.bind(this.$el, { exhibit: this.exhibit });
-
-      // Start CodeMirror on the stylesheet.
+      this.buildUi();
       this.editor = CodeMirror.fromTextArea(this.__ui.styles[0]);
 
+    },
+
+
+    /**
+     * Bind the exhibit to the form.
+     */
+    buildUi: function() {
+      rivets.bind(this.$el, { exhibit: this.exhibit });
     },
 
 
