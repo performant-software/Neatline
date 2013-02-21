@@ -5,7 +5,7 @@
     "admin":              "./views/admin/javascripts"
   },
 
-  "jasmine":              "./views/shared/javascripts/tests",
+  "jasmine":              "./views/shared/javascripts/jasmine",
 
   "stylus": {
     "shared":             "./views/shared/css/stylus",

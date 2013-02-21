@@ -12,8 +12,7 @@
 
 module.exports = function(grunt) {
 
-  // Load custom tasks.
-  grunt.loadNpmTasks('grunt-css');
+  // Load tasks.
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');

@@ -99,7 +99,7 @@ describe('Static Bubble', function() {
   });
 
 
-  it('should freeze bubble on feature select', function() {
+  it('should freeze bubble on select', function() {
 
     // --------------------------------------------------------------------
     // When a feature is selected, the bubble should stay visible when the

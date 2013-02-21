@@ -92,47 +92,14 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     public function __record($exhibit=null, $item=null)
     {
 
-        // Create exhibit.
+        // Get exhibit and item.
         if (is_null($exhibit)) $exhibit = $this->__exhibit();
-
-        // Create item.
         if (is_null($item)) $item = $this->__item();
 
         // Create record.
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
         return $record;
-
-    }
-
-
-    /**
-     * Create an element text for an item.
-     *
-     * @param Omeka_record $item The item.
-     * @param string $elementSet The element set.
-     * @param string $elementName The element name.
-     * @param string $value The value for the text.
-     * @return Omeka_record $text The new text.
-     */
-    public function __text($item, $elementSet, $elementName, $value)
-    {
-
-        // Get element table.
-        $elementTable = $this->db->getTable('Element');
-
-        // Fetch element record and the item type id.
-        $element = $elementTable->findByElementSetNameAndElementName(
-            $elementSet, $elementName);
-
-        $text = new ElementText;
-        $text->record_id = $item->id;
-        $text->record_type = 'Item';
-        $text->element_id = $element->id;
-        $text->text = $value;
-        $text->save();
-
-        return $text;
 
     }
 
@@ -147,8 +114,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
 
         // Open the fixture file.
-        $fixturePath = NL_DIR.'/views/shared/javascripts/tests/fixtures/';
-        $fixture = fopen($fixturePath . $file, 'w');
+        $path = NL_DIR.'/views/shared/javascripts/jasmine/fixtures/';
+        $fixture = fopen($path . $file, 'w');
 
         // Hit route, get response.
         $this->dispatch($route);
