@@ -16,6 +16,31 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Set a field if the passed value is not whitespace.
+     *
+     * @param string $key The name of the field.
+     * @param boolean $val The value to set.
+     */
+    public function setNotEmpty($key, $val)
+    {
+        if (is_string($val) && trim($val) == '') $this->$key = null;
+        else $this->$key = $val;
+    }
+
+
+    /**
+     * Save form values.
+     *
+     * @param array $values The POST/PUT values.
+     */
+    public function saveForm($values)
+    {
+        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
+        $this->save();
+    }
+
+
+    /**
      * Before saving, update the `modified` timestamp.
      *
      * @return array The array representation of the record fields.

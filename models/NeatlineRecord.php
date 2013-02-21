@@ -97,20 +97,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
-     * Set a field if the passed value is not null or ''.
-     *
-     * @param string $field The name of the fiel.
-     * @param boolean $value The value to set.
-     */
-    public function setNotEmpty($field, $value)
-    {
-        if (is_string($value)) $value = trim($value);
-        if ($value == '') $this->$field = null;
-        else $this->$field = $value;
-    }
-
-
-    /**
      * Get the parent exhibit record.
      *
      * @return Omeka_record The parent exhibit.
@@ -119,18 +105,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
     {
         $exhibits = $this->getTable('NeatlineExhibit');
         return $exhibits->find($this->exhibit_id);
-    }
-
-
-    /**
-     * Save form values.
-     *
-     * @param array $values The POST/PUT values.
-     */
-    public function saveForm($values)
-    {
-        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
-        $this->save();
     }
 
 

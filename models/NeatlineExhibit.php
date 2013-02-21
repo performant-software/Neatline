@@ -29,18 +29,6 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
-     * Save data from the add/edit form.
-     *
-     * @param array $values The form values.
-     */
-    public function saveForm($values)
-    {
-        foreach ($values as $key => $value) $this->$key = $value;
-        $this->save();
-    }
-
-
-    /**
      * Get the number of active records in the exhibit.
      *
      * @return integer The record count.

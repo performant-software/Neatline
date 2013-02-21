@@ -96,7 +96,7 @@ describe('Map Exhibit Defaults', function() {
   });
 
 
-  it('should not show layer switcher for 1 layer', function() {
+  it('should not show layer switcher for just one layer', function() {
 
     // --------------------------------------------------------------------
     // When just a single base layer is enabled for the exhibit, the layer

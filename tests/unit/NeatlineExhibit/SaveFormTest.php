@@ -25,21 +25,51 @@ class Neatline_NeatlineExhibitTest_SaveForm
         $exhibit = $this->__exhibit();
 
         $exhibit->saveForm(array(
-            'title'         => 'title',
-            'slug'          => 'slug',
-            'base_layers'   => '1,2,3',
+            'base_layers'   => '1',
             'base_layer'    => '2',
-            'description'   => 'desc',
-            'public'        => 1
+            'title'         => '3',
+            'slug'          => '4',
+            'description'   => '5',
+            'public'        => '6',
+            'styles'        => '7',
+            'map_focus'     => '8',
+            'map_zoom'      => '9'
         ));
 
-        // Should set values.
-        $this->assertEquals($exhibit->title,        'title');
-        $this->assertEquals($exhibit->slug,         'slug');
-        $this->assertEquals($exhibit->base_layers,  '1,2,3');
+        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+
+        $this->assertEquals($exhibit->base_layers,  '1');
         $this->assertEquals($exhibit->base_layer,   '2');
-        $this->assertEquals($exhibit->description,  'desc');
-        $this->assertEquals($exhibit->public,       1);
+        $this->assertEquals($exhibit->title,        '3');
+        $this->assertEquals($exhibit->slug,         '4');
+        $this->assertEquals($exhibit->description,  '5');
+        $this->assertEquals($exhibit->public,       6);
+        $this->assertEquals($exhibit->styles,       7);
+        $this->assertEquals($exhibit->map_focus,    8);
+        $this->assertEquals($exhibit->map_zoom,     9);
+
+    }
+
+
+    /**
+     * `saveForm` should set empty/whitespace strings as `null`.
+     */
+    public function testWhitespaceBlocking()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // String field.
+        $exhibit->saveForm(array('title' => ''));
+        $this->assertNull($exhibit->title);
+        $exhibit->saveForm(array('title' => ' '));
+        $this->assertNull($exhibit->title);
+
+        // Number field.
+        $exhibit->saveForm(array('map_zoom' => ''));
+        $this->assertNull($exhibit->map_zoom);
+        $exhibit->saveForm(array('map_zoom' => ' '));
+        $this->assertNull($exhibit->map_zoom);
 
     }
 

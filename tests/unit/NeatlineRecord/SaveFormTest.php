@@ -24,29 +24,28 @@ class Neatline_NeatlineRecordTest_SaveForm
 
         $record = $this->__record();
 
-        $values = array(
-            'item_id'           => 1,
+        $record->saveForm(array(
+            'item_id'           => '1',
             'title'             => '2',
             'body'              => '3',
             'coverage'          => 'POINT(4 4)',
             'tags'              => '5',
             'map_focus'         => '6',
-            'map_zoom'          => 7,
+            'map_zoom'          => '7',
             'presenter'         => '8',
             'vector_color'      => '9',
             'stroke_color'      => '10',
             'select_color'      => '11',
-            'vector_opacity'    => 12,
-            'select_opacity'    => 13,
-            'stroke_opacity'    => 14,
-            'stroke_width'      => 15,
-            'point_radius'      => 16,
+            'vector_opacity'    => '12',
+            'select_opacity'    => '13',
+            'stroke_opacity'    => '14',
+            'stroke_width'      => '15',
+            'point_radius'      => '16',
             'point_image'       => '17',
-            'max_zoom'          => 18,
-            'min_zoom'          => 19
-        );
+            'max_zoom'          => '18',
+            'min_zoom'          => '19'
+        ));
 
-        $record->saveForm($values);
         $record = $this->_recordsTable->find($record->id);
 
         $this->assertEquals($record->item_id,           1);
@@ -73,20 +72,24 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * `saveForm` should set empty strings as null.
+     * `saveForm` should set empty/whitespace strings as `null`.
      */
-    public function testEmptyValueBlocking()
+    public function testWhitespaceBlocking()
     {
 
         $record = $this->__record();
 
-        // Empty string:
+        // String field.
         $record->saveForm(array('title' => ''));
         $this->assertNull($record->title);
-
-        // Un-trimmed empty string:
         $record->saveForm(array('title' => ' '));
         $this->assertNull($record->title);
+
+        // Number field.
+        $record->saveForm(array('max_zoom' => ''));
+        $this->assertNull($record->max_zoom);
+        $record->saveForm(array('max_zoom' => ' '));
+        $this->assertNull($record->max_zoom);
 
     }
 

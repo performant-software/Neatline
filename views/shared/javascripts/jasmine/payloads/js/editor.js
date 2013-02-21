@@ -26629,8 +26629,8 @@ Neatline.module('Map', function(
           );
       }
 
+      // Otherwise, geolocate.
       else {
-        // Otherwise, geolocate.
         this.map.zoomTo(this.options.defaultZoom);
         this.geolocate();
       }
