@@ -26,25 +26,21 @@ Neatline.module('Map.Layers.Google', function(
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.TERRAIN
         });
-        break;
       case 'streets':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.ROADMAP,
           numZoomLevels: 25
         });
-        break;
       case 'satellite':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.SATELLITE,
           numZoomLevels: 25
         });
-        break;
       case 'hybrid':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.HYBRID,
           numZoomLevels: 25
         });
-        break;
     }
   });
 
