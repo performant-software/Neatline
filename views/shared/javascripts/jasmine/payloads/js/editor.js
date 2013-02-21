@@ -27299,7 +27299,7 @@ Neatline.module('Presenter.StaticBubble', function(
      */
     select: function(model) {
       this.show(model);
-      if (!_.isNull(this.model.get('body'))) this.__ui.body.show();
+      if (this.model.get('body')) this.$el.addClass('body');
       this.$el.addClass('frozen');
       this.frozen = true;
     },
@@ -27310,8 +27310,7 @@ Neatline.module('Presenter.StaticBubble', function(
      */
     unselect: function() {
       Neatline.execute('map:unselect');
-      this.__ui.body.hide();
-      this.$el.removeClass('frozen');
+      this.$el.removeClass('frozen body');
       this.frozen = false;
       this.hide();
     },

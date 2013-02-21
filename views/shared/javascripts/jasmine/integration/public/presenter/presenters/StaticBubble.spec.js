@@ -117,11 +117,11 @@ describe('Static Bubble', function() {
   });
 
 
-  it('should show body on select when body is not empty', function() {
+  it('should show body and close "X" when body is not empty', function() {
 
     // --------------------------------------------------------------------
-    // When a feature is selected and the bubble record has a non-null
-    // body, the body container should be displayed.
+    // When a feature is selected and the record has a non-null body, the
+    // body container and close "X" should be displayed.
     // --------------------------------------------------------------------
 
     // Set non-null body.
@@ -131,17 +131,18 @@ describe('Static Bubble', function() {
     _t.hoverOnMapFeature(feature1);
     _t.clickOnMapFeature(feature1);
 
-    // Body should be visible.
+    // Body, "X" should be visible.
+    expect(els.close).toBeVisible();
     expect(els.body).toBeVisible();
 
   });
 
 
-  it('should not show body on select when body is empty', function() {
+  it('should not show body and close "X" when body is empty', function() {
 
     // --------------------------------------------------------------------
-    // When a feature is selected and the bubble record has a null body,
-    // the body container should not be displayed.
+    // When a feature is selected and the record has a null body, the body
+    // container and close "X" should not be displayed.
     // --------------------------------------------------------------------
 
     // Set null body.
@@ -151,7 +152,8 @@ describe('Static Bubble', function() {
     _t.hoverOnMapFeature(feature1);
     _t.clickOnMapFeature(feature1);
 
-    // Body should be not visible.
+    // Body, "X" should be not visible.
+    expect(els.close).not.toBeVisible();
     expect(els.body).not.toBeVisible();
 
   });

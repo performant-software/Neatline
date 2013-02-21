@@ -517,7 +517,7 @@ img.olTileImage {
   max-width: 400px;
   left: 70px;
   top: 20px;
-  opacity: 0.9;
+  opacity: 0.75;
 }
 #static-bubble .close {
   display: none;
@@ -537,7 +537,11 @@ img.olTileImage {
   margin-top: 0.7em;
   white-space: pre-wrap;
 }
-#static-bubble.frozen .close {
+#static-bubble.frozen {
+  opacity: 0.9;
+}
+#static-bubble.body .close,
+#static-bubble.body .body {
   display: block;
 }
 

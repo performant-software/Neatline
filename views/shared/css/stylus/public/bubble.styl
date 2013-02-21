@@ -22,7 +22,7 @@
   max-width 400px
   left 70px
   top 20px
-  opacity 0.9
+  opacity 0.75
 
   .close
     display none
@@ -43,5 +43,9 @@
     white-space pre-wrap
 
   &.frozen
-    .close
+    opacity 0.9
+
+  &.body
+    .close,
+    .body
       display block
