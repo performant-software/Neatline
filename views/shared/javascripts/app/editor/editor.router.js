@@ -38,7 +38,7 @@ Neatline.module('Editor', { startWithParent: false,
         search:   Editor.Search.  __view,
         records:  Editor.Records. __view,
         record:   Editor.Record.  __view,
-        styles:   Editor.Styles. __view
+        styles:   Editor.Styles.  __view
       };
 
     },
