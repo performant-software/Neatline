@@ -95,9 +95,6 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      options: {
-        separator: ';'
-      },
       form: {
         src: [
           config.vendor.js.chosen,
@@ -193,11 +190,11 @@ module.exports = function(grunt) {
       },
       editor_css: {
         src: [
-          '<%= concat.neatline_css.src %>',
           config.vendor.css.bootstrap,
           config.vendor.css.toastr,
           config.vendor.css.chosen,
           config.vendor.css.codemirror,
+          '<%= concat.neatline_css.src %>',
           config.payloads.shared.css+'/editor/*.css'
         ],
         dest: config.payloads.shared.css+'/editor.css'
