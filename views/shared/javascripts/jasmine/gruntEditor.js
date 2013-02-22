@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         'integration/editor/**/*.spec.js'
       ],
       helpers: [
-        'helpers/helpers.js',
+        'helpers/*.js',
         'components/jasmine-jquery/lib/jasmine-jquery.js',
         'components/sinon.js/sinon.js'
       ],

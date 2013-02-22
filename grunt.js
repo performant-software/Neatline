@@ -16,7 +16,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-rigger');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -257,13 +256,6 @@ module.exports = function(grunt) {
           './views/admin/css/payloads/form/*.css':
             config.stylus.admin+'/form/*.styl'
         }
-      }
-    },
-
-    rig: {
-      jasmine: {
-        src: config.jasmine+'/helpers/_helpers.js',
-        dest: config.jasmine+'/helpers/helpers.js'
       }
     },
 
