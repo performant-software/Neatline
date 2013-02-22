@@ -19,12 +19,32 @@ class Neatline_PublicHtmlFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
+     * Inject the real `layers.json`.
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        Zend_Registry::set('layers', NL_DIR . '/layers.json');
+    }
+
+
+    /**
      * `neatline-partial.html`
      */
     public function testNeatlinePartial()
     {
         $this->writeFixture('neatline/fixtures/neatline',
             'neatline-partial.html');
+    }
+
+
+    /**
+     * `editor-partial.html`
+     */
+    public function testEditorPartial()
+    {
+        $this->writeFixture('neatline/fixtures/editor',
+            'editor-partial.html');
     }
 
 

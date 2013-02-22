@@ -5,7 +5,7 @@
     "admin":              "./views/admin/javascripts"
   },
 
-  "jasmine":              "./views/shared/javascripts/jasmine",
+  "jasmine":              "./tests/jasmine",
 
   "stylus": {
     "shared":             "./views/shared/css/stylus",
@@ -49,7 +49,9 @@
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "codemirror":       "./components/codemirror/lib/codemirror.js",
-      "codemirror_yaml":  "./components/codemirror/mode/yaml/yaml.js"
+      "codemirror_yaml":  "./components/codemirror/mode/yaml/yaml.js",
+      "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
+      "sinon":            "./components/sinon.js/sinon.js"
     },
 
     "css": {

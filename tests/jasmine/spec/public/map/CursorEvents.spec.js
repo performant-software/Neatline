@@ -20,9 +20,11 @@ describe('Map Cursor Events', function() {
 
     _t.loadNeatline();
 
+    // Get layer and feature.
     layer = _t.vw.map.layers[0];
     feature = layer.features[0];
 
+    // Spy on the event aggregator.
     vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
   });

@@ -19,6 +19,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -70,7 +71,7 @@ module.exports = function(grunt) {
         command: 'phpunit --color',
         options: {
           execOptions: {
-            cwd: './tests'
+            cwd: './tests/phpunit'
           }
         }
       }
@@ -111,6 +112,7 @@ module.exports = function(grunt) {
           // Vendor:
           config.vendor.js.jquery,
           config.vendor.js.underscore,
+          config.vendor.js.underscore_s,
           config.vendor.js.backbone,
           config.vendor.js.marionette,
           config.vendor.js.neatline,
@@ -253,16 +255,32 @@ module.exports = function(grunt) {
     },
 
     jasmine: {
+      options: {
+        helpers: [
+          config.jasmine+'/helpers/*.js',
+          config.vendor.js.jasmine_jquery,
+          config.vendor.js.sinon
+        ]
+      },
       neatline: {
         src: config.payloads.shared.js+'/neatline.js',
         options: {
-          specs: config.jasmine+'/integration/public/**/*.spec.js',
-          helpers: [
-            config.jasmine+'/helpers/*.js',
-            './components/jasmine-jquery/lib/jasmine-jquery.js',
-            './components/underscore.string/lib/underscore.string.js',
-            './components/sinon.js/sinon.js'
-          ]
+          specs: config.jasmine+'/spec/public/**/*.spec.js'
+        }
+      },
+      editor: {
+        src: config.payloads.shared.js+'/editor.js',
+        options: {
+          specs: config.jasmine+'/spec/editor/**/*.spec.js'
+        }
+      }
+    },
+
+    connect: {
+      server: {
+        options: {
+          keepalive: true,
+          port: 1337
         }
       }
     }
@@ -313,8 +331,7 @@ module.exports = function(grunt) {
   // Run all tests.
   grunt.registerTask('test', [
     'shell:phpunit',
-    'shell:jasmine_public',
-    'shell:jasmine_editor'
+    'jasmine'
   ]);
 
   // Run PHPUnit.

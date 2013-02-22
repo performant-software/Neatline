@@ -116,7 +116,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
 
         // Open the fixture file.
-        $path = NL_DIR.'/views/shared/javascripts/jasmine/fixtures/';
+        $path = NL_DIR . '/tests/jasmine/fixtures/';
         $fixture = fopen($path . $file, 'w');
 
         // Hit route, get response.

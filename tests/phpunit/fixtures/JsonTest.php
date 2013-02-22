@@ -237,4 +237,66 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     }
 
 
+    /**
+     * GET /record/:id
+     * `record.standard.json`
+     */
+    public function testRecordJson()
+    {
+
+        $exhibit    = $this->__exhibit();
+        $item       = $this->__item();
+        $record     = $this->__record($exhibit, $item);
+
+        $record->title              = 'title';
+        $record->_title             = '_title';
+        $record->body               = 'body';
+        $record->_body              = '_body';
+        $record->tags               = 'tags';
+        $record->coverage           = 'POINT(1 2)';
+        $record->map_focus          = '100,200';
+        $record->map_zoom           = 10;
+        $record->presenter          = 'StaticBubble';
+        $record->vector_color       = '#111111';
+        $record->stroke_color       = '#222222';
+        $record->select_color       = '#333333';
+        $record->vector_opacity     = 4;
+        $record->select_opacity     = 5;
+        $record->stroke_opacity     = 6;
+        $record->stroke_width       = 7;
+        $record->point_radius       = 8;
+        $record->point_image        = '9';
+        $record->min_zoom           = 10;
+        $record->max_zoom           = 11;
+        $record->__save();
+
+        $this->writeFixture('neatline/record/'.$record->id,
+            'record.standard.json');
+
+    }
+
+
+    /**
+     * POST /record
+     * `record.add.json`
+     */
+    public function testNewRecordJson()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // New record data.
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id'    => $exhibit->id,
+            'coverage'      => 'POINT(1 1)'
+        )));
+
+        $this->request->setMethod('POST');
+        $this->writeFixture('neatline/record',
+            'record.add.json');
+
+    }
+
+
 }
