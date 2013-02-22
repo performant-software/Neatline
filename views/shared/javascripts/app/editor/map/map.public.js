@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Map events.
+ * Map public API.
  *
  * @package     omeka
  * @subpackage  neatline

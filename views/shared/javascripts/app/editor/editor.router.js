@@ -22,7 +22,7 @@ Neatline.module('Editor', { startWithParent: false,
       'records(/search)(/query=:q)(/start=:s)': 'records',
       'records/add':                            'records/add',
       'records/:id':                            'records/:id',
-      'styles':                                 'exhibit'
+      'styles':                                 'styles'
     },
 
 
@@ -86,7 +86,7 @@ Neatline.module('Editor', { startWithParent: false,
     /**
      * Show the exhibit defaults form.
      */
-    'exhibit': function() {
+    'styles': function() {
       this.views.menu.    showIn(this.editor);
       this.views.styles.  showIn(this.editor);
       Neatline.vent.trigger('editor:router:#styles');
