@@ -12,9 +12,10 @@
  */
 
 
-if (!($omekaDir = getenv('OMEKA_DIR'))) {
-    $omekaDir = dirname(dirname(dirname(dirname(__FILE__))));
+if (!($omeka = getenv('OMEKA_DIR'))) {
+    $omeka = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
 }
 
-require_once $omekaDir . '/application/tests/bootstrap.php';
+require_once $omeka . '/application/tests/bootstrap.php';
+require_once dirname(__FILE__) . '/../../NeatlinePlugin.php';
 require_once 'Neatline_Test_AppTestCase.php';

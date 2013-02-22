@@ -17,16 +17,6 @@ class Neatline_ExhibitsControllerTest_Edit
 
 
     /**
-     * Inject mock layers JSON.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
-    }
-
-
-    /**
      * The /edit/:id route should display the edit form.
      */
     public function testBaseMarkup()

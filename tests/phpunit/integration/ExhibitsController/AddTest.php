@@ -17,16 +17,6 @@ class Neatline_ExhibitsControllerTest_Add
 
 
     /**
-     * Inject mock layers JSON.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
-    }
-
-
-    /**
      * The /add route should display the add exhibit form.
      */
     public function testBaseMarkup()

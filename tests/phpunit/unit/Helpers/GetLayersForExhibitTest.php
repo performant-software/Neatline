@@ -17,16 +17,6 @@ class Neatline_NeatlineExhibitTest_GetLayersForExhibit
 
 
     /**
-     * Inject mock layers JSON.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
-    }
-
-
-    /**
      * `_nl_getLayersForExhibit` should return layer definitions for the
      * layers included in the `base_layers` field.
      */

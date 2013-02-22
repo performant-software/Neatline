@@ -12,9 +12,6 @@
  */
 
 
-require_once dirname(__FILE__) . '/../NeatlinePlugin.php';
-
-
 class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 {
 
@@ -36,8 +33,13 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $pluginHelper->setUp('Neatline');
 
         // Get plugin tables.
-        $this->_exhibitsTable   = $this->db->getTable('NeatlineExhibit');
-        $this->_recordsTable    = $this->db->getTable('NeatlineRecord');
+        $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
+        $this->_recordsTable  = $this->db->getTable('NeatlineRecord');
+
+        // Mock layers.
+        Zend_Registry::set(
+          'layers', NL_DIR . '/tests/phpunit/mocks/layers.json'
+        );
 
     }
 
@@ -137,7 +139,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
     {
 
         // Open the file.
-        $mockPath = NL_DIR . '/tests/mocks/put.txt';
+        $mockPath = NL_DIR . '/tests/phpunit/mocks/put.txt';
         $fileIn = fopen($mockPath, 'w');
 
         // Write data.

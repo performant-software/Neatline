@@ -13,9 +13,12 @@
 module.exports = function(grunt) {
 
   // Load tasks.
-  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -24,77 +27,51 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     shell: {
+      options: {
+        stdout: true
+      },
 
       // BOWER
       bower_cache_clean: {
-        command: 'rm -rf ~/.bower',
-        stdout: true
+        command: 'rm -rf ~/.bower'
       },
       bower_install: {
-        command: 'bower install',
-        stdout: true
+        command: 'bower install'
       },
 
       // BUILD
       build_openlayers: {
         command: 'python build.py full OpenLayers.js',
-        stdout: true,
-        execOptions: {
-          cwd: config.build.openlayers
+        options: {
+          execOptions: {
+            cwd: config.build.openlayers
+          }
         }
       },
       build_bootstrap: {
         command: 'npm install && make bootstrap',
-        stdout: true,
-        execOptions: {
-          cwd: config.build.bootstrap
+        options: {
+          execOptions: {
+            cwd: config.build.bootstrap
+          }
         }
       },
       move_bootstrap_images: {
         command: 'cp -r ' + config.build.bootstrap + '/img ' +
           './views/shared/css/img',
-        stdout: true
       },
       move_chosen_images: {
         command: 'cp ' + config.build.chosen+'/chosen-sprite.png ' +
           config.payloads.admin.css,
-        stdout: true
       },
 
       // TEST
       phpunit: {
         command: 'phpunit --color',
-        stdout: true,
-        execOptions: {
-          cwd: './tests'
-        }
-      },
-      jasmine_public: {
-        command: 'grunt --config gruntPublic.js jasmine',
-        stdout: true,
-        execOptions: {
-          cwd: config.jasmine
-        }
-      },
-      jasmine_public_server: {
-        command: 'grunt --config gruntPublic.js jasmine-server',
-        stdout: true,
-        execOptions: {
-          cwd: config.jasmine
-        }
-      },
-      jasmine_editor: {
-        command: 'grunt --config gruntEditor.js jasmine',
-        stdout: true,
-        execOptions: {
-          cwd: config.jasmine
-        }
-      },
-      jasmine_editor_server: {
-        command: 'grunt --config gruntEditor.js jasmine-server',
-        stdout: true,
-        execOptions: {
-          cwd: config.jasmine
+        options: {
+          execOptions: {
+            cwd: './tests'
+          }
         }
       }
 
@@ -117,14 +94,16 @@ module.exports = function(grunt) {
     },
 
     concat: {
+      options: {
+        separator: ';'
+      },
       form: {
         src: [
           config.vendor.js.chosen,
           config.vendor.js.underscore_s,
           config.src.admin+'/*.js'
         ],
-        dest: config.payloads.admin.js+'/form.js',
-        separator: ';'
+        dest: config.payloads.admin.js+'/form.js'
       },
       neatline: {
         src: [
@@ -150,8 +129,7 @@ module.exports = function(grunt) {
           config.src.shared+'/presenter/StaticBubble/*.js'
 
         ],
-        dest: config.payloads.shared.js+'/neatline.js',
-        separator: ';'
+        dest: config.payloads.shared.js+'/neatline.js'
       },
       editor: {
         src: [
@@ -195,8 +173,7 @@ module.exports = function(grunt) {
           config.src.shared+'/editor/styles/*.js'
 
         ],
-        dest: config.payloads.shared.js+'/editor.js',
-        separator: ';'
+        dest: config.payloads.shared.js+'/editor.js'
       },
       form_css: {
         src: [
@@ -214,7 +191,7 @@ module.exports = function(grunt) {
       },
       editor_css: {
         src: [
-          '<config:concat.neatline_css.src>',
+          '<%= concat.neatline_css.src %>',
           config.vendor.css.bootstrap,
           config.vendor.css.toastr,
           config.vendor.css.chosen,
@@ -225,19 +202,19 @@ module.exports = function(grunt) {
       }
     },
 
-    min: {
+    uglify: {
       form: {
-        src: '<config:concat.form.src>',
+        src: '<%= concat.form.src %>',
         dest: config.payloads.admin.js+'/form.js',
         separator: ';'
       },
       neatline: {
-        src: '<config:concat.neatline.src>',
+        src: '<%= concat.neatline.src %>',
         dest: config.payloads.shared.js+'/neatline.js',
         separator: ';'
       },
       editor: {
-        src: '<config:concat.editor.src>',
+        src: '<%= concat.editor.src %>',
         dest: config.payloads.shared.js+'/editor.js',
         separator: ';'
       }
@@ -259,39 +236,12 @@ module.exports = function(grunt) {
       }
     },
 
-    copy: {
-      build: {
-        files: [
-          {
-            src: './components/**',
-            dest: config.jasmine+'/components/'
-          },
-          {
-            src: './node_modules/**',
-            dest: config.jasmine+'/node_modules/'
-          }
-        ]
-      },
-      payload: {
-        files: [
-          {
-            src: config.payloads.shared.js+'/*.js',
-            dest: config.jasmine+'/payloads/js/'
-          },
-          {
-            src: config.payloads.shared.css+'/*.css',
-            dest: config.jasmine+'/payloads/css/'
-          }
-        ]
-      }
-    },
-
     watch: {
       payload: {
         files: [
-          '<config:concat.form.src>',
-          '<config:concat.neatline.src>',
-          '<config:concat.editor.src>',
+          '<%= concat.form.src %>',
+          '<%= concat.neatline.src %>',
+          '<%= concat.editor.src %>',
           config.stylus.admin+'/**/*.styl',
           config.stylus.shared+'/**/*.styl',
           config.jasmine+'/helpers/*.js'
@@ -299,6 +249,21 @@ module.exports = function(grunt) {
         tasks: [
           'compile:concat'
         ]
+      }
+    },
+
+    jasmine: {
+      neatline: {
+        src: config.payloads.shared.js+'/neatline.js',
+        options: {
+          specs: config.jasmine+'/integration/public/**/*.spec.js',
+          helpers: [
+            config.jasmine+'/helpers/*.js',
+            './components/jasmine-jquery/lib/jasmine-jquery.js',
+            './components/underscore.string/lib/underscore.string.js',
+            './components/sinon.js/sinon.js'
+          ]
+        }
       }
     }
 
@@ -319,22 +284,18 @@ module.exports = function(grunt) {
     'stylus',
     'concat:form_css',
     'concat:neatline_css',
-    'concat:editor_css',
-    'copy:payload',
-    'rig'
+    'concat:editor_css'
   ]);
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
-    'min:form',
-    'min:neatline',
-    'min:editor',
+    'uglify:form',
+    'uglify:neatline',
+    'uglify:editor',
     'stylus',
     'concat:form_css',
     'concat:neatline_css',
-    'concat:editor_css',
-    'copy:payload',
-    'rig'
+    'concat:editor_css'
   ]);
 
   // Build the application.
@@ -346,8 +307,7 @@ module.exports = function(grunt) {
     'shell:build_bootstrap',
     'compile:min',
     'shell:move_bootstrap_images',
-    'shell:move_chosen_images',
-    'copy:build'
+    'shell:move_chosen_images'
   ]);
 
   // Run all tests.
@@ -359,28 +319,6 @@ module.exports = function(grunt) {
 
   // Run PHPUnit.
   grunt.registerTask('phpunit', 'shell:phpunit');
-
-  // Run Jasmine.
-  grunt.registerTask('jasmine', [
-    'shell:jasmine_public',
-    'shell:jasmine_editor'
-  ]);
-  grunt.registerTask(
-    'jasmine:public',
-    'shell:jasmine_public'
-  );
-  grunt.registerTask(
-    'jasmine:public:server',
-    'shell:jasmine_public_server'
-  );
-  grunt.registerTask(
-    'jasmine:editor',
-    'shell:jasmine_editor'
-  );
-  grunt.registerTask(
-    'jasmine:editor:server',
-    'shell:jasmine_editor_server'
-  );
 
 
 };

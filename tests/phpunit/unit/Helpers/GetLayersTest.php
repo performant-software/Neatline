@@ -17,16 +17,6 @@ class Neatline_NeatlineExhibitTest_GetLayers
 
 
     /**
-     * Inject mock layers JSON.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-        Zend_Registry::set('layers', NL_DIR . '/tests/mocks/layers.json');
-    }
-
-
-    /**
      * `_nl_getLayers` should parse the JSON in the passed file.
      */
     public function testGetLayers()
