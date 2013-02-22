@@ -15,6 +15,16 @@ Neatline.module('Editor.Record', function(
 
 
   /**
+   * Append the view to the editor container.
+   */
+  var show = function() {
+    Record.__view.showIn(Neatline.request('editor:getContainer'));
+  };
+
+  Neatline.commands.addHandler('editor:record:show', show);
+
+
+  /**
    * Show form for an existing record.
    *
    * @param {Number} id: The record id.
@@ -27,7 +37,6 @@ Neatline.module('Editor.Record', function(
   };
 
   Neatline.commands.addHandler('editor:record:showById', showById);
-  Neatline.vent.on('editor:router:#records/:id', showById);
 
 
   /**
@@ -40,7 +49,6 @@ Neatline.module('Editor.Record', function(
   };
 
   Neatline.commands.addHandler('editor:record:showNew', showNew);
-  Neatline.vent.on('editor:router:#records/add', showNew);
 
 
   /**

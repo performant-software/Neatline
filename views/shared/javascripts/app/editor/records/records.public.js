@@ -15,6 +15,16 @@ Neatline.module('Editor.Records', function(
 
 
   /**
+   * Append the view to the editor container.
+   */
+  var show = function() {
+    Records.__view.showIn(Neatline.request('editor:getContainer'));
+  };
+
+  Neatline.commands.addHandler('editor:records:show', show);
+
+
+  /**
    * Query for new records.
    *
    * @param {Object} params: The query parameters.

@@ -18,8 +18,8 @@
   <p class="lead"><?php echo $exhibit->title; ?></p>
 
   <ul class="nav nav-pills">
-    <li class="records"><a href="#records">Records</a></li>
-    <li class="styles"><a href="#styles">Styles</a></li>
+    <li class="tab records"><a href="#records">Records</a></li>
+    <li class="tab styles"><a href="#styles">Styles</a></li>
   </ul>
 
 </script>

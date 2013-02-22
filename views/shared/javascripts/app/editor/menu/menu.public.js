@@ -15,25 +15,25 @@ Neatline.module('Editor.Menu', function(
 
 
   /**
-   * Activate "Records" tab.
+   * Append the view to the editor container.
    */
-  var activateRecords = function() {
-    Menu.__view.activateTab('records');
+  var show = function() {
+    Menu.__view.showIn(Neatline.request('editor:getContainer'));
   };
 
-  Neatline.commands.addHandler('editor:menu:records', activateRecords);
-  Neatline.vent.on('editor:router:#records', activateRecords);
+  Neatline.commands.addHandler('editor:menu:show', show);
 
 
   /**
-   * Activate "Stylesheet" tab.
+   * Activate the current tab.
+   *
+   * @param {String} tab: The tab to activate.
    */
-  var activateStyles = function() {
-    Menu.__view.activateTab('styles');
+  var update = function(tab) {
+    Menu.__view.activateTab(tab);
   };
 
-  Neatline.commands.addHandler('editor:menu:styles', activateStyles);
-  Neatline.vent.on('editor:router:#styles', activateStyles);
+  Neatline.commands.addHandler('editor:menu:update', update);
 
 
 });

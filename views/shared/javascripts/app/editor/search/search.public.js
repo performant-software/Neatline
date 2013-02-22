@@ -15,6 +15,16 @@ Neatline.module('Editor.Search', function(
 
 
   /**
+   * Append the view to the editor container.
+   */
+  var show = function() {
+    Search.__view.showIn(Neatline.request('editor:getContainer'));
+  };
+
+  Neatline.commands.addHandler('editor:search:show', show);
+
+
+  /**
    * Load the starting record list derived from the route parameters.
    *
    * @param {String} query:   The search query.
@@ -37,7 +47,6 @@ Neatline.module('Editor.Search', function(
   };
 
   Neatline.commands.addHandler('editor:search:initialize', initialize);
-  Neatline.vent.on('editor:router:#records', initialize);
 
 
   /**

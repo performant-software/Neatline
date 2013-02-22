@@ -13,8 +13,18 @@
 describe('Router', function() {
 
 
+  var els;
+
+
   beforeEach(function() {
+
     _t.loadEditor();
+
+    els = {
+      records:  _t.vw.menu.$('li.records'),
+      styles:   _t.vw.menu.$('li.styles')
+    };
+
   });
 
 
@@ -28,7 +38,7 @@ describe('Router', function() {
       expect(_t.el.editor).toContain(_t.el.records);
 
       // "Records" tab should be active.
-      expect(_t.vw.menu.__ui.tabs.records).toHaveClass('active');
+      expect(els.records).toHaveClass('active');
 
     });
 
@@ -80,7 +90,7 @@ describe('Router', function() {
     expect(_t.el.editor).toContain(_t.el.styles);
 
     // "Styles" tab should be active.
-    expect(_t.vw.menu.__ui.tabs.styles).toHaveClass('active');
+    expect(els.styles).toHaveClass('active');
 
   });
 

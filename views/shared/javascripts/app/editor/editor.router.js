@@ -26,39 +26,25 @@ Neatline.module('Editor', { startWithParent: false,
     },
 
 
-    /**
-     * Alias components.
-     */
-    initialize: function() {
-
-      this.editor = Editor.__view.__ui.editor;
-
-      this.views = {
-        menu:     Editor.Menu.    __view,
-        search:   Editor.Search.  __view,
-        records:  Editor.Records. __view,
-        record:   Editor.Record.  __view,
-        styles:   Editor.Styles.  __view
-      };
-
-    },
-
-
     before: function() {
       Neatline.vent.trigger('editor:router:before');
-      this.editor.empty();
+      Editor.__view.__ui.editor.empty();
     },
 
 
     /**
      * Show the list of records.
+     *
+     * @param {String} query: The search query.
+     * @param {String} start: The paging offset.
      */
-    'records': function(query, offset) {
-      if (_.isString(offset)) offset = parseInt(offset, 10);
-      this.views.menu.    showIn(this.editor);
-      this.views.search.  showIn(this.editor);
-      this.views.records. showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#records', query, offset);
+    'records': function(query, start) {
+      if (_.isString(start)) start = parseInt(start, 10);
+      Neatline.execute('editor:menu:show');
+      Neatline.execute('editor:search:show');
+      Neatline.execute('editor:records:show');
+      Neatline.execute('editor:search:initialize', query, start);
+      Neatline.execute('editor:menu:update', 'records');
     },
 
 
@@ -66,8 +52,8 @@ Neatline.module('Editor', { startWithParent: false,
      * Show add record form.
      */
     'records/add': function() {
-      this.views.record.  showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#records/add');
+      Neatline.execute('editor:record:show');
+      Neatline.execute('editor:record:showNew');
     },
 
 
@@ -77,9 +63,8 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} id: The record id.
      */
     'records/:id': function(id) {
-      id = parseInt(id, 10);
-      this.views.record.  showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#records/:id', id);
+      Neatline.execute('editor:record:show');
+      Neatline.execute('editor:record:showById', parseInt(id, 10));
     },
 
 
@@ -87,9 +72,9 @@ Neatline.module('Editor', { startWithParent: false,
      * Show the exhibit defaults form.
      */
     'styles': function() {
-      this.views.menu.    showIn(this.editor);
-      this.views.styles.  showIn(this.editor);
-      Neatline.vent.trigger('editor:router:#styles');
+      Neatline.execute('editor:menu:show');
+      Neatline.execute('editor:styles:show');
+      Neatline.execute('editor:menu:update', 'styles');
     }
 
 

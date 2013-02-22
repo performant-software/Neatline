@@ -15,14 +15,14 @@ Neatline.module('Editor.Styles', function(
 
 
   /**
-   * Refresh the editor.
+   * Append the view to the editor container.
    */
-  var refresh = function() {
+  var show = function() {
+    Styles.__view.showIn(Neatline.request('editor:getContainer'));
     Styles.__view.refresh();
   };
 
-  Neatline.commands.addHandler('editor:styles:refresh', refresh);
-  Neatline.vent.on('editor:router:#styles', refresh);
+  Neatline.commands.addHandler('editor:styles:show', show);
 
 
 });

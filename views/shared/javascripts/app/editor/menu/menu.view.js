@@ -21,11 +21,7 @@ Neatline.module('Editor.Menu', function(
     tagName: 'header',
 
     ui: {
-      tabs: {
-        all:      'ul.nav li',
-        records:  'li.records',
-        styles:   'li.styles'
-      }
+      tabs: 'li.tab'
     },
 
 
@@ -41,11 +37,11 @@ Neatline.module('Editor.Menu', function(
     /**
      * Activate a tab.
      *
-     * @param {String} tab: The tab name.
+     * @param {String} tab: The tab to activate.
      */
     activateTab: function(tab) {
-      this.__ui.tabs.all.removeClass('active');
-      this.__ui.tabs[tab].addClass('active');
+      this.__ui.tabs.removeClass('active');
+      this.__ui.tabs.filter('.'+tab).addClass('active');
     }
 
 
