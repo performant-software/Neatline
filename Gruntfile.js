@@ -28,11 +28,12 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     shell: {
+
       options: {
         stdout: true
       },
 
-      // BOWER
+      // Bower.
       bower_cache_clean: {
         command: 'rm -rf ~/.bower'
       },
@@ -202,20 +203,20 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        separator: ';'
+      },
       form: {
         src: '<%= concat.form.src %>',
-        dest: config.payloads.admin.js+'/form.js',
-        separator: ';'
+        dest: config.payloads.admin.js+'/form.js'
       },
       neatline: {
         src: '<%= concat.neatline.src %>',
-        dest: config.payloads.shared.js+'/neatline.js',
-        separator: ';'
+        dest: config.payloads.shared.js+'/neatline.js'
       },
       editor: {
         src: '<%= concat.editor.src %>',
-        dest: config.payloads.shared.js+'/editor.js',
-        separator: ';'
+        dest: config.payloads.shared.js+'/editor.js'
       }
     },
 
