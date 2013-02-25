@@ -15,38 +15,38 @@ Neatline.module('Editor.Search', function(
 
 
   /**
-   * Append the view to the editor container.
+   * Append the form to the editor container.
    */
-  var show = function() {
+  var render = function() {
     Search.__view.showIn(Neatline.request('editor:getContainer'));
   };
 
-  Neatline.commands.addHandler('editor:search:show', show);
+  Neatline.commands.addHandler('editor:search:render', render);
 
 
   /**
-   * Load the starting record list derived from the route parameters.
+   * Initialize the record list from route parameters.
    *
-   * @param {String} query:   The search query.
-   * @param {Number} offset:  The limit offset.
+   * @param {String} query: The search query.
+   * @param {Number} start: The paging offset.
    */
-  var initialize = function(query, offset) {
+  var init = function(query, start) {
 
     // Parse route parameters, set raw query.
-    query = query || null; offset = offset || 0;
+    query = query || null; start = start || 0;
     Search.__view.setQueryFromUrl(query);
 
     // Load the record list.
     Neatline.execute('editor:records:load', _.extend(
       Search.__view.query, {
         limit:  Neatline.global.page_length,
-        offset: offset
+        offset: start
       }
     ));
 
   };
 
-  Neatline.commands.addHandler('editor:search:initialize', initialize);
+  Neatline.commands.addHandler('editor:search:init', init);
 
 
   /**

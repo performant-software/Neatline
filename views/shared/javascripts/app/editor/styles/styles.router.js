@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record form controller.
+ * Styles controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -33,8 +33,8 @@ Neatline.module('Editor.Styles', function(
      */
     'styles': function() {
       Neatline.execute('editor:menu:update', 'styles');
-      Neatline.execute('editor:menu:show');
-      Neatline.execute('editor:styles:show');
+      Neatline.execute('editor:menu:render');
+      Neatline.execute('editor:styles:render');
     }
 
 

@@ -15,14 +15,14 @@ Neatline.module('Editor.Styles', function(
 
 
   /**
-   * Append the view to the editor container.
+   * Append the form to the editor container.
    */
-  var show = function() {
+  var render = function() {
     Styles.__view.showIn(Neatline.request('editor:getContainer'));
     Styles.__view.refresh();
   };
 
-  Neatline.commands.addHandler('editor:styles:show', show);
+  Neatline.commands.addHandler('editor:styles:render', render);
 
 
 });

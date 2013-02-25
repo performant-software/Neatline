@@ -15,13 +15,13 @@ Neatline.module('Editor.Menu', function(
 
 
   /**
-   * Append the view to the editor container.
+   * Append the menu to the editor container.
    */
-  var show = function() {
+  var render = function() {
     Menu.__view.showIn(Neatline.request('editor:getContainer'));
   };
 
-  Neatline.commands.addHandler('editor:menu:show', show);
+  Neatline.commands.addHandler('editor:menu:render', render);
 
 
   /**

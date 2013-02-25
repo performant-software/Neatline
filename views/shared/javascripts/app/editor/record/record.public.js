@@ -15,13 +15,13 @@ Neatline.module('Editor.Record', function(
 
 
   /**
-   * Append the view to the editor container.
+   * Append the form to the editor container.
    */
-  var show = function() {
+  var render = function() {
     Record.__view.showIn(Neatline.request('editor:getContainer'));
   };
 
-  Neatline.commands.addHandler('editor:record:show', show);
+  Neatline.commands.addHandler('editor:record:render', render);
 
 
   /**

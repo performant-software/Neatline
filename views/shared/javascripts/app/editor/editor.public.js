@@ -55,7 +55,7 @@ Neatline.module('Editor', { startWithParent: false,
    */
   var showRecordForm = function(model) {
     if (!Neatline.request('editor:record:isOpen?')) {
-      Editor.__router.navigate('records/'+model.get('id'), true);
+      Editor.Record.__router.navigate('records/'+model.get('id'), true);
     }
   };
 
@@ -67,7 +67,7 @@ Neatline.module('Editor', { startWithParent: false,
    * Navigate to the record list.
    */
   var showRecordList = function() {
-    Editor.__router.navigate('records', true);
+    Editor.Records.__router.navigate('records', true);
   };
 
   Neatline.commands.addHandler('editor:showRecordList', showRecordList);

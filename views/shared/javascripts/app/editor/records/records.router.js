@@ -36,12 +36,11 @@ Neatline.module('Editor.Records', function(
      * @param {String} start: The paging offset.
      */
     'records': function(query, start) {
-      if (_.isString(start)) start = parseInt(start, 10);
-      Neatline.execute('editor:menu:show');
-      Neatline.execute('editor:search:show');
-      Neatline.execute('editor:records:show');
-      Neatline.execute('editor:search:initialize', query, start);
       Neatline.execute('editor:menu:update', 'records');
+      Neatline.execute('editor:search:init', query, start);
+      Neatline.execute('editor:menu:render');
+      Neatline.execute('editor:search:render');
+      Neatline.execute('editor:records:render');
     }
 
 
