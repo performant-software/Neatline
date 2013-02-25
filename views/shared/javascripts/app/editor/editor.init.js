@@ -35,8 +35,7 @@ Neatline.module('Editor', { startWithParent: false,
    * Initialize the router and layout view.
    */
   Editor.init = function() {
-    this.__view   = new Editor.View({ el: 'body' });
-    this.__router = new Editor.Router();
+    this.__view = new Editor.View({ el: 'body' });
   };
 
   Editor.addInitializer(Editor.init);

@@ -15,7 +15,8 @@ Neatline.module('Editor.Record', function(
 
 
   Record.init = function() {
-    this.__view = new Record.View();
+    this.__view =   new Record.View();
+    this.__router = new Record.Router();
   };
 
   Record.addInitializer(Record.init);

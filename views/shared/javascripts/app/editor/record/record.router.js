@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Editor controller.
+ * Record form controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,23 +10,22 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor', { startWithParent: false,
-  define: function(Editor, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Record', function(
+  Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.Router = Backbone.Router.extend({
+  Record.Router = Backbone.Router.extend({
 
 
     routes: {
-      'records/add':  'records/add',
-      'records/:id':  'records/:id',
-      'styles':       'styles'
+      'records/add': 'records/add',
+      'records/:id': 'records/:id'
     },
 
 
     before: function() {
       Neatline.vent.trigger('editor:router:before');
-      Editor.__view.__ui.editor.empty();
+      Neatline.execute('editor:empty');
     },
 
 
@@ -47,20 +46,10 @@ Neatline.module('Editor', { startWithParent: false,
     'records/:id': function(id) {
       Neatline.execute('editor:record:show');
       Neatline.execute('editor:record:showById', parseInt(id, 10));
-    },
-
-
-    /**
-     * Show the exhibit defaults form.
-     */
-    'styles': function() {
-      Neatline.execute('editor:menu:show');
-      Neatline.execute('editor:styles:show');
-      Neatline.execute('editor:menu:update', 'styles');
     }
 
 
   });
 
 
-}});
+});
