@@ -253,14 +253,14 @@ describe('Record Form Style Tab', function() {
     // should be populated with the current zoom.
     // --------------------------------------------------------------------
 
-    _t.setMapZoom(1);
+    _t.setMapZoom(10);
     els.setMinZoom.trigger('click');
 
     // Input should be updated.
-    expect(els.minZoom).toHaveValue('1');
+    expect(els.minZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(_t.vw.record.model.get('min_zoom')).toEqual('1');
+    expect(_t.vw.record.model.get('min_zoom')).toEqual('10');
 
   });
 
@@ -272,14 +272,14 @@ describe('Record Form Style Tab', function() {
     // should be populated with the current zoom.
     // --------------------------------------------------------------------
 
-    _t.setMapZoom(1);
+    _t.setMapZoom(10);
     els.setMaxZoom.trigger('click');
 
     // Input should be updated.
-    expect(els.maxZoom).toHaveValue('1');
+    expect(els.maxZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(_t.vw.record.model.get('max_zoom')).toEqual('1');
+    expect(_t.vw.record.model.get('max_zoom')).toEqual('10');
 
   });
 

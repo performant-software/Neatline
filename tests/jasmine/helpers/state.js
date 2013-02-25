@@ -76,6 +76,7 @@ var _t = (function(_t) {
     this.aliasNeatline();
     this.aliasEditor();
 
+    // Default route.
     this.navigate('');
 
   };
