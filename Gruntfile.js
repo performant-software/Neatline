@@ -20,6 +20,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
@@ -28,20 +29,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     shell: {
-
       options: {
         stdout: true
       },
-
-      // Bower.
       bower_cache_clean: {
         command: 'rm -rf ~/.bower'
       },
       bower_install: {
         command: 'bower install'
       },
-
-      // BUILD
       build_openlayers: {
         command: 'python build.py full OpenLayers.js',
         options: {
@@ -58,16 +54,6 @@ module.exports = function(grunt) {
           }
         }
       },
-      move_bootstrap_images: {
-        command: 'cp -r ' + config.build.bootstrap + '/img ' +
-          './views/shared/css/img',
-      },
-      move_chosen_images: {
-        command: 'cp ' + config.build.chosen+'/chosen-sprite.png ' +
-          config.payloads.admin.css,
-      },
-
-      // TEST
       phpunit: {
         command: 'phpunit --color',
         options: {
@@ -76,7 +62,25 @@ module.exports = function(grunt) {
           }
         }
       }
+    },
 
+    copy: {
+      bootstrap: {
+        files: [{
+          src: config.build.bootstrap+'/img/*',
+          dest: './views/shared/css/img/',
+          expand: true,
+          flatten: true
+        }]
+      },
+      chosen: {
+        files: [{
+          src: config.build.chosen+'/chosen-sprite.png',
+          dest: config.payloads.admin.css,
+          expand: true,
+          flatten: true
+        }]
+      }
     },
 
     clean: {
@@ -87,11 +91,6 @@ module.exports = function(grunt) {
         config.payloads.shared.css,
         config.payloads.admin.js,
         config.payloads.admin.css
-      ],
-      jasmine: [
-        config.jasmine+'/payloads',
-        config.jasmine+'/node_modules',
-        config.jasmine+'/components'
       ]
     },
 
@@ -322,8 +321,7 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_bootstrap',
     'compile:min',
-    'shell:move_bootstrap_images',
-    'shell:move_chosen_images'
+    'copy'
   ]);
 
   // Run all tests.
