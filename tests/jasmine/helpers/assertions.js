@@ -20,7 +20,7 @@ var _t = (function(_t) {
    * @param {String} method: The method.
    */
   _t.assertLastRequestMethod = function(method) {
-    var request = _t.getLastRequest();
+    var request = this.getLastRequest();
     expect(request.method).toEqual(method);
   };
 
@@ -31,7 +31,7 @@ var _t = (function(_t) {
    * @param {String} route: The route.
    */
   _t.assertLastRequestRoute = function(route) {
-    var request = _t.getLastRequest();
+    var request = this.getLastRequest();
     expect(_.string.startsWith(request.url, route)).toBeTruthy();
   };
 
@@ -43,7 +43,7 @@ var _t = (function(_t) {
    * @param {String} val: The value.
    */
   _t.assertLastRequestHasGetParameter = function(key, val) {
-    var request = _t.getLastRequest();
+    var request = this.getLastRequest();
     if (val) expect(request.url).toContain(key+'='+val);
     else expect(request.url).toContain(key);
   };
@@ -53,7 +53,7 @@ var _t = (function(_t) {
    * Assert that the pagination is empty.
    */
   _t.assertPaginationEmpty = function() {
-    var pag = _t.el.records.find('.pagination');
+    var pag = this.el.records.find('.pagination');
     expect($(pag[0]).text().match(/^\s+$/)).toBeTruthy();
     expect($(pag[1]).text().match(/^\s+$/)).toBeTruthy();
   };
@@ -63,7 +63,7 @@ var _t = (function(_t) {
    * Assert that the pagination is not empty.
    */
   _t.assertPaginationNotEmpty = function() {
-    var pag = _t.el.records.find('.pagination');
+    var pag = this.el.records.find('.pagination');
     expect($(pag[0]).text().match(/^\s+$/)).not.toBeTruthy();
     expect($(pag[1]).text().match(/^\s+$/)).not.toBeTruthy();
   };
@@ -73,7 +73,7 @@ var _t = (function(_t) {
    * Assert that the pagination `<<` link is enabled.
    */
   _t.assertPaginationPrevEnabled = function() {
-    var prev = _t.el.records.find('.pagination .prev');
+    var prev = this.el.records.find('.pagination .prev');
     expect($(prev[0]).parent('li')).not.toHaveClass('disabled');
     expect($(prev[1]).parent('li')).not.toHaveClass('disabled');
   };
@@ -83,7 +83,7 @@ var _t = (function(_t) {
    * Assert that the pagination `<<` link is disabled.
    */
   _t.assertPaginationPrevDisabled = function() {
-    var prev = _t.el.records.find('.pagination .prev');
+    var prev = this.el.records.find('.pagination .prev');
     expect($(prev[0]).parent('li')).toHaveClass('disabled');
     expect($(prev[1]).parent('li')).toHaveClass('disabled');
   };
@@ -93,7 +93,7 @@ var _t = (function(_t) {
    * Assert that the pagination `>>` link is enabled.
    */
   _t.assertPaginationNextEnabled = function() {
-    var next = _t.el.records.find('.pagination .next');
+    var next = this.el.records.find('.pagination .next');
     expect($(next[0]).parent('li')).not.toHaveClass('disabled');
     expect($(next[1]).parent('li')).not.toHaveClass('disabled');
   };
@@ -103,7 +103,7 @@ var _t = (function(_t) {
    * Assert that the pagination `>>` link is disabled.
    */
   _t.assertPaginationNextDisabled = function() {
-    var next = _t.el.records.find('.pagination .next');
+    var next = this.el.records.find('.pagination .next');
     expect($(next[0]).parent('li')).toHaveClass('disabled');
     expect($(next[1]).parent('li')).toHaveClass('disabled');
   };
@@ -115,7 +115,7 @@ var _t = (function(_t) {
    * @param {String} route: The hash.
    */
   _t.assertPaginationPrevRoute = function(route) {
-    var prev = _t.el.records.find('.pagination .prev');
+    var prev = this.el.records.find('.pagination .prev');
     expect($(prev[0])).toHaveAttr('href', route);
     expect($(prev[1])).toHaveAttr('href', route);
   };
@@ -127,7 +127,7 @@ var _t = (function(_t) {
    * @param {String} route: The hash.
    */
   _t.assertPaginationNextRoute = function(route) {
-    var next = _t.el.records.find('.pagination .next');
+    var next = this.el.records.find('.pagination .next');
     expect($(next[0])).toHaveAttr('href', route);
     expect($(next[1])).toHaveAttr('href', route);
   };
@@ -139,19 +139,19 @@ var _t = (function(_t) {
   _t.assertMapRefreshed = function() {
 
     // Route should be /records/:id, method GET.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
+    this.assertLastRequestRoute(Neatline.global.records_api);
+    this.assertLastRequestMethod('GET');
 
     // Request should include map focus.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
+    this.assertLastRequestHasGetParameter('extent');
+    this.assertLastRequestHasGetParameter('zoom');
 
     // Respond with new data.
-    _t.respondLast200(_t.json.records.removed);
+    this.respondLast200(this.json.records.removed);
 
     // Record2 point should be removed.
-    expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(_t.vw.map.layers.length).toEqual(2);
+    expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
+    expect(this.vw.map.layers.length).toEqual(2);
 
   };
 

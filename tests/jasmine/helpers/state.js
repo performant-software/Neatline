@@ -34,7 +34,7 @@ var _t = (function(_t) {
 
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
-    _t.aliasNeatline();
+    this.aliasNeatline();
 
   };
 
@@ -43,8 +43,6 @@ var _t = (function(_t) {
    * Load editor application.
    */
   _t.loadEditor = function() {
-
-    _t.resetHash();
 
     // Load fixtures.
     this.setFixturesPath();
@@ -70,36 +68,37 @@ var _t = (function(_t) {
     // Map edit module.
     Neatline.Editor.Map.init();
 
-    // Reset history.
-    Backbone.history.stop();
-    Backbone.history.start();
+    // Reset the route.
+    this.restartHistory();
 
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
-    _t.aliasNeatline();
-    _t.aliasEditor();
+    this.aliasNeatline();
+    this.aliasEditor();
 
-    _t.navigate('');
+    this.navigate('');
 
   };
 
 
   /**
-   * Strip the current hash route off the window href.
+   * Reset the Backbone history.
    */
-  _t.resetHash = function() {
+  _t.restartHistory = function() {
     window.location.hash = '';
+    Backbone.history.stop();
+    Backbone.history.start();
   };
 
 
   /**
    * Navigate to a route, forcing refresh.
    *
-   * @param {String} frag: The URL fragment.
+   * @param {String} fragment: The URL fragment.
    */
-  _t.navigate = function(frag) {
-    Neatline.Editor.__router.navigate('RESET');
-    Neatline.Editor.__router.navigate(frag, { trigger: true });
+  _t.navigate = function(fragment) {
+    Backbone.history.fragment = null;
+    Backbone.history.navigate(fragment, true);
   };
 
 
@@ -129,7 +128,7 @@ var _t = (function(_t) {
    * Navigate to the edit form for the first record.
    */
   _t.openRecordForm = function() {
-    _t.showRecordList(this.json.records.standard);
+    this.showRecordList(this.json.records.standard);
     var models = this.getRecordListModels();
     this.navigate('records/'+models[0].get('id'));
   };

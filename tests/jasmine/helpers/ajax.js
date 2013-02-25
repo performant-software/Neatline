@@ -30,7 +30,7 @@ var _t = (function(_t) {
    * @return {Object} params: The parameters.
    */
   _t.getLastRequestParams = function() {
-    return $.parseJSON(_t.getLastRequest().requestBody);
+    return $.parseJSON(this.getLastRequest().requestBody);
   };
 
 

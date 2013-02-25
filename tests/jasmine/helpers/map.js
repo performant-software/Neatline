@@ -157,7 +157,7 @@ var _t = (function(_t) {
    * @param {Array}: A list of control `CLASS_NAME`s.
    */
   _t.getMapControlClassNames = function() {
-    return _.map(_t.vw.map.map.controls, function(control) {
+    return _.map(this.vw.map.map.controls, function(control) {
       return control.CLASS_NAME;
     });
   };

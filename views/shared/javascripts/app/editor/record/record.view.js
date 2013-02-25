@@ -62,7 +62,6 @@ Neatline.module('Editor.Record', function(
       // "Text" tab.
       text: {
         tab:      'a[href="#record-form-text"]',
-        region:   '#record-form-text'
       },
 
       // "Spatial" tab.

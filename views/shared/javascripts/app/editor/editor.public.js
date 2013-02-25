@@ -79,7 +79,7 @@ Neatline.module('Editor', { startWithParent: false,
    * @param {String} message: The new route.
    */
   var updateRoute = function(route) {
-    Editor.__router.navigate(route, { replace: true });
+    Editor.Record.__router.navigate(route, { replace: true });
   };
 
   Neatline.commands.addHandler('editor:updateRoute', updateRoute);

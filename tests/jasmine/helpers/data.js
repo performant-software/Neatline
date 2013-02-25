@@ -41,7 +41,7 @@ var _t = (function(_t) {
    * @return {Object}: The layer.
    */
   _t.getVectorLayerByTitle = function(title) {
-    return _.find(_t.vw.map.layers, function(layer) {
+    return _.find(this.vw.map.layers, function(layer) {
       return layer.name == title;
     });
   };
@@ -53,7 +53,7 @@ var _t = (function(_t) {
    * @return {Number}: The id.
    */
   _t.getNewRecordId = function() {
-    return $.parseJSON(_t.json.record.add).id;
+    return $.parseJSON(this.json.record.add).id;
   };
 
 
@@ -75,28 +75,28 @@ var _t = (function(_t) {
    */
   _t.getRecordFormElements = function() {
     return {
-      id:             _t.el.record.find('p.lead span.id'),
-      titleHeader:    _t.el.record.find('p.lead span.title'),
-      titleInput:     _t.el.record.find('textarea[name="title"]'),
-      itemId:         _t.el.record.find('input[name="item-id"]'),
-      body:           _t.el.record.find('textarea[name="body"]'),
-      coverage:       _t.el.record.find('textarea[name="coverage"]'),
-      tags:           _t.el.record.find('input[name="tags"]'),
-      presenter:      _t.el.record.find('select[name="presenter"]'),
-      vectorColor:    _t.el.record.find('input[name="vector-color"]'),
-      strokeColor:    _t.el.record.find('input[name="stroke-color"]'),
-      selectColor:    _t.el.record.find('input[name="select-color"]'),
-      vectorOpacity:  _t.el.record.find('input[name="vector-opacity"]'),
-      selectOpacity:  _t.el.record.find('input[name="select-opacity"]'),
-      strokeOpacity:  _t.el.record.find('input[name="stroke-opacity"]'),
-      imageOpacity:   _t.el.record.find('input[name="image-opacity"]'),
-      strokeWidth:    _t.el.record.find('input[name="stroke-width"]'),
-      pointRadius:    _t.el.record.find('input[name="point-radius"]'),
-      minZoom:        _t.el.record.find('input[name="min-zoom"]'),
-      maxZoom:        _t.el.record.find('input[name="max-zoom"]'),
-      pointImage:     _t.el.record.find('input[name="point-image"]'),
-      mapFocus:       _t.el.record.find('input[name="map-focus"]'),
-      mapZoom:        _t.el.record.find('input[name="map-zoom"]')
+      id:             this.el.record.find('p.lead span.id'),
+      titleHeader:    this.el.record.find('p.lead span.title'),
+      titleInput:     this.el.record.find('textarea[name="title"]'),
+      itemId:         this.el.record.find('input[name="item-id"]'),
+      body:           this.el.record.find('textarea[name="body"]'),
+      coverage:       this.el.record.find('textarea[name="coverage"]'),
+      tags:           this.el.record.find('input[name="tags"]'),
+      presenter:      this.el.record.find('select[name="presenter"]'),
+      vectorColor:    this.el.record.find('input[name="vector-color"]'),
+      strokeColor:    this.el.record.find('input[name="stroke-color"]'),
+      selectColor:    this.el.record.find('input[name="select-color"]'),
+      vectorOpacity:  this.el.record.find('input[name="vector-opacity"]'),
+      selectOpacity:  this.el.record.find('input[name="select-opacity"]'),
+      strokeOpacity:  this.el.record.find('input[name="stroke-opacity"]'),
+      imageOpacity:   this.el.record.find('input[name="image-opacity"]'),
+      strokeWidth:    this.el.record.find('input[name="stroke-width"]'),
+      pointRadius:    this.el.record.find('input[name="point-radius"]'),
+      minZoom:        this.el.record.find('input[name="min-zoom"]'),
+      maxZoom:        this.el.record.find('input[name="max-zoom"]'),
+      pointImage:     this.el.record.find('input[name="point-image"]'),
+      mapFocus:       this.el.record.find('input[name="map-focus"]'),
+      mapZoom:        this.el.record.find('input[name="map-zoom"]')
     };
   };
 
