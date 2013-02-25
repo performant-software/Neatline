@@ -18,33 +18,15 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     routes: {
-      '':                                       'records',
-      'records(/search)(/query=:q)(/start=:s)': 'records',
-      'records/add':                            'records/add',
-      'records/:id':                            'records/:id',
-      'styles':                                 'styles'
+      'records/add':  'records/add',
+      'records/:id':  'records/:id',
+      'styles':       'styles'
     },
 
 
     before: function() {
       Neatline.vent.trigger('editor:router:before');
       Editor.__view.__ui.editor.empty();
-    },
-
-
-    /**
-     * Show the list of records.
-     *
-     * @param {String} query: The search query.
-     * @param {String} start: The paging offset.
-     */
-    'records': function(query, start) {
-      if (_.isString(start)) start = parseInt(start, 10);
-      Neatline.execute('editor:menu:show');
-      Neatline.execute('editor:search:show');
-      Neatline.execute('editor:records:show');
-      Neatline.execute('editor:search:initialize', query, start);
-      Neatline.execute('editor:menu:update', 'records');
     },
 
 

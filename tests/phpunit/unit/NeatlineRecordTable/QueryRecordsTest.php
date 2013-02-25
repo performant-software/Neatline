@@ -157,11 +157,14 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
     public function testExhibitFilter()
     {
 
-        $exhibit1   = $this->__exhibit();
-        $exhibit2   = $this->__exhibit();
-        $record1    = new NeatlineRecord($exhibit1);
-        $record2    = new NeatlineRecord($exhibit1);
-        $record3    = new NeatlineRecord($exhibit2);
+        $exhibit1 = $this->__exhibit();
+        $exhibit2 = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit1);
+        $record2 = new NeatlineRecord($exhibit1);
+        $record3 = new NeatlineRecord($exhibit2);
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
 
         $record1->save();
         $record2->save();
@@ -171,8 +174,8 @@ class Neatline_NeatlineRecordTableTest_QueryRecords
         $result = $this->_recordsTable->queryRecords($exhibit1);
 
         // Exhibit2 records should be absent.
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertEquals($result['records'][1]['id'], $record1->id);
         $this->assertCount(2, $result['records']);
 
     }

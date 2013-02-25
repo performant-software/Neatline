@@ -39,6 +39,16 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
+   * Clear the editor container.
+   */
+  var empty = function() {
+    Editor.__view.__ui.editor.empty();
+  };
+
+  Neatline.commands.addHandler('editor:empty', empty);
+
+
+  /**
    * Open a record edit form if one is not already open.
    *
    * @param {Object} model: The record model.

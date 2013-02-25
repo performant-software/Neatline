@@ -16,7 +16,8 @@ Neatline.module('Editor.Records', function(
 
   Records.init = function() {
     this.__collection = new Neatline.Shared.Record.Collection();
-    this.__view = new Records.View();
+    this.__view =       new Records.View();
+    this.__router =     new Records.Router();
   };
 
   Records.addInitializer(Records.init);
