@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Menu initializer.
+ * Search initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Menu', function(
-  Menu, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Search', function(
+  Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  Menu.init = function() {
-    this.__view = new Menu.View();
+  Search.init = function() {
+    this.__view = new Search.View();
   };
 
-  Menu.addInitializer(Menu.init);
+  Search.addInitializer(Search.init);
 
 
 });

@@ -10,8 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Styles', function(
+Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
+
+
+  var NS = 'editor:exhibit:styles';
 
 
   /**
@@ -23,7 +26,7 @@ Neatline.module('Editor.Styles', function(
     Styles.__view.showIn(container);
     Styles.__view.refresh();
   };
-  Neatline.commands.addHandler('editor:styles:display', display);
+  Neatline.commands.addHandler(NS+':display', display);
 
 
 });

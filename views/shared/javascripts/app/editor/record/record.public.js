@@ -14,6 +14,9 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
+  var NS = 'editor:record';
+
+
   /**
    * Append the form to the editor container.
    *
@@ -22,7 +25,7 @@ Neatline.module('Editor.Record', function(
   var display = function(container) {
     Record.__view.showIn(container);
   };
-  Neatline.commands.addHandler('editor:record:display', display);
+  Neatline.commands.addHandler(NS+':display', display);
 
 
   /**
@@ -36,7 +39,7 @@ Neatline.module('Editor.Record', function(
       Record.__view.show(record);
     });
   };
-  Neatline.commands.addHandler('editor:record:bindId', bindId);
+  Neatline.commands.addHandler(NS+':bindId', bindId);
 
 
   /**
@@ -47,7 +50,7 @@ Neatline.module('Editor.Record', function(
     Record.__view.show(record);
     Record.__view.resetTabs();
   };
-  Neatline.commands.addHandler('editor:record:bindNew', bindNew);
+  Neatline.commands.addHandler(NS+':bindNew', bindNew);
 
 
   /**
@@ -60,7 +63,7 @@ Neatline.module('Editor.Record', function(
       Record.__router.navigate('records/'+model.get('id'), true);
     }
   };
-  Neatline.commands.addHandler('editor:record:navToForm', navToForm);
+  Neatline.commands.addHandler(NS+':navToForm', navToForm);
   Neatline.vent.on('map:select', navToForm);
 
 
@@ -72,7 +75,7 @@ Neatline.module('Editor.Record', function(
   var updateRoute = function(route) {
     Record.__router.navigate(route, { replace: true });
   };
-  Neatline.commands.addHandler('editor:record:updateRoute', updateRoute);
+  Neatline.commands.addHandler(NS+':updateRoute', updateRoute);
 
 
   /**
@@ -83,7 +86,7 @@ Neatline.module('Editor.Record', function(
   var setCoverage = function(coverage) {
     Record.__view.model.set('coverage', coverage);
   };
-  Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
+  Neatline.commands.addHandler(NS+':setCoverage', setCoverage);
 
 
   /**
@@ -92,7 +95,7 @@ Neatline.module('Editor.Record', function(
   var deactivate = function() {
     if (Record.__view.open) Record.__view.deactivate();
   };
-  Neatline.commands.addHandler('editor:record:deactivate', deactivate);
+  Neatline.commands.addHandler(NS+':deactivate', deactivate);
   Neatline.vent.on('editor:router:before', deactivate);
 
 

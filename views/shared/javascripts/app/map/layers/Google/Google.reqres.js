@@ -20,7 +20,7 @@ Neatline.module('Map.Layers.Google', function(
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer.Google}: The Google layer.
    */
-  Neatline.reqres.addHandler('map:layers:Google', function(json) {
+  var Google = function(json) {
     switch (json.properties.provider) {
       case 'physical':
         return new OpenLayers.Layer.Google(json.title, {
@@ -42,7 +42,8 @@ Neatline.module('Map.Layers.Google', function(
           numZoomLevels: 25
         });
     }
-  });
+  };
+  Neatline.reqres.addHandler('map:layers:Google', Google);
 
 
 });

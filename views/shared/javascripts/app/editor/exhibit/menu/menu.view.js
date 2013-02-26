@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Menu', function(
+Neatline.module('Editor.Exhibit.Menu', function(
   Menu, Neatline, Backbone, Marionette, $, _) {
 
 

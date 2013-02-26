@@ -10,8 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Menu', function(
+Neatline.module('Editor.Exhibit.Menu', function(
   Menu, Neatline, Backbone, Marionette, $, _) {
+
+
+  var NS = 'editor:exhibit:menu';
 
 
   /**
@@ -22,7 +25,7 @@ Neatline.module('Editor.Menu', function(
   var display = function(container) {
     Menu.__view.showIn(container);
   };
-  Neatline.commands.addHandler('editor:menu:display', display);
+  Neatline.commands.addHandler(NS+':display', display);
 
 
   /**
@@ -33,7 +36,7 @@ Neatline.module('Editor.Menu', function(
   var activateTab = function(tab) {
     Menu.__view.activateTab(tab);
   };
-  Neatline.commands.addHandler('editor:menu:activateTab', activateTab);
+  Neatline.commands.addHandler(NS+':activateTab', activateTab);
 
 
 });

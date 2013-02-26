@@ -21,13 +21,14 @@ Neatline.module('Map.Layers', function(
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer|null}: The layer.
    */
-  Neatline.reqres.addHandler('map:layers:getLayer', function(json) {
+  var getLayer = function(json) {
     try {
       return Neatline.request('map:layers:'+json.type, json);
     } catch (e) {
       return null;
     }
-  });
+  };
+  Neatline.reqres.addHandler('map:layers:getLayer', getLayer);
 
 
 });

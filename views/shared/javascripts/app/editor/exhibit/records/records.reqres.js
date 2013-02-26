@@ -10,8 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Records', function(
-  Records, Editor, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Records', function(
+  Records, Neatline, Backbone, Marionette, $, _) {
+
+
+  NS = 'editor:exhibit:records';
 
 
   /**
@@ -20,9 +23,10 @@ Neatline.module('Editor.Records', function(
    * @param {Number} id: The record id.
    * @param {Function} cb: A callback, called with the model.
    */
-  Neatline.reqres.addHandler('editor:records:getModel', function(id, cb) {
+  var getModel = function(id, cb) {
     Records.__collection.getOrFetch(id, cb);
-  });
+  };
+  Neatline.reqres.addHandler(NS+':getModel', getModel);
 
 
 });

@@ -15,25 +15,6 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Display a list of views inthe editor container.
-   *
-   * @param {Array} views: A list of views.
-   */
-  var display = function(views) {
-
-    // Clear the editor container.
-    Editor.__view.__ui.editor.empty();
-
-    // Show each of the views.
-    _.each(views, function(v) {
-      Neatline.execute('editor:'+v+':display', Editor.__view.__ui.editor);
-    });
-
-  };
-  Neatline.commands.addHandler('editor:display', display);
-
-
-  /**
    * Flash a success notification.
    *
    * @param {String} message: The message.

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Search request handlers.
+ * Search public request handlers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,8 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Search', function(
+Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
+
+
+  var NS = 'editor:exhibit:search';
 
 
   /**
@@ -19,9 +22,10 @@ Neatline.module('Editor.Search', function(
    *
    * @return {String}: The query.
    */
-  Neatline.reqres.addHandler('editor:search:getQueryForUrl', function() {
+  var getQueryForUrl = function() {
     return Search.__view.getQueryForUrl();
-  });
+  };
+  Neatline.reqres.addHandler(NS+':getQueryForUrl', getQueryForUrl);
 
 
 });
