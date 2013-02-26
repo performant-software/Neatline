@@ -26,7 +26,7 @@ describe('Layers API', function() {
     // --------------------------------------------------------------------
 
     // Request layer type for which no handler exists.
-    var layer = Neatline.request('map:layers:getLayer', {
+    var layer = Neatline.request('LAYERS:getLayer', {
       type: 'LayerType'
     });
 
@@ -43,12 +43,12 @@ describe('Layers API', function() {
     // --------------------------------------------------------------------
 
     // Register a handler for `LayerType` that returns `true`.
-    Neatline.reqres.addHandler('map:layers:LayerType', function() {
+    Neatline.reqres.addHandler('LAYERS:LayerType', function() {
       return true;
     });
 
     // Request a `LayerType` layer.
-    var layer = Neatline.request('map:layers:getLayer', {
+    var layer = Neatline.request('LAYERS:getLayer', {
       type: 'LayerType'
     });
 

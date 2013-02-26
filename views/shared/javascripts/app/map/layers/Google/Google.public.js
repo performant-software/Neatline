@@ -14,9 +14,6 @@ Neatline.module('Map.Layers.Google', function(
   Google, Neatline, Backbone, Marionette, $, _) {
 
 
-  Google.NS = 'map:layers';
-
-
   /**
    * Construct a Google layer.
    *
@@ -46,7 +43,7 @@ Neatline.module('Map.Layers.Google', function(
         });
     }
   };
-  Neatline.reqres.addHandler(Google.NS+':Google', layer);
+  Neatline.reqres.addHandler('LAYERS:Google', layer);
 
 
 });

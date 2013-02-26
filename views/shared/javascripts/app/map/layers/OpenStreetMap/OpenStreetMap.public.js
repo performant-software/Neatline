@@ -14,9 +14,6 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   OpenStreetMap, Neatline, Backbone, Marionette, $, _) {
 
 
-  OpenStreetMap.NS = 'map:layers';
-
-
   /**
    * Construct an OpenStreetMap layer.
    *
@@ -26,7 +23,7 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   var layer = function(json) {
     return new OpenLayers.Layer.OSM(json.title);
   };
-  Neatline.reqres.addHandler(OpenStreetMap.NS+':OpenStreetMap', layer);
+  Neatline.reqres.addHandler('LAYERS:OpenStreetMap', layer);
 
 
 });

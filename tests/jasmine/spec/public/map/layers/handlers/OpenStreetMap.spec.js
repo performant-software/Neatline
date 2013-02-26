@@ -20,7 +20,7 @@ describe('OpenStreetMap Layer Handler', function() {
 
   it('should construct an OpenStreetMap layer', function() {
 
-    var osm = Neatline.request('map:layers:OpenStreetMap', {
+    var osm = Neatline.request('LAYERS:OpenStreetMap', {
       title: 'Title'
     });
 

@@ -14,9 +14,6 @@ Neatline.module('Map.Layers', function(
   Layers, Neatline, Backbone, Marionette, $, _) {
 
 
-  Layers.NS = 'map:layers';
-
-
   /**
    * Dispatch a layer request to the appropriate handler. If no handler
    * exists for the passed type and the request fails, return null.
@@ -26,12 +23,12 @@ Neatline.module('Map.Layers', function(
    */
   var getLayer = function(json) {
     try {
-      return Neatline.request('map:layers:'+json.type, json);
+      return Neatline.request('LAYERS:'+json.type, json);
     } catch (e) {
       return null;
     }
   };
-  Neatline.reqres.addHandler(Layers.NS+':getLayer', getLayer);
+  Neatline.reqres.addHandler('LAYERS:getLayer', getLayer);
 
 
 });
