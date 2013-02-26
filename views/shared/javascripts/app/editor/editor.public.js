@@ -22,7 +22,6 @@ Neatline.module('Editor', { startWithParent: false,
   var notifySuccess = function(message) {
     Editor.__view.notifySuccess(message);
   };
-
   Neatline.commands.addHandler('editor:notifySuccess', notifySuccess);
 
 
@@ -34,30 +33,16 @@ Neatline.module('Editor', { startWithParent: false,
   var notifyError = function(message) {
     Editor.__view.notifyError(message);
   };
-
   Neatline.commands.addHandler('editor:notifyError', notifyError);
 
 
   /**
    * Clear the editor container.
    */
-  var empty = function() {
+  var clearContainer = function() {
     Editor.__view.__ui.editor.empty();
   };
-
-  Neatline.commands.addHandler('editor:empty', empty);
-
-
-  /**
-   * Update the route hash.
-   *
-   * @param {String} message: The new route.
-   */
-  var updateRoute = function(route) {
-    Editor.Record.__router.navigate(route, { replace: true });
-  };
-
-  Neatline.commands.addHandler('editor:updateRoute', updateRoute);
+  Neatline.commands.addHandler('editor:clearContainer', clearContainer);
 
 
 }});

@@ -22,7 +22,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var startEdit = function(model) {
     Map.__view.startEdit(model);
   };
-
   Neatline.commands.addHandler('editor:map:startEdit', startEdit);
 
 
@@ -34,7 +33,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var endEdit = function(model) {
     Map.__view.endEdit();
   };
-
   Neatline.commands.addHandler('editor:map:endEdit', endEdit);
 
 
@@ -46,7 +44,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateEdit = function(settings) {
     Map.__view.updateEdit(settings);
   };
-
   Neatline.commands.addHandler('editor:map:updateEdit', updateEdit);
 
 
@@ -58,7 +55,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateWKT = function(wkt) {
     Map.__view.updateWKT(wkt);
   };
-
   Neatline.commands.addHandler('editor:map:updateWKT', updateWKT);
 
 
@@ -70,7 +66,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateStyles = function(model) {
     Map.__view.updateStyles(model);
   };
-
   Neatline.commands.addHandler('editor:map:updateStyles', updateStyles);
 
 
@@ -82,18 +77,16 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateModel = function(model) {
     Map.__view.updateModel(model);
   };
-
   Neatline.commands.addHandler('editor:map:updateModel', updateModel);
 
 
   /**
    * Delete all features on the edit layer.
    */
-  var clear = function() {
-    Map.__view.clear();
+  var clearLayer = function() {
+    Map.__view.clearLayer();
   };
-
-  Neatline.commands.addHandler('editor:map:clear', clear);
+  Neatline.commands.addHandler('editor:map:clearLayer', clearLayer);
 
 
   /**
@@ -105,7 +98,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
     Map.__collection.remove(model);
     Map.__view.removeLayerByModel(model);
   };
-
   Neatline.commands.addHandler('editor:map:deleteLayer', deleteLayer);
 
 

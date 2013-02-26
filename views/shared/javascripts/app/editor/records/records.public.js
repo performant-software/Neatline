@@ -17,11 +17,10 @@ Neatline.module('Editor.Records', function(
   /**
    * Append the list to the editor container.
    */
-  var render = function() {
+  var display = function() {
     Records.__view.showIn(Neatline.request('editor:getContainer'));
   };
-
-  Neatline.commands.addHandler('editor:records:render', render);
+  Neatline.commands.addHandler('editor:records:display', display);
 
 
   /**
@@ -34,7 +33,6 @@ Neatline.module('Editor.Records', function(
       ingest(records);
     });
   };
-
   Neatline.commands.addHandler('editor:records:load', load);
 
 
@@ -46,18 +44,16 @@ Neatline.module('Editor.Records', function(
   var ingest = function(records) {
     Records.__view.ingest(records);
   };
-
   Neatline.commands.addHandler('editor:records:ingest', ingest);
 
 
   /**
    * Navigate to the record list.
    */
-  var showList = function() {
+  var navToList = function() {
     Records.__router.navigate('records', true);
   };
-
-  Neatline.commands.addHandler('editor:records:showList', showList);
+  Neatline.commands.addHandler('editor:records:navToList', navToList);
 
 
 });

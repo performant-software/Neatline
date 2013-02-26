@@ -26,7 +26,6 @@ Neatline.module('Presenter', function(
       );
     } catch (e) {}
   };
-
   Neatline.commands.addHandler('presenter:show', show);
   Neatline.vent.on('map:highlight', show);
 
@@ -43,7 +42,6 @@ Neatline.module('Presenter', function(
       );
     } catch(e) {}
   };
-
   Neatline.commands.addHandler('presenter:hide', hide);
   Neatline.vent.on('map:unhighlight', hide);
 
@@ -60,7 +58,6 @@ Neatline.module('Presenter', function(
       );
     } catch (e) {}
   };
-
   Neatline.commands.addHandler('presenter:select', select);
   Neatline.vent.on('map:select', select);
 
@@ -77,7 +74,6 @@ Neatline.module('Presenter', function(
       );
     } catch (e) {}
   };
-
   Neatline.commands.addHandler('presenter:unselect', unselect);
   Neatline.vent.on('map:unselect', unselect);
 

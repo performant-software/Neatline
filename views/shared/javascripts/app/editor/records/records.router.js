@@ -25,7 +25,7 @@ Neatline.module('Editor.Records', function(
 
     before: function() {
       Neatline.vent.trigger('editor:router:before');
-      Neatline.execute('editor:empty');
+      Neatline.execute('editor:clearContainer');
     },
 
 
@@ -36,11 +36,11 @@ Neatline.module('Editor.Records', function(
      * @param {String} start: The paging offset.
      */
     'records': function(query, start) {
-      Neatline.execute('editor:menu:update', 'records');
-      Neatline.execute('editor:search:init', query, start);
-      Neatline.execute('editor:menu:render');
-      Neatline.execute('editor:search:render');
-      Neatline.execute('editor:records:render');
+      Neatline.execute('editor:menu:display');
+      Neatline.execute('editor:search:display');
+      Neatline.execute('editor:records:display');
+      Neatline.execute('editor:menu:activateTab', 'records');
+      Neatline.execute('editor:search:initialize', query, start);
     }
 
 

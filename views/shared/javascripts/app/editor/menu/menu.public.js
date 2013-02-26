@@ -17,23 +17,21 @@ Neatline.module('Editor.Menu', function(
   /**
    * Append the menu to the editor container.
    */
-  var render = function() {
+  var display = function() {
     Menu.__view.showIn(Neatline.request('editor:getContainer'));
   };
-
-  Neatline.commands.addHandler('editor:menu:render', render);
+  Neatline.commands.addHandler('editor:menu:display', display);
 
 
   /**
-   * Activate the current tab.
+   * Set the active tab.
    *
    * @param {String} tab: The tab to activate.
    */
-  var update = function(tab) {
+  var activateTab = function(tab) {
     Menu.__view.activateTab(tab);
   };
-
-  Neatline.commands.addHandler('editor:menu:update', update);
+  Neatline.commands.addHandler('editor:menu:activateTab', activateTab);
 
 
 });

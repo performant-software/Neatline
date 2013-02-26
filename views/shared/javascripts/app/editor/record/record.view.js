@@ -172,7 +172,7 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     onCloseClick: function() {
-      Neatline.execute('editor:records:showList');
+      Neatline.execute('editor:records:navToList');
       this.deactivate();
     },
 
@@ -208,7 +208,7 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('map:refresh');
 
       // Update the route.
-      Neatline.execute('editor:updateRoute',
+      Neatline.execute('editor:record:updateRoute',
         'records/'+this.model.get('id')
       );
 
@@ -339,7 +339,7 @@ Neatline.module('Editor.Record', function(
      * Clear all features on the edit layer.
      */
     onClearClick: function() {
-      Neatline.execute('editor:map:clear', this.model);
+      Neatline.execute('editor:map:clearLayer');
     },
 
 

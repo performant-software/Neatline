@@ -69,6 +69,9 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.updateControls();
 
+    // Publish collection.
+    Neatline.vent.trigger('map:ingest', records);
+
   },
 
 
@@ -377,7 +380,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Delete all features on the edit layer, publish empty WKT.
    */
-  clear: function() {
+  clearLayer: function() {
     this.editLayer.destroyFeatures();
     this.publish();
   }

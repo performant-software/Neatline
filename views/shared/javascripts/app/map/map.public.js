@@ -15,19 +15,17 @@ Neatline.module('Map', function(
 
 
   /**
-   * Update map layers.
+   * Load map layers.
    *
    * @param {Object} params: Hash with `extent` and `zoom`.
    */
-  var update = function(params) {
+  var load = function(params) {
     Map.__collection.update(params, function(records) {
-      Neatline.vent.trigger('map:update', records);
       Map.__view.ingest(records);
     });
   };
-
-  Neatline.commands.addHandler('map:update', update);
-  Neatline.vent.on('map:move', update);
+  Neatline.commands.addHandler('map:load', load);
+  Neatline.vent.on('map:move', load);
 
 
   /**
@@ -36,7 +34,6 @@ Neatline.module('Map', function(
   var refresh = function() {
     Map.__view.publishPosition();
   };
-
   Neatline.commands.addHandler('map:refresh', refresh);
 
 
@@ -48,7 +45,6 @@ Neatline.module('Map', function(
   var focusByModel = function(model) {
     Map.__view.focusByModel(model);
   };
-
   Neatline.commands.addHandler('map:focusByModel', focusByModel);
 
 
@@ -62,7 +58,6 @@ Neatline.module('Map', function(
       focusByModel(model);
     });
   };
-
   Neatline.commands.addHandler('map:focusById', focusById);
 
 
@@ -72,7 +67,6 @@ Neatline.module('Map', function(
   var unselect = function() {
     Map.__view.unselectAll();
   };
-
   Neatline.commands.addHandler('map:unselect', unselect);
 
 

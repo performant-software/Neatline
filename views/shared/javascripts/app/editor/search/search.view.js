@@ -131,16 +131,15 @@ Neatline.module('Editor.Search', function(
       this.parse();
 
       // Update the route.
-      Neatline.execute('editor:updateRoute', this.getUrlFromQuery());
+      var url = this.getUrlFromQuery();
+      Neatline.execute('editor:record:updateRoute', url);
 
       // Execute the query.
       if (!this.mirroring) {
-        Neatline.execute('editor:records:load', _.extend(
-          Search.__view.query, {
-            limit: Neatline.global.page_length,
-            offset: 0
-          }
-        ));
+        Neatline.execute('editor:records:load', _.extend(this.query, {
+          limit: Neatline.global.page_length,
+          offset: 0
+        }));
       }
 
     },

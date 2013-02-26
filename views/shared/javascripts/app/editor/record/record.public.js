@@ -17,38 +17,35 @@ Neatline.module('Editor.Record', function(
   /**
    * Append the form to the editor container.
    */
-  var render = function() {
+  var display = function() {
     Record.__view.showIn(Neatline.request('editor:getContainer'));
   };
-
-  Neatline.commands.addHandler('editor:record:render', render);
+  Neatline.commands.addHandler('editor:record:display', display);
 
 
   /**
    * Show form for an existing record.
    *
-   * @param {Number} id: The record id.
+   * @param {Number|String} id: The record id.
    */
-  var showById = function(id) {
+  var bindId = function(id) {
     id = parseInt(id, 10);
     Neatline.request('editor:records:getModel', id, function(record) {
       Record.__view.show(record);
     });
   };
-
-  Neatline.commands.addHandler('editor:record:showById', showById);
+  Neatline.commands.addHandler('editor:record:bindId', bindId);
 
 
   /**
    * Show form for a new record.
    */
-  var showNew = function() {
+  var bindNew = function() {
     var record = new Neatline.Shared.Record.Model();
     Record.__view.show(record);
     Record.__view.resetTabs();
   };
-
-  Neatline.commands.addHandler('editor:record:showNew', showNew);
+  Neatline.commands.addHandler('editor:record:bindNew', bindNew);
 
 
   /**
@@ -56,14 +53,24 @@ Neatline.module('Editor.Record', function(
    *
    * @param {Object} model: The record model.
    */
-  var showForm = function(model) {
+  var navToForm = function(model) {
     if (!Record.__view.open) {
       Record.__router.navigate('records/'+model.get('id'), true);
     }
   };
+  Neatline.commands.addHandler('editor:record:navToForm', navToForm);
+  Neatline.vent.on('map:select', navToForm);
 
-  Neatline.commands.addHandler('editor:record:showForm', showForm);
-  Neatline.vent.on('map:select', showForm);
+
+  /**
+   * Update the route hash.
+   *
+   * @param {String} message: The new route.
+   */
+  var updateRoute = function(route) {
+    Record.__router.navigate(route, { replace: true });
+  };
+  Neatline.commands.addHandler('editor:record:updateRoute', updateRoute);
 
 
   /**
@@ -74,7 +81,6 @@ Neatline.module('Editor.Record', function(
   var setCoverage = function(coverage) {
     Record.__view.model.set('coverage', coverage);
   };
-
   Neatline.commands.addHandler('editor:record:setCoverage', setCoverage);
 
 
@@ -84,7 +90,6 @@ Neatline.module('Editor.Record', function(
   var deactivate = function() {
     if (Record.__view.open) Record.__view.deactivate();
   };
-
   Neatline.commands.addHandler('editor:record:deactivate', deactivate);
   Neatline.vent.on('editor:router:before', deactivate);
 

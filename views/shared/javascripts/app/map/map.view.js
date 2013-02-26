@@ -301,6 +301,9 @@ Neatline.module('Map', function(
 
       this.updateControls();
 
+      // Publish collection.
+      Neatline.vent.trigger('map:ingest', records);
+
     },
 
 

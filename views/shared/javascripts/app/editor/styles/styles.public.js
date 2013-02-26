@@ -17,12 +17,11 @@ Neatline.module('Editor.Styles', function(
   /**
    * Append the form to the editor container.
    */
-  var render = function() {
+  var display = function() {
     Styles.__view.showIn(Neatline.request('editor:getContainer'));
     Styles.__view.refresh();
   };
-
-  Neatline.commands.addHandler('editor:styles:render', render);
+  Neatline.commands.addHandler('editor:styles:display', display);
 
 
 });

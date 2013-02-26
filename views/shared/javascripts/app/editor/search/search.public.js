@@ -17,11 +17,10 @@ Neatline.module('Editor.Search', function(
   /**
    * Append the form to the editor container.
    */
-  var render = function() {
+  var display = function() {
     Search.__view.showIn(Neatline.request('editor:getContainer'));
   };
-
-  Neatline.commands.addHandler('editor:search:render', render);
+  Neatline.commands.addHandler('editor:search:display', display);
 
 
   /**
@@ -30,10 +29,12 @@ Neatline.module('Editor.Search', function(
    * @param {String} query: The search query.
    * @param {Number} start: The paging offset.
    */
-  var init = function(query, start) {
+  var initialize = function(query, start) {
 
-    // Parse route parameters, set raw query.
-    query = query || null; start = start || 0;
+    query = query || null;
+    start = start || 0;
+
+    // Set the search query.
     Search.__view.setQueryFromUrl(query);
 
     // Load the record list.
@@ -45,8 +46,7 @@ Neatline.module('Editor.Search', function(
     ));
 
   };
-
-  Neatline.commands.addHandler('editor:search:init', init);
+  Neatline.commands.addHandler('editor:search:initialize', initialize);
 
 
   /**
@@ -54,9 +54,8 @@ Neatline.module('Editor.Search', function(
    */
   var syncWithMap = function() {
     var records = Neatline.request('map:getRecords');
-    if (records) Neatline.execute('editor:records:ingest', records);
+    if (records)  Neatline.execute('editor:records:ingest', records);
   };
-
   Neatline.commands.addHandler('editor:search:syncWithMap', syncWithMap);
 
 
@@ -70,9 +69,8 @@ Neatline.module('Editor.Search', function(
       Neatline.execute('editor:records:ingest', records);
     }
   };
-
   Neatline.commands.addHandler('editor:search:mirror', mirror);
-  Neatline.vent.on('map:update', mirror);
+  Neatline.vent.on('map:ingest', mirror);
 
 
 });
