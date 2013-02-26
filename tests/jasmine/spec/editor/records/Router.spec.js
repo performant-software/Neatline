@@ -41,6 +41,10 @@ describe('Records Router', function() {
 
     });
 
+    it('empty', function() {
+      _t.navigate('');
+    });
+
     it('default', function() {
       _t.navigate('records');
     });

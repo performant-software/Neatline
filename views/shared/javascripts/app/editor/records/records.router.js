@@ -14,17 +14,12 @@ Neatline.module('Editor.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.Router = Backbone.Router.extend({
+  Records.Router = Neatline.Editor.Router.extend({
 
 
     routes: {
       '': 'records',
       'records(/search)(/query=:q)(/start=:s)': 'records'
-    },
-
-
-    before: function() {
-      Neatline.vent.trigger('editor:router:before');
     },
 
 

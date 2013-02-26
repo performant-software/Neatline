@@ -14,16 +14,11 @@ Neatline.module('Editor.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Styles.Router = Backbone.Router.extend({
+  Styles.Router = Neatline.Editor.Router.extend({
 
 
     routes: {
       'styles': 'styles'
-    },
-
-
-    before: function() {
-      Neatline.vent.trigger('editor:router:before');
     },
 
 
