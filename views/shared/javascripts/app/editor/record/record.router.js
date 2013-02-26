@@ -27,7 +27,7 @@ Neatline.module('Editor.Record', function(
      * Show add record form.
      */
     'records/add': function() {
-      Neatline.execute('editor:display', ['record']);
+      Neatline.execute('EDITOR:display', ['record']);
       Neatline.execute('editor:record:bindNew');
     },
 
@@ -38,7 +38,7 @@ Neatline.module('Editor.Record', function(
      * @param {String} id: The record id.
      */
     'records/:id': function(id) {
-      Neatline.execute('editor:display', ['record']);
+      Neatline.execute('EDITOR:display', ['record']);
       Neatline.execute('editor:record:bindId', id);
     }
 

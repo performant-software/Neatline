@@ -25,7 +25,7 @@ Neatline.module('Editor.Exhibit', function(
   var display = function(views) {
 
     // Get and clear the editor container.
-    var editor = Neatline.request('editor:getContainer');
+    var editor = Neatline.request('EDITOR:getContainer');
     editor.empty();
 
     // Show the views.

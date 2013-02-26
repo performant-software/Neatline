@@ -213,7 +213,7 @@ Neatline.module('Editor.Record', function(
       );
 
       // Flash success.
-      Neatline.execute('editor:notifySuccess',
+      Neatline.execute('EDITOR:notifySuccess',
         STRINGS.record.save.success
       );
 
@@ -224,7 +224,7 @@ Neatline.module('Editor.Record', function(
      * When a save fails.
      */
     onSaveError: function() {
-      Neatline.execute('editor:notifyError',
+      Neatline.execute('EDITOR:notifyError',
         STRINGS.record.save.error
       );
     },
@@ -240,7 +240,7 @@ Neatline.module('Editor.Record', function(
       this.__ui.remove.modal.modal('hide');
 
       // FLash success.
-      Neatline.execute('editor:notifySuccess',
+      Neatline.execute('EDITOR:notifySuccess',
         STRINGS.record.remove.success
       );
 
@@ -253,7 +253,7 @@ Neatline.module('Editor.Record', function(
      * When a delete fails.
      */
     onDeleteError: function() {
-      Neatline.execute('editor:notifyError',
+      Neatline.execute('EDITOR:notifyError',
         STRINGS.record.remove.error
       );
     },
@@ -319,7 +319,7 @@ Neatline.module('Editor.Record', function(
         Neatline.execute('editor:map:updateWKT', wkt);
 
         // Flash success.
-        Neatline.execute('editor:notifySuccess',
+        Neatline.execute('EDITOR:notifySuccess',
           STRINGS.svg.parse.success
         );
 
@@ -327,7 +327,7 @@ Neatline.module('Editor.Record', function(
         this.__ui.spatial.modal.modal('hide');
 
       } catch (e) {
-        Neatline.execute('editor:notifyError',
+        Neatline.execute('EDITOR:notifyError',
           STRINGS.svg.parse.error
         );
       }

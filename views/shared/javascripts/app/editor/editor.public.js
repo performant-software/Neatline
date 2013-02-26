@@ -14,9 +14,6 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor';
-
-
   /**
    * Display a list of views inthe editor container.
    *
@@ -33,7 +30,7 @@ Neatline.module('Editor', { startWithParent: false,
     });
 
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler('EDITOR:display', display);
 
 
   /**
@@ -44,7 +41,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifySuccess = function(message) {
     Editor.__view.notifySuccess(message);
   };
-  Neatline.commands.addHandler(NS+':notifySuccess', notifySuccess);
+  Neatline.commands.addHandler('EDITOR:notifySuccess', notifySuccess);
 
 
   /**
@@ -55,7 +52,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifyError = function(message) {
     Editor.__view.notifyError(message);
   };
-  Neatline.commands.addHandler(NS+':notifyError', notifyError);
+  Neatline.commands.addHandler('EDITOR:notifyError', notifyError);
 
 
   /**
@@ -66,7 +63,7 @@ Neatline.module('Editor', { startWithParent: false,
   var getContainer = function() {
     return Editor.__view.__ui.editor
   };
-  Neatline.reqres.addHandler(NS+':getContainer', getContainer);
+  Neatline.reqres.addHandler('EDITOR:getContainer', getContainer);
 
 
 }});

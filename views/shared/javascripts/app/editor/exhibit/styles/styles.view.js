@@ -104,7 +104,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      */
     onSaveSuccess: function() {
       Neatline.execute('MAP:refresh');
-      Neatline.execute('editor:notifySuccess',
+      Neatline.execute('EDITOR:notifySuccess',
         STRINGS.exhibit.save.success
       );
     },
@@ -114,7 +114,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * When a save fails.
      */
     onSaveError: function() {
-      Neatline.execute('editor:notifyError',
+      Neatline.execute('EDITOR:notifyError',
         STRINGS.exhibit.save.error
       );
     }
