@@ -310,7 +310,7 @@ describe('Static Bubble', function() {
     _t.clickOnMapFeature(feature1);
 
     // Deactivate the presenter.
-    Neatline.vent.trigger('presenter:deactivate');
+    Neatline.vent.trigger('PRESENTER:deactivate');
 
     // Bubble should disappear.
     expect(_t.el.staticBubble).not.toBeVisible();
@@ -325,7 +325,7 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Deactivate the presenter.
-    Neatline.vent.trigger('presenter:deactivate');
+    Neatline.vent.trigger('PRESENTER:deactivate');
 
     // Hover on feature.
     _t.hoverOnMapFeature(feature1);
@@ -344,8 +344,8 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Deactivate, activate the presenter.
-    Neatline.vent.trigger('presenter:deactivate');
-    Neatline.vent.trigger('presenter:activate');
+    Neatline.vent.trigger('PRESENTER:deactivate');
+    Neatline.vent.trigger('PRESENTER:activate');
 
     // Hover on feature.
     _t.hoverOnMapFeature(feature1);

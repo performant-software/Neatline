@@ -51,7 +51,7 @@ describe('Presenter Form Interaction', function() {
     _t.openFirstRecordForm();
 
     // Presenter should deactivate.
-    expect(vent).toHaveBeenCalledWith('presenter:deactivate');
+    expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
 
   });
 
@@ -70,7 +70,7 @@ describe('Presenter Form Interaction', function() {
     els.spatial.tab('show');
 
     // Presenter should deactivate.
-    expect(vent).toHaveBeenCalledWith('presenter:deactivate');
+    expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
 
   });
 
@@ -92,7 +92,7 @@ describe('Presenter Form Interaction', function() {
     els.text.tab('show');
 
     // Presenter should activate.
-    expect(vent).toHaveBeenCalledWith('presenter:activate');
+    expect(vent).toHaveBeenCalledWith('PRESENTER:activate');
 
   });
 
@@ -119,8 +119,8 @@ describe('Presenter Form Interaction', function() {
     _t.respondRecords();
 
     // Presenter should activate.
-    expect(vent).toHaveBeenCalledWith('presenter:activate');
-    expect(exec).toHaveBeenCalledWith('presenter:unselect', model);
+    expect(vent).toHaveBeenCalledWith('PRESENTER:activate');
+    expect(exec).toHaveBeenCalledWith('PRESENTER:unselect', model);
 
   });
 

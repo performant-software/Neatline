@@ -24,30 +24,30 @@ describe('Presenter API', function() {
 
 
   it('show', function() {
-    Neatline.commands.addHandler('presenter:P:show', function() {});
-    Neatline.execute('presenter:show', model);
-    expect(exec).toHaveBeenCalledWith('presenter:P:show', model);
+    Neatline.commands.addHandler('PRESENTER:P:show', function() {});
+    Neatline.execute('PRESENTER:show', model);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:P:show', model);
   });
 
 
   it('hide', function() {
-    Neatline.commands.addHandler('presenter:P:hide', function() {});
-    Neatline.execute('presenter:hide', model);
-    expect(exec).toHaveBeenCalledWith('presenter:P:hide', model);
+    Neatline.commands.addHandler('PRESENTER:P:hide', function() {});
+    Neatline.execute('PRESENTER:hide', model);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:P:hide', model);
   });
 
 
   it('select', function() {
-    Neatline.commands.addHandler('presenter:P:select', function() {});
-    Neatline.execute('presenter:select', model);
-    expect(exec).toHaveBeenCalledWith('presenter:P:select', model);
+    Neatline.commands.addHandler('PRESENTER:P:select', function() {});
+    Neatline.execute('PRESENTER:select', model);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:P:select', model);
   });
 
 
   it('unselect', function() {
-    Neatline.commands.addHandler('presenter:P:unselect', function() {});
-    Neatline.execute('presenter:unselect', model);
-    expect(exec).toHaveBeenCalledWith('presenter:P:unselect', model);
+    Neatline.commands.addHandler('PRESENTER:P:unselect', function() {});
+    Neatline.execute('PRESENTER:unselect', model);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:P:unselect', model);
   });
 
 

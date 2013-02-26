@@ -14,9 +14,6 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'presenter:StaticBubble';
-
-
   /**
    * Show the bubble.
    *
@@ -25,7 +22,9 @@ Neatline.module('Presenter.StaticBubble', function(
   var show = function(model) {
     StaticBubble.__view.show(model);
   };
-  Neatline.commands.addHandler(NS+':show', show);
+  Neatline.commands.addHandler(
+    'PRESENTER:StaticBubble:show', show
+  );
 
 
   /**
@@ -34,7 +33,9 @@ Neatline.module('Presenter.StaticBubble', function(
   var hide = function() {
     StaticBubble.__view.hide();
   };
-  Neatline.commands.addHandler(NS+':hide', hide);
+  Neatline.commands.addHandler(
+    'PRESENTER:StaticBubble:hide', hide
+  );
 
 
   /**
@@ -45,7 +46,9 @@ Neatline.module('Presenter.StaticBubble', function(
   var select = function(model) {
     StaticBubble.__view.select(model);
   };
-  Neatline.commands.addHandler(NS+':select', select);
+  Neatline.commands.addHandler(
+    'PRESENTER:StaticBubble:select', select
+  );
 
 
   /**
@@ -54,7 +57,9 @@ Neatline.module('Presenter.StaticBubble', function(
   var unselect = function() {
     StaticBubble.__view.unselect();
   };
-  Neatline.commands.addHandler(NS+':unselect', unselect);
+  Neatline.commands.addHandler(
+    'PRESENTER:StaticBubble:unselect', unselect
+  );
 
 
   /**
@@ -63,7 +68,9 @@ Neatline.module('Presenter.StaticBubble', function(
   var activate = function() {
     StaticBubble.__view.activate();
   };
-  Neatline.vent.on('presenter:activate', activate);
+  Neatline.vent.on(
+    'PRESENTER:activate', activate
+  );
 
 
   /**
@@ -73,7 +80,9 @@ Neatline.module('Presenter.StaticBubble', function(
     StaticBubble.__view.deactivate();
     StaticBubble.__view.unselect();
   };
-  Neatline.vent.on('presenter:deactivate', deactivate);
+  Neatline.vent.on(
+    'PRESENTER:deactivate', deactivate
+  );
 
 
 });

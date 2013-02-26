@@ -14,9 +14,6 @@ Neatline.module('Presenter', function(
   Presenter, Neatline, Backbone, Marionette, $, _) {
 
 
-  Presenter.NS = 'presenter';
-
-
   /**
    * Show the record.
    *
@@ -25,11 +22,11 @@ Neatline.module('Presenter', function(
   var show = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':show', model
+        'PRESENTER:'+model.get('presenter')+':show', model
       );
     } catch (e) {}
   };
-  Neatline.commands.addHandler(Presenter.NS+':show', show);
+  Neatline.commands.addHandler('PRESENTER:show', show);
   Neatline.vent.on('MAP:highlight', show);
 
 
@@ -41,11 +38,11 @@ Neatline.module('Presenter', function(
   var hide = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':hide', model
+        'PRESENTER:'+model.get('presenter')+':hide', model
       );
     } catch(e) {}
   };
-  Neatline.commands.addHandler(Presenter.NS+':hide', hide);
+  Neatline.commands.addHandler('PRESENTER:hide', hide);
   Neatline.vent.on('MAP:unhighlight', hide);
 
 
@@ -57,11 +54,11 @@ Neatline.module('Presenter', function(
   var select = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':select', model
+        'PRESENTER:'+model.get('presenter')+':select', model
       );
     } catch (e) {}
   };
-  Neatline.commands.addHandler(Presenter.NS+':select', select);
+  Neatline.commands.addHandler('PRESENTER:select', select);
   Neatline.vent.on('MAP:select', select);
 
 
@@ -73,11 +70,11 @@ Neatline.module('Presenter', function(
   var unselect = function(model) {
     try {
       Neatline.execute(
-        'presenter:'+model.get('presenter')+':unselect', model
+        'PRESENTER:'+model.get('presenter')+':unselect', model
       );
     } catch (e) {}
   };
-  Neatline.commands.addHandler(Presenter.NS+':unselect', unselect);
+  Neatline.commands.addHandler('PRESENTER:unselect', unselect);
   Neatline.vent.on('MAP:unselect', unselect);
 
 
