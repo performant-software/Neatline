@@ -31,6 +31,7 @@ function records(exhibit_id, count, zoom, color, tags) {
       'body,'+
       '_body,'+
       'tags,'+
+      'presenter,'+
       'vector_color,'+
       'stroke_color,'+
       'select_color,'+
@@ -60,6 +61,7 @@ function records(exhibit_id, count, zoom, color, tags) {
       '"'+bod+'",'+
       '"'+bod+'",'+
       '"'+tags+'",'+
+      '"StaticBubble",'+
       '"'+color+'",'+
       '"#000000",'+
       '"'+color+'",'+

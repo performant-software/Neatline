@@ -103,8 +103,8 @@ Neatline.module('Editor.Search', function(
 
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
-        Neatline.execute('editor:search:syncWithMap');
         this.mirroring = true;
+        Neatline.execute('editor:search:mirrorMap');
         this.bold();
       }
 
