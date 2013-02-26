@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  NS = 'editor:exhibit:records';
+  Records.NS = 'editor:exhibit:records';
 
 
   /**
@@ -25,7 +25,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var display = function(container) {
     Records.__view.showIn(container);
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler(Records.NS+':display', display);
 
 
   /**
@@ -38,7 +38,7 @@ Neatline.module('Editor.Exhibit.Records', function(
       ingest(records);
     });
   };
-  Neatline.commands.addHandler(NS+':load', load);
+  Neatline.commands.addHandler(Records.NS+':load', load);
 
 
   /**
@@ -49,7 +49,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var ingest = function(records) {
     Records.__view.ingest(records);
   };
-  Neatline.commands.addHandler(NS+':ingest', ingest);
+  Neatline.commands.addHandler(Records.NS+':ingest', ingest);
 
 
   /**
@@ -58,7 +58,19 @@ Neatline.module('Editor.Exhibit.Records', function(
   var navToList = function() {
     Records.__router.navigate('records', true);
   };
-  Neatline.commands.addHandler(NS+':navToList', navToList);
+  Neatline.commands.addHandler(Records.NS+':navToList', navToList);
+
+
+  /**
+   * Get a record model from the collection.
+   *
+   * @param {Number} id: The record id.
+   * @param {Function} cb: A callback, called with the model.
+   */
+  var getModel = function(id, cb) {
+    Records.__collection.getOrFetch(id, cb);
+  };
+  Neatline.reqres.addHandler(Records.NS+':getModel', getModel);
 
 
 });

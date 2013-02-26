@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor:exhibit:styles';
+  Styles.NS = 'editor:exhibit:styles';
 
 
   /**
@@ -26,7 +26,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
     Styles.__view.showIn(container);
     Styles.__view.refresh();
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler(Styles.NS+':display', display);
 
 
 });

@@ -11,10 +11,10 @@
  */
 
 Neatline.module('Editor.Exhibit', function(
-  Menu, Neatline, Backbone, Marionette, $, _) {
+  Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor:exhibit';
+  Exhibit.NS = 'editor:exhibit';
 
 
   /**
@@ -34,7 +34,7 @@ Neatline.module('Editor.Exhibit', function(
     });
 
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler(Exhibit.NS+':display', display);
 
 
 });

@@ -14,6 +14,9 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
+  Editor.NS = 'editor';
+
+
   /**
    * Flash a success notification.
    *
@@ -22,7 +25,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifySuccess = function(message) {
     Editor.__view.notifySuccess(message);
   };
-  Neatline.commands.addHandler('editor:notifySuccess', notifySuccess);
+  Neatline.commands.addHandler(Editor.NS+':notifySuccess', notifySuccess);
 
 
   /**
@@ -33,7 +36,18 @@ Neatline.module('Editor', { startWithParent: false,
   var notifyError = function(message) {
     Editor.__view.notifyError(message);
   };
-  Neatline.commands.addHandler('editor:notifyError', notifyError);
+  Neatline.commands.addHandler(Editor.NS+':notifyError', notifyError);
+
+
+  /**
+   * Return the editor container div.
+   *
+   * @return {Object}: The container.
+   */
+  var getContainer = function() {
+    return Editor.__view.__ui.editor
+  };
+  Neatline.reqres.addHandler(Editor.NS+':getContainer', getContainer);
 
 
 }});
