@@ -28,7 +28,7 @@ var _t = (function(_t) {
     // Mock the server.
     this.server = sinon.fakeServer.create();
 
-    // Public modules.
+    // Restart modules.
     Neatline.Map.init();
     Neatline.Presenter.StaticBubble.init();
 
@@ -53,31 +53,25 @@ var _t = (function(_t) {
     // Mock the server.
     this.server = sinon.fakeServer.create();
 
-    // Editor modules.
+    // Restart modules.
     Neatline.Editor.Menu.init();
     Neatline.Editor.Search.init();
     Neatline.Editor.Record.init();
     Neatline.Editor.Records.init();
     Neatline.Editor.Styles.init();
     Neatline.Editor.init();
-
-    // Public modules.
     Neatline.Map.init();
     Neatline.Presenter.StaticBubble.init();
-
-    // Map edit module.
     Neatline.Editor.Map.init();
 
     // Reset the route.
     this.restartHistory();
+    this.navigate('');
 
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
     this.aliasNeatline();
     this.aliasEditor();
-
-    // Default route.
-    this.navigate('');
 
   };
 
