@@ -50,4 +50,14 @@ Neatline.module('Editor.Records', function(
   Neatline.commands.addHandler('editor:records:ingest', ingest);
 
 
+  /**
+   * Navigate to the record list.
+   */
+  var showList = function() {
+    Records.__router.navigate('records', true);
+  };
+
+  Neatline.commands.addHandler('editor:records:showList', showList);
+
+
 });

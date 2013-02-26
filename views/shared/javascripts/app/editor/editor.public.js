@@ -49,31 +49,6 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Open a record edit form if one is not already open.
-   *
-   * @param {Object} model: The record model.
-   */
-  var showRecordForm = function(model) {
-    if (!Neatline.request('editor:record:isOpen?')) {
-      Editor.Record.__router.navigate('records/'+model.get('id'), true);
-    }
-  };
-
-  Neatline.commands.addHandler('editor:showRecordForm', showRecordForm);
-  Neatline.vent.on('map:select', showRecordForm);
-
-
-  /**
-   * Navigate to the record list.
-   */
-  var showRecordList = function() {
-    Editor.Records.__router.navigate('records', true);
-  };
-
-  Neatline.commands.addHandler('editor:showRecordList', showRecordList);
-
-
-  /**
    * Update the route hash.
    *
    * @param {String} message: The new route.

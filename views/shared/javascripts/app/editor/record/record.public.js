@@ -52,6 +52,21 @@ Neatline.module('Editor.Record', function(
 
 
   /**
+   * Open a record edit form if one is not already open.
+   *
+   * @param {Object} model: The record model.
+   */
+  var showForm = function(model) {
+    if (!Record.__view.open) {
+      Record.__router.navigate('records/'+model.get('id'), true);
+    }
+  };
+
+  Neatline.commands.addHandler('editor:record:showForm', showForm);
+  Neatline.vent.on('map:select', showForm);
+
+
+  /**
    * Update coverage textarea.
    *
    * @param {String} coverage: The new WKT.
