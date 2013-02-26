@@ -32,8 +32,8 @@ describe('Styles Initialization', function() {
     };
 
     // Start form module.
-    Neatline.Editor.Styles.init();
-    var view = Neatline.Editor.Styles.__view;
+    Neatline.Editor.Exhibit.Styles.init();
+    var view = Neatline.Editor.Exhibit.Styles.__view;
 
     // Form should be populated.
     expect(view.editor.getValue()).toEqual('1');

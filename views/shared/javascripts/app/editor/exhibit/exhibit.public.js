@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.NS = 'editor:exhibit';
+  var NS = 'editor:exhibit';
 
 
   /**
@@ -25,7 +25,7 @@ Neatline.module('Editor.Exhibit', function(
   var display = function(views) {
 
     // Get and clear the editor container.
-    var editor = Neatline.execute('editor:getContainer');
+    var editor = Neatline.request('editor:getContainer');
     editor.empty();
 
     // Show the views.
@@ -34,7 +34,7 @@ Neatline.module('Editor.Exhibit', function(
     });
 
   };
-  Neatline.commands.addHandler(Exhibit.NS+':display', display);
+  Neatline.commands.addHandler(NS+':display', display);
 
 
 });

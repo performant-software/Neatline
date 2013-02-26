@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Menu', function(
   Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-  Menu.NS = 'editor:exhibit:menu';
+  var NS = 'editor:exhibit:menu';
 
 
   /**
@@ -25,7 +25,7 @@ Neatline.module('Editor.Exhibit.Menu', function(
   var display = function(container) {
     Menu.__view.showIn(container);
   };
-  Neatline.commands.addHandler(Menu.NS+':display', display);
+  Neatline.commands.addHandler(NS+':display', display);
 
 
   /**
@@ -36,7 +36,7 @@ Neatline.module('Editor.Exhibit.Menu', function(
   var activateTab = function(tab) {
     Menu.__view.activateTab(tab);
   };
-  Neatline.commands.addHandler(Menu.NS+':activateTab', activateTab);
+  Neatline.commands.addHandler(NS+':activateTab', activateTab);
 
 
 });

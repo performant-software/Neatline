@@ -14,7 +14,26 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.NS = 'editor';
+  var NS = 'editor';
+
+
+  /**
+   * Display a list of views inthe editor container.
+   *
+   * @param {Array} views: A list of views.
+   */
+  var display = function(views) {
+
+    // Clear the editor container.
+    Editor.__view.__ui.editor.empty();
+
+    // Show each of the views.
+    _.each(views, function(v) {
+      Neatline.execute('editor:'+v+':display', Editor.__view.__ui.editor);
+    });
+
+  };
+  Neatline.commands.addHandler(NS+':display', display);
 
 
   /**
@@ -25,7 +44,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifySuccess = function(message) {
     Editor.__view.notifySuccess(message);
   };
-  Neatline.commands.addHandler(Editor.NS+':notifySuccess', notifySuccess);
+  Neatline.commands.addHandler(NS+':notifySuccess', notifySuccess);
 
 
   /**
@@ -36,7 +55,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifyError = function(message) {
     Editor.__view.notifyError(message);
   };
-  Neatline.commands.addHandler(Editor.NS+':notifyError', notifyError);
+  Neatline.commands.addHandler(NS+':notifyError', notifyError);
 
 
   /**
@@ -47,7 +66,7 @@ Neatline.module('Editor', { startWithParent: false,
   var getContainer = function() {
     return Editor.__view.__ui.editor
   };
-  Neatline.reqres.addHandler(Editor.NS+':getContainer', getContainer);
+  Neatline.reqres.addHandler(NS+':getContainer', getContainer);
 
 
 }});

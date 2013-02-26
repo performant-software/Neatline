@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Search', function(
+Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
@@ -104,7 +104,7 @@ Neatline.module('Editor.Search', function(
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         this.mirroring = true;
-        Neatline.execute('editor:search:mirrorMap');
+        Neatline.execute('editor:exhibit:search:mirrorMap');
         this.bold();
       }
 
@@ -134,12 +134,15 @@ Neatline.module('Editor.Search', function(
       var url = this.getUrlFromQuery();
       Neatline.execute('editor:record:updateRoute', url);
 
-      // Execute the query.
+      // Build parameters object.
+      var params = _.extend(this.query, {
+        limit: Neatline.global.page_length,
+        offset: 0
+      });
+
+      // Load records.
       if (!this.mirroring) {
-        Neatline.execute('editor:records:load', _.extend(this.query, {
-          limit: Neatline.global.page_length,
-          offset: 0
-        }));
+        Neatline.execute('editor:exhibit:records:load', params);
       }
 
     },

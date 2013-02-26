@@ -54,11 +54,11 @@ var _t = (function(_t) {
     this.server = sinon.fakeServer.create();
 
     // Restart modules.
-    Neatline.Editor.Menu.init();
-    Neatline.Editor.Search.init();
+    Neatline.Editor.Exhibit.Menu.init();
+    Neatline.Editor.Exhibit.Search.init();
+    Neatline.Editor.Exhibit.Records.init();
+    Neatline.Editor.Exhibit.Styles.init();
     Neatline.Editor.Record.init();
-    Neatline.Editor.Records.init();
-    Neatline.Editor.Styles.init();
     Neatline.Editor.init();
     Neatline.Map.init();
     Neatline.Presenter.StaticBubble.init();

@@ -30,7 +30,7 @@ var _t = (function(_t) {
    * @return {Array}: The models.
    */
   _t.getRecordListModels = function() {
-    return Neatline.Editor.Records.__collection.models;
+    return Neatline.Editor.Exhibit.Records.__collection.models;
   };
 
 
