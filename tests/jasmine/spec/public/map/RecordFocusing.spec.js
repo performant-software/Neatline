@@ -47,11 +47,11 @@ describe('Map Record Focusing', function() {
     });
 
     it('focusByModel', function() {
-      Neatline.execute('map:focusByModel', _t.vw.map.layers[0].nModel);
+      Neatline.execute('MAP:focusByModel', _t.vw.map.layers[0].nModel);
     });
 
     it('focusById', function() {
-      Neatline.execute('map:focusById', _t.vw.map.layers[0].nId);
+      Neatline.execute('MAP:focusById', _t.vw.map.layers[0].nId);
     });
 
   });
@@ -92,7 +92,7 @@ describe('Map Record Focusing', function() {
       var model = _t.buildModelFromJson(_t.json.record.standard);
       var count = _t.server.requests.count;
 
-      Neatline.execute('map:focusByModel', model);
+      Neatline.execute('MAP:focusByModel', model);
 
       // Should not request data from server.
       expect(_t.server.requests.count).toEqual(count);
@@ -102,8 +102,8 @@ describe('Map Record Focusing', function() {
     it('focusById', function() {
 
       var done = false;
-      Neatline.vent.on('map:focused', function() { done = true; });
-      Neatline.execute('map:focusById', 999);
+      Neatline.vent.on('MAP:focused', function() { done = true; });
+      Neatline.execute('MAP:focusById', 999);
 
       // Respond to the GET request.
       var request = _t.respondLast200(_t.json.record.standard);

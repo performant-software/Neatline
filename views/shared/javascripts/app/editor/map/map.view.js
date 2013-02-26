@@ -70,7 +70,7 @@ _.extend(Neatline.Map.View.prototype, {
     this.updateControls();
 
     // Publish collection.
-    Neatline.vent.trigger('map:ingest', records);
+    Neatline.vent.trigger('MAP:ingest', records);
 
   },
 

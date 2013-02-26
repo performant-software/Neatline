@@ -205,7 +205,7 @@ Neatline.module('Editor.Record', function(
     onSaveSuccess: function() {
 
       // Refresh the map.
-      Neatline.execute('map:refresh');
+      Neatline.execute('MAP:refresh');
 
       // Update the route.
       Neatline.execute('editor:record:updateRoute',
@@ -263,7 +263,7 @@ Neatline.module('Editor.Record', function(
      * Populate "Min Zoom" with current map value.
      */
     onSetMinZoom: function() {
-      var zoom = Neatline.request('map:getZoom');
+      var zoom = Neatline.request('MAP:getZoom');
       this.__ui.style.minZoom.val(zoom).change();
     },
 
@@ -272,7 +272,7 @@ Neatline.module('Editor.Record', function(
      * Populate "Max Zoom" with current map value.
      */
     onSetMaxZoom: function() {
-      var zoom = Neatline.request('map:getZoom');
+      var zoom = Neatline.request('MAP:getZoom');
       this.__ui.style.maxZoom.val(zoom).change();
     },
 
@@ -281,8 +281,8 @@ Neatline.module('Editor.Record', function(
      * Populate default focus and zoom with current map center.
      */
     onSetFocus: function() {
-      var center  = Neatline.request('map:getCenter');
-      var zoom    = Neatline.request('map:getZoom');
+      var center  = Neatline.request('MAP:getCenter');
+      var zoom    = Neatline.request('MAP:getZoom');
       this.__ui.style.mapFocus.val(center.lon+','+center.lat).change();
       this.__ui.style.mapZoom.val(zoom).change();
     },

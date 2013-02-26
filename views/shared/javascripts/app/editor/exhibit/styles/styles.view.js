@@ -63,8 +63,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * Populate "Default Focus" with current map center.
      */
     onSetFocus: function() {
-      var center  = Neatline.request('map:getCenter');
-      var zoom    = Neatline.request('map:getZoom');
+      var center  = Neatline.request('MAP:getCenter');
+      var zoom    = Neatline.request('MAP:getZoom');
       this.__ui.mapFocus.val(center.lon+','+center.lat).change();
       this.__ui.mapZoom.val(zoom).change();
     },
@@ -103,7 +103,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * When a save succeeds.
      */
     onSaveSuccess: function() {
-      Neatline.execute('map:refresh');
+      Neatline.execute('MAP:refresh');
       Neatline.execute('editor:notifySuccess',
         STRINGS.exhibit.save.success
       );

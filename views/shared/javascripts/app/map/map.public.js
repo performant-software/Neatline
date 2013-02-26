@@ -14,9 +14,6 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.NS = 'map';
-
-
   /**
    * Load map layers.
    *
@@ -27,8 +24,8 @@ Neatline.module('Map', function(
       Map.__view.ingest(records);
     });
   };
-  Neatline.commands.addHandler(Map.NS+':load', load);
-  Neatline.vent.on('map:move', load);
+  Neatline.commands.addHandler('MAP:load', load);
+  Neatline.vent.on('MAP:move', load);
 
 
   /**
@@ -37,7 +34,7 @@ Neatline.module('Map', function(
   var refresh = function() {
     Map.__view.publishPosition();
   };
-  Neatline.commands.addHandler(Map.NS+':refresh', refresh);
+  Neatline.commands.addHandler('MAP:refresh', refresh);
 
 
   /**
@@ -48,7 +45,7 @@ Neatline.module('Map', function(
   var focusByModel = function(model) {
     Map.__view.focusByModel(model);
   };
-  Neatline.commands.addHandler(Map.NS+':focusByModel', focusByModel);
+  Neatline.commands.addHandler('MAP:focusByModel', focusByModel);
 
 
   /**
@@ -61,7 +58,7 @@ Neatline.module('Map', function(
       focusByModel(model);
     });
   };
-  Neatline.commands.addHandler(Map.NS+':focusById', focusById);
+  Neatline.commands.addHandler('MAP:focusById', focusById);
 
 
   /**
@@ -70,7 +67,7 @@ Neatline.module('Map', function(
   var unselect = function() {
     Map.__view.unselectAll();
   };
-  Neatline.commands.addHandler(Map.NS+':unselect', unselect);
+  Neatline.commands.addHandler('MAP:unselect', unselect);
 
 
   /**
@@ -81,7 +78,7 @@ Neatline.module('Map', function(
   var getMap = function() {
     return Map.__view.map;
   };
-  Neatline.reqres.addHandler(Map.NS+':getMap', getMap);
+  Neatline.reqres.addHandler('MAP:getMap', getMap);
 
 
   /**
@@ -92,7 +89,7 @@ Neatline.module('Map', function(
   var getRecords = function() {
     return Map.__view.records;
   };
-  Neatline.reqres.addHandler(Map.NS+':getRecords', getRecords);
+  Neatline.reqres.addHandler('MAP:getRecords', getRecords);
 
 
   /**
@@ -103,7 +100,7 @@ Neatline.module('Map', function(
   var getCenter = function() {
     return Map.__view.map.getCenter();
   };
-  Neatline.reqres.addHandler(Map.NS+':getCenter', getCenter);
+  Neatline.reqres.addHandler('MAP:getCenter', getCenter);
 
 
   /**
@@ -114,7 +111,7 @@ Neatline.module('Map', function(
   var getZoom = function() {
     return Map.__view.map.getZoom();
   };
-  Neatline.reqres.addHandler(Map.NS+':getZoom', getZoom);
+  Neatline.reqres.addHandler('MAP:getZoom', getZoom);
 
 
 });

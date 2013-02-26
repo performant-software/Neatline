@@ -62,7 +62,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var mirrorMap = function(records) {
 
     // Get the record collection on the map.
-    records = records || Neatline.request('map:getRecords');
+    records = records || Neatline.request('MAP:getRecords');
 
     // Render in the record browser.
     if (records && Search.__view.mirroring) {
@@ -71,7 +71,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
   };
   Neatline.commands.addHandler(NS+':mirrorMap', mirrorMap);
-  Neatline.vent.on('map:ingest', mirrorMap);
+  Neatline.vent.on('MAP:ingest', mirrorMap);
 
 
   /**

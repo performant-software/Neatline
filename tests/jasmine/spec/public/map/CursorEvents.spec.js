@@ -38,8 +38,8 @@ describe('Map Cursor Events', function() {
     // Should render `temporary` intent.
     expect(feature.renderIntent).toEqual('temporary');
 
-    // Should publish `map:highlight`.
-    expect(vent).toHaveBeenCalledWith('map:highlight', layer.nModel);
+    // Should publish `MAP:highlight`.
+    expect(vent).toHaveBeenCalledWith('MAP:highlight', layer.nModel);
 
   });
 
@@ -53,8 +53,8 @@ describe('Map Cursor Events', function() {
     // Should render `default` intent.
     expect(feature.renderIntent).toEqual('default');
 
-    // Should publish `map:unhighlight`.
-    expect(vent).toHaveBeenCalledWith('map:unhighlight', layer.nModel);
+    // Should publish `MAP:unhighlight`.
+    expect(vent).toHaveBeenCalledWith('MAP:unhighlight', layer.nModel);
 
   });
 
@@ -67,8 +67,8 @@ describe('Map Cursor Events', function() {
     // Should render `select` intent.
     expect(feature.renderIntent).toEqual('select');
 
-    // Should publish `map:select`.
-    expect(vent).toHaveBeenCalledWith('map:select', layer.nModel);
+    // Should publish `MAP:select`.
+    expect(vent).toHaveBeenCalledWith('MAP:select', layer.nModel);
 
   });
 
@@ -82,8 +82,8 @@ describe('Map Cursor Events', function() {
     // Should render `default` intent.
     expect(feature.renderIntent).toEqual('default');
 
-    // Should publish `map:unselect`.
-    expect(vent).toHaveBeenCalledWith('map:unselect', layer.nModel);
+    // Should publish `MAP:unselect`.
+    expect(vent).toHaveBeenCalledWith('MAP:unselect', layer.nModel);
 
   });
 
@@ -97,8 +97,8 @@ describe('Map Cursor Events', function() {
     var extent = _t.vw.map.getExtentAsWKT();
     var zoom = _t.vw.map.getZoom();
 
-    // Should publish `map:move`.
-    expect(vent.argsForCall[0][0]).toEqual('map:move');
+    // Should publish `MAP:move`.
+    expect(vent.argsForCall[0][0]).toEqual('MAP:move');
     expect(vent.argsForCall[0][1].extent).toEqual(extent);
     expect(vent.argsForCall[0][1].zoom).toEqual(zoom);
 

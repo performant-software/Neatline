@@ -30,7 +30,7 @@ Neatline.module('Presenter', function(
     } catch (e) {}
   };
   Neatline.commands.addHandler(Presenter.NS+':show', show);
-  Neatline.vent.on('map:highlight', show);
+  Neatline.vent.on('MAP:highlight', show);
 
 
   /**
@@ -46,7 +46,7 @@ Neatline.module('Presenter', function(
     } catch(e) {}
   };
   Neatline.commands.addHandler(Presenter.NS+':hide', hide);
-  Neatline.vent.on('map:unhighlight', hide);
+  Neatline.vent.on('MAP:unhighlight', hide);
 
 
   /**
@@ -62,7 +62,7 @@ Neatline.module('Presenter', function(
     } catch (e) {}
   };
   Neatline.commands.addHandler(Presenter.NS+':select', select);
-  Neatline.vent.on('map:select', select);
+  Neatline.vent.on('MAP:select', select);
 
 
   /**
@@ -78,7 +78,7 @@ Neatline.module('Presenter', function(
     } catch (e) {}
   };
   Neatline.commands.addHandler(Presenter.NS+':unselect', unselect);
-  Neatline.vent.on('map:unselect', unselect);
+  Neatline.vent.on('MAP:unselect', unselect);
 
 
 });

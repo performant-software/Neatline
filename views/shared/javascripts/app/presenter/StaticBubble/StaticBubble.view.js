@@ -73,7 +73,7 @@ Neatline.module('Presenter.StaticBubble', function(
         this.onMouseOut  = _.bind(this.hide, this);
 
         // Bind to mousemove and mouseout.
-        var map = Neatline.request('map:getMap');
+        var map = Neatline.request('MAP:getMap');
         map.events.register('mouseout', null, this.onMouseOut);
 
         // Render template, inject bubble.
@@ -113,7 +113,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Unfreeze and hide the bubble.
      */
     unselect: function() {
-      Neatline.execute('map:unselect');
+      Neatline.execute('MAP:unselect');
       this.$el.removeClass('frozen body');
       this.frozen = false;
       this.hide();
@@ -140,7 +140,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Unbind move and leave listeners.
      */
     unbind: function() {
-      var map = Neatline.request('map:getMap');
+      var map = Neatline.request('MAP:getMap');
       map.events.unregister('mouseout', null, this.onMouseOut);
     }
 

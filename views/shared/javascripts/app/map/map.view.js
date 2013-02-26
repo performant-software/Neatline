@@ -203,10 +203,10 @@ Neatline.module('Map', function(
 
 
     /**
-     * Publish the current focus and zoom of the map via `map:move`.
+     * Publish the current focus and zoom of the map via `MAP:move`.
      */
     publishPosition: function() {
-      Neatline.vent.trigger('map:move', {
+      Neatline.vent.trigger('MAP:move', {
         extent: this.getExtentAsWKT(),
         zoom:   this.getZoom()
       });
@@ -244,7 +244,7 @@ Neatline.module('Map', function(
         this.map.zoomToExtent(layer.getDataExtent());
       }
 
-      Neatline.vent.trigger('map:focused');
+      Neatline.vent.trigger('MAP:focused');
 
     },
 
@@ -302,7 +302,7 @@ Neatline.module('Map', function(
       this.updateControls();
 
       // Publish collection.
-      Neatline.vent.trigger('map:ingest', records);
+      Neatline.vent.trigger('MAP:ingest', records);
 
     },
 
@@ -435,46 +435,46 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is selected, publish `map:select` with the model
+     * When a feature is selected, publish `MAP:select` with the model
      * instance that was used to construct the layer.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureSelect: function(feature) {
-      Neatline.vent.trigger('map:select', feature.layer.nModel);
+      Neatline.vent.trigger('MAP:select', feature.layer.nModel);
     },
 
 
     /**
-     * When a feature is unselected, publish `map:unselect` with the model
+     * When a feature is unselected, publish `MAP:unselect` with the model
      * instance that was used to construct the layer.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureUnselect: function(feature) {
-      Neatline.vent.trigger('map:unselect', feature.layer.nModel);
+      Neatline.vent.trigger('MAP:unselect', feature.layer.nModel);
     },
 
 
     /**
-     * When a feature is highlighted, publish `map:highlight` with the
+     * When a feature is highlighted, publish `MAP:highlight` with the
      * model instance that was used to construct the layer.
      *
      * @param {Object} evt: The highlight event.
      */
     onFeatureHighlight: function(evt) {
-      Neatline.vent.trigger('map:highlight', evt.feature.layer.nModel);
+      Neatline.vent.trigger('MAP:highlight', evt.feature.layer.nModel);
     },
 
 
     /**
-     * When a feature is un-highlighted, publish `map:unhighlight` with
+     * When a feature is un-highlighted, publish `MAP:unhighlight` with
      * the model instance that was used to construct the layer.
      *
      * @param {Object} evt: The unhighlight event.
      */
     onFeatureUnhighlight: function(evt) {
-      Neatline.vent.trigger('map:unhighlight', evt.feature.layer.nModel);
+      Neatline.vent.trigger('MAP:unhighlight', evt.feature.layer.nModel);
     }
 
 

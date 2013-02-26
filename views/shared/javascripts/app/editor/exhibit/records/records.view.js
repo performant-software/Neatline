@@ -62,7 +62,7 @@ Neatline.module('Editor.Exhibit.Records', function(
      */
     click: function(e) {
       var id = parseInt($(e.currentTarget).attr('data-id'), 10);
-      Neatline.execute('map:focusById', id);
+      Neatline.execute('MAP:focusById', id);
     }
 
 
