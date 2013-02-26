@@ -16,9 +16,11 @@ Neatline.module('Editor.Styles', function(
 
   /**
    * Append the form to the editor container.
+   *
+   * @param {Object} container: The container element.
    */
-  var display = function() {
-    Styles.__view.showIn(Neatline.request('editor:getContainer'));
+  var display = function(container) {
+    Styles.__view.showIn(container);
     Styles.__view.refresh();
   };
   Neatline.commands.addHandler('editor:styles:display', display);

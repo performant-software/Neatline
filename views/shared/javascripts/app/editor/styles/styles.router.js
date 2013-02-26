@@ -24,7 +24,6 @@ Neatline.module('Editor.Styles', function(
 
     before: function() {
       Neatline.vent.trigger('editor:router:before');
-      Neatline.execute('editor:clearContainer');
     },
 
 
@@ -32,8 +31,7 @@ Neatline.module('Editor.Styles', function(
      * Show the exhibit defaults form.
      */
     'styles': function() {
-      Neatline.execute('editor:menu:display');
-      Neatline.execute('editor:styles:display');
+      Neatline.execute('editor:display', ['menu', 'styles']);
       Neatline.execute('editor:menu:activateTab', 'styles');
     }
 

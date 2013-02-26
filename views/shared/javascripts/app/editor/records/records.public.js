@@ -16,9 +16,11 @@ Neatline.module('Editor.Records', function(
 
   /**
    * Append the list to the editor container.
+   *
+   * @param {Object} container: The container element.
    */
-  var display = function() {
-    Records.__view.showIn(Neatline.request('editor:getContainer'));
+  var display = function(container) {
+    Records.__view.showIn(container);
   };
   Neatline.commands.addHandler('editor:records:display', display);
 

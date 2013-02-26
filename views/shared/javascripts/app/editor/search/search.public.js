@@ -16,9 +16,11 @@ Neatline.module('Editor.Search', function(
 
   /**
    * Append the form to the editor container.
+   *
+   * @param {Object} container: The container element.
    */
-  var display = function() {
-    Search.__view.showIn(Neatline.request('editor:getContainer'));
+  var display = function(container) {
+    Search.__view.showIn(container);
   };
   Neatline.commands.addHandler('editor:search:display', display);
 
@@ -56,7 +58,6 @@ Neatline.module('Editor.Search', function(
 
     // Get the record collection on the map.
     records = records || Neatline.request('map:getRecords');
-    console.log(records);
 
     // Render in the record browser.
     if (records && Search.__view.mirroring) {
