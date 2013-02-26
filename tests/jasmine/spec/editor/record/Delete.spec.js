@@ -19,7 +19,7 @@ describe('Record Form Delete', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openRecordForm();
+    _t.openFirstRecordForm();
 
     id = _t.vw.record.model.get('id');
 

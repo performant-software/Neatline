@@ -27,7 +27,7 @@ describe('Record Form Style Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openRecordForm();
+    _t.openFirstRecordForm();
 
     els = {
       presenter:      _t.vw.record.$('select[name="presenter"]'),

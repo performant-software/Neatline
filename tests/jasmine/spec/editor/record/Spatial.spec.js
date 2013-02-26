@@ -19,7 +19,7 @@ describe('Record Form Spatial Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openRecordForm();
+    _t.openFirstRecordForm();
 
     els = {
       text:     _t.vw.record.$('a[href="#record-form-text"]'),
@@ -28,7 +28,7 @@ describe('Record Form Spatial Tab', function() {
       point:    _t.vw.record.$('input[value="point"]'),
       line:     _t.vw.record.$('input[value="line"]'),
       poly:     _t.vw.record.$('input[value="poly"]'),
-      svg:     _t.vw.record.$('input[value="svg"]'),
+      svg:      _t.vw.record.$('input[value="svg"]'),
       regPoly:  _t.vw.record.$('input[value="regPoly"]'),
       modify:   _t.vw.record.$('input[value="modify"]'),
       rotate:   _t.vw.record.$('input[value="rotate"]'),

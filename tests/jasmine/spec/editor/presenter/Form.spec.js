@@ -19,7 +19,7 @@ describe('Presenter Form Interaction', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openRecordForm();
+    _t.openFirstRecordForm();
 
     els = {
       text:     _t.vw.record.$('a[href="#record-form-text"]'),
@@ -48,7 +48,7 @@ describe('Presenter Form Interaction', function() {
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Reopen the form.
-    _t.openRecordForm();
+    _t.openFirstRecordForm();
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('presenter:deactivate');

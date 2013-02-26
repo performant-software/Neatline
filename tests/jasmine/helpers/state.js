@@ -80,7 +80,7 @@ var _t = (function(_t) {
    * Reset the Backbone history.
    */
   _t.restartHistory = function() {
-    window.location.hash = '';
+    window.location.hash = null;
     Backbone.history.stop();
     Backbone.history.start();
   };
@@ -122,7 +122,7 @@ var _t = (function(_t) {
   /**
    * Navigate to the edit form for the first record.
    */
-  _t.openRecordForm = function() {
+  _t.openFirstRecordForm = function() {
     this.showRecordList(this.json.records.standard);
     var models = this.getRecordListModels();
     this.navigate('records/'+models[0].get('id'));
