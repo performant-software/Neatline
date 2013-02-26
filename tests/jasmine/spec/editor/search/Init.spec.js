@@ -62,8 +62,6 @@ describe('Search Initialization', function() {
     var c1 = _t.server.requests.length;
     _t.navigate('records/search/query=map:');
     var c2 = _t.server.requests.length;
-
-    // No request.
     expect(c2).toEqual(c1);
 
   });

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Editor router test.
+ * Records router test.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Router', function() {
+describe('Records Router', function() {
 
 
   var els;
@@ -21,8 +21,7 @@ describe('Router', function() {
     _t.loadEditor();
 
     els = {
-      records:  _t.vw.menu.$('li.records'),
-      styles:   _t.vw.menu.$('li.styles')
+      records: _t.vw.menu.$('li.records')
     };
 
   });
@@ -57,40 +56,6 @@ describe('Router', function() {
     it('query and offset', function() {
       _t.navigate('records/search/query=test/start=50');
     });
-
-  });
-
-
-  it('#record/:id', function() {
-
-    _t.navigate($(_t.getRecordRows()[1]).attr('href'));
-
-    // Record form should be visible.
-    expect(_t.el.editor).toContain(_t.el.record);
-
-  });
-
-
-  it('#record/add', function() {
-
-    _t.navigate('records/add');
-
-    // Record form should be visible.
-    expect(_t.el.editor).toContain(_t.el.record);
-
-  });
-
-
-  it('#styles', function() {
-
-    _t.navigate('styles');
-
-    // Style editor should be visible.
-    expect(_t.el.editor).toContain(_t.el.menu);
-    expect(_t.el.editor).toContain(_t.el.styles);
-
-    // "Styles" tab should be active.
-    expect(els.styles).toHaveClass('active');
 
   });
 
