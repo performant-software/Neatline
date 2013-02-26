@@ -14,6 +14,9 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
+  Map.NS = 'map';
+
+
   /**
    * Load map layers.
    *
@@ -24,7 +27,7 @@ Neatline.module('Map', function(
       Map.__view.ingest(records);
     });
   };
-  Neatline.commands.addHandler('map:load', load);
+  Neatline.commands.addHandler(Map.NS+':load', load);
   Neatline.vent.on('map:move', load);
 
 
@@ -34,7 +37,7 @@ Neatline.module('Map', function(
   var refresh = function() {
     Map.__view.publishPosition();
   };
-  Neatline.commands.addHandler('map:refresh', refresh);
+  Neatline.commands.addHandler(Map.NS+':refresh', refresh);
 
 
   /**
@@ -45,7 +48,7 @@ Neatline.module('Map', function(
   var focusByModel = function(model) {
     Map.__view.focusByModel(model);
   };
-  Neatline.commands.addHandler('map:focusByModel', focusByModel);
+  Neatline.commands.addHandler(Map.NS+':focusByModel', focusByModel);
 
 
   /**
@@ -58,7 +61,7 @@ Neatline.module('Map', function(
       focusByModel(model);
     });
   };
-  Neatline.commands.addHandler('map:focusById', focusById);
+  Neatline.commands.addHandler(Map.NS+':focusById', focusById);
 
 
   /**
@@ -67,7 +70,51 @@ Neatline.module('Map', function(
   var unselect = function() {
     Map.__view.unselectAll();
   };
-  Neatline.commands.addHandler('map:unselect', unselect);
+  Neatline.commands.addHandler(Map.NS+':unselect', unselect);
+
+
+  /**
+   * Emit the OpenLayers map instance.
+   *
+   * @return {Object}: The map.
+   */
+  var getMap = function() {
+    return Map.__view.map;
+  };
+  Neatline.reqres.addHandler(Map.NS+':getMap', getMap);
+
+
+  /**
+   * Emit the current records collection.
+   *
+   * @return {Object}: The collection.
+   */
+  var getRecords = function() {
+    return Map.__view.records;
+  };
+  Neatline.reqres.addHandler(Map.NS+':getRecords', getRecords);
+
+
+  /**
+   * Emit the current viewport focus coordinates.
+   *
+   * @return {Object}: OpenLayers.LonLat.
+   */
+  var getCenter = function() {
+    return Map.__view.map.getCenter();
+  };
+  Neatline.reqres.addHandler(Map.NS+':getCenter', getCenter);
+
+
+  /**
+   * Emit the current zoom level.
+   *
+   * @return {Number}: The zoom level.
+   */
+  var getZoom = function() {
+    return Map.__view.map.getZoom();
+  };
+  Neatline.reqres.addHandler(Map.NS+':getZoom', getZoom);
 
 
 });

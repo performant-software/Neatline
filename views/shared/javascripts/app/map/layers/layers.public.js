@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Layers request handlers.
+ * Layers public API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,6 +12,9 @@
 
 Neatline.module('Map.Layers', function(
   Layers, Neatline, Backbone, Marionette, $, _) {
+
+
+  Layers.NS = 'map:layers';
 
 
   /**
@@ -28,7 +31,7 @@ Neatline.module('Map.Layers', function(
       return null;
     }
   };
-  Neatline.reqres.addHandler('map:layers:getLayer', getLayer);
+  Neatline.reqres.addHandler(Layers.NS+':getLayer', getLayer);
 
 
 });

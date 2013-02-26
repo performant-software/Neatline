@@ -14,11 +14,14 @@ Neatline.module('Presenter.None', function(
   None, Neatline, Backbone, Marionette, $, _) {
 
 
+  None.NS = 'presenter:None';
+
+
   var none = function() {};
-  Neatline.commands.addHandler('presenter:None:show', none);
-  Neatline.commands.addHandler('presenter:None:hide', none);
-  Neatline.commands.addHandler('presenter:None:select', none);
-  Neatline.commands.addHandler('presenter:None:unselect', none);
+  Neatline.commands.addHandler(None.NS+':show', none);
+  Neatline.commands.addHandler(None.NS+':hide', none);
+  Neatline.commands.addHandler(None.NS+':select', none);
+  Neatline.commands.addHandler(None.NS+':unselect', none);
   Neatline.vent.on('presenter:activate', none);
   Neatline.vent.on('presenter:deactivate', none);
 

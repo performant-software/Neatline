@@ -14,18 +14,21 @@ Neatline.module('Map.Layers.Stamen', function(
   Stamen, Neatline, Backbone, Marionette, $, _) {
 
 
+  Stamen.NS = 'map:layers';
+
+
   /**
    * Construct a Stamen layer - http://maps.stamen.com/.
    *
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
    */
-  var Stamen = function(json) {
+  var layer = function(json) {
     var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
     layer.name = json.title;
     return layer;
   };
-  Neatline.reqres.addHandler('map:layers:Stamen', Stamen);
+  Neatline.reqres.addHandler(Stamen.NS+':Stamen', layer);
 
 
 });

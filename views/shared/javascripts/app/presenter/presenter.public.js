@@ -14,6 +14,9 @@ Neatline.module('Presenter', function(
   Presenter, Neatline, Backbone, Marionette, $, _) {
 
 
+  Presenter.NS = 'presenter';
+
+
   /**
    * Show the record.
    *
@@ -26,7 +29,7 @@ Neatline.module('Presenter', function(
       );
     } catch (e) {}
   };
-  Neatline.commands.addHandler('presenter:show', show);
+  Neatline.commands.addHandler(Presenter.NS+':show', show);
   Neatline.vent.on('map:highlight', show);
 
 
@@ -42,7 +45,7 @@ Neatline.module('Presenter', function(
       );
     } catch(e) {}
   };
-  Neatline.commands.addHandler('presenter:hide', hide);
+  Neatline.commands.addHandler(Presenter.NS+':hide', hide);
   Neatline.vent.on('map:unhighlight', hide);
 
 
@@ -58,7 +61,7 @@ Neatline.module('Presenter', function(
       );
     } catch (e) {}
   };
-  Neatline.commands.addHandler('presenter:select', select);
+  Neatline.commands.addHandler(Presenter.NS+':select', select);
   Neatline.vent.on('map:select', select);
 
 
@@ -74,7 +77,7 @@ Neatline.module('Presenter', function(
       );
     } catch (e) {}
   };
-  Neatline.commands.addHandler('presenter:unselect', unselect);
+  Neatline.commands.addHandler(Presenter.NS+':unselect', unselect);
   Neatline.vent.on('map:unselect', unselect);
 
 

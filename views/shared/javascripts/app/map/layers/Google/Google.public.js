@@ -14,13 +14,16 @@ Neatline.module('Map.Layers.Google', function(
   Google, Neatline, Backbone, Marionette, $, _) {
 
 
+  Google.NS = 'map:layers';
+
+
   /**
    * Construct a Google layer.
    *
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer.Google}: The Google layer.
    */
-  var Google = function(json) {
+  var layer = function(json) {
     switch (json.properties.provider) {
       case 'physical':
         return new OpenLayers.Layer.Google(json.title, {
@@ -43,7 +46,7 @@ Neatline.module('Map.Layers.Google', function(
         });
     }
   };
-  Neatline.reqres.addHandler('map:layers:Google', Google);
+  Neatline.reqres.addHandler(Google.NS+':Google', layer);
 
 
 });

@@ -14,16 +14,19 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   OpenStreetMap, Neatline, Backbone, Marionette, $, _) {
 
 
+  OpenStreetMap.NS = 'map:layers';
+
+
   /**
    * Construct an OpenStreetMap layer.
    *
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer.OSM}: The OSM layer.
    */
-  var OpenStreetMap = function(json) {
+  var layer = function(json) {
     return new OpenLayers.Layer.OSM(json.title);
   };
-  Neatline.reqres.addHandler('map:layers:OpenStreetMap', OpenStreetMap);
+  Neatline.reqres.addHandler(OpenStreetMap.NS+':OpenStreetMap', layer);
 
 
 });
