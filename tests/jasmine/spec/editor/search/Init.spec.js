@@ -13,12 +13,12 @@
 describe('Search Initialization', function() {
 
 
-  var pageLength;
+  var perPage;
 
 
   beforeEach(function() {
     _t.loadEditor();
-    pageLength = Neatline.global.page_length;
+    perPage = Neatline.global.page_length;
   });
 
 
@@ -50,6 +50,25 @@ describe('Search Initialization', function() {
   });
 
 
+  it('should not load records when map mirroring is active', function() {
+
+    // --------------------------------------------------------------------
+    // When a route is requested with the map-mirroring search query, the
+    // regular GET request for records should not be issued. This prevents
+    // the map-synced record list from being overwritten by new records.
+    // --------------------------------------------------------------------
+
+    // Initialize with `map:` query.
+    var c1 = _t.server.requests.length;
+    _t.navigate('records/search/query=map:');
+    var c2 = _t.server.requests.length;
+
+    // No request.
+    expect(c2).toEqual(c1);
+
+  });
+
+
   describe('API requests', function() {
 
 
@@ -74,7 +93,7 @@ describe('Search Initialization', function() {
       _t.assertLastRequestMethod('GET');
 
       // Default `limit` and `offset`.
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '0');
 
     });
@@ -89,7 +108,7 @@ describe('Search Initialization', function() {
       _t.assertLastRequestMethod('GET');
 
       // Default `limit` and `offset`.
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '0');
 
     });
@@ -104,7 +123,7 @@ describe('Search Initialization', function() {
       _t.assertLastRequestMethod('GET');
 
       // `offset`=10, default `limit`.
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '10');
 
     });
@@ -120,7 +139,7 @@ describe('Search Initialization', function() {
 
       // `query`=keywords, `offset`=0, default `limit`.
       _t.assertLastRequestHasGetParameter('query', 'keywords');
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '0');
 
     });
@@ -139,7 +158,7 @@ describe('Search Initialization', function() {
       expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
       // `offset`=0, default `limit`.
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '0');
 
     });
@@ -155,7 +174,7 @@ describe('Search Initialization', function() {
 
       // `query`=keywords, `offset`=10.
       _t.assertLastRequestHasGetParameter('query', 'keywords');
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '10');
 
     });
@@ -174,7 +193,7 @@ describe('Search Initialization', function() {
       expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
       // `offset`=0, default `limit`.
-      _t.assertLastRequestHasGetParameter('limit', pageLength);
+      _t.assertLastRequestHasGetParameter('limit', perPage);
       _t.assertLastRequestHasGetParameter('offset', '10');
 
     });

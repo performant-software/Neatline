@@ -19,11 +19,11 @@ describe('Search Map Mirroring', function() {
   });
 
 
-  it('should not issue GET request when `map:` is entered', function() {
+  it('should not load records when `map:` is entered', function() {
 
     // --------------------------------------------------------------------
-    // A regular search GET request should not be issued in response to a
-    // keystroke if the input value starts with `map:`.
+    // When `map:` is typed into the search box, the regular GET request
+    // for records should not be issued.
     // --------------------------------------------------------------------
 
     // Keyup with `map:`.

@@ -40,12 +40,14 @@ Neatline.module('Editor.Search', function(
     Search.__view.setQueryFromUrl(query);
 
     // Load the record list.
-    Neatline.execute('editor:records:load', _.extend(
-      Search.__view.query, {
-        limit:  Neatline.global.page_length,
-        offset: start
-      }
-    ));
+    if (!Search.__view.mirroring) {
+      Neatline.execute('editor:records:load', _.extend(
+        Search.__view.query, {
+          limit:  Neatline.global.page_length,
+          offset: start
+        }
+      ));
+    }
 
   };
   Neatline.commands.addHandler('editor:search:initialize', initialize);
