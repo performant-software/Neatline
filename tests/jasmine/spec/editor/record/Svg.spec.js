@@ -13,7 +13,7 @@
 describe('Record Form SVG', function() {
 
 
-  var els;
+  var el;
 
 
   beforeEach(function() {
@@ -21,7 +21,7 @@ describe('Record Form SVG', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    els = {
+    el = {
       link:     _t.vw.RECORD.$('a[href="#svg-modal"]'),
       svg:      _t.vw.RECORD.$('textarea[name="svg"]'),
       density:  _t.vw.RECORD.$('input[name="density"]'),
@@ -41,11 +41,11 @@ describe('Record Form SVG', function() {
     // --------------------------------------------------------------------
 
     // Click on "Enter Markup".
-    els.link.trigger('click');
+    el.link.trigger('click');
 
     // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
-    expect(els.modal).toHaveClass('in');
+    expect(el.modal).toHaveClass('in');
 
   });
 
@@ -58,13 +58,13 @@ describe('Record Form SVG', function() {
     // --------------------------------------------------------------------
 
     // Click on "Enter Markup".
-    els.link.trigger('click');
+    el.link.trigger('click');
 
     // Click on "Cancel".
-    els.cancel.trigger('click');
+    el.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(els.modal).not.toHaveClass('in');
+    expect(el.modal).not.toHaveClass('in');
 
   });
 
@@ -81,8 +81,8 @@ describe('Record Form SVG', function() {
     var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
 
     // Update SVG.
-    els.svg.val(svg);
-    els.parse.trigger('click');
+    el.svg.val(svg);
+    el.parse.trigger('click');
 
     // `geometry` on handler should be set.
     expect(_t.vw.MAP.controls.svg.handler.geometry.equals(geo)).
@@ -99,18 +99,18 @@ describe('Record Form SVG', function() {
     // --------------------------------------------------------------------
 
     // Set SVG.
-    els.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
+    el.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
 
     // Set low density.
-    els.density.val('1.0');
-    els.parse.trigger('click');
+    el.density.val('1.0');
+    el.parse.trigger('click');
 
     // Capture the number of points in the geometry.
     var c1 = _t.vw.MAP.controls.svg.handler.geometry.getVertices().length;
 
     // Set high density.
-    els.density.val('2.0');
-    els.parse.trigger('click');
+    el.density.val('2.0');
+    el.parse.trigger('click');
 
     // Capture the number of points in the geometry.
     var c2 = _t.vw.MAP.controls.svg.handler.geometry.getVertices().length;
@@ -132,8 +132,8 @@ describe('Record Form SVG', function() {
     spyOn(toastr, 'info');
 
     // Parse valid SVG.
-    els.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
-    els.parse.trigger('click');
+    el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    el.parse.trigger('click');
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -150,11 +150,11 @@ describe('Record Form SVG', function() {
     // --------------------------------------------------------------------
 
     // Parse valid SVG.
-    els.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
-    els.parse.trigger('click');
+    el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    el.parse.trigger('click');
 
     // Modal should be hidden.
-    expect(els.modal).not.toHaveClass('in');
+    expect(el.modal).not.toHaveClass('in');
 
   });
 
@@ -170,8 +170,8 @@ describe('Record Form SVG', function() {
     spyOn(toastr, 'error');
 
     // Parse invalid SVG.
-    els.svg.val('invalid');
-    els.parse.trigger('click');
+    el.svg.val('invalid');
+    el.parse.trigger('click');
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
@@ -188,14 +188,14 @@ describe('Record Form SVG', function() {
     // --------------------------------------------------------------------
 
     // Click on "Enter Markup".
-    els.link.trigger('click');
+    el.link.trigger('click');
 
     // Parse invalid SVG.
-    els.svg.val('invalid');
-    els.parse.trigger('click');
+    el.svg.val('invalid');
+    el.parse.trigger('click');
 
     // Modal should be hidden.
-    expect(els.modal).toHaveClass('in');
+    expect(el.modal).toHaveClass('in');
 
   });
 

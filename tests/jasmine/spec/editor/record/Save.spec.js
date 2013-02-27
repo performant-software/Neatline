@@ -13,7 +13,7 @@
 describe('Record Form Save', function() {
 
 
-  var els;
+  var el;
 
 
   beforeEach(function() {
@@ -21,7 +21,7 @@ describe('Record Form Save', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    els = {
+    el = {
       save: _t.vw.RECORD.$('a[name="save"]')
     };
 
@@ -60,7 +60,7 @@ describe('Record Form Save', function() {
     inputs.mapZoom.         val('18').      trigger('change');
 
     // Click "Save" button.
-    els.save.trigger('click');
+    el.save.trigger('click');
 
     // Route should be /record/:id, method PUT.
     _t.assertLastRequestRoute(Neatline.global.record_api+'/'+id);
@@ -104,7 +104,7 @@ describe('Record Form Save', function() {
     spyOn(toastr, 'info');
 
     // Click on "Save".
-    els.save.trigger('click');
+    el.save.trigger('click');
     _t.respondLast200('');
 
     // `toastr` should be called.
@@ -126,7 +126,7 @@ describe('Record Form Save', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    els.save.trigger('click');
+    el.save.trigger('click');
     _t.respondLast500();
 
     // `toastr` should be called.
@@ -145,7 +145,7 @@ describe('Record Form Save', function() {
     // --------------------------------------------------------------------
 
     // Click on "Save".
-    els.save.trigger('click');
+    el.save.trigger('click');
     _t.respondLast200('');
 
     _t.assertMapRefreshed();

@@ -13,7 +13,7 @@
 describe('Record Form Close', function() {
 
 
-  var vw, el;
+  var el;
 
 
   beforeEach(function() {
@@ -21,14 +21,8 @@ describe('Record Form Close', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    vw = {
-      editor:   Neatline.Editor.__view,
-      records:  Neatline.Editor.Exhibit.Records.__view,
-      record:   Neatline.Editor.Record.__view
-    };
-
     el = {
-      close:    vw.record.$('a[name="close"]')
+      close: _t.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -46,8 +40,8 @@ describe('Record Form Close', function() {
     _t.respondRecords();
 
     // Records list should be visible.
-    expect(vw.editor.__ui.editor).not.toContain(vw.record.$el);
-    expect(vw.editor.__ui.editor).toContain(vw.records.$el);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
 
   });
 

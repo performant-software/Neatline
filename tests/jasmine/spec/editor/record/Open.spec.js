@@ -13,7 +13,7 @@
 describe('Record Form Open', function() {
 
 
-  var recordRows, recordModels, feature1, feature2, els;
+  var el, recordRows, recordModels, feature1, feature2;
 
 
   beforeEach(function() {
@@ -26,7 +26,7 @@ describe('Record Form Open', function() {
     feature1  = _t.vw.MAP.layers[0].features[0];
     feature2  = _t.vw.MAP.layers[1].features[0];
 
-    els = {
+    el = {
 
       pan:        _t.vw.RECORD.$('input[value="pan"]'),
       poly:       _t.vw.RECORD.$('input[value="poly"]'),
@@ -132,16 +132,16 @@ describe('Record Form Open', function() {
     _t.click($(recordRows[1]));
 
     // "Text" tab should be active.
-    expect(els.labels.text.parent('li')).toHaveClass('active');
-    expect(els.tabs.text).toHaveClass('active');
+    expect(el.labels.text.parent('li')).toHaveClass('active');
+    expect(el.tabs.text).toHaveClass('active');
 
     // "Spatial" should be inactive.
-    expect(els.labels.spatial.parent('li')).not.toHaveClass('active');
-    expect(els.tabs.spatial).not.toHaveClass('active');
+    expect(el.labels.spatial.parent('li')).not.toHaveClass('active');
+    expect(el.tabs.spatial).not.toHaveClass('active');
 
     // "Style" should be inactive.
-    expect(els.labels.style.parent('li')).not.toHaveClass('active');
-    expect(els.tabs.style).not.toHaveClass('active');
+    expect(el.labels.style.parent('li')).not.toHaveClass('active');
+    expect(el.tabs.style).not.toHaveClass('active');
 
   });
 
@@ -258,11 +258,11 @@ describe('Record Form Open', function() {
     expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
-    els.pan[0].checked = false; els.poly[0].checked = true;
+    el.pan[0].checked = false; el.poly[0].checked = true;
     expect(_t.vw.SPATIAL.getEditMode()).toEqual('poly');
 
     // Close the form.
-    els.close.trigger('click');
+    el.close.trigger('click');
     _t.respondRecords();
 
     // Re-open the form.

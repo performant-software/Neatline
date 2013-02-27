@@ -13,42 +13,36 @@
 describe('Record Form Add', function() {
 
 
-  var vw, el;
+  var el;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
 
-    vw = {
-      editor:     Neatline.Editor.__view,
-      records:    Neatline.Editor.Exhibit.Records.__view,
-      record:     Neatline.Editor.Record.__view
-    };
-
     el = {
 
       labels: {
-        text:     vw.record.$('a[href="#record-form-text"]'),
-        spatial:  vw.record.$('a[href="#record-form-spatial"]'),
-        style:    vw.record.$('a[href="#record-form-style"]')
+        text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
+        spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+        style:    _t.vw.RECORD.$('a[href="#record-form-style"]')
       },
 
       tabs: {
-        text:     vw.record.$('#record-form-text'),
-        spatial:  vw.record.$('#record-form-spatial'),
-        style:    vw.record.$('#record-form-style')
+        text:     _t.vw.RECORD.$('#record-form-text'),
+        spatial:  _t.vw.RECORD.$('#record-form-spatial'),
+        style:    _t.vw.RECORD.$('#record-form-style')
       },
 
       buttons: {
-        add:      vw.records.$('a[href="#records/add"]'),
-        close:    vw.record.$('a[name="close"]'),
-        save:     vw.record.$('a[name="save"]')
+        add:      _t.vw.RECORDS.$('a[href="#records/add"]'),
+        close:    _t.vw.RECORD.$('a[name="close"]'),
+        save:     _t.vw.RECORD.$('a[name="save"]')
       },
 
       lead: {
-        id:       vw.record.$('p.lead span.id'),
-        title:    vw.record.$('p.lead span.title')
+        id:       _t.vw.RECORD.$('p.lead span.id'),
+        title:    _t.vw.RECORD.$('p.lead span.title')
       }
 
     };
@@ -67,7 +61,7 @@ describe('Record Form Add', function() {
     _t.click(el.buttons.add);
 
     // Record form should be visible.
-    expect(vw.editor.__ui.editor).toContain(vw.record.$el);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
 
     // Form id should be empty.
     expect(el.lead.id).toBeEmpty();
@@ -76,7 +70,7 @@ describe('Record Form Add', function() {
     expect(el.lead.title.text()).toEqual(STRINGS.placeholders.title);
 
     // Model should have exhibit id.
-    var record = vw.record.model;
+    var record = _t.vw.RECORD.model;
     expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.

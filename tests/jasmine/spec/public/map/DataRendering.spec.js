@@ -13,20 +13,16 @@
 describe('Map Data Rendering', function() {
 
 
-  var vw, layer1, layer2, layer3;
+  var layer1, layer2, layer3;
 
 
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    vw = {
-      map: Neatline.Map.__view
-    };
-
-    layer1 = vw.map.layers[0];
-    layer2 = vw.map.layers[1];
-    layer3 = vw.map.layers[2];
+    layer1 = _t.vw.MAP.layers[0];
+    layer2 = _t.vw.MAP.layers[1];
+    layer3 = _t.vw.MAP.layers[2];
 
   });
 
@@ -46,7 +42,7 @@ describe('Map Data Rendering', function() {
     _t.assertLastRequestHasGetParameter('extent');
     _t.assertLastRequestHasGetParameter('zoom');
 
-    expect(vw.map.layers.length).toEqual(3);
+    expect(_t.vw.MAP.layers.length).toEqual(3);
     expect(layer1.features[0].geometry.x).toEqual(1);
     expect(layer1.features[0].geometry.y).toEqual(2);
     expect(layer2.features[0].geometry.x).toEqual(3);
@@ -71,7 +67,7 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(vw.map.layers.length).toEqual(3);
+    expect(_t.vw.MAP.layers.length).toEqual(3);
 
     // Move map.
     _t.triggerMapMove();
@@ -91,7 +87,7 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(7);
     expect(record2Layer.features[0].geometry.y).toEqual(8);
-    expect(vw.map.layers.length).toEqual(3);
+    expect(_t.vw.MAP.layers.length).toEqual(3);
 
   });
 
@@ -111,7 +107,7 @@ describe('Map Data Rendering', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(vw.map.layers.length).toEqual(3);
+    expect(_t.vw.MAP.layers.length).toEqual(3);
 
     // Move map.
     _t.triggerMapMove();
@@ -127,7 +123,7 @@ describe('Map Data Rendering', function() {
 
     // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(vw.map.layers.length).toEqual(2);
+    expect(_t.vw.MAP.layers.length).toEqual(2);
 
   });
 

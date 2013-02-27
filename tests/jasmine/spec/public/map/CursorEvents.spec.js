@@ -13,19 +13,15 @@
 describe('Map Cursor Events', function() {
 
 
-  var vw, layer, feature, vent;
+  var layer, feature, vent;
 
 
   beforeEach(function() {
 
     _t.loadNeatline();
 
-    vw = {
-      map: Neatline.Map.__view
-    };
-
-    // Alias layer and feature.
-    layer = vw.map.layers[0];
+    // Get layer and feature.
+    layer = _t.vw.MAP.layers[0];
     feature = layer.features[0];
 
     // Spy on the event aggregator.
@@ -98,8 +94,8 @@ describe('Map Cursor Events', function() {
     _t.refreshMap(_t.json.records.changed);
 
     // Get extent and zoom.
-    var extent = vw.map.getExtentAsWKT();
-    var zoom = vw.map.getZoom();
+    var extent = _t.vw.MAP.getExtentAsWKT();
+    var zoom = _t.vw.MAP.getZoom();
 
     // Should publish `MAP:move`.
     expect(vent.argsForCall[0][0]).toEqual('MAP:move');

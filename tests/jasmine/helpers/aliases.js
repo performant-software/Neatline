@@ -19,8 +19,8 @@ var _t = (function(_t) {
    */
   _t.aliasNeatline = function() {
     this.vw = {
-      MAP:          Neatline.Map.__view,
-      STATICBUBBLE: Neatline.Presenter.StaticBubble.__view
+      MAP:      Neatline.Map.__view,
+      BUBBLE:   Neatline.Presenter.StaticBubble.__view
     };
   };
 

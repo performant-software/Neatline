@@ -13,7 +13,7 @@
 describe('Record Form Delete', function() {
 
 
-  var vw, el, id;
+  var el, id;
 
 
   beforeEach(function() {
@@ -21,21 +21,14 @@ describe('Record Form Delete', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    vw = {
-      map:      Neatline.Map.__view,
-      editor:   Neatline.Editor.__view,
-      records:  Neatline.Editor.Exhibit.Records.__view,
-      record:   Neatline.Editor.Record.__view
-    };
+    id = _t.vw.RECORD.model.get('id');
 
     el = {
-      delete1:  vw.record.$('a[name="delete1"]'),
-      delete2:  vw.record.$('a[name="delete2"]'),
-      cancel:   vw.record.$('a[name="cancel"]'),
-      modal:    vw.record.$('#delete-modal')
+      delete1:  _t.vw.RECORD.$('a[name="delete1"]'),
+      delete2:  _t.vw.RECORD.$('a[name="delete2"]'),
+      cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
+      modal:    _t.vw.RECORD.$('#delete-modal')
     };
-
-    id = vw.record.model.get('id');
 
   });
 
@@ -110,7 +103,7 @@ describe('Record Form Delete', function() {
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.remove.success, null, vw.editor.options.toastr
+      STRINGS.record.remove.success, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -132,7 +125,7 @@ describe('Record Form Delete', function() {
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.remove.error, null, vw.editor.options.toastr
+      STRINGS.record.remove.error, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -155,8 +148,8 @@ describe('Record Form Delete', function() {
     expect(el.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(vw.editor.__ui.editor).not.toContain(vw.record.$el);
-    expect(vw.editor.__ui.editor).toContain(vw.records.$el);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
@@ -174,7 +167,7 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Capture the form model.
-    var model = vw.record.model;
+    var model = _t.vw.RECORD.model;
 
     // Delete, confirm.
     el.delete1.trigger('click');
@@ -182,10 +175,10 @@ describe('Record Form Delete', function() {
     _t.respondLast200('');
 
     // Layer should be removed from map.
-    expect(vw.map.getLayerByModel(model)).toBeUndefined();
+    expect(_t.vw.MAP.getLayerByModel(model)).toBeUndefined();
 
     // Layer should be removed from `layers`.
-    expect(_.find(vw.map.layers, function(layer) {
+    expect(_.find(_t.vw.MAP.layers, function(layer) {
       return layer.nId == id; })).toBeUndefined();
 
   });

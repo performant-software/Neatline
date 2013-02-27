@@ -13,19 +13,12 @@
 describe('Map Editing', function() {
 
 
-  var vw, recordModels;
+  var recordModels;
 
 
   beforeEach(function() {
-
     _t.loadEditor();
-
-    vw = {
-      map: Neatline.Map.__view
-    };
-
     recordModels = _t.getRecordListModels();
-
   });
 
 
@@ -39,19 +32,19 @@ describe('Map Editing', function() {
 
     // Load map without record 2.
     _t.refreshMap(_t.json.records.removed);
-    expect(vw.map.layers.length).toEqual(2);
+    expect(_t.vw.MAP.layers.length).toEqual(2);
 
     // Open form for record 2.
     _t.navigate('records/'+recordModels[1].get('id'));
 
     // Map should create new layer for record 2.
-    var newLayer = _.last(vw.map.layers);
+    var newLayer = _.last(_t.vw.MAP.layers);
     expect(newLayer.features[0].geometry.x).toEqual(3);
     expect(newLayer.features[0].geometry.y).toEqual(4);
-    expect(vw.map.layers.length).toEqual(3);
+    expect(_t.vw.MAP.layers.length).toEqual(3);
 
     // Map should set record 2 layer as the edit layer.
-    expect(newLayer.nId).toEqual(vw.map.editLayer.nId);
+    expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
 
   });
 
@@ -66,11 +59,11 @@ describe('Map Editing', function() {
     _t.navigate('records/add');
 
     // Map should create new layer.
-    var newLayer = _.last(vw.map.layers);
-    expect(vw.map.layers.length).toEqual(4);
+    var newLayer = _.last(_t.vw.MAP.layers);
+    expect(_t.vw.MAP.layers.length).toEqual(4);
 
     // Map should set new layer as the edit layer.
-    expect(newLayer.nId).toEqual(vw.map.editLayer.nId);
+    expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
 
   });
 
@@ -121,7 +114,7 @@ describe('Map Editing', function() {
     _t.refreshMap(_t.json.records.changed);
 
     // Edit layer model should be updated.
-    expect(vw.map.editLayer.nModel.get('coverage')).
+    expect(_t.vw.MAP.editLayer.nModel.get('coverage')).
       toEqual('POINT(7 8)');
 
   });
@@ -159,7 +152,7 @@ describe('Map Editing', function() {
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer should still be present.
-    expect(vw.map.layers.length).toEqual(4);
+    expect(_t.vw.MAP.layers.length).toEqual(4);
 
   });
 
@@ -194,14 +187,14 @@ describe('Map Editing', function() {
 
     // Create new record.
     _t.navigate('records/add');
-    expect(vw.map.layers.length).toEqual(4);
+    expect(_t.vw.MAP.layers.length).toEqual(4);
 
     // Close without saving, refresh map.
     _t.navigate('records');
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer should be removed.
-    expect(vw.map.layers.length).toEqual(3);
+    expect(_t.vw.MAP.layers.length).toEqual(3);
     expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();

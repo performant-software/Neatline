@@ -13,7 +13,7 @@
 describe('Presenter Form Interaction', function() {
 
 
-  var vw, el;
+  var el;
 
 
   beforeEach(function() {
@@ -21,14 +21,10 @@ describe('Presenter Form Interaction', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    vw = {
-      record:   Neatline.Editor.Record.__view
-    };
-
     el = {
-      text:     vw.record.$('a[href="#record-form-text"]'),
-      spatial:  vw.record.$('a[href="#record-form-spatial"]'),
-      close:    vw.record.$('a[name="close"]')
+      text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
+      spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+      close:    _t.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -116,7 +112,7 @@ describe('Presenter Form Interaction', function() {
     var exec = spyOn(Neatline, 'execute').andCallThrough();
 
     // Capture the form model.
-    var model = vw.record.model;
+    var model = _t.vw.RECORD.model;
 
     // Close the form.
     el.close.trigger('click');

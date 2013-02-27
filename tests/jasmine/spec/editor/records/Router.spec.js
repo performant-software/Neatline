@@ -13,14 +13,14 @@
 describe('Records Router', function() {
 
 
-  var els;
+  var el;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
 
-    els = {
+    el = {
       records: _t.vw.MENU.$('li[data-slug="records"]')
     };
 
@@ -37,7 +37,7 @@ describe('Records Router', function() {
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
 
       // "Records" tab should be active.
-      expect(els.records).toHaveClass('active');
+      expect(el.records).toHaveClass('active');
 
     });
 

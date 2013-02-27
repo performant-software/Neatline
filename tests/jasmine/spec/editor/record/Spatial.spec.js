@@ -13,7 +13,7 @@
 describe('Record Form Spatial Tab', function() {
 
 
-  var els;
+  var el;
 
 
   beforeEach(function() {
@@ -21,7 +21,7 @@ describe('Record Form Spatial Tab', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    els = {
+    el = {
       text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
       spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
       pan:      _t.vw.RECORD.$('input[value="pan"]'),
@@ -54,9 +54,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Point".
-    els.pan.removeAttr('checked');
-    els.point.attr('checked', 'checked');
-    els.point.trigger('change');
+    el.pan.removeAttr('checked');
+    el.point.attr('checked', 'checked');
+    el.point.trigger('change');
 
     // "Draw Point" should be active.
     expect(_t.vw.MAP.controls.point.active).toBeTruthy();
@@ -72,9 +72,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Line".
-    els.pan.removeAttr('checked');
-    els.line.attr('checked', 'checked');
-    els.line.trigger('change');
+    el.pan.removeAttr('checked');
+    el.line.attr('checked', 'checked');
+    el.line.trigger('change');
 
     // "Draw Line" should be active.
     expect(_t.vw.MAP.controls.line.active).toBeTruthy();
@@ -90,9 +90,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Polygon".
-    els.pan.removeAttr('checked');
-    els.poly.attr('checked', 'checked');
-    els.poly.trigger('change');
+    el.pan.removeAttr('checked');
+    el.poly.attr('checked', 'checked');
+    el.poly.trigger('change');
 
     // "Draw Polygon" should be active.
     expect(_t.vw.MAP.controls.poly.active).toBeTruthy();
@@ -108,9 +108,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw SVG".
-    els.pan.removeAttr('checked');
-    els.svg.attr('checked', 'checked');
-    els.svg.trigger('change');
+    el.pan.removeAttr('checked');
+    el.svg.attr('checked', 'checked');
+    el.svg.trigger('change');
 
     // "Draw SVG" should be active.
     expect(_t.vw.MAP.controls.svg.active).toBeTruthy();
@@ -126,9 +126,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Draw Regular Polygon".
-    els.pan.removeAttr('checked');
-    els.regPoly.attr('checked', 'checked');
-    els.regPoly.trigger('change');
+    el.pan.removeAttr('checked');
+    el.regPoly.attr('checked', 'checked');
+    el.regPoly.trigger('change');
 
     // "Draw Regular Polygon" should be active.
     expect(_t.vw.MAP.controls.regPoly.active).toBeTruthy();
@@ -144,9 +144,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Modify Shape".
-    els.pan.removeAttr('checked');
-    els.modify.attr('checked', 'checked');
-    els.modify.trigger('change');
+    el.pan.removeAttr('checked');
+    el.modify.attr('checked', 'checked');
+    el.modify.trigger('change');
 
     // "Modify Shape" should be active.
     expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
@@ -162,9 +162,9 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Check "Delete Shape".
-    els.pan.removeAttr('checked');
-    els.remove.attr('checked', 'checked');
-    els.remove.trigger('change');
+    el.pan.removeAttr('checked');
+    el.remove.attr('checked', 'checked');
+    el.remove.trigger('change');
 
     // "Delete Shape" should be active.
     expect(_t.vw.MAP.controls.remove.active).toBeTruthy();
@@ -180,8 +180,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set sides.
-    els.sides.val('10');
-    els.sides.trigger('change');
+    el.sides.val('10');
+    el.sides.trigger('change');
 
     // "Sides" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
@@ -197,8 +197,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set snap angle.
-    els.snap.val('45');
-    els.snap.trigger('change');
+    el.snap.val('45');
+    el.snap.trigger('change');
 
     // "Snap Angle" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
@@ -214,15 +214,15 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set irregular.
-    els.irreg.attr('checked', 'checked');
-    els.irreg.trigger('change');
+    el.irreg.attr('checked', 'checked');
+    el.irreg.trigger('change');
 
     // "Irregular" be active.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    els.irreg.removeAttr('checked');
-    els.irreg.trigger('change');
+    el.irreg.removeAttr('checked');
+    el.irreg.trigger('change');
 
     // "Irregular" should be inactive.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
@@ -238,8 +238,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set rotate.
-    els.rotate.attr('checked', 'checked');
-    els.rotate.trigger('change');
+    el.rotate.attr('checked', 'checked');
+    el.rotate.trigger('change');
 
     // Rotation should be active.
     expect(_t.vw.MAP.controls.edit.mode).toEqual(
@@ -258,8 +258,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set options.
-    els.resize.attr('checked', 'checked');
-    els.resize.trigger('change');
+    el.resize.attr('checked', 'checked');
+    el.resize.trigger('change');
 
     // Resize should be active.
     expect(_t.vw.MAP.controls.edit.mode).toEqual(
@@ -278,8 +278,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set options.
-    els.drag.attr('checked', 'checked');
-    els.drag.trigger('change');
+    el.drag.attr('checked', 'checked');
+    el.drag.trigger('change');
 
     // Drag should be active.
     expect(_t.vw.MAP.controls.edit.mode).toEqual(
@@ -302,7 +302,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.point.drawFeature(pt);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))'
     );
 
@@ -323,7 +323,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.line.drawFeature(line);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(3 4,5 6))'
     );
 
@@ -346,7 +346,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.poly.drawFeature(poly);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((3 4,5 6,7 8,3 4)))'
     );
 
@@ -366,7 +366,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.svg.drawFeature(collection);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4),POINT(5 6))'
     );
 
@@ -389,7 +389,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.svg.drawFeature(poly);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
@@ -412,7 +412,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.regPoly.drawFeature(poly);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
@@ -436,7 +436,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.edit.dragComplete();
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual(
+    expect(el.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(2 3))'
     );
 
@@ -457,7 +457,7 @@ describe('Record Form Spatial Tab', function() {
     _t.vw.MAP.controls.remove.selectFeature(feature);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual('');
+    expect(el.coverage.val()).toEqual('');
 
   });
 
@@ -470,13 +470,13 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Click "Clear all Geometry".
-    els.clear.trigger('click');
+    el.clear.trigger('click');
 
     // All features should be removed.
     expect(_t.vw.MAP.editLayer.features.length).toEqual(0);
 
     // "Coverage" should be updated.
-    expect(els.coverage.val()).toEqual('');
+    expect(el.coverage.val()).toEqual('');
 
   });
 
@@ -489,13 +489,13 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Click coverage tab.
-    els.spatial.tab('show');
+    el.spatial.tab('show');
 
     // Activate "Draw Polygon".
-    els.pan[0].checked = false; els.poly[0].checked = true;
+    el.pan[0].checked = false; el.poly[0].checked = true;
 
     // Click "Text" tab.
-    els.text.tab('show');
+    el.text.tab('show');
 
     // "Navigate" mode should be active.
     expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');

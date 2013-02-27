@@ -13,17 +13,8 @@
 describe('Map Record Focusing', function() {
 
 
-  var vw;
-
-
   beforeEach(function() {
-
     _t.loadNeatline();
-
-    vw = {
-      map: Neatline.Map.__view
-    };
-
   });
 
 
@@ -47,8 +38,8 @@ describe('Map Record Focusing', function() {
       expect(_t.server.requests.count).toEqual(requestCount);
 
       // Map should focus on record.
-      var c = vw.map.map.getCenter();
-      var z = vw.map.map.getZoom();
+      var c = _t.vw.MAP.map.getCenter();
+      var z = _t.vw.MAP.map.getZoom();
       expect(c.lon).toEqual(100);
       expect(c.lat).toEqual(200);
       expect(z).toEqual(10);
@@ -56,11 +47,11 @@ describe('Map Record Focusing', function() {
     });
 
     it('focusByModel', function() {
-      Neatline.execute('MAP:focusByModel', vw.map.layers[0].nModel);
+      Neatline.execute('MAP:focusByModel', _t.vw.MAP.layers[0].nModel);
     });
 
     it('focusById', function() {
-      Neatline.execute('MAP:focusById', vw.map.layers[0].nId);
+      Neatline.execute('MAP:focusById', _t.vw.MAP.layers[0].nId);
     });
 
   });
@@ -82,13 +73,13 @@ describe('Map Record Focusing', function() {
     afterEach(function() {
 
       // New layer should be created for model.
-      expect(vw.map.layers.length).toEqual(4);
-      expect(vw.map.layers[3].features[0].geometry.x).toEqual(1);
-      expect(vw.map.layers[3].features[0].geometry.y).toEqual(2);
+      expect(_t.vw.MAP.layers.length).toEqual(4);
+      expect(_t.vw.MAP.layers[3].features[0].geometry.x).toEqual(1);
+      expect(_t.vw.MAP.layers[3].features[0].geometry.y).toEqual(2);
 
       // Map should focus.
-      var c = vw.map.map.getCenter();
-      var z = vw.map.map.getZoom();
+      var c = _t.vw.MAP.map.getCenter();
+      var z = _t.vw.MAP.map.getZoom();
       expect(c.lon).toEqual(100);
       expect(c.lat).toEqual(200);
       expect(z).toEqual(10);

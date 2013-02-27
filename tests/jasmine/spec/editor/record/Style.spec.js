@@ -13,7 +13,7 @@
 describe('Record Form Style Tab', function() {
 
 
-  var els, standard, temporary, select;
+  var el, standard, temporary, select;
 
 
   var getStyles = function() {
@@ -29,7 +29,7 @@ describe('Record Form Style Tab', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    els = {
+    el = {
       presenter:      _t.vw.RECORD.$('select[name="presenter"]'),
       vectorColor:    _t.vw.RECORD.$('input[name="vector-color"]'),
       strokeColor:    _t.vw.RECORD.$('input[name="stroke-color"]'),
@@ -57,7 +57,7 @@ describe('Record Form Style Tab', function() {
   describe('presenter', function() {
 
     it('should update on `change`', function() {
-      els.presenter.val('None').trigger('change');
+      el.presenter.val('None').trigger('change');
       expect(_t.vw.MAP.editLayer.nModel.get('presenter')).toEqual('None');
     });
 
@@ -67,12 +67,12 @@ describe('Record Form Style Tab', function() {
   describe('shape color', function() {
 
     it('should update on `change`', function() {
-      els.vectorColor.val('#ffffff').trigger('change');
+      el.vectorColor.val('#ffffff').trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.vectorColor.val('#ffffff').trigger('keyup');
+      el.vectorColor.val('#ffffff').trigger('keyup');
       getStyles();
     });
 
@@ -86,12 +86,12 @@ describe('Record Form Style Tab', function() {
   describe('line color', function() {
 
     it('should update on `change`', function() {
-      els.strokeColor.val('#ffffff').trigger('change');
+      el.strokeColor.val('#ffffff').trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.strokeColor.val('#ffffff').trigger('keyup');
+      el.strokeColor.val('#ffffff').trigger('keyup');
       getStyles();
     });
 
@@ -105,12 +105,12 @@ describe('Record Form Style Tab', function() {
   describe('selected color', function() {
 
     it('should update on `change`', function() {
-      els.selectColor.val('#ffffff').trigger('change');
+      el.selectColor.val('#ffffff').trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.selectColor.val('#ffffff').trigger('keyup');
+      el.selectColor.val('#ffffff').trigger('keyup');
       getStyles();
     });
 
@@ -125,12 +125,12 @@ describe('Record Form Style Tab', function() {
   describe('shape opacity', function() {
 
     it('should update on `change`', function() {
-      els.vectorOpacity.val(50).trigger('change');
+      el.vectorOpacity.val(50).trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.vectorOpacity.val(50).trigger('keyup');
+      el.vectorOpacity.val(50).trigger('keyup');
       getStyles();
     });
 
@@ -145,12 +145,12 @@ describe('Record Form Style Tab', function() {
   describe('line opacity', function() {
 
     it('should update on `change`', function() {
-      els.strokeOpacity.val(50).trigger('change');
+      el.strokeOpacity.val(50).trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.strokeOpacity.val(50).trigger('keyup');
+      el.strokeOpacity.val(50).trigger('keyup');
       getStyles();
     });
 
@@ -166,12 +166,12 @@ describe('Record Form Style Tab', function() {
   describe('selected opacity', function() {
 
     it('should update on `change`', function() {
-      els.selectOpacity.val(50).trigger('change');
+      el.selectOpacity.val(50).trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.selectOpacity.val(50).trigger('keyup');
+      el.selectOpacity.val(50).trigger('keyup');
       getStyles();
     });
 
@@ -186,12 +186,12 @@ describe('Record Form Style Tab', function() {
   describe('line width', function() {
 
     it('should update on `change`', function() {
-      els.strokeWidth.val(50).trigger('change');
+      el.strokeWidth.val(50).trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.strokeWidth.val(50).trigger('keyup');
+      el.strokeWidth.val(50).trigger('keyup');
       getStyles();
     });
 
@@ -207,12 +207,12 @@ describe('Record Form Style Tab', function() {
   describe('point radius', function() {
 
     it('should update on `change`', function() {
-      els.pointRadius.val(50).trigger('change');
+      el.pointRadius.val(50).trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.pointRadius.val(50).trigger('keyup');
+      el.pointRadius.val(50).trigger('keyup');
       getStyles();
     });
 
@@ -228,12 +228,12 @@ describe('Record Form Style Tab', function() {
   describe('point radius', function() {
 
     it('should update on `change`', function() {
-      els.pointImage.val('img.png').trigger('change');
+      el.pointImage.val('img.png').trigger('change');
       getStyles();
     });
 
     it('should update on `keyup`', function() {
-      els.pointImage.val('img.png').trigger('keyup');
+      el.pointImage.val('img.png').trigger('keyup');
       getStyles();
     });
 
@@ -254,10 +254,10 @@ describe('Record Form Style Tab', function() {
     // --------------------------------------------------------------------
 
     _t.setMapZoom(10);
-    els.setMinZoom.trigger('click');
+    el.setMinZoom.trigger('click');
 
     // Input should be updated.
-    expect(els.minZoom).toHaveValue('10');
+    expect(el.minZoom).toHaveValue('10');
 
     // Model should be updated.
     expect(_t.vw.RECORD.model.get('min_zoom')).toEqual('10');
@@ -273,10 +273,10 @@ describe('Record Form Style Tab', function() {
     // --------------------------------------------------------------------
 
     _t.setMapZoom(10);
-    els.setMaxZoom.trigger('click');
+    el.setMaxZoom.trigger('click');
 
     // Input should be updated.
-    expect(els.maxZoom).toHaveValue('10');
+    expect(el.maxZoom).toHaveValue('10');
 
     // Model should be updated.
     expect(_t.vw.RECORD.model.get('max_zoom')).toEqual('10');
@@ -292,11 +292,11 @@ describe('Record Form Style Tab', function() {
     // --------------------------------------------------------------------
 
     _t.setMapCenter(1, 2, 3);
-    els.setFocus.trigger('click');
+    el.setFocus.trigger('click');
 
     // Inputs should be updated.
-    expect(els.mapFocus).toHaveValue('1,2');
-    expect(els.mapZoom).toHaveValue(3);
+    expect(el.mapFocus).toHaveValue('1,2');
+    expect(el.mapZoom).toHaveValue(3);
 
     // Model should be updated.
     expect(_t.vw.RECORD.model.get('map_focus')).toEqual('1,2');

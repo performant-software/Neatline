@@ -13,14 +13,14 @@
 describe('Styles Router', function() {
 
 
-  var els;
+  var el;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
 
-    els = {
+    el = {
       styles: _t.vw.MENU.$('li[data-slug="styles"]')
     };
 
@@ -36,7 +36,7 @@ describe('Styles Router', function() {
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.STYLES.$el);
 
     // "Styles" tab should be active.
-    expect(els.styles).toHaveClass('active');
+    expect(el.styles).toHaveClass('active');
 
   });
 

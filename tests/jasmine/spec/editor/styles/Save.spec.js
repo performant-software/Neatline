@@ -13,14 +13,14 @@
 describe('Styles Save', function() {
 
 
-  var els;
+  var el;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
 
-    els = {
+    el = {
       setFocus: _t.vw.STYLES.$('a[name="set-focus"]'),
       save:     _t.vw.STYLES.$('a[name="save"]')
     };
@@ -36,7 +36,7 @@ describe('Styles Save', function() {
     // --------------------------------------------------------------------
 
     _t.setMapCenter(1, 2, 3);
-    els.setFocus.trigger('click');
+    el.setFocus.trigger('click');
 
     // Inputs should be updated.
     expect(_t.vw.STYLES.__ui.mapFocus).toHaveValue('1,2');
@@ -61,7 +61,7 @@ describe('Styles Save', function() {
     _t.vw.STYLES.__ui.mapZoom. val('3').trigger('change');
 
     // Click "Save" button.
-    els.save.trigger('click');
+    el.save.trigger('click');
 
     // Route should be /neatline/put/:id, method PUT.
     _t.assertLastRequestRoute(Neatline.global.exhibit_put);
@@ -87,7 +87,7 @@ describe('Styles Save', function() {
     spyOn(toastr, 'info');
 
     // Click on "Save".
-    els.save.trigger('click');
+    el.save.trigger('click');
     _t.respondLast200('');
 
     // `toastr` should be called.
@@ -109,7 +109,7 @@ describe('Styles Save', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    els.save.trigger('click');
+    el.save.trigger('click');
     _t.respondLast500();
 
     // `toastr` should be called.
@@ -128,7 +128,7 @@ describe('Styles Save', function() {
     // --------------------------------------------------------------------
 
     // Click on "Save".
-    els.save.trigger('click');
+    el.save.trigger('click');
     _t.respondLast200('');
 
     _t.assertMapRefreshed();
