@@ -14,9 +14,6 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor:exhibit';
-
-
   /**
    * Display exhibit views in the editor container.
    *
@@ -34,7 +31,7 @@ Neatline.module('Editor.Exhibit', function(
     });
 
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler('EXHIBIT:display', display);
 
 
 });
