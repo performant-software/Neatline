@@ -22,7 +22,7 @@ describe('Record Form Save', function() {
     _t.openFirstRecordForm();
 
     els = {
-      save: _t.vw.record.$('a[name="save"]')
+      save: _t.vw.RECORD.$('a[name="save"]')
     };
 
   });
@@ -36,7 +36,7 @@ describe('Record Form Save', function() {
     // --------------------------------------------------------------------
 
     // Get the model id and form elements.
-    var id = _t.vw.record.model.get('id');
+    var id = _t.vw.RECORD.model.get('id');
     var inputs = _t.getRecordFormElements();
 
     inputs.titleInput.      val('1').       trigger('change');

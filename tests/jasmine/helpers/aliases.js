@@ -35,17 +35,10 @@ var _t = (function(_t) {
       MENU:     Neatline.Editor.Exhibit.Menu.__view,
       SEARCH:   Neatline.Editor.Exhibit.Search.__view,
       RECORDS:  Neatline.Editor.Exhibit.Records.__view,
-      styles:   Neatline.Editor.Exhibit.Styles.   __view,
-      record:   Neatline.Editor.Record.           __view,
-      spatial:  Neatline.Editor.Record.Spatial.   __view
+      STYLES:   Neatline.Editor.Exhibit.Styles.__view,
+      RECORD:   Neatline.Editor.Record.__view,
+      SPATIAL:  Neatline.Editor.Record.Spatial.__view
     };
-
-    this.el = {
-      records:  Neatline.Editor.Exhibit.Records.  __view.$el,
-      styles:   Neatline.Editor.Exhibit.Styles.   __view.$el,
-      record:   Neatline.Editor.Record.           __view.$el
-    };
-
   };
 
 

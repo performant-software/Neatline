@@ -22,7 +22,7 @@ describe('Record Form Close', function() {
     _t.openFirstRecordForm();
 
     els = {
-      close: _t.vw.record.$('a[name="close"]')
+      close: _t.vw.RECORD.$('a[name="close"]')
     };
 
   });

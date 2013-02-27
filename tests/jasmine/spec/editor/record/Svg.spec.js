@@ -22,12 +22,12 @@ describe('Record Form SVG', function() {
     _t.openFirstRecordForm();
 
     els = {
-      link:     _t.vw.record.$('a[href="#svg-modal"]'),
-      svg:      _t.vw.record.$('textarea[name="svg"]'),
-      density:  _t.vw.record.$('input[name="density"]'),
-      cancel:   _t.vw.record.$('a[name="cancel"]'),
-      parse:    _t.vw.record.$('a[name="parse"]'),
-      modal:    _t.vw.record.$('#svg-modal')
+      link:     _t.vw.RECORD.$('a[href="#svg-modal"]'),
+      svg:      _t.vw.RECORD.$('textarea[name="svg"]'),
+      density:  _t.vw.RECORD.$('input[name="density"]'),
+      cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
+      parse:    _t.vw.RECORD.$('a[name="parse"]'),
+      modal:    _t.vw.RECORD.$('#svg-modal')
     };
 
   });

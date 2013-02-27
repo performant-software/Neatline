@@ -21,8 +21,8 @@ describe('Styles Save', function() {
     _t.loadEditor();
 
     els = {
-      setFocus: _t.vw.styles.$('a[name="set-focus"]'),
-      save:     _t.vw.styles.$('a[name="save"]')
+      setFocus: _t.vw.STYLES.$('a[name="set-focus"]'),
+      save:     _t.vw.STYLES.$('a[name="save"]')
     };
 
   });
@@ -39,12 +39,12 @@ describe('Styles Save', function() {
     els.setFocus.trigger('click');
 
     // Inputs should be updated.
-    expect(_t.vw.styles.__ui.mapFocus).toHaveValue('1,2');
-    expect(_t.vw.styles.__ui.mapZoom).toHaveValue(3);
+    expect(_t.vw.STYLES.__ui.mapFocus).toHaveValue('1,2');
+    expect(_t.vw.STYLES.__ui.mapZoom).toHaveValue(3);
 
     // Model should be updated.
-    expect(_t.vw.styles.exhibit.get('map_focus')).toEqual('1,2');
-    expect(_t.vw.styles.exhibit.get('map_zoom')).toEqual('3');
+    expect(_t.vw.STYLES.exhibit.get('map_focus')).toEqual('1,2');
+    expect(_t.vw.STYLES.exhibit.get('map_zoom')).toEqual('3');
 
   });
 
@@ -56,9 +56,9 @@ describe('Styles Save', function() {
     // be issued to the exhibit API with the new data.
     // --------------------------------------------------------------------
 
-    _t.vw.styles.editor.setValue('1');
-    _t.vw.styles.__ui.mapFocus.val('2').trigger('change');
-    _t.vw.styles.__ui.mapZoom. val('3').trigger('change');
+    _t.vw.STYLES.editor.setValue('1');
+    _t.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
+    _t.vw.STYLES.__ui.mapZoom. val('3').trigger('change');
 
     // Click "Save" button.
     els.save.trigger('click');

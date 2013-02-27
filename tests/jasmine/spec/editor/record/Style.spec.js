@@ -30,23 +30,23 @@ describe('Record Form Style Tab', function() {
     _t.openFirstRecordForm();
 
     els = {
-      presenter:      _t.vw.record.$('select[name="presenter"]'),
-      vectorColor:    _t.vw.record.$('input[name="vector-color"]'),
-      strokeColor:    _t.vw.record.$('input[name="stroke-color"]'),
-      selectColor:    _t.vw.record.$('input[name="select-color"]'),
-      vectorOpacity:  _t.vw.record.$('input[name="vector-opacity"]'),
-      strokeOpacity:  _t.vw.record.$('input[name="stroke-opacity"]'),
-      selectOpacity:  _t.vw.record.$('input[name="select-opacity"]'),
-      strokeWidth:    _t.vw.record.$('input[name="stroke-width"]'),
-      pointRadius:    _t.vw.record.$('input[name="point-radius"]'),
-      pointImage:     _t.vw.record.$('input[name="point-image"]'),
-      minZoom:        _t.vw.record.$('input[name="min-zoom"]'),
-      maxZoom:        _t.vw.record.$('input[name="max-zoom"]'),
-      mapFocus:       _t.vw.record.$('input[name="map-focus"]'),
-      mapZoom:        _t.vw.record.$('input[name="map-zoom"]'),
-      setMinZoom:     _t.vw.record.$('a[name="set-min-zoom"]'),
-      setMaxZoom:     _t.vw.record.$('a[name="set-max-zoom"]'),
-      setFocus:       _t.vw.record.$('a[name="set-focus"]')
+      presenter:      _t.vw.RECORD.$('select[name="presenter"]'),
+      vectorColor:    _t.vw.RECORD.$('input[name="vector-color"]'),
+      strokeColor:    _t.vw.RECORD.$('input[name="stroke-color"]'),
+      selectColor:    _t.vw.RECORD.$('input[name="select-color"]'),
+      vectorOpacity:  _t.vw.RECORD.$('input[name="vector-opacity"]'),
+      strokeOpacity:  _t.vw.RECORD.$('input[name="stroke-opacity"]'),
+      selectOpacity:  _t.vw.RECORD.$('input[name="select-opacity"]'),
+      strokeWidth:    _t.vw.RECORD.$('input[name="stroke-width"]'),
+      pointRadius:    _t.vw.RECORD.$('input[name="point-radius"]'),
+      pointImage:     _t.vw.RECORD.$('input[name="point-image"]'),
+      minZoom:        _t.vw.RECORD.$('input[name="min-zoom"]'),
+      maxZoom:        _t.vw.RECORD.$('input[name="max-zoom"]'),
+      mapFocus:       _t.vw.RECORD.$('input[name="map-focus"]'),
+      mapZoom:        _t.vw.RECORD.$('input[name="map-zoom"]'),
+      setMinZoom:     _t.vw.RECORD.$('a[name="set-min-zoom"]'),
+      setMaxZoom:     _t.vw.RECORD.$('a[name="set-max-zoom"]'),
+      setFocus:       _t.vw.RECORD.$('a[name="set-focus"]')
     };
 
     model = _t.vw.MAP.editLayer.nModel;
@@ -260,7 +260,7 @@ describe('Record Form Style Tab', function() {
     expect(els.minZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(_t.vw.record.model.get('min_zoom')).toEqual('10');
+    expect(_t.vw.RECORD.model.get('min_zoom')).toEqual('10');
 
   });
 
@@ -279,7 +279,7 @@ describe('Record Form Style Tab', function() {
     expect(els.maxZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(_t.vw.record.model.get('max_zoom')).toEqual('10');
+    expect(_t.vw.RECORD.model.get('max_zoom')).toEqual('10');
 
   });
 
@@ -299,8 +299,8 @@ describe('Record Form Style Tab', function() {
     expect(els.mapZoom).toHaveValue(3);
 
     // Model should be updated.
-    expect(_t.vw.record.model.get('map_focus')).toEqual('1,2');
-    expect(_t.vw.record.model.get('map_zoom')).toEqual('3');
+    expect(_t.vw.RECORD.model.get('map_focus')).toEqual('1,2');
+    expect(_t.vw.RECORD.model.get('map_zoom')).toEqual('3');
 
   });
 

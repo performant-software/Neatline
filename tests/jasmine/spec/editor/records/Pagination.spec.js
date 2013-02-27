@@ -33,7 +33,7 @@ describe('Records Pagination', function() {
     _t.respondLast200(_t.json.records.p12);
 
     // Paginators should be hidden.
-    expect(_t.el.records.find('.pagination')).toBeEmpty();
+    expect(_t.vw.RECORDS.$el.find('.pagination')).toBeEmpty();
 
   });
 

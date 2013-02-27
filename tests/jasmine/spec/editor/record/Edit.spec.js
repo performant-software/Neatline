@@ -26,7 +26,7 @@ describe('Record Form Edit', function() {
     // on the map edit layer should be updated.
     // --------------------------------------------------------------------
 
-    _t.vw.record.model.set('id', 999);
+    _t.vw.RECORD.model.set('id', 999);
 
     // Edit layer `nModel` and `nId` should be updated.
     expect(_t.vw.MAP.editLayer.nModel.get('id')).toEqual(999);

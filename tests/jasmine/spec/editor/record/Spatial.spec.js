@@ -22,25 +22,25 @@ describe('Record Form Spatial Tab', function() {
     _t.openFirstRecordForm();
 
     els = {
-      text:     _t.vw.record.$('a[href="#record-form-text"]'),
-      spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
-      pan:      _t.vw.record.$('input[value="pan"]'),
-      point:    _t.vw.record.$('input[value="point"]'),
-      line:     _t.vw.record.$('input[value="line"]'),
-      poly:     _t.vw.record.$('input[value="poly"]'),
-      svg:      _t.vw.record.$('input[value="svg"]'),
-      regPoly:  _t.vw.record.$('input[value="regPoly"]'),
-      modify:   _t.vw.record.$('input[value="modify"]'),
-      rotate:   _t.vw.record.$('input[value="rotate"]'),
-      resize:   _t.vw.record.$('input[value="resize"]'),
-      drag:     _t.vw.record.$('input[value="drag"]'),
-      remove:   _t.vw.record.$('input[value="remove"]'),
-      coverage: _t.vw.record.$('textarea[name="coverage"]'),
-      clear:    _t.vw.record.$('a[name="clear"]'),
-      parse:    _t.vw.record.$('a[name="parse"]'),
-      sides:    _t.vw.spatial.__ui.sides,
-      snap:     _t.vw.spatial.__ui.snap,
-      irreg:    _t.vw.spatial.__ui.irreg
+      text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
+      spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+      pan:      _t.vw.RECORD.$('input[value="pan"]'),
+      point:    _t.vw.RECORD.$('input[value="point"]'),
+      line:     _t.vw.RECORD.$('input[value="line"]'),
+      poly:     _t.vw.RECORD.$('input[value="poly"]'),
+      svg:      _t.vw.RECORD.$('input[value="svg"]'),
+      regPoly:  _t.vw.RECORD.$('input[value="regPoly"]'),
+      modify:   _t.vw.RECORD.$('input[value="modify"]'),
+      rotate:   _t.vw.RECORD.$('input[value="rotate"]'),
+      resize:   _t.vw.RECORD.$('input[value="resize"]'),
+      drag:     _t.vw.RECORD.$('input[value="drag"]'),
+      remove:   _t.vw.RECORD.$('input[value="remove"]'),
+      coverage: _t.vw.RECORD.$('textarea[name="coverage"]'),
+      clear:    _t.vw.RECORD.$('a[name="clear"]'),
+      parse:    _t.vw.RECORD.$('a[name="parse"]'),
+      sides:    _t.vw.SPATIAL.__ui.sides,
+      snap:     _t.vw.SPATIAL.__ui.snap,
+      irreg:    _t.vw.SPATIAL.__ui.irreg
     };
 
   });
@@ -498,7 +498,7 @@ describe('Record Form Spatial Tab', function() {
     els.text.tab('show');
 
     // "Navigate" mode should be active.
-    expect(_t.vw.spatial.getEditMode()).toEqual('pan');
+    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
 
   });
 

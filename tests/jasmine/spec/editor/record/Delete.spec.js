@@ -21,13 +21,13 @@ describe('Record Form Delete', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    id = _t.vw.record.model.get('id');
+    id = _t.vw.RECORD.model.get('id');
 
     els = {
-      delete1:  _t.vw.record.$('a[name="delete1"]'),
-      delete2:  _t.vw.record.$('a[name="delete2"]'),
-      cancel:   _t.vw.record.$('a[name="cancel"]'),
-      modal:    _t.vw.record.$('#delete-modal')
+      delete1:  _t.vw.RECORD.$('a[name="delete1"]'),
+      delete2:  _t.vw.RECORD.$('a[name="delete2"]'),
+      cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
+      modal:    _t.vw.RECORD.$('#delete-modal')
     };
 
   });
@@ -148,8 +148,8 @@ describe('Record Form Delete', function() {
     expect(els.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.el.record);
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
@@ -167,7 +167,7 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Capture the form model.
-    var model = _t.vw.record.model;
+    var model = _t.vw.RECORD.model;
 
     // Delete, confirm.
     els.delete1.trigger('click');

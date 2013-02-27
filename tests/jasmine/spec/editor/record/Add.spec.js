@@ -23,26 +23,26 @@ describe('Record Form Add', function() {
     els = {
 
       labels: {
-        text:     _t.vw.record.$('a[href="#record-form-text"]'),
-        spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
-        style:    _t.vw.record.$('a[href="#record-form-style"]')
+        text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
+        spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+        style:    _t.vw.RECORD.$('a[href="#record-form-style"]')
       },
 
       tabs: {
-        text:     _t.vw.record.$('#record-form-text'),
-        spatial:  _t.vw.record.$('#record-form-spatial'),
-        style:    _t.vw.record.$('#record-form-style')
+        text:     _t.vw.RECORD.$('#record-form-text'),
+        spatial:  _t.vw.RECORD.$('#record-form-spatial'),
+        style:    _t.vw.RECORD.$('#record-form-style')
       },
 
       buttons: {
         add:      _t.vw.RECORDS.$('a[href="#records/add"]'),
-        close:    _t.vw.record.$('a[name="close"]'),
-        save:     _t.vw.record.$('a[name="save"]')
+        close:    _t.vw.RECORD.$('a[name="close"]'),
+        save:     _t.vw.RECORD.$('a[name="save"]')
       },
 
       lead: {
-        id:       _t.vw.record.$('p.lead span.id'),
-        title:    _t.vw.record.$('p.lead span.title')
+        id:       _t.vw.RECORD.$('p.lead span.id'),
+        title:    _t.vw.RECORD.$('p.lead span.title')
       }
 
     };
@@ -61,7 +61,7 @@ describe('Record Form Add', function() {
     _t.click(els.buttons.add);
 
     // Record form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
 
     // Form id should be empty.
     expect(els.lead.id).toBeEmpty();
@@ -70,7 +70,7 @@ describe('Record Form Add', function() {
     expect(els.lead.title.text()).toEqual(STRINGS.placeholders.title);
 
     // Model should have exhibit id.
-    var record = _t.vw.record.model;
+    var record = _t.vw.RECORD.model;
     expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.

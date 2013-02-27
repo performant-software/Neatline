@@ -33,7 +33,7 @@ describe('Styles Router', function() {
 
     // Tabs, styles form should be visible.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.MENU.$el);
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.styles);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.STYLES.$el);
 
     // "Styles" tab should be active.
     expect(els.styles).toHaveClass('active');

@@ -74,29 +74,30 @@ var _t = (function(_t) {
    * @return {Object}: A hash of elements.
    */
   _t.getRecordFormElements = function() {
+    var form = this.vw.RECORD.$el;
     return {
-      id:             this.el.record.find('p.lead span.id'),
-      titleHeader:    this.el.record.find('p.lead span.title'),
-      titleInput:     this.el.record.find('textarea[name="title"]'),
-      itemId:         this.el.record.find('input[name="item-id"]'),
-      body:           this.el.record.find('textarea[name="body"]'),
-      coverage:       this.el.record.find('textarea[name="coverage"]'),
-      tags:           this.el.record.find('input[name="tags"]'),
-      presenter:      this.el.record.find('select[name="presenter"]'),
-      vectorColor:    this.el.record.find('input[name="vector-color"]'),
-      strokeColor:    this.el.record.find('input[name="stroke-color"]'),
-      selectColor:    this.el.record.find('input[name="select-color"]'),
-      vectorOpacity:  this.el.record.find('input[name="vector-opacity"]'),
-      selectOpacity:  this.el.record.find('input[name="select-opacity"]'),
-      strokeOpacity:  this.el.record.find('input[name="stroke-opacity"]'),
-      imageOpacity:   this.el.record.find('input[name="image-opacity"]'),
-      strokeWidth:    this.el.record.find('input[name="stroke-width"]'),
-      pointRadius:    this.el.record.find('input[name="point-radius"]'),
-      minZoom:        this.el.record.find('input[name="min-zoom"]'),
-      maxZoom:        this.el.record.find('input[name="max-zoom"]'),
-      pointImage:     this.el.record.find('input[name="point-image"]'),
-      mapFocus:       this.el.record.find('input[name="map-focus"]'),
-      mapZoom:        this.el.record.find('input[name="map-zoom"]')
+      id:             form.find('p.lead span.id'),
+      titleHeader:    form.find('p.lead span.title'),
+      titleInput:     form.find('textarea[name="title"]'),
+      itemId:         form.find('input[name="item-id"]'),
+      body:           form.find('textarea[name="body"]'),
+      coverage:       form.find('textarea[name="coverage"]'),
+      tags:           form.find('input[name="tags"]'),
+      presenter:      form.find('select[name="presenter"]'),
+      vectorColor:    form.find('input[name="vector-color"]'),
+      strokeColor:    form.find('input[name="stroke-color"]'),
+      selectColor:    form.find('input[name="select-color"]'),
+      vectorOpacity:  form.find('input[name="vector-opacity"]'),
+      selectOpacity:  form.find('input[name="select-opacity"]'),
+      strokeOpacity:  form.find('input[name="stroke-opacity"]'),
+      imageOpacity:   form.find('input[name="image-opacity"]'),
+      strokeWidth:    form.find('input[name="stroke-width"]'),
+      pointRadius:    form.find('input[name="point-radius"]'),
+      minZoom:        form.find('input[name="min-zoom"]'),
+      maxZoom:        form.find('input[name="max-zoom"]'),
+      pointImage:     form.find('input[name="point-image"]'),
+      mapFocus:       form.find('input[name="map-focus"]'),
+      mapZoom:        form.find('input[name="map-zoom"]')
     };
   };
 

@@ -22,9 +22,9 @@ describe('Presenter Form Interaction', function() {
     _t.openFirstRecordForm();
 
     els = {
-      text:     _t.vw.record.$('a[href="#record-form-text"]'),
-      spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
-      close:    _t.vw.record.$('a[name="close"]')
+      text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
+      spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+      close:    _t.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -112,7 +112,7 @@ describe('Presenter Form Interaction', function() {
     var exec = spyOn(Neatline, 'execute').andCallThrough();
 
     // Capture the form model.
-    var model = _t.vw.record.model;
+    var model = _t.vw.RECORD.model;
 
     // Close the form.
     els.close.trigger('click');

@@ -23,7 +23,7 @@ describe('Record Router', function() {
     _t.navigate($(_t.getRecordRows()[1]).attr('href'));
 
     // Record form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
 
   });
 
@@ -33,7 +33,7 @@ describe('Record Router', function() {
     _t.navigate('records/add');
 
     // Record form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
 
   });
 

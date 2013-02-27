@@ -28,20 +28,20 @@ describe('Record Form Open', function() {
 
     els = {
 
-      pan:        _t.vw.record.$('input[value="pan"]'),
-      poly:       _t.vw.record.$('input[value="poly"]'),
-      close:      _t.vw.record.$('a[name="close"]'),
+      pan:        _t.vw.RECORD.$('input[value="pan"]'),
+      poly:       _t.vw.RECORD.$('input[value="poly"]'),
+      close:      _t.vw.RECORD.$('a[name="close"]'),
 
       labels: {
-        text:     _t.vw.record.$('a[href="#record-form-text"]'),
-        spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
-        style:    _t.vw.record.$('a[href="#record-form-style"]')
+        text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
+        spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+        style:    _t.vw.RECORD.$('a[href="#record-form-style"]')
       },
 
       tabs: {
-        text:     _t.vw.record.$('#record-form-text'),
-        spatial:  _t.vw.record.$('#record-form-spatial'),
-        style:    _t.vw.record.$('#record-form-style')
+        text:     _t.vw.RECORD.$('#record-form-text'),
+        spatial:  _t.vw.RECORD.$('#record-form-spatial'),
+        style:    _t.vw.RECORD.$('#record-form-style')
       }
 
     };
@@ -60,8 +60,8 @@ describe('Record Form Open', function() {
     _t.click($(recordRows[1]));
 
     // Record form should be displayed.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORDS.$el);
 
   });
 
@@ -76,8 +76,8 @@ describe('Record Form Open', function() {
     _t.navigate($(recordRows[1]).attr('href'));
 
     // Record form should be displayed.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORDS.$el);
 
   });
 
@@ -158,8 +158,8 @@ describe('Record Form Open', function() {
     _t.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
-    expect(_t.vw.record.model.get('title')).toEqual('title1');
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.RECORD.model.get('title')).toEqual('title1');
 
   });
 
@@ -179,14 +179,14 @@ describe('Record Form Open', function() {
     _t.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
-    expect(_t.vw.record.model.get('title')).toEqual('title1');
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.RECORD.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
     _t.clickOnMapFeature(feature2);
 
     // Form should not display new model.
-    expect(_t.vw.record.model.get('title')).toEqual('title1');
+    expect(_t.vw.RECORD.model.get('title')).toEqual('title1');
 
   });
 
@@ -255,11 +255,11 @@ describe('Record Form Open', function() {
 
     // Show form, check mode.
     _t.click($(recordRows[1]));
-    expect(_t.vw.spatial.getEditMode()).toEqual('pan');
+    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
     els.pan[0].checked = false; els.poly[0].checked = true;
-    expect(_t.vw.spatial.getEditMode()).toEqual('poly');
+    expect(_t.vw.SPATIAL.getEditMode()).toEqual('poly');
 
     // Close the form.
     els.close.trigger('click');
@@ -269,7 +269,7 @@ describe('Record Form Open', function() {
     _t.openFirstRecordForm();
 
     // "Navigate" mode should be active.
-    expect(_t.vw.spatial.getEditMode()).toEqual('pan');
+    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
 
   });
 

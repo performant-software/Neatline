@@ -34,7 +34,7 @@ describe('Records Router', function() {
       // Tabs, search, records should be visible.
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.MENU.$el);
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.SEARCH.$el);
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.records);
+      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
 
       // "Records" tab should be active.
       expect(els.records).toHaveClass('active');
