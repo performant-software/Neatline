@@ -22,17 +22,14 @@
   'exhibit' => $exhibit
 )); ?>
 
-<!-- Templates. -->
+<!-- Underscore templates. -->
 <?php echo $this->partial('exhibits/_strings.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_pagination.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_record_text.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_search.php'); ?>
-
-<?php echo $this->partial('exhibits/underscore/_styles.php', array(
-  'exhibit' => $exhibit
-)); ?>
-
-<?php echo $this->partial('exhibits/underscore/_menu.php', array(
-  'exhibit' => $exhibit
-)); ?>
+<?php echo $this->partial('exhibits/underscore/_exhibit_tabs.php', array(
+  'exhibit' => $exhibit )); ?>
+<?php echo $this->partial('exhibits/underscore/_exhibit_styles.php', array(
+  'exhibit' => $exhibit )); ?>

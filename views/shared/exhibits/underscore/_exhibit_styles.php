@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Styles.
+ * Exhibit tyles form.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,7 +13,7 @@
 
 ?>
 
-<script id="styles-template" type="text/templates">
+<script id="exhibit-styles-template" type="text/templates">
 
   <div class="control-group">
 

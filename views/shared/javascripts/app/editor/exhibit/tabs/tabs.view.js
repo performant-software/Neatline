@@ -17,7 +17,7 @@ Neatline.module('Editor.Exhibit.Tabs', function(
   Tabs.View = Backbone.Neatline.View.extend({
 
 
-    template: '#menu-template',
+    template: '#exhibit-tabs-template',
     tagName:  'header',
 
     ui: {

@@ -23,7 +23,7 @@
   <div class="body" data-html="record._body"></div>
 </script>
 
-<!-- Templates. -->
+<!-- Underscore templates. -->
 
 <script>
   STRINGS = {
@@ -154,7 +154,6 @@
 </script>
 
 
-<!-- Record edit form. -->
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->
@@ -597,12 +596,59 @@ SVG</label>
 
 </script>
 
+<script id="record-text-template" type="text/templates">
+
+  <div class="control-group">
+
+    
+
+<label>Item</label>
+<div class="controls">
+  <div class="inline-inputs">
+    <input
+      type="text"
+      name='item-id'            data-value='record.item_id'          />
+  </div>
+</div>
+
+    
+
+<label for="title">
+Title</label>
+<div class="controls">
+  <textarea
+        name='title'        data-value='record.title'  ></textarea>
+</div>
+
+    
+
+<label for="body">
+Body</label>
+<div class="controls">
+  <textarea
+        name='body'        data-value='record.body'  ></textarea>
+</div>
+
+  </div>
+
+</script>
+
 <script id="search-template" type="text/templates">
   <input type="text" placeholder="Search" />
 </script>
 
+<script id="exhibit-tabs-template" type="text/templates">
 
-<script id="styles-template" type="text/templates">
+  <p class="lead"></p>
+
+  <ul class="nav nav-pills">
+    <li class="tab records"><a href="#records">Records</a></li>
+    <li class="tab styles"><a href="#styles">Styles</a></li>
+  </ul>
+
+</script>
+
+<script id="exhibit-styles-template" type="text/templates">
 
   <div class="control-group">
 
@@ -651,17 +697,5 @@ Stylesheet</label>
     <a name="save" class="btn btn-large btn-primary" \>
       <i class="icon-ok icon-white"></i> Save    </a>
   </div>
-
-</script>
-
-
-<script id="menu-template" type="text/templates">
-
-  <p class="lead"></p>
-
-  <ul class="nav nav-pills">
-    <li class="tab records"><a href="#records">Records</a></li>
-    <li class="tab styles"><a href="#styles">Styles</a></li>
-  </ul>
 
 </script>

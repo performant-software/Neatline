@@ -27,6 +27,7 @@ Neatline.module('Editor.Record.Text', function(
      * Show text tab for new record.
      */
     'records/add/text': function() {
+      console.log('records/add/text');
       // TODO
     },
 
@@ -37,6 +38,7 @@ Neatline.module('Editor.Record.Text', function(
      * @param {String} id: The record id.
      */
     'records/:id/text': function(id) {
+      console.log('records/'+id+'/text');
       // TODO
     }
 

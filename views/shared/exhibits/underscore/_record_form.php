@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record form underscore template.
+ * Record form.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,7 +14,6 @@
 ?>
 
 
-<!-- Record edit form. -->
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->

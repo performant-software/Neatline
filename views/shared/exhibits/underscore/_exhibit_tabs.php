@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Editor menu.
+ * Editor tabs.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,7 +13,7 @@
 
 ?>
 
-<script id="menu-template" type="text/templates">
+<script id="exhibit-tabs-template" type="text/templates">
 
   <p class="lead"><?php echo $exhibit->title; ?></p>
 

@@ -23,7 +23,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
     Styles.__view.showIn(container);
     Styles.__view.refresh();
   };
-  Neatline.commands.addHandler('STYLES:display', display);
+  Neatline.commands.addHandler('ESTYLES:display', display);
 
 
 });
