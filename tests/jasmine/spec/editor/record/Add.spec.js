@@ -13,36 +13,42 @@
 describe('Record Form Add', function() {
 
 
-  var els;
+  var vw, el;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
 
-    els = {
+    vw = {
+      editor:     Neatline.Editor.__view,
+      records:    Neatline.Editor.Exhibit.Records.__view,
+      record:     Neatline.Editor.Record.__view
+    };
+
+    el = {
 
       labels: {
-        text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
-        spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
-        style:    _t.vw.RECORD.$('a[href="#record-form-style"]')
+        text:     vw.record.$('a[href="#record-form-text"]'),
+        spatial:  vw.record.$('a[href="#record-form-spatial"]'),
+        style:    vw.record.$('a[href="#record-form-style"]')
       },
 
       tabs: {
-        text:     _t.vw.RECORD.$('#record-form-text'),
-        spatial:  _t.vw.RECORD.$('#record-form-spatial'),
-        style:    _t.vw.RECORD.$('#record-form-style')
+        text:     vw.record.$('#record-form-text'),
+        spatial:  vw.record.$('#record-form-spatial'),
+        style:    vw.record.$('#record-form-style')
       },
 
       buttons: {
-        add:      _t.vw.RECORDS.$('a[href="#records/add"]'),
-        close:    _t.vw.RECORD.$('a[name="close"]'),
-        save:     _t.vw.RECORD.$('a[name="save"]')
+        add:      vw.records.$('a[href="#records/add"]'),
+        close:    vw.record.$('a[name="close"]'),
+        save:     vw.record.$('a[name="save"]')
       },
 
       lead: {
-        id:       _t.vw.RECORD.$('p.lead span.id'),
-        title:    _t.vw.RECORD.$('p.lead span.title')
+        id:       vw.record.$('p.lead span.id'),
+        title:    vw.record.$('p.lead span.title')
       }
 
     };
@@ -58,19 +64,19 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(els.buttons.add);
+    _t.click(el.buttons.add);
 
     // Record form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    expect(vw.editor.__ui.editor).toContain(vw.record.$el);
 
     // Form id should be empty.
-    expect(els.lead.id).toBeEmpty();
+    expect(el.lead.id).toBeEmpty();
 
     // Form title should display placeholder.
-    expect(els.lead.title.text()).toEqual(STRINGS.placeholders.title);
+    expect(el.lead.title.text()).toEqual(STRINGS.placeholders.title);
 
     // Model should have exhibit id.
-    var record = _t.vw.RECORD.model;
+    var record = vw.record.model;
     expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.
@@ -98,25 +104,25 @@ describe('Record Form Add', function() {
     _t.click($(_t.getRecordRows()[1]));
 
     // Click "Style" tab.
-    els.labels.style.tab('show');
+    el.labels.style.tab('show');
 
     // Close the form.
-    els.buttons.close.trigger('click');
+    el.buttons.close.trigger('click');
 
     // Add record.
-    _t.click(els.buttons.add);
+    _t.click(el.buttons.add);
 
     // "Text" tab should be active.
-    expect(els.labels.text.parent('li')).toHaveClass('active');
-    expect(els.tabs.text).toHaveClass('active');
+    expect(el.labels.text.parent('li')).toHaveClass('active');
+    expect(el.tabs.text).toHaveClass('active');
 
     // "Spatial" should be inactive.
-    expect(els.labels.spatial.parent('li')).not.toHaveClass('active');
-    expect(els.tabs.spatial).not.toHaveClass('active');
+    expect(el.labels.spatial.parent('li')).not.toHaveClass('active');
+    expect(el.tabs.spatial).not.toHaveClass('active');
 
     // "Style" should be inactive.
-    expect(els.labels.style.parent('li')).not.toHaveClass('active');
-    expect(els.tabs.style).not.toHaveClass('active');
+    expect(el.labels.style.parent('li')).not.toHaveClass('active');
+    expect(el.tabs.style).not.toHaveClass('active');
 
   });
 
@@ -128,10 +134,10 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(els.buttons.add);
+    _t.click(el.buttons.add);
 
     // Click "Save".
-    els.buttons.save.trigger('click');
+    el.buttons.save.trigger('click');
 
     // Route should be /record, method POST.
     _t.assertLastRequestRoute(Neatline.global.record_api);
@@ -151,10 +157,10 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(els.buttons.add);
+    _t.click(el.buttons.add);
 
     // Click "Save".
-    els.buttons.save.trigger('click');
+    el.buttons.save.trigger('click');
     _t.respondNewRecord();
 
     // Get the id of the record.

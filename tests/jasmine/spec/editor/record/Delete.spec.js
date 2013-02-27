@@ -13,7 +13,7 @@
 describe('Record Form Delete', function() {
 
 
-  var els, id;
+  var vw, el, id;
 
 
   beforeEach(function() {
@@ -21,14 +21,21 @@ describe('Record Form Delete', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    id = _t.vw.RECORD.model.get('id');
-
-    els = {
-      delete1:  _t.vw.RECORD.$('a[name="delete1"]'),
-      delete2:  _t.vw.RECORD.$('a[name="delete2"]'),
-      cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
-      modal:    _t.vw.RECORD.$('#delete-modal')
+    vw = {
+      map:      Neatline.Map.__view,
+      editor:   Neatline.Editor.__view,
+      records:  Neatline.Editor.Exhibit.Records.__view,
+      record:   Neatline.Editor.Record.__view
     };
+
+    el = {
+      delete1:  vw.record.$('a[name="delete1"]'),
+      delete2:  vw.record.$('a[name="delete2"]'),
+      cancel:   vw.record.$('a[name="cancel"]'),
+      modal:    vw.record.$('#delete-modal')
+    };
+
+    id = vw.record.model.get('id');
 
   });
 
@@ -41,11 +48,11 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Click on "Delete".
-    els.delete1.trigger('click');
+    el.delete1.trigger('click');
 
     // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
-    expect(els.modal).toHaveClass('in');
+    expect(el.modal).toHaveClass('in');
 
   });
 
@@ -58,13 +65,13 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Click on "Delete".
-    els.delete1.trigger('click');
+    el.delete1.trigger('click');
 
     // Click on "Cancel".
-    els.cancel.trigger('click');
+    el.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(els.modal).not.toHaveClass('in');
+    expect(el.modal).not.toHaveClass('in');
 
   });
 
@@ -77,8 +84,8 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Delete, confirm.
-    els.delete1.trigger('click');
-    els.delete2.trigger('click');
+    el.delete1.trigger('click');
+    el.delete2.trigger('click');
 
     // Route should be /record/:id, method DELETE.
     _t.assertLastRequestRoute(Neatline.global.record_api+'/'+id);
@@ -98,12 +105,12 @@ describe('Record Form Delete', function() {
     spyOn(toastr, 'info');
 
     // Click on "Save".
-    els.delete2.trigger('click');
+    el.delete2.trigger('click');
     _t.respondLast200('');
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.remove.success, null, _t.vw.EDITOR.options.toastr
+      STRINGS.record.remove.success, null, vw.editor.options.toastr
     );
 
   });
@@ -120,12 +127,12 @@ describe('Record Form Delete', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    els.delete2.trigger('click');
+    el.delete2.trigger('click');
     _t.respondLast500();
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.remove.error, null, _t.vw.EDITOR.options.toastr
+      STRINGS.record.remove.error, null, vw.editor.options.toastr
     );
 
   });
@@ -140,16 +147,16 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Delete, confirm.
-    els.delete1.trigger('click');
-    els.delete2.trigger('click');
+    el.delete1.trigger('click');
+    el.delete2.trigger('click');
     _t.respondLast200('');
 
     // Modal should be hidden.
-    expect(els.modal).not.toHaveClass('in');
+    expect(el.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
+    expect(vw.editor.__ui.editor).not.toContain(vw.record.$el);
+    expect(vw.editor.__ui.editor).toContain(vw.records.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
@@ -167,18 +174,18 @@ describe('Record Form Delete', function() {
     // --------------------------------------------------------------------
 
     // Capture the form model.
-    var model = _t.vw.RECORD.model;
+    var model = vw.record.model;
 
     // Delete, confirm.
-    els.delete1.trigger('click');
-    els.delete2.trigger('click');
+    el.delete1.trigger('click');
+    el.delete2.trigger('click');
     _t.respondLast200('');
 
     // Layer should be removed from map.
-    expect(_t.vw.MAP.getLayerByModel(model)).toBeUndefined();
+    expect(vw.map.getLayerByModel(model)).toBeUndefined();
 
     // Layer should be removed from `layers`.
-    expect(_.find(_t.vw.MAP.layers, function(layer) {
+    expect(_.find(vw.map.layers, function(layer) {
       return layer.nId == id; })).toBeUndefined();
 
   });

@@ -13,7 +13,7 @@
 describe('Presenter Form Interaction', function() {
 
 
-  var els;
+  var vw, el;
 
 
   beforeEach(function() {
@@ -21,10 +21,14 @@ describe('Presenter Form Interaction', function() {
     _t.loadEditor();
     _t.openFirstRecordForm();
 
-    els = {
-      text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
-      spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
-      close:    _t.vw.RECORD.$('a[name="close"]')
+    vw = {
+      record:   Neatline.Editor.Record.__view
+    };
+
+    el = {
+      text:     vw.record.$('a[href="#record-form-text"]'),
+      spatial:  vw.record.$('a[href="#record-form-spatial"]'),
+      close:    vw.record.$('a[name="close"]')
     };
 
   });
@@ -38,10 +42,10 @@ describe('Presenter Form Interaction', function() {
     // --------------------------------------------------------------------
 
     // Select "Spatial".
-    els.spatial.tab('show');
+    el.spatial.tab('show');
 
     // Close the form.
-    els.close.trigger('click');
+    el.close.trigger('click');
     _t.respondRecords();
 
     // Spy on trigger.
@@ -67,7 +71,7 @@ describe('Presenter Form Interaction', function() {
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Select "Spatial".
-    els.spatial.tab('show');
+    el.spatial.tab('show');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
@@ -86,10 +90,10 @@ describe('Presenter Form Interaction', function() {
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Select "Spatial".
-    els.spatial.tab('show');
+    el.spatial.tab('show');
 
     // Select "Text".
-    els.text.tab('show');
+    el.text.tab('show');
 
     // Presenter should activate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:activate');
@@ -105,17 +109,17 @@ describe('Presenter Form Interaction', function() {
     // --------------------------------------------------------------------
 
     // Select "Spatial".
-    els.spatial.tab('show');
+    el.spatial.tab('show');
 
     // Spy on trigger and execute.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
     var exec = spyOn(Neatline, 'execute').andCallThrough();
 
     // Capture the form model.
-    var model = _t.vw.RECORD.model;
+    var model = vw.record.model;
 
     // Close the form.
-    els.close.trigger('click');
+    el.close.trigger('click');
     _t.respondRecords();
 
     // Presenter should activate.
