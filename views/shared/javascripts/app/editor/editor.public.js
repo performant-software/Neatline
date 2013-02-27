@@ -26,7 +26,7 @@ Neatline.module('Editor', { startWithParent: false,
 
     // Show each of the views.
     _.each(views, function(v) {
-      Neatline.execute('editor:'+v+':display', Editor.__view.__ui.editor);
+      Neatline.execute(v+':display', Editor.__view.__ui.editor);
     });
 
   };

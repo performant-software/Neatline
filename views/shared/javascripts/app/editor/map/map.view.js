@@ -336,7 +336,7 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
     // Update the form.
-    Neatline.execute('editor:record:setCoverage', wkt);
+    Neatline.execute('RECORD:setCoverage', wkt);
 
   },
 

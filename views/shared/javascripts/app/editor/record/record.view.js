@@ -208,7 +208,7 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('MAP:refresh');
 
       // Update the route.
-      Neatline.execute('editor:record:updateRoute',
+      Neatline.execute('RECORD:updateRoute',
         'records/'+this.model.get('id')
       );
 

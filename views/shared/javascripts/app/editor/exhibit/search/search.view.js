@@ -132,7 +132,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
       // Update the route.
       var url = this.getUrlFromQuery();
-      Neatline.execute('editor:record:updateRoute', url);
+      Neatline.execute('RECORD:updateRoute', url);
 
       // Build parameters object.
       var params = _.extend(this.query, {
