@@ -53,7 +53,7 @@ var _t = (function(_t) {
    * Assert that the pagination is empty.
    */
   _t.assertPaginationEmpty = function() {
-    var pag = this.el.records.find('.pagination');
+    var pag = this.vw.RECORDS.$el.find('.pagination');
     expect($(pag[0]).text().match(/^\s+$/)).toBeTruthy();
     expect($(pag[1]).text().match(/^\s+$/)).toBeTruthy();
   };
@@ -63,7 +63,7 @@ var _t = (function(_t) {
    * Assert that the pagination is not empty.
    */
   _t.assertPaginationNotEmpty = function() {
-    var pag = this.el.records.find('.pagination');
+    var pag = this.vw.RECORDS.$el.find('.pagination');
     expect($(pag[0]).text().match(/^\s+$/)).not.toBeTruthy();
     expect($(pag[1]).text().match(/^\s+$/)).not.toBeTruthy();
   };
@@ -73,7 +73,7 @@ var _t = (function(_t) {
    * Assert that the pagination `<<` link is enabled.
    */
   _t.assertPaginationPrevEnabled = function() {
-    var prev = this.el.records.find('.pagination .prev');
+    var prev = this.vw.RECORDS.$el.find('.pagination .prev');
     expect($(prev[0]).parent('li')).not.toHaveClass('disabled');
     expect($(prev[1]).parent('li')).not.toHaveClass('disabled');
   };
@@ -83,7 +83,7 @@ var _t = (function(_t) {
    * Assert that the pagination `<<` link is disabled.
    */
   _t.assertPaginationPrevDisabled = function() {
-    var prev = this.el.records.find('.pagination .prev');
+    var prev = this.vw.RECORDS.$el.find('.pagination .prev');
     expect($(prev[0]).parent('li')).toHaveClass('disabled');
     expect($(prev[1]).parent('li')).toHaveClass('disabled');
   };
@@ -93,7 +93,7 @@ var _t = (function(_t) {
    * Assert that the pagination `>>` link is enabled.
    */
   _t.assertPaginationNextEnabled = function() {
-    var next = this.el.records.find('.pagination .next');
+    var next = this.vw.RECORDS.$el.find('.pagination .next');
     expect($(next[0]).parent('li')).not.toHaveClass('disabled');
     expect($(next[1]).parent('li')).not.toHaveClass('disabled');
   };
@@ -103,7 +103,7 @@ var _t = (function(_t) {
    * Assert that the pagination `>>` link is disabled.
    */
   _t.assertPaginationNextDisabled = function() {
-    var next = this.el.records.find('.pagination .next');
+    var next = this.vw.RECORDS.$el.find('.pagination .next');
     expect($(next[0]).parent('li')).toHaveClass('disabled');
     expect($(next[1]).parent('li')).toHaveClass('disabled');
   };
@@ -115,7 +115,7 @@ var _t = (function(_t) {
    * @param {String} route: The hash.
    */
   _t.assertPaginationPrevRoute = function(route) {
-    var prev = this.el.records.find('.pagination .prev');
+    var prev = this.vw.RECORDS.$el.find('.pagination .prev');
     expect($(prev[0])).toHaveAttr('href', route);
     expect($(prev[1])).toHaveAttr('href', route);
   };
@@ -127,7 +127,7 @@ var _t = (function(_t) {
    * @param {String} route: The hash.
    */
   _t.assertPaginationNextRoute = function(route) {
-    var next = this.el.records.find('.pagination .next');
+    var next = this.vw.RECORDS.$el.find('.pagination .next');
     expect($(next[0])).toHaveAttr('href', route);
     expect($(next[1])).toHaveAttr('href', route);
   };
@@ -151,7 +151,7 @@ var _t = (function(_t) {
 
     // Record2 point should be removed.
     expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(this.vw.map.layers.length).toEqual(2);
+    expect(this.vw.MAP.layers.length).toEqual(2);
 
   };
 

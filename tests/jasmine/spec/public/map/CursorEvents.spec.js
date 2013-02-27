@@ -21,7 +21,7 @@ describe('Map Cursor Events', function() {
     _t.loadNeatline();
 
     // Get layer and feature.
-    layer = _t.vw.map.layers[0];
+    layer = _t.vw.MAP.layers[0];
     feature = layer.features[0];
 
     // Spy on the event aggregator.
@@ -94,8 +94,8 @@ describe('Map Cursor Events', function() {
     _t.refreshMap(_t.json.records.changed);
 
     // Get extent and zoom.
-    var extent = _t.vw.map.getExtentAsWKT();
-    var zoom = _t.vw.map.getZoom();
+    var extent = _t.vw.MAP.getExtentAsWKT();
+    var zoom = _t.vw.MAP.getZoom();
 
     // Should publish `MAP:move`.
     expect(vent.argsForCall[0][0]).toEqual('MAP:move');

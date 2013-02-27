@@ -31,21 +31,21 @@ describe('Search Initialization', function() {
 
     // Single word query.
     _t.navigate('records/search/query=word');
-    expect(_t.vw.search.__ui.search).toHaveValue('word');
+    expect(_t.vw.SEARCH.__ui.search).toHaveValue('word');
 
     // Multiple-word query.
     _t.navigate('records/search/query=word1+word2');
-    expect(_t.vw.search.__ui.search).toHaveValue('word1 word2');
+    expect(_t.vw.SEARCH.__ui.search).toHaveValue('word1 word2');
 
     // Tags query.
     _t.navigate('records/search/query=tags:+tag1,+tag2');
-    expect(_t.vw.search.__ui.search).toHaveValue('tags: tag1, tag2');
-    expect(_t.vw.search.__ui.search).toHaveClass('bold');
+    expect(_t.vw.SEARCH.__ui.search).toHaveValue('tags: tag1, tag2');
+    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
 
     // Map query.
     _t.navigate('records/search/query=map:');
-    expect(_t.vw.search.__ui.search).toHaveValue('map:');
-    expect(_t.vw.search.__ui.search).toHaveClass('bold');
+    expect(_t.vw.SEARCH.__ui.search).toHaveValue('map:');
+    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
 
   });
 

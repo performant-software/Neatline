@@ -23,8 +23,8 @@ describe('Record Form Open', function() {
     recordRows    = _t.getRecordRows();
     recordModels  = _t.getRecordListModels();
 
-    feature1  = _t.vw.map.layers[0].features[0];
-    feature2  = _t.vw.map.layers[1].features[0];
+    feature1  = _t.vw.MAP.layers[0].features[0];
+    feature2  = _t.vw.MAP.layers[1].features[0];
 
     els = {
 
@@ -60,8 +60,8 @@ describe('Record Form Open', function() {
     _t.click($(recordRows[1]));
 
     // Record form should be displayed.
-    expect(_t.el.editor).toContain(_t.el.record);
-    expect(_t.el.editor).not.toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.el.records);
 
   });
 
@@ -76,8 +76,8 @@ describe('Record Form Open', function() {
     _t.navigate($(recordRows[1]).attr('href'));
 
     // Record form should be displayed.
-    expect(_t.el.editor).toContain(_t.el.record);
-    expect(_t.el.editor).not.toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.el.records);
 
   });
 
@@ -158,7 +158,7 @@ describe('Record Form Open', function() {
     _t.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
   });
@@ -179,7 +179,7 @@ describe('Record Form Open', function() {
     _t.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
     expect(_t.vw.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
@@ -206,8 +206,8 @@ describe('Record Form Open', function() {
     _t.click($(recordRows[1]));
 
     // Get focus and zoom.
-    var center  = _t.vw.map.map.getCenter();
-    var zoom    = _t.vw.map.map.getZoom();
+    var center  = _t.vw.MAP.map.getCenter();
+    var zoom    = _t.vw.MAP.map.getZoom();
 
     // Focus should be unchanged.
     expect(center.lon).toEqual(100);
@@ -234,8 +234,8 @@ describe('Record Form Open', function() {
     _t.clickOnMapFeature(feature1);
 
     // Get focus and zoom.
-    var center  = _t.vw.map.map.getCenter();
-    var zoom    = _t.vw.map.map.getZoom();
+    var center  = _t.vw.MAP.map.getCenter();
+    var zoom    = _t.vw.MAP.map.getZoom();
 
     // Focus should be unchanged.
     expect(center.lon).toEqual(200);

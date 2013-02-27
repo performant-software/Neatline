@@ -85,7 +85,7 @@ describe('Record Form SVG', function() {
     els.parse.trigger('click');
 
     // `geometry` on handler should be set.
-    expect(_t.vw.map.controls.svg.handler.geometry.equals(geo)).
+    expect(_t.vw.MAP.controls.svg.handler.geometry.equals(geo)).
       toBeTruthy();
 
   });
@@ -106,14 +106,14 @@ describe('Record Form SVG', function() {
     els.parse.trigger('click');
 
     // Capture the number of points in the geometry.
-    var c1 = _t.vw.map.controls.svg.handler.geometry.getVertices().length;
+    var c1 = _t.vw.MAP.controls.svg.handler.geometry.getVertices().length;
 
     // Set high density.
     els.density.val('2.0');
     els.parse.trigger('click');
 
     // Capture the number of points in the geometry.
-    var c2 = _t.vw.map.controls.svg.handler.geometry.getVertices().length;
+    var c2 = _t.vw.MAP.controls.svg.handler.geometry.getVertices().length;
 
     // Should be more points.
     expect(c2).toBeGreaterThan(c1);
@@ -137,7 +137,7 @@ describe('Record Form SVG', function() {
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.svg.parse.success, null, _t.vw.editor.options.toastr
+      STRINGS.svg.parse.success, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -175,7 +175,7 @@ describe('Record Form SVG', function() {
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.svg.parse.error, null, _t.vw.editor.options.toastr
+      STRINGS.svg.parse.error, null, _t.vw.EDITOR.options.toastr
     );
 
   });

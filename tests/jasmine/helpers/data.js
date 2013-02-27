@@ -20,7 +20,7 @@ var _t = (function(_t) {
    * @return {Array}: The DOM collection of <a> elements.
    */
   _t.getRecordRows = function() {
-    return this.el.records.find('.list a');
+    return this.vw.RECORDS.$el.find('.list a');
   };
 
 
@@ -41,7 +41,7 @@ var _t = (function(_t) {
    * @return {Object}: The layer.
    */
   _t.getVectorLayerByTitle = function(title) {
-    return _.find(this.vw.map.layers, function(layer) {
+    return _.find(this.vw.MAP.layers, function(layer) {
       return layer.name == title;
     });
   };

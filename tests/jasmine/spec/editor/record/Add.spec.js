@@ -35,7 +35,7 @@ describe('Record Form Add', function() {
       },
 
       buttons: {
-        add:      _t.vw.records.$('a[href="#records/add"]'),
+        add:      _t.vw.RECORDS.$('a[href="#records/add"]'),
         close:    _t.vw.record.$('a[name="close"]'),
         save:     _t.vw.record.$('a[name="save"]')
       },
@@ -61,7 +61,7 @@ describe('Record Form Add', function() {
     _t.click(els.buttons.add);
 
     // Record form should be visible.
-    expect(_t.el.editor).toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.record);
 
     // Form id should be empty.
     expect(els.lead.id).toBeEmpty();

@@ -109,7 +109,7 @@ describe('Record Form Save', function() {
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.save.success, null, _t.vw.editor.options.toastr
+      STRINGS.record.save.success, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -131,7 +131,7 @@ describe('Record Form Save', function() {
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.save.error, null, _t.vw.editor.options.toastr
+      STRINGS.record.save.error, null, _t.vw.EDITOR.options.toastr
     );
 
   });

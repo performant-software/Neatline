@@ -103,7 +103,7 @@ describe('Record Form Delete', function() {
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.remove.success, null, _t.vw.editor.options.toastr
+      STRINGS.record.remove.success, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -125,7 +125,7 @@ describe('Record Form Delete', function() {
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.remove.error, null, _t.vw.editor.options.toastr
+      STRINGS.record.remove.error, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -148,8 +148,8 @@ describe('Record Form Delete', function() {
     expect(els.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(_t.el.editor).not.toContain(_t.el.record);
-    expect(_t.el.editor).toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.el.record);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.records);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
@@ -175,10 +175,10 @@ describe('Record Form Delete', function() {
     _t.respondLast200('');
 
     // Layer should be removed from map.
-    expect(_t.vw.map.getLayerByModel(model)).toBeUndefined();
+    expect(_t.vw.MAP.getLayerByModel(model)).toBeUndefined();
 
     // Layer should be removed from `layers`.
-    expect(_.find(_t.vw.map.layers, function(layer) {
+    expect(_.find(_t.vw.MAP.layers, function(layer) {
       return layer.nId == id; })).toBeUndefined();
 
   });

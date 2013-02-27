@@ -59,7 +59,7 @@ describe('Record Form Spatial Tab', function() {
     els.point.trigger('change');
 
     // "Draw Point" should be active.
-    expect(_t.vw.map.controls.point.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.point.active).toBeTruthy();
 
   });
 
@@ -77,7 +77,7 @@ describe('Record Form Spatial Tab', function() {
     els.line.trigger('change');
 
     // "Draw Line" should be active.
-    expect(_t.vw.map.controls.line.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.line.active).toBeTruthy();
 
   });
 
@@ -95,7 +95,7 @@ describe('Record Form Spatial Tab', function() {
     els.poly.trigger('change');
 
     // "Draw Polygon" should be active.
-    expect(_t.vw.map.controls.poly.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.poly.active).toBeTruthy();
 
   });
 
@@ -113,7 +113,7 @@ describe('Record Form Spatial Tab', function() {
     els.svg.trigger('change');
 
     // "Draw SVG" should be active.
-    expect(_t.vw.map.controls.svg.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.svg.active).toBeTruthy();
 
   });
 
@@ -131,7 +131,7 @@ describe('Record Form Spatial Tab', function() {
     els.regPoly.trigger('change');
 
     // "Draw Regular Polygon" should be active.
-    expect(_t.vw.map.controls.regPoly.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.regPoly.active).toBeTruthy();
 
   });
 
@@ -149,7 +149,7 @@ describe('Record Form Spatial Tab', function() {
     els.modify.trigger('change');
 
     // "Modify Shape" should be active.
-    expect(_t.vw.map.controls.edit.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
 
   });
 
@@ -167,7 +167,7 @@ describe('Record Form Spatial Tab', function() {
     els.remove.trigger('change');
 
     // "Delete Shape" should be active.
-    expect(_t.vw.map.controls.remove.active).toBeTruthy();
+    expect(_t.vw.MAP.controls.remove.active).toBeTruthy();
 
   });
 
@@ -184,7 +184,7 @@ describe('Record Form Spatial Tab', function() {
     els.sides.trigger('change');
 
     // "Sides" should be updated.
-    expect(_t.vw.map.controls.regPoly.handler.sides).toEqual(10);
+    expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
 
   });
 
@@ -201,7 +201,7 @@ describe('Record Form Spatial Tab', function() {
     els.snap.trigger('change');
 
     // "Snap Angle" should be updated.
-    expect(_t.vw.map.controls.regPoly.handler.snapAngle).toEqual(45);
+    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
 
   });
 
@@ -218,14 +218,14 @@ describe('Record Form Spatial Tab', function() {
     els.irreg.trigger('change');
 
     // "Irregular" be active.
-    expect(_t.vw.map.controls.regPoly.handler.irregular).toEqual(true);
+    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
     els.irreg.removeAttr('checked');
     els.irreg.trigger('change');
 
     // "Irregular" should be inactive.
-    expect(_t.vw.map.controls.regPoly.handler.irregular).toEqual(false);
+    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
 
   });
 
@@ -242,7 +242,7 @@ describe('Record Form Spatial Tab', function() {
     els.rotate.trigger('change');
 
     // Rotation should be active.
-    expect(_t.vw.map.controls.edit.mode).toEqual(
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.RESHAPE |
       OpenLayers.Control.ModifyFeature.ROTATE
     );
@@ -262,7 +262,7 @@ describe('Record Form Spatial Tab', function() {
     els.resize.trigger('change');
 
     // Resize should be active.
-    expect(_t.vw.map.controls.edit.mode).toEqual(
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.RESHAPE |
       OpenLayers.Control.ModifyFeature.RESIZE
     );
@@ -282,7 +282,7 @@ describe('Record Form Spatial Tab', function() {
     els.drag.trigger('change');
 
     // Drag should be active.
-    expect(_t.vw.map.controls.edit.mode).toEqual(
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.RESHAPE |
       OpenLayers.Control.ModifyFeature.DRAG
     );
@@ -299,7 +299,7 @@ describe('Record Form Spatial Tab', function() {
 
     // Create a new point, trigger modify.
     var pt = new OpenLayers.Geometry.Point(3,4);
-    _t.vw.map.controls.point.drawFeature(pt);
+    _t.vw.MAP.controls.point.drawFeature(pt);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -320,7 +320,7 @@ describe('Record Form Spatial Tab', function() {
     var pt1   = new OpenLayers.Geometry.Point(3,4);
     var pt2   = new OpenLayers.Geometry.Point(5,6);
     var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
-    _t.vw.map.controls.line.drawFeature(line);
+    _t.vw.MAP.controls.line.drawFeature(line);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -343,7 +343,7 @@ describe('Record Form Spatial Tab', function() {
     var pt3   = new OpenLayers.Geometry.Point(7,8);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
-    _t.vw.map.controls.poly.drawFeature(poly);
+    _t.vw.MAP.controls.poly.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -363,7 +363,7 @@ describe('Record Form Spatial Tab', function() {
     var pt1 = new OpenLayers.Geometry.Point(3,4);
     var pt2 = new OpenLayers.Geometry.Point(5,6);
     var collection = new OpenLayers.Geometry.Collection([pt1, pt2]);
-    _t.vw.map.controls.svg.drawFeature(collection);
+    _t.vw.MAP.controls.svg.drawFeature(collection);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -386,7 +386,7 @@ describe('Record Form Spatial Tab', function() {
     var pt3   = new OpenLayers.Geometry.Point(5,6);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
-    _t.vw.map.controls.svg.drawFeature(poly);
+    _t.vw.MAP.controls.svg.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -409,7 +409,7 @@ describe('Record Form Spatial Tab', function() {
     var pt3   = new OpenLayers.Geometry.Point(5,6);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
-    _t.vw.map.controls.regPoly.drawFeature(poly);
+    _t.vw.MAP.controls.regPoly.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -427,13 +427,13 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Edit feature, set new point coords.
-    var feature = _t.vw.map.editLayer.features[0];
-    _t.vw.map.controls.edit.feature = feature;
+    var feature = _t.vw.MAP.editLayer.features[0];
+    _t.vw.MAP.controls.edit.feature = feature;
     feature.geometry.x = 2;
     feature.geometry.y = 3;
 
     // Trigger modification.
-    _t.vw.map.controls.edit.dragComplete();
+    _t.vw.MAP.controls.edit.dragComplete();
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual(
@@ -451,10 +451,10 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Edit feature, set new point coords.
-    var feature = _t.vw.map.editLayer.features[0];
+    var feature = _t.vw.MAP.editLayer.features[0];
 
     // Trigger modification.
-    _t.vw.map.controls.remove.selectFeature(feature);
+    _t.vw.MAP.controls.remove.selectFeature(feature);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual('');
@@ -473,7 +473,7 @@ describe('Record Form Spatial Tab', function() {
     els.clear.trigger('click');
 
     // All features should be removed.
-    expect(_t.vw.map.editLayer.features.length).toEqual(0);
+    expect(_t.vw.MAP.editLayer.features.length).toEqual(0);
 
     // "Coverage" should be updated.
     expect(els.coverage.val()).toEqual('');

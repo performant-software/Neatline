@@ -21,8 +21,8 @@ describe('Static Bubble', function() {
     _t.loadNeatline();
 
     // Get layers.
-    layer1 = _t.vw.map.layers[0];
-    layer2 = _t.vw.map.layers[1];
+    layer1 = _t.vw.MAP.layers[0];
+    layer2 = _t.vw.MAP.layers[1];
 
     // Get features.
     feature1 = layer1.features[0];
@@ -33,9 +33,9 @@ describe('Static Bubble', function() {
     layer2.nModel.set('presenter', 'StaticBubble');
 
     els = {
-      title:  _t.vw.bubble.$('.title'),
-      body:   _t.vw.bubble.$('.body'),
-      close:  _t.vw.bubble.$('.close')
+      title:  _t.vw.STATICBUBBLE.$('.title'),
+      body:   _t.vw.STATICBUBBLE.$('.body'),
+      close:  _t.vw.STATICBUBBLE.$('.close')
     };
 
   });
@@ -56,7 +56,7 @@ describe('Static Bubble', function() {
     expect(els.body.text()).toEqual('_body1');
 
     // Bubble should be injected into map.
-    expect(_t.el.map).toContain(_t.el.bubble);
+    expect(_t.vw.MAP.$el).toContain(_t.vw.STATICBUBBLE.$el);
 
     // Title should be visible.
     expect(els.title).toBeVisible();
@@ -78,7 +78,7 @@ describe('Static Bubble', function() {
     _t.unHoverOnMapFeature();
 
     // Bubble should not be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.vw.STATICBUBBLE.$el).not.toBeVisible();
 
   });
 
@@ -94,7 +94,7 @@ describe('Static Bubble', function() {
     _t.triggerMapMouseout();
 
     // Bubble should not be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.vw.STATICBUBBLE.$el).not.toBeVisible();
 
   });
 
@@ -112,7 +112,7 @@ describe('Static Bubble', function() {
 
     // Bubble should be visible on unhover.
     _t.unHoverOnMapFeature();
-    expect(_t.el.bubble).toBeVisible();
+    expect(_t.vw.STATICBUBBLE.$el).toBeVisible();
 
   });
 
@@ -170,7 +170,7 @@ describe('Static Bubble', function() {
     _t.clickOnMapFeature(feature1);
 
     // Should add `frozen` class.
-    expect(_t.el.bubble).toHaveClass('frozen');
+    expect(_t.vw.STATICBUBBLE.$el).toHaveClass('frozen');
 
   });
 
@@ -235,7 +235,7 @@ describe('Static Bubble', function() {
     afterEach(function() {
 
       // Bubble should disappear.
-      expect(_t.el.bubble).not.toBeVisible();
+      expect(_t.vw.STATICBUBBLE.$el).not.toBeVisible();
 
       // Hover on a different feature.
       _t.hoverOnMapFeature(feature2);
@@ -294,7 +294,7 @@ describe('Static Bubble', function() {
     _t.clickOffMapFeature();
 
     // Should remove `frozen` class.
-    expect(_t.el.bubble).not.toHaveClass('frozen');
+    expect(_t.vw.STATICBUBBLE.$el).not.toHaveClass('frozen');
 
   });
 
@@ -313,7 +313,7 @@ describe('Static Bubble', function() {
     Neatline.vent.trigger('PRESENTER:deactivate');
 
     // Bubble should disappear.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.vw.STATICBUBBLE.$el).not.toBeVisible();
 
   });
 
@@ -331,7 +331,7 @@ describe('Static Bubble', function() {
     _t.hoverOnMapFeature(feature1);
 
     // Bubble should not be visible.
-    expect(_t.el.bubble).not.toBeVisible();
+    expect(_t.vw.STATICBUBBLE.$el).not.toBeVisible();
 
   });
 
@@ -351,7 +351,7 @@ describe('Static Bubble', function() {
     _t.hoverOnMapFeature(feature1);
 
     // Bubble should be visible.
-    expect(_t.el.bubble).toBeVisible();
+    expect(_t.vw.STATICBUBBLE.$el).toBeVisible();
 
   });
 

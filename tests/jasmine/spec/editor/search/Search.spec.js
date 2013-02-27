@@ -30,11 +30,11 @@ describe('Search', function() {
     // --------------------------------------------------------------------
 
     // Keyup with tag string in the box.
-    _t.vw.search.__ui.search.val('tags: tag1, tag2');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('tags: tag1, tag2');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Input should be bold.
-    expect(_t.vw.search.__ui.search).toHaveClass('bold');
+    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
 
   });
 
@@ -47,11 +47,11 @@ describe('Search', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.search.__ui.search.val('map:');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map:');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Input should be bold.
-    expect(_t.vw.search.__ui.search).toHaveClass('bold');
+    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
 
   });
 
@@ -65,22 +65,22 @@ describe('Search', function() {
     // --------------------------------------------------------------------
 
     // Exiting tags query.
-    _t.vw.search.__ui.search.val('tags:');
-    _t.vw.search.__ui.search.trigger('keyup');
-    _t.vw.search.__ui.search.val('tags');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('tags:');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('tags');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Input should not be bold.
-    expect(_t.vw.search.__ui.search).not.toHaveClass('bold');
+    expect(_t.vw.SEARCH.__ui.search).not.toHaveClass('bold');
 
     // Exiting map mirroring.
-    _t.vw.search.__ui.search.val('map:');
-    _t.vw.search.__ui.search.trigger('keyup');
-    _t.vw.search.__ui.search.val('map');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map:');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Input should not be bold.
-    expect(_t.vw.search.__ui.search).not.toHaveClass('bold');
+    expect(_t.vw.SEARCH.__ui.search).not.toHaveClass('bold');
 
   });
 
@@ -94,8 +94,8 @@ describe('Search', function() {
     // --------------------------------------------------------------------
 
     // Keyup with 'keyword' in the box.
-    _t.vw.search.__ui.search.val('word1 word2');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('word1 word2');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Should produce GET request to /records.
     _t.assertLastRequestRoute(Neatline.global.records_api);
@@ -125,8 +125,8 @@ describe('Search', function() {
     // --------------------------------------------------------------------
 
     // Keyup with tag string in the box.
-    _t.vw.search.__ui.search.val('tags: tag1, tag2');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('tags: tag1, tag2');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Should produce GET request to /records.
     _t.assertLastRequestRoute(Neatline.global.records_api);
@@ -158,24 +158,24 @@ describe('Search', function() {
     // --------------------------------------------------------------------
 
     // Keyup with one word.
-    _t.vw.search.__ui.search.val('word1');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('word1');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Route should be updated.
     expect(Backbone.history.fragment).toEqual(
       'records/search/query=word1');
 
     // Keyup with multiple words.
-    _t.vw.search.__ui.search.val('word1 word2 word3');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('word1 word2 word3');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Route should be updated.
     expect(Backbone.history.fragment).toEqual(
       'records/search/query=word1+word2+word3');
 
     // Keyup with empty query.
-    _t.vw.search.__ui.search.val('');
-    _t.vw.search.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('');
+    _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Route should be updated.
     expect(Backbone.history.fragment).toEqual(

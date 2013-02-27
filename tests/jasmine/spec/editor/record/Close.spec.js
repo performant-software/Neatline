@@ -40,8 +40,8 @@ describe('Record Form Close', function() {
     _t.respondRecords();
 
     // Records list should be visible.
-    expect(_t.el.editor).not.toContain(_t.el.record);
-    expect(_t.el.editor).toContain(_t.el.records);
+    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
 
   });
 

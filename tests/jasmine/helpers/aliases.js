@@ -15,47 +15,32 @@ var _t = (function(_t) {
 
 
   /**
-   * Shortcut public-facing exhibit components.
+   * Shortcut public views.
    */
   _t.aliasNeatline = function() {
-
     this.vw = {
-      map:      Neatline.Map.                     __view,
-      bubble:   Neatline.Presenter.StaticBubble.  __view
+      MAP:          Neatline.Map.__view,
+      STATICBUBBLE: Neatline.Presenter.StaticBubble.__view
     };
-
-    this.el = {
-      map:      Neatline.Map.                     __view.$el,
-      bubble:   Neatline.Presenter.StaticBubble.  __view.$el
-    };
-
   };
 
 
   /**
-   * Shortcut editor components.
+   * Shortcut editor views.
    */
   _t.aliasEditor = function() {
-
     this.vw = {
-      map:      Neatline.Map.                     __view,
-      bubble:   Neatline.Presenter.StaticBubble.  __view,
-      editor:   Neatline.Editor.                  __view,
-      menu:     Neatline.Editor.Exhibit.Menu.     __view,
-      search:   Neatline.Editor.Exhibit.Search.   __view,
-      records:  Neatline.Editor.Exhibit.Records.  __view,
+      MAP:      Neatline.Map.__view,
+      EDITOR:   Neatline.Editor.__view,
+      MENU:     Neatline.Editor.Exhibit.Menu.__view,
+      SEARCH:   Neatline.Editor.Exhibit.Search.__view,
+      RECORDS:  Neatline.Editor.Exhibit.Records.__view,
       styles:   Neatline.Editor.Exhibit.Styles.   __view,
       record:   Neatline.Editor.Record.           __view,
-      spatial:  Neatline.Editor.Record.Spatial.   __view,
-      mapedit:  Neatline.Editor.Map.              __view
+      spatial:  Neatline.Editor.Record.Spatial.   __view
     };
 
     this.el = {
-      map:      Neatline.Map.                     __view.$el,
-      bubble:   Neatline.Presenter.StaticBubble.  __view.$el,
-      editor:   Neatline.Editor.                  __view.__ui.editor,
-      menu:     Neatline.Editor.Exhibit.Menu.     __view.$el,
-      search:   Neatline.Editor.Exhibit.Search.   __view.$el,
       records:  Neatline.Editor.Exhibit.Records.  __view.$el,
       styles:   Neatline.Editor.Exhibit.Styles.   __view.$el,
       record:   Neatline.Editor.Record.           __view.$el

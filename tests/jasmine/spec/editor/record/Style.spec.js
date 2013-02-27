@@ -17,7 +17,7 @@ describe('Record Form Style Tab', function() {
 
 
   var getStyles = function() {
-    var styles  = _t.vw.map.editLayer.styleMap.styles;
+    var styles  = _t.vw.MAP.editLayer.styleMap.styles;
     standard    = styles['default'].defaultStyle;
     temporary   = styles.temporary.defaultStyle;
     select      = styles.select.defaultStyle;
@@ -49,7 +49,7 @@ describe('Record Form Style Tab', function() {
       setFocus:       _t.vw.record.$('a[name="set-focus"]')
     };
 
-    model = _t.vw.map.editLayer.nModel;
+    model = _t.vw.MAP.editLayer.nModel;
 
   });
 
@@ -58,7 +58,7 @@ describe('Record Form Style Tab', function() {
 
     it('should update on `change`', function() {
       els.presenter.val('None').trigger('change');
-      expect(_t.vw.map.editLayer.nModel.get('presenter')).toEqual('None');
+      expect(_t.vw.MAP.editLayer.nModel.get('presenter')).toEqual('None');
     });
 
   });

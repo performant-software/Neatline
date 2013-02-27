@@ -21,7 +21,7 @@ describe('Records Router', function() {
     _t.loadEditor();
 
     els = {
-      records: _t.vw.menu.$('li[data-slug="records"]')
+      records: _t.vw.MENU.$('li[data-slug="records"]')
     };
 
   });
@@ -32,9 +32,9 @@ describe('Records Router', function() {
     afterEach(function() {
 
       // Tabs, search, records should be visible.
-      expect(_t.el.editor).toContain(_t.el.menu);
-      expect(_t.el.editor).toContain(_t.el.search);
-      expect(_t.el.editor).toContain(_t.el.records);
+      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.MENU.$el);
+      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.SEARCH.$el);
+      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.el.records);
 
       // "Records" tab should be active.
       expect(els.records).toHaveClass('active');

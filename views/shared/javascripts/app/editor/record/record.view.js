@@ -28,13 +28,9 @@ Neatline.module('Editor.Record', function(
     },
 
     ui: {
-      text: {
-        tab:    'a[href="#record-form-text"]',
-        region: '#record-form-text'
-      },
-      remove: {
-        modal:  '#delete-modal'
-      }
+      textTab:    'a[href="#record-form-text"]',
+      textRegion: '#record-form-text',
+      delModal:   '#delete-modal'
     },
 
 
@@ -161,7 +157,7 @@ Neatline.module('Editor.Record', function(
 
       // Delete the record's layer on the map.
       Neatline.execute('MAPEDIT:deleteLayer', this.model);
-      this.__ui.remove.modal.modal('hide');
+      this.__ui.delModal.modal('hide');
 
       // FLash success.
       Neatline.execute('EDITOR:notifySuccess',
@@ -187,8 +183,8 @@ Neatline.module('Editor.Record', function(
      * Activate the "Text" tab.
      */
     resetTabs: function() {
-      this.__ui.text.region.addClass('active');
-      this.__ui.text.tab.tab('show');
+      this.__ui.textRegion.addClass('active');
+      this.__ui.textTab.tab('show');
     }
 
 

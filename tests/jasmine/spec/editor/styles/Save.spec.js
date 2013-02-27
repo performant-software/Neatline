@@ -92,7 +92,7 @@ describe('Styles Save', function() {
 
     // `toastr` should be called.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.exhibit.save.success, null, _t.vw.editor.options.toastr
+      STRINGS.exhibit.save.success, null, _t.vw.EDITOR.options.toastr
     );
 
   });
@@ -114,7 +114,7 @@ describe('Styles Save', function() {
 
     // `toastr` should be called.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.exhibit.save.error, null, _t.vw.editor.options.toastr
+      STRINGS.exhibit.save.error, null, _t.vw.EDITOR.options.toastr
     );
 
   });

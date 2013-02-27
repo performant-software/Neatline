@@ -18,7 +18,7 @@ var _t = (function(_t) {
    * Trigger a pan/zoom event on the map.
    */
   _t.triggerMapMove = function() {
-    this.vw.map.map.events.triggerEvent('moveend');
+    this.vw.MAP.map.events.triggerEvent('moveend');
   };
 
 
@@ -26,7 +26,7 @@ var _t = (function(_t) {
    * Trigger a mouseout event on the map.
    */
   _t.triggerMapMouseout = function() {
-    this.vw.map.map.events.triggerEvent('mouseout');
+    this.vw.MAP.map.events.triggerEvent('mouseout');
   };
 
 
@@ -49,7 +49,7 @@ var _t = (function(_t) {
   _t.clickOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.map.layers, function(layer) {
+    _.each(this.vw.MAP.layers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return feature;
       };
@@ -62,7 +62,7 @@ var _t = (function(_t) {
     };
 
     // Trigger click.
-    this.vw.map.map.events.triggerEvent('click', evt);
+    this.vw.MAP.map.events.triggerEvent('click', evt);
 
   };
 
@@ -73,14 +73,14 @@ var _t = (function(_t) {
   _t.clickOffMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.map.layers, function(layer) {
+    _.each(this.vw.MAP.layers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return null;
       };
     });
 
     // Trigger click.
-    this.vw.map.map.events.triggerEvent('click', {
+    this.vw.MAP.map.events.triggerEvent('click', {
       xy: new OpenLayers.Pixel(1,2)
     });
 
@@ -95,14 +95,14 @@ var _t = (function(_t) {
   _t.hoverOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.map.layers, function(layer) {
+    _.each(this.vw.MAP.layers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return feature;
       };
     });
 
     // Trigger click.
-    this.vw.map.map.events.triggerEvent('mousemove', {
+    this.vw.MAP.map.events.triggerEvent('mousemove', {
       xy: new OpenLayers.Pixel(1,2)
     });
 
@@ -115,14 +115,14 @@ var _t = (function(_t) {
   _t.unHoverOnMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.map.layers, function(layer) {
+    _.each(this.vw.MAP.layers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return null;
       };
     });
 
     // Trigger click.
-    this.vw.map.map.events.triggerEvent('mousemove', {
+    this.vw.MAP.map.events.triggerEvent('mousemove', {
       xy: new OpenLayers.Pixel(1,2)
     });
 
@@ -137,7 +137,7 @@ var _t = (function(_t) {
    * @param {Number} zoom: The zoom level.
    */
   _t.setMapCenter = function(lon, lat, zoom) {
-    this.vw.map.map.setCenter([lon, lat], zoom);
+    this.vw.MAP.map.setCenter([lon, lat], zoom);
   };
 
 
@@ -147,7 +147,7 @@ var _t = (function(_t) {
    * @param {Number} zoom: The zoom level.
    */
   _t.setMapZoom = function(zoom) {
-    this.vw.map.map.zoomTo(zoom);
+    this.vw.MAP.map.zoomTo(zoom);
   };
 
 
@@ -157,7 +157,7 @@ var _t = (function(_t) {
    * @param {Array}: A list of control `CLASS_NAME`s.
    */
   _t.getMapControlClassNames = function() {
-    return _.map(this.vw.map.map.controls, function(control) {
+    return _.map(this.vw.MAP.map.controls, function(control) {
       return control.CLASS_NAME;
     });
   };
