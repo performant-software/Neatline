@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit tabs.
+ * Exhibit menu.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,19 +13,16 @@
 
 ?>
 
-<script id="record-tabs-template" type="text/templates">
+<script id="exhibit-menu-template" type="text/templates">
 
-  <p class="lead"></p>
+  <p class="lead"><?php echo $exhibit->title; ?></p>
 
   <ul class="nav nav-pills">
-    <li class="tab" data-slug="text">
-      <a href="#">Text</a>
-    </li>
-    <li class="tab" data-slug="spatial">
-      <a href="#">Spatial</a>
+    <li class="tab" data-slug="records">
+      <a href="#records">Records</a>
     </li>
     <li class="tab" data-slug="styles">
-      <a href="#">Styles</a>
+      <a href="#styles">Styles</a>
     </li>
   </ul>
 

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit tabs initializer.
+ * Exhibit menu initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Tabs', function(
-  Tabs, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Menu', function(
+  Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-  Tabs.init = function() {
-    this.__view = new Tabs.View();
+  Menu.init = function() {
+    this.__view = new Menu.View();
   };
 
-  Tabs.addInitializer(Tabs.init);
+  Menu.addInitializer(Menu.init);
 
 
 });

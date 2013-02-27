@@ -32,8 +32,8 @@
 <?php echo $this->partial($_.'_record_list.php'); ?>
 <?php echo $this->partial($_.'_record_form.php'); ?>
 <?php echo $this->partial($_.'_record_text.php'); ?>
-<?php echo $this->partial($_.'_record_tabs.php'); ?>
-<?php echo $this->partial($_.'_exhibit_tabs.php', array(
+<?php echo $this->partial($_.'_record_menu.php'); ?>
+<?php echo $this->partial($_.'_exhibit_menu.php', array(
   'exhibit' => $exhibit )); ?>
 <?php echo $this->partial($_.'_exhibit_styles.php', array(
   'exhibit' => $exhibit )); ?>
