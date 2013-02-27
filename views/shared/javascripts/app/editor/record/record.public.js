@@ -32,8 +32,8 @@ Neatline.module('Editor.Record', function(
    */
   var bindId = function(id) {
     id = parseInt(id, 10);
-    Neatline.request('RECORDS:getModel', id, function(r) {
-      Record.__view.show(r);
+    Neatline.request('RECORDS:getModel', id, function(record) {
+      Record.__view.bind(record);
     });
   };
   Neatline.commands.addHandler('RECORD:bindId', bindId);
@@ -44,10 +44,20 @@ Neatline.module('Editor.Record', function(
    */
   var bindNew = function() {
     var record = new Neatline.Shared.Record.Model();
-    Record.__view.show(record);
+    Record.__view.bind(record);
     Record.__view.resetTabs();
   };
   Neatline.commands.addHandler('RECORD:bindNew', bindNew);
+
+
+  /**
+   * Unbind the form.
+   */
+  var unbind = function() {
+    if (Record.__view.open) Record.__view.unbind();
+  };
+  Neatline.commands.addHandler('RECORD:unbind', unbind);
+  Neatline.vent.on('editor:router:before', unbind);
 
 
   /**
@@ -84,16 +94,6 @@ Neatline.module('Editor.Record', function(
     Record.__view.model.set('coverage', coverage);
   };
   Neatline.commands.addHandler('RECORD:setCoverage', setCoverage);
-
-
-  /**
-   * Deactivate the form.
-   */
-  var deactivate = function() {
-    if (Record.__view.open) Record.__view.deactivate();
-  };
-  Neatline.commands.addHandler('RECORD:deactivate', deactivate);
-  Neatline.vent.on('editor:router:before', deactivate);
 
 
   /**

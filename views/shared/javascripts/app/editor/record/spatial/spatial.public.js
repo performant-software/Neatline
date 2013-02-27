@@ -15,13 +15,13 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
   /**
-   * Reset the map edit mode to "Navigate".
+   * Reset the edit mode to "Navigate".
    */
   var resetEditMode = function() {
     Spatial.__view.resetEditMode();
   };
   Neatline.commands.addHandler('SPATIAL:resetEditMode', resetEditMode);
-  Neatline.vent.on('RECORD:show', resetEditMode);
+  Neatline.vent.on('RECORD:bind', resetEditMode);
 
 
 }});

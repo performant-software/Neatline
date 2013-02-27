@@ -59,7 +59,7 @@ Neatline.module('Editor.Record', function(
      *
      * @param {Object} model: A record model.
      */
-    show: function(model) {
+    bind: function(model) {
 
       // Start map editing, bind model to form.
       Neatline.execute('MAPEDIT:startEdit', model);
@@ -71,7 +71,7 @@ Neatline.module('Editor.Record', function(
       });
 
       // Notify tab views.
-      Neatline.vent.trigger('RECORD:show', model);
+      Neatline.vent.trigger('RECORD:bind', model);
 
       // (De)activate presenter.
       this.setPresenterStatus();
@@ -85,7 +85,7 @@ Neatline.module('Editor.Record', function(
     /**
      * End the map edit session, reset the presenter.
      */
-    deactivate: function() {
+    unbind: function() {
 
       // Deactivate map editing.
       Neatline.execute('MAPEDIT:endEdit', this.model);
@@ -105,7 +105,7 @@ Neatline.module('Editor.Record', function(
      */
     onCloseClick: function() {
       Neatline.execute('RECORDS:navToList');
-      this.deactivate();
+      this.unbind();
     },
 
 
