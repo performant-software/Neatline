@@ -14,9 +14,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
-  Map.NS = 'editor:map';
-
-
   /**
    * Start map edit when a record form is opened.
    *
@@ -25,7 +22,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var startEdit = function(model) {
     Map.__view.startEdit(model);
   };
-  Neatline.commands.addHandler(Map.NS+':startEdit', startEdit);
+  Neatline.commands.addHandler('MAPEDIT:startEdit', startEdit);
 
 
   /**
@@ -36,7 +33,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var endEdit = function(model) {
     Map.__view.endEdit();
   };
-  Neatline.commands.addHandler(Map.NS+':endEdit', endEdit);
+  Neatline.commands.addHandler('MAPEDIT:endEdit', endEdit);
 
 
   /**
@@ -47,7 +44,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateEdit = function(settings) {
     Map.__view.updateEdit(settings);
   };
-  Neatline.commands.addHandler(Map.NS+':updateEdit', updateEdit);
+  Neatline.commands.addHandler('MAPEDIT:updateEdit', updateEdit);
 
 
   /**
@@ -58,7 +55,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateWKT = function(wkt) {
     Map.__view.updateWKT(wkt);
   };
-  Neatline.commands.addHandler(Map.NS+':updateWKT', updateWKT);
+  Neatline.commands.addHandler('MAPEDIT:updateWKT', updateWKT);
 
 
   /**
@@ -69,7 +66,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateStyles = function(model) {
     Map.__view.updateStyles(model);
   };
-  Neatline.commands.addHandler(Map.NS+':updateStyles', updateStyles);
+  Neatline.commands.addHandler('MAPEDIT:updateStyles', updateStyles);
 
 
   /**
@@ -80,7 +77,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateModel = function(model) {
     Map.__view.updateModel(model);
   };
-  Neatline.commands.addHandler(Map.NS+':updateModel', updateModel);
+  Neatline.commands.addHandler('MAPEDIT:updateModel', updateModel);
 
 
   /**
@@ -89,7 +86,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var clearLayer = function() {
     Map.__view.clearLayer();
   };
-  Neatline.commands.addHandler(Map.NS+':clearLayer', clearLayer);
+  Neatline.commands.addHandler('MAPEDIT:clearLayer', clearLayer);
 
 
   /**
@@ -101,7 +98,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
     Map.__collection.remove(model);
     Map.__view.removeLayerByModel(model);
   };
-  Neatline.commands.addHandler(Map.NS+':deleteLayer', deleteLayer);
+  Neatline.commands.addHandler('MAPEDIT:deleteLayer', deleteLayer);
 
 
 }});

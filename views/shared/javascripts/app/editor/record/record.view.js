@@ -133,12 +133,12 @@ Neatline.module('Editor.Record', function(
     show: function(model) {
 
       // Activate map editing, bind model to form.
-      Neatline.execute('editor:map:startEdit', model);
+      Neatline.execute('MAPEDIT:startEdit', model);
       rivets.bind(this.$el, { record: model });
 
       // Update map on model change.
       model.bind('change', function() {
-        Neatline.execute('editor:map:updateModel', model);
+        Neatline.execute('MAPEDIT:updateModel', model);
       });
 
       this.setPresenterStatus();
@@ -156,7 +156,7 @@ Neatline.module('Editor.Record', function(
     deactivate: function() {
 
       // Deactivate map editing.
-      Neatline.execute('editor:map:endEdit', this.model);
+      Neatline.execute('MAPEDIT:endEdit', this.model);
 
       // Activate and close the presenter.
       Neatline.vent.trigger('PRESENTER:activate');
@@ -236,7 +236,7 @@ Neatline.module('Editor.Record', function(
     onDeleteSuccess: function() {
 
       // Delete the record's layer on the map.
-      Neatline.execute('editor:map:deleteLayer', this.model);
+      Neatline.execute('MAPEDIT:deleteLayer', this.model);
       this.__ui.remove.modal.modal('hide');
 
       // FLash success.
@@ -292,7 +292,7 @@ Neatline.module('Editor.Record', function(
      * Publish the current edit control configuration.
      */
     onControlChange: function() {
-      Neatline.execute('editor:map:updateEdit', {
+      Neatline.execute('MAPEDIT:updateEdit', {
         mode:   this.getEditMode(),
         modify: this.getModifyOptions(),
         poly:   this.getPolyOptions()
@@ -316,7 +316,7 @@ Neatline.module('Editor.Record', function(
 
         // Covnert SVG, update handler.
         var wkt = SVGtoWKT.convert(val);
-        Neatline.execute('editor:map:updateWKT', wkt);
+        Neatline.execute('MAPEDIT:updateWKT', wkt);
 
         // Flash success.
         Neatline.execute('EDITOR:notifySuccess',
@@ -339,7 +339,7 @@ Neatline.module('Editor.Record', function(
      * Clear all features on the edit layer.
      */
     onClearClick: function() {
-      Neatline.execute('editor:map:clearLayer');
+      Neatline.execute('MAPEDIT:clearLayer');
     },
 
 
@@ -357,7 +357,7 @@ Neatline.module('Editor.Record', function(
      * Preview new style settings on the map edit layer.
      */
     onStyleChange: function() {
-      Neatline.execute('editor:map:updateStyles', this.model);
+      Neatline.execute('MAPEDIT:updateStyles', this.model);
     },
 
 
