@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit tabs view.
+ * Record form styles.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,13 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Tabs', function(
-  Tabs, Neatline, Backbone, Marionette, $, _) {
+
+@import 'var'
 
 
-  Tabs.View = Neatline.Editor.Shared.Tabs.View.extend({
-    template: '#exhibit-tabs-template'
-  });
+#editor
 
+  form.record.text
 
-});
+    textarea
+      height 100px
+      &[name="body"]
+        height 300px

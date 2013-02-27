@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Save/Delete buttons for record form.
+ * Save/Delete buttons and delete modal for record form.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -25,5 +25,34 @@
     class="btn btn-large btn-inverse"
     data-toggle="modal"
   ><i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?></a>
+
+</div>
+
+<div id="delete-modal" class="modal hide">
+
+  <div class="modal-header">
+    <h4>Are you sure?</h4>
+  </div>
+
+  <div class="modal-body">
+    <p>
+      <?php echo __(
+        'This will delete the record from the database and remove all
+        associated metadata. This action cannot be undone.'
+      );?>
+    </p>
+  </div>
+
+  <div class="modal-footer">
+
+    <a name="cancel" class="btn" data-dismiss="modal">
+      <i class="icon-ban-circle"></i> Cancel
+    </a>
+
+    <a name="delete2" class="btn btn-danger">
+      <i class="icon-trash icon-white"></i> Yes, delete
+    </a>
+
+  </div>
 
 </div>

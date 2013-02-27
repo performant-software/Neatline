@@ -40,4 +40,9 @@
 
   </div>
 
+  <!-- Save/Delete buttons. -->
+  <?php echo $this->partial(
+    'exhibits/underscore/partials/_form_actions.php'
+  ); ?>
+
 </script>

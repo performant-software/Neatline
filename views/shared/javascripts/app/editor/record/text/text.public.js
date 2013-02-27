@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Text tab form.
+ * Styles public API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,10 +14,15 @@ Neatline.module('Editor.Record.Text', function(
   Text, Neatline, Backbone, Marionette, $, _) {
 
 
-  Text.View = Neatline.Editor.Record.View.extend({
-    template:   '#record-text-template',
-    className:  'form-stacked record text'
-  });
+  /**
+   * Append the form to the editor container.
+   *
+   * @param {Object} container: The container element.
+   */
+  var display = function(container) {
+    Text.__view.showIn(container);
+  };
+  Neatline.commands.addHandler('TEXT:display', display);
 
 
 });

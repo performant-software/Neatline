@@ -30,7 +30,7 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {String} start: The paging offset.
      */
     'records': function(query, start) {
-      Neatline.execute('EXHIBIT:display', ['ETABS', 'SEARCH', 'RECORDS']);
+      Neatline.execute('EDITOR:display', ['ETABS', 'SEARCH', 'RECORDS']);
       Neatline.execute('ETABS:activateTab', 'records');
       Neatline.execute('SEARCH:initialize', query, start);
     }

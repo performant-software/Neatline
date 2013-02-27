@@ -499,8 +499,6 @@ Geometry ( Well-Known Text )</label>
 
 </div>
 
-  <!-- Delete modal. -->
-  
 <div id="delete-modal" class="modal hide">
 
   <div class="modal-header">
@@ -508,8 +506,9 @@ Geometry ( Well-Known Text )</label>
   </div>
 
   <div class="modal-body">
-    <p>This will delete the record from the database and remove all
-      associated metadata. This action cannot be undone.</p>
+    <p>
+      This will delete the record from the database and remove all
+        associated metadata. This action cannot be undone.    </p>
   </div>
 
   <div class="modal-footer">
@@ -603,6 +602,48 @@ Body</label>
 </div>
 
   </div>
+
+  <!-- Save/Delete buttons. -->
+  
+<div class="actions">
+
+  <a name="save" class="btn btn-large btn-primary" \>
+    <i class="icon-ok icon-white"></i> Save  </a>
+
+  <a
+    href="#delete-modal"
+    name="delete1"
+    class="btn btn-large btn-inverse"
+    data-toggle="modal"
+  ><i class="icon-trash icon-white"></i> Delete</a>
+
+</div>
+
+<div id="delete-modal" class="modal hide">
+
+  <div class="modal-header">
+    <h4>Are you sure?</h4>
+  </div>
+
+  <div class="modal-body">
+    <p>
+      This will delete the record from the database and remove all
+        associated metadata. This action cannot be undone.    </p>
+  </div>
+
+  <div class="modal-footer">
+
+    <a name="cancel" class="btn" data-dismiss="modal">
+      <i class="icon-ban-circle"></i> Cancel
+    </a>
+
+    <a name="delete2" class="btn btn-danger">
+      <i class="icon-trash icon-white"></i> Yes, delete
+    </a>
+
+  </div>
+
+</div>
 
 </script>
 
