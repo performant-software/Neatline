@@ -24,8 +24,7 @@ Neatline.module('Editor.Record', function(
     events: {
       'click a[name="close"]':    'onCloseClick',
       'click a[name="save"]':     'onSaveClick',
-      'click a[name="delete2"]':  'onDeleteClick',
-      'shown ul.nav a':           'onTabChange'
+      'click a[name="delete2"]':  'onDeleteClick'
     },
 
     ui: {
@@ -43,14 +42,10 @@ Neatline.module('Editor.Record', function(
      * Initialize state, render template.
      */
     initialize: function() {
-
-      this.open = false;  // True when the form is displayed.
-      this.hash = null;   // The `href` of the active tab.
-
+      this.open = false;    // True when the form is displayed.
       this.getTemplate();
       this.getUi();
       this.resetTabs();
-
     },
 
 
@@ -72,9 +67,6 @@ Neatline.module('Editor.Record', function(
 
       // Notify tab views.
       Neatline.vent.trigger('RECORD:bind', model);
-
-      // (De)activate presenter.
-      this.setPresenterStatus();
 
       this.model = model;
       this.open  = true;
@@ -188,38 +180,6 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('EDITOR:notifyError',
         STRINGS.record.remove.error
       );
-    },
-
-
-    /**
-     * Cache the current tab hash, (de)activate the presenter.
-     *
-     * @param {Object} event: The `shown` event.
-     */
-    onTabChange: function(event) {
-      this.hash = event.target.hash;
-      this.setPresenterStatus();
-    },
-
-
-    /**
-     * Deactivate the presenter when the "Spatial" tab is active.
-     */
-    setPresenterStatus: function() {
-      Neatline.vent.trigger(this.spatialTabActive() ?
-        'PRESENTER:deactivate' :
-        'PRESENTER:activate'
-      );
-    },
-
-
-    /**
-     * Is the "Spatial" tab activated?
-     *
-     * @return {Boolean}: True if "Spatial" is active.
-     */
-    spatialTabActive: function() {
-      return this.hash == '#record-form-spatial';
     },
 
 

@@ -15,13 +15,15 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
   /**
-   * Reset the edit mode to "Navigate".
+   * Reset the edit mode to "Navigate", deactivate presenter if spatial
+   * tab is active.
    */
-  var resetEditMode = function() {
+  var bind = function() {
+    Spatial.__view.setPresenterStatus();
     Spatial.__view.resetEditMode();
   };
-  Neatline.commands.addHandler('SPATIAL:resetEditMode', resetEditMode);
-  Neatline.vent.on('RECORD:bind', resetEditMode);
+  Neatline.commands.addHandler('SPATIAL:bind', bind);
+  Neatline.vent.on('RECORD:bind', bind);
 
 
 }});

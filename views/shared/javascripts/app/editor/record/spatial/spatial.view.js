@@ -29,7 +29,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
       'click a[name="clear"]':          'onClearClick',
 
       // Tab changes.
-      'shown ul.nav a':                 'resetEditMode'
+      'shown ul.nav a':                 'onTabChange'
 
     },
 
@@ -53,6 +53,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      * Get inputs.
      */
     initialize: function() {
+      this.hash = null;     // The `href` of the active tab.
       this.getUi();
     },
 
@@ -109,6 +110,39 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      */
     onClearClick: function() {
       Neatline.execute('MAPEDIT:clearLayer');
+    },
+
+
+    /**
+     * Cache the current tab hash, (de)activate the presenter.
+     *
+     * @param {Object} event: The `shown` event.
+     */
+    onTabChange: function(event) {
+      this.hash = event.target.hash;
+      this.setPresenterStatus();
+      this.resetEditMode();
+    },
+
+
+    /**
+     * Deactivate the presenter when the "Spatial" tab is active.
+     */
+    setPresenterStatus: function() {
+      Neatline.vent.trigger(this.spatialTabActive() ?
+        'PRESENTER:deactivate' :
+        'PRESENTER:activate'
+      );
+    },
+
+
+    /**
+     * Is the "Spatial" tab activated?
+     *
+     * @return {Boolean}: True if "Spatial" is active.
+     */
+    spatialTabActive: function() {
+      return this.hash == '#record-form-spatial';
     },
 
 
