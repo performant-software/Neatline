@@ -60,6 +60,7 @@ var _t = (function(_t) {
     Neatline.Editor.Exhibit.Styles.init();
     Neatline.Editor.Exhibit.init();
     Neatline.Editor.Record.init();
+    Neatline.Editor.Record.Spatial.init();
     Neatline.Editor.Record.Style.init();
     Neatline.Editor.init();
     Neatline.Map.init();

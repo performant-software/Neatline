@@ -28,6 +28,10 @@ describe('Record Form Open', function() {
 
     els = {
 
+      pan:        _t.vw.record.$('input[value="pan"]'),
+      poly:       _t.vw.record.$('input[value="poly"]'),
+      close:      _t.vw.record.$('a[name="close"]'),
+
       labels: {
         text:     _t.vw.record.$('a[href="#record-form-text"]'),
         spatial:  _t.vw.record.$('a[href="#record-form-spatial"]'),
@@ -38,11 +42,7 @@ describe('Record Form Open', function() {
         text:     _t.vw.record.$('#record-form-text'),
         spatial:  _t.vw.record.$('#record-form-spatial'),
         style:    _t.vw.record.$('#record-form-style')
-      },
-
-      pan:        _t.vw.record.$('input[value="pan"]'),
-      poly:       _t.vw.record.$('input[value="poly"]'),
-      close:      _t.vw.record.$('a[name="close"]')
+      }
 
     };
 
@@ -255,11 +255,11 @@ describe('Record Form Open', function() {
 
     // Show form, check mode.
     _t.click($(recordRows[1]));
-    expect(_t.vw.record.getEditMode()).toEqual('pan');
+    expect(_t.vw.spatial.getEditMode()).toEqual('pan');
 
     // Activate "Polygon" control, check mode.
     els.pan[0].checked = false; els.poly[0].checked = true;
-    expect(_t.vw.record.getEditMode()).toEqual('poly');
+    expect(_t.vw.spatial.getEditMode()).toEqual('poly');
 
     // Close the form.
     els.close.trigger('click');
@@ -269,7 +269,7 @@ describe('Record Form Open', function() {
     _t.openFirstRecordForm();
 
     // "Navigate" mode should be active.
-    expect(_t.vw.record.getEditMode()).toEqual('pan');
+    expect(_t.vw.spatial.getEditMode()).toEqual('pan');
 
   });
 

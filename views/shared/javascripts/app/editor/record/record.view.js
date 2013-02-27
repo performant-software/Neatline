@@ -22,56 +22,20 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
-
-      // Save/Close/Delete.
-      'click a[name="close"]':          'onCloseClick',
-      'click a[name="save"]':           'onSaveClick',
-      'click a[name="delete2"]':        'onDeleteClick',
-
-      // Change map edit mode.
-      'change div.spatial input':       'onControlChange',
-      'keyup div.spatial input':        'onControlChange',
-
-      // Parse SVG geometry.
-      'click a[name="parse"]':          'onParseClick',
-
-      // Clear all geometries.
-      'click a[name="clear"]':          'onClearClick',
-
-      // Tab changes.
-      'shown ul.nav a':                 'onTabChange'
-
-    },
-
-    selectors: {
-      mode:       'input[name="mode"]',
-      modify:     'input[name="modify"]'
+      'click a[name="close"]':    'onCloseClick',
+      'click a[name="save"]':     'onSaveClick',
+      'click a[name="delete2"]':  'onDeleteClick',
+      'shown ul.nav a':           'onTabChange'
     },
 
     ui: {
-
-      // "Text" tab.
       text: {
-        tab:      'a[href="#record-form-text"]',
-        region:   '#record-form-text'
+        tab:    'a[href="#record-form-text"]',
+        region: '#record-form-text'
       },
-
-      // "Spatial" tab.
-      spatial: {
-        pan:      'input[value="pan"]',
-        sides:    'input[name="sides"]',
-        snap:     'input[name="snap"]',
-        irreg:    'input[name="irreg"]',
-        svg:      'textarea[name="svg"]',
-        density:  'input[name="density"]',
-        modal:    '#svg-modal'
-      },
-
-      // Delete.
       remove: {
-        modal:    '#delete-modal'
+        modal:  '#delete-modal'
       }
-
     },
 
 
@@ -97,7 +61,7 @@ Neatline.module('Editor.Record', function(
      */
     show: function(model) {
 
-      // Activate map editing, bind model to form.
+      // Start map editing, bind model to form.
       Neatline.execute('MAPEDIT:startEdit', model);
       rivets.bind(this.$el, { record: model });
 
@@ -106,8 +70,11 @@ Neatline.module('Editor.Record', function(
         Neatline.execute('MAPEDIT:updateModel', model);
       });
 
+      // Notify tab views.
+      Neatline.vent.trigger('RECORD:show', model);
+
+      // (De)activate presenter.
       this.setPresenterStatus();
-      this.resetEditMode();
 
       this.model = model;
       this.open  = true;
@@ -225,61 +192,6 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Publish the current edit control configuration.
-     */
-    onControlChange: function() {
-      Neatline.execute('MAPEDIT:updateEdit', {
-        mode:   this.getEditMode(),
-        modify: this.getModifyOptions(),
-        poly:   this.getPolyOptions()
-      });
-    },
-
-
-    /**
-     * Convert new SVG to WKT and update the map handler.
-     */
-    onParseClick: function() {
-
-      var val = this.__ui.spatial.svg.val();
-
-      try {
-
-        // Set density.
-        SVGtoWKT.DENSITY = parseFloat(
-          this.__ui.spatial.density.val()
-        );
-
-        // Covnert SVG, update handler.
-        var wkt = SVGtoWKT.convert(val);
-        Neatline.execute('MAPEDIT:updateWKT', wkt);
-
-        // Flash success.
-        Neatline.execute('EDITOR:notifySuccess',
-          STRINGS.svg.parse.success
-        );
-
-        // Close the modal.
-        this.__ui.spatial.modal.modal('hide');
-
-      } catch (e) {
-        Neatline.execute('EDITOR:notifyError',
-          STRINGS.svg.parse.error
-        );
-      }
-
-    },
-
-
-    /**
-     * Clear all features on the edit layer.
-     */
-    onClearClick: function() {
-      Neatline.execute('MAPEDIT:clearLayer');
-    },
-
-
-    /**
      * Cache the current tab hash, (de)activate the presenter.
      *
      * @param {Object} event: The `shown` event.
@@ -287,7 +199,6 @@ Neatline.module('Editor.Record', function(
     onTabChange: function(event) {
       this.hash = event.target.hash;
       this.setPresenterStatus();
-      this.resetEditMode();
     },
 
 
@@ -318,50 +229,6 @@ Neatline.module('Editor.Record', function(
     resetTabs: function() {
       this.__ui.text.region.addClass('active');
       this.__ui.text.tab.tab('show');
-    },
-
-
-    /**
-     * Reset the map edit mode to "Navigate".
-     */
-    resetEditMode: function() {
-      this.__ui.spatial.pan[0].checked = true;
-      this.__ui.spatial.pan.trigger('change');
-    },
-
-
-    /**
-     * Get the map edit mode.
-     *
-     * @return {String}: pan|point|line|poly|svg|regPoly|modify|remove.
-     */
-    getEditMode: function() {
-      return $(this.selectors.mode+':checked').val();
-    },
-
-
-    /**
-     * Get the "Modify Shape" checkboxes.
-     *
-     * @return {Array}: 0-3 strings: rotate|resize|drag.
-     */
-    getModifyOptions: function() {
-      var inputs = $(this.selectors.modify+':checked');
-      return _.map(inputs, function(i) { return $(i).val(); });
-    },
-
-
-    /**
-     * Get the "Draw Regular Polygon" settings.
-     *
-     * @return {Object}: {sides,snap,irreg}.
-     */
-    getPolyOptions: function() {
-      return {
-        sides:  this.__ui.spatial.sides.val(),
-        snap:   this.__ui.spatial.snap.val(),
-        irreg:  this.__ui.spatial.irreg.is(':checked')
-      };
     }
 
 

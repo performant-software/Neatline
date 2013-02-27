@@ -46,6 +46,7 @@ var _t = (function(_t) {
       records:  Neatline.Editor.Exhibit.Records.  __view,
       styles:   Neatline.Editor.Exhibit.Styles.   __view,
       record:   Neatline.Editor.Record.           __view,
+      spatial:  Neatline.Editor.Record.Spatial.   __view,
       mapedit:  Neatline.Editor.Map.              __view
     };
 

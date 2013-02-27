@@ -38,9 +38,9 @@ describe('Record Form Spatial Tab', function() {
       coverage: _t.vw.record.$('textarea[name="coverage"]'),
       clear:    _t.vw.record.$('a[name="clear"]'),
       parse:    _t.vw.record.$('a[name="parse"]'),
-      sides:    _t.vw.record.__ui.spatial.sides,
-      snap:     _t.vw.record.__ui.spatial.snap,
-      irreg:    _t.vw.record.__ui.spatial.irreg
+      sides:    _t.vw.spatial.__ui.sides,
+      snap:     _t.vw.spatial.__ui.snap,
+      irreg:    _t.vw.spatial.__ui.irreg
     };
 
   });
@@ -498,7 +498,7 @@ describe('Record Form Spatial Tab', function() {
     els.text.tab('show');
 
     // "Navigate" mode should be active.
-    expect(_t.vw.record.getEditMode()).toEqual('pan');
+    expect(_t.vw.spatial.getEditMode()).toEqual('pan');
 
   });
 
