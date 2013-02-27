@@ -54,7 +54,7 @@ var _t = (function(_t) {
     this.server = sinon.fakeServer.create();
 
     // Start modules.
-    Neatline.Editor.Exhibit.Menu.init();
+    Neatline.Editor.Exhibit.Tabs.init();
     Neatline.Editor.Exhibit.Search.init();
     Neatline.Editor.Exhibit.Records.init();
     Neatline.Editor.Exhibit.Styles.init();

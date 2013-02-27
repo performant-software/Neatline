@@ -29,9 +29,9 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {String} query: The search query.
      * @param {String} start: The paging offset.
      */
-    records: function(query, start) {
-      Neatline.execute('EXHIBIT:display', ['EMENU', 'SEARCH', 'RECORDS']);
-      Neatline.execute('EMENU:activateTab', 'records');
+    'records': function(query, start) {
+      Neatline.execute('EXHIBIT:display', ['ETABS', 'SEARCH', 'RECORDS']);
+      Neatline.execute('ETABS:activateTab', 'records');
       Neatline.execute('SEARCH:initialize', query, start);
     }
 

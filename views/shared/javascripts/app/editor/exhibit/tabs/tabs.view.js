@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Menu view.
+ * Exhibit tabs view.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,15 +10,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Menu', function(
-  Menu, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Tabs', function(
+  Tabs, Neatline, Backbone, Marionette, $, _) {
 
 
-  Menu.View = Backbone.Neatline.View.extend({
+  Tabs.View = Backbone.Neatline.View.extend({
 
 
     template: '#menu-template',
-    tagName: 'header',
+    tagName:  'header',
 
     ui: {
       tabs: 'li.tab'
