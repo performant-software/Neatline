@@ -42,7 +42,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
       this.getUi();
 
       // Create exhibit model, bind to form.
-      this.exhibit = new Neatline.Editor.Shared.Exhibit.Model();
+      this.exhibit = new Neatline.Editor.Exhibit.Model();
       this.buildUi();
 
       // Create CodeMirror YAML editor for styles.
