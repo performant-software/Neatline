@@ -163,7 +163,6 @@ module.exports = function(grunt) {
 
           // Editor:
           config.src.shared+'/editor/*.js',
-          config.src.shared+'/editor/shared/**/*.js',
           config.src.shared+'/editor/exhibit/**/*.js',
           config.src.shared+'/editor/record/**/*.js',
           config.src.shared+'/editor/map/*.js',

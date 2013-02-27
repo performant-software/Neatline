@@ -27,12 +27,13 @@
 
 <!-- Underscore templates. -->
 <?php $_ = 'exhibits/underscore/'; ?>
-<?php echo $this->partial($_.'_record_list.php'); ?>
+<?php echo $this->partial($_.'_search.php'); ?>
 <?php echo $this->partial($_.'_pagination.php'); ?>
+<?php echo $this->partial($_.'_record_list.php'); ?>
 <?php echo $this->partial($_.'_record_form.php'); ?>
 <?php echo $this->partial($_.'_record_text.php'); ?>
-<?php echo $this->partial($_.'_search.php'); ?>
-<?php echo $this->partial($_.'_exhibit_styles.php', array(
-  'exhibit' => $exhibit )); ?>
+<?php echo $this->partial($_.'_record_tabs.php'); ?>
 <?php echo $this->partial($_.'_exhibit_tabs.php', array(
+  'exhibit' => $exhibit )); ?>
+<?php echo $this->partial($_.'_exhibit_styles.php', array(
   'exhibit' => $exhibit )); ?>

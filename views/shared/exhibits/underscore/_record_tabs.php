@@ -13,16 +13,19 @@
 
 ?>
 
-<script id="exhibit-tabs-template" type="text/templates">
+<script id="record-tabs-template" type="text/templates">
 
-  <p class="lead"><?php echo $exhibit->title; ?></p>
+  <p class="lead"></p>
 
   <ul class="nav nav-pills">
-    <li class="tab" data-slug="records">
-      <a href="#records">Records</a>
+    <li class="tab" data-slug="text">
+      <a href="#">Text</a>
+    </li>
+    <li class="tab" data-slug="spatial">
+      <a href="#">Spatial</a>
     </li>
     <li class="tab" data-slug="styles">
-      <a href="#styles">Styles</a>
+      <a href="#">Styles</a>
     </li>
   </ul>
 

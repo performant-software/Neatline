@@ -21,7 +21,7 @@ describe('Styles Router', function() {
     _t.loadEditor();
 
     els = {
-      styles: _t.vw.tabs.$('li.styles')
+      styles: _t.vw.tabs.$('li[data-slug="styles"]')
     };
 
   });

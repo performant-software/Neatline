@@ -14,8 +14,37 @@ Neatline.module('Editor.Exhibit.Tabs', function(
   Tabs, Neatline, Backbone, Marionette, $, _) {
 
 
-  Tabs.View = Neatline.Editor.Shared.Tabs.View.extend({
-    template: '#exhibit-tabs-template'
+  Tabs.View = Backbone.Neatline.View.extend({
+
+
+    template: '#exhibit-tabs-template',
+    tagName:  'header',
+
+    ui: {
+      tabs: 'li.tab'
+    },
+
+
+    /**
+     * Render template, get ui.
+     */
+    initialize: function() {
+      this.getTemplate();
+      this.getUi();
+    },
+
+
+    /**
+     * Activate a tab.
+     *
+     * @param {String} tab: The tab to activate.
+     */
+    activateTab: function(tab) {
+      this.__ui.tabs.removeClass('active');
+      this.__ui.tabs.filter('[data-slug="'+tab+'"]').addClass('active');
+    }
+
+
   });
 
 

@@ -21,7 +21,7 @@ describe('Records Router', function() {
     _t.loadEditor();
 
     els = {
-      records: _t.vw.tabs.$('li.records')
+      records: _t.vw.tabs.$('li[data-slug="records"]')
     };
 
   });

@@ -67,33 +67,8 @@
 
 <!-- Underscore templates. -->
 
-<script id="record-list-template" type="text/templates">
-
-  <div class="pagination"></div>
-
-  <ul class="list">
-
-    <a href="#records/add">New Record</a>
-
-    <% records.each(function(r) { %>
-      <a href="#records/<%= r.get('id') %>" data-id="<%= r.get('id') %>">
-        <span class="title">
-          <% if (!_.isEmpty(r.get('_title'))) { %>
-            <%= _.string.stripTags(r.get('_title')) %>
-          <% } else { %>
-            <%= STRINGS.placeholders.title %>
-          <% } %>
-        </span>
-        <span class="body">
-          <%= _.string.stripTags(r.get('_body')) %>
-        </span>
-      </a>
-    <% }); %>
-
-  </ul>
-
-  <div class="pagination"></div>
-
+<script id="search-template" type="text/templates">
+  <input type="text" placeholder="Search" />
 </script>
 
 <script id="pagination-template" type="text/templates">
@@ -152,6 +127,35 @@
     </div>
 
   <% } %>
+
+</script>
+
+<script id="record-list-template" type="text/templates">
+
+  <div class="pagination"></div>
+
+  <ul class="list">
+
+    <a href="#records/add">New Record</a>
+
+    <% records.each(function(r) { %>
+      <a href="#records/<%= r.get('id') %>" data-id="<%= r.get('id') %>">
+        <span class="title">
+          <% if (!_.isEmpty(r.get('_title'))) { %>
+            <%= _.string.stripTags(r.get('_title')) %>
+          <% } else { %>
+            <%= STRINGS.placeholders.title %>
+          <% } %>
+        </span>
+        <span class="body">
+          <%= _.string.stripTags(r.get('_body')) %>
+        </span>
+      </a>
+    <% }); %>
+
+  </ul>
+
+  <div class="pagination"></div>
 
 </script>
 
@@ -647,8 +651,37 @@ Body</label>
 
 </script>
 
-<script id="search-template" type="text/templates">
-  <input type="text" placeholder="Search" />
+<script id="record-tabs-template" type="text/templates">
+
+  <p class="lead"></p>
+
+  <ul class="nav nav-pills">
+    <li class="tab" data-slug="text">
+      <a href="#">Text</a>
+    </li>
+    <li class="tab" data-slug="spatial">
+      <a href="#">Spatial</a>
+    </li>
+    <li class="tab" data-slug="styles">
+      <a href="#">Styles</a>
+    </li>
+  </ul>
+
+</script>
+
+<script id="exhibit-tabs-template" type="text/templates">
+
+  <p class="lead"></p>
+
+  <ul class="nav nav-pills">
+    <li class="tab" data-slug="records">
+      <a href="#records">Records</a>
+    </li>
+    <li class="tab" data-slug="styles">
+      <a href="#styles">Styles</a>
+    </li>
+  </ul>
+
 </script>
 
 <script id="exhibit-styles-template" type="text/templates">
@@ -697,16 +730,5 @@ Stylesheet</label>
     <a name="save" class="btn btn-large btn-primary" \>
       <i class="icon-ok icon-white"></i> Save    </a>
   </div>
-
-</script>
-
-<script id="exhibit-tabs-template" type="text/templates">
-
-  <p class="lead"></p>
-
-  <ul class="nav nav-pills">
-    <li class="tab records"><a href="#records">Records</a></li>
-    <li class="tab styles"><a href="#styles">Styles</a></li>
-  </ul>
 
 </script>
