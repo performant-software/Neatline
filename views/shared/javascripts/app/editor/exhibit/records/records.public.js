@@ -14,9 +14,6 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor:exhibit:records';
-
-
   /**
    * Append the list to the editor container.
    *
@@ -25,7 +22,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var display = function(container) {
     Records.__view.showIn(container);
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler('RECORDS:display', display);
 
 
   /**
@@ -38,7 +35,7 @@ Neatline.module('Editor.Exhibit.Records', function(
       ingest(records);
     });
   };
-  Neatline.commands.addHandler(NS+':load', load);
+  Neatline.commands.addHandler('RECORDS:load', load);
 
 
   /**
@@ -49,7 +46,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var ingest = function(records) {
     Records.__view.ingest(records);
   };
-  Neatline.commands.addHandler(NS+':ingest', ingest);
+  Neatline.commands.addHandler('RECORDS:ingest', ingest);
 
 
   /**
@@ -58,7 +55,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var navToList = function() {
     Records.__router.navigate('records', true);
   };
-  Neatline.commands.addHandler(NS+':navToList', navToList);
+  Neatline.commands.addHandler('RECORDS:navToList', navToList);
 
 
   /**
@@ -70,7 +67,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var getModel = function(id, cb) {
     Records.__collection.getOrFetch(id, cb);
   };
-  Neatline.reqres.addHandler(NS+':getModel', getModel);
+  Neatline.reqres.addHandler('RECORDS:getModel', getModel);
 
 
 });

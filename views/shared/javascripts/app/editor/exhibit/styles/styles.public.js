@@ -14,9 +14,6 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Styles.NS = 'editor:exhibit:styles';
-
-
   /**
    * Append the form to the editor container.
    *
@@ -26,7 +23,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
     Styles.__view.showIn(container);
     Styles.__view.refresh();
   };
-  Neatline.commands.addHandler(Styles.NS+':display', display);
+  Neatline.commands.addHandler('STYLES:display', display);
 
 
 });

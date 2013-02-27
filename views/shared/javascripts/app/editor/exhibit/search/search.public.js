@@ -14,9 +14,6 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor:exhibit:search';
-
-
   /**
    * Append the form to the editor container.
    *
@@ -25,7 +22,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var display = function(container) {
     Search.__view.showIn(container);
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler('SEARCH:display', display);
 
 
   /**
@@ -44,16 +41,14 @@ Neatline.module('Editor.Exhibit.Search', function(
 
     // Load the record list.
     if (!Search.__view.mirroring) {
-      Neatline.execute('editor:exhibit:records:load', _.extend(
-        Search.__view.query, {
-          limit:  Neatline.global.page_length,
-          offset: start
-        }
-      ));
+      Neatline.execute('RECORDS:load', _.extend(Search.__view.query, {
+        limit:  Neatline.global.page_length,
+        offset: start
+      }));
     }
 
   };
-  Neatline.commands.addHandler(NS+':initialize', initialize);
+  Neatline.commands.addHandler('SEARCH:initialize', initialize);
 
 
   /**
@@ -66,11 +61,11 @@ Neatline.module('Editor.Exhibit.Search', function(
 
     // Render in the record browser.
     if (records && Search.__view.mirroring) {
-      Neatline.execute('editor:exhibit:records:ingest', records);
+      Neatline.execute('RECORDS:ingest', records);
     }
 
   };
-  Neatline.commands.addHandler(NS+':mirrorMap', mirrorMap);
+  Neatline.commands.addHandler('SEARCH:mirrorMap', mirrorMap);
   Neatline.vent.on('MAP:ingest', mirrorMap);
 
 
@@ -82,7 +77,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var getQueryForUrl = function() {
     return Search.__view.getQueryForUrl();
   };
-  Neatline.reqres.addHandler(NS+':getQueryForUrl', getQueryForUrl);
+  Neatline.reqres.addHandler('SEARCH:getQueryForUrl', getQueryForUrl);
 
 
 });

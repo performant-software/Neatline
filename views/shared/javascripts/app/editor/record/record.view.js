@@ -172,7 +172,7 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     onCloseClick: function() {
-      Neatline.execute('editor:exhibit:records:navToList');
+      Neatline.execute('RECORDS:navToList');
       this.deactivate();
     },
 

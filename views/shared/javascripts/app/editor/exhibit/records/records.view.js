@@ -46,7 +46,7 @@ Neatline.module('Editor.Exhibit.Records', function(
       // Render pagination.
       if (records.count > Neatline.global.page_length) {
         this.$('.pagination').html(this.pagination({
-          query: Neatline.request('editor:exhibit:search:getQueryForUrl'),
+          query: Neatline.request('SEARCH:getQueryForUrl'),
           limit: Neatline.global.page_length,
           records: records
         }));

@@ -27,7 +27,7 @@ Neatline.module('Editor.Exhibit', function(
 
     // Show the views.
     _.each(views, function(v) {
-      Neatline.execute('editor:exhibit:'+v+':display', editor);
+      Neatline.execute(v+':display', editor);
     });
 
   };

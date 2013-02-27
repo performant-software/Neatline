@@ -104,7 +104,7 @@ Neatline.module('Editor.Exhibit.Search', function(
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         this.mirroring = true;
-        Neatline.execute('editor:exhibit:search:mirrorMap');
+        Neatline.execute('SEARCH:mirrorMap');
         this.bold();
       }
 
@@ -142,7 +142,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
       // Load records.
       if (!this.mirroring) {
-        Neatline.execute('editor:exhibit:records:load', params);
+        Neatline.execute('RECORDS:load', params);
       }
 
     },

@@ -32,7 +32,7 @@ Neatline.module('Editor.Record', function(
    */
   var bindId = function(id) {
     id = parseInt(id, 10);
-    Neatline.request('editor:exhibit:records:getModel', id, function(r) {
+    Neatline.request('RECORDS:getModel', id, function(r) {
       Record.__view.show(r);
     });
   };

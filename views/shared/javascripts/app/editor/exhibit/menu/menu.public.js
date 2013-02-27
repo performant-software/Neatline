@@ -14,9 +14,6 @@ Neatline.module('Editor.Exhibit.Menu', function(
   Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-  var NS = 'editor:exhibit:menu';
-
-
   /**
    * Append the menu to a container.
    *
@@ -25,7 +22,7 @@ Neatline.module('Editor.Exhibit.Menu', function(
   var display = function(container) {
     Menu.__view.showIn(container);
   };
-  Neatline.commands.addHandler(NS+':display', display);
+  Neatline.commands.addHandler('EMENU:display', display);
 
 
   /**
@@ -36,7 +33,7 @@ Neatline.module('Editor.Exhibit.Menu', function(
   var activateTab = function(tab) {
     Menu.__view.activateTab(tab);
   };
-  Neatline.commands.addHandler(NS+':activateTab', activateTab);
+  Neatline.commands.addHandler('EMENU:activateTab', activateTab);
 
 
 });
