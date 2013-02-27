@@ -96,4 +96,22 @@ Neatline.module('Editor.Record', function(
   Neatline.vent.on('editor:router:before', deactivate);
 
 
+  /**
+   * Return the form element.
+   */
+  var getElement = function() {
+    return Record.__view.$el;
+  };
+  Neatline.reqres.addHandler('RECORD:getElement', getElement);
+
+
+  /**
+   * Return the form model.
+   */
+  var getModel = function() {
+    return Record.__view.model;
+  };
+  Neatline.reqres.addHandler('RECORD:getModel', getModel);
+
+
 });

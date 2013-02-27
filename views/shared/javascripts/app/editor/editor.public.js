@@ -22,7 +22,7 @@ Neatline.module('Editor', { startWithParent: false,
   var display = function(views) {
 
     // Clear the editor container.
-    Editor.__view.__ui.editor.empty();
+    Editor.__view.__ui.editor.children().detach();
 
     // Show each of the views.
     _.each(views, function(v) {
