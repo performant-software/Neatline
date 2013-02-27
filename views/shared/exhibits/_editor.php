@@ -22,14 +22,17 @@
   'exhibit' => $exhibit
 )); ?>
 
-<!-- Underscore templates. -->
+<!-- Strings. -->
 <?php echo $this->partial('exhibits/_strings.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_pagination.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_record_text.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_search.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_exhibit_tabs.php', array(
+
+<!-- Underscore templates. -->
+<?php $_ = 'exhibits/underscore/'; ?>
+<?php echo $this->partial($_.'_record_list.php'); ?>
+<?php echo $this->partial($_.'_pagination.php'); ?>
+<?php echo $this->partial($_.'_record_form.php'); ?>
+<?php echo $this->partial($_.'_record_text.php'); ?>
+<?php echo $this->partial($_.'_search.php'); ?>
+<?php echo $this->partial($_.'_exhibit_styles.php', array(
   'exhibit' => $exhibit )); ?>
-<?php echo $this->partial('exhibits/underscore/_exhibit_styles.php', array(
+<?php echo $this->partial($_.'_exhibit_tabs.php', array(
   'exhibit' => $exhibit )); ?>

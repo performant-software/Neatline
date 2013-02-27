@@ -13,7 +13,6 @@
 
 ?>
 
-
 <label for="<?php echo $name; ?>">
 <?php echo __($label); ?>
 </label>

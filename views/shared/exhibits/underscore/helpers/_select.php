@@ -13,7 +13,6 @@
 
 ?>
 
-
 <label><?php echo __($label); ?></label>
 <div class="controls">
   <div class="inline-inputs">

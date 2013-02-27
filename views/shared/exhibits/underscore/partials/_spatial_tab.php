@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Spatial tab template.
+ * Record spatial tab.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,7 +12,6 @@
  */
 
 ?>
-
 
 <div class="control-group spatial">
 

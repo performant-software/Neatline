@@ -13,7 +13,6 @@
 
 ?>
 
-
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->

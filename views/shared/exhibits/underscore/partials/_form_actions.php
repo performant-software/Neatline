@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Save/Delete buttons for recrord edit form.
+ * Save/Delete buttons for record form.
  *
  * @package     omeka
  * @subpackage  neatline

@@ -13,5 +13,4 @@
 
 ?>
 
-
 <a name="close" class="close">&times;</a>

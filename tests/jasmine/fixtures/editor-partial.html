@@ -23,7 +23,7 @@
   <div class="body" data-html="record._body"></div>
 </script>
 
-<!-- Underscore templates. -->
+<!-- Strings. -->
 
 <script>
   STRINGS = {
@@ -64,6 +64,8 @@
     }
   };
 </script>
+
+<!-- Underscore templates. -->
 
 <script id="record-list-template" type="text/templates">
 
@@ -153,12 +155,10 @@
 
 </script>
 
-
 <script id="record-form-template" type="text/templates">
 
   <!-- Close button. -->
   
-
 <a name="close" class="close">&times;</a>
 
   <p class="lead">
@@ -176,11 +176,9 @@
 
     <div class="tab-pane text" id="record-form-text">
       
-
 <div class="control-group">
 
   
-
 <label>Item</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -191,7 +189,6 @@
 </div>
 
   
-
 <label for="title">
 Title</label>
 <div class="controls">
@@ -200,7 +197,6 @@ Title</label>
 </div>
 
   
-
 <label for="body">
 Body</label>
 <div class="controls">
@@ -213,7 +209,6 @@ Body</label>
 
     <div class="tab-pane spatial" id="record-form-spatial">
       
-
 <div class="control-group spatial">
 
   <label class="radio">
@@ -301,7 +296,6 @@ Body</label>
   </div>
 
   
-
 <label for="coverage">
 Geometry ( Well-Known Text )</label>
 <div class="controls">
@@ -314,11 +308,9 @@ Geometry ( Well-Known Text )</label>
 
     <div class="tab-pane style" id="record-form-style">
       
-
 <div class="control-group">
 
   
-
 <label>Tags</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -329,7 +321,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Presenter</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -344,7 +335,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Shape Color</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -355,7 +345,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Line Color</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -366,7 +355,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Selected Color</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -377,7 +365,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Shape Opacity</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -388,7 +375,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Line Opacity</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -399,7 +385,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Selected Opacity</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -410,7 +395,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Line Width</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -421,7 +405,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Point Radius</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -432,7 +415,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Point Image</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -443,7 +425,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Min Zoom</label>
   ( <a class="use-current" name="set-min-zoom">
       Use Current
@@ -457,7 +438,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Max Zoom</label>
   ( <a class="use-current" name="set-max-zoom">
       Use Current
@@ -471,7 +451,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Default Focus</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -482,7 +461,6 @@ Geometry ( Well-Known Text )</label>
 </div>
 
   
-
 <label>Default Zoom</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -559,7 +537,6 @@ Geometry ( Well-Known Text )</label>
   <div class="modal-body">
 
     
-
 <label for="svg">
 SVG</label>
 <div class="controls">
@@ -568,7 +545,6 @@ SVG</label>
 </div>
 
     
-
 <label>Density</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -601,7 +577,6 @@ SVG</label>
   <div class="control-group">
 
     
-
 <label>Item</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -612,7 +587,6 @@ SVG</label>
 </div>
 
     
-
 <label for="title">
 Title</label>
 <div class="controls">
@@ -621,7 +595,6 @@ Title</label>
 </div>
 
     
-
 <label for="body">
 Body</label>
 <div class="controls">
@@ -637,23 +610,11 @@ Body</label>
   <input type="text" placeholder="Search" />
 </script>
 
-<script id="exhibit-tabs-template" type="text/templates">
-
-  <p class="lead"></p>
-
-  <ul class="nav nav-pills">
-    <li class="tab records"><a href="#records">Records</a></li>
-    <li class="tab styles"><a href="#styles">Styles</a></li>
-  </ul>
-
-</script>
-
 <script id="exhibit-styles-template" type="text/templates">
 
   <div class="control-group">
 
     
-
 <label for="styles">
 Stylesheet</label>
 <div class="controls">
@@ -662,7 +623,6 @@ Stylesheet</label>
 </div>
 
     
-
 <label>Default Map Focus</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -673,7 +633,6 @@ Stylesheet</label>
 </div>
 
     
-
 <label>Default Map Zoom</label>
 <div class="controls">
   <div class="inline-inputs">
@@ -697,5 +656,16 @@ Stylesheet</label>
     <a name="save" class="btn btn-large btn-primary" \>
       <i class="icon-ok icon-white"></i> Save    </a>
   </div>
+
+</script>
+
+<script id="exhibit-tabs-template" type="text/templates">
+
+  <p class="lead"></p>
+
+  <ul class="nav nav-pills">
+    <li class="tab records"><a href="#records">Records</a></li>
+    <li class="tab styles"><a href="#styles">Styles</a></li>
+  </ul>
 
 </script>

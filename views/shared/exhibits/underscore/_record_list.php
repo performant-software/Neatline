@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record list underscore template.
+ * Record list.
  *
  * @package     omeka
  * @subpackage  neatline

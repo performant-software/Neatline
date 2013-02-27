@@ -13,7 +13,6 @@
 
 ?>
 
-
 <label><?php echo __($label); ?></label>
 <?php if (isset($useCurrent) && $useCurrent): ?>
   ( <a class="use-current" name="set-<?php echo $name; ?>">

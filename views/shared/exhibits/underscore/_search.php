@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Search box in editor.
+ * Search form.
  *
  * @package     omeka
  * @subpackage  neatline
