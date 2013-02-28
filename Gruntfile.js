@@ -24,7 +24,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
 
   // Load configuration.
-  var config = grunt.file.readJSON('./config.json');
+  var cfg = grunt.file.readJSON('./config.json');
 
   grunt.initConfig({
 
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         command: 'python build.py full OpenLayers.js',
         options: {
           execOptions: {
-            cwd: config.build.openlayers
+            cwd: cfg.build.openlayers
           }
         }
       },
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
         command: 'npm install && make bootstrap',
         options: {
           execOptions: {
-            cwd: config.build.bootstrap
+            cwd: cfg.build.bootstrap
           }
         }
       },
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
     copy: {
       bootstrap: {
         files: [{
-          src: config.build.bootstrap+'/img/*',
+          src: cfg.build.bootstrap+'/img/*',
           dest: './views/shared/css/img/',
           expand: true,
           flatten: true
@@ -75,8 +75,8 @@ module.exports = function(grunt) {
       },
       chosen: {
         files: [{
-          src: config.build.chosen+'/chosen-sprite.png',
-          dest: config.payloads.admin.css,
+          src: cfg.build.chosen+'/chosen-sprite.png',
+          dest: cfg.payloads.admin.css,
           expand: true,
           flatten: true
         }]
@@ -87,113 +87,113 @@ module.exports = function(grunt) {
       bower: './components',
       images: './views/shared/css/img',
       payloads: [
-        config.payloads.shared.js,
-        config.payloads.shared.css,
-        config.payloads.admin.js,
-        config.payloads.admin.css
+        cfg.payloads.shared.js,
+        cfg.payloads.shared.css,
+        cfg.payloads.admin.js,
+        cfg.payloads.admin.css
       ]
     },
 
     concat: {
       form: {
         src: [
-          config.vendor.js.chosen,
-          config.vendor.js.underscore_s,
-          config.src.admin+'/*.js'
+          cfg.vendor.js.chosen,
+          cfg.vendor.js.underscore_s,
+          cfg.src.admin+'/*.js'
         ],
-        dest: config.payloads.admin.js+'/form.js'
+        dest: cfg.payloads.admin.js+'/form.js'
       },
       neatline: {
         src: [
 
           // Vendor:
-          config.vendor.js.jquery,
-          config.vendor.js.underscore,
-          config.vendor.js.underscore_s,
-          config.vendor.js.backbone,
-          config.vendor.js.marionette,
-          config.vendor.js.neatline,
-          config.vendor.js.safesync,
-          config.vendor.js.openlayers,
-          config.vendor.js.stamen,
-          config.vendor.js.rivets,
+          cfg.vendor.js.jquery,
+          cfg.vendor.js.underscore,
+          cfg.vendor.js.underscore_s,
+          cfg.vendor.js.backbone,
+          cfg.vendor.js.marionette,
+          cfg.vendor.js.neatline,
+          cfg.vendor.js.safesync,
+          cfg.vendor.js.openlayers,
+          cfg.vendor.js.stamen,
+          cfg.vendor.js.rivets,
 
           // Neatline:
-          config.src.shared+'/*.js',
-          config.src.shared+'/shared/record/record.model.js',
-          config.src.shared+'/shared/record/record.collection.js',
-          config.src.shared+'/map/**/*.js',
-          config.src.shared+'/presenter/*.js',
-          config.src.shared+'/presenter/None/*.js',
-          config.src.shared+'/presenter/StaticBubble/*.js'
+          cfg.src.shared+'/*.js',
+          cfg.src.shared+'/shared/record/record.model.js',
+          cfg.src.shared+'/shared/record/record.collection.js',
+          cfg.src.shared+'/map/**/*.js',
+          cfg.src.shared+'/presenter/*.js',
+          cfg.src.shared+'/presenter/None/*.js',
+          cfg.src.shared+'/presenter/StaticBubble/*.js'
 
         ],
-        dest: config.payloads.shared.js+'/neatline.js'
+        dest: cfg.payloads.shared.js+'/neatline.js'
       },
       editor: {
         src: [
 
           // Vendor:
-          config.vendor.js.jquery,
-          config.vendor.js.underscore,
-          config.vendor.js.underscore_s,
-          config.vendor.js.backbone,
-          config.vendor.js.marionette,
-          config.vendor.js.neatline,
-          config.vendor.js.openlayers,
-          config.vendor.js.stamen,
-          config.vendor.js.svgtowkt,
-          config.vendor.js.routefilter,
-          config.vendor.js.toastr,
-          config.vendor.js.draggable,
-          config.vendor.js.chosen,
-          config.vendor.js.bootstrap,
-          config.vendor.js.rivets,
-          config.vendor.js.codemirror,
-          config.vendor.js.codemirror_yaml,
+          cfg.vendor.js.jquery,
+          cfg.vendor.js.underscore,
+          cfg.vendor.js.underscore_s,
+          cfg.vendor.js.backbone,
+          cfg.vendor.js.marionette,
+          cfg.vendor.js.neatline,
+          cfg.vendor.js.openlayers,
+          cfg.vendor.js.stamen,
+          cfg.vendor.js.svgtowkt,
+          cfg.vendor.js.routefilter,
+          cfg.vendor.js.toastr,
+          cfg.vendor.js.draggable,
+          cfg.vendor.js.chosen,
+          cfg.vendor.js.bootstrap,
+          cfg.vendor.js.rivets,
+          cfg.vendor.js.codemirror,
+          cfg.vendor.js.codemirror_yaml,
 
           // Neatline:
-          config.src.shared+'/*.js',
-          config.src.shared+'/shared/record/record.model.js',
-          config.src.shared+'/shared/record/record.collection.js',
-          config.src.shared+'/map/**/*.js',
-          config.src.shared+'/presenter/*.js',
-          config.src.shared+'/presenter/None/*.js',
-          config.src.shared+'/presenter/StaticBubble/*.js',
+          cfg.src.shared+'/*.js',
+          cfg.src.shared+'/shared/record/record.model.js',
+          cfg.src.shared+'/shared/record/record.collection.js',
+          cfg.src.shared+'/map/**/*.js',
+          cfg.src.shared+'/presenter/*.js',
+          cfg.src.shared+'/presenter/None/*.js',
+          cfg.src.shared+'/presenter/StaticBubble/*.js',
 
           // Editor:
-          config.src.shared+'/editor/*.js',
-          config.src.shared+'/editor/exhibit/**/*.js',
-          config.src.shared+'/editor/record/**/*.js',
-          config.src.shared+'/editor/map/*.js',
+          cfg.src.shared+'/editor/*.js',
+          cfg.src.shared+'/editor/exhibit/**/*.js',
+          cfg.src.shared+'/editor/record/**/*.js',
+          cfg.src.shared+'/editor/map/*.js',
 
         ],
-        dest: config.payloads.shared.js+'/editor.js'
+        dest: cfg.payloads.shared.js+'/editor.js'
       },
       form_css: {
         src: [
-          config.vendor.css.chosen,
-          config.payloads.admin.css+'/form/*.css'
+          cfg.vendor.css.chosen,
+          cfg.payloads.admin.css+'/form/*.css'
         ],
-        dest: config.payloads.admin.css+'/form.css'
+        dest: cfg.payloads.admin.css+'/form.css'
       },
       neatline_css: {
         src: [
-          config.vendor.css.openlayers,
-          config.payloads.shared.css+'/public/*.css'
+          cfg.vendor.css.openlayers,
+          cfg.payloads.shared.css+'/public/*.css'
         ],
-        dest: config.payloads.shared.css+'/neatline.css'
+        dest: cfg.payloads.shared.css+'/neatline.css'
       },
       editor_css: {
         src: [
-          config.vendor.css.bootstrap,
-          config.vendor.css.toastr,
-          config.vendor.css.chosen,
-          config.vendor.css.codemirror,
+          cfg.vendor.css.bootstrap,
+          cfg.vendor.css.toastr,
+          cfg.vendor.css.chosen,
+          cfg.vendor.css.codemirror,
           '<%= concat.neatline_css.src %>',
-          config.payloads.shared.css+'/editor/*.css'
+          cfg.payloads.shared.css+'/editor/*.css'
         ],
-        dest: config.payloads.shared.css+'/editor.css'
+        dest: cfg.payloads.shared.css+'/editor.css'
       }
     },
 
@@ -203,30 +203,30 @@ module.exports = function(grunt) {
       },
       form: {
         src: '<%= concat.form.src %>',
-        dest: config.payloads.admin.js+'/form.js'
+        dest: cfg.payloads.admin.js+'/form.js'
       },
       neatline: {
         src: '<%= concat.neatline.src %>',
-        dest: config.payloads.shared.js+'/neatline.js'
+        dest: cfg.payloads.shared.js+'/neatline.js'
       },
       editor: {
         src: '<%= concat.editor.src %>',
-        dest: config.payloads.shared.js+'/editor.js'
+        dest: cfg.payloads.shared.js+'/editor.js'
       }
     },
 
     stylus: {
       compile: {
         options: {
-          paths: [config.stylus.shared]
+          paths: [cfg.stylus.shared]
         },
         files: {
           './views/shared/css/payloads/public/*.css':
-            config.stylus.shared+'/public/*.styl',
+            cfg.stylus.shared+'/public/*.styl',
           './views/shared/css/payloads/editor/*.css':
-            config.stylus.shared+'/editor/*.styl',
+            cfg.stylus.shared+'/editor/*.styl',
           './views/admin/css/payloads/form/*.css':
-            config.stylus.admin+'/form/*.styl'
+            cfg.stylus.admin+'/form/*.styl'
         }
       }
     },
@@ -237,9 +237,9 @@ module.exports = function(grunt) {
           '<%= concat.form.src %>',
           '<%= concat.neatline.src %>',
           '<%= concat.editor.src %>',
-          config.stylus.admin+'/**/*.styl',
-          config.stylus.shared+'/**/*.styl',
-          config.jasmine+'/helpers/*.js'
+          cfg.stylus.admin+'/**/*.styl',
+          cfg.stylus.shared+'/**/*.styl',
+          cfg.jasmine+'/helpers/*.js'
         ],
         tasks: [
           'compile:concat'
@@ -250,21 +250,21 @@ module.exports = function(grunt) {
     jasmine: {
       options: {
         helpers: [
-          config.jasmine+'/helpers/*.js',
-          config.vendor.js.jasmine_jquery,
-          config.vendor.js.sinon
+          cfg.jasmine+'/helpers/*.js',
+          cfg.vendor.js.jasmine_jquery,
+          cfg.vendor.js.sinon
         ]
       },
       neatline: {
-        src: config.payloads.shared.js+'/neatline.js',
+        src: cfg.payloads.shared.js+'/neatline.js',
         options: {
-          specs: config.jasmine+'/spec/public/**/*.spec.js'
+          specs: cfg.jasmine+'/spec/public/**/*.spec.js'
         }
       },
       editor: {
-        src: config.payloads.shared.js+'/editor.js',
+        src: cfg.payloads.shared.js+'/editor.js',
         options: {
-          specs: config.jasmine+'/spec/editor/**/*.spec.js'
+          specs: cfg.jasmine+'/spec/editor/**/*.spec.js'
         }
       }
     },

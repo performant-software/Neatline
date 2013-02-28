@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for NeatlinePlugin::addStyle.
+ * Tests for `addField` on `NeatlinePlugin`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,18 +11,18 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlinePluginTest_AddStyle
+class Neatline_NeatlinePluginTest_AddField
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * addStyle() should add columns to the records table.
+     * `addField` should add columns to the records table.
      */
-    public function testAddStyle()
+    public function testAddField()
     {
 
-        NeatlinePlugin::addStyle('test', 'INT UNSIGNED NULL');
+        NeatlinePlugin::addField('test', 'INT UNSIGNED NULL');
 
         // Get columns.
         $name = $this->_recordsTable->getTableName();

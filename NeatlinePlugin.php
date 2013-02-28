@@ -16,7 +16,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 {
 
 
-    // Hooks.
     protected $_hooks = array(
         'install',
         'uninstall',
@@ -26,7 +25,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     );
 
 
-    // Filters.
     protected $_filters = array(
         'admin_navigation_main',
         'neatline_globals',
@@ -41,7 +39,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * @param string $name The column name.
      * @param string $type The column definition.
      */
-    public static function addStyle($name, $type)
+    public static function addField($name, $type)
     {
 
         $_db = get_db();
@@ -111,20 +109,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Add styles.
         // -----------
-        self::addStyle('presenter',         'VARCHAR(100) NULL');
-        self::addStyle('vector_color',      'TINYTEXT NULL');
-        self::addStyle('stroke_color',      'TINYTEXT NULL');
-        self::addStyle('select_color',      'TINYTEXT NULL');
-        self::addStyle('point_image',       'TINYTEXT NULL');
-        self::addStyle('vector_opacity',    'INT(10) UNSIGNED NULL');
-        self::addStyle('select_opacity',    'INT(10) UNSIGNED NULL');
-        self::addStyle('stroke_opacity',    'INT(10) UNSIGNED NULL');
-        self::addStyle('stroke_width',      'INT(10) UNSIGNED NULL');
-        self::addStyle('point_radius',      'INT(10) UNSIGNED NULL');
-        self::addStyle('max_zoom',          'INT(10) UNSIGNED NULL');
-        self::addStyle('min_zoom',          'INT(10) UNSIGNED NULL');
-        self::addStyle('map_zoom',          'INT(10) UNSIGNED NULL');
-        self::addStyle('map_focus',         'VARCHAR(100) NULL');
+        self::addField('presenter',         'VARCHAR(100) NULL');
+        self::addField('vector_color',      'TINYTEXT NULL');
+        self::addField('stroke_color',      'TINYTEXT NULL');
+        self::addField('select_color',      'TINYTEXT NULL');
+        self::addField('point_image',       'TINYTEXT NULL');
+        self::addField('vector_opacity',    'INT(10) UNSIGNED NULL');
+        self::addField('select_opacity',    'INT(10) UNSIGNED NULL');
+        self::addField('stroke_opacity',    'INT(10) UNSIGNED NULL');
+        self::addField('stroke_width',      'INT(10) UNSIGNED NULL');
+        self::addField('point_radius',      'INT(10) UNSIGNED NULL');
+        self::addField('max_zoom',          'INT(10) UNSIGNED NULL');
+        self::addField('min_zoom',          'INT(10) UNSIGNED NULL');
+        self::addField('map_zoom',          'INT(10) UNSIGNED NULL');
+        self::addField('map_focus',         'VARCHAR(100) NULL');
 
     }
 
