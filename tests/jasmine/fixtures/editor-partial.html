@@ -67,66 +67,67 @@
 
 <!-- Underscore templates. -->
 
-<script id="search-template" type="text/templates">
-  <input type="text" placeholder="Search" />
+<script id="exhibit-menu-template" type="text/templates">
+
+  <p class="lead"></p>
+
+  <ul class="nav nav-pills">
+    <li class="tab" data-slug="records">
+      <a href="#records">Records</a>
+    </li>
+    <li class="tab" data-slug="styles">
+      <a href="#styles">Styles</a>
+    </li>
+  </ul>
+
 </script>
 
-<script id="pagination-template" type="text/templates">
+<script id="exhibit-styles-template" type="text/templates">
 
-  <%
+  <div class="control-group">
 
-    // Base fragment.
-    var prev = '#records/search';
-    var next = '#records/search';
+    
+<label for="styles">
+Stylesheet</label>
+<div class="controls">
+  <textarea
+    id='styles'    name='styles'        data-value='exhibit.styles'  ></textarea>
+</div>
 
-    // Add existing query.
-    if (!_.isEmpty(query)) {
-      prev += '/query='+query;
-      next += '/query='+query;
-    }
+    
+<label>Default Map Focus</label>
+<div class="controls">
+  <div class="inline-inputs">
+    <input
+      type="text"
+      name='map-focus'            data-value='exhibit.map_focus'          />
+  </div>
+</div>
 
-    // Compute back/forward offsets.
-    var prevStart = records.offset-limit;
-    var nextStart = records.offset+limit;
+    
+<label>Default Map Zoom</label>
+<div class="controls">
+  <div class="inline-inputs">
+    <input
+      type="text"
+      name='map-zoom'            data-value='exhibit.map_zoom'          />
+  </div>
+</div>
 
-    var prevActive = true;
-    var nextActive = true;
-
-    // Add prev offset.
-    if (prevStart > 0) {
-      prev += '/start='+prevStart;
-    } else {
-      if (_.isEmpty(query)) prev = '#records';
-      if (records.offset == 0) prevActive = false;
-    }
-
-    // Add next offset.
-    if (nextStart < records.count) {
-      next += '/start='+nextStart;
-    } else {
-      next += '/start='+records.offset;
-      nextActive = false;
-    }
-
-  %>
-
-  <% if (!_.string.startsWith(query, 'map:')) { %>
-
-    <ul class="prev-next">
-      <li <% if (!prevActive) {
-        %><%='class="disabled"'%><%
-      } %>><a class="prev" href="<%= prev %>">«</a></li>
-      <li <% if (!nextActive) {
-        %><%='class="disabled"'%><%
-      } %>><a class="next" href="<%= next %>">»</a></li>
-    </ul>
-    <div class="pagination-details">
-      <span class="start"><%= records.offset+1 %></span> -
-      <span class="end"><%= records.offset+records.length %></span> of
-      <span class="total"><%= records.count %></span>
+    <div class="controls">
+      <div class="inline-inputs">
+        <a name="set-focus" class="btn btn-small">
+          <i class="icon-map-marker"></i> Use Current Viewport as Default
+        </a>
+      </div>
     </div>
 
-  <% } %>
+  </div>
+
+  <div class="actions">
+    <a name="save" class="btn btn-large btn-primary" \>
+      <i class="icon-ok icon-white"></i> Save    </a>
+  </div>
 
 </script>
 
@@ -654,66 +655,65 @@ Body</label>
 <script id="record-menu-template" type="text/templates">
 </script>
 
-<script id="exhibit-menu-template" type="text/templates">
+<script id="pagination-template" type="text/templates">
 
-  <p class="lead"></p>
+  <%
 
-  <ul class="nav nav-pills">
-    <li class="tab" data-slug="records">
-      <a href="#records">Records</a>
-    </li>
-    <li class="tab" data-slug="styles">
-      <a href="#styles">Styles</a>
-    </li>
-  </ul>
+    // Base fragment.
+    var prev = '#records/search';
+    var next = '#records/search';
+
+    // Add existing query.
+    if (!_.isEmpty(query)) {
+      prev += '/query='+query;
+      next += '/query='+query;
+    }
+
+    // Compute back/forward offsets.
+    var prevStart = records.offset-limit;
+    var nextStart = records.offset+limit;
+
+    var prevActive = true;
+    var nextActive = true;
+
+    // Add prev offset.
+    if (prevStart > 0) {
+      prev += '/start='+prevStart;
+    } else {
+      if (_.isEmpty(query)) prev = '#records';
+      if (records.offset == 0) prevActive = false;
+    }
+
+    // Add next offset.
+    if (nextStart < records.count) {
+      next += '/start='+nextStart;
+    } else {
+      next += '/start='+records.offset;
+      nextActive = false;
+    }
+
+  %>
+
+  <% if (!_.string.startsWith(query, 'map:')) { %>
+
+    <ul class="prev-next">
+      <li <% if (!prevActive) {
+        %><%='class="disabled"'%><%
+      } %>><a class="prev" href="<%= prev %>">«</a></li>
+      <li <% if (!nextActive) {
+        %><%='class="disabled"'%><%
+      } %>><a class="next" href="<%= next %>">»</a></li>
+    </ul>
+    <div class="pagination-details">
+      <span class="start"><%= records.offset+1 %></span> -
+      <span class="end"><%= records.offset+records.length %></span> of
+      <span class="total"><%= records.count %></span>
+    </div>
+
+  <% } %>
 
 </script>
 
-<script id="exhibit-styles-template" type="text/templates">
-
-  <div class="control-group">
-
-    
-<label for="styles">
-Stylesheet</label>
-<div class="controls">
-  <textarea
-    id='styles'    name='styles'        data-value='exhibit.styles'  ></textarea>
-</div>
-
-    
-<label>Default Map Focus</label>
-<div class="controls">
-  <div class="inline-inputs">
-    <input
-      type="text"
-      name='map-focus'            data-value='exhibit.map_focus'          />
-  </div>
-</div>
-
-    
-<label>Default Map Zoom</label>
-<div class="controls">
-  <div class="inline-inputs">
-    <input
-      type="text"
-      name='map-zoom'            data-value='exhibit.map_zoom'          />
-  </div>
-</div>
-
-    <div class="controls">
-      <div class="inline-inputs">
-        <a name="set-focus" class="btn btn-small">
-          <i class="icon-map-marker"></i> Use Current Viewport as Default
-        </a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="actions">
-    <a name="save" class="btn btn-large btn-primary" \>
-      <i class="icon-ok icon-white"></i> Save    </a>
-  </div>
-
+<script id="search-template" type="text/templates">
+  <input type="text" placeholder="Search" />
 </script>

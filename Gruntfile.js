@@ -12,7 +12,6 @@
 
 module.exports = function(grunt) {
 
-  // Load tasks.
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -23,7 +22,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-shell');
 
-  // Load configuration.
   var cfg = grunt.file.readJSON('./config.json');
 
   grunt.initConfig({
@@ -198,9 +196,6 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      options: {
-        separator: ';'
-      },
       form: {
         src: '<%= concat.form.src %>',
         dest: cfg.payloads.admin.js+'/form.js'

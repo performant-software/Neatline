@@ -27,13 +27,13 @@
 
 <!-- Underscore templates. -->
 <?php $_ = 'exhibits/underscore/'; ?>
-<?php echo $this->partial($_.'_search.php'); ?>
-<?php echo $this->partial($_.'_pagination.php'); ?>
+<?php $e = array('exhibit' => $exhibit ); ?>
+<?php echo $this->partial($_.'_exhibit_menu.php', $e); ?>
+<?php echo $this->partial($_.'_exhibit_styles.php', $e); ?>
 <?php echo $this->partial($_.'_record_list.php'); ?>
 <?php echo $this->partial($_.'_record_form.php'); ?>
 <?php echo $this->partial($_.'_record_text.php'); ?>
 <?php echo $this->partial($_.'_record_menu.php'); ?>
-<?php echo $this->partial($_.'_exhibit_menu.php', array(
-  'exhibit' => $exhibit )); ?>
-<?php echo $this->partial($_.'_exhibit_styles.php', array(
-  'exhibit' => $exhibit )); ?>
+<?php echo $this->partial($_.'_pagination.php'); ?>
+<?php echo $this->partial($_.'_search.php'); ?>
+<?php fire_plugin_hook('neatline_templates', $e);
