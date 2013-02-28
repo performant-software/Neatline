@@ -210,8 +210,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register record presenters.
      *
-     * @param array $presenters Array of presenter name => ids.
-     * @return array The modified array.
+     * @param array $presenters Presenters, NAME => ID.
+     * @return array The array, with None and StaticBubble.
      */
     public function filterNeatlinePresenters($presenters)
     {
