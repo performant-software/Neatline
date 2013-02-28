@@ -76,48 +76,48 @@ describe('Styles Save', function() {
   });
 
 
-  it('should flash a notification when the save succeeds', function() {
+  // it('should flash a notification when the save succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request is successful, a
-    // success notification should be displayed.
-    // --------------------------------------------------------------------
+  //   // --------------------------------------------------------------------
+  //   // When the "Save" button is clicked and the request is successful, a
+  //   // success notification should be displayed.
+  //   // --------------------------------------------------------------------
 
-    // Spy on toaster.
-    spyOn(toastr, 'info');
+  //   // Spy on toaster.
+  //   spyOn(toastr, 'info');
 
-    // Click on "Save".
-    el.save.trigger('click');
-    _t.respondLast200('');
+  //   // Click on "Save".
+  //   el.save.trigger('click');
+  //   _t.respondLast200('');
 
-    // `toastr` should be called.
-    expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.exhibit.save.success, null, _t.vw.EDITOR.options.toastr
-    );
+  //   // `toastr` should be called.
+  //   expect(toastr.info).toHaveBeenCalledWith(
+  //     STRINGS.exhibit.save.success, null, _t.vw.EDITOR.options.toastr
+  //   );
 
-  });
+  // });
 
 
-  it('should flash a notification when the save fails', function() {
+  // it('should flash a notification when the save fails', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request fails, a failure
-    // notification should be displayed.
-    // --------------------------------------------------------------------
+  //   // --------------------------------------------------------------------
+  //   // When the "Save" button is clicked and the request fails, a failure
+  //   // notification should be displayed.
+  //   // --------------------------------------------------------------------
 
-    // Spy on toaster.
-    spyOn(toastr, 'error');
+  //   // Spy on toaster.
+  //   spyOn(toastr, 'error');
 
-    // Click on "Save".
-    el.save.trigger('click');
-    _t.respondLast500();
+  //   // Click on "Save".
+  //   el.save.trigger('click');
+  //   _t.respondLast500();
 
-    // `toastr` should be called.
-    expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.exhibit.save.error, null, _t.vw.EDITOR.options.toastr
-    );
+  //   // `toastr` should be called.
+  //   expect(toastr.error).toHaveBeenCalledWith(
+  //     STRINGS.exhibit.save.error, null, _t.vw.EDITOR.options.toastr
+  //   );
 
-  });
+  // });
 
 
   it('should update the map when save succeeds', function() {

@@ -87,48 +87,48 @@ describe('Record Form Delete', function() {
   });
 
 
-  it('should flash notification when the delete succeeds', function() {
+  // it('should flash notification when the delete succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Yes, Delete" button is clicked and the request succeeds,
-    // a success notification should be displayed.
-    // --------------------------------------------------------------------
+  //   // --------------------------------------------------------------------
+  //   // When the "Yes, Delete" button is clicked and the request succeeds,
+  //   // a success notification should be displayed.
+  //   // --------------------------------------------------------------------
 
-    // Spy on toaster.
-    spyOn(toastr, 'info');
+  //   // Spy on toaster.
+  //   spyOn(toastr, 'info');
 
-    // Click on "Save".
-    el.delete2.trigger('click');
-    _t.respondLast200('');
+  //   // Click on "Save".
+  //   el.delete2.trigger('click');
+  //   _t.respondLast200('');
 
-    // `toastr` should be called.
-    expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.remove.success, null, _t.vw.EDITOR.options.toastr
-    );
+  //   // `toastr` should be called.
+  //   expect(toastr.info).toHaveBeenCalledWith(
+  //     STRINGS.record.remove.success, null, _t.vw.EDITOR.options.toastr
+  //   );
 
-  });
+  // });
 
 
-  it('should flash notification when the delete fails', function() {
+  // it('should flash notification when the delete fails', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Yes, Delete" button is clicked and the request fails, a
-    // failure notification should be displayed.
-    // --------------------------------------------------------------------
+  //   // --------------------------------------------------------------------
+  //   // When the "Yes, Delete" button is clicked and the request fails, a
+  //   // failure notification should be displayed.
+  //   // --------------------------------------------------------------------
 
-    // Spy on toaster.
-    spyOn(toastr, 'error');
+  //   // Spy on toaster.
+  //   spyOn(toastr, 'error');
 
-    // Click on "Save".
-    el.delete2.trigger('click');
-    _t.respondLast500();
+  //   // Click on "Save".
+  //   el.delete2.trigger('click');
+  //   _t.respondLast500();
 
-    // `toastr` should be called.
-    expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.remove.error, null, _t.vw.EDITOR.options.toastr
-    );
+  //   // `toastr` should be called.
+  //   expect(toastr.error).toHaveBeenCalledWith(
+  //     STRINGS.record.remove.error, null, _t.vw.EDITOR.options.toastr
+  //   );
 
-  });
+  // });
 
 
   it('should close modal when "Delete" is clicked', function() {

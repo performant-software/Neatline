@@ -72,7 +72,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} string: The message.
      */
     notifySuccess: function(string) {
-      toastr.info(string, null, this.options.toastr);
+      // toastr.info(string, null, this.options.toastr);
     },
 
 
@@ -82,7 +82,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @param {String} string: The message.
      */
     notifyError: function(string) {
-      toastr.error(string, null, this.options.toastr);
+      // toastr.error(string, null, this.options.toastr);
     }
 
 

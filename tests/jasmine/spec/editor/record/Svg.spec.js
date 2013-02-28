@@ -121,26 +121,26 @@ describe('Record Form SVG', function() {
   });
 
 
-  it('should flash notification when the parse succeeds', function() {
+  // it('should flash notification when the parse succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When new SVG is successfully parsed, a success notification should
-    // be displayed.
-    // --------------------------------------------------------------------
+  //   // --------------------------------------------------------------------
+  //   // When new SVG is successfully parsed, a success notification should
+  //   // be displayed.
+  //   // --------------------------------------------------------------------
 
-    // Spy on toaster.
-    spyOn(toastr, 'info');
+  //   // Spy on toaster.
+  //   spyOn(toastr, 'info');
 
-    // Parse valid SVG.
-    el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
-    el.parse.trigger('click');
+  //   // Parse valid SVG.
+  //   el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+  //   el.parse.trigger('click');
 
-    // `toastr` should be called.
-    expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.svg.parse.success, null, _t.vw.EDITOR.options.toastr
-    );
+  //   // `toastr` should be called.
+  //   expect(toastr.info).toHaveBeenCalledWith(
+  //     STRINGS.svg.parse.success, null, _t.vw.EDITOR.options.toastr
+  //   );
 
-  });
+  // });
 
 
   it('should close the modal when the parse succeeds', function() {
@@ -159,26 +159,26 @@ describe('Record Form SVG', function() {
   });
 
 
-  it('should flash notification when the parse fails', function() {
+  // it('should flash notification when the parse fails', function() {
 
-    // --------------------------------------------------------------------
-    // When new SVG is not parsed successfully, a failure notification
-    // should be displayed.
-    // --------------------------------------------------------------------
+  //   // --------------------------------------------------------------------
+  //   // When new SVG is not parsed successfully, a failure notification
+  //   // should be displayed.
+  //   // --------------------------------------------------------------------
 
-    // Spy on toaster.
-    spyOn(toastr, 'error');
+  //   // Spy on toaster.
+  //   spyOn(toastr, 'error');
 
-    // Parse invalid SVG.
-    el.svg.val('invalid');
-    el.parse.trigger('click');
+  //   // Parse invalid SVG.
+  //   el.svg.val('invalid');
+  //   el.parse.trigger('click');
 
-    // `toastr` should be called.
-    expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.svg.parse.error, null, _t.vw.EDITOR.options.toastr
-    );
+  //   // `toastr` should be called.
+  //   expect(toastr.error).toHaveBeenCalledWith(
+  //     STRINGS.svg.parse.error, null, _t.vw.EDITOR.options.toastr
+  //   );
 
-  });
+  // });
 
 
   it('should not close the modal when the parse fails', function() {

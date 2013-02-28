@@ -43,7 +43,6 @@
       "stamen":           "./components/stamen-neatline/stamen.neatline.js",
       "svgtowkt":         "./components/svg-to-wkt/svg-to-wkt.js",
       "routefilter":      "./components/backbone.routefilter/dist/backbone.routefilter.js",
-      "toastr":           "./components/toastr/toastr.js",
       "draggable":        "./components/jquery-draggable-input/jquery-draggable-input.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
@@ -57,7 +56,6 @@
     "css": {
       "openlayers":       "./components/openlayers/theme/default/style.css",
       "bootstrap":        "./components/bootstrap/bootstrap/css/bootstrap.min.css",
-      "toastr":           "./components/toastr/toastr.css",
       "chosen":           "./components/chosen/chosen/chosen.css",
       "codemirror":       "./components/codemirror/lib/codemirror.css"
     }

@@ -142,7 +142,7 @@ module.exports = function(grunt) {
           cfg.vendor.js.stamen,
           cfg.vendor.js.svgtowkt,
           cfg.vendor.js.routefilter,
-          cfg.vendor.js.toastr,
+          // cfg.vendor.js.pnotify,
           cfg.vendor.js.draggable,
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
@@ -184,11 +184,11 @@ module.exports = function(grunt) {
       },
       editor_css: {
         src: [
+          '<%= concat.neatline_css.src %>',
           cfg.vendor.css.bootstrap,
-          cfg.vendor.css.toastr,
+          // cfg.vendor.css.pnotify,
           cfg.vendor.css.chosen,
           cfg.vendor.css.codemirror,
-          '<%= concat.neatline_css.src %>',
           cfg.payloads.shared.css+'/editor/*.css'
         ],
         dest: cfg.payloads.shared.css+'/editor.css'
@@ -283,7 +283,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', 'test');
 
   // Assemble static assets.
-  grunt.registerTask('compile:concat', [
+  grunt.registerTask('compile', [
     'concat:form',
     'concat:neatline',
     'concat:editor',

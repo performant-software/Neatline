@@ -94,7 +94,7 @@
   </label>
 
   <div class="control-group">
-    <a name="clear" class="btn btn-warning">
+    <a name="clear" class="btn btn-primary">
       <i class="icon-refresh icon-white"></i> Clear all Geometry
     </a>
   </div>
