@@ -11,5 +11,3 @@ views/shared/javascripts/payloads
 views/admin/css/payloads
 views/shared/css/payloads
 views/shared/css/img
-
-tests/jasmine/fixtures
