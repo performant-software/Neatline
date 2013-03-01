@@ -14,11 +14,9 @@ Neatline.module('Editor.Exhibit.Menu', function(
   Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-  Menu.init = function() {
+  Menu.addInitializer(function() {
     this.__view = new Menu.View();
-  };
-
-  Menu.addInitializer(Menu.init);
+  });
 
 
 });

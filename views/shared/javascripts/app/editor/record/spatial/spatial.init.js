@@ -15,7 +15,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
   /**
-   * Start the tab once the form is running.
+   * Start the tab after the form.
    */
   Neatline.Editor.Record.on('start', function() {
     Spatial.start();
@@ -25,12 +25,10 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
   /**
    * Instantiate the tab view.
    */
-  Spatial.init = function() {
+  Spatial.addInitializer(function() {
     var form = Neatline.request('RECORD:getElement');
     this.__view = new Spatial.View({ el: form });
-  };
-
-  Spatial.addInitializer(Spatial.init);
+  });
 
 
 }});

@@ -14,11 +14,9 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  Search.init = function() {
+  Search.addInitializer(function() {
     this.__view = new Search.View();
-  };
-
-  Search.addInitializer(Search.init);
+  });
 
 
 });

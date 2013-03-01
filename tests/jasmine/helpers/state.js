@@ -61,7 +61,16 @@ var _t = (function(_t) {
 
 
   /**
-   * (Re)start the Neatline application.
+   * Recursively stop all modules.
+   */
+  _t.stopApplication = function() {
+    _.each(Neatline.submodules, function(m) { m.stop(); });
+    Neatline.initCallbacks.reset();
+  };
+
+
+  /**
+   * (Re)start the application.
    */
   _t.startApplication = function() {
 
@@ -70,8 +79,7 @@ var _t = (function(_t) {
     Backbone.history.stop();
 
     // Start Neatline.
-    _.each(Neatline.submodules, function(m) { m.stop(); });
-    Neatline.initCallbacks.reset();
+    this.stopApplication();
     Neatline.start();
 
   };

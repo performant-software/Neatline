@@ -14,11 +14,9 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  StaticBubble.init = function() {
+  StaticBubble.addInitializer(function() {
     this.__view = new StaticBubble.View();
-  };
-
-  StaticBubble.addInitializer(StaticBubble.init);
+  });
 
 
 });

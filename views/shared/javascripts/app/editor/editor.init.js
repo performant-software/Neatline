@@ -32,13 +32,11 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Initialize the router and layout view.
+   * Initialize the layout view.
    */
-  Editor.init = function() {
+  Editor.addInitializer(function() {
     this.__view = new Editor.View({ el: 'body' });
-  };
-
-  Editor.addInitializer(Editor.init);
+  });
 
 
 }});

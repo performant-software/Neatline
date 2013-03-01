@@ -14,12 +14,10 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Styles.init = function() {
+  Styles.addInitializer(function() {
     this.__view   = new Styles.View();
     this.__router = new Styles.Router();
-  };
-
-  Styles.addInitializer(Styles.init);
+  });
 
 
 });

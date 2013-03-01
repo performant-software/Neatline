@@ -14,12 +14,10 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.init = function() {
+  Record.addInitializer(function() {
     this.__view =   new Record.View();
     this.__router = new Record.Router();
-  };
-
-  Record.addInitializer(Record.init);
+  });
 
 
 });

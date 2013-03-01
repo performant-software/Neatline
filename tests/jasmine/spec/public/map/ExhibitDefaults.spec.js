@@ -15,6 +15,7 @@ describe('Map Exhibit Defaults', function() {
 
   beforeEach(function() {
 
+    _t.stopApplication();
     _t.setFixturesPath();
     loadFixtures('neatline-partial.html');
 
@@ -47,7 +48,7 @@ describe('Map Exhibit Defaults', function() {
     // --------------------------------------------------------------------
 
     // Start the map.
-    Neatline.Map.init();
+    Neatline.Map.start();
 
     // Base layers should be added to the map.
     expect(Neatline.Map.__view.map.layers[0].name).toEqual('Layer1');
@@ -68,7 +69,7 @@ describe('Map Exhibit Defaults', function() {
     Neatline.global.base_layer = 'Layer2';
 
     // Start the map.
-    Neatline.Map.init();
+    Neatline.Map.start();
 
     // Default layer should be set.
     expect(Neatline.Map.__view.map.baseLayer.name).toEqual('Layer2');
@@ -85,7 +86,7 @@ describe('Map Exhibit Defaults', function() {
     // --------------------------------------------------------------------
 
     // Start the map.
-    Neatline.Map.init();
+    Neatline.Map.start();
     _t.aliasNeatline();
 
     // Layer switcher should be enabled.
@@ -113,7 +114,7 @@ describe('Map Exhibit Defaults', function() {
     ];
 
     // Start the map.
-    Neatline.Map.init();
+    Neatline.Map.start();
     _t.aliasNeatline();
 
     // Layer switcher should not be enabled.
@@ -136,7 +137,7 @@ describe('Map Exhibit Defaults', function() {
     Neatline.global.map_zoom = 10;
 
     // Start map.
-    Neatline.Map.init();
+    Neatline.Map.start();
 
     // Viewport should be set to default.
     var center = Neatline.Map.__view.map.getCenter();

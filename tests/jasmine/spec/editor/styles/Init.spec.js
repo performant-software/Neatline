@@ -14,6 +14,7 @@ describe('Styles Initialization', function() {
 
 
   beforeEach(function() {
+    _t.stopApplication();
     _t.setFixturesPath();
     loadFixtures('editor-partial.html');
   });
@@ -32,7 +33,7 @@ describe('Styles Initialization', function() {
     };
 
     // Start form module.
-    Neatline.Editor.Exhibit.Styles.init();
+    Neatline.Editor.Exhibit.Styles.start();
     var view = Neatline.Editor.Exhibit.Styles.__view;
 
     // Form should be populated.

@@ -14,16 +14,11 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Alias the exhibit map view and collection.
-   */
-  Map.init = function() {
+  Map.addInitializer(function() {
     this.__collection = Neatline.Map.__collection;
     this.__view = Neatline.Map.__view;
     this.__view.initializeEditor();
-  };
-
-  Map.addInitializer(Map.init);
+  });
 
 
 }});

@@ -14,11 +14,9 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.init = function() {
+  Exhibit.addInitializer(function() {
     this.__model = new Exhibit.Model();
-  };
-
-  Exhibit.addInitializer(Exhibit.init);
+  });
 
 
 });

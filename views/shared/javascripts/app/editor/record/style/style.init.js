@@ -15,7 +15,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
 
   /**
-   * Start the tab once the form is running.
+   * Start the tab after the form.
    */
   Neatline.Editor.Record.on('start', function() {
     Style.start();
@@ -25,12 +25,10 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   /**
    * Instantiate the tab view.
    */
-  Style.init = function() {
+  Style.addInitializer(function() {
     var form = Neatline.request('RECORD:getElement');
     this.__view = new Style.View({ el: form });
-  };
-
-  Style.addInitializer(Style.init);
+  });
 
 
 }});
