@@ -33,7 +33,6 @@
 <?php echo $this->partial($_.'_record_list.php'); ?>
 <?php echo $this->partial($_.'_record_form.php'); ?>
 <?php echo $this->partial($_.'_record_text.php'); ?>
-<?php echo $this->partial($_.'_record_menu.php'); ?>
 <?php echo $this->partial($_.'_pagination.php'); ?>
 <?php echo $this->partial($_.'_search.php'); ?>
 <?php fire_plugin_hook('neatline_templates', $e);
