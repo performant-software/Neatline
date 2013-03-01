@@ -27,10 +27,7 @@ var _t = (function(_t) {
 
     // Mock the server.
     this.server = sinon.fakeServer.create();
-
-    // Start modules.
-    Neatline.Map.init();
-    Neatline.Presenter.StaticBubble.init();
+    this.startApplication();
 
     // Inject fixtures, alias components.
     this.respondAll200(this.json.records.standard);
@@ -50,25 +47,9 @@ var _t = (function(_t) {
     loadFixtures('editor-partial.html');
     loadStyleFixtures('editor.css');
 
-    // Mock the server.
+    // Mock the server, reset history.
     this.server = sinon.fakeServer.create();
-
-    // Start modules.
-    Neatline.Editor.Exhibit.Menu.init();
-    Neatline.Editor.Exhibit.Search.init();
-    Neatline.Editor.Exhibit.Records.init();
-    Neatline.Editor.Exhibit.Styles.init();
-    Neatline.Editor.Exhibit.init();
-    Neatline.Editor.Record.init();
-    Neatline.Editor.Record.Spatial.init();
-    Neatline.Editor.Record.Style.init();
-    Neatline.Editor.init();
-    Neatline.Map.init();
-    Neatline.Presenter.StaticBubble.init();
-    Neatline.Editor.Map.init();
-
-    // Reset the route.
-    this.restartHistory();
+    this.startApplication();
     this.navigate('');
 
     // Inject fixtures, alias components.
@@ -80,12 +61,19 @@ var _t = (function(_t) {
 
 
   /**
-   * Reset the Backbone history.
+   * (Re)start the Neatline application.
    */
-  _t.restartHistory = function() {
+  _t.startApplication = function() {
+
+    // Reset the history.
     window.location.hash = null;
     Backbone.history.stop();
-    Backbone.history.start();
+
+    // Start Neatline.
+    _.each(Neatline.submodules, function(m) { m.stop(); });
+    Neatline.initCallbacks.reset();
+    Neatline.start();
+
   };
 
 
