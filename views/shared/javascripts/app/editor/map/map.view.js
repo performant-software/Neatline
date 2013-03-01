@@ -16,7 +16,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Initialize editor-specific state tracekrs.
    */
-  initializeEditor: function() {
+  __initEditor: function() {
     this.editLayer = null;
   },
 
