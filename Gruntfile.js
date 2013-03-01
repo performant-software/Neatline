@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Grunt file.
+ * Gruntfile.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
         stdout: true
       },
       bower_cache_clean: {
-        command: 'rm -rf ~/.bower'
+        command: 'rm -rf ~/.bower && bower cache-clean'
       },
       bower_install: {
         command: 'bower install'
@@ -94,6 +94,9 @@ module.exports = function(grunt) {
 
     concat: {
       form: {
+        options: {
+          separator: ';'
+        },
         src: [
           cfg.vendor.js.chosen,
           cfg.vendor.js.underscore_s,
@@ -102,6 +105,9 @@ module.exports = function(grunt) {
         dest: cfg.payloads.admin.js+'/form.js'
       },
       neatline: {
+        options: {
+          separator: ';'
+        },
         src: [
 
           // Vendor:
@@ -129,6 +135,9 @@ module.exports = function(grunt) {
         dest: cfg.payloads.shared.js+'/neatline.js'
       },
       editor: {
+        options: {
+          separator: ';'
+        },
         src: [
 
           // Vendor:
@@ -142,8 +151,8 @@ module.exports = function(grunt) {
           cfg.vendor.js.stamen,
           cfg.vendor.js.svgtowkt,
           cfg.vendor.js.routefilter,
-          // cfg.vendor.js.pnotify,
           cfg.vendor.js.draggable,
+          cfg.vendor.js.alertify,
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.rivets,
@@ -186,7 +195,8 @@ module.exports = function(grunt) {
         src: [
           '<%= concat.neatline_css.src %>',
           cfg.vendor.css.bootstrap,
-          // cfg.vendor.css.pnotify,
+          cfg.vendor.css.alertify_core,
+          cfg.vendor.css.alertify_theme,
           cfg.vendor.css.chosen,
           cfg.vendor.css.codemirror,
           cfg.payloads.shared.css+'/editor/*.css'
@@ -311,7 +321,7 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
-    'compile:min',
+    'compile',
     'copy'
   ]);
 

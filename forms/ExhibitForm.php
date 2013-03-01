@@ -130,7 +130,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Description.
         $this->addElement('textarea', 'description', array(
             'label'         => __('Description'),
-            'description'   => __('Supporting prose to describe the exhibit.'),
+            'description'   => __('Introductory text for the exhibit.'),
             'value'         => $this->_exhibit->description,
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));

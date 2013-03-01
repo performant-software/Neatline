@@ -5,7 +5,7 @@
 
       "spyc":                   "https://github.com/mustangostang/spyc.git"
 
-    , "jquery":                 ">= 1.8.2"
+    , "jquery":                 ">= 1.9.1"
     , "underscore":             ">= 1.4.2"
     , "underscore.string":      ">= 2.3.0"
     , "backbone":               ">= 0.9.2"
@@ -17,7 +17,7 @@
     , "svg-to-wkt":             "https://github.com/davidmcclure/svg-to-wkt.git"
     , "backbone.routefilter":   "https://github.com/boazsender/backbone.routefilter.git"
     , "jquery-draggable-input": "https://github.com/saschagehlich/jquery-draggable-input.git"
-    // , "pines-notify":           ">= 1.2.0"
+    , "alertify":               ">= 0.3.8"
     , "chosen":                 ">= 0.9.11"
     , "codemirror":             "latest"
     , "bootstrap":              ">= 2.2.0"
