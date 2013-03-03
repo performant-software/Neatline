@@ -44,7 +44,7 @@
       "svgtowkt":         "./components/svg-to-wkt/svg-to-wkt.js",
       "routefilter":      "./components/backbone.routefilter/dist/backbone.routefilter.js",
       "draggable":        "./components/jquery-draggable-input/jquery-draggable-input.js",
-      "alertify":         "./components/alertify/alertify.js",
+      "toastr":           "./components/toastr/toastr.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
       "rivets":           "./components/rivets/lib/rivets.js",
@@ -57,8 +57,7 @@
     "css": {
       "openlayers":       "./components/openlayers/theme/default/style.css",
       "bootstrap":        "./components/bootstrap/bootstrap/css/bootstrap.min.css",
-      "alertify_core":    "./components/alertify/themes/alertify.core.css",
-      "alertify_theme":   "./components/alertify/themes/alertify.bootstrap.css",
+      "toastr":           "./components/toastr/toastr.css",
       "chosen":           "./components/chosen/chosen/chosen.css",
       "codemirror":       "./components/codemirror/lib/codemirror.css"
     }

@@ -94,9 +94,6 @@ module.exports = function(grunt) {
 
     concat: {
       form: {
-        options: {
-          separator: ';'
-        },
         src: [
           cfg.vendor.js.chosen,
           cfg.vendor.js.underscore_s,
@@ -105,9 +102,6 @@ module.exports = function(grunt) {
         dest: cfg.payloads.admin.js+'/form.js'
       },
       neatline: {
-        options: {
-          separator: ';'
-        },
         src: [
 
           // Vendor:
@@ -135,9 +129,6 @@ module.exports = function(grunt) {
         dest: cfg.payloads.shared.js+'/neatline.js'
       },
       editor: {
-        options: {
-          separator: ';'
-        },
         src: [
 
           // Vendor:
@@ -152,7 +143,7 @@ module.exports = function(grunt) {
           cfg.vendor.js.svgtowkt,
           cfg.vendor.js.routefilter,
           cfg.vendor.js.draggable,
-          cfg.vendor.js.alertify,
+          cfg.vendor.js.toastr,
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.rivets,
@@ -195,8 +186,7 @@ module.exports = function(grunt) {
         src: [
           '<%= concat.neatline_css.src %>',
           cfg.vendor.css.bootstrap,
-          cfg.vendor.css.alertify_core,
-          cfg.vendor.css.alertify_theme,
+          cfg.vendor.css.toastr,
           cfg.vendor.css.chosen,
           cfg.vendor.css.codemirror,
           cfg.payloads.shared.css+'/editor/*.css'

@@ -12,6 +12,16 @@
 
 
 /**
+ * Toastr globals.
+ */
+toastr.options = {
+  timeOut:  2500,
+  fadeIn:   200,
+  fadeOut:  200
+};
+
+
+/**
  * Construct the URL fragment for a record edit form.
  *
  * @param {Number} id: The record id.
