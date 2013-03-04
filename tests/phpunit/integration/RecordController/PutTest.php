@@ -128,4 +128,34 @@ class Neatline_RecordControllerTest_Put
     }
 
 
+    /**
+     * PUT should apply exhibit styles to the record.
+     */
+    public function testApplyStyles()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = new NeatlineRecord($exhibit);
+        $record->tags = 'tag';
+        $record->save();
+
+        // Exhibit YAML.
+        $exhibit->styles = "
+        tag:
+         - vector_color: 'color1'
+        ";
+
+        $exhibit->save();
+
+        // Save the record.
+        $this->writePut(array('vector_color' => 'color2'));
+        $this->dispatch('neatline/record/'.$record->id);
+
+        // Exhibit style should clobber PUT value.
+        $record = $this->_recordsTable->find($record->id);
+        $this->assertEquals($record->vector_color, 'color1');
+
+    }
+
+
 }

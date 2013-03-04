@@ -50,7 +50,10 @@ class Neatline_RecordController extends Neatline_RestController
         // Return new id.
         echo Zend_Json::encode(array('id' => $record->id));
 
-        // Synchronize styles.
+        // Apply exhibit stylesheet.
+        $this->_table->applyStyles($record->getExhibit(), $record);
+
+        // Synchronize tag-siblings.
         $this->_table->syncStyles($record);
 
     }
@@ -70,7 +73,10 @@ class Neatline_RecordController extends Neatline_RestController
             Zend_Registry::get('fileIn')), true
         ));
 
-        // Synchronize styles.
+        // Apply exhibit stylesheet.
+        $this->_table->applyStyles($record->getExhibit(), $record);
+
+        // Synchronize tag-siblings.
         $this->_table->syncStyles($record);
 
     }

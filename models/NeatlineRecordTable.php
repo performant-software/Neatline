@@ -96,7 +96,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
             // `WHERE`
             $where = array(
                 'exhibit_id = ?' => $record->exhibit_id,
-                'tags REGEXP ?' => '[[:<:]]'.$tag.'[[:>:]]'
+                'tags REGEXP ?'  => '[[:<:]]'.$tag.'[[:>:]]'
             );
 
             // `SET`

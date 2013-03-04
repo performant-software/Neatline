@@ -91,7 +91,7 @@ class Neatline_RecordControllerTest_Post
 
 
     /**
-     * PUT should synchronize record styles with tag siblings.
+     * POST should synchronize record styles with tag siblings.
      */
     public function testSynchronizeStyles()
     {
@@ -123,6 +123,40 @@ class Neatline_RecordControllerTest_Post
         // Record 1 should be synchronized with new record.
         $record1 = $this->_recordsTable->find($record1->id);
         $this->assertEquals($record1->vector_color, 'color');
+
+    }
+
+
+    /**
+     * POST should apply exhibit styles to the record.
+     */
+    public function testApplyStyles()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // Exhibit YAML.
+        $exhibit->styles = "
+        tag:
+         - vector_color: 'color1'
+        ";
+
+        $exhibit->save();
+
+        // New record data.
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id'    => $exhibit->id,
+            'vector_color'  => 'color2',
+            'tags'          => 'tag'
+        )));
+
+        // Save the new record.
+        $this->dispatch('neatline/record');
+
+        // Exhibit style should clobber POST value.
+        $record = $this->getLastRecord();
+        $this->assertEquals($record->vector_color, 'color1');
 
     }
 
