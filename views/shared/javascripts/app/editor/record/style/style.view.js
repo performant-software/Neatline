@@ -24,7 +24,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
       'click a[name="set-focus"]':      'onSetFocus',
 
       // Preview styles.
-      'change input.preview':           'onStyleChange',
       'keyup input.preview':            'onStyleKeyup',
 
       // Tab changes.
@@ -102,16 +101,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      */
     onStyleKeyup: function(e) {
       $(e.target).trigger('change');
-    },
-
-
-    /**
-     * Preview new style settings on the map edit layer.
-     */
-    onStyleChange: function() {
-      Neatline.execute(
-        'MAPEDIT:updateStyles', Neatline.request('RECORD:getModel')
-      );
     }
 
 
