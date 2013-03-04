@@ -27,9 +27,10 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *  #ffffff, but the stroke color will be unchanged since no explicit
      *  value is set in the YAML.
      *
-     * @param NeatlineExhibit The exhibit to update.
+     * @param NeatlineExhibit $exhibit The exhibit to update.
+     * @param NeatlineRecord|null $record The record to update.
      */
-    public function applyStyles($exhibit)
+    public function applyStyles($exhibit, $record=null)
     {
 
         // Parse the styles YAML.
@@ -44,6 +45,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // `WHERE`
             $where = array('exhibit_id = ?' => $exhibit->id);
+            if (!is_null($record)) $where['id = ?'] = $record->id;
             if ($tag != 'default') $where['tags REGEXP ?'] =
                 '[[:<:]]'.$tag.'[[:>:]]';
 
@@ -76,7 +78,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *  the value on the passed record, but vector color will be unchanged
      *  since an explicit value is set in the YAML.
      *
-     * @param NeatlineRecord The record to propagate.
+     * @param NeatlineRecord $record The record to propagate.
      */
     public function syncStyles($record)
     {
@@ -182,16 +184,17 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *
      * @param NeatlineExhibit $exhibit The exhibit record.
      * @param array $params Associative array of filter parameters:
-     *  - `zoom`:   The current zoom level of the map.
-     *  - `extent`: The current viewport extent of the map (WKT POLYGON).
-     *  - `query`:  A full-text search query.
-     *  - `tags`:   An array of tags.
-     *  - `offset`: The number of records to skip.
-     *  - `limit`:  The number of records to get.
+     *
+     *  - zoom:     The zoom level of the map.
+     *  - extent:   The viewport extent of the map.
+     *  - query:    A full-text search query.
+     *  - tags:     An array of tags.
+     *  - offset:   The number of records to skip.
+     *  - limit:    The number of records to get.
      *
      * @return array The collection of records.
      */
-    public function queryRecords($exhibit, $params = array())
+    public function queryRecords($exhibit, $params=array())
     {
 
         $data = array('records' => array(), 'offset' => 0);
