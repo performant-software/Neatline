@@ -68,6 +68,56 @@
       "properties": {
         "provider": "terrain"
       }
+    },
+
+    {
+      "title": "Icarus",
+      "id": "Icarus",
+      "type": "WMS",
+      "properties": {
+        "address": "http://lat.lib.virginia.edu:8080/neatline/nonspatial/wms",
+        "layers": "nonspatial:icarus"
+      }
+    },
+
+    {
+      "title": "Old Timer",
+      "id": "OldTimer",
+      "type": "WMS",
+      "properties": {
+        "address": "http://lat.lib.virginia.edu:8080/neatline/nonspatial/wms",
+        "layers": "nonspatial:old-timer"
+      }
+    },
+
+    {
+      "title": "Sistine Chapel",
+      "id": "Sistine",
+      "type": "WMS",
+      "properties": {
+        "address": "http://lat.lib.virginia.edu:8080/neatline/nonspatial/wms",
+        "layers": "nonspatial:sistine"
+      }
+    },
+
+    {
+      "title": "Terrace",
+      "id": "Terrace",
+      "type": "WMS",
+      "properties": {
+        "address": "http://lat.lib.virginia.edu:8080/neatline/nonspatial/wms",
+        "layers": "nonspatial:terrace"
+      }
+    },
+
+    {
+      "title": "Windows",
+      "id": "Windows",
+      "type": "WMS",
+      "properties": {
+        "address": "http://lat.lib.virginia.edu:8080/neatline/nonspatial/wms",
+        "layers": "nonspatial:windows"
+      }
     }
 
   ]
