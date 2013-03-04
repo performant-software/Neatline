@@ -30,17 +30,9 @@ class Neatline_RecordControllerTest_Get
         $response = $this->getResponseArray();
         $this->assertResponseCode(200);
 
-        // Should emit static fields.
-        $this->assertObjectHasAttribute('id',       $response);
-        $this->assertObjectHasAttribute('item_id',  $response);
-        $this->assertObjectHasAttribute('title',    $response);
-        $this->assertObjectHasAttribute('body',     $response);
-        $this->assertObjectHasAttribute('coverage', $response);
-        $this->assertObjectHasAttribute('tags',     $response);
-
-        // Should emit styles.
-        foreach (_nl_getStyles() as $s) {
-            $this->assertObjectHasAttribute($s, $response);
+        // Should emit all attributes.
+        foreach (array_keys($record->toArray()) as $k) {
+            $this->assertObjectHasAttribute($k, $response);
         }
 
     }

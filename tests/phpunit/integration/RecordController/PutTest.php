@@ -155,6 +155,32 @@ class Neatline_RecordControllerTest_Put
         $record = $this->_recordsTable->find($record->id);
         $this->assertEquals($record->vector_color, 'color1');
 
+        // New value should be returned to editor.
+        $response = $this->getResponseArray();
+        $this->assertEquals($response->vector_color, 'color1');
+
+    }
+
+
+    /**
+     * PUT should return all record attributes.
+     */
+    public function testReturnRecord()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = $this->__record($exhibit);
+
+        // Save the record.
+        $this->writePut(array());
+        $this->dispatch('neatline/record/'.$record->id);
+        $response = $this->getResponseArray();
+
+        // Should emit all attributes.
+        foreach (array_keys($record->toArray()) as $k) {
+            $this->assertObjectHasAttribute($k, $response);
+        }
+
     }
 
 

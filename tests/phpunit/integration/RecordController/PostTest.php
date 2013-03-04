@@ -158,6 +158,37 @@ class Neatline_RecordControllerTest_Post
         $record = $this->getLastRecord();
         $this->assertEquals($record->vector_color, 'color1');
 
+        // New value should be returned to editor.
+        $response = $this->getResponseArray();
+        $this->assertEquals($response->vector_color, 'color1');
+
+    }
+
+
+    /**
+     * POST should return all record attributes.
+     */
+    public function testReturnRecord()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // New record data.
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id' => $exhibit->id
+        )));
+
+        // Save the new record.
+        $this->dispatch('neatline/record');
+        $response = $this->getResponseArray();
+        $record = $this->getLastRecord();
+
+        // Should emit all attributes.
+        foreach (array_keys($record->toArray()) as $k) {
+            $this->assertObjectHasAttribute($k, $response);
+        }
+
     }
 
 
