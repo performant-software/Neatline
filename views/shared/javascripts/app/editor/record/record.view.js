@@ -58,7 +58,6 @@ Neatline.module('Editor.Record', function(
 
       // Update map on model change.
       model.bind('change', function() {
-        Neatline.execute('MAPEDIT:updateStyles', model);
         Neatline.execute('MAPEDIT:updateModel', model);
       });
 

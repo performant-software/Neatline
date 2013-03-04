@@ -59,17 +59,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * Update edit layer styles.
-   *
-   * @param {Object} model: The updated model.
-   */
-  var updateStyles = function(model) {
-    Map.__view.updateStyles(model);
-  };
-  Neatline.commands.addHandler('MAPEDIT:updateStyles', updateStyles);
-
-
-  /**
    * Update edit layer model.
    *
    * @param {Object} model: The updated model.

@@ -284,24 +284,20 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Reconstruct the stylemap for the edit layer.
-   *
-   * @param {Object} model: The updated model.
-   */
-  updateStyles: function(model) {
-    this.editLayer.styleMap = this.getStyleMap(model);
-    this.editLayer.redraw();
-  },
-
-
-  /**
    * Update `nModel` and `nId` on the edit layer.
    *
    * @param {Object} model: The updated model.
    */
   updateModel: function(model) {
+
+    // Replace the model.
     this.editLayer.nId = model.get('id');
     this.editLayer.nModel = model;
+
+    // Rebuild the style map.
+    this.editLayer.styleMap = this.getStyleMap(model);
+    this.editLayer.redraw();
+
   },
 
 
