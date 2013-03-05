@@ -253,13 +253,13 @@ module.exports = function(grunt) {
       neatline: {
         src: cfg.payloads.shared.js+'/neatline.js',
         options: {
-          specs: cfg.jasmine+'/spec/public/**/*.spec.js'
+          specs: cfg.jasmine+'/suites/public/**/*.spec.js'
         }
       },
       editor: {
         src: cfg.payloads.shared.js+'/editor.js',
         options: {
-          specs: cfg.jasmine+'/spec/editor/**/*.spec.js'
+          specs: cfg.jasmine+'/suites/editor/**/*.spec.js'
         }
       }
     },
