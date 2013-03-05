@@ -24,6 +24,11 @@ describe('Record Router', function() {
 
   it('#record/:id', function() {
 
+    // --------------------------------------------------------------------
+    // When `#record/:id` route is requested, the record form should be
+    // displayed and the "Text" tab should be activated by default.
+    // --------------------------------------------------------------------
+
     _t.navigate(href);
 
     // Record form should be visible, "Text" tab active.
@@ -34,6 +39,13 @@ describe('Record Router', function() {
 
 
   it('#record/:id/:tab', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/:id/:tab` route is requested, the record form should
+    // be displayed and the requested tab should be activated.
+    // --------------------------------------------------------------------
+
+    // Walk tabs.
     _.each(_t.getTabSlugs(), function(slug) {
 
       _t.navigate(href+'/'+slug);
@@ -43,10 +55,16 @@ describe('Record Router', function() {
       _t.assertActiveTab(slug);
 
     });
+
   });
 
 
   it('#record/add', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/add` route is requested, the record form should be
+    // displayed and the "Text' tab should be activated by default.
+    // --------------------------------------------------------------------
 
     _t.navigate('record/add');
 
@@ -58,6 +76,13 @@ describe('Record Router', function() {
 
 
   it('#record/add/:tab', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/add/:tab` route is requested, the record form should
+    // be displayed and the requested tab should be activated.
+    // --------------------------------------------------------------------
+
+    // Walk tabs.
     _.each(_t.getTabSlugs(), function(slug) {
 
       _t.navigate('record/add/'+slug);
@@ -67,6 +92,7 @@ describe('Record Router', function() {
       _t.assertActiveTab(slug);
 
     });
+
   });
 
 

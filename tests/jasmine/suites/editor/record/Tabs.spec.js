@@ -13,24 +13,78 @@
 describe('Record Form Tabs', function() {
 
 
-  var el;
-
-
   beforeEach(function() {
-
     _t.loadEditor();
+  });
 
-    el = {
-      text:     _t.vw.RECORD.$('a[href="#record-text"]'),
-      spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
-      style:    _t.vw.RECORD.$('a[href="#record-style"]')
-    };
+
+  it('should update route for unsaved record', function() {
+
+    // --------------------------------------------------------------------
+    // When the tabs are toggled in the edit form for an unsaved record,
+    // the route should update to provide a hard link to the current tab.
+    // For example, when the "Text" tab is active, the route should be:
+    //
+    // `#record/add/text`
+    //
+    // When the "Spatial" tab is active:
+    //
+    // `#record/add/spatial`
+    //
+    // etc.
+    // --------------------------------------------------------------------
+
+    // Add record.
+    _t.navigate('record/add');
+
+    // Walk tab slugs.
+    _.each(_t.getTabSlugs(), function(slug) {
+
+      // Click on the tab.
+      var tab = _t.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      tab.trigger('click');
+
+      // Route should update.
+      expect(Backbone.history.fragment).toEqual('record/add/'+slug);
+
+    });
 
   });
 
 
-  it('should update route for unsaved record');
-  it('should update route for saved record');
+  it('should update route for saved record', function() {
+
+    // --------------------------------------------------------------------
+    // When the tabs are toggled in the edit form for a saved record, the
+    // route should update to provide a hard link to the current tab. For
+    // example, when the "Text" tab is active, the route should be:
+    //
+    // `#record/<id>/text`
+    //
+    // When the "Spatial" tab is active:
+    //
+    // `#record/<id>/spatial`
+    //
+    // etc.
+    // --------------------------------------------------------------------
+
+    // Edit existing record.
+    var id = _t.getRecordListModels()[0].get('id');
+    _t.navigate('record/'+id);
+
+    // Walk tab slugs.
+    _.each(_t.getTabSlugs(), function(slug) {
+
+      // Click on the tab.
+      var tab = _t.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      tab.trigger('click');
+
+      // Route should update.
+      expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
+
+    });
+
+  });
 
 
 });
