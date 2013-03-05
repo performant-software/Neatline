@@ -13,17 +13,24 @@
 describe('Record Form Tabs', function() {
 
 
+  var el;
+
+
   beforeEach(function() {
+
     _t.loadEditor();
+
+    el = {
+      text:     _t.vw.RECORD.$('a[href="#record-text"]'),
+      spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
+      style:    _t.vw.RECORD.$('a[href="#record-style"]')
+    };
+
   });
 
 
-  it('should ', function() {
-
-    // --------------------------------------------------------------------
-    // --------------------------------------------------------------------
-
-  });
+  it('should update route for unsaved record');
+  it('should update route for saved record');
 
 
 });

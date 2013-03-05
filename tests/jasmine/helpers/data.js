@@ -102,6 +102,18 @@ var _t = (function(_t) {
   };
 
 
+  /**
+   * Get an array of all the record form tab slugs.
+   *
+   * @return {Array}: The slugs.
+   */
+  _t.getTabSlugs = function() {
+    return _.map(this.vw.RECORD.__ui.tabs, function(tab) {
+      return $(tab).attr('data-slug');
+    });
+  };
+
+
   return _t;
 
 

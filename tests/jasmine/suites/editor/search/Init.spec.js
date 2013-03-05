@@ -22,30 +22,34 @@ describe('Search Initialization', function() {
   });
 
 
-  it('should populate search box with query', function() {
+  describe('should populate search box with query', function() {
 
     // --------------------------------------------------------------------
     // When a route that defines a search query is requested, the search
     // query should be populated in the input and parsed.
     // --------------------------------------------------------------------
 
-    // Single word query.
-    _t.navigate('records/search/query=word');
-    expect(_t.vw.SEARCH.__ui.search).toHaveValue('word');
+    it('single-word query', function() {
+      _t.navigate('records/search/query=word');
+      expect(_t.vw.SEARCH.__ui.search).toHaveValue('word');
+    });
 
-    // Multiple-word query.
-    _t.navigate('records/search/query=word1+word2');
-    expect(_t.vw.SEARCH.__ui.search).toHaveValue('word1 word2');
+    it('multiple-word query', function() {
+      _t.navigate('records/search/query=word1+word2');
+      expect(_t.vw.SEARCH.__ui.search).toHaveValue('word1 word2');
+    });
 
-    // Tags query.
-    _t.navigate('records/search/query=tags:+tag1,+tag2');
-    expect(_t.vw.SEARCH.__ui.search).toHaveValue('tags: tag1, tag2');
-    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+    it('tags query', function() {
+      _t.navigate('records/search/query=tags:+tag1,+tag2');
+      expect(_t.vw.SEARCH.__ui.search).toHaveValue('tags: tag1, tag2');
+      expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+    });
 
-    // Map query.
-    _t.navigate('records/search/query=map:');
-    expect(_t.vw.SEARCH.__ui.search).toHaveValue('map:');
-    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+    it('map-mirror query', function() {
+      _t.navigate('records/search/query=map:');
+      expect(_t.vw.SEARCH.__ui.search).toHaveValue('map:');
+      expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+    });
 
   });
 
@@ -62,6 +66,8 @@ describe('Search Initialization', function() {
     var c1 = _t.server.requests.length;
     _t.navigate('records/search/query=map:');
     var c2 = _t.server.requests.length;
+
+    // No GET request.
     expect(c2).toEqual(c1);
 
   });

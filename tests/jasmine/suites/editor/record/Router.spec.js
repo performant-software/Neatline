@@ -33,31 +33,16 @@ describe('Record Router', function() {
   });
 
 
-  describe('#record/:id/:tab', function() {
+  it('#record/:id/:tab', function() {
+    _.each(_t.getTabSlugs(), function(slug) {
 
-    afterEach(function() {
-      // Record form should be visible.
+      _t.navigate(href+'/'+slug);
+
+      // Record form should be visible, requested tab active.
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    });
+      _t.assertActiveTab(slug);
 
-    it('text', function() {
-      _t.navigate(href+'/text');
-      // "Text" tab active.
-      _t.assertActiveTab('text');
     });
-
-    it('spatial', function() {
-      _t.navigate(href+'/spatial');
-      // "Spatial" tab active.
-      _t.assertActiveTab('spatial');
-    });
-
-    it('style', function() {
-      _t.navigate(href+'/style');
-      // "Style" tab active.
-      _t.assertActiveTab('style');
-    });
-
   });
 
 
@@ -72,31 +57,16 @@ describe('Record Router', function() {
   });
 
 
-  describe('#record/add/:tab', function() {
+  it('#record/add/:tab', function() {
+    _.each(_t.getTabSlugs(), function(slug) {
 
-    afterEach(function() {
-      // Record form should be visible.
+      _t.navigate('record/add/'+slug);
+
+      // Record form should be visible, requested tab active.
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    });
+      _t.assertActiveTab(slug);
 
-    it('text', function() {
-      _t.navigate('record/add/text');
-      // "Text" tab active.
-      _t.assertActiveTab('text');
     });
-
-    it('spatial', function() {
-      _t.navigate('record/add/spatial');
-      // "Spatial" tab active.
-      _t.assertActiveTab('spatial');
-    });
-
-    it('style', function() {
-      _t.navigate('record/add/style');
-      // "Style" tab active.
-      _t.assertActiveTab('style');
-    });
-
   });
 
 
