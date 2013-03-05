@@ -45,7 +45,7 @@ Neatline.module('Editor.Record', function(
   var bindNew = function() {
     var record = new Neatline.Shared.Record.Model();
     Record.__view.bind(record);
-    Record.__view.resetTabs();
+    Record.__view.reset();
   };
   Neatline.commands.addHandler('RECORD:bindNew', bindNew);
 

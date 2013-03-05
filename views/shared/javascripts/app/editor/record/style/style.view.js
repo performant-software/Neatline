@@ -18,16 +18,16 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
     events: {
 
+      // Tab change.
+      'shown ul.nav a':                 'onTabChange',
+
       // Set map-derived styles.
       'click a[name="set-min-zoom"]':   'onSetMinZoom',
       'click a[name="set-max-zoom"]':   'onSetMaxZoom',
       'click a[name="set-focus"]':      'onSetFocus',
 
       // Preview styles.
-      'keyup input.preview':            'onStyleKeyup',
-
-      // Tab changes.
-      'shown ul.nav a':                 'buildUi'
+      'keyup input.preview':            'onStyleKeyup'
 
     },
 
@@ -50,7 +50,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     /**
      * Instantiate color pickers and draggers.
      */
-    buildUi: function() {
+    onTabChange: function() {
 
       // INTEGERS
       this.$('input.integer').draggableInput({

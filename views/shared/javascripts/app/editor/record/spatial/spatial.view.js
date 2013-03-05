@@ -18,6 +18,9 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
     events: {
 
+      // Tab change.
+      'shown ul.nav a':                 'onTabChange',
+
       // Change map edit mode.
       'change div.spatial input':       'onControlChange',
       'keyup div.spatial input':        'onControlChange',
@@ -26,10 +29,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
       'click a[name="parse"]':          'onParseClick',
 
       // Clear all geometries.
-      'click a[name="clear"]':          'onClearClick',
-
-      // Tab changes.
-      'shown ul.nav a':                 'onTabChange'
+      'click a[name="clear"]':          'onClearClick'
 
     },
 
@@ -55,6 +55,18 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
     initialize: function() {
       this.hash = null;     // The `href` of the active tab.
       this.getUi();
+    },
+
+
+    /**
+     * Cache the current tab, (de)activate the presenter.
+     *
+     * @param {Object} event: The `shown` event.
+     */
+    onTabChange: function(event) {
+      this.hash = event.target.hash;
+      this.setPresenterStatus();
+      this.resetEditMode();
     },
 
 
@@ -110,18 +122,6 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      */
     onClearClick: function() {
       Neatline.execute('MAPEDIT:clearLayer');
-    },
-
-
-    /**
-     * Cache the current tab hash, (de)activate the presenter.
-     *
-     * @param {Object} event: The `shown` event.
-     */
-    onTabChange: function(event) {
-      this.hash = event.target.hash;
-      this.setPresenterStatus();
-      this.resetEditMode();
     },
 
 

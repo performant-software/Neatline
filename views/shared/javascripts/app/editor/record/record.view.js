@@ -22,6 +22,7 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
+      'shown ul.nav a':           'onTabChange',
       'click a[name="close"]':    'onCloseClick',
       'click a[name="save"]':     'onSaveClick',
       'click a[name="delete2"]':  'onDeleteClick'
@@ -38,10 +39,10 @@ Neatline.module('Editor.Record', function(
      * Initialize state, render template.
      */
     initialize: function() {
-      this.open = false;    // True when the form is displayed.
+      this.open = false;
       this.getTemplate();
       this.getUi();
-      this.resetTabs();
+      this.reset();
     },
 
 
@@ -52,20 +53,20 @@ Neatline.module('Editor.Record', function(
      */
     bind: function(model) {
 
+      this.model = model;
+      this.open  = true;
+
       // Start map editing, bind model to form.
-      Neatline.execute('MAPEDIT:startEdit', model);
+      Neatline.execute('MAPEDIT:startEdit', this.model);
       rivets.bind(this.$el, { record: model });
 
       // Update map on model change.
-      model.bind('change', function() {
-        Neatline.execute('MAPEDIT:updateModel', model);
-      });
+      this.model.bind('change', _.bind(function() {
+        Neatline.execute('MAPEDIT:updateModel', this.model);
+      }, this));
 
       // Notify tab views.
-      Neatline.vent.trigger('RECORD:bind', model);
-
-      this.model = model;
-      this.open  = true;
+      Neatline.vent.trigger('RECORD:bind', this.model);
 
     },
 
@@ -85,6 +86,16 @@ Neatline.module('Editor.Record', function(
       this.model = null;
       this.open  = false;
 
+    },
+
+
+    /**
+     * Update the route.
+     *
+     * @param {Object} event: The `shown` event.
+     */
+    onTabChange: function(event) {
+      // console.log(event);
     },
 
 
@@ -182,7 +193,7 @@ Neatline.module('Editor.Record', function(
     /**
      * Activate the "Text" tab.
      */
-    resetTabs: function() {
+    reset: function() {
       this.__ui.textRegion.addClass('active');
       this.__ui.textTab.tab('show');
     }
