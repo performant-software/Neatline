@@ -26,9 +26,15 @@
   </p>
 
   <ul class="nav nav-pills">
-    <li><a href="#record-form-text" data-toggle="tab">Text</a></li>
-    <li><a href="#record-form-spatial" data-toggle="tab">Spatial</a></li>
-    <li><a href="#record-form-style" data-toggle="tab">Style</a></li>
+    <li class="tab" data-slug="text">
+      <a href="#record-form-text" data-toggle="tab">Text</a>
+    </li>
+    <li class="tab" data-slug="spatial">
+      <a href="#record-form-spatial" data-toggle="tab">Spatial</a>
+    </li>
+    <li class="tab" data-slug="style">
+      <a href="#record-form-style" data-toggle="tab">Style</a>
+    </li>
   </ul>
 
   <div class="tab-content">
