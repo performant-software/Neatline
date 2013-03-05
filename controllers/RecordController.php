@@ -47,14 +47,8 @@ class Neatline_RecordController extends Neatline_RestController
         $post = Zend_Json::decode($this->_request->getRawBody());
         $record->saveForm($post);
 
-        // Set the new record id on the request.
+        // Forward to GET.
         $this->_request->setParam('id', $record->id);
-
-        // Apply exhibit stylesheet, sync tag-siblings.
-        $this->_table->applyStyles($record->getExhibit(), $record);
-        $this->_table->syncStyles($record);
-
-        // Return GET.
         $this->getAction();
 
     }
@@ -74,11 +68,7 @@ class Neatline_RecordController extends Neatline_RestController
             Zend_Registry::get('fileIn')), true
         ));
 
-        // Apply exhibit stylesheet, sync tag-siblings.
-        $this->_table->applyStyles($record->getExhibit(), $record);
-        $this->_table->syncStyles($record);
-
-        // Return GET.
+        // Forward to GET.
         $this->getAction();
 
     }
