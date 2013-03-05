@@ -39,6 +39,7 @@ Neatline.module('Editor.Record', function(
      */
     initialize: function() {
       this.open = false;
+      this.hash = null;
       this.getTemplate();
       this.getUi();
     },
@@ -110,6 +111,9 @@ Neatline.module('Editor.Record', function(
 
       // Update the route.
       Neatline.execute('EDITOR:setRoute', 'record/'+record+'/'+tab);
+
+      // Store tab hash.
+      this.hash = event.target.hash;
 
     },
 

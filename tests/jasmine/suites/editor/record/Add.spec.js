@@ -116,11 +116,11 @@ describe('Record Form Add', function() {
   });
 
 
-  it('should update the route after first save', function() {
+  it('should update the route after save', function() {
 
     // --------------------------------------------------------------------
-    // When a record is saved for the first time, the URL hash should be
-    // updated to point to the record/:id resource for the new record.
+    // When a record is saved, the URL hash should be updated to point to
+    // the id-specific resource for the record.
     // --------------------------------------------------------------------
 
     // Add record.

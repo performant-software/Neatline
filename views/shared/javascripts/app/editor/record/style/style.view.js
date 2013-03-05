@@ -19,15 +19,15 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     events: {
 
       // Tab change.
-      'shown ul.nav a':                 'onTabChange',
+      'shown ul.nav a':               'onTabChange',
 
       // Set map-derived styles.
-      'click a[name="set-min-zoom"]':   'onSetMinZoom',
-      'click a[name="set-max-zoom"]':   'onSetMaxZoom',
-      'click a[name="set-focus"]':      'onSetFocus',
+      'click a[name="set-min-zoom"]': 'onSetMinZoom',
+      'click a[name="set-max-zoom"]': 'onSetMaxZoom',
+      'click a[name="set-focus"]':    'onSetFocus',
 
       // Preview styles.
-      'keyup input.preview':            'onStyleKeyup'
+      'keyup input.preview':          'onStyleKeyup'
 
     },
 
