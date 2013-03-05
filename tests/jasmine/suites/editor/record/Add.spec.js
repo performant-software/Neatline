@@ -120,21 +120,37 @@ describe('Record Form Add', function() {
 
     // --------------------------------------------------------------------
     // When a record is saved, the URL hash should be updated to point to
-    // the id-specific resource for the record.
+    // the id-specific resource for the record. For example, if the "Text"
+    // tab is active, the route should change from `#record/add/text` to:
+    //
+    // `#record/<id>/text`
+    //
+    // When the "Spatial" tab is active:
+    //
+    // `#record/<id>/spatial`
+    //
+    // etc.
     // --------------------------------------------------------------------
 
     // Add record.
     _t.click(el.addButton);
 
-    // Click "Save".
-    el.saveButton.trigger('click');
-    _t.respondNewRecord();
+    // Walk tab slugs.
+    _.each(_t.getTabSlugs(), function(slug) {
 
-    // Get the id of the record.
-    var id = _t.getNewRecordId();
+      // Click on the tab.
+      var tab = _t.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      tab.trigger('click');
 
-    // Route should be updated to record/:id.
-    expect(Backbone.history.fragment).toEqual('record/'+id);
+      // Click "Save".
+      el.saveButton.trigger('click');
+      _t.respondNewRecord();
+
+      // Route should be updated.
+      var id = _t.getNewRecordId();
+      expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
+
+    });
 
   });
 

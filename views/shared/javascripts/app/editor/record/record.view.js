@@ -39,7 +39,7 @@ Neatline.module('Editor.Record', function(
      */
     initialize: function() {
       this.open = false;
-      this.hash = null;
+      this.tab = null;
       this.getTemplate();
       this.getUi();
     },
@@ -105,15 +105,12 @@ Neatline.module('Editor.Record', function(
      */
     onTabChange: function(event) {
 
-      // Get the record and tab slugs.
-      var record = this.model.get('id') || 'add';
-      var tab = $(event.target).attr('data-slug');
+      // Get the tab slug and id.
+      this.tab = $(event.target).attr('data-slug');
+      var id = this.model.get('id') || 'add';
 
       // Update the route.
-      Neatline.execute('EDITOR:setRoute', 'record/'+record+'/'+tab);
-
-      // Store tab hash.
-      this.hash = event.target.hash;
+      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.tab);
 
     },
 
@@ -161,7 +158,7 @@ Neatline.module('Editor.Record', function(
 
       // Update the route.
       Neatline.execute('EDITOR:setRoute',
-        'record/'+this.model.get('id')
+        'record/'+this.model.get('id')+'/'+this.tab
       );
 
       // Refresh the map.
