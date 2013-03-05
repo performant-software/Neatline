@@ -149,9 +149,7 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('MAP:refresh');
 
       // Update the route.
-      Neatline.execute('RECORD:updateRoute',
-        'record/'+this.model.get('id')
-      );
+      Backbone.history.navigate('record/'+this.model.get('id'));
 
       // Flash success.
       Neatline.execute('EDITOR:notifySuccess',

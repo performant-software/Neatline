@@ -79,17 +79,6 @@ Neatline.module('Editor.Record', function(
 
 
   /**
-   * Update the route hash.
-   *
-   * @param {String} message: The new route.
-   */
-  var updateRoute = function(route) {
-    Record.__router.navigate(route, { replace: true });
-  };
-  Neatline.commands.addHandler('RECORD:updateRoute', updateRoute);
-
-
-  /**
    * Update coverage textarea.
    *
    * @param {String} coverage: The new WKT.
