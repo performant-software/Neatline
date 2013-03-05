@@ -131,7 +131,7 @@ Neatline.module('Editor.Exhibit.Search', function(
       this.parse();
 
       // Update the route.
-      Backbone.history.navigate(this.getUrlFromQuery());
+      Neatline.execute('EDITOR:setRoute', this.getUrlFromQuery());
 
       // Build parameters object.
       var params = _.extend(this.query, {

@@ -56,6 +56,17 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
+   * Update the route hash without adding to the history.
+   *
+   * @param {String} route: The new route.
+   */
+  var setRoute = function(route) {
+    Backbone.history.navigate(route, { replace: true });
+  };
+  Neatline.commands.addHandler('EDITOR:setRoute', setRoute);
+
+
+  /**
    * Return the editor container div.
    *
    * @return {Object}: The container.

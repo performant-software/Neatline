@@ -105,7 +105,7 @@ Neatline.module('Editor.Record', function(
     onTabChange: function(event) {
       var slug = $(event.target).attr('data-slug');
       var id = this.model.get('id') || 'add';
-      Backbone.history.navigate('record/'+id+'/'+slug);
+      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+slug);
     },
 
 
@@ -145,16 +145,18 @@ Neatline.module('Editor.Record', function(
      */
     onSaveSuccess: function() {
 
-      // Refresh the map.
-      Neatline.execute('MAP:refresh');
-
-      // Update the route.
-      Backbone.history.navigate('record/'+this.model.get('id'));
-
       // Flash success.
       Neatline.execute('EDITOR:notifySuccess',
         STRINGS.record.save.success
       );
+
+      // Update the route.
+      Neatline.execute('EDITOR:setRoute',
+        'record/'+this.model.get('id')
+      );
+
+      // Refresh the map.
+      Neatline.execute('MAP:refresh');
 
     },
 
@@ -174,15 +176,16 @@ Neatline.module('Editor.Record', function(
      */
     onDeleteSuccess: function() {
 
-      // Delete the record's layer on the map.
-      Neatline.execute('MAPEDIT:deleteLayer', this.model);
-      this.__ui.modal.modal('hide');
-
       // FLash success.
       Neatline.execute('EDITOR:notifySuccess',
         STRINGS.record.remove.success
       );
 
+      // Delete the record's layer on the map.
+      Neatline.execute('MAPEDIT:deleteLayer', this.model);
+      this.__ui.modal.modal('hide');
+
+      // Close the form.
       this.onCloseClick();
 
     },
