@@ -32,11 +32,21 @@ Neatline.module('Editor.Record', function(
    * @param {String} tab: The active tab.
    */
   var bindId = function(id, tab) {
+
     id = parseInt(id, 10);
+
+    // Get or fetch the model.
     Neatline.request('RECORDS:getModel', id, function(record) {
+
+      // Bind model to form.
       Record.__view.bind(record);
+
+      // Display the form and tab.
+      Neatline.execute('EDITOR:display', ['RECORD']);
       Record.__view.activateTab(tab);
+
     });
+
   };
   Neatline.commands.addHandler('RECORD:bindId', bindId);
 
@@ -47,9 +57,15 @@ Neatline.module('Editor.Record', function(
    * @param {String} tab: The active tab.
    */
   var bindNew = function(tab) {
+
+    // Create a new model, bind to form.
     var record = new Neatline.Shared.Record.Model();
     Record.__view.bind(record);
+
+    // Display form and tab.
+    Neatline.execute('EDITOR:display', ['RECORD']);
     Record.__view.activateTab(tab);
+
   };
   Neatline.commands.addHandler('RECORD:bindNew', bindNew);
 
