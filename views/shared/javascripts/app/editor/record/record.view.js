@@ -29,9 +29,8 @@ Neatline.module('Editor.Record', function(
     },
 
     ui: {
-      textTab:    'a[href="#record-form-text"]',
-      textRegion: '#record-form-text',
-      delModal:   '#delete-modal'
+      tabs:   'li.tab a',
+      modal:  '#delete-modal'
     },
 
 
@@ -42,7 +41,6 @@ Neatline.module('Editor.Record', function(
       this.open = false;
       this.getTemplate();
       this.getUi();
-      this.reset();
     },
 
 
@@ -90,12 +88,24 @@ Neatline.module('Editor.Record', function(
 
 
     /**
+     * Activate a tab.
+     *
+     * @param {String} tab: The tab to activate.
+     */
+    activateTab: function(tab) {
+      this.__ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
+    },
+
+
+    /**
      * Update the route.
      *
      * @param {Object} event: The `shown` event.
      */
     onTabChange: function(event) {
-      // console.log(event);
+      var slug = $(event.target).attr('data-slug');
+      var id = this.model.get('id') || 'add';
+      Backbone.history.navigate('record/'+id+'/'+slug);
     },
 
 
@@ -140,7 +150,7 @@ Neatline.module('Editor.Record', function(
 
       // Update the route.
       Neatline.execute('RECORD:updateRoute',
-        'records/'+this.model.get('id')
+        'record/'+this.model.get('id')
       );
 
       // Flash success.
@@ -168,7 +178,7 @@ Neatline.module('Editor.Record', function(
 
       // Delete the record's layer on the map.
       Neatline.execute('MAPEDIT:deleteLayer', this.model);
-      this.__ui.delModal.modal('hide');
+      this.__ui.modal.modal('hide');
 
       // FLash success.
       Neatline.execute('EDITOR:notifySuccess',
@@ -187,15 +197,6 @@ Neatline.module('Editor.Record', function(
       Neatline.execute('EDITOR:notifyError',
         STRINGS.record.remove.error
       );
-    },
-
-
-    /**
-     * Activate the "Text" tab.
-     */
-    reset: function() {
-      this.__ui.textRegion.addClass('active');
-      this.__ui.textTab.tab('show');
     }
 
 

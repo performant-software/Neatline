@@ -23,19 +23,19 @@ describe('Record Form Add', function() {
     el = {
 
       labels: {
-        text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
-        spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
-        style:    _t.vw.RECORD.$('a[href="#record-form-style"]')
+        text:     _t.vw.RECORD.$('a[href="#record-text"]'),
+        spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
+        style:    _t.vw.RECORD.$('a[href="#record-style"]')
       },
 
       tabs: {
-        text:     _t.vw.RECORD.$('#record-form-text'),
-        spatial:  _t.vw.RECORD.$('#record-form-spatial'),
-        style:    _t.vw.RECORD.$('#record-form-style')
+        text:     _t.vw.RECORD.$('#record-text'),
+        spatial:  _t.vw.RECORD.$('#record-spatial'),
+        style:    _t.vw.RECORD.$('#record-style')
       },
 
       buttons: {
-        add:      _t.vw.RECORDS.$('a[href="#records/add"]'),
+        add:      _t.vw.RECORDS.$('a[href="#record/add"]'),
         close:    _t.vw.RECORD.$('a[name="close"]'),
         save:     _t.vw.RECORD.$('a[name="save"]')
       },
@@ -147,7 +147,7 @@ describe('Record Form Add', function() {
 
     // --------------------------------------------------------------------
     // When a record is saved for the first time, the URL hash should be
-    // updated to point to the records/:id resource for the new record.
+    // updated to point to the record/:id resource for the new record.
     // --------------------------------------------------------------------
 
     // Add record.
@@ -160,8 +160,8 @@ describe('Record Form Add', function() {
     // Get the id of the record.
     var newId = _t.getNewRecordId();
 
-    // Route should be updated to records/:id.
-    expect(Backbone.history.fragment).toEqual('records/'+newId);
+    // Route should be updated to record/:id.
+    expect(Backbone.history.fragment).toEqual('record/'+newId);
 
   });
 

@@ -34,7 +34,7 @@ describe('Map Data Rendering', function() {
     // that fall within the default viewport.
     // --------------------------------------------------------------------
 
-    // Route should be /records/:id, method GET.
+    // Route should be records API, method GET.
     _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
@@ -73,7 +73,7 @@ describe('Map Data Rendering', function() {
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.changed);
 
-    // Route should be /records/:id, method GET.
+    // Route should be records API, method GET.
     _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
@@ -113,7 +113,7 @@ describe('Map Data Rendering', function() {
     _t.triggerMapMove();
     _t.respondLast200(_t.json.records.removed);
 
-    // Route should be /records/:id, method GET.
+    // Route should be records API, method GET.
     _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 

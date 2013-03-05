@@ -22,8 +22,8 @@ describe('Record Form Spatial Tab', function() {
     _t.openFirstRecordForm();
 
     el = {
-      text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
-      spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+      text:     _t.vw.RECORD.$('a[href="#record-text"]'),
+      spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
       pan:      _t.vw.RECORD.$('input[value="pan"]'),
       point:    _t.vw.RECORD.$('input[value="point"]'),
       line:     _t.vw.RECORD.$('input[value="line"]'),

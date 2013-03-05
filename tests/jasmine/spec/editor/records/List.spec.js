@@ -38,13 +38,13 @@ describe('Records List', function() {
     expect($(recordRows[3]).find('.body')).toHaveText('_body3');
 
     // Record edit form links should be listed.
-    expect($(recordRows[0]).attr('href')).toEqual('#records/add');
+    expect($(recordRows[0]).attr('href')).toEqual('#record/add');
     expect($(recordRows[1]).attr('href')).
-      toEqual('#records/'+recordModels[0].get('id'));
+      toEqual('#record/'+recordModels[0].get('id'));
     expect($(recordRows[2]).attr('href')).
-      toEqual('#records/'+recordModels[1].get('id'));
+      toEqual('#record/'+recordModels[1].get('id'));
     expect($(recordRows[3]).attr('href')).
-      toEqual('#records/'+recordModels[2].get('id'));
+      toEqual('#record/'+recordModels[2].get('id'));
 
   });
 

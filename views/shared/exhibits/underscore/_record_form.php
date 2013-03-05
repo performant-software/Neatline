@@ -26,32 +26,35 @@
   </p>
 
   <ul class="nav nav-pills">
-    <li class="tab" data-slug="text">
-      <a href="#record-form-text" data-toggle="tab">Text</a>
+    <li class="tab">
+      <a href="#record-text" data-toggle="tab"
+        data-slug="text">Text</a>
     </li>
-    <li class="tab" data-slug="spatial">
-      <a href="#record-form-spatial" data-toggle="tab">Spatial</a>
+    <li class="tab">
+      <a href="#record-spatial" data-toggle="tab"
+        data-slug="spatial">Spatial</a>
     </li>
-    <li class="tab" data-slug="style">
-      <a href="#record-form-style" data-toggle="tab">Style</a>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab"
+        data-slug="style">Style</a>
     </li>
   </ul>
 
   <div class="tab-content">
 
-    <div class="tab-pane text" id="record-form-text">
+    <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
         'exhibits/underscore/partials/_text_tab.php'
       ); ?>
     </div>
 
-    <div class="tab-pane spatial" id="record-form-spatial">
+    <div class="tab-pane spatial" id="record-spatial">
       <?php echo $this->partial(
         'exhibits/underscore/partials/_spatial_tab.php'
       ); ?>
     </div>
 
-    <div class="tab-pane style" id="record-form-style">
+    <div class="tab-pane style" id="record-style">
       <?php echo $this->partial(
         'exhibits/underscore/partials/_style_tab.php'
       ); ?>

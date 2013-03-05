@@ -142,7 +142,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      * @return {Boolean}: True if "Spatial" is active.
      */
     spatialTabActive: function() {
-      return this.hash == '#record-form-spatial';
+      return this.hash == '#record-spatial';
     },
 
 

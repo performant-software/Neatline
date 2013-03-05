@@ -30,7 +30,7 @@ describe('Record Router', function() {
 
   it('#record/add', function() {
 
-    _t.navigate('records/add');
+    _t.navigate('record/add');
 
     // Record form should be visible.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);

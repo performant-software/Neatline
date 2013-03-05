@@ -18,28 +18,53 @@ Neatline.module('Editor.Record', function(
 
 
     routes: {
-      'records/add': 'records/add',
-      'records/:id': 'records/:id'
+      'record/add':      'record/add',
+      'record/add/:tab': 'record/add/:tab',
+      'record/:id':      'record/:id',
+      'record/:id/:tab': 'record/:id/:tab'
     },
 
 
     /**
      * Show add record form.
      */
-    'records/add': function() {
+    'record/add': function() {
       Neatline.execute('EDITOR:display', ['RECORD']);
-      Neatline.execute('RECORD:bindNew');
+      Neatline.execute('RECORD:bindNew', 'text');
     },
 
 
     /**
-     * Show edit form for individual record.
+     * Show add record form with specific tab.
+     *
+     * @param {String} tab: The active tab.
+     */
+    'record/add/:tab': function(tab) {
+      Neatline.execute('EDITOR:display', ['RECORD']);
+      Neatline.execute('RECORD:bindNew', tab);
+    },
+
+
+    /**
+     * Show edit record form.
      *
      * @param {String} id: The record id.
      */
-    'records/:id': function(id) {
+    'record/:id': function(id) {
       Neatline.execute('EDITOR:display', ['RECORD']);
-      Neatline.execute('RECORD:bindId', id);
+      Neatline.execute('RECORD:bindId', id, 'text');
+    },
+
+
+    /**
+     * Show edit record form with specific tab.
+     *
+     * @param {String} id: The record id.
+     * @param {String} tab: The active tab.
+     */
+    'record/:id/:tab': function(id, tab) {
+      Neatline.execute('EDITOR:display', ['RECORD']);
+      Neatline.execute('RECORD:bindId', id, tab);
     }
 
 

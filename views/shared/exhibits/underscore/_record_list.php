@@ -19,10 +19,10 @@
 
   <ul class="list">
 
-    <a href="#records/add">New Record</a>
+    <a href="#record/add">New Record</a>
 
     <% records.each(function(r) { %>
-      <a href="#records/<%= r.get('id') %>" data-id="<%= r.get('id') %>">
+      <a href="#record/<%= r.get('id') %>" data-id="<%= r.get('id') %>">
         <span class="title">
           <% if (!_.isEmpty(r.get('_title'))) { %>
             <%= _.string.stripTags(r.get('_title')) %>

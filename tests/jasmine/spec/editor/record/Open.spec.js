@@ -33,15 +33,15 @@ describe('Record Form Open', function() {
       close:      _t.vw.RECORD.$('a[name="close"]'),
 
       labels: {
-        text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
-        spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
-        style:    _t.vw.RECORD.$('a[href="#record-form-style"]')
+        text:     _t.vw.RECORD.$('a[href="#record-text"]'),
+        spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
+        style:    _t.vw.RECORD.$('a[href="#record-style"]')
       },
 
       tabs: {
-        text:     _t.vw.RECORD.$('#record-form-text'),
-        spatial:  _t.vw.RECORD.$('#record-form-spatial'),
-        style:    _t.vw.RECORD.$('#record-form-style')
+        text:     _t.vw.RECORD.$('#record-text'),
+        spatial:  _t.vw.RECORD.$('#record-spatial'),
+        style:    _t.vw.RECORD.$('#record-style')
       }
 
     };
@@ -66,10 +66,10 @@ describe('Record Form Open', function() {
   });
 
 
-  it('should open the form when /records/:id is requested', function() {
+  it('should open the form when /record/:id is requested', function() {
 
     // --------------------------------------------------------------------
-    // The record form should be displayed when /records/:id is accessed.
+    // The record form should be displayed when /record/:id is accessed.
     // --------------------------------------------------------------------
 
     // Click on record row.

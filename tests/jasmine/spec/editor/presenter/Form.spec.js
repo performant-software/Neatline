@@ -22,8 +22,8 @@ describe('Presenter Form Interaction', function() {
     _t.openFirstRecordForm();
 
     el = {
-      text:     _t.vw.RECORD.$('a[href="#record-form-text"]'),
-      spatial:  _t.vw.RECORD.$('a[href="#record-form-spatial"]'),
+      text:     _t.vw.RECORD.$('a[href="#record-text"]'),
+      spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
       close:    _t.vw.RECORD.$('a[name="close"]')
     };
 

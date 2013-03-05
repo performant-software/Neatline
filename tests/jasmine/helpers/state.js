@@ -124,7 +124,7 @@ var _t = (function(_t) {
   _t.openFirstRecordForm = function() {
     this.showRecordList(this.json.records.standard);
     var models = this.getRecordListModels();
-    this.navigate('records/'+models[0].get('id'));
+    this.navigate('record/'+models[0].get('id'));
   };
 
 
