@@ -35,7 +35,105 @@ describe('Record Form Open', function() {
   });
 
 
-  it('should open the form when a record row is clicked', function() {
+  describe('model binding', function() {
+
+    var model;
+
+    afterEach(function() {
+
+      // The form should be displayed and  populated with data.
+      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+      expect(_t.vw.RECORD.model.get('id')).toEqual(model.get('id'));
+
+    });
+
+    it('when a record row is clicked', function() {
+
+      // ------------------------------------------------------------------
+      // When one of the listings in the record browser is clicked, the
+      // existing model should be bound to the form immediately.
+      // ------------------------------------------------------------------
+
+      model = recordModels[0];
+
+      // Click on a record listing.
+      var c1 = _t.server.requests.length;
+      _t.click($(recordRows[1]));
+      var c2 = _t.server.requests.length;
+      // TODO
+
+      // No GET request.
+      expect(c2).toEqual(c1);
+
+    });
+
+    it('when a loaded record is requested by a route', function() {
+
+      // ------------------------------------------------------------------
+      // When a record that has already been loaded into the browser is
+      // requested by a route, the existing model should be bound to the
+      // form immediately.
+      // ------------------------------------------------------------------
+
+      model = recordModels[0];
+
+      // Request an already-loaded record.
+      var c1 = _t.server.requests.length;
+      _t.navigate('record/'+recordModels[0].get('id'));
+      var c2 = _t.server.requests.length;
+
+      // No GET request.
+      expect(c2).toEqual(c1);
+
+    });
+
+    it('when an unloaded record is requested by a route', function() {
+
+      // ------------------------------------------------------------------
+      // When a record that has _not_ already been loaded into the browser
+      // is requested by a route, the record should be loaded.
+      // ------------------------------------------------------------------
+
+      model = _t.buildModelFromJson(_t.json.record.standard);
+
+      // Request an unloaded record.
+      var c1 = _t.server.requests.length;
+      _t.navigate('record/999');
+      var c2 = _t.server.requests.length;
+      expect(c2).toEqual(c1+1);
+
+      // Should generate GET request to record/999.
+      _t.assertLastRequestRoute(Neatline.global.record_api+'/999');
+      _t.assertLastRequestMethod('GET');
+
+      // Respond to the GET request.
+      _t.respondLast200(_t.json.record.standard);
+
+    });
+
+    it('when a map feature is clicked', function() {
+
+      // ------------------------------------------------------------------
+      // When a map feature is clicked, the feature's parent model should
+      // be bound to the form immediately.
+      // ------------------------------------------------------------------
+
+      model = _t.vw.MAP.layers[0].nModel;
+
+      // Click on map feature.
+      var c1 = _t.server.requests.length;
+      _t.clickOnMapFeature(feature1);
+      var c2 = _t.server.requests.length;
+
+      // No GET request.
+      expect(c2).toEqual(c1);
+
+    });
+
+  });
+
+
+  it('should open when a record row is clicked', function() {
 
     // --------------------------------------------------------------------
     // When one of the record listings in the left panel is clicked, the
@@ -45,14 +143,13 @@ describe('Record Form Open', function() {
     // Click on record row.
     _t.click($(recordRows[1]));
 
-    // Record form should be displayed.
+    // Form should be displayed.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORDS.$el);
 
   });
 
 
-  it('should open the form when /record/:id is requested', function() {
+  it('should open when /record/:id is requested', function() {
 
     // --------------------------------------------------------------------
     // The record form should be displayed when /record/:id is accessed.
@@ -61,9 +158,25 @@ describe('Record Form Open', function() {
     // Click on record row.
     _t.navigate($(recordRows[1]).attr('href'));
 
-    // Record form should be displayed.
+    // Form should be displayed.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORDS.$el);
+
+  });
+
+
+  it('should open when a map feature is clicked', function() {
+
+    // --------------------------------------------------------------------
+    // When a vector geometry on the map is clicked and an edit form isn't
+    // already open, the edit form that corresponds to the geometry should
+    // be displayed in the left pane.
+    // --------------------------------------------------------------------
+
+    // Trigger click.
+    _t.clickOnMapFeature(feature1);
+
+    // Form should be displayed.
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
 
   });
 
@@ -107,25 +220,7 @@ describe('Record Form Open', function() {
   });
 
 
-  it('should show form when a map feature is clicked', function() {
-
-    // --------------------------------------------------------------------
-    // When a vector geometry on the map is clicked and an edit form isn't
-    // already open, the edit form that corresponds to the geometry should
-    // be displayed in the left pane.
-    // --------------------------------------------------------------------
-
-    // Trigger click.
-    _t.clickOnMapFeature(feature1);
-
-    // Record form should be displayed.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.RECORD.model.get('title')).toEqual('title1');
-
-  });
-
-
-  it('should not open new form in response to map click', function() {
+  it('should not change form model in response to map click', function() {
 
     // --------------------------------------------------------------------
     // When an edit form is already open, clicking on a map feature that
@@ -183,9 +278,9 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
     // When the user clicks on a map vector to open an edit form, the map
     // should _not_ jump to the default focus position for the record that
-    // corresponds to the clicked geometry. This to prevent lurching,
-    // disorienting leaps that can occur when the default zoom for the
-    // clicked record is much wider or tighter than the current map zoom.
+    // corresponds to the clicked geometry. This to prevent disorienting
+    // leaps that can occur when the default zoom for the clicked record
+    // is much wider or tighter than the current map zoom.
     // --------------------------------------------------------------------
 
     // Set center and zoom.
