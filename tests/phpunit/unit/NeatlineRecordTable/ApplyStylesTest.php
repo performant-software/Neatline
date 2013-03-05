@@ -31,14 +31,14 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record2->save();
 
         // YAML
-        $exhibit->styles = "
-        tag1:
-         - vector_color: '1'
-         - vector_opacity: 2
-        tag2:
-         - stroke_color: '3'
-         - stroke_opacity: 4
-        ";
+        $exhibit->styles = <<<YAML
+tag1:
+ - vector_color: '1'
+ - vector_opacity: 2
+tag2:
+ - stroke_color: '3'
+ - stroke_opacity: 4
+YAML;
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit);
@@ -73,10 +73,10 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record->save();
 
         // YAML
-        $exhibit->styles = "
-        tag:
-         - vector_color
-        ";
+        $exhibit->styles = <<<YAML
+tag:
+ - vector_color
+YAML;
 
         // Apply styles, reload record.
         $this->_recordsTable->applyStyles($exhibit);
@@ -99,10 +99,10 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record2 = $this->__record($exhibit);
 
         // YAML
-        $exhibit->styles = "
-        default:
-         - vector_color: 'color'
-        ";
+        $exhibit->styles = <<<YAML
+default:
+ - vector_color: 'color'
+YAML;
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit);
@@ -132,10 +132,10 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record2->save();
 
         // YAML
-        $exhibit1->styles = "
-        tag:
-         - vector_color: '1'
-        ";
+        $exhibit1->styles = <<<YAML
+tag:
+ - vector_color: '1'
+YAML;
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit1);
@@ -164,10 +164,10 @@ class Neatline_NeatlineRecordTableTest_ApplyStyles
         $record2->save();
 
         // YAML
-        $exhibit->styles = "
-        tag:
-         - vector_color: '1'
-        ";
+        $exhibit->styles = <<<YAML
+tag:
+ - vector_color: '1'
+YAML;
 
         // Apply styles, reload records.
         $this->_recordsTable->applyStyles($exhibit, $record1);

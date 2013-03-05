@@ -29,6 +29,76 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
+     * Synchronize the values in the stylesheet to match the values on the
+     * passed record. For example, if `styles` on the exhibit is:
+     *
+     * tag:
+     *  - vector_color: "#ffffff"
+     *  - stroke_color
+     *
+     * And the passed record is tagged with `tag` has has a `vector_color`
+     * of "#000000" and a `stroke_color` of "#f0f0f0", the stylesheet YAML
+     * should be updated to:
+     *
+     * tag:
+     *  - vector_color: "#000000"
+     *  - stroke_color: "#f0f0f0"
+     *
+     * @param NeatlineRecord $record The record to update from.
+     */
+    public function updateStyles($record)
+    {
+
+        // Prase the styles YAML.
+        $yaml = Spyc::YAMLLoad($this->styles);
+
+        // Gather style columns.
+        $valid = _nl_getStyles();
+
+        // Walk record tags.
+        foreach (_nl_explode($record->tags) as $tag) {
+
+            // If the tag is styled.
+            if (array_key_exists($tag, $yaml)) {
+                // Walk tag properties.
+                foreach ($yaml[$tag] as $i => $prop) {
+
+                    // Property has value. eg:
+                    // tag:
+                    //  - vector_color: "#000000"
+                    if (is_array($prop)) { $key = key($prop);
+                        // If the property is valid.
+                        if (in_array($key, $valid)) {
+                            // Update the stylesheet.
+                            $yaml[$tag][$i][$key] = $record->$key;
+                        }
+                    }
+
+                    // Property has no value.
+                    // tag:
+                    //  - vector_color
+                    if (is_string($prop)) {
+                        // If the property is valid.
+                        if (in_array($prop, $valid)) {
+                            // Update the stylesheet.
+                            $yaml[$tag][$i] = array(
+                                $prop => $record->$prop
+                            );
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        // Re-convert to YAML.
+        $this->styles = Spyc::YAMLDump($yaml);
+
+    }
+
+
+    /**
      * Get the number of active records in the exhibit.
      *
      * @return integer The record count.

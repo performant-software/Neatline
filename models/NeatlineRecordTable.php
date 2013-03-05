@@ -20,12 +20,12 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * definitions in the `styles` YAML. For example, if `styles` is:
      *
      * tag:
-     *  - vector_color: #ffffff
+     *  - vector_color: "#ffffff"
      *  - stroke_color
      *
-     *  The vector color on records tagged with `tag` will be updated to
-     *  #ffffff, but the stroke color will be unchanged since no explicit
-     *  value is set in the YAML.
+     * The vector color on records tagged with `tag` will be updated to
+     * #ffffff, but the stroke color will be unchanged since no explicit
+     * value is set in the YAML.
      *
      * @param NeatlineExhibit $exhibit The exhibit to update.
      * @param NeatlineRecord|null $record The record to update.
@@ -74,9 +74,9 @@ class NeatlineRecordTable extends Omeka_Db_Table
      *  - vector_color: #ffffff
      *  - stroke_color
      *
-     *  The stroke color on records tagged with `tag` will be updated to
-     *  the value on the passed record, but vector color will be unchanged
-     *  since an explicit value is set in the YAML.
+     * The stroke color on records tagged with `tag` will be updated to
+     * the value on the passed record, but vector color will be unchanged
+     * since an explicit value is set in the YAML.
      *
      * @param NeatlineRecord $record The record to propagate.
      */

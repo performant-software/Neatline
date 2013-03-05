@@ -34,10 +34,10 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
         $record3->save();
 
         // YAML
-        $exhibit->styles = "
-        tag1:
-         - vector_color
-        ";
+        $exhibit->styles = <<<YAML
+tag1:
+ - vector_color
+YAML;
 
         $exhibit->save();
         $record1->vector_color = 'color';
@@ -73,10 +73,10 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
         $record2->save();
 
         // YAML
-        $exhibit->styles = "
-        tag:
-         - vector_color: 'color1'
-        ";
+        $exhibit->styles = <<<YAML
+tag:
+ - vector_color: 'color1'
+YAML;
 
         $exhibit->save();
         $record1->vector_color = 'color2';
@@ -113,10 +113,10 @@ class Neatline_NeatlineRecordTableTest_SyncStyles
         $record3->save();
 
         // YAML
-        $exhibit1->styles = "
-        tag:
-         - vector_color
-        ";
+        $exhibit1->styles = <<<YAML
+tag:
+ - vector_color
+YAML;
 
         $exhibit1->save();
         $record1->vector_color = 'color';
