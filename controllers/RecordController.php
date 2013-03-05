@@ -68,6 +68,11 @@ class Neatline_RecordController extends Neatline_RestController
             Zend_Registry::get('fileIn')), true
         ));
 
+        // TODO|dev
+        $exhibit = $record->getExhibit();
+        $exhibit->updateStyles($record);
+        $exhibit->save();
+
         // Forward to GET.
         $this->getAction();
 

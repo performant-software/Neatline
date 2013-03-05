@@ -93,7 +93,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
         }
 
         // Re-convert to YAML.
-        $this->styles = Spyc::YAMLDump($yaml);
+        $this->styles = Spyc::YAMLDump($yaml, 1, false);
 
     }
 
