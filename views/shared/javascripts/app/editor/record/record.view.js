@@ -103,9 +103,14 @@ Neatline.module('Editor.Record', function(
      * @param {Object} event: The `shown` event.
      */
     onTabChange: function(event) {
-      var slug = $(event.target).attr('data-slug');
-      var id = this.model.get('id') || 'add';
-      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+slug);
+
+      // Get the record and tab slugs.
+      var record = this.model.get('id') || 'add';
+      var tab = $(event.target).attr('data-slug');
+
+      // Update the route.
+      Neatline.execute('EDITOR:setRoute', 'record/'+record+'/'+tab);
+
     },
 
 

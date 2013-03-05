@@ -131,10 +131,10 @@ describe('Record Form Add', function() {
     _t.respondNewRecord();
 
     // Get the id of the record.
-    var newId = _t.getNewRecordId();
+    var id = _t.getNewRecordId();
 
     // Route should be updated to record/:id.
-    expect(Backbone.history.fragment).toEqual('record/'+newId);
+    expect(Backbone.history.fragment).toEqual('record/'+id);
 
   });
 
