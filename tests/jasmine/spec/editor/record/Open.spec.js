@@ -27,23 +27,9 @@ describe('Record Form Open', function() {
     feature2  = _t.vw.MAP.layers[1].features[0];
 
     el = {
-
-      pan:        _t.vw.RECORD.$('input[value="pan"]'),
-      poly:       _t.vw.RECORD.$('input[value="poly"]'),
-      close:      _t.vw.RECORD.$('a[name="close"]'),
-
-      labels: {
-        text:     _t.vw.RECORD.$('a[href="#record-text"]'),
-        spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
-        style:    _t.vw.RECORD.$('a[href="#record-style"]')
-      },
-
-      tabs: {
-        text:     _t.vw.RECORD.$('#record-text'),
-        spatial:  _t.vw.RECORD.$('#record-spatial'),
-        style:    _t.vw.RECORD.$('#record-style')
-      }
-
+      pan:    _t.vw.RECORD.$('input[value="pan"]'),
+      poly:   _t.vw.RECORD.$('input[value="poly"]'),
+      close:  _t.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -117,31 +103,6 @@ describe('Record Form Open', function() {
     expect(inputs.maxZoom).         toHaveValue('34');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
-
-  });
-
-
-  it('should show the "Text" tab on first form open', function() {
-
-    // --------------------------------------------------------------------
-    // When a form is opened for the first time in an editing session, the
-    // "Text" tab should be activated by default.
-    // --------------------------------------------------------------------
-
-    // Open form.
-    _t.click($(recordRows[1]));
-
-    // "Text" tab should be active.
-    expect(el.labels.text.parent('li')).toHaveClass('active');
-    expect(el.tabs.text).toHaveClass('active');
-
-    // "Spatial" should be inactive.
-    expect(el.labels.spatial.parent('li')).not.toHaveClass('active');
-    expect(el.tabs.spatial).not.toHaveClass('active');
-
-    // "Style" should be inactive.
-    expect(el.labels.style.parent('li')).not.toHaveClass('active');
-    expect(el.tabs.style).not.toHaveClass('active');
 
   });
 

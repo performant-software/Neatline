@@ -25,6 +25,9 @@ describe('Record Router', function() {
     // Record form should be visible.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
 
+    // "Text" should be active.
+    _t.assertActiveTab('text');
+
   });
 
 
@@ -34,6 +37,9 @@ describe('Record Router', function() {
 
     // Record form should be visible.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+
+    // "Text" should be active.
+    _t.assertActiveTab('text');
 
   });
 
