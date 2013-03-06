@@ -27,6 +27,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $exhibit->description   = 'Description.';
         $exhibit->base_layers   = 'Layer1,Layer3';
         $exhibit->base_layer    = 'Layer3';
+        $exhibit->widgets       = 'Widget1,Widget2';
         $exhibit->public        = 1;
         $exhibit->save();
 
@@ -52,6 +53,14 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertXpath(
             '//select[@name="base_layer"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
+
+        // Widgets:
+        $this->assertXpath(
+            '//select[@name="widgets[]"]/
+            option[@selected="selected"][@value="Widget1"]');
+        $this->assertXpath(
+            '//select[@name="widgets[]"]/
+            option[@selected="selected"][@value="Widget2"]');
 
         // Description:
         $this->assertXpathContentContains(

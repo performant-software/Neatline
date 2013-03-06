@@ -55,7 +55,10 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
 
         // Widgets:
-        $this->assertXpath('//select[@name="widgets[]"]');
+        $root = '//select[@name="widgets[]"]';
+        $this->assertXpath($root.'/option[@value="Widget1"]');
+        $this->assertXpath($root.'/option[@value="Widget2"]');
+        $this->assertXpath($root.'/option[@value="Widget3"]');
 
         // Description:
         $this->assertXpath('//textarea[@name="description"]');

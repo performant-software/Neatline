@@ -19,3 +19,4 @@ if (!($omeka = getenv('OMEKA_DIR'))) {
 require_once $omeka . '/application/tests/bootstrap.php';
 require_once dirname(__FILE__) . '/../../NeatlinePlugin.php';
 require_once 'Neatline_Test_AppTestCase.php';
+require_once 'mocks/filters.php';

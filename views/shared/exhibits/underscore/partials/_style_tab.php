@@ -27,7 +27,7 @@
       'name'  => 'presenter',
       'label' => 'Presenter',
       'bind'  => 'record.presenter',
-      'options'   => _nl_getPresenters()
+      'options' => _nl_getPresenters()
   )); ?>
 
   <?php echo $this->partial(

@@ -36,7 +36,10 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $this->_exhibitsTable = $this->db->getTable('NeatlineExhibit');
         $this->_recordsTable  = $this->db->getTable('NeatlineRecord');
 
-        // Mock layers.
+        // Register widgets.
+        add_filter('neatline_widgets', '_nl_mockWidgets');
+
+        // Register layers.
         Zend_Registry::set(
           'layers', NL_DIR . '/tests/phpunit/mocks/layers.json'
         );

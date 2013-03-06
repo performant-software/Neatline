@@ -115,6 +115,17 @@ function _nl_editorGlobals($exhibit)
 
 
 /**
+ * Gather widgets exposed via the `neatline_widgets` filter.
+ *
+ * @return array An array of widget name => ids.
+ */
+function _nl_getWidgets()
+{
+    return apply_filters('neatline_widgets', array());
+}
+
+
+/**
  * Gather presenters exposed via the `neatline_presenters` filter.
  *
  * @return array An array of presenter name => ids.
