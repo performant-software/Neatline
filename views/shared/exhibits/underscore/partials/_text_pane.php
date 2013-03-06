@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record text tab.
+ * Record text pane.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,22 +15,19 @@
 
 <div class="control-group">
 
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_text_input.php', array(
+  <?php echo common('input', array(
       'name'  => 'item-id',
       'label' => 'Item',
       'bind'  => 'record.item_id'
   )); ?>
 
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_textarea.php', array(
+  <?php echo common('textarea', array(
       'name'  => 'title',
       'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_textarea.php', array(
+  <?php echo common('textarea', array(
       'name'  => 'body',
       'label' => 'Body',
       'bind'  => 'record.body'

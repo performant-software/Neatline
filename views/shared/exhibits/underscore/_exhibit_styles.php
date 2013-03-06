@@ -17,23 +17,20 @@
 
   <div class="control-group">
 
-    <?php echo $this->partial(
-      'exhibits/underscore/helpers/_textarea.php', array(
+    <?php echo common('textarea', array(
         'id'    => 'styles',
         'name'  => 'styles',
         'label' => 'Stylesheet',
         'bind'  => 'exhibit.styles'
     )); ?>
 
-    <?php echo $this->partial(
-      'exhibits/underscore/helpers/_text_input.php', array(
+    <?php echo common('input', array(
         'name'  => 'map-focus',
         'label' => 'Default Map Focus',
         'bind'  => 'exhibit.map_focus'
     )); ?>
 
-    <?php echo $this->partial(
-      'exhibits/underscore/helpers/_text_input.php', array(
+    <?php echo common('input', array(
         'name'  => 'map-zoom',
         'label' => 'Default Map Zoom',
         'bind'  => 'exhibit.map_zoom'

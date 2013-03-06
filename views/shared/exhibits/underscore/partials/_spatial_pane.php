@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record spatial tab.
+ * Record spatial pane.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -99,8 +99,7 @@
     </a>
   </div>
 
-  <?php echo $this->partial(
-    'exhibits/underscore/helpers/_textarea.php', array(
+  <?php echo common('textarea', array(
       'name'  => 'coverage',
       'label' => 'Geometry ( Well-Known Text )',
       'bind'  => 'record.coverage',

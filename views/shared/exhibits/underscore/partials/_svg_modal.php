@@ -21,15 +21,13 @@
 
   <div class="modal-body">
 
-    <?php echo $this->partial(
-      'exhibits/underscore/helpers/_textarea.php', array(
+    <?php echo common('textarea', array(
         'name'  => 'svg',
         'label' => 'SVG',
         'class' => 'code'
     )); ?>
 
-    <?php echo $this->partial(
-      'exhibits/underscore/helpers/_text_input.php', array(
+    <?php echo common('input', array(
         'name'  => 'density',
         'label' => 'Density',
         'value' => '1.0'
