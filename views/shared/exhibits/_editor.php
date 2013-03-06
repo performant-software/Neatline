@@ -24,14 +24,13 @@
 <?php echo $this->partial('exhibits/_strings.php'); ?>
 
 <!-- Underscore templates. -->
-<?php $_ = 'exhibits/underscore/'; ?>
-<?php echo $this->partial($_.'_exhibit_menu.php'); ?>
-<?php echo $this->partial($_.'_exhibit_styles.php'); ?>
-<?php echo $this->partial($_.'_record_form.php'); ?>
-<?php echo $this->partial($_.'_record_list.php'); ?>
-<?php echo $this->partial($_.'_record_text.php'); ?>
-<?php echo $this->partial($_.'_pagination.php'); ?>
-<?php echo $this->partial($_.'_search.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_exhibit_menu.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_exhibit_styles.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_record_text.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_pagination.php'); ?>
+<?php echo $this->partial('exhibits/underscore/_search.php'); ?>
 
 <!-- Plugin templates. ->
 <?php fire_plugin_hook('neatline_templates'); ?>
