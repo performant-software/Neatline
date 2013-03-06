@@ -236,7 +236,8 @@ class Neatline_ExhibitsControllerTest_Edit
             'title'         => 'title',
             'slug'          => 'slug',
             'base_layers'   => array('Layer1', 'Layer2'),
-            'base_layer'    => 'Layer2'
+            'base_layer'    => 'Layer2',
+            'widgets'       => array('Widget1', 'Widget2'),
         ));
 
         // Submit the form.
@@ -288,6 +289,7 @@ class Neatline_ExhibitsControllerTest_Edit
             'slug'          => 'slug-2',
             'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer2',
+            'widgets'       => array('Widget1', 'Widget2'),
             'description'   => 'Description 2.',
             'public'        => 0
         ));
@@ -296,11 +298,12 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->dispatch('neatline/edit/'.$exhibit->id);
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
-        // Should save fields.
+        // Should set fields.
         $this->assertEquals($exhibit->title,        'Title 2');
         $this->assertEquals($exhibit->slug,         'slug-2');
         $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer2');
+        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->description,  'Description 2.');
         $this->assertEquals($exhibit->public,       0);
 

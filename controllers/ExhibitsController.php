@@ -38,9 +38,7 @@ class Neatline_ExhibitsController
 
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
-                $vals = $form->getValues();
-                $vals['base_layers'] = implode(',',$vals['base_layers']);
-                $exhibit->saveForm($vals);
+                $exhibit->saveForm($form->getValues());
                 $this->_redirect('neatline');
             }
         }
@@ -61,9 +59,7 @@ class Neatline_ExhibitsController
 
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
-                $vals = $form->getValues();
-                $vals['base_layers'] = implode(',',$vals['base_layers']);
-                $exhibit->saveForm($vals);
+                $exhibit->saveForm($form->getValues());
                 $this->_redirect('neatline');
             }
         }

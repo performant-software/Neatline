@@ -30,6 +30,20 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
+     * Implode `widgets` and `base_layers` before saving.
+     *
+     * @param array $values The POST/PUT values.
+     */
+    public function saveForm($values)
+    {
+        foreach ($values as $k => $v) {
+            if (is_array($v)) $values[$k] = implode(',', $v);
+        }
+        parent::saveForm($values);
+    }
+
+
+    /**
      * Get the number of active records in the exhibit.
      *
      * @return integer The record count.

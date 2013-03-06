@@ -25,28 +25,30 @@ class Neatline_NeatlineExhibitTest_SaveForm
         $exhibit = $this->__exhibit();
 
         $exhibit->saveForm(array(
-            'base_layers'   => '1',
-            'base_layer'    => '2',
-            'title'         => '3',
-            'slug'          => '4',
-            'description'   => '5',
-            'public'        => '6',
-            'styles'        => '7',
-            'map_focus'     => '8',
-            'map_zoom'      => '9'
+            'base_layers'   => array('1','2'),
+            'base_layer'    => '3',
+            'widgets'       => array('4','5'),
+            'title'         => '6',
+            'slug'          => '7',
+            'description'   => '8',
+            'public'        => '9',
+            'styles'        => '10',
+            'map_focus'     => '11',
+            'map_zoom'      => '12'
         ));
 
         $exhibit = $this->_exhibitsTable->find($exhibit->id);
 
-        $this->assertEquals($exhibit->base_layers,  '1');
-        $this->assertEquals($exhibit->base_layer,   '2');
-        $this->assertEquals($exhibit->title,        '3');
-        $this->assertEquals($exhibit->slug,         '4');
-        $this->assertEquals($exhibit->description,  '5');
-        $this->assertEquals($exhibit->public,       6);
-        $this->assertEquals($exhibit->styles,       7);
-        $this->assertEquals($exhibit->map_focus,    8);
-        $this->assertEquals($exhibit->map_zoom,     9);
+        $this->assertEquals($exhibit->base_layers,  '1,2');
+        $this->assertEquals($exhibit->base_layer,   '3');
+        $this->assertEquals($exhibit->widgets,      '4,5');
+        $this->assertEquals($exhibit->title,        '6');
+        $this->assertEquals($exhibit->slug,         '7');
+        $this->assertEquals($exhibit->description,  '8');
+        $this->assertEquals($exhibit->public,       9);
+        $this->assertEquals($exhibit->styles,       10);
+        $this->assertEquals($exhibit->map_focus,    11);
+        $this->assertEquals($exhibit->map_zoom,     12);
 
     }
 

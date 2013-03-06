@@ -256,8 +256,9 @@ class Neatline_ExhibitsControllerTest_Add
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title',
             'slug'          => 'slug',
-            'base_layers'   => array('Layer1', 'Layer3'),
-            'base_layer'    => 'Layer3',
+            'base_layers'   => array('Layer1', 'Layer2'),
+            'base_layer'    => 'Layer2',
+            'widgets'       => array('Widget1', 'Widget2'),
             'description'   => 'Description.',
             'public'        => 1
         ));
@@ -266,13 +267,14 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 0);
         $this->dispatch('neatline/add');
         $this->assertEquals($this->_exhibitsTable->count(), 1);
-
-        // Should set exhibit fields.
         $exhibit = $this->getFirstExhibit();
-        $this->assertEquals($exhibit->base_layers,  'Layer1,Layer3');
-        $this->assertEquals($exhibit->base_layer,   'Layer3');
+
+        // Should set fields.
         $this->assertEquals($exhibit->title,        'Title');
         $this->assertEquals($exhibit->slug,         'slug');
+        $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
+        $this->assertEquals($exhibit->base_layer,   'Layer2');
+        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->description,  'Description.');
         $this->assertEquals($exhibit->public,       1);
 
