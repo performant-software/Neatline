@@ -50,19 +50,19 @@
 
     <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_text_tab.php'
+        'exhibits/underscore/partials/_text_pane.php'
       ); ?>
     </div>
 
     <div class="tab-pane spatial" id="record-spatial">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_spatial_tab.php'
+        'exhibits/underscore/partials/_spatial_pane.php'
       ); ?>
     </div>
 
     <div class="tab-pane style" id="record-style">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_style_tab.php'
+        'exhibits/underscore/partials/_style_pane.php'
       ); ?>
     </div>
 
