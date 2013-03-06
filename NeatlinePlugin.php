@@ -182,7 +182,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Add link to main admin menu bar.
      *
-     * @param array $tabs Array of label => URI pairs.
+     * @param array $tabs Tabs, <LABEL> => <URI> pairs.
      * @return array The tab array with the "Neatline" tab.
      */
     public function filterAdminNavigationMain($tabs)
@@ -211,7 +211,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register record presenters.
      *
-     * @param array $presenters Presenters, NAME => ID.
+     * @param array $presenters Presenters, <NAME> => <ID>.
      * @return array The array, with None and StaticBubble.
      */
     public function filterNeatlinePresenters($presenters)

@@ -123,7 +123,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             'label'         => __('Widgets'),
             'description'   => __('Select plugin widgets available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
-            'multiOptions'  => _nl_getWidgets(),
+            'multiOptions'  => array_flip(_nl_getWidgets()),
             'value'         => _nl_explode($this->_exhibit->widgets),
         ));
 
