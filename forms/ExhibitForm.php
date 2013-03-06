@@ -112,7 +112,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         $this->addElement('select', 'base_layer', array(
             'label'         => __('Default Layer'),
             'description'   => __('Select which layer is visible by default when the exhibit loads.'),
-            'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
+            'attribs'       => array('data-placeholder' => 'Select a layer'),
             'multiOptions'  => _nl_getLayersForSelect(),
             'value'         => _nl_explode($this->_exhibit->base_layer),
             'required'      => true,
