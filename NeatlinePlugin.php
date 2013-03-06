@@ -34,30 +34,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Add a column to the exhibit table.
-     *
-     * @param string $name The column name.
-     * @param string $type The column definition.
-     */
-    public static function addExhibitField($name, $type)
-    {
-        self::addField('neatline_exhibits', $name, $type);
-    }
-
-
-    /**
-     * Add a column to the records table.
-     *
-     * @param string $name The column name.
-     * @param string $type The column definition.
-     */
-    public static function addRecordField($name, $type)
-    {
-        self::addField('neatline_records', $name, $type);
-    }
-
-
-    /**
      * Add a column to a table.
      *
      * @param string $table The table name.
@@ -75,6 +51,72 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             $_db->query($sql);
         } catch (Exception $e) {}
 
+    }
+
+
+    /**
+     * Remove a column from a table.
+     *
+     * @param string $table The table name.
+     * @param string $name The column name.
+     */
+    private static function dropField($table, $name)
+    {
+
+        $_db = get_db();
+        $table = $_db->prefix.$table;
+
+        try {
+            $sql = "ALTER TABLE `{$table}` DROP COLUMN {$name}";
+            $_db->query($sql);
+        } catch (Exception $e) {}
+
+    }
+
+
+    /**
+     * Add a column to the exhibits table.
+     *
+     * @param string $name The column name.
+     * @param string $type The column definition.
+     */
+    public static function addExhibitField($name, $type)
+    {
+        self::addField('neatline_exhibits', $name, $type);
+    }
+
+
+    /**
+     * Remove a column from the exhibits table.
+     *
+     * @param string $name The column name.
+     */
+    public static function dropExhibitField($name)
+    {
+        self::dropField('neatline_exhibits', $name);
+    }
+
+
+    /**
+     * Add a column to the records table.
+     *
+     * @param string $name The column name.
+     * @param string $type The column definition.
+     */
+    public static function addRecordField($name, $type)
+    {
+        self::addField('neatline_records', $name, $type);
+    }
+
+
+    /**
+     * Remove a column from the records table.
+     *
+     * @param string $name The column name.
+     */
+    public static function dropRecordField($name)
+    {
+        self::dropField('neatline_records', $name);
     }
 
 
