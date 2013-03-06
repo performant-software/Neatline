@@ -56,6 +56,18 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
+     * Check whether a widget is enabled.
+     *
+     * @param string $widget The id of the widget.
+     * @return boolean True if the widget is enabled.
+     */
+    public function hasWidget($id)
+    {
+        return in_array($id, _nl_explode($this->widgets));
+    }
+
+
+    /**
      * Delete all child data records when an exhibit is deleted.
      */
     protected function beforeDelete()

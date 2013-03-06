@@ -13,6 +13,75 @@
 
 
 /**
+ * Gather widgets via the `neatline_widgets` filter.
+ *
+ * @return array An array of widget name => ids.
+ */
+function _nl_getWidgets()
+{
+    return apply_filters('neatline_widgets', array());
+}
+
+
+/**
+ * Gather presenters via the `neatline_presenters` filter.
+ *
+ * @return array An array of presenter name => ids.
+ */
+function _nl_getPresenters()
+{
+    return apply_filters('neatline_presenters', array());
+}
+
+
+/**
+ * Gather style columns via the `neatline_links` filter.
+ *
+ * @return array An array of column names.
+ */
+function _nl_getStyles()
+{
+    return apply_filters('neatline_styles', array());
+}
+
+
+/**
+ * Gather record tabs via the `neatline_record_tabs` filter.
+ *
+ * @return array An array of widget name => ids.
+ */
+function _nl_getRecordTabs()
+{
+    return apply_filters('neatline_record_tabs', array());
+}
+
+
+/**
+ * Gather exhibit tabs via the `neatline_exhibit_tabs` filter.
+ *
+ * @return array An array of widget name => ids.
+ */
+function _nl_getExhibitTabs()
+{
+    return apply_filters('neatline_exhibit_tabs', array());
+}
+
+
+/**
+ * Gather global properties exposed via the `neatline_globals` filter.
+ *
+ * @param NeatlineExhibit The exhibit.
+ * @return array The array of key => values.
+ */
+function _nl_getGlobals($exhibit)
+{
+    return apply_filters('neatline_globals', array(), array(
+        'exhibit' => $exhibit
+    ));
+}
+
+
+/**
  * Include the Google Maps API.
  */
 function _nl_mapApis()
@@ -111,53 +180,6 @@ function _nl_editorGlobals($exhibit)
         'styles_api'    => url('neatline/styles/'.$exhibit->id),
         'page_length'   => (int) get_plugin_ini('Neatline', 'page_length')
     );
-}
-
-
-/**
- * Gather widgets exposed via the `neatline_widgets` filter.
- *
- * @return array An array of widget name => ids.
- */
-function _nl_getWidgets()
-{
-    return apply_filters('neatline_widgets', array());
-}
-
-
-/**
- * Gather presenters exposed via the `neatline_presenters` filter.
- *
- * @return array An array of presenter name => ids.
- */
-function _nl_getPresenters()
-{
-    return apply_filters('neatline_presenters', array());
-}
-
-
-/**
- * Gather style columns exposed via the `neatline_links` filter.
- *
- * @return array An array of column names.
- */
-function _nl_getStyles()
-{
-    return apply_filters('neatline_styles', array());
-}
-
-
-/**
- * Gather global properties exposed via the `neatline_globals` filter.
- *
- * @param NeatlineExhibit The exhibit.
- * @return array The array of key => values.
- */
-function _nl_getGlobals($exhibit)
-{
-    return apply_filters('neatline_globals', array(), array(
-        'exhibit' => $exhibit
-    ));
 }
 
 

@@ -26,6 +26,7 @@
   </p>
 
   <ul class="nav nav-pills">
+
     <li class="tab">
       <a href="#record-text" data-toggle="tab"
         data-slug="text">Text</a>
@@ -38,6 +39,7 @@
       <a href="#record-style" data-toggle="tab"
         data-slug="style">Style</a>
     </li>
+
   </ul>
 
   <div class="tab-content">
