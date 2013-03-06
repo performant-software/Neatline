@@ -18,7 +18,9 @@
 <head>
 
   <meta charset="utf-8">
-  <title><?php echo $title; ?></title>
+  <title><?php echo __(
+    'Neatline Editor: %s', _nl_exhibit()->title
+  ); ?></title>
 
   <?php
   _nl_editorAssets();

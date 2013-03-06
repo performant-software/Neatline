@@ -13,5 +13,4 @@
 
 ?>
 
-
 <div id="neatline-map" class="neatline-block"></div>

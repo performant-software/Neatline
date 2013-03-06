@@ -10,15 +10,14 @@
  * @copyright   2012 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
+
 ?>
 
 <?php _nl_exhibitAssets(_nl_exhibit()); ?>
 <?php echo head(array('title' => _nl_field('title'))); ?>
 
 <!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php', array(
-  'exhibit' => _nl_exhibit()
-)); ?>
+<?php echo $this->partial('neatline/_neatline.php'); ?>
 
 <div class="exhibit-description">
     <?php echo _nl_field('description'); ?>

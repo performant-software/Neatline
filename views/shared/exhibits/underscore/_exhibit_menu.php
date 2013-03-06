@@ -15,7 +15,7 @@
 
 <script id="exhibit-menu-template" type="text/templates">
 
-  <p class="lead"><?php echo $exhibit->title; ?></p>
+  <p class="lead"><?php echo _nl_exhibit()->title; ?></p>
 
   <ul class="nav nav-pills">
     <li class="tab" data-slug="records">

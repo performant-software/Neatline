@@ -13,16 +13,6 @@
 
 ?>
 
-<!-- Header. -->
-<?php echo $this->partial('exhibits/_editor_header.php', array(
-  'exhibit' => $exhibit,
-  'title' => __('Neatline Editor: %s', $exhibit->title)
-)); ?>
-
-<!-- Editor partial. -->
-<?php echo $this->partial('exhibits/_editor.php', array(
-  'exhibit' => $exhibit
-)); ?>
-
-<!-- Footer. -->
+<?php echo $this->partial('exhibits/_editor_header.php'); ?>
+<?php echo $this->partial('exhibits/_editor.php'); ?>
 <?php echo $this->partial('exhibits/_editor_footer.php'); ?>

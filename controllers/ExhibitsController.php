@@ -96,7 +96,7 @@ class Neatline_ExhibitsController
      */
     public function editorAction()
     {
-        $this->view->exhibit = $this->_helper->db->findById();
+        $this->view->neatline_exhibit = $this->_helper->db->findById();
     }
 
 

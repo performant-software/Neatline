@@ -21,11 +21,19 @@ class Neatline_FixturesController
      */
     public function init()
     {
+
+        // Suppress template resolution.
         $this->_helper->viewRenderer->setNoRender(true);
-        $this->exhibit = new NeatlineExhibit();
-        $this->exhibit->base_layer  = 'OpenStreetMap';
-        $this->exhibit->slug        = 'slug';
-        $this->exhibit->save();
+
+        // Create mock exhibit.
+        $exhibit = new NeatlineExhibit();
+        $exhibit->base_layer  = 'OpenStreetMap';
+        $exhibit->slug        = 'slug';
+        $exhibit->save();
+
+        // Set exhibit on view.
+        get_view()->neatline_exhibit = $exhibit;
+
     }
 
 
@@ -34,9 +42,7 @@ class Neatline_FixturesController
      */
     public function neatlineAction()
     {
-        echo $this->view->partial('neatline/_neatline.php', array(
-            'exhibit' => $this->exhibit
-        ));
+        echo $this->view->partial('neatline/_neatline.php');
     }
 
 
@@ -45,9 +51,7 @@ class Neatline_FixturesController
      */
     public function editorAction()
     {
-        echo $this->view->partial('exhibits/_editor.php', array(
-            'exhibit' => $this->exhibit
-        ));
+        echo $this->view->partial('exhibits/_editor.php');
     }
 
 

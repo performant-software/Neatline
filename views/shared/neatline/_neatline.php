@@ -20,7 +20,7 @@
 <!-- JSON globals. -->
 <script type="text/javascript">
   Neatline.global = <?php echo Zend_Json::encode(
-    _nl_getGlobals($exhibit)
+    _nl_getGlobals(_nl_exhibit())
   ); ?>
 </script>
 
