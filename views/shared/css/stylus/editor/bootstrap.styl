@@ -14,22 +14,31 @@
 @import 'var'
 
 
-textarea
-input[type="text"]
-  box-shadow none
-  border-radius 0
-  border-color $borderColor
+#editor
 
-  &:focus
+  textarea
+  input[type="text"]
     box-shadow none
-    border-color $accentColor
+    border-radius 2px
+    border-color $borderColor
 
-.nav-pills > li > a
-  border-radius 0
-  padding 6px 8px
+    &:focus
+      box-shadow none
+      border-color $accentColor
 
-.modal-backdrop
-  opacity 0.3
+  .nav-pills li a
+    border-radius 2px
+    padding 6px 8px
 
-.tab-content
-  overflow hidden
+  .dropdown-menu
+    border-radius 2px
+    min-width 0
+
+    li a
+      padding 3px 8px
+
+  .modal-backdrop
+    opacity 0.3
+
+  .tab-content
+    overflow hidden

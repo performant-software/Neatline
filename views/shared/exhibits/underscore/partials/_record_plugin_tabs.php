@@ -18,17 +18,18 @@
 
   <li class="dropdown">
 
+    <!-- Dropdown button. -->
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       Plugins <b class="caret"></b>
     </a>
 
     <ul class="dropdown-menu">
-      <?php foreach (_nl_getRecordTabs() as $label => $slug): ?>
+      <?php foreach (_nl_getRecordTabs() as $label => $data): ?>
 
+        <!-- Dropdown items. -->
         <li class="tab">
-          <a
-            data-slug="<?php echo $slug; ?>"
-            href="#record-<?php echo $slug; ?>"
+          <a data-slug="<?php echo $data['slug']; ?>"
+            href="#record-<?php echo $data['slug']; ?>"
             data-toggle="tab"
           ><?php echo $label; ?></a>
         </li>

@@ -66,6 +66,10 @@
       ); ?>
     </div>
 
+    <?php echo $this->partial(
+      'exhibits/underscore/partials/_record_plugin_panes.php'
+    ); ?>
+
   </div>
 
   <!-- Save/Delete buttons. -->
