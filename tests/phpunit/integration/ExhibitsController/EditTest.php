@@ -40,11 +40,6 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertXpath(
             '//input[@name="slug"][@value="slug"]');
 
-        // Description:
-        $this->assertXpathContentContains(
-            '//textarea[@name="description"]',
-            'Description.');
-
         // Base Layers:
         $this->assertXpath(
             '//select[@name="base_layers[]"]/optgroup/
@@ -57,6 +52,11 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->assertXpath(
             '//select[@name="base_layer"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
+
+        // Description:
+        $this->assertXpathContentContains(
+            '//textarea[@name="description"]',
+            'Description.');
 
         // Public.
         $this->assertXpath(

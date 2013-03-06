@@ -25,13 +25,10 @@ class Neatline_ExhibitsControllerTest_Add
         $this->dispatch('neatline/add');
 
         // Title:
-        $this->assertQuery('input[name="title"]');
+        $this->assertXpath('//input[@name="title"]');
 
         // Slug:
-        $this->assertQuery('input[name="slug"]');
-
-        // Description:
-        $this->assertQuery('textarea[name="description"]');
+        $this->assertXpath('//input[@name="slug"]');
 
         // Base Layers:
         $root = '//select[@name="base_layers[]"]';
@@ -57,8 +54,14 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
 
+        // Widgets:
+        $this->assertXpath('//select[@name="widgets[]"]');
+
+        // Description:
+        $this->assertXpath('//textarea[@name="description"]');
+
         // Public:
-        $this->assertQuery('input[name="public"]');
+        $this->assertXpath('//input[@name="public"]');
 
     }
 

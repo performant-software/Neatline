@@ -96,16 +96,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             'description'   => __('Select the base layers available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => _nl_getLayersForSelect(),
-            'value'         => _nl_explode($this->_exhibit->base_layers),
-            'validators'    => array(
-                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
-                    array(
-                        'messages' => array(
-                            Zend_Validate_NotEmpty::IS_EMPTY => __('Select at least one layer.')
-                        )
-                    )
-                )
-            )
+            'value'         => _nl_explode($this->_exhibit->base_layers)
         ));
 
         // Default Layer.
@@ -125,6 +116,15 @@ class Neatline_ExhibitForm extends Omeka_Form
                     )
                 )
             )
+        ));
+
+        // Widgets.
+        $this->addElement('multiselect', 'widgets', array(
+            'label'         => __('Widgets'),
+            'description'   => __('Select plugin widgets available in the exhibit.'),
+            'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
+            // 'multiOptions'  => _nl_getLayersForSelect(),
+            // 'value'         => _nl_explode($this->_exhibit->base_layers),
         ));
 
         // Description.
@@ -153,6 +153,7 @@ class Neatline_ExhibitForm extends Omeka_Form
             'slug',
             'base_layers',
             'base_layer',
+            'widgets',
             'description',
             'public'
         ), 'exhibit_info');

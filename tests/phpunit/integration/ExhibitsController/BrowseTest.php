@@ -57,18 +57,18 @@ class Neatline_ExhibitsControllerTest_Browse
 
         $this->dispatch('neatline');
 
-        // Should show 3 exhibit rows.
-        $this->assertQueryCount('table.neatline tbody tr', 3);
+        // Should list 3 exhibits.
+        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 3);
 
         // Should show exhibit titles.
-        $this->assertQueryContentContains(
-            'table.neatline tbody td.title',
+        $this->assertXpathContentContains(
+            '//table[@class="neatline"]/tbody//td[@class="title"]',
             'Exhibit 1');
-        $this->assertQueryContentContains(
-            'table.neatline tbody td.title',
+        $this->assertXpathContentContains(
+            '//table[@class="neatline"]/tbody//td[@class="title"]',
             'Exhibit 2');
-        $this->assertQueryContentContains(
-            'table.neatline tbody td.title',
+        $this->assertXpathContentContains(
+            '//table[@class="neatline"]/tbody//td[@class="title"]',
             'Exhibit 3');
 
         // Should show links to public views.
@@ -105,22 +105,22 @@ class Neatline_ExhibitsControllerTest_Browse
         // Page 1.
         $this->dispatch('neatline');
 
-        // Should show first two exhibits.
-        $this->assertQueryCount('table.neatline tbody tr', 2);
+        // Should list first two exhibits.
+        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug1').'"]');
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug2').'"]');
 
         // Should show pagination.
-        $this->assertQuery('div.pagination');
+        $this->assertXpath('//div[@class="pagination"]');
 
         // Page 2.
         $this->resetResponse();
         $this->dispatch('neatline?page=2');
 
         // Should show next two exhibits.
-        $this->assertQueryCount('table.neatline tbody tr', 2);
+        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug3').'"]');
         $this->assertXpath('//td[@class="title"]/a[@href="'.
