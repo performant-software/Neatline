@@ -265,19 +265,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function filterNeatlineGlobals($globals, $args)
     {
-
-        // Public properties.
         $globals = array_merge($globals,
             _nl_exhibitGlobals($args['exhibit'])
         );
-
-        // Editor properties.
         $globals = array_merge($globals,
             _nl_editorGlobals($args['exhibit'])
         );
-
         return $globals;
-
     }
 
 
