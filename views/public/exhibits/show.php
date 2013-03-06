@@ -12,12 +12,12 @@
  */
 ?>
 
-<?php _nl_exhibitAssets(_nl_currentExhibit()); ?>
+<?php _nl_exhibitAssets(_nl_exhibit()); ?>
 <?php echo head(array('title' => _nl_field('title'))); ?>
 
 <!-- The core Neatline partial. -->
 <?php echo $this->partial('neatline/_neatline.php', array(
-  'exhibit' => _nl_currentExhibit()
+  'exhibit' => _nl_exhibit()
 )); ?>
 
 <div class="exhibit-description">

@@ -40,6 +40,10 @@
         data-slug="style">Style</a>
     </li>
 
+    <?php echo $this->partial(
+      'exhibits/underscore/partials/_record_plugin_tabs.php'
+    ); ?>
+
   </ul>
 
   <div class="tab-content">

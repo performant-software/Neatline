@@ -30,8 +30,8 @@
 <?php $e = array('exhibit' => $exhibit ); ?>
 <?php echo $this->partial($_.'_exhibit_menu.php', $e); ?>
 <?php echo $this->partial($_.'_exhibit_styles.php', $e); ?>
+<?php echo $this->partial($_.'_record_form.php', $e); ?>
 <?php echo $this->partial($_.'_record_list.php'); ?>
-<?php echo $this->partial($_.'_record_form.php'); ?>
 <?php echo $this->partial($_.'_record_text.php'); ?>
 <?php echo $this->partial($_.'_pagination.php'); ?>
 <?php echo $this->partial($_.'_search.php'); ?>

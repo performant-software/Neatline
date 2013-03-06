@@ -264,7 +264,7 @@ function _nl_getLayersForExhibit($exhibit)
  */
 function _nl_field($fieldname, $exhibit=null)
 {
-    $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
+    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
     return $exhibit->$fieldname;
 }
 
@@ -274,7 +274,7 @@ function _nl_field($fieldname, $exhibit=null)
  *
  * @return NeatlineExhibit|null
  */
-function _nl_currentExhibit()
+function _nl_exhibit()
 {
     return get_view()->neatline_exhibit;
 }
@@ -305,7 +305,7 @@ function _nl_link($exhibit=null, $text=null, $props=array(),
     $action='show', $public=true) {
 
     // Get the text and slug.
-    $exhibit = $exhibit ? $exhibit : _nl_currentExhibit();
+    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
     $text = $text ? $text : _nl_field('title', $exhibit);
     if ($action == 'show') { $slug = $exhibit->slug; }
     else { $slug = $exhibit->id; }
@@ -328,6 +328,6 @@ function _nl_link($exhibit=null, $text=null, $props=array(),
  */
 function _nl_totalRecords($neatline=null)
 {
-    $neatline = $neatline ? $neatline : _nl_currentExhibit();
+    $neatline = $neatline ? $neatline : _nl_exhibit();
     return (int)$neatline->getNumberOfRecords();
 }
