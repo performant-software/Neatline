@@ -34,23 +34,45 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Register a taggable style attribute.
+     * Add a column to the exhibit table.
      *
      * @param string $name The column name.
      * @param string $type The column definition.
      */
-    public static function addField($name, $type)
+    public static function addExhibitField($name, $type)
+    {
+        self::addField('neatline_exhibits', $name, $type);
+    }
+
+
+    /**
+     * Add a column to the records table.
+     *
+     * @param string $name The column name.
+     * @param string $type The column definition.
+     */
+    public static function addRecordField($name, $type)
+    {
+        self::addField('neatline_records', $name, $type);
+    }
+
+
+    /**
+     * Add a column to a table.
+     *
+     * @param string $table The table name.
+     * @param string $name The column name.
+     * @param string $type The column definition.
+     */
+    private static function addField($table, $name, $type)
     {
 
         $_db = get_db();
+        $table = $_db->prefix.$table;
 
         try {
-
-            // Add column to records table.
-            $sql = "ALTER TABLE `{$_db->prefix}neatline_records`
-                    ADD COLUMN {$name} {$type}";
+            $sql = "ALTER TABLE `{$table}` ADD COLUMN {$name} {$type}";
             $_db->query($sql);
-
         } catch (Exception $e) {}
 
     }
@@ -110,20 +132,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         // Add styles.
         // -----------
-        self::addField('presenter',         'VARCHAR(100) NULL');
-        self::addField('vector_color',      'TINYTEXT NULL');
-        self::addField('stroke_color',      'TINYTEXT NULL');
-        self::addField('select_color',      'TINYTEXT NULL');
-        self::addField('point_image',       'TINYTEXT NULL');
-        self::addField('vector_opacity',    'INT(10) UNSIGNED NULL');
-        self::addField('select_opacity',    'INT(10) UNSIGNED NULL');
-        self::addField('stroke_opacity',    'INT(10) UNSIGNED NULL');
-        self::addField('stroke_width',      'INT(10) UNSIGNED NULL');
-        self::addField('point_radius',      'INT(10) UNSIGNED NULL');
-        self::addField('max_zoom',          'INT(10) UNSIGNED NULL');
-        self::addField('min_zoom',          'INT(10) UNSIGNED NULL');
-        self::addField('map_zoom',          'INT(10) UNSIGNED NULL');
-        self::addField('map_focus',         'VARCHAR(100) NULL');
+        self::addRecordField('presenter',       'VARCHAR(100) NULL');
+        self::addRecordField('vector_color',    'TINYTEXT NULL');
+        self::addRecordField('stroke_color',    'TINYTEXT NULL');
+        self::addRecordField('select_color',    'TINYTEXT NULL');
+        self::addRecordField('point_image',     'TINYTEXT NULL');
+        self::addRecordField('vector_opacity',  'INT(10) UNSIGNED NULL');
+        self::addRecordField('select_opacity',  'INT(10) UNSIGNED NULL');
+        self::addRecordField('stroke_opacity',  'INT(10) UNSIGNED NULL');
+        self::addRecordField('stroke_width',    'INT(10) UNSIGNED NULL');
+        self::addRecordField('point_radius',    'INT(10) UNSIGNED NULL');
+        self::addRecordField('max_zoom',        'INT(10) UNSIGNED NULL');
+        self::addRecordField('min_zoom',        'INT(10) UNSIGNED NULL');
+        self::addRecordField('map_zoom',        'INT(10) UNSIGNED NULL');
+        self::addRecordField('map_focus',       'VARCHAR(100) NULL');
 
     }
 
