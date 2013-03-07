@@ -208,21 +208,19 @@ function _nl_getLayers()
 
 
 /**
- * Get an array of grouped id => name layer pairs for form select.
+ * Get an array of grouped <SLUG> => <TITLE> widget pairs for form select.
  *
- * @return array The layers.
+ * @return array The select options.
  */
-function _nl_getLayersForSelect()
+function _nl_getWidgetsForSelect()
 {
 
-    $all = _nl_getLayers();
-
+    $widgets = _nl_getWidgets();
     $options = array();
-    foreach ($all as $group => $layers) {
-        $options[$group] = array();
-        foreach ($layers as $layer) {
-            $options[$group][$layer['id']] = $layer['title'];
-        }
+
+    // Add option for each widget.
+    foreach ($widgets as $label => $widget) {
+        $options[$widget['id']] = $label;
     }
 
     return $options;
@@ -231,7 +229,36 @@ function _nl_getLayersForSelect()
 
 
 /**
- * Get an array of layer definitions for an exhibit.
+ * Get an array of grouped <SLUG> => <TITLE> layer pairs for form select.
+ *
+ * @return array The select options.
+ */
+function _nl_getLayersForSelect()
+{
+
+    $groups = _nl_getLayers();
+    $options = array();
+
+    // Walk the layer groups.
+    foreach ($groups as $group => $layers) {
+
+        // Add an option group.
+        $options[$group] = array();
+
+        // Add option for each layer.
+        foreach ($layers as $layer) {
+            $options[$group][$layer['id']] = $layer['title'];
+        }
+
+    }
+
+    return $options;
+
+}
+
+
+/**
+ * Get an cropped array of layer definitions for an exhibit.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The layers.
@@ -239,15 +266,23 @@ function _nl_getLayersForSelect()
 function _nl_getLayersForExhibit($exhibit)
 {
 
+    $groups = _nl_getLayers();
+    $subset = array();
+
+    // Explode the list of ids in `base_layers` and merge the `base_layer`
+    // id into the array, which ensures that at least 1 layer is included
+    // in the case that `base_layers` is empty.
     $ids = _nl_explode($exhibit->base_layers);
     $ids = array_merge($ids, array($exhibit->base_layer));
-    $all = _nl_getLayers();
 
-    $subset = array();
-    foreach ($all as $group => $layers) {
+    // Walk the layer groups.
+    foreach ($groups as $group => $layers) {
+
+        // Include the layer if it is enabled in the exhihbit.
         foreach ($layers as $layer) {
             if (in_array($layer['id'], $ids)) $subset[] = $layer;
         }
+
     }
 
     return $subset;

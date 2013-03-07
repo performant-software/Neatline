@@ -21,8 +21,20 @@
 function _nl_mockWidgets($widgets)
 {
     return array_merge($widgets, array(
-        'Widget1 Label' => 'Widget1',
-        'Widget2 Label' => 'Widget2',
-        'Widget3 Label' => 'Widget3'
+        'Widget1 Label' => array(
+            'id'    => 'Widget1',
+            'slug'  => 'widget-1',
+            'pane'  => 'form1'
+        ),
+        'Widget2 Label' => array(
+            'id'    => 'Widget2',
+            'slug'  => 'widget-2',
+            'pane'  => 'form2'
+        ),
+        'Widget3 Label' => array(
+            'id'    => 'Widget3',
+            'slug'  => 'widget-3',
+            'pane'  => 'form3'
+        )
     ));
 }
