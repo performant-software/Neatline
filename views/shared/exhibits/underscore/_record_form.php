@@ -20,12 +20,15 @@
     'exhibits/underscore/partials/_close_button.php'
   ); ?>
 
+  <!-- Header. -->
   <p class="lead">
     <span class="id" data-text="record.id | id"></span>
     <span class="title" data-text="record.title | title"></span>
   </p>
 
   <ul class="nav nav-pills">
+
+    <!-- Default tabs. -->
 
     <li class="tab">
       <a href="#record-text" data-toggle="tab"
@@ -40,27 +43,39 @@
         data-slug="style">Style</a>
     </li>
 
+    <!-- Widget tabs. -->
+    <?php echo $this->partial(
+      'exhibits/underscore/partials/_widget_tabs.php'
+    ); ?>
+
   </ul>
 
   <div class="tab-content">
 
+    <!-- Default panels. -->
+
     <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_text_pane.php'
+        'exhibits/underscore/partials/_text_panel.php'
       ); ?>
     </div>
 
     <div class="tab-pane spatial" id="record-spatial">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_spatial_pane.php'
+        'exhibits/underscore/partials/_spatial_panel.php'
       ); ?>
     </div>
 
     <div class="tab-pane style" id="record-style">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_style_pane.php'
+        'exhibits/underscore/partials/_style_panel.php'
       ); ?>
     </div>
+
+    <!-- Widget panels. -->
+    <?php echo $this->partial(
+      'exhibits/underscore/partials/_widget_panels.php'
+    ); ?>
 
   </div>
 

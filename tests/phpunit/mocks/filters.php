@@ -24,17 +24,17 @@ function _nl_mockWidgets($widgets)
         'Widget1 Label' => array(
             'id'    => 'Widget1',
             'slug'  => 'widget-1',
-            'pane'  => 'form1'
+            'form'  => 'form1'
         ),
         'Widget2 Label' => array(
             'id'    => 'Widget2',
             'slug'  => 'widget-2',
-            'pane'  => 'form2'
+            'form'  => 'form2'
         ),
         'Widget3 Label' => array(
             'id'    => 'Widget3',
             'slug'  => 'widget-3',
-            'pane'  => 'form3'
+            'form'  => 'form3'
         )
     ));
 }
