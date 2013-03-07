@@ -17,20 +17,20 @@
 
   <div class="control-group">
 
-    <?php echo common('textarea', array(
+    <?php echo common('neatline/textarea', array(
         'id'    => 'styles',
         'name'  => 'styles',
         'label' => 'Stylesheet',
         'bind'  => 'exhibit.styles'
     )); ?>
 
-    <?php echo common('input', array(
+    <?php echo common('neatline/input', array(
         'name'  => 'map-focus',
         'label' => 'Default Map Focus',
         'bind'  => 'exhibit.map_focus'
     )); ?>
 
-    <?php echo common('input', array(
+    <?php echo common('neatline/input', array(
         'name'  => 'map-zoom',
         'label' => 'Default Map Zoom',
         'bind'  => 'exhibit.map_zoom'

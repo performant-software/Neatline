@@ -21,13 +21,13 @@
 
   <div class="modal-body">
 
-    <?php echo common('textarea', array(
+    <?php echo common('neatline/textarea', array(
         'name'  => 'svg',
         'label' => 'SVG',
         'class' => 'code'
     )); ?>
 
-    <?php echo common('input', array(
+    <?php echo common('neatline/input', array(
         'name'  => 'density',
         'label' => 'Density',
         'value' => '1.0'

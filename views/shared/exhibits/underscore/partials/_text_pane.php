@@ -15,19 +15,19 @@
 
 <div class="control-group">
 
-  <?php echo common('input', array(
+  <?php echo common('neatline/input', array(
       'name'  => 'item-id',
       'label' => 'Item',
       'bind'  => 'record.item_id'
   )); ?>
 
-  <?php echo common('textarea', array(
+  <?php echo common('neatline/textarea', array(
       'name'  => 'title',
       'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
-  <?php echo common('textarea', array(
+  <?php echo common('neatline/textarea', array(
       'name'  => 'body',
       'label' => 'Body',
       'bind'  => 'record.body'
