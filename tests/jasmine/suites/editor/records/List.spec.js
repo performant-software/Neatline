@@ -28,8 +28,7 @@ describe('Records List', function() {
     var recordModels = _t.getRecordListModels();
     var recordRows = _t.getRecordRows();
 
-    // Record titles and bodies should be listed.
-    expect(recordRows.length).toEqual(4);
+    // Titles and bodies should be listed.
     expect($(recordRows[1]).find('.title')).toHaveText('_title1');
     expect($(recordRows[1]).find('.body')).toHaveText('_body1');
     expect($(recordRows[2]).find('.title')).toHaveText('_title2');
@@ -37,14 +36,16 @@ describe('Records List', function() {
     expect($(recordRows[3]).find('.title')).toHaveText('_title3');
     expect($(recordRows[3]).find('.body')).toHaveText('_body3');
 
-    // Record edit form links should be listed.
-    expect($(recordRows[0]).attr('href')).toEqual('#record/add');
+    // Add record link.
+    expect($(recordRows[0]).attr('href')).toEqual('#record/add/text');
+
+    // Record links.
     expect($(recordRows[1]).attr('href')).
-      toEqual('#record/'+recordModels[0].get('id'));
+      toEqual('#record/'+recordModels[0].get('id')+'/text');
     expect($(recordRows[2]).attr('href')).
-      toEqual('#record/'+recordModels[1].get('id'));
+      toEqual('#record/'+recordModels[1].get('id')+'/text');
     expect($(recordRows[3]).attr('href')).
-      toEqual('#record/'+recordModels[2].get('id'));
+      toEqual('#record/'+recordModels[2].get('id')+'/text');
 
   });
 

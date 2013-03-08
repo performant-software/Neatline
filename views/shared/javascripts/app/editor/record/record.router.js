@@ -18,18 +18,8 @@ Neatline.module('Editor.Record', function(
 
 
     routes: {
-      'record/add':      'record/add',
       'record/add/:tab': 'record/add/:tab',
-      'record/:id':      'record/:id',
       'record/:id/:tab': 'record/:id/:tab'
-    },
-
-
-    /**
-     * Show add record form.
-     */
-    'record/add': function() {
-      Neatline.execute('RECORD:bindNew', 'text');
     },
 
 
@@ -40,16 +30,6 @@ Neatline.module('Editor.Record', function(
      */
     'record/add/:tab': function(tab) {
       Neatline.execute('RECORD:bindNew', tab);
-    },
-
-
-    /**
-     * Show edit record form.
-     *
-     * @param {String} id: The record id.
-     */
-    'record/:id': function(id) {
-      Neatline.execute('RECORD:bindId', id, 'text');
     },
 
 
