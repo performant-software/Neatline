@@ -28,7 +28,7 @@
     </li>
     <li class="tab">
       <a href="#styles" data-toggle="tab"
-        data-slug="styles">Records</a>
+        data-slug="styles">Styles</a>
     </li>
 
     <!-- TODO: Widget tabs. -->
@@ -40,15 +40,11 @@
     <!-- Default panels. -->
 
     <div class="tab-pane records" id="records">
-      <?php echo $this->partial(
-        'exhibits/underscore/partials/_records.php'
-      ); ?>
+      <!-- TODO: Records panel. -->
     </div>
 
     <div class="tab-pane styles" id="styles">
-      <?php echo $this->partial(
-        'exhibits/underscore/partials/_styles.php'
-      ); ?>
+      <!-- TODO: Styles panel. -->
     </div>
 
     <!-- TODO: Widget panels. -->

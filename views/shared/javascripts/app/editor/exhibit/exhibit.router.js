@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit form initializer.
+ * Exhibit form controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -14,9 +14,25 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.addInitializer(function() {
-    this.__view =   new Exhibit.View();
-    this.__router = new Exhibit.Router();
+  Exhibit.Router = Neatline.Editor.Router.extend({
+
+
+    routes: {
+      ':tab': ':tab',
+    },
+
+
+    /**
+     * Show an exhibit form tab.
+     *
+     * @param {String} tab: The active tab.
+     */
+    ':tab': function(tab) {
+      Neatline.execute('EDITOR:display', ['EXHIBIT']);
+      Neatline.execute('EXHIBIT:activateTab', tab);
+    }
+
+
   });
 
 

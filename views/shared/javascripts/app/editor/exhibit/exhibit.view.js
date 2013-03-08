@@ -48,7 +48,7 @@ Neatline.module('Editor.Exhibit', function(
      */
     onTabChange: function(event) {
       var tab = $(event.target).attr('data-slug');
-      Neatline.execute('EDITOR:setRoute', 'records/'+tab);
+      Neatline.execute('EDITOR:setRoute', tab);
     },
 
 
