@@ -27,9 +27,7 @@ Neatline.module('Shared.Widget', function(
      * `#neatline` container.
      */
     init: function() {
-      if (!$.contains(document.documentElement, this.el)) {
-        this.$el.appendTo($('#neatline'));
-      }
+      if (!$('#'+this.id).length) this.$el.appendTo($('#neatline'));
     },
 
 
