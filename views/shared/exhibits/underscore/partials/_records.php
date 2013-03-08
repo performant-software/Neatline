@@ -13,38 +13,18 @@
 
 ?>
 
-<!-- Pagination container. -->
+
+<!-- Search box. -->
+<input type="text" placeholder="Search" />
+
+<!-- Top pagination. -->
 <div class="pagination"></div>
 
+<!-- Records. -->
 <ul class="list">
-
-  <!-- Add record link. -->
   <a href="#record/add/text">New Record</a>
-
-  <% records.each(function(r) { %>
-
-    <!-- Record listing. -->
-    <a href="#record/<%= r.get('id') %>/text"
-      data-id="<%= r.get('id') %>">
-
-      <!-- Title. -->
-      <span class="title">
-        <% if (!_.isEmpty(r.get('_title'))) { %>
-          <%= _.string.stripTags(r.get('_title')) %>
-        <% } else { %>
-          <%= STRINGS.placeholders.title %>
-        <% } %>
-      </span>
-
-      <!-- Body. -->
-      <span class="body">
-        <%= _.string.stripTags(r.get('_body')) %>
-      </span>
-
-    </a>
-
-  <% }); %>
-
+  <div class="records"></div>
 </ul>
 
+<!-- Bottom pagination. -->
 <div class="pagination"></div>

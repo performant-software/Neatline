@@ -40,11 +40,15 @@
     <!-- Default panels. -->
 
     <div class="tab-pane records" id="records">
-      <!-- TODO: Records panel. -->
+      <?php echo $this->partial(
+        'exhibits/underscore/partials/_records.php'
+      ); ?>
     </div>
 
     <div class="tab-pane styles" id="styles">
-      <!-- TODO: Styles panel. -->
+      <?php echo $this->partial(
+        'exhibits/underscore/partials/_styles.php'
+      ); ?>
     </div>
 
     <!-- TODO: Widget panels. -->
