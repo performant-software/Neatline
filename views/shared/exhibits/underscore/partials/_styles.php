@@ -16,8 +16,8 @@
 <div class="control-group">
 
   <?php echo common('neatline/textarea', array(
-      'id'    => 'styles',
-      'name'  => 'styles',
+      'id'    => 'stylesheet',
+      'name'  => 'stylesheet',
       'label' => 'Stylesheet',
       'bind'  => 'exhibit.styles'
   )); ?>

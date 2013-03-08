@@ -10,15 +10,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Records', { startWithParent: false,
+  define: function(Records, Neatline, Backbone, Marionette, $, _) {
 
+
+  Neatline.Editor.Exhibit.on('start', function() {
+    Records.start();
+  });
 
   Records.addInitializer(function() {
+    var form = Neatline.request('EXHIBIT:getElement');
     this.__collection = new Neatline.Shared.Record.Collection();
-    this.__view =       new Records.View();
-    this.__router =     new Records.Router();
+    this.__view = new Records.View({ el: form });
   });
 
 
-});
+}});

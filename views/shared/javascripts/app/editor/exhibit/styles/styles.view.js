@@ -17,17 +17,13 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles.View = Backbone.Neatline.View.extend({
 
 
-    template:   '#exhibit-styles-template',
-    className:  'form-stacked styles',
-    tagName:    'form',
-
     events: {
       'click a[name="set-focus"]':  'onSetFocus',
       'click a[name="save"]':       'save'
     },
 
     ui: {
-      styles:   '#styles',
+      styles:   '#stylesheet',
       mapFocus: 'input[name="map-focus"]',
       mapZoom:  'input[name="map-zoom"]'
     },
@@ -42,7 +38,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
       this.exhibit = new Neatline.Editor.Exhibit.Model();
       this.buildUi();
 
-      // Create CodeMirror YAML editor for styles.
+      // Create CodeMirror editor for stylesheet.
       this.editor = CodeMirror.fromTextArea(this.__ui.styles[0]);
 
     },

@@ -17,10 +17,6 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search.View = Backbone.Neatline.View.extend({
 
 
-    template:   '#search-template',
-    className:  'search',
-    tagName:    'form',
-
     events: {
       'keyup input': 'onKeystroke',
     },

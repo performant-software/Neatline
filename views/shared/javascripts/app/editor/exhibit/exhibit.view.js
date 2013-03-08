@@ -32,6 +32,14 @@ Neatline.module('Editor.Exhibit', function(
 
 
     /**
+     * Create exhibit model.
+     */
+    init: function() {
+      this.exhibit = new Neatline.Editor.Exhibit.Model();
+    },
+
+
+    /**
      * Activate a tab.
      *
      * @param {String} tab: The tab to activate.

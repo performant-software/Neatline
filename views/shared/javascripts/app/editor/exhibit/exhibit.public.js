@@ -36,4 +36,13 @@ Neatline.module('Editor.Exhibit', function(
   Neatline.commands.addHandler('EXHIBIT:activateTab', activateTab);
 
 
+  /**
+   * Return the form element.
+   */
+  var getElement = function() {
+    return Exhibit.__view.$el;
+  };
+  Neatline.reqres.addHandler('EXHIBIT:getElement', getElement);
+
+
 });

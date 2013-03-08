@@ -14,17 +14,10 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
   define: function(Spatial, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Start the tab after the form.
-   */
   Neatline.Editor.Record.on('start', function() {
     Spatial.start();
   });
 
-
-  /**
-   * Instantiate the tab view.
-   */
   Spatial.addInitializer(function() {
     var form = Neatline.request('RECORD:getElement');
     this.__view = new Spatial.View({ el: form });
