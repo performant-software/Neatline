@@ -40,14 +40,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
 
     /**
-     * Get inputs.
-     */
-    initialize: function() {
-      this.getUi();
-    },
-
-
-    /**
      * Instantiate color pickers and draggers.
      */
     onTabChange: function() {

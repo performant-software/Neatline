@@ -31,15 +31,10 @@ Neatline.module('Editor.Exhibit.Search', function(
 
 
     /**
-     * Compile search and pagination templates.
+     * Initialize state.
      */
-    initialize: function() {
-
-      this.getTemplate();
-      this.getUi();
-
+    init: function() {
       this.mirroring = false; // True if map mirroring is enabled.
-
     },
 
 

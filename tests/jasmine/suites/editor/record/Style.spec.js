@@ -323,7 +323,7 @@ describe('Record Form Style Tab', function() {
 
     // Inputs should be updated.
     expect(el.mapFocus).toHaveValue('1,2');
-    expect(el.mapZoom).toHaveValue(3);
+    expect(el.mapZoom).toHaveValue('3');
 
     // Model should be updated.
     expect(_t.vw.RECORD.model.get('map_focus')).toEqual('1,2');

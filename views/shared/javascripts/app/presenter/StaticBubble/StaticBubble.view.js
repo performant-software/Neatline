@@ -32,13 +32,11 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
     /**
-     * Initialize trackers, get markup.
+     * Initialize state.
      */
-    initialize: function() {
+    init: function() {
       this.active = true;   // True when bubble should be displayed.
       this.frozen = false;  // True when bubble is frozen after a click.
-      this.getTemplate();
-      this.getUi();
     },
 
 

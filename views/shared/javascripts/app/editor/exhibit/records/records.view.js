@@ -25,9 +25,9 @@ Neatline.module('Editor.Exhibit.Records', function(
 
 
     /**
-     * Compile row template.
+     * Compile pagination and row templates.
      */
-    initialize: function() {
+    init: function() {
       this.pagination = _.template($('#pagination-template').html());
       this.records = _.template($('#record-list-template').html());
     },

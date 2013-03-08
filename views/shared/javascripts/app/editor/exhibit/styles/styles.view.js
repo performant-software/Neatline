@@ -34,12 +34,9 @@ Neatline.module('Editor.Exhibit.Styles', function(
 
 
     /**
-     * Render template.
+     * Construct the exhibit model and stylesheet editor.
      */
-    initialize: function() {
-
-      this.getTemplate();
-      this.getUi();
+    init: function() {
 
       // Create exhibit model, bind to form.
       this.exhibit = new Neatline.Editor.Exhibit.Model();

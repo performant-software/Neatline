@@ -25,11 +25,9 @@ Neatline.module('Editor', { startWithParent: false,
 
 
     /**
-     * Get ui, store default editor width, listen for window resize.
+     * Store default editor width, listen for window resize.
      */
-    initialize: function() {
-
-      this.getUi();
+    init: function() {
 
       // Cache starting width.
       this.width = this.__ui.editor.width();

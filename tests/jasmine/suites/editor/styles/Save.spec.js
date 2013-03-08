@@ -40,7 +40,7 @@ describe('Styles Save', function() {
 
     // Inputs should be updated.
     expect(_t.vw.STYLES.__ui.mapFocus).toHaveValue('1,2');
-    expect(_t.vw.STYLES.__ui.mapZoom).toHaveValue(3);
+    expect(_t.vw.STYLES.__ui.mapZoom).toHaveValue('3');
 
     // Model should be updated.
     expect(_t.vw.STYLES.exhibit.get('map_focus')).toEqual('1,2');

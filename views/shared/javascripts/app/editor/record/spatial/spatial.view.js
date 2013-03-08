@@ -50,11 +50,10 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
     /**
-     * Get inputs.
+     * Initialize state.
      */
-    initialize: function() {
-      this.hash = null;
-      this.getUi();
+    init: function() {
+      this.tab = null;  // The hash of the active tab.
     },
 
 
@@ -64,7 +63,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      * @param {Object} event: The `shown` event.
      */
     onTabChange: function(event) {
-      this.hash = event.target.hash;
+      this.tab = event.target.hash;
       this.setPresenterStatus();
       this.resetEditMode();
     },
@@ -142,7 +141,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      * @return {Boolean}: True if "Spatial" is active.
      */
     spatialTabActive: function() {
-      return this.hash == '#record-spatial';
+      return this.tab == '#record-spatial';
     },
 
 

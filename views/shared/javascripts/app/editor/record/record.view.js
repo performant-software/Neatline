@@ -35,13 +35,11 @@ Neatline.module('Editor.Record', function(
 
 
     /**
-     * Initialize state, render template.
+     * Initialize state.
      */
-    initialize: function() {
-      this.open = false;
-      this.tab = null;
-      this.getTemplate();
-      this.getUi();
+    init: function() {
+      this.open = false;  // True if a record is bound to the form.
+      this.tab = null;    // The hash of the active tab.
     },
 
 

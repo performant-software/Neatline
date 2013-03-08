@@ -26,15 +26,6 @@ Neatline.module('Editor.Exhibit.Menu', function(
 
 
     /**
-     * Render template, get ui.
-     */
-    initialize: function() {
-      this.getTemplate();
-      this.getUi();
-    },
-
-
-    /**
      * Activate a tab.
      *
      * @param {String} tab: The tab to activate.
