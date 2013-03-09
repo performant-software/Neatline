@@ -72,7 +72,7 @@ describe('Record Form Open', function() {
       model = recordModels[0];
 
       // Request an already-loaded record.
-      _t.navigate('record/'+recordModels[0].get('id')+'/text');
+      _t.navigate('record/'+recordModels[0].get('id'));
 
     });
 
@@ -86,7 +86,7 @@ describe('Record Form Open', function() {
       model = _t.buildModelFromJson(_t.json.record.standard);
 
       // Request unloaded record.
-      _t.navigate('record/999/text');
+      _t.navigate('record/999');
 
       // Respond to the GET request.
       _t.respondLast200(_t.json.record.standard);

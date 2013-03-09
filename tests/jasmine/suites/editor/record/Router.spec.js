@@ -13,12 +13,28 @@
 describe('Record Router', function() {
 
 
-  var id;
+  var href;
 
 
   beforeEach(function() {
     _t.loadEditor();
-    id = _t.getRecordListModels()[0].get('id');
+    href = $(_t.getRecordRows()[0]).attr('href');
+  });
+
+
+  it('#record/:id', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/:id` route is requested, the record form should be
+    // displayed and the "Text" tab should be activated by default.
+    // --------------------------------------------------------------------
+
+    _t.navigate(href);
+
+    // Record form should be visible, "Text" tab active.
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    _t.assertActiveTab('text');
+
   });
 
 
@@ -32,13 +48,29 @@ describe('Record Router', function() {
     // Walk tabs.
     _.each(_t.getTabSlugs(), function(slug) {
 
-      _t.navigate('record/'+id+'/'+slug);
+      _t.navigate(href+'/'+slug);
 
       // Record form should be visible, requested tab active.
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
       _t.assertActiveTab(slug);
 
     });
+
+  });
+
+
+  it('#record/add', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/add` route is requested, the record form should be
+    // displayed and the "Text' tab should be activated by default.
+    // --------------------------------------------------------------------
+
+    _t.navigate('record/add');
+
+    // Record form should be visible, "Text" tab active.
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    _t.assertActiveTab('text');
 
   });
 

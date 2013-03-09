@@ -21,7 +21,7 @@ describe('Record Form Add', function() {
     _t.loadEditor();
 
     el = {
-      addButton:    _t.vw.RECORDS.$('a[href="#record/add/text"]'),
+      addButton:    _t.vw.RECORDS.$('a[href="#record/add"]'),
       closeButton:  _t.vw.RECORD.$('a[name="close"]'),
       saveButton:   _t.vw.RECORD.$('a[name="save"]'),
       styleTab:     _t.vw.RECORD.$('a[href="#record-style"]'),

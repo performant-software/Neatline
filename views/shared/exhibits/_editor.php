@@ -26,7 +26,6 @@
 <!-- Underscore templates. -->
 <?php echo $this->partial('exhibits/underscore/_exhibit_menu.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_exhibit_styles.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_exhibit_form.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>
 <?php echo $this->partial('exhibits/underscore/_pagination.php'); ?>
