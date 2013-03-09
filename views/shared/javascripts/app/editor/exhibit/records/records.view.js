@@ -17,12 +17,10 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records.View = Backbone.Neatline.View.extend({
 
 
-    events: {
-      'click ul.records a': 'click'
-    },
+    className: 'records',
 
-    ui: {
-      records: 'div.record-list'
+    events: {
+      'click a': 'click'
     },
 
 
@@ -43,11 +41,11 @@ Neatline.module('Editor.Exhibit.Records', function(
     ingest: function(records) {
 
       // Inject the records list.
-      this.__ui.records.html(this.records({ records: records }));
+      this.$el.html(this.records({ records: records }));
 
       // Render pagination.
       if (records.count > Neatline.global.page_length) {
-        this.__ui.pagination.html(this.pagination({
+        this.$('.pagination').html(this.pagination({
           query: Neatline.request('SEARCH:getQueryForUrl'),
           limit: Neatline.global.page_length,
           records: records

@@ -1,9 +1,8 @@
-<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record list.
+ * Exhibit menu initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,11 +10,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-?>
+Neatline.module('Editor.Exhibit.Menu', function(
+  Menu, Neatline, Backbone, Marionette, $, _) {
 
 
-<!-- Search box. -->
-<input type="text" name="search" placeholder="Search" />
+  Menu.addInitializer(function() {
+    this.__view = new Menu.View();
+  });
 
-<!-- Records. -->
-<div class="record-list"></div>
+
+});

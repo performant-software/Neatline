@@ -17,12 +17,16 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search.View = Backbone.Neatline.View.extend({
 
 
+    template:   '#search-template',
+    className:  'search',
+    tagName:    'form',
+
     events: {
-      'keyup input[name="search"]': 'onKeystroke',
+      'keyup input': 'onKeystroke',
     },
 
     ui: {
-      search: 'input[name="search"]'
+      search: 'input'
     },
 
 

@@ -14,10 +14,17 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
+  /**
+   * Start the tab after the form.
+   */
   Neatline.Editor.Record.on('start', function() {
     Style.start();
   });
 
+
+  /**
+   * Instantiate the tab view.
+   */
   Style.addInitializer(function() {
     var form = Neatline.request('RECORD:getElement');
     this.__view = new Style.View({ el: form });

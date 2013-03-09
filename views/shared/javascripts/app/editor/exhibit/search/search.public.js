@@ -15,6 +15,17 @@ Neatline.module('Editor.Exhibit.Search', function(
 
 
   /**
+   * Append the form to the editor container.
+   *
+   * @param {Object} container: The container element.
+   */
+  var display = function(container) {
+    Search.__view.showIn(container);
+  };
+  Neatline.commands.addHandler('SEARCH:display', display);
+
+
+  /**
    * Initialize the record list from route parameters.
    *
    * @param {String} query: The search query.

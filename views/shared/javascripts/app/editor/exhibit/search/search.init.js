@@ -10,19 +10,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Search', { startWithParent: false,
-  define: function(Search, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Search', function(
+  Search, Neatline, Backbone, Marionette, $, _) {
 
-
-  Neatline.Editor.Exhibit.on('start', function() {
-    Search.start();
-  });
 
   Search.addInitializer(function() {
-    this.__view = new Search.View({
-      el: Neatline.request('EXHIBIT:getElement')
-    });
+    this.__view = new Search.View();
   });
 
 
-}});
+});
