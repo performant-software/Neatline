@@ -15,16 +15,7 @@
 
 
 <!-- Search box. -->
-<input type="text" placeholder="Search" />
-
-<!-- Top pagination. -->
-<div class="pagination"></div>
+<input type="text" name="search" placeholder="Search" />
 
 <!-- Records. -->
-<ul class="list">
-  <a href="#record/add/text">New Record</a>
-  <div class="records"></div>
-</ul>
-
-<!-- Bottom pagination. -->
-<div class="pagination"></div>
+<div class="record-list"></div>

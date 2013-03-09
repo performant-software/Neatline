@@ -15,17 +15,6 @@ Neatline.module('Editor.Exhibit.Records', function(
 
 
   /**
-   * Append the list to the editor container.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Records.__view.showIn(container);
-  };
-  Neatline.commands.addHandler('RECORDS:display', display);
-
-
-  /**
    * Query for new records.
    *
    * @param {Object} params: The query parameters.
@@ -47,15 +36,6 @@ Neatline.module('Editor.Exhibit.Records', function(
     Records.__view.ingest(records);
   };
   Neatline.commands.addHandler('RECORDS:ingest', ingest);
-
-
-  /**
-   * Navigate to the record list.
-   */
-  var navToList = function() {
-    Records.__router.navigate('records', true);
-  };
-  Neatline.commands.addHandler('RECORDS:navToList', navToList);
 
 
   /**

@@ -18,11 +18,11 @@ Neatline.module('Editor.Exhibit.Search', function(
 
 
     events: {
-      'keyup input': 'onKeystroke',
+      'keyup input[name="search"]': 'onKeystroke',
     },
 
     ui: {
-      search: 'input'
+      search: 'input[name="search"]'
     },
 
 

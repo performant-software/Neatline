@@ -19,8 +19,9 @@ Neatline.module('Editor.Exhibit.Search', { startWithParent: false,
   });
 
   Search.addInitializer(function() {
-    var form = Neatline.request('EXHIBIT:getElement');
-    this.__view = new Search.View({ el: form });
+    this.__view = new Search.View({
+      el: Neatline.request('EXHIBIT:getElement')
+    });
   });
 
 

@@ -19,9 +19,10 @@ Neatline.module('Editor.Exhibit.Records', { startWithParent: false,
   });
 
   Records.addInitializer(function() {
-    var form = Neatline.request('EXHIBIT:getElement');
     this.__collection = new Neatline.Shared.Record.Collection();
-    this.__view = new Records.View({ el: form });
+    this.__view       = new Records.View({
+      el: Neatline.request('EXHIBIT:getElement')
+    });
   });
 
 
