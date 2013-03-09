@@ -48,7 +48,8 @@
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
       "ace":              "./components/ace/build/src/ace.js",
-      "ace_css":          "./components/ace/build/src/mode-css.js",
+      "ace_theme":        "./components/ace/build/src/theme-clouds.js",
+      "ace_mode":         "./components/ace/build/src/mode-css.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
       "sinon":            "./components/sinon.js/sinon.js"

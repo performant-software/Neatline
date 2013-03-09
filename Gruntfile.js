@@ -151,7 +151,8 @@ module.exports = function(grunt) {
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.ace,
-          cfg.vendor.js.ace_css,
+          cfg.vendor.js.ace_theme,
+          cfg.vendor.js.ace_mode,
           cfg.vendor.js.rivets,
 
           // Neatline:

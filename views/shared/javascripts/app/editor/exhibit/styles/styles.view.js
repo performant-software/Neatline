@@ -34,19 +34,19 @@ Neatline.module('Editor.Exhibit.Styles', function(
 
 
     /**
-     * Construct the exhibit model and stylesheet editor.
+     * Construct the exhibit model and bind to form.
      */
     init: function() {
       this.exhibit = new Neatline.Editor.Exhibit.Model();
-      this.buildUi();
+      rivets.bind(this.$el, { exhibit: this.exhibit });
     },
 
 
     /**
-     * Bind the exhibit to the form.
+     * Instantiate the ACE editor on the stylesheet.
      */
-    buildUi: function() {
-      rivets.bind(this.$el, { exhibit: this.exhibit });
+    buildEditor: function() {
+      // TODO
     },
 
 
