@@ -56,9 +56,9 @@ describe('Styles Save', function() {
     // be issued to the exhibit API with the new data.
     // --------------------------------------------------------------------
 
-    _t.vw.STYLES.editor.setValue('1');
+    _t.vw.STYLES.__ui.styles.val('1').trigger('change');
     _t.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
-    _t.vw.STYLES.__ui.mapZoom. val('3').trigger('change');
+    _t.vw.STYLES.__ui.mapZoom.val('3').trigger('change');
 
     // Click "Save" button.
     el.save.trigger('click');

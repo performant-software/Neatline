@@ -37,7 +37,7 @@ describe('Styles Initialization', function() {
     var view = Neatline.Editor.Exhibit.Styles.__view;
 
     // Form should be populated.
-    expect(view.editor.getValue()).toEqual('1');
+    expect(view.__ui.styles.val()).toEqual('1');
     expect(view.$('input[name="map-focus"]').val()).toEqual('2');
     expect(view.$('input[name="map-zoom"]').val()).toEqual('3');
 

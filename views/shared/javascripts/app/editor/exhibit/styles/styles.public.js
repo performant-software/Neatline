@@ -21,7 +21,6 @@ Neatline.module('Editor.Exhibit.Styles', function(
    */
   var display = function(container) {
     Styles.__view.showIn(container);
-    Styles.__view.refresh();
   };
   Neatline.commands.addHandler('ESTYLES:display', display);
 

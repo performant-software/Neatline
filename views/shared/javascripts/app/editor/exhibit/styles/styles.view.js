@@ -37,14 +37,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * Construct the exhibit model and stylesheet editor.
      */
     init: function() {
-
-      // Create exhibit model, bind to form.
       this.exhibit = new Neatline.Editor.Exhibit.Model();
       this.buildUi();
-
-      // Create CodeMirror YAML editor for styles.
-      this.editor = CodeMirror.fromTextArea(this.__ui.styles[0]);
-
     },
 
 
@@ -68,27 +62,9 @@ Neatline.module('Editor.Exhibit.Styles', function(
 
 
     /**
-     * Refresh the editor.
-     */
-    refresh: function() {
-      this.editor.refresh();
-    },
-
-
-    /**
-     * Push the stylesheet into the model.
-     */
-    syncStyles: function() {
-      this.editor.save();
-      this.__ui.styles.change();
-    },
-
-
-    /**
      * Save the settings.
      */
     save: function() {
-      this.syncStyles();
       this.exhibit.save(null, {
         success:  _.bind(this.onSaveSuccess, this),
         error:    _.bind(this.onSaveError, this)

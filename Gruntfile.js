@@ -153,8 +153,6 @@ module.exports = function(grunt) {
           cfg.vendor.js.ace,
           cfg.vendor.js.ace_css,
           cfg.vendor.js.rivets,
-          cfg.vendor.js.codemirror,
-          cfg.vendor.js.codemirror_yaml,
 
           // Neatline:
           cfg.src.shared+'/*.js',
