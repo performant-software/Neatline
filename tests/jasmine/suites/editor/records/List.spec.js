@@ -28,8 +28,7 @@ describe('Records List', function() {
     var recordModels = _t.getRecordListModels();
     var recordRows = _t.getRecordRows();
 
-    // Record titles and bodies should be listed.
-    expect(recordRows.length).toEqual(4);
+    // Titles and bodies should be listed.
     expect($(recordRows[1]).find('.title')).toHaveText('_title1');
     expect($(recordRows[1]).find('.body')).toHaveText('_body1');
     expect($(recordRows[2]).find('.title')).toHaveText('_title2');
@@ -37,8 +36,10 @@ describe('Records List', function() {
     expect($(recordRows[3]).find('.title')).toHaveText('_title3');
     expect($(recordRows[3]).find('.body')).toHaveText('_body3');
 
-    // Record edit form links should be listed.
+    // Should link to new record.
     expect($(recordRows[0]).attr('href')).toEqual('#record/add');
+
+    // Should link to existing records.
     expect($(recordRows[1]).attr('href')).
       toEqual('#record/'+recordModels[0].get('id'));
     expect($(recordRows[2]).attr('href')).

@@ -63,7 +63,7 @@ describe('Search Map Mirroring', function() {
     expect(recordRows.length).toEqual(2);
 
     // No pagination.
-    _t.assertPaginationEmpty();
+    expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
 
   });
 
@@ -92,7 +92,7 @@ describe('Search Map Mirroring', function() {
     expect(recordRows.length).toEqual(2);
 
     // No pagination.
-    _t.assertPaginationEmpty();
+    expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
 
   });
 
@@ -118,7 +118,7 @@ describe('Search Map Mirroring', function() {
     expect(recordRows.length).toEqual(3);
 
     // No pagination.
-    _t.assertPaginationEmpty();
+    expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
 
   });
 
@@ -151,7 +151,7 @@ describe('Search Map Mirroring', function() {
     expect(recordRows.length).toEqual(4);
 
     // Pagination visible.
-    _t.assertPaginationNotEmpty();
+    expect(_t.vw.RECORDS.$el).toContain('.pagination');
 
   });
 
@@ -183,7 +183,7 @@ describe('Search Map Mirroring', function() {
     expect(recordRows.length).toEqual(4);
 
     // Pagination visible.
-    _t.assertPaginationNotEmpty();
+    expect(_t.vw.RECORDS.$el).toContain('.pagination');
 
   });
 

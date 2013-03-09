@@ -28,8 +28,7 @@ Neatline.module('Editor.Exhibit.Records', function(
      * Compile pagination and row templates.
      */
     init: function() {
-      this.pagination = _.template($('#pagination-template').html());
-      this.records = _.template($('#record-list-template').html());
+      this.template = _.template($('#record-list-template').html());
     },
 
 
@@ -39,19 +38,11 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
-
-      // Inject the records list.
-      this.$el.html(this.records({ records: records }));
-
-      // Render pagination.
-      if (records.count > Neatline.global.page_length) {
-        this.$('.pagination').html(this.pagination({
-          query: Neatline.request('SEARCH:getQueryForUrl'),
-          limit: Neatline.global.page_length,
-          records: records
-        }));
-      }
-
+      this.$el.html(this.template({
+        records:  records,
+        query:    Neatline.request('SEARCH:getQueryForUrl'),
+        limit:    Neatline.global.page_length
+      }));
     },
 
 

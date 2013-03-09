@@ -16,7 +16,9 @@
 <script id="record-list-template" type="text/templates">
 
   <!-- Top pagination. -->
-  <div class="pagination"></div>
+  <?php echo $this->partial(
+    'exhibits/underscore/partials/_pagination.php'
+  ); ?>
 
   <ul class="list">
 
@@ -50,6 +52,8 @@
   </ul>
 
   <!-- Bottom pagination. -->
-  <div class="pagination"></div>
+  <?php echo $this->partial(
+    'exhibits/underscore/partials/_pagination.php'
+  ); ?>
 
 </script>
