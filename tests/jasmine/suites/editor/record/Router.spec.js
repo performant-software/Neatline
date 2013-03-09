@@ -22,6 +22,22 @@ describe('Record Router', function() {
   });
 
 
+  it('#record/:id', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/:id` route is requested, the record form should be
+    // displayed and the "Text" tab should be activated by default.
+    // --------------------------------------------------------------------
+
+    _t.navigate(href);
+
+    // Record form should be visible, "Text" tab active.
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    _t.assertActiveTab('text');
+
+  });
+
+
   it('#record/:id/:tab', function() {
 
     // --------------------------------------------------------------------
@@ -39,6 +55,22 @@ describe('Record Router', function() {
       _t.assertActiveTab(slug);
 
     });
+
+  });
+
+
+  it('#record/add', function() {
+
+    // --------------------------------------------------------------------
+    // When `#record/add` route is requested, the record form should be
+    // displayed and the "Text' tab should be activated by default.
+    // --------------------------------------------------------------------
+
+    _t.navigate('record/add');
+
+    // Record form should be visible, "Text" tab active.
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    _t.assertActiveTab('text');
 
   });
 

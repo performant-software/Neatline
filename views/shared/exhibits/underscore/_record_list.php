@@ -15,21 +15,14 @@
 
 <script id="record-list-template" type="text/templates">
 
-  <!-- Top pagination. -->
   <div class="pagination"></div>
 
   <ul class="list">
 
-    <!-- Add record link. -->
-    <a href="#record/add/text">New Record</a>
+    <a href="#record/add">New Record</a>
 
     <% records.each(function(r) { %>
-
-      <!-- Record listing. -->
-      <a href="#record/<%= r.get('id') %>/text"
-        data-id="<%= r.get('id') %>">
-
-        <!-- Title. -->
+      <a href="#record/<%= r.get('id') %>" data-id="<%= r.get('id') %>">
         <span class="title">
           <% if (!_.isEmpty(r.get('_title'))) { %>
             <%= _.string.stripTags(r.get('_title')) %>
@@ -37,19 +30,14 @@
             <%= STRINGS.placeholders.title %>
           <% } %>
         </span>
-
-        <!-- Body. -->
         <span class="body">
           <%= _.string.stripTags(r.get('_body')) %>
         </span>
-
       </a>
-
     <% }); %>
 
   </ul>
 
-  <!-- Bottom pagination. -->
   <div class="pagination"></div>
 
 </script>
