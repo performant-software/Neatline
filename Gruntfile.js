@@ -130,6 +130,9 @@ module.exports = function(grunt) {
         dest: cfg.payloads.shared.js+'/neatline.js'
       },
       editor: {
+        options: {
+          separator: ';'
+        },
         src: [
 
           // Vendor:
@@ -147,6 +150,8 @@ module.exports = function(grunt) {
           cfg.vendor.js.toastr,
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
+          cfg.vendor.js.ace,
+          cfg.vendor.js.ace_css,
           cfg.vendor.js.rivets,
           cfg.vendor.js.codemirror,
           cfg.vendor.js.codemirror_yaml,

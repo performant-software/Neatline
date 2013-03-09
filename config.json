@@ -47,6 +47,8 @@
       "toastr":           "./components/toastr/toastr.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
+      "ace":              "./components/ace/build/src/ace.js",
+      "ace_css":          "./components/ace/build/src/mode-css.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "codemirror":       "./components/codemirror/lib/codemirror.js",
       "codemirror_yaml":  "./components/codemirror/mode/yaml/yaml.js",
