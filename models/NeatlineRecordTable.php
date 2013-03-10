@@ -30,7 +30,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param NeatlineExhibit $exhibit The exhibit to update.
      * @param NeatlineRecord|null $record The record to update.
      */
-    public function applyStyles($exhibit, $record=null)
+    public function applyStyles($exhibit)
     {
 
         // Parse the styles YAML.
@@ -45,7 +45,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // `WHERE`
             $where = array('exhibit_id = ?' => $exhibit->id);
-            if (!is_null($record)) $where['id = ?'] = $record->id;
             if ($tag != 'default') $where['tags REGEXP ?'] =
                 '[[:<:]]'.$tag.'[[:>:]]';
 

@@ -149,36 +149,4 @@ YAML;
     }
 
 
-    /**
-     * When a record is passed, just that record should be updated.
-     */
-    public function testRecordIsolation()
-    {
-
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record1->tags = 'tag';
-        $record2->tags = 'tag';
-        $record1->save();
-        $record2->save();
-
-        // YAML
-        $exhibit->styles = <<<YAML
-tag:
- - vector_color: '1'
-YAML;
-
-        // Apply styles, reload records.
-        $this->_recordsTable->applyStyles($exhibit, $record1);
-        $record1 = $this->_recordsTable->find($record1->id);
-        $record2 = $this->_recordsTable->find($record2->id);
-
-        // Just record 1 record should be updated.
-        $this->assertEquals($record1->vector_color, '1');
-        $this->assertNull($record2->vector_color);
-
-    }
-
-
 }
