@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `applyStyles` on `NeatlineRecordTable`.
+ * Tests for `pushStyles` on `NeatlineRecordTable`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,15 +11,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTableTest_ApplyStyles
+class Neatline_NeatlineRecordTableTest_PushStyles
     extends Neatline_Test_AppTestCase
 {
 
 
     /**
-     * `applyStyles` should propagate styles to records in the exhibit.
+     * `pushStyles` should propagate styles to records in the exhibit.
      */
-    public function testApplyStyles()
+    public function testpushStyles()
     {
 
         $exhibit = $this->__exhibit();
@@ -41,7 +41,7 @@ tag2:
 YAML;
 
         // Apply styles, reload records.
-        $this->_recordsTable->applyStyles($exhibit);
+        $this->_recordsTable->pushStyles($exhibit);
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
@@ -61,7 +61,7 @@ YAML;
 
 
     /**
-     * `applyStyles` should ignore styles that do not have values.
+     * `pushStyles` should ignore styles that do not have values.
      */
     public function testIgnoreStylesWithoutValues()
     {
@@ -79,7 +79,7 @@ tag:
 YAML;
 
         // Apply styles, reload record.
-        $this->_recordsTable->applyStyles($exhibit);
+        $this->_recordsTable->pushStyles($exhibit);
         $record = $this->_recordsTable->find($record->id);
 
         // `vector_color` should not be changed.
@@ -105,7 +105,7 @@ default:
 YAML;
 
         // Apply styles, reload records.
-        $this->_recordsTable->applyStyles($exhibit);
+        $this->_recordsTable->pushStyles($exhibit);
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
@@ -117,7 +117,7 @@ YAML;
 
 
     /**
-     * `applyStyles` should only update records in the passed exhibit.
+     * `pushStyles` should only update records in the passed exhibit.
      */
     public function testExhibitIsolation()
     {
@@ -138,7 +138,7 @@ tag:
 YAML;
 
         // Apply styles, reload records.
-        $this->_recordsTable->applyStyles($exhibit1);
+        $this->_recordsTable->pushStyles($exhibit1);
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 

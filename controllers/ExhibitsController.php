@@ -86,7 +86,7 @@ class Neatline_ExhibitsController
 
         // Propagate the stylesheet.
         $records = $this->_helper->db->getTable('NeatlineRecord');
-        $records->applyStyles($exhibit);
+        $records->pushStyles($exhibit);
 
     }
 

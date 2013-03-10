@@ -50,8 +50,9 @@ class NeatlineExhibit extends Neatline_AbstractRecord
      */
     public function getNumberOfRecords()
     {
-        $recordsTable = $this->getTable('NeatlineRecord');
-        return $recordsTable->countActiveRecordsByExhibit($this);
+      return $this->getTable('NeatlineRecord')->count(array(
+          'exhibit_id' => $this->id
+      ));
     }
 
 

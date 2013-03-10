@@ -30,7 +30,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param NeatlineExhibit $exhibit The exhibit to update.
      * @param NeatlineRecord|null $record The record to update.
      */
-    public function applyStyles($exhibit)
+    public function pushStyles($exhibit)
     {
 
         // Parse the styles YAML.
@@ -97,21 +97,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
         $select->order('added DESC');
         return $select;
 
-    }
-
-
-    /**
-     * Count the number of active records in an exhibit.
-     *
-     * @param NeatlineExhibit $exhibit The exhibit record.
-     * @return int The number of active records.
-     */
-    public function countActiveRecordsByExhibit($exhibit)
-    {
-        return $this->count(array(
-            'exhibit_id' => $exhibit->id,
-            'map_active' => 1
-        ));
     }
 
 
