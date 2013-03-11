@@ -50,6 +50,18 @@ describe('Styles Save', function() {
   });
 
 
+  it('should synchronize model with stylesheet editor', function() {
+
+    // --------------------------------------------------------------------
+    // When the stylesheet is changed, the model should be updated.
+    // --------------------------------------------------------------------
+
+    _t.vw.STYLES.ace.getSession().setValue('val');
+    expect(_t.vw.STYLES.model.get('styles')).toEqual('val');
+
+  });
+
+
   it('should issue PUT request when "Save" is clicked', function() {
 
     // --------------------------------------------------------------------
