@@ -37,8 +37,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * Construct the exhibit model and bind to form.
      */
     init: function() {
-      this.exhibit = new Neatline.Editor.Exhibit.Model();
-      rivets.bind(this.$el, { exhibit: this.exhibit });
+      this.model = new Neatline.Editor.Exhibit.Model();
+      rivets.bind(this.$el, { exhibit: this.model });
     },
 
 
@@ -48,24 +48,44 @@ Neatline.module('Editor.Exhibit.Styles', function(
     buildEditor: function() {
 
       // Create editor.
-      this.editor = ace.edit('styles');
+      this.ace = ace.edit('styles');
 
       // Disable syntax checking, set CSS mode.
-      this.editor.getSession().setUseWorker(false);
-      this.editor.getSession().setMode('ace/mode/css');
+      this.ace.getSession().setUseWorker(false);
+      this.ace.getSession().setMode('ace/mode/css');
 
       // Disable gutter and line highlighing.
-      this.editor.renderer.setShowGutter(false);
-      this.editor.setHighlightActiveLine(false);
+      this.ace.renderer.setShowGutter(false);
+      this.ace.setHighlightActiveLine(false);
 
-      // Populate value.
-      this.editor.getSession().setValue(this.exhibit.get('styles'));
+      // Populate stylesheet value.
+      this.setAceVal(this.model.get('styles'));
 
-      // Update model on change.
-      this.editor.on('change', _.bind(function() {
-        this.exhibit.set('styles', this.editor.getSession().getValue());
+      // Update model when the editor changes.
+      this.ace.on('change', _.bind(function() {
+        this.model.set('styles', this.getAceVal());
       }, this));
 
+    },
+
+
+    /**
+     * Get the current stylesheet value.
+     *
+     * @return {String} val: The value.
+     */
+    getAceVal: function() {
+      return this.ace.getSession().getValue();
+    },
+
+
+    /**
+     * Get the current stylesheet value.
+     *
+     * @param {String} val: The value.
+     */
+    setAceVal: function(val) {
+      return this.ace.getSession().setValue(val);
     },
 
 
@@ -84,7 +104,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * Save the settings.
      */
     save: function() {
-      this.exhibit.save(null, {
+      this.model.save(null, {
         success:  _.bind(this.onSaveSuccess, this),
         error:    _.bind(this.onSaveError, this)
       });

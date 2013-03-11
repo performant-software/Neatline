@@ -44,8 +44,8 @@ describe('Styles Save', function() {
     expect(_t.vw.STYLES.__ui.mapZoom).toHaveValue('3');
 
     // Model should be updated.
-    expect(_t.vw.STYLES.exhibit.get('map_focus')).toEqual('1,2');
-    expect(_t.vw.STYLES.exhibit.get('map_zoom')).toEqual('3');
+    expect(_t.vw.STYLES.model.get('map_focus')).toEqual('1,2');
+    expect(_t.vw.STYLES.model.get('map_zoom')).toEqual('3');
 
   });
 
@@ -57,7 +57,7 @@ describe('Styles Save', function() {
     // be issued to the exhibit API with the new data.
     // --------------------------------------------------------------------
 
-    _t.vw.STYLES.editor.getSession().setValue('1');
+    _t.vw.STYLES.ace.getSession().setValue('1');
     _t.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
     _t.vw.STYLES.__ui.mapZoom.val('3').trigger('change');
 

@@ -37,7 +37,7 @@ describe('Styles Initialization', function() {
     _t.aliasEditor();
 
     // Form should be populated.
-    expect(_t.vw.STYLES.editor.getSession().getValue()).toEqual('1');
+    expect(_t.vw.STYLES.ace.getSession().getValue()).toEqual('1');
     expect(_t.vw.STYLES.$('input[name="map-focus"]').val()).toEqual('2');
     expect(_t.vw.STYLES.$('input[name="map-zoom"]').val()).toEqual('3');
 
