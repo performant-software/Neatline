@@ -19,12 +19,25 @@ class Neatline_PublicHtmlFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * Inject the real `layers.json`.
+     * Inject the real `layers.json`, mock exhibit.
      */
     public function setUp()
     {
+
         parent::setUp();
+
+        // Inject real `layers.json`.
         Zend_Registry::set('layers', NL_DIR . '/layers.json');
+
+        // Mock exhibit.
+        $exhibit = $this->__exhibit();
+        $exhibit->base_layer = 'OpenStreetMap';
+        $exhibit->save();
+
+        // Set script path and exhibit variable.
+        get_view()->setScriptPath(NL_DIR . '/views/shared');
+        get_view()->neatline_exhibit = $exhibit;
+
     }
 
 
@@ -33,8 +46,10 @@ class Neatline_PublicHtmlFixtureTest extends Neatline_Test_AppTestCase
      */
     public function testNeatlinePartial()
     {
-        $this->writeFixture('neatline/fixtures/neatline',
-            'neatline-partial.html');
+        $this->writeFixture(
+            get_view()->partial('neatline/_neatline.php'),
+            'neatline-partial.html'
+        );
     }
 
 
@@ -43,8 +58,10 @@ class Neatline_PublicHtmlFixtureTest extends Neatline_Test_AppTestCase
      */
     public function testEditorPartial()
     {
-        $this->writeFixture('neatline/fixtures/editor',
-            'editor-partial.html');
+        $this->writeFixture(
+            get_view()->partial('exhibits/_editor.php'),
+            'editor-partial.html'
+        );
     }
 
 
