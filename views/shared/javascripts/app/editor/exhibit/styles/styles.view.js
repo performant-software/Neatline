@@ -47,16 +47,15 @@ Neatline.module('Editor.Exhibit.Styles', function(
      */
     buildEditor: function() {
 
-      // Create editor.
+      // Create Ace.
       this.ace = ace.edit('styles');
-
-      // Disable syntax checking, set CSS mode.
       this.ace.getSession().setUseWorker(false);
       this.ace.getSession().setMode('ace/mode/css');
 
-      // Disable gutter and line highlighing.
+      // Configure Ace.
       this.ace.renderer.setShowGutter(false);
       this.ace.setHighlightActiveLine(false);
+      this.ace.getSession().setTabSize(2);
 
       // Populate stylesheet value.
       this.setAceVal(this.model.get('styles'));
