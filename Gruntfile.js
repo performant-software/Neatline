@@ -153,6 +153,7 @@ module.exports = function(grunt) {
           cfg.vendor.js.ace,
           cfg.vendor.js.ace_theme,
           cfg.vendor.js.ace_mode,
+          cfg.vendor.js.ace_worker,
           cfg.vendor.js.rivets,
 
           // Neatline:
@@ -194,7 +195,6 @@ module.exports = function(grunt) {
           cfg.vendor.css.bootstrap,
           cfg.vendor.css.toastr,
           cfg.vendor.css.chosen,
-          cfg.vendor.css.codemirror,
           cfg.payloads.shared.css+'/editor/*.css'
         ],
         dest: cfg.payloads.shared.css+'/editor.css'

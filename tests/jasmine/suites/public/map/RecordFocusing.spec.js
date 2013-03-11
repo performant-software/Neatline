@@ -38,11 +38,7 @@ describe('Map Record Focusing', function() {
       expect(_t.server.requests.count).toEqual(requestCount);
 
       // Map should focus on record.
-      var c = _t.vw.MAP.map.getCenter();
-      var z = _t.vw.MAP.map.getZoom();
-      expect(c.lon).toEqual(100);
-      expect(c.lat).toEqual(200);
-      expect(z).toEqual(10);
+      _t.assertMapViewport(100, 200, 10);
 
     });
 
@@ -78,11 +74,7 @@ describe('Map Record Focusing', function() {
       expect(_t.vw.MAP.layers[3].features[0].geometry.y).toEqual(2);
 
       // Map should focus.
-      var c = _t.vw.MAP.map.getCenter();
-      var z = _t.vw.MAP.map.getZoom();
-      expect(c.lon).toEqual(100);
-      expect(c.lat).toEqual(200);
-      expect(z).toEqual(10);
+      _t.assertMapViewport(100, 200, 10);
 
     });
 

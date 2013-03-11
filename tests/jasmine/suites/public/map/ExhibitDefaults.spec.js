@@ -15,7 +15,6 @@ describe('Map Exhibit Defaults', function() {
 
   beforeEach(function() {
 
-    _t.stopApplication();
     _t.setFixturesPath();
     loadFixtures('neatline-partial.html');
 
@@ -47,13 +46,14 @@ describe('Map Exhibit Defaults', function() {
     // layers defined in the `base_layers` global.
     // --------------------------------------------------------------------
 
-    // Start the map.
-    Neatline.Map.start();
+    // Initialize.
+    _t.startApplication();
+    _t.aliasNeatline();
 
     // Base layers should be added to the map.
-    expect(Neatline.Map.__view.map.layers[0].name).toEqual('Layer1');
-    expect(Neatline.Map.__view.map.layers[1].name).toEqual('Layer2');
-    expect(Neatline.Map.__view.map.layers[2].name).toEqual('Layer3');
+    expect(_t.vw.MAP.map.layers[0].name).toEqual('Layer1');
+    expect(_t.vw.MAP.map.layers[1].name).toEqual('Layer2');
+    expect(_t.vw.MAP.map.layers[2].name).toEqual('Layer3');
 
   });
 
@@ -68,11 +68,12 @@ describe('Map Exhibit Defaults', function() {
     // Set the default base layer.
     Neatline.global.base_layer = 'Layer2';
 
-    // Start the map.
-    Neatline.Map.start();
+    // Initialize.
+    _t.startApplication();
+    _t.aliasNeatline();
 
     // Default layer should be set.
-    expect(Neatline.Map.__view.map.baseLayer.name).toEqual('Layer2');
+    expect(_t.vw.MAP.map.baseLayer.name).toEqual('Layer2');
 
   });
 
@@ -85,8 +86,8 @@ describe('Map Exhibit Defaults', function() {
     // the layer switcher control should be added to the map.
     // --------------------------------------------------------------------
 
-    // Start the map.
-    Neatline.Map.start();
+    // Initialize.
+    _t.startApplication();
     _t.aliasNeatline();
 
     // Layer switcher should be enabled.
@@ -113,8 +114,8 @@ describe('Map Exhibit Defaults', function() {
       }
     ];
 
-    // Start the map.
-    Neatline.Map.start();
+    // Initialize.
+    _t.startApplication();
     _t.aliasNeatline();
 
     // Layer switcher should not be enabled.
@@ -136,14 +137,12 @@ describe('Map Exhibit Defaults', function() {
     Neatline.global.map_focus = '1,2';
     Neatline.global.map_zoom = 10;
 
-    // Start map.
-    Neatline.Map.start();
+    // Initialize.
+    _t.startApplication();
+    _t.aliasNeatline();
 
-    // Viewport should be set to default.
-    var center = Neatline.Map.__view.map.getCenter();
-    expect(Neatline.Map.__view.map.zoom).toEqual(10);
-    expect(center.lon).toEqual(1);
-    expect(center.lat).toEqual(2);
+    // Should set default focus.
+    _t.assertMapViewport(1, 2, 10);
 
   });
 

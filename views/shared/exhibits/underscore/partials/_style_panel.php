@@ -120,12 +120,10 @@
       'bind'  => 'record.map_zoom'
   )); ?>
 
-  <div class="controls">
-    <div class="inline-inputs">
-      <a name="set-focus" class="btn btn-small">
-        <i class="icon-map-marker"></i> Use Current Viewport as Default
-      </a>
-    </div>
-  </div>
+  <?php echo common('neatline/button', array(
+      'name'  => 'set-focus',
+      'icon'  => 'icon-map-marker',
+      'text'  => 'User Current Viewport as Default'
+  )); ?>
 
 </div>

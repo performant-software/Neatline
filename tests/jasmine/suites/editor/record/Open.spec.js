@@ -190,14 +190,8 @@ describe('Record Form Open', function() {
     // Open form.
     _t.click($(recordRows[1]));
 
-    // Get focus and zoom.
-    var center  = _t.vw.MAP.map.getCenter();
-    var zoom    = _t.vw.MAP.map.getZoom();
-
     // Focus should be unchanged.
-    expect(center.lon).toEqual(100);
-    expect(center.lat).toEqual(200);
-    expect(zoom).toEqual(10);
+    _t.assertMapViewport(100, 200, 10);
 
   });
 
@@ -218,14 +212,8 @@ describe('Record Form Open', function() {
     // Trigger click on Record 1 feature.
     _t.clickOnMapFeature(feature1);
 
-    // Get focus and zoom.
-    var center  = _t.vw.MAP.map.getCenter();
-    var zoom    = _t.vw.MAP.map.getZoom();
-
     // Focus should be unchanged.
-    expect(center.lon).toEqual(200);
-    expect(center.lat).toEqual(300);
-    expect(zoom).toEqual(15);
+    _t.assertMapViewport(200, 300, 15);
 
   });
 

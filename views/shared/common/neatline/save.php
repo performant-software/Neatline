@@ -1,8 +1,9 @@
+<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Styles tab styles.
+ * Stand-alone save button.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,19 +11,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+?>
 
-@import 'var'
-
-
-#editor
-
-  form.styles
-    padding-top 0
-
-    .control-group
-      margin-bottom 2.4em
-
-    #styles
-      position relative
-      border 1px solid $borderColor
-      height 400px
+<div class="actions">
+  <a name="save" class="btn btn-large btn-primary" \>
+    <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
+  </a>
+</div>

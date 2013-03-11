@@ -47,9 +47,10 @@
       "toastr":           "./components/toastr/toastr.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
-      "ace":              "./components/ace/build/src/ace.js",
-      "ace_theme":        "./components/ace/build/src/theme-clouds.js",
-      "ace_mode":         "./components/ace/build/src/mode-css.js",
+      "ace":              "./components/ace-builds/src-noconflict/ace.js",
+      "ace_theme":        "./components/ace-builds/src-noconflict/theme-clouds.js",
+      "ace_mode":         "./components/ace-builds/src-noconflict/mode-css.js",
+      "ace_worker":       "./components/ace-builds/src-noconflict/worker-css.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
       "sinon":            "./components/sinon.js/sinon.js"
@@ -59,8 +60,7 @@
       "openlayers":       "./components/openlayers/theme/default/style.css",
       "bootstrap":        "./components/bootstrap/bootstrap/css/bootstrap.min.css",
       "toastr":           "./components/toastr/toastr.css",
-      "chosen":           "./components/chosen/chosen/chosen.css",
-      "codemirror":       "./components/codemirror/lib/codemirror.css"
+      "chosen":           "./components/chosen/chosen/chosen.css"
     }
 
   }

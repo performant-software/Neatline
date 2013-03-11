@@ -19,6 +19,7 @@ describe('Styles Save', function() {
   beforeEach(function() {
 
     _t.loadEditor();
+    _t.navigate('styles');
 
     el = {
       setFocus: _t.vw.STYLES.$('a[name="set-focus"]'),
@@ -56,7 +57,7 @@ describe('Styles Save', function() {
     // be issued to the exhibit API with the new data.
     // --------------------------------------------------------------------
 
-    _t.vw.STYLES.__ui.styles.val('1').trigger('change');
+    _t.vw.STYLES.editor.getSession().setValue('1');
     _t.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
     _t.vw.STYLES.__ui.mapZoom.val('3').trigger('change');
 

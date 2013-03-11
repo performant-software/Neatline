@@ -1,8 +1,9 @@
+<?php
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Styles tab styles.
+ * Ace editor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,19 +11,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+?>
 
-@import 'var'
-
-
-#editor
-
-  form.styles
-    padding-top 0
-
-    .control-group
-      margin-bottom 2.4em
-
-    #styles
-      position relative
-      border 1px solid $borderColor
-      height 400px
+<label><?php echo __($label); ?></label>
+<div class="controls">
+  <div class="inline-inputs">
+    <div <?php if (isset($id)) echo "id='$id'"; ?>/>
+  </div>
+</div>

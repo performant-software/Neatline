@@ -21,8 +21,8 @@
 
   <a
     href="#delete-modal"
-    name="delete1"
     class="btn btn-large btn-inverse"
+    name="delete1"
     data-toggle="modal"
   ><i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?></a>
 

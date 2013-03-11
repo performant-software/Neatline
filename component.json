@@ -10,7 +10,7 @@
     , "marionette":             ">= 1.0.0-rc6"
     , "chosen":                 ">= 0.9.11"
     , "bootstrap":              ">= 2.3.1"
-    , "ace":                    ">= 0.2.0"
+    , "ace-builds":             ">= 1.0.0"
     , "rivets":                 ">= 0.4.5"
     , "jasmine-jquery":         ">= 1.4.2"
     , "sinon":                  ">= 1.6.0"

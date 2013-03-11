@@ -14,7 +14,6 @@ describe('Styles Initialization', function() {
 
 
   beforeEach(function() {
-    _t.stopApplication();
     _t.setFixturesPath();
     loadFixtures('editor-partial.html');
   });
@@ -32,14 +31,15 @@ describe('Styles Initialization', function() {
       styles: '1', map_focus: '2', map_zoom: 3
     };
 
-    // Start form module.
-    Neatline.Editor.Exhibit.Styles.start();
-    var view = Neatline.Editor.Exhibit.Styles.__view;
+    // Initialize.
+    _t.startApplication();
+    _t.navigate('styles');
+    _t.aliasEditor();
 
     // Form should be populated.
-    expect(view.__ui.styles.val()).toEqual('1');
-    expect(view.$('input[name="map-focus"]').val()).toEqual('2');
-    expect(view.$('input[name="map-zoom"]').val()).toEqual('3');
+    expect(_t.vw.STYLES.editor.getSession().getValue()).toEqual('1');
+    expect(_t.vw.STYLES.$('input[name="map-focus"]').val()).toEqual('2');
+    expect(_t.vw.STYLES.$('input[name="map-zoom"]').val()).toEqual('3');
 
   });
 

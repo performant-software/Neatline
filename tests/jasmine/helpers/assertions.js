@@ -137,6 +137,20 @@ var _t = (function(_t) {
 
 
   /**
+   * Assert the current viewport zoom and focus.
+   *
+   * @param {Number} lon: The focus longitude.
+   * @param {Number} lat: The focus latitude.
+   * @param {Number} zoom: The zoom.
+   */
+  _t.assertMapViewport = function(lon, lat, zoom) {
+    expect(_t.vw.MAP.map.getCenter().lon).toEqual(lon);
+    expect(_t.vw.MAP.map.getCenter().lat).toEqual(lat);
+    expect(_t.vw.MAP.map.getZoom()).toEqual(zoom);
+  };
+
+
+  /**
    * Assert the active record form tab.
    *
    * @param {String} slug: The tab slug.
