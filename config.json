@@ -45,6 +45,7 @@
       "routefilter":      "./components/backbone.routefilter/dist/backbone.routefilter.js",
       "draggable":        "./components/jquery-draggable-input/jquery-draggable-input.js",
       "toastr":           "./components/toastr/toastr.js",
+      "cssjson":          "./components/cssjson/cssjson.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
       "ace":              "./components/ace-builds/src-noconflict/ace.js",

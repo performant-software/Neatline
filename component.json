@@ -24,6 +24,7 @@
     , "backbone.routefilter":   "https://github.com/boazsender/backbone.routefilter.git"
     , "jquery-draggable-input": "https://github.com/saschagehlich/jquery-draggable-input.git"
     , "toastr":                 "https://github.com/davidmcclure/toastr.git"
+    , "cssjson":                "https://github.com/aramkocharyan/CSSJSON.git"
 
   }
 }

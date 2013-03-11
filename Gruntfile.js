@@ -148,6 +148,7 @@ module.exports = function(grunt) {
           cfg.vendor.js.routefilter,
           cfg.vendor.js.draggable,
           cfg.vendor.js.toastr,
+          cfg.vendor.js.cssjson,
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.ace,
