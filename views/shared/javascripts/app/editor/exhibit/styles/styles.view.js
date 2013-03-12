@@ -48,21 +48,21 @@ Neatline.module('Editor.Exhibit.Styles', function(
     buildEditor: function() {
 
       // Create Ace.
-      this.ace = ace.edit('styles');
-      this.ace.getSession().setUseWorker(false);
-      this.ace.getSession().setMode('ace/mode/css');
+      this.styles = ace.edit('styles');
+      this.styles.getSession().setUseWorker(false);
+      this.styles.getSession().setMode('ace/mode/css');
 
       // Configure Ace.
-      this.ace.renderer.setShowGutter(false);
-      this.ace.setHighlightActiveLine(false);
-      this.ace.getSession().setTabSize(2);
+      this.styles.renderer.setShowGutter(false);
+      this.styles.setHighlightActiveLine(false);
+      this.styles.getSession().setTabSize(2);
 
       // Populate stylesheet value.
-      this.setAceVal(this.model.get('styles'));
+      this.setStyles(this.model.get('styles'));
 
       // Update model when the editor changes.
-      this.ace.on('change', _.bind(function() {
-        this.model.set('styles', this.getAceVal());
+      this.styles.on('change', _.bind(function() {
+        this.model.set('styles', this.getStyles());
       }, this));
 
     },
@@ -73,8 +73,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
      *
      * @return {String} val: The value.
      */
-    getAceVal: function() {
-      return this.ace.getSession().getValue();
+    getStyles: function() {
+      return this.styles.getSession().getValue();
     },
 
 
@@ -83,8 +83,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
      *
      * @param {String} val: The value.
      */
-    setAceVal: function(val) {
-      return this.ace.getSession().setValue(val);
+    setStyles: function(val) {
+      return this.styles.getSession().setValue(val);
     },
 
 

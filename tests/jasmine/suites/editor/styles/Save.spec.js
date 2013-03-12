@@ -53,10 +53,11 @@ describe('Styles Save', function() {
   it('should synchronize model with stylesheet editor', function() {
 
     // --------------------------------------------------------------------
-    // When the stylesheet is changed, the model should be updated.
+    // When the stylesheet is changed, the model should be updated with a
+    // JSON representation of the CSS.
     // --------------------------------------------------------------------
 
-    _t.vw.STYLES.ace.getSession().setValue('val');
+    _t.vw.STYLES.styles.getSession().setValue('val');
     expect(_t.vw.STYLES.model.get('styles')).toEqual('val');
 
   });
@@ -69,7 +70,7 @@ describe('Styles Save', function() {
     // be issued to the exhibit API with the new data.
     // --------------------------------------------------------------------
 
-    _t.vw.STYLES.ace.getSession().setValue('1');
+    _t.vw.STYLES.styles.getSession().setValue('1');
     _t.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
     _t.vw.STYLES.__ui.mapZoom.val('3').trigger('change');
 
