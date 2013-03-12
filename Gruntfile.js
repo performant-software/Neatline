@@ -27,15 +27,19 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     shell: {
+
       options: {
         stdout: true
       },
+
       bower_cache_clean: {
         command: 'rm -rf ~/.bower && bower cache-clean'
       },
+
       bower_install: {
         command: 'bower install'
       },
+
       build_openlayers: {
         command: 'python build.py full OpenLayers.js',
         options: {
@@ -44,6 +48,7 @@ module.exports = function(grunt) {
           }
         }
       },
+
       build_bootstrap: {
         command: 'npm install && make bootstrap',
         options: {
@@ -52,6 +57,16 @@ module.exports = function(grunt) {
           }
         }
       },
+
+      build_sinon: {
+        command: './build',
+        options: {
+          execOptions: {
+            cwd: cfg.build.sinon
+          }
+        }
+      },
+
       phpunit: {
         command: 'phpunit --color',
         options: {
@@ -60,9 +75,11 @@ module.exports = function(grunt) {
           }
         }
       }
+
     },
 
     copy: {
+
       bootstrap: {
         files: [{
           src: cfg.build.bootstrap+'/img/*',
@@ -71,6 +88,7 @@ module.exports = function(grunt) {
           flatten: true
         }]
       },
+
       chosen: {
         files: [{
           src: cfg.build.chosen+'/chosen-sprite.png',
@@ -79,20 +97,22 @@ module.exports = function(grunt) {
           flatten: true
         }]
       }
+
     },
 
     clean: {
-      bower: './components',
-      images: './views/shared/css/img',
       payloads: [
         cfg.payloads.shared.js,
         cfg.payloads.shared.css,
         cfg.payloads.admin.js,
         cfg.payloads.admin.css
-      ]
+      ],
+      images: './views/shared/css/img',
+      bower: './components'
     },
 
     concat: {
+
       form: {
         src: [
           cfg.vendor.js.chosen,
@@ -101,6 +121,7 @@ module.exports = function(grunt) {
         ],
         dest: cfg.payloads.admin.js+'/form.js'
       },
+
       neatline: {
         src: [
 
@@ -129,6 +150,7 @@ module.exports = function(grunt) {
         ],
         dest: cfg.payloads.shared.js+'/neatline.js'
       },
+
       editor: {
         options: {
           separator: ';'
@@ -148,7 +170,6 @@ module.exports = function(grunt) {
           cfg.vendor.js.routefilter,
           cfg.vendor.js.draggable,
           cfg.vendor.js.toastr,
-          cfg.vendor.js.cssjson,
           cfg.vendor.js.chosen,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.ace,
@@ -176,6 +197,7 @@ module.exports = function(grunt) {
         ],
         dest: cfg.payloads.shared.js+'/editor.js'
       },
+
       form_css: {
         src: [
           cfg.vendor.css.chosen,
@@ -183,6 +205,7 @@ module.exports = function(grunt) {
         ],
         dest: cfg.payloads.admin.css+'/form.css'
       },
+
       neatline_css: {
         src: [
           cfg.vendor.css.openlayers,
@@ -190,6 +213,7 @@ module.exports = function(grunt) {
         ],
         dest: cfg.payloads.shared.css+'/neatline.css'
       },
+
       editor_css: {
         src: [
           '<%= concat.neatline_css.src %>',
@@ -200,24 +224,30 @@ module.exports = function(grunt) {
         ],
         dest: cfg.payloads.shared.css+'/editor.css'
       }
+
     },
 
     uglify: {
+
       form: {
         src: '<%= concat.form.src %>',
         dest: cfg.payloads.admin.js+'/form.js'
       },
+
       neatline: {
         src: '<%= concat.neatline.src %>',
         dest: cfg.payloads.shared.js+'/neatline.js'
       },
+
       editor: {
         src: '<%= concat.editor.src %>',
         dest: cfg.payloads.shared.js+'/editor.js'
       }
+
     },
 
     stylus: {
+
       compile: {
         options: {
           paths: [cfg.stylus.shared]
@@ -231,9 +261,11 @@ module.exports = function(grunt) {
             cfg.stylus.admin+'/form/*.styl'
         }
       }
+
     },
 
     watch: {
+
       payload: {
         files: [
           '<%= concat.form.src %>',
@@ -247,9 +279,11 @@ module.exports = function(grunt) {
           'compile:concat'
         ]
       }
+
     },
 
     jasmine: {
+
       options: {
         helpers: [
           cfg.jasmine+'/helpers/*.js',
@@ -257,27 +291,32 @@ module.exports = function(grunt) {
           cfg.vendor.js.sinon
         ]
       },
+
       neatline: {
         src: cfg.payloads.shared.js+'/neatline.js',
         options: {
           specs: cfg.jasmine+'/suites/public/**/*.spec.js'
         }
       },
+
       editor: {
         src: cfg.payloads.shared.js+'/editor.js',
         options: {
           specs: cfg.jasmine+'/suites/editor/**/*.spec.js'
         }
       }
+
     },
 
     connect: {
+
       server: {
         options: {
           keepalive: true,
           port: 1337
         }
       }
+
     }
 
   });
@@ -318,6 +357,7 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
+    'shell:build_sinon',
     'compile',
     'copy'
   ]);

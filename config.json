@@ -26,7 +26,8 @@
   "build": {
     "openlayers":         "./components/openlayers/build",
     "bootstrap":          "./components/bootstrap",
-    "chosen":             "./components/chosen/chosen"
+    "chosen":             "./components/chosen/chosen",
+    "sinon":              "./components/sinon"
   },
 
   "vendor": {
@@ -45,7 +46,6 @@
       "routefilter":      "./components/backbone.routefilter/dist/backbone.routefilter.js",
       "draggable":        "./components/jquery-draggable-input/jquery-draggable-input.js",
       "toastr":           "./components/toastr/toastr.js",
-      "cssjson":          "./components/cssjson/cssjson.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
       "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
       "ace":              "./components/ace-builds/src-noconflict/ace.js",
@@ -54,7 +54,7 @@
       "ace_worker":       "./components/ace-builds/src-noconflict/worker-css.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
-      "sinon":            "./components/sinon.js/sinon.js"
+      "sinon":            "./components/sinon/pkg/sinon.js"
     },
 
     "css": {
