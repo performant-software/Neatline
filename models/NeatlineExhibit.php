@@ -95,7 +95,6 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
         foreach ($css as $tag => $rules) {
 
-            // Just update records in the exhibit.
             $where = array('exhibit_id = ?' => $this->id);
 
             // If selector is `all`, update all records in the exhibit;
@@ -106,13 +105,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
             $set = array();
             foreach ($rules as $prop => $val) {
-
-                // If the property is a valid style and the value is not
-                // `auto`, add the pair to the list of columns to update.
-                if (in_array($prop, $valid) && $val != 'auto') {
-                    $set[$prop] = $val;
-                }
-
+                if ($val != 'auto') $set[$prop] = $val;
             }
 
             // Update records.
