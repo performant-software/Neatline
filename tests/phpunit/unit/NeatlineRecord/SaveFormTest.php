@@ -72,7 +72,7 @@ class Neatline_NeatlineRecordTest_SaveForm
 
 
     /**
-     * `saveForm` should set empty/whitespace strings as `null`.
+     * Empty/whitespace strings should be set as `null`.
      */
     public function testWhitespaceBlocking()
     {
@@ -90,6 +90,38 @@ class Neatline_NeatlineRecordTest_SaveForm
         $this->assertNull($record->max_zoom);
         $record->saveForm(array('max_zoom' => ' '));
         $this->assertNull($record->max_zoom);
+
+    }
+
+
+    /**
+     * CSS rule-sets on the parent exhibit with selectors that are tagged
+     * on the record should be updated with the new record values.
+     */
+    public function testUpdateExhibitStyles()
+    {
+
+    }
+
+
+    /**
+     * The exhibit CSS - newly updated with values from the saved record -
+     * should be pushed out to all other records in the exhibit.
+     */
+    public function testPushStyles()
+    {
+
+    }
+
+
+    /**
+     * When a record is saved with _new_ tags - eg., when the tags string
+     * used to be `tag1`, and is changed to `tag1,tag2` - the existing CSS
+     * rules for the new tag(s) should be applied to the record before it
+     * is used to update the exhibit CSS.
+     */
+    public function testPullStyles()
+    {
 
     }
 

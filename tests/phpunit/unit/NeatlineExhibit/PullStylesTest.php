@@ -37,7 +37,6 @@ class Neatline_NeatlineExhibitTest_PullStyles
               stroke-opacity: 6;
             }
         ";
-
         $record = new NeatlineRecord($exhibit);
         $record->vector_color = '7';
         $record->vector_opacity = 8;
@@ -47,7 +46,6 @@ class Neatline_NeatlineExhibitTest_PullStyles
 
         // Pull styles.
         $exhibit->pullStyles($record);
-
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
 
             // `tag1` and `tag2` styles updated.
@@ -85,20 +83,20 @@ class Neatline_NeatlineExhibitTest_PullStyles
               invalid: value;
             }
         ";
-
         $record = new NeatlineRecord($exhibit);
         $record->vector_color = '2';
         $record->tags = 'tag';
 
         // Pull styles.
         $exhibit->pullStyles($record);
-
-        // Invalid property should be ignored.
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+
+            // Invalid property should be ignored.
             'tag' => array(
                 'vector_color' => '2',
                 'invalid' => 'value'
             )
+
         ));
 
     }

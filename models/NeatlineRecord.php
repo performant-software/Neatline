@@ -76,23 +76,35 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public function saveForm($values)
     {
 
-        // Cache old tags.
+        // Store the original tags string.
         $oldTags = _nl_explode($this->tags);
 
-        // Assign form values.
+        // Mass-assign the form values.
         foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
 
-        // Pull values for new tags.
+        // If 1 or more tags have been added to the record since the last
+        // time it was saved, pull in the _existing_ CSS rules for those
+        // tags onto the record before using the record to update the CSS.
+        // Otherwise, the existing styles set for the tag(s) in the CSS
+        // and on other records with the tag(s) would be clobbered in the
+        // next step by the current values on the record being saved.
+        //
+        // The intuition here is that adding a new tag to a record should
+        // have the effect of making the record _conform_ to the already-
+        // established styling of other records with that tag - instead of
+        // changing the other records to look like this record.
         $newTags = _nl_explode($this->tags);
         $this->pullStyles(array_diff($newTags, $oldTags));
         $this->save();
 
-        // Pull exhibit CSS.
+        // For each of the tags defined on the record, update the rule-set
+        // for that tag in the exhibit CSS with the values on the record.
         $exhibit = $this->getExhibit();
         $exhibit->pullStyles($this);
         $exhibit->save();
 
-        // Propagage new CSS.
+        // Once the exhibit CSS has been updated with the record values,
+        // propagate the new rules to all other records in the exhibit.
         $exhibit->pushStyles();
 
     }

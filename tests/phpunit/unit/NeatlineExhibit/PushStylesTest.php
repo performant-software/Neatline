@@ -33,7 +33,6 @@ class Neatline_NeatlineExhibitTest_PushStyles
               stroke-opacity: 4;
             }
         ";
-
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record1->tags = 'tag1';
@@ -77,7 +76,6 @@ class Neatline_NeatlineExhibitTest_PushStyles
               stroke-color: auto;
             }
         ";
-
         $record = new NeatlineRecord($exhibit);
         $record->tags = 'tag';
         $record->save();
@@ -109,7 +107,6 @@ class Neatline_NeatlineExhibitTest_PushStyles
               invalid: value;
             }
         ";
-
         $record = new NeatlineRecord($exhibit);
         $record->tags = 'tag';
         $record->save();
@@ -139,7 +136,6 @@ class Neatline_NeatlineExhibitTest_PushStyles
               vector-color: color;
             }
         ";
-
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
@@ -170,7 +166,6 @@ class Neatline_NeatlineExhibitTest_PushStyles
               vector-color: color;
             }
         ";
-
         $record1 = new NeatlineRecord($exhibit1);
         $record2 = new NeatlineRecord($exhibit2);
         $record1->tags = 'tag';

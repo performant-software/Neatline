@@ -23,7 +23,6 @@ class Neatline_NeatlineRecordTest_PullStyles
     {
 
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($exhibit);
         $exhibit->styles = "
             .tag1 {
               vector-color: 1;
@@ -38,8 +37,8 @@ class Neatline_NeatlineRecordTest_PullStyles
               select-opacity: 6;
             }
         ";
-
         $exhibit->save();
+        $record = new NeatlineRecord($exhibit);
 
         // Pull `tag1` and `tag2`, save.
         $record->pullStyles(array('tag1', 'tag2'));
@@ -55,8 +54,8 @@ class Neatline_NeatlineRecordTest_PullStyles
         $this->assertEquals($record->stroke_opacity, 4);
 
         // Should not pull `tag3`.
-        $this->assertObjectNotHasAttribute('select_color', $record);
-        $this->assertObjectNotHasAttribute('select_opacity', $record);
+        $this->assertNull($record->select_color);
+        $this->assertNull($record->select_opacity);
 
     }
 
@@ -69,15 +68,14 @@ class Neatline_NeatlineRecordTest_PullStyles
     {
 
         $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($exhibit);
         $exhibit->styles = "
             .tag {
               vector-color: color;
               invalid: value;
             }
         ";
-
         $exhibit->save();
+        $record = new NeatlineRecord($exhibit);
 
         // Pull `tag1`, save.
         $record->pullStyles(array('tag'));
