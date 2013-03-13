@@ -15,7 +15,7 @@
     , "jasmine-jquery":         ">= 1.4.2"
     , "sinon":                  ">= 1.6.0"
 
-    , "spyc":                   "https://github.com/mustangostang/spyc.git"
+    , "php-css":                "https://github.com/davidmcclure/php-css.git"
     , "backbone.neatline":      "https://github.com/davidmcclure/backbone.neatline.git"
     , "backbone-safesync":      "https://github.com/amccloud/backbone-safesync.git"
     , "openlayers":             "https://github.com/davidmcclure/openlayers.git"

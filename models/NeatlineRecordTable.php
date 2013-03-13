@@ -33,15 +33,16 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function pushStyles($exhibit)
     {
 
-        // Parse the styles YAML.
-        $yaml = Spyc::YAMLLoad($exhibit->styles);
+        // Parse the stylesheet.
+        $css = PHP_CSS::readCSS($exhibit->styles);
 
         // Gather style columns.
         $valid = _nl_getStyles();
 
-        foreach ($yaml as $tag => $styles) {
+        foreach ($css as $tag => $rules) {
 
-            if (!is_array($styles)) continue;
+            // Pop leading `.`
+            $tag = ltrim($tag, '.');
 
             // `WHERE`
             $where = array('exhibit_id = ?' => $exhibit->id);
@@ -50,11 +51,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
             // `SET`
             $set = array();
-            foreach ($styles as $s) { if (is_array($s)) {
-                foreach ($s as $k => $v) { if (in_array($k, $valid)) {
-                    $set[$k] = $v;
-                }}
-            }}
+            foreach ($rules as $prop => $val) {
+
+                // Replace `-` with `_`.
+                $prop = str_replace('-', '_', $prop);
+                if (in_array($prop, $valid)) $set[$prop] = $val;
+
+            }
 
             if (!empty($set)) {
                 $this->update($this->getTableName(), $set, $where);

@@ -61,8 +61,9 @@ class Neatline_ExhibitsControllerTest_Put
         $record->save();
 
         $values = array('styles' => "
-        tag:
-         - vector_color: 'color'
+            .tag {
+              vector-color: color;
+            }
         ");
 
         $this->writePut($values);
