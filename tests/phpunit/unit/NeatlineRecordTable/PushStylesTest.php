@@ -18,10 +18,8 @@ class Neatline_NeatlineRecordTableTest_PushStyles
 
     /**
      * `pushStyles` should propagate rules to records in the exhibit.
-     *
-     * @group styles
      */
-    public function testpushStyles()
+    public function testPushStyles()
     {
 
         $exhibit = $this->__exhibit();
@@ -105,7 +103,7 @@ CSS;
 
         // CSS
         $exhibit->styles = <<<CSS
-all {
+.all {
   vector-color: color;
 }
 CSS;
