@@ -44,17 +44,23 @@ class NeatlineRecordTable extends Omeka_Db_Table
             // Pop leading `.`
             $tag = ltrim($tag, '.');
 
-            // `WHERE`
+            // Just update records belonging to the exhibit.
             $where = array('exhibit_id = ?' => $exhibit->id);
-            if ($tag != 'default') $where['tags REGEXP ?'] =
-                '[[:<:]]'.$tag.'[[:>:]]';
 
-            // `SET`
+            // If selector is `all`, apply the rules to all records in the
+            // exhibit; otherwise, just match records with the tag.
+            if ($tag != 'all') {
+                $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
+            }
+
             $set = array();
             foreach ($rules as $prop => $val) {
 
                 // Replace `-` with `_`.
                 $prop = str_replace('-', '_', $prop);
+
+                // If the property is a valid style attribute, add the
+                // key-value pair to the array of columns to update.
                 if (in_array($prop, $valid)) $set[$prop] = $val;
 
             }
