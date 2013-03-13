@@ -30,7 +30,6 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record1->save();
         $record2->save();
 
-        // CSS
         $exhibit->styles = <<<CSS
 .tag1 {
   vector-color: 1;
@@ -73,7 +72,6 @@ CSS;
         $record->tags = 'tag';
         $record->save();
 
-        // CSS
         $exhibit->styles = <<<CSS
 .tag {
   vector-color: auto;
@@ -99,7 +97,6 @@ CSS;
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
-        // CSS
         $exhibit->styles = <<<CSS
 .all {
   vector-color: color;
@@ -132,7 +129,6 @@ CSS;
         $record1->save();
         $record2->save();
 
-        // CSS
         $exhibit1->styles = <<<CSS
 .tag {
   vector-color: color;

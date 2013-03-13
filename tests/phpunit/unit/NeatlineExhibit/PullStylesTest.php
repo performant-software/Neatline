@@ -31,7 +31,6 @@ class Neatline_NeatlineExhibitTest_PullStyles
         $record->stroke_opacity = 8;
         $record->tags = 'tag1,tag2';
 
-        // CSS
         $exhibit->styles = <<<CSS
 .tag1 {
   vector-color: 1;
@@ -43,7 +42,6 @@ class Neatline_NeatlineExhibitTest_PullStyles
 }
 CSS;
 
-        // Pull styles.
         $exhibit->pullStyles($record);
 
         // Stylesheet should be updated with record values.

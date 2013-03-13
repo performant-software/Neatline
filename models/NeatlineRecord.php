@@ -69,6 +69,18 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
+     * Pull and push tags.
+     *
+     * @param array $values The POST/PUT values.
+     */
+    public function saveForm($values)
+    {
+        parent::saveForm($values);
+        // TODO
+    }
+
+
+    /**
      * Before saving, replace the raw value of `coverage` with the MySQL
      * expression to set the `GEOMETRY` value. If `coverage` is undefined,
      * use `POINT(0 0)` as a de facto "null" value (ignored in queries).
@@ -136,14 +148,13 @@ class NeatlineRecord extends Neatline_AbstractRecord
      */
     public function pullStyles($tags)
     {
-
         // Parse the stylesheet.
         $css = _nl_readCSS($this->getExhibit()->styles);
 
         // Sync the record with the CSS.
         foreach ($css as $selector => $rules) {
             if (in_array($selector, $tags)) {
-                foreach ($rules as $prop => $val) $record->$prop = $val;
+                foreach ($rules as $prop => $val) $this->$prop = $val;
             }
         }
 
