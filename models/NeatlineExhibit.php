@@ -103,9 +103,13 @@ class NeatlineExhibit extends Neatline_AbstractRecord
                 $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
             }
 
+            // Form the array of key-value pairs to update. Ignore rules
+            // if the value is `auto` or the property is invalid.
             $set = array();
             foreach ($rules as $prop => $val) {
-                if ($val != 'auto') $set[$prop] = $val;
+                if (in_array($prop, $valid) && $val != 'auto') {
+                    $set[$prop] = $val;
+                }
             }
 
             // Update records.
@@ -147,14 +151,19 @@ class NeatlineExhibit extends Neatline_AbstractRecord
         // Explode record tags.
         $tags = _nl_explode($record->tags);
 
+        // Gather style columns.
+        $valid = _nl_getStyles();
+
         foreach ($css as $selector => $rules) {
 
-            // Is the tag defined in the CSS?
+            // Is the record tagged with the selector?
             if (in_array($selector, $tags)) {
 
-                // Update the stylesheet rules.
+                // Update each CSS rule to match the record values.
                 foreach ($rules as $prop => $val) {
-                    $css[$selector][$prop] = $record->$prop;
+                    if (in_array($prop, $valid)) {
+                        $css[$selector][$prop] = $record->$prop;
+                    }
                 }
 
             }

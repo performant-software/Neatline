@@ -169,10 +169,16 @@ class NeatlineRecord extends Neatline_AbstractRecord
         // Parse the stylesheet.
         $css = _nl_readCSS($this->getExhibit()->styles);
 
-        // Sync the record with the CSS.
+        // Gather style columns.
+        $valid = _nl_getStyles();
+
         foreach ($css as $selector => $rules) {
+
+            // Is the selector included in the list of tags to pull?
             if (in_array($selector, $tags)) {
-                foreach ($rules as $prop => $val) $this->$prop = $val;
+                foreach ($rules as $prop => $val) {
+                    if (in_array($prop, $valid)) $this->$prop = $val;
+                }
             }
         }
 

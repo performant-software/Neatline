@@ -23,6 +23,17 @@ class Neatline_NeatlineExhibitTest_PushStyles
     {
 
         $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag1 {
+              vector-color: 1;
+              vector-opacity: 2;
+            }
+            .tag2 {
+              stroke-color: 3;
+              stroke-opacity: 4;
+            }
+        ";
+
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record1->tags = 'tag1';
@@ -30,18 +41,10 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record1->save();
         $record2->save();
 
-        $exhibit->styles = <<<CSS
-.tag1 {
-  vector-color: 1;
-  vector-opacity: 2;
-}
-.tag2 {
-  stroke-color: 3;
-  stroke-opacity: 4;
-}
-CSS;
-
+        // Push styles.
         $exhibit->pushStyles();
+
+        // Reload records.
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
@@ -61,53 +64,93 @@ CSS;
 
 
     /**
-     * `pushStyles` should ignore rules with a value of `auto`.
+     * When the value of a rule is the reserved word `auto`, `pushStyles`
+     * should ignore the rule and not progate the value.
      */
-    public function testIgnoreStylesWithoutValues()
+    public function testIgnoreAutoValues()
     {
 
         $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: color;
+              stroke-color: auto;
+            }
+        ";
+
         $record = new NeatlineRecord($exhibit);
-        $record->vector_color = 'color';
         $record->tags = 'tag';
         $record->save();
 
-        $exhibit->styles = <<<CSS
-.tag {
-  vector-color: auto;
-}
-CSS;
-
+        // Push styles.
         $exhibit->pushStyles();
+
+        // Reload record.
         $record = $this->_recordsTable->find($record->id);
 
-        // `vector_color` should not be changed.
+        // Should ignore rules with `auto` value.
+        $this->assertEquals($record->vector_color, 'color');
+        $this->assertNull($record->stroke_color);
+
+    }
+
+
+    /**
+     * When an invalid property is defined on the stylesheet, `pushStyles`
+     * should ignore the rule and not attempt to update the property.
+     */
+    public function testIgnoreInvalidProperties()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: color;
+              invalid: value;
+            }
+        ";
+
+        $record = new NeatlineRecord($exhibit);
+        $record->tags = 'tag';
+        $record->save();
+
+        // Push styles.
+        $exhibit->pushStyles();
+
+        // Reload record.
+        $record = $this->_recordsTable->find($record->id);
+
+        // Should ignore rules with non-style properties.
         $this->assertEquals($record->vector_color, 'color');
 
     }
 
 
     /**
-     * The `all` selector match all records in an exhibit.
+     * Rules defined under the `all` selector should be applied to all
+     * records in an exhibit.
      */
     public function testDefaultTag()
     {
 
         $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .all {
+              vector-color: color;
+            }
+        ";
+
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
-        $exhibit->styles = <<<CSS
-.all {
-  vector-color: color;
-}
-CSS;
-
+        // Push styles.
         $exhibit->pushStyles();
+
+        // Reload records.
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
-        // Both records should be matched by `default`.
+        // Both records should be updated.
         $this->assertEquals($record1->vector_color, 'color');
         $this->assertEquals($record2->vector_color, 'color');
 
@@ -115,13 +158,19 @@ CSS;
 
 
     /**
-     * `pushStyles` should only update records in the passed exhibit.
+     * Only update records that belong to the exhibit should be updated.
      */
     public function testExhibitIsolation()
     {
 
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
+        $exhibit1->styles = "
+            .tag {
+              vector-color: color;
+            }
+        ";
+
         $record1 = new NeatlineRecord($exhibit1);
         $record2 = new NeatlineRecord($exhibit2);
         $record1->tags = 'tag';
@@ -129,17 +178,14 @@ CSS;
         $record1->save();
         $record2->save();
 
-        $exhibit1->styles = <<<CSS
-.tag {
-  vector-color: color;
-}
-CSS;
-
+        // Push styles.
         $exhibit1->pushStyles();
+
+        // Reload records.
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
-        // Just exhibit 1 record should be updated.
+        // Just exhibit 1 records should be updated.
         $this->assertEquals($record1->vector_color, 'color');
         $this->assertNull($record2->vector_color);
 

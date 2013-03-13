@@ -23,36 +23,81 @@ class Neatline_NeatlineExhibitTest_PullStyles
     {
 
         $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag1 {
+              vector-color: 1;
+              vector-opacity: 2;
+            }
+            .tag2 {
+              stroke-color: 3;
+              stroke-opacity: 4;
+            }
+            .tag3 {
+              stroke-color: 5;
+              stroke-opacity: 6;
+            }
+        ";
 
         $record = new NeatlineRecord($exhibit);
-        $record->vector_color = '5';
-        $record->vector_opacity = 6;
-        $record->stroke_color = '7';
-        $record->stroke_opacity = 8;
+        $record->vector_color = '7';
+        $record->vector_opacity = 8;
+        $record->stroke_color = '9';
+        $record->stroke_opacity = 10;
         $record->tags = 'tag1,tag2';
 
-        $exhibit->styles = <<<CSS
-.tag1 {
-  vector-color: 1;
-  vector-opacity: 2;
-}
-.tag2 {
-  stroke-color: 3;
-  stroke-opacity: 4;
-}
-CSS;
-
+        // Pull styles.
         $exhibit->pullStyles($record);
 
-        // Stylesheet should be updated with record values.
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+
+            // `tag1` and `tag2` styles updated.
             'tag1' => array(
-                'vector_color' => '5',
-                'vector_opacity' => '6'
+                'vector_color' => '7',
+                'vector_opacity' => '8'
             ),
             'tag2' => array(
-                'stroke_color' => '7',
-                'stroke_opacity' => '8'
+                'stroke_color' => '9',
+                'stroke_opacity' => '10'
+            ),
+
+            // `tag3` styles unchanged.
+            'tag3' => array(
+                'stroke_color' => '5',
+                'stroke_opacity' => '6'
+            )
+
+        ));
+
+    }
+
+
+    /**
+     * When an invalid property is defined on the stylesheet, `pullStyles`
+     * should ignore the rule.
+     */
+    public function testIgnoreInvalidProperties()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: 1;
+              invalid: value;
+            }
+        ";
+
+        $record = new NeatlineRecord($exhibit);
+        $record->vector_color = '2';
+        $record->tags = 'tag';
+
+        // Pull styles.
+        $exhibit->pullStyles($record);
+
+        // Invalid property should be ignored.
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+            'tag' => array(
+                'vector_color' => '2',
+                'invalid' => 'value'
             )
         ));
 
