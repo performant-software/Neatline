@@ -14,11 +14,24 @@
 
 if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
+// Plugin class.
 require_once NL_DIR . '/NeatlinePlugin.php';
+
+// Abstract model/controller.
 require_once NL_DIR . '/models/abstract/NeatlineAbstractRecord.php';
 require_once NL_DIR . '/controllers/abstract/NeatlineRestController.php';
-require_once NL_DIR . '/helpers/NeatlineFunctions.php';
+
+// Helpers.
+require_once NL_DIR . '/helpers/Assets.php';
+require_once NL_DIR . '/helpers/Layers.php';
+require_once NL_DIR . '/helpers/Plugins.php';
+require_once NL_DIR . '/helpers/Views.php';
+require_once NL_DIR . '/helpers/Styles.php';
+
+// Forms.
 require_once NL_DIR . '/forms/ExhibitForm.php';
+
+// Libraries.
 require_once NL_DIR . '/components/php-css/PHP_CSS.php';
 
 Zend_Registry::set('layers', NL_DIR . '/layers.json');
