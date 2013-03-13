@@ -69,7 +69,29 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
-     * Pull and push tags.
+     * Get the parent exhibit record.
+     *
+     * @return Omeka_record The parent exhibit.
+     */
+    public function getExhibit()
+    {
+        $exhibits = $this->getTable('NeatlineExhibit');
+        return $exhibits->find($this->exhibit_id);
+    }
+
+
+    /**
+     * Assemble record data for the front-end application.
+     *
+     * @return array The data array.
+     */
+    public function buildJsonData() {
+        return array_merge(parent::toArray(), $this->styles);
+    }
+
+
+    /**
+     * Save data from a POST or PUT request.
      *
      * @param array $values The POST/PUT values.
      */
@@ -88,7 +110,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
         // Otherwise, the existing styles set for the tag(s) in the CSS
         // and on other records with the tag(s) would be clobbered in the
         // next step by the current values on the record being saved.
-        //
         // The intuition here is that adding a new tag to a record should
         // have the effect of making the record _conform_ to the already-
         // established styling of other records with that tag - instead of
@@ -98,7 +119,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
         $this->save();
 
         // For each of the tags defined on the record, update the rule-set
-        // for that tag in the exhibit CSS with the values on the record.
+        // for that tag in the exhibit CSS (if one exists) with the values
+        // defined on the record.
         $exhibit = $this->getExhibit();
         $exhibit->pullStyles($this);
         $exhibit->save();
@@ -139,28 +161,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
-     * Get the parent exhibit record.
-     *
-     * @return Omeka_record The parent exhibit.
-     */
-    public function getExhibit()
-    {
-        $exhibits = $this->getTable('NeatlineExhibit');
-        return $exhibits->find($this->exhibit_id);
-    }
-
-
-    /**
-     * Assemble record data for the front-end application.
-     *
-     * @return array The data array.
-     */
-    public function buildJsonData() {
-        return array_merge(parent::toArray(), $this->styles);
-    }
-
-
-    /**
      * Update record styles to match exhibit CSS. For example, if `styles`
      * on the parent exhibit is:
      *
@@ -184,9 +184,9 @@ class NeatlineRecord extends Neatline_AbstractRecord
         // Gather style columns.
         $valid = _nl_getStyles();
 
+        // For each of the passed tags, try to find a corresponding rule-
+        // set in the CSS. Update the record with all defined rules.
         foreach ($css as $selector => $rules) {
-
-            // Is the selector included in the list of tags to pull?
             if (in_array($selector, $tags)) {
                 foreach ($rules as $prop => $val) {
                     if (in_array($prop, $valid)) $this->$prop = $val;
