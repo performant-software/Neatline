@@ -76,17 +76,15 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public function saveForm($values)
     {
 
-        // TODO|dev
-
         // Cache old tags.
-        $tags1 = _nl_explode($this->tags);
+        $oldTags = _nl_explode($this->tags);
 
         // Assign form values.
         foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
 
         // Pull values for new tags.
-        $tags2 = _nl_explode($this->tags);
-        $this->pullStyles(array_diff($tags1, $tags2));
+        $newTags = _nl_explode($this->tags);
+        $this->pullStyles(array_diff($newTags, $oldTags));
         $this->save();
 
         // Pull exhibit CSS.

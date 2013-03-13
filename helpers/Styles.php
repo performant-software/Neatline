@@ -84,25 +84,25 @@ function _nl_readCSS($css)
 function _nl_writeCSS($styles, $breaks=1, $indent=2)
 {
 
-    $css = '';
+    $css = "";
     $len = count($styles);
     $itr = 0;
 
     foreach ($styles as $selector => $rules) {
 
         // selector {
-        $css .= '.'.$selector.' {\n';
+        $css .= ".".$selector." {\n";
 
         // property: value;
         foreach ($rules as $prop => $val) {
-            $prop = str_replace('_', '-', $prop);
-            $css .= str_repeat(' ' , $indent).$prop.': '.$val.';\n';
+            $prop = str_replace("_", "-", $prop);
+            $css .= str_repeat(" " , $indent).$prop.": ".$val.";\n";
         }
 
-        $css .= '}';
+        $css .= "}";
 
         // If not last selector, add line break(s).
-        if ($itr != $len-1) $css .= str_repeat('\n', $breaks+1);
+        if ($itr != $len-1) $css .= str_repeat("\n", $breaks+1);
         $itr++;
 
     }

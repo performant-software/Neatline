@@ -30,9 +30,17 @@ class Neatline_NeatlineExhibitTest_WriteCss
                 'prop_3' => 'val3',
                 'prop_4' => 'val4'
             )
-        )),
-            '.tag1 {\n  prop-1: val1;\n  prop-2: val2;\n}\n\n'.
-            '.tag2 {\n  prop-3: val3;\n  prop-4: val4;\n}'
+        )), <<<CSS
+.tag1 {
+  prop-1: val1;
+  prop-2: val2;
+}
+
+.tag2 {
+  prop-3: val3;
+  prop-4: val4;
+}
+CSS
         );
     }
 
@@ -49,10 +57,16 @@ class Neatline_NeatlineExhibitTest_WriteCss
             'tag2' => array(
                 'prop_2' => 'val2',
             )
-        ), 2),
-            // 2 blank lines after closing }.
-            '.tag1 {\n  prop-1: val1;\n}\n\n\n'.
-            '.tag2 {\n  prop-2: val2;\n}'
+        ), 2), <<<CSS
+.tag1 {
+  prop-1: val1;
+}
+
+
+.tag2 {
+  prop-2: val2;
+}
+CSS
         );
     }
 
@@ -64,9 +78,11 @@ class Neatline_NeatlineExhibitTest_WriteCss
     {
         $this->assertEquals(_nl_writeCSS(array(
             'tag' => array('prop' => 'val')
-        ), null, 4),
-            // 4-space indentation.
-            '.tag {\n    prop: val;\n}'
+        ), null, 4), <<<CSS
+.tag {
+    prop: val;
+}
+CSS
         );
     }
 
