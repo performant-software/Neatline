@@ -34,7 +34,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     {
 
         // Parse the stylesheet.
-        $css = PHP_CSS::readCSS($exhibit->styles);
+        $css = _nl_readCSS($exhibit->styles);
 
         // Gather style columns.
         $valid = _nl_getStyles();

@@ -53,32 +53,27 @@ class NeatlineExhibit extends Neatline_AbstractRecord
     {
 
         // Parse the stylesheet.
-        $css = PHP_CSS::readCSS($this->styles);
+        $css = _nl_readCSS($this->styles);
 
         // Explode record tags.
         $tags = _nl_explode($record->tags);
 
         foreach ($css as $selector => $rules) {
 
-            // Get raw tag string.
-            $tag = ltrim($selector, '.');
+            // Does the CSS style the tag?
+            if (in_array($selector, $tags)) {
 
-            if (in_array($tag, $tags)) {
+                // Update the stylesheet rules.
                 foreach ($rules as $prop => $val) {
-
-                    // Get MySQL column name.
-                    $col = str_replace('-', '_', $prop);
-
-                    // Update the CSS array.
-                    $css[$selector][$prop] = $record->$col;
-
+                    $css[$selector][$prop] = $record->$prop;
                 }
+
             }
 
         }
 
         // Recompile the stylesheet.
-        $this->styles = PHP_CSS::writeCSS($css);
+        $this->styles = _nl_writeCSS($css);
 
     }
 

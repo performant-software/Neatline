@@ -31,9 +31,6 @@ require_once NL_DIR . '/helpers/Styles.php';
 // Forms.
 require_once NL_DIR . '/forms/ExhibitForm.php';
 
-// Libraries.
-require_once NL_DIR . '/components/php-css/PHP_CSS.php';
-
 Zend_Registry::set('layers', NL_DIR . '/layers.json');
 Zend_Registry::set('fileIn', 'php://input');
 

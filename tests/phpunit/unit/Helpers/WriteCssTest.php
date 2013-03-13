@@ -1,0 +1,74 @@
+<?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+
+/**
+ * Tests for `_nl_writeCSS`.
+ *
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+class Neatline_NeatlineExhibitTest_WriteCss
+    extends Neatline_Test_AppTestCase
+{
+
+
+    /**
+     * `_nl_writeCSS` should convert an array into a CSS string.
+     */
+    public function testwriteCSS()
+    {
+        $this->assertEquals(_nl_writeCSS(array(
+            'tag1' => array(
+                'prop_1' => 'val1',
+                'prop_2' => 'val2'
+            ),
+            'tag2' => array(
+                'prop_3' => 'val3',
+                'prop_4' => 'val4'
+            )
+        )),
+            '.tag1 {\n  prop-1: val1;\n  prop-2: val2;\n}\n\n'.
+            '.tag2 {\n  prop-3: val3;\n  prop-4: val4;\n}'
+        );
+    }
+
+
+    /**
+     * `$breaks` should set the number of blank lines between rule sets.
+     */
+    public function testBreaks()
+    {
+        $this->assertEquals(_nl_writeCSS(array(
+            'tag1' => array(
+                'prop_1' => 'val1'
+            ),
+            'tag2' => array(
+                'prop_2' => 'val2',
+            )
+        ), 2),
+            // 2 blank lines after closing }.
+            '.tag1 {\n  prop-1: val1;\n}\n\n\n'.
+            '.tag2 {\n  prop-2: val2;\n}'
+        );
+    }
+
+
+    /**
+     * `$indent` should set the rule indentation width.
+     */
+    public function testIndent()
+    {
+        $this->assertEquals(_nl_writeCSS(array(
+            'tag' => array('prop' => 'val')
+        ), null, 4),
+            // 4-space indentation.
+            '.tag {\n    prop: val;\n}'
+        );
+    }
+
+
+}

@@ -47,14 +47,14 @@ CSS;
         $exhibit->pullStyles($record);
 
         // Stylesheet should be updated with record values.
-        $this->assertEquals(PHP_CSS::readCSS($exhibit->styles), array(
-            '.tag1' => array(
-                'vector-color' => '5',
-                'vector-opacity' => '6'
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+            'tag1' => array(
+                'vector_color' => '5',
+                'vector_opacity' => '6'
             ),
-            '.tag2' => array(
-                'vector-color' => '7',
-                'vector-opacity' => '8'
+            'tag2' => array(
+                'stroke_color' => '7',
+                'stroke_opacity' => '8'
             )
         ));
 
