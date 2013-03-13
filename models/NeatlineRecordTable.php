@@ -16,65 +16,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Update records in an exhibit according to the value-defined style
-     * definitions in the `styles` CSS. For example, if `styles` is:
-     *
-     * .tag {
-     *   vector-color: #ffffff;
-     *   stroke-color: auto;
-     * }
-     *
-     * The vector color on records tagged with `tag` will be updated to
-     * #ffffff, but the stroke color will be unchanged since no explicit
-     * value is set in the CSS.
-     *
-     * @param NeatlineExhibit $exhibit The exhibit to update.
-     */
-    public function pushStyles($exhibit)
-    {
-
-        // Parse the stylesheet.
-        $css = _nl_readCSS($exhibit->styles);
-
-        // Gather style columns.
-        $valid = _nl_getStyles();
-
-        foreach ($css as $tag => $rules) {
-
-            $tag = ltrim($tag, '.');
-
-            // Just update records in the passed exhibit.
-            $where = array('exhibit_id = ?' => $exhibit->id);
-
-            // If selector is `all`, update all records in the exhibit;
-            // otherwise, just match records with the tag.
-            if ($tag != 'all') {
-                $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
-            }
-
-            $set = array();
-            foreach ($rules as $prop => $val) {
-
-                $prop = str_replace('-', '_', $prop);
-
-                // If the property is a valid style and the value is not
-                // `auto`, add the pair to the list of columns to update.
-                if (in_array($prop, $valid) && $val != 'auto') {
-                    $set[$prop] = $val;
-                }
-
-            }
-
-            if (!empty($set)) {
-                $this->update($this->getTableName(), $set, $where);
-            }
-
-        }
-
-    }
-
-
-    /**
      * Update record item references when an item is changed.
      *
      * @param Item $item The item record.

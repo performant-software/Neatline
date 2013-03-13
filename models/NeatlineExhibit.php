@@ -30,55 +30,6 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
-     * Update the exhibit stylesheet with values from a specific record.
-     * For example, if `styles` is:
-     *
-     * .tag {
-     *   vector-color: #111111;
-     *   stroke-color: #222222;
-     * }
-     *
-     * And the passed record is tagged with `tag` has a `vector_color` of
-     * `#333333` and a `stroke_color` of `#444444`, the stylesheet should
-     * be updated to:
-     *
-     * .tag {
-     *   vector-color: #333333;
-     *   stroke-color: #444444;
-     * }
-     *
-     * @param NeatlineRecord $record The record to update from.
-     */
-    public function pullStyles($record)
-    {
-
-        // Parse the stylesheet.
-        $css = _nl_readCSS($this->styles);
-
-        // Explode record tags.
-        $tags = _nl_explode($record->tags);
-
-        foreach ($css as $selector => $rules) {
-
-            // Does the CSS style the tag?
-            if (in_array($selector, $tags)) {
-
-                // Update the stylesheet rules.
-                foreach ($rules as $prop => $val) {
-                    $css[$selector][$prop] = $record->$prop;
-                }
-
-            }
-
-        }
-
-        // Recompile the stylesheet.
-        $this->styles = _nl_writeCSS($css);
-
-    }
-
-
-    /**
      * Implode `widgets` and `base_layers` before saving.
      *
      * @param array $values The POST/PUT values.
@@ -114,6 +65,112 @@ class NeatlineExhibit extends Neatline_AbstractRecord
     public function hasWidget($id)
     {
         return in_array($id, _nl_explode($this->widgets));
+    }
+
+
+    /**
+     * Update records in an exhibit according to the value-defined style
+     * definitions in the `styles` CSS. For example, if `styles` is:
+     *
+     * .tag {
+     *   vector-color: #ffffff;
+     *   stroke-color: auto;
+     * }
+     *
+     * The vector color on records tagged with `tag` will be updated to
+     * #ffffff, but the stroke color will be unchanged since no explicit
+     * value is set in the CSS.
+     */
+    public function pushStyles()
+    {
+
+        // Parse the stylesheet.
+        $css = _nl_readCSS($this->styles);
+
+        // Load records table.
+        $records = $this->getTable('NeatlineRecord');
+
+        // Gather style columns.
+        $valid = _nl_getStyles();
+
+        foreach ($css as $tag => $rules) {
+
+            // Just update records in the exhibit.
+            $where = array('exhibit_id = ?' => $this->id);
+
+            // If selector is `all`, update all records in the exhibit;
+            // otherwise, just match records with the tag.
+            if ($tag != 'all') {
+                $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
+            }
+
+            $set = array();
+            foreach ($rules as $prop => $val) {
+
+                // If the property is a valid style and the value is not
+                // `auto`, add the pair to the list of columns to update.
+                if (in_array($prop, $valid) && $val != 'auto') {
+                    $set[$prop] = $val;
+                }
+
+            }
+
+            // Update records.
+            if (!empty($set)) $records->update(
+                $records->getTableName(), $set, $where
+            );
+
+        }
+
+    }
+
+
+    /**
+     * Update the exhibit stylesheet with values from a specific record.
+     * For example, if `styles` is:
+     *
+     * .tag {
+     *   vector-color: #111111;
+     *   stroke-color: #222222;
+     * }
+     *
+     * And the passed record is tagged with `tag` has a `vector_color` of
+     * `#333333` and a `stroke_color` of `#444444`, the stylesheet should
+     * be updated to:
+     *
+     * .tag {
+     *   vector-color: #333333;
+     *   stroke-color: #444444;
+     * }
+     *
+     * @param NeatlineRecord $record The record to update from.
+     */
+    public function pullStyles($record)
+    {
+
+        // Parse the stylesheet.
+        $css = _nl_readCSS($this->styles);
+
+        // Explode record tags.
+        $tags = _nl_explode($record->tags);
+
+        foreach ($css as $selector => $rules) {
+
+            // Is the tag defined in the CSS?
+            if (in_array($selector, $tags)) {
+
+                // Update the stylesheet rules.
+                foreach ($rules as $prop => $val) {
+                    $css[$selector][$prop] = $record->$prop;
+                }
+
+            }
+
+        }
+
+        // Recompile the stylesheet.
+        $this->styles = _nl_writeCSS($css);
+
     }
 
 

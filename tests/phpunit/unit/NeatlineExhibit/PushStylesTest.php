@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `pushStyles` on `NeatlineRecordTable`.
+ * Tests for `pushStyles` on `NeatlineExhibit`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTableTest_PushStyles
+class Neatline_NeatlineExhibitTest_PushStyles
     extends Neatline_Test_AppTestCase
 {
 
@@ -42,8 +42,7 @@ class Neatline_NeatlineRecordTableTest_PushStyles
 }
 CSS;
 
-        // Apply styles, reload records.
-        $this->_recordsTable->pushStyles($exhibit);
+        $exhibit->pushStyles();
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
@@ -81,8 +80,7 @@ CSS;
 }
 CSS;
 
-        // Apply styles, reload record.
-        $this->_recordsTable->pushStyles($exhibit);
+        $exhibit->pushStyles();
         $record = $this->_recordsTable->find($record->id);
 
         // `vector_color` should not be changed.
@@ -108,8 +106,7 @@ CSS;
 }
 CSS;
 
-        // Apply styles, reload records.
-        $this->_recordsTable->pushStyles($exhibit);
+        $exhibit->pushStyles();
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 
@@ -142,8 +139,7 @@ CSS;
 }
 CSS;
 
-        // Apply styles, reload records.
-        $this->_recordsTable->pushStyles($exhibit1);
+        $exhibit1->pushStyles();
         $record1 = $this->_recordsTable->find($record1->id);
         $record2 = $this->_recordsTable->find($record2->id);
 

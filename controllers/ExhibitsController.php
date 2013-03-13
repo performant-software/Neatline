@@ -84,9 +84,8 @@ class Neatline_ExhibitsController
             Zend_Registry::get('fileIn')), true
         ));
 
-        // Propagate the stylesheet.
-        $records = $this->_helper->db->getTable('NeatlineRecord');
-        $records->pushStyles($exhibit);
+        // Propagate CSS.
+        $exhibit->pushStyles();
 
     }
 
