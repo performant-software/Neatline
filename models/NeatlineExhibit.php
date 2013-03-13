@@ -30,6 +30,39 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
+     * Update the exhibit stylesheet with values from a specific record.
+     * For example, if `styles` is:
+     *
+     * .tag {
+     *   vector-color: #111111;
+     *   stroke-color: #222222;
+     * }
+     *
+     * And the passed record is tagged with `tag` has a `vector_color` of
+     * `#333333` and a `stroke_color` of `#444444`, the stylesheet should
+     * be updated to:
+     *
+     * .tag {
+     *   vector-color: #333333;
+     *   stroke-color: #444444;
+     * }
+     *
+     * @param NeatlineRecord $record The record to update from.
+     */
+    public function pullStyles($record)
+    {
+
+        // Parse the stylesheet.
+        $css = PHP_CSS::readCSS($this->styles);
+
+        foreach ($css as $tag => $rules) {
+            // TODO
+        }
+
+    }
+
+
+    /**
      * Implode `widgets` and `base_layers` before saving.
      *
      * @param array $values The POST/PUT values.

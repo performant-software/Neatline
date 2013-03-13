@@ -17,18 +17,18 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
     /**
      * Update records in an exhibit according to the value-defined style
-     * definitions in the `styles` YAML. For example, if `styles` is:
+     * definitions in the `styles` CSS. For example, if `styles` is:
      *
-     * tag:
-     *  - vector_color: "#ffffff"
-     *  - stroke_color
+     * .tag {
+     *   vector-color: #ffffff;
+     *   stroke-color: auto;
+     * }
      *
      * The vector color on records tagged with `tag` will be updated to
      * #ffffff, but the stroke color will be unchanged since no explicit
-     * value is set in the YAML.
+     * value is set in the CSS.
      *
      * @param NeatlineExhibit $exhibit The exhibit to update.
-     * @param NeatlineRecord|null $record The record to update.
      */
     public function pushStyles($exhibit)
     {
