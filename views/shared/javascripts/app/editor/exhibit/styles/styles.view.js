@@ -84,7 +84,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * @param {String} val: The value.
      */
     setStyles: function(val) {
-      return this.styles.getSession().setValue(val);
+      this.styles.getSession().setValue(val);
     },
 
 

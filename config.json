@@ -51,7 +51,6 @@
       "ace":              "./components/ace-builds/src-noconflict/ace.js",
       "ace_theme":        "./components/ace-builds/src-noconflict/theme-clouds.js",
       "ace_mode":         "./components/ace-builds/src-noconflict/mode-css.js",
-      "ace_worker":       "./components/ace-builds/src-noconflict/worker-css.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
       "sinon":            "./components/sinon/pkg/sinon.js"

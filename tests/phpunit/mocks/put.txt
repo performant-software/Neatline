@@ -1,1 +1,1 @@
-[]
+{"styles":"\n            .tag {\n              vector-color: color;\n            }\n        "}
