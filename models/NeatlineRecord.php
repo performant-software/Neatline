@@ -119,6 +119,38 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
+     * Update record styles to match exhibit CSS. For example, if `styles`
+     * on the parent exhibit is:
+     *
+     * .tag1 {
+     *   vector-color: #111111;
+     * }
+     * .tag2 {
+     *   stroke-color: #222222;
+     * }
+     *
+     * And `array('tag1', 'tag2')` is passed, `vector_color` should be set
+     * to '#111111' and `stroke_color` to '#222222'.
+     *
+     * @param array $tags An array of tags to pull.
+     */
+    public function pullStyles($tags)
+    {
+
+        // Parse the stylesheet.
+        $css = _nl_readCSS($this->getExhibit()->styles);
+
+        // Sync the record with the CSS.
+        foreach ($css as $selector => $rules) {
+            if (in_array($selector, $tags)) {
+                foreach ($rules as $prop => $val) $record->$prop = $val;
+            }
+        }
+
+    }
+
+
+    /**
      * Compile Omeka item references. Supported syntax:
      *
      * `[item]`
