@@ -29,18 +29,6 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Save form values.
-     *
-     * @param array $values The POST/PUT values.
-     */
-    public function saveForm($values)
-    {
-        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
-        $this->save();
-    }
-
-
-    /**
      * Before saving, update the `modified` timestamp.
      *
      * @return array The array representation of the record fields.
