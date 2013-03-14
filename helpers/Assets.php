@@ -88,8 +88,7 @@ function _nl_exhibitGlobals($exhibit)
 {
     return array(
         'exhibit'       => $exhibit->toArray(),
-        'records_api'   => public_url('neatline/records/'.$exhibit->id),
-        'record_api'    => public_url('neatline/record'),
+        'records_api'   => public_url('neatline/records'),
         'base_layers'   => _nl_getLayersForExhibit($exhibit),
         'base_layer'    => $exhibit->base_layer,
         'map_zoom'      => $exhibit->map_zoom,

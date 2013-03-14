@@ -23,13 +23,11 @@ Neatline.module('Shared.Record', function(
      * @return {String}: The url.
      */
     url: function() {
-      var url = Neatline.global.record_api;
+      var url = Neatline.global.records_api;
       if (this.get('id')) url += ('/'+this.get('id'));
       return url;
     },
 
-
-    // TODO|dev
 
     defaults: function() {
       return {

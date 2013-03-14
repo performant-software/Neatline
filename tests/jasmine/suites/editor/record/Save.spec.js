@@ -63,7 +63,7 @@ describe('Record Form Save', function() {
     el.save.trigger('click');
 
     // Route should be /record/:id, method PUT.
-    _t.assertLastRequestRoute(Neatline.global.record_api+'/'+id);
+    _t.assertLastRequestRoute(Neatline.global.records_api+'/'+id);
     _t.assertLastRequestMethod('PUT');
 
     // Capture query parameters.

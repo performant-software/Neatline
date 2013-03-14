@@ -107,7 +107,7 @@ describe('Record Form Add', function() {
     el.saveButton.trigger('click');
 
     // Route should be /record, method POST.
-    _t.assertLastRequestRoute(Neatline.global.record_api);
+    _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('POST');
 
     // Request should have exhibit id.

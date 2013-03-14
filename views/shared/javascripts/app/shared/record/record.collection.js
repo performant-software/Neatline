@@ -21,6 +21,24 @@ Neatline.module('Shared.Record', function(
 
 
     /**
+     * Fetch a subset of the collection from the server.
+     *
+     * @param {Object} params: Query parameters.
+     * @param {Function} cb: Called when `fetch` completes.
+     */
+    update: function(params, cb) {
+
+      // Add the exhibit id to the request.
+      params = _.extend(params, {
+        exhibit_id: Neatline.global.exhibit.id
+      });
+
+      this.fetch({ data: $.param(params), success: cb });
+
+    },
+
+
+    /**
      * Construct the API url.
      *
      * @return {String}: The url.

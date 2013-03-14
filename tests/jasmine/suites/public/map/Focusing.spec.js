@@ -103,7 +103,7 @@ describe('Map Record Focusing', function() {
 
       // Should load record from server.
       expect(request.method).toEqual('GET');
-      expect(request.url).toEqual(Neatline.global.record_api+'/999');
+      expect(request.url).toEqual(Neatline.global.records_api+'/999');
 
     });
 
