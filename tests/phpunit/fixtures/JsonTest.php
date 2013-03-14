@@ -167,7 +167,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * GET /records/:id
+     * GET /records
      * `records.p12.json`   (records 1-2)
      * `records.p23.json`   (records 2-3)
      * `records.p34.json`   (records 3-4)
@@ -252,7 +252,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * GET /record/:id
+     * GET /records/:id
      * `record.standard.json`
      */
     public function testRecordJson()
@@ -290,7 +290,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * POST /record
+     * POST /records
      * `record.add.json`
      */
     public function testNewRecordJson()
@@ -308,6 +308,25 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $this->request->setMethod('POST');
         $this->writeFixtureFromRoute('neatline/records',
             'record.add.json');
+
+    }
+
+
+    /**
+     * GET /exhibits/:id
+     * `exhibit.json`
+     */
+    public function testExhibitJson()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles    = '1';
+        $exhibit->map_focus = '2';
+        $exhibit->map_zoom  = '3';
+        $exhibit->save();
+
+        $this->writeFixtureFromRoute('neatline/exhibits/'.$exhibit->id,
+            'exhibit.json');
 
     }
 

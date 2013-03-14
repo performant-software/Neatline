@@ -29,6 +29,8 @@ var _t = (function(_t) {
   _t.loadJsonFixtures = function() {
     this.json = {
 
+      exhibit:    readFixtures('exhibit.json'),
+
       records: {
         standard: readFixtures('records.standard.json'),
         changed:  readFixtures('records.changed.json'),

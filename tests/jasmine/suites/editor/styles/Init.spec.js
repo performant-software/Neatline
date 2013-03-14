@@ -33,8 +33,8 @@ describe('Styles Initialization', function() {
 
     // Initialize.
     _t.startApplication();
-    _t.navigate('styles');
     _t.aliasEditor();
+    _t.showStyles();
 
     // Form should be populated.
     expect(_t.vw.STYLES.styles.getSession().getValue()).toEqual('1');

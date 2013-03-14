@@ -20,8 +20,10 @@ Neatline.module('Editor.Exhibit.Styles', function(
    * @param {Object} container: The container element.
    */
   var display = function(container) {
-    Styles.__view.showIn(container);
-    Styles.__view.buildEditor();
+    Styles.__view.model.fetch({ success: function() {
+      Styles.__view.showIn(container);
+      Styles.__view.buildEditor();
+    }})
   };
   Neatline.commands.addHandler('ESTYLES:display', display);
 

@@ -128,6 +128,15 @@ var _t = (function(_t) {
   };
 
 
+  /**
+   * Navigate to the exhibit styles form.
+   */
+  _t.showStyles = function() {
+    _t.navigate('styles');
+    _t.respondLast200(_t.json.exhibit);
+  };
+
+
   return _t;
 
 

@@ -29,7 +29,7 @@ describe('Styles Router', function() {
 
   it('#styles', function() {
 
-    _t.navigate('styles');
+    _t.showStyles();
 
     // Tabs, styles form should be visible.
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.MENU.$el);
