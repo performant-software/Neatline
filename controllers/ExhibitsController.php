@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_ExhibitsController
-    extends Omeka_Controller_AbstractActionController
+class Neatline_ExhibitsController extends Neatline_RestController
 {
 
 
@@ -24,6 +23,26 @@ class Neatline_ExhibitsController
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->_table = $this->_helper->db->getTable('NeatlineExhibit');
         $this->_browseRecordsPerPage = get_option('per_page_admin');
+    }
+
+
+    /**
+     * Update exhibit via PUT. Used by Backbone.
+     */
+    public function putAction()
+    {
+
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Update the exhibit.
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
+            Zend_Registry::get('fileIn')), true
+        ));
+
+        // Propagate CSS.
+        $exhibit->pushStyles();
+
     }
 
 
@@ -66,26 +85,6 @@ class Neatline_ExhibitsController
 
         $this->view->neatline_exhibit = $exhibit;
         $this->view->form = $form;
-
-    }
-
-
-    /**
-     * Update exhibit via PUT. Used by Backbone.
-     */
-    public function putAction()
-    {
-
-        $this->_helper->viewRenderer->setNoRender(true);
-
-        // Update the exhibit.
-        $exhibit = $this->_helper->db->findById();
-        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
-            Zend_Registry::get('fileIn')), true
-        ));
-
-        // Propagate CSS.
-        $exhibit->pushStyles();
 
     }
 

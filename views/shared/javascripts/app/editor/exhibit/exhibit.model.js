@@ -23,7 +23,7 @@ Neatline.module('Editor.Exhibit', function(
      * @return {String}: The url.
      */
     url: function() {
-      return Neatline.global.exhibit_put;
+      return Neatline.global.exhibits_api;
     },
 
 

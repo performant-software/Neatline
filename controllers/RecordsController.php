@@ -27,7 +27,7 @@ class Neatline_RecordsController extends Neatline_RestController
 
 
     /**
-     * Get a record collection.
+     * Get a collection of records.
      */
     public function listAction()
     {
@@ -35,17 +35,10 @@ class Neatline_RecordsController extends Neatline_RestController
         // Load exhibit.
         $exhibit = $this->exhibits->find($this->_request->exhibit_id);
 
-        // Load records.
-        echo Zend_Json::encode(
-            $this->records->queryRecords($exhibit, array(
-                'extent'    => $this->_request->extent,
-                'zoom'      => $this->_request->zoom,
-                'offset'    => $this->_request->offset,
-                'limit'     => $this->_request->limit,
-                'query'     => $this->_request->query,
-                'tags'      => $this->_request->tags
-            ))
-        );
+        // Query records.
+        echo Zend_Json::encode($this->records->queryRecords(
+            $exhibit, $this->_request->getParams()
+        ));
 
     }
 

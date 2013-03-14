@@ -37,7 +37,7 @@
     <?php echo common('neatline/button', array(
         'name'  => 'set-focus',
         'icon'  => 'icon-map-marker',
-        'text'  => 'User Current Viewport as Default'
+        'text'  => 'Use Current Viewport as Default'
     )); ?>
 
   </div>
