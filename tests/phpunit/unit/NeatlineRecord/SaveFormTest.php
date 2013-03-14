@@ -101,6 +101,18 @@ class Neatline_NeatlineRecordTest_SaveForm
     public function testUpdateExhibitStyles()
     {
 
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: 1;
+            }
+        ";
+        $exhibit->save();
+        $record = new NeatlineRecord($exhibit);
+
+        // Save form with new `vector_color`.
+        $record->saveForm(array('vector_color' => '2'));
+
     }
 
 
