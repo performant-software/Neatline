@@ -53,10 +53,9 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function getAction()
     {
-
         $this->_helper->viewRenderer->setNoRender(true);
-        // TODO
-
+        $exhibit = $this->_helper->db->findById();
+        echo Zend_Json::encode($exhibit->toArray());
     }
 
 
