@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for INDX action in records API.
+ * Tests for INDEX action in records API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -17,23 +17,35 @@ class Neatline_RecordsControllerTest_Get
 
 
     /**
+     * Create exhibit, set parameter on request.
+     */
+    public function setUp()
+    {
+
+        parent::setUp();
+
+        // Create exhibit.
+        $this->exhibit = $this->__exhibit();
+
+        // Set GET parameter.
+        $this->request->setQuery(array(
+          'exhibit_id' => $this->exhibit->id
+        ));
+
+    }
+
+
+    /**
      * GET should emit a JSON object containing a list of records with all
      * data needed by the front-end application.
      */
     public function testGet()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
+        $record = $this->__record($this->exhibit);
 
-        // Hit /records, should return 200.
-        $this->dispatch('neatline/records/'.$exhibit->id);
-        $this->assertResponseCode(200);
-
-        // Capture response, alias records.
-        $response = $this->getResponseArray();
-        $records  = $response->records;
+        $this->dispatch('neatline/records');
+        $records = $this->getResponseArray()->records;
 
         // Should emit fields.
         $this->assertObjectHasAttribute('id',       $records[0]);
@@ -57,10 +69,9 @@ class Neatline_RecordsControllerTest_Get
     public function testExhibitFilter()
     {
 
-        $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit1);
-        $record2 = new NeatlineRecord($exhibit1);
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
         $record3 = new NeatlineRecord($exhibit2);
         $record1->added = '2001-01-01';
         $record2->added = '2002-01-01';
@@ -70,17 +81,14 @@ class Neatline_RecordsControllerTest_Get
         $record2->save();
         $record3->save();
 
-        // Hit /records for exhibit 1.
-        $this->dispatch('neatline/records/'.$exhibit1->id);
-
-        // Capture response, alias records.
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
-        $records  = $response->records;
+        $records = $response->records;
 
         // Should apply exhibit filter.
         $this->assertEquals($records[0]->id, $record2->id);
         $this->assertEquals($records[1]->id, $record1->id);
-        $this->assertCount(2 , $response->records);
+        $this->assertCount(2, $response->records);
 
     }
 
@@ -91,25 +99,25 @@ class Neatline_RecordsControllerTest_Get
     public function testZoomFilter()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
         $record1->min_zoom = 1;
         $record2->min_zoom = 2;
 
         $record1->save();
         $record2->save();
 
-        // Set `zoom` parameter.
-        $this->request->setQuery(array('zoom' => 1));
+        $this->request->setQuery(array(
+            'zoom' => 1
+        ));
 
         // GET with zoom that excludes record 2.
-        $this->dispatch('neatline/records/'.$exhibit->id);
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply zoom filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
-        $this->assertCount(1 , $response->records);
+        $this->assertCount(1, $response->records);
 
     }
 
@@ -120,27 +128,25 @@ class Neatline_RecordsControllerTest_Get
     public function testExtentFilter()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
         $record1->coverage = 'POINT(1 1)';
         $record2->coverage = 'POINT(3 3)';
 
         $record1->save();
         $record2->save();
 
-        // Set `extent` parameter.
         $this->request->setQuery(array(
           'extent' => 'POLYGON((0 0,0 2,2 2,2 0,0 0))'
         ));
 
         // GET with extent that excludes record 2.
-        $this->dispatch('neatline/records/'.$exhibit->id);
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply zoom filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
-        $this->assertCount(1 , $response->records);
+        $this->assertCount(1, $response->records);
 
     }
 
@@ -151,10 +157,9 @@ class Neatline_RecordsControllerTest_Get
     public function testLimitFilter()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record3 = new NeatlineRecord($exhibit);
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
+        $record3 = new NeatlineRecord($this->exhibit);
         $record1->added = '2001-01-01';
         $record2->added = '2002-01-01';
         $record3->added = '2003-01-01';
@@ -163,16 +168,18 @@ class Neatline_RecordsControllerTest_Get
         $record2->save();
         $record3->save();
 
-        // Set `limit` and `offset` parameters.
-        $this->request->setQuery(array('limit' => 1, 'offset' => 1));
+        $this->request->setQuery(array(
+            'limit' => 1,
+            'offset' => 1
+        ));
 
         // GET with limit that excludes records 1 and 3.
-        $this->dispatch('neatline/records/'.$exhibit->id);
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply limit filter.
         $this->assertEquals($response->records[0]->id, $record2->id);
-        $this->assertCount(1 , $response->records);
+        $this->assertCount(1, $response->records);
 
     }
 
@@ -183,25 +190,25 @@ class Neatline_RecordsControllerTest_Get
     public function testKeywordsFilter()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
         $record1->title = 'neatline';
         $record2->title = 'omeka';
 
         $record1->save();
         $record2->save();
 
-        // Set `query` parameter.
-        $this->request->setQuery(array('query' => 'neatline'));
+        $this->request->setQuery(array(
+            'query' => 'neatline'
+        ));
 
         // GET with query that excludes record 2.
-        $this->dispatch('neatline/records/'.$exhibit->id);
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply query filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
-        $this->assertCount(1 , $response->records);
+        $this->assertCount(1, $response->records);
 
     }
 
@@ -212,25 +219,25 @@ class Neatline_RecordsControllerTest_Get
     public function testTagsFilter()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
         $record1->tags = 'tag1, tag2';
         $record2->tags = 'tag3';
 
         $record1->save();
         $record2->save();
 
-        // Set `tags` parameter.
-        $this->request->setQuery(array('tags' => array('tag1', 'tag2')));
+        $this->request->setQuery(array(
+            'tags' => array('tag1', 'tag2'))
+        );
 
         // GET with query that excludes record 2.
-        $this->dispatch('neatline/records/'.$exhibit->id);
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply tags filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
-        $this->assertCount(1 , $response->records);
+        $this->assertCount(1, $response->records);
 
     }
 

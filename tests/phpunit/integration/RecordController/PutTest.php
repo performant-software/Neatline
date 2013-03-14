@@ -67,7 +67,7 @@ class Neatline_RecordControllerTest_Put
         );
 
         $this->writePut($values);
-        $this->dispatch('neatline/record/'.$record->id);
+        $this->dispatch('neatline/records/'.$record->id);
         $record = $this->reload($record);
 
         // Should update fields.
@@ -102,9 +102,8 @@ class Neatline_RecordControllerTest_Put
         $exhibit = $this->__exhibit();
         $record = $this->__record($exhibit);
 
-        // Save the record.
         $this->writePut(array());
-        $this->dispatch('neatline/record/'.$record->id);
+        $this->dispatch('neatline/records/'.$record->id);
         $response = $this->getResponseArray();
 
         // Should emit all attributes.

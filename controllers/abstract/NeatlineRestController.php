@@ -36,7 +36,8 @@ abstract class Neatline_RestController
         switch($method) {
 
             case 'GET':
-                $this->_forward('get');
+                if ($this->_request->id) $this->_forward('get');
+                else $this->_forward('list');
                 break;
 
             case 'POST':

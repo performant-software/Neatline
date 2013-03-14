@@ -24,7 +24,6 @@ class Neatline_RecordControllerTest_Post
 
         $exhibit = $this->__exhibit();
 
-        // New record data.
         $this->request->setMethod('POST')->setRawBody(
           Zend_Json::encode(array(
             'exhibit_id'        => $exhibit->id,
@@ -49,11 +48,9 @@ class Neatline_RecordControllerTest_Post
             'map_zoom'          => '19'
         )));
 
-        // Hit /records with POST.
         $c1 = $this->_recordsTable->count();
-        $this->dispatch('neatline/record');
+        $this->dispatch('neatline/records');
         $c2 = $this->_recordsTable->count();
-        $this->assertResponseCode(200);
 
         // Should create a record.
         $this->assertEquals($c2, $c1+1);
@@ -62,7 +59,7 @@ class Neatline_RecordControllerTest_Post
         $response = $this->getResponseArray();
         $this->assertNotNull($response->id);
 
-        // Load the record.
+        // Load the new record.
         $record = $this->_recordsTable->find($response->id);
 
         // Should update fields.
@@ -104,8 +101,7 @@ class Neatline_RecordControllerTest_Post
             'exhibit_id' => $exhibit->id
         )));
 
-        // Save the new record.
-        $this->dispatch('neatline/record');
+        $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
         $record = $this->getLastRecord();
 

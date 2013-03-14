@@ -19,7 +19,26 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
 
     /**
-     * GET /records/:id
+     * Create exhibit, set parameter on request.
+     */
+    public function setUp()
+    {
+
+        parent::setUp();
+
+        // Create exhibit.
+        $this->exhibit = $this->__exhibit();
+
+        // Set GET parameter.
+        $this->request->setQuery(array(
+          'exhibit_id' => $this->exhibit->id
+        ));
+
+    }
+
+
+    /**
+     * GET /records
      * `records.standard.json`
      * `records.changed.json`
      * `records.removed.json`
@@ -27,10 +46,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     public function testRecordsJson()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
-        $record3 = $this->__record($exhibit);
+        $record1 = $this->__record($this->exhibit);
+        $record2 = $this->__record($this->exhibit);
+        $record3 = $this->__record($this->exhibit);
 
         // `records.standard.json`
         // - #1 has a default map focus/zoom, #2 and #3 do not.
@@ -121,7 +139,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->__save();
         $record3->__save();
 
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.standard.json');
 
         // `records.changed.json`
@@ -131,7 +149,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->__save();
 
         $this->resetResponse();
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.changed.json');
 
 
@@ -142,7 +160,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
         // Write the fixture.
         $this->resetResponse();
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.removed.json');
 
     }
@@ -159,11 +177,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     public function testPaginatedRecordsJson()
     {
 
-        $exhibit = $this->__exhibit();
-
         // Create 6 records.
         for ($i = 0; $i<6; $i++) {
-            $record = new NeatlineRecord($exhibit);
+            $record = new NeatlineRecord($this->exhibit);
             $record->added  = '200'.$i.'-01-01';
             $record->title  = 'Record'.$i;
             $record->_title = '_Record'.$i;
@@ -172,31 +188,31 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
 
         // Records 1-2.
         $this->request->setQuery(array('limit' => 2, 'offset' => 0));
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.p12.json');
 
         // Records 2-3.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 1));
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.p23.json');
 
         // Records 3-4.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 2));
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.p34.json');
 
         // Records 5-6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 4));
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.p56.json');
 
         // Record 6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 5));
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.p6.json');
 
     }
@@ -209,13 +225,12 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     public function testTagsRecordsJson()
     {
 
-        $exhibit = $this->__exhibit();
-        $record = new NeatlineRecord($exhibit);
+        $record = new NeatlineRecord($this->exhibit);
         $record->title  = '<tag>title</tag>';
         $record->body   = '<tag>body</tag>';
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.tags.json');
 
     }
@@ -228,10 +243,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     public function testEmptyTitleRecordsJson()
     {
 
-        $exhibit = $this->__exhibit();
-        $record = $this->__record($exhibit);
+        $record = $this->__record($this->exhibit);
 
-        $this->writeFixtureFromRoute('neatline/records/'.$exhibit->id,
+        $this->writeFixtureFromRoute('neatline/records',
             'records.noTitle.json');
 
     }
@@ -244,9 +258,8 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
     public function testRecordJson()
     {
 
-        $exhibit    = $this->__exhibit();
-        $item       = $this->__item();
-        $record     = $this->__record($exhibit, $item);
+        $item   = $this->__item();
+        $record = $this->__record($this->exhibit, $item);
 
         $record->title              = 'title';
         $record->_title             = '_title';
@@ -270,7 +283,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->max_zoom           = 11;
         $record->__save();
 
-        $this->writeFixtureFromRoute('neatline/record/'.$record->id,
+        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
             'record.standard.json');
 
     }
@@ -293,7 +306,7 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         )));
 
         $this->request->setMethod('POST');
-        $this->writeFixtureFromRoute('neatline/record',
+        $this->writeFixtureFromRoute('neatline/records',
             'record.add.json');
 
     }

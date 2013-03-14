@@ -25,10 +25,8 @@ class Neatline_RecordControllerTest_Get
         $exhibit = $this->__exhibit();
         $record = $this->__record($exhibit);
 
-        // Hit /record/:id.
-        $this->dispatch('neatline/record/'.$record->id);
+        $this->dispatch('neatline/records/'.$record->id);
         $response = $this->getResponseArray();
-        $this->assertResponseCode(200);
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {
