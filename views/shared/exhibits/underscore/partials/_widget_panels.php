@@ -19,7 +19,7 @@
     <!-- Panels. -->
     <div id="record-<?php echo $widget['slug']; ?>"
       class="tab-pane plugin <?php echo $widget['slug']; ?>"
-    ><?php echo $widget['form']; ?></div>
+    ><?php echo $widget['record_form']; ?></div>
 
   <?php endif; ?>
 <?php endforeach; ?>
