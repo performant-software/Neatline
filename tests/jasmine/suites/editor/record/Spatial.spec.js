@@ -19,7 +19,7 @@ describe('Record Form Spatial Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.openFirstRecordForm();
+    _t.showFirstRecordForm();
 
     el = {
       text:     _t.vw.RECORD.$('a[href="#record-text"]'),

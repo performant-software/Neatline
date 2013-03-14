@@ -59,8 +59,33 @@ class Neatline_NeatlineRecordTest_PullStyles
 
 
     /**
-     * When an invalid property is defined on the stylesheet, `pullStyles`
-     * should ignore the rule.
+     * Rules with `auto` values should be ignored.
+     */
+    public function testIgnoreAutoStyles()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: auto;
+            }
+        ";
+        $exhibit->save();
+        $record = new NeatlineRecord($exhibit);
+
+        // Pull `tag1`, save.
+        $record->pullStyles(array('tag'));
+        $record->save();
+        $record = $this->reload($record);
+
+        // `auto` value should be ignored.
+        $this->assertNull($record->vector_color);
+
+    }
+
+
+    /**
+     * Rules with invalid properties should be ignored.
      */
     public function testIgnoreInvalidProperties()
     {

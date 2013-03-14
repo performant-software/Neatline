@@ -15,7 +15,7 @@ describe('Record Form Edit', function() {
 
   beforeEach(function() {
     _t.loadEditor();
-    _t.openFirstRecordForm();
+    _t.showFirstRecordForm();
   });
 
 

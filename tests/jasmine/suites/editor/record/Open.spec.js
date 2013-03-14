@@ -239,7 +239,7 @@ describe('Record Form Open', function() {
     _t.respondRecords();
 
     // Re-open the form.
-    _t.openFirstRecordForm();
+    _t.showFirstRecordForm();
 
     // "Navigate" mode should be active.
     expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');

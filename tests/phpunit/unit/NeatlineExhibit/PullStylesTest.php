@@ -70,8 +70,7 @@ class Neatline_NeatlineExhibitTest_PullStyles
 
 
     /**
-     * When an invalid property is defined on the stylesheet, `pullStyles`
-     * should ignore the rule.
+     * Rules with invalid properties should be ignored.
      */
     public function testIgnoreInvalidProperties()
     {

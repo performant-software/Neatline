@@ -121,7 +121,7 @@ var _t = (function(_t) {
   /**
    * Navigate to the edit form for the first record.
    */
-  _t.openFirstRecordForm = function() {
+  _t.showFirstRecordForm = function() {
     this.showRecordList(this.json.records.standard);
     var models = this.getRecordListModels();
     this.navigate('record/'+models[0].get('id'));

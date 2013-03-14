@@ -61,8 +61,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
 
     /**
-     * When the value of a rule is the reserved word `auto`, `pushStyles`
-     * should ignore the rule and not progate the value.
+     * Rules with `auto` values should be ignored.
      */
     public function testIgnoreAutoValues()
     {
@@ -90,8 +89,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
 
     /**
-     * When an invalid property is defined on the stylesheet, `pushStyles`
-     * should ignore the rule and not attempt to update the property.
+     * Rules with invalid properties should be ignored.
      */
     public function testIgnoreInvalidProperties()
     {

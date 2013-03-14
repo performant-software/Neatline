@@ -190,9 +190,12 @@ class NeatlineRecord extends Neatline_AbstractRecord
             // If the tag has been requested.
             if (in_array($selector, $tags)) {
 
-                // Apply the CSS rules to the record.
+                // Apply the CSS rules to the record. Ignore rules if the
+                // value is `auto` or the property is invalid.
                 foreach ($rules as $prop => $val) {
-                    if (in_array($prop, $valid)) $this->$prop = $val;
+                    if (in_array($prop, $valid) && $val != 'auto') {
+                        $this->$prop = $val;
+                    }
                 }
 
             }
