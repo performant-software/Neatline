@@ -109,11 +109,18 @@ class Neatline_NeatlineRecordTest_SaveForm
         ";
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
+        $record->tags = 'tag';
 
         // Save form with new `vector_color`.
         $record->saveForm(array('vector_color' => '2'));
+        $exhibit = $this->reload($exhibit);
 
-        // TODO
+        // Should update CSS.
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+            'tag' => array(
+                'vector_color' => '2'
+            )
+        ));
 
     }
 
@@ -125,17 +132,68 @@ class Neatline_NeatlineRecordTest_SaveForm
     public function testPushStyles()
     {
 
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: 1;
+            }
+        ";
+        $exhibit->save();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record1->tags = 'tag';
+        $record2->tags = 'tag';
+        $record1->save();
+        $record2->save();
+
+        // Save record 1 with new `vector_color`.
+        $record1->saveForm(array('vector_color' => '2'));
+        $record2 = $this->reload($record2);
+
+        // Should update record 2.
+        $this->assertEquals($record2->vector_color, '2');
+
     }
 
 
     /**
      * When a record is saved with _new_ tags - eg., when the tags string
      * used to be `tag1`, and is changed to `tag1,tag2` - the existing CSS
-     * rules for the new tag(s) should be applied to the record before it
-     * is used to update the exhibit CSS.
+     * rules for the `tag2` should be applied to the record before it is
+     * used to update the exhibit CSS.
      */
     public function testPullStyles()
     {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              vector-color: 1;
+            }
+        ";
+        $exhibit->save();
+
+        // Record 1 synchronized with CSS.
+        $record1 = new NeatlineRecord($exhibit);
+        $record1->vector_color = '1';
+        $record1->tags = 'tag';
+        $record1->save();
+
+        // Record 2 not synchronized.
+        $record2 = new NeatlineRecord($exhibit);
+        $record2->vector_color = '2';
+        $record2->save();
+
+        // Add `tag` to record 2, along with un-synchronized style.
+        $record2->saveForm(array('tags' => 'tag', 'vector_color' => '2'));
+        $record1 = $this->reload($record1);
+        $record2 = $this->reload($record2);
+
+        // Record 1 should be unchanged.
+        $this->assertEquals($record1->vector_color, '1');
+
+        // Record 2 should pull `tag` styles.
+        $this->assertEquals($record2->vector_color, '1');
 
     }
 

@@ -37,9 +37,7 @@ class Neatline_ExhibitsControllerTest_Put
 
         $this->writePut($values);
         $this->dispatch('neatline/put/'.$exhibit->id);
-
-        // Reload the exhibit.
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $exhibit = $this->reload($exhibit);
 
         // Should update fields.
         $this->assertEquals($exhibit->styles,       '4');

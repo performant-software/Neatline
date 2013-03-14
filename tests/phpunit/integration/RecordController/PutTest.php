@@ -68,9 +68,7 @@ class Neatline_RecordControllerTest_Put
 
         $this->writePut($values);
         $this->dispatch('neatline/record/'.$record->id);
-
-        // Reload the record.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->reload($record);
 
         // Should update fields.
         $this->assertEquals($record->title,             '21');

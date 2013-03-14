@@ -42,10 +42,8 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
         // Push styles.
         $exhibit->pushStyles();
-
-        // Reload records.
-        $record1 = $this->_recordsTable->find($record1->id);
-        $record2 = $this->_recordsTable->find($record2->id);
+        $record1 = $this->reload($record1);
+        $record2 = $this->reload($record2);
 
         // Record 1 should have `tag1` styles.
         $this->assertEquals($record1->vector_color, '1');
@@ -82,9 +80,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
         // Push styles.
         $exhibit->pushStyles();
-
-        // Reload record.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->reload($record);
 
         // Should ignore rules with `auto` value.
         $this->assertEquals($record->vector_color, 'color');
@@ -113,9 +109,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
         // Push styles.
         $exhibit->pushStyles();
-
-        // Reload record.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->reload($record);
 
         // Should ignore rules with non-style properties.
         $this->assertEquals($record->vector_color, 'color');
@@ -141,10 +135,8 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
         // Push styles.
         $exhibit->pushStyles();
-
-        // Reload records.
-        $record1 = $this->_recordsTable->find($record1->id);
-        $record2 = $this->_recordsTable->find($record2->id);
+        $record1 = $this->reload($record1);
+        $record2 = $this->reload($record2);
 
         // Both records should be updated.
         $this->assertEquals($record1->vector_color, 'color');
@@ -175,10 +167,8 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
         // Push styles.
         $exhibit1->pushStyles();
-
-        // Reload records.
-        $record1 = $this->_recordsTable->find($record1->id);
-        $record2 = $this->_recordsTable->find($record2->id);
+        $record1 = $this->reload($record1);
+        $record2 = $this->reload($record2);
 
         // Just exhibit 1 records should be updated.
         $this->assertEquals($record1->vector_color, 'color');

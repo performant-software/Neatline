@@ -43,9 +43,7 @@ class Neatline_NeatlineRecordTest_PullStyles
         // Pull `tag1` and `tag2`, save.
         $record->pullStyles(array('tag1', 'tag2'));
         $record->save();
-
-        // Reload record.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->reload($record);
 
         // Should pull `tag1` and `tag2`.
         $this->assertEquals($record->vector_color, '1');
@@ -80,9 +78,7 @@ class Neatline_NeatlineRecordTest_PullStyles
         // Pull `tag1`, save.
         $record->pullStyles(array('tag'));
         $record->save();
-
-        // Reload record.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->reload($record);
 
         // Invalid property should be ignored.
         $this->assertEquals($record->vector_color, 'color');

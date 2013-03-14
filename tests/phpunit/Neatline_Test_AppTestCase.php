@@ -183,9 +183,9 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      * @param Omeka_Record_AbstractRecord $record A record to reload.
      * @return Omeka_Record_AbstractRecord The reloaded record.
      */
-    public function reload()
+    public function reload($record)
     {
-        // TODO
+        return $record->getTable()->find($record->id);
     }
 
 
