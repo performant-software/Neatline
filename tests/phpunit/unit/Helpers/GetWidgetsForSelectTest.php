@@ -22,11 +22,32 @@ class Neatline_NeatlineExhibitTest_GetWidgetsForSelect
      */
     public function testGetLayersForSelect()
     {
+
+        // Mock filter callback.
+        function getWidgetsForSelect_widgets1($widgets)
+        {
+            return array_merge($widgets, array(
+                'Widget1 Label' => array(
+                    'id' => 'Widget1'
+                ),
+                'Widget2 Label' => array(
+                    'id' => 'Widget2'
+                ),
+                'Widget3 Label' => array(
+                    'id' => 'Widget3'
+                )
+            ));
+        }
+
+        // Register filter callback.
+        add_filter('neatline_widgets', 'GetWidgetsForSelect_widgets1');
+
         $this->assertEquals(_nl_getWidgetsForSelect(), array(
             'Widget1' => 'Widget1 Label',
             'Widget2' => 'Widget2 Label',
             'Widget3' => 'Widget3 Label'
         ));
+
     }
 
 

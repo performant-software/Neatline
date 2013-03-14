@@ -70,7 +70,7 @@ function _nl_getExhibitTabs()
 /**
  * Gather global properties exposed via the `neatline_globals` filter.
  *
- * @param NeatlineExhibit The exhibit.
+ * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The array of key => values.
  */
 function _nl_getGlobals($exhibit)
@@ -89,14 +89,48 @@ function _nl_getGlobals($exhibit)
 function _nl_getWidgetsForSelect()
 {
 
-    $widgets = _nl_getWidgets();
     $options = array();
 
     // Add option for each widget.
-    foreach ($widgets as $label => $widget) {
+    foreach (_nl_getWidgets() as $label => $widget) {
         $options[$widget['id']] = $label;
     }
 
     return $options;
 
+}
+
+
+/**
+ * Check to see if an exhibit has any widgets that register record forms.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return boolean True if tabs exist.
+ */
+function _nl_hasRecordTabs($exhibit)
+{
+
+    foreach (_nl_getWidgets() as $label => $widget) {
+        // Does the widget register a record form?
+        $form = array_key_exists('record_form', $widget);
+        // Is the widget enabled on the exhibit?
+        $active = $exhibit->hasWidget($widget['id']);
+        if ($form && $active) return true;
+    }
+
+    return false;
+
+}
+
+
+/**
+ * Check to see if an exhibit has any any widgets enabled that register
+ * exhibit form tabs.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return boolean True if tabs exist.
+ */
+function _nl_hasExhibitTabs($exhibit)
+{
+    // TODO
 }

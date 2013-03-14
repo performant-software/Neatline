@@ -22,19 +22,19 @@ function _nl_mockWidgets($widgets)
 {
     return array_merge($widgets, array(
         'Widget1 Label' => array(
-            'id'    => 'Widget1',
-            'slug'  => 'widget-1',
-            'form'  => 'form1'
+            'id'          => 'Widget1',
+            'slug'        => 'widget-1',
+            'record_form' => 'form1'
         ),
         'Widget2 Label' => array(
-            'id'    => 'Widget2',
-            'slug'  => 'widget-2',
-            'form'  => 'form2'
+            'id'          => 'Widget2',
+            'slug'        => 'widget-2',
+            'record_form' => 'form2'
         ),
         'Widget3 Label' => array(
-            'id'    => 'Widget3',
-            'slug'  => 'widget-3',
-            'form'  => 'form3'
+            'id'          => 'Widget3',
+            'slug'        => 'widget-3',
+            'record_form' => 'form3'
         )
     ));
 }
