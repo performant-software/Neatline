@@ -27,7 +27,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Update exhibit via PUT. Used by Backbone.
+     * Update exhibit via PUT.
+     * @backbone
      */
     public function putAction()
     {
@@ -42,6 +43,19 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
         // Propagate CSS.
         $exhibit->pushStyles();
+
+    }
+
+
+    /**
+     * Load exhibit via GET.
+     * @backbone
+     */
+    public function getAction()
+    {
+
+        $this->_helper->viewRenderer->setNoRender(true);
+        // TODO
 
     }
 

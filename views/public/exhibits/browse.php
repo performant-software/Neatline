@@ -30,7 +30,7 @@
 
     <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>
     <div id="neatline-<?php echo _nl_field('id'); ?>">
-      <h2 class="title"><?php echo link_to_neatline(); ?></h2>
+      <h2 class="title"><?php echo _nl_link(); ?></h2>
       <?php echo _nl_field('description'); ?>
     </div>
     <?php endforeach; ?>

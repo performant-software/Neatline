@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordControllerTest_Delete
+class Neatline_RecordsControllerTest_Delete
     extends Neatline_Test_AppTestCase
 {
 

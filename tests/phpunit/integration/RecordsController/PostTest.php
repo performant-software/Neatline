@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for POST action in record API.
+ * Tests for POST action in records API.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordControllerTest_Post
+class Neatline_RecordsControllerTest_Post
     extends Neatline_Test_AppTestCase
 {
 

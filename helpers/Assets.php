@@ -106,7 +106,7 @@ function _nl_exhibitGlobals($exhibit)
 function _nl_editorGlobals($exhibit)
 {
     return array(
-        'exhibits_api'  => url('neatline/put/'.$exhibit->id),
+        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
         'page_length'   => (int) get_plugin_ini('Neatline', 'page_length')
     );
 }
