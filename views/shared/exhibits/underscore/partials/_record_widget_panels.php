@@ -13,13 +13,12 @@
 
 ?>
 
-<?php foreach (_nl_getWidgets() as $label => $widget): ?>
-  <?php if (_nl_exhibit()->hasWidget($widget['id'])): ?>
+<?php foreach (_nl_getRecordWidgets(_nl_exhibit())
+  as $label => $widget): ?>
 
-    <!-- Panels. -->
-    <div id="record-<?php echo $widget['slug']; ?>"
-      class="tab-pane plugin <?php echo $widget['slug']; ?>"
-    ><?php echo $widget['record_form']; ?></div>
+  <!-- Panels. -->
+  <div id="record-<?php echo $widget['slug']; ?>"
+    class="tab-pane plugin <?php echo $widget['slug']; ?>"
+  ><?php echo $widget['record_form']; ?></div>
 
-  <?php endif; ?>
 <?php endforeach; ?>

@@ -45,7 +45,7 @@
 
     <!-- Widget tabs. -->
     <?php echo $this->partial(
-      'exhibits/underscore/partials/_widget_tabs.php'
+      'exhibits/underscore/partials/_record_widget_tabs.php'
     ); ?>
 
   </ul>
@@ -74,7 +74,7 @@
 
     <!-- Widget panels. -->
     <?php echo $this->partial(
-      'exhibits/underscore/partials/_widget_panels.php'
+      'exhibits/underscore/partials/_record_widget_panels.php'
     ); ?>
 
   </div>

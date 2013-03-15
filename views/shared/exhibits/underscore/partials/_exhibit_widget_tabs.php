@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Widget tabs.
+ * Exhibit widget tabs.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,7 +13,7 @@
 
 ?>
 
-<?php if (_nl_hasRecordWidgets(_nl_exhibit())): ?>
+<?php if (_nl_hasExhibitWidgets(_nl_exhibit())): ?>
   <li class="dropdown plugins">
 
     <!-- Dropdown. -->
@@ -22,19 +22,17 @@
     </a>
 
     <ul class="dropdown-menu">
-      <?php foreach (_nl_getWidgets() as $label => $widget): ?>
-        <?php if (_nl_exhibit()->hasWidget($widget['id'])): ?>
+      <?php foreach (_nl_getExhibitWidgets(_nl_exhibit())
+        as $label => $widget): ?>
 
-          <!-- Tabs. -->
-          <li class="tab">
-            <a
-              data-slug="<?php echo $widget['slug']; ?>"
-              href="#record-<?php echo $widget['slug']; ?>"
-              data-toggle="tab"
-            ><?php echo $label; ?></a>
-          </li>
+        <!-- Tabs. -->
+        <li class="tab">
+          <a
+            data-slug="<?php echo $widget['slug']; ?>"
+            href="#plugins/<?php echo $widget['slug']; ?>"
+          ><?php echo $label; ?></a>
+        </li>
 
-        <?php endif; ?>
       <?php endforeach; ?>
     </ul>
 

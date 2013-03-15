@@ -88,16 +88,11 @@ function _nl_getGlobals($exhibit)
  */
 function _nl_getWidgetsForSelect()
 {
-
     $options = array();
-
-    // Add option for each widget.
     foreach (_nl_getWidgets() as $label => $widget) {
         $options[$widget['id']] = $label;
     }
-
     return $options;
-
 }
 
 
@@ -109,12 +104,7 @@ function _nl_getWidgetsForSelect()
  */
 function _nl_hasRecordWidgets($exhibit)
 {
-    foreach (_nl_getWidgets() as $label => $widget) {
-        $active = $exhibit->hasWidget($widget['id']);
-        $form = array_key_exists('record_form', $widget);
-        if ($form && $active) return true;
-    }
-    return false;
+    return count(_nl_getRecordWidgets($exhibit)) > 0;
 }
 
 
@@ -126,10 +116,41 @@ function _nl_hasRecordWidgets($exhibit)
  */
 function _nl_hasExhibitWidgets($exhibit)
 {
+    return count(_nl_getExhibitWidgets($exhibit)) > 0;
+}
+
+
+/**
+ * Get all widgets for an exhibit that register a record form.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return array $widgets The array of widgets.
+ */
+function _nl_getRecordWidgets($exhibit)
+{
+    $widgets = array();
+    foreach (_nl_getWidgets() as $label => $widget) {
+        $active = $exhibit->hasWidget($widget['id']);
+        $form = array_key_exists('record_form', $widget);
+        if ($form && $active) $widgets[$label] = $widget;
+    }
+    return $widgets;
+}
+
+
+/**
+ * Get all widgets for an exhibit that register an exhibit form.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return array $widgets The array of widgets.
+ */
+function _nl_getExhibitWidgets($exhibit)
+{
+    $widgets = array();
     foreach (_nl_getWidgets() as $label => $widget) {
         $active = $exhibit->hasWidget($widget['id']);
         $form = array_key_exists('exhibit_form', $widget);
-        if ($form && $active) return true;
+        if ($form && $active) $widgets[$label] = $widget;
     }
-    return false;
+    return $widgets;
 }
