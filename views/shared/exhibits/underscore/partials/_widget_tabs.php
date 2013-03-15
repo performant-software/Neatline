@@ -13,7 +13,7 @@
 
 ?>
 
-<?php if (_nl_exhibit()->widgets): ?>
+<?php if (_nl_hasRecordWidgets(_nl_exhibit())): ?>
   <li class="dropdown plugins">
 
     <!-- Dropdown. -->

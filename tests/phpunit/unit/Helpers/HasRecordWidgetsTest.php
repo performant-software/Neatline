@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_hasRecordTabs`.
+ * Tests for `_nl_hasRecordWidgets`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTest_HasRecordTabs
+class Neatline_NeatlineExhibitTest_HasRecordWidgets
     extends Neatline_Test_AppTestCase
 {
 
@@ -25,8 +25,8 @@ class Neatline_NeatlineExhibitTest_HasRecordTabs
         parent::setUp();
 
         // Mock widgets callback.
-        if (!function_exists('hasRecordTabs_widgets')) {
-            function hasRecordTabs_widgets($widgets)
+        if (!function_exists('hasRecordWidgets_widgets')) {
+            function hasRecordWidgets_widgets($widgets)
             {
                 return array_merge($widgets, array(
                     'Widget 1 Label' => array(
@@ -41,40 +41,32 @@ class Neatline_NeatlineExhibitTest_HasRecordTabs
         }
 
         // Register filter callback.
-        add_filter('neatline_widgets', 'hasRecordTabs_widgets');
+        add_filter('neatline_widgets', 'hasRecordWidgets_widgets');
 
     }
 
 
     /**
-     * `_nl_hasRecordTabs` should return false when none of the widgets
-     * on the exhibit registers a record form tab.
+     * `_nl_hasRecordWidgets` should return false when none of the widgets
+     * on the exhibit registers a record form.
      */
-    public function testNoRecordTabs()
+    public function testNoForms()
     {
-
         $exhibit = new NeatlineExhibit;
         $exhibit->widgets = 'Widget1';
-
-        // False when no record tabs.
-        $this->assertFalse(_nl_hasRecordTabs($exhibit));
-
+        $this->assertFalse(_nl_hasRecordWidgets($exhibit));
     }
 
 
     /**
-     * `_nl_hasRecordTabs` should return true when at one or more of the
-     * widgets on the exhibit registers a record form tab.
+     * `_nl_hasWidgetForms` should return true when one or more of the
+     * widgets on the exhibit registers a form for the passed key.
      */
-    public function testRecordTabs()
+    public function testForms()
     {
-
         $exhibit = new NeatlineExhibit;
         $exhibit->widgets = 'Widget2';
-
-        // True when record tabs.
-        $this->assertTrue(_nl_hasRecordTabs($exhibit));
-
+        $this->assertTrue(_nl_hasRecordWidgets($exhibit));
     }
 
 

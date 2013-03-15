@@ -102,35 +102,34 @@ function _nl_getWidgetsForSelect()
 
 
 /**
- * Check to see if an exhibit has any widgets that register record forms.
+ * Check if an exhibit has any widgets that register a record form.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return boolean True if tabs exist.
  */
-function _nl_hasRecordTabs($exhibit)
+function _nl_hasRecordWidgets($exhibit)
 {
-
     foreach (_nl_getWidgets() as $label => $widget) {
-        // Does the widget register a record form?
-        $form = array_key_exists('record_form', $widget);
-        // Is the widget enabled on the exhibit?
         $active = $exhibit->hasWidget($widget['id']);
+        $form = array_key_exists('record_form', $widget);
         if ($form && $active) return true;
     }
-
     return false;
-
 }
 
 
 /**
- * Check to see if an exhibit has any any widgets enabled that register
- * exhibit form tabs.
+ * Check if an exhibit has any widgets that register an exhibit form.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return boolean True if tabs exist.
  */
-function _nl_hasExhibitTabs($exhibit)
+function _nl_hasExhibitWidgets($exhibit)
 {
-    // TODO
+    foreach (_nl_getWidgets() as $label => $widget) {
+        $active = $exhibit->hasWidget($widget['id']);
+        $form = array_key_exists('exhibit_form', $widget);
+        if ($form && $active) return true;
+    }
+    return false;
 }
