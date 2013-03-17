@@ -101,4 +101,33 @@ class Neatline_NeatlineExhibitTest_PullStyles
     }
 
 
+    /**
+     * Rules under the `all` selector should be pulled from all records.
+     */
+    public function testAllSelector()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .all {
+              vector-color: 1;
+            }
+        ";
+        $record = new NeatlineRecord($exhibit);
+        $record->vector_color = '2';
+
+        // Pull styles.
+        $exhibit->pullStyles($record);
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+
+            // `all` selector should be updated.
+            'all' => array(
+                'vector_color' => '2',
+            )
+
+        ));
+
+    }
+
+
 }

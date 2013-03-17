@@ -116,10 +116,9 @@ class Neatline_NeatlineExhibitTest_PushStyles
 
 
     /**
-     * Rules defined under the `all` selector should be applied to all
-     * records in an exhibit.
+     * Rules under the `all` selector should be applied to all records.
      */
-    public function testDefaultTag()
+    public function testAllSelector()
     {
 
         $exhibit = $this->__exhibit();

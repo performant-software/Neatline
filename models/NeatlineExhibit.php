@@ -163,7 +163,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
         foreach ($css as $selector => $rules) {
 
             // Is the record tagged with the selector?
-            if (in_array($selector, $tags)) {
+            if (in_array($selector, $tags) || $selector == 'all') {
 
                 // Update each CSS rule to match the record values.
                 foreach ($rules as $prop => $val) {
