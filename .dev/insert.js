@@ -102,8 +102,8 @@ client.query(sql, function(err, res) {
     records(res.insertId, 400, 4, '#00aeff', 'level4');
     records(res.insertId, 1000, 5, '#0006ff', 'level5');
     records(res.insertId, 20000, 6, '#7800ff', 'level6');
-    records(res.insertId, 50000, 7, '#f000ff', 'level7');
-    records(res.insertId, 100000, 8, '#ff0000', 'level8');
+    // records(res.insertId, 50000, 7, '#f000ff', 'level7');
+    // records(res.insertId, 100000, 8, '#ff0000', 'level8');
 
     client.end(function() {
       process.exit();
