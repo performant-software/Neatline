@@ -48,9 +48,9 @@ class Neatline_RecordsControllerTest_Post
             'map_zoom'          => '19'
         )));
 
-        $c1 = $this->_recordsTable->count();
+        $c1 = $this->__records->count();
         $this->dispatch('neatline/records');
-        $c2 = $this->_recordsTable->count();
+        $c2 = $this->__records->count();
 
         // Should create a record.
         $this->assertEquals($c2, $c1+1);
@@ -60,7 +60,7 @@ class Neatline_RecordsControllerTest_Post
         $this->assertNotNull($response->id);
 
         // Load the new record.
-        $record = $this->_recordsTable->find($response->id);
+        $record = $this->__records->find($response->id);
 
         // Should update fields.
         $this->assertEquals($record->exhibit_id,        $exhibit->id);
@@ -105,7 +105,7 @@ class Neatline_RecordsControllerTest_Post
         $response = $this->getResponseArray();
 
         // Get the new record.
-        $record = $this->getLastRow($this->_recordsTable);
+        $record = $this->getLastRow($this->__records);
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {

@@ -46,7 +46,7 @@ class Neatline_NeatlineRecordTest_SaveForm
             'min_zoom'          => '19'
         ));
 
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->__records->find($record->id);
 
         $this->assertEquals($record->item_id,           1);
         $this->assertEquals($record->title,             '2');

@@ -37,7 +37,7 @@ class Neatline_NeatlineExhibitTest_SaveForm
             'map_zoom'      => '12'
         ));
 
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $exhibit = $this->__exhibits->find($exhibit->id);
 
         $this->assertEquals($exhibit->base_layers,  '1,2');
         $this->assertEquals($exhibit->base_layer,   '3');

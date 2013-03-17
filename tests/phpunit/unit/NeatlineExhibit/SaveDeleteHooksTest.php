@@ -32,12 +32,12 @@ class Neatline_NeatlineExhibitTest_SaveDeleteHooks
         $exhibit1->delete();
 
         // Should delete exhibit1 records.
-        $this->assertNull($this->_recordsTable->find($record1->id));
-        $this->assertNull($this->_recordsTable->find($record2->id));
+        $this->assertNull($this->__records->find($record1->id));
+        $this->assertNull($this->__records->find($record2->id));
 
         // Should delete exhibit2 records.
-        $this->assertNotNull($this->_recordsTable->find($record3->id));
-        $this->assertNotNull($this->_recordsTable->find($record4->id));
+        $this->assertNotNull($this->__records->find($record3->id));
+        $this->assertNotNull($this->__records->find($record4->id));
 
     }
 

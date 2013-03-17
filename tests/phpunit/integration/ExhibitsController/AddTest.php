@@ -81,9 +81,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -106,9 +106,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -131,9 +131,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -156,9 +156,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -181,9 +181,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -209,9 +209,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
+        $this->assertEquals($this->__exhibits->count(), 1);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
+        $this->assertEquals($this->__exhibits->count(), 1);
         $this->assertAction('add');
 
         // Should flash error.
@@ -234,9 +234,9 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -264,12 +264,12 @@ class Neatline_ExhibitsControllerTest_Add
         ));
 
         // Should create new exhibit.
-        $this->assertEquals($this->_exhibitsTable->count(), 0);
+        $this->assertEquals($this->__exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibitsTable->count(), 1);
+        $this->assertEquals($this->__exhibits->count(), 1);
 
         // Get the new exhibit.
-        $exhibit = $this->getLastRow($this->_exhibitsTable);
+        $exhibit = $this->getLastRow($this->__exhibits);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title');

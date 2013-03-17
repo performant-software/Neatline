@@ -244,7 +244,7 @@ class Neatline_ExhibitsControllerTest_Edit
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should save exhibit.
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $exhibit = $this->__exhibits->find($exhibit->id);
         $this->assertEquals($exhibit->title, 'title');
 
     }
@@ -296,7 +296,7 @@ class Neatline_ExhibitsControllerTest_Edit
 
         // Submit the form, reload exhibit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $exhibit = $this->__exhibits->find($exhibit->id);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title 2');

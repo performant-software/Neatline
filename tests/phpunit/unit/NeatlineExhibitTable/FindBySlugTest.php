@@ -22,7 +22,7 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
     public function testFindBySlug()
     {
         $exhibit = $this->__exhibit('test-slug');
-        $retrieved = $this->_exhibitsTable->findBySlug('test-slug');
+        $retrieved = $this->__exhibits->findBySlug('test-slug');
         $this->assertEquals($retrieved->id, $exhibit->id);
     }
 
@@ -33,7 +33,7 @@ class Neatline_NeatlineExhibitTableTest_FindBySlug
     public function testFindBySlugEscaping()
     {
         $exhibit = $this->__exhibit('---slug-1-');
-        $retrievedExhibit = $this->_exhibitsTable->findBySlug('"; err;');
+        $retrievedExhibit = $this->__exhibits->findBySlug('"; err;');
         $this->assertNull($retrievedExhibit);
     }
 

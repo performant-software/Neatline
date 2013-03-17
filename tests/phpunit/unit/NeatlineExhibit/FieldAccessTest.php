@@ -36,7 +36,7 @@ class Neatline_NeatlineExhibitTest_FieldAccess
         $exhibit->map_zoom      = 10;
         $exhibit->save();
 
-        $exhibit = $this->_exhibitsTable->find($exhibit->id);
+        $exhibit = $this->__exhibits->find($exhibit->id);
 
         $this->assertEquals($exhibit->base_layers,  '1');
         $this->assertEquals($exhibit->base_layer,   '2');

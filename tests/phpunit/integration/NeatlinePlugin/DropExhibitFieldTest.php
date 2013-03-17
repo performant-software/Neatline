@@ -26,8 +26,9 @@ class Neatline_NeatlinePluginTest_DropExhibitField
         NeatlinePlugin::dropExhibitField('test');
 
         // Get columns.
-        $name = $this->_exhibitsTable->getTableName();
-        $cols = $this->db->describeTable($name);
+        $cols = $this->db->describeTable(
+          $this->__exhibits->getTableName()
+        );
 
         // Should not have `test` column.
         $this->assertArrayNotHasKey('test', $cols);

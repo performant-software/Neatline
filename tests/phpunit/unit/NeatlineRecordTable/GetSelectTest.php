@@ -28,8 +28,8 @@ class Neatline_NeatlineRecordTableTest_GetSelect
         $record->save();
 
         // Query for the record.
-        $record = $this->_recordsTable->fetchObject(
-            $this->_recordsTable->getSelect()
+        $record = $this->__records->fetchObject(
+            $this->__records->getSelect()
         );
 
         // Coverage should be selected as plaintext.
@@ -50,8 +50,8 @@ class Neatline_NeatlineRecordTableTest_GetSelect
         $record->save();
 
         // Query for the record.
-        $record = $this->_recordsTable->fetchObject(
-            $this->_recordsTable->getSelect()
+        $record = $this->__records->fetchObject(
+            $this->__records->getSelect()
         );
 
         // Coverage should be null.
@@ -78,8 +78,8 @@ class Neatline_NeatlineRecordTableTest_GetSelect
         $record3->save();
 
         // Query for the records.
-        $records = $this->_recordsTable->fetchObjects(
-            $this->_recordsTable->getSelect()
+        $records = $this->__records->fetchObjects(
+            $this->__records->getSelect()
         );
 
         // Should be in reverse chronological order.

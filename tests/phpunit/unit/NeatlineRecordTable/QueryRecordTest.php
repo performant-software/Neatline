@@ -51,7 +51,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $record->map_zoom           = 18;
         $record->save();
 
-        $records = $this->_recordsTable->queryRecord($record->id);
+        $records = $this->__records->queryRecord($record->id);
 
         $this->assertEquals($records['id'],                 $record->id);
         $this->assertEquals($records['item_id'],            $item->id);

@@ -68,7 +68,7 @@ class Neatline_ExhibitsControllerTest_Put
         $this->dispatch('neatline/put/'.$exhibit->id);
 
         // `styles` column should be updated.
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->__records->find($record->id);
         $this->assertEquals($record->vector_color, 'color');
 
     }

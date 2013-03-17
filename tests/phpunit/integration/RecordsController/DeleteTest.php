@@ -28,16 +28,16 @@ class Neatline_RecordsControllerTest_Delete
 
         $this->request->setMethod('DELETE');
 
-        $c1 = $this->_recordsTable->count();
+        $c1 = $this->__records->count();
         $this->dispatch('neatline/records/'.$record2->id);
-        $c2 = $this->_recordsTable->count();
+        $c2 = $this->__records->count();
 
         // Should delete a record.
         $this->assertEquals($c2, $c1-1);
 
         // Should delete the correct record.
-        $this->assertNull($this->_recordsTable->find($record2->id));
-        $this->assertNotNull($this->_recordsTable->find($record1->id));
+        $this->assertNull($this->__records->find($record2->id));
+        $this->assertNotNull($this->__records->find($record1->id));
 
     }
 

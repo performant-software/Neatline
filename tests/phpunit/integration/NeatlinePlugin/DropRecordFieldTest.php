@@ -26,8 +26,9 @@ class Neatline_NeatlinePluginTest_DropRecordField
         NeatlinePlugin::dropRecordField('test');
 
         // Get columns.
-        $name = $this->_recordsTable->getTableName();
-        $cols = $this->db->describeTable($name);
+        $cols = $this->db->describeTable(
+          $this->__records->getTableName()
+        );
 
         // Should not have `test` column.
         $this->assertArrayNotHasKey('test', $cols);

@@ -25,8 +25,9 @@ class Neatline_NeatlinePluginTest_AddExhibitField
         NeatlinePlugin::addExhibitField('test', 'INT UNSIGNED NULL');
 
         // Get columns.
-        $name = $this->_exhibitsTable->getTableName();
-        $cols = $this->db->describeTable($name);
+        $cols = $this->db->describeTable(
+          $this->__exhibits->getTableName()
+        );
 
         // Should have new `test` column.
         $this->assertArrayHasKey('test', $cols);

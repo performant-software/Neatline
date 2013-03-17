@@ -25,8 +25,9 @@ class Neatline_NeatlinePluginTest_AddRecordField
         NeatlinePlugin::addRecordField('test', 'INT UNSIGNED NULL');
 
         // Get columns.
-        $name = $this->_recordsTable->getTableName();
-        $cols = $this->db->describeTable($name);
+        $cols = $this->db->describeTable(
+          $this->__records->getTableName()
+        );
 
         // Should have new `test` column.
         $this->assertArrayHasKey('test', $cols);

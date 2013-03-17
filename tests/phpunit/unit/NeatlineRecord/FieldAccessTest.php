@@ -48,7 +48,7 @@ class Neatline_NeatlineRecordTest_FieldAccess
         $record->min_zoom           = 22;
         $record->__save();
 
-        $record = $this->_recordsTable->find($record->id);
+        $record = $this->__records->find($record->id);
 
         $this->assertEquals($record->item_id,           1);
         $this->assertEquals($record->exhibit_id,        2);
