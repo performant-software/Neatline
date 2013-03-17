@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Test suite parent class.
+ * Base test case.
  *
  * @package     omeka
  * @subpackage  neatline
