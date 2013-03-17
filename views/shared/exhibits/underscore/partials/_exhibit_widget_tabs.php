@@ -29,7 +29,7 @@
         <li class="tab">
           <a
             data-slug="<?php echo $widget['slug']; ?>"
-            href="#plugins/<?php echo $widget['slug']; ?>"
+            href="#<?php echo $widget['slug']; ?>"
           ><?php echo $label; ?></a>
         </li>
 

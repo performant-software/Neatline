@@ -32,7 +32,7 @@ var _t = (function(_t) {
     this.vw = {
       MAP:      Neatline.Map.__view,
       EDITOR:   Neatline.Editor.__view,
-      MENU:     Neatline.Editor.Exhibit.Menu.__view,
+      EXHIBIT:  Neatline.Editor.Exhibit.__view,
       SEARCH:   Neatline.Editor.Exhibit.Search.__view,
       RECORDS:  Neatline.Editor.Exhibit.Records.__view,
       STYLES:   Neatline.Editor.Exhibit.Styles.__view,

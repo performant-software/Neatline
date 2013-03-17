@@ -15,7 +15,7 @@ Neatline.module('Editor.Exhibit', function(
 
 
   Exhibit.addInitializer(function() {
-    this.__model = new Exhibit.Model();
+    this.__view = new Exhibit.View();
   });
 
 

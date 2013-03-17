@@ -21,7 +21,7 @@ describe('Styles Router', function() {
     _t.loadEditor();
 
     el = {
-      styles: _t.vw.MENU.$('li[data-slug="styles"]')
+      styles: _t.vw.EXHIBIT.$('li[data-slug="styles"]')
     };
 
   });
@@ -32,7 +32,7 @@ describe('Styles Router', function() {
     _t.showStyles();
 
     // Tabs, styles form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.MENU.$el);
+    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.EXHIBIT.$el);
     expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.STYLES.$el);
 
     // "Styles" tab should be active.
