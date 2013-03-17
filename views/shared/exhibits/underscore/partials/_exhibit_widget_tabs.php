@@ -13,7 +13,9 @@
 
 ?>
 
-<?php $tabs = _nl_getExhibitTabs(_nl_exhibit()); if (count($tabs) > 0): ?>
+<?php $tabs = _nl_getExhibitTabs(_nl_exhibit());
+  if (count($tabs) > 0): ?>
+
   <li class="dropdown plugins">
 
     <!-- Dropdown. -->
@@ -36,4 +38,5 @@
     </ul>
 
   </li>
+
 <?php endif; ?>

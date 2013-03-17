@@ -103,7 +103,9 @@ class Neatline_RecordsControllerTest_Post
 
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
-        $record = $this->getLastRecord();
+
+        // Get the new record.
+        $record = $this->getLast($this->_recordsTable);
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {

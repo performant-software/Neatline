@@ -40,8 +40,8 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         add_filter('neatline_widgets', '_nl_mockWidgets');
 
         // Register layers.
-        Zend_Registry::set(
-          'layers', NL_DIR . '/tests/phpunit/mocks/layers.json'
+        Zend_Registry::set('layers',
+            NL_DIR . '/tests/phpunit/mocks/layers.json'
         );
 
     }
@@ -60,6 +60,19 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Create an Item.
+     *
+     * @return Omeka_record $item The item.
+     */
+    public function __item()
+    {
+        $item = new Item;
+        $item->save();
+        return $item;
+    }
+
+
+    /**
      * Create a Neatline exhibit.
      *
      * @param string $slug The exhibit slug.
@@ -71,19 +84,6 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
         $exhibit->slug = $slug;
         $exhibit->save();
         return $exhibit;
-    }
-
-
-    /**
-     * Create an Item.
-     *
-     * @return Omeka_record $item The item.
-     */
-    public function __item()
-    {
-        $item = new Item;
-        $item->save();
-        return $item;
     }
 
 
@@ -190,28 +190,14 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Get the first exhibit.
+     * Get the last record in a table.
      *
-     * @return NeatlineExhibit The record.
+     * @param Omeka_Db_Table $table A table.
+     * @return Neatline_AbstractRecord The last record.
      */
-    public function getFirstExhibit()
+    public function getLast($table)
     {
-        $exhibits = $this->_exhibitsTable->fetchObjects(
-            $this->_exhibitsTable->getSelect());
-        return $exhibits[0];
-    }
-
-
-    /**
-     * Get the last record.
-     *
-     * @return Item The record.
-     */
-    public function getLastRecord()
-    {
-        $records = $this->_recordsTable->fetchObjects(
-            $this->_recordsTable->getSelect());
-        return end($records);
+        return end($table->fetchObjects($table->getSelect()));
     }
 
 
