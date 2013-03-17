@@ -41,27 +41,37 @@ function _nl_formAssets()
  */
 function _nl_exhibitAssets($exhibit)
 {
+
     _nl_mapApis();
     _nl_exhibitCss($exhibit);
     queue_css_file('payloads/neatline');
-    fire_plugin_hook('neatline_public_css');
     queue_js_file('payloads/neatline');
-    fire_plugin_hook('neatline_public_js');
     queue_js_file('bootstrap');
+
+    fire_plugin_hook('neatline_public_static', array(
+        'exhibit' => $exhibit
+    ));
+
 }
 
 
 /**
  * Include static files for the editor.
+ *
+ * @param NeatlineExhibit The exhibit.
  */
-function _nl_editorAssets()
+function _nl_editorAssets($exhibit)
 {
+
     _nl_mapApis();
     queue_css_file('payloads/editor');
-    fire_plugin_hook('neatline_editor_css');
     queue_js_file('payloads/editor');
-    fire_plugin_hook('neatline_editor_js');
     queue_js_file('bootstrap');
+
+    fire_plugin_hook('neatline_editor_static', array(
+        'exhibit' => $exhibit
+    ));
+
 }
 
 

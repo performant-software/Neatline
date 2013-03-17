@@ -23,7 +23,7 @@
   ); ?></title>
 
   <?php
-  _nl_editorAssets();
+  _nl_editorAssets(_nl_exhibit());
   echo head_js(false);
   echo head_css();
   ?>
