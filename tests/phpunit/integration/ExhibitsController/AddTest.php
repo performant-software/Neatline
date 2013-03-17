@@ -269,7 +269,7 @@ class Neatline_ExhibitsControllerTest_Add
         $this->assertEquals($this->_exhibitsTable->count(), 1);
 
         // Get the new exhibit.
-        $exhibit = $this->getLast($this->_exhibitsTable);
+        $exhibit = $this->getLastRow($this->_exhibitsTable);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title');

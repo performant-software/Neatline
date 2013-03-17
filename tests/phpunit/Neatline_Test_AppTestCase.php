@@ -195,7 +195,7 @@ class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
      * @param Omeka_Db_Table $table A table.
      * @return Neatline_AbstractRecord The last record.
      */
-    public function getLast($table)
+    public function getLastRow($table)
     {
         return end($table->fetchObjects($table->getSelect()));
     }
