@@ -235,6 +235,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     /**
      * Propagate item changes to Neatline records.
+     *
+     * @param array $args Array of arguments, with `record`.
      */
     public function hookAfterSaveItem($args)
     {
@@ -260,7 +262,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * Register properties on `Neatline.global`.
      *
      * @param array $globals The array of properties.
-     * @param array $args An array of arguments, with `exhibit`.
+     * @param array $args Array of arguments, with `exhibit`.
      * @return array The modified array.
      */
     public function filterNeatlineGlobals($globals, $args)

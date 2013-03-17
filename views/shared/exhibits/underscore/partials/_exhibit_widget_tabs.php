@@ -13,7 +13,7 @@
 
 ?>
 
-<?php if (_nl_hasExhibitWidgets(_nl_exhibit())): ?>
+<?php $tabs = _nl_getExhibitTabs(_nl_exhibit()); if (count($tabs) > 0): ?>
   <li class="dropdown plugins">
 
     <!-- Dropdown. -->
@@ -22,14 +22,13 @@
     </a>
 
     <ul class="dropdown-menu">
-      <?php foreach (_nl_getExhibitWidgets(_nl_exhibit())
-        as $label => $widget): ?>
+      <?php foreach ($tabs as $label => $slug): ?>
 
         <!-- Tabs. -->
         <li class="tab">
           <a
-            data-slug="<?php echo $widget['slug']; ?>"
-            href="#<?php echo $widget['slug']; ?>"
+            data-slug="<?php echo $slug; ?>"
+            href="#<?php echo $slug; ?>"
           ><?php echo $label; ?></a>
         </li>
 
