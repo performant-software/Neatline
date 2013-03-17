@@ -26,8 +26,9 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
    * Instantiate the tab view.
    */
   Spatial.addInitializer(function() {
-    var form = Neatline.request('RECORD:getElement');
-    this.__view = new Spatial.View({ el: form });
+    this.__view = new Spatial.View({
+      el: Neatline.request('RECORD:getElement')
+    });
   });
 
 

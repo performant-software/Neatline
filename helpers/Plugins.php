@@ -35,7 +35,7 @@ function _nl_getPresenters()
 
 
 /**
- * Gather style columns via the `neatline_links` filter.
+ * Gather style columns via the `neatline_styles` filter.
  *
  * @return array An array of column names.
  */
@@ -48,22 +48,28 @@ function _nl_getStyles()
 /**
  * Gather record tabs via the `neatline_record_tabs` filter.
  *
+ * @param NeatlineExhibit $exhibit The exhibit.
  * @return array An array of widget name => ids.
  */
-function _nl_getRecordTabs()
+function _nl_getRecordTabs($exhibit)
 {
-    return apply_filters('neatline_record_tabs', array());
+    return apply_filters('neatline_record_tabs', array(), array(
+        'exhibit' => $exhibit
+    ));
 }
 
 
 /**
  * Gather exhibit tabs via the `neatline_exhibit_tabs` filter.
  *
+ * @param NeatlineExhibit $exhibit The exhibit.
  * @return array An array of widget name => ids.
  */
-function _nl_getExhibitTabs()
+function _nl_getExhibitTabs($exhibit)
 {
-    return apply_filters('neatline_exhibit_tabs', array());
+    return apply_filters('neatline_exhibit_tabs', array(), array(
+        'exhibit' => $exhibit
+    ));
 }
 
 
