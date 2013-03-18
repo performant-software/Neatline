@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
  * Top-level Neatline partial.
@@ -15,6 +15,7 @@
 
 <div id="neatline">
   <?php echo $this->partial('neatline/_map.php'); ?>
+  <?php echo $this->partial('neatline/_loader.php'); ?>
 </div>
 
 <!-- JSON globals. -->

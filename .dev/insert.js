@@ -21,6 +21,11 @@ var client = mysql.createConnection({
 client.connect();
 
 
+function color() {
+  return "#"+((1<<24)*Math.random()|0).toString(16);
+}
+
+
 function records(exhibit_id, count, zoom, color, tags) {
 
   // Base insert.
@@ -32,12 +37,12 @@ function records(exhibit_id, count, zoom, color, tags) {
       '_body,'+
       'tags,'+
       'presenter,'+
-      'vector_color,'+
+      'fill_color,'+
       'stroke_color,'+
       'select_color,'+
       'point_radius,'+
       'stroke_opacity,'+
-      'vector_opacity,'+
+      'fill_opacity,'+
       'select_opacity,'+
       'stroke_width,'+
       'min_zoom,'+
@@ -69,7 +74,7 @@ function records(exhibit_id, count, zoom, color, tags) {
       100+','+
       30+','+
       50+','+
-      2+','+
+      1+','+
       zoom+','+
       zoom+','+
       geo+
@@ -88,7 +93,7 @@ var wp, len;
 
 // Create exhibit.
 var sql = 'INSERT INTO omeka_neatline_exhibits ' +
-  '(title, slug) VALUES ("dev", "dev")';
+  '(title, slug, base_layer) VALUES ("dev", "dev", "OpenStreetMap")';
 
 client.query(sql, function(err, res) {
 
@@ -98,12 +103,12 @@ client.query(sql, function(err, res) {
     wp = text;
     len = text.length
 
-    records(res.insertId, 200, 3, '#00ff24', 'level3');
-    records(res.insertId, 400, 4, '#00aeff', 'level4');
-    records(res.insertId, 1000, 5, '#0006ff', 'level5');
-    records(res.insertId, 20000, 6, '#7800ff', 'level6');
-    // records(res.insertId, 50000, 7, '#f000ff', 'level7');
-    // records(res.insertId, 100000, 8, '#ff0000', 'level8');
+    records(res.insertId, 200, 3, color(), 'level3');
+    records(res.insertId, 400, 4, color(), 'level4');
+    records(res.insertId, 1000, 5, color(), 'level5');
+    records(res.insertId, 20000, 6, color(), 'level6');
+    records(res.insertId, 50000, 7, color(), 'level7');
+    records(res.insertId, 100000, 8, color(), 'level8');
 
     client.end(function() {
       process.exit();
