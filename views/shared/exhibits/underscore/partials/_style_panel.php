@@ -29,9 +29,9 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
-      'name'  => 'vector-color',
+      'name'  => 'fill-color',
       'label' => 'Shape Color',
-      'bind'  => 'record.vector_color',
+      'bind'  => 'record.fill_color',
       'class' => 'preview',
       'type'  => 'color'
   )); ?>
@@ -53,9 +53,9 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
-      'name'  => 'vector-opacity',
+      'name'  => 'fill-opacity',
       'label' => 'Shape Opacity',
-      'bind'  => 'record.vector_opacity',
+      'bind'  => 'record.fill_opacity',
       'class' => 'preview opacity'
   )); ?>
 

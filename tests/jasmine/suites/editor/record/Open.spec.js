@@ -132,10 +132,10 @@ describe('Record Form Open', function() {
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
     expect(inputs.tags).            toHaveValue('tags1');
     expect(inputs.presenter).       toHaveValue('StaticBubble');
-    expect(inputs.vectorColor).     toHaveValue('#444444');
+    expect(inputs.fillColor).       toHaveValue('#444444');
     expect(inputs.strokeColor).     toHaveValue('#777777');
     expect(inputs.selectColor).     toHaveValue('#101010');
-    expect(inputs.vectorOpacity).   toHaveValue('13');
+    expect(inputs.fillOpacity).     toHaveValue('13');
     expect(inputs.selectOpacity).   toHaveValue('16');
     expect(inputs.strokeOpacity).   toHaveValue('19');
     expect(inputs.strokeWidth).     toHaveValue('22');

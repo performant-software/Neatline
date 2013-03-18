@@ -90,9 +90,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->presenter         = 'StaticBubble';
         $record3->presenter         = 'StaticBubble';
         // ----------------------------------------------------------------
-        $record1->vector_color      = '#444444';
-        $record2->vector_color      = '#555555';
-        $record3->vector_color      = '#666666';
+        $record1->fill_color        = '#444444';
+        $record2->fill_color        = '#555555';
+        $record3->fill_color        = '#666666';
         // ----------------------------------------------------------------
         $record1->stroke_color      = '#777777';
         $record2->stroke_color      = '#888888';
@@ -102,9 +102,9 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->select_color      = '#111111';
         $record3->select_color      = '#121212';
         // ----------------------------------------------------------------
-        $record1->vector_opacity    = 13;
-        $record2->vector_opacity    = 14;
-        $record3->vector_opacity    = 15;
+        $record1->fill_opacity      = 13;
+        $record2->fill_opacity      = 14;
+        $record3->fill_opacity      = 15;
         // ----------------------------------------------------------------
         $record1->select_opacity    = 16;
         $record2->select_opacity    = 17;
@@ -270,10 +270,10 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->map_focus          = '100,200';
         $record->map_zoom           = 10;
         $record->presenter          = 'StaticBubble';
-        $record->vector_color       = '#111111';
+        $record->fill_color         = '#111111';
         $record->stroke_color       = '#222222';
         $record->select_color       = '#333333';
-        $record->vector_opacity     = 4;
+        $record->fill_opacity       = 4;
         $record->select_opacity     = 5;
         $record->stroke_opacity     = 6;
         $record->stroke_width       = 7;

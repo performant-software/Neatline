@@ -30,10 +30,10 @@ class Neatline_RecordsControllerTest_Put
         $record->coverage           = 'POINT(4 4)';
         $record->tags               = '5';
         $record->presenter          = '6';
-        $record->vector_color       = '7';
-        $record->stroke_color       = '8';
-        $record->select_color       = '9';
-        $record->vector_opacity     = 10;
+        $record->fill_color         = '7';
+        $record->select_color       = '8';
+        $record->stroke_color       = '9';
+        $record->fill_opacity       = 10;
         $record->select_opacity     = 11;
         $record->stroke_opacity     = 12;
         $record->stroke_width       = 13;
@@ -51,10 +51,10 @@ class Neatline_RecordsControllerTest_Put
             'coverage'              => 'POINT(23 23)',
             'tags'                  => '24',
             'presenter'             => '25',
-            'vector_color'          => '26',
-            'stroke_color'          => '27',
-            'select_color'          => '28',
-            'vector_opacity'        => '29',
+            'fill_color'            => '26',
+            'select_color'          => '27',
+            'stroke_color'          => '28',
+            'fill_opacity'          => '29',
             'select_opacity'        => '30',
             'stroke_opacity'        => '31',
             'stroke_width'          => '32',
@@ -76,10 +76,10 @@ class Neatline_RecordsControllerTest_Put
         $this->assertEquals($record->coverage,          'POINT(23 23)');
         $this->assertEquals($record->tags,              '24');
         $this->assertEquals($record->presenter,         '25');
-        $this->assertEquals($record->vector_color,      '26');
-        $this->assertEquals($record->stroke_color,      '27');
-        $this->assertEquals($record->select_color,      '28');
-        $this->assertEquals($record->vector_opacity,    29);
+        $this->assertEquals($record->fill_color,        '26');
+        $this->assertEquals($record->select_color,      '27');
+        $this->assertEquals($record->stroke_color,      '28');
+        $this->assertEquals($record->fill_opacity,      29);
         $this->assertEquals($record->select_opacity,    30);
         $this->assertEquals($record->stroke_opacity,    31);
         $this->assertEquals($record->stroke_width,      32);

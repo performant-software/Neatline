@@ -352,26 +352,26 @@ Neatline.module('Map', function(
     getStyleMap: function(record) {
 
       // Ensure integers.
-      var vectorOpacity = parseInt(record.get('vector_opacity'),  10);
+      var fillOpacity   = parseInt(record.get('fill_opacity'),    10);
       var selectOpacity = parseInt(record.get('select_opacity'),  10);
       var strokeOpacity = parseInt(record.get('stroke_opacity'),  10);
       var pointRadius   = parseInt(record.get('point_radius'),    10);
       var strokeWidth   = parseInt(record.get('stroke_width'),    10);
 
       // Decimal opacities.
-      vectorOpacity /= 100;
+      fillOpacity   /= 100;
       selectOpacity /= 100;
       strokeOpacity /= 100;
 
       return new OpenLayers.StyleMap({
         'default': new OpenLayers.Style({
-          fillColor:        record.get('vector_color'),
+          fillColor:        record.get('fill_color'),
           strokeColor:      record.get('stroke_color'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
-          fillOpacity:      vectorOpacity,
-          graphicOpacity:   vectorOpacity,
+          fillOpacity:      fillOpacity,
+          graphicOpacity:   fillOpacity,
           strokeOpacity:    strokeOpacity
         }),
         'select': new OpenLayers.Style({

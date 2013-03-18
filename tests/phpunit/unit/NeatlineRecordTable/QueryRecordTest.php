@@ -18,9 +18,7 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
 
     /**
      * --------------------------------------------------------------------
-     * `queryRecord` should retrieve the data record with a given id and
-     * construct an associative array that contains all of the information
-     * about the record needed by the front end application.
+     * `queryRecord` should fetch an individual record.
      * --------------------------------------------------------------------
      */
     public function testQueryRecord()
@@ -36,10 +34,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $record->coverage           = 'POINT(3 3)';
         $record->tags               = '4';
         $record->presenter          = '5';
-        $record->vector_color       = '6';
-        $record->stroke_color       = '7';
-        $record->select_color       = '8';
-        $record->vector_opacity     = 9;
+        $record->fill_color         = '6';
+        $record->select_color       = '7';
+        $record->stroke_color       = '8';
+        $record->fill_opacity       = 9;
         $record->select_opacity     = 10;
         $record->stroke_opacity     = 11;
         $record->stroke_width       = 12;
@@ -62,10 +60,10 @@ class Neatline_NeatlineRecordTableTest_QueryRecord
         $this->assertEquals($records['coverage'],           'POINT(3 3)');
         $this->assertEquals($records['tags'],               '4');
         $this->assertEquals($records['presenter'],          '5');
-        $this->assertEquals($records['vector_color'],       '6');
-        $this->assertEquals($records['stroke_color'],       '7');
-        $this->assertEquals($records['select_color'],       '8');
-        $this->assertEquals($records['vector_opacity'],     9);
+        $this->assertEquals($records['fill_color'],         '6');
+        $this->assertEquals($records['select_color'],       '7');
+        $this->assertEquals($records['stroke_color'],       '8');
+        $this->assertEquals($records['fill_opacity'],       9);
         $this->assertEquals($records['select_opacity'],     10);
         $this->assertEquals($records['stroke_opacity'],     11);
         $this->assertEquals($records['stroke_width'],       12);

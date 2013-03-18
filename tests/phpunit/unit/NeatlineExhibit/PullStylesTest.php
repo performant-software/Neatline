@@ -25,8 +25,8 @@ class Neatline_NeatlineExhibitTest_PullStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag1 {
-              vector-color: 1;
-              vector-opacity: 2;
+              fill-color: 1;
+              fill-opacity: 2;
             }
             .tag2 {
               stroke-color: 3;
@@ -38,9 +38,9 @@ class Neatline_NeatlineExhibitTest_PullStyles
             }
         ";
         $record = new NeatlineRecord($exhibit);
-        $record->vector_color = '7';
-        $record->vector_opacity = 8;
-        $record->stroke_color = '9';
+        $record->fill_color     = '7';
+        $record->fill_opacity   = 8;
+        $record->stroke_color   = '9';
         $record->stroke_opacity = 10;
         $record->tags = 'tag1,tag2';
 
@@ -50,8 +50,8 @@ class Neatline_NeatlineExhibitTest_PullStyles
 
             // `tag1` and `tag2` styles updated.
             'tag1' => array(
-                'vector_color' => '7',
-                'vector_opacity' => '8'
+                'fill_color' => '7',
+                'fill_opacity' => '8'
             ),
             'tag2' => array(
                 'stroke_color' => '9',
@@ -78,12 +78,12 @@ class Neatline_NeatlineExhibitTest_PullStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: 1;
+              fill-color: 1;
               invalid: value;
             }
         ";
         $record = new NeatlineRecord($exhibit);
-        $record->vector_color = '2';
+        $record->fill_color = '2';
         $record->tags = 'tag';
 
         // Pull styles.
@@ -92,7 +92,7 @@ class Neatline_NeatlineExhibitTest_PullStyles
 
             // Invalid property should be ignored.
             'tag' => array(
-                'vector_color' => '2',
+                'fill_color' => '2',
                 'invalid' => 'value'
             )
 
@@ -110,11 +110,11 @@ class Neatline_NeatlineExhibitTest_PullStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .all {
-              vector-color: 1;
+              fill-color: 1;
             }
         ";
         $record = new NeatlineRecord($exhibit);
-        $record->vector_color = '2';
+        $record->fill_color = '2';
 
         // Pull styles.
         $exhibit->pullStyles($record);
@@ -122,7 +122,7 @@ class Neatline_NeatlineExhibitTest_PullStyles
 
             // `all` selector should be updated.
             'all' => array(
-                'vector_color' => '2',
+                'fill_color' => '2',
             )
 
         ));

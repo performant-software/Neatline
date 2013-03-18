@@ -33,10 +33,10 @@ Neatline.module('Shared.Record', function(
       return {
         exhibit_id:     Neatline.global.exhibit.id,
         presenter:      'StaticBubble',
-        vector_color:   '#00aeff',
-        stroke_color:   '#000000',
+        fill_color:     '#00aeff',
         select_color:   '#00aeff',
-        vector_opacity: 30,
+        stroke_color:   '#000000',
+        fill_opacity:   30,
         stroke_opacity: 90,
         select_opacity: 50,
         point_radius:   10,

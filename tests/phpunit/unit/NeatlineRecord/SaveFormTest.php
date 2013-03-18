@@ -33,10 +33,10 @@ class Neatline_NeatlineRecordTest_SaveForm
             'map_focus'         => '6',
             'map_zoom'          => '7',
             'presenter'         => '8',
-            'vector_color'      => '9',
-            'stroke_color'      => '10',
-            'select_color'      => '11',
-            'vector_opacity'    => '12',
+            'fill_color'        => '9',
+            'select_color'      => '10',
+            'stroke_color'      => '11',
+            'fill_opacity'      => '12',
             'select_opacity'    => '13',
             'stroke_opacity'    => '14',
             'stroke_width'      => '15',
@@ -56,10 +56,10 @@ class Neatline_NeatlineRecordTest_SaveForm
         $this->assertEquals($record->map_focus,         '6');
         $this->assertEquals($record->map_zoom,          7);
         $this->assertEquals($record->presenter,         '8');
-        $this->assertEquals($record->vector_color,      '9');
-        $this->assertEquals($record->stroke_color,      '10');
-        $this->assertEquals($record->select_color,      '11');
-        $this->assertEquals($record->vector_opacity,    12);
+        $this->assertEquals($record->fill_color,        '9');
+        $this->assertEquals($record->select_color,      '10');
+        $this->assertEquals($record->stroke_color,      '11');
+        $this->assertEquals($record->fill_opacity,      12);
         $this->assertEquals($record->select_opacity,    13);
         $this->assertEquals($record->stroke_opacity,    14);
         $this->assertEquals($record->stroke_width,      15);
@@ -104,21 +104,21 @@ class Neatline_NeatlineRecordTest_SaveForm
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: 1;
+              fill-color: 1;
             }
         ";
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
         $record->tags = 'tag';
 
-        // Save form with new `vector_color`.
-        $record->saveForm(array('vector_color' => '2'));
+        // Save form with new `fill_color`.
+        $record->saveForm(array('fill_color' => '2'));
         $exhibit = $this->reload($exhibit);
 
         // Should update CSS.
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
             'tag' => array(
-                'vector_color' => '2'
+                'fill_color' => '2'
             )
         ));
 
@@ -135,7 +135,7 @@ class Neatline_NeatlineRecordTest_SaveForm
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: 1;
+              fill-color: 1;
             }
         ";
         $exhibit->save();
@@ -146,12 +146,12 @@ class Neatline_NeatlineRecordTest_SaveForm
         $record1->save();
         $record2->save();
 
-        // Save record 1 with new `vector_color`.
-        $record1->saveForm(array('vector_color' => '2'));
+        // Save record 1 with new `fill_color`.
+        $record1->saveForm(array('fill_color' => '2'));
         $record2 = $this->reload($record2);
 
         // Should update record 2.
-        $this->assertEquals($record2->vector_color, '2');
+        $this->assertEquals($record2->fill_color, '2');
 
     }
 
@@ -168,32 +168,32 @@ class Neatline_NeatlineRecordTest_SaveForm
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: 1;
+              fill-color: 1;
             }
         ";
         $exhibit->save();
 
         // Record 1 synchronized with CSS.
         $record1 = new NeatlineRecord($exhibit);
-        $record1->vector_color = '1';
+        $record1->fill_color = '1';
         $record1->tags = 'tag';
         $record1->save();
 
         // Record 2 not synchronized.
         $record2 = new NeatlineRecord($exhibit);
-        $record2->vector_color = '2';
+        $record2->fill_color = '2';
         $record2->save();
 
         // Add `tag` to record 2, along with un-synchronized style.
-        $record2->saveForm(array('tags' => 'tag', 'vector_color' => '2'));
+        $record2->saveForm(array('tags' => 'tag', 'fill_color' => '2'));
         $record1 = $this->reload($record1);
         $record2 = $this->reload($record2);
 
         // Record 1 should be unchanged.
-        $this->assertEquals($record1->vector_color, '1');
+        $this->assertEquals($record1->fill_color, '1');
 
         // Record 2 should pull `tag` styles.
-        $this->assertEquals($record2->vector_color, '1');
+        $this->assertEquals($record2->fill_color, '1');
 
     }
 

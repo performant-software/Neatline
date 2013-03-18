@@ -33,10 +33,10 @@ class Neatline_RecordsControllerTest_Post
             'coverage'          => 'POINT(4 4)',
             'tags'              => '5',
             'presenter'         => '6',
-            'vector_color'      => '7',
-            'stroke_color'      => '8',
-            'select_color'      => '9',
-            'vector_opacity'    => '10',
+            'fill_color'        => '7',
+            'select_color'      => '8',
+            'stroke_color'      => '9',
+            'fill_opacity'      => '10',
             'select_opacity'    => '11',
             'stroke_opacity'    => '12',
             'stroke_width'      => '13',
@@ -70,10 +70,10 @@ class Neatline_RecordsControllerTest_Post
         $this->assertEquals($record->coverage,          'POINT(4 4)');
         $this->assertEquals($record->tags,              '5');
         $this->assertEquals($record->presenter,         '6');
-        $this->assertEquals($record->vector_color,      '7');
-        $this->assertEquals($record->stroke_color,      '8');
-        $this->assertEquals($record->select_color,      '9');
-        $this->assertEquals($record->vector_opacity,    10);
+        $this->assertEquals($record->fill_color,        '7');
+        $this->assertEquals($record->select_color,      '8');
+        $this->assertEquals($record->stroke_color,      '9');
+        $this->assertEquals($record->fill_opacity,      10);
         $this->assertEquals($record->select_opacity,    11);
         $this->assertEquals($record->stroke_opacity,    12);
         $this->assertEquals($record->stroke_width,      13);

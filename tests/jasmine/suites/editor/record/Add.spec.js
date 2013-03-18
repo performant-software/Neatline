@@ -57,10 +57,10 @@ describe('Record Form Add', function() {
 
     // Model should have defined styles.
     expect(_.isString(record.get('presenter'))).      toBeTruthy();
-    expect(_.isString(record.get('vector_color'))).   toBeTruthy();
-    expect(_.isString(record.get('stroke_color'))).   toBeTruthy();
+    expect(_.isString(record.get('fill_color'))).     toBeTruthy();
     expect(_.isString(record.get('select_color'))).   toBeTruthy();
-    expect(_.isNumber(record.get('vector_opacity'))). toBeTruthy();
+    expect(_.isString(record.get('stroke_color'))).   toBeTruthy();
+    expect(_.isNumber(record.get('fill_opacity'))).   toBeTruthy();
     expect(_.isNumber(record.get('stroke_opacity'))). toBeTruthy();
     expect(_.isNumber(record.get('select_opacity'))). toBeTruthy();
     expect(_.isNumber(record.get('point_radius'))).   toBeTruthy();

@@ -165,13 +165,13 @@ class NeatlineRecord extends Neatline_AbstractRecord
      * on the parent exhibit is:
      *
      * .tag1 {
-     *   vector-color: #111111;
+     *   fill-color: #111111;
      * }
      * .tag2 {
      *   stroke-color: #222222;
      * }
      *
-     * And `array('tag1', 'tag2')` is passed, `vector_color` should be set
+     * And `array('tag1', 'tag2')` is passed, `fill_color` should be set
      * to '#111111' and `stroke_color` to '#222222'.
      *
      * @param array $tags An array of tags to pull.

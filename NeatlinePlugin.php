@@ -175,11 +175,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Add styles.
         // -----------
         self::addRecordField('presenter',       'VARCHAR(100) NULL');
-        self::addRecordField('vector_color',    'TINYTEXT NULL');
-        self::addRecordField('stroke_color',    'TINYTEXT NULL');
+        self::addRecordField('fill_color',      'TINYTEXT NULL');
         self::addRecordField('select_color',    'TINYTEXT NULL');
+        self::addRecordField('stroke_color',    'TINYTEXT NULL');
         self::addRecordField('point_image',     'TINYTEXT NULL');
-        self::addRecordField('vector_opacity',  'INT(10) UNSIGNED NULL');
+        self::addRecordField('fill_opacity',    'INT(10) UNSIGNED NULL');
         self::addRecordField('select_opacity',  'INT(10) UNSIGNED NULL');
         self::addRecordField('stroke_opacity',  'INT(10) UNSIGNED NULL');
         self::addRecordField('stroke_width',    'INT(10) UNSIGNED NULL');
@@ -302,10 +302,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         return array_merge($styles, array(
             'presenter',
-            'vector_color',
-            'stroke_color',
+            'fill_color',
             'select_color',
-            'vector_opacity',
+            'stroke_color',
+            'fill_opacity',
             'stroke_opacity',
             'select_opacity',
             'stroke_width',

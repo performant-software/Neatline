@@ -60,7 +60,7 @@ class Neatline_ExhibitsControllerTest_Put
 
         $values = array('styles' => "
             .tag {
-              vector-color: color;
+              fill-color: color;
             }
         ");
 
@@ -69,7 +69,7 @@ class Neatline_ExhibitsControllerTest_Put
 
         // `styles` column should be updated.
         $record = $this->__records->find($record->id);
-        $this->assertEquals($record->vector_color, 'color');
+        $this->assertEquals($record->fill_color, 'color');
 
     }
 

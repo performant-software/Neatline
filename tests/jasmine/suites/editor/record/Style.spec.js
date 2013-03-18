@@ -31,10 +31,10 @@ describe('Record Form Style Tab', function() {
 
     el = {
       presenter:      _t.vw.RECORD.$('select[name="presenter"]'),
-      vectorColor:    _t.vw.RECORD.$('input[name="vector-color"]'),
-      strokeColor:    _t.vw.RECORD.$('input[name="stroke-color"]'),
+      fillColor:      _t.vw.RECORD.$('input[name="fill-color"]'),
       selectColor:    _t.vw.RECORD.$('input[name="select-color"]'),
-      vectorOpacity:  _t.vw.RECORD.$('input[name="vector-opacity"]'),
+      strokeColor:    _t.vw.RECORD.$('input[name="stroke-color"]'),
+      fillOpacity:    _t.vw.RECORD.$('input[name="fill-opacity"]'),
       strokeOpacity:  _t.vw.RECORD.$('input[name="stroke-opacity"]'),
       selectOpacity:  _t.vw.RECORD.$('input[name="select-opacity"]'),
       strokeWidth:    _t.vw.RECORD.$('input[name="stroke-width"]'),
@@ -67,15 +67,15 @@ describe('Record Form Style Tab', function() {
   describe('shape color', function() {
 
     it('model `set`', function() {
-      _t.vw.RECORD.model.set('vector_color', '#ffffff');
+      _t.vw.RECORD.model.set('fill_color', '#ffffff');
     });
 
     it('input `change`', function() {
-      el.vectorColor.val('#ffffff').trigger('change');
+      el.fillColor.val('#ffffff').trigger('change');
     });
 
     it('input `keyup`', function() {
-      el.vectorColor.val('#ffffff').trigger('keyup');
+      el.fillColor.val('#ffffff').trigger('keyup');
     });
 
     afterEach(function() {
@@ -134,15 +134,15 @@ describe('Record Form Style Tab', function() {
   describe('shape opacity', function() {
 
     it('model `set`', function() {
-      _t.vw.RECORD.model.set('vector_opacity', 50);
+      _t.vw.RECORD.model.set('fill_opacity', 50);
     });
 
     it('should update on `change`', function() {
-      el.vectorOpacity.val(50).trigger('change');
+      el.fillOpacity.val(50).trigger('change');
     });
 
     it('should update on `keyup`', function() {
-      el.vectorOpacity.val(50).trigger('keyup');
+      el.fillOpacity.val(50).trigger('keyup');
     });
 
     afterEach(function() {

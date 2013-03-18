@@ -25,8 +25,8 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag1 {
-              vector-color: 1;
-              vector-opacity: 2;
+              fill-color: 1;
+              fill-opacity: 2;
             }
             .tag2 {
               stroke-color: 3;
@@ -46,16 +46,16 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record2 = $this->reload($record2);
 
         // Record 1 should have `tag1` styles.
-        $this->assertEquals($record1->vector_color, '1');
-        $this->assertEquals($record1->vector_opacity, 2);
+        $this->assertEquals($record1->fill_color, '1');
+        $this->assertEquals($record1->fill_opacity, 2);
         $this->assertNull($record1->stroke_color);
         $this->assertNull($record1->stroke_opacity);
 
         // Record 2 should have `tag2` styles.
         $this->assertEquals($record2->stroke_color, '3');
         $this->assertEquals($record2->stroke_opacity, 4);
-        $this->assertNull($record2->vector_color);
-        $this->assertNull($record2->vector_opacity);
+        $this->assertNull($record2->fill_color);
+        $this->assertNull($record2->fill_opacity);
 
     }
 
@@ -69,7 +69,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: color;
+              fill-color: color;
               stroke-color: auto;
             }
         ";
@@ -82,7 +82,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record = $this->reload($record);
 
         // Should ignore rules with `auto` value.
-        $this->assertEquals($record->vector_color, 'color');
+        $this->assertEquals($record->fill_color, 'color');
         $this->assertNull($record->stroke_color);
 
     }
@@ -97,7 +97,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: color;
+              fill-color: color;
               invalid: value;
             }
         ";
@@ -110,7 +110,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record = $this->reload($record);
 
         // Should ignore rules with non-style properties.
-        $this->assertEquals($record->vector_color, 'color');
+        $this->assertEquals($record->fill_color, 'color');
 
     }
 
@@ -124,7 +124,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .all {
-              vector-color: color;
+              fill-color: color;
             }
         ";
         $record1 = $this->__record($exhibit);
@@ -136,8 +136,8 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record2 = $this->reload($record2);
 
         // Both records should be updated.
-        $this->assertEquals($record1->vector_color, 'color');
-        $this->assertEquals($record2->vector_color, 'color');
+        $this->assertEquals($record1->fill_color, 'color');
+        $this->assertEquals($record2->fill_color, 'color');
 
     }
 
@@ -152,7 +152,7 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $exhibit2 = $this->__exhibit();
         $exhibit1->styles = "
             .tag {
-              vector-color: color;
+              fill-color: color;
             }
         ";
         $record1 = new NeatlineRecord($exhibit1);
@@ -168,8 +168,8 @@ class Neatline_NeatlineExhibitTest_PushStyles
         $record2 = $this->reload($record2);
 
         // Just exhibit 1 records should be updated.
-        $this->assertEquals($record1->vector_color, 'color');
-        $this->assertNull($record2->vector_color);
+        $this->assertEquals($record1->fill_color, 'color');
+        $this->assertNull($record2->fill_color);
 
     }
 

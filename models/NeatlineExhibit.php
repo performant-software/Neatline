@@ -79,12 +79,12 @@ class NeatlineExhibit extends Neatline_AbstractRecord
      * definitions in the `styles` CSS. For example, if `styles` is:
      *
      * .tag {
-     *   vector-color: #ffffff;
+     *   fill-color: #ffffff;
      *   stroke-color: auto;
      * }
      *
-     * The vector color on records tagged with `tag` will be updated to
-     * #ffffff, but the stroke color will be unchanged since no explicit
+     * The fill color on records tagged with `tag` will be updated to
+     * `#ffffff`, but the stroke color will be unchanged since no explicit
      * value is set in the CSS.
      */
     public function pushStyles()
@@ -133,16 +133,16 @@ class NeatlineExhibit extends Neatline_AbstractRecord
      * For example, if `styles` is:
      *
      * .tag {
-     *   vector-color: #111111;
+     *   fill-color: #111111;
      *   stroke-color: #222222;
      * }
      *
-     * And the passed record is tagged with `tag` has a `vector_color` of
+     * And the passed record is tagged with `tag` has a `fill_color` of
      * `#333333` and a `stroke_color` of `#444444`, the stylesheet should
      * be updated to:
      *
      * .tag {
-     *   vector-color: #333333;
+     *   fill-color: #333333;
      *   stroke-color: #444444;
      * }
      *

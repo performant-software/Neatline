@@ -25,8 +25,8 @@ class Neatline_NeatlineRecordTest_PullStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag1 {
-              vector-color: 1;
-              vector-opacity: 2;
+              fill-color: 1;
+              fill-opacity: 2;
             }
             .tag2 {
               stroke-color: 3;
@@ -46,8 +46,8 @@ class Neatline_NeatlineRecordTest_PullStyles
         $record = $this->reload($record);
 
         // Should pull `tag1` and `tag2`.
-        $this->assertEquals($record->vector_color, '1');
-        $this->assertEquals($record->vector_opacity, 2);
+        $this->assertEquals($record->fill_color, '1');
+        $this->assertEquals($record->fill_opacity, 2);
         $this->assertEquals($record->stroke_color, '3');
         $this->assertEquals($record->stroke_opacity, 4);
 
@@ -67,7 +67,7 @@ class Neatline_NeatlineRecordTest_PullStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: auto;
+              fill-color: auto;
             }
         ";
         $exhibit->save();
@@ -79,7 +79,7 @@ class Neatline_NeatlineRecordTest_PullStyles
         $record = $this->reload($record);
 
         // `auto` value should be ignored.
-        $this->assertNull($record->vector_color);
+        $this->assertNull($record->fill_color);
 
     }
 
@@ -93,7 +93,7 @@ class Neatline_NeatlineRecordTest_PullStyles
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
             .tag {
-              vector-color: color;
+              fill-color: color;
               invalid: value;
             }
         ";
@@ -106,7 +106,7 @@ class Neatline_NeatlineRecordTest_PullStyles
         $record = $this->reload($record);
 
         // Invalid property should be ignored.
-        $this->assertEquals($record->vector_color, 'color');
+        $this->assertEquals($record->fill_color, 'color');
 
     }
 
