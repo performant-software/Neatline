@@ -12,21 +12,6 @@
 
 
 /**
- * Global ajax loading notification.
- */
-$(function() {
-  $('#loader').
-    ajaxStart(function() {
-      $(this).show();
-    }).
-    ajaxStop(function() {
-      $(this).hide();
-    })
-  ;
-});
-
-
-/**
  * OpenLayers theme image source.
  */
 OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';

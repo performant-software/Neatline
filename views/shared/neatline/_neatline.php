@@ -15,7 +15,6 @@
 
 <div id="neatline">
   <?php echo $this->partial('neatline/_map.php'); ?>
-  <?php echo $this->partial('neatline/_loader.php'); ?>
 </div>
 
 <!-- JSON globals. -->
