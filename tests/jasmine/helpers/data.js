@@ -74,30 +74,30 @@ var _t = (function(_t) {
    * @return {Object}: A hash of elements.
    */
   _t.getRecordFormElements = function() {
-    var form = this.vw.RECORD.$el;
+    var form = this.vw.RECORD;
     return {
-      id:             form.find('p.lead span.id'),
-      titleHeader:    form.find('p.lead span.title'),
-      titleInput:     form.find('textarea[name="title"]'),
-      itemId:         form.find('input[name="item-id"]'),
-      body:           form.find('textarea[name="body"]'),
-      coverage:       form.find('textarea[name="coverage"]'),
-      tags:           form.find('input[name="tags"]'),
-      presenter:      form.find('select[name="presenter"]'),
-      fillColor:      form.find('input[name="fill-color"]'),
-      selectColor:    form.find('input[name="select-color"]'),
-      strokeColor:    form.find('input[name="stroke-color"]'),
-      fillOpacity:    form.find('input[name="fill-opacity"]'),
-      selectOpacity:  form.find('input[name="select-opacity"]'),
-      strokeOpacity:  form.find('input[name="stroke-opacity"]'),
-      imageOpacity:   form.find('input[name="image-opacity"]'),
-      strokeWidth:    form.find('input[name="stroke-width"]'),
-      pointRadius:    form.find('input[name="point-radius"]'),
-      minZoom:        form.find('input[name="min-zoom"]'),
-      maxZoom:        form.find('input[name="max-zoom"]'),
-      pointImage:     form.find('input[name="point-image"]'),
-      mapFocus:       form.find('input[name="map-focus"]'),
-      mapZoom:        form.find('input[name="map-zoom"]')
+      id:             form.$('p.lead span.id'),
+      titleHeader:    form.$('p.lead span.title'),
+      titleInput:     form.$('textarea[name="title"]'),
+      itemId:         form.$('input[name="item-id"]'),
+      body:           form.$('textarea[name="body"]'),
+      coverage:       form.$('textarea[name="coverage"]'),
+      tags:           form.$('input[name="tags"]'),
+      presenter:      form.$('select[name="presenter"]'),
+      fillColor:      form.$('input[name="fill-color"]'),
+      selectColor:    form.$('input[name="select-color"]'),
+      strokeColor:    form.$('input[name="stroke-color"]'),
+      fillOpacity:    form.$('input[name="fill-opacity"]'),
+      selectOpacity:  form.$('input[name="select-opacity"]'),
+      strokeOpacity:  form.$('input[name="stroke-opacity"]'),
+      imageOpacity:   form.$('input[name="image-opacity"]'),
+      strokeWidth:    form.$('input[name="stroke-width"]'),
+      pointRadius:    form.$('input[name="point-radius"]'),
+      minZoom:        form.$('input[name="min-zoom"]'),
+      maxZoom:        form.$('input[name="max-zoom"]'),
+      pointImage:     form.$('input[name="point-image"]'),
+      mapFocus:       form.$('input[name="map-focus"]'),
+      mapZoom:        form.$('input[name="map-zoom"]')
     };
   };
 

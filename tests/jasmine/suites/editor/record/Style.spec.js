@@ -29,25 +29,11 @@ describe('Record Form Style Tab', function() {
     _t.loadEditor();
     _t.showFirstRecordForm();
 
-    el = {
-      presenter:      _t.vw.RECORD.$('select[name="presenter"]'),
-      fillColor:      _t.vw.RECORD.$('input[name="fill-color"]'),
-      selectColor:    _t.vw.RECORD.$('input[name="select-color"]'),
-      strokeColor:    _t.vw.RECORD.$('input[name="stroke-color"]'),
-      fillOpacity:    _t.vw.RECORD.$('input[name="fill-opacity"]'),
-      strokeOpacity:  _t.vw.RECORD.$('input[name="stroke-opacity"]'),
-      selectOpacity:  _t.vw.RECORD.$('input[name="select-opacity"]'),
-      strokeWidth:    _t.vw.RECORD.$('input[name="stroke-width"]'),
-      pointRadius:    _t.vw.RECORD.$('input[name="point-radius"]'),
-      pointImage:     _t.vw.RECORD.$('input[name="point-image"]'),
-      minZoom:        _t.vw.RECORD.$('input[name="min-zoom"]'),
-      maxZoom:        _t.vw.RECORD.$('input[name="max-zoom"]'),
-      mapFocus:       _t.vw.RECORD.$('input[name="map-focus"]'),
-      mapZoom:        _t.vw.RECORD.$('input[name="map-zoom"]'),
+    el = _.extend(_t.getRecordFormElements(), {
       setMinZoom:     _t.vw.RECORD.$('a[name="set-min-zoom"]'),
       setMaxZoom:     _t.vw.RECORD.$('a[name="set-max-zoom"]'),
       setFocus:       _t.vw.RECORD.$('a[name="set-focus"]')
-    };
+    });
 
     model = _t.vw.MAP.editLayer.nModel;
 
