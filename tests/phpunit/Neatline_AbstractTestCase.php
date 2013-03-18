@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Base test case.
+ * Abstract test case.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,39 +12,8 @@
  */
 
 
-class Neatline_Test_AppTestCase extends Omeka_Test_AppTestCase
+class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
 {
-
-
-    /**
-     * Bootstrap the plugin.
-     */
-    public function setUp()
-    {
-
-        parent::setUp();
-
-        // Authenticate and set the current user.
-        $this->user = $this->db->getTable('User')->find(1);
-        $this->_authenticateUser($this->user);
-
-        // Install the plugin.
-        $pluginHelper = new Omeka_Test_Helper_Plugin;
-        $pluginHelper->setUp('Neatline');
-
-        // Get plugin tables.
-        $this->__exhibits = $this->db->getTable('NeatlineExhibit');
-        $this->__records  = $this->db->getTable('NeatlineRecord');
-
-        // Register widgets.
-        add_filter('neatline_widgets', '_nl_mockWidgets');
-
-        // Register layers.
-        Zend_Registry::set('layers',
-            NL_DIR . '/tests/phpunit/mocks/layers.json'
-        );
-
-    }
 
 
     /**

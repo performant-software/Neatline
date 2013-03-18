@@ -11,15 +11,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_BeforeSave
-    extends Neatline_Test_AppTestCase
+class NeatlineRecordTest_BeforeSave extends Neatline_TestCase
 {
 
 
     /**
      * `beforeSave` should compile `_title` and `_body`.
      */
-    public function testParentReferences()
+    public function testCompileFields()
     {
 
         $item = insert_item(array(), array(

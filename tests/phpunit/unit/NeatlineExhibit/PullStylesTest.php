@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTest_PullStyles
-    extends Neatline_Test_AppTestCase
+class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
 {
 
 

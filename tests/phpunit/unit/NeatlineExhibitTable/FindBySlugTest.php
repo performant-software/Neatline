@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTableTest_FindBySlug
-    extends Neatline_Test_AppTestCase
+class NeatlineExhibitTableTest_FindBySlug extends Neatline_TestCase
 {
 
 

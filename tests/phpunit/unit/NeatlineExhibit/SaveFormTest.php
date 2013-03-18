@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTest_SaveForm
-    extends Neatline_Test_AppTestCase
+class NeatlineExhibitTest_SaveForm extends Neatline_TestCase
 {
 
 

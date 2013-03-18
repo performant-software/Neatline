@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTest_HasWidget
-    extends Neatline_Test_AppTestCase
+class NeatlineExhibitTest_HasWidget extends Neatline_TestCase
 {
 
 

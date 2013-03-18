@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTableTest_QueryRecords
-    extends Neatline_Test_AppTestCase
+class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
 {
 
 

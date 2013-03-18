@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineExhibitTest_GetLayers
-    extends Neatline_Test_AppTestCase
+class HelpersTest_GetLayers extends Neatline_TestCase
 {
 
 

@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlinePluginTest_DropRecordField
-    extends Neatline_Test_AppTestCase
+class NeatlinePluginTest_DropRecordField extends Neatline_TestCase
 {
 
 

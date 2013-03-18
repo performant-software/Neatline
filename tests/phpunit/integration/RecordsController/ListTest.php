@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsControllerTest_List
-    extends Neatline_Test_AppTestCase
+class RecordsControllerTest_List extends Neatline_TestCase
 {
 
 

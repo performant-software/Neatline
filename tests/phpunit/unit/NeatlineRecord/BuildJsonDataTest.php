@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_NeatlineRecordTest_BuildJsonData
-    extends Neatline_Test_AppTestCase
+class NeatlineRecordTest_BuildJsonData extends Neatline_TestCase
 {
 
 

@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_ExhibitsControllerTest_Show
-    extends Neatline_Test_AppTestCase
+class ExhibitsControllerTest_Show extends Neatline_TestCase
 {
 
 
