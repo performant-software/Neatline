@@ -94,13 +94,13 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record2->fill_color        = '#555555';
         $record3->fill_color        = '#666666';
         // ----------------------------------------------------------------
-        $record1->stroke_color      = '#777777';
-        $record2->stroke_color      = '#888888';
-        $record3->stroke_color      = '#999999';
+        $record1->select_color      = '#777777';
+        $record2->select_color      = '#888888';
+        $record3->select_color      = '#999999';
         // ----------------------------------------------------------------
-        $record1->select_color      = '#101010';
-        $record2->select_color      = '#111111';
-        $record3->select_color      = '#121212';
+        $record1->stroke_color      = '#101010';
+        $record2->stroke_color      = '#111111';
+        $record3->stroke_color      = '#121212';
         // ----------------------------------------------------------------
         $record1->fill_opacity      = 13;
         $record2->fill_opacity      = 14;
@@ -271,8 +271,8 @@ class Neatline_RecordsJsonFixtureTest extends Neatline_Test_AppTestCase
         $record->map_zoom           = 10;
         $record->presenter          = 'StaticBubble';
         $record->fill_color         = '#111111';
-        $record->stroke_color       = '#222222';
-        $record->select_color       = '#333333';
+        $record->select_color       = '#222222';
+        $record->stroke_color       = '#333333';
         $record->fill_opacity       = 4;
         $record->select_opacity     = 5;
         $record->stroke_opacity     = 6;
