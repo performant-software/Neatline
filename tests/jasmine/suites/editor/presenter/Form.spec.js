@@ -37,18 +37,11 @@ describe('Presenter Form Interaction', function() {
     // presenter should be deactivated.
     // --------------------------------------------------------------------
 
-    // Select "Spatial".
-    el.spatial.tab('show');
-
-    // Close the form.
-    el.close.trigger('click');
-    _t.respondRecords();
-
     // Spy on trigger.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
-    // Reopen the form.
-    _t.showFirstRecordForm();
+    // Request record spatial tab.
+    _t.navigate('record/add/spatial');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
