@@ -159,6 +159,11 @@ module.exports = function(grunt) {
 
           // Vendor:
           cfg.vendor.js.jquery,
+          cfg.vendor.js.ui_core,
+          cfg.vendor.js.ui_widget,
+          cfg.vendor.js.ui_position,
+          cfg.vendor.js.ui_menu,
+          cfg.vendor.js.ui_autocomplete,
           cfg.vendor.js.underscore,
           cfg.vendor.js.underscore_s,
           cfg.vendor.js.backbone,
@@ -216,6 +221,7 @@ module.exports = function(grunt) {
       editor_css: {
         src: [
           '<%= concat.neatline_css.src %>',
+          cfg.vendor.css.jquery_ui,
           cfg.vendor.css.bootstrap,
           cfg.vendor.css.toastr,
           cfg.vendor.css.chosen,

@@ -30,13 +30,13 @@
 
   <?php echo common('neatline/textarea', array(
       'name'  => 'title',
-      'label' => 'Neatline Title',
+      'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
   <?php echo common('neatline/textarea', array(
       'name'  => 'body',
-      'label' => 'Neatline Body',
+      'label' => 'Body',
       'bind'  => 'record.body'
   )); ?>
 
