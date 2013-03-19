@@ -16,6 +16,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
   Style.View = Backbone.Neatline.View.extend({
 
+
     events: {
 
       // Tab change.

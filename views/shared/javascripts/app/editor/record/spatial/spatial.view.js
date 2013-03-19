@@ -16,6 +16,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
   Spatial.View = Backbone.Neatline.View.extend({
 
+
     events: {
 
       // Tab change.

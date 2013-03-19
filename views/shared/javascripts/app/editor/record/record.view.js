@@ -93,7 +93,6 @@ Neatline.module('Editor.Record', function(
      */
     activateTab: function(tab) {
       this.__ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
-      Neatline.vent.trigger('RECORD:newTab', tab);
     },
 
 
