@@ -24,14 +24,11 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
     {
 
         $exhibit    = $this->__exhibit();
-        $item1      = $this->__item();
-        $item2      = $this->__item();
+        $item1      = $this->__item('1');
+        $item2      = $this->__item('2');
         $record1    = new NeatlineRecord($exhibit, $item1);
         $record2    = new NeatlineRecord($exhibit, $item2);
 
-        //-----------------------------------------------------------------
-        $record1->item_title        = '1';
-        $record2->item_title        = '2';
         //-----------------------------------------------------------------
         $record1->added             = '2001-01-01';
         $record2->added             = '2002-01-01';

@@ -24,10 +24,9 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
     {
 
         $exhibit  = $this->__exhibit();
-        $item     = $this->__item();
+        $item     = $this->__item('1');
         $record   = new NeatlineRecord($exhibit, $item);
 
-        $record->item_title         = '1';
         $record->title              = '2';
         $record->body               = '3';
         $record->coverage           = 'POINT(4 4)';

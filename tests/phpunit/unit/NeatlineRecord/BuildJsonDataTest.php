@@ -22,9 +22,9 @@ class NeatlineRecordTest_BuildJsonData extends Neatline_TestCase
     public function testBuildJsonData()
     {
 
-        $exhibit  = $this->__exhibit();
-        $item     = $this->__item();
-        $record   = new NeatlineRecord($exhibit, $item);
+        $exhibit    = $this->__exhibit();
+        $item       = $this->__item('1');
+        $record     = new NeatlineRecord($exhibit, $item);
 
         $record->item_title         = '1';
         $record->title              = '2';

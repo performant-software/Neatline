@@ -16,6 +16,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     public $item_id;        // INT(10) UNSIGNED NULL
+    public $item_title;     // MEDIUMTEXT NULL
     public $exhibit_id;     // INT(10) UNSIGNED NULL
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
@@ -226,6 +227,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
         $item = get_record_by_id('Item', $this->item_id);
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
 
+        // Compile title and body.
         foreach ($fields as $src => $tar) {
 
             // `[item]`
@@ -248,6 +250,11 @@ class NeatlineRecord extends Neatline_AbstractRecord
                 $this->$tar);
 
         }
+
+        // Update the `item_title` field.
+        $this->item_title = metadata($item, array(
+            'Dublin Core', 'Title'
+        ));
 
     }
 

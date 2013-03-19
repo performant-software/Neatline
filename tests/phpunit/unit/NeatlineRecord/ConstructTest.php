@@ -18,7 +18,7 @@ class NeatlineRecordTest_Construct extends Neatline_TestCase
     /**
      * `__construct` should set foreign keys.
      */
-    public function testParentReferences()
+    public function testSetParentReferences()
     {
 
         $exhibit    = $this->__exhibit();
@@ -33,10 +33,9 @@ class NeatlineRecordTest_Construct extends Neatline_TestCase
 
 
     /**
-     * A record should not be associated with an item when an item is not
-     * passed to the constructor.
+     * The `item_id` reference should be null when no item is passed.
      */
-    public function testParentReferencesWithNoParentItem()
+    public function testNoItem()
     {
 
         $exhibit    = $this->__exhibit();

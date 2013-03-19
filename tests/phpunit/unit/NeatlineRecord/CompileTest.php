@@ -27,19 +27,11 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
 
     /**
      * `[item]` should be replaced with the full item metadata output.
-     * @group compile
      */
     public function testItem()
     {
 
-        $item = insert_item(array(), array(
-            'Dublin Core' => array (
-                'Title' => array(
-                    array('text' => 'title', 'html' => false)
-                )
-            )
-        ));
-
+        $item = $this->__item('title');
         $texts = all_element_texts($item);
         $src = "
             [item]
@@ -70,7 +62,6 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
 
     /**
      * `[item:"<element>"]` should be replaced with element text values.
-     * @group compile
      */
     public function testItemField()
     {
@@ -118,7 +109,6 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
 
     /**
      * `[item:files]` should be replaced with file display markup.
-     * @group compile
      */
     public function testItemFiles()
     {
@@ -157,9 +147,26 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
 
 
     /**
+     * The `item_title` field should be updated with the current Dublin
+     * Core "Title" field on the parent item.
+     */
+    public function testItemTitle()
+    {
+
+        $exhibit    = $this->__exhibit();
+        $item       = $this->__item('title');
+        $record     = new NeatlineRecord($exhibit, $item);
+        $record->compile();
+
+        // Item title should be set.
+        $this->assertEquals($record->item_title, 'title');
+
+    }
+
+
+    /**
      * When no `item_id` is set on the record, the raw fields should be
      * copied unchanged into the compiled fields.
-     * @group compile
      */
     public function testWithNoItemId()
     {

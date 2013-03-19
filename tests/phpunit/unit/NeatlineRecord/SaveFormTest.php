@@ -25,49 +25,47 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
 
         $record->saveForm(array(
             'item_id'           => '1',
-            'item_title'        => '2',
-            'title'             => '3',
-            'body'              => '4',
-            'coverage'          => 'POINT(5 5)',
-            'tags'              => '6',
-            'map_focus'         => '7',
-            'map_zoom'          => '8',
-            'presenter'         => '9',
-            'fill_color'        => '10',
-            'select_color'      => '11',
-            'stroke_color'      => '12',
-            'fill_opacity'      => '13',
-            'select_opacity'    => '14',
-            'stroke_opacity'    => '15',
-            'stroke_width'      => '16',
-            'point_radius'      => '17',
-            'point_image'       => '18',
-            'max_zoom'          => '19',
-            'min_zoom'          => '20'
+            'title'             => '2',
+            'body'              => '3',
+            'coverage'          => 'POINT(4 4)',
+            'tags'              => '5',
+            'map_focus'         => '6',
+            'map_zoom'          => '7',
+            'presenter'         => '8',
+            'fill_color'        => '9',
+            'select_color'      => '10',
+            'stroke_color'      => '11',
+            'fill_opacity'      => '12',
+            'select_opacity'    => '13',
+            'stroke_opacity'    => '14',
+            'stroke_width'      => '15',
+            'point_radius'      => '16',
+            'point_image'       => '17',
+            'max_zoom'          => '18',
+            'min_zoom'          => '19'
         ));
 
         $record = $this->__records->find($record->id);
 
         $this->assertEquals($record->item_id,           1);
-        $this->assertEquals($record->item_title,        '2');
-        $this->assertEquals($record->title,             '3');
-        $this->assertEquals($record->body,              '4');
-        $this->assertEquals($record->coverage,          'POINT(5 5)');
-        $this->assertEquals($record->tags,              '6');
-        $this->assertEquals($record->map_focus,         '7');
-        $this->assertEquals($record->map_zoom,          8);
-        $this->assertEquals($record->presenter,         '9');
-        $this->assertEquals($record->fill_color,        '10');
-        $this->assertEquals($record->select_color,      '11');
-        $this->assertEquals($record->stroke_color,      '12');
-        $this->assertEquals($record->fill_opacity,      13);
-        $this->assertEquals($record->select_opacity,    14);
-        $this->assertEquals($record->stroke_opacity,    15);
-        $this->assertEquals($record->stroke_width,      16);
-        $this->assertEquals($record->point_radius,      17);
-        $this->assertEquals($record->point_image,       '18');
-        $this->assertEquals($record->max_zoom,          19);
-        $this->assertEquals($record->min_zoom,          20);
+        $this->assertEquals($record->title,             '2');
+        $this->assertEquals($record->body,              '3');
+        $this->assertEquals($record->coverage,          'POINT(4 4)');
+        $this->assertEquals($record->tags,              '5');
+        $this->assertEquals($record->map_focus,         '6');
+        $this->assertEquals($record->map_zoom,          7);
+        $this->assertEquals($record->presenter,         '8');
+        $this->assertEquals($record->fill_color,        '9');
+        $this->assertEquals($record->select_color,      '10');
+        $this->assertEquals($record->stroke_color,      '11');
+        $this->assertEquals($record->fill_opacity,      12);
+        $this->assertEquals($record->select_opacity,    13);
+        $this->assertEquals($record->stroke_opacity,    14);
+        $this->assertEquals($record->stroke_width,      15);
+        $this->assertEquals($record->point_radius,      16);
+        $this->assertEquals($record->point_image,       '17');
+        $this->assertEquals($record->max_zoom,          18);
+        $this->assertEquals($record->min_zoom,          19);
 
     }
 

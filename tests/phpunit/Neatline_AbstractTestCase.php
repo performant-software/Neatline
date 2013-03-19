@@ -31,13 +31,18 @@ class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
     /**
      * Create an Item.
      *
+     * @param string $title The exhibit title.
      * @return Omeka_record $item The item.
      */
-    public function __item()
+    public function __item($title='test-title')
     {
-        $item = new Item;
-        $item->save();
-        return $item;
+        return $item = insert_item(array(), array(
+            'Dublin Core' => array (
+                'Title' => array(
+                    array('text' => $title, 'html' => false)
+                )
+            )
+        ));
     }
 
 
