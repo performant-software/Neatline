@@ -23,55 +23,56 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
     public function testQueryRecord()
     {
 
-        $exhibit = $this->__exhibit();
-        $item = $this->__item();
+        $exhibit  = $this->__exhibit();
+        $item     = $this->__item();
+        $record   = new NeatlineRecord($exhibit, $item);
 
-        $record = new NeatlineRecord($exhibit, $item);
-
-        $record->title              = '1';
-        $record->body               = '2';
-        $record->coverage           = 'POINT(3 3)';
-        $record->tags               = '4';
-        $record->presenter          = '5';
-        $record->fill_color         = '6';
-        $record->select_color       = '7';
-        $record->stroke_color       = '8';
-        $record->fill_opacity       = 9;
-        $record->select_opacity     = 10;
-        $record->stroke_opacity     = 11;
-        $record->stroke_width       = 12;
-        $record->point_radius       = 13;
-        $record->point_image        = '14';
-        $record->min_zoom           = 15;
-        $record->max_zoom           = 16;
-        $record->map_focus          = '17';
-        $record->map_zoom           = 18;
+        $record->item_title         = '1';
+        $record->title              = '2';
+        $record->body               = '3';
+        $record->coverage           = 'POINT(4 4)';
+        $record->tags               = '5';
+        $record->presenter          = '6';
+        $record->fill_color         = '7';
+        $record->select_color       = '8';
+        $record->stroke_color       = '9';
+        $record->fill_opacity       = 10;
+        $record->select_opacity     = 11;
+        $record->stroke_opacity     = 12;
+        $record->stroke_width       = 13;
+        $record->point_radius       = 14;
+        $record->point_image        = '15';
+        $record->min_zoom           = 16;
+        $record->max_zoom           = 17;
+        $record->map_focus          = '18';
+        $record->map_zoom           = 19;
         $record->save();
 
         $records = $this->__records->queryRecord($record->id);
 
         $this->assertEquals($records['id'],                 $record->id);
         $this->assertEquals($records['item_id'],            $item->id);
-        $this->assertEquals($records['title'],              '1');
-        $this->assertEquals($records['_title'],             '1');
-        $this->assertEquals($records['body'],               '2');
-        $this->assertEquals($records['_body'],              '2');
-        $this->assertEquals($records['coverage'],           'POINT(3 3)');
-        $this->assertEquals($records['tags'],               '4');
-        $this->assertEquals($records['presenter'],          '5');
-        $this->assertEquals($records['fill_color'],         '6');
-        $this->assertEquals($records['select_color'],       '7');
-        $this->assertEquals($records['stroke_color'],       '8');
-        $this->assertEquals($records['fill_opacity'],       9);
-        $this->assertEquals($records['select_opacity'],     10);
-        $this->assertEquals($records['stroke_opacity'],     11);
-        $this->assertEquals($records['stroke_width'],       12);
-        $this->assertEquals($records['point_radius'],       13);
-        $this->assertEquals($records['point_image'],        '14');
-        $this->assertEquals($records['min_zoom'],           15);
-        $this->assertEquals($records['max_zoom'],           16);
-        $this->assertEquals($records['map_focus'],          '17');
-        $this->assertEquals($records['map_zoom'],           18);
+        $this->assertEquals($records['item_title'],         '1');
+        $this->assertEquals($records['title'],              '2');
+        $this->assertEquals($records['_title'],             '2');
+        $this->assertEquals($records['body'],               '3');
+        $this->assertEquals($records['_body'],              '3');
+        $this->assertEquals($records['coverage'],           'POINT(4 4)');
+        $this->assertEquals($records['tags'],               '5');
+        $this->assertEquals($records['presenter'],          '6');
+        $this->assertEquals($records['fill_color'],         '7');
+        $this->assertEquals($records['select_color'],       '8');
+        $this->assertEquals($records['stroke_color'],       '9');
+        $this->assertEquals($records['fill_opacity'],       10);
+        $this->assertEquals($records['select_opacity'],     11);
+        $this->assertEquals($records['stroke_opacity'],     12);
+        $this->assertEquals($records['stroke_width'],       13);
+        $this->assertEquals($records['point_radius'],       14);
+        $this->assertEquals($records['point_image'],        '15');
+        $this->assertEquals($records['min_zoom'],           16);
+        $this->assertEquals($records['max_zoom'],           17);
+        $this->assertEquals($records['map_focus'],          '18');
+        $this->assertEquals($records['map_zoom'],           19);
 
     }
 
