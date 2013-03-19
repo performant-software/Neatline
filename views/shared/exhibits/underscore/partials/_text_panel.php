@@ -16,7 +16,7 @@
 <div class="control-group">
 
   <?php echo common('neatline/input', array(
-      'placeholder' => 'Search Items',
+      'placeholder' => 'Search Omeka Items',
       'name'  => 'item-title',
       'label' => 'Omeka Title',
       'bind'  => 'record.item_title'
@@ -24,7 +24,7 @@
 
   <?php echo common('neatline/input', array(
       'name'  => 'item-id',
-      'label' => 'Omeka ID',
+      'label' => 'Item ID',
       'bind'  => 'record.item_id'
   )); ?>
 
