@@ -17,8 +17,21 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   Text.View = Backbone.Neatline.View.extend({
 
 
+    events: {
+      'shown ul.nav a': 'onTabChange',
+    },
+
     ui: {
-      item: 'input[name="item-id"]',
+      itemTitle:  'input[name="item-title"]',
+      itemId:     'input[name="item-id"]'
+    },
+
+
+    /**
+     * Instantiate Chosen.
+     */
+    onTabChange: function() {
+
     }
 
 

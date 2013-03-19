@@ -23,6 +23,7 @@
   <div class="inline-inputs">
     <input
       type="<?php echo isset($type) ? $type : 'text'; ?>"
+      <?php if (isset($placeholder)) echo "placeholder='$placeholder'"; ?>
       <?php if (isset($name)) echo "name='$name'"; ?>
       <?php if (isset($class)) echo "class='$class'"; ?>
       <?php if (isset($bind)) echo "data-value='$bind'"; ?>
