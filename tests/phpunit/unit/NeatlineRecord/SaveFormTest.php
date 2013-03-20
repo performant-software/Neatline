@@ -16,57 +16,64 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
 
 
     /**
-     * `saveForm` should update fields to match the input array.
+     * `saveForm` should mass assign the input array to the record.
      */
-    public function testUpdate()
+    public function testFieldAssignment()
     {
 
         $record = $this->__record();
 
         $record->saveForm(array(
-            'item_id'           => '1',
-            'title'             => '2',
-            'body'              => '3',
-            'coverage'          => 'POINT(4 4)',
-            'tags'              => '5',
-            'map_focus'         => '6',
-            'map_zoom'          => '7',
-            'presenter'         => '8',
-            'fill_color'        => '9',
-            'select_color'      => '10',
-            'stroke_color'      => '11',
-            'fill_opacity'      => '12',
-            'select_opacity'    => '13',
-            'stroke_opacity'    => '14',
-            'stroke_width'      => '15',
-            'point_radius'      => '16',
-            'point_image'       => '17',
-            'max_zoom'          => '18',
-            'min_zoom'          => '19'
+            'title'             => '1',
+            'body'              => '2',
+            'coverage'          => 'POINT(3 3)',
+            'tags'              => '4',
+            'map_focus'         => '5',
+            'map_zoom'          => '6',
+            'presenter'         => '7',
+            'fill_color'        => '8',
+            'select_color'      => '9',
+            'stroke_color'      => '10',
+            'fill_opacity'      => '11',
+            'select_opacity'    => '12',
+            'stroke_opacity'    => '13',
+            'stroke_width'      => '14',
+            'point_radius'      => '15',
+            'point_image'       => '16',
+            'max_zoom'          => '17',
+            'min_zoom'          => '18'
         ));
 
-        $record = $this->__records->find($record->id);
+        $this->assertEquals($record->title,             '1');
+        $this->assertEquals($record->body,              '2');
+        $this->assertEquals($record->coverage,          'POINT(3 3)');
+        $this->assertEquals($record->tags,              '4');
+        $this->assertEquals($record->map_focus,         '5');
+        $this->assertEquals($record->map_zoom,          6);
+        $this->assertEquals($record->presenter,         '7');
+        $this->assertEquals($record->fill_color,        '8');
+        $this->assertEquals($record->select_color,      '9');
+        $this->assertEquals($record->stroke_color,      '10');
+        $this->assertEquals($record->fill_opacity,      11);
+        $this->assertEquals($record->select_opacity,    12);
+        $this->assertEquals($record->stroke_opacity,    13);
+        $this->assertEquals($record->stroke_width,      14);
+        $this->assertEquals($record->point_radius,      15);
+        $this->assertEquals($record->point_image,       '16');
+        $this->assertEquals($record->max_zoom,          17);
+        $this->assertEquals($record->min_zoom,          18);
 
-        $this->assertEquals($record->item_id,           1);
-        $this->assertEquals($record->title,             '2');
-        $this->assertEquals($record->body,              '3');
-        $this->assertEquals($record->coverage,          'POINT(4 4)');
-        $this->assertEquals($record->tags,              '5');
-        $this->assertEquals($record->map_focus,         '6');
-        $this->assertEquals($record->map_zoom,          7);
-        $this->assertEquals($record->presenter,         '8');
-        $this->assertEquals($record->fill_color,        '9');
-        $this->assertEquals($record->select_color,      '10');
-        $this->assertEquals($record->stroke_color,      '11');
-        $this->assertEquals($record->fill_opacity,      12);
-        $this->assertEquals($record->select_opacity,    13);
-        $this->assertEquals($record->stroke_opacity,    14);
-        $this->assertEquals($record->stroke_width,      15);
-        $this->assertEquals($record->point_radius,      16);
-        $this->assertEquals($record->point_image,       '17');
-        $this->assertEquals($record->max_zoom,          18);
-        $this->assertEquals($record->min_zoom,          19);
+    }
 
+
+    /**
+     * `saveForm` should assign the `item_id` field.
+     */
+    public function testItemId()
+    {
+        $record = $this->__record();
+        $record->saveForm(array('item_id' => '1'));
+        $this->assertEquals($record->item_id, 1);
     }
 
 
@@ -79,10 +86,10 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $record = $this->__record();
 
         // String field.
-        $record->saveForm(array('title' => ''));
-        $this->assertNull($record->title);
-        $record->saveForm(array('title' => ' '));
-        $this->assertNull($record->title);
+        $record->saveForm(array('fill_color' => ''));
+        $this->assertNull($record->body);
+        $record->saveForm(array('fill_color' => ' '));
+        $this->assertNull($record->body);
 
         // Number field.
         $record->saveForm(array('max_zoom' => ''));

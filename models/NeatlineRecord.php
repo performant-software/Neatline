@@ -204,12 +204,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
-     * Compile Omeka item references. Supported syntax:
-     *
-     * `[item]`
-     * `[item:"<element>"]`
-     * `[item:files]`
-     *
+     * Compile Omeka item references.
      */
     public function compile() {
 
@@ -220,7 +215,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
         $item = get_record_by_id('Item', $this->item_id);
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
 
-        // Update the `item_title` field.
+        // Pull the item title.
         $this->title = metadata($item, array(
             'Dublin Core', 'Title'
         ));
