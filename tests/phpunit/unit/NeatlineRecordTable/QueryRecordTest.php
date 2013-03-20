@@ -24,9 +24,10 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
     {
 
         $exhibit  = $this->__exhibit();
-        $item     = $this->__item('1');
+        $item     = $this->__item();
         $record   = new NeatlineRecord($exhibit, $item);
 
+        $record->title              = '1';
         $record->body               = '2';
         $record->coverage           = 'POINT(3 3)';
         $record->tags               = '4';
@@ -44,7 +45,7 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
         $record->max_zoom           = 16;
         $record->map_focus          = '17';
         $record->map_zoom           = 18;
-        $record->save();
+        $record->__save();
 
         $records = $this->__records->queryRecord($record->id);
 

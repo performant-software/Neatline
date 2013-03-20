@@ -76,7 +76,7 @@ class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
 
         // Create record.
         $record = new NeatlineRecord($exhibit, $item);
-        $record->save();
+        $record->__save();
         return $record;
 
     }

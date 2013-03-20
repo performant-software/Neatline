@@ -24,14 +24,17 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
     {
 
         $exhibit    = $this->__exhibit();
-        $item1      = $this->__item('1');
-        $item2      = $this->__item('2');
+        $item1      = $this->__item();
+        $item2      = $this->__item();
         $record1    = new NeatlineRecord($exhibit, $item1);
         $record2    = new NeatlineRecord($exhibit, $item2);
 
         //-----------------------------------------------------------------
         $record1->added             = '2001-01-01';
         $record2->added             = '2002-01-01';
+        //-----------------------------------------------------------------
+        $record1->title             = '1';
+        $record2->title             = '2';
         //-----------------------------------------------------------------
         $record1->body              = '3';
         $record2->body              = '4';
@@ -85,8 +88,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $record2->map_zoom          = 36;
         //-----------------------------------------------------------------
 
-        $record1->save();
-        $record2->save();
+        $record1->__save();
+        $record2->__save();
 
         // Query for records, alias `records`.
         $result = $this->__records->queryRecords($exhibit);

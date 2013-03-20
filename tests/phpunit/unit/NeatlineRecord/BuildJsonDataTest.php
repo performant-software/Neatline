@@ -23,9 +23,10 @@ class NeatlineRecordTest_BuildJsonData extends Neatline_TestCase
     {
 
         $exhibit    = $this->__exhibit();
-        $item       = $this->__item('1');
+        $item       = $this->__item();
         $record     = new NeatlineRecord($exhibit, $item);
 
+        $record->title              = '1';
         $record->body               = '2';
         $record->tags               = '3';
         $record->fill_color         = '4';
@@ -42,7 +43,7 @@ class NeatlineRecordTest_BuildJsonData extends Neatline_TestCase
         $record->map_focus          = '15';
         $record->map_zoom           = 16;
         $record->coverage           = 'POINT(17 17)';
-        $record->save();
+        $record->__save();
 
         $data = $record->buildJsonData();
 

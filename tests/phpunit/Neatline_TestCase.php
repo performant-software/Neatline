@@ -44,6 +44,10 @@ class Neatline_TestCase extends Neatline_AbstractTestCase
             NL_DIR . '/tests/phpunit/mocks/layers.json'
         );
 
+        // Register script paths.
+        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
+        get_view()->addScriptPath(NL_DIR . '/views/shared');
+
     }
 
 

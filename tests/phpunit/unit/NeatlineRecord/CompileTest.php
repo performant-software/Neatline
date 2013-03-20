@@ -21,7 +21,6 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
     public function setUp()
     {
         parent::setUp();
-        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
     }
 
 
@@ -35,6 +34,7 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
         $exhibit    = $this->__exhibit();
         $item       = $this->__item('title');
         $record     = new NeatlineRecord($exhibit, $item);
+
         $record->compile();
 
         // Title should be set.

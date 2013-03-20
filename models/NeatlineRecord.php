@@ -211,14 +211,41 @@ class NeatlineRecord extends Neatline_AbstractRecord
         // Break if no parent item.
         if (is_null($this->item_id)) return;
 
-        // Get the item, set view directory.
+        // Get the item, set on view.
         $item = get_record_by_id('Item', $this->item_id);
-        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
+        get_view()->item = $item;
 
-        // Pull the item title.
-        $this->title = metadata($item, array(
-            'Dublin Core', 'Title'
-        ));
+        // Pull title and body.
+        $this->title = metadata($item, array('Dublin Core', 'Title'));
+        $this->body = $this->getItemBody();
+
+    }
+
+
+    /**
+     * Compile the record's `body` field from the parent Omeka item.
+     */
+    public function getItemBody() {
+
+        $exhibit = $this->getExhibit();
+        $tags = _nl_explode($this->tags);
+
+        // `item-[slug]-[tag]`
+        foreach ($tags as $tag) { try {
+            return get_view()->partial(
+                'neatline/item-'.$exhibit->slug.'-'.$tag.'.php'
+            );
+        } catch (Exception $e) {}}
+
+        // `item-[slug]`
+        try {
+            return get_view()->partial(
+                'neatline/item-'.$exhibit->slug.'.php'
+            );
+        } catch (Exception $e) {}
+
+        // `item`
+        return get_view()->partial('neatline/item.php');
 
     }
 
