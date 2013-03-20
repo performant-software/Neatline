@@ -129,4 +129,33 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
     }
 
 
+    /**
+     * NULL record values should revert stylesheet rules to `auto`.
+     */
+    public function testNullRecordValues()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .all {
+              point-image: url;
+            }
+        ";
+        $record = new NeatlineRecord($exhibit);
+        $record->point_image = null;
+
+        // Pull styles.
+        $exhibit->pullStyles($record);
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+
+            // `point-image` should revert to `auto`.
+            'all' => array(
+                'point_image' => 'auto'
+            )
+
+        ));
+
+    }
+
+
 }

@@ -16,16 +16,10 @@
 <div class="control-group">
 
   <?php echo common('neatline/input', array(
-      'placeholder' => 'Search Omeka Items',
-      'name'  => 'item-title',
-      'label' => 'Omeka Title',
-      'bind'  => 'record.item_title'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
       'name'  => 'item-id',
-      'label' => 'Item ID',
-      'bind'  => 'record.item_id'
+      'label' => 'Omeka ID',
+      'bind'  => 'record.item_id',
+      'placeholder' => 'Search Omeka Items'
   )); ?>
 
   <?php echo common('neatline/textarea', array(
