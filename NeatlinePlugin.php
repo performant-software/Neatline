@@ -34,93 +34,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Add a column to a table.
-     *
-     * @param string $table The table name.
-     * @param string $name The column name.
-     * @param string $type The column definition.
-     */
-    private static function addField($table, $name, $type)
-    {
-
-        $_db = get_db();
-        $table = $_db->prefix.$table;
-
-        try {
-            $sql = "ALTER TABLE `{$table}` ADD COLUMN {$name} {$type}";
-            $_db->query($sql);
-        } catch (Exception $e) {}
-
-    }
-
-
-    /**
-     * Remove a column from a table.
-     *
-     * @param string $table The table name.
-     * @param string $name The column name.
-     */
-    private static function dropField($table, $name)
-    {
-
-        $_db = get_db();
-        $table = $_db->prefix.$table;
-
-        try {
-            $sql = "ALTER TABLE `{$table}` DROP COLUMN {$name}";
-            $_db->query($sql);
-        } catch (Exception $e) {}
-
-    }
-
-
-    /**
-     * Add a column to the exhibits table.
-     *
-     * @param string $name The column name.
-     * @param string $type The column definition.
-     */
-    public static function addExhibitField($name, $type)
-    {
-        self::addField('neatline_exhibits', $name, $type);
-    }
-
-
-    /**
-     * Remove a column from the exhibits table.
-     *
-     * @param string $name The column name.
-     */
-    public static function dropExhibitField($name)
-    {
-        self::dropField('neatline_exhibits', $name);
-    }
-
-
-    /**
-     * Add a column to the records table.
-     *
-     * @param string $name The column name.
-     * @param string $type The column definition.
-     */
-    public static function addRecordField($name, $type)
-    {
-        self::addField('neatline_records', $name, $type);
-    }
-
-
-    /**
-     * Remove a column from the records table.
-     *
-     * @param string $name The column name.
-     */
-    public static function dropRecordField($name)
-    {
-        self::dropField('neatline_records', $name);
-    }
-
-
-    /**
      * Create tables.
      */
     public function hookInstall()
@@ -162,6 +75,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `body`              MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `tags`              TEXT NULL,
+            `presenter`         VARCHAR(100) NULL,
+            `fill_color`        TINYTEXT NULL,
+            `select_color`      TINYTEXT NULL,
+            `stroke_color`      TINYTEXT NULL,
+            `point_image`       TINYTEXT NULL,
+            `fill_opacity`      INT(10) UNSIGNED NULL,
+            `select_opacity`    INT(10) UNSIGNED NULL,
+            `stroke_opacity`    INT(10) UNSIGNED NULL,
+            `stroke_width`      INT(10) UNSIGNED NULL,
+            `point_radius`      INT(10) UNSIGNED NULL,
+            `max_zoom`          INT(10) UNSIGNED NULL,
+            `min_zoom`          INT(10) UNSIGNED NULL,
+            `map_zoom`          INT(10) UNSIGNED NULL,
+            `map_focus`         VARCHAR(100) NULL,
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)
@@ -169,23 +96,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query($sql);
 
-
-        // Add styles.
-        // -----------
-        self::addRecordField('presenter',       'VARCHAR(100) NULL');
-        self::addRecordField('fill_color',      'TINYTEXT NULL');
-        self::addRecordField('select_color',    'TINYTEXT NULL');
-        self::addRecordField('stroke_color',    'TINYTEXT NULL');
-        self::addRecordField('point_image',     'TINYTEXT NULL');
-        self::addRecordField('fill_opacity',    'INT(10) UNSIGNED NULL');
-        self::addRecordField('select_opacity',  'INT(10) UNSIGNED NULL');
-        self::addRecordField('stroke_opacity',  'INT(10) UNSIGNED NULL');
-        self::addRecordField('stroke_width',    'INT(10) UNSIGNED NULL');
-        self::addRecordField('point_radius',    'INT(10) UNSIGNED NULL');
-        self::addRecordField('max_zoom',        'INT(10) UNSIGNED NULL');
-        self::addRecordField('min_zoom',        'INT(10) UNSIGNED NULL');
-        self::addRecordField('map_zoom',        'INT(10) UNSIGNED NULL');
-        self::addRecordField('map_focus',       'VARCHAR(100) NULL');
 
     }
 

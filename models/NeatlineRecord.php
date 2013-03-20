@@ -23,6 +23,20 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $body;           // MEDIUMTEXT NULL
     public $coverage;       // GEOMETRY NOT NULL
     public $tags;           // TEXT NULL
+    public $presenter;      // VARCHAR(100) NULL
+    public $fill_color;     // TINYTEXT NULL
+    public $select_color;   // TINYTEXT NULL
+    public $stroke_color;   // TINYTEXT NULL
+    public $point_image;    // TINYTEXT NULL
+    public $fill_opacity;   // INT(10) UNSIGNED NULL
+    public $select_opacity; // INT(10) UNSIGNED NULL
+    public $stroke_opacity; // INT(10) UNSIGNED NULL
+    public $stroke_width;   // INT(10) UNSIGNED NULL
+    public $point_radius;   // INT(10) UNSIGNED NULL
+    public $max_zoom;       // INT(10) UNSIGNED NULL
+    public $min_zoom;       // INT(10) UNSIGNED NULL
+    public $map_zoom;       // INT(10) UNSIGNED NULL
+    public $map_focus;      // VARCHAR(100) NULL
 
 
     private $styles = array();
@@ -39,30 +53,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
         parent::__construct();
         if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
         if (!is_null($item)) $this->item_id = $item->id;
-    }
-
-
-    /**
-     * Add a key-value pair to `styles`.
-     *
-     * @param string $name The attribute name.
-     * @param mixed $value The value.
-     */
-    public function __set($name, $value)
-    {
-        $this->styles[$name] = $value;
-    }
-
-
-    /**
-     * Get style property.
-     *
-     * @param string $name The attribute name.
-     * @param mixed $name The value.
-     */
-    public function __get($name)
-    {
-        return $this->styles[$name];
     }
 
 
