@@ -26,10 +26,10 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
 
 
     /**
-     * The `item_title` field should be updated with the current Dublin
-     * Core "Title" field on the parent item.
+     * The `title` field should be updated with the current Dublin Core
+     * "Title" field on the parent item.
      */
-    public function testItemTitle()
+    public function testTitle()
     {
 
         $exhibit    = $this->__exhibit();
@@ -37,8 +37,8 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
         $record     = new NeatlineRecord($exhibit, $item);
         $record->compile();
 
-        // Item title should be set.
-        $this->assertEquals($record->item_title, 'title');
+        // Title should be set.
+        $this->assertEquals($record->title, 'title');
 
     }
 

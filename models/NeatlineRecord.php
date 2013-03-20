@@ -16,7 +16,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     public $item_id;        // INT(10) UNSIGNED NULL
-    public $item_title;     // MEDIUMTEXT NULL
     public $exhibit_id;     // INT(10) UNSIGNED NULL
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
@@ -32,8 +31,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
     /**
      * Set foreign keys.
      *
-     * @param Omeka_record $item The item record.
-     * @param Omeka_record $exhibit The exhibit record.
+     * @param Item $item The item record.
+     * @param NeatlineExhibit $exhibit The exhibit record.
      */
     public function __construct($exhibit = null, $item = null)
     {
@@ -222,7 +221,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
 
         // Update the `item_title` field.
-        $this->item_title = metadata($item, array(
+        $this->title = metadata($item, array(
             'Dublin Core', 'Title'
         ));
 

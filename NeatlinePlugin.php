@@ -155,7 +155,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_records` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `item_id`           INT(10) UNSIGNED NULL,
-            `item_title`        MEDIUMTEXT NULL,
             `exhibit_id`        INT(10) UNSIGNED NULL,
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,

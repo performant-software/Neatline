@@ -73,7 +73,7 @@ class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
 
         // Get exhibit and item.
         if (is_null($exhibit)) $exhibit = $this->__exhibit();
-        if (is_null($item)) $item = $this->__item();
+        // if (is_null($item)) $item = $this->__item();
 
         // Create record.
         $record = new NeatlineRecord($exhibit, $item);

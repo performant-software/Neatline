@@ -19,7 +19,6 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
    * tab is active.
    */
   var bind = function() {
-    Spatial.__view.setPresenterStatus();
     Spatial.__view.resetEditMode();
   };
   Neatline.commands.addHandler('SPATIAL:bind', bind);
