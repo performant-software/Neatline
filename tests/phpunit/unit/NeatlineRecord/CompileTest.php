@@ -16,29 +16,34 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
 
 
     /**
-     * Set the view script path.
+     * Register the mock script path.
      */
     public function setUp()
     {
         parent::setUp();
+        get_view()->addScriptPath(NL_DIR . '/tests/phpunit/mocks/tmpl');
     }
 
 
     /**
-     * The `title` field should be updated with the current Dublin Core
-     * "Title" field on the parent item.
+     * `compile` should write the DC "Title" element on the parent item to
+     * `title` and the compiled metadata output to `body`.
+     *
+     * should be updated with the current Dublin Core
+     * "Title" field on the parent item and the `body` field should be set.
      */
-    public function testTitle()
+    public function testCompile()
     {
 
         $exhibit    = $this->__exhibit();
         $item       = $this->__item('title');
-        $record     = new NeatlineRecord($exhibit, $item);
 
+        $record = new NeatlineRecord($exhibit, $item);
         $record->compile();
 
-        // Title should be set.
+        // Title and body should be set.
         $this->assertEquals($record->title, 'title');
+        $this->assertRegExp('/item/', $record->getItemBody());
 
     }
 

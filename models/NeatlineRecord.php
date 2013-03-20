@@ -230,21 +230,21 @@ class NeatlineRecord extends Neatline_AbstractRecord
         $exhibit = $this->getExhibit();
         $tags = _nl_explode($this->tags);
 
-        // `item-[slug]-[tag]`
+        // Match `item-[slug]-[tag]`.
         foreach ($tags as $tag) { try {
             return get_view()->partial(
                 'neatline/item-'.$exhibit->slug.'-'.$tag.'.php'
             );
         } catch (Exception $e) {}}
 
-        // `item-[slug]`
+        // Match `item-[slug]`.
         try {
             return get_view()->partial(
                 'neatline/item-'.$exhibit->slug.'.php'
             );
         } catch (Exception $e) {}
 
-        // `item`
+        // Revert to default `item`.
         return get_view()->partial('neatline/item.php');
 
     }
