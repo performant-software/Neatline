@@ -59,7 +59,7 @@ describe('Search Map Mirroring', function() {
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('_Record0');
+    expect($(recordRows[1]).find('.title')).toHaveText('Record0');
     expect(recordRows.length).toEqual(2);
 
     // No pagination.
@@ -88,7 +88,7 @@ describe('Search Map Mirroring', function() {
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('_Record0');
+    expect($(recordRows[1]).find('.title')).toHaveText('Record0');
     expect(recordRows.length).toEqual(2);
 
     // No pagination.
@@ -113,8 +113,8 @@ describe('Search Map Mirroring', function() {
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('_Record1');
-    expect($(recordRows[2]).find('.title')).toHaveText('_Record0');
+    expect($(recordRows[1]).find('.title')).toHaveText('Record1');
+    expect($(recordRows[2]).find('.title')).toHaveText('Record0');
     expect(recordRows.length).toEqual(3);
 
     // No pagination.
@@ -145,9 +145,9 @@ describe('Search Map Mirroring', function() {
 
     // Record list should not synchronize with the map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('_title1');
-    expect($(recordRows[2]).find('.title')).toHaveText('_title2');
-    expect($(recordRows[3]).find('.title')).toHaveText('_title3');
+    expect($(recordRows[1]).find('.title')).toHaveText('title1');
+    expect($(recordRows[2]).find('.title')).toHaveText('title2');
+    expect($(recordRows[3]).find('.title')).toHaveText('title3');
     expect(recordRows.length).toEqual(4);
 
     // Pagination visible.
@@ -177,9 +177,9 @@ describe('Search Map Mirroring', function() {
 
     // Record list should not synchronize with the map.
     var recordRows = _t.getRecordRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('_title1');
-    expect($(recordRows[2]).find('.title')).toHaveText('_title2');
-    expect($(recordRows[3]).find('.title')).toHaveText('_title3');
+    expect($(recordRows[1]).find('.title')).toHaveText('title1');
+    expect($(recordRows[2]).find('.title')).toHaveText('title2');
+    expect($(recordRows[3]).find('.title')).toHaveText('title3');
     expect(recordRows.length).toEqual(4);
 
     // Pagination visible.

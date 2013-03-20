@@ -32,9 +32,7 @@ function records(exhibit_id, count, zoom, color, tags) {
   var sql = 'INSERT INTO omeka_neatline_records (' +
       'exhibit_id,'+
       'title,'+
-      '_title,'+
       'body,'+
-      '_body,'+
       'tags,'+
       'presenter,'+
       'fill_color,'+
@@ -62,8 +60,6 @@ function records(exhibit_id, count, zoom, color, tags) {
     sql += '(' +
       exhibit_id+','+
       '"Record'+n+'",'+
-      '"Record'+n+'",'+
-      '"'+bod+'",'+
       '"'+bod+'",'+
       '"'+tags+'",'+
       '"StaticBubble",'+

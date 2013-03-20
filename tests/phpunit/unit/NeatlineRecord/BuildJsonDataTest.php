@@ -52,9 +52,7 @@ class NeatlineRecordTest_BuildJsonData extends Neatline_TestCase
         $this->assertEquals($data['item_id'],           $item->id);
         $this->assertEquals($data['item_title'],        '1');
         $this->assertEquals($data['title'],             '2');
-        $this->assertEquals($data['_title'],            '2');
         $this->assertEquals($data['body'],              '3');
-        $this->assertEquals($data['_body'],             '3');
         $this->assertEquals($data['tags'],              '4');
         $this->assertEquals($data['fill_color'],        '5');
         $this->assertEquals($data['select_color'],      '6');

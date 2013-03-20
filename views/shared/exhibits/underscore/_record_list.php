@@ -33,8 +33,8 @@
 
         <!-- Title. -->
         <span class="title">
-          <% if (!_.isEmpty(r.get('_title'))) { %>
-            <%= _.string.stripTags(r.get('_title')) %>
+          <% if (!_.isEmpty(r.get('title'))) { %>
+            <%= _.string.stripTags(r.get('title')) %>
           <% } else { %>
             <%= STRINGS.placeholders.title %>
           <% } %>
@@ -42,7 +42,7 @@
 
         <!-- Body. -->
         <span class="body">
-          <%= _.string.stripTags(r.get('_body')) %>
+          <%= _.string.stripTags(r.get('body')) %>
         </span>
 
       </a>

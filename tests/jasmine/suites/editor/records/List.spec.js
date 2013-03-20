@@ -29,12 +29,12 @@ describe('Records List', function() {
     var recordRows = _t.getRecordRows();
 
     // Titles and bodies should be listed.
-    expect($(recordRows[1]).find('.title')).toHaveText('_title1');
-    expect($(recordRows[1]).find('.body')).toHaveText('_body1');
-    expect($(recordRows[2]).find('.title')).toHaveText('_title2');
-    expect($(recordRows[2]).find('.body')).toHaveText('_body2');
-    expect($(recordRows[3]).find('.title')).toHaveText('_title3');
-    expect($(recordRows[3]).find('.body')).toHaveText('_body3');
+    expect($(recordRows[1]).find('.title')).toHaveText('title1');
+    expect($(recordRows[1]).find('.body')).toHaveText('body1');
+    expect($(recordRows[2]).find('.title')).toHaveText('title2');
+    expect($(recordRows[2]).find('.body')).toHaveText('body2');
+    expect($(recordRows[3]).find('.title')).toHaveText('title3');
+    expect($(recordRows[3]).find('.body')).toHaveText('body3');
 
     // Should link to new record.
     expect($(recordRows[0]).attr('href')).toEqual('#record/add');

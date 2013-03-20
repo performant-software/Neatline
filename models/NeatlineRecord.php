@@ -21,9 +21,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
     public $title;          // MEDIUMTEXT NULL
-    public $_title;         // MEDIUMTEXT NULL
     public $body;           // MEDIUMTEXT NULL
-    public $_body;          // MEDIUMTEXT NULL
     public $coverage;       // GEOMETRY NOT NULL
     public $tags;           // TEXT NULL
 
@@ -216,40 +214,12 @@ class NeatlineRecord extends Neatline_AbstractRecord
      */
     public function compile() {
 
-        // Copy raw -> compiled.
-        $fields = array('title' => '_title', 'body' => '_body');
-        foreach ($fields as $s => $t) $this->$t = $this->$s;
-
         // Break if no parent item.
         if (is_null($this->item_id)) return;
 
         // Get the item, set view directory.
         $item = get_record_by_id('Item', $this->item_id);
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
-
-        // Compile title and body.
-        foreach ($fields as $src => $tar) {
-
-            // `[item]`
-            $texts = all_element_texts($item);
-            $this->$tar = str_replace('[item]', $texts, $this->$tar);
-
-            // `[item:"<element>"]`
-            $re = "/\[item:\"(?P<el>[a-zA-Z\s]+)\"\]/";
-            preg_match_all($re, $this->$tar, $matches);
-
-            foreach ($matches['el'] as $el) {
-                $text = metadata($item, array('Dublin Core', $el));
-                $re = "/\[item:\"{$el}\"\]/";
-                $this->$tar = preg_replace($re, $text, $this->$tar);
-            }
-
-            // `[item:files]`
-            $files = files_for_item(array(), array(), $item);
-            $this->$tar = str_replace('[item:files]', $files,
-                $this->$tar);
-
-        }
 
         // Update the `item_title` field.
         $this->item_title = metadata($item, array(

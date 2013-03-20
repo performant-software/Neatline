@@ -52,8 +52,8 @@ describe('Static Bubble', function() {
     _t.hoverOnMapFeature(feature1);
 
     // Title and body should be rendered.
-    expect(el.title.text()).toEqual('_title1');
-    expect(el.body.text()).toEqual('_body1');
+    expect(el.title.text()).toEqual('title1');
+    expect(el.body.text()).toEqual('body1');
 
     // Bubble should be injected into map.
     expect(_t.vw.MAP.$el).toContain(_t.vw.BUBBLE.$el);
@@ -190,8 +190,8 @@ describe('Static Bubble', function() {
     _t.hoverOnMapFeature(feature2);
 
     // Bubble values should be unchanged.
-    expect(el.title.text()).toEqual('_title1');
-    expect(el.body.text()).toEqual('_body1');
+    expect(el.title.text()).toEqual('title1');
+    expect(el.body.text()).toEqual('body1');
 
   });
 
@@ -211,8 +211,8 @@ describe('Static Bubble', function() {
     _t.clickOnMapFeature(feature2);
 
     // Bubble values should change.
-    expect(el.title.text()).toEqual('_title2');
-    expect(el.body.text()).toEqual('_body2');
+    expect(el.title.text()).toEqual('title2');
+    expect(el.body.text()).toEqual('body2');
 
   });
 
@@ -241,8 +241,8 @@ describe('Static Bubble', function() {
       _t.hoverOnMapFeature(feature2);
 
       // Bubble values should be changed.
-      expect(el.title.text()).toEqual('_title2');
-      expect(el.body.text()).toEqual('_body2');
+      expect(el.title.text()).toEqual('title2');
+      expect(el.body.text()).toEqual('body2');
 
     });
 

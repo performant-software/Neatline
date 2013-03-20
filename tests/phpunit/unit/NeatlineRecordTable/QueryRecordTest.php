@@ -53,9 +53,7 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
         $this->assertEquals($records['item_id'],            $item->id);
         $this->assertEquals($records['item_title'],         '1');
         $this->assertEquals($records['title'],              '2');
-        $this->assertEquals($records['_title'],             '2');
         $this->assertEquals($records['body'],               '3');
-        $this->assertEquals($records['_body'],              '3');
         $this->assertEquals($records['coverage'],           'POINT(4 4)');
         $this->assertEquals($records['tags'],               '5');
         $this->assertEquals($records['presenter'],          '6');

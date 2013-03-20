@@ -83,7 +83,7 @@ describe('Search Initialization', function() {
       var firstRecord = _t.getRecordRows()[1];
 
       // Record list should be updated.
-      expect($(firstRecord).find('.title')).toHaveText('_Record0');
+      expect($(firstRecord).find('.title')).toHaveText('Record0');
 
     });
 

@@ -160,13 +160,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
             `title`             MEDIUMTEXT NULL,
-            `_title`            MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,
-            `_body`             MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `tags`              TEXT NULL,
              PRIMARY KEY        (`id`),
-             FULLTEXT KEY       (`_title`, `_body`),
+             FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 

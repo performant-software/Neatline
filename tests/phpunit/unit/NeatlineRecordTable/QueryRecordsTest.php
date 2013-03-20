@@ -103,9 +103,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[0]['item_id'],         $item2->id);
         $this->assertEquals($records[0]['item_title'],      '2');
         $this->assertEquals($records[0]['title'],           '4');
-        $this->assertEquals($records[0]['_title'],          '4');
         $this->assertEquals($records[0]['body'],            '6');
-        $this->assertEquals($records[0]['_body'],           '6');
         $this->assertEquals($records[0]['coverage'],        'POINT(8 8)');
         $this->assertEquals($records[0]['tags'],            '10');
         $this->assertEquals($records[0]['presenter'],       '12');
@@ -128,9 +126,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[1]['item_id'],         $item1->id);
         $this->assertEquals($records[1]['item_title'],      '1');
         $this->assertEquals($records[1]['title'],           '3');
-        $this->assertEquals($records[1]['_title'],          '3');
         $this->assertEquals($records[1]['body'],            '5');
-        $this->assertEquals($records[1]['_body'],           '5');
         $this->assertEquals($records[1]['coverage'],        'POINT(7 7)');
         $this->assertEquals($records[1]['tags'],            '9');
         $this->assertEquals($records[1]['presenter'],       '11');

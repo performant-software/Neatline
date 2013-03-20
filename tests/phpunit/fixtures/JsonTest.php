@@ -62,17 +62,9 @@ class FixturesTest_Json extends Neatline_TestCase
         $record2->title             = 'title2';
         $record3->title             = 'title3';
         // ----------------------------------------------------------------
-        $record1->_title            = '_title1';
-        $record2->_title            = '_title2';
-        $record3->_title            = '_title3';
-        // ----------------------------------------------------------------
         $record1->body              = 'body1';
         $record2->body              = 'body2';
         $record3->body              = 'body3';
-        // ----------------------------------------------------------------
-        $record1->_body             = '_body1';
-        $record2->_body             = '_body2';
-        $record3->_body             = '_body3';
         // ----------------------------------------------------------------
         $record1->tags              = 'tags1';
         $record2->tags              = 'tags2';
@@ -182,7 +174,6 @@ class FixturesTest_Json extends Neatline_TestCase
             $record = new NeatlineRecord($this->exhibit);
             $record->added  = '200'.$i.'-01-01';
             $record->title  = 'Record'.$i;
-            $record->_title = '_Record'.$i;
             $record->__save();
         }
 
@@ -262,9 +253,7 @@ class FixturesTest_Json extends Neatline_TestCase
         $record = $this->__record($this->exhibit, $item);
 
         $record->title              = 'title';
-        $record->_title             = '_title';
         $record->body               = 'body';
-        $record->_body              = '_body';
         $record->tags               = 'tags';
         $record->coverage           = 'POINT(1 2)';
         $record->map_focus          = '100,200';
