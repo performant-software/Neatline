@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Fixture generators for public-facing markup.
+ * HTML fixture generators.
  *
  * @package     omeka
  * @subpackage  neatline

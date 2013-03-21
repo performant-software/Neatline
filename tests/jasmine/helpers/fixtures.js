@@ -27,10 +27,9 @@ var _t = (function(_t) {
    * Read JSON fixtures.
    */
   _t.loadJsonFixtures = function() {
+
     this.json = {
-
       exhibit:    readFixtures('exhibit.json'),
-
       records: {
         standard: readFixtures('records.standard.json'),
         changed:  readFixtures('records.changed.json'),
@@ -43,13 +42,16 @@ var _t = (function(_t) {
         p56:      readFixtures('records.p56.json'),
         p6:       readFixtures('records.p6.json')
       },
-
       record: {
         standard: readFixtures('record.standard.json'),
         add:      readFixtures('record.add.json')
       }
-
     };
+
+    this.xml = {
+      items:      readFixtures('items.xml')
+    };
+
   };
 
 
