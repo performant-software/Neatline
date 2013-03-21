@@ -27,7 +27,8 @@
     "openlayers":         "./components/openlayers/build",
     "bootstrap":          "./components/bootstrap",
     "chosen":             "./components/chosen/chosen",
-    "sinon":              "./components/sinon"
+    "sinon":              "./components/sinon",
+    "jquery_ui":          "./components/jquery-ui/themes/smoothness"
   },
 
   "vendor": {

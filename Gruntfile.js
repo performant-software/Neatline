@@ -96,6 +96,15 @@ module.exports = function(grunt) {
           expand: true,
           flatten: true
         }]
+      },
+
+      jquery_ui: {
+        files: [{
+          src: cfg.build.jquery_ui+'/images/*',
+          dest: cfg.payloads.shared.css+'/images',
+          expand: true,
+          flatten: true
+        }]
       }
 
     },

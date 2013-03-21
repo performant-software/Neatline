@@ -43,11 +43,6 @@
         data-slug="style">Style</a>
     </li>
 
-    <!-- Widget tabs. -->
-    <?php echo $this->partial(
-      'exhibits/underscore/partials/_record_widget_tabs.php'
-    ); ?>
-
   </ul>
 
   <div class="tab-content">
@@ -71,11 +66,6 @@
         'exhibits/underscore/partials/_style_panel.php'
       ); ?>
     </div>
-
-    <!-- Widget panels. -->
-    <?php echo $this->partial(
-      'exhibits/underscore/partials/_record_widget_panels.php'
-    ); ?>
 
   </div>
 
