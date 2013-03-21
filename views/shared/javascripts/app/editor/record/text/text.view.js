@@ -70,32 +70,14 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
 
     /**
-     * Bind item choice.
+     * Bind item choice, disable editors.
      *
      * @param {Object} event: The select event.
      * @param {Object} ui: The option.
      */
     onSelect: function(event, ui) {
-      this.__ui.title.val(ui.item.label).change();
       this.__ui.item.change();
-    },
-
-
-    /**
-     * enable the title and body editors.
-     */
-    enable: function() {
-      this.__ui.title.prop('disabled', false);
-      this.__ui.body.prop('disabled', false);
-    },
-
-
-    /**
-     * Disable the title and body editors.
-     */
-    disable: function() {
-      this.__ui.title.prop('disabled', true);
-      this.__ui.body.prop('disabled', true);
+      this.__ui.title.val(ui.item.label).change();
     }
 
 
