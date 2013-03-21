@@ -13,9 +13,18 @@
 describe('Record Form Text Tab', function() {
 
 
+  var el;
+
+
   beforeEach(function() {
+
     _t.loadEditor();
     _t.showFirstRecordForm();
+
+    el = {
+      autocomplete: $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0])
+    };
+
   });
 
 
@@ -38,11 +47,10 @@ describe('Record Form Text Tab', function() {
     _t.assertLastRequestHasGetParameter('output', 'omeka-xml');
 
     // Respond with items list.
-    _t.respondLastXml200(_t.xml.items);
+    _t.respondXmlLast200(_t.xml.items);
 
     // Get widget container and items.
-    var widget = $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0]);
-    var items = widget.find('a');
+    var items = el.autocomplete.find('a');
 
     // Should list items.
     expect(items[0]).toHaveText('Item 1');
@@ -61,11 +69,10 @@ describe('Record Form Text Tab', function() {
 
     // Enter item search query.
     _t.vw.TEXT.__ui.item.autocomplete('search', 'item');
-    _t.respondLastXml200(_t.xml.items);
+    _t.respondXmlLast200(_t.xml.items);
 
     // Click on the first option.
-    $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0]).
-      find('a').first().click();
+    el.autocomplete.find('a').first().click();
 
     // Should populate id.
     expect(_t.vw.TEXT.__ui.item).toHaveValue(

@@ -88,7 +88,7 @@ var _t = (function(_t) {
    * @param {Object} response: The response body.
    * @return {Object} response: The last request.
    */
-  _t.respondLastXml200 = function(response) {
+  _t.respondXmlLast200 = function(response) {
     var request = this.getLastRequest();
     this.respond200(request, response, 'text/xml');
     return request;
