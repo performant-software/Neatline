@@ -13,14 +13,13 @@
 describe('Record Form Style Tab', function() {
 
 
-  var el, standard, temporary, select;
+  var el, std, tmp, sel;
 
 
   var getStyles = function() {
-    var styles  = _t.vw.MAP.editLayer.styleMap.styles;
-    standard    = styles['default'].defaultStyle;
-    temporary   = styles.temporary.defaultStyle;
-    select      = styles.select.defaultStyle;
+    std = _t.vw.MAP.editLayer.styleMap.styles['default'].defaultStyle;
+    tmp = _t.vw.MAP.editLayer.styleMap.styles.temporary.defaultStyle;
+    sel = _t.vw.MAP.editLayer.styleMap.styles.select.defaultStyle;
   };
 
 
@@ -30,9 +29,9 @@ describe('Record Form Style Tab', function() {
     _t.showFirstRecordForm();
 
     el = _.extend(_t.getRecordFormElements(), {
-      setMinZoom:     _t.vw.RECORD.$('a[name="set-min-zoom"]'),
-      setMaxZoom:     _t.vw.RECORD.$('a[name="set-max-zoom"]'),
-      setFocus:       _t.vw.RECORD.$('a[name="set-focus"]')
+      setMinZoom: _t.vw.RECORD.$('a[name="set-min-zoom"]'),
+      setMaxZoom: _t.vw.RECORD.$('a[name="set-max-zoom"]'),
+      setFocus:   _t.vw.RECORD.$('a[name="set-focus"]')
     });
 
     model = _t.vw.MAP.editLayer.nModel;
@@ -66,7 +65,7 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.fillColor).toEqual('#ffffff');
+      expect(std.fillColor).toEqual('#ffffff');
     });
 
   });
@@ -88,7 +87,7 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.strokeColor).toEqual('#ffffff');
+      expect(std.strokeColor).toEqual('#ffffff');
     });
 
   });
@@ -110,8 +109,8 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(temporary.fillColor).toEqual('#ffffff');
-      expect(select.fillColor).toEqual('#ffffff');
+      expect(tmp.fillColor).toEqual('#ffffff');
+      expect(sel.fillColor).toEqual('#ffffff');
     });
 
   });
@@ -133,8 +132,8 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.fillOpacity).toEqual(0.5);
-      expect(standard.graphicOpacity).toEqual(0.5);
+      expect(std.fillOpacity).toEqual(0.5);
+      expect(std.graphicOpacity).toEqual(0.5);
     });
 
   });
@@ -156,9 +155,9 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.strokeOpacity).toEqual(0.5);
-      expect(temporary.strokeOpacity).toEqual(0.5);
-      expect(select.strokeOpacity).toEqual(0.5);
+      expect(std.strokeOpacity).toEqual(0.5);
+      expect(tmp.strokeOpacity).toEqual(0.5);
+      expect(sel.strokeOpacity).toEqual(0.5);
     });
 
   });
@@ -180,8 +179,8 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(temporary.fillOpacity).toEqual(0.5);
-      expect(select.fillOpacity).toEqual(0.5);
+      expect(tmp.fillOpacity).toEqual(0.5);
+      expect(sel.fillOpacity).toEqual(0.5);
     });
 
   });
@@ -203,9 +202,9 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.strokeWidth).toEqual(50);
-      expect(temporary.strokeWidth).toEqual(50);
-      expect(select.strokeWidth).toEqual(50);
+      expect(std.strokeWidth).toEqual(50);
+      expect(tmp.strokeWidth).toEqual(50);
+      expect(sel.strokeWidth).toEqual(50);
     });
 
   });
@@ -227,9 +226,9 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.pointRadius).toEqual(50);
-      expect(temporary.pointRadius).toEqual(50);
-      expect(select.pointRadius).toEqual(50);
+      expect(std.pointRadius).toEqual(50);
+      expect(tmp.pointRadius).toEqual(50);
+      expect(sel.pointRadius).toEqual(50);
     });
 
   });
@@ -251,9 +250,9 @@ describe('Record Form Style Tab', function() {
 
     afterEach(function() {
       getStyles();
-      expect(standard.externalGraphic).toEqual('img.png');
-      expect(temporary.externalGraphic).toEqual('img.png');
-      expect(select.externalGraphic).toEqual('img.png');
+      expect(std.externalGraphic).toEqual('img.png');
+      expect(tmp.externalGraphic).toEqual('img.png');
+      expect(sel.externalGraphic).toEqual('img.png');
     });
 
   });

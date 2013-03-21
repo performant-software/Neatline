@@ -26,7 +26,28 @@ describe('Record Form Text Tab', function() {
     // that match the query should be autocompleted below the box.
     // --------------------------------------------------------------------
 
-    // TODO
+    // Enter item search query.
+    _t.vw.TEXT.__ui.item.autocomplete('search', 'item');
+
+    // Should produce GET request to /items/browse.
+    _t.assertLastRequestRoute(Neatline.global.items_api);
+    _t.assertLastRequestMethod('GET');
+
+    // Should emit query and output format.
+    _t.assertLastRequestHasGetParameter('search', 'item');
+    _t.assertLastRequestHasGetParameter('output', 'omeka-xml');
+
+    // Respond with items list.
+    _t.respondLastXml200(_t.xml.items);
+
+    // Get widget container and items.
+    var widget = $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0]);
+    var items = widget.find('a');
+
+    // Should list items.
+    expect(items[0]).toHaveText('Item 1');
+    expect(items[1]).toHaveText('Item 2');
+    expect(items[2]).toHaveText('Item 3');
 
   });
 
@@ -38,7 +59,21 @@ describe('Record Form Text Tab', function() {
     // with the title of the Omeka item.
     // --------------------------------------------------------------------
 
-    // TODO
+    // Enter item search query.
+    _t.vw.TEXT.__ui.item.autocomplete('search', 'item');
+    _t.respondLastXml200(_t.xml.items);
+
+    // Click on the first option.
+    $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0]).
+      find('a').first().click();
+
+    // Should populate id.
+    expect(_t.vw.TEXT.__ui.item).toHaveValue(
+      $(_t.xml.items).find('item').first().attr('itemId')
+    );
+
+    // Should populate title.
+    expect(_t.vw.TEXT.__ui.title).toHaveValue('Item 1');
 
   });
 

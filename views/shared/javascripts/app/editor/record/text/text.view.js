@@ -63,6 +63,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
           });
         });
 
+        console.log(items);
         res(items);
 
       });

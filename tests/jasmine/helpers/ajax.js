@@ -39,10 +39,11 @@ var _t = (function(_t) {
    *
    * @param {Object} request: The sinon request.
    * @param {Object} response: The response body.
+   * @param {String} type: The content type.
    */
-  _t.respond200 = function(request, response) {
-    var contentType = { 'Content-Type':'application/json' };
-    request.respond(200, contentType, response);
+  _t.respond200 = function(request, response, type) {
+    type = type || 'application/json';
+    request.respond(200, { 'Content-Type': type }, response);
   };
 
 
@@ -77,6 +78,19 @@ var _t = (function(_t) {
   _t.respondLast200 = function(response) {
     var request = this.getLastRequest();
     this.respond200(request, response);
+    return request;
+  };
+
+
+  /**
+   * Respond 200 to the last AJAX call with XML.
+   *
+   * @param {Object} response: The response body.
+   * @return {Object} response: The last request.
+   */
+  _t.respondLastXml200 = function(response) {
+    var request = this.getLastRequest();
+    this.respond200(request, response, 'text/xml');
     return request;
   };
 
