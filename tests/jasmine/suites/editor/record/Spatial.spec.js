@@ -488,7 +488,7 @@ describe('Record Form Spatial Tab', function() {
     // the spatial tab is deactivated.
     // --------------------------------------------------------------------
 
-    // Click coverage tab.
+    // Click "Spatial" tab.
     el.spatial.tab('show');
 
     // Activate "Draw Polygon".

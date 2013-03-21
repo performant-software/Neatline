@@ -28,7 +28,8 @@
     "bootstrap":          "./components/bootstrap",
     "chosen":             "./components/chosen/chosen",
     "sinon":              "./components/sinon",
-    "jquery_ui":          "./components/jquery-ui/themes/smoothness"
+    "jquery_ui":          "./components/jquery-ui/themes/smoothness",
+    "ckeditor":           "./components/ckeditor/dev/builder"
   },
 
   "vendor": {

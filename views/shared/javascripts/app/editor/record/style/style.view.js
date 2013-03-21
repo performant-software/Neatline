@@ -43,7 +43,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     /**
      * Instantiate color pickers and draggers.
      */
-    onTabChange: function() {
+    buildWidgets: function() {
 
       // INTEGERS
       this.$('input.integer').draggableInput({

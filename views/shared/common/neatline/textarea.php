@@ -16,7 +16,7 @@
 <label for="<?php echo $name; ?>">
 <?php echo __($label); ?>
 </label>
-<div class="controls">
+<div class="controls <?php if (isset($class)) echo $class; ?>">
   <textarea
     <?php if (isset($id)) echo "id='$id'"; ?>
     <?php if (isset($name)) echo "name='$name'"; ?>

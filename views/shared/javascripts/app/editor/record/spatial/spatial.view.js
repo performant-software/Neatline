@@ -18,20 +18,11 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
     events: {
-
-      // Tab change.
       'shown ul.nav a':           'onTabChange',
-
-      // Change map edit mode.
       'change div.spatial input': 'onControlChange',
       'keyup div.spatial input':  'onControlChange',
-
-      // Parse SVG geometry.
       'click a[name="parse"]':    'onParseClick',
-
-      // Clear all geometries.
       'click a[name="clear"]':    'onClearClick'
-
     },
 
     selectors: {

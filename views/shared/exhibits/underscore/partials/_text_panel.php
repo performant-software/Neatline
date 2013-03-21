@@ -23,12 +23,14 @@
   )); ?>
 
   <?php echo common('neatline/textarea', array(
+      'class' => 'ckeditor',
       'name'  => 'title',
       'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
   <?php echo common('neatline/textarea', array(
+      'class' => 'ckeditor',
       'name'  => 'body',
       'label' => 'Body',
       'bind'  => 'record.body'

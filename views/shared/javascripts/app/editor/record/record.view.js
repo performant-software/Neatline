@@ -62,9 +62,6 @@ Neatline.module('Editor.Record', function(
         Neatline.execute('MAPEDIT:updateModel', this.model);
       }, this));
 
-      // Notify tab views.
-      Neatline.vent.trigger('RECORD:bind', this.model);
-
     },
 
 
@@ -93,6 +90,7 @@ Neatline.module('Editor.Record', function(
      */
     activateTab: function(tab) {
       this.__ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
+      Neatline.vent.trigger('RECORD:tab:'+tab);
     },
 
 

@@ -218,33 +218,4 @@ describe('Record Form Open', function() {
   });
 
 
-  it('should default to "Navigate" edit mode when opened', function() {
-
-    // --------------------------------------------------------------------
-    // The geometry editing controls should always revert to the default
-    // "Navigate" mode when a form is opened, regardless of what the state
-    // of the form was when it was last closed.
-    // --------------------------------------------------------------------
-
-    // Show form, check mode.
-    _t.click($(recordRows[1]));
-    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
-
-    // Activate "Polygon" control, check mode.
-    el.pan[0].checked = false; el.poly[0].checked = true;
-    expect(_t.vw.SPATIAL.getEditMode()).toEqual('poly');
-
-    // Close the form.
-    el.close.trigger('click');
-    _t.respondRecords();
-
-    // Re-open the form.
-    _t.showFirstRecordForm();
-
-    // "Navigate" mode should be active.
-    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
-
-  });
-
-
 });
