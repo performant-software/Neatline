@@ -43,8 +43,7 @@
               __('Public')    => 'public',
               __('Edit')      => null
           ), array(
-              'link_tag'      => 'th scope="col"',
-              'list_tag'      => ''
+              'link_tag'      => 'th scope="col"'
           )); ?>
         </tr>
       </thead>
@@ -60,13 +59,14 @@
             <ul class="action-links group">
               <li>
                 <?php echo _nl_link($e, __('Edit Details'),
-                  array('class' => 'edit'), 'edit', false); ?>
-                </a>
+                  array('class' => 'edit'), 'edit', false);
+                ?>
               </li>
               <li>
                 <?php echo _nl_link($e, __('Delete'),
-                  array('class'=>'delete delete-confirm'),
-                  'delete-confirm', false); ?>
+                  array('class' => 'delete delete-confirm'),
+                  'delete-confirm', false);
+                ?>
               </li>
             </ul>
           </td>
@@ -75,8 +75,10 @@
           <td><?php echo _nl_totalRecords(); ?></td>
           <td><?php echo _nl_field('public')?__('Yes'):__('No'); ?></td>
 
-          <td><?php echo _nl_link($e, __('Edit'),
-                array('class'=>'edit'), 'editor', false); ?>
+          <td>
+            <?php echo _nl_link($e, __('Edit'),
+              array('class' => 'editor'), 'editor', false);
+            ?>
           </td>
 
         </tr>

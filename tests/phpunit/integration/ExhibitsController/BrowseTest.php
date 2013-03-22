@@ -79,11 +79,11 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
             public_url('neatline/show/slug3').'"]');
 
         // Should show links to editor.
-        $this->assertXpath('//a[@class="edit"][@href="'.
+        $this->assertXpath('//a[@class="editor"][@href="'.
             url('neatline/editor/'.$exhibit1->id).'"]');
-        $this->assertXpath('//a[@class="edit"][@href="'.
+        $this->assertXpath('//a[@class="editor"][@href="'.
             url('neatline/editor/'.$exhibit2->id).'"]');
-        $this->assertXpath('//a[@class="edit"][@href="'.
+        $this->assertXpath('//a[@class="editor"][@href="'.
             url('neatline/editor/'.$exhibit3->id).'"]');
 
     }

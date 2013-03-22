@@ -22,6 +22,7 @@
 
 <div id="primary">
   <?php echo flash(); ?>
+  <?php echo items_search_form(); ?>
 </div>
 
 <?php echo foot(); ?>

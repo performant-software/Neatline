@@ -107,12 +107,16 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function importAction()
     {
+
+        $exhibit = $this->_helper->db->findById();
+
         // TODO|dev
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            sendLongRunning('ItemImporter', array(
-                'exhibit' => $this->_helper->db->findById()
+            sendLongRunning('Job_ItemImporter', array(
+                'exhibit_id' => $exhibit->id
             )
         );
+
     }
 
 
