@@ -39,25 +39,49 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
         select: _.bind(this.onSelect, this)
       });
 
-      // CKEDITOR
-      CKEDITOR.replace('title', {
-        toolbar: [
-          ['Bold','Italic','Underline','RemoveFormat'],
-          ['Maximize','Source']
-        ],
-        height: 100
-      });
-      CKEDITOR.replace('body', {
-        toolbar: [
-          [ 'Bold','Italic','Underline','RemoveFormat',
-            'NumberedList','BulletedList',
-            'Link','Unlink','Image' ],
-          [ 'Outdent','Indent',
-            'JustifyLeft','JustifyCenter','JustifyRight'],
-          [ 'Maximize','Source' ]
-        ],
-        height: 260
-      });
+      // // CKEDITOR
+      // CKEDITOR.replace('title', {
+      //   toolbar: [
+      //     [
+      //       'Bold',
+      //       'Italic',
+      //       'Underline',
+      //       'RemoveFormat'
+      //     ],
+      //     [
+      //       'Maximize',
+      //       'Source'
+      //     ]
+      //   ],
+      //   height: 80 
+      // });
+      // CKEDITOR.replace('body', {
+      //   toolbar: [
+      //     [
+      //       'Bold',
+      //       'Italic',
+      //       'Underline',
+      //       'RemoveFormat',
+      //       'NumberedList',
+      //       'BulletedList',
+      //       'Link',
+      //       'Unlink',
+      //       'Image'
+      //     ],
+      //     [
+      //       'Outdent',
+      //       'Indent',
+      //       'JustifyLeft',
+      //       'JustifyCenter',
+      //       'JustifyRight'
+      //     ],
+      //     [
+      //       'Maximize',
+      //       'Source' 
+      //     ]
+      //   ],
+      //   height: 240
+      // });
 
     },
 
@@ -66,9 +90,9 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
      * Stop CKEditor instances on title and body.
      */
     stopCKEditor: function() {
-      _.each(CKEDITOR.instances, function(val, key) {
-        val.destroy();
-      });
+      // _.each(CKEDITOR.instances, function(val, key) {
+        // val.destroy();
+      // });
     },
 
 
