@@ -77,7 +77,7 @@ Neatline.module('Editor.Record', function(
     if (Record.__view.open) Record.__view.unbind();
   };
   Neatline.commands.addHandler('RECORD:unbind', unbind);
-  Neatline.vent.on('editor:router:before', unbind);
+  Neatline.vent.on('ROUTER:before', unbind);
 
 
   /**

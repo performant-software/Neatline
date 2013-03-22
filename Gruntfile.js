@@ -58,15 +58,6 @@ module.exports = function(grunt) {
         }
       },
 
-      build_ckeditor: {
-        command: './build.sh',
-        options: {
-          execOptions: {
-            cwd: cfg.build.ckeditor
-          }
-        }
-      },
-
       build_sinon: {
         command: './build',
         options: {
@@ -113,15 +104,6 @@ module.exports = function(grunt) {
           dest: cfg.payloads.shared.css+'/images',
           expand: true,
           flatten: true
-        }]
-      },
-
-      ckeditor: {
-        files: [{
-          cwd: cfg.build.ckeditor+'/release/ckeditor/',
-          src: '**',
-          dest: cfg.payloads.shared.js+'/ckeditor/',
-          expand: true
         }]
       }
 
@@ -392,7 +374,6 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
-    'shell:build_ckeditor',
     'shell:build_sinon',
     'compile',
     'copy'

@@ -24,14 +24,4 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   Neatline.vent.on('RECORD:tab:text', activate);
 
 
-  /**
-   * Tear down the CKEditor instances.
-   */
-  var deactivate = function() {
-    Text.__view.stopCKEditor();
-  };
-  Neatline.commands.addHandler('TEXT:deactivate', deactivate);
-  Neatline.vent.on('editor:router:before', deactivate);
-
-
 }});
