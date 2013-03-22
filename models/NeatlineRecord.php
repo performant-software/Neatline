@@ -234,6 +234,13 @@ class NeatlineRecord extends Neatline_AbstractRecord
             );
         } catch (Exception $e) {}
 
+        // Match `item-[tag]`.
+        foreach ($tags as $tag) { try {
+            return get_view()->partial(
+                'neatline/item-'.$tag.'.php'
+            );
+        } catch (Exception $e) {}}
+
         // Revert to default `item`.
         return get_view()->partial('neatline/item.php');
 

@@ -30,7 +30,7 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
      * more than one tag on the record has a tag-specific template, the
      * template for the leftmost tag in the list should take precedence.
      */
-    public function testTagTemplate()
+    public function testExhibitTagTemplate()
     {
 
         $exhibit = $this->__exhibit('slug');
@@ -38,18 +38,18 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
 
         // `tag1` before `tag2`.
         $record->tags = 'tag1,tag2';
-        $this->assertRegExp('/item-slug-tag1/', $record->getItemBody());
+        $this->assertRegExp('/item-slug-tag1\n/', $record->getItemBody());
 
         // `tag2` before `tag1`.
         $record->tags = 'tag2,tag1';
-        $this->assertRegExp('/item-slug-tag2/', $record->getItemBody());
+        $this->assertRegExp('/item-slug-tag2\n/', $record->getItemBody());
 
     }
 
 
     /**
-     * When none of the tag-specific templates match, `getItemBody` should
-     * try to load an exhibit-specific template.
+     * When none of the `item-[slug]-[tag]` templates match, `getItemBody`
+     * should try to load an exhibit-specific template.
      */
     public function testExhibitTemplate()
     {
@@ -58,11 +58,32 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
         $record = $this->__record($exhibit);
 
         // No tags.
-        $this->assertRegExp('/item-slug/', $record->getItemBody());
+        $this->assertRegExp('/item-slug\n/', $record->getItemBody());
 
         // No matching tags.
         $record->tags = 'tag3';
-        $this->assertRegExp('/item-slug/', $record->getItemBody());
+        $this->assertRegExp('/item-slug\n/', $record->getItemBody());
+
+    }
+
+
+    /**
+     * When none of the custom templates match, `getItemBody` should load
+     * the default `item` template.
+     */
+    public function testTagTemplate()
+    {
+
+        $exhibit = $this->__exhibit('another-slug');
+        $record = $this->__record($exhibit);
+
+        // `tag1` before `tag2`.
+        $record->tags = 'tag1,tag2';
+        $this->assertRegExp('/item-tag1\n/', $record->getItemBody());
+
+        // `tag2` before `tag1`.
+        $record->tags = 'tag2,tag1';
+        $this->assertRegExp('/item-tag2\n/', $record->getItemBody());
 
     }
 
@@ -78,7 +99,7 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
         $record = $this->__record($exhibit);
 
         // No tag- or slug-specific templates.
-        $this->assertRegExp('/item/', $record->getItemBody());
+        $this->assertRegExp('/item\n/', $record->getItemBody());
 
     }
 
