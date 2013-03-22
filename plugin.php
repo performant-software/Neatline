@@ -17,9 +17,10 @@ if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 // Plugin class.
 require_once NL_DIR . '/NeatlinePlugin.php';
 
-// Abstract model/controller.
+// Application classes.
 require_once NL_DIR . '/models/abstract/NeatlineAbstractRecord.php';
 require_once NL_DIR . '/controllers/abstract/NeatlineRestController.php';
+require_once NL_DIR . '/jobs/ItemImporter.php';
 
 // Helpers.
 require_once NL_DIR . '/helpers/Assets.php';

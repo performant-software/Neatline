@@ -103,6 +103,20 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
+     * Import items from Omeka.
+     */
+    public function importAction()
+    {
+        // TODO|dev
+        Zend_Registry::get('bootstrap')->getResource('jobs')->
+            sendLongRunning('ItemImporter', array(
+                'exhibit' => $this->_helper->db->findById()
+            )
+        );
+    }
+
+
+    /**
      * Edit exhibit.
      */
     public function editorAction()
