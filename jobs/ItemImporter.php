@@ -18,43 +18,23 @@ class Job_ItemImporter extends Omeka_Job_AbstractJob
 
     /**
      * Import Omeka items.
+     * TODO|dev
      */
     public function perform()
     {
 
-        $this->_mockView();
+        _nl_mockView();
 
         // Load the exhibit.
-        $exhibit = $this->_db->getTable('NeatlineExhibit')->
-            find($this->_options['exhibit_id']);
+        $exhibit = $this->_db->getTable('NeatlineExhibit')->find(
+            $this->_options['exhibit_id']
+        );
 
         // Create records.
         foreach (get_records('Item', array(), 1000) as $item) {
             $record = new NeatlineRecord($exhibit, $item);
             $record->save();
         }
-
-    }
-
-
-    /**
-     * Set a mock `Omeka_View` instance in the registry.
-     */
-    protected function _mockView()
-    {
-
-        $view = new Omeka_View;
-        Zend_Registry::set('view', $view);
-
-        // Register default views.
-        $view->setScriptPath(VIEW_SCRIPTS_DIR);
-
-        // Register Neatline views.
-        $view->addScriptPath(NL_DIR.'/views/shared');
-
-        // Register public theme views.
-        $theme = get_option('public_theme');
-        $view->addScriptPath(PUBLIC_THEME_DIR.'/'.$theme.'/neatline');
 
     }
 

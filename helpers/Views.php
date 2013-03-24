@@ -13,6 +13,30 @@
 
 
 /**
+ * Set a mock `Omeka_View` instance in the registry.
+ */
+function _nl_mockView()
+{
+
+    $view = new Omeka_View;
+
+    // Default templates.
+    $view->setScriptPath(VIEW_SCRIPTS_DIR);
+
+    // Neatline templates.
+    $view->addScriptPath(NL_DIR . '/views/shared');
+
+    // Theme templates.
+    $theme = get_option('public_theme');
+    $view->addScriptPath(PUBLIC_THEME_DIR . '/' . $theme . '/neatline');
+
+    // Register the view.
+    Zend_Registry::set('view', $view);
+
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute.
