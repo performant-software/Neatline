@@ -55,6 +55,7 @@ function _nl_editorAssets($exhibit)
 
     _nl_mapApis();
     queue_css_file('payloads/editor');
+    queue_js_file('payloads/ckeditor/ckeditor');
     queue_js_file('payloads/editor');
     queue_js_file('bootstrap');
 

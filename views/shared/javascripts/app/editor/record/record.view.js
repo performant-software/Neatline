@@ -90,7 +90,6 @@ Neatline.module('Editor.Record', function(
      */
     activateTab: function(tab) {
       this.__ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
-      Neatline.vent.trigger('RECORD:tab:'+tab);
     },
 
 
@@ -105,8 +104,9 @@ Neatline.module('Editor.Record', function(
       this.tab = $(event.target).attr('data-slug');
       var id = this.model.get('id') || 'add';
 
-      // Update the route.
+      // Update the route, notify tab views.
       Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.tab);
+      Neatline.vent.trigger('RECORD:tab:'+this.tab);
 
     },
 
