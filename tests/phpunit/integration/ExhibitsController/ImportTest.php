@@ -23,7 +23,6 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
 
         $exhibit = $this->__exhibit();
 
-        // Mock collection.
         $collection = insert_collection(array(), array(
             'Dublin Core' => array (
                 'Title' => array(
@@ -32,7 +31,6 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
             )
         ));
 
-        // Mock type.
         $type = insert_item_type(array('name' => 'Type'));
 
         $this->request->setMethod('POST')->setPost(array(
