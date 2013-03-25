@@ -39,9 +39,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $map_focus;      // VARCHAR(100) NULL
 
 
-    private $styles = array();
-
-
     /**
      * Set foreign keys.
      *
@@ -65,16 +62,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
     {
         $exhibits = $this->getTable('NeatlineExhibit');
         return $exhibits->find($this->exhibit_id);
-    }
-
-
-    /**
-     * Assemble record data for the front-end application.
-     *
-     * @return array The data array.
-     */
-    public function buildJsonData() {
-        return array_merge(parent::toArray(), $this->styles);
     }
 
 
@@ -143,7 +130,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
             );
         }
 
-        return array_merge($fields, $this->styles);
+        return $fields;
 
     }
 

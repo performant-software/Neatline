@@ -59,7 +59,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function queryRecord($id)
     {
         $select = $this->getSelect()->where('id=?', $id);
-        return $this->fetchObject($select)->buildJsonData();
+        return $this->fetchObject($select)->toArray();
     }
 
 
@@ -127,7 +127,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
         // Execute query.
         if ($records = $this->fetchObjects($select)) {
             foreach ($records as $record) {
-                $data['records'][] = $record->buildJsonData();
+                $data['records'][] = $record->toArray();
             }
         }
 

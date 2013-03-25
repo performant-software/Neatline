@@ -16,36 +16,9 @@ class ItemImporterTest_Explode extends Neatline_TestCase
 
 
     /**
-     * `ItemImporter` should match keyword queries.
+     * `ItemImporter` should apply the search query.
      */
-    public function testMatchKeywords()
-    {
-
-        $item1 = $this->__item('David McClure');
-        $item2 = $this->__item('David William McClure');
-        $item3 = $this->__item('Kara Weisman');
-        $exhibit = $this->__exhibit();
-
-        Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('ItemImporter', array(
-                'query' => array('search' => 'David'),
-                'exhibit_id' => $exhibit->id
-            )
-        );
-
-        // Should match items 1 and 2.
-        $records = $this->__records->queryRecords($exhibit);
-        $this->assertEquals($records['records'][0]['item_id'],$item1->id);
-        $this->assertEquals($records['records'][1]['item_id'],$item2->id);
-        $this->assertEquals($records['count'], 2);
-
-    }
-
-
-    /**
-     * `ItemImporter` should match range queries.
-     */
-    public function testMatchRange()
+    public function testCreateRecords()
     {
 
         $item1 = $this->__item();
@@ -68,40 +41,31 @@ class ItemImporterTest_Explode extends Neatline_TestCase
 
 
     /**
-     * `ItemImporter` should match collection queries.
-     */
-    public function testMatchCollection()
-    {
-        // TODO
-    }
-
-
-    /**
-     * `ItemImporter` should match type queries.
-     */
-    public function testMatchType()
-    {
-        // TODO
-    }
-
-
-    /**
-     * `ItemImporter` should match tags queries.
-     */
-    public function testMatchTags()
-    {
-        // TODO
-    }
-
-
-    /**
      * For any given Omeka item, `ItemImporter` should check to see if a
      * Neatline record already exists in the exhibit for the item; if so,
      * the record should be re-saved/compiled, but not duplicated.
      */
     public function testBlockDuplicates()
     {
-        // TODO
+
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
+
+        // Create existing item-backed record.
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->__save();
+
+        // Zend_Registry::get('bootstrap')->getResource('jobs')->
+            // send('ItemImporter', array(
+                // 'query' => array('range' => $item->id),
+                // 'exhibit_id' => $exhibit->id
+            // )
+        // );
+
+        // Should not duplicate item 1 record.
+        $records = $this->__records->queryRecords($exhibit);
+        $this->assertEquals($records['count'], 1);
+
     }
 
 
