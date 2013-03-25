@@ -65,7 +65,7 @@ var _t = (function(_t) {
    */
   _t.stopApplication = function() {
     _.each(Neatline.submodules, function(m) { m.stop(); });
-    Neatline.initCallbacks.reset();
+    Neatline._initCallbacks.reset();
   };
 
 

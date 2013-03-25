@@ -20,7 +20,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   var activate = function() {
     Text.__view.buildWidgets();
   };
-  Neatline.commands.addHandler('TEXT:activate', activate);
+  Neatline.commands.setHandler('TEXT:activate', activate);
   Neatline.vent.on('RECORD:tab:text', activate);
 
 

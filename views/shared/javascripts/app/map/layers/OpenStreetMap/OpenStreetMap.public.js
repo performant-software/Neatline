@@ -23,7 +23,7 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   var layer = function(json) {
     return new OpenLayers.Layer.OSM(json.title);
   };
-  Neatline.reqres.addHandler('LAYERS:OpenStreetMap', layer);
+  Neatline.reqres.setHandler('LAYERS:OpenStreetMap', layer);
 
 
 });

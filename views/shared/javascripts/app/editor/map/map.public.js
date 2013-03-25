@@ -22,7 +22,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var startEdit = function(model) {
     Map.__view.startEdit(model);
   };
-  Neatline.commands.addHandler('MAPEDIT:startEdit', startEdit);
+  Neatline.commands.setHandler('MAPEDIT:startEdit', startEdit);
 
 
   /**
@@ -33,7 +33,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var endEdit = function(model) {
     Map.__view.endEdit();
   };
-  Neatline.commands.addHandler('MAPEDIT:endEdit', endEdit);
+  Neatline.commands.setHandler('MAPEDIT:endEdit', endEdit);
 
 
   /**
@@ -44,7 +44,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateEdit = function(settings) {
     Map.__view.updateEdit(settings);
   };
-  Neatline.commands.addHandler('MAPEDIT:updateEdit', updateEdit);
+  Neatline.commands.setHandler('MAPEDIT:updateEdit', updateEdit);
 
 
   /**
@@ -55,7 +55,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateWKT = function(wkt) {
     Map.__view.updateWKT(wkt);
   };
-  Neatline.commands.addHandler('MAPEDIT:updateWKT', updateWKT);
+  Neatline.commands.setHandler('MAPEDIT:updateWKT', updateWKT);
 
 
   /**
@@ -66,7 +66,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateModel = function(model) {
     Map.__view.updateModel(model);
   };
-  Neatline.commands.addHandler('MAPEDIT:updateModel', updateModel);
+  Neatline.commands.setHandler('MAPEDIT:updateModel', updateModel);
 
 
   /**
@@ -75,7 +75,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var clearLayer = function() {
     Map.__view.clearLayer();
   };
-  Neatline.commands.addHandler('MAPEDIT:clearLayer', clearLayer);
+  Neatline.commands.setHandler('MAPEDIT:clearLayer', clearLayer);
 
 
   /**
@@ -87,7 +87,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
     Map.__collection.remove(model);
     Map.__view.removeLayerByModel(model);
   };
-  Neatline.commands.addHandler('MAPEDIT:deleteLayer', deleteLayer);
+  Neatline.commands.setHandler('MAPEDIT:deleteLayer', deleteLayer);
 
 
 }});

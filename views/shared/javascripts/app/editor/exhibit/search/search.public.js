@@ -22,7 +22,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var display = function(container) {
     Search.__view.showIn(container);
   };
-  Neatline.commands.addHandler('SEARCH:display', display);
+  Neatline.commands.setHandler('SEARCH:display', display);
 
 
   /**
@@ -48,7 +48,7 @@ Neatline.module('Editor.Exhibit.Search', function(
     }
 
   };
-  Neatline.commands.addHandler('SEARCH:initialize', initialize);
+  Neatline.commands.setHandler('SEARCH:initialize', initialize);
 
 
   /**
@@ -65,7 +65,7 @@ Neatline.module('Editor.Exhibit.Search', function(
     }
 
   };
-  Neatline.commands.addHandler('SEARCH:mirrorMap', mirrorMap);
+  Neatline.commands.setHandler('SEARCH:mirrorMap', mirrorMap);
   Neatline.vent.on('MAP:ingest', mirrorMap);
 
 
@@ -77,7 +77,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var getQueryForUrl = function() {
     return Search.__view.getQueryForUrl();
   };
-  Neatline.reqres.addHandler('SEARCH:getQueryForUrl', getQueryForUrl);
+  Neatline.reqres.setHandler('SEARCH:getQueryForUrl', getQueryForUrl);
 
 
 });

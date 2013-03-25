@@ -15,12 +15,12 @@ Neatline.module('Presenter.None', function(
 
 
   var none = function() {};
-  Neatline.commands.addHandler('PRESENTER:None:show', none);
-  Neatline.commands.addHandler('PRESENTER:None:hide', none);
-  Neatline.commands.addHandler('PRESENTER:None:select', none);
-  Neatline.commands.addHandler('PRESENTER:None:unselect', none);
-  Neatline.vent.on('PRESENTER:activate', none);
-  Neatline.vent.on('PRESENTER:deactivate', none);
+  Neatline.commands.setHandler('PRESENTER:None:show',     none);
+  Neatline.commands.setHandler('PRESENTER:None:hide',     none);
+  Neatline.commands.setHandler('PRESENTER:None:select',   none);
+  Neatline.commands.setHandler('PRESENTER:None:unselect', none);
+  Neatline.vent.on('PRESENTER:activate',    none);
+  Neatline.vent.on('PRESENTER:deactivate',  none);
 
 
 });

@@ -25,7 +25,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
       Styles.__view.buildEditor();
     }})
   };
-  Neatline.commands.addHandler('ESTYLES:display', display);
+  Neatline.commands.setHandler('ESTYLES:display', display);
 
 
 });

@@ -28,7 +28,7 @@ Neatline.module('Map.Layers', function(
       return null;
     }
   };
-  Neatline.reqres.addHandler('LAYERS:getLayer', getLayer);
+  Neatline.reqres.setHandler('LAYERS:getLayer', getLayer);
 
 
 });

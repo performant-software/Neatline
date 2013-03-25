@@ -25,7 +25,7 @@ Neatline.module('Map.Layers.Stamen', function(
     layer.name = json.title;
     return layer;
   };
-  Neatline.reqres.addHandler('LAYERS:Stamen', layer);
+  Neatline.reqres.setHandler('LAYERS:Stamen', layer);
 
 
 });

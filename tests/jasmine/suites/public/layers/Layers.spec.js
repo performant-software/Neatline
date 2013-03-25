@@ -43,7 +43,7 @@ describe('Layers API', function() {
     // --------------------------------------------------------------------
 
     // Register a handler for `LayerType` that returns `true`.
-    Neatline.reqres.addHandler('LAYERS:LayerType', function() {
+    Neatline.reqres.setHandler('LAYERS:LayerType', function() {
       return true;
     });
 

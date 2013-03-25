@@ -22,7 +22,7 @@ Neatline.module('Editor.Exhibit', function(
   var display = function(container) {
     Exhibit.__view.showIn(container);
   };
-  Neatline.commands.addHandler('EXHIBIT:display', display);
+  Neatline.commands.setHandler('EXHIBIT:display', display);
 
 
   /**
@@ -33,7 +33,7 @@ Neatline.module('Editor.Exhibit', function(
   var activateTab = function(tab) {
     Exhibit.__view.activateTab(tab);
   };
-  Neatline.commands.addHandler('EXHIBIT:activateTab', activateTab);
+  Neatline.commands.setHandler('EXHIBIT:activateTab', activateTab);
 
 
 });

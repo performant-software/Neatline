@@ -54,11 +54,9 @@
         <tr>
 
           <td class="title">
-            <strong>
-              <?php echo _nl_link($e, 'editor', null,
-                array('class' => 'editor'), false);
-              ?>
-            </strong>
+            <?php echo _nl_link($e, 'editor', null,
+              array('class' => 'editor'), false);
+            ?>
             <ul class="action-links group">
               <li>
                 <?php echo _nl_link($e, 'show', __('Public View'),

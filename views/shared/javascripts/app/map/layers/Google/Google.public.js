@@ -43,7 +43,7 @@ Neatline.module('Map.Layers.Google', function(
         });
     }
   };
-  Neatline.reqres.addHandler('LAYERS:Google', layer);
+  Neatline.reqres.setHandler('LAYERS:Google', layer);
 
 
 });

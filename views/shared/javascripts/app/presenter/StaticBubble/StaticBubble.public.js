@@ -22,7 +22,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var show = function(model) {
     StaticBubble.__view.show(model);
   };
-  Neatline.commands.addHandler(
+  Neatline.commands.setHandler(
     'PRESENTER:StaticBubble:show', show
   );
 
@@ -33,7 +33,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var hide = function() {
     StaticBubble.__view.hide();
   };
-  Neatline.commands.addHandler(
+  Neatline.commands.setHandler(
     'PRESENTER:StaticBubble:hide', hide
   );
 
@@ -46,7 +46,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var select = function(model) {
     StaticBubble.__view.select(model);
   };
-  Neatline.commands.addHandler(
+  Neatline.commands.setHandler(
     'PRESENTER:StaticBubble:select', select
   );
 
@@ -57,7 +57,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var unselect = function() {
     StaticBubble.__view.unselect();
   };
-  Neatline.commands.addHandler(
+  Neatline.commands.setHandler(
     'PRESENTER:StaticBubble:unselect', unselect
   );
 

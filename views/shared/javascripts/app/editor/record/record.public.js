@@ -22,7 +22,7 @@ Neatline.module('Editor.Record', function(
   var display = function(container) {
     Record.__view.showIn(container);
   };
-  Neatline.commands.addHandler('RECORD:display', display);
+  Neatline.commands.setHandler('RECORD:display', display);
 
 
   /**
@@ -48,7 +48,7 @@ Neatline.module('Editor.Record', function(
     });
 
   };
-  Neatline.commands.addHandler('RECORD:bindId', bindId);
+  Neatline.commands.setHandler('RECORD:bindId', bindId);
 
 
   /**
@@ -67,7 +67,7 @@ Neatline.module('Editor.Record', function(
     Record.__view.activateTab(tab);
 
   };
-  Neatline.commands.addHandler('RECORD:bindNew', bindNew);
+  Neatline.commands.setHandler('RECORD:bindNew', bindNew);
 
 
   /**
@@ -76,7 +76,7 @@ Neatline.module('Editor.Record', function(
   var unbind = function() {
     if (Record.__view.open) Record.__view.unbind();
   };
-  Neatline.commands.addHandler('RECORD:unbind', unbind);
+  Neatline.commands.setHandler('RECORD:unbind', unbind);
   Neatline.vent.on('ROUTER:before', unbind);
 
 
@@ -90,7 +90,7 @@ Neatline.module('Editor.Record', function(
       Record.__router.navigate('record/'+model.get('id'), true);
     }
   };
-  Neatline.commands.addHandler('RECORD:navToForm', navToForm);
+  Neatline.commands.setHandler('RECORD:navToForm', navToForm);
   Neatline.vent.on('MAP:select', navToForm);
 
 
@@ -102,7 +102,7 @@ Neatline.module('Editor.Record', function(
   var setCoverage = function(coverage) {
     Record.__view.model.set('coverage', coverage);
   };
-  Neatline.commands.addHandler('RECORD:setCoverage', setCoverage);
+  Neatline.commands.setHandler('RECORD:setCoverage', setCoverage);
 
 
   /**
@@ -111,7 +111,7 @@ Neatline.module('Editor.Record', function(
   var getElement = function() {
     return Record.__view.$el;
   };
-  Neatline.reqres.addHandler('RECORD:getElement', getElement);
+  Neatline.reqres.setHandler('RECORD:getElement', getElement);
 
 
   /**
@@ -120,7 +120,7 @@ Neatline.module('Editor.Record', function(
   var getModel = function() {
     return Record.__view.model;
   };
-  Neatline.reqres.addHandler('RECORD:getModel', getModel);
+  Neatline.reqres.setHandler('RECORD:getModel', getModel);
 
 
 });

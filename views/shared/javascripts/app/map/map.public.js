@@ -24,7 +24,7 @@ Neatline.module('Map', function(
       Map.__view.ingest(records);
     });
   };
-  Neatline.commands.addHandler('MAP:load', load);
+  Neatline.commands.setHandler('MAP:load', load);
   Neatline.vent.on('MAP:move', load);
 
 
@@ -34,7 +34,7 @@ Neatline.module('Map', function(
   var refresh = function() {
     Map.__view.publishPosition();
   };
-  Neatline.commands.addHandler('MAP:refresh', refresh);
+  Neatline.commands.setHandler('MAP:refresh', refresh);
 
 
   /**
@@ -45,7 +45,7 @@ Neatline.module('Map', function(
   var focusByModel = function(model) {
     Map.__view.focusByModel(model);
   };
-  Neatline.commands.addHandler('MAP:focusByModel', focusByModel);
+  Neatline.commands.setHandler('MAP:focusByModel', focusByModel);
 
 
   /**
@@ -58,7 +58,7 @@ Neatline.module('Map', function(
       focusByModel(model);
     });
   };
-  Neatline.commands.addHandler('MAP:focusById', focusById);
+  Neatline.commands.setHandler('MAP:focusById', focusById);
 
 
   /**
@@ -67,7 +67,7 @@ Neatline.module('Map', function(
   var unselect = function() {
     Map.__view.unselectAll();
   };
-  Neatline.commands.addHandler('MAP:unselect', unselect);
+  Neatline.commands.setHandler('MAP:unselect', unselect);
 
 
   /**
@@ -78,7 +78,7 @@ Neatline.module('Map', function(
   var getMap = function() {
     return Map.__view.map;
   };
-  Neatline.reqres.addHandler('MAP:getMap', getMap);
+  Neatline.reqres.setHandler('MAP:getMap', getMap);
 
 
   /**
@@ -89,7 +89,7 @@ Neatline.module('Map', function(
   var getRecords = function() {
     return Map.__view.records;
   };
-  Neatline.reqres.addHandler('MAP:getRecords', getRecords);
+  Neatline.reqres.setHandler('MAP:getRecords', getRecords);
 
 
   /**
@@ -100,7 +100,7 @@ Neatline.module('Map', function(
   var getCenter = function() {
     return Map.__view.map.getCenter();
   };
-  Neatline.reqres.addHandler('MAP:getCenter', getCenter);
+  Neatline.reqres.setHandler('MAP:getCenter', getCenter);
 
 
   /**
@@ -111,7 +111,7 @@ Neatline.module('Map', function(
   var getZoom = function() {
     return Map.__view.map.getZoom();
   };
-  Neatline.reqres.addHandler('MAP:getZoom', getZoom);
+  Neatline.reqres.setHandler('MAP:getZoom', getZoom);
 
 
 });
