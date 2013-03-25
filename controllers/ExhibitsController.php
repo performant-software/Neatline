@@ -161,7 +161,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
     protected function _getAddSuccessMessage($exhibit)
     {
         return __('The Neatline "%s" was successfully added!',
-            $exhibit->title);
+            $exhibit->title
+        );
     }
 
 
@@ -171,7 +172,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
     protected function _getEditSuccessMessage($exhibit)
     {
         return __('The Neatline "%s" was successfully changed!',
-            $exhibit->title);
+            $exhibit->title
+        );
     }
 
 
@@ -181,7 +183,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
     protected function _getDeleteSuccessMessage($exhibit)
     {
         return __('The Neatline "%s" was successfully deleted!',
-            $exhibit->title);
+            $exhibit->title
+        );
     }
 
 
@@ -191,7 +194,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
     protected function _getDeleteConfirmMessage($exhibit)
     {
       return __('This will delete "%s" and its associated metadata.',
-        $exhibit->title);
+          $exhibit->title
+      );
     }
 
 
@@ -200,9 +204,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     private function _getExhibitForm($exhibit)
     {
-        return new Neatline_ExhibitForm(array(
-            'exhibit' => $exhibit
-        ));
+        return new Neatline_ExhibitForm(array('exhibit' => $exhibit));
     }
 
 
