@@ -16,11 +16,48 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
 
 
     /**
-     * .
+     * Query values should be saved and re-populated.
      */
-    public function test()
+    public function testSaveQuery()
     {
-        // TODO
+
+        $exhibit = $this->__exhibit();
+
+        // Mock collection.
+        $collection = insert_collection(array(), array(
+            'Dublin Core' => array (
+                'Title' => array(
+                    array('text' => 'Collection', 'html' => false)
+                )
+            )
+        ));
+
+        // Mock type.
+        $type = insert_item_type(array('name' => 'Type'));
+
+        $this->request->setMethod('POST')->setPost(array(
+            'search'        => 'Keywords',
+            'range'         => '1-10',
+            'collection'    => $collection->id,
+            'type'          => $type->id,
+            'tags'          => 'tag1,tag2'
+        ));
+
+        $this->dispatch('neatline/import/'.$exhibit->id);
+
+        // Inputs:
+        $this->assertXpath('//input[@name="search"][@value="Keywords"]');
+        $this->assertXpath('//input[@name="range"][@value="1-10"]');
+        $this->assertXpath('//input[@name="tags"][@value="tag1,tag2"]');
+
+        // Selects:
+        $this->assertXpath(
+            '//select[@name="collection"]/option[@selected="selected"]
+            [@label="Collection"]');
+        $this->assertXpath(
+            '//select[@name="type"]/option[@selected="selected"]
+            [@label="Type"]');
+
     }
 
 
