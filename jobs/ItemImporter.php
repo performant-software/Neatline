@@ -35,10 +35,11 @@ class ItemImporter extends Omeka_Job_AbstractJob
         foreach ($items as $item) {
 
             // Try to find a record.
-            $record = $__records->findBy(array(
-                'exhibit_id' => $exhibit->id,
-                'item_id' => $item->id
-            ));
+            $record = $__records->fetchObject(
+                $__records->getSelect()
+                    ->where('exhibit_id=?', $exhibit->id)
+                    ->where('item_id=?', $item->id)
+            );
 
             // Or create a new one.
             if (!$record) $record = new NeatlineRecord($exhibit, $item);

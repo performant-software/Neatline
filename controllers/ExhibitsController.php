@@ -127,7 +127,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
         }
 
-        // Show query.
+        // Populate query.
         $query = unserialize($exhibit->query);
         $_REQUEST = $query; $_GET = $query;
 

@@ -55,16 +55,19 @@ class ItemImporterTest_Explode extends Neatline_TestCase
         $record = new NeatlineRecord($exhibit, $item);
         $record->__save();
 
-        // Zend_Registry::get('bootstrap')->getResource('jobs')->
-            // send('ItemImporter', array(
-                // 'query' => array('range' => $item->id),
-                // 'exhibit_id' => $exhibit->id
-            // )
-        // );
+        Zend_Registry::get('bootstrap')->getResource('jobs')->
+            send('ItemImporter', array(
+                'query' => array('range' => $item->id),
+                'exhibit_id' => $exhibit->id
+            )
+        );
 
         // Should not duplicate item 1 record.
         $records = $this->__records->queryRecords($exhibit);
         $this->assertEquals($records['count'], 1);
+
+        // Should (re)compile the existing record.
+        $this->assertNotNull($records['records'][0]['body']);
 
     }
 
