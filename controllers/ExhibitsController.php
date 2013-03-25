@@ -111,11 +111,11 @@ class Neatline_ExhibitsController extends Neatline_RestController
         $exhibit = $this->_helper->db->findById();
 
         // TODO|dev
-        Zend_Registry::get('bootstrap')->getResource('jobs')->
-            sendLongRunning('Job_ItemImporter', array(
-                'exhibit_id' => $exhibit->id
-            )
-        );
+        // Zend_Registry::get('bootstrap')->getResource('jobs')->
+            // sendLongRunning('Job_ItemImporter', array(
+                // 'exhibit_id' => $exhibit->id
+            // )
+        // );
 
     }
 

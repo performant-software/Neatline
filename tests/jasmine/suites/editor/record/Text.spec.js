@@ -53,9 +53,9 @@ describe('Record Form Text Tab', function() {
     var items = el.autocomplete.find('a');
 
     // Should list items.
-    expect(items[0]).toHaveText('Item 1');
+    expect(items[0]).toHaveText('Item 3');
     expect(items[1]).toHaveText('Item 2');
-    expect(items[2]).toHaveText('Item 3');
+    expect(items[2]).toHaveText('Item 1');
 
   });
 
@@ -80,7 +80,7 @@ describe('Record Form Text Tab', function() {
     );
 
     // Should populate title.
-    expect(_t.vw.TEXT.__ui.title).toHaveValue('Item 1');
+    expect(_t.vw.TEXT.__ui.title).toHaveValue('Item 3');
 
   });
 

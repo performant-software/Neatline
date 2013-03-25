@@ -24,9 +24,17 @@ class FixturesTest_Xml extends Neatline_TestCase
      */
     public function testItemsXml()
     {
-        $this->__item('Item 1');
-        $this->__item('Item 2');
-        $this->__item('Item 3');
+        $item1 = $this->__item('Item 1');
+        $item2 = $this->__item('Item 2');
+        $item3 = $this->__item('Item 3');
+        $item1->added = '2021-01-01';
+        $item2->added = '2022-01-01';
+        $item3->added = '2023-01-01';
+
+        $item1->save();
+        $item2->save();
+        $item3->save();
+
         $this->request->setQuery(array('output' => 'omeka-xml'));
         $this->writeFixtureFromRoute('items/browse', 'items.xml');
     }
