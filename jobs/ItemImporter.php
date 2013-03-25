@@ -23,15 +23,18 @@ class Job_ItemImporter extends Omeka_Job_AbstractJob
     public function perform()
     {
 
-        _nl_mockView();
+        _nl_setView();
 
         // Load the exhibit.
         $exhibit = $this->_db->getTable('NeatlineExhibit')->find(
             $this->_options['exhibit_id']
         );
 
+        // Query for items.
+        $items = get_records('Item', $this->_options['query'], 100000);
+
         // Create records.
-        foreach (get_records('Item', array(), 1000) as $item) {
+        foreach ($items as $item) {
             $record = new NeatlineRecord($exhibit, $item);
             $record->save();
         }

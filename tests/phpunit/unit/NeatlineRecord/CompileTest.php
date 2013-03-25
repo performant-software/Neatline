@@ -28,22 +28,19 @@ class NeatlineRecordTest_Compile extends Neatline_TestCase
     /**
      * `compile` should write the DC "Title" element on the parent item to
      * `title` and the compiled metadata output to `body`.
-     *
-     * should be updated with the current Dublin Core
-     * "Title" field on the parent item and the `body` field should be set.
      */
     public function testCompile()
     {
 
-        $exhibit    = $this->__exhibit();
-        $item       = $this->__item('title');
+        $exhibit = $this->__exhibit();
+        $item = $this->__item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->compile();
 
         // Title and body should be set.
         $this->assertEquals($record->title, 'title');
-        $this->assertRegExp('/item/', $record->getItemBody());
+        $this->assertEquals($record->body, $record->getItemBody());
 
     }
 

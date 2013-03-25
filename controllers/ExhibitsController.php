@@ -120,7 +120,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
             // Import items.
             Zend_Registry::get('bootstrap')->getResource('jobs')->
                 sendLongRunning('Job_ItemImporter', array(
-                    'exhibit_id' => $exhibit->id
+                    'exhibit_id' => $exhibit->id,
+                    'query' => $post
                 )
             );
 

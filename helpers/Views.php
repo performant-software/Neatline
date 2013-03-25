@@ -13,9 +13,9 @@
 
 
 /**
- * Set a mock `Omeka_View` instance in the registry.
+ * Set the script path depth chart for item compilation.
  */
-function _nl_mockView()
+function _nl_setView()
 {
 
     $view = new Omeka_View;
