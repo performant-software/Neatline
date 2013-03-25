@@ -13,7 +13,7 @@
 
 ?>
 
-<?php _nl_exhibitAssets(_nl_exhibit()); ?>
+<?php _nl_neatlineAssets(_nl_exhibit()); ?>
 <?php echo head(array('title' => _nl_field('title'))); ?>
 
 <!-- The core Neatline partial. -->

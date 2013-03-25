@@ -13,6 +13,8 @@
 
 ?>
 
+<?php queue_css_file('payloads/browse'); ?>
+
 <?php
   echo head(array(
     'title' => __('Neatline | Browse Exhibits'),

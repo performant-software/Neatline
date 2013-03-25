@@ -25,21 +25,11 @@ function _nl_mapApis()
 
 
 /**
- * Include static files for the exhibit form.
- */
-function _nl_formAssets()
-{
-    queue_css_file('payloads/form');
-    queue_js_file('payloads/form');
-}
-
-
-/**
  * Include static files for the exhibit.
  *
  * @param NeatlineExhibit The exhibit.
  */
-function _nl_exhibitAssets($exhibit)
+function _nl_neatlineAssets($exhibit)
 {
 
     _nl_mapApis();

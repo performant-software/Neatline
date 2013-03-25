@@ -13,7 +13,10 @@
 
 ?>
 
-<?php _nl_formAssets(); ?>
+<?php
+  queue_css_file('payloads/form');
+  queue_js_file('payloads/form');
+?>
 
 <?php
   echo head(array(

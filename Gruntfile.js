@@ -214,7 +214,7 @@ module.exports = function(grunt) {
       form_css: {
         src: [
           cfg.vendor.css.chosen,
-          cfg.payloads.admin.css+'/form/*.css'
+          cfg.payloads.admin.css+'/form.css'
         ],
         dest: cfg.payloads.admin.css+'/form.css'
       },
@@ -222,7 +222,7 @@ module.exports = function(grunt) {
       neatline_css: {
         src: [
           cfg.vendor.css.openlayers,
-          cfg.payloads.shared.css+'/public/*.css'
+          cfg.payloads.shared.css+'/neatline.css'
         ],
         dest: cfg.payloads.shared.css+'/neatline.css'
       },
@@ -234,7 +234,7 @@ module.exports = function(grunt) {
           cfg.vendor.css.bootstrap,
           cfg.vendor.css.toastr,
           cfg.vendor.css.chosen,
-          cfg.payloads.shared.css+'/editor/*.css'
+          cfg.payloads.shared.css+'/editor.css'
         ],
         dest: cfg.payloads.shared.css+'/editor.css'
       }
@@ -267,12 +267,14 @@ module.exports = function(grunt) {
           paths: [cfg.stylus.shared]
         },
         files: {
-          './views/shared/css/payloads/public/*.css':
-            cfg.stylus.shared+'/public/*.styl',
-          './views/shared/css/payloads/editor/*.css':
+          './views/shared/css/payloads/neatline.css':
+            cfg.stylus.shared+'/neatline/*.styl',
+          './views/shared/css/payloads/editor.css':
             cfg.stylus.shared+'/editor/*.styl',
-          './views/admin/css/payloads/form/*.css':
-            cfg.stylus.admin+'/form/*.styl'
+          './views/admin/css/payloads/browse.css':
+            cfg.stylus.admin+'/browse.styl',
+          './views/admin/css/payloads/form.css':
+            cfg.stylus.admin+'/form.styl'
         }
       }
 
