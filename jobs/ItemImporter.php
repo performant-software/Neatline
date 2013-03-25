@@ -12,7 +12,7 @@
  */
 
 
-class Job_ItemImporter extends Omeka_Job_AbstractJob
+class ItemImporter extends Omeka_Job_AbstractJob
 {
 
 

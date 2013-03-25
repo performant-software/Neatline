@@ -23,6 +23,7 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
 
         $exhibit = $this->__exhibit();
 
+        // Create mock collection.
         $collection = insert_collection(array(), array(
             'Dublin Core' => array (
                 'Title' => array(
@@ -31,8 +32,10 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
             )
         ));
 
+        // Create mock type.
         $type = insert_item_type(array('name' => 'Type'));
 
+        // Set POST data.
         $this->request->setMethod('POST')->setPost(array(
             'search'        => 'Keywords',
             'range'         => '1-10',
