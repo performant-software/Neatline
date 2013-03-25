@@ -55,22 +55,28 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
         $exhibit3->save();
 
         $this->dispatch('neatline');
+        // echo $this->getResponse()->getBody('default');
 
         // Should list 3 exhibits.
         $this->assertXpath('//table[@class="neatline"]/tbody/tr', 3);
 
-        // Should show exhibit titles.
-        $this->assertXpathContentContains(
-            '//table[@class="neatline"]/tbody//td[@class="title"]',
-            'Exhibit 1');
-        $this->assertXpathContentContains(
-            '//table[@class="neatline"]/tbody//td[@class="title"]',
-            'Exhibit 2');
-        $this->assertXpathContentContains(
-            '//table[@class="neatline"]/tbody//td[@class="title"]',
-            'Exhibit 3');
+        // Editor links.
+        $this->assertXpathContentContains('//a[@class="editor"][@href="'.
+            url('neatline/editor/'.$exhibit1->id).'"]', 'Exhibit 1');
+        $this->assertXpathContentContains('//a[@class="editor"][@href="'.
+            url('neatline/editor/'.$exhibit2->id).'"]', 'Exhibit 2');
+        $this->assertXpathContentContains('//a[@class="editor"][@href="'.
+            url('neatline/editor/'.$exhibit3->id).'"]', 'Exhibit 3');
 
-        // Should show links to configuration forms.
+        // Public view links.
+        $this->assertXpath('//a[@class="public"][@href="'.
+            public_url('neatline/show/slug1').'"]');
+        $this->assertXpath('//a[@class="public"][@href="'.
+            public_url('neatline/show/slug2').'"]');
+        $this->assertXpath('//a[@class="public"][@href="'.
+            public_url('neatline/show/slug3').'"]');
+
+        // Exhibit settings links.
         $this->assertXpath('//a[@class="edit"][@href="'.
             url('neatline/edit/'.$exhibit1->id).'"]');
         $this->assertXpath('//a[@class="edit"][@href="'.
@@ -78,21 +84,21 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
         $this->assertXpath('//a[@class="edit"][@href="'.
             url('neatline/edit/'.$exhibit3->id).'"]');
 
-        // Should show links to public views.
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
-            public_url('neatline/show/slug1').'"]');
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
-            public_url('neatline/show/slug2').'"]');
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
-            public_url('neatline/show/slug3').'"]');
+        // Import items links.
+        $this->assertXpath('//a[@class="import"][@href="'.
+            url('neatline/import/'.$exhibit1->id).'"]');
+        $this->assertXpath('//a[@class="import"][@href="'.
+            url('neatline/import/'.$exhibit2->id).'"]');
+        $this->assertXpath('//a[@class="import"][@href="'.
+            url('neatline/import/'.$exhibit3->id).'"]');
 
-        // Should show links to editor.
-        $this->assertXpath('//a[@class="editor"][@href="'.
-            url('neatline/editor/'.$exhibit1->id).'"]');
-        $this->assertXpath('//a[@class="editor"][@href="'.
-            url('neatline/editor/'.$exhibit2->id).'"]');
-        $this->assertXpath('//a[@class="editor"][@href="'.
-            url('neatline/editor/'.$exhibit3->id).'"]');
+        // Delete links.
+        $this->assertXpath('//a[@class="delete-confirm"][@href="'.
+            url('neatline/delete-confirm/'.$exhibit1->id).'"]');
+        $this->assertXpath('//a[@class="delete-confirm"][@href="'.
+            url('neatline/delete-confirm/'.$exhibit2->id).'"]');
+        $this->assertXpath('//a[@class="delete-confirm"][@href="'.
+            url('neatline/delete-confirm/'.$exhibit3->id).'"]');
 
     }
 
@@ -114,9 +120,9 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
 
         // Should list first two exhibits.
         $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
+        $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug1').'"]');
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
+        $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug2').'"]');
 
         // Should show pagination.
@@ -128,9 +134,9 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
 
         // Should show next two exhibits.
         $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
+        $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug3').'"]');
-        $this->assertXpath('//td[@class="title"]/a[@href="'.
+        $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug4').'"]');
 
     }

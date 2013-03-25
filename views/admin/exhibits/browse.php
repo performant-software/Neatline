@@ -40,8 +40,7 @@
               __('Exhibit')   => 'title',
               __('Modified')  => 'modified',
               __('# Items')   => 'added',
-              __('Public')    => 'public',
-              __('Edit')      => null
+              __('Public')    => 'public'
           ), array(
               'link_tag'      => 'th scope="col"'
           )); ?>
@@ -55,16 +54,30 @@
         <tr>
 
           <td class="title">
-            <?php echo _nl_link(); ?>
+            <strong>
+              <?php echo _nl_link($e, 'editor', null,
+                array('class' => 'editor'), false);
+              ?>
+            </strong>
             <ul class="action-links group">
               <li>
-                <?php echo _nl_link($e, 'edit', __('Edit Details'),
+                <?php echo _nl_link($e, 'show', __('Public View'),
+                  array('class' => 'public'), true);
+                ?>
+              </li>
+              <li>
+                <?php echo _nl_link($e, 'edit', __('Exhibit Settings'),
                   array('class' => 'edit'), false);
                 ?>
               </li>
               <li>
+                <?php echo _nl_link($e, 'import', __('Import Items'),
+                  array('class' => 'import'), false);
+                ?>
+              </li>
+              <li>
                 <?php echo _nl_link($e, 'delete-confirm', __('Delete'),
-                  array('class' => 'delete delete-confirm'), false);
+                  array('class' => 'delete-confirm'), false);
                 ?>
               </li>
             </ul>
@@ -73,12 +86,6 @@
           <td><?php echo format_date(_nl_field('modified')); ?></td>
           <td><?php echo _nl_totalRecords(); ?></td>
           <td><?php echo _nl_field('public')?__('Yes'):__('No'); ?></td>
-
-          <td>
-            <?php echo _nl_link($e, 'editor', __('Edit'),
-              array('class' => 'editor'), false);
-            ?>
-          </td>
 
         </tr>
         <?php endforeach; ?>

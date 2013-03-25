@@ -82,13 +82,7 @@ function _nl_areExhibits()
  * @param array $props Array of properties for the element.
  * @return string The HTML link.
  */
-function _nl_link(
-    $exhibit    = null,
-    $action     = 'show',
-    $text       = null,
-    $props      = array(),
-    $public     = true
-) {
+function _nl_link($exhibit, $action, $text, $props=array(), $public=true) {
 
     $exhibit = $exhibit ? $exhibit : _nl_exhibit();
 
