@@ -70,6 +70,14 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
             '//table[@class="neatline"]/tbody//td[@class="title"]',
             'Exhibit 3');
 
+        // Should show links to configuration forms.
+        $this->assertXpath('//a[@class="edit"][@href="'.
+            url('neatline/edit/'.$exhibit1->id).'"]');
+        $this->assertXpath('//a[@class="edit"][@href="'.
+            url('neatline/edit/'.$exhibit2->id).'"]');
+        $this->assertXpath('//a[@class="edit"][@href="'.
+            url('neatline/edit/'.$exhibit3->id).'"]');
+
         // Should show links to public views.
         $this->assertXpath('//td[@class="title"]/a[@href="'.
             public_url('neatline/show/slug1').'"]');

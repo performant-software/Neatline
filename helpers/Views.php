@@ -77,26 +77,32 @@ function _nl_areExhibits()
  * Returns a link to a Neatline exhibit.
  *
  * @param NeatlineExhibit|null $exhibit The exhibit record.
+ * @param string $action The action for the link. Default is 'show'.
  * @param string $text HTML for the text of the link.
  * @param array $props Array of properties for the element.
- * @param string $action The action for the link. Default is 'show'.
  * @return string The HTML link.
  */
-function _nl_link($exhibit=null, $text=null, $props=array(),
-    $action='show', $public=true) {
+function _nl_link(
+    $exhibit    = null,
+    $action     = 'show',
+    $text       = null,
+    $props      = array(),
+    $public     = true
+) {
+
+    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
 
     // Get the text and slug.
-    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
     $text = $text ? $text : _nl_field('title', $exhibit);
     if ($action == 'show') { $slug = $exhibit->slug; }
     else { $slug = $exhibit->id; }
 
     // Form the route.
-    $route = 'neatline/'.$action.'/'.$slug;
+    $route = 'neatline/' . $action . '/' . $slug;
     $uri = $public ? public_url($route) : url($route);
     $props['href'] = $uri;
 
-    return '<a '.tag_attributes($props).'>'.$text.'</a>';
+    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 
 }
 

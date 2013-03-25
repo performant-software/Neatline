@@ -58,14 +58,13 @@
             <?php echo _nl_link(); ?>
             <ul class="action-links group">
               <li>
-                <?php echo _nl_link($e, __('Edit Details'),
-                  array('class' => 'edit'), 'edit', false);
+                <?php echo _nl_link($e, 'edit', __('Edit Details'),
+                  array('class' => 'edit'), false);
                 ?>
               </li>
               <li>
-                <?php echo _nl_link($e, __('Delete'),
-                  array('class' => 'delete delete-confirm'),
-                  'delete-confirm', false);
+                <?php echo _nl_link($e, 'delete-confirm', __('Delete'),
+                  array('class' => 'delete delete-confirm'), false);
                 ?>
               </li>
             </ul>
@@ -76,8 +75,8 @@
           <td><?php echo _nl_field('public')?__('Yes'):__('No'); ?></td>
 
           <td>
-            <?php echo _nl_link($e, __('Edit'),
-              array('class' => 'editor'), 'editor', false);
+            <?php echo _nl_link($e, 'editor', __('Edit'),
+              array('class' => 'editor'), false);
             ?>
           </td>
 
