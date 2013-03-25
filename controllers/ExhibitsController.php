@@ -110,12 +110,25 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
         $exhibit = $this->_helper->db->findById();
 
-        // TODO|dev
-        // Zend_Registry::get('bootstrap')->getResource('jobs')->
-            // sendLongRunning('Job_ItemImporter', array(
-                // 'exhibit_id' => $exhibit->id
-            // )
-        // );
+        if ($this->_request->isPost()) {
+
+            // Save the query.
+            $post = $this->_request->getPost();
+            $exhibit->query = serialize($post);
+            $exhibit->save();
+
+            // Import items.
+            Zend_Registry::get('bootstrap')->getResource('jobs')->
+                sendLongRunning('Job_ItemImporter', array(
+                    'exhibit_id' => $exhibit->id
+                )
+            );
+
+        }
+
+        // Show query.
+        $query = unserialize($exhibit->query);
+        $_REQUEST = $query; $_GET = $query;
 
     }
 

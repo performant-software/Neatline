@@ -94,7 +94,7 @@
       <?php
         echo $this->formSelect(
           'type',
-          @$_REQUEST['item-type-search'],
+          @$_REQUEST['type'],
           array('id' => 'item-type-search'),
           get_table_options('ItemType')
         );
