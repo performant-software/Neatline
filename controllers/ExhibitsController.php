@@ -125,6 +125,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
                 )
             );
 
+            $this->_redirect('neatline');
+
         }
 
         // Show query.
