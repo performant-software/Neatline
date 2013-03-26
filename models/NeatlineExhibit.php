@@ -110,12 +110,21 @@ class NeatlineExhibit extends Neatline_AbstractRecord
                 $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
             }
 
-            // Form the array of key-value pairs to update. Ignore rules
-            // if the value is `auto` or the property is invalid.
+            // Walk valid CSS rules.
             $set = array();
             foreach ($rules as $prop => $val) {
-                if (in_array($prop, $valid) && $val != 'auto') {
-                    $set[$prop] = $val;
+                if (in_array($prop, $valid)) {
+
+                    // Push value if not `auto` or `none`.
+                    if ($val != 'auto' && $val != 'none') {
+                        $set[$prop] = $val;
+                    }
+
+                    // If `none`, push NULL.
+                    else if ($val == 'none') {
+                        $set[$prop] = null;
+                    }
+
                 }
             }
 
@@ -173,7 +182,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
                         // Get the record value.
                         $value = !is_null($record->$prop) ?
                             $record->$prop :
-                            'auto';
+                            'none';
 
                         // Update the CSS.
                         $css[$selector][$prop] = $value;

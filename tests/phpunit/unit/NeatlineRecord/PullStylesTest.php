@@ -60,7 +60,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
     /**
      * Rules with `auto` values should be ignored.
      */
-    public function testIgnoreAutoStyles()
+    public function testAutoValues()
     {
 
         $exhibit = $this->__exhibit();
@@ -72,7 +72,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
-        // Pull `tag1`, save.
+        // Pull `tag`, save.
         $record->pullStyles(array('tag'));
         $record->save();
         $record = $this->reload($record);
@@ -84,9 +84,9 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
 
 
     /**
-     * Rules with invalid properties should be ignored.
+     * Rules with invalid selectors should be ignored.
      */
-    public function testIgnoreInvalidProperties()
+    public function testInvalidSelectors()
     {
 
         $exhibit = $this->__exhibit();
@@ -99,13 +99,39 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
-        // Pull `tag1`, save.
+        // Pull `tag`, save.
         $record->pullStyles(array('tag'));
         $record->save();
         $record = $this->reload($record);
 
         // Invalid property should be ignored.
         $this->assertEquals($record->fill_color, 'color');
+
+    }
+
+
+    /**
+     * Rules with `none` values should be pulled as NULL.
+     */
+    public function testNoneValues()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              point-image: none;
+            }
+        ";
+        $exhibit->save();
+        $record = new NeatlineRecord($exhibit);
+
+        // Pull `tag`, save.
+        $record->pullStyles(array('tag'));
+        $record->save();
+        $record = $this->reload($record);
+
+        // `none` should be cast to NULL.
+        $this->assertNull($record->point_image);
 
     }
 

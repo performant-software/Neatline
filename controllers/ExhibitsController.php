@@ -158,7 +158,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     protected function _getDeleteSuccessMessage($exhibit)
     {
-        return __('The Neatline "%s" was successfully deleted!',
+        return __('The exhibit "%s" was successfully deleted!',
             $exhibit->title
         );
     }

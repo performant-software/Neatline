@@ -69,9 +69,9 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
 
 
     /**
-     * Rules with invalid properties should be ignored.
+     * Rules with invalid selectors should be ignored.
      */
-    public function testIgnoreInvalidProperties()
+    public function testInvalidSelectors()
     {
 
         $exhibit = $this->__exhibit();
@@ -130,9 +130,9 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
 
 
     /**
-     * NULL record values should revert stylesheet rules to `auto`.
+     * NULL record values should be pulled as `none`.
      */
-    public function testNullRecordValues()
+    public function testNullValues()
     {
 
         $exhibit = $this->__exhibit();
@@ -148,9 +148,9 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $exhibit->pullStyles($record);
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
 
-            // `point-image` should revert to `auto`.
+            // `point-image` should pull `none`.
             'all' => array(
-                'point_image' => 'auto'
+                'point_image' => 'none'
             )
 
         ));

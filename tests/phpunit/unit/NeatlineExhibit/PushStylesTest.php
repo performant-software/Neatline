@@ -62,7 +62,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
     /**
      * Rules with `auto` values should be ignored.
      */
-    public function testIgnoreAutoValues()
+    public function testAutoValues()
     {
 
         $exhibit = $this->__exhibit();
@@ -88,9 +88,36 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
 
 
     /**
-     * Rules with invalid properties should be ignored.
+     * Rules with `none` values should be ignored.
      */
-    public function testIgnoreInvalidProperties()
+    public function testNoneValues()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .tag {
+              point-image: none;
+            }
+        ";
+        $record = new NeatlineRecord($exhibit);
+        $record->point_image = 'img';
+        $record->tags = 'tag';
+        $record->save();
+
+        // Push styles.
+        $exhibit->pushStyles();
+        $record = $this->reload($record);
+
+        // Should push `none` as NULL.
+        $this->assertNull($record->point_image);
+
+    }
+
+
+    /**
+     * Rules with invalid selectors should be ignored.
+     */
+    public function testInvalidSelectors()
     {
 
         $exhibit = $this->__exhibit();

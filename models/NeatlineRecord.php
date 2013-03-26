@@ -159,17 +159,26 @@ class NeatlineRecord extends Neatline_AbstractRecord
         // Gather style columns.
         $valid = _nl_getStyles();
 
-        // For each CSS-styled tag.
+        // Walk CSS rules.
         foreach ($css as $selector => $rules) {
 
-            // If the tag has been requested.
+            // If the tag is being pulled.
             if (in_array($selector, $tags)) {
 
-                // Apply the CSS rules to the record. Ignore rules if the
-                // value is `auto` or the property is invalid.
+                // Walk valid CSS rules.
                 foreach ($rules as $prop => $val) {
-                    if (in_array($prop, $valid) && $val != 'auto') {
-                        $this->$prop = $val;
+                    if (in_array($prop, $valid)) {
+
+                        // Set value if not `auto` or `none`.
+                        if ($val != 'auto' && $val != 'none') {
+                            $this->$prop = $val;
+                        }
+
+                        // If `none`, set NULL.
+                        else if ($val == 'none') {
+                            $this->$prop = null;
+                        }
+
                     }
                 }
 
