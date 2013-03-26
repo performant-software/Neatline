@@ -21,6 +21,12 @@
       'bind'  => 'record.tags'
   )); ?>
 
+  <?php echo common('neatline/input', array(
+      'name'  => 'widgets',
+      'label' => 'Widgets',
+      'bind'  => 'record.widgets'
+  )); ?>
+
   <?php echo common('neatline/select', array(
       'name'  => 'presenter',
       'label' => 'Presenter',
@@ -30,14 +36,14 @@
 
   <?php echo common('neatline/input', array(
       'name'  => 'fill-color',
-      'label' => 'Shape Color',
+      'label' => 'Fill Color',
       'bind'  => 'record.fill_color',
       'class' => 'preview'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'select-color',
-      'label' => 'Selected Color',
+      'label' => 'Select Color',
       'bind'  => 'record.select_color',
       'class' => 'preview'
   )); ?>
@@ -51,14 +57,14 @@
 
   <?php echo common('neatline/input', array(
       'name'  => 'fill-opacity',
-      'label' => 'Shape Opacity',
+      'label' => 'Fill Opacity',
       'bind'  => 'record.fill_opacity',
       'class' => 'preview opacity'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'select-opacity',
-      'label' => 'Selected Opacity',
+      'label' => 'Select Opacity',
       'bind'  => 'record.select_opacity',
       'class' => 'preview opacity'
   )); ?>
@@ -103,6 +109,12 @@
       'label' => 'Max Zoom',
       'bind'  => 'record.max_zoom',
       'useCurrent' => true
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'weight',
+      'label' => 'Weight / Order',
+      'bind'  => 'record.weight'
   )); ?>
 
   <?php echo common('neatline/input', array(

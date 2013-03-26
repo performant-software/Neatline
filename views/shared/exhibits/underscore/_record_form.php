@@ -39,6 +39,10 @@
         data-slug="spatial">Spatial</a>
     </li>
     <li class="tab">
+      <a href="#record-temporal" data-toggle="tab"
+        data-slug="temporal">Temporal</a>
+    </li>
+    <li class="tab">
       <a href="#record-style" data-toggle="tab"
         data-slug="style">Style</a>
     </li>
@@ -58,6 +62,12 @@
     <div class="tab-pane spatial" id="record-spatial">
       <?php echo $this->partial(
         'exhibits/underscore/partials/_spatial_panel.php'
+      ); ?>
+    </div>
+
+    <div class="tab-pane temporal" id="record-temporal">
+      <?php echo $this->partial(
+        'exhibits/underscore/partials/_temporal_panel.php'
       ); ?>
     </div>
 

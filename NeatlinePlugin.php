@@ -233,7 +233,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'min_zoom',
             'max_zoom',
             'map_focus',
-            'map_zoom'
+            'map_zoom',
+            'start_show_date',
+            'end_show_date'
         ));
     }
 
