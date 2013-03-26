@@ -132,17 +132,17 @@ describe('Record Form Open', function() {
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
     expect(inputs.tags).            toHaveValue('tags1');
     expect(inputs.presenter).       toHaveValue('StaticBubble');
-    expect(inputs.fillColor).       toHaveValue('#444444');
-    expect(inputs.selectColor).     toHaveValue('#777777');
-    expect(inputs.strokeColor).     toHaveValue('#101010');
-    expect(inputs.fillOpacity).     toHaveValue('13');
-    expect(inputs.selectOpacity).   toHaveValue('16');
-    expect(inputs.strokeOpacity).   toHaveValue('19');
-    expect(inputs.strokeWidth).     toHaveValue('22');
-    expect(inputs.pointRadius).     toHaveValue('25');
-    expect(inputs.pointImage).      toHaveValue('28');
-    expect(inputs.minZoom).         toHaveValue('31');
-    expect(inputs.maxZoom).         toHaveValue('34');
+    expect(inputs.fillColor).       toHaveValue('#111111');
+    expect(inputs.selectColor).     toHaveValue('#222222');
+    expect(inputs.strokeColor).     toHaveValue('#333333');
+    expect(inputs.fillOpacity).     toHaveValue('4');
+    expect(inputs.selectOpacity).   toHaveValue('5');
+    expect(inputs.strokeOpacity).   toHaveValue('6');
+    expect(inputs.strokeWidth).     toHaveValue('7');
+    expect(inputs.pointRadius).     toHaveValue('8');
+    expect(inputs.pointImage).      toHaveValue('9');
+    expect(inputs.minZoom).         toHaveValue('10');
+    expect(inputs.maxZoom).         toHaveValue('11');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
 

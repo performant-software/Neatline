@@ -130,143 +130,44 @@ describe('Map Layers', function() {
 
   it('should render styles', function() {
 
-    /*
-     * Default:
-     */
+    var std = layer1.styleMap.styles['default'].defaultStyle;
+    var tmp = layer1.styleMap.styles.temporary.defaultStyle;
+    var sel = layer1.styleMap.styles.select.defaultStyle;
 
     // Fill color.
-    expect(layer1.styleMap.styles['default'].defaultStyle.fillColor).
-      toEqual('#444444');
-    expect(layer2.styleMap.styles['default'].defaultStyle.fillColor).
-      toEqual('#555555');
+    expect(std.fillColor).toEqual('#111111');
+    expect(tmp.fillColor).toEqual('#222222');
+    expect(sel.fillColor).toEqual('#222222');
 
     // Stroke color.
-    expect(layer1.styleMap.styles['default'].defaultStyle.strokeColor).
-      toEqual('#101010');
-    expect(layer2.styleMap.styles['default'].defaultStyle.strokeColor).
-      toEqual('#111111');
+    expect(std.strokeColor).toEqual('#333333');
+    expect(tmp.strokeColor).toEqual('#333333');
+    expect(sel.strokeColor).toEqual('#333333');
 
-    // Fill opacity
-    expect(layer1.styleMap.styles['default'].defaultStyle.fillOpacity).
-      toEqual(0.13);
-    expect(layer2.styleMap.styles['default'].defaultStyle.fillOpacity).
-      toEqual(0.14);
+    // Fill opacity.
+    expect(std.fillOpacity).toEqual(0.04);
+    expect(tmp.fillOpacity).toEqual(0.05);
+    expect(sel.fillOpacity).toEqual(0.05);
 
-    // Graphic opacity (same as fill opacity)
-    expect(layer1.styleMap.styles['default'].defaultStyle.graphicOpacity).
-      toEqual(0.13);
-    expect(layer2.styleMap.styles['default'].defaultStyle.graphicOpacity).
-      toEqual(0.14);
+    // Graphic opacity.
+    expect(std.graphicOpacity).toEqual(0.04);
+    expect(tmp.graphicOpacity).toEqual(0.05);
+    expect(sel.graphicOpacity).toEqual(0.05);
 
-    // Stroke opacity
-    expect(layer1.styleMap.styles['default'].defaultStyle.strokeOpacity).
-      toEqual(0.19);
-    expect(layer2.styleMap.styles['default'].defaultStyle.strokeOpacity).
-      toEqual(0.20);
+    // Stroke opacity.
+    expect(std.strokeOpacity).toEqual(0.06);
+    expect(tmp.strokeOpacity).toEqual(0.06);
+    expect(sel.strokeOpacity).toEqual(0.06);
 
     // Stroke width.
-    expect(layer1.styleMap.styles['default'].defaultStyle.strokeWidth).
-      toEqual(22);
-    expect(layer2.styleMap.styles['default'].defaultStyle.strokeWidth).
-      toEqual(23);
+    expect(std.strokeWidth).toEqual(7);
+    expect(tmp.strokeWidth).toEqual(7);
+    expect(sel.strokeWidth).toEqual(7);
 
     // Point radius.
-    expect(layer1.styleMap.styles['default'].defaultStyle.pointRadius).
-      toEqual(25);
-    expect(layer2.styleMap.styles['default'].defaultStyle.pointRadius).
-      toEqual(26);
-
-    /*
-     * Select:
-     */
-
-    // Fill color.
-    expect(layer1.styleMap.styles.select.defaultStyle.fillColor).
-      toEqual('#777777');
-    expect(layer2.styleMap.styles.select.defaultStyle.fillColor).
-      toEqual('#888888');
-
-    // Stroke color.
-    expect(layer1.styleMap.styles.select.defaultStyle.strokeColor).
-      toEqual('#101010');
-    expect(layer2.styleMap.styles.select.defaultStyle.strokeColor).
-      toEqual('#111111');
-
-    // Fill opacity
-    expect(layer1.styleMap.styles.select.defaultStyle.fillOpacity).
-      toEqual(0.16);
-    expect(layer2.styleMap.styles.select.defaultStyle.fillOpacity).
-      toEqual(0.17);
-
-    // Graphic opacity (same as fill opacity)
-    expect(layer1.styleMap.styles.select.defaultStyle.graphicOpacity).
-      toEqual(0.16);
-    expect(layer2.styleMap.styles.select.defaultStyle.graphicOpacity).
-      toEqual(0.17);
-
-    // Stroke opacity
-    expect(layer1.styleMap.styles.select.defaultStyle.strokeOpacity).
-      toEqual(0.19);
-    expect(layer2.styleMap.styles.select.defaultStyle.strokeOpacity).
-      toEqual(0.20);
-
-    // Stroke width.
-    expect(layer1.styleMap.styles.select.defaultStyle.strokeWidth).
-      toEqual(22);
-    expect(layer2.styleMap.styles.select.defaultStyle.strokeWidth).
-      toEqual(23);
-
-    // Point radius.
-    expect(layer1.styleMap.styles.select.defaultStyle.pointRadius).
-      toEqual(25);
-    expect(layer2.styleMap.styles.select.defaultStyle.pointRadius).
-      toEqual(26);
-
-    /*
-     * Temporary:
-     */
-
-    // Fill color.
-    expect(layer1.styleMap.styles.temporary.defaultStyle.fillColor).
-      toEqual('#777777');
-    expect(layer2.styleMap.styles.temporary.defaultStyle.fillColor).
-      toEqual('#888888');
-
-    // Stroke color.
-    expect(layer1.styleMap.styles.temporary.defaultStyle.strokeColor).
-      toEqual('#101010');
-    expect(layer2.styleMap.styles.temporary.defaultStyle.strokeColor).
-      toEqual('#111111');
-
-    // Fill opacity
-    expect(layer1.styleMap.styles.temporary.defaultStyle.fillOpacity).
-      toEqual(0.16);
-    expect(layer2.styleMap.styles.temporary.defaultStyle.fillOpacity).
-      toEqual(0.17);
-
-    // Graphic opacity (same as fill opacity)
-    expect(layer1.styleMap.styles.temporary.defaultStyle.graphicOpacity).
-      toEqual(0.16);
-    expect(layer2.styleMap.styles.temporary.defaultStyle.graphicOpacity).
-      toEqual(0.17);
-
-    // Stroke opacity
-    expect(layer1.styleMap.styles.temporary.defaultStyle.strokeOpacity).
-      toEqual(0.19);
-    expect(layer2.styleMap.styles.temporary.defaultStyle.strokeOpacity).
-      toEqual(0.20);
-
-    // Stroke width.
-    expect(layer1.styleMap.styles.temporary.defaultStyle.strokeWidth).
-      toEqual(22);
-    expect(layer2.styleMap.styles.temporary.defaultStyle.strokeWidth).
-      toEqual(23);
-
-    // Point radius.
-    expect(layer1.styleMap.styles.temporary.defaultStyle.pointRadius).
-      toEqual(25);
-    expect(layer2.styleMap.styles.temporary.defaultStyle.pointRadius).
-      toEqual(26);
+    expect(std.pointRadius).toEqual(8);
+    expect(tmp.pointRadius).toEqual(8);
+    expect(sel.pointRadius).toEqual(8);
 
   });
 

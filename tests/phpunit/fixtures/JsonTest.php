@@ -53,79 +53,32 @@ class FixturesTest_Json extends Neatline_TestCase
         // `records.standard.json`
         // - #1 has a default map focus/zoom, #2 and #3 do not.
 
-        // ----------------------------------------------------------------
         $record1->item_id           = 1;
-        $record2->item_id           = 2;
-        $record3->item_id           = 3;
-        // ----------------------------------------------------------------
         $record1->title             = 'title1';
-        $record2->title             = 'title2';
-        $record3->title             = 'title3';
-        // ----------------------------------------------------------------
         $record1->body              = 'body1';
-        $record2->body              = 'body2';
-        $record3->body              = 'body3';
-        // ----------------------------------------------------------------
         $record1->tags              = 'tags1';
-        $record2->tags              = 'tags2';
-        $record3->tags              = 'tags3';
-        // ----------------------------------------------------------------
         $record1->coverage          = 'POINT(1 2)';
-        $record2->coverage          = 'POINT(3 4)';
-        $record3->coverage          = 'POINT(5 6)';
-        // ----------------------------------------------------------------
         $record1->map_focus         = '100,200';
         $record1->map_zoom          = 10;
-        // ** No default focus for #2 and #3.
-        // ----------------------------------------------------------------
         $record1->presenter         = 'StaticBubble';
-        $record2->presenter         = 'StaticBubble';
-        $record3->presenter         = 'StaticBubble';
-        // ----------------------------------------------------------------
-        $record1->fill_color        = '#444444';
-        $record2->fill_color        = '#555555';
-        $record3->fill_color        = '#666666';
-        // ----------------------------------------------------------------
-        $record1->select_color      = '#777777';
-        $record2->select_color      = '#888888';
-        $record3->select_color      = '#999999';
-        // ----------------------------------------------------------------
-        $record1->stroke_color      = '#101010';
-        $record2->stroke_color      = '#111111';
-        $record3->stroke_color      = '#121212';
-        // ----------------------------------------------------------------
-        $record1->fill_opacity      = 13;
-        $record2->fill_opacity      = 14;
-        $record3->fill_opacity      = 15;
-        // ----------------------------------------------------------------
-        $record1->select_opacity    = 16;
-        $record2->select_opacity    = 17;
-        $record3->select_opacity    = 18;
-        // ----------------------------------------------------------------
-        $record1->stroke_opacity    = 19;
-        $record2->stroke_opacity    = 20;
-        $record3->stroke_opacity    = 21;
-        // ----------------------------------------------------------------
-        $record1->stroke_width      = 22;
-        $record2->stroke_width      = 23;
-        $record3->stroke_width      = 24;
-        // ----------------------------------------------------------------
-        $record1->point_radius      = 25;
-        $record2->point_radius      = 26;
-        $record3->point_radius      = 27;
-        // ----------------------------------------------------------------
-        $record1->point_image       = '28';
-        $record2->point_image       = '29';
-        $record3->point_image       = '30';
-        // ----------------------------------------------------------------
-        $record1->min_zoom          = 31;
-        $record2->min_zoom          = 32;
-        $record3->min_zoom          = 33;
-        // ----------------------------------------------------------------
-        $record1->max_zoom          = 34;
-        $record2->max_zoom          = 35;
-        $record3->max_zoom          = 36;
-        // ----------------------------------------------------------------
+        $record1->fill_color        = '#111111';
+        $record1->select_color      = '#222222';
+        $record1->stroke_color      = '#333333';
+        $record1->fill_opacity      = 4;
+        $record1->select_opacity    = 5;
+        $record1->stroke_opacity    = 6;
+        $record1->stroke_width      = 7;
+        $record1->point_radius      = 8;
+        $record1->point_image       = '9';
+        $record1->min_zoom          = 10;
+        $record1->max_zoom          = 11;
+
+        $record2->title             = 'title2';
+        $record3->title             = 'title3';
+        $record2->body              = 'body2';
+        $record3->body              = 'body3';
+        $record2->coverage          = 'POINT(3 4)';
+        $record3->coverage          = 'POINT(5 6)';
 
         $record1->__save();
         $record2->__save();
@@ -143,7 +96,6 @@ class FixturesTest_Json extends Neatline_TestCase
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'records.changed.json');
-
 
         // `records.removed.json`
         // #2 has been deleted from the collection.
@@ -169,7 +121,6 @@ class FixturesTest_Json extends Neatline_TestCase
     public function testPaginatedRecordsJson()
     {
 
-        // Create 6 records.
         for ($i = 0; $i<6; $i++) {
             $record = new NeatlineRecord($this->exhibit);
             $record->added  = '200'.$i.'-01-01';
@@ -233,12 +184,9 @@ class FixturesTest_Json extends Neatline_TestCase
      */
     public function testEmptyTitleRecordsJson()
     {
-
         $record = $this->__record($this->exhibit);
-
         $this->writeFixtureFromRoute('neatline/records',
             'records.noTitle.json');
-
     }
 
 
