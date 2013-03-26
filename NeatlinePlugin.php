@@ -220,6 +220,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineStyles($styles)
     {
         return array_merge($styles, array(
+            'widgets',
             'presenter',
             'fill_color',
             'select_color',
