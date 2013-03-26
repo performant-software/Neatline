@@ -82,7 +82,7 @@ class NeatlineRecordTest_FieldAccess extends Neatline_TestCase
         $this->assertEquals($record->end_date,          '25');
         $this->assertEquals($record->start_show_date,   '26');
         $this->assertEquals($record->end_show_date,     '27');
-        $this->assertEquals($record->weight,            '28');
+        $this->assertEquals($record->weight,            28);
 
     }
 
