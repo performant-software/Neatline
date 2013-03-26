@@ -25,6 +25,16 @@ function _nl_mapApis()
 
 
 /**
+ * Include static files for add/edit form.
+ */
+function _nl_formAssets()
+{
+    queue_css_file('payloads/form');
+    queue_js_file('payloads/form');
+}
+
+
+/**
  * Include static files for the exhibit.
  *
  * @param NeatlineExhibit The exhibit.
@@ -55,7 +65,6 @@ function _nl_editorAssets($exhibit)
 
     _nl_mapApis();
     queue_css_file('payloads/editor');
-    queue_js_file('payloads/ckeditor/ckeditor');
     queue_js_file('payloads/editor');
     queue_js_file('bootstrap');
 

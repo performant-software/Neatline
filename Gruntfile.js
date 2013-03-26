@@ -114,15 +114,6 @@ module.exports = function(grunt) {
           expand: true,
           flatten: true
         }]
-      },
-
-      ckeditor: {
-        files: [{
-          cwd: cfg.build.ckeditor+'/release/ckeditor/',
-          src: '**',
-          dest: cfg.payloads.shared.js+'/ckeditor/',
-          expand: true
-        }]
       }
 
     },
@@ -394,7 +385,6 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
-    'shell:build_ckeditor',
     'shell:build_sinon',
     'compile',
     'copy'
