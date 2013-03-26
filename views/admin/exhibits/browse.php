@@ -20,17 +20,16 @@
     'title' => __('Neatline | Browse Exhibits'),
     'content_class' => 'neatline'
   ));
+  echo flash();
 ?>
 
-<p class="add-button">
-  <a class="add green button" href="<?php echo url('neatline/add'); ?>">
+<div class="table-actions">
+  <a class="small green button" href="<?php echo url('neatline/add'); ?>">
     <?php echo __('Create an Exhibit'); ?>
   </a>
-</p>
+</div>
 
 <div id="primary">
-
-  <?php echo flash(); ?>
 
   <?php if(_nl_areExhibits()): ?>
   <div class="pagination"><?php echo pagination_links(); ?></div>

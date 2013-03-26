@@ -39,6 +39,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
+
         // Exhibits table.
         // ---------------
         $sql = "CREATE TABLE IF NOT EXISTS
