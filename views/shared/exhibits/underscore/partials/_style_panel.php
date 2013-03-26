@@ -21,11 +21,13 @@
       'bind'  => 'record.tags'
   )); ?>
 
+  <!--
   <?php echo common('neatline/input', array(
       'name'  => 'widgets',
       'label' => 'Widgets',
       'bind'  => 'record.widgets'
   )); ?>
+  -->
 
   <?php echo common('neatline/select', array(
       'name'  => 'presenter',
@@ -38,21 +40,24 @@
       'name'  => 'fill-color',
       'label' => 'Fill Color',
       'bind'  => 'record.fill_color',
-      'class' => 'preview'
+      'class' => 'preview',
+      'type'  => 'color'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'select-color',
       'label' => 'Select Color',
       'bind'  => 'record.select_color',
-      'class' => 'preview'
+      'class' => 'preview',
+      'type'  => 'color'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'stroke-color',
       'label' => 'Line Color',
       'bind'  => 'record.stroke_color',
-      'class' => 'preview'
+      'class' => 'preview',
+      'type'  => 'color'
   )); ?>
 
   <?php echo common('neatline/input', array(
@@ -111,11 +116,13 @@
       'useCurrent' => true
   )); ?>
 
+  <!--
   <?php echo common('neatline/input', array(
       'name'  => 'weight',
       'label' => 'Weight / Order',
       'bind'  => 'record.weight'
   )); ?>
+  -->
 
   <?php echo common('neatline/input', array(
       'name'  => 'map-focus',

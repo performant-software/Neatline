@@ -103,11 +103,12 @@
 
   <?php echo common('neatline/textarea', array(
       'name'  => 'coverage',
-      'label' => 'Geometry ( Well-Known Text )',
+      'label' => 'Geometry',
       'bind'  => 'record.coverage',
       'class' => 'code'
   )); ?>
 
+  <!--
   <?php echo common('neatline/input', array(
       'name'  => 'wms_address',
       'label' => 'WMS Address',
@@ -119,5 +120,6 @@
       'label' => 'WMS Layers',
       'bind'  => 'record.wms_layers'
   )); ?>
+  -->
 
 </div>
