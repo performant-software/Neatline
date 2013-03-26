@@ -32,24 +32,21 @@
       'name'  => 'fill-color',
       'label' => 'Shape Color',
       'bind'  => 'record.fill_color',
-      'class' => 'preview',
-      'type'  => 'color'
+      'class' => 'preview'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'select-color',
       'label' => 'Selected Color',
       'bind'  => 'record.select_color',
-      'class' => 'preview',
-      'type'  => 'color'
+      'class' => 'preview'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'stroke-color',
       'label' => 'Line Color',
       'bind'  => 'record.stroke_color',
-      'class' => 'preview',
-      'type'  => 'color'
+      'class' => 'preview'
   )); ?>
 
   <?php echo common('neatline/input', array(
