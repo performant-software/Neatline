@@ -132,7 +132,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
     /**
      * NULL record values should be pulled as `none`.
      */
-    public function testNullValues()
+    public function testNullRecordValues()
     {
 
         $exhibit = $this->__exhibit();

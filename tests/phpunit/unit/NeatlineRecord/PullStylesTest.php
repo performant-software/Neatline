@@ -113,7 +113,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
     /**
      * Rules with `none` values should be pulled as NULL.
      */
-    public function testNoneValues()
+    public function testNoneCssValues()
     {
 
         $exhibit = $this->__exhibit();

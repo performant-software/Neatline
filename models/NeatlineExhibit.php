@@ -181,8 +181,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
                         // Get the record value.
                         $value = !is_null($record->$prop) ?
-                            $record->$prop :
-                            'none';
+                            $record->$prop : 'none';
 
                         // Update the CSS.
                         $css[$selector][$prop] = $value;
