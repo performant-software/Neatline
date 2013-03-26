@@ -71,7 +71,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $exhibit->saveForm($form->getValues());
-                $this->_redirect('neatline');
+                $this->_helper->redirector('browse');
             }
         }
 
@@ -92,7 +92,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $exhibit->saveForm($form->getValues());
-                $this->_redirect('neatline');
+                $this->_helper->redirector('browse');
             }
         }
 
@@ -154,29 +154,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Sets the add success message.
-     */
-    protected function _getAddSuccessMessage($exhibit)
-    {
-        return __('The Neatline "%s" was successfully added!',
-            $exhibit->title
-        );
-    }
-
-
-    /**
-     * Sets the edit success message.
-     */
-    protected function _getEditSuccessMessage($exhibit)
-    {
-        return __('The Neatline "%s" was successfully changed!',
-            $exhibit->title
-        );
-    }
-
-
-    /**
-     * Sets the delete success message.
+     * Set the delete success message.
      */
     protected function _getDeleteSuccessMessage($exhibit)
     {
@@ -187,7 +165,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Sets the delete confirm message.
+     * Set the delete confirm message.
      */
     protected function _getDeleteConfirmMessage($exhibit)
     {
