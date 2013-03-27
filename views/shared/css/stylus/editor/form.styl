@@ -14,41 +14,39 @@
 @import 'var'
 
 
-#editor
+form
+  padding $editorMargin
 
-  form
-    padding $editorMargin
+  label
+    font-weight 500
 
-    label
-      font-weight 500
+  div.controls
+    margin-bottom 10px
 
-    div.controls
-      margin-bottom 10px
+  a.close
+    font-size 2em
+    line-height 1em
+    margin-top -2px
+    margin-left 5px
 
-    a.close
-      font-size 2em
-      line-height 1em
-      margin-top -2px
-      margin-left 5px
+  ul.nav
+    margin-top 20px
 
-    ul.nav
-      margin-top 20px
+  h3.head
+    font-size 2em
+    font-weight 300
 
-    h3.head
-      font-size 2em
-      font-weight 300
+  textarea,
+  input[type="text"],
+  input[type="color"]
+    max-width 95%
+    width 95%
 
-    textarea,
-    input[type="text"],
-    input[type="color"]
-      max-width 95%
-      width 95%
+  select
+    width 100%
 
-    select
-      width 100%
+  .actions
+    margin-top 1em
 
-    .actions
-      margin-top 1em
-
-      a
-        margin-right 5px
+    a
+      margin-right 5px

@@ -14,40 +14,38 @@
 @import 'var'
 
 
-#editor
+div.records
 
-  .records
+  ul.list
+    margin 0
 
-    ul.list
-      margin 0
+    a
+      display list-item
+      font-size 14px
+      font-weight 300
+      padding 0.2em $editorMargin
+      border-top 1px solid #f0f0f0
+      white-space nowrap
+      color $textColor
 
-      a
-        display list-item
-        font-size 14px
-        font-weight 300
-        padding 0.2em $editorMargin
-        border-top 1px solid #f0f0f0
-        white-space nowrap
-        color $textColor
+      &:hover
+        background $accentColor
+        text-decoration none
+        color white
 
-        &:hover
-          background $accentColor
-          text-decoration none
-          color white
+      .title
+        font-weight bold
 
-        .title
-          font-weight bold
+  .pagination
+    padding-left $editorMargin
 
-    .pagination
-      padding-left $editorMargin
+    .pagination-details
+      display inline
+      position relative
+      left 5px
+      top -10px
 
-      .pagination-details
-        display inline
-        position relative
-        left 5px
-        top -10px
-
-        .start
-        .end
-        .total
-          font-weight bold
+      .start
+      .end
+      .total
+        font-weight bold

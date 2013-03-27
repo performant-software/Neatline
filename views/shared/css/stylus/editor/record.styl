@@ -14,69 +14,67 @@
 @import 'var'
 
 
-#editor
+form.record
 
-  form.record
+  span.id
+    font-weight bold
 
-    span.id
-      font-weight bold
+  .nav-pills li a
+    padding 4px 5px
+    font-size 12px
 
-    .nav-pills li a
-      padding 4px 5px
-      font-size 12px
+  #record-text
 
-    #record-text
+    textarea[name="title"]
+      height 100px
+    textarea[name="body"]
+      height 300px
 
-      textarea[name="title"]
-        height 100px
-      textarea[name="body"]
-        height 300px
+  #record-spatial
 
-    #record-spatial
+    label.radio
+    label.checkbox
+      margin-bottom 8px
+      cursor pointer
 
-      label.radio
-      label.checkbox
-        margin-bottom 8px
-        cursor pointer
+    label.radio
+      margin-left 0.5em
 
-      label.radio
-        margin-left 0.5em
-
-      div.control-group.indent
-        margin 0 2em
-
-        label
-        .inline-inputs
-          font-weight 300
-
-        &.regular-polygon
-
-          .inline-inputs
-            margin-bottom 10px
-
-          input[type="text"]
-            display inline
-            margin 0 4px 0 0
-            width 30px
-
-      a[name="clear"]
-        margin 0.5em 0
-
-      textarea.code
-        height 20px
-        font-size 12px
-        font-family Consolas
-        font-weight bold
-
-    #record-style
-      margin-bottom 1.4em
+    div.control-group.indent
+      margin 0 2em
 
       label
-        display inline-block
+      .inline-inputs
+        font-weight 300
 
-      a.use-current
-        font-size 12px
-        cursor pointer
+      &.regular-polygon
 
-      button[name="focus-map"]
-        margin 5px 0 10px
+        .inline-inputs
+          margin-bottom 10px
+
+        input[type="text"]
+          display inline
+          margin 0 4px 0 0
+          width 30px
+
+    a[name="clear"]
+      margin 0.5em 0
+
+    textarea.code
+      height 20px
+      font-size 12px
+      font-family Consolas
+      font-weight bold
+
+  #record-style
+    margin-bottom 1.4em
+
+    label
+      display inline-block
+
+    a.use-current
+      font-size 12px
+      cursor pointer
+
+    button[name="focus-map"]
+      margin 5px 0 10px
