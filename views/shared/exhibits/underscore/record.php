@@ -49,7 +49,7 @@
         'exhibits/underscore/partials/pane_text.php'
       ); ?>
     </div>
-    <div class="tab-pane spatial" id="record-map">
+    <div class="tab-pane map" id="record-map">
       <?php echo $this->partial(
         'exhibits/underscore/partials/pane_map.php'
       ); ?>

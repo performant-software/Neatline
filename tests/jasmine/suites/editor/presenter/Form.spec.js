@@ -68,11 +68,11 @@ describe('Presenter Form Interaction', function() {
   });
 
 
-  it('should activate when spatial tab is unselected', function() {
+  it('should activate when map tab is unselected', function() {
 
     // --------------------------------------------------------------------
-    // When a record is being edited and the spatial tab is unselected,
-    // the presenter should be activated.
+    // When a record is being edited and the map tab is unselected, the
+    // presenter should be activated.
     // --------------------------------------------------------------------
 
     // Spy on trigger.

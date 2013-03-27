@@ -125,9 +125,9 @@ describe('Record Form Add', function() {
     //
     // `#record/<id>/text`
     //
-    // When the "Spatial" tab is active:
+    // When the "Map" tab is active:
     //
-    // `#record/<id>/spatial`
+    // `#record/<id>/map`
     //
     // etc.
     // --------------------------------------------------------------------

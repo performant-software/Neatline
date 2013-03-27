@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for SVG drawing in "Spatial" tab on record form.
+ * Tests for SVG drawing in "Map" tab on record form.
  *
  * @package     omeka
  * @subpackage  neatline

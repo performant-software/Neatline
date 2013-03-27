@@ -25,8 +25,6 @@ describe('Record Form Map Tab', function() {
     _t.vw.RECORD.activateTab('map');
 
     el = {
-      text:     _t.vw.RECORD.$('a[href="#record-text"]'),
-      spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
       pan:      _t.vw.RECORD.$('input[value="pan"]'),
       point:    _t.vw.RECORD.$('input[value="point"]'),
       line:     _t.vw.RECORD.$('input[value="line"]'),
@@ -530,8 +528,8 @@ describe('Record Form Map Tab', function() {
     // Activate "Draw Polygon".
     el.pan[0].checked = false; el.poly[0].checked = true;
 
-    // Click "Text" tab.
-    el.text.tab('show');
+    // Activate "Text" tab.
+    _t.vw.RECORD.activateTab('text');
 
     // "Navigate" mode should be active.
     expect(_t.vw.MAPTAB.getEditMode()).toEqual('pan');

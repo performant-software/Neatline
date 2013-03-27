@@ -27,9 +27,9 @@ describe('Record Form Tabs', function() {
     //
     // `#record/add/text`
     //
-    // When the "Spatial" tab is active:
+    // When the "Map" tab is active:
     //
-    // `#record/add/spatial`
+    // `#record/add/map`
     //
     // etc.
     // --------------------------------------------------------------------
@@ -61,9 +61,9 @@ describe('Record Form Tabs', function() {
     //
     // `#record/<id>/text`
     //
-    // When the "Spatial" tab is active:
+    // When the "Map" tab is active:
     //
-    // `#record/<id>/spatial`
+    // `#record/<id>/map`
     //
     // etc.
     // --------------------------------------------------------------------

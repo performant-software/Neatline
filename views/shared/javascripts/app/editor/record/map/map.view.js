@@ -18,11 +18,11 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
 
     events: {
-      'shown ul.nav a':           'onTabChange',
-      'change div.spatial input': 'onControlChange',
-      'keyup div.spatial input':  'onControlChange',
-      'click a[name="parse"]':    'onParseClick',
-      'click a[name="clear"]':    'onClearClick'
+      'shown ul.nav a':         'onTabChange',
+      'change div.map input':   'onControlChange',
+      'keyup div.map input':    'onControlChange',
+      'click a[name="parse"]':  'onParseClick',
+      'click a[name="clear"]':  'onClearClick'
     },
 
     selectors: {
