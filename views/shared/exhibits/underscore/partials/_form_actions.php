@@ -19,12 +19,9 @@
     <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
   </a>
 
-  <a
-    href="#delete-modal"
-    class="btn btn-inverse"
-    name="delete1"
-    data-toggle="modal"
-  ><i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?></a>
+  <a href="#delete-modal" class="btn btn-inverse" data-toggle="modal">
+    <i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?>
+  </a>
 
 </div>
 
@@ -49,7 +46,7 @@
       <i class="icon-ban-circle"></i> Cancel
     </a>
 
-    <a name="delete2" class="btn btn-danger">
+    <a name="delete" class="btn btn-danger">
       <i class="icon-trash icon-white"></i> Yes, delete
     </a>
 

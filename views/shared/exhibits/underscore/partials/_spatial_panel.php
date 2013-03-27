@@ -99,8 +99,6 @@
     </a>
   </div>
 
-  <hr>
-
   <?php echo common('neatline/textarea', array(
       'name'  => 'coverage',
       'label' => 'Coverage (Well-Known Text)',

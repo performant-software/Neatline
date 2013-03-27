@@ -22,10 +22,10 @@ Neatline.module('Editor.Record', function(
     tagName:    'form',
 
     events: {
-      'shown ul.nav a':           'onTabChange',
-      'click a[name="close"]':    'onCloseClick',
-      'click a[name="save"]':     'onSaveClick',
-      'click a[name="delete2"]':  'onDeleteClick'
+      'shown ul.nav a':         'onTabChange',
+      'click a[name="close"]':  'onCloseClick',
+      'click a[name="save"]':   'onSaveClick',
+      'click a[name="delete"]': 'onDeleteClick'
     },
 
     ui: {

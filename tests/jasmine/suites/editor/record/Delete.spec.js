@@ -24,8 +24,8 @@ describe('Record Form Delete', function() {
     id = _t.vw.RECORD.model.get('id');
 
     el = {
-      delete1:  _t.vw.RECORD.$('a[name="delete1"]'),
-      delete2:  _t.vw.RECORD.$('a[name="delete2"]'),
+      delete1:  _t.vw.RECORD.$('a[href="#delete-modal"]'),
+      delete2:  _t.vw.RECORD.$('a[name="delete"]'),
       cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
       modal:    _t.vw.RECORD.$('#delete-modal')
     };
