@@ -15,12 +15,13 @@
 
 <div class="actions">
 
-  <a name="save" class="btn btn-primary" \>
+  <a name="save" class="btn btn-primary btn-large" \>
     <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" class="btn btn-inverse" data-toggle="modal">
-    <i class="icon-trash icon-white"></i> <?php echo __('Delete'); ?>
+  <a href="#delete-modal" class="btn btn-inverse btn-large"
+    data-toggle="modal"><i class="icon-trash icon-white"></i>
+    <?php echo __('Delete'); ?>
   </a>
 
 </div>

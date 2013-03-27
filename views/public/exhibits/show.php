@@ -17,7 +17,7 @@
 <?php echo head(array('title' => _nl_field('title'))); ?>
 
 <!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/_neatline.php'); ?>
+<?php echo $this->partial('neatline/partials/neatline.php'); ?>
 
 <div class="exhibit-description">
     <?php echo _nl_field('description'); ?>

@@ -47,7 +47,7 @@ class FixturesTest_Html extends Neatline_TestCase
     public function testNeatlinePartial()
     {
         $this->writeFixture(
-            get_view()->partial('neatline/_neatline.php'),
+            get_view()->partial('neatline/partials/neatline.php'),
             'neatline-partial.html'
         );
     }
@@ -59,7 +59,7 @@ class FixturesTest_Html extends Neatline_TestCase
     public function testEditorPartial()
     {
         $this->writeFixture(
-            get_view()->partial('exhibits/partials/editor.php'),
+            get_view()->partial('exhibits/partials/editor_core.php'),
             'editor-partial.html'
         );
     }

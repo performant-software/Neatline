@@ -14,7 +14,7 @@
 ?>
 
 <div id="neatline">
-  <?php echo $this->partial('neatline/_map.php'); ?>
+  <?php echo $this->partial('neatline/partials/map.php'); ?>
 </div>
 
 <!-- JSON globals. -->
@@ -25,7 +25,7 @@
 </script>
 
 <!-- Underscore templates. -->
-<?php echo $this->partial('neatline/underscore/_static_bubble.php'); ?>
+<?php echo $this->partial('neatline/underscore/bubble.php'); ?>
 
 <!-- Plugin templates. ->
 <?php fire_plugin_hook('neatline_public_underscore', array(

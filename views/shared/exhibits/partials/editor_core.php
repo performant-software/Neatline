@@ -18,7 +18,7 @@
 <div id="editor"></div>
 
 <!-- Exhibit. -->
-<?php echo $this->partial('neatline/_neatline.php'); ?>
+<?php echo $this->partial('neatline/partials/neatline.php'); ?>
 
 <!-- Loader. -->
 <?php echo $this->partial('exhibits/partials/loader.php'); ?>
