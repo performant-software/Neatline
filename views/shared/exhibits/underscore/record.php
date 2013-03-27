@@ -34,11 +34,11 @@
     </li>
     <li class="tab">
       <a href="#record-spatial" data-toggle="tab"
-        data-slug="spatial">Spatial</a>
+        data-slug="spatial">Map</a>
     </li>
     <li class="tab">
       <a href="#record-style" data-toggle="tab"
-        data-slug="style">Styles</a>
+        data-slug="style">Style</a>
     </li>
   </ul>
 

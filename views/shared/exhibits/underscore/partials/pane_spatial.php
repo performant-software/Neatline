@@ -36,11 +36,6 @@
   </label>
 
   <label class="radio">
-    <input type="radio" name="mode" value="svg">
-    Draw SVG ( <a href="#svg-modal" data-toggle="modal">Enter Markup</a> )
-  </label>
-
-  <label class="radio">
     <input type="radio" name="mode" value="regPoly">
     Draw Regular Polygon
   </label>
@@ -63,6 +58,11 @@
     </label>
 
   </div>
+
+  <label class="radio">
+    <input type="radio" name="mode" value="svg">
+    Draw SVG ( <a href="#svg-modal" data-toggle="modal">Paste</a> )
+  </label>
 
   <label class="radio">
     <input type="radio" name="mode" value="modify">
@@ -95,25 +95,11 @@
     </a>
   </div>
 
-  <hr>
-
   <?php echo common('neatline/textarea', array(
       'name'  => 'coverage',
       'label' => 'Geometry',
       'bind'  => 'record.coverage',
       'class' => 'code'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'wms-address',
-      'label' => 'WMS Address',
-      'bind'  => 'record.wms_address'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'wms-layers',
-      'label' => 'WMS Layers',
-      'bind'  => 'record.wms_layers'
   )); ?>
 
 </div>

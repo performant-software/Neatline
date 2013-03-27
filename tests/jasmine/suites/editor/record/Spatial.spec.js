@@ -21,6 +21,9 @@ describe('Record Form Spatial Tab', function() {
     _t.loadEditor();
     _t.showFirstRecordForm();
 
+    // Show "Spatial" tab.
+    _t.vw.RECORD.activateTab('spatial');
+
     el = {
       text:     _t.vw.RECORD.$('a[href="#record-text"]'),
       spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
@@ -37,10 +40,7 @@ describe('Record Form Spatial Tab', function() {
       remove:   _t.vw.RECORD.$('input[value="remove"]'),
       coverage: _t.vw.RECORD.$('textarea[name="coverage"]'),
       clear:    _t.vw.RECORD.$('a[name="clear"]'),
-      parse:    _t.vw.RECORD.$('a[name="parse"]'),
-      sides:    _t.vw.SPATIAL.__ui.sides,
-      snap:     _t.vw.SPATIAL.__ui.snap,
-      irreg:    _t.vw.SPATIAL.__ui.irreg
+      parse:    _t.vw.RECORD.$('a[name="parse"]')
     };
 
   });
@@ -49,8 +49,7 @@ describe('Record Form Spatial Tab', function() {
   it('should set draw point mode', function() {
 
     // --------------------------------------------------------------------
-    // When the "Draw Point" radio button is selected, the corresponding
-    // drawFeature control should be activated on the map.
+    // The "Draw Point" radio should enable point-drawing on the map.
     // --------------------------------------------------------------------
 
     // Check "Draw Point".
@@ -67,8 +66,7 @@ describe('Record Form Spatial Tab', function() {
   it('should set draw line mode', function() {
 
     // --------------------------------------------------------------------
-    // When the "Draw Line" radio button is selected, the corresponding
-    // drawFeature control should be activated on the map.
+    // The "Draw Line" radio should enable line-drawing on the map.
     // --------------------------------------------------------------------
 
     // Check "Draw Line".
@@ -85,8 +83,7 @@ describe('Record Form Spatial Tab', function() {
   it('should set draw polygon mode', function() {
 
     // --------------------------------------------------------------------
-    // When the "Draw Polygon" radio button is selected, the corresponding
-    // drawFeature control should be activated on the map.
+    // The "Draw Polygon" radio should enable polygon-drawing on the map.
     // --------------------------------------------------------------------
 
     // Check "Draw Polygon".
@@ -103,8 +100,7 @@ describe('Record Form Spatial Tab', function() {
   it('should set draw SVG mode', function() {
 
     // --------------------------------------------------------------------
-    // When the "Draw SVG" radio button is selected, the corresponding
-    // drawFeature control should be activated on the map.
+    // The "Draw SVG" radio should enable SVG-drawing on the map.
     // --------------------------------------------------------------------
 
     // Check "Draw SVG".
@@ -121,8 +117,8 @@ describe('Record Form Spatial Tab', function() {
   it('should set draw regular polygon mode', function() {
 
     // --------------------------------------------------------------------
-    // When the "Draw Regular Polygon" radio button is selected, the
-    // corresponding drawFeature control should be activated on the map.
+    // The "Draw Regular Polygon" radio should enable regular-polygon-
+    // drawing on the map.
     // --------------------------------------------------------------------
 
     // Check "Draw Regular Polygon".
@@ -132,6 +128,93 @@ describe('Record Form Spatial Tab', function() {
 
     // "Draw Regular Polygon" should be active.
     expect(_t.vw.MAP.controls.regPoly.active).toBeTruthy();
+
+  });
+
+
+  it('should show/hide regular polygon options', function() {
+
+    // --------------------------------------------------------------------
+    // When "Draw Regular Polygon" is checked, the list of control options
+    // should be displayed; when unchecked, the list should disappear.
+    // --------------------------------------------------------------------
+
+    // Options should be hidden.
+    expect(_t.vw.SPATIAL.__ui.regOpts).not.toBeVisible();
+
+    // Check "Draw Regular Polygon".
+    el.pan.removeAttr('checked');
+    el.regPoly.attr('checked', 'checked');
+    el.regPoly.trigger('change');
+
+    // Options should be visible.
+    expect(_t.vw.SPATIAL.__ui.regOpts).toBeVisible();
+
+    // Check "Navigate".
+    el.regPoly.removeAttr('checked');
+    el.pan.attr('checked', 'checked');
+    el.pan.trigger('change');
+
+    // Options should be hidden.
+    expect(_t.vw.SPATIAL.__ui.regOpts).not.toBeVisible();
+
+  });
+
+
+  it('should set sides', function() {
+
+    // --------------------------------------------------------------------
+    // When a new value is entered into the "Sides" input, the `sides`
+    // property on the modifyFeature control should be updated.
+    // --------------------------------------------------------------------
+
+    // Set sides.
+    _t.vw.SPATIAL.__ui.sides.val('10');
+    _t.vw.SPATIAL.__ui.sides.trigger('change');
+
+    // "Sides" should be updated.
+    expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
+
+  });
+
+
+  it('should set snap angle', function() {
+
+    // --------------------------------------------------------------------
+    // When a new value is entered into the "Snap Angle" input, the
+    // `snapAngle` property on the modifyFeature control should be updated.
+    // --------------------------------------------------------------------
+
+    // Set snap angle.
+    _t.vw.SPATIAL.__ui.snap.val('45');
+    _t.vw.SPATIAL.__ui.snap.trigger('change');
+
+    // "Snap Angle" should be updated.
+    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
+
+  });
+
+
+  it('should set irregular', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Irregular" checkbox is changed, the `irregular` property
+    // on the modifyFeature control should be updated.
+    // --------------------------------------------------------------------
+
+    // Set irregular.
+    _t.vw.SPATIAL.__ui.irreg.attr('checked', 'checked');
+    _t.vw.SPATIAL.__ui.irreg.trigger('change');
+
+    // "Irregular" be active.
+    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
+
+    // Unset irregular.
+    _t.vw.SPATIAL.__ui.irreg.removeAttr('checked');
+    _t.vw.SPATIAL.__ui.irreg.trigger('change');
+
+    // "Irregular" should be inactive.
+    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
 
   });
 
@@ -246,69 +329,11 @@ describe('Record Form Spatial Tab', function() {
   });
 
 
-  it('should set sides', function() {
-
-    // --------------------------------------------------------------------
-    // When a new value is entered into the "Sides" input, the `sides`
-    // property on the modifyFeature control should be updated.
-    // --------------------------------------------------------------------
-
-    // Set sides.
-    el.sides.val('10');
-    el.sides.trigger('change');
-
-    // "Sides" should be updated.
-    expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
-
-  });
-
-
-  it('should set snap angle', function() {
-
-    // --------------------------------------------------------------------
-    // When a new value is entered into the "Snap Angle" input, the
-    // `snapAngle` property on the modifyFeature control should be updated.
-    // --------------------------------------------------------------------
-
-    // Set snap angle.
-    el.snap.val('45');
-    el.snap.trigger('change');
-
-    // "Snap Angle" should be updated.
-    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
-
-  });
-
-
-  it('should set irregular polygon', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Irregular" checkbox is changed, the `irregular` property
-    // on the modifyFeature control should be updated.
-    // --------------------------------------------------------------------
-
-    // Set irregular.
-    el.irreg.attr('checked', 'checked');
-    el.irreg.trigger('change');
-
-    // "Irregular" be active.
-    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
-
-    // Unset irregular.
-    el.irreg.removeAttr('checked');
-    el.irreg.trigger('change');
-
-    // "Irregular" should be inactive.
-    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
-
-  });
-
-
   it('should update coverage on point add', function() {
 
     // --------------------------------------------------------------------
-    // When a new point geometry is added to the map, the coverage text
-    // area should be updated with the new WKT string.
+    // When a new point is added to the map, the coverage text area should
+    // be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
@@ -326,8 +351,8 @@ describe('Record Form Spatial Tab', function() {
   it('should update coverage on line add', function() {
 
     // --------------------------------------------------------------------
-    // When a new line geometry is added to the map, the coverage text
-    // area should be updated with the new WKT string.
+    // When a new line is added to the map, the coverage text area should
+    // be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
@@ -347,8 +372,8 @@ describe('Record Form Spatial Tab', function() {
   it('should update coverage on polygon add', function() {
 
     // --------------------------------------------------------------------
-    // When a new polygon geometry is added to the map, the coverage text
-    // area should be updated with the new WKT string.
+    // When a new polygon is added to the map, the coverage text area
+    // should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
@@ -390,8 +415,8 @@ describe('Record Form Spatial Tab', function() {
   it('should update coverage on svg polygon add', function() {
 
     // --------------------------------------------------------------------
-    // When a new SVG-backed polygon geometry is added to the map, the
-    // coverage text area should be updated with the new WKT string.
+    // When a new SVG-backed polygon is added to the map, the coverage
+    // text area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
@@ -413,8 +438,8 @@ describe('Record Form Spatial Tab', function() {
   it('should update coverage on regular polygon add', function() {
 
     // --------------------------------------------------------------------
-    // When a new regular polygon geometry is added to the map, the
-    // coverage text area should be updated with the new WKT string.
+    // When a new regular polygon is added to the map, the coverage text
+    // area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
     // Create a new point, trigger modify.
@@ -501,9 +526,6 @@ describe('Record Form Spatial Tab', function() {
     // The geometry editing controls should revert to "Navigate" mode when
     // the spatial tab is deactivated.
     // --------------------------------------------------------------------
-
-    // Click "Spatial" tab.
-    el.spatial.tab('show');
 
     // Activate "Draw Polygon".
     el.pan[0].checked = false; el.poly[0].checked = true;
