@@ -13,12 +13,19 @@
 
 ?>
 
-<label><?php echo __($label); ?></label>
+<label>
+  <?php echo __($label); ?>
+  <?php if (isset($style)): ?>
+    <code><?php echo $style; ?></code>
+  <?php endif; ?>
+</label>
+
 <?php if (isset($useCurrent) && $useCurrent): ?>
   ( <a class="use-current" name="set-<?php echo $name; ?>">
       Use Current
     </a> )
 <?php endif; ?>
+
 <div class="controls">
   <div class="inline-inputs">
     <input

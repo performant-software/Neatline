@@ -17,10 +17,10 @@
 
   <div class="control-group">
 
-    <?php echo common('neatline/code', array(
-        'label' => 'Stylesheet',
-        'id'    => 'styles'
-    )); ?>
+    <label>Stylesheet</label>
+    <div class="controls">
+      <div class="inline-inputs"><div id="styles" /></div>
+    </div>
 
     <?php echo common('neatline/input', array(
         'name'  => 'map-focus',

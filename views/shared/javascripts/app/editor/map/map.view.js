@@ -229,6 +229,24 @@ _.extend(Neatline.Map.View.prototype, {
         this.controls.edit.activate();
         break;
 
+      case 'rotate':
+        this.deactivateControls();
+        this.controls.edit.activate();
+        this.controls.edit.mode = OpenLayers.Control.ModifyFeature.ROTATE;
+        break;
+
+      case 'resize':
+        this.deactivateControls();
+        this.controls.edit.activate();
+        this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESIZE;
+        break;
+
+      case 'drag':
+        this.deactivateControls();
+        this.controls.edit.activate();
+        this.controls.edit.mode = OpenLayers.Control.ModifyFeature.DRAG;
+        break;
+
       case 'remove':
         this.controls.remove.activate();
         break;
@@ -250,24 +268,6 @@ _.extend(Neatline.Map.View.prototype, {
     // Irregular.
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
-
-    // Apply "Modify Shape" settings.
-    // ------------------------------
-
-    // Rotate.
-    if (_.contains(settings.modify, 'rotate')) {
-      this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.ROTATE;
-    }
-
-    // Resize.
-    if (_.contains(settings.modify, 'resize')) {
-      this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.RESIZE;
-    }
-
-    // Drag.
-    if (_.contains(settings.modify, 'drag')) {
-      this.controls.edit.mode |= OpenLayers.Control.ModifyFeature.DRAG;
-    }
 
   },
 

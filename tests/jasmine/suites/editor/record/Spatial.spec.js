@@ -148,8 +148,82 @@ describe('Record Form Spatial Tab', function() {
     el.modify.attr('checked', 'checked');
     el.modify.trigger('change');
 
-    // "Modify Shape" should be active.
+    // Edit control should be active.
     expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+
+    // Reshape should be active.
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.RESHAPE
+    );
+
+  });
+
+
+  it('should set rotate shape mode', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Rotate Shape" radio button is selected, the corresponding
+    // modifyFeature control should be activated on the map.
+    // --------------------------------------------------------------------
+
+    // Check "Rotate Shape".
+    el.pan.removeAttr('checked');
+    el.rotate.attr('checked', 'checked');
+    el.rotate.trigger('change');
+
+    // Edit control should be active.
+    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+
+    // Rotate should be active.
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.ROTATE
+    );
+
+  });
+
+
+  it('should set resize shape mode', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Resize Shape" radio button is selected, the corresponding
+    // modifyFeature control should be activated on the map.
+    // --------------------------------------------------------------------
+
+    // Check "Resize Shape".
+    el.pan.removeAttr('checked');
+    el.resize.attr('checked', 'checked');
+    el.resize.trigger('change');
+
+    // Edit control should be active.
+    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+
+    // Resize should be active.
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.RESIZE
+    );
+
+  });
+
+
+  it('should set drag shape mode', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Drag Shape" radio button is selected, the corresponding
+    // modifyFeature control should be activated on the map.
+    // --------------------------------------------------------------------
+
+    // Check "Drag Shape".
+    el.pan.removeAttr('checked');
+    el.drag.attr('checked', 'checked');
+    el.drag.trigger('change');
+
+    // Edit control should be active.
+    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+
+    // Resize should be active.
+    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+      OpenLayers.Control.ModifyFeature.DRAG
+    );
 
   });
 
@@ -226,66 +300,6 @@ describe('Record Form Spatial Tab', function() {
 
     // "Irregular" should be inactive.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
-
-  });
-
-
-  it('should set rotation', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Rotate" option under "Modify Shape" is checked, `ROTATE`
-    // mode should be activated on the modifyFeature control.
-    // --------------------------------------------------------------------
-
-    // Set rotate.
-    el.rotate.attr('checked', 'checked');
-    el.rotate.trigger('change');
-
-    // Rotation should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
-      OpenLayers.Control.ModifyFeature.RESHAPE |
-      OpenLayers.Control.ModifyFeature.ROTATE
-    );
-
-  });
-
-
-  it('should set resize', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Resize" option under "Modify Shape" is checked, `RESIZE`
-    // mode should be activated on the modifyFeature control.
-    // --------------------------------------------------------------------
-
-    // Set options.
-    el.resize.attr('checked', 'checked');
-    el.resize.trigger('change');
-
-    // Resize should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
-      OpenLayers.Control.ModifyFeature.RESHAPE |
-      OpenLayers.Control.ModifyFeature.RESIZE
-    );
-
-  });
-
-
-  it('should set drag', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Drag" option under "Modify Shape" is checked, `DRAG` mode
-    // should be activated on the modifyFeature control.
-    // --------------------------------------------------------------------
-
-    // Set options.
-    el.drag.attr('checked', 'checked');
-    el.drag.trigger('change');
-
-    // Drag should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
-      OpenLayers.Control.ModifyFeature.RESHAPE |
-      OpenLayers.Control.ModifyFeature.DRAG
-    );
 
   });
 

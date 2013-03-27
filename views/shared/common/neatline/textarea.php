@@ -13,9 +13,13 @@
 
 ?>
 
-<label for="<?php echo $name; ?>">
-<?php echo __($label); ?>
+<label>
+  <?php echo __($label); ?>
+  <?php if (isset($style)): ?>
+    <code><?php echo $style; ?></code>
+  <?php endif; ?>
 </label>
+
 <div class="controls <?php if (isset($class)) echo $class; ?>">
   <textarea
     <?php if (isset($id)) echo "id='$id'"; ?>

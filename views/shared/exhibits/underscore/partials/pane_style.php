@@ -15,6 +15,8 @@
 
 <div class="control-group">
 
+  <legend>Groups</legend>
+
   <?php echo common('neatline/input', array(
       'name'  => 'tags',
       'label' => 'Tags',
@@ -25,13 +27,17 @@
       'name'  => 'presenter',
       'label' => 'Presenter',
       'bind'  => 'record.presenter',
+      'style' => 'presenter',
       'options' => _nl_getPresenters()
   )); ?>
+
+  <legend>Colors</legend>
 
   <?php echo common('neatline/input', array(
       'name'  => 'fill-color',
       'label' => 'Fill Color',
       'bind'  => 'record.fill_color',
+      'style' => 'fill-color',
       'class' => 'preview',
       'type'  => 'color'
   )); ?>
@@ -40,22 +46,27 @@
       'name'  => 'select-color',
       'label' => 'Select Color',
       'bind'  => 'record.select_color',
+      'style' => 'select-color',
       'class' => 'preview',
       'type'  => 'color'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'stroke-color',
-      'label' => 'Line Color',
+      'label' => 'Stroke Color',
       'bind'  => 'record.stroke_color',
+      'style' => 'stroke-color',
       'class' => 'preview',
       'type'  => 'color'
   )); ?>
+
+  <legend>Opacities</legend>
 
   <?php echo common('neatline/input', array(
       'name'  => 'fill-opacity',
       'label' => 'Fill Opacity',
       'bind'  => 'record.fill_opacity',
+      'style' => 'fill-opacity',
       'class' => 'preview opacity'
   )); ?>
 
@@ -63,20 +74,25 @@
       'name'  => 'select-opacity',
       'label' => 'Select Opacity',
       'bind'  => 'record.select_opacity',
+      'style' => 'select-opacity',
       'class' => 'preview opacity'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'stroke-opacity',
-      'label' => 'Line Opacity',
+      'label' => 'Stroke Opacity',
       'bind'  => 'record.stroke_opacity',
+      'style' => 'stroke-opacity',
       'class' => 'preview opacity'
   )); ?>
 
+  <legend>Dimensions</legend>
+
   <?php echo common('neatline/input', array(
       'name'  => 'stroke-width',
-      'label' => 'Line Width',
+      'label' => 'Stroke Width',
       'bind'  => 'record.stroke_width',
+      'style' => 'stroke-width',
       'class' => 'preview integer'
   )); ?>
 
@@ -84,20 +100,34 @@
       'name'  => 'point-radius',
       'label' => 'Point Radius',
       'bind'  => 'record.point_radius',
+      'style' => 'point-radius',
       'class' => 'preview integer'
   )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'weight',
+      'label' => 'Order / Weight',
+      'bind'  => 'record.weight',
+      'style' => 'weight'
+  )); ?>
+
+  <legend>Imagery</legend>
 
   <?php echo common('neatline/input', array(
       'name'  => 'point-image',
       'label' => 'Point Image',
       'bind'  => 'record.point_image',
+      'style' => 'point-image',
       'class' => 'preview'
   )); ?>
+
+  <legend>Visibility</legend>
 
   <?php echo common('neatline/input', array(
       'name'  => 'min-zoom',
       'label' => 'Min Zoom',
       'bind'  => 'record.min_zoom',
+      'style' => 'min-zoom',
       'useCurrent' => true
   )); ?>
 
@@ -105,19 +135,22 @@
       'name'  => 'max-zoom',
       'label' => 'Max Zoom',
       'bind'  => 'record.max_zoom',
+      'style' => 'max-zoom',
       'useCurrent' => true
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'map-focus',
       'label' => 'Default Focus',
-      'bind'  => 'record.map_focus'
+      'bind'  => 'record.map_focus',
+      'style' => 'map-focus'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'map-zoom',
       'label' => 'Default Zoom',
-      'bind'  => 'record.map_zoom'
+      'bind'  => 'record.map_zoom',
+      'style' => 'map-zoom'
   )); ?>
 
   <?php echo common('neatline/button', array(

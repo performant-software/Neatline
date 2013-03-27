@@ -69,24 +69,20 @@
     Modify Shape
   </label>
 
-  <div class="control-group indent">
+  <label class="radio">
+    <input type="radio" name="mode" value="rotate">
+    Rotate Shape
+  </label>
 
-    <label class="checkbox">
-      <input type="checkbox" name="modify" value="rotate">
-      Rotate
-    </label>
+  <label class="radio">
+    <input type="radio" name="mode" value="resize">
+    Resize Shape
+  </label>
 
-    <label class="checkbox">
-      <input type="checkbox" name="modify" value="resize">
-      Resize
-    </label>
-
-    <label class="checkbox">
-      <input type="checkbox" name="modify" value="drag">
-      Drag
-    </label>
-
-  </div>
+  <label class="radio">
+    <input type="radio" name="mode" value="drag">
+    Drag Shape
+  </label>
 
   <label class="radio">
     <input type="radio" name="mode" value="remove">
@@ -99,11 +95,25 @@
     </a>
   </div>
 
+  <hr>
+
   <?php echo common('neatline/textarea', array(
       'name'  => 'coverage',
-      'label' => 'Coverage (Well-Known Text)',
+      'label' => 'Geometry',
       'bind'  => 'record.coverage',
       'class' => 'code'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'wms-address',
+      'label' => 'WMS Address',
+      'bind'  => 'record.wms_address'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'wms-layers',
+      'label' => 'WMS Layers',
+      'bind'  => 'record.wms_layers'
   )); ?>
 
 </div>

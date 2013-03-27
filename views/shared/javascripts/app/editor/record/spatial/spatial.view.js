@@ -66,9 +66,8 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
      */
     onControlChange: function() {
       Neatline.execute('MAPEDIT:updateEdit', {
-        mode:   this.getEditMode(),
-        modify: this.getModifyOptions(),
-        poly:   this.getPolyOptions()
+        mode: this.getEditMode(),
+        poly: this.getPolyOptions()
       });
     },
 
@@ -117,7 +116,7 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
     /**
-     * Deactivate the presenter when the "Spatial" tab is active.
+     * Deactivate the presenter when "Spatial" is active.
      */
     setPresenterStatus: function() {
       Neatline.vent.trigger(this.spatialTabActive() ?
@@ -149,21 +148,10 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
     /**
      * Get the map edit mode.
      *
-     * @return {String}: pan|point|line|poly|svg|regPoly|modify|remove.
+     * @return {String}: The mode slug.
      */
     getEditMode: function() {
       return $(this.selectors.mode+':checked').val();
-    },
-
-
-    /**
-     * Get the "Modify Shape" checkboxes.
-     *
-     * @return {Array}: 0-3 strings: rotate|resize|drag.
-     */
-    getModifyOptions: function() {
-      var inputs = $(this.selectors.modify+':checked');
-      return _.map(inputs, function(i) { return $(i).val(); });
     },
 
 

@@ -13,7 +13,13 @@
 
 ?>
 
-<label><?php echo __($label); ?></label>
+<label>
+  <?php echo __($label); ?>
+  <?php if (isset($style)): ?>
+    <code><?php echo $style; ?></code>
+  <?php endif; ?>
+</label>
+
 <div class="controls">
   <div class="inline-inputs">
     <select
