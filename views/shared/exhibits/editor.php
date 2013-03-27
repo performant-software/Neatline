@@ -13,6 +13,6 @@
 
 ?>
 
-<?php echo $this->partial('exhibits/_editor_header.php'); ?>
-<?php echo $this->partial('exhibits/_editor.php'); ?>
-<?php echo $this->partial('exhibits/_editor_footer.php'); ?>
+<?php echo $this->partial('exhibits/partials/editor_header.php'); ?>
+<?php echo $this->partial('exhibits/partials/editor.php'); ?>
+<?php echo $this->partial('exhibits/partials/editor_footer.php'); ?>

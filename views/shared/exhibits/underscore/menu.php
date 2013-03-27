@@ -28,7 +28,7 @@
 
     <!-- Widget tabs. -->
     <?php echo $this->partial(
-      'exhibits/underscore/partials/_exhibit_widget_tabs.php'
+      'exhibits/underscore/partials/exhibit_widget_tabs.php'
     ); ?>
 
   </ul>

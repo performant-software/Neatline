@@ -17,7 +17,7 @@
 
   <!-- Close button. -->
   <?php echo $this->partial(
-    'exhibits/underscore/partials/_close_button.php'
+    'exhibits/underscore/partials/close_button.php'
   ); ?>
 
   <!-- Header. -->
@@ -26,10 +26,8 @@
     <span class="title" data-text="record.title | title"></span>
   </p>
 
+  <!-- Tabs. -->
   <ul class="nav nav-pills">
-
-    <!-- Default tabs. -->
-
     <li class="tab">
       <a href="#record-text" data-toggle="tab"
         data-slug="text">Text</a>
@@ -39,74 +37,38 @@
         data-slug="spatial">Spatial</a>
     </li>
     <li class="tab">
-      <a href="#record-temporal" data-toggle="tab"
-        data-slug="temporal">Temporal</a>
-    </li>
-    <li class="tab">
       <a href="#record-style" data-toggle="tab"
-        data-slug="style">Categories</a>
+        data-slug="style">Styles</a>
     </li>
-    <li class="tab">
-      <a href="#record-style" data-toggle="tab"
-        data-slug="style">Colors</a>
-    </li>
-    <li class="tab">
-      <a href="#record-style" data-toggle="tab"
-        data-slug="style">Opacities</a>
-    </li>
-    <li class="tab">
-      <a href="#record-style" data-toggle="tab"
-        data-slug="style">Dimensions</a>
-    </li>
-    <li class="tab">
-      <a href="#record-style" data-toggle="tab"
-        data-slug="style">Imagery</a>
-    </li>
-    <li class="tab">
-      <a href="#record-style" data-toggle="tab"
-        data-slug="style">Visibility</a>
-    </li>
-
   </ul>
 
+  <!-- Panels. -->
   <div class="tab-content">
-
-    <!-- Default panels. -->
-
     <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_text_panel.php'
+        'exhibits/underscore/partials/text_panel.php'
       ); ?>
     </div>
-
     <div class="tab-pane spatial" id="record-spatial">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_spatial_panel.php'
+        'exhibits/underscore/partials/spatial_panel.php'
       ); ?>
     </div>
-
-    <div class="tab-pane temporal" id="record-temporal">
-      <?php echo $this->partial(
-        'exhibits/underscore/partials/_temporal_panel.php'
-      ); ?>
-    </div>
-
     <div class="tab-pane style" id="record-style">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/_style_panel.php'
+        'exhibits/underscore/partials/style_panel.php'
       ); ?>
     </div>
-
   </div>
 
   <!-- Save/Delete buttons. -->
   <?php echo $this->partial(
-    'exhibits/underscore/partials/_form_actions.php'
+    'exhibits/underscore/partials/form_actions.php'
   ); ?>
 
   <!-- SVG modal. -->
   <?php echo $this->partial(
-    'exhibits/underscore/partials/_svg_modal.php'
+    'exhibits/underscore/partials/svg_modal.php'
   ); ?>
 
 </script>

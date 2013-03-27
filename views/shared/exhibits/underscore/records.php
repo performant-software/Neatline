@@ -17,7 +17,7 @@
 
   <!-- Top pagination. -->
   <?php echo $this->partial(
-    'exhibits/underscore/partials/_pagination.php'
+    'exhibits/underscore/partials/pagination.php'
   ); ?>
 
   <ul class="list">
@@ -53,7 +53,7 @@
 
   <!-- Bottom pagination. -->
   <?php echo $this->partial(
-    'exhibits/underscore/partials/_pagination.php'
+    'exhibits/underscore/partials/pagination.php'
   ); ?>
 
 </script>

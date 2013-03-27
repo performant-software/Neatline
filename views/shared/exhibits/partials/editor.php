@@ -21,17 +21,17 @@
 <?php echo $this->partial('neatline/_neatline.php'); ?>
 
 <!-- Loader. -->
-<?php echo $this->partial('exhibits/_loader.php'); ?>
+<?php echo $this->partial('exhibits/partials/loader.php'); ?>
 
 <!-- Strings. -->
-<?php echo $this->partial('exhibits/_strings.php'); ?>
+<?php echo $this->partial('exhibits/partials/strings.php'); ?>
 
 <!-- Underscore templates. -->
-<?php echo $this->partial('exhibits/underscore/_exhibit_menu.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_exhibit_styles.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_record_form.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_record_list.php'); ?>
-<?php echo $this->partial('exhibits/underscore/_search.php'); ?>
+<?php echo $this->partial('exhibits/underscore/menu.php'); ?>
+<?php echo $this->partial('exhibits/underscore/styles.php'); ?>
+<?php echo $this->partial('exhibits/underscore/record.php'); ?>
+<?php echo $this->partial('exhibits/underscore/records.php'); ?>
+<?php echo $this->partial('exhibits/underscore/search.php'); ?>
 
 <!-- Plugin templates. ->
 <?php fire_plugin_hook('neatline_editor_underscore', array(

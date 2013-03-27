@@ -106,18 +106,4 @@
       'class' => 'code'
   )); ?>
 
-  <!--
-  <?php echo common('neatline/input', array(
-      'name'  => 'wms_address',
-      'label' => 'WMS Address',
-      'bind'  => 'record.wms_address'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'wms_layers',
-      'label' => 'WMS Layers',
-      'bind'  => 'record.wms_layers'
-  )); ?>
-  -->
-
 </div>

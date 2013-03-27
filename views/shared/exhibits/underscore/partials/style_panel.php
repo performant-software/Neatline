@@ -21,14 +21,6 @@
       'bind'  => 'record.tags'
   )); ?>
 
-  <!--
-  <?php echo common('neatline/input', array(
-      'name'  => 'widgets',
-      'label' => 'Widgets',
-      'bind'  => 'record.widgets'
-  )); ?>
-  -->
-
   <?php echo common('neatline/select', array(
       'name'  => 'presenter',
       'label' => 'Presenter',
@@ -115,14 +107,6 @@
       'bind'  => 'record.max_zoom',
       'useCurrent' => true
   )); ?>
-
-  <!--
-  <?php echo common('neatline/input', array(
-      'name'  => 'weight',
-      'label' => 'Weight / Order',
-      'bind'  => 'record.weight'
-  )); ?>
-  -->
 
   <?php echo common('neatline/input', array(
       'name'  => 'map-focus',
