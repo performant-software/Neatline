@@ -38,15 +38,33 @@
       <a href="#record-spatial" data-toggle="tab"
         data-slug="spatial">Spatial</a>
     </li>
-    <!--
     <li class="tab">
       <a href="#record-temporal" data-toggle="tab"
         data-slug="temporal">Temporal</a>
     </li>
-    -->
     <li class="tab">
       <a href="#record-style" data-toggle="tab"
-        data-slug="style">Style</a>
+        data-slug="style">Categories</a>
+    </li>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab"
+        data-slug="style">Colors</a>
+    </li>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab"
+        data-slug="style">Opacities</a>
+    </li>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab"
+        data-slug="style">Dimensions</a>
+    </li>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab"
+        data-slug="style">Imagery</a>
+    </li>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab"
+        data-slug="style">Visibility</a>
     </li>
 
   </ul>

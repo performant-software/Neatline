@@ -103,7 +103,7 @@
 
   <?php echo common('neatline/textarea', array(
       'name'  => 'coverage',
-      'label' => 'Geometry',
+      'label' => 'Coverage (Well-Known Text)',
       'bind'  => 'record.coverage',
       'class' => 'code'
   )); ?>
