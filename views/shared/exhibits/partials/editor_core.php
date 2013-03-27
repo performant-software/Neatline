@@ -20,9 +20,6 @@
 <!-- Exhibit. -->
 <?php echo $this->partial('neatline/partials/neatline.php'); ?>
 
-<!-- Loader. -->
-<?php echo $this->partial('exhibits/partials/loader.php'); ?>
-
 <!-- Strings. -->
 <?php echo $this->partial('exhibits/partials/strings.php'); ?>
 

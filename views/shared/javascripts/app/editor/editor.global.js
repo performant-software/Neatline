@@ -12,21 +12,6 @@
 
 
 /**
- * Global ajax loading notification.
- */
-$(function() {
-  $('#loader').
-    ajaxStart(function() {
-      $(this).show();
-    }).
-    ajaxStop(function() {
-      $(this).hide();
-    })
-  ;
-});
-
-
-/**
  * Toastr globals.
  */
 toastr.options = {
