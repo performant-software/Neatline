@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Record spatial pane.
+ * Record map pane.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,7 +13,7 @@
 
 ?>
 
-<div class="control-group spatial">
+<div class="control-group map">
 
   <label class="radio">
     <input type="radio" name="mode" value="pan" checked>

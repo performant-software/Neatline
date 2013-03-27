@@ -22,26 +22,26 @@ describe('Presenter Form Interaction', function() {
     _t.showFirstRecordForm();
 
     el = {
-      text:     _t.vw.RECORD.$('a[href="#record-text"]'),
-      spatial:  _t.vw.RECORD.$('a[href="#record-spatial"]'),
-      close:    _t.vw.RECORD.$('a[name="close"]')
+      text:   _t.vw.RECORD.$('a[href="#record-text"]'),
+      map:    _t.vw.RECORD.$('a[href="#record-map"]'),
+      close:  _t.vw.RECORD.$('a[name="close"]')
     };
 
   });
 
 
-  it('should deactivate when form opened with spatial tab', function() {
+  it('should deactivate when form opened with map tab', function() {
 
     // --------------------------------------------------------------------
-    // When the record form is opened and the spatial tab is selected, the
+    // When the record form is opened and the map tab is selected, the
     // presenter should be deactivated.
     // --------------------------------------------------------------------
 
     // Spy on trigger.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
-    // Request record spatial tab.
-    _t.navigate('record/add/spatial');
+    // Request record map tab.
+    _t.navigate('record/add/map');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
@@ -49,18 +49,18 @@ describe('Presenter Form Interaction', function() {
   });
 
 
-  it('should deactivate when spatial tab is selected', function() {
+  it('should deactivate when map tab is selected', function() {
 
     // --------------------------------------------------------------------
-    // When a record is being edited and the spatial tab is selected, the
+    // When a record is being edited and the map tab is selected, the
     // presenter should be deactivated.
     // --------------------------------------------------------------------
 
     // Spy on trigger.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
-    // Select "Spatial".
-    el.spatial.tab('show');
+    // Select "Map".
+    el.map.tab('show');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
@@ -78,8 +78,8 @@ describe('Presenter Form Interaction', function() {
     // Spy on trigger.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
-    // Select "Spatial".
-    el.spatial.tab('show');
+    // Select "Map".
+    el.map.tab('show');
 
     // Select "Text".
     el.text.tab('show');
@@ -97,8 +97,8 @@ describe('Presenter Form Interaction', function() {
     // and activated.
     // --------------------------------------------------------------------
 
-    // Select "Spatial".
-    el.spatial.tab('show');
+    // Select "Map".
+    el.map.tab('show');
 
     // Spy on trigger and execute.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();

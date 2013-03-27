@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for record form spatial tab.
+ * Tests for record form map tab.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Spatial Tab', function() {
+describe('Record Form Map Tab', function() {
 
 
   var el;
@@ -21,8 +21,8 @@ describe('Record Form Spatial Tab', function() {
     _t.loadEditor();
     _t.showFirstRecordForm();
 
-    // Show "Spatial" tab.
-    _t.vw.RECORD.activateTab('spatial');
+    // Show "Map" tab.
+    _t.vw.RECORD.activateTab('map');
 
     el = {
       text:     _t.vw.RECORD.$('a[href="#record-text"]'),
@@ -140,7 +140,7 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Options should be hidden.
-    expect(_t.vw.SPATIAL.__ui.regOpts).not.toBeVisible();
+    expect(_t.vw.MAPTAB.__ui.regOpts).not.toBeVisible();
 
     // Check "Draw Regular Polygon".
     el.pan.removeAttr('checked');
@@ -148,7 +148,7 @@ describe('Record Form Spatial Tab', function() {
     el.regPoly.trigger('change');
 
     // Options should be visible.
-    expect(_t.vw.SPATIAL.__ui.regOpts).toBeVisible();
+    expect(_t.vw.MAPTAB.__ui.regOpts).toBeVisible();
 
     // Check "Navigate".
     el.regPoly.removeAttr('checked');
@@ -156,7 +156,7 @@ describe('Record Form Spatial Tab', function() {
     el.pan.trigger('change');
 
     // Options should be hidden.
-    expect(_t.vw.SPATIAL.__ui.regOpts).not.toBeVisible();
+    expect(_t.vw.MAPTAB.__ui.regOpts).not.toBeVisible();
 
   });
 
@@ -169,8 +169,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set sides.
-    _t.vw.SPATIAL.__ui.sides.val('10');
-    _t.vw.SPATIAL.__ui.sides.trigger('change');
+    _t.vw.MAPTAB.__ui.sides.val('10');
+    _t.vw.MAPTAB.__ui.sides.trigger('change');
 
     // "Sides" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
@@ -186,8 +186,8 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set snap angle.
-    _t.vw.SPATIAL.__ui.snap.val('45');
-    _t.vw.SPATIAL.__ui.snap.trigger('change');
+    _t.vw.MAPTAB.__ui.snap.val('45');
+    _t.vw.MAPTAB.__ui.snap.trigger('change');
 
     // "Snap Angle" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
@@ -203,15 +203,15 @@ describe('Record Form Spatial Tab', function() {
     // --------------------------------------------------------------------
 
     // Set irregular.
-    _t.vw.SPATIAL.__ui.irreg.attr('checked', 'checked');
-    _t.vw.SPATIAL.__ui.irreg.trigger('change');
+    _t.vw.MAPTAB.__ui.irreg.attr('checked', 'checked');
+    _t.vw.MAPTAB.__ui.irreg.trigger('change');
 
     // "Irregular" be active.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    _t.vw.SPATIAL.__ui.irreg.removeAttr('checked');
-    _t.vw.SPATIAL.__ui.irreg.trigger('change');
+    _t.vw.MAPTAB.__ui.irreg.removeAttr('checked');
+    _t.vw.MAPTAB.__ui.irreg.trigger('change');
 
     // "Irregular" should be inactive.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
@@ -534,7 +534,7 @@ describe('Record Form Spatial Tab', function() {
     el.text.tab('show');
 
     // "Navigate" mode should be active.
-    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
+    expect(_t.vw.MAPTAB.getEditMode()).toEqual('pan');
 
   });
 

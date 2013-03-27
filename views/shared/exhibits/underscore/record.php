@@ -33,8 +33,8 @@
         data-slug="text">Text</a>
     </li>
     <li class="tab">
-      <a href="#record-spatial" data-toggle="tab"
-        data-slug="spatial">Map</a>
+      <a href="#record-map" data-toggle="tab"
+        data-slug="map">Map</a>
     </li>
     <li class="tab">
       <a href="#record-style" data-toggle="tab"
@@ -49,9 +49,9 @@
         'exhibits/underscore/partials/pane_text.php'
       ); ?>
     </div>
-    <div class="tab-pane spatial" id="record-spatial">
+    <div class="tab-pane spatial" id="record-map">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/pane_spatial.php'
+        'exhibits/underscore/partials/pane_map.php'
       ); ?>
     </div>
     <div class="tab-pane style" id="record-style">

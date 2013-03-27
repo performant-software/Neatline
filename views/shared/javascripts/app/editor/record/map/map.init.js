@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Spatial tab initializer.
+ * Map tab initializer.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,23 +10,23 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record.Spatial', { startWithParent: false,
-  define: function(Spatial, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Record.Map', { startWithParent: false,
+  define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
   /**
    * Start the tab after the form.
    */
   Neatline.Editor.Record.on('start', function() {
-    Spatial.start();
+    Map.start();
   });
 
 
   /**
    * Instantiate the tab view.
    */
-  Spatial.addInitializer(function() {
-    this.__view = new Spatial.View({
+  Map.addInitializer(function() {
+    this.__view = new Map.View({
       el: Neatline.request('RECORD:getElement')
     });
   });

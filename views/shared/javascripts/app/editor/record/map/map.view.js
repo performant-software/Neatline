@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Spatial tab form.
+ * Map tab form.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,11 +10,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record.Spatial', { startWithParent: false,
-  define: function(Spatial, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Record.Map', { startWithParent: false,
+  define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Spatial.View = Backbone.Neatline.View.extend({
+  Map.View = Backbone.Neatline.View.extend({
 
 
     events: {
@@ -121,10 +121,10 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
     /**
-     * Deactivate the presenter when "Spatial" is active.
+     * Deactivate the presenter when "Map" is active.
      */
     setPresenterStatus: function() {
-      Neatline.vent.trigger(this.spatialTabActive() ?
+      Neatline.vent.trigger(this.mapTabActive() ?
         'PRESENTER:deactivate' :
         'PRESENTER:activate'
       );
@@ -141,12 +141,12 @@ Neatline.module('Editor.Record.Spatial', { startWithParent: false,
 
 
     /**
-     * Is the "Spatial" tab activated?
+     * Is the "Map" tab activated?
      *
-     * @return {Boolean}: True if "Spatial" is active.
+     * @return {Boolean}: True if "Map" is active.
      */
-    spatialTabActive: function() {
-      return this.tab == '#record-spatial';
+    mapTabActive: function() {
+      return this.tab == '#record-map';
     },
 
 
