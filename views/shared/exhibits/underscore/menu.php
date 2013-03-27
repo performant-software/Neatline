@@ -18,19 +18,12 @@
   <p class="lead"><?php echo _nl_exhibit()->title; ?></p>
 
   <ul class="nav nav-pills">
-
     <li class="tab" data-slug="records">
       <a href="#records">Records</a>
     </li>
     <li class="tab" data-slug="styles">
       <a href="#styles">Styles</a>
     </li>
-
-    <!-- Widget tabs. -->
-    <?php echo $this->partial(
-      'exhibits/underscore/partials/exhibit_widget_tabs.php'
-    ); ?>
-
   </ul>
 
 </script>

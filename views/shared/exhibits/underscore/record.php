@@ -46,17 +46,17 @@
   <div class="tab-content">
     <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/text_panel.php'
+        'exhibits/underscore/partials/pane_text.php'
       ); ?>
     </div>
     <div class="tab-pane spatial" id="record-spatial">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/spatial_panel.php'
+        'exhibits/underscore/partials/pane_spatial.php'
       ); ?>
     </div>
     <div class="tab-pane style" id="record-style">
       <?php echo $this->partial(
-        'exhibits/underscore/partials/style_panel.php'
+        'exhibits/underscore/partials/pane_style.php'
       ); ?>
     </div>
   </div>
