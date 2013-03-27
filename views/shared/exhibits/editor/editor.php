@@ -21,10 +21,10 @@
 <?php echo $this->partial('neatline/_neatline.php'); ?>
 
 <!-- Loader. -->
-<?php echo $this->partial('exhibits/partials/loader.php'); ?>
+<?php echo $this->partial('exhibits/editor/loader.php'); ?>
 
 <!-- Strings. -->
-<?php echo $this->partial('exhibits/partials/strings.php'); ?>
+<?php echo $this->partial('exhibits/editor/strings.php'); ?>
 
 <!-- Underscore templates. -->
 <?php echo $this->partial('exhibits/underscore/menu.php'); ?>
