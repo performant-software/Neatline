@@ -48,7 +48,7 @@
     </div>
 
     <div class="inline-inputs">
-      <input type="text" name="snap" value="0" />
+      <input type="text" name="snap" value="15" />
       Snap Angle (degrees)
     </div>
 

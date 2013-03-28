@@ -226,27 +226,27 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'modify':
+        this.deactivateControls();
         this.controls.edit.mode = modes.RESHAPE;
         this.controls.edit.activate();
-        this.deactivateControls();
         break;
 
       case 'rotate':
+        this.deactivateControls();
         this.controls.edit.mode = modes.ROTATE;
         this.controls.edit.activate();
-        this.deactivateControls();
         break;
 
       case 'resize':
+        this.deactivateControls();
         this.controls.edit.mode = modes.RESIZE;
         this.controls.edit.activate();
-        this.deactivateControls();
         break;
 
       case 'drag':
+        this.deactivateControls();
         this.controls.edit.mode = modes.DRAG;
         this.controls.edit.activate();
-        this.deactivateControls();
         break;
 
       case 'remove':
