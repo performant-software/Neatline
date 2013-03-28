@@ -31,13 +31,6 @@
       'options' => _nl_getPresenters()
   )); ?>
 
-  <?php echo common('neatline/input', array(
-      'name'  => 'widgets',
-      'label' => 'Widgets',
-      'style' => 'widgets',
-      'bind'  => 'record.widgets'
-  )); ?>
-
   <legend>Colors</legend>
 
   <?php echo common('neatline/input', array(
@@ -118,34 +111,6 @@
       'style' => 'weight'
   )); ?>
 
-  <legend>Temporal</legend>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'start-date',
-      'label' => 'Start Date',
-      'bind'  => 'record.start_date'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'end-date',
-      'label' => 'End Date',
-      'bind'  => 'record.end_date'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'start-show-date',
-      'label' => 'Start Show Date',
-      'style' => 'start-show-date',
-      'bind'  => 'record.start_show_date'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'end-show-date',
-      'label' => 'End Show Date',
-      'style' => 'end-show-date',
-      'bind'  => 'record.end_show_date'
-  )); ?>
-
   <legend>Imagery</legend>
 
   <?php echo common('neatline/input', array(
@@ -154,18 +119,6 @@
       'bind'  => 'record.point_image',
       'style' => 'point-image',
       'class' => 'preview'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'wms-address',
-      'label' => 'WMS Address',
-      'bind'  => 'record.wms_address'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'wms-layers',
-      'label' => 'WMS Layers',
-      'bind'  => 'record.wms_layers'
   )); ?>
 
   <legend>Visibility</legend>
