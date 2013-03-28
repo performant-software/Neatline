@@ -25,9 +25,9 @@ describe('Map Editing', function() {
   it('should create edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
-    // When an record form is opened for an existing record that is not
-    // loaded on the map, a new layer should be created for the record and
-    // set at the edit layer.
+    // When an edit form is opened for an existing record that is not
+    // currently loaded on the map, a new layer should be created for the
+    // record and set at the edit layer.
     // --------------------------------------------------------------------
 
     // Load map without record 2.

@@ -72,6 +72,12 @@ _.extend(Neatline.Map.View.prototype, {
     // Publish collection.
     Neatline.vent.trigger('MAP:ingest', records);
 
+
+    // Force edit layer to the top of stack.
+    // -------------------------------------
+    this.raiseEditLayer();
+
+
   },
 
 
@@ -155,6 +161,12 @@ _.extend(Neatline.Map.View.prototype, {
     _.each(this.controls, _.bind(function(control, key) {
       this.map.addControl(control);
     }, this));
+
+
+    // Force edit layer to the top of stack.
+    // -------------------------------------
+    this.raiseEditLayer();
+
 
   },
 
@@ -269,6 +281,11 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
+    // Force edit layer to the top of stack.
+    // -------------------------------------
+    this.raiseEditLayer();
+
+
   },
 
 
@@ -334,6 +351,14 @@ _.extend(Neatline.Map.View.prototype, {
     // Update the form.
     Neatline.execute('RECORD:setCoverage', wkt);
 
+  },
+
+
+  /**
+   * Push the edit layer to the top of the stack.
+   */
+  raiseEditLayer: function() {
+    if (!_.isNull(this.editLayer)) this.editLayer.setZIndex(99999);
   },
 
 
