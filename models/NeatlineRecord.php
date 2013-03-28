@@ -227,26 +227,26 @@ class NeatlineRecord extends Neatline_AbstractRecord
         // Match `item-[slug]-[tag]`.
         foreach ($tags as $tag) { try {
             return get_view()->partial(
-                'neatline/item-'.$exhibit->slug.'-'.$tag.'.php'
+                'exhibits/item-'.$exhibit->slug.'-'.$tag.'.php'
             );
         } catch (Exception $e) {}}
 
         // Match `item-[slug]`.
         try {
             return get_view()->partial(
-                'neatline/item-'.$exhibit->slug.'.php'
+                'exhibits/item-'.$exhibit->slug.'.php'
             );
         } catch (Exception $e) {}
 
         // Match `item-[tag]`.
         foreach ($tags as $tag) { try {
             return get_view()->partial(
-                'neatline/item-'.$tag.'.php'
+                'exhibits/item-'.$tag.'.php'
             );
         } catch (Exception $e) {}}
 
         // Revert to default `item`.
-        return get_view()->partial('neatline/item.php');
+        return get_view()->partial('exhibits/item.php');
 
     }
 

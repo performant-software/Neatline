@@ -25,7 +25,7 @@
 </script>
 
 <!-- Underscore templates. -->
-<?php echo $this->partial('neatline/underscore/bubble.php'); ?>
+<?php echo $this->partial('exhibits/underscore/bubble.php'); ?>
 
 <!-- Plugin templates. ->
 <?php fire_plugin_hook('neatline_public_underscore', array(

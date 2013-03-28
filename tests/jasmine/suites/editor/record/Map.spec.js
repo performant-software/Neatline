@@ -130,35 +130,6 @@ describe('Record Form Map Tab', function() {
   });
 
 
-  it('should show/hide regular polygon options', function() {
-
-    // --------------------------------------------------------------------
-    // When "Draw Regular Polygon" is checked, the list of control options
-    // should be displayed; when unchecked, the list should disappear.
-    // --------------------------------------------------------------------
-
-    // Options should be hidden.
-    expect(_t.vw.MAPTAB.__ui.regOpts).not.toBeVisible();
-
-    // Check "Draw Regular Polygon".
-    el.pan.removeAttr('checked');
-    el.regPoly.attr('checked', 'checked');
-    el.regPoly.trigger('change');
-
-    // Options should be visible.
-    expect(_t.vw.MAPTAB.__ui.regOpts).toBeVisible();
-
-    // Check "Navigate".
-    el.regPoly.removeAttr('checked');
-    el.pan.attr('checked', 'checked');
-    el.pan.trigger('change');
-
-    // Options should be hidden.
-    expect(_t.vw.MAPTAB.__ui.regOpts).not.toBeVisible();
-
-  });
-
-
   it('should set sides', function() {
 
     // --------------------------------------------------------------------

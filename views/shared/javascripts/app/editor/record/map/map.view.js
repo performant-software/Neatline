@@ -32,7 +32,6 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
     ui: {
       pan:      'input[value="pan"]',
-      regOpts:  'div.regular-polygon',
       sides:    'input[name="sides"]',
       snap:     'input[name="snap"]',
       irreg:    'input[name="irreg"]',
@@ -66,14 +65,10 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Publish the current edit control configuration.
      */
     onControlChange: function() {
-
-      // Update the map.
       Neatline.execute('MAPEDIT:updateEdit', {
-        mode: this.getEditMode(), poly: this.getPolyOptions()
+        mode: this.getEditMode(),
+        poly: this.getPolyOptions()
       });
-
-      this.setRegPolyVisibility();
-
     },
 
 
@@ -128,15 +123,6 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         'PRESENTER:deactivate' :
         'PRESENTER:activate'
       );
-    },
-
-
-    /**
-     * Show the regular polygon options when the mode is active.
-     */
-    setRegPolyVisibility: function() {
-      if (this.getEditMode() == 'regPoly') this.__ui.regOpts.show();
-      else this.__ui.regOpts.hide();
     },
 
 

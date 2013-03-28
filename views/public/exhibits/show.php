@@ -16,9 +16,10 @@
 <?php _nl_neatlineAssets(_nl_exhibit()); ?>
 <?php echo head(array('title' => _nl_field('title'))); ?>
 
-<!-- The core Neatline partial. -->
-<?php echo $this->partial('neatline/partials/neatline.php'); ?>
+<!-- Exhibit. -->
+<?php echo $this->partial('exhibits/_exhibit.php'); ?>
 
+<!-- Description. -->
 <div class="exhibit-description">
     <?php echo _nl_field('description'); ?>
 </div>
