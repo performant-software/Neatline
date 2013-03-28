@@ -14,7 +14,7 @@
 ?>
 
 <div id="neatline">
-  <?php echo $this->partial('neatline/partials/map.php'); ?>
+  <div id="neatline-map" class="neatline-block"></div>
 </div>
 
 <!-- JSON globals. -->

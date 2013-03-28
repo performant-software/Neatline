@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for SHOW action in exhibits controller.
+ * Tests for EDITOR action in exhibits controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -15,17 +15,12 @@ class ExhibitsControllerTest_Show extends Neatline_TestCase
 {
 
 
-    protected $_isAdminTest = false;
-
-
     /**
-     * SHOW should load exhibits by slug.
+     * .
      */
-    public function testLoadExhibit()
+    public function testBaseMarkup()
     {
-        $exhibit = $this->__exhibit('slug');
-        $this->dispatch('neatline/show/slug');
-        $this->assertEquals(_nl_exhibit()->id, $exhibit->id);
+        // TODO
     }
 
 

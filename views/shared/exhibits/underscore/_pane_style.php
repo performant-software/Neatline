@@ -134,15 +134,15 @@
 
   <?php echo common('neatline/input', array(
       'name'  => 'start-show-date',
-      'label' => 'Start After Date',
-      'style' => 'show-after-date',
+      'label' => 'Start Show Date',
+      'style' => 'start-show-date',
       'bind'  => 'record.start_show_date'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'end-show-date',
-      'label' => 'Show Before Date',
-      'style' => 'show-before-date',
+      'label' => 'End Show Date',
+      'style' => 'end-show-date',
       'bind'  => 'record.end_show_date'
   )); ?>
 

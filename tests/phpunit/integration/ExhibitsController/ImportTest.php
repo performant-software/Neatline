@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for import action in exhibits controller.
+ * Tests for IMPORT action in exhibits controller.
  *
  * @package     omeka
  * @subpackage  neatline

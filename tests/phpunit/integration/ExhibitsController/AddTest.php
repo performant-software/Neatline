@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for add action in exhibits controller.
+ * Tests for ADD action in exhibits controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,7 +16,7 @@ class ExhibitsControllerTest_Add extends Neatline_TestCase
 
 
     /**
-     * The /add route should display the add exhibit form.
+     * ADD should display the add exhibit form.
      */
     public function testBaseMarkup()
     {

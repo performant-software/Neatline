@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for browse action in exhibits controller.
+ * Tests for BROWSE action in exhibits controller.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,7 +16,7 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
 
 
     /**
-     * The index action (admin/neatline) should redirect to browse.
+     * INDEX action should redirect to BROWSE.
      */
     public function testIndexRedirect()
     {
@@ -28,7 +28,7 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
 
 
     /**
-     * Browse should display a button to create a new exhibit.
+     * BROWSE should display a button to create a new exhibit.
      */
     public function testBaseMarkup()
     {
@@ -38,7 +38,7 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
 
 
     /**
-     * Browse should display a list of exhibits with links to the public
+     * BROWSE should display a list of exhibits with links to the public
      * show views and editor views.
      */
     public function testExhibitList()

@@ -35,8 +35,7 @@ class RecordsControllerTest_List extends Neatline_TestCase
 
 
     /**
-     * GET should emit a JSON object containing a list of records with all
-     * data needed by the front-end application.
+     * LIST should emit a JSON representation of a collection of records.
      */
     public function testGet()
     {
@@ -63,7 +62,7 @@ class RecordsControllerTest_List extends Neatline_TestCase
 
 
     /**
-     * GET should only return records for the requested exhibit.
+     * LIST should only return records for the requested exhibit.
      */
     public function testExhibitFilter()
     {
