@@ -18,6 +18,7 @@ _.extend(Neatline.Map.View.prototype, {
    */
   __initEditor: function() {
     this.editLayer = null;
+    this.isModifying = false;
   },
 
 
@@ -69,6 +70,7 @@ _.extend(Neatline.Map.View.prototype, {
     }, this));
 
     this.updateControls();
+    this.raiseEditLayer();
 
     // Publish collection.
     Neatline.vent.trigger('MAP:ingest', records);
@@ -190,18 +192,21 @@ _.extend(Neatline.Map.View.prototype, {
   updateEdit: function(settings) {
 
 
-    // Deactivate all editing controls.
+    // Reset trackers.
+    this.settings = settings;
+    this.isModifying = false;
+
+    // Reset controls.
+    this.activateControls();
     _.each(this.controls, function(control) {
       control.deactivate();
     });
 
-    // Alias modify modes, reactiate controls.
-    var modes = OpenLayers.Control.ModifyFeature;
-    this.activateControls();
-
 
     // Apply edit mode.
     // ----------------
+
+    var modes = OpenLayers.Control.ModifyFeature;
 
     switch (settings.mode) {
 
@@ -226,27 +231,23 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'modify':
-        this.deactivateControls();
         this.controls.edit.mode = modes.RESHAPE;
-        this.controls.edit.activate();
+        this.activateModifying();
         break;
 
       case 'rotate':
-        this.deactivateControls();
         this.controls.edit.mode = modes.ROTATE;
-        this.controls.edit.activate();
+        this.activateModifying();
         break;
 
       case 'resize':
-        this.deactivateControls();
         this.controls.edit.mode = modes.RESIZE;
-        this.controls.edit.activate();
+        this.activateModifying();
         break;
 
       case 'drag':
-        this.deactivateControls();
         this.controls.edit.mode = modes.DRAG;
-        this.controls.edit.activate();
+        this.activateModifying();
         break;
 
       case 'remove':
@@ -271,6 +272,18 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
+  },
+
+
+  /**
+   * Activate the `edit` control, deactivate the default cursor controls,
+   * and raise the edit layer to the top of the stack.
+   */
+  activateModifying: function() {
+    this.deactivateControls();
+    this.controls.edit.activate();
+    this.raiseEditLayer();
+    this.isModifying = true;
   },
 
 
@@ -343,7 +356,7 @@ _.extend(Neatline.Map.View.prototype, {
    * Push the edit layer to the top of the stack.
    */
   raiseEditLayer: function() {
-    if (!_.isNull(this.editLayer)) {
+    if (!_.isNull(this.editLayer) && this.isModifying) {
       this.map.raiseLayer(this.editLayer, this.map.layers.length);
     }
   },
