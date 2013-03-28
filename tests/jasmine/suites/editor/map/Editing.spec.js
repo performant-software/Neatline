@@ -138,6 +138,7 @@ describe('Map Editing', function() {
 
   });
 
+
   it('should not remove edit layer for new record', function() {
 
     // --------------------------------------------------------------------

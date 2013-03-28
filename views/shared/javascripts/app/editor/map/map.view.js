@@ -33,6 +33,7 @@ _.extend(Neatline.Map.View.prototype, {
    */
   ingest: function(records) {
 
+
     this.records = records;
     var layers = [];
 
@@ -73,11 +74,6 @@ _.extend(Neatline.Map.View.prototype, {
     Neatline.vent.trigger('MAP:ingest', records);
 
 
-    // Force edit layer to the top of stack.
-    // -------------------------------------
-    this.raiseEditLayer();
-
-
   },
 
 
@@ -87,6 +83,7 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} model: The record model.
    */
   startEdit: function(model) {
+
 
     // Find or create a layer for the model.
     this.editLayer = this.getLayerByModel(model) ||
@@ -163,11 +160,6 @@ _.extend(Neatline.Map.View.prototype, {
     }, this));
 
 
-    // Force edit layer to the top of stack.
-    // -------------------------------------
-    this.raiseEditLayer();
-
-
   },
 
 
@@ -198,17 +190,14 @@ _.extend(Neatline.Map.View.prototype, {
   updateEdit: function(settings) {
 
 
-    // Re-activate the default hover/click controls (which could have been
-    // disabled if the previous edit mode was "Modify Shape").
-    this.activateControls();
-
     // Deactivate all editing controls.
     _.each(this.controls, function(control) {
       control.deactivate();
     });
 
-    // Reset modify mode.
-    this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESHAPE;
+    // Alias modify modes, reactiate controls.
+    var modes = OpenLayers.Control.ModifyFeature;
+    this.activateControls();
 
 
     // Apply edit mode.
@@ -237,26 +226,27 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'modify':
-        this.deactivateControls();
+        this.controls.edit.mode = modes.RESHAPE;
         this.controls.edit.activate();
+        this.deactivateControls();
         break;
 
       case 'rotate':
-        this.deactivateControls();
+        this.controls.edit.mode = modes.ROTATE;
         this.controls.edit.activate();
-        this.controls.edit.mode = OpenLayers.Control.ModifyFeature.ROTATE;
+        this.deactivateControls();
         break;
 
       case 'resize':
-        this.deactivateControls();
+        this.controls.edit.mode = modes.RESIZE;
         this.controls.edit.activate();
-        this.controls.edit.mode = OpenLayers.Control.ModifyFeature.RESIZE;
+        this.deactivateControls();
         break;
 
       case 'drag':
-        this.deactivateControls();
+        this.controls.edit.mode = modes.DRAG;
         this.controls.edit.activate();
-        this.controls.edit.mode = OpenLayers.Control.ModifyFeature.DRAG;
+        this.deactivateControls();
         break;
 
       case 'remove':
@@ -279,11 +269,6 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Irregular.
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
-
-
-    // Force edit layer to the top of stack.
-    // -------------------------------------
-    this.raiseEditLayer();
 
 
   },
@@ -358,7 +343,9 @@ _.extend(Neatline.Map.View.prototype, {
    * Push the edit layer to the top of the stack.
    */
   raiseEditLayer: function() {
-    if (!_.isNull(this.editLayer)) this.editLayer.setZIndex(99999);
+    if (!_.isNull(this.editLayer)) {
+      this.map.raiseLayer(this.editLayer, this.map.layers.length);
+    }
   },
 
 
