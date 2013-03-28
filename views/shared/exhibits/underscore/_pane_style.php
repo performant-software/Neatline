@@ -121,6 +121,20 @@
       'class' => 'preview'
   )); ?>
 
+  <?php echo common('neatline/input', array(
+      'name'  => 'wms-address',
+      'label' => 'WMS Address',
+      'bind'  => 'record.wms_address',
+      'style' => 'wms-address'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'wms-layers',
+      'label' => 'WMS Layers',
+      'bind'  => 'record.wms_layers',
+      'style' => 'wms-layers'
+  )); ?>
+
   <legend>Visibility</legend>
 
   <?php echo common('neatline/input', array(

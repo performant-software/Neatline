@@ -223,9 +223,9 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.settings = settings;
 
-    // Before manifesting the new settings, reset the map to its default
-    // state - reactivate the default hover and click controls, deactivate
-    // all of the editing controls, and toggle off `isModifying`.
+
+    // Reset map.
+    // ----------
 
     this.isModifying = false;
 
@@ -235,8 +235,8 @@ _.extend(Neatline.Map.View.prototype, {
     });
 
 
-    // Activate (and, in the case of the `edit` control, configure) the
-    // control that corresponds with the edit mode set on the edit form.
+    // Set edit mode.
+    // --------------
 
     var modes = OpenLayers.Control.ModifyFeature;
 
@@ -261,11 +261,6 @@ _.extend(Neatline.Map.View.prototype, {
       case 'regPoly':
         this.controls.regPoly.activate();
         break;
-
-      // For each of the four vector editing states, set the corresponding
-      // mode on the `edit` control and call the `activateModifying`
-      // routine, which switches on the `edit` control and ensures that
-      // the edit layer is at the top of the layers stack.
 
       case 'modify':
         this.controls.edit.mode = modes.RESHAPE;
@@ -294,7 +289,8 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
 
-    // Update the regular polygon control with the options on the form.
+    // Set regular polygon options.
+    // ----------------------------
 
     // Sides.
     var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
