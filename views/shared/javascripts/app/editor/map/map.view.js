@@ -17,8 +17,8 @@ _.extend(Neatline.Map.View.prototype, {
    * Initialize editor-specific state tracekrs.
    */
   __initEditor: function() {
-    this.editLayer = null;
-    this.isModifying = false;
+    this.editLayer    = null;
+    this.isModifying  = false;
   },
 
 
@@ -98,7 +98,7 @@ _.extend(Neatline.Map.View.prototype, {
         this.editLayer,
         OpenLayers.Handler.Point,
         {
-          featureAdded: _.bind(this.publish, this)
+          featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
@@ -107,7 +107,7 @@ _.extend(Neatline.Map.View.prototype, {
         this.editLayer,
         OpenLayers.Handler.Path,
         {
-          featureAdded: _.bind(this.publish, this)
+          featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
@@ -116,7 +116,7 @@ _.extend(Neatline.Map.View.prototype, {
         this.editLayer,
         OpenLayers.Handler.Polygon,
         {
-          featureAdded: _.bind(this.publish, this)
+          featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
@@ -125,7 +125,7 @@ _.extend(Neatline.Map.View.prototype, {
         this.editLayer,
         OpenLayers.Handler.RegularPolygon,
         {
-          featureAdded: _.bind(this.publish, this)
+          featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
@@ -134,7 +134,7 @@ _.extend(Neatline.Map.View.prototype, {
         this.editLayer,
         OpenLayers.Handler.Geometry,
         {
-          featureAdded: _.bind(this.publish, this)
+          featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
@@ -142,7 +142,7 @@ _.extend(Neatline.Map.View.prototype, {
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
-          onModification: _.bind(this.publish, this)
+          onModification: _.bind(this.publishWKT, this)
         }
       ),
 
@@ -282,8 +282,8 @@ _.extend(Neatline.Map.View.prototype, {
   activateModifying: function() {
     this.deactivateControls();
     this.controls.edit.activate();
-    this.raiseEditLayer();
     this.isModifying = true;
+    this.raiseEditLayer();
   },
 
 
@@ -319,7 +319,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Publish updated KML.
    */
-  publish: function() {
+  publishWKT: function() {
 
     var features = [];
     var wkt = null;
@@ -342,8 +342,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Convert to WKT.
     if (!_.isEmpty(features)) {
-      var formatWKT = new OpenLayers.Format.WKT();
-      var wkt = formatWKT.write(features);
+      wkt = new OpenLayers.Format.WKT().write(features);
     }
 
     // Update the form.
@@ -370,7 +369,7 @@ _.extend(Neatline.Map.View.prototype, {
   removeFeature: function(feature) {
     this.controls.remove.unselectFeature(feature);
     this.editLayer.destroyFeatures([feature]);
-    this.publish();
+    this.publishWKT();
   },
 
 
@@ -403,7 +402,7 @@ _.extend(Neatline.Map.View.prototype, {
    */
   clearLayer: function() {
     this.editLayer.destroyFeatures();
-    this.publish();
+    this.publishWKT();
   }
 
 
