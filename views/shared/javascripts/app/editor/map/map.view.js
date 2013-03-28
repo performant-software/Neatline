@@ -14,7 +14,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Initialize editor-specific state tracekrs.
+   * Initialize editor-specific state trackers.
    */
   __initEditor: function() {
     this.editLayer    = null;
@@ -38,7 +38,10 @@ _.extend(Neatline.Map.View.prototype, {
     this.records = records;
     var layers = [];
 
-    // REMOVE
+    // First, remove all of the existing vector layers. If `editLayer` is
+    // defined (meaning that a record form is open, and an edit session is
+    // currently in progress), remove all layers _except_ the edit layer.
+
     _.each(this.layers, _.bind(function(layer) {
 
       // Remove if the layer is not the edit layer.
@@ -52,7 +55,17 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.layers = layers;
 
-    // CREATE
+    // Once the map is cleared (with the exception of the edit layer, if
+    // one exists), build layers for all of the records in the incoming
+    // collection. Exclude the record associated with the edit layer from
+    // this process, since its layer was preserved in the first step. If
+    // the record for the edit layer is encountered in the new records,
+    // replace the `nModel` on the existing edit layer with the new model
+    // from the server (this has the effect of synchronizing the edit
+    // layer model with any changes that have been made to the model on
+    // the server; for example, if the record was bound to an Omeka item,
+    // and the body field has been updated with the compiled metadata).
+
     records.each(_.bind(function(record) {
 
       var id = record.get('id');
@@ -68,6 +81,15 @@ _.extend(Neatline.Map.View.prototype, {
       }
 
     }, this));
+
+    // Update the default click and hover controls with the new batch of
+    // layers that was just constructed, and, if the user is currently
+    // modifying vector geometry (the "Modify/Rotate/Resize/Drag Shape"
+    // modes), force the edit layer to the top of the layer stack. This is
+    // necessary because OpenLayers automatically manages the layers' z-
+    // indecies and can "bury" the edit layer under the regular layers,
+    // which makes it impossible to select/edit the vectors on the edit
+    // layer with the cursor controls on the edit control.
 
     this.updateControls();
     this.raiseEditLayer();
@@ -87,9 +109,16 @@ _.extend(Neatline.Map.View.prototype, {
   startEdit: function(model) {
 
 
-    // Find or create a layer for the model.
-    this.editLayer = this.getLayerByModel(model) ||
-      this.buildLayer(model);
+    // If a layer already exists on the map for the model that is being
+    // edited (which would be the case, for instance, if the user opened
+    // the edit form by just clicking on a map vector), use the exising
+    // layer as the edit layer. If a layer does not exist, build a new
+    // layer from the model and add it to the map.
+
+    this.editLayer = this.getLayerByModel(model);
+    if (!this.editLayer) this.editLayer = this.buildLayer(model);
+
+    // Create the set of editing controls for the edit layer.
 
     this.controls = {
 
@@ -138,7 +167,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Modify shape.
+      // Modify/Rotate/Resize/Drag shape.
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
@@ -156,7 +185,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     };
 
-    // Add edit controls to map.
+    // Add the edit controls to map.
     _.each(this.controls, _.bind(function(control, key) {
       this.map.addControl(control);
     }, this));
@@ -166,7 +195,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Remove editing controls.
+   * Remove the editing controls.
    */
   endEdit: function() {
 
@@ -192,19 +221,22 @@ _.extend(Neatline.Map.View.prototype, {
   updateEdit: function(settings) {
 
 
-    // Reset trackers.
     this.settings = settings;
+
+    // Before manifesting the new settings, reset the map to its default
+    // state - reactivate the default hover and click controls, deactivate
+    // all of the editing controls, and toggle off `isModifying`.
+
     this.isModifying = false;
 
-    // Reset controls.
     this.activateControls();
     _.each(this.controls, function(control) {
       control.deactivate();
     });
 
 
-    // Apply edit mode.
-    // ----------------
+    // Activate (and, in the case of the `edit` control, configure) the
+    // control that corresponds with the edit mode set on the edit form.
 
     var modes = OpenLayers.Control.ModifyFeature;
 
@@ -229,6 +261,11 @@ _.extend(Neatline.Map.View.prototype, {
       case 'regPoly':
         this.controls.regPoly.activate();
         break;
+
+      // For each of the four vector editing states, set the corresponding
+      // mode on the `edit` control and call the `activateModifying`
+      // routine, which switches on the `edit` control and ensures that
+      // the edit layer is at the top of the layers stack.
 
       case 'modify':
         this.controls.edit.mode = modes.RESHAPE;
@@ -257,8 +294,7 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
 
-    // Apply "Regular Polygon" settings.
-    // ---------------------------------
+    // Update the regular polygon control with the options on the form.
 
     // Sides.
     var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
@@ -276,14 +312,24 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Activate the `edit` control, deactivate the default cursor controls,
-   * and raise the edit layer to the top of the stack.
+   * Activate the `edit` control.
    */
   activateModifying: function() {
+
+    // First, deactivate the default cursor controls on the map and switch
+    // on the `edit` control, which provides its own selection controls.
+
     this.deactivateControls();
     this.controls.edit.activate();
+
+    // Then, flip on the `isModifying` state tracker and force the edit
+    // layer to the top of the stack of layers on the map, which ensures
+    // that the geometries on the layer can be selected and manipulated
+    // by the `edit` control.
+
     this.isModifying = true;
     this.raiseEditLayer();
+
   },
 
 
