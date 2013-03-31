@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
+class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 {
 
 
