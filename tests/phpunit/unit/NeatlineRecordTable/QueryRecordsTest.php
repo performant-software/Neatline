@@ -31,16 +31,16 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
 
         $record1->added             = '2001-01-01';
         $record2->added             = '2002-01-01';
-        $record1->widgets           = '1';
-        $record2->widgets           = '2';
-        $record1->title             = '3';
-        $record2->title             = '4';
-        $record1->body              = '5';
-        $record2->body              = '6';
-        $record1->coverage          = 'POINT(7 7)';
-        $record2->coverage          = 'POINT(8 8)';
-        $record1->tags              = '9';
-        $record2->tags              = '10';
+        $record1->title             = '1';
+        $record2->title             = '2';
+        $record1->body              = '3';
+        $record2->body              = '4';
+        $record1->coverage          = 'POINT(5 5)';
+        $record2->coverage          = 'POINT(6 6)';
+        $record1->tags              = '7';
+        $record2->tags              = '8';
+        $record1->widgets           = '9';
+        $record2->widgets           = '10';
         $record1->presenter         = '11';
         $record2->presenter         = '12';
         $record1->fill_color        = '13';
@@ -77,10 +77,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $record2->start_date        = '44';
         $record1->end_date          = '45';
         $record2->end_date          = '46';
-        $record1->start_show_date   = '47';
-        $record2->start_show_date   = '48';
-        $record1->end_show_date     = '49';
-        $record2->end_show_date     = '50';
+        $record1->show_after_date   = '47';
+        $record2->show_after_date   = '48';
+        $record1->show_before_date  = '49';
+        $record2->show_before_date  = '50';
         $record1->weight            = 51;
         $record2->weight            = 52;
 
@@ -97,11 +97,11 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         // Record 2:
         $this->assertEquals($records[0]['id'],              $record2->id);
         $this->assertEquals($records[0]['item_id'],         $item2->id);
-        $this->assertEquals($records[0]['widgets'],         '2');
-        $this->assertEquals($records[0]['title'],           '4');
-        $this->assertEquals($records[0]['body'],            '6');
-        $this->assertEquals($records[0]['coverage'],        'POINT(8 8)');
-        $this->assertEquals($records[0]['tags'],            '10');
+        $this->assertEquals($records[0]['title'],           '2');
+        $this->assertEquals($records[0]['body'],            '4');
+        $this->assertEquals($records[0]['coverage'],        'POINT(6 6)');
+        $this->assertEquals($records[0]['tags'],            '8');
+        $this->assertEquals($records[0]['widgets'],         '10');
         $this->assertEquals($records[0]['presenter'],       '12');
         $this->assertEquals($records[0]['fill_color'],      '14');
         $this->assertEquals($records[0]['select_color'],    '16');
@@ -120,18 +120,18 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[0]['wms_layers'],      '42');
         $this->assertEquals($records[0]['start_date'],      '44');
         $this->assertEquals($records[0]['end_date'],        '46');
-        $this->assertEquals($records[0]['start_show_date'], '48');
-        $this->assertEquals($records[0]['end_show_date'],   '50');
+        $this->assertEquals($records[0]['show_after_date'], '48');
+        $this->assertEquals($records[0]['show_before_date'],'50');
         $this->assertEquals($records[0]['weight'],          52);
 
         // Record 1:
         $this->assertEquals($records[1]['id'],              $record1->id);
         $this->assertEquals($records[1]['item_id'],         $item1->id);
-        $this->assertEquals($records[1]['widgets'],         '1');
-        $this->assertEquals($records[1]['title'],           '3');
-        $this->assertEquals($records[1]['body'],            '5');
-        $this->assertEquals($records[1]['coverage'],        'POINT(7 7)');
-        $this->assertEquals($records[1]['tags'],            '9');
+        $this->assertEquals($records[1]['title'],           '1');
+        $this->assertEquals($records[1]['body'],            '3');
+        $this->assertEquals($records[1]['coverage'],        'POINT(5 5)');
+        $this->assertEquals($records[1]['tags'],            '7');
+        $this->assertEquals($records[1]['widgets'],         '9');
         $this->assertEquals($records[1]['presenter'],       '11');
         $this->assertEquals($records[1]['fill_color'],      '13');
         $this->assertEquals($records[1]['select_color'],    '15');
@@ -150,8 +150,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[1]['wms_layers'],      '41');
         $this->assertEquals($records[1]['start_date'],      '43');
         $this->assertEquals($records[1]['end_date'],        '45');
-        $this->assertEquals($records[1]['start_show_date'], '47');
-        $this->assertEquals($records[1]['end_show_date'],   '49');
+        $this->assertEquals($records[1]['show_after_date'], '47');
+        $this->assertEquals($records[1]['show_before_date'],'49');
         $this->assertEquals($records[1]['weight'],          51);
 
     }

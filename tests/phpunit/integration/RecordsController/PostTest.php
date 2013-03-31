@@ -26,11 +26,11 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->request->setMethod('POST')->setRawBody(
           Zend_Json::encode(array(
             'exhibit_id'        => $exhibit->id,
-            'widgets'           => '1',
-            'title'             => '2',
-            'body'              => '3',
-            'coverage'          => 'POINT(4 4)',
-            'tags'              => '5',
+            'title'             => '1',
+            'body'              => '2',
+            'coverage'          => 'POINT(3 3)',
+            'tags'              => '4',
+            'widgets'           => '5',
             'presenter'         => '6',
             'fill_color'        => '7',
             'select_color'      => '8',
@@ -49,8 +49,8 @@ class RecordsControllerTest_Post extends Neatline_TestCase
             'wms_layers'        => '21',
             'start_date'        => '22',
             'end_date'          => '23',
-            'start_show_date'   => '24',
-            'end_show_date'     => '25',
+            'show_after_date'   => '24',
+            'show_before_date'  => '25',
             'weight'            => '26'
         )));
 
@@ -70,11 +70,11 @@ class RecordsControllerTest_Post extends Neatline_TestCase
 
         // Should update fields.
         $this->assertEquals($record->exhibit_id,        $exhibit->id);
-        $this->assertEquals($record->widgets,           '1');
-        $this->assertEquals($record->title,             '2');
-        $this->assertEquals($record->body,              '3');
-        $this->assertEquals($record->coverage,          'POINT(4 4)');
-        $this->assertEquals($record->tags,              '5');
+        $this->assertEquals($record->title,             '1');
+        $this->assertEquals($record->body,              '2');
+        $this->assertEquals($record->coverage,          'POINT(3 3)');
+        $this->assertEquals($record->tags,              '4');
+        $this->assertEquals($record->widgets,           '5');
         $this->assertEquals($record->presenter,         '6');
         $this->assertEquals($record->fill_color,        '7');
         $this->assertEquals($record->select_color,      '8');
@@ -93,8 +93,8 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->assertEquals($record->wms_layers,        '21');
         $this->assertEquals($record->start_date,        '22');
         $this->assertEquals($record->end_date,          '23');
-        $this->assertEquals($record->start_show_date,   '24');
-        $this->assertEquals($record->end_show_date,     '25');
+        $this->assertEquals($record->show_after_date,   '24');
+        $this->assertEquals($record->show_before_date,  '25');
         $this->assertEquals($record->weight,            26);
 
     }

@@ -19,11 +19,11 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $exhibit_id;         // INT(10) UNSIGNED NULL
     public $added;              // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;           // TIMESTAMP NULL
-    public $widgets;            // TEXT NULL
     public $title;              // MEDIUMTEXT NULL
     public $body;               // MEDIUMTEXT NULL
     public $coverage;           // GEOMETRY NOT NULL
     public $tags;               // TEXT NULL
+    public $widgets;            // TEXT NULL
     public $presenter;          // VARCHAR(100) NULL
     public $fill_color;         // TINYTEXT NULL
     public $select_color;       // TINYTEXT NULL
@@ -42,8 +42,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $wms_layers;         // VARCHAR(100) NULL
     public $start_date;         // VARCHAR(100) NULL
     public $end_date;           // VARCHAR(100) NULL
-    public $start_show_date;    // VARCHAR(100) NULL
-    public $end_show_date;      // VARCHAR(100) NULL
+    public $show_after_date;    // VARCHAR(100) NULL
+    public $show_before_date;   // VARCHAR(100) NULL
     public $weight;             // INT(10) UNSIGNED NULL
 
 

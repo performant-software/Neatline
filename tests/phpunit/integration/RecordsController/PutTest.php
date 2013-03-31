@@ -23,11 +23,11 @@ class RecordsControllerTest_Put extends Neatline_TestCase
 
         $record = $this->__record();
 
-        $record->widgets            = '1';
-        $record->title              = '2';
-        $record->body               = '3';
-        $record->coverage           = 'POINT(4 4)';
-        $record->tags               = '5';
+        $record->title              = '1';
+        $record->body               = '2';
+        $record->coverage           = 'POINT(3 3)';
+        $record->tags               = '4';
+        $record->widgets            = '5';
         $record->presenter          = '6';
         $record->fill_color         = '7';
         $record->select_color       = '8';
@@ -46,17 +46,17 @@ class RecordsControllerTest_Put extends Neatline_TestCase
         $record->wms_layers         = '21';
         $record->start_date         = '22';
         $record->end_date           = '23';
-        $record->start_show_date    = '24';
-        $record->end_show_date      = '25';
+        $record->show_after_date    = '24';
+        $record->show_before_date   = '25';
         $record->weight             = 26;
         $record->save();
 
         $values = array(
-            'widgets'           => '27',
-            'title'             => '28',
-            'body'              => '29',
-            'coverage'          => 'POINT(30 30)',
-            'tags'              => '31',
+            'title'             => '27',
+            'body'              => '28',
+            'coverage'          => 'POINT(29 29)',
+            'tags'              => '30',
+            'widgets'           => '31',
             'presenter'         => '32',
             'fill_color'        => '33',
             'select_color'      => '34',
@@ -75,8 +75,8 @@ class RecordsControllerTest_Put extends Neatline_TestCase
             'wms_layers'        => '47',
             'start_date'        => '48',
             'end_date'          => '49',
-            'start_show_date'   => '50',
-            'end_show_date'     => '51',
+            'show_after_date'   => '50',
+            'show_before_date'  => '51',
             'weight'            => '52'
         );
 
@@ -85,11 +85,11 @@ class RecordsControllerTest_Put extends Neatline_TestCase
         $record = $this->reload($record);
 
         // Should update fields.
-        $this->assertEquals($record->widgets,           '27');
-        $this->assertEquals($record->title,             '28');
-        $this->assertEquals($record->body,              '29');
-        $this->assertEquals($record->coverage,          'POINT(30 30)');
-        $this->assertEquals($record->tags,              '31');
+        $this->assertEquals($record->title,             '27');
+        $this->assertEquals($record->body,              '28');
+        $this->assertEquals($record->coverage,          'POINT(29 29)');
+        $this->assertEquals($record->tags,              '30');
+        $this->assertEquals($record->widgets,           '31');
         $this->assertEquals($record->presenter,         '32');
         $this->assertEquals($record->fill_color,        '33');
         $this->assertEquals($record->select_color,      '34');
@@ -108,8 +108,8 @@ class RecordsControllerTest_Put extends Neatline_TestCase
         $this->assertEquals($record->wms_layers,        '47');
         $this->assertEquals($record->start_date,        '48');
         $this->assertEquals($record->end_date,          '49');
-        $this->assertEquals($record->start_show_date,   '50');
-        $this->assertEquals($record->end_show_date,     '51');
+        $this->assertEquals($record->show_after_date,   '50');
+        $this->assertEquals($record->show_before_date,  '51');
         $this->assertEquals($record->weight,            52);
 
     }
