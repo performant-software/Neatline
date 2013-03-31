@@ -85,7 +85,13 @@ class NeatlineRecord extends Neatline_AbstractRecord
         $oldTags = _nl_explode($this->tags);
 
         // Mass-assign the form.
-        parent::setFromArray($values);
+        $this->setFromArray($values);
+
+        // TODO|stylesets
+        // foreach (_nl_getStylesetTables() as $styleset) {
+            // $set = $styleset->getOrCreate($this)->setFromArray($this);
+            // $set->save();
+        // }
 
         // If 1 or more tags have been added to the record since the last
         // time it was saved, pull in the _existing_ CSS rules for those

@@ -237,6 +237,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'map_zoom',
             'wms_address',
             'wms_layers',
+            'start_date',
+            'end_date',
             'show_after_date',
             'show_before_date',
             'weight'
