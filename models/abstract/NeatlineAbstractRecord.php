@@ -29,6 +29,17 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Mass-assign an associative array to the record.
+     *
+     * @param array $values The array of values.
+     */
+    public function setFromArray($values)
+    {
+        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
+    }
+
+
+    /**
      * Before saving, update the `modified` timestamp.
      *
      * @return array The array representation of the record fields.

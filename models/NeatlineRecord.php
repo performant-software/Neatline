@@ -81,11 +81,11 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public function saveForm($values)
     {
 
-        // Store the original tags string.
+        // Cache the original tags string.
         $oldTags = _nl_explode($this->tags);
 
-        // Mass-assign the form values.
-        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
+        // Mass-assign the form.
+        parent::setFromArray($values);
 
         // If 1 or more tags have been added to the record since the last
         // time it was saved, pull in the _existing_ CSS rules for those

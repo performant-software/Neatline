@@ -38,13 +38,12 @@ class NeatlineExhibit extends Neatline_AbstractRecord
     public function saveForm($values)
     {
 
-        // Implode arrays.
+        // Implode array values.
         foreach ($values as $k => $v) {
             if (is_array($v)) $values[$k] = implode(',', $v);
         }
 
-        // Mass-assign form values.
-        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
+        parent::setFromArray($values);
         $this->save();
 
     }

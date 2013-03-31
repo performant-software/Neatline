@@ -135,6 +135,36 @@
       'style' => 'wms-layers'
   )); ?>
 
+  <legend>Temporal</legend>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'start-date',
+      'label' => 'Start Date',
+      'bind'  => 'record.start_date',
+      'style' => 'start-date'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'end-date',
+      'label' => 'End Date',
+      'bind'  => 'record.end_date',
+      'style' => 'end-date'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'show-after-date',
+      'label' => 'Show After Date',
+      'bind'  => 'record.show_after_date',
+      'style' => 'show-after-date'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'show-before-date',
+      'label' => 'Show Before Date',
+      'bind'  => 'record.show_before_date',
+      'style' => 'show-before-date'
+  )); ?>
+
   <legend>Visibility</legend>
 
   <?php echo common('neatline/input', array(
