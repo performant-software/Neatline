@@ -47,9 +47,9 @@ abstract class Neatline_ExtensibleRecord extends Neatline_GenericRecord
      *
      * @return array The record attributes.
      */
-    public function toArrayForSave()
+    public function toArray()
     {
-        return array_merge(parent::toArrayForSave(), $this->attribs);
+        return array_merge(parent::toArray(), $this->attribs);
     }
 
 

@@ -27,6 +27,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     protected $_filters = array(
         'admin_navigation_main',
+        'neatline_exhibit_stylesets',
         'neatline_record_stylesets',
         'neatline_globals',
         'neatline_presenters',
@@ -59,6 +60,21 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `styles`            TEXT NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
+             PRIMARY KEY        (`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
+
+        // Exhibit stylesets.
+        // ------------------
+        $sql = "CREATE TABLE IF NOT EXISTS
+            `{$this->_db->prefix}neatline_default_exhibit_stylesets` (
+            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `record_id`         INT(10) UNSIGNED NULL,
+            `test1`             INT(10) UNSIGNED NULL,
+            `test2`             INT(10) UNSIGNED NULL,
+            `test3`             INT(10) UNSIGNED NULL,
              PRIMARY KEY        (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -200,25 +216,44 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * @param array $tables The styleset tables.
      * @return array The tables, with NeatlineDefaultRecordStyleset.
      */
+    public function filterNeatlineExhibitStylesets($stylesets)
+    {
+        $stylesets[] = $this->_db->getTable(
+            'NeatlineDefaultExhibitStyleset');
+        return $stylesets;
+    }
+
+
+    /**
+     * Add link to main admin menu bar.
+     *
+     * @param array $tables The styleset tables.
+     * @return array The tables, with NeatlineDefaultRecordStyleset.
+     */
     public function filterNeatlineRecordStylesets($tables)
     {
-        $tables[] = $this->_db->getTable('NeatlineDefaultRecordStyleset');
-        return $tables;
+        $stylesets[] = $this->_db->getTable(
+            'NeatlineDefaultRecordStyleset');
+        return $stylesets;
     }
 
 
     /**
      * Register properties on `Neatline.global`.
      *
-     * @param array $g The array of global properties.
+     * @param array $globals The array of global properties.
      * @param array $args Array of arguments, with `exhibit`.
      * @return array The modified array.
      */
-    public function filterNeatlineGlobals($g, $args)
+    public function filterNeatlineGlobals($globals, $args)
     {
-        $g = array_merge($g, _nl_exhibitGlobals($args['exhibit']));
-        $g = array_merge($g, _nl_editorGlobals($args['exhibit']));
-        return $g;
+        $globals = array_merge($globals,
+            _nl_exhibitGlobals($args['exhibit'])
+        );
+        $globals = array_merge($globals,
+            _nl_editorGlobals($args['exhibit'])
+        );
+        return $globals;
     }
 
 
@@ -231,7 +266,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlinePresenters($presenters)
     {
         return array_merge($presenters, array(
-            'None' => 'None', 'Static Bubble' => 'StaticBubble'
+            'None' => 'None',
+            'Static Bubble' => 'StaticBubble'
         ));
     }
 
