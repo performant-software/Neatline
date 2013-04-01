@@ -26,7 +26,7 @@ abstract class Neatline_AbstractStyleset extends Neatline_AbstractRecord
     public function __construct($record = null)
     {
         parent::__construct();
-        if (!is_null($record)) $this->record_id = $exhibit->id;
+        if (!is_null($record)) $this->record_id = $record->id;
     }
 
 

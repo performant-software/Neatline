@@ -76,13 +76,15 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
             'insert'  => !$this->exists()
         );
 
+        // Insert/udpate the master record.
         $this->runCallbacks('beforeSave', $args);
         $this->id = $this->insertOrUpdate($this->toArrayForSave());
         $this->runCallbacks('afterSave', $args);
 
-        // TODO|stylesets
+        // Insert/update stylesets.
         foreach ($this->getStylesetTables() as $table) {
-            $styleset = $table->getOrCreate($this)->setByRecord($this);
+            $styleset = $table->getOrCreate($this);
+            $styleset->setByRecord($this);
             $styleset->save();
         }
 

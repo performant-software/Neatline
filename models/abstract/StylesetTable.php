@@ -29,7 +29,10 @@ abstract class Neatline_AbstractStylesetTable extends Omeka_Db_Table
         if ($set) return $set;
 
         // If none exists, create a new one.
-        else return new $this->_target($record);
+        else {
+            $class = $this->_target;
+            return new $class($record);
+        }
 
     }
 
