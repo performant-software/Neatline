@@ -11,8 +11,16 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
+abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 {
+
+
+    /**
+     * Get an array of all styleset tables that are bound to the record.
+     *
+     * @return array $tables The array of styleset tables.
+     */
+    abstract public function getStylesetTables();
 
 
     /**
@@ -68,6 +76,12 @@ class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
         $this->runCallbacks('beforeSave', $args);
         $this->id = $this->insertOrUpdate($this->toArrayForSave());
         $this->runCallbacks('afterSave', $args);
+
+        // TODO|stylesets
+        foreach ($this->getStylesetTables() as $table) {
+            $styleset = $table->getOrCreate($this)->setByRecord($this);
+            $styleset->save();
+        }
 
     }
 

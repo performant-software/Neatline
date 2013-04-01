@@ -31,6 +31,18 @@ class NeatlineExhibit extends Neatline_AbstractRecord
 
 
     /**
+     * Gather all record styleset tables.
+     *
+     * @return array The tables.
+     */
+    public function getStylesetTables()
+    {
+        // TODO|stylesets
+        return array();
+    }
+
+
+    /**
      * Implode `widgets` and `base_layers` before saving.
      *
      * @param array $values The POST/PUT values.

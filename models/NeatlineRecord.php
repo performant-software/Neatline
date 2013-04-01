@@ -62,6 +62,18 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
 
     /**
+     * Gather all record styleset tables.
+     *
+     * @return array The tables.
+     */
+    public function getStylesetTables()
+    {
+        // TODO|stylesets
+        return array();
+    }
+
+
+    /**
      * Get the parent exhibit record.
      *
      * @return Omeka_record The parent exhibit.
