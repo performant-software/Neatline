@@ -37,20 +37,15 @@ abstract class Neatline_AbstractRecordTable extends Omeka_Db_Table
         $select = parent::getSelect();
 
         // Get the parent table alias.
-        $parentAlias = $this->getTableAlias();
+        $pAlias = $this->getTableAlias();
 
-        // Walk styleset tables.
+        // Join styleset tables.
         foreach ($this->getStylesetTables() as $table) {
-
-            // Get styleset alias and name.
-            $stylesetAlias = $table->getTableAlias();
-            $stylesetName  = $table->getTableName();
-
-            // Join the styleset.
-            $select->join(array($stylesetAlias => $stylesetName),
-                "$parentAlias.id = $stylesetAlias.record_id"
+            $sAlias = $table->getTableAlias();
+            $sName  = $table->getTableName();
+            $select->join(array($sAlias => $sName),
+                "$pAlias.id = $sAlias.record_id"
             );
-
         }
 
         return $select;

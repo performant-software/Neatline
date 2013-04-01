@@ -71,7 +71,8 @@ class NeatlineRecordTable extends Neatline_AbstractRecordTable
      */
     public function queryRecord($id)
     {
-        $select = $this->getSelect()->where('id=?', $id);
+        $alias  = $this->getTableAlias();
+        $select = $this->getSelect()->where("$alias.id=?", $id);
         return $this->fetchObject($select)->toArray();
     }
 

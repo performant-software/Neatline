@@ -11,7 +11,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_AbstractStylesetTable extends Omeka_Db_Table
+abstract class Neatline_AbstractStylesetTable
+    extends Neatline_AbstractRecordTable
 {
 
 

@@ -27,6 +27,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     protected $_filters = array(
         'admin_navigation_main',
+        'neatline_record_stylesets',
         'neatline_globals',
         'neatline_presenters',
         'neatline_styles'
@@ -40,8 +41,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
 
-        // Exhibits table.
-        // ---------------
+        // Exhibits.
+        // ---------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -64,8 +65,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Records table.
-        // --------------
+        // Records.
+        // --------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -77,7 +78,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `body`              MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `tags`              TEXT NULL,
-
             `widgets`           TEXT NULL,
             `presenter`         VARCHAR(100) NULL,
             `fill_color`        TINYTEXT NULL,
@@ -95,17 +95,30 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_focus`         VARCHAR(100) NULL,
             `wms_address`       VARCHAR(100) NULL,
             `wms_layers`        VARCHAR(100) NULL,
-
             `start_date`        VARCHAR(100) NULL,
             `end_date`          VARCHAR(100) NULL,
             `show_after_date`   VARCHAR(100) NULL,
             `show_before_date`  VARCHAR(100) NULL,
-
             `weight`            INT(10) UNSIGNED NULL,
-
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)
+
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $this->_db->query($sql);
+
+
+        // Record stylesets.
+        // -----------------
+        $sql = "CREATE TABLE IF NOT EXISTS
+            `{$this->_db->prefix}neatline_record_stylesets` (
+            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `record_id`         INT(10) UNSIGNED NULL,
+            `test1`             INT(10) UNSIGNED NULL,
+            `test2`             INT(10) UNSIGNED NULL,
+            `test3`             INT(10) UNSIGNED NULL,
+             PRIMARY KEY        (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
@@ -178,6 +191,19 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
+    }
+
+
+    /**
+     * Add link to main admin menu bar.
+     *
+     * @param array $stylesets The styleset tables.
+     * @return array The tables, with NeatlineRecordStylesetTable.
+     */
+    public function filterNeatlineRecordStylesets($stylesets)
+    {
+        $stylesets[] = $this->_db->getTable('NeatlineRecordStyleset');
+        return $stylesets;
     }
 
 
