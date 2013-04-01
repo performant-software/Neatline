@@ -43,7 +43,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
             if (is_array($v)) $values[$k] = implode(',', $v);
         }
 
-        parent::setFromArray($values);
+        $this->setFromArray($values);
         $this->save();
 
     }
