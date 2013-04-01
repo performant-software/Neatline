@@ -56,9 +56,9 @@ class NeatlineExhibit extends Neatline_StylableRecord
      */
     public function getNumberOfRecords()
     {
-      return $this->getTable('NeatlineRecord')->count(array(
-          'exhibit_id' => $this->id
-      ));
+        return $this->getTable('NeatlineRecord')->count(array(
+            'exhibit_id' => $this->id
+        ));
     }
 
 

@@ -40,8 +40,8 @@
           <?php echo browse_sort_links(array(
               __('Exhibit')   => 'title',
               __('Modified')  => 'modified',
-              __('# Items')   => 'added',
-              __('Public')    => 'public'
+              __('# Items')   => null,
+              __('Public')    => null
           ), array(
               'link_tag'      => 'th scope="col"'
           )); ?>

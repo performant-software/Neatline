@@ -82,7 +82,7 @@ function _nl_areExhibits()
  * @param array $props Array of properties for the element.
  * @return string The HTML link.
  */
-function _nl_link($exhibit, $action, $text, $props=array(), $public=true) {
+function _nl_link($exhibit,$action,$text,$props=array(),$public=true) {
 
     $exhibit = $exhibit ? $exhibit : _nl_exhibit();
 
@@ -102,13 +102,13 @@ function _nl_link($exhibit, $action, $text, $props=array(), $public=true) {
 
 
 /**
- * Returns the number of records used in a given Neatline.
+ * Count the records in an exhibit.
  *
- * @param NeatlineExhibit $neatline The exhibit record.
- * @return integer
+ * @param NeatlineExhibit $exhibit The exhibit record.
+ * @return integer The number of records.
  */
-function _nl_totalRecords($neatline=null)
+function _nl_totalRecords($exhibit=null)
 {
-    $neatline = $neatline ? $neatline : _nl_exhibit();
-    return (int)$neatline->getNumberOfRecords();
+    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
+    return (int) $exhibit->getNumberOfRecords();
 }

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Table class for Neatline data records.
+ * Table class for records.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -73,7 +73,7 @@ class NeatlineRecordTable extends Neatline_StylableTable
     {
         $alias  = $this->getTableAlias();
         $select = $this->getSelect()->where("$alias.id=?", $id);
-        return $this->fetchObject($select)->toArray();
+        return $this->_db->fetchRow($select);
     }
 
 
@@ -139,11 +139,7 @@ class NeatlineRecordTable extends Neatline_StylableTable
         }
 
         // Execute query.
-        if ($records = $this->fetchObjects($select)) {
-            foreach ($records as $record) {
-                $data['records'][] = $record->toArray();
-            }
-        }
+        $data['records'] = $select->query()->fetchAll();
 
         // Strip off limit and columns.
         $select->reset(Zend_Db_Select::LIMIT_COUNT);

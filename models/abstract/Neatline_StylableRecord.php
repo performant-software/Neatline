@@ -15,6 +15,44 @@ abstract class Neatline_StylableRecord extends Neatline_GenericRecord
 {
 
 
+    private $attribs = array();
+
+
+    /**
+     * Add a key-value pair to `styles`.
+     *
+     * @param string $name The attribute name.
+     * @param mixed $value The value.
+     */
+    public function __set($name, $value)
+    {
+        $this->attribs[$name] = $value;
+    }
+
+
+    /**
+     * Get style property.
+     *
+     * @param string $name The attribute name.
+     * @return mixed $name The value.
+     */
+    public function __get($name)
+    {
+        return $this->attribs[$name];
+    }
+
+
+    /**
+     * Merge assigned and public attributes.
+     *
+     * @return array The record attributes.
+     */
+    public function toArrayForSave()
+    {
+        return array_merge(parent::toArrayForSave(), $this->attribs);
+    }
+
+
     /**
      * Update stylesets after saving.
      *
