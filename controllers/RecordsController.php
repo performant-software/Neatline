@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsController extends Neatline_AbstractRestController
+class Neatline_RecordsController extends Neatline_RestController
 {
 
 
