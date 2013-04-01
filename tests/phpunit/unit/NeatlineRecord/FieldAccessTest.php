@@ -40,8 +40,8 @@ class NeatlineRecordTest_FieldAccess extends Neatline_TestCase
         $record->stroke_width       = 15;
         $record->point_radius       = 16;
         $record->point_image        = '17';
-        $record->max_zoom           = 18;
-        $record->min_zoom           = 19;
+        $record->min_zoom           = 18;
+        $record->max_zoom           = 19;
         $record->map_zoom           = 20;
         $record->map_focus          = '21';
         $record->wms_address        = '22';
@@ -72,8 +72,8 @@ class NeatlineRecordTest_FieldAccess extends Neatline_TestCase
         $this->assertEquals($record->stroke_width,      15);
         $this->assertEquals($record->point_radius,      16);
         $this->assertEquals($record->point_image,       '17');
-        $this->assertEquals($record->max_zoom,          18);
-        $this->assertEquals($record->min_zoom,          19);
+        $this->assertEquals($record->min_zoom,          18);
+        $this->assertEquals($record->max_zoom,          19);
         $this->assertEquals($record->map_zoom,          20);
         $this->assertEquals($record->map_focus,         '21');
         $this->assertEquals($record->wms_address,       '22');

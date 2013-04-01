@@ -37,7 +37,7 @@ var _t = (function(_t) {
       RECORDS:  Neatline.Editor.Exhibit.Records.__view,
       STYLES:   Neatline.Editor.Exhibit.Styles.__view,
       RECORD:   Neatline.Editor.Record.__view,
-      MAPTAB:   Neatline.Editor.Record.Map.__view,
+      SPATIAL:  Neatline.Editor.Record.Map.__view,
       TEXT:     Neatline.Editor.Record.Text.__view
     };
   };

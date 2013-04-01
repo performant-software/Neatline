@@ -72,6 +72,8 @@ class FixturesTest_Json extends Neatline_TestCase
         $record1->point_image       = '9';
         $record1->min_zoom          = 10;
         $record1->max_zoom          = 11;
+        $record1->wms_address       = '12';
+        $record1->wms_layers        = '13';
 
         $record2->title             = 'title2';
         $record3->title             = 'title3';
@@ -218,6 +220,8 @@ class FixturesTest_Json extends Neatline_TestCase
         $record->point_image        = '9';
         $record->min_zoom           = 10;
         $record->max_zoom           = 11;
+        $record->wms_address        = '12';
+        $record->wms_layers         = '13';
         $record->__save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,

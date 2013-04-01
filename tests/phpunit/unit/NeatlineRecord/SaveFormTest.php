@@ -39,8 +39,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
             'stroke_width'      => '13',
             'point_radius'      => '14',
             'point_image'       => '15',
-            'max_zoom'          => '16',
-            'min_zoom'          => '17',
+            'min_zoom'          => '16',
+            'max_zoom'          => '17',
             'map_zoom'          => '18',
             'map_focus'         => '19',
             'wms_address'       => '20',
@@ -67,8 +67,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($record->stroke_width,      13);
         $this->assertEquals($record->point_radius,      14);
         $this->assertEquals($record->point_image,       '15');
-        $this->assertEquals($record->max_zoom,          16);
-        $this->assertEquals($record->min_zoom,          17);
+        $this->assertEquals($record->min_zoom,          16);
+        $this->assertEquals($record->max_zoom,          17);
         $this->assertEquals($record->map_zoom,          18);
         $this->assertEquals($record->map_focus,         '19');
         $this->assertEquals($record->wms_address,       '20');

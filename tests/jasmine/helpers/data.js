@@ -96,6 +96,8 @@ var _t = (function(_t) {
       minZoom:        form.$('input[name="min-zoom"]'),
       maxZoom:        form.$('input[name="max-zoom"]'),
       pointImage:     form.$('input[name="point-image"]'),
+      wmsAddress:     form.$('input[name="wms-address"]'),
+      wmsLayers:      form.$('input[name="wms-layers"]'),
       mapFocus:       form.$('input[name="map-focus"]'),
       mapZoom:        form.$('input[name="map-zoom"]')
     };

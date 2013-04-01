@@ -138,8 +138,8 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set sides.
-    _t.vw.MAPTAB.__ui.sides.val('10');
-    _t.vw.MAPTAB.__ui.sides.trigger('change');
+    _t.vw.SPATIAL.__ui.sides.val('10');
+    _t.vw.SPATIAL.__ui.sides.trigger('change');
 
     // "Sides" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
@@ -155,8 +155,8 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set snap angle.
-    _t.vw.MAPTAB.__ui.snap.val('45');
-    _t.vw.MAPTAB.__ui.snap.trigger('change');
+    _t.vw.SPATIAL.__ui.snap.val('45');
+    _t.vw.SPATIAL.__ui.snap.trigger('change');
 
     // "Snap Angle" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
@@ -172,15 +172,15 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set irregular.
-    _t.vw.MAPTAB.__ui.irreg.attr('checked', 'checked');
-    _t.vw.MAPTAB.__ui.irreg.trigger('change');
+    _t.vw.SPATIAL.__ui.irreg.attr('checked', 'checked');
+    _t.vw.SPATIAL.__ui.irreg.trigger('change');
 
     // "Irregular" be active.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    _t.vw.MAPTAB.__ui.irreg.removeAttr('checked');
-    _t.vw.MAPTAB.__ui.irreg.trigger('change');
+    _t.vw.SPATIAL.__ui.irreg.removeAttr('checked');
+    _t.vw.SPATIAL.__ui.irreg.trigger('change');
 
     // "Irregular" should be inactive.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
@@ -503,7 +503,7 @@ describe('Record Form Map Tab', function() {
     _t.vw.RECORD.activateTab('text');
 
     // "Navigate" mode should be active.
-    expect(_t.vw.MAPTAB.getEditMode()).toEqual('pan');
+    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
 
   });
 

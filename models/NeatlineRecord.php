@@ -34,8 +34,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $stroke_opacity;     // INT(10) UNSIGNED NULL
     public $stroke_width;       // INT(10) UNSIGNED NULL
     public $point_radius;       // INT(10) UNSIGNED NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
     public $min_zoom;           // INT(10) UNSIGNED NULL
+    public $max_zoom;           // INT(10) UNSIGNED NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
     public $map_focus;          // VARCHAR(100) NULL
     public $wms_address;        // VARCHAR(100) NULL
@@ -86,12 +86,6 @@ class NeatlineRecord extends Neatline_AbstractRecord
 
         // Mass-assign the form.
         $this->setFromArray($values);
-
-        // TODO|stylesets
-        // foreach (_nl_getStylesetTables() as $styleset) {
-            // $set = $styleset->getOrCreate($this)->setFromArray($this);
-            // $set->save();
-        // }
 
         // If 1 or more tags have been added to the record since the last
         // time it was saved, pull in the _existing_ CSS rules for those
