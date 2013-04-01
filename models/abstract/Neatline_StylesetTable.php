@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Table class for Neatline data records.
+ * Table class for stylesets.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,8 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_AbstractStylesetTable
-    extends Neatline_AbstractRecordTable
+abstract class Neatline_AbstractStylesetTable extends Omeka_Db_Table
 {
 
 

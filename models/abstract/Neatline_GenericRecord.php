@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Row class for NeatlineRecord.
+ * Generic row class.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
+abstract class Neatline_GenericRecord extends Omeka_Record_AbstractRecord
 {
 
 
@@ -69,13 +69,6 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
         $this->runCallbacks('beforeSave', $args);
         $this->id = $this->insertOrUpdate($this->toArrayForSave());
         $this->runCallbacks('afterSave', $args);
-
-        // Insert/update stylesets.
-        foreach ($this->getTable()->getStylesetTables() as $table) {
-            $styleset = $table->getOrCreate($this);
-            $styleset->setByRecord($this);
-            $styleset->save();
-        }
 
     }
 

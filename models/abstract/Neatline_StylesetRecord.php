@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_AbstractStyleset extends Neatline_AbstractRecord
+abstract class Neatline_StylesetRecord extends Neatline_GenericRecord
 {
 
 
@@ -27,17 +27,6 @@ abstract class Neatline_AbstractStyleset extends Neatline_AbstractRecord
     {
         parent::__construct();
         if (!is_null($record)) $this->record_id = $record->id;
-    }
-
-
-    /**
-     * Set a field if the passed value is not whitespace.
-     *
-     * @param NeatlineRecord $record The parent record.
-     */
-    public function setByRecord($record)
-    {
-        $this->setFromArray($record->toArrayForSave());
     }
 
 

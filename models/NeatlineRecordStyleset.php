@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordStyleset extends Neatline_AbstractStyleset
+class NeatlineRecordStyleset extends Neatline_StylesetRecord
 {
 
 
