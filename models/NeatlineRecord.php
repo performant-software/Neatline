@@ -68,8 +68,7 @@ class NeatlineRecord extends Neatline_AbstractRecord
      */
     public function getStylesetTables()
     {
-        // TODO|stylesets
-        return array();
+        return apply_filters('neatline_record_stylesets', array());
     }
 
 

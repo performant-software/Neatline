@@ -37,8 +37,7 @@ class NeatlineExhibit extends Neatline_AbstractRecord
      */
     public function getStylesetTables()
     {
-        // TODO|stylesets
-        return array();
+        return apply_filters('neatline_exhibit_stylesets', array());
     }
 
 

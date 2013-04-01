@@ -20,7 +20,10 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
      *
      * @return array $tables The array of styleset tables.
      */
-    abstract public function getStylesetTables();
+    public function getStylesetTables()
+    {
+        return array();
+    }
 
 
     /**

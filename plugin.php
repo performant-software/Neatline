@@ -18,8 +18,10 @@ if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 require_once NL_DIR . '/NeatlinePlugin.php';
 
 // Application classes.
-require_once NL_DIR . '/models/abstract/NeatlineAbstractRecord.php';
-require_once NL_DIR . '/controllers/abstract/NeatlineRestController.php';
+require_once NL_DIR . '/models/abstract/Record.php';
+require_once NL_DIR . '/models/abstract/Styleset.php';
+require_once NL_DIR . '/models/abstract/StylesetTable.php';
+require_once NL_DIR . '/controllers/abstract/Rest.php';
 require_once NL_DIR . '/jobs/ItemImporter.php';
 
 // Helpers.

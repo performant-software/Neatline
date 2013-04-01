@@ -44,16 +44,6 @@ class NeatlineRecordTable extends Omeka_Db_Table
             'NULLIF(AsText(coverage), "POINT(0 0)")'
         )));
 
-        // TODO|stylesets
-        // $record = $this->getTableAlias();
-        // foreach (_nl_getStylesetTables() as $styleset) {
-            // $table = $styleset->getTableName();
-            // $alias = $styleset->getTableAlias();
-            // $select->join(array($alias => $table),
-                // "$record->id = $alias->record_id"
-            // );
-        // }
-
         // Order chronologically.
         $select->order('added DESC');
 
