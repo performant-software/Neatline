@@ -15,6 +15,21 @@ abstract class Neatline_AbstractStyleset extends Neatline_AbstractRecord
 {
 
 
+    public $record_id; // INT(10) UNSIGNED NULL
+
+
+    /**
+     * Set parent record foreign key.
+     *
+     * @param NeatlineRecord $record The parent record.
+     */
+    public function __construct($record = null)
+    {
+        parent::__construct();
+        if (!is_null($record)) $this->record_id = $exhibit->id;
+    }
+
+
     /**
      * Set a field if the passed value is not whitespace.
      *
@@ -22,7 +37,7 @@ abstract class Neatline_AbstractStyleset extends Neatline_AbstractRecord
      */
     public function setByRecord($record)
     {
-        // TODO
+        $this->setFromArray($record->toArrayForSave());
     }
 
 
