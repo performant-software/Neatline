@@ -56,8 +56,10 @@ describe('Record Form Save', function() {
     inputs.pointImage.      val('14').      trigger('change');
     inputs.minZoom.         val('15').      trigger('change');
     inputs.maxZoom.         val('16').      trigger('change');
-    inputs.mapFocus.        val('17').      trigger('change');
-    inputs.mapZoom.         val('18').      trigger('change');
+    inputs.wmsAddress.      val('17').      trigger('change');
+    inputs.wmsLayers.       val('18').      trigger('change');
+    inputs.mapFocus.        val('19').      trigger('change');
+    inputs.mapZoom.         val('20').      trigger('change');
 
     // Click "Save" button.
     el.save.trigger('click');
@@ -87,8 +89,10 @@ describe('Record Form Save', function() {
     expect(params.point_image).     toEqual('14');
     expect(params.min_zoom).        toEqual('15');
     expect(params.max_zoom).        toEqual('16');
-    expect(params.map_focus).       toEqual('17');
-    expect(params.map_zoom).        toEqual('18');
+    expect(params.wms_address).     toEqual('17');
+    expect(params.wms_layers).      toEqual('18');
+    expect(params.map_focus).       toEqual('19');
+    expect(params.map_zoom).        toEqual('20');
 
   });
 

@@ -34,8 +34,8 @@ class NeatlineRecord extends Neatline_AbstractRecord
     public $stroke_opacity;     // INT(10) UNSIGNED NULL
     public $stroke_width;       // INT(10) UNSIGNED NULL
     public $point_radius;       // INT(10) UNSIGNED NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
     public $min_zoom;           // INT(10) UNSIGNED NULL
+    public $max_zoom;           // INT(10) UNSIGNED NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
     public $map_focus;          // VARCHAR(100) NULL
     public $wms_address;        // VARCHAR(100) NULL

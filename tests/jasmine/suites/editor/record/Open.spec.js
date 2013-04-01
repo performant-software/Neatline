@@ -143,6 +143,8 @@ describe('Record Form Open', function() {
     expect(inputs.pointImage).      toHaveValue('9');
     expect(inputs.minZoom).         toHaveValue('10');
     expect(inputs.maxZoom).         toHaveValue('11');
+    expect(inputs.wmsAddress).      toHaveValue('12');
+    expect(inputs.wmsLayers).       toHaveValue('13');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
 
