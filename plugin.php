@@ -15,20 +15,19 @@
 if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
 require_once NL_DIR . '/NeatlinePlugin.php';
-
-$paths = array(
-    NL_DIR . '/models/abstract/*.php',
-    NL_DIR . '/controllers/abstract/*.php',
-    NL_DIR . '/jobs/*.php',
-    NL_DIR . '/helpers/*.php',
-    NL_DIR . '/forms/*.php'
-);
-
-foreach ($paths as $path) {
-    foreach (glob($path) as $file) {
-        require_once $file;
-    }
-}
+require_once NL_DIR . '/models/abstract/Neatline_GenericRecord.php';
+require_once NL_DIR . '/models/abstract/Neatline_ExtensibleRecord.php';
+require_once NL_DIR . '/models/abstract/Neatline_ExtensibleTable.php';
+require_once NL_DIR . '/models/abstract/Neatline_StylesetRecord.php';
+require_once NL_DIR . '/models/abstract/Neatline_StylesetTable.php';
+require_once NL_DIR . '/controllers/abstract/Neatline_RestController.php';
+require_once NL_DIR . '/jobs/ItemImporter.php';
+require_once NL_DIR . '/forms/ExhibitForm.php';
+require_once NL_DIR . '/helpers/Assets.php';
+require_once NL_DIR . '/helpers/Layers.php';
+require_once NL_DIR . '/helpers/Plugins.php';
+require_once NL_DIR . '/helpers/Styles.php';
+require_once NL_DIR . '/helpers/Views.php';
 
 Zend_Registry::set('layers', NL_DIR . '/layers.json');
 Zend_Registry::set('fileIn', 'php://input');

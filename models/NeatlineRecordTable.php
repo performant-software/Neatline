@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTable extends Neatline_StylableTable
+class NeatlineRecordTable extends Neatline_ExtensibleTable
 {
 
 

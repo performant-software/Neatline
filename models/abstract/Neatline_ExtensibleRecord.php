@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_StylableRecord extends Neatline_GenericRecord
+abstract class Neatline_ExtensibleRecord extends Neatline_GenericRecord
 {
 
 
