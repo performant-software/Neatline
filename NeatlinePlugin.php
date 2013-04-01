@@ -112,7 +112,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Record stylesets.
         // -----------------
         $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_record_stylesets` (
+            `{$this->_db->prefix}neatline_default_record_stylesets` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `record_id`         INT(10) UNSIGNED NULL,
             `test1`             INT(10) UNSIGNED NULL,
@@ -197,13 +197,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Add link to main admin menu bar.
      *
-     * @param array $stylesets The styleset tables.
-     * @return array The tables, with NeatlineRecordStylesetTable.
+     * @param array $tables The styleset tables.
+     * @return array The tables, with NeatlineDefaultRecordStyleset.
      */
-    public function filterNeatlineRecordStylesets($stylesets)
+    public function filterNeatlineRecordStylesets($tables)
     {
-        $stylesets[] = $this->_db->getTable('NeatlineRecordStyleset');
-        return $stylesets;
+        $tables[] = $this->_db->getTable('NeatlineDefaultRecordStyleset');
+        return $tables;
     }
 
 
