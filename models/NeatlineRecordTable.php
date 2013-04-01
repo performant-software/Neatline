@@ -11,21 +11,18 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTable extends Omeka_Db_Table
+class NeatlineRecordTable extends Neatline_AbstractRecordTable
 {
 
 
     /**
-     * Update record item references when an item is changed.
+     * Gather styleset tables.
      *
-     * @param Item $item The item record.
+     * @return array The tables.
      */
-    public function syncItem($item)
+    public function getStylesetTables()
     {
-        $select = $this->getSelect()->where('item_id=?', $item->id);
-        foreach ($this->fetchObjects($select) as $record) {
-            $record->save();
-        }
+        return apply_filters('neatline_record_stylesets', array());
     }
 
 
@@ -49,6 +46,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         return $select;
 
+    }
+
+
+    /**
+     * Update record item references when an item is changed.
+     *
+     * @param Item $item The item record.
+     */
+    public function syncItem($item)
+    {
+        $select = $this->getSelect()->where('item_id=?', $item->id);
+        foreach ($this->fetchObjects($select) as $record) {
+            $record->save();
+        }
     }
 
 

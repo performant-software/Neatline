@@ -16,17 +16,6 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Get an array of all styleset tables that are bound to the record.
-     *
-     * @return array $tables The array of styleset tables.
-     */
-    public function getStylesetTables()
-    {
-        return array();
-    }
-
-
-    /**
      * Set a field if the passed value is not whitespace.
      *
      * @param string $key The name of the field.
@@ -82,7 +71,7 @@ abstract class Neatline_AbstractRecord extends Omeka_Record_AbstractRecord
         $this->runCallbacks('afterSave', $args);
 
         // Insert/update stylesets.
-        foreach ($this->getStylesetTables() as $table) {
+        foreach ($this->getTable()->getStylesetTables() as $table) {
             $styleset = $table->getOrCreate($this);
             $styleset->setByRecord($this);
             $styleset->save();

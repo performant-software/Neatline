@@ -24,14 +24,16 @@ abstract class Neatline_AbstractStylesetTable extends Omeka_Db_Table
     public function getOrCreate($record)
     {
 
-        // Try to find an existing styleset.
+        // Query for existing styleset.
         $set = $this->findBySql('record_id=?', array($record->id), true);
-        if ($set) return $set;
+        if (!is_null($set)) return $set;
 
-        // If none exists, create a new one.
         else {
-            $class = $this->_target;
-            return new $class($record);
+
+            // Create a new styleset.
+            $target = $this->_target;
+            return new $target($record);
+
         }
 
     }

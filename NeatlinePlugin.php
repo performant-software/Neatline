@@ -77,6 +77,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `body`              MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
             `tags`              TEXT NULL,
+
             `widgets`           TEXT NULL,
             `presenter`         VARCHAR(100) NULL,
             `fill_color`        TINYTEXT NULL,
@@ -94,11 +95,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `map_focus`         VARCHAR(100) NULL,
             `wms_address`       VARCHAR(100) NULL,
             `wms_layers`        VARCHAR(100) NULL,
+
             `start_date`        VARCHAR(100) NULL,
             `end_date`          VARCHAR(100) NULL,
             `show_after_date`   VARCHAR(100) NULL,
             `show_before_date`  VARCHAR(100) NULL,
+
             `weight`            INT(10) UNSIGNED NULL,
+
              PRIMARY KEY        (`id`),
              FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)

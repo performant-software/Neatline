@@ -11,8 +11,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibitTable extends Omeka_Db_Table
+class NeatlineExhibitTable extends Neatline_AbstractRecordTable
 {
+
+
+    /**
+     * Gather styleset tables.
+     *
+     * @return array The tables.
+     */
+    public function getStylesetTables()
+    {
+        return apply_filters('neatline_exhibit_stylesets', array());
+    }
 
 
     /**
