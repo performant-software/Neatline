@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for map editing.
+ * Tests for edit layer management.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -13,12 +13,28 @@
 describe('Map Edit Layer', function() {
 
 
-  var recordModels;
+  var el, recordModels;
 
 
   beforeEach(function() {
+
     _t.loadEditor();
     recordModels = _t.getRecordListModels();
+
+    el = {
+      pan:      _t.vw.RECORD.$('input[value="pan"]'),
+      point:    _t.vw.RECORD.$('input[value="point"]'),
+      line:     _t.vw.RECORD.$('input[value="line"]'),
+      poly:     _t.vw.RECORD.$('input[value="poly"]'),
+      regPoly:  _t.vw.RECORD.$('input[value="regPoly"]'),
+      svg:      _t.vw.RECORD.$('input[value="svg"]'),
+      modify:   _t.vw.RECORD.$('input[value="modify"]'),
+      rotate:   _t.vw.RECORD.$('input[value="rotate"]'),
+      resize:   _t.vw.RECORD.$('input[value="resize"]'),
+      drag:     _t.vw.RECORD.$('input[value="drag"]'),
+      remove:   _t.vw.RECORD.$('input[value="remove"]')
+    };
+
   });
 
 
