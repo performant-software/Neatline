@@ -288,6 +288,34 @@ Neatline.module('Map', function(
 
       this.records = records;
 
+      // Rebuild layers.
+      this.updateWmsLayers(this.records);
+      this.updateVectorLayers(this.records);
+      this.updateControls();
+
+      // Publish collection.
+      Neatline.vent.trigger('MAP:ingest', this.records);
+
+    },
+
+
+    /**
+     * Rebuild the WMS layers to match the new collection.
+     *
+     * @param {Object} records: The records collection.
+     */
+    updateWmsLayers: function(records) {
+      // TODO
+    },
+
+
+    /**
+     * Rebuild the vector layers to match the new collection.
+     *
+     * @param {Object} records: The records collection.
+     */
+    updateVectorLayers: function(records) {
+
       // Remove layers.
       _.each(this.vectorLayers, _.bind(function(layer) {
         this.map.removeLayer(layer);
@@ -299,11 +327,6 @@ Neatline.module('Map', function(
       records.each(_.bind(function(record) {
         this.buildVectorLayer(record);
       }, this));
-
-      this.updateControls();
-
-      // Publish collection.
-      Neatline.vent.trigger('MAP:ingest', records);
 
     },
 

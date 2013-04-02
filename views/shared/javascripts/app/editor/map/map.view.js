@@ -32,10 +32,9 @@ _.extend(Neatline.Map.View.prototype, {
    *
    * @param {Object} records: The records collection.
    */
-  ingest: function(records) {
+  updateVectorLayers: function(records) {
 
 
-    this.records = records;
     var layers = [];
 
     // First, remove all of the existing vector layers. If `editLayer` is
@@ -82,20 +81,13 @@ _.extend(Neatline.Map.View.prototype, {
 
     }, this));
 
-    // Update the default click and hover controls with the new batch of
-    // layers that was just constructed, and, if the user is currently
-    // modifying vector geometry (the "Modify/Rotate/Resize/Drag Shape"
-    // modes), force the edit layer to the top of the layer stack. This is
-    // necessary because OpenLayers automatically manages the layers' z-
-    // indecies and can "bury" the edit layer under the regular layers,
-    // which makes it impossible to select/edit the vectors on the edit
-    // layer with the cursor controls on the edit control.
+    // If the user is currently modifying vector geometry (the "Modify/
+    // Rotate/Resize/Drag Shape" modes), push the edit layer to the top of
+    // the layer stack. This is necessary because OpenLayers automatically
+    // manages the layers' z-indecies and can "bury" the edit layer under
+    // other layers, which makes it impossible to edit the vectors.
 
-    this.updateControls();
     this.raiseEditLayer();
-
-    // Publish collection.
-    Neatline.vent.trigger('MAP:ingest', records);
 
 
   },
