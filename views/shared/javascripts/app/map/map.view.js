@@ -286,15 +286,15 @@ Neatline.module('Map', function(
      */
     ingest: function(records) {
 
-      this.records = records;
-
-      // Rebuild layers.
-      this.updateWmsLayers(this.records);
-      this.updateVectorLayers(this.records);
-      this.updateControls();
+      // Build layers.
+      this.ingestWmsLayers(records);
+      this.ingestVectorLayers(records);
 
       // Publish collection.
-      Neatline.vent.trigger('MAP:ingest', this.records);
+      Neatline.vent.trigger('MAP:ingest', records);
+
+      this.records = records;
+      this.updateControls();
 
     },
 
@@ -304,7 +304,7 @@ Neatline.module('Map', function(
      *
      * @param {Object} records: The records collection.
      */
-    updateWmsLayers: function(records) {
+    ingestWmsLayers: function(records) {
       // TODO
     },
 
@@ -314,7 +314,7 @@ Neatline.module('Map', function(
      *
      * @param {Object} records: The records collection.
      */
-    updateVectorLayers: function(records) {
+    ingestVectorLayers: function(records) {
 
       // Remove layers.
       _.each(this.vectorLayers, _.bind(function(layer) {
@@ -335,6 +335,7 @@ Neatline.module('Map', function(
      * Construct a WMS overlay for a model.
      *
      * @param {Object} record: The record model.
+     * @return {OpenLayers.Layer.WMS}: The layer.
      */
     buildWmsLayer: function(record) {
       // TODO

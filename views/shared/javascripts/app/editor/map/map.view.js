@@ -32,7 +32,7 @@ _.extend(Neatline.Map.View.prototype, {
    *
    * @param {Object} records: The records collection.
    */
-  updateVectorLayers: function(records) {
+  ingestVectorLayers: function(records) {
 
 
     var layers = [];
