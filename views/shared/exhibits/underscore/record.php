@@ -22,8 +22,8 @@
 
   <!-- Header. -->
   <p class="lead">
-    <span class="id" data-text="record.id | id"></span>
-    <span class="title" data-text="record.title | title"></span>
+    <span class="id" data-text="record.id | recordId"></span>
+    <span class="title" data-text="record.title | recordTitle"></span>
   </p>
 
   <!-- Tabs. -->

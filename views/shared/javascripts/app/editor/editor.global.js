@@ -12,16 +12,6 @@
 
 
 /**
- * Toastr globals.
- */
-toastr.options = {
-  timeOut:  2500,
-  fadeIn:   200,
-  fadeOut:  200
-};
-
-
-/**
  * Construct the URL fragment for a record edit form.
  *
  * @param {Number} id: The record id.
@@ -38,7 +28,7 @@ rivets.formatters.recordLink = function(id) {
  * @param {String|null} title: The title.
  * @return {String}: If the title is null, return the placeholder.
  */
-rivets.formatters.title = function(title) {
+rivets.formatters.recordTitle = function(title) {
   return title ? title : STRINGS.placeholders.title;
 };
 
@@ -49,6 +39,27 @@ rivets.formatters.title = function(title) {
  * @param {Number|null} id: The record id.
  * @return {String}: The formatted id.
  */
-rivets.formatters.id = function(id) {
+rivets.formatters.recordId = function(id) {
   return id ? '#'+id+':' : null;
+};
+
+
+/**
+ * Explode a comma-delimited string to an array.
+ *
+ * @param {String} string: A comma-delimited string.
+ * @return {Array}: The exploded array.
+ */
+rivets.formatters.commaDelimited = function(string) {
+  return string ? string.split(',') : null;
+};
+
+
+/**
+ * Toastr globals.
+ */
+toastr.options = {
+  timeOut:  2500,
+  fadeIn:   200,
+  fadeOut:  200
 };

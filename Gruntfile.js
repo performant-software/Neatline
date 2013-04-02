@@ -324,10 +324,7 @@ module.exports = function(grunt) {
       },
 
       editor: {
-        src: [
-          cfg.payloads.shared.js+'/ckeditor/ckeditor.js',
-          cfg.payloads.shared.js+'/editor.js'
-        ],
+        src: cfg.payloads.shared.js+'/editor.js',
         options: {
           specs: cfg.jasmine+'/suites/editor/**/*.spec.js'
         }

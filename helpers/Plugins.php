@@ -24,6 +24,17 @@ function _nl_getExhibitWidgets()
 
 
 /**
+ * Gather exhibit widgets via the `neatline_exhibit_widgets` filter.
+ *
+ * @return array An array of widget name => ids.
+ */
+function _nl_getRecordWidgets()
+{
+    return apply_filters('neatline_record_widgets', array());
+}
+
+
+/**
  * Gather presenters via the `neatline_presenters` filter.
  *
  * @return array An array of presenter name => ids.

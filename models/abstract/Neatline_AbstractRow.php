@@ -35,7 +35,22 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
      */
     public function setArray($values)
     {
-        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
+        foreach ($values as $k => $v) {
+            if (is_array($v)) $v = implode(',', $v);
+            $this->setNotEmpty($k, $v);
+        }
+    }
+
+
+    /**
+     * Implode `widgets` and `base_layers` before saving.
+     *
+     * @param array $values The POST/PUT values.
+     */
+    public function saveForm($values)
+    {
+        $this->setArray($values);
+        $this->save();
     }
 
 

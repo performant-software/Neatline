@@ -34,10 +34,10 @@
   <?php echo common('neatline/select', array(
       'name'  => 'widgets',
       'label' => 'Widgets',
-      'multi' => true,
-      'bind'  => 'record.widgets',
+      'bind'  => 'record.widgets | commaDelimited',
       'style' => 'widgets',
-      'options' => array()
+      'options' => _nl_getRecordWidgets(),
+      'multi' => true,
   )); ?>
 
   <legend>Colors</legend>
