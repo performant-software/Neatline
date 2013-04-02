@@ -35,19 +35,6 @@ var _t = (function(_t) {
 
 
   /**
-   * Get the vector layer by record title.
-   *
-   * @param {String} title: The record title.
-   * @return {Object}: The layer.
-   */
-  _t.getVectorLayerByTitle = function(title) {
-    return _.find(this.vw.MAP.layers, function(layer) {
-      return layer.name == title;
-    });
-  };
-
-
-  /**
    * Get the record id from the new record JSON fixture.
    *
    * @return {Number}: The id.

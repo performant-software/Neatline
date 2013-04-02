@@ -26,10 +26,11 @@ describe('Map Record Focusing', function() {
     // record without fetching new data from the server.
     // --------------------------------------------------------------------
 
-    var requestCount;
+    var requestCount, layer;
 
     beforeEach(function() {
       requestCount = _t.server.requests.count;
+      layer = _t.vw.MAP.vectorLayers[0];
     });
 
     afterEach(function() {
@@ -43,11 +44,11 @@ describe('Map Record Focusing', function() {
     });
 
     it('focusByModel', function() {
-      Neatline.execute('MAP:focusByModel', _t.vw.MAP.layers[0].nModel);
+      Neatline.execute('MAP:focusByModel', layer.nModel);
     });
 
     it('focusById', function() {
-      Neatline.execute('MAP:focusById', _t.vw.MAP.layers[0].nId);
+      Neatline.execute('MAP:focusById', layer.nId);
     });
 
   });
@@ -69,9 +70,9 @@ describe('Map Record Focusing', function() {
     afterEach(function() {
 
       // New layer should be created for model.
-      expect(_t.vw.MAP.layers.length).toEqual(4);
-      expect(_t.vw.MAP.layers[3].features[0].geometry.x).toEqual(1);
-      expect(_t.vw.MAP.layers[3].features[0].geometry.y).toEqual(2);
+      expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
+      expect(_t.vw.MAP.vectorLayers[3].features[0].geometry.x).toEqual(1);
+      expect(_t.vw.MAP.vectorLayers[3].features[0].geometry.y).toEqual(2);
 
       // Map should focus.
       _t.assertMapViewport(100, 200, 10);

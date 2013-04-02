@@ -21,8 +21,8 @@ describe('Static Bubble', function() {
     _t.loadNeatline();
 
     // Get layers.
-    layer1 = _t.vw.MAP.layers[0];
-    layer2 = _t.vw.MAP.layers[1];
+    layer1 = _t.vw.MAP.vectorLayers[0];
+    layer2 = _t.vw.MAP.vectorLayers[1];
 
     // Get features.
     feature1 = layer1.features[0];

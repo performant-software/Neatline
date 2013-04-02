@@ -27,8 +27,9 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      this.records = null;  // The current collection of records.
-      this.layers = [];     // An array of record-backed vector layers.
+      this.records = null;    // Current collection.
+      this.vectorLayers = []; // Current vector layers.
+      this.wmsLayers = [];    // Current WMS layers.
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -99,7 +100,7 @@ Neatline.module('Map', function(
 
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
-        this.layers, {
+        this.vectorLayers, {
           hover: true,
           highlightOnly: true,
           renderIntent: 'temporary',
@@ -112,7 +113,7 @@ Neatline.module('Map', function(
 
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
-        this.layers, {
+        this.vectorLayers, {
           onSelect:   this.onFeatureSelect,
           onUnselect: this.onFeatureUnselect
         }
@@ -188,8 +189,8 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
-      this.hoverControl.setLayer(this.layers);
-      this.clickControl.setLayer(this.layers);
+      this.hoverControl.setLayer(this.vectorLayers);
+      this.clickControl.setLayer(this.vectorLayers);
     },
 
 
@@ -228,7 +229,7 @@ Neatline.module('Map', function(
 
       // Get a layer for the model.
       var layer = this.getLayerByModel(model);
-      if (!layer) layer = this.buildLayer(model);
+      if (!layer) layer = this.buildVectorLayer(model);
 
       // Try to get a focus and zoom.
       var focus = model.get('map_focus');
@@ -288,15 +289,15 @@ Neatline.module('Map', function(
       this.records = records;
 
       // Remove layers.
-      _.each(this.layers, _.bind(function(layer) {
+      _.each(this.vectorLayers, _.bind(function(layer) {
         this.map.removeLayer(layer);
       }, this));
 
-      this.layers = [];
+      this.vectorLayers = [];
 
       // Add layers.
       records.each(_.bind(function(record) {
-        this.buildLayer(record);
+        this.buildVectorLayer(record);
       }, this));
 
       this.updateControls();
@@ -311,9 +312,9 @@ Neatline.module('Map', function(
      * Construct a vector layer and geometries for a model.
      *
      * @param {Object} record: The record model.
-     * @return {Boolean}: True if the layer was added.
+     * @return {OpenLayers.Layer.Vector}: The layer.
      */
-    buildLayer: function(record) {
+    buildVectorLayer: function(record) {
 
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(
@@ -323,7 +324,7 @@ Neatline.module('Map', function(
         }
       );
 
-      // Build features.
+      // Build vector layer.
       if (record.get('coverage')) {
         var formatWKT = new OpenLayers.Format.WKT();
         var features = formatWKT.read(record.get('coverage'));
@@ -336,7 +337,7 @@ Neatline.module('Map', function(
 
       // Add to map, track.
       this.map.addLayer(layer);
-      this.layers.push(layer);
+      this.vectorLayers.push(layer);
 
       return layer;
 
@@ -344,8 +345,7 @@ Neatline.module('Map', function(
 
 
     /**
-     * Construct a style map object for a vector. Used by `buildLayer` to
-     * populate the `styleMap` attribute for a model's vector layer.
+     * Construct a style map object for a vector.
      *
      * @param {Object} record: The record.
      */

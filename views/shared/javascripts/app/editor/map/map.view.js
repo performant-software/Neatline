@@ -42,7 +42,7 @@ _.extend(Neatline.Map.View.prototype, {
     // defined (meaning that a record form is open, and an edit session is
     // currently in progress), remove all layers _except_ the edit layer.
 
-    _.each(this.layers, _.bind(function(layer) {
+    _.each(this.vectorLayers, _.bind(function(layer) {
 
       // Remove if the layer is not the edit layer.
       if (!this.editLayer || (layer.id != this.editLayer.id)) {
@@ -53,7 +53,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     }, this));
 
-    this.layers = layers;
+    this.vectorLayers = layers;
 
     // Once the map is cleared (with the exception of the edit layer, if
     // one exists), build layers for all of the records in the incoming
@@ -72,7 +72,7 @@ _.extend(Neatline.Map.View.prototype, {
 
       // Add if the layer is not the edit layer.
       if (!this.editLayer || (id != this.editLayer.nId)) {
-        this.buildLayer(record);
+        this.buildVectorLayer(record);
       }
 
       // Update the edit layer model.
@@ -116,7 +116,7 @@ _.extend(Neatline.Map.View.prototype, {
     // layer from the model and add it to the map.
 
     this.editLayer = this.getLayerByModel(model);
-    if (!this.editLayer) this.editLayer = this.buildLayer(model);
+    if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
 
     // Create the set of editing controls for the edit layer.
 
@@ -433,7 +433,7 @@ _.extend(Neatline.Map.View.prototype, {
    */
   removeLayer: function(layer) {
     this.map.removeLayer(layer);
-    this.layers = _.reject(this.layers, function(l) {
+    this.vectorLayers = _.reject(this.vectorLayers, function(l) {
       return l.nId == layer.nId;
     });
   },

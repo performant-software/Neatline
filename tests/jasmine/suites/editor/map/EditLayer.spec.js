@@ -48,16 +48,16 @@ describe('Map Edit Layer', function() {
 
     // Load map without record 2.
     _t.refreshMap(_t.json.records.removed);
-    expect(_t.vw.MAP.layers.length).toEqual(2);
+    expect(_t.vw.MAP.vectorLayers.length).toEqual(2);
 
     // Open form for record 2.
     _t.navigate('record/'+recordModels[1].get('id'));
 
     // Map should create new layer for record 2.
-    var newLayer = _.last(_t.vw.MAP.layers);
+    var newLayer = _.last(_t.vw.MAP.vectorLayers);
     expect(newLayer.features[0].geometry.x).toEqual(3);
     expect(newLayer.features[0].geometry.y).toEqual(4);
-    expect(_t.vw.MAP.layers.length).toEqual(3);
+    expect(_t.vw.MAP.vectorLayers.length).toEqual(3);
 
     // Map should set record 2 layer as the edit layer.
     expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
@@ -75,8 +75,8 @@ describe('Map Edit Layer', function() {
     _t.navigate('record/add');
 
     // Map should create new layer.
-    var newLayer = _.last(_t.vw.MAP.layers);
-    expect(_t.vw.MAP.layers.length).toEqual(4);
+    var newLayer = _.last(_t.vw.MAP.vectorLayers);
+    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
 
     // Map should set new layer as the edit layer.
     expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
@@ -169,7 +169,7 @@ describe('Map Edit Layer', function() {
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer should still be present.
-    expect(_t.vw.MAP.layers.length).toEqual(4);
+    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
 
   });
 
@@ -204,14 +204,14 @@ describe('Map Edit Layer', function() {
 
     // Create new record.
     _t.navigate('record/add');
-    expect(_t.vw.MAP.layers.length).toEqual(4);
+    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
 
     // Close without saving, refresh map.
     _t.navigate('records');
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer should be removed.
-    expect(_t.vw.MAP.layers.length).toEqual(3);
+    expect(_t.vw.MAP.vectorLayers.length).toEqual(3);
     expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
