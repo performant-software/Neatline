@@ -58,8 +58,6 @@ class FixturesTest_Json extends Neatline_TestCase
         $record1->body              = 'body1';
         $record1->tags              = 'tags1';
         $record1->coverage          = 'POINT(1 2)';
-        $record1->map_focus         = '100,200';
-        $record1->map_zoom          = 10;
         $record1->presenter         = 'StaticBubble';
         $record1->fill_color        = '#111111';
         $record1->select_color      = '#222222';
@@ -69,11 +67,18 @@ class FixturesTest_Json extends Neatline_TestCase
         $record1->stroke_opacity    = 6;
         $record1->stroke_width      = 7;
         $record1->point_radius      = 8;
-        $record1->point_image       = '9';
-        $record1->min_zoom          = 10;
-        $record1->max_zoom          = 11;
-        $record1->wms_address       = '12';
-        $record1->wms_layers        = '13';
+        $record1->weight            = 9;
+        $record1->start_date        = '10';
+        $record1->end_date          = '11';
+        $record1->point_image       = '12';
+        $record1->wms_address       = '13';
+        $record1->wms_layers        = '14';
+        $record1->min_zoom          = 15;
+        $record1->max_zoom          = 16;
+        $record1->show_after_date   = '17';
+        $record1->show_before_date  = '18';
+        $record1->map_focus         = '100,200';
+        $record1->map_zoom          = 10;
 
         $record2->title             = 'title2';
         $record3->title             = 'title3';
@@ -206,8 +211,6 @@ class FixturesTest_Json extends Neatline_TestCase
         $record->body               = 'body';
         $record->tags               = 'tags';
         $record->coverage           = 'POINT(1 2)';
-        $record->map_focus          = '100,200';
-        $record->map_zoom           = 10;
         $record->presenter          = 'StaticBubble';
         $record->fill_color         = '#111111';
         $record->select_color       = '#222222';
@@ -217,11 +220,18 @@ class FixturesTest_Json extends Neatline_TestCase
         $record->stroke_opacity     = 6;
         $record->stroke_width       = 7;
         $record->point_radius       = 8;
-        $record->point_image        = '9';
-        $record->min_zoom           = 10;
-        $record->max_zoom           = 11;
-        $record->wms_address        = '12';
-        $record->wms_layers         = '13';
+        $record->weight             = 9;
+        $record->start_date         = '10';
+        $record->end_date           = '11';
+        $record->point_image        = '12';
+        $record->wms_address        = '13';
+        $record->wms_layers         = '14';
+        $record->min_zoom           = 15;
+        $record->max_zoom           = 16;
+        $record->show_after_date    = '17';
+        $record->show_before_date   = '18';
+        $record->map_focus          = '100,200';
+        $record->map_zoom           = 10;
         $record->__save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,

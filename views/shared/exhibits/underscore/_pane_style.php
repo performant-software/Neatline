@@ -104,6 +104,29 @@
       'class' => 'preview integer'
   )); ?>
 
+  <?php echo common('neatline/input', array(
+      'name'  => 'weight',
+      'label' => 'Order / Weight',
+      'bind'  => 'record.weight',
+      'style' => 'weight'
+  )); ?>
+
+  <legend>Dates</legend>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'start-date',
+      'label' => 'Start Date',
+      'bind'  => 'record.start_date',
+      'style' => 'start-date'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'end-date',
+      'label' => 'End Date',
+      'bind'  => 'record.end_date',
+      'style' => 'end-date'
+  )); ?>
+
   <legend>Imagery</legend>
 
   <?php echo common('neatline/input', array(
@@ -144,6 +167,20 @@
       'bind'  => 'record.max_zoom',
       'style' => 'max-zoom',
       'useCurrent' => true
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'show-after-date',
+      'label' => 'Show After Date',
+      'bind'  => 'record.show_after_date',
+      'style' => 'show-after-date'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'show-before-date',
+      'label' => 'Show Before Date',
+      'bind'  => 'record.show_before_date',
+      'style' => 'show-before-date'
   )); ?>
 
   <?php echo common('neatline/input', array(

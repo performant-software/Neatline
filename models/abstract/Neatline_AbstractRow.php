@@ -83,7 +83,6 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
     {
 
         $table = $this->getTable();
-        $valid = $table->getColumns();
         $db = $table->getAdapter();
 
         $cols = array();
@@ -93,7 +92,6 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 
         // Build column and value arrays.
         foreach ($values as $col => $val) {
-            if (!in_array($col, $valid)) continue;
             $cols[] = $db->quoteIdentifier($col, true);
             if ($val instanceof Zend_Db_Expr) {
                 $vals[] = $val->__toString();

@@ -53,13 +53,18 @@ describe('Record Form Save', function() {
     inputs.strokeOpacity.   val('11').      trigger('change');
     inputs.strokeWidth.     val('12').      trigger('change');
     inputs.pointRadius.     val('13').      trigger('change');
-    inputs.pointImage.      val('14').      trigger('change');
-    inputs.minZoom.         val('15').      trigger('change');
-    inputs.maxZoom.         val('16').      trigger('change');
-    inputs.wmsAddress.      val('17').      trigger('change');
-    inputs.wmsLayers.       val('18').      trigger('change');
-    inputs.mapFocus.        val('19').      trigger('change');
-    inputs.mapZoom.         val('20').      trigger('change');
+    inputs.weight.          val('14').      trigger('change');
+    inputs.startDate.       val('15').      trigger('change');
+    inputs.endDate.         val('16').      trigger('change');
+    inputs.pointImage.      val('17').      trigger('change');
+    inputs.wmsAddress.      val('18').      trigger('change');
+    inputs.wmsLayers.       val('19').      trigger('change');
+    inputs.minZoom.         val('20').      trigger('change');
+    inputs.maxZoom.         val('21').      trigger('change');
+    inputs.showAfterDate.   val('22').      trigger('change');
+    inputs.showBeforeDate.  val('23').      trigger('change');
+    inputs.mapFocus.        val('24').      trigger('change');
+    inputs.mapZoom.         val('25').      trigger('change');
 
     // Click "Save" button.
     el.save.trigger('click');
@@ -72,27 +77,32 @@ describe('Record Form Save', function() {
     var params = _t.getLastRequestParams();
 
     // Check the query string for updated values.
-    expect(params.title).           toEqual('1');
-    expect(params.body).            toEqual('2');
-    expect(params.item_id).         toEqual('3');
-    expect(params.coverage).        toEqual('4');
-    expect(params.tags).            toEqual('5');
-    expect(params.presenter).       toEqual('None');
-    expect(params.fill_color).      toEqual('#666666');
-    expect(params.select_color).    toEqual('#777777');
-    expect(params.stroke_color).    toEqual('#888888');
-    expect(params.fill_opacity).    toEqual('9');
-    expect(params.select_opacity).  toEqual('10');
-    expect(params.stroke_opacity).  toEqual('11');
-    expect(params.stroke_width).    toEqual('12');
-    expect(params.point_radius).    toEqual('13');
-    expect(params.point_image).     toEqual('14');
-    expect(params.min_zoom).        toEqual('15');
-    expect(params.max_zoom).        toEqual('16');
-    expect(params.wms_address).     toEqual('17');
-    expect(params.wms_layers).      toEqual('18');
-    expect(params.map_focus).       toEqual('19');
-    expect(params.map_zoom).        toEqual('20');
+    expect(params.title).             toEqual('1');
+    expect(params.body).              toEqual('2');
+    expect(params.item_id).           toEqual('3');
+    expect(params.coverage).          toEqual('4');
+    expect(params.tags).              toEqual('5');
+    expect(params.presenter).         toEqual('None');
+    expect(params.fill_color).        toEqual('#666666');
+    expect(params.select_color).      toEqual('#777777');
+    expect(params.stroke_color).      toEqual('#888888');
+    expect(params.fill_opacity).      toEqual('9');
+    expect(params.select_opacity).    toEqual('10');
+    expect(params.stroke_opacity).    toEqual('11');
+    expect(params.stroke_width).      toEqual('12');
+    expect(params.point_radius).      toEqual('13');
+    expect(params.weight).            toEqual('14');
+    expect(params.start_date).        toEqual('15');
+    expect(params.end_date).          toEqual('16');
+    expect(params.point_image).       toEqual('17');
+    expect(params.wms_address).       toEqual('18');
+    expect(params.wms_layers).        toEqual('19');
+    expect(params.min_zoom).          toEqual('20');
+    expect(params.max_zoom).          toEqual('21');
+    expect(params.show_after_date).   toEqual('22');
+    expect(params.show_before_date).  toEqual('23');
+    expect(params.map_focus).         toEqual('24');
+    expect(params.map_zoom).          toEqual('25');
 
   });
 

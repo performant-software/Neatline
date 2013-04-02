@@ -140,11 +140,16 @@ describe('Record Form Open', function() {
     expect(inputs.strokeOpacity).   toHaveValue('6');
     expect(inputs.strokeWidth).     toHaveValue('7');
     expect(inputs.pointRadius).     toHaveValue('8');
-    expect(inputs.pointImage).      toHaveValue('9');
-    expect(inputs.minZoom).         toHaveValue('10');
-    expect(inputs.maxZoom).         toHaveValue('11');
-    expect(inputs.wmsAddress).      toHaveValue('12');
-    expect(inputs.wmsLayers).       toHaveValue('13');
+    expect(inputs.weight).          toHaveValue('9');
+    expect(inputs.startDate).       toHaveValue('10');
+    expect(inputs.endDate).         toHaveValue('11');
+    expect(inputs.pointImage).      toHaveValue('12');
+    expect(inputs.wmsAddress).      toHaveValue('13');
+    expect(inputs.wmsLayers).       toHaveValue('14');
+    expect(inputs.minZoom).         toHaveValue('15');
+    expect(inputs.maxZoom).         toHaveValue('16');
+    expect(inputs.showAfterDate).   toHaveValue('17');
+    expect(inputs.showBeforeDate).  toHaveValue('18');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
 
