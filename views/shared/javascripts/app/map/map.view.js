@@ -332,6 +332,16 @@ Neatline.module('Map', function(
 
 
     /**
+     * Construct a WMS overlay for a model.
+     *
+     * @param {Object} record: The record model.
+     */
+    buildWmsLayer: function(record) {
+      // TODO
+    },
+
+
+    /**
      * Construct a vector layer and geometries for a model.
      *
      * @param {Object} record: The record model.
