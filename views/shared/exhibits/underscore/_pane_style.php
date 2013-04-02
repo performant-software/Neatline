@@ -31,6 +31,15 @@
       'options' => _nl_getPresenters()
   )); ?>
 
+  <?php echo common('neatline/select', array(
+      'name'  => 'widgets',
+      'label' => 'Widgets',
+      'multi' => true,
+      'bind'  => 'record.widgets',
+      'style' => 'widgets',
+      'options' => array()
+  )); ?>
+
   <legend>Colors</legend>
 
   <?php echo common('neatline/input', array(

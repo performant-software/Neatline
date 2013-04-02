@@ -37,7 +37,7 @@ class Neatline_TestCase extends Neatline_AbstractTestCase
         $this->__records  = $this->db->getTable('NeatlineRecord');
 
         // Register widgets.
-        add_filter('neatline_widgets', '_nl_mockWidgets');
+        add_filter('neatline_exhibit_widgets', '_nl_mockWidgets');
 
         // Register layers.
         Zend_Registry::set('layers',

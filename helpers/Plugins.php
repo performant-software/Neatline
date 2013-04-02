@@ -13,13 +13,13 @@
 
 
 /**
- * Gather widgets via the `neatline_widgets` filter.
+ * Gather exhibit widgets via the `neatline_exhibit_widgets` filter.
  *
  * @return array An array of widget name => ids.
  */
-function _nl_getWidgets()
+function _nl_getExhibitWidgets()
 {
-    return apply_filters('neatline_widgets', array());
+    return apply_filters('neatline_exhibit_widgets', array());
 }
 
 
