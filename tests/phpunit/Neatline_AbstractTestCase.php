@@ -170,7 +170,7 @@ class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
      */
     public function getLastRow($table)
     {
-        return end($table->fetchObjects($table->getSelect()));
+        return end($table->findAll());
     }
 
 

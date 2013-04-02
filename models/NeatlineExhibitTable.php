@@ -23,8 +23,7 @@ class NeatlineExhibitTable extends Omeka_Db_Table
      */
     public function findBySlug($slug)
     {
-        $select = $this->getSelect()->where('slug=?', $slug);
-        return $this->fetchObject($select);
+        return $this->findBySql('slug=?', array($slug), true);
     }
 
 

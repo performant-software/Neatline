@@ -35,10 +35,8 @@ class ItemImporter extends Omeka_Job_AbstractJob
         foreach ($items as $item) {
 
             // Try to find a record.
-            $record = $__records->fetchObject(
-                $__records->getSelect()
-                    ->where('exhibit_id=?', $exhibit->id)
-                    ->where('item_id=?', $item->id)
+            $record = $__records->findBySql('exhibit_id=? && item_id=?',
+                array($exhibit->id, $item->id), true
             );
 
             // Or create a new one.

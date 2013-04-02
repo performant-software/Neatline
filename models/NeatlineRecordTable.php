@@ -45,10 +45,8 @@ class NeatlineRecordTable extends Omeka_Db_Table
      */
     public function syncItem($item)
     {
-        $select = $this->getSelect()->where('item_id=?', $item->id);
-        foreach ($this->fetchObjects($select) as $record) {
-            $record->save();
-        }
+        $records = $this->findBySql('item_id=?', array($item->id));
+        foreach ($records as $record) { $record->save(); }
     }
 
 
