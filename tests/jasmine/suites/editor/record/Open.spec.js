@@ -118,7 +118,7 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Open form, get elements.
-    _t.click($(recordRows[1]));
+    _t.navigate('record/'+recordModels[0].get('id'));
     var inputs = _t.getRecordFormElements();
 
     // Get the form model id.
@@ -153,6 +153,29 @@ describe('Record Form Open', function() {
     expect(inputs.showBeforeDate).  toHaveValue('18');
     expect(inputs.mapFocus).        toHaveValue('100,200');
     expect(inputs.mapZoom).         toHaveValue('10');
+
+  });
+
+
+  it('should populate null `widgets` value', function() {
+
+    // --------------------------------------------------------------------
+    // When a record with a null `widgets` value is bound to the form, all
+    // options in the "Widgets" select should be toggled off.
+    // --------------------------------------------------------------------
+
+    // Open first record.
+    _t.navigate('record/'+recordModels[0].get('id'));
+
+    // Null out `widgets` field.
+    recordModels[1].set('widgets', null);
+
+    // Open the form, get elements.
+    _t.navigate('record/'+recordModels[1].get('id'));
+    var inputs = _t.getRecordFormElements();
+
+    // All widgets should be deselected.
+    expect(inputs.widgets.val()).toBeNull();
 
   });
 
