@@ -66,8 +66,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Exhibit stylesets.
-        // ------------------
+        // Default exhibit expansion.
+        // --------------------------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibit_expansions` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -125,8 +125,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Record stylesets.
-        // -----------------
+        // Default record expansion.
+        // -------------------------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_record_expansions` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
