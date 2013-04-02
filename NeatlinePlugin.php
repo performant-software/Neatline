@@ -27,8 +27,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     protected $_filters = array(
         'admin_navigation_main',
-        'neatline_exhibit_expansions',
-        'neatline_record_expansions',
         'neatline_globals',
         'neatline_presenters',
         'neatline_styles'
@@ -60,21 +58,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `styles`            TEXT NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
-             PRIMARY KEY        (`id`)
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
-
-        // Default exhibit expansion.
-        // --------------------------
-        $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_exhibit_expansions` (
-            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `record_id`         INT(10) UNSIGNED NULL,
-            `test1`             INT(10) UNSIGNED NULL,
-            `test2`             INT(10) UNSIGNED NULL,
-            `test3`             INT(10) UNSIGNED NULL,
              PRIMARY KEY        (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
@@ -120,21 +103,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
              FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
-
-
-        // Default record expansion.
-        // -------------------------
-        $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_record_expansions` (
-            `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `record_id`         INT(10) UNSIGNED NULL,
-            `test1`             INT(10) UNSIGNED NULL,
-            `test2`             INT(10) UNSIGNED NULL,
-            `test3`             INT(10) UNSIGNED NULL,
-             PRIMARY KEY        (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
@@ -207,32 +175,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
         return $tabs;
-    }
-
-
-    /**
-     * Register exhibit expansions.
-     *
-     * @param array $tables The styleset tables.
-     * @return array The tables, with NeatlineDefaultRecordStyleset.
-     */
-    public function filterNeatlineExhibitExpansions($tables)
-    {
-        $tables[] = $this->_db->getTable('NeatlineExhibitExpansion');
-        return $tables;
-    }
-
-
-    /**
-     * Register exhibit expansions.
-     *
-     * @param array $tables The styleset tables.
-     * @return array The tables, with NeatlineDefaultRecordStyleset.
-     */
-    public function filterNeatlineRecordExpansions($tables)
-    {
-        $tables[] = $this->_db->getTable('NeatlineRecordExpansion');
-        return $tables;
     }
 
 

@@ -16,10 +16,6 @@ if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
 require_once NL_DIR . '/NeatlinePlugin.php';
 require_once NL_DIR . '/models/abstract/Neatline_AbstractRow.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpandableRow.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpandableTable.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpansionRow.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpansionTable.php';
 require_once NL_DIR . '/controllers/abstract/Neatline_RestController.php';
 require_once NL_DIR . '/jobs/ItemImporter.php';
 require_once NL_DIR . '/forms/ExhibitForm.php';
