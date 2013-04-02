@@ -23,14 +23,16 @@
       'bind'  => 'record.tags'
   )); ?>
 
-  <?php echo common('neatline/select', array(
-      'name'  => 'widgets',
-      'label' => 'Widgets',
-      'bind'  => 'record.widgets | commaDelimited',
-      'style' => 'widgets',
-      'options' => _nl_getRecordWidgets(),
-      'multi' => true,
-  )); ?>
+  <?php if (count(_nl_getRecordWidgets())): ?>
+    <?php echo common('neatline/select', array(
+        'name'  => 'widgets',
+        'label' => 'Widgets',
+        'bind'  => 'record.widgets | commaDelimited',
+        'style' => 'widgets',
+        'options' => _nl_getRecordWidgets(),
+        'multi' => true,
+    )); ?>
+  <?php endif; ?>
 
   <?php echo common('neatline/select', array(
       'name'  => 'presenter',
