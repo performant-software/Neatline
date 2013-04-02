@@ -24,20 +24,20 @@
   )); ?>
 
   <?php echo common('neatline/select', array(
-      'name'  => 'presenter',
-      'label' => 'Presenter',
-      'bind'  => 'record.presenter',
-      'style' => 'presenter',
-      'options' => _nl_getPresenters()
-  )); ?>
-
-  <?php echo common('neatline/select', array(
       'name'  => 'widgets',
       'label' => 'Widgets',
       'bind'  => 'record.widgets | commaDelimited',
       'style' => 'widgets',
       'options' => _nl_getRecordWidgets(),
       'multi' => true,
+  )); ?>
+
+  <?php echo common('neatline/select', array(
+      'name'  => 'presenter',
+      'label' => 'Presenter',
+      'bind'  => 'record.presenter',
+      'style' => 'presenter',
+      'options' => _nl_getPresenters()
   )); ?>
 
   <legend>Colors</legend>

@@ -30,28 +30,28 @@ class RecordsControllerTest_Post extends Neatline_TestCase
             'body'              => '2',
             'coverage'          => 'POINT(3 3)',
             'tags'              => '4',
-            'widgets'           => '5',
-            'presenter'         => '6',
-            'fill_color'        => '7',
-            'select_color'      => '8',
-            'stroke_color'      => '9',
-            'fill_opacity'      => '10',
-            'select_opacity'    => '11',
-            'stroke_opacity'    => '12',
-            'stroke_width'      => '13',
-            'point_radius'      => '14',
-            'point_image'       => '15',
-            'min_zoom'          => '16',
-            'max_zoom'          => '17',
-            'map_zoom'          => '18',
-            'map_focus'         => '19',
-            'wms_address'       => '20',
-            'wms_layers'        => '21',
-            'start_date'        => '22',
-            'end_date'          => '23',
-            'show_after_date'   => '24',
-            'show_before_date'  => '25',
-            'weight'            => '26'
+            'widgets'           => array('5','6'),
+            'presenter'         => '7',
+            'fill_color'        => '8',
+            'select_color'      => '9',
+            'stroke_color'      => '10',
+            'fill_opacity'      => '11',
+            'select_opacity'    => '12',
+            'stroke_opacity'    => '13',
+            'stroke_width'      => '14',
+            'point_radius'      => '15',
+            'point_image'       => '16',
+            'min_zoom'          => '17',
+            'max_zoom'          => '18',
+            'map_zoom'          => '19',
+            'map_focus'         => '20',
+            'wms_address'       => '21',
+            'wms_layers'        => '22',
+            'start_date'        => '23',
+            'end_date'          => '24',
+            'show_after_date'   => '25',
+            'show_before_date'  => '26',
+            'weight'            => '27'
         )));
 
         $c1 = $this->__records->count();
@@ -74,28 +74,28 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->assertEquals($record->body,              '2');
         $this->assertEquals($record->coverage,          'POINT(3 3)');
         $this->assertEquals($record->tags,              '4');
-        $this->assertEquals($record->widgets,           '5');
-        $this->assertEquals($record->presenter,         '6');
-        $this->assertEquals($record->fill_color,        '7');
-        $this->assertEquals($record->select_color,      '8');
-        $this->assertEquals($record->stroke_color,      '9');
-        $this->assertEquals($record->fill_opacity,      10);
-        $this->assertEquals($record->select_opacity,    11);
-        $this->assertEquals($record->stroke_opacity,    12);
-        $this->assertEquals($record->stroke_width,      13);
-        $this->assertEquals($record->point_radius,      14);
-        $this->assertEquals($record->point_image,       '15');
-        $this->assertEquals($record->min_zoom,          16);
-        $this->assertEquals($record->max_zoom,          17);
-        $this->assertEquals($record->map_zoom,          18);
-        $this->assertEquals($record->map_focus,         '19');
-        $this->assertEquals($record->wms_address,       '20');
-        $this->assertEquals($record->wms_layers,        '21');
-        $this->assertEquals($record->start_date,        '22');
-        $this->assertEquals($record->end_date,          '23');
-        $this->assertEquals($record->show_after_date,   '24');
-        $this->assertEquals($record->show_before_date,  '25');
-        $this->assertEquals($record->weight,            26);
+        $this->assertEquals($record->widgets,           '5,6');
+        $this->assertEquals($record->presenter,         '7');
+        $this->assertEquals($record->fill_color,        '8');
+        $this->assertEquals($record->select_color,      '9');
+        $this->assertEquals($record->stroke_color,      '10');
+        $this->assertEquals($record->fill_opacity,      11);
+        $this->assertEquals($record->select_opacity,    12);
+        $this->assertEquals($record->stroke_opacity,    13);
+        $this->assertEquals($record->stroke_width,      14);
+        $this->assertEquals($record->point_radius,      15);
+        $this->assertEquals($record->point_image,       '16');
+        $this->assertEquals($record->min_zoom,          17);
+        $this->assertEquals($record->max_zoom,          18);
+        $this->assertEquals($record->map_zoom,          19);
+        $this->assertEquals($record->map_focus,         '20');
+        $this->assertEquals($record->wms_address,       '21');
+        $this->assertEquals($record->wms_layers,        '22');
+        $this->assertEquals($record->start_date,        '23');
+        $this->assertEquals($record->end_date,          '24');
+        $this->assertEquals($record->show_after_date,   '25');
+        $this->assertEquals($record->show_before_date,  '26');
+        $this->assertEquals($record->weight,            27);
 
     }
 
