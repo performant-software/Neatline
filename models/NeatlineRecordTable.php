@@ -11,18 +11,18 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTable extends Neatline_ExtensibleTable
+class NeatlineRecordTable extends Neatline_ExpandableTable
 {
 
 
     /**
-     * Gather styleset tables.
+     * Gather expansion tables.
      *
      * @return array The tables.
      */
-    public function getStylesetTables()
+    public function getExpansionTables()
     {
-        return apply_filters('neatline_record_stylesets', array());
+        return apply_filters('neatline_record_expansions', array());
     }
 
 

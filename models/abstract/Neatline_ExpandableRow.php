@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Row class for stylable record.
+ * Row class for expandable record.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_ExtensibleRecord extends Neatline_GenericRecord
+abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
 {
 
 
@@ -64,9 +64,9 @@ abstract class Neatline_ExtensibleRecord extends Neatline_GenericRecord
         parent::save($throwIfInvalid);
 
         // Insert/update stylesets.
-        foreach ($this->getTable()->getStylesetTables() as $table) {
+        foreach ($this->getTable()->getExpansionTables() as $table) {
             $styleset = $table->getOrCreate($this);
-            $styleset->setFromArray($this->toArrayForSave());
+            $styleset->setArray($this->toArrayForSave());
             $styleset->save();
         }
 

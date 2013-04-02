@@ -11,20 +11,20 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_ExtensibleTable extends Omeka_Db_Table
+abstract class Neatline_ExpandableTable extends Omeka_Db_Table
 {
 
 
     /**
-     * Get an array of all styleset tables that extend the record.
+     * Gather expanion tables.
      *
-     * @return array The array of styleset tables.
+     * @return array The array of expansion tables.
      */
-    abstract public function getStylesetTables();
+    abstract public function getExpansionTables();
 
 
     /**
-     * Join the styleset tables.
+     * Add the expansion tables to the query.
      *
      * @return Omeka_Db_Select $select The modified select.
      */
@@ -37,7 +37,7 @@ abstract class Neatline_ExtensibleTable extends Omeka_Db_Table
         $pAlias = $this->getTableAlias();
 
         // Join styleset tables.
-        foreach ($this->getStylesetTables() as $table) {
+        foreach ($this->getExpansionTables() as $table) {
             $sAlias = $table->getTableAlias();
             $sName  = $table->getTableName();
             $select->join(array($sAlias => $sName),

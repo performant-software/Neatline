@@ -27,8 +27,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
     protected $_filters = array(
         'admin_navigation_main',
-        'neatline_exhibit_stylesets',
-        'neatline_record_stylesets',
+        'neatline_exhibit_expansions',
+        'neatline_record_expansions',
         'neatline_globals',
         'neatline_presenters',
         'neatline_styles'
@@ -69,7 +69,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Exhibit stylesets.
         // ------------------
         $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_default_exhibit_stylesets` (
+            `{$this->_db->prefix}neatline_exhibit_expansions` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `record_id`         INT(10) UNSIGNED NULL,
             `test1`             INT(10) UNSIGNED NULL,
@@ -128,7 +128,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Record stylesets.
         // -----------------
         $sql = "CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_default_record_stylesets` (
+            `{$this->_db->prefix}neatline_record_expansions` (
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `record_id`         INT(10) UNSIGNED NULL,
             `test1`             INT(10) UNSIGNED NULL,
@@ -211,30 +211,28 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Add link to main admin menu bar.
+     * Register exhibit expansions.
      *
      * @param array $tables The styleset tables.
      * @return array The tables, with NeatlineDefaultRecordStyleset.
      */
-    public function filterNeatlineExhibitStylesets($stylesets)
+    public function filterNeatlineExhibitExpansions($tables)
     {
-        $stylesets[] = $this->_db->getTable(
-            'NeatlineDefaultExhibitStyleset');
-        return $stylesets;
+        $tables[] = $this->_db->getTable('NeatlineExhibitExpansion');
+        return $tables;
     }
 
 
     /**
-     * Add link to main admin menu bar.
+     * Register exhibit expansions.
      *
      * @param array $tables The styleset tables.
      * @return array The tables, with NeatlineDefaultRecordStyleset.
      */
-    public function filterNeatlineRecordStylesets($tables)
+    public function filterNeatlineRecordExpansions($tables)
     {
-        $stylesets[] = $this->_db->getTable(
-            'NeatlineDefaultRecordStyleset');
-        return $stylesets;
+        $tables[] = $this->_db->getTable('NeatlineRecordExpansion');
+        return $tables;
     }
 
 

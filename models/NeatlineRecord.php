@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecord extends Neatline_ExtensibleRecord
+class NeatlineRecord extends Neatline_ExpandableRow
 {
 
 
@@ -85,7 +85,7 @@ class NeatlineRecord extends Neatline_ExtensibleRecord
         $oldTags = _nl_explode($this->tags);
 
         // Mass-assign the form.
-        $this->setFromArray($values);
+        $this->setArray($values);
 
         // If 1 or more tags have been added to the record since the last
         // time it was saved, pull in the _existing_ CSS rules for those

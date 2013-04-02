@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_GenericRecord extends Omeka_Record_AbstractRecord
+abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 {
 
 
@@ -33,7 +33,7 @@ abstract class Neatline_GenericRecord extends Omeka_Record_AbstractRecord
      *
      * @param array $values The array of values.
      */
-    public function setFromArray($values)
+    public function setArray($values)
     {
         foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
     }

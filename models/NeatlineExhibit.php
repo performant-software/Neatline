@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibit extends Neatline_ExtensibleRecord
+class NeatlineExhibit extends Neatline_ExpandableRow
 {
 
 
@@ -43,7 +43,7 @@ class NeatlineExhibit extends Neatline_ExtensibleRecord
             if (is_array($v)) $values[$k] = implode(',', $v);
         }
 
-        $this->setFromArray($values);
+        $this->setArray($values);
         $this->save();
 
     }
