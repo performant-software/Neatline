@@ -131,7 +131,8 @@ describe('Record Form Open', function() {
     expect(inputs.itemId).          toHaveValue('1');
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
     expect(inputs.tags).            toHaveValue('tags1');
-    expect(inputs.presenter).       toHaveValue('StaticBubble');
+    expect(inputs.widgets.val()).   toEqual(['Widget1','Widget3']);
+    expect(inputs.presenter).       toHaveValue('Presenter2');
     expect(inputs.fillColor).       toHaveValue('#111111');
     expect(inputs.selectColor).     toHaveValue('#222222');
     expect(inputs.strokeColor).     toHaveValue('#333333');

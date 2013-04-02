@@ -26,3 +26,19 @@ function _nl_mockWidgets($widgets)
         'Widget3 Label' => 'Widget3'
     ));
 }
+
+
+/**
+ * Register mock presenters.
+ *
+ * @param array $presenters Presenters, NAME => ID.
+ * @return array The array, with mock presenters.
+ */
+function _nl_mockPresenters($presenters)
+{
+    return array_merge($presenters, array(
+        'Presenter1 Label' => 'Presenter1',
+        'Presenter2 Label' => 'Presenter2',
+        'Presenter3 Label' => 'Presenter3'
+    ));
+}

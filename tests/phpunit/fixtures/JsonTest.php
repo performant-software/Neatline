@@ -58,7 +58,8 @@ class FixturesTest_Json extends Neatline_TestCase
         $record1->body              = 'body1';
         $record1->tags              = 'tags1';
         $record1->coverage          = 'POINT(1 2)';
-        $record1->presenter         = 'StaticBubble';
+        $record1->widgets           = 'Widget1,Widget3';
+        $record1->presenter         = 'Presenter2';
         $record1->fill_color        = '#111111';
         $record1->select_color      = '#222222';
         $record1->stroke_color      = '#333333';
@@ -211,7 +212,8 @@ class FixturesTest_Json extends Neatline_TestCase
         $record->body               = 'body';
         $record->tags               = 'tags';
         $record->coverage           = 'POINT(1 2)';
-        $record->presenter          = 'StaticBubble';
+        $record->widgets            = 'Widget1,Widget3';
+        $record->presenter          = 'Presenter2';
         $record->fill_color         = '#111111';
         $record->select_color       = '#222222';
         $record->stroke_color       = '#333333';

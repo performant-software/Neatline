@@ -83,6 +83,7 @@ var _t = (function(_t) {
       body:           form.$('textarea[name="body"]'),
       coverage:       form.$('textarea[name="coverage"]'),
       tags:           form.$('input[name="tags"]'),
+      widgets:        form.$('select[name="widgets"]'),
       presenter:      form.$('select[name="presenter"]'),
       fillColor:      form.$('input[name="fill-color"]'),
       selectColor:    form.$('input[name="select-color"]'),
