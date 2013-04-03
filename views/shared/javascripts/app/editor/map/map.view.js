@@ -76,7 +76,7 @@ _.extend(Neatline.Map.View.prototype, {
 
       // Update the edit layer model.
       else if (id == this.editLayer.nId) {
-        this.editLayer.nModel = record;
+        this.updateModel(record);
       }
 
     }, this));
