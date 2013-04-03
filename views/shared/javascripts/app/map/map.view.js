@@ -27,9 +27,9 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      this.records = null;    // Current collection.
-      this.vectorLayers = []; // Current vector layers.
-      this.wmsLayers = [];    // Current WMS layers.
+      this.records = null;    // The current collection of records.
+      this.vectorLayers = []; // The current set of vector layers.
+      this.wmsLayers = [];    // The current set of WMS layers..
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -211,42 +211,6 @@ Neatline.module('Map', function(
         extent: this.getExtentAsWKT(),
         zoom:   this.getZoom()
       });
-    },
-
-
-    /**
-     * Focus the position and zoom to center around the passed model.
-     *
-     * - If the model has a non-null `map_focus` and `map_zoom`, set the
-     *   viewport using these values.
-     *
-     * - Otherwise, automatically fit the viewport around the extent of
-     *   the model's geometries, except when coverage is `POINT(0 0)`.
-     *
-     * @param {Object} model: The record model.
-     */
-    focusByModel: function(model) {
-
-      // Get a layer for the model.
-      var layer = this.getLayerByModel(model);
-      if (!layer) layer = this.buildVectorLayer(model);
-
-      // Try to get a focus and zoom.
-      var focus = model.get('map_focus');
-      var zoom  = model.get('map_zoom');
-
-      // If defined, apply.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
-      }
-
-      // Otherwise, fit to viewport.
-      else if (model.get('coverage')) {
-        this.map.zoomToExtent(layer.getDataExtent());
-      }
-
-      Neatline.vent.trigger('MAP:focused');
-
     },
 
 
@@ -465,6 +429,42 @@ Neatline.module('Map', function(
       var extent = this.map.getExtent().toGeometry();
       var vector = new OpenLayers.Feature.Vector(extent);
       return format.write(vector);
+    },
+
+
+    /**
+     * Focus the position and zoom to center around the passed model.
+     *
+     * - If the model has a non-null `map_focus` and `map_zoom`, set the
+     *   viewport using these values.
+     *
+     * - Otherwise, automatically fit the viewport around the extent of
+     *   the model's geometries, except when coverage is `POINT(0 0)`.
+     *
+     * @param {Object} model: The record model.
+     */
+    focusByModel: function(model) {
+
+      // Get a layer for the model.
+      var layer = this.getLayerByModel(model);
+      if (!layer) layer = this.buildVectorLayer(model);
+
+      // Try to get a focus and zoom.
+      var focus = model.get('map_focus');
+      var zoom  = model.get('map_zoom');
+
+      // If defined, apply.
+      if (_.isString(focus) && _.isNumber(zoom)) {
+        this.setViewport(focus, zoom);
+      }
+
+      // Otherwise, fit to viewport.
+      else if (model.get('coverage')) {
+        this.map.zoomToExtent(layer.getDataExtent());
+      }
+
+      Neatline.vent.trigger('MAP:focused');
+
     },
 
 
