@@ -32,16 +32,17 @@ describe('Map Edit Layer', function() {
 
     // Load map without record 2.
     _t.refreshMap(_t.json.records.removed);
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(2);
+    _t.assertVectorLayerCount(2);
 
     // Open form for record 2.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    var id = recordModels[1].get('id')
+    _t.navigate('record/'+id);
 
     // Map should create new layer for record 2.
-    var newLayer = _.last(_t.vw.MAP.vectorLayers);
+    var newLayer = _t.vw.MAP.vectorLayers[id];
     expect(newLayer.features[0].geometry.x).toEqual(3);
     expect(newLayer.features[0].geometry.y).toEqual(4);
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(3);
+    _t.assertVectorLayerCount(3);
 
     // Map should set record 2 layer as the edit layer.
     expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
@@ -58,11 +59,11 @@ describe('Map Edit Layer', function() {
     // Add new record.
     _t.navigate('record/add');
 
-    // Map should create new layer.
-    var newLayer = _.last(_t.vw.MAP.vectorLayers);
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
+    // Should add new layer.
+    _t.assertVectorLayerCount(4);
 
-    // Map should set new layer as the edit layer.
+    // New layer should be the edit layer.
+    var newLayer = _.last(_t.vw.MAP.getVectorLayers());
     expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
 
   });
@@ -152,8 +153,8 @@ describe('Map Edit Layer', function() {
     // Reload the map.
     _t.refreshMap(_t.json.records.standard);
 
-    // Edit layer should still be present.
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
+    // Edit layer still present.
+    _t.assertVectorLayerCount(4);
 
   });
 
@@ -188,17 +189,16 @@ describe('Map Edit Layer', function() {
 
     // Create new record.
     _t.navigate('record/add');
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
 
     // Close without saving, refresh map.
     _t.navigate('records');
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer should be removed.
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(3);
     expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
+    _t.assertVectorLayerCount(3);
 
   });
 
