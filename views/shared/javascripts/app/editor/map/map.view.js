@@ -34,10 +34,12 @@ _.extend(Neatline.Map.View.prototype, {
     // edited (which would be the case, for instance, if the user opened
     // the edit form by just clicking on a map vector), use the existing
     // layer as the edit layer. If a layer does not exist, build a new
-    // layer from the model add it to the map.
+    // layer from the model and add it to the map.
 
     this.editLayer = this.vectorLayers[model.get('id')];
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
+
+    // Create the set of editing controls for the edit layer.
 
     this.controls = {
 
