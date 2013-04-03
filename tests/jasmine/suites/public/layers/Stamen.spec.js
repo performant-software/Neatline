@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Stamen Layer Handler', function() {
+describe('Stamen Base Layer', function() {
 
 
   var layer;

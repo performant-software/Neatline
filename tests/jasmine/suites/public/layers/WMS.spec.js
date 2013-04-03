@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('WMS Layer Handler', function() {
+describe('WMS Base Layer', function() {
 
 
   beforeEach(function() {

@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Google Layer Handler', function() {
+describe('Google Base Layer', function() {
 
 
   var layer;
