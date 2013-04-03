@@ -13,7 +13,7 @@
 describe('Record Form Open', function() {
 
 
-  var el, recordRows, recordModels, layers, feature1, feature2;
+  var el, recordRows, recordModels, feature1, feature2;
 
 
   beforeEach(function() {
@@ -23,9 +23,8 @@ describe('Record Form Open', function() {
     recordRows    = _t.getRecordRows();
     recordModels  = _t.getRecordListModels();
 
-    layers    = _t.vw.MAP.getVectorLayers();
-    feature1  = layers[0].features[0];
-    feature2  = layers[1].features[0];
+    feature1  = _t.vw.MAP.vectorLayers[0].features[0];
+    feature2  = _t.vw.MAP.vectorLayers[1].features[0];
 
     el = {
       pan:    _t.vw.RECORD.$('input[value="pan"]'),
@@ -101,7 +100,7 @@ describe('Record Form Open', function() {
       // be bound to the form immediately.
       // ------------------------------------------------------------------
 
-      model = layers[0].nModel;
+      model = _t.vw.MAP.vectorLayers[0].nModel;
 
       // Click on map feature.
       _t.clickOnMapFeature(feature1);

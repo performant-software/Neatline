@@ -74,7 +74,7 @@ describe('Map Record Focusing', function() {
       // New layer should be created for model.
       expect(layers[3].features[0].geometry.x).toEqual(1);
       expect(layers[3].features[0].geometry.y).toEqual(2);
-      _t.assertVectorLayerCount(4);
+      expect(layers.length).toEqual(4);
 
       // Map should focus.
       _t.assertMapViewport(100, 200, 10);

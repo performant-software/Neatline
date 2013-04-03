@@ -458,6 +458,18 @@ Neatline.module('Map', function(
 
 
     /**
+     * Return the layer that corresponds the the passed model instance.
+     *
+     * @param {Object} model: The record model.
+     * @return {Object}: The vector layer.
+     */
+    getLayerByModel: function(model) {
+      var id = String(model.get('id'));
+      return _.first(this.map.getLayersBy('nId', id));
+    },
+
+
+    /**
      * Get the current map viewport bounds as a WKT polygon string.
      *
      * @return {String}: The WKT string.
@@ -504,7 +516,7 @@ Neatline.module('Map', function(
     focusByModel: function(model) {
 
       // Get a layer for the model.
-      var layer = this.vectorLayers[model.get('id')];
+      var layer = this.getLayerByModel(model);
       if (!layer) layer = this.buildVectorLayer(model);
 
       // Try to get a focus and zoom.

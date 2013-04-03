@@ -151,16 +151,6 @@ var _t = (function(_t) {
 
 
   /**
-   * Assert the number of vector layers on the map.
-   *
-   * @param {Number} count: The number of layers.
-   */
-  _t.assertVectorLayerCount = function(count) {
-    expect(_t.vw.MAP.getVectorLayers().length).toEqual(count);
-  };
-
-
-  /**
    * Assert the active record form tab.
    *
    * @param {String} slug: The tab slug.

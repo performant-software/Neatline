@@ -43,7 +43,7 @@ describe('Map Vector Layers', function() {
     expect(layers[1].features[0].geometry.y).toEqual(4);
     expect(layers[2].features[0].geometry.x).toEqual(5);
     expect(layers[2].features[0].geometry.y).toEqual(6);
-    _t.assertVectorLayerCount(3);
+    expect(layers.length).toEqual(3);
 
   });
 
@@ -102,7 +102,7 @@ describe('Map Vector Layers', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
-    _t.assertVectorLayerCount(3);
+    expect(layers.length).toEqual(3);
 
     // Move map.
     _t.triggerMapMove();
@@ -118,7 +118,7 @@ describe('Map Vector Layers', function() {
 
     // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
-    _t.assertVectorLayerCount(2);
+    expect(_t.vw.MAP.getVectorLayers().length).toEqual(2);
 
   });
 
