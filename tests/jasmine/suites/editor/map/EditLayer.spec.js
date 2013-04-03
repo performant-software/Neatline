@@ -13,28 +13,12 @@
 describe('Map Edit Layer', function() {
 
 
-  var el, recordModels;
+  var recordModels;
 
 
   beforeEach(function() {
-
     _t.loadEditor();
     recordModels = _t.getRecordListModels();
-
-    el = {
-      pan:      _t.vw.RECORD.$('input[value="pan"]'),
-      point:    _t.vw.RECORD.$('input[value="point"]'),
-      line:     _t.vw.RECORD.$('input[value="line"]'),
-      poly:     _t.vw.RECORD.$('input[value="poly"]'),
-      regPoly:  _t.vw.RECORD.$('input[value="regPoly"]'),
-      svg:      _t.vw.RECORD.$('input[value="svg"]'),
-      modify:   _t.vw.RECORD.$('input[value="modify"]'),
-      rotate:   _t.vw.RECORD.$('input[value="rotate"]'),
-      resize:   _t.vw.RECORD.$('input[value="resize"]'),
-      drag:     _t.vw.RECORD.$('input[value="drag"]'),
-      remove:   _t.vw.RECORD.$('input[value="remove"]')
-    };
-
   });
 
 
