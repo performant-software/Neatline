@@ -28,7 +28,7 @@ Neatline.module('Map', function(
     initialize: function() {
 
       this.records = null;    // The current collection of records.
-      this.vectorLayers = []; // The current set of vector layers.
+      this.vectorLayers = {}; // The current set of vector layers.
       this.wmsLayers = {};    // The current set of WMS layers..
 
       this.__initOpenLayers();
@@ -100,7 +100,7 @@ Neatline.module('Map', function(
 
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
-        this.vectorLayers, {
+        this.getVectorLayers(), {
           hover: true,
           highlightOnly: true,
           renderIntent: 'temporary',
@@ -113,7 +113,7 @@ Neatline.module('Map', function(
 
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
-        this.vectorLayers, {
+        this.getVectorLayers(), {
           onSelect:   this.onFeatureSelect,
           onUnselect: this.onFeatureUnselect
         }
@@ -189,8 +189,8 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
-      this.hoverControl.setLayer(this.vectorLayers);
-      this.clickControl.setLayer(this.vectorLayers);
+      this.hoverControl.setLayer(this.getVectorLayers());
+      this.clickControl.setLayer(this.getVectorLayers());
     },
 
 
@@ -270,16 +270,66 @@ Neatline.module('Map', function(
      */
     ingestVectorLayers: function(records) {
 
-      // Remove layers.
-      _.each(this.vectorLayers, _.bind(function(layer) {
-        this.map.removeLayer(layer);
+      var newIds = [];
+
+      // First, build vector layers for records that don't already have a
+      // layer on the map. Collect the id's of all the records in the new
+      // collection in the `newIds` tracker array.
+
+      records.each(_.bind(function(record) {
+        var id = record.get('id');
+        if (!_.has(this.vectorLayers, id)) this.buildVectorLayer(record);
+        newIds.push(id);
       }, this));
 
-      this.vectorLayers = [];
+      // Once the new layers are in place, scrub out any existing layers
+      // associated with records that are absent from the new collection.
 
-      // Add layers.
+      _.each(this.vectorLayers, _.bind(function(v, k) {
+        if (!_.contains(newIds, parseInt(k, 10))) {
+          this.map.removeLayer(v);
+          delete this.vectorLayers[k];
+        }
+      }, this));
+
+    },
+
+
+    /**
+     * Rebuild the WMS layers to match the new collection.
+     *
+     * @param {Object} records: The records collection.
+     */
+    ingestWmsLayers: function(records) {
+
+      var newIds = [];
+
+      // First, build WMS layers for any records that have an address and
+      // layers, but don't already have a WMS layer on the map. Regardless
+      // of whether a new layer needs to be constructed, add the id of all
+      // records with WMS layers to the `newIds` tracker array.
+
       records.each(_.bind(function(record) {
-        this.buildVectorLayer(record);
+        if (record.get('wms_address') && record.get('wms_layers')) {
+          var id = record.get('id');
+          if (!_.has(this.wmsLayers, id)) this.buildWmsLayer(record);
+          newIds.push(id);
+        }
+
+      }, this));
+
+      // Once the new layers have been built, we need to check to see if
+      // there are any existing WMS layers that were _not_ present in the
+      // new collection of records (this could be the case, for example,
+      // if a WMS layer is associated with a record that has a min or max
+      // zoom style, and the map has just been zoomed above or below one
+      // of those threshold). Remove these "stale" layers.
+
+      _.each(this.wmsLayers, _.bind(function(v, k) {
+        if (!_.contains(newIds, parseInt(k, 10))) {
+          this.map.removeLayer(v);
+          delete this.wmsLayers[k];
+        }
       }, this));
 
     },
@@ -292,6 +342,8 @@ Neatline.module('Map', function(
      * @return {OpenLayers.Layer.Vector}: The layer.
      */
     buildVectorLayer: function(record) {
+
+      var id = record.get('id');
 
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(
@@ -309,66 +361,14 @@ Neatline.module('Map', function(
       }
 
       // Store model, id.
-      layer.nId = record.get('id');
       layer.nModel = record;
+      layer.nId = id;
 
       // Add to map, track.
       this.map.addLayer(layer);
-      this.vectorLayers.push(layer);
+      this.vectorLayers[id] = layer;
 
       return layer;
-
-    },
-
-
-    /**
-     * Rebuild the WMS layers to match the new collection.
-     *
-     * @param {Object} records: The records collection.
-      // TODO|dev
-     */
-    ingestWmsLayers: function(records) {
-
-      var newIds = [];
-
-      // First, build WMS layers for any records that have an address and
-      // layers, but don't already have a WMS layer on the map. Regardless
-      // of whether a new layer needs to be constructed, add the id of all
-      // records with WMS layers to the `newIds` tracker array.
-
-      records.each(_.bind(function(record) {
-
-        // Does the record have a WMS layer?
-        if (record.get('wms_address') && record.get('wms_layers')) {
-
-          var id = record.get('id');
-
-          // If the record doesn't already have a layer, create one.
-          if (!_.has(this.wmsLayers, id)) this.buildWmsLayer(record);
-          newIds.push(id);
-
-        }
-
-      }, this));
-
-      // Once the new layers have been built, we need to check to see if
-      // there are any existing WMS layers that were _not_ present in the
-      // new collection of records (this could be the case, for example,
-      // if a WMS layer is associated with a record that has a min or max
-      // zoom style, and the map has just been zoomed above or below one
-      // of those threholds). If so, remove these "stale" layers.
-
-      _.each(this.wmsLayers, _.bind(function(v, k) {
-
-        // Is the layer's record not included in the new collection?
-        if (!_.contains(newIds, parseInt(k, 10))) {
-
-          // If so, remove the layer.
-          this.map.removeLayer(v);
-          delete this.wmsLayers[k];
-
-        }
-      }, this));
 
     },
 
@@ -378,7 +378,6 @@ Neatline.module('Map', function(
      *
      * @param {Object} record: The record model.
      * @return {OpenLayers.Layer.WMS}: The layer.
-      // TODO|dev
      */
     buildWmsLayer: function(record) {
 
@@ -471,6 +470,19 @@ Neatline.module('Map', function(
 
 
     /**
+     * Get the current map viewport bounds as a WKT polygon string.
+     *
+     * @return {String}: The WKT string.
+     */
+    getExtentAsWKT: function() {
+      var format = new OpenLayers.Format.WKT();
+      var extent = this.map.getExtent().toGeometry();
+      var vector = new OpenLayers.Feature.Vector(extent);
+      return format.write(vector);
+    },
+
+
+    /**
      * Get the current zoom level.
      *
      * @return {Number}: The zoom level.
@@ -481,15 +493,12 @@ Neatline.module('Map', function(
 
 
     /**
-     * Get the current map viewport bounds as a WKT polygon string.
+     * Get all current vector layers as an array.
      *
-     * @return {String}: The WKT string.
+     * @return {Array}: The array of vector layers.
      */
-    getExtentAsWKT: function() {
-      var format = new OpenLayers.Format.WKT();
-      var extent = this.map.getExtent().toGeometry();
-      var vector = new OpenLayers.Feature.Vector(extent);
-      return format.write(vector);
+    getVectorLayers: function() {
+      return _.values(this.vectorLayers);
     },
 
 
