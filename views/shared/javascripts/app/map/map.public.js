@@ -87,7 +87,7 @@ Neatline.module('Map', function(
    * @return {Object}: The collection.
    */
   var getRecords = function() {
-    return Map.__view.records;
+    return Map.__collection;
   };
   Neatline.reqres.setHandler('MAP:getRecords', getRecords);
 
