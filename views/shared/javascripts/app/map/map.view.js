@@ -251,7 +251,6 @@ Neatline.module('Map', function(
 
       // Build layers.
       this.ingestVectorLayers(records);
-      // this.ingestWmsLayers(records);
 
       // Publish collection, update controls.
       Neatline.vent.trigger('MAP:ingest', records);
@@ -280,36 +279,6 @@ Neatline.module('Map', function(
       }, this));
 
     },
-
-
-    // [>*
-    //  * Rebuild the WMS layers to match the new collection.
-    //  *
-    //  * @param {Object} records: The records collection.
-    //   // TODO|dev
-    //  */
-    // ingestWmsLayers: function(records) {
-
-    //   var newIds = [];
-
-    //   // Create new layers.
-    //   records.each(_.bind(function(record) {
-    //     if (record.get('wms_address') && record.get('wms_layers')) {
-    //       var id = record.get('id');
-    //       if (!_.has(this.wmsLayers, id)) this.buildWmsLayer(record);
-    //       newIds.push(id);
-    //     }
-    //   }, this));
-
-    //   // Purge stale layers.
-    //   _.each(this.wmsLayers, _.bind(function(v, k) {
-    //     if (!_.contains(newIds, parseInt(k, 10))) {
-    //       this.map.removeLayer(v);
-    //       delete this.wmsLayers[k];
-    //     }
-    //   }, this));
-
-    // },
 
 
     /**
@@ -346,36 +315,6 @@ Neatline.module('Map', function(
       return layer;
 
     },
-
-
-    // [>*
-    //  * Construct a WMS overlay for a model.
-    //  *
-    //  * @param {Object} record: The record model.
-    //  * @return {OpenLayers.Layer.WMS}: The layer.
-    //   // TODO|dev
-    //  */
-    // buildWmsLayer: function(record) {
-
-    //   // Build the layer.
-    //   var layer = new OpenLayers.Layer.WMS(
-    //     record.get('title'), record.get('wms_address'), {
-    //       layers: record.get('wms_layers'),
-    //       transparent: true
-    //     }, {
-    //       displayOutsideMaxExtent: true,
-    //       opacity: record.get('fill_opacity') / 100,
-    //       isBaseLayer: false
-    //     }
-    //   );
-
-    //   // Add to map, track.
-    //   this.map.addLayer(layer);
-    //   this.wmsLayers[record.get('id')] = layer;
-
-    //   return layer;
-
-    // },
 
 
     /**
