@@ -131,7 +131,7 @@ var _t = (function(_t) {
 
     // Record2 point should be removed.
     expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(this.vw.MAP.getVectorLayers().length).toEqual(2);
+    expect(this.vw.MAP.vectorLayers.length).toEqual(2);
 
   };
 

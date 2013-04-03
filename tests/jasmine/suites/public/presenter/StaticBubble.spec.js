@@ -13,7 +13,7 @@
 describe('Static Bubble', function() {
 
 
-  var el, layers, feature1, feature2;
+  var el, layer1, layer2, feature1, feature2;
 
 
   beforeEach(function() {
@@ -21,15 +21,16 @@ describe('Static Bubble', function() {
     _t.loadNeatline();
 
     // Get layers.
-    layers = _t.vw.MAP.getVectorLayers();
+    layer1 = _t.vw.MAP.vectorLayers[0];
+    layer2 = _t.vw.MAP.vectorLayers[1];
 
     // Get features.
-    feature1 = layers[0].features[0];
-    feature2 = layers[1].features[0];
+    feature1 = layer1.features[0];
+    feature2 = layer2.features[0];
 
     // Set presenters.
-    layers[0].nModel.set('presenter', 'StaticBubble');
-    layers[1].nModel.set('presenter', 'StaticBubble');
+    layer1.nModel.set('presenter', 'StaticBubble');
+    layer2.nModel.set('presenter', 'StaticBubble');
 
     el = {
       title:  _t.vw.BUBBLE.$('.title'),
@@ -124,7 +125,7 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Set non-null body.
-    layers[0].nModel.set('body', 'content');
+    layer1.nModel.set('body', 'content');
 
     // Highlight feature, then select.
     _t.hoverOnMapFeature(feature1);
@@ -145,7 +146,7 @@ describe('Static Bubble', function() {
     // --------------------------------------------------------------------
 
     // Set null body.
-    layers[0].nModel.set('body', null);
+    layer1.nModel.set('body', null);
 
     // Highlight feature, then select.
     _t.hoverOnMapFeature(feature1);

@@ -49,7 +49,7 @@ var _t = (function(_t) {
   _t.clickOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.vw.MAP.vectorLayers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return feature;
       };
@@ -73,7 +73,7 @@ var _t = (function(_t) {
   _t.clickOffMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.vw.MAP.vectorLayers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return null;
       };
@@ -95,7 +95,7 @@ var _t = (function(_t) {
   _t.hoverOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.vw.MAP.vectorLayers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return feature;
       };
@@ -115,7 +115,7 @@ var _t = (function(_t) {
   _t.unHoverOnMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.vw.MAP.vectorLayers, function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return null;
       };
@@ -158,7 +158,7 @@ var _t = (function(_t) {
    * @return {Object}: The layer.
    */
   _t.getVectorLayerByTitle = function(title) {
-    return _.find(this.vw.MAP.getVectorLayers(), function(layer) {
+    return _.find(this.vw.MAP.vectorLayers, function(layer) {
       return layer.name == title;
     });
   };
