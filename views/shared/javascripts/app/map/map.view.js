@@ -28,7 +28,6 @@ Neatline.module('Map', function(
     initialize: function() {
 
       this.vectorLayers = []; // The current set of vector layers.
-      this.wmsLayers    = {}; // The current set of WMS layers.
 
       this.__initOpenLayers();
       this.__initBaseLayers();
