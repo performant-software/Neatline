@@ -21,8 +21,8 @@ describe('Record Form Edit', function() {
   it('should update edit layer model', function() {
 
     // --------------------------------------------------------------------
-    // When the record form model changes, `nModel` and `nId` attributes
-    // on the map edit layer should be updated.
+    // When the record form model changes, the `nModel` `attribute on the
+    // map edit layer should be updated.
     // --------------------------------------------------------------------
 
     _t.showFirstRecordForm();
@@ -30,9 +30,8 @@ describe('Record Form Edit', function() {
     // Update record form model.
     _t.vw.RECORD.model.set('id', 999);
 
-    // Edit layer `nModel` and `nId` should be updated.
+    // Edit layer `nModel` should be updated.
     expect(_t.vw.MAP.editLayer.nModel.id).toEqual(999);
-    expect(_t.vw.MAP.editLayer.nId).toEqual(999);
 
   });
 

@@ -334,9 +334,8 @@ Neatline.module('Map', function(
         layer.addFeatures(this.formatWKT.read(record.get('coverage')));
       }
 
-      // Store model, id.
+      // Store model.
       layer.nModel = record;
-      layer.nId = record.id;
 
       // Track, add to map.
       this.layers.vector[record.id] = layer;

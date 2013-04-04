@@ -48,7 +48,7 @@ describe('Map Record Focusing', function() {
     });
 
     it('focusById', function() {
-      Neatline.execute('MAP:focusById', layer.nId);
+      Neatline.execute('MAP:focusById', layer.nModel.id);
     });
 
   });

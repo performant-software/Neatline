@@ -264,18 +264,18 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Update `nModel` and `nId` on the edit layer.
+   * Update the model on the edit layer, update the edit layer's id key
+   * in the id-to-layer tracker object.
    *
    * @param {Object} model: The updated model.
    */
   updateModel: function(model) {
 
     // Update the key in the layers tracker.
-    delete this.layers.vector[this.editLayer.nId];
+    delete this.layers.vector[this.editLayer.nModel.id];
     this.layers.vector[model.id] = this.editLayer;
 
     // Replace the model.
-    this.editLayer.nId = model.id;
     this.editLayer.nModel = model;
 
     // Rebuild the style map.

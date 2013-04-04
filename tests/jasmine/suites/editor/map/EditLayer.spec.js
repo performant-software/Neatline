@@ -44,7 +44,7 @@ describe('Map Edit Layer', function() {
     _t.assertVectorLayerCount(3);
 
     // Record 2 layer should be edit layer.
-    expect(_t.vw.MAP.editLayer.nId).toEqual(record2Layer.nId);
+    expect(_t.vw.MAP.editLayer.nModel.id).toEqual(record2Layer.nModel.id);
 
   });
 
@@ -63,7 +63,7 @@ describe('Map Edit Layer', function() {
     _t.assertVectorLayerCount(4);
 
     // Map should set new layer as the edit layer.
-    expect(_t.vw.MAP.editLayer.nId).toBeUndefined();
+    expect(_t.vw.MAP.editLayer.nModel.id).toBeUndefined();
 
   });
 
