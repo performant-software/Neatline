@@ -272,7 +272,7 @@ _.extend(Neatline.Map.View.prototype, {
   updateModel: function(model) {
 
     // Update the key in the layers tracker.
-    delete this.layers.vector[this.editLayer.nModel.id];
+    delete this.layers.vector[this.editLayer.nId];
     this.layers.vector[model.id] = this.editLayer;
 
     // Replace the model.
