@@ -297,11 +297,8 @@ Neatline.module('Map', function(
 
       _.each(this.layers.vector, _.bind(function(layer, id) {
 
-        // Is the layer model absent from the collection?
-        var isStale = !_.contains(newIds, parseInt(id, 10));
-
-        // If so, and the layer is unfrozen, delete.
-        if (isStale && !layer.options.neatline.frozen) {
+        // Delete if model is absent and layer is unfrozen.
+        if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
           delete this.layers.vector[id];
           this.map.removeLayer(layer);
         }
@@ -322,11 +319,7 @@ Neatline.module('Map', function(
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(record.get('title'), {
         styleMap: this.getStyleMap(record),
-        displayInLayerSwitcher: false,
-        neatline: {
-          model: record,
-          frozen: false
-        }
+        displayInLayerSwitcher: false
       });
 
       // Add features.
@@ -336,6 +329,7 @@ Neatline.module('Map', function(
 
       // Store model.
       layer.nModel = record;
+      layer.nFrozen = false;
 
       // Track, add to map.
       this.layers.vector[record.id] = layer;

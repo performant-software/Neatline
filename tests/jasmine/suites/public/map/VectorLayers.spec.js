@@ -106,14 +106,14 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
     // When the map is refreshed, existing layers associated with records
     // that are absent from the new collection should _not_ be removed if
-    // the `neatline.frozen` option is true.
+    // the `nFrozen` property is true.
     // --------------------------------------------------------------------
 
     // Load records with record 2.
     _t.refreshMap(_t.json.records.standard);
 
     // Freeze record 2.
-    _t.getVectorLayerByTitle('title2').options.neatline.frozen = true;
+    _t.getVectorLayerByTitle('title2').nFrozen = true;
 
     // Load records without record 2.
     _t.refreshMap(_t.json.records.removed);

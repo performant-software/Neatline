@@ -38,7 +38,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
-    this.editLayer.options.neatline.frozen = true;
+    this.editLayer.nFrozen = true;
 
     // Create the set of editing controls for the edit layer.
 
@@ -128,7 +128,7 @@ _.extend(Neatline.Map.View.prototype, {
     }, this));
 
     // Unfreeze the edit layer.
-    this.editLayer.options.neatline.frozen = false;
+    this.editLayer.nFrozen = false;
     this.activateControls();
 
   },
