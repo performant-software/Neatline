@@ -28,7 +28,7 @@ Neatline.module('Map', function(
     initialize: function() {
 
       this.layers = { vector: {}, wms: {} };
-      this.format = new OpenLayers.Format.WKT();
+      this.formatWKT = new OpenLayers.Format.WKT();
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -257,6 +257,9 @@ Neatline.module('Map', function(
       Neatline.vent.trigger('MAP:ingest', records);
       this.updateControls();
 
+      // Store collection.
+      this.records = records;
+
     },
 
 
@@ -264,7 +267,6 @@ Neatline.module('Map', function(
      * Rebuild the vector layers to match the new collection.
      *
      * @param {Object} records: The records collection.
-     * TODO|dev
      */
     ingestVectorLayers: function(records) {
 
@@ -329,7 +331,7 @@ Neatline.module('Map', function(
 
       // Add features.
       if (record.get('coverage')) {
-        layer.addFeatures(this.format.read(record.get('coverage')));
+        layer.addFeatures(this.formatWKT.read(record.get('coverage')));
       }
 
       // Store model, id.
@@ -429,7 +431,7 @@ Neatline.module('Map', function(
     getExtentAsWKT: function() {
       var extent = this.map.getExtent().toGeometry();
       var vector = new OpenLayers.Feature.Vector(extent);
-      return this.format.write(vector);
+      return this.formatWKT.write(vector);
     },
 
 

@@ -13,18 +13,16 @@
 describe('Record Form Open', function() {
 
 
-  var el, recordRows, recordModels, feature1, feature2;
+  var el, recordModels, feature1, feature2;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
 
-    recordRows    = _t.getRecordRows();
-    recordModels  = _t.getRecordListModels();
-
-    feature1  = _t.vw.MAP.vectorLayers[0].features[0];
-    feature2  = _t.vw.MAP.vectorLayers[1].features[0];
+    recordModels = _t.getRecordListModels();
+    feature1 = _t.vw.MAP.getVectorLayers()[0].features[0];
+    feature2 = _t.vw.MAP.getVectorLayers()[1].features[0];
 
     el = {
       pan:    _t.vw.RECORD.$('input[value="pan"]'),
@@ -41,7 +39,7 @@ describe('Record Form Open', function() {
 
     afterEach(function() {
 
-      // The form should be displayed and  populated with data.
+      // The form should be displayed and populated with data.
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
       expect(_t.vw.RECORD.model.id).toEqual(model.id);
 
@@ -57,7 +55,7 @@ describe('Record Form Open', function() {
       model = recordModels[0];
 
       // Click on a record listing.
-      _t.click($(recordRows[1]));
+      _t.click($(_t.getRecordRows()[1]));
 
     });
 
@@ -100,7 +98,7 @@ describe('Record Form Open', function() {
       // be bound to the form immediately.
       // ------------------------------------------------------------------
 
-      model = _t.vw.MAP.vectorLayers[0].nModel;
+      model = _t.vw.MAP.getVectorLayers()[0].nModel;
 
       // Click on map feature.
       _t.clickOnMapFeature(feature1);
@@ -219,7 +217,7 @@ describe('Record Form Open', function() {
     _t.setMapCenter(200, 300, 15);
 
     // Open form.
-    _t.click($(recordRows[1]));
+    _t.click($(_t.getRecordRows()[1]));
 
     // Focus should be unchanged.
     _t.assertMapViewport(100, 200, 10);

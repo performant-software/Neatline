@@ -32,19 +32,19 @@ describe('Map Edit Layer', function() {
 
     // Load map without record 2.
     _t.refreshMap(_t.json.records.removed);
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(2);
+    _t.assertVectorLayerCount(2);
 
-    // Open form for record 2.
+    // Open record 2 form.
     _t.navigate('record/'+recordModels[1].id);
 
-    // Map should create new layer for record 2.
-    var newLayer = _.last(_t.vw.MAP.vectorLayers);
-    expect(newLayer.features[0].geometry.x).toEqual(3);
-    expect(newLayer.features[0].geometry.y).toEqual(4);
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(3);
+    // Should create new layer for record 2.
+    var record2Layer = _t.vw.MAP.layers.vector[recordModels[1].id];
+    expect(record2Layer.features[0].geometry.x).toEqual(3);
+    expect(record2Layer.features[0].geometry.y).toEqual(4);
+    _t.assertVectorLayerCount(3);
 
-    // Map should set record 2 layer as the edit layer.
-    expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
+    // Record 2 layer should be edit layer.
+    expect(_t.vw.MAP.editLayer.nId).toEqual(record2Layer.nId);
 
   });
 
@@ -58,12 +58,12 @@ describe('Map Edit Layer', function() {
     // Add new record.
     _t.navigate('record/add');
 
-    // Map should create new layer.
-    var newLayer = _.last(_t.vw.MAP.vectorLayers);
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
+    // Map should create new layer for unsaved record.
+    expect(_.has(_t.vw.MAP.layers.vector, undefined)).toBeTruthy();
+    _t.assertVectorLayerCount(4);
 
     // Map should set new layer as the edit layer.
-    expect(newLayer.nId).toEqual(_t.vw.MAP.editLayer.nId);
+    expect(_t.vw.MAP.editLayer.nId).toBeUndefined();
 
   });
 
@@ -152,8 +152,8 @@ describe('Map Edit Layer', function() {
     // Reload the map.
     _t.refreshMap(_t.json.records.standard);
 
-    // Edit layer should still be present.
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
+    // Edit layer still present.
+    _t.assertVectorLayerCount(4);
 
   });
 
@@ -188,17 +188,17 @@ describe('Map Edit Layer', function() {
 
     // Create new record.
     _t.navigate('record/add');
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
+    _t.assertVectorLayerCount(4);
 
     // Close without saving, refresh map.
     _t.navigate('records');
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer should be removed.
-    expect(_t.vw.MAP.vectorLayers.length).toEqual(3);
     expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
+    _t.assertVectorLayerCount(3);
 
   });
 

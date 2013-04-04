@@ -23,77 +23,6 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * When a new record collection is ingested, exclude the layer that is
-   * currently being edited from being updated or garbage collected in the
-   * process of rendering the new collection. This prevents edit layers
-   * for new records from being prematurely garbage collected before they
-   * are saved for the first time, and unsaved modifications made to edit
-   * layers for existing records from being wiped out by server data.
-   *
-   * @param {Object} records: The records collection.
-   */
-  ingestVectorLayers: function(records) {
-
-
-    var layers = [];
-
-    // First, remove all of the existing vector layers. If `editLayer` is
-    // defined (meaning that a record form is open, and an edit session is
-    // currently in progress), remove all layers _except_ the edit layer.
-
-    _.each(this.vectorLayers, _.bind(function(layer) {
-
-      // Remove if the layer is not the edit layer.
-      if (!this.editLayer || (layer.id != this.editLayer.id)) {
-        this.map.removeLayer(layer);
-      }
-
-      else layers.push(layer);
-
-    }, this));
-
-    this.vectorLayers = layers;
-
-    // Once the map is cleared (with the exception of the edit layer, if
-    // one exists), build layers for all of the records in the incoming
-    // collection. Exclude the record associated with the edit layer from
-    // this process, since its layer was preserved in the first step. If
-    // the record for the edit layer is encountered in the new records,
-    // replace the `nModel` on the existing edit layer with the new model
-    // from the server (this has the effect of synchronizing the edit
-    // layer model with any changes that have been made to the model on
-    // the server; for example, if the record was bound to an Omeka item,
-    // and the body field has been updated with the compiled metadata).
-
-    records.each(_.bind(function(record) {
-
-      var id = record.id;
-
-      // Add if the layer is not the edit layer.
-      if (!this.editLayer || (id != this.editLayer.nId)) {
-        this.buildVectorLayer(record);
-      }
-
-      // Update the edit layer model.
-      else if (id == this.editLayer.nId) {
-        this.updateModel(record);
-      }
-
-    }, this));
-
-    // If the user is currently modifying vector geometry (the "Modify/
-    // Rotate/Resize/Drag Shape" modes), push the edit layer to the top of
-    // the layer stack. This is necessary because OpenLayers automatically
-    // manages the layers' z-indecies and can "bury" the edit layer under
-    // other layers, which makes it impossible to edit the vectors.
-
-    this.raiseEditLayer();
-
-
-  },
-
-
-  /**
    * Construct editing controls for record.
    *
    * @param {Object} model: The record model.
@@ -425,9 +354,7 @@ _.extend(Neatline.Map.View.prototype, {
    */
   removeLayer: function(layer) {
     this.map.removeLayer(layer);
-    this.vectorLayers = _.reject(this.vectorLayers, function(l) {
-      return l.nId == layer.nId;
-    });
+    delete this.layers.vector[layer.nId]
   },
 
 

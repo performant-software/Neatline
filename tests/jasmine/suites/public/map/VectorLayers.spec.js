@@ -80,7 +80,7 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should remove stale layers', function() {
+  it('should garbage collect stale layers', function() {
 
     // --------------------------------------------------------------------
     // When the map is refreshed, layers for records that are no longer
@@ -106,7 +106,7 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should not remove frozen layers', function() {
+  it('should not garbage collect frozen layers', function() {
 
     // --------------------------------------------------------------------
     // When the map is refreshed, existing layers associated with records

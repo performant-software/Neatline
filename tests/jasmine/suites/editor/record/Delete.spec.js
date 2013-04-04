@@ -176,9 +176,8 @@ describe('Record Form Delete', function() {
     // Layer should be removed from map.
     expect(_t.vw.MAP.getLayerByModel(model)).toBeUndefined();
 
-    // Layer should be removed from `layers`.
-    expect(_.find(_t.vw.MAP.vectorLayers, function(layer) {
-      return layer.nId == model.id; })).toBeUndefined();
+    // Layer should be removed from tracker.
+    expect(_t.vw.MAP.layers.vector[model.id]).toBeUndefined();
 
   });
 
