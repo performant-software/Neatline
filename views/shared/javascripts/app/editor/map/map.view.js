@@ -247,7 +247,7 @@ _.extend(Neatline.Map.View.prototype, {
     // by the `edit` control.
 
     this.isModifying = true;
-    this.raiseEditLayer();
+    this.raiseLayer();
 
   },
 
@@ -321,16 +321,6 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Push the edit layer to the top of the stack.
-   */
-  raiseEditLayer: function() {
-    if (!_.isNull(this.editLayer) && this.isModifying) {
-      this.map.raiseLayer(this.editLayer, this.map.layers.length);
-    }
-  },
-
-
-  /**
    * Delete a feature.
    *
    * @param {Object} feature: The selected feature.
@@ -339,6 +329,16 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.remove.unselectFeature(feature);
     this.editLayer.destroyFeatures([feature]);
     this.publishWKT();
+  },
+
+
+  /**
+   * Push the edit layer to the top of the stack.
+   */
+  raiseLayer: function() {
+    if (!_.isNull(this.editLayer) && this.isModifying) {
+      this.map.raiseLayer(this.editLayer, this.map.layers.length);
+    }
   },
 
 

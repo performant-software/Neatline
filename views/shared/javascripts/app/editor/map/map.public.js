@@ -70,6 +70,16 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
+   * Raise the edit layer.
+   */
+  var raiseLayer = function() {
+    Map.__view.raiseLayer();
+  };
+  Neatline.commands.setHandler('MAPEDIT:raiseLayer', raiseLayer);
+  Neatline.vent.on('MAP:ingest', raiseLayer);
+
+
+  /**
    * Empty the edit layer.
    */
   var clearLayer = function() {
