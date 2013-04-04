@@ -88,15 +88,10 @@ describe('Map Vector Layers', function() {
     // the viewport or because they were deleted) - should be removed.
     // --------------------------------------------------------------------
 
-    var record2Layer = _t.getVectorLayerByTitle('title2');
+    // Load records with record 2.
+    _t.refreshMap(_t.json.records.standard);
 
-    // Record 2 point at POINT(3 4).
-    expect(record2Layer.features.length).toEqual(1);
-    expect(record2Layer.features[0].geometry.x).toEqual(3);
-    expect(record2Layer.features[0].geometry.y).toEqual(4);
-    _t.assertVectorLayerCount(3);
-
-    // Move map.
+    // Load records without record 2.
     _t.refreshMap(_t.json.records.removed);
 
     // Record 2 layer should be removed.

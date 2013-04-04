@@ -183,11 +183,8 @@ Neatline.module('Editor.Record', function(
         STRINGS.record.remove.success
       );
 
-      // Delete the record's layer on the map.
-      Neatline.execute('MAPEDIT:deleteLayer', this.model);
+      // Hide modal, close form.
       this.__ui.modal.modal('hide');
-
-      // Close the form.
       this.onCloseClick();
 
     },

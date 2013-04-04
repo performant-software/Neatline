@@ -36,7 +36,7 @@ _.extend(Neatline.Map.View.prototype, {
     // layer as the edit layer. If a layer does not exist, build a new
     // layer from the model and add it to the map.
 
-    this.editLayer = this.getLayerByModel(model);
+    this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
     this.editLayer.options.neatline.frozen = true;
 
@@ -343,29 +343,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Remove a layer by model.
-   *
-   * @param {Object} model: The model of the deleted record.
-   */
-  removeLayerByModel: function(model) {
-    var layer = this.getLayerByModel(model);
-    if (layer) this.removeLayer(layer);
-  },
-
-
-  /**
-   * Remove a layer from the map and the `layers` tracker.
-   *
-   * @param {Object} layer: The layer.
-   */
-  removeLayer: function(layer) {
-    this.map.removeLayer(layer);
-    delete this.layers.vector[layer.nId]
-  },
-
-
-  /**
-   * Delete all features on the edit layer, publish empty WKT.
+   * Clear the edit layer, publish empty WKT.
    */
   clearLayer: function() {
     this.editLayer.destroyFeatures();

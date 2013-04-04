@@ -70,24 +70,12 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
-   * Delete all features on the edit layer.
+   * Empty the edit layer.
    */
   var clearLayer = function() {
     Map.__view.clearLayer();
   };
   Neatline.commands.setHandler('MAPEDIT:clearLayer', clearLayer);
-
-
-  /**
-   * Remove a model's layer from the map.
-   *
-   * @param {Object} model: The record model.
-   */
-  var deleteLayer = function(model) {
-    Map.__collection.remove(model);
-    Map.__view.removeLayerByModel(model);
-  };
-  Neatline.commands.setHandler('MAPEDIT:deleteLayer', deleteLayer);
 
 
 }});

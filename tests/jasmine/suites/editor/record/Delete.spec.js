@@ -157,29 +157,4 @@ describe('Record Form Delete', function() {
   });
 
 
-  it('should remove the model from the map collection', function() {
-
-    // --------------------------------------------------------------------
-    // When a record is deleted, the model for the record should be
-    // removed from the map records collection, the layer for the record
-    // should be removed immediately from the map, and the layer should
-    // be removed from the `layers` tracker array on the map view.
-    // --------------------------------------------------------------------
-
-    var model = _t.vw.RECORD.model;
-
-    // Delete, confirm.
-    el.delete1.trigger('click');
-    el.delete2.trigger('click');
-    _t.respondLast200('');
-
-    // Layer should be removed from map.
-    expect(_t.vw.MAP.getLayerByModel(model)).toBeUndefined();
-
-    // Layer should be removed from tracker.
-    expect(_t.vw.MAP.layers.vector[model.id]).toBeUndefined();
-
-  });
-
-
 });

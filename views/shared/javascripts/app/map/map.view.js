@@ -403,17 +403,6 @@ Neatline.module('Map', function(
 
 
     /**
-     * Return the layer that corresponds the the passed model instance.
-     *
-     * @param {Object} model: The record model.
-     * @return {Object}: The vector layer.
-     */
-    getLayerByModel: function(model) {
-      return _.first(this.map.getLayersBy('nId', String(model.id)));
-    },
-
-
-    /**
      * Get the current zoom level.
      *
      * @return {Number}: The zoom level.
@@ -459,7 +448,7 @@ Neatline.module('Map', function(
     focusByModel: function(model) {
 
       // Get a layer for the model.
-      var layer = this.getLayerByModel(model);
+      var layer = this.layers.vector[model.id]
       if (!layer) layer = this.buildVectorLayer(model);
 
       // Try to get a focus and zoom.
