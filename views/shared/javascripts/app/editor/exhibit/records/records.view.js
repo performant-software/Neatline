@@ -39,9 +39,9 @@ Neatline.module('Editor.Exhibit.Records', function(
      */
     ingest: function(records) {
       this.$el.html(this.template({
-        records:  records,
-        query:    Neatline.request('SEARCH:getQueryForUrl'),
-        limit:    Neatline.global.page_length
+        records: records,
+        query: Neatline.request('SEARCH:getQueryForUrl'),
+        limit: Neatline.global.page_length
       }));
     },
 

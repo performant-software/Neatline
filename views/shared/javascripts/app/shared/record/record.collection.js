@@ -33,7 +33,7 @@ Neatline.module('Shared.Record', function(
         exhibit_id: Neatline.global.exhibit.id
       });
 
-      this.fetch({ data: $.param(params), success: cb });
+      this.fetch({ reset: true, data: $.param(params), success: cb });
 
     },
 
