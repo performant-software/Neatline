@@ -274,23 +274,36 @@ Neatline.module('Map', function(
       // records that don't already have a layer from a previous ingest.
 
       records.each(_.bind(function(record) {
+
+        // Register the new id.
         newIds.push(record.id);
+
+        // Create new layer, if one doesn't exist.
         if (!_.has(this.layers.vector, record.id)) {
           this.buildVectorLayer(record);
         }
+
       }, this));
 
       // Once all of the records in the new collection are represented on
       // the map, we need to make sure that there aren't any layers on the
       // map from a previous ingest that are _not_ present in the new
       // collection (for example, if the map was panned, and a record no
-      // longer falls inside the viewport). Remove these "stale" layers.
+      // longer falls inside the viewport). Remove these "stale" layers,
+      // unless they are marked as frozen, in which case they are immune
+      // from the garbage collection process.
 
       _.each(this.layers.vector, _.bind(function(layer, id) {
-        if (!_.contains(newIds, parseInt(id, 10))) {
-          this.map.removeLayer(layer);
+
+        // Is the layer model absent from the collection?
+        var isStale = !_.contains(newIds, parseInt(id, 10));
+
+        // If so, and the layer is unfrozen, delete.
+        if (isStale && !layer.options.neatline.frozen) {
           delete this.layers.vector[id];
+          this.map.removeLayer(layer);
         }
+
       }, this));
 
     },
@@ -307,7 +320,11 @@ Neatline.module('Map', function(
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(record.get('title'), {
         styleMap: this.getStyleMap(record),
-        displayInLayerSwitcher: false
+        displayInLayerSwitcher: false,
+        neatline: {
+          model: record,
+          frozen: false
+        }
       });
 
       // Add features.

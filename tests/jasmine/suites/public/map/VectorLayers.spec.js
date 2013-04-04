@@ -67,15 +67,15 @@ describe('Map Vector Layers', function() {
     // that were not present in the last collection.
     // --------------------------------------------------------------------
 
-  });
+    // Load records without record 2.
+    _t.refreshMap(_t.json.records.removed);
 
+    // Load records with record 2.
+    _t.refreshMap(_t.json.records.standard);
 
-  it('should not duplicate layers', function() {
-
-    // --------------------------------------------------------------------
-    // When the map is refreshed, new layers should _not_ be created for
-    // records that already have layers on the map.
-    // --------------------------------------------------------------------
+    // Record 2 layer should be added.
+    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+    _t.assertVectorLayerCount(3);
 
   });
 
@@ -90,7 +90,7 @@ describe('Map Vector Layers', function() {
 
     var record2Layer = _t.getVectorLayerByTitle('title2');
 
-    // Record2 point at POINT(3 4).
+    // Record 2 point at POINT(3 4).
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
@@ -99,7 +99,7 @@ describe('Map Vector Layers', function() {
     // Move map.
     _t.refreshMap(_t.json.records.removed);
 
-    // Record2 point should be removed.
+    // Record 2 layer should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
     _t.assertVectorLayerCount(2);
 
@@ -113,6 +113,19 @@ describe('Map Vector Layers', function() {
     // that are absent from the new collection should _not_ be removed if
     // the `neatline.frozen` option is true.
     // --------------------------------------------------------------------
+
+    // Load records with record 2.
+    _t.refreshMap(_t.json.records.standard);
+
+    // Freeze record 2.
+    _t.getVectorLayerByTitle('title2').options.neatline.frozen = true;
+
+    // Load records without record 2.
+    _t.refreshMap(_t.json.records.removed);
+
+    // Record 2 layer should not be removed.
+    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+    _t.assertVectorLayerCount(3);
 
   });
 
