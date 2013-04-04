@@ -67,7 +67,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     records.each(_.bind(function(record) {
 
-      var id = record.get('id');
+      var id = record.id;
 
       // Add if the layer is not the edit layer.
       if (!this.editLayer || (id != this.editLayer.nId)) {
@@ -340,7 +340,7 @@ _.extend(Neatline.Map.View.prototype, {
   updateModel: function(model) {
 
     // Replace the model.
-    this.editLayer.nId = model.get('id');
+    this.editLayer.nId = model.id;
     this.editLayer.nModel = model;
 
     // Rebuild the style map.

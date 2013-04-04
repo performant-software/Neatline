@@ -24,7 +24,7 @@ Neatline.module('Shared.Record', function(
      */
     url: function() {
       var url = Neatline.global.records_api;
-      if (this.get('id')) url += ('/'+this.get('id'));
+      if (this.id) url += ('/'+this.id);
       return url;
     },
 

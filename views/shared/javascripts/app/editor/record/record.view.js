@@ -102,7 +102,7 @@ Neatline.module('Editor.Record', function(
 
       // Get the tab slug and id.
       this.tab = $(event.target).attr('data-slug');
-      var id = this.model.get('id') || 'add';
+      var id = this.model.id || 'add';
 
       // Update the route, notify tab views.
       Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.tab);
@@ -154,7 +154,7 @@ Neatline.module('Editor.Record', function(
 
       // Update the route.
       Neatline.execute('EDITOR:setRoute',
-        'record/'+this.model.get('id')+'/'+this.tab
+        'record/'+this.model.id+'/'+this.tab
       );
 
       // Refresh the map.

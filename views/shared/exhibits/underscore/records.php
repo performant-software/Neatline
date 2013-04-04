@@ -28,8 +28,7 @@
     <% records.each(function(r) { %>
 
       <!-- Record listing. -->
-      <a href="#record/<%= r.get('id') %>"
-        data-id="<%= r.get('id') %>">
+      <a href="#record/<%= r.id %>" data-id="<%= r.id %>">
 
         <!-- Title. -->
         <span class="title">

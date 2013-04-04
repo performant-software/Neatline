@@ -69,7 +69,7 @@ describe('Record Form Tabs', function() {
     // --------------------------------------------------------------------
 
     // Edit existing record.
-    var id = _t.getRecordListModels()[0].get('id');
+    var id = _t.getRecordListModels()[0].id;
     _t.navigate('record/'+id);
 
     // Walk tab slugs.

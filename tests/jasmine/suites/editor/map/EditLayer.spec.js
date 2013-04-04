@@ -35,7 +35,7 @@ describe('Map Edit Layer', function() {
     expect(_t.vw.MAP.vectorLayers.length).toEqual(2);
 
     // Open form for record 2.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    _t.navigate('record/'+recordModels[1].id);
 
     // Map should create new layer for record 2.
     var newLayer = _.last(_t.vw.MAP.vectorLayers);
@@ -76,7 +76,7 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
 
     // Open form for record 2, get layer.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    _t.navigate('record/'+recordModels[1].id);
     var record2Layer = _t.getVectorLayerByTitle('title2');
 
     // Add a new point.
@@ -108,7 +108,7 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
 
     // Open form for record 2.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    _t.navigate('record/'+recordModels[1].id);
 
     // Reload map with updated record 2.
     _t.refreshMap(_t.json.records.changed);
@@ -128,7 +128,7 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
 
     // Open form for record 2.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    _t.navigate('record/'+recordModels[1].id);
 
     // Reload map without record 2.
     _t.refreshMap(_t.json.records.removed);
@@ -166,7 +166,7 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
 
     // Open form for record 2, then record list.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    _t.navigate('record/'+recordModels[1].id);
     _t.navigate('records');
 
     // Reload the map without record 2.

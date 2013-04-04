@@ -304,8 +304,8 @@ Neatline.module('Map', function(
       }
 
       // Store model, id.
-      layer.nId = record.get('id');
       layer.nModel = record;
+      layer.nId = record.id;
 
       // Add to map, track.
       this.map.addLayer(layer);
@@ -378,8 +378,7 @@ Neatline.module('Map', function(
      * @return {Object}: The vector layer.
      */
     getLayerByModel: function(model) {
-      var id = String(model.get('id'));
-      return _.first(this.map.getLayersBy('nId', id));
+      return _.first(this.map.getLayersBy('nId', String(model.id)));
     },
 
 

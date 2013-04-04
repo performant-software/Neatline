@@ -87,7 +87,7 @@ Neatline.module('Editor.Record', function(
    */
   var navToForm = function(model) {
     if (!Record.__view.open) {
-      Record.__router.navigate('record/'+model.get('id'), true);
+      Record.__router.navigate('record/'+model.id, true);
     }
   };
   Neatline.commands.setHandler('RECORD:navToForm', navToForm);

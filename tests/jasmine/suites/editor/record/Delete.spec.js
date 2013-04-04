@@ -13,15 +13,13 @@
 describe('Record Form Delete', function() {
 
 
-  var el, id;
+  var el;
 
 
   beforeEach(function() {
 
     _t.loadEditor();
     _t.showFirstRecordForm();
-
-    id = _t.vw.RECORD.model.get('id');
 
     el = {
       delete1:  _t.vw.RECORD.$('a[href="#delete-modal"]'),
@@ -75,6 +73,8 @@ describe('Record Form Delete', function() {
     // When the "Yes, delete" button is clicked, a well-formed DELETE
     // request should be issued to the records API.
     // --------------------------------------------------------------------
+
+    var id = _t.vw.RECORD.model.id;
 
     // Delete, confirm.
     el.delete1.trigger('click');
@@ -166,7 +166,6 @@ describe('Record Form Delete', function() {
     // be removed from the `layers` tracker array on the map view.
     // --------------------------------------------------------------------
 
-    // Capture the form model.
     var model = _t.vw.RECORD.model;
 
     // Delete, confirm.
@@ -178,8 +177,8 @@ describe('Record Form Delete', function() {
     expect(_t.vw.MAP.getLayerByModel(model)).toBeUndefined();
 
     // Layer should be removed from `layers`.
-    expect(_.find(_t.vw.MAP.layers, function(layer) {
-      return layer.nId == id; })).toBeUndefined();
+    expect(_.find(_t.vw.MAP.vectorLayers, function(layer) {
+      return layer.nId == model.id; })).toBeUndefined();
 
   });
 

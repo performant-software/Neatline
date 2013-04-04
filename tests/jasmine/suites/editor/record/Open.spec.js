@@ -43,7 +43,7 @@ describe('Record Form Open', function() {
 
       // The form should be displayed and  populated with data.
       expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-      expect(_t.vw.RECORD.model.get('id')).toEqual(model.get('id'));
+      expect(_t.vw.RECORD.model.id).toEqual(model.id);
 
     });
 
@@ -72,7 +72,7 @@ describe('Record Form Open', function() {
       model = recordModels[0];
 
       // Request an already-loaded record.
-      _t.navigate('record/'+recordModels[0].get('id'));
+      _t.navigate('record/'+recordModels[0].id);
 
     });
 
@@ -118,11 +118,11 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Open form, get elements.
-    _t.navigate('record/'+recordModels[0].get('id'));
+    _t.navigate('record/'+recordModels[0].id);
     var inputs = _t.getRecordFormElements();
 
     // Get the form model id.
-    var id = recordModels[0].get('id');
+    var id = recordModels[0].id;
 
     expect(inputs.id).              toHaveText('#'+id+':'),
     expect(inputs.titleHeader).     toHaveText('title1');
@@ -165,13 +165,13 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Open first record.
-    _t.navigate('record/'+recordModels[0].get('id'));
+    _t.navigate('record/'+recordModels[0].id);
 
     // Null out `widgets` field.
     recordModels[1].set('widgets', null);
 
     // Open the form, get elements.
-    _t.navigate('record/'+recordModels[1].get('id'));
+    _t.navigate('record/'+recordModels[1].id);
     var inputs = _t.getRecordFormElements();
 
     // All widgets should be deselected.

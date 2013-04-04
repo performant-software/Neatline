@@ -41,11 +41,11 @@ describe('Records List', function() {
 
     // Should link to existing records.
     expect($(recordRows[1]).attr('href')).
-      toEqual('#record/'+recordModels[0].get('id'));
+      toEqual('#record/'+recordModels[0].id);
     expect($(recordRows[2]).attr('href')).
-      toEqual('#record/'+recordModels[1].get('id'));
+      toEqual('#record/'+recordModels[1].id);
     expect($(recordRows[3]).attr('href')).
-      toEqual('#record/'+recordModels[2].get('id'));
+      toEqual('#record/'+recordModels[2].id);
 
   });
 

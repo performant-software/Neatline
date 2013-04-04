@@ -35,8 +35,7 @@ describe('Record Form Save', function() {
     // be issued to the record API with the new data.
     // --------------------------------------------------------------------
 
-    // Get the model id and form elements.
-    var id = _t.vw.RECORD.model.get('id');
+    var id = _t.vw.RECORD.model.id;
     var inputs = _t.getRecordFormElements();
     var widgets = ['Widget2','Widget3'];
 
