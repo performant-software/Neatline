@@ -416,6 +416,16 @@ Neatline.module('Map', function(
 
 
     /**
+     * Get an array of all vector layers.
+     *
+     * @return {Array}: The array of layers.
+     */
+    getVectorLayers: function() {
+      return _.values(this.layers.vector);
+    },
+
+
+    /**
      * Focus the position and zoom to center around the passed model.
      *
      * - If the model has a non-null `map_focus` and `map_zoom`, set the

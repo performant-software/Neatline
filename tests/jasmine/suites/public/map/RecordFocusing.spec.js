@@ -30,7 +30,7 @@ describe('Map Record Focusing', function() {
 
     beforeEach(function() {
       requestCount = _t.server.requests.count;
-      layer = _t.vw.MAP.vectorLayers[0];
+      layer = _t.vw.MAP.getVectorLayers()[0];
     });
 
     afterEach(function() {
@@ -70,9 +70,10 @@ describe('Map Record Focusing', function() {
     afterEach(function() {
 
       // New layer should be created for model.
-      expect(_t.vw.MAP.vectorLayers.length).toEqual(4);
-      expect(_t.vw.MAP.vectorLayers[3].features[0].geometry.x).toEqual(1);
-      expect(_t.vw.MAP.vectorLayers[3].features[0].geometry.y).toEqual(2);
+      var layers = _t.vw.MAP.getVectorLayers();
+      expect(layers[3].features[0].geometry.x).toEqual(1);
+      expect(layers[3].features[0].geometry.y).toEqual(2);
+      expect(layers.length).toEqual(4);
 
       // Map should focus.
       _t.assertMapViewport(100, 200, 10);
