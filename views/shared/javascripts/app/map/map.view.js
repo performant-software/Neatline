@@ -99,7 +99,7 @@ Neatline.module('Map', function(
 
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
-        _.values(this.layers.vector), {
+        this.getVectorLayers(), {
           hover: true,
           highlightOnly: true,
           renderIntent: 'temporary',
@@ -112,7 +112,7 @@ Neatline.module('Map', function(
 
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
-        _.values(this.layers.vector), {
+        this.getVectorLayers(), {
           onSelect:   this.onFeatureSelect,
           onUnselect: this.onFeatureUnselect
         }
@@ -188,8 +188,9 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
-      this.hoverControl.setLayer(_.values(this.layers.vector));
-      this.clickControl.setLayer(_.values(this.layers.vector));
+      var layers = this.getVectorLayers();
+      this.hoverControl.setLayer(layers);
+      this.clickControl.setLayer(layers);
     },
 
 

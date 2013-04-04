@@ -131,7 +131,7 @@ var _t = (function(_t) {
 
     // Record2 point should be removed.
     expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(this.vw.MAP.getVectorLayers().length).toEqual(2);
+    this.assertVectorLayerCount(2);
 
   };
 
@@ -144,9 +144,21 @@ var _t = (function(_t) {
    * @param {Number} zoom: The zoom.
    */
   _t.assertMapViewport = function(lon, lat, zoom) {
-    expect(_t.vw.MAP.map.getCenter().lon).toEqual(lon);
-    expect(_t.vw.MAP.map.getCenter().lat).toEqual(lat);
-    expect(_t.vw.MAP.map.getZoom()).toEqual(zoom);
+    expect(this.vw.MAP.map.getCenter().lon).toEqual(lon);
+    expect(this.vw.MAP.map.getCenter().lat).toEqual(lat);
+    expect(this.vw.MAP.map.getZoom()).toEqual(zoom);
+  };
+
+
+  /**
+   * Assert the current viewport zoom and focus.
+   *
+   * @param {Number} lon: The focus longitude.
+   * @param {Number} lat: The focus latitude.
+   * @param {Number} zoom: The zoom.
+   */
+  _t.assertVectorLayerCount = function(count) {
+    expect(this.vw.MAP.getVectorLayers().length).toEqual(count);
   };
 
 

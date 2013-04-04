@@ -22,7 +22,7 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should load layers when the exhibit is started', function() {
+  it('should load layers when exhibit starts', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit starts, the map should automatically load records
@@ -37,24 +37,33 @@ describe('Map Vector Layers', function() {
     _t.assertLastRequestHasGetParameter('extent');
     _t.assertLastRequestHasGetParameter('zoom');
 
-    expect(_t.vw.MAP.getVectorLayers().length).toEqual(3);
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
     expect(layers[1].features[0].geometry.x).toEqual(3);
     expect(layers[1].features[0].geometry.y).toEqual(4);
     expect(layers[2].features[0].geometry.x).toEqual(5);
     expect(layers[2].features[0].geometry.y).toEqual(6);
+    _t.assertVectorLayerCount(3);
 
   });
 
 
-  it('should remove layers when the map is moved', function() {
+  it('should add new layers', function() {
+
+  });
+
+
+  it('should not duplciate layers', function() {
+
+  });
+
+
+  it('should remove stale layers', function() {
 
     // --------------------------------------------------------------------
-    // When the map is moved or zoomed and records are requested for the
-    // new viewport, layers for records that are no longer present in the
-    // collection - either because they no longer intersect the viewport
-    // or because they were deleted - should be removed from the map.
+    // When the map is refreshed, layers for records that are no longer
+    // present in the collection (either because they no longer intersect
+    // the viewport or because they were deleted) - should be removed.
     // --------------------------------------------------------------------
 
     var record2Layer = _t.getVectorLayerByTitle('title2');
@@ -63,11 +72,10 @@ describe('Map Vector Layers', function() {
     expect(record2Layer.features.length).toEqual(1);
     expect(record2Layer.features[0].geometry.x).toEqual(3);
     expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(_t.vw.MAP.getVectorLayers().length).toEqual(3);
+    _t.assertVectorLayerCount(3);
 
     // Move map.
-    _t.triggerMapMove();
-    _t.respondLast200(_t.json.records.removed);
+    _t.refreshMap(_t.json.records.removed);
 
     // Route should be records API, method GET.
     _t.assertLastRequestRoute(Neatline.global.records_api);
@@ -79,7 +87,12 @@ describe('Map Vector Layers', function() {
 
     // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
-    expect(_t.vw.MAP.getVectorLayers().length).toEqual(2);
+    _t.assertVectorLayerCount(2);
+
+  });
+
+
+  it('should not remove frozen layers', function() {
 
   });
 
