@@ -27,8 +27,8 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      this.formatWKT = new OpenLayers.Format.WKT() // Read/write WKT.
-      this.vectorLayers = []; // Current vector layers.
+      this.layers = { vector: {}, wms: {} };
+      this.format = new OpenLayers.Format.WKT();
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -99,7 +99,7 @@ Neatline.module('Map', function(
 
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
-        this.vectorLayers, {
+        _.values(this.layers.vector), {
           hover: true,
           highlightOnly: true,
           renderIntent: 'temporary',
@@ -112,7 +112,7 @@ Neatline.module('Map', function(
 
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
-        this.vectorLayers, {
+        _.values(this.layers.vector), {
           onSelect:   this.onFeatureSelect,
           onUnselect: this.onFeatureUnselect
         }
@@ -188,8 +188,8 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
-      this.hoverControl.setLayer(this.vectorLayers);
-      this.clickControl.setLayer(this.vectorLayers);
+      this.hoverControl.setLayer(_.values(this.layers.vector));
+      this.clickControl.setLayer(_.values(this.layers.vector));
     },
 
 
@@ -234,7 +234,7 @@ Neatline.module('Map', function(
         bind: true, watch: false
       });
 
-      // Focus.
+      // Geolocate.
       this.map.addControl(geolocate);
       geolocate.activate();
 
@@ -263,19 +263,33 @@ Neatline.module('Map', function(
      * Rebuild the vector layers to match the new collection.
      *
      * @param {Object} records: The records collection.
+     * TODO|dev
      */
     ingestVectorLayers: function(records) {
 
-      // Remove layers.
-      _.each(this.vectorLayers, _.bind(function(layer) {
-        this.map.removeLayer(layer);
+      var newIds = [];
+
+      // First, walk the new collection of records and create layers for
+      // records that don't already have a layer from a previous ingest.
+
+      records.each(_.bind(function(record) {
+        newIds.push(record.id);
+        if (!_.has(this.layers.vector, record.id)) {
+          this.buildVectorLayer(record);
+        }
       }, this));
 
-      this.vectorLayers = [];
+      // Once all of the records in the new collection are represented on
+      // the map, we need to make sure that there aren't any layers on the
+      // map from a previous ingest that are _not_ present in the new
+      // collection (for example, if the map was panned, and a record no
+      // longer falls inside the viewport). Remove these "stale" layers.
 
-      // Add layers.
-      records.each(_.bind(function(record) {
-        this.buildVectorLayer(record);
+      _.each(this.layers.vector, _.bind(function(layer, id) {
+        if (!_.contains(newIds, parseInt(id, 10))) {
+          this.map.removeLayer(layer);
+          delete this.layers.vector[id];
+        }
       }, this));
 
     },
@@ -297,16 +311,16 @@ Neatline.module('Map', function(
 
       // Add features.
       if (record.get('coverage')) {
-        layer.addFeatures(this.formatWKT.read(record.get('coverage')));
+        layer.addFeatures(this.format.read(record.get('coverage')));
       }
 
       // Store model, id.
       layer.nModel = record;
       layer.nId = record.id;
 
-      // Add to map, track.
+      // Track, add to map.
+      this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
-      this.vectorLayers.push(layer);
 
       return layer;
 
@@ -397,7 +411,7 @@ Neatline.module('Map', function(
     getExtentAsWKT: function() {
       var extent = this.map.getExtent().toGeometry();
       var vector = new OpenLayers.Feature.Vector(extent);
-      return this.formatWKT.write(vector);
+      return this.format.write(vector);
     },
 
 
