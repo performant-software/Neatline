@@ -27,8 +27,7 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      this.layers = { vector: {}, wms: {} };
-      this.formatWKT = new OpenLayers.Format.WKT();
+      this.vectorLayers = []; // The current set of vector layers.
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -99,7 +98,7 @@ Neatline.module('Map', function(
 
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
-        _.values(this.layers.vector), {
+        this.vectorLayers, {
           hover: true,
           highlightOnly: true,
           renderIntent: 'temporary',
@@ -112,7 +111,7 @@ Neatline.module('Map', function(
 
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
-        _.values(this.layers.vector), {
+        this.vectorLayers, {
           onSelect:   this.onFeatureSelect,
           onUnselect: this.onFeatureUnselect
         }
@@ -188,8 +187,8 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
-      this.hoverControl.setLayer(_.values(this.layers.vector));
-      this.clickControl.setLayer(_.values(this.layers.vector));
+      this.hoverControl.setLayer(this.vectorLayers);
+      this.clickControl.setLayer(this.vectorLayers);
     },
 
 
@@ -266,22 +265,16 @@ Neatline.module('Map', function(
      */
     ingestVectorLayers: function(records) {
 
-      var ids = [];
-
-      // Create new layers.
-      records.each(_.bind(function(record) {
-        ids.push(record.id);
-        if (!_.has(this.layers.vector, record.id)) {
-          this.buildVectorLayer(record);
-        }
+      // Remove layers.
+      _.each(this.vectorLayers, _.bind(function(layer) {
+        this.map.removeLayer(layer);
       }, this));
 
-      // Purge stale layers.
-      _.each(this.layers.vector, _.bind(function(layer, id) {
-        if (!_.contains(ids, parseInt(id, 10))) {
-          this.map.removeLayer(layer);
-          delete this.layers.vector[id];
-        }
+      this.vectorLayers = [];
+
+      // Add layers.
+      records.each(_.bind(function(record) {
+        this.buildVectorLayer(record);
       }, this));
 
     },
@@ -305,7 +298,8 @@ Neatline.module('Map', function(
 
       // Build vector layer.
       if (record.get('coverage')) {
-        var features = this.formatWKT.read(record.get('coverage'));
+        var formatWKT = new OpenLayers.Format.WKT();
+        var features = formatWKT.read(record.get('coverage'));
         layer.addFeatures(features);
       }
 
@@ -313,9 +307,9 @@ Neatline.module('Map', function(
       layer.nModel = record;
       layer.nId = record.id;
 
-      // Track, add to map.
-      this.layers.vector[record.id] = layer;
+      // Add to map, track.
       this.map.addLayer(layer);
+      this.vectorLayers.push(layer);
 
       return layer;
 
@@ -378,6 +372,17 @@ Neatline.module('Map', function(
 
 
     /**
+     * Return the layer that corresponds the the passed model instance.
+     *
+     * @param {Object} model: The record model.
+     * @return {Object}: The vector layer.
+     */
+    getLayerByModel: function(model) {
+      return _.first(this.map.getLayersBy('nId', String(model.id)));
+    },
+
+
+    /**
      * Get the current zoom level.
      *
      * @return {Number}: The zoom level.
@@ -414,7 +419,7 @@ Neatline.module('Map', function(
     focusByModel: function(model) {
 
       // Get a layer for the model.
-      var layer = this.layers.vector[model.id];
+      var layer = this.getLayerByModel(model);
       if (!layer) layer = this.buildVectorLayer(model);
 
       // Try to get a focus and zoom.
