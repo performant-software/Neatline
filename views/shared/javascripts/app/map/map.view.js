@@ -27,7 +27,8 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      this.vectorLayers = []; // The current set of vector layers.
+      this.formatWKT = new OpenLayers.Format.WKT() // Read/write WKT.
+      this.vectorLayers = []; // Current vector layers.
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -289,18 +290,14 @@ Neatline.module('Map', function(
     buildVectorLayer: function(record) {
 
       // Build the layer.
-      var layer = new OpenLayers.Layer.Vector(
-        record.get('title'), {
-          styleMap: this.getStyleMap(record),
-          displayInLayerSwitcher: false
-        }
-      );
+      var layer = new OpenLayers.Layer.Vector(record.get('title'), {
+        styleMap: this.getStyleMap(record),
+        displayInLayerSwitcher: false
+      });
 
-      // Build vector layer.
+      // Add features.
       if (record.get('coverage')) {
-        var formatWKT = new OpenLayers.Format.WKT();
-        var features = formatWKT.read(record.get('coverage'));
-        layer.addFeatures(features);
+        layer.addFeatures(this.formatWKT.read(record.get('coverage')));
       }
 
       // Store model, id.
@@ -398,10 +395,9 @@ Neatline.module('Map', function(
      * @return {String}: The WKT string.
      */
     getExtentAsWKT: function() {
-      var format = new OpenLayers.Format.WKT();
       var extent = this.map.getExtent().toGeometry();
       var vector = new OpenLayers.Feature.Vector(extent);
-      return format.write(vector);
+      return this.formatWKT.write(vector);
     },
 
 
