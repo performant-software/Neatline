@@ -37,7 +37,7 @@ describe('Record Form Style Tab', function() {
   });
 
 
-  describe('model sync', function() {
+  describe('style previewing', function() {
 
     // --------------------------------------------------------------------
     // When the record form model changes - either by a direct update to
