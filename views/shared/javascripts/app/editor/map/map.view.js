@@ -413,21 +413,10 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} model: The model of the deleted record.
    */
   removeLayerByModel: function(model) {
-    var layer = this.getLayerByModel(model);
-    if (layer) this.removeLayer(layer);
-  },
-
-
-  /**
-   * Remove a layer from the map and the `layers` tracker.
-   *
-   * @param {Object} layer: The layer.
-   */
-  removeLayer: function(layer) {
-    this.map.removeLayer(layer);
-    this.vectorLayers = _.reject(this.vectorLayers, function(l) {
-      return l.nId == layer.nId;
-    });
+    if (_.has(this.layers.vector, model.id)) {
+      this.map.removeLayer(this.layers.vector[model.id]);
+      delete this.layers.vector[model.id];
+    }
   },
 
 
