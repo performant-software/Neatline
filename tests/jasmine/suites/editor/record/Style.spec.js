@@ -34,225 +34,225 @@ describe('Record Form Style Tab', function() {
       setFocus:   _t.vw.RECORD.$('a[name="set-focus"]')
     });
 
-    model = _t.vw.MAP.editLayer.nModel;
-
   });
 
 
-  describe('presenter', function() {
+  describe('model sync', function() {
 
-    it('should update on `change`', function() {
-      el.presenter.val('None').trigger('change');
-      expect(_t.vw.MAP.editLayer.nModel.get('presenter')).toEqual('None');
+    // --------------------------------------------------------------------
+    // When the record form model changes - either by a direct update to
+    // the model or by a change/keyup event on the form inputs - the style
+    // map on the edit layer should be rebuilt.
+    // --------------------------------------------------------------------
+
+    describe('presenter', function() {
+
+      it('should update on `change`', function() {
+        el.presenter.val('None').trigger('change');
+        var presenter = _t.vw.MAP.editLayer.nModel.get('presenter');
+        expect(presenter).toEqual('None');
+      });
+
     });
 
-  });
+    describe('shape color', function() {
 
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('fill_color', '#ffffff');
+      });
 
-  describe('shape color', function() {
+      it('input `change`', function() {
+        el.fillColor.val('#ffffff').trigger('change');
+      });
 
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('fill_color', '#ffffff');
+      it('input `keyup`', function() {
+        el.fillColor.val('#ffffff').trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(std.fillColor).toEqual('#ffffff');
+      });
+
     });
 
-    it('input `change`', function() {
-      el.fillColor.val('#ffffff').trigger('change');
+    describe('line color', function() {
+
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('stroke_color', '#ffffff');
+      });
+
+      it('input `change`', function() {
+        el.strokeColor.val('#ffffff').trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.strokeColor.val('#ffffff').trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(std.strokeColor).toEqual('#ffffff');
+      });
+
     });
 
-    it('input `keyup`', function() {
-      el.fillColor.val('#ffffff').trigger('keyup');
+    describe('selected color', function() {
+
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('select_color', '#ffffff');
+      });
+
+      it('input `change`', function() {
+        el.selectColor.val('#ffffff').trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.selectColor.val('#ffffff').trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(tmp.fillColor).toEqual('#ffffff');
+        expect(sel.fillColor).toEqual('#ffffff');
+      });
+
     });
 
-    afterEach(function() {
-      getStyles();
-      expect(std.fillColor).toEqual('#ffffff');
+    describe('shape opacity', function() {
+
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('fill_opacity', 50);
+      });
+
+      it('input `change`', function() {
+        el.fillOpacity.val(50).trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.fillOpacity.val(50).trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(std.fillOpacity).toEqual(0.5);
+        expect(std.graphicOpacity).toEqual(0.5);
+      });
+
     });
 
-  });
+    describe('line opacity', function() {
 
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('stroke_opacity', 50);
+      });
 
-  describe('line color', function() {
+      it('input `change`', function() {
+        el.strokeOpacity.val(50).trigger('change');
+      });
 
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('stroke_color', '#ffffff');
+      it('input `keyup`', function() {
+        el.strokeOpacity.val(50).trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(std.strokeOpacity).toEqual(0.5);
+        expect(tmp.strokeOpacity).toEqual(0.5);
+        expect(sel.strokeOpacity).toEqual(0.5);
+      });
+
     });
 
-    it('should update on `change`', function() {
-      el.strokeColor.val('#ffffff').trigger('change');
+    describe('selected opacity', function() {
+
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('select_opacity', 50);
+      });
+
+      it('input `change`', function() {
+        el.selectOpacity.val(50).trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.selectOpacity.val(50).trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(tmp.fillOpacity).toEqual(0.5);
+        expect(sel.fillOpacity).toEqual(0.5);
+      });
+
     });
 
-    it('should update on `keyup`', function() {
-      el.strokeColor.val('#ffffff').trigger('keyup');
+    describe('line width', function() {
+
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('stroke_width', 50);
+      });
+
+      it('input `change`', function() {
+        el.strokeWidth.val(50).trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.strokeWidth.val(50).trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(std.strokeWidth).toEqual(50);
+        expect(tmp.strokeWidth).toEqual(50);
+        expect(sel.strokeWidth).toEqual(50);
+      });
+
     });
 
-    afterEach(function() {
-      getStyles();
-      expect(std.strokeColor).toEqual('#ffffff');
+    describe('point radius', function() {
+
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('point_radius', 50);
+      });
+
+      it('input `change`', function() {
+        el.pointRadius.val(50).trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.pointRadius.val(50).trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(std.pointRadius).toEqual(50);
+        expect(tmp.pointRadius).toEqual(50);
+        expect(sel.pointRadius).toEqual(50);
+      });
+
     });
 
-  });
+    describe('point image', function() {
 
+      it('model `set`', function() {
+        _t.vw.RECORD.model.set('point_image', 'img.png');
+      });
 
-  describe('selected color', function() {
+      it('input `change`', function() {
+        el.pointImage.val('img.png').trigger('change');
+      });
 
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('select_color', '#ffffff');
-    });
+      it('input `keyup`', function() {
+        el.pointImage.val('img.png').trigger('keyup');
+      });
 
-    it('should update on `change`', function() {
-      el.selectColor.val('#ffffff').trigger('change');
-    });
+      afterEach(function() {
+        getStyles();
+        expect(std.externalGraphic).toEqual('img.png');
+        expect(tmp.externalGraphic).toEqual('img.png');
+        expect(sel.externalGraphic).toEqual('img.png');
+      });
 
-    it('should update on `keyup`', function() {
-      el.selectColor.val('#ffffff').trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(tmp.fillColor).toEqual('#ffffff');
-      expect(sel.fillColor).toEqual('#ffffff');
-    });
-
-  });
-
-
-  describe('shape opacity', function() {
-
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('fill_opacity', 50);
-    });
-
-    it('should update on `change`', function() {
-      el.fillOpacity.val(50).trigger('change');
-    });
-
-    it('should update on `keyup`', function() {
-      el.fillOpacity.val(50).trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(std.fillOpacity).toEqual(0.5);
-      expect(std.graphicOpacity).toEqual(0.5);
-    });
-
-  });
-
-
-  describe('line opacity', function() {
-
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('stroke_opacity', 50);
-    });
-
-    it('should update on `change`', function() {
-      el.strokeOpacity.val(50).trigger('change');
-    });
-
-    it('should update on `keyup`', function() {
-      el.strokeOpacity.val(50).trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(std.strokeOpacity).toEqual(0.5);
-      expect(tmp.strokeOpacity).toEqual(0.5);
-      expect(sel.strokeOpacity).toEqual(0.5);
-    });
-
-  });
-
-
-  describe('selected opacity', function() {
-
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('select_opacity', 50);
-    });
-
-    it('should update on `change`', function() {
-      el.selectOpacity.val(50).trigger('change');
-    });
-
-    it('should update on `keyup`', function() {
-      el.selectOpacity.val(50).trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(tmp.fillOpacity).toEqual(0.5);
-      expect(sel.fillOpacity).toEqual(0.5);
-    });
-
-  });
-
-
-  describe('line width', function() {
-
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('stroke_width', 50);
-    });
-
-    it('should update on `change`', function() {
-      el.strokeWidth.val(50).trigger('change');
-    });
-
-    it('should update on `keyup`', function() {
-      el.strokeWidth.val(50).trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(std.strokeWidth).toEqual(50);
-      expect(tmp.strokeWidth).toEqual(50);
-      expect(sel.strokeWidth).toEqual(50);
-    });
-
-  });
-
-
-  describe('point radius', function() {
-
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('point_radius', 50);
-    });
-
-    it('should update on `change`', function() {
-      el.pointRadius.val(50).trigger('change');
-    });
-
-    it('should update on `keyup`', function() {
-      el.pointRadius.val(50).trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(std.pointRadius).toEqual(50);
-      expect(tmp.pointRadius).toEqual(50);
-      expect(sel.pointRadius).toEqual(50);
-    });
-
-  });
-
-
-  describe('point image', function() {
-
-    it('model `set`', function() {
-      _t.vw.RECORD.model.set('point_image', 'img.png');
-    });
-
-    it('should update on `change`', function() {
-      el.pointImage.val('img.png').trigger('change');
-    });
-
-    it('should update on `keyup`', function() {
-      el.pointImage.val('img.png').trigger('keyup');
-    });
-
-    afterEach(function() {
-      getStyles();
-      expect(std.externalGraphic).toEqual('img.png');
-      expect(tmp.externalGraphic).toEqual('img.png');
-      expect(sel.externalGraphic).toEqual('img.png');
     });
 
   });

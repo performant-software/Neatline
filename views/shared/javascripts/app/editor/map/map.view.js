@@ -270,6 +270,11 @@ _.extend(Neatline.Map.View.prototype, {
    */
   updateModel: function(model) {
 
+    console.log('updateModel');
+
+    // delete this.layers.vector[this.editLayer.nId];
+    // this.layers.vector[model.id] = this.editLayer;
+
     // Replace the model.
     this.editLayer.nId = model.id;
     this.editLayer.nModel = model;

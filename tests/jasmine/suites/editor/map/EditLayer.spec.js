@@ -59,7 +59,7 @@ describe('Map Edit Layer', function() {
     _t.navigate('record/add');
 
     // Map should create new layer for unsaved record.
-    expect(_.has(_t.vw.MAP.layers.vector, undefined)).toBeTruthy();
+    expect(_t.vw.MAP.layers.vector[undefined]).toBeDefined();
     _t.assertVectorLayerCount(4);
 
     // Map should set new layer as the edit layer.
@@ -99,27 +99,6 @@ describe('Map Edit Layer', function() {
   });
 
 
-  it('should update edit layer model', function() {
-
-    // --------------------------------------------------------------------
-    // When a record is being edited and a new collection of records is
-    // ingested on the map, the model tied with the edit layer should be
-    // replaced by the updated version.
-    // --------------------------------------------------------------------
-
-    // Open form for record 2.
-    _t.navigate('record/'+recordModels[1].id);
-
-    // Reload map with updated record 2.
-    _t.refreshMap(_t.json.records.changed);
-
-    // Edit layer model should be updated.
-    expect(_t.vw.MAP.editLayer.nModel.get('coverage')).
-      toEqual('POINT(7 8)');
-
-  });
-
-
   it('should not remove edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
@@ -135,6 +114,7 @@ describe('Map Edit Layer', function() {
 
     // Record 2 layer should still be present.
     expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+    _t.assertVectorLayerCount(3);
 
   });
 
@@ -153,6 +133,7 @@ describe('Map Edit Layer', function() {
     _t.refreshMap(_t.json.records.standard);
 
     // Edit layer still present.
+    expect(_t.vw.MAP.layers.vector[undefined]).toBeDefined();
     _t.assertVectorLayerCount(4);
 
   });
@@ -165,7 +146,7 @@ describe('Map Edit Layer', function() {
     // edit layer should start updating again in response to map moves.
     // --------------------------------------------------------------------
 
-    // Open form for record 2, then record list.
+    // Open record 2 form, then record list.
     _t.navigate('record/'+recordModels[1].id);
     _t.navigate('records');
 
