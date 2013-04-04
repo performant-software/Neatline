@@ -55,10 +55,10 @@ Neatline.module('Editor.Record', function(
 
       // Start map editing, bind model to form.
       Neatline.execute('MAPEDIT:startEdit', this.model);
-      rivets.bind(this.$el, { record: model });
+      rivets.bind(this.$el, { record: this.model });
 
       // Update map on model change.
-      this.model.bind('change', _.bind(function() {
+      this.listenTo(this.model, 'change', _.bind(function() {
         Neatline.execute('MAPEDIT:updateModel', this.model);
       }, this));
 
@@ -77,8 +77,9 @@ Neatline.module('Editor.Record', function(
       Neatline.vent.trigger('PRESENTER:activate');
       Neatline.execute('PRESENTER:unselect', this.model);
 
-      this.model = null;
-      this.open  = false;
+      // Unbind model listeners.
+      this.stopListening(this.model);
+      this.open = false;
 
     },
 
