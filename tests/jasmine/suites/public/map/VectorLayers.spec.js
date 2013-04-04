@@ -22,20 +22,32 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should load layers when exhibit starts', function() {
+  it('should query records API on pan/zoom', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit starts, the map should automatically load records
-    // that fall within the default viewport.
+    // When the map is panned or zoomed, a GET request should be emitted
+    // to the records API with `extent` and `zoom` parameters.
     // --------------------------------------------------------------------
 
-    // Route should be records API, method GET.
+    _t.triggerMapMove();
+
+    // Should issue GET request to records API.
     _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
     // Request should include map focus.
     _t.assertLastRequestHasGetParameter('extent');
     _t.assertLastRequestHasGetParameter('zoom');
+
+  });
+
+
+  it('should load layers when exhibit starts', function() {
+
+    // --------------------------------------------------------------------
+    // When the exhibit starts, the map should automatically load records
+    // that fall within the default viewport.
+    // --------------------------------------------------------------------
 
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
@@ -50,10 +62,20 @@ describe('Map Vector Layers', function() {
 
   it('should add new layers', function() {
 
+    // --------------------------------------------------------------------
+    // When the map is refreshed, new layers should be created for records
+    // that were not present in the last collection.
+    // --------------------------------------------------------------------
+
   });
 
 
-  it('should not duplciate layers', function() {
+  it('should not duplicate layers', function() {
+
+    // --------------------------------------------------------------------
+    // When the map is refreshed, new layers should _not_ be created for
+    // records that already have layers on the map.
+    // --------------------------------------------------------------------
 
   });
 
@@ -77,14 +99,6 @@ describe('Map Vector Layers', function() {
     // Move map.
     _t.refreshMap(_t.json.records.removed);
 
-    // Route should be records API, method GET.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
-
-    // Request should include map focus.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
-
     // Record2 point should be removed.
     expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
     _t.assertVectorLayerCount(2);
@@ -93,6 +107,12 @@ describe('Map Vector Layers', function() {
 
 
   it('should not remove frozen layers', function() {
+
+    // --------------------------------------------------------------------
+    // When the map is refreshed, existing layers associated with records
+    // that are absent from the new collection should _not_ be removed if
+    // the `neatline.frozen` option is true.
+    // --------------------------------------------------------------------
 
   });
 

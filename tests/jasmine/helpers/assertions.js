@@ -50,6 +50,55 @@ var _t = (function(_t) {
 
 
   /**
+   * Assert that the last request was a map refresh.
+   */
+  _t.assertMapRefreshed = function() {
+
+    // Should issue GET request to records API.
+    _t.assertLastRequestRoute(Neatline.global.records_api);
+    _t.assertLastRequestMethod('GET');
+
+    // Request should include map focus.
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
+
+    // Respond with new data.
+    this.respondLast200(this.json.records.removed);
+
+    // Record2 point should be removed.
+    expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
+    this.assertVectorLayerCount(2);
+
+  };
+
+
+  /**
+   * Assert the current viewport zoom and focus.
+   *
+   * @param {Number} lon: The focus longitude.
+   * @param {Number} lat: The focus latitude.
+   * @param {Number} zoom: The zoom.
+   */
+  _t.assertMapViewport = function(lon, lat, zoom) {
+    expect(this.vw.MAP.map.getCenter().lon).toEqual(lon);
+    expect(this.vw.MAP.map.getCenter().lat).toEqual(lat);
+    expect(this.vw.MAP.map.getZoom()).toEqual(zoom);
+  };
+
+
+  /**
+   * Assert the current viewport zoom and focus.
+   *
+   * @param {Number} lon: The focus longitude.
+   * @param {Number} lat: The focus latitude.
+   * @param {Number} zoom: The zoom.
+   */
+  _t.assertVectorLayerCount = function(count) {
+    expect(this.vw.MAP.getVectorLayers().length).toEqual(count);
+  };
+
+
+  /**
    * Assert that the pagination `<<` link is enabled.
    */
   _t.assertPaginationPrevEnabled = function() {
@@ -110,55 +159,6 @@ var _t = (function(_t) {
     var next = this.vw.RECORDS.$el.find('.pagination .next');
     expect($(next[0])).toHaveAttr('href', route);
     expect($(next[1])).toHaveAttr('href', route);
-  };
-
-
-  /**
-   * Assert that the last request was a map refresh.
-   */
-  _t.assertMapRefreshed = function() {
-
-    // Route should be /records/:id, method GET.
-    this.assertLastRequestRoute(Neatline.global.records_api);
-    this.assertLastRequestMethod('GET');
-
-    // Request should include map focus.
-    this.assertLastRequestHasGetParameter('extent');
-    this.assertLastRequestHasGetParameter('zoom');
-
-    // Respond with new data.
-    this.respondLast200(this.json.records.removed);
-
-    // Record2 point should be removed.
-    expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
-    this.assertVectorLayerCount(2);
-
-  };
-
-
-  /**
-   * Assert the current viewport zoom and focus.
-   *
-   * @param {Number} lon: The focus longitude.
-   * @param {Number} lat: The focus latitude.
-   * @param {Number} zoom: The zoom.
-   */
-  _t.assertMapViewport = function(lon, lat, zoom) {
-    expect(this.vw.MAP.map.getCenter().lon).toEqual(lon);
-    expect(this.vw.MAP.map.getCenter().lat).toEqual(lat);
-    expect(this.vw.MAP.map.getZoom()).toEqual(zoom);
-  };
-
-
-  /**
-   * Assert the current viewport zoom and focus.
-   *
-   * @param {Number} lon: The focus longitude.
-   * @param {Number} lat: The focus latitude.
-   * @param {Number} zoom: The zoom.
-   */
-  _t.assertVectorLayerCount = function(count) {
-    expect(this.vw.MAP.getVectorLayers().length).toEqual(count);
   };
 
 
