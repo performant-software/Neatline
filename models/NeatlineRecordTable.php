@@ -116,6 +116,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
             );
         }
 
+        // ** Widget
+        if (isset($params['widget'])) {
+            $select = $this->_filterByWidget($select,
+                $params['widget']
+            );
+        }
+
         // ** Limit
         if (isset($params['limit']) && isset($params['offset'])) {
             $data['offset'] = $params['offset'];
@@ -225,7 +232,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
 
     /**
-     * Filter by tag query.
+     * Filter by tags query.
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param array $tags An array of tags.
@@ -236,6 +243,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
         foreach ($tags as $tag) {
             $select->where("tags REGEXP ?", "[[:<:]]".$tag."[[:>:]]");
         }
+        return $select;
+    }
+
+
+    /**
+     * Filter by widget query.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param string $widget A widget id.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterByWidget($select, $widget)
+    {
+        $select->where("widgets REGEXP ?", "[[:<:]]".$widget."[[:>:]]");
         return $select;
     }
 

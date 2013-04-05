@@ -423,7 +423,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
         $record1->tags = 'tag1';
-        $record2->tags = 'tag1, tag2';
+        $record2->tags = 'tag1,tag2';
         $record3->tags = 'tag3';
 
         $record1->save();
@@ -435,6 +435,34 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
             array('tags' => array('tag1', 'tag2')));
         $this->assertEquals($result['records'][0]['id'], $record2->id);
         $this->assertCount(1, $result['records']);
+
+    }
+
+
+    /**
+     * `queryRecords` should filter on a widget query.
+     */
+    public function testWidgetFilter()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record3 = new NeatlineRecord($exhibit);
+        $record1->widgets = 'Widget1';
+        $record2->widgets = 'Widget1,Widget2';
+        $record3->widgets = 'Widget3';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        // Query for tag1 and tag2.
+        $result = $this->__records->queryRecords($exhibit,
+            array('widget' => 'Widget1'));
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertCount(2, $result['records']);
 
     }
 
