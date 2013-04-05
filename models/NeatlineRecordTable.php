@@ -192,10 +192,15 @@ class NeatlineRecordTable extends Omeka_Db_Table
             "MBRIntersects(coverage, GeomFromText('$extent'))"
         ));
 
-        // Omit empty coveages.
+        // Omit empty coverages.
         $select->where(new Zend_Db_Expr(
             "AsText(coverage) != 'POINT(0 0)'"
         ));
+
+        // Match WMS layers.
+        $select->orWhere(
+            "wms_address IS NOT NULL AND wms_layers IS NOT NULL"
+        );
 
         return $select;
 
