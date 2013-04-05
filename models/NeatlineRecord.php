@@ -22,7 +22,6 @@ class NeatlineRecord extends Neatline_AbstractRow
     public $title;              // MEDIUMTEXT NULL
     public $body;               // MEDIUMTEXT NULL
     public $coverage;           // GEOMETRY NOT NULL
-    public $is_coverage;        // TINYINT(1) NOT NULL
     public $tags;               // TEXT NULL
     public $widgets;            // TEXT NULL
     public $presenter;          // VARCHAR(100) NULL
@@ -131,12 +130,12 @@ class NeatlineRecord extends Neatline_AbstractRow
         // Add the coverage.
         if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('{$fields['coverage']}')");
-            $fields['is_coverage'] = 1;
+                "GeomFromText('{$fields['coverage']}')"
+            );
         } else {
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('POINT(0 0)')");
-            $fields['is_coverage'] = 0;
+                "GeomFromText('POINT(0 0)')"
+            );
         }
 
         return $fields;

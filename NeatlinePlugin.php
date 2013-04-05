@@ -76,7 +76,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `title`             MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
-            `is_coverage`       TINYINT(1) NOT NULL,
             `tags`              TEXT NULL,
             `widgets`           TEXT NULL,
             `presenter`         VARCHAR(100) NULL,
