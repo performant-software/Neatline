@@ -356,7 +356,7 @@ Neatline.module('Map', function(
      * @param {OpenLayers.Layer.Vector}: The layer.
      */
     removeVectorLayer: function(layer) {
-      delete this.layers.vector[layer.nId];
+      delete this.layers.vector[layer.nModel.id];
       this.map.removeLayer(layer);
     },
 
@@ -367,7 +367,7 @@ Neatline.module('Map', function(
      * @param {OpenLayers.Layer.WMS}: The layer.
      */
     removeWmsLayer: function(layer) {
-      delete this.layers.wms[layer.nId];
+      delete this.layers.wms[layer.nModel.id];
       this.map.removeLayer(layer);
     },
 
@@ -378,17 +378,15 @@ Neatline.module('Map', function(
     removeAllLayers: function() {
 
       // Vector:
-      _.each(_.values(this.layers.vector), _.bind(function(layer) {
-        this.map.removeLayer(layer);
+      _.each(_.keys(this.layers.vector), _.bind(function(id) {
+        var layer = this.layers.vector[id];
+        if (!layer.nFrozen) this.removeVectorLayer(layer);
       }, this));
 
       // WMS:
-      _.each(_.values(this.layers.wms), _.bind(function(layer) {
-        this.map.removeLayer(layer);
+      _.each(_.keys(this.layers.wms), _.bind(function(id) {
+        this.removeWmsLayer(this.layers.wms[id]);
       }, this));
-
-      // Reset tracker.
-      this.layers = { vector: {}, wms: {} };
 
     },
 

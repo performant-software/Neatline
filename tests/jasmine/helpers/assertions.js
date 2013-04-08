@@ -62,10 +62,10 @@ var _t = (function(_t) {
     _t.assertLastRequestHasGetParameter('extent');
     _t.assertLastRequestHasGetParameter('zoom');
 
-    // Respond with new data.
+    // Respond with updated collection.
     this.respondLast200(this.json.records.changed);
 
-    // Record2 point shoulbe be changed.
+    // Record2 point should be changed.
     var record2Layer = _t.getVectorLayerByTitle('title2');
     expect(record2Layer.features[0].geometry.x).toEqual(7);
     expect(record2Layer.features[0].geometry.y).toEqual(8);
