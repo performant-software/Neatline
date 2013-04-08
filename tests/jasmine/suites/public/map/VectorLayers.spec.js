@@ -83,7 +83,7 @@ describe('Map Vector Layers', function() {
       return layer.id;
     });
 
-    // Should be unchanged.
+    // Layers be the same.
     expect(olIds2).toEqual(olIds1);
 
   });

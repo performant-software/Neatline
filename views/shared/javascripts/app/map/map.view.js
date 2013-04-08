@@ -270,7 +270,7 @@ Neatline.module('Map', function(
      */
     ingestVectorLayers: function(records) {
 
-      var newIds = [];
+      var vIds = [];
 
       // First, walk the new collection of records and create layers for
       // records that don't already have a layer from a previous ingest.
@@ -278,7 +278,7 @@ Neatline.module('Map', function(
       records.each(_.bind(function(record) {
 
         // Register the new id.
-        newIds.push(record.id);
+        vIds.push(record.id);
 
         // Create new layer, if one doesn't exist.
         if (!_.has(this.layers.vector, record.id)) {
@@ -298,7 +298,7 @@ Neatline.module('Map', function(
       _.each(this.layers.vector, _.bind(function(layer, id) {
 
         // Delete if model is absent and layer is unfrozen.
-        if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
+        if (!_.contains(vIds, parseInt(id, 10)) && !layer.nFrozen) {
           this.removeVectorLayer(layer);
         }
 
