@@ -111,11 +111,11 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records
-     * `records.p12.json` (records 1-2)
-     * `records.p23.json` (records 2-3)
-     * `records.p34.json` (records 3-4)
-     * `records.p56.json` (records 5-6)
-     * `records.p6.json`  (record 6)
+     * `records.pagination.1-2.json`
+     * `records.pagination.2-3.json`
+     * `records.pagination.3-4.json`
+     * `records.pagination.5-6.json`
+     * `records.pagination.6.json`
      */
     public function testPaginatedRecordsJson()
     {

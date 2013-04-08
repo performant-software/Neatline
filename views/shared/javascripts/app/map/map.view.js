@@ -256,13 +256,12 @@ Neatline.module('Map', function(
 
         newIds.push(record.id);
 
-        // Create vector layer, if one doesn't exist.
+        // Create vector layer.
         if (!_.has(this.layers.vector, record.id)) {
           this.buildVectorLayer(record);
         }
 
-        // Create WMS layer, if the record defines an address and layers
-        // and a layer doesn't already exist for the record.
+        // Create WMS layer.
         if (record.get('wms_address') && record.get('wms_layers') &&
           !_.has(this.layers.wms, record.id)) {
           this.buildWmsLayer(record);
@@ -315,7 +314,6 @@ Neatline.module('Map', function(
 
       layer.nModel = record;
       layer.nFrozen = false;
-      layer.nId = record.id;
 
       // Track, add to map.
       this.layers.vector[record.id] = layer;

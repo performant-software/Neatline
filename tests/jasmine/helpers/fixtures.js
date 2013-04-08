@@ -33,13 +33,13 @@ var _t = (function(_t) {
       records: {
         standard: readFixtures('records.standard.json'),
         changed:  readFixtures('records.changed.json'),
+        noTitle:  readFixtures('records.noTitle.json'),
+        tags:     readFixtures('records.tags.json'),
         p12:      readFixtures('records.pagination.1-2.json'),
         p23:      readFixtures('records.pagination.2-3.json'),
         p34:      readFixtures('records.pagination.3-4.json'),
         p56:      readFixtures('records.pagination.5-6.json'),
-        p6:       readFixtures('records.pagination.6.json'),
-        noTitle:  readFixtures('records.noTitle.json'),
-        tags:     readFixtures('records.tags.json')
+        p6:       readFixtures('records.pagination.6.json')
       },
       record: {
         standard: readFixtures('record.standard.json'),
@@ -48,7 +48,7 @@ var _t = (function(_t) {
     };
 
     this.xml = {
-      items:      readFixtures('items.xml')
+      items: readFixtures('items.xml')
     };
 
   };
