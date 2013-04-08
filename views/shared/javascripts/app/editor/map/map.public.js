@@ -72,20 +72,20 @@ Neatline.module('Editor.Map', { startWithParent: false,
   /**
    * Raise the edit layer.
    */
-  var raiseLayer = function() {
-    Map.__view.raiseLayer();
+  var raiseEditLayer = function() {
+    Map.__view.raiseEditLayer();
   };
-  Neatline.commands.setHandler('MAPEDIT:raiseLayer', raiseLayer);
-  Neatline.vent.on('MAP:ingest', raiseLayer);
+  Neatline.commands.setHandler('MAPEDIT:raiseEditLayer', raiseEditLayer);
+  Neatline.vent.on('MAP:ingest', raiseEditLayer);
 
 
   /**
    * Empty the edit layer.
    */
-  var clearLayer = function() {
-    Map.__view.clearLayer();
+  var clearEditLayer = function() {
+    Map.__view.clearEditLayer();
   };
-  Neatline.commands.setHandler('MAPEDIT:clearLayer', clearLayer);
+  Neatline.commands.setHandler('MAPEDIT:clearEditLayer', clearEditLayer);
 
 
 }});

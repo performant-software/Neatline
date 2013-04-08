@@ -34,7 +34,7 @@ _.extend(Neatline.Map.View.prototype, {
     // edited (which would be the case, for instance, if the user opened
     // the edit form by just clicking on a map vector), use the exising
     // layer as the edit layer. If a layer does not exist, build a new
-    // layer from the model and add it to the map.
+    // layer form the model, freeze it, and add it to the map.
 
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
@@ -247,7 +247,7 @@ _.extend(Neatline.Map.View.prototype, {
     // by the `edit` control.
 
     this.isModifying = true;
-    this.raiseLayer();
+    this.raiseEditLayer();
 
   },
 
@@ -311,7 +311,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Convert to WKT.
     if (!_.isEmpty(features)) {
-      wkt = new OpenLayers.Format.WKT().write(features);
+      wkt = this.formatWKT.write(features);
     }
 
     // Update the form.
@@ -335,7 +335,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Push the edit layer to the top of the stack.
    */
-  raiseLayer: function() {
+  raiseEditLayer: function() {
     if (!_.isNull(this.editLayer) && this.isModifying) {
       this.map.raiseLayer(this.editLayer, this.map.layers.length);
     }
@@ -345,7 +345,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Clear the edit layer, publish empty WKT.
    */
-  clearLayer: function() {
+  clearEditLayer: function() {
     this.editLayer.destroyFeatures();
     this.publishWKT();
   }

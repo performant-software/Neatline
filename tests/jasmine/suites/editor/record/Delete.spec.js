@@ -131,7 +131,7 @@ describe('Record Form Delete', function() {
   });
 
 
-  it('should close modal when "Delete" is clicked', function() {
+  it('should close modal and form when delete succeeds', function() {
 
     // --------------------------------------------------------------------
     // When the "Yes, delete" button is clicked and the request succeeds,
@@ -153,6 +153,24 @@ describe('Record Form Delete', function() {
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
+
+  });
+
+
+  it('should update the map when delete succeeds', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked and the request succeeds,
+    // the map should be automatically refreshed to manifest the deletion.
+    // --------------------------------------------------------------------
+
+    // Delete, confirm.
+    el.delete1.trigger('click');
+    el.delete2.trigger('click');
+    _t.respondLast200('');
+
+    // Map should update.
+    _t.assertMapRefreshed();
 
   });
 

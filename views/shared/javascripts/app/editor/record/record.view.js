@@ -188,6 +188,9 @@ Neatline.module('Editor.Record', function(
       this.__ui.modal.modal('hide');
       this.onCloseClick();
 
+      // Refresh the map.
+      Neatline.execute('MAP:refresh');
+
     },
 
 

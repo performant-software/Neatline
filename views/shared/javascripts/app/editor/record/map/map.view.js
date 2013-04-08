@@ -111,7 +111,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Clear all features on the edit layer.
      */
     onClearClick: function() {
-      Neatline.execute('MAPEDIT:clearLayer');
+      Neatline.execute('MAPEDIT:clearEditLayer');
     },
 
 

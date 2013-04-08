@@ -299,8 +299,7 @@ Neatline.module('Map', function(
 
         // Delete if model is absent and layer is unfrozen.
         if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
-          delete this.layers.vector[id];
-          this.map.removeLayer(layer);
+          this.removeVectorLayer(layer);
         }
 
       }, this));
@@ -336,6 +335,57 @@ Neatline.module('Map', function(
       this.map.addLayer(layer);
 
       return layer;
+
+    },
+
+
+    /**
+     * Construct a WMS layer for a model.
+     *
+     * @param {Object} record: The record model.
+     * @return {OpenLayers.Layer.WMS}: The layer.
+     */
+    buildWmsLayer: function(record) {
+      // TODO
+    },
+
+
+    /**
+     * Remove a vector layer from the map
+     *
+     * @param {OpenLayers.Layer.Vector}: The layer.
+     */
+    removeVectorLayer: function(layer) {
+      delete this.layers.vector[layer.nId];
+      this.map.removeLayer(layer);
+    },
+
+
+    /**
+     * Remove a WMS layer from the map
+     *
+     * @param {OpenLayers.Layer.WMS}: The layer.
+     */
+    removeWmsLayer: function(layer) {
+      delete this.layers.wms[layer.nId];
+      this.map.removeLayer(layer);
+    },
+
+
+    /**
+     * Remove all layers from the map
+     */
+    removeAllLayers: function() {
+
+      // Vector:
+      _.each(this.layers.vector, _.bind(function(layer, id) {
+        this.removeVectorLayer(layer);
+      }, this));
+
+      // WMS:
+      _.each(this.layers.wms, _.bind(function(layer, id) {
+        this.removeWmsLayer(layer);
+      }, this));
 
     },
 
