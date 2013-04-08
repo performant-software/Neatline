@@ -397,8 +397,9 @@ Neatline.module('Map', function(
 
       // Vector:
       _.each(_.keys(this.layers.vector), _.bind(function(id) {
-        var layer = this.layers.vector[id];
-        if (!layer.nFrozen) this.removeVectorLayer(layer);
+        if (!this.layers.vector[id].nFrozen) {
+          this.removeVectorLayer(this.layers.vector[id]);
+        }
       }, this));
 
       // WMS:
@@ -416,14 +417,14 @@ Neatline.module('Map', function(
      */
     getStyleMap: function(record) {
 
-      // Ensure integers.
+      // Cast numeric fields to integers.
       var fillOpacity   = parseInt(record.get('fill_opacity'),    10);
       var selectOpacity = parseInt(record.get('select_opacity'),  10);
       var strokeOpacity = parseInt(record.get('stroke_opacity'),  10);
       var pointRadius   = parseInt(record.get('point_radius'),    10);
       var strokeWidth   = parseInt(record.get('stroke_width'),    10);
 
-      // Decimal opacities.
+      // 1-100 => 0.0-1.0
       fillOpacity   /= 100;
       selectOpacity /= 100;
       strokeOpacity /= 100;

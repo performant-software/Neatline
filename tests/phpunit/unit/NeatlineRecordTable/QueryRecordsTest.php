@@ -332,38 +332,6 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
 
 
     /**
-     * When an `extent` polygon is passed to `queryRecords`, records that
-     * have non-null for `wms_address` and `wms_layers` should always be
-     * included in the result set, even when the coverage is null or falls
-     * outside of the viewport extent.
-     */
-    public function testExtentWmsLayerInclusion()
-    {
-
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record1->coverage = 'POINT(0 0)';
-        $record2->coverage = 'POINT(2 2)';
-        $record1->wms_address = 'address';
-        $record2->wms_address = 'address';
-        $record1->wms_layers = 'layers';
-        $record2->wms_layers = 'layers';
-
-        $record1->save();
-        $record2->save();
-
-        // Records with WMS layers included.
-        $result = $this->__records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))'));
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
-        $this->assertCount(2, $result['records']);
-
-    }
-
-
-    /**
      * When a `limit` and `offset` values are passed to `queryRecords`,
      * the result set should be truncated to the `limit` length, starting
      * from the `offset` value.

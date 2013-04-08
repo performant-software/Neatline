@@ -70,6 +70,15 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   /**
+   * Empty the edit layer.
+   */
+  var clearEditLayer = function() {
+    Map.__view.clearEditLayer();
+  };
+  Neatline.commands.setHandler('MAPEDIT:clearEditLayer', clearEditLayer);
+
+
+  /**
    * Raise the edit layer.
    */
   var raiseEditLayer = function() {
@@ -77,15 +86,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
   };
   Neatline.commands.setHandler('MAPEDIT:raiseEditLayer', raiseEditLayer);
   Neatline.vent.on('MAP:ingest', raiseEditLayer);
-
-
-  /**
-   * Empty the edit layer.
-   */
-  var clearEditLayer = function() {
-    Map.__view.clearEditLayer();
-  };
-  Neatline.commands.setHandler('MAPEDIT:clearEditLayer', clearEditLayer);
 
 
 }});
