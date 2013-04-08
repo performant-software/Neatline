@@ -250,8 +250,7 @@ Neatline.module('Map', function(
      */
     ingest: function(records) {
 
-      // Build layers.
-      this.ingestVectorLayers(records);
+      this.buildLayers(records);
 
       // Publish collection, update controls.
       Neatline.vent.trigger('MAP:ingest', records);
@@ -268,7 +267,7 @@ Neatline.module('Map', function(
      *
      * @param {Object} records: The records collection.
      */
-    ingestVectorLayers: function(records) {
+    buildLayers: function(records) {
 
       var newIds = [];
 
@@ -277,7 +276,6 @@ Neatline.module('Map', function(
 
       records.each(_.bind(function(record) {
 
-        // Register the new id.
         newIds.push(record.id);
 
         // Create vector layer, if one doesn't exist.
@@ -285,7 +283,6 @@ Neatline.module('Map', function(
           this.buildVectorLayer(record);
         }
 
-        // TODO|dev
         // Create WMS layer, if the record defines an address and layers
         // and a layer doesn't already exist for the record.
         if (record.get('wms_address') && record.get('wms_layers') &&
@@ -303,13 +300,14 @@ Neatline.module('Map', function(
       // unless they are marked as frozen, in which case they are immune
       // from the garbage collection process.
 
+      // Garbage-collect stale vector layers.
       _.each(this.layers.vector, _.bind(function(layer, id) {
         if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
           this.removeVectorLayer(layer);
         }
       }, this));
 
-      // TODO|dev
+      // Garbage-collect stale WMS layers.
       _.each(this.layers.wms, _.bind(function(layer, id) {
         if (!_.contains(newIds, parseInt(id, 10))) {
           this.removeWmsLayer(layer);
