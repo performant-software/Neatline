@@ -30,21 +30,21 @@ describe('Map Edit Layer', function() {
     // record and set at the edit layer.
     // --------------------------------------------------------------------
 
-    // Load map without record 2.
-    _t.refreshMap(_t.json.records.removed);
+    // Load map without record 3.
+    _t.refreshMap(_t.json.records.changed);
     _t.assertVectorLayerCount(2);
 
-    // Open record 2 form.
-    _t.navigate('record/'+recordModels[1].id);
+    // Open record 3 form.
+    _t.navigate('record/'+recordModels[2].id);
 
-    // Should create new layer for record 2.
-    var record2Layer = _t.vw.MAP.layers.vector[recordModels[1].id];
-    expect(record2Layer.features[0].geometry.x).toEqual(3);
-    expect(record2Layer.features[0].geometry.y).toEqual(4);
+    // Should create new layer for record 3.
+    var record3Layer = _t.vw.MAP.layers.vector[recordModels[2].id];
+    expect(record3Layer.features[0].geometry.x).toEqual(5);
+    expect(record3Layer.features[0].geometry.y).toEqual(6);
     _t.assertVectorLayerCount(3);
 
     // Record 2 layer should be edit layer.
-    expect(_t.vw.MAP.editLayer.nModel.id).toEqual(record2Layer.nModel.id);
+    expect(_t.vw.MAP.editLayer.nModel.id).toEqual(record3Layer.nModel.id);
 
   });
 
@@ -106,14 +106,14 @@ describe('Map Edit Layer', function() {
     // if new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
-    // Open form for record 2.
-    _t.navigate('record/'+recordModels[1].id);
+    // Open form for record 3.
+    _t.navigate('record/'+recordModels[2].id);
 
-    // Reload map without record 2.
-    _t.refreshMap(_t.json.records.removed);
+    // Reload map without record 3.
+    _t.refreshMap(_t.json.records.changed);
 
-    // Record 2 layer should still be present.
-    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
+    // Record 3 layer should still be present.
+    expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
   });
@@ -146,15 +146,15 @@ describe('Map Edit Layer', function() {
     // edit layer should start updating again in response to map moves.
     // --------------------------------------------------------------------
 
-    // Open record 2 form, then record list.
-    _t.navigate('record/'+recordModels[1].id);
+    // Open record 3 form, then record list.
+    _t.navigate('record/'+recordModels[2].id);
     _t.navigate('records');
 
-    // Reload the map without record 2.
-    _t.refreshMap(_t.json.records.removed);
+    // Reload the map without record 3.
+    _t.refreshMap(_t.json.records.changed);
 
     // Record 2 layer should be cleared.
-    expect(_t.getVectorLayerByTitle('title2')).toBeUndefined();
+    expect(_t.getVectorLayerByTitle('title3')).toBeUndefined();
 
   });
 

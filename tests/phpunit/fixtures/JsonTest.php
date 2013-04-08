@@ -96,24 +96,15 @@ class FixturesTest_Json extends Neatline_TestCase
             'records.standard.json');
 
         // `records.changed.json`
-        // Data for #2 has changed.
+        // Data for #2 has changed, #3 has been deleted.
 
         $record2->coverage = 'POINT(7 8)';
         $record2->__save();
+        $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'records.changed.json');
-
-        // `records.removed.json`
-        // #2 has been deleted from the collection.
-
-        $record2->delete();
-
-        // Write the fixture.
-        $this->resetResponse();
-        $this->writeFixtureFromRoute('neatline/records',
-            'records.removed.json');
 
     }
 

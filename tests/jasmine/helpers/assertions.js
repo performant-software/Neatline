@@ -63,10 +63,15 @@ var _t = (function(_t) {
     _t.assertLastRequestHasGetParameter('zoom');
 
     // Respond with new data.
-    this.respondLast200(this.json.records.removed);
+    this.respondLast200(this.json.records.changed);
 
-    // Record2 point should be removed.
-    expect(this.getVectorLayerByTitle('title2')).toBeUndefined();
+    // Record2 point shoulbe be changed.
+    var record2Layer = _t.getVectorLayerByTitle('title2');
+    expect(record2Layer.features[0].geometry.x).toEqual(7);
+    expect(record2Layer.features[0].geometry.y).toEqual(8);
+
+    // Record3 point should be removed.
+    expect(this.getVectorLayerByTitle('title3')).toBeUndefined();
     this.assertVectorLayerCount(2);
 
   };

@@ -33,7 +33,6 @@ var _t = (function(_t) {
       records: {
         standard: readFixtures('records.standard.json'),
         changed:  readFixtures('records.changed.json'),
-        removed:  readFixtures('records.removed.json'),
         noTitle:  readFixtures('records.noTitle.json'),
         tags:     readFixtures('records.tags.json'),
         p12:      readFixtures('records.p12.json'),
