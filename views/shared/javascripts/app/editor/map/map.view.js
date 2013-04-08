@@ -80,7 +80,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw SVG-backed geometry.
+      // Draw SVG geometry.
       svg: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Geometry,
@@ -89,7 +89,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Modify/Rotate/Resize/Drag shape.
+      // Modify shape.
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
@@ -142,9 +142,6 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} settings: Settings for the controls.
    */
   updateEdit: function(settings) {
-
-
-    this.settings = settings;
 
 
     // Reset map.

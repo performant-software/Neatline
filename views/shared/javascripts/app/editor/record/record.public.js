@@ -58,8 +58,10 @@ Neatline.module('Editor.Record', function(
    */
   var bindNew = function(tab) {
 
-    // Create a new model, bind to form.
+    // Create a new model.
     var record = new Neatline.Shared.Record.Model();
+
+    // Bind model to form.
     Record.__view.bind(record);
 
     // Display form and tab.
