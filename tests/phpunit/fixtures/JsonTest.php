@@ -52,6 +52,7 @@ class FixturesTest_Json extends Neatline_TestCase
 
         // `records.standard.json`
         // - #1 has a default map focus/zoom, #2 and #3 do not.
+        // - #1 and #2 have WMS layers, #3 does not.
 
         $record1->item_id           = 1;
         $record1->title             = 'title1';

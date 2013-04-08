@@ -285,8 +285,13 @@ Neatline.module('Map', function(
           this.buildVectorLayer(record);
         }
 
-        // TODO: Create WMS layer if address and layers are defined and a
-        // WMS layer doesn't already exist for the record.
+        // TODO|dev
+        // Create WMS layer, if the record defines an address and layers
+        // and a layer doesn't already exist for the record.
+        if (record.get('wms_address') && record.get('wms_layers') &&
+          !_.has(this.layers.wms, record.id)) {
+          this.buildWmsLayer(record);
+        }
 
       }, this));
 
@@ -299,15 +304,17 @@ Neatline.module('Map', function(
       // from the garbage collection process.
 
       _.each(this.layers.vector, _.bind(function(layer, id) {
-
-        // Delete if model is absent and layer is unfrozen.
         if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
           this.removeVectorLayer(layer);
         }
-
       }, this));
 
-      // TODO: Remove stale WMS layers.
+      // TODO|dev
+      _.each(this.layers.wms, _.bind(function(layer, id) {
+        if (!_.contains(newIds, parseInt(id, 10))) {
+          this.removeWmsLayer(layer);
+        }
+      }, this));
 
     },
 
@@ -364,8 +371,10 @@ Neatline.module('Map', function(
         }
       );
 
+      layer.nModel = record;
+
       // Track, add to map.
-      this.wmsLayers[record.id] = layer;
+      this.layers.wms[record.id] = layer;
       this.map.addLayer(layer);
 
       return layer;
