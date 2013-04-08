@@ -28,12 +28,12 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               fill-opacity: 2;
             }
             .tag2 {
-              stroke-color: 3;
-              stroke-opacity: 4;
+              select-color: 3;
+              select-opacity: 4;
             }
             .tag3 {
-              select-color: 5;
-              select-opacity: 6;
+              stroke-color: 5;
+              stroke-opacity: 6;
             }
         ";
         $exhibit->save();
@@ -47,12 +47,42 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         // Should pull `tag1` and `tag2`.
         $this->assertEquals($record->fill_color, '1');
         $this->assertEquals($record->fill_opacity, 2);
-        $this->assertEquals($record->stroke_color, '3');
-        $this->assertEquals($record->stroke_opacity, 4);
+        $this->assertEquals($record->select_color, '3');
+        $this->assertEquals($record->select_opacity, 4);
 
         // Should not pull `tag3`.
-        $this->assertNull($record->select_color);
-        $this->assertNull($record->select_opacity);
+        $this->assertNull($record->stroke_color);
+        $this->assertNull($record->stroke_opacity);
+
+    }
+
+
+    /**
+     * `pullStyles` should pull values from the `auto` selector.
+     */
+    public function testPullAllTag()
+    {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .all {
+              fill-color: 1;
+            }
+            .tag {
+              fill-opacity: 2;
+            }
+        ";
+        $exhibit->save();
+        $record = new NeatlineRecord($exhibit);
+
+        // Pull `tag`.
+        $record->pullStyles(array('tag'));
+        $record->save();
+        $record = $this->reload($record);
+
+        // Should pull `tag` and `all`.
+        $this->assertEquals($record->fill_color, '1');
+        $this->assertEquals($record->fill_opacity, 2);
 
     }
 
