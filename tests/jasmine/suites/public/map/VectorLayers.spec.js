@@ -60,6 +60,35 @@ describe('Map Vector Layers', function() {
   });
 
 
+  it('should not duplicate or rebuild existing layers', function() {
+
+    // --------------------------------------------------------------------
+    // When records are ingested that already have layers on the map, the
+    // existing layers should be not be duplicated or recreated.
+    // --------------------------------------------------------------------
+
+    // Load 3 records.
+    _t.refreshMap(this.json.records.standard);
+
+    // Gather OpenLayers layer ids.
+    var olIds1 = _.map(_.values(_t.vw.MAP.layers), function(layer) {
+      return layer.id;
+    });
+
+    // Reload the same collection.
+    _t.refreshMap(this.json.records.standard);
+
+    // Re-get the OpenLayers layer ids.
+    var olIds2 = _.map(_.values(_t.vw.MAP.layers), function(layer) {
+      return layer.id;
+    });
+
+    // Should be unchanged.
+    expect(olIds2).toEqual(olIds1);
+
+  });
+
+
   it('should add new layers', function() {
 
     // --------------------------------------------------------------------
@@ -126,6 +155,10 @@ describe('Map Vector Layers', function() {
 
 
   it('should render styles', function() {
+
+    // --------------------------------------------------------------------
+    // Vector layer style maps should be built from record values.
+    // --------------------------------------------------------------------
 
     var std = layers[0].styleMap.styles['default'].defaultStyle;
     var tmp = layers[0].styleMap.styles.temporary.defaultStyle;
