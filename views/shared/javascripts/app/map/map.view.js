@@ -243,45 +243,15 @@ Neatline.module('Map', function(
 
 
     /**
-     * Update the map with a new collection of records.
+     * The top-level point of entry when a new record collection arrives.
+     * Updates the map layers to mirror the new records collection.
      *
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
 
-      var newIds = [];
-
-      // Create layers.
-      records.each(_.bind(function(record) {
-
-        newIds.push(record.id);
-
-        // Create vector layer.
-        if (!_.has(this.layers.vector, record.id)) {
-          this.buildVectorLayer(record);
-        }
-
-        // Create WMS layer.
-        if (record.get('wms_address') && record.get('wms_layers') &&
-          !_.has(this.layers.wms, record.id)) {
-          this.buildWmsLayer(record);
-        }
-
-      }, this));
-
-      // Garbage-collect stale vector layers.
-      _.each(this.layers.vector, _.bind(function(layer, id) {
-        if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
-          this.removeVectorLayer(layer);
-        }
-      }, this));
-
-      // Garbage-collect stale WMS layers.
-      _.each(this.layers.wms, _.bind(function(layer, id) {
-        if (!_.contains(newIds, parseInt(id, 10))) {
-          this.removeWmsLayer(layer);
-        }
-      }, this));
+      // Build layers.
+      this.ingestVectorLayers(records);
 
       // Publish collection, update controls.
       Neatline.vent.trigger('MAP:ingest', records);
@@ -289,6 +259,49 @@ Neatline.module('Map', function(
 
       // Store collection.
       this.records = records;
+
+    },
+
+
+    /**
+     * Rebuild the vector layers to match the new collection.
+     *
+     * @param {Object} records: The records collection.
+     */
+    ingestVectorLayers: function(records) {
+
+      var newIds = [];
+
+      // First, walk the new collection of records and create layers for
+      // records that don't already have a layer from a previous ingest.
+
+      records.each(_.bind(function(record) {
+
+        newIds.push(record.id);
+
+        // Create vector layer, if one doesn't exist.
+        if (!_.has(this.layers.vector, record.id)) {
+          this.buildVectorLayer(record);
+        }
+
+      }, this));
+
+      // Once all of the records in the new collection are represented on
+      // the map, we need to make sure that there aren't any layers on the
+      // map from a previous ingest that are _not_ present in the new
+      // collection (for example, if the map was panned, and a record no
+      // longer falls inside the viewport). Remove these "stale" layers,
+      // unless they are marked as frozen, in which case they are immune
+      // from the garbage collection process.
+
+      _.each(this.layers.vector, _.bind(function(layer, id) {
+
+        // Delete if model is absent and layer is unfrozen.
+        if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
+          this.removeVectorLayer(layer);
+        }
+
+      }, this));
 
     },
 
