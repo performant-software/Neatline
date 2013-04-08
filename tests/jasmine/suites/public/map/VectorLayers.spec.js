@@ -68,7 +68,7 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load 3 records.
-    _t.refreshMap(this.json.records.standard);
+    _t.refreshMap(_t.json.records.standard);
 
     // Gather OpenLayers layer ids.
     var olIds1 = _.map(_.values(_t.vw.MAP.layers), function(layer) {
@@ -76,7 +76,7 @@ describe('Map Vector Layers', function() {
     });
 
     // Reload the same collection.
-    _t.refreshMap(this.json.records.standard);
+    _t.refreshMap(_t.json.records.standard);
 
     // Re-get the OpenLayers layer ids.
     var olIds2 = _.map(_.values(_t.vw.MAP.layers), function(layer) {

@@ -346,7 +346,25 @@ Neatline.module('Map', function(
      * @return {OpenLayers.Layer.WMS}: The layer.
      */
     buildWmsLayer: function(record) {
-      // TODO
+
+      // Build the layer.
+      var layer = new OpenLayers.Layer.WMS(
+        record.get('title'), record.get('wms_address'), {
+          layers: record.get('wms_layers'),
+          transparent: true
+        }, {
+          displayOutsideMaxExtent: true,
+          opacity: record.get('fill_opacity') / 100,
+          isBaseLayer: false
+        }
+      );
+
+      // Track, add to map.
+      this.wmsLayers[record.id] = layer;
+      this.map.addLayer(layer);
+
+      return layer;
+
     },
 
 
