@@ -270,7 +270,7 @@ Neatline.module('Map', function(
      */
     ingestVectorLayers: function(records) {
 
-      var vIds = [];
+      var newIds = [];
 
       // First, walk the new collection of records and create layers for
       // records that don't already have a layer from a previous ingest.
@@ -278,12 +278,15 @@ Neatline.module('Map', function(
       records.each(_.bind(function(record) {
 
         // Register the new id.
-        vIds.push(record.id);
+        newIds.push(record.id);
 
-        // Create new layer, if one doesn't exist.
+        // Create vector layer, if one doesn't exist.
         if (!_.has(this.layers.vector, record.id)) {
           this.buildVectorLayer(record);
         }
+
+        // TODO: Create WMS layer if address and layers are defined and a
+        // WMS layer doesn't already exist for the record.
 
       }, this));
 
@@ -298,11 +301,13 @@ Neatline.module('Map', function(
       _.each(this.layers.vector, _.bind(function(layer, id) {
 
         // Delete if model is absent and layer is unfrozen.
-        if (!_.contains(vIds, parseInt(id, 10)) && !layer.nFrozen) {
+        if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
           this.removeVectorLayer(layer);
         }
 
       }, this));
+
+      // TODO: Remove stale WMS layers.
 
     },
 

@@ -22,26 +22,6 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should query records API on pan/zoom', function() {
-
-    // --------------------------------------------------------------------
-    // When the map is panned or zoomed, a GET request should be emitted
-    // to the records API with `extent` and `zoom` parameters.
-    // --------------------------------------------------------------------
-
-    _t.triggerMapMove();
-
-    // Should issue GET request to records API.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
-
-    // Request should include map focus.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
-
-  });
-
-
   it('should load layers when exhibit starts', function() {
 
     // --------------------------------------------------------------------
@@ -60,6 +40,38 @@ describe('Map Vector Layers', function() {
   });
 
 
+  it('should load layers when map is moved', function() {
+
+    // --------------------------------------------------------------------
+    // When the map is panned or zoomed, a GET request should be emitted
+    // to the records API with `extent` and `zoom` parameters.
+    // --------------------------------------------------------------------
+
+    // Clear map layers.
+    _t.vw.MAP.removeAllLayers();
+    _t.assertVectorLayerCount(0);
+
+    // Move the map.
+    _t.triggerMapMove();
+
+    // Should query by extent.
+    _t.assertMapExtentQuery();
+
+    // Respond with default collection.
+    _t.respondLast200(_t.json.records.standard);
+
+    // Should build layers.
+    expect(layers[0].features[0].geometry.x).toEqual(1);
+    expect(layers[0].features[0].geometry.y).toEqual(2);
+    expect(layers[1].features[0].geometry.x).toEqual(3);
+    expect(layers[1].features[0].geometry.y).toEqual(4);
+    expect(layers[2].features[0].geometry.x).toEqual(5);
+    expect(layers[2].features[0].geometry.y).toEqual(6);
+    _t.assertVectorLayerCount(3);
+
+  });
+
+
   it('should not duplicate or rebuild existing layers', function() {
 
     // --------------------------------------------------------------------
@@ -67,7 +79,7 @@ describe('Map Vector Layers', function() {
     // existing layers should be not be duplicated or recreated.
     // --------------------------------------------------------------------
 
-    // Load 3 records.
+    // Load default collection.
     _t.refreshMap(_t.json.records.standard);
 
     // Gather OpenLayers layer ids.
@@ -75,7 +87,7 @@ describe('Map Vector Layers', function() {
       return layer.id;
     });
 
-    // Reload the same collection.
+    // Reload the default collection.
     _t.refreshMap(_t.json.records.standard);
 
     // Re-get the OpenLayers layer ids.

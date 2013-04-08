@@ -52,7 +52,7 @@ var _t = (function(_t) {
   /**
    * Assert that the last request was a map refresh.
    */
-  _t.assertMapRefreshed = function() {
+  _t.assertMapExtentQuery = function() {
 
     // Should issue GET request to records API.
     _t.assertLastRequestRoute(Neatline.global.records_api);
@@ -61,6 +61,17 @@ var _t = (function(_t) {
     // Request should include map focus.
     _t.assertLastRequestHasGetParameter('extent');
     _t.assertLastRequestHasGetParameter('zoom');
+
+  };
+
+
+  /**
+   * Assert that the vector layers were refreshed.
+   */
+  _t.assertMapRefreshed = function() {
+
+    // Should query by extent.
+    _t.assertMapExtentQuery();
 
     // Respond with updated collection.
     this.respondLast200(this.json.records.changed);
