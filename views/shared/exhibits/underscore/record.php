@@ -66,9 +66,4 @@
     'exhibits/underscore/_form_actions.php'
   ); ?>
 
-  <!-- SVG modal. -->
-  <?php echo $this->partial(
-    'exhibits/underscore/_svg_modal.php'
-  ); ?>
-
 </script>

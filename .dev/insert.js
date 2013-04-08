@@ -102,7 +102,7 @@ client.query(sql, function(err, res) {
     records(res.insertId, 200, 3, color(), 'level3');
     records(res.insertId, 400, 4, color(), 'level4');
     records(res.insertId, 1000, 5, color(), 'level5');
-    records(res.insertId, 100000, 6, color(), 'level6');
+    records(res.insertId, 20000, 6, color(), 'level6');
     records(res.insertId, 50000, 7, color(), 'level7');
     records(res.insertId, 100000, 8, color(), 'level8');
 

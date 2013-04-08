@@ -61,7 +61,8 @@
 
   <label class="radio">
     <input type="radio" name="mode" value="svg">
-    Draw SVG ( <a href="#svg-modal" data-toggle="modal">Paste</a> )
+    Draw SVG ( <a href="#svg-modal" data-toggle="modal">Enter Markup</a> )
+    <?php echo $this->partial('exhibits/underscore/_svg_modal.php'); ?>
   </label>
 
   <label class="radio">
