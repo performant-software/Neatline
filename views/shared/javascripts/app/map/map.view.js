@@ -378,14 +378,17 @@ Neatline.module('Map', function(
     removeAllLayers: function() {
 
       // Vector:
-      _.each(this.layers.vector, _.bind(function(layer, id) {
-        this.removeVectorLayer(layer);
+      _.each(_.values(this.layers.vector), _.bind(function(layer) {
+        this.map.removeLayer(layer);
       }, this));
 
       // WMS:
-      _.each(this.layers.wms, _.bind(function(layer, id) {
-        this.removeWmsLayer(layer);
+      _.each(_.values(this.layers.wms), _.bind(function(layer) {
+        this.map.removeLayer(layer);
       }, this));
+
+      // Reset tracker.
+      this.layers = { vector: {}, wms: {} };
 
     },
 

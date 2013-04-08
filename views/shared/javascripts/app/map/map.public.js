@@ -32,6 +32,7 @@ Neatline.module('Map', function(
    * Reload map data for current focus/zoom.
    */
   var refresh = function() {
+    Map.__view.removeAllLayers();
     Map.__view.publishPosition();
   };
   Neatline.commands.setHandler('MAP:refresh', refresh);
