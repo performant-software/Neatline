@@ -243,37 +243,15 @@ Neatline.module('Map', function(
 
 
     /**
-     * The top-level point of entry when a new record collection arrives.
-     * Updates the map layers to mirror the new records collection.
+     * Update the map with a new collection of records.
      *
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
 
-      this.buildLayers(records);
-
-      // Publish collection, update controls.
-      Neatline.vent.trigger('MAP:ingest', records);
-      this.updateControls();
-
-      // Store collection.
-      this.records = records;
-
-    },
-
-
-    /**
-     * Rebuild the vector layers to match the new collection.
-     *
-     * @param {Object} records: The records collection.
-     */
-    buildLayers: function(records) {
-
       var newIds = [];
 
-      // First, walk the new collection of records and create layers for
-      // records that don't already have a layer from a previous ingest.
-
+      // Create layers.
       records.each(_.bind(function(record) {
 
         newIds.push(record.id);
@@ -292,14 +270,6 @@ Neatline.module('Map', function(
 
       }, this));
 
-      // Once all of the records in the new collection are represented on
-      // the map, we need to make sure that there aren't any layers on the
-      // map from a previous ingest that are _not_ present in the new
-      // collection (for example, if the map was panned, and a record no
-      // longer falls inside the viewport). Remove these "stale" layers,
-      // unless they are marked as frozen, in which case they are immune
-      // from the garbage collection process.
-
       // Garbage-collect stale vector layers.
       _.each(this.layers.vector, _.bind(function(layer, id) {
         if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
@@ -313,6 +283,13 @@ Neatline.module('Map', function(
           this.removeWmsLayer(layer);
         }
       }, this));
+
+      // Publish collection, update controls.
+      Neatline.vent.trigger('MAP:ingest', records);
+      this.updateControls();
+
+      // Store collection.
+      this.records = records;
 
     },
 

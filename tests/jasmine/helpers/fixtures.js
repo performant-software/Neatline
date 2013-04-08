@@ -33,13 +33,13 @@ var _t = (function(_t) {
       records: {
         standard: readFixtures('records.standard.json'),
         changed:  readFixtures('records.changed.json'),
+        p12:      readFixtures('records.pagination.1-2.json'),
+        p23:      readFixtures('records.pagination.2-3.json'),
+        p34:      readFixtures('records.pagination.3-4.json'),
+        p56:      readFixtures('records.pagination.5-6.json'),
+        p6:       readFixtures('records.pagination.6.json'),
         noTitle:  readFixtures('records.noTitle.json'),
-        tags:     readFixtures('records.tags.json'),
-        p12:      readFixtures('records.p12.json'),
-        p23:      readFixtures('records.p23.json'),
-        p34:      readFixtures('records.p34.json'),
-        p56:      readFixtures('records.p56.json'),
-        p6:       readFixtures('records.p6.json')
+        tags:     readFixtures('records.tags.json')
       },
       record: {
         standard: readFixtures('record.standard.json'),

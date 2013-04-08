@@ -18,10 +18,7 @@ describe('Map WMS Layers', function() {
   });
 
 
-  it('should load layers when exhibit starts');
-  it('should not duplicate or rebuild existing layers');
-  it('should add new layers');
-  it('should garbage collect stale layers');
+  // TODO
 
 
 });

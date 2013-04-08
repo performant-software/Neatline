@@ -52,7 +52,6 @@ class FixturesTest_Json extends Neatline_TestCase
 
         // `records.standard.json`
         // - #1 has a default map focus/zoom, #2 and #3 do not.
-        // - #1 and #2 have WMS layers, #3 does not.
 
         $record1->item_id           = 1;
         $record1->title             = 'title1';
@@ -112,11 +111,11 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records
-     * `records.p12.json`   (records 1-2)
-     * `records.p23.json`   (records 2-3)
-     * `records.p34.json`   (records 3-4)
-     * `records.p56.json`   (records 5-6)
-     * `records.p6.json`    (record 6)
+     * `records.p12.json` (records 1-2)
+     * `records.p23.json` (records 2-3)
+     * `records.p34.json` (records 3-4)
+     * `records.p56.json` (records 5-6)
+     * `records.p6.json`  (record 6)
      */
     public function testPaginatedRecordsJson()
     {
@@ -131,31 +130,31 @@ class FixturesTest_Json extends Neatline_TestCase
         // Records 1-2.
         $this->request->setQuery(array('limit' => 2, 'offset' => 0));
         $this->writeFixtureFromRoute('neatline/records',
-            'records.p12.json');
+            'records.pagination.1-2.json');
 
         // Records 2-3.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 1));
         $this->writeFixtureFromRoute('neatline/records',
-            'records.p23.json');
+            'records.pagination.2-3.json');
 
         // Records 3-4.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 2));
         $this->writeFixtureFromRoute('neatline/records',
-            'records.p34.json');
+            'records.pagination.3-4.json');
 
         // Records 5-6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 4));
         $this->writeFixtureFromRoute('neatline/records',
-            'records.p56.json');
+            'records.pagination.5-6.json');
 
         // Record 6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 5));
         $this->writeFixtureFromRoute('neatline/records',
-            'records.p6.json');
+            'records.pagination.6.json');
 
     }
 
@@ -180,7 +179,7 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records/:id
-     * `records.emptyTitle.json`
+     * `records.noTitle.json`
      */
     public function testEmptyTitleRecordsJson()
     {
