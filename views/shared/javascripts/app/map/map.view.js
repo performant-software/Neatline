@@ -417,14 +417,12 @@ Neatline.module('Map', function(
      */
     getStyleMap: function(record) {
 
-      // Cast numeric fields to integers.
       var fillOpacity   = parseInt(record.get('fill_opacity'),    10);
       var selectOpacity = parseInt(record.get('select_opacity'),  10);
       var strokeOpacity = parseInt(record.get('stroke_opacity'),  10);
       var pointRadius   = parseInt(record.get('point_radius'),    10);
       var strokeWidth   = parseInt(record.get('stroke_width'),    10);
 
-      // 1-100 => 0.0-1.0
       fillOpacity   /= 100;
       selectOpacity /= 100;
       strokeOpacity /= 100;

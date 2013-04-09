@@ -311,6 +311,7 @@ module.exports = function(grunt) {
       options: {
         helpers: [
           cfg.jasmine+'/helpers/*.js',
+          cfg.jasmine+'/assertions/*.js',
           cfg.vendor.js.jasmine_jquery,
           cfg.vendor.js.sinon
         ]

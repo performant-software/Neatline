@@ -144,18 +144,17 @@ _.extend(Neatline.Map.View.prototype, {
   updateEdit: function(settings) {
 
 
-    // Reset map state.
-    // ----------------
+    // (1) Reset the map to its default state.
 
     this.isModifying = false;
+
     this.activateControls();
     _.each(this.controls, function(control) {
       control.deactivate();
     });
 
 
-    // Set edit mode.
-    // --------------
+    // (2) Apply the active editing mode.
 
     var modes = OpenLayers.Control.ModifyFeature;
 
@@ -207,9 +206,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     }
 
-
-    // Set regular polygon options.
-    // ----------------------------
+    // (3) Update the settings on the regular polygon control.
 
     // Sides:
     var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
@@ -270,9 +267,16 @@ _.extend(Neatline.Map.View.prototype, {
    */
   updateModel: function(model) {
 
-    // Update the key in the layers tracker.
-    delete this.layers.vector[model.previous('id')];
-    this.layers.vector[model.id] = this.editLayer;
+    // If the `id` of the model associated with the form has changed since
+    // the last `change` event, update the key used to identify the edit
+    // layer in the `layers.vector` hash. This is the case when the model
+    // has been saved for the first time, and the original `undefined` id
+    // is replaced by the new id of the resource on the server.
+
+    if (model.hasChanged('id')) {
+      delete this.layers.vector[model.previous('id')];
+      this.layers.vector[model.id] = this.editLayer;
+    }
 
     // Replace the model.
     this.editLayer.nModel = model;
@@ -294,9 +298,18 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Get features from the edit layer.
     _.each(this.editLayer.features, function(f) {
+
+      // Don't save temporary editing geometry added by the modify feature
+      // control (eg, the drag-handle points added on vertices).
+
       if (!f._sketch) {
 
-        // Split collections into individual features.
+        // If the feature is a geometry collection, "flatten" it into a
+        // series of regular, non-collection features by creating features
+        // from each of the component geometries. Otherwise, it's possible
+        // for layers with multiple features to be serialized as nested
+        // GEOMETRYCOLLECTION's, which can't be indexed by MySQL.
+
         if (f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Collection') {
           _.each(f.geometry.components, function(geo) {
             features.push(new OpenLayers.Feature.Vector(geo));
@@ -306,14 +319,11 @@ _.extend(Neatline.Map.View.prototype, {
         else features.push(f);
 
       }
+
     });
 
-    // Convert to WKT.
-    if (!_.isEmpty(features)) {
-      wkt = this.formatWKT.write(features);
-    }
-
-    // Update the form.
+    // Convert to WKT, update the form.
+    if (!_.isEmpty(features)) wkt = this.formatWKT.write(features);
     Neatline.execute('RECORD:setCoverage', wkt);
 
   },
