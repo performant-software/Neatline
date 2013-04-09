@@ -107,7 +107,7 @@ describe('Search', function() {
     _t.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    _t.respondLast200(_t.json.records.p6);
+    _t.respondLast200(_t.json.records.pagination.r6);
     var firstRecord = _t.getRecordRows()[1];
 
     // Record list should be updated.
@@ -141,7 +141,7 @@ describe('Search', function() {
     _t.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    _t.respondLast200(_t.json.records.p6);
+    _t.respondLast200(_t.json.records.pagination.r6);
     var firstRecord = _t.getRecordRows()[1];
 
     // Record list should be updated.

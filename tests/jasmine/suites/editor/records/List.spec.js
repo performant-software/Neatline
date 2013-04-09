@@ -56,7 +56,7 @@ describe('Records List', function() {
     // HTML tags should be removed from title and body fields.
     // --------------------------------------------------------------------
 
-    _t.showRecordList(_t.json.records.tags);
+    _t.showRecordList(_t.json.records.htmlTags);
     var recordRows = _t.getRecordRows();
 
     // Tags should be removed.

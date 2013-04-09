@@ -30,7 +30,7 @@ describe('Records Pagination', function() {
 
     // Load 2 records.
     _t.navigate('records');
-    _t.respondLast200(_t.json.records.p12);
+    _t.respondLast200(_t.json.records.pagination.r1_2);
 
     // Paginators should be hidden.
     expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
@@ -47,7 +47,7 @@ describe('Records Pagination', function() {
 
       // Load records 1-2.
       _t.navigate('records/search/query=x+y/start=0');
-      _t.respondLast200(_t.json.records.p12);
+      _t.respondLast200(_t.json.records.pagination.r1_2);
 
       // << disabled, >> enabled.
       _t.assertPaginationPrevDisabled();
@@ -63,7 +63,7 @@ describe('Records Pagination', function() {
 
       // Load records 1-2.
       _t.navigate('records/search/start=0');
-      _t.respondLast200(_t.json.records.p12);
+      _t.respondLast200(_t.json.records.pagination.r1_2);
 
       // << disabled, >> enabled.
       _t.assertPaginationPrevDisabled();
@@ -87,7 +87,7 @@ describe('Records Pagination', function() {
 
       // Load records 2-3.
       _t.navigate('records/search/query=x+y/start=1');
-      _t.respondLast200(_t.json.records.p23);
+      _t.respondLast200(_t.json.records.pagination.r2_3);
 
       // << enabled, >> enabled.
       _t.assertPaginationPrevEnabled();
@@ -103,7 +103,7 @@ describe('Records Pagination', function() {
 
       // Load records 2-3.
       _t.navigate('records/search/start=1');
-      _t.respondLast200(_t.json.records.p23);
+      _t.respondLast200(_t.json.records.pagination.r2_3);
 
       // << enabled, >> enabled.
       _t.assertPaginationPrevEnabled();
@@ -127,7 +127,7 @@ describe('Records Pagination', function() {
 
       // Load records 3-4.
       _t.navigate('records/search/query=x+y/start=2');
-      _t.respondLast200(_t.json.records.p34);
+      _t.respondLast200(_t.json.records.pagination.r3_4);
 
       // << enabled, >> enabled.
       _t.assertPaginationPrevEnabled();
@@ -143,7 +143,7 @@ describe('Records Pagination', function() {
 
       // Load records 3-4.
       _t.navigate('records/search/start=2');
-      _t.respondLast200(_t.json.records.p34);
+      _t.respondLast200(_t.json.records.pagination.r3_4);
 
       // << enabled, >> enabled.
       _t.assertPaginationPrevEnabled();
@@ -167,7 +167,7 @@ describe('Records Pagination', function() {
 
       // Load records 5-6.
       _t.navigate('records/search/query=x+y/start=4');
-      _t.respondLast200(_t.json.records.p56);
+      _t.respondLast200(_t.json.records.pagination.r5_6);
 
       // << enabled, >> disabled.
       _t.assertPaginationPrevEnabled();
@@ -183,7 +183,7 @@ describe('Records Pagination', function() {
 
       // Load records 5-6.
       _t.navigate('records/search/start=4');
-      _t.respondLast200(_t.json.records.p56);
+      _t.respondLast200(_t.json.records.pagination.r5_6);
 
       // << enabled, >> disabled.
       _t.assertPaginationPrevEnabled();
@@ -207,7 +207,7 @@ describe('Records Pagination', function() {
 
       // Load record 6.
       _t.navigate('records/search/query=x+y/start=5');
-      _t.respondLast200(_t.json.records.p6);
+      _t.respondLast200(_t.json.records.pagination.r6);
 
       // << enabled, >> disabled.
       _t.assertPaginationPrevEnabled();
@@ -223,7 +223,7 @@ describe('Records Pagination', function() {
 
       // Load record 6.
       _t.navigate('records/search/start=5');
-      _t.respondLast200(_t.json.records.p6);
+      _t.respondLast200(_t.json.records.pagination.r6);
 
       // << enabled, >> disabled.
       _t.assertPaginationPrevEnabled();

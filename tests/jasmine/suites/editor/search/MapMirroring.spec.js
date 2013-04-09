@@ -51,7 +51,7 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Load 1 record on map.
-    _t.refreshMap(_t.json.records.p6);
+    _t.refreshMap(_t.json.records.pagination.r6);
 
     // Keyup with `map:` in the box.
     _t.vw.SEARCH.__ui.search.val('map:');
@@ -84,7 +84,7 @@ describe('Search Map Mirroring', function() {
     _t.navigate('records/search/query=map:');
 
     // Load 1 record on map.
-    _t.refreshMap(_t.json.records.p6);
+    _t.refreshMap(_t.json.records.pagination.r6);
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
@@ -109,7 +109,7 @@ describe('Search Map Mirroring', function() {
     _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Load 2 records on map.
-    _t.refreshMap(_t.json.records.p56);
+    _t.refreshMap(_t.json.records.pagination.r5_6);
 
     // Record list should synchronize with map.
     var recordRows = _t.getRecordRows();
@@ -141,7 +141,7 @@ describe('Search Map Mirroring', function() {
     _t.respondRecords();
 
     // Update map records.
-    _t.refreshMap(_t.json.records.p56);
+    _t.refreshMap(_t.json.records.pagination.r5_6);
 
     // Record list should not synchronize with the map.
     var recordRows = _t.getRecordRows();
@@ -173,7 +173,7 @@ describe('Search Map Mirroring', function() {
     _t.respondRecords();
 
     // Update map records.
-    _t.refreshMap(_t.json.records.p56);
+    _t.refreshMap(_t.json.records.pagination.r5_6);
 
     // Record list should not synchronize with the map.
     var recordRows = _t.getRecordRows();

@@ -41,7 +41,6 @@ class FixturesTest_Json extends Neatline_TestCase
      * GET /records
      * `records.standard.json`
      * `records.changed.json`
-     * `records.removed.json`
      */
     public function testRecordsJson()
     {
@@ -161,7 +160,7 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records/:id
-     * `records.tags.json`
+     * `records.htmlTags.json`
      */
     public function testTagsRecordsJson()
     {
@@ -172,7 +171,7 @@ class FixturesTest_Json extends Neatline_TestCase
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'records.tags.json');
+            'records.htmlTags.json');
 
     }
 
