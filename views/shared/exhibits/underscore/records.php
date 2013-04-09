@@ -23,7 +23,7 @@
   <ul class="list">
 
     <!-- Add record link. -->
-    <a href="#record/add">New Record</a>
+    <a href="#record/add"><?php echo __('New Record'); ?></a>
 
     <% records.each(function(r) { %>
 

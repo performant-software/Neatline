@@ -21,63 +21,33 @@ describe('Records List', function() {
   it('should list records', function() {
 
     // --------------------------------------------------------------------
-    // #records should render the list of records.
+    // The record browser pane should show a list of records. Tags should
     // --------------------------------------------------------------------
 
-    _t.showRecordList(_t.json.records.standard);
-    var recordModels = _t.getRecordListModels();
-    var recordRows = _t.getRecordRows();
+    _t.showRecordList(_t.json.records.list);
 
-    // Titles and bodies should be listed.
-    expect($(recordRows[1]).find('.title')).toHaveText('title1');
-    expect($(recordRows[1]).find('.body')).toHaveText('body1');
-    expect($(recordRows[2]).find('.title')).toHaveText('title2');
-    expect($(recordRows[2]).find('.body')).toHaveText('body2');
-    expect($(recordRows[3]).find('.title')).toHaveText('title3');
-    expect($(recordRows[3]).find('.body')).toHaveText('body3');
+    // Get record list models and rows.
+    var rows = _t.getRecordRows(), models = _t.getRecordListModels();
 
-    // Should link to new record.
-    expect($(recordRows[0]).attr('href')).toEqual('#record/add');
+    // Should show link to add new record.
+    expect($(rows[0]).attr('href')).toEqual('#record/add');
+    expect($(rows[0])).toHaveText('New Record');
 
-    // Should link to existing records.
-    expect($(recordRows[1]).attr('href')).
-      toEqual('#record/'+recordModels[0].id);
-    expect($(recordRows[2]).attr('href')).
-      toEqual('#record/'+recordModels[1].id);
-    expect($(recordRows[3]).attr('href')).
-      toEqual('#record/'+recordModels[2].id);
+    // Should list titles and bodies.
+    expect($(rows[1]).attr('href')).toEqual('#record/'+models[0].id);
+    expect($(rows[1]).find('.title')).toHaveText('title');
+    expect($(rows[1]).find('.body')).toHaveText('body');
 
-  });
+    // Show strip tags from titles and bodies.
+    expect($(rows[2]).attr('href')).toEqual('#record/'+models[1].id);
+    expect($(rows[2]).find('.title')).toHaveText('title with tags');
+    expect($(rows[2]).find('.body')).toHaveText('body with tags');
 
-
-  it('should strip tags out of title and body fields', function() {
-
-    // --------------------------------------------------------------------
-    // HTML tags should be removed from title and body fields.
-    // --------------------------------------------------------------------
-
-    _t.showRecordList(_t.json.records.list.htmlTags);
-    var recordRows = _t.getRecordRows();
-
-    // Tags should be removed.
-    expect($(recordRows[1]).find('.title')).toHaveText('title');
-    expect($(recordRows[1]).find('.body')).toHaveText('body');
-
-  });
-
-
-  it('should render a placeholder for an empty title', function() {
-
-    // --------------------------------------------------------------------
-    // When a record title is empty, a placeholder should be displayed.
-    // --------------------------------------------------------------------
-
-    _t.showRecordList(_t.json.records.list.noTitle);
-    var recordRows = _t.getRecordRows();
-
-    // Placeholder should be displayed.
-    expect($(recordRows[1]).find('.title')).toHaveText(
-      STRINGS.placeholders.title);
+    // Should show placeholder for empty titles.
+    var placeholder = STRINGS.placeholders.title;
+    expect($(rows[3]).attr('href')).toEqual('#record/'+models[2].id);
+    expect($(rows[3]).find('.title')).toHaveText(placeholder);
+    expect($(rows[3]).find('.body').text().trim()).toEqual('');
 
   });
 

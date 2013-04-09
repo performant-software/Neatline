@@ -33,11 +33,14 @@ var _t = (function(_t) {
       exhibit:        readFixtures('exhibit.json'),
 
       records: {
+
         standard:     readFixtures('records.standard.json'),
         changed:      readFixtures('records.changed.json'),
-        list: {
-          noTitle:    readFixtures('records.list.no-title.json'),
-          htmlTags:   readFixtures('records.list.html-tags.json'),
+
+        list:         readFixtures('records.list.json'),
+        vector: {
+          standard:   readFixtures('records.vector.standard.json'),
+          changed:    readFixtures('records.vector.changed.json'),
         },
         pagination: {
           r1_2:       readFixtures('records.pagination.1-2.json'),

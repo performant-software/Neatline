@@ -28,8 +28,6 @@ class FixturesTest_Json extends Neatline_TestCase
 
         // Create exhibit.
         $this->exhibit = $this->__exhibit();
-
-        // Set GET parameter.
         $this->request->setQuery(array(
           'exhibit_id' => $this->exhibit->id
         ));
@@ -42,7 +40,7 @@ class FixturesTest_Json extends Neatline_TestCase
      * `records.standard.json`
      * `records.changed.json`
      */
-    public function testRecordsJson()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -110,13 +108,84 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records
+     * `records.vector.standard.json`
+     * `records.vector.changed.json`
+     */
+    public function testRecordsVector()
+    {
+
+        $record1 = $this->__record($this->exhibit);
+        $record2 = $this->__record($this->exhibit);
+        $record3 = $this->__record($this->exhibit);
+
+        $record1->title     = 'title1';
+        $record2->title     = 'title2';
+        $record3->title     = 'title3';
+        $record1->body      = 'body1';
+        $record2->body      = 'body2';
+        $record3->body      = 'body3';
+        $record1->coverage  = 'POINT(1 2)';
+        $record2->coverage  = 'POINT(3 4)';
+        $record3->coverage  = 'POINT(5 6)';
+
+        $record1->__save();
+        $record2->__save();
+        $record3->__save();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'records.vector.standard.json');
+
+        // - Record 2 coverage changes.
+        // - Record 3 deleted.
+
+        $record2->coverage = 'POINT(7 8)';
+        $record2->__save();
+        $record3->delete();
+
+        $this->resetResponse();
+        $this->writeFixtureFromRoute('neatline/records',
+            'records.vector.changed.json');
+
+    }
+
+
+    /**
+     * GET /records/:id
+     * `records.list.json`
+     */
+    public function testRecordsList()
+    {
+
+        $record1 = $this->__record($this->exhibit);
+        $record2 = $this->__record($this->exhibit);
+        $record3 = $this->__record($this->exhibit);
+
+        $record1->title = 'title';
+        $record2->title = '<tag>title with tags</tag>';
+        $record3->title = null;
+        $record1->body  = 'body';
+        $record2->body  = '<tag>body with tags</tag>';
+        $record3->body  = null;
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'records.list.json');
+
+    }
+
+
+    /**
+     * GET /records
      * `records.pagination.1-2.json`
      * `records.pagination.2-3.json`
      * `records.pagination.3-4.json`
      * `records.pagination.5-6.json`
      * `records.pagination.6.json`
      */
-    public function testPaginatedRecordsJson()
+    public function testRecordsPagination()
     {
 
         for ($i = 0; $i<6; $i++) {
@@ -160,39 +229,9 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records/:id
-     * `records.list.html-tags.json`
-     */
-    public function testTagsRecordsJson()
-    {
-
-        $record = new NeatlineRecord($this->exhibit);
-        $record->title  = '<tag>title</tag>';
-        $record->body   = '<tag>body</tag>';
-        $record->save();
-
-        $this->writeFixtureFromRoute('neatline/records',
-            'records.list.html-tags.json');
-
-    }
-
-
-    /**
-     * GET /records/:id
-     * `records.list.no-title.json`
-     */
-    public function testEmptyTitleRecordsJson()
-    {
-        $record = $this->__record($this->exhibit);
-        $this->writeFixtureFromRoute('neatline/records',
-            'records.list.no-title.json');
-    }
-
-
-    /**
-     * GET /records/:id
      * `record.standard.json`
      */
-    public function testRecordJson()
+    public function testRecord()
     {
 
         $item   = $this->__item();
@@ -236,7 +275,7 @@ class FixturesTest_Json extends Neatline_TestCase
      * POST /records
      * `record.add.json`
      */
-    public function testNewRecordJson()
+    public function testRecordAdd()
     {
 
         $exhibit = $this->__exhibit();
@@ -259,7 +298,7 @@ class FixturesTest_Json extends Neatline_TestCase
      * GET /exhibits/:id
      * `exhibit.json`
      */
-    public function testExhibitJson()
+    public function testExhibit()
     {
 
         $exhibit = $this->__exhibit();

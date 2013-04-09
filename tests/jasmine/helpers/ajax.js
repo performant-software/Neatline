@@ -111,7 +111,7 @@ var _t = (function(_t) {
    * Respond 200 with the default record collection.
    */
   _t.respondRecords = function() {
-    this.respondLast200(this.json.records.standard);
+    this.respondLast200(this.json.records.vector.standard);
   };
 
 
