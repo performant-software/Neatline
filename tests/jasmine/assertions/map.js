@@ -39,7 +39,7 @@ var _t = (function(_t) {
     _t.assertMapExtentQuery();
 
     // Respond with updated collection.
-    this.respondLast200(this.json.records.changed);
+    this.respondLast200(this.json.records.vector.changed);
 
     // Record2 point should be changed.
     var record2Layer = _t.getVectorLayerByTitle('title2');
@@ -48,7 +48,6 @@ var _t = (function(_t) {
 
     // Record3 point should be removed.
     expect(this.getVectorLayerByTitle('title3')).toBeUndefined();
-    this.assertVectorLayerCount(2);
 
   };
 

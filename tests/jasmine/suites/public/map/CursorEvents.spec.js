@@ -91,7 +91,7 @@ describe('Map Cursor Events', function() {
   it('should publish map move', function() {
 
     // Move the map.
-    _t.refreshMap(_t.json.records.changed);
+    _t.refreshMap(_t.json.records.vector.changed);
 
     // Get extent and zoom.
     var extent = _t.vw.MAP.getExtentAsWKT();
