@@ -33,10 +33,7 @@ var _t = (function(_t) {
       exhibit:        readFixtures('exhibit.json'),
 
       records: {
-
         standard:     readFixtures('records.standard.json'),
-        changed:      readFixtures('records.changed.json'),
-
         list:         readFixtures('records.list.json'),
         vector: {
           standard:   readFixtures('records.vector.standard.json'),
