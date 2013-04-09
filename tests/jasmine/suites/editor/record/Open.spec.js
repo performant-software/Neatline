@@ -115,20 +115,18 @@ describe('Record Form Open', function() {
     // with data from the record model.
     // --------------------------------------------------------------------
 
-    // Open form, get elements.
-    _t.navigate('record/'+recordModels[0].id);
+    _t.showRecordForm();
+
+    var id = JSON.parse(_t.json.record.standard).id;
     var inputs = _t.getRecordFormElements();
 
-    // Get the form model id.
-    var id = recordModels[0].id;
-
     expect(inputs.id).              toHaveText('#'+id+':'),
-    expect(inputs.titleHeader).     toHaveText('title1');
-    expect(inputs.titleInput).      toHaveValue('title1');
-    expect(inputs.body).            toHaveValue('body1');
+    expect(inputs.titleHeader).     toHaveText('title');
+    expect(inputs.titleInput).      toHaveValue('title');
+    expect(inputs.body).            toHaveValue('body');
     expect(inputs.itemId).          toHaveValue('1');
     expect(inputs.coverage).        toHaveValue('POINT(1 2)');
-    expect(inputs.tags).            toHaveValue('tags1');
+    expect(inputs.tags).            toHaveValue('tags');
     expect(inputs.widgets.val()).   toEqual(['Widget1','Widget3']);
     expect(inputs.presenter).       toHaveValue('Presenter2');
     expect(inputs.fillColor).       toHaveValue('#111111');

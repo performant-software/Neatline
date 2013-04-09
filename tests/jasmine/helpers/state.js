@@ -61,15 +61,6 @@ var _t = (function(_t) {
 
 
   /**
-   * Recursively stop all modules.
-   */
-  _t.stopApplication = function() {
-    _.each(Neatline.submodules, function(m) { m.stop(); });
-    Neatline._initCallbacks.reset();
-  };
-
-
-  /**
    * (Re)start the application.
    */
   _t.startApplication = function() {
@@ -82,6 +73,15 @@ var _t = (function(_t) {
     this.stopApplication();
     Neatline.start();
 
+  };
+
+
+  /**
+   * Recursively stop all modules.
+   */
+  _t.stopApplication = function() {
+    _.each(Neatline.submodules, function(m) { m.stop(); });
+    Neatline._initCallbacks.reset();
   };
 
 
@@ -122,8 +122,7 @@ var _t = (function(_t) {
    * Navigate to the edit form for the first record.
    */
   _t.showRecordForm = function() {
-    var model = _t.buildModelFromJson(_t.json.record.standard);
-    this.navigate('record/'+model.id);
+    this.navigate('record/'+JSON.parse(_t.json.record.standard).id);
     _t.respondLast200(_t.json.record.standard);
   };
 

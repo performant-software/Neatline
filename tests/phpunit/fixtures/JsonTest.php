@@ -234,9 +234,9 @@ class FixturesTest_Json extends Neatline_TestCase
     public function testRecord()
     {
 
-        $item   = $this->__item();
-        $record = $this->__record($this->exhibit, $item);
+        $record = $this->__record($this->exhibit);
 
+        $record->item_id            = 1;
         $record->title              = 'title';
         $record->body               = 'body';
         $record->tags               = 'tags';
