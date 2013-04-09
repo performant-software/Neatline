@@ -31,6 +31,7 @@ var _t = (function(_t) {
   _t.aliasEditor = function() {
     this.vw = {
       MAP:      Neatline.Map.__view,
+      BUBBLE:   Neatline.Presenter.StaticBubble.__view,
       EDITOR:   Neatline.Editor.__view,
       EXHIBIT:  Neatline.Editor.Exhibit.__view,
       SEARCH:   Neatline.Editor.Exhibit.Search.__view,

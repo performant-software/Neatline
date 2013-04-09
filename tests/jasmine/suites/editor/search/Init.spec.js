@@ -80,7 +80,7 @@ describe('Search Initialization', function() {
 
       // Inject a new records collection.
       _t.respondLast200(_t.json.records.pagination.r6);
-      var firstRecord = _t.getRecordRows()[1];
+      var firstRecord = _t.getRecordListRows()[1];
 
       // Record list should be updated.
       expect($(firstRecord).find('.title')).toHaveText('Record0');

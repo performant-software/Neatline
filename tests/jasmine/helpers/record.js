@@ -15,22 +15,12 @@ var _t = (function(_t) {
 
 
   /**
-   * Get the record id from the new record JSON fixture.
-   *
-   * @return {Number}: The id.
-   */
-  _t.getNewRecordId = function() {
-    return $.parseJSON(this.json.record.add).id;
-  };
-
-
-  /**
    * Construct a record model instance from a JSON string.
    *
    * @param {String} json: The JSON string.
    * @return {Object} model: The model.
    */
-  _t.buildModelFromJson = function(json) {
+  _t.buildRecordFromJson = function(json) {
     return new Neatline.Shared.Record.Model(JSON.parse(json));
   };
 

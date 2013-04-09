@@ -21,13 +21,13 @@ describe('Records List', function() {
   it('should list records', function() {
 
     // --------------------------------------------------------------------
-    // The record browser pane should show a list of records. Tags should
+    // The record browser pane should show a list of records.
     // --------------------------------------------------------------------
 
     _t.showRecordList(_t.json.records.list);
 
     // Get record list models and rows.
-    var rows = _t.getRecordRows(), models = _t.getRecordListModels();
+    var rows = _t.getRecordListRows(), models = _t.getRecordListModels();
 
     // Should show link to add new record.
     expect($(rows[0]).attr('href')).toEqual('#record/add');

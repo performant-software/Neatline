@@ -18,7 +18,7 @@ describe('Record Router', function() {
 
   beforeEach(function() {
     _t.loadEditor();
-    href = $(_t.getRecordRows()[0]).attr('href');
+    href = $(_t.getRecordListRows()[0]).attr('href');
   });
 
 

@@ -176,23 +176,6 @@ var _t = (function(_t) {
   };
 
 
-  /**
-   * Mock the Google Maps API.
-   */
-  _t.mockGoogleApi = function() {
-    window.google = {
-      maps: {
-        MapTypeId: {
-          TERRAIN:    'terrain',
-          ROADMAP:    'roadmap',
-          SATELLITE:  'satellite',
-          HYBRID:     'hybrid'
-        }
-      }
-    };
-  };
-
-
   return _t;
 
 

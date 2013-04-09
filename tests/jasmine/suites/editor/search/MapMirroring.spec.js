@@ -58,7 +58,7 @@ describe('Search Map Mirroring', function() {
     _t.vw.SEARCH.__ui.search.trigger('keyup');
 
     // Record list should synchronize with map.
-    var recordRows = _t.getRecordRows();
+    var recordRows = _t.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('Record0');
     expect(recordRows.length).toEqual(2);
 
@@ -87,7 +87,7 @@ describe('Search Map Mirroring', function() {
     _t.refreshMap(_t.json.records.pagination.r6);
 
     // Record list should synchronize with map.
-    var recordRows = _t.getRecordRows();
+    var recordRows = _t.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('Record0');
     expect(recordRows.length).toEqual(2);
 
@@ -112,7 +112,7 @@ describe('Search Map Mirroring', function() {
     _t.refreshMap(_t.json.records.pagination.r5_6);
 
     // Record list should synchronize with map.
-    var recordRows = _t.getRecordRows();
+    var recordRows = _t.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('Record1');
     expect($(recordRows[2]).find('.title')).toHaveText('Record0');
     expect(recordRows.length).toEqual(3);
@@ -138,13 +138,15 @@ describe('Search Map Mirroring', function() {
     // Backspace once.
     _t.vw.SEARCH.__ui.search.val('map');
     _t.vw.SEARCH.__ui.search.trigger('keyup');
-    _t.respondRecords();
+
+    // Respond with default record collection.
+    _t.respondLast200(_t.json.records.vector.standard);
 
     // Update map records.
     _t.refreshMap(_t.json.records.pagination.r5_6);
 
     // Record list should not synchronize with the map.
-    var recordRows = _t.getRecordRows();
+    var recordRows = _t.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('title1');
     expect($(recordRows[2]).find('.title')).toHaveText('title2');
     expect($(recordRows[3]).find('.title')).toHaveText('title3');
@@ -167,16 +169,18 @@ describe('Search Map Mirroring', function() {
     _t.vw.SEARCH.__ui.search.val('map:');
     _t.vw.SEARCH.__ui.search.trigger('keyup');
 
-    // Clear the search box, load default records.
+    // Clear the search box.
     _t.vw.SEARCH.__ui.search.val('');
     _t.vw.SEARCH.__ui.search.trigger('keyup');
-    _t.respondRecords();
+
+    // Respond with default record collection.
+    _t.respondLast200(_t.json.records.vector.standard);
 
     // Update map records.
     _t.refreshMap(_t.json.records.pagination.r5_6);
 
     // Record list should not synchronize with the map.
-    var recordRows = _t.getRecordRows();
+    var recordRows = _t.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('title1');
     expect($(recordRows[2]).find('.title')).toHaveText('title2');
     expect($(recordRows[3]).find('.title')).toHaveText('title3');

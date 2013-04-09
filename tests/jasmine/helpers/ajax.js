@@ -107,22 +107,6 @@ var _t = (function(_t) {
   };
 
 
-  /**
-   * Respond 200 with the default record collection.
-   */
-  _t.respondRecords = function() {
-    this.respondLast200(this.json.records.vector.standard);
-  };
-
-
-  /**
-   * Respond 200 with the new record JSON.
-   */
-  _t.respondNewRecord = function() {
-    this.respondLast200(this.json.record.add);
-  };
-
-
   return _t;
 
 

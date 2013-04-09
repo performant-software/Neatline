@@ -83,7 +83,7 @@ describe('Map Record Focusing', function() {
     it('focusByModel', function() {
 
       // Create a model that does not have a layer.
-      var model = _t.buildModelFromJson(_t.json.record.standard);
+      var model = _t.buildRecordFromJson(_t.json.record.standard);
       var count = _t.server.requests.count;
 
       Neatline.execute('MAP:focusByModel', model);

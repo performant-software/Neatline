@@ -37,7 +37,6 @@ describe('Record Form Close', function() {
 
     // Click "X".
     el.close.trigger('click');
-    _t.respondRecords();
 
     // Records list should be visible.
     expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);

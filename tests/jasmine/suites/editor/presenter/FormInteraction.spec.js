@@ -109,7 +109,6 @@ describe('Presenter Form Interaction', function() {
 
     // Close the form.
     el.close.trigger('click');
-    _t.respondRecords();
 
     // Presenter should activate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:activate');

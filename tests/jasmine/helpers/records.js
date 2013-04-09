@@ -19,7 +19,7 @@ var _t = (function(_t) {
    *
    * @return {Array}: The DOM collection of <a> elements.
    */
-  _t.getRecordRows = function() {
+  _t.getRecordListRows = function() {
     return this.vw.RECORDS.$el.find('.list a');
   };
 

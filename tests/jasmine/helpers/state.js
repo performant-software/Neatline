@@ -29,7 +29,7 @@ var _t = (function(_t) {
     this.server = sinon.fakeServer.create();
     this.startApplication();
 
-    // Alias components.
+    // Respond with default records collection.
     this.respondAll200(this.json.records.standard);
     this.aliasNeatline();
 
@@ -52,9 +52,8 @@ var _t = (function(_t) {
     this.startApplication();
     this.navigate('');
 
-    // Alias components.
+    // Respond with default records collection.
     this.respondAll200(this.json.records.standard);
-    this.aliasNeatline();
     this.aliasEditor();
 
   };

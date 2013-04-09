@@ -55,7 +55,7 @@ describe('Record Form Open', function() {
       model = recordModels[0];
 
       // Click on a record listing.
-      _t.click($(_t.getRecordRows()[1]));
+      _t.click($(_t.getRecordListRows()[1]));
 
     });
 
@@ -81,7 +81,7 @@ describe('Record Form Open', function() {
       // is requested by a route, the record should be loaded.
       // ------------------------------------------------------------------
 
-      model = _t.buildModelFromJson(_t.json.record.standard);
+      model = _t.buildRecordFromJson(_t.json.record.standard);
 
       // Request unloaded record.
       _t.navigate('record/999');
@@ -215,7 +215,7 @@ describe('Record Form Open', function() {
     _t.setMapCenter(200, 300, 15);
 
     // Open form.
-    _t.click($(_t.getRecordRows()[1]));
+    _t.click($(_t.getRecordListRows()[1]));
 
     // Focus should be unchanged.
     _t.assertMapViewport(100, 200, 10);

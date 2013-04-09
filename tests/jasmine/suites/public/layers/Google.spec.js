@@ -17,8 +17,21 @@ describe('Google Base Layer', function() {
 
 
   beforeEach(function() {
+
     _t.loadNeatline();
-    _t.mockGoogleApi();
+
+    // Mock Google API.
+    window.google = {
+      maps: {
+        MapTypeId: {
+          TERRAIN:    'terrain',
+          ROADMAP:    'roadmap',
+          SATELLITE:  'satellite',
+          HYBRID:     'hybrid'
+        }
+      }
+    };
+
   });
 
 

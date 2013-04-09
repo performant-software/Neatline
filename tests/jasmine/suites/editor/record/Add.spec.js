@@ -77,7 +77,7 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Open form.
-    _t.click($(_t.getRecordRows()[1]));
+    _t.click($(_t.getRecordListRows()[1]));
 
     // Click "Style" tab.
     el.styleTab.tab('show');
@@ -144,10 +144,10 @@ describe('Record Form Add', function() {
 
       // Click "Save".
       el.saveButton.trigger('click');
-      _t.respondNewRecord();
+      _t.respondLast200(_t.json.record.add);
 
       // Route should be updated.
-      var id = _t.getNewRecordId();
+      var id = $.parseJSON(_t.json.record.add).id;
       expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
 
     });
