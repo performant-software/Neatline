@@ -72,35 +72,6 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should not duplicate or rebuild existing layers', function() {
-
-    // --------------------------------------------------------------------
-    // When records are ingested that already have layers on the map, the
-    // existing layers should be not be duplicated or recreated.
-    // --------------------------------------------------------------------
-
-    // Load default collection.
-    _t.refreshMap(_t.json.records.vector.standard);
-
-    // Gather OpenLayers layer ids.
-    var olIds1 = _.map(_.values(_t.vw.MAP.layers), function(layer) {
-      return layer.id;
-    });
-
-    // Reload the default collection.
-    _t.refreshMap(_t.json.records.vector.standard);
-
-    // Re-get the OpenLayers layer ids.
-    var olIds2 = _.map(_.values(_t.vw.MAP.layers), function(layer) {
-      return layer.id;
-    });
-
-    // Layers be the same.
-    expect(olIds2).toEqual(olIds1);
-
-  });
-
-
   it('should add new layers', function() {
 
     // --------------------------------------------------------------------

@@ -19,6 +19,7 @@ describe('Static Bubble', function() {
   beforeEach(function() {
 
     _t.loadNeatline();
+    _t.refreshMap(_t.json.records.vector.standard);
 
     // Get layers and features.
     layers = _t.vw.MAP.getVectorLayers();

@@ -25,11 +25,11 @@ var _t = (function(_t) {
     loadFixtures('neatline-partial.html');
     loadStyleFixtures('neatline.css');
 
-    // Mock the server.
+    // Start the application.
     this.server = sinon.fakeServer.create();
     this.startApplication();
 
-    // Inject fixtures, alias components.
+    // Alias components.
     this.respondAll200(this.json.records.standard);
     this.aliasNeatline();
 
@@ -47,12 +47,12 @@ var _t = (function(_t) {
     loadFixtures('editor-partial.html');
     loadStyleFixtures('editor.css');
 
-    // Mock the server, reset history.
+    // Start the application.
     this.server = sinon.fakeServer.create();
     this.startApplication();
     this.navigate('');
 
-    // Inject fixtures, alias components.
+    // Alias components.
     this.respondAll200(this.json.records.standard);
     this.aliasNeatline();
     this.aliasEditor();
