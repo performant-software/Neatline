@@ -29,28 +29,34 @@ var _t = (function(_t) {
   _t.loadJsonFixtures = function() {
 
     this.json = {
-      exhibit:    readFixtures('exhibit.json'),
+
+      exhibit:        readFixtures('exhibit.json'),
+
       records: {
-        standard: readFixtures('records.standard.json'),
-        changed:  readFixtures('records.changed.json'),
-        noTitle:  readFixtures('records.noTitle.json'),
-        htmlTags: readFixtures('records.htmltags.json'),
+        standard:     readFixtures('records.standard.json'),
+        changed:      readFixtures('records.changed.json'),
+        list: {
+          noTitle:    readFixtures('records.list.no-title.json'),
+          htmlTags:   readFixtures('records.list.html-tags.json'),
+        },
         pagination: {
-          r1_2:   readFixtures('records.pagination.1-2.json'),
-          r2_3:   readFixtures('records.pagination.2-3.json'),
-          r3_4:   readFixtures('records.pagination.3-4.json'),
-          r5_6:   readFixtures('records.pagination.5-6.json'),
-          r6:     readFixtures('records.pagination.6.json')
+          r1_2:       readFixtures('records.pagination.1-2.json'),
+          r2_3:       readFixtures('records.pagination.2-3.json'),
+          r3_4:       readFixtures('records.pagination.3-4.json'),
+          r5_6:       readFixtures('records.pagination.5-6.json'),
+          r6:         readFixtures('records.pagination.6.json')
         }
       },
+
       record: {
-        standard: readFixtures('record.standard.json'),
-        add:      readFixtures('record.add.json')
+        standard:     readFixtures('record.standard.json'),
+        add:          readFixtures('record.add.json')
       }
+
     };
 
     this.xml = {
-      items: readFixtures('items.xml')
+      items:          readFixtures('items.xml')
     };
 
   };

@@ -56,7 +56,7 @@ describe('Records List', function() {
     // HTML tags should be removed from title and body fields.
     // --------------------------------------------------------------------
 
-    _t.showRecordList(_t.json.records.htmlTags);
+    _t.showRecordList(_t.json.records.list.htmlTags);
     var recordRows = _t.getRecordRows();
 
     // Tags should be removed.
@@ -72,7 +72,7 @@ describe('Records List', function() {
     // When a record title is empty, a placeholder should be displayed.
     // --------------------------------------------------------------------
 
-    _t.showRecordList(_t.json.records.noTitle);
+    _t.showRecordList(_t.json.records.list.noTitle);
     var recordRows = _t.getRecordRows();
 
     // Placeholder should be displayed.

@@ -160,7 +160,7 @@ class FixturesTest_Json extends Neatline_TestCase
 
     /**
      * GET /records/:id
-     * `records.htmlTags.json`
+     * `records.list.html-tags.json`
      */
     public function testTagsRecordsJson()
     {
@@ -171,20 +171,20 @@ class FixturesTest_Json extends Neatline_TestCase
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'records.htmlTags.json');
+            'records.list.html-tags.json');
 
     }
 
 
     /**
      * GET /records/:id
-     * `records.noTitle.json`
+     * `records.list.no-title.json`
      */
     public function testEmptyTitleRecordsJson()
     {
         $record = $this->__record($this->exhibit);
         $this->writeFixtureFromRoute('neatline/records',
-            'records.noTitle.json');
+            'records.list.no-title.json');
     }
 
 
