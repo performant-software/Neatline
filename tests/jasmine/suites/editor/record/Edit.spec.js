@@ -25,7 +25,7 @@ describe('Record Form Edit', function() {
     // map edit layer should be updated.
     // --------------------------------------------------------------------
 
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     // Update record form model.
     _t.vw.RECORD.model.set('id', 999);

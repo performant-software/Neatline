@@ -121,7 +121,7 @@ var _t = (function(_t) {
   /**
    * Navigate to the edit form for the first record.
    */
-  _t.showFirstRecordForm = function() {
+  _t.showRecordForm = function() {
     var model = _t.buildModelFromJson(_t.json.record.standard);
     this.navigate('record/'+model.id);
     _t.respondLast200(_t.json.record.standard);

@@ -19,7 +19,7 @@ describe('Record Form Save', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     el = {
       save: _t.vw.RECORD.$('a[name="save"]')

@@ -19,7 +19,7 @@ describe('Presenter Form Interaction', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     el = {
       text:   _t.vw.RECORD.$('a[href="#record-text"]'),

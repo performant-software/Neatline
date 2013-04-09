@@ -19,7 +19,7 @@ describe('Record Form Map Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     // Show "Map" tab.
     _t.vw.RECORD.activateTab('map');

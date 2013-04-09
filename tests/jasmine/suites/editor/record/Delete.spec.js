@@ -19,7 +19,7 @@ describe('Record Form Delete', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     el = {
       delete1:  _t.vw.RECORD.$('a[href="#delete-modal"]'),

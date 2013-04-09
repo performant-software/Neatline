@@ -19,7 +19,7 @@ describe('Record Form Text Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     el = {
       autocomplete: $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0])

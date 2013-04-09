@@ -19,7 +19,7 @@ describe('Record Form Close', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showFirstRecordForm();
+    _t.showRecordForm();
 
     el = {
       close: _t.vw.RECORD.$('a[name="close"]')
