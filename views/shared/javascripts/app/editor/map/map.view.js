@@ -144,11 +144,10 @@ _.extend(Neatline.Map.View.prototype, {
   updateEdit: function(settings) {
 
 
-    // Reset map.
-    // ----------
+    // Reset map state.
+    // ----------------
 
     this.isModifying = false;
-
     this.activateControls();
     _.each(this.controls, function(control) {
       control.deactivate();
@@ -212,15 +211,15 @@ _.extend(Neatline.Map.View.prototype, {
     // Set regular polygon options.
     // ----------------------------
 
-    // Sides.
+    // Sides:
     var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
     this.controls.regPoly.handler.sides = Math.max(3, sides);
 
-    // Snap angle.
+    // Snap angle:
     var snap = _.isNaN(settings.poly.snap) ? 0 : settings.poly.snap;
     this.controls.regPoly.handler.snapAngle = parseFloat(snap);
 
-    // Irregular.
+    // Irregular:
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
@@ -238,10 +237,13 @@ _.extend(Neatline.Map.View.prototype, {
     this.deactivateControls();
     this.controls.edit.activate();
 
-    // Then, flip on the `isModifying` state tracker and force the edit
-    // layer to the top of the stack of layers on the map, which ensures
-    // that the geometries on the layer can be selected and manipulated
-    // by the `edit` control.
+    // Then, push the edit layer to the top of the stack of vector layers.
+    // Since OpenLayers automatically manages the z-indices of map layers,
+    // it's possible for the edit layer to be "buried" underneath other
+    // layers on the map, making it impossible to select or manipulate the
+    // geometries on the edit layer. This ensures that the edit layer will
+    // always be the "highest" layer on the map when one of the geometry
+    // modification modes is active.
 
     this.isModifying = true;
     this.raiseEditLayer();
@@ -269,7 +271,7 @@ _.extend(Neatline.Map.View.prototype, {
   updateModel: function(model) {
 
     // Update the key in the layers tracker.
-    delete this.layers.vector[this.editLayer.nModel.previous('id')];
+    delete this.layers.vector[model.previous('id')];
     this.layers.vector[model.id] = this.editLayer;
 
     // Replace the model.
