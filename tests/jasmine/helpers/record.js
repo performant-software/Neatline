@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Data access helpers.
+ * Record helpers.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -12,26 +12,6 @@
 
 
 var _t = (function(_t) {
-
-
-  /**
-   * Get DOM collection of editor record listings.
-   *
-   * @return {Array}: The DOM collection of <a> elements.
-   */
-  _t.getRecordRows = function() {
-    return this.vw.RECORDS.$el.find('.list a');
-  };
-
-
-  /**
-   * Get the array of models from the record list collection.
-   *
-   * @return {Array}: The models.
-   */
-  _t.getRecordListModels = function() {
-    return Neatline.Editor.Exhibit.Records.__collection.models;
-  };
 
 
   /**
