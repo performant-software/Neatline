@@ -27,7 +27,7 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
     // When an edit form is opened for an existing record that is not
     // currently loaded on the map, a new layer should be created for the
-    // record and set at the edit layer.
+    // record and set as the edit layer.
     // --------------------------------------------------------------------
 
     // Load map without record 3.
@@ -64,37 +64,6 @@ describe('Map Edit Layer', function() {
 
     // Map should set new layer as the edit layer.
     expect(_t.vw.MAP.editLayer.nModel.id).toBeUndefined();
-
-  });
-
-
-  it('should not update edit layer for existing record', function() {
-
-    // --------------------------------------------------------------------
-    // When a record form is open, the edit layer should not be rebuilt
-    // when new data is ingested in response to move events.
-    // --------------------------------------------------------------------
-
-    // Open form for record 2, get layer.
-    _t.navigate('record/'+models[1].id);
-    var record2Layer = _t.getVectorLayerByTitle('title2');
-
-    // Add a new point.
-    record2Layer.addFeatures([
-      new OpenLayers.Feature.Vector(
-        new OpenLayers.Geometry.Point(9,10)
-      )
-    ]);
-
-    // Move the map, re-get layer.
-    _t.refreshMap(_t.json.records.vector.changed);
-    record2Layer = _t.getVectorLayerByTitle('title2');
-
-    // Geometry should be unchanged.
-    expect(record2Layer.features[0].geometry.x).toEqual(3);
-    expect(record2Layer.features[0].geometry.y).toEqual(4);
-    expect(record2Layer.features[1].geometry.x).toEqual(9);
-    expect(record2Layer.features[1].geometry.y).toEqual(10);
 
   });
 
@@ -169,10 +138,11 @@ describe('Map Edit Layer', function() {
 
     // Create new record.
     _t.navigate('record/add');
-    _t.assertVectorLayerCount(4);
 
-    // Close without saving, refresh map.
+    // Close without saving.
     _t.navigate('records');
+
+    // Refresh the map.
     _t.refreshMap(_t.json.records.vector.standard);
 
     // Edit layer should be removed.

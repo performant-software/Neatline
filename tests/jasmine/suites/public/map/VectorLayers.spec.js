@@ -26,7 +26,7 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Respond to start-up request.
-    _t.respondAll200(_t.json.MapVectorLayers.records.regular);
+    _t.respondLast200(_t.json.MapVectorLayers.records.regular);
     var layers = _t.vw.MAP.getVectorLayers();
 
     expect(layers[0].features[0].geometry.x).toEqual(1);
@@ -138,7 +138,7 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Respond to start-up request.
-    _t.respondAll200(_t.json.MapVectorLayers.records.styles);
+    _t.respondLast200(_t.json.MapVectorLayers.records.styles);
     var layer = _t.vw.MAP.getVectorLayers()[0];
 
     var def = layer.styleMap.styles['default'].defaultStyle;

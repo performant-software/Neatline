@@ -47,11 +47,8 @@ var _t = (function(_t) {
     // Start the application.
     this.server = sinon.fakeServer.create();
     this.startApplication();
-    this.navigate('');
-
-    // Respond with default records collection.
-    this.respondAll200(this.json.records.standard);
     this.aliasEditor();
+    this.navigate('');
 
   };
 

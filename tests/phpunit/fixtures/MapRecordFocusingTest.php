@@ -22,7 +22,7 @@ class FixturesTest_MapRecordFocusing extends Neatline_RecordsFixtureCase
     public function testMapRecordFocusing()
     {
 
-        $record  = $this->__record($this->exhibit);
+        $record = $this->__record($this->exhibit);
         $record->coverage   = 'POINT(1 2)';
         $record->map_focus  = '100,200';
         $record->map_zoom   = 10;

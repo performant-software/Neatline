@@ -47,37 +47,10 @@ var _t = (function(_t) {
         }
       },
 
-
-
-      // OLD
-
-      exhibit:        readFixtures('exhibit.json'),
-
-      records: {
-        standard:     readFixtures('records.standard.json'),
-        list:         readFixtures('records.list.json'),
-        vector: {
-          standard:   readFixtures('records.vector.standard.json'),
-          changed:    readFixtures('records.vector.changed.json'),
-        },
-        pagination: {
-          r1_2:       readFixtures('records.pagination.1-2.json'),
-          r2_3:       readFixtures('records.pagination.2-3.json'),
-          r3_4:       readFixtures('records.pagination.3-4.json'),
-          r5_6:       readFixtures('records.pagination.5-6.json'),
-          r6:         readFixtures('records.pagination.6.json')
-        }
-      },
-
-      record: {
-        standard:     readFixtures('record.standard.json'),
-        add:          readFixtures('record.add.json')
+      StaticBubble: {
+        records:    readFixtures('StaticBubble.records.json')
       }
 
-    };
-
-    this.xml = {
-      items:          readFixtures('items.xml')
     };
 
   };
