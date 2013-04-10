@@ -81,7 +81,7 @@ describe('Record Form Open', function() {
       // is requested by a route, the record should be loaded.
       // ------------------------------------------------------------------
 
-      model = _t.buildRecordFromJson(_t.json.record.standard);
+      model = _t.recordFromJson(_t.json.record.standard);
 
       // Request unloaded record.
       _t.navigate('record/999');

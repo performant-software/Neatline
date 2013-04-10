@@ -11,22 +11,28 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapCursorEvents extends Neatline_RecordsFixtureCase
+class FixturesTest_MapCursorEvents extends Neatline_TestCase
 {
 
 
+    protected $_isAdminTest = false;
+
+
     /**
-     * `records.mapCursorEvents.json`
+     * `MapCursorEvents.records.json`
      */
     public function testMapCursorEvents()
     {
 
-        $record = $this->__record($this->exhibit);
+        $exhibit = $this->__exhibit();
+        $record  = $this->__record($exhibit);
         $record->coverage = 'POINT(1 2)';
-        $record->save();
+        $record->__save();
+
+        $this->request->setQuery(array('exhibit_id' => $exhibit->id));
 
         $this->writeFixtureFromRoute('neatline/records',
-            'records.mapCursorEvents.json');
+            'MapCursorEvents.records.json');
 
     }
 

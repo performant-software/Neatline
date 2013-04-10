@@ -20,7 +20,7 @@ var _t = (function(_t) {
    * @param {String} json: The JSON string.
    * @return {Object} model: The model.
    */
-  _t.buildRecordFromJson = function(json) {
+  _t.recordFromJson = function(json) {
     return new Neatline.Shared.Record.Model(JSON.parse(json));
   };
 

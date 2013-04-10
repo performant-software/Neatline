@@ -30,7 +30,14 @@ var _t = (function(_t) {
 
     this.json = {
 
-      mapCursorEvents: readFixtures('records.mapCursorEvents.json'),
+      MapCursorEvents: {
+        records: readFixtures('MapCursorEvents.records.json')
+      },
+
+      MapRecordFocusing: {
+        records: readFixtures('MapRecordFocusing.records.json'),
+        record: readFixtures('MapRecordFocusing.record.json')
+      },
 
 
 
