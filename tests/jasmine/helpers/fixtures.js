@@ -30,6 +30,12 @@ var _t = (function(_t) {
 
     this.json = {
 
+      mapCursorEvents: readFixtures('records.mapCursorEvents.json'),
+
+
+
+      // OLD
+
       exhibit:        readFixtures('exhibit.json'),
 
       records: {

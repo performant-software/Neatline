@@ -15,6 +15,7 @@ describe('Map Record Focusing', function() {
 
   beforeEach(function() {
     _t.loadNeatline();
+    _t.respondAll200(_t.json.mapRecordFocusing);
   });
 
 
@@ -26,17 +27,17 @@ describe('Map Record Focusing', function() {
     // record without fetching new data from the server.
     // --------------------------------------------------------------------
 
-    var requestCount, layer;
+    var count, layer;
 
     beforeEach(function() {
-      requestCount = _t.server.requests.count;
+      count = _t.server.requests.count;
       layer = _t.vw.MAP.getVectorLayers()[0];
     });
 
     afterEach(function() {
 
       // No request should have been issued.
-      expect(_t.server.requests.count).toEqual(requestCount);
+      expect(_t.server.requests.count).toEqual(count);
 
       // Map should focus on record.
       _t.assertMapViewport(100, 200, 10);

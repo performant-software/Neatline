@@ -16,6 +16,9 @@ class Neatline_RecordsFixtureCase extends Neatline_TestCase
 {
 
 
+    protected $_isAdminTest = false;
+
+
     /**
      * Create exhibit, set `exhibit_id` GET parameter.
      */

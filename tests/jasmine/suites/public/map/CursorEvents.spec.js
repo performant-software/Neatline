@@ -19,6 +19,7 @@ describe('Map Cursor Events', function() {
   beforeEach(function() {
 
     _t.loadNeatline();
+    _t.respondAll200(_t.json.mapCursorEvents);
 
     // Get layer and feature.
     layer = _t.vw.MAP.getVectorLayers()[0];
