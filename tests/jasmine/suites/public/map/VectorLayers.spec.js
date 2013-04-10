@@ -13,12 +13,8 @@
 describe('Map Vector Layers', function() {
 
 
-  var layers;
-
-
   beforeEach(function() {
     _t.loadNeatline();
-    layers = _t.vw.MAP.getVectorLayers();
   });
 
 
@@ -28,6 +24,10 @@ describe('Map Vector Layers', function() {
     // When the exhibit starts, the map should automatically load records
     // that fall within the default viewport.
     // --------------------------------------------------------------------
+
+    // Respond to start-up request.
+    _t.respondAll200(_t.json.MapVectorLayers.records.regular);
+    var layers = _t.vw.MAP.getVectorLayers();
 
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
@@ -47,14 +47,12 @@ describe('Map Vector Layers', function() {
     // to the records API with `extent` and `zoom` parameters.
     // --------------------------------------------------------------------
 
-    // Clear map layers.
-    _t.vw.MAP.removeAllLayers();
-
     // Move the map.
     _t.triggerMapMove();
 
-    // Respond with default collection.
-    _t.respondLast200(_t.json.records.vector.standard);
+    // Inject records fixture.
+    _t.respondLast200(_t.json.MapVectorLayers.records.regular);
+    var layers = _t.vw.MAP.getVectorLayers();
 
     // Should build layers.
     expect(layers[0].features[0].geometry.x).toEqual(1);
@@ -76,10 +74,10 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load records without record 3.
-    _t.refreshMap(_t.json.records.vector.changed);
+    _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
     // Load records with record 3.
-    _t.refreshMap(_t.json.records.vector.standard);
+    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
 
     // Record 3 layer should be added.
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
@@ -97,10 +95,10 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load records with record 3.
-    _t.refreshMap(_t.json.records.vector.standard);
+    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
 
     // Load records without record 3.
-    _t.refreshMap(_t.json.records.vector.changed);
+    _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
     // Record 3 layer should be removed.
     expect(_t.getVectorLayerByTitle('title3')).toBeUndefined();
@@ -118,13 +116,13 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load records with record 3.
-    _t.refreshMap(_t.json.records.vector.standard);
+    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
 
     // Freeze record 3.
     _t.getVectorLayerByTitle('title3').nFrozen = true;
 
     // Load records without record 3.
-    _t.refreshMap(_t.json.records.vector.changed);
+    _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
     // Record 3 layer should not be removed.
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();

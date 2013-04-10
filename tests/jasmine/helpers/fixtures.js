@@ -31,12 +31,20 @@ var _t = (function(_t) {
     this.json = {
 
       MapCursorEvents: {
-        records: readFixtures('MapCursorEvents.records.json')
+        records:    readFixtures('MapCursorEvents.records.json')
       },
 
       MapRecordFocusing: {
-        records: readFixtures('MapRecordFocusing.records.json'),
-        record: readFixtures('MapRecordFocusing.record.json')
+        records:    readFixtures('MapRecordFocusing.records.json'),
+        record:     readFixtures('MapRecordFocusing.record.json')
+      },
+
+      MapVectorLayers: {
+        records: {
+          regular:  readFixtures('MapVectorLayers.records.regular.json'),
+          deleted:  readFixtures('MapVectorLayers.records.deleted.json'),
+          styles:   readFixtures('MapVectorLayers.records.styles.json')
+        }
       },
 
 

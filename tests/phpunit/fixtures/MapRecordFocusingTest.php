@@ -11,11 +11,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapRecordFocusing extends Neatline_TestCase
+class FixturesTest_MapRecordFocusing extends Neatline_RecordsFixtureCase
 {
-
-
-    protected $_isAdminTest = false;
 
 
     /**
@@ -25,23 +22,22 @@ class FixturesTest_MapRecordFocusing extends Neatline_TestCase
     public function testMapRecordFocusing()
     {
 
-        $exhibit = $this->__exhibit();
-        $record  = $this->__record($exhibit);
+        $record  = $this->__record($this->exhibit);
         $record->coverage   = 'POINT(1 2)';
         $record->map_focus  = '100,200';
         $record->map_zoom   = 10;
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'MapRecordFocusing.record.json');
+        $this->writeFixtureFromRoute('neatline/records',
+            'MapRecordFocusing.records.json'
+        );
 
         $this->resetResponse();
         $this->resetRequest();
 
-        $this->request->setQuery(array('exhibit_id' => $exhibit->id));
-
-        $this->writeFixtureFromRoute('neatline/records',
-            'MapRecordFocusing.records.json');
+        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
+            'MapRecordFocusing.record.json'
+        );
 
     }
 
