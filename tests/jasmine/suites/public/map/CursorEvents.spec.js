@@ -32,7 +32,6 @@ describe('Map Cursor Events', function() {
 
   it('should render and publish feature hover', function() {
 
-    // Hover on feature.
     _t.hoverOnMapFeature(feature);
 
     // Should render `temporary` intent.
@@ -46,7 +45,6 @@ describe('Map Cursor Events', function() {
 
   it('should render and publish feature unhover', function() {
 
-    // Unhover on feature.
     _t.hoverOnMapFeature(feature);
     _t.unHoverOnMapFeature();
 
@@ -61,7 +59,6 @@ describe('Map Cursor Events', function() {
 
   it('should render and publish feature select', function() {
 
-    // Click on feature.
     _t.clickOnMapFeature(feature);
 
     // Should render `select` intent.
@@ -75,7 +72,6 @@ describe('Map Cursor Events', function() {
 
   it('should render and publish feature unselect', function() {
 
-    // Click on feature, then off.
     _t.clickOnMapFeature(feature);
     _t.clickOffMapFeature();
 
@@ -84,23 +80,6 @@ describe('Map Cursor Events', function() {
 
     // Should publish `MAP:unselect`.
     expect(vent).toHaveBeenCalledWith('MAP:unselect', layer.nModel);
-
-  });
-
-
-  it('should publish map move', function() {
-
-    // Move the map.
-    _t.refreshMap(_t.json.records.vector.changed);
-
-    // Get extent and zoom.
-    var extent = _t.vw.MAP.getExtentAsWKT();
-    var zoom = _t.vw.MAP.getZoom();
-
-    // Should publish `MAP:move`.
-    expect(vent.argsForCall[0][0]).toEqual('MAP:move');
-    expect(vent.argsForCall[0][1].extent).toEqual(extent);
-    expect(vent.argsForCall[0][1].zoom).toEqual(zoom);
 
   });
 
