@@ -57,8 +57,6 @@ class FixturesTest_Json extends Neatline_TestCase
     /**
      * GET /records
      * `records.standard.json`
-     * `records.changed.json`
-     * `records.removed.json`
      */
     public function testRecordsJson()
     {
@@ -66,9 +64,6 @@ class FixturesTest_Json extends Neatline_TestCase
         $record1 = $this->__record($this->exhibit);
         $record2 = $this->__record($this->exhibit);
         $record3 = $this->__record($this->exhibit);
-
-        // `records.standard.json`
-        // - #1 has a default map focus/zoom, #2 and #3 do not.
 
         $record1->item_id           = 1;
         $record1->title             = 'title1';
@@ -113,54 +108,6 @@ class FixturesTest_Json extends Neatline_TestCase
             'records.standard.json');
 
     }
-
-
-    /**
-     * GET /records
-     * `records.standard.json`
-     */
-    // public function testRecordsJson()
-    // {
-
-    //     $record1 = $this->__record($this->exhibit);
-    //     $record2 = $this->__record($this->exhibit);
-    //     $record3 = $this->__record($this->exhibit);
-
-    //     $record1->setArray(array(
-    //         'item_id'           => 1,
-    //         'title'             => 'Title1',
-    //         'body'              => 'Body1',
-    //         'coverage'          => 'POINT(1 1)',
-    //         'tags'              => 'tags1',
-    //         'widgets'           => 'Widget1',
-    //         'presenter'         => 'Presenter1',
-    //         'fill_color'        => '#111111',
-    //         'select_color'      => '#222222',
-    //         'stroke_color'      => '#333333',
-    //         'point_image'       => 'image1',
-    //         'fill_opacity'      => 1,
-    //         'select_opacity'    => 2,
-    //         'stroke_opacity'    => 3,
-    //         'stroke_width'      => 4,
-    //         'point_radius'      => 5,
-    //         'min_zoom'          => 6,
-    //         'max_zoom'          => 7,
-    //         'map_zoom'          => 8,
-    //         'map_focus'         => '1,1',
-    //         'wms_address'       => 'address1',
-    //         'wms_layers'        => 'layers1',
-    //         'start_date'        => '2001',
-    //         'end_date'          => '2002',
-    //     ));
-
-    //     $record1->__save();
-    //     $record2->__save();
-    //     $record3->__save();
-
-    //     $this->writeFixtureFromRoute('neatline/records',
-    //         'records.standard.json');
-
-    // }
 
 
     /**
@@ -293,33 +240,36 @@ class FixturesTest_Json extends Neatline_TestCase
 
         $record = $this->__record($this->exhibit);
 
-        $record->item_id            = 1;
-        $record->title              = 'title';
-        $record->body               = 'body';
-        $record->tags               = 'tags';
-        $record->coverage           = 'POINT(1 2)';
-        $record->widgets            = 'Widget1,Widget3';
-        $record->presenter          = 'Presenter2';
-        $record->fill_color         = '#111111';
-        $record->select_color       = '#222222';
-        $record->stroke_color       = '#333333';
-        $record->fill_opacity       = 4;
-        $record->select_opacity     = 5;
-        $record->stroke_opacity     = 6;
-        $record->stroke_width       = 7;
-        $record->point_radius       = 8;
-        $record->weight             = 9;
-        $record->start_date         = '10';
-        $record->end_date           = '11';
-        $record->point_image        = '12';
-        $record->wms_address        = '13';
-        $record->wms_layers         = '14';
-        $record->min_zoom           = 15;
-        $record->max_zoom           = 16;
-        $record->show_after_date    = '17';
-        $record->show_before_date   = '18';
-        $record->map_focus          = '100,200';
-        $record->map_zoom           = 10;
+        $record->setArray(array(
+            'item_id'           => 1,
+            'title'             => 'title',
+            'body'              => 'body',
+            'tags'              => 'tags',
+            'coverage'          => 'POINT(1 2)',
+            'widgets'           => 'Widget1,Widget3',
+            'presenter'         => 'Presenter2',
+            'fill_color'        => '#111111',
+            'select_color'      => '#222222',
+            'stroke_color'      => '#333333',
+            'fill_opacity'      => 4,
+            'select_opacity'    => 5,
+            'stroke_opacity'    => 6,
+            'stroke_width'      => 7,
+            'point_radius'      => 8,
+            'weight'            => 9,
+            'start_date'        => '10',
+            'end_date'          => '11',
+            'point_image'       => '12',
+            'wms_address'       => '13',
+            'wms_layers'        => '14',
+            'min_zoom'          => 15,
+            'max_zoom'          => 16,
+            'show_after_date'   => '17',
+            'show_before_date'  => '18',
+            'map_focus'         => '100,200',
+            'map_zoom'          => 10
+        ));
+
         $record->__save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,

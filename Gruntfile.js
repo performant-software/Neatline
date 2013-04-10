@@ -125,6 +125,11 @@ module.exports = function(grunt) {
         cfg.payloads.admin.js,
         cfg.payloads.admin.css
       ],
+      fixtures: [
+        cfg.jasmine+'/fixtures/*.json',
+        cfg.jasmine+'/fixtures/*.html',
+        cfg.jasmine+'/fixtures/*.xml'
+      ],
       images: './views/shared/css/img',
       bower: './components'
     },
