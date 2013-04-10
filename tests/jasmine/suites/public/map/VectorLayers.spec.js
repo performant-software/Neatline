@@ -137,44 +137,53 @@ describe('Map Vector Layers', function() {
     // Vector layer style maps should be built from record values.
     // --------------------------------------------------------------------
 
-    var std = layers[0].styleMap.styles['default'].defaultStyle;
-    var tmp = layers[0].styleMap.styles.temporary.defaultStyle;
-    var sel = layers[0].styleMap.styles.select.defaultStyle;
+    // Respond to start-up request.
+    _t.respondAll200(_t.json.MapVectorLayers.records.styles);
+    var layer = _t.vw.MAP.getVectorLayers()[0];
+
+    var def = layer.styleMap.styles['default'].defaultStyle;
+    var tmp = layer.styleMap.styles.temporary.defaultStyle;
+    var sel = layer.styleMap.styles.select.defaultStyle;
 
     // Fill color.
-    expect(std.fillColor).toEqual('#111111');
-    expect(tmp.fillColor).toEqual('#222222');
-    expect(sel.fillColor).toEqual('#222222');
+    expect(def.fillColor).toEqual('1');
+    expect(tmp.fillColor).toEqual('2');
+    expect(sel.fillColor).toEqual('2');
 
     // Stroke color.
-    expect(std.strokeColor).toEqual('#333333');
-    expect(tmp.strokeColor).toEqual('#333333');
-    expect(sel.strokeColor).toEqual('#333333');
+    expect(def.strokeColor).toEqual('3');
+    expect(tmp.strokeColor).toEqual('3');
+    expect(sel.strokeColor).toEqual('3');
 
     // Fill opacity.
-    expect(std.fillOpacity).toEqual(0.04);
+    expect(def.fillOpacity).toEqual(0.04);
     expect(tmp.fillOpacity).toEqual(0.05);
     expect(sel.fillOpacity).toEqual(0.05);
 
     // Graphic opacity.
-    expect(std.graphicOpacity).toEqual(0.04);
+    expect(def.graphicOpacity).toEqual(0.04);
     expect(tmp.graphicOpacity).toEqual(0.05);
     expect(sel.graphicOpacity).toEqual(0.05);
 
     // Stroke opacity.
-    expect(std.strokeOpacity).toEqual(0.06);
+    expect(def.strokeOpacity).toEqual(0.06);
     expect(tmp.strokeOpacity).toEqual(0.06);
     expect(sel.strokeOpacity).toEqual(0.06);
 
     // Stroke width.
-    expect(std.strokeWidth).toEqual(7);
+    expect(def.strokeWidth).toEqual(7);
     expect(tmp.strokeWidth).toEqual(7);
     expect(sel.strokeWidth).toEqual(7);
 
     // Point radius.
-    expect(std.pointRadius).toEqual(8);
+    expect(def.pointRadius).toEqual(8);
     expect(tmp.pointRadius).toEqual(8);
     expect(sel.pointRadius).toEqual(8);
+
+    // Point image.
+    expect(def.externalGraphic).toEqual('9');
+    expect(tmp.externalGraphic).toEqual('9');
+    expect(sel.externalGraphic).toEqual('9');
 
   });
 

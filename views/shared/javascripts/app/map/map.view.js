@@ -417,15 +417,11 @@ Neatline.module('Map', function(
      */
     getStyleMap: function(record) {
 
-      var fillOpacity   = parseInt(record.get('fill_opacity'),    10);
-      var selectOpacity = parseInt(record.get('select_opacity'),  10);
-      var strokeOpacity = parseInt(record.get('stroke_opacity'),  10);
-      var pointRadius   = parseInt(record.get('point_radius'),    10);
-      var strokeWidth   = parseInt(record.get('stroke_width'),    10);
-
-      fillOpacity   /= 100;
-      selectOpacity /= 100;
-      strokeOpacity /= 100;
+      var fillOpacity   = parseInt(record.get('fill_opacity'))   / 100;
+      var selectOpacity = parseInt(record.get('select_opacity')) / 100;
+      var strokeOpacity = parseInt(record.get('stroke_opacity')) / 100;
+      var pointRadius   = parseInt(record.get('point_radius'));
+      var strokeWidth   = parseInt(record.get('stroke_width'));
 
       return new OpenLayers.StyleMap({
         'default': new OpenLayers.Style({

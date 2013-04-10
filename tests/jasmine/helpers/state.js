@@ -28,9 +28,6 @@ var _t = (function(_t) {
     // Start the application.
     this.server = sinon.fakeServer.create();
     this.startApplication();
-
-    // Respond with default records collection.
-    // this.respondAll200(this.json.records.standard);
     this.aliasNeatline();
 
   };

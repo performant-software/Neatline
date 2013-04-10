@@ -56,7 +56,27 @@ class FixturesTest_MapVectorLayers extends Neatline_RecordsFixtureCase
      */
     public function testStyles()
     {
-        // TODO
+
+        $record = $this->__record($this->exhibit);
+
+        $record->setArray(array(
+            'fill_color'        => '1',
+            'select_color'      => '2',
+            'stroke_color'      => '3',
+            'fill_opacity'      => 4,
+            'select_opacity'    => 5,
+            'stroke_opacity'    => 6,
+            'stroke_width'      => 7,
+            'point_radius'      => 8,
+            'point_image'       => '9'
+        ));
+
+        $record->save();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'MapVectorLayers.records.styles.json'
+        );
+
     }
 
 
