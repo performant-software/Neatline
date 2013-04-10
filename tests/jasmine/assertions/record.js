@@ -21,13 +21,12 @@ var _t = (function(_t) {
    */
   _t.assertActiveTab = function(slug) {
 
-    // Get tab and pane.
-    var tab = this.vw.RECORD.$('a[href="#record-'+slug+'"]');
-    var pane = this.vw.RECORD.$('#record-'+slug);
+    var label = this.vw.RECORD.$('a[href="#record-'+slug+'"]');
+    var panel = this.vw.RECORD.$('#record-'+slug);
 
     // Tab should be active, pane visible.
-    expect(tab.parent('li')).toHaveClass('active');
-    expect(pane).toHaveClass('active');
+    expect(label.parent('li')).toHaveClass('active');
+    expect(panel).toHaveClass('active');
 
   };
 

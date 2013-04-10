@@ -15,44 +15,6 @@ var _t = (function(_t) {
 
 
   /**
-   * Assert that the last request was a map refresh.
-   */
-  _t.assertMapExtentQuery = function() {
-
-    // Should issue GET request to records API.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
-
-    // Request should include map focus.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
-
-  };
-
-
-  /**
-   * Assert that the vector layers were refreshed.
-   */
-  _t.assertMapRefreshed = function() {
-
-    // Should query by extent.
-    _t.assertMapExtentQuery();
-
-    // Respond with updated collection.
-    this.respondLast200(this.json.records.vector.changed);
-
-    // Record2 point should be changed.
-    var record2Layer = _t.getVectorLayerByTitle('title2');
-    expect(record2Layer.features[0].geometry.x).toEqual(7);
-    expect(record2Layer.features[0].geometry.y).toEqual(8);
-
-    // Record3 point should be removed.
-    expect(this.getVectorLayerByTitle('title3')).toBeUndefined();
-
-  };
-
-
-  /**
    * Assert the current viewport zoom and focus.
    *
    * @param {Number} lon: The focus longitude.

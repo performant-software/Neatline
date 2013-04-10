@@ -49,13 +49,9 @@ describe('Map Vector Layers', function() {
 
     // Clear map layers.
     _t.vw.MAP.removeAllLayers();
-    _t.assertVectorLayerCount(0);
 
     // Move the map.
     _t.triggerMapMove();
-
-    // Should query by extent.
-    _t.assertMapExtentQuery();
 
     // Respond with default collection.
     _t.respondLast200(_t.json.records.vector.standard);
