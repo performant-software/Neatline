@@ -19,6 +19,7 @@ describe('Record Form Add', function() {
   beforeEach(function() {
 
     _t.loadEditor();
+    _t.respondRecordList200(_t.json.RecordForm.records);
 
     el = {
       addButton:    _t.vw.RECORDS.$('a[href="#record/add"]'),
@@ -132,22 +133,17 @@ describe('Record Form Add', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    // Add record.
-    _t.click(el.addButton);
-
-    // Walk tab slugs.
     _.each(_t.getTabSlugs(), function(slug) {
 
-      // Click on the tab.
-      var tab = _t.vw.RECORD.$('a[href="#record-'+slug+'"]')
-      tab.trigger('click');
+      // Open new form with the tab.
+      _t.navigate('record/add/'+slug);
 
       // Click "Save".
       el.saveButton.trigger('click');
-      _t.respondLast200(_t.json.record.add);
+      _t.respondLast200(_t.json.RecordForm.record);
 
       // Route should be updated.
-      var id = $.parseJSON(_t.json.record.add).id;
+      var id = $.parseJSON(_t.json.RecordForm.record).id;
       expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
 
     });

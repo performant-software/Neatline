@@ -19,7 +19,7 @@ describe('Record Form Presenter', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showRecordForm('{}');
+    _t.showRecordForm(_t.json.RecordForm.record);
 
     el = {
       text:   _t.vw.RECORD.$('a[href="#record-text"]'),

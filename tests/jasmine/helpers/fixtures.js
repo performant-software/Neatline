@@ -56,6 +56,11 @@ var _t = (function(_t) {
           regular:  readFixtures('MapEditLayer.records.regular.json'),
           deleted:  readFixtures('MapEditLayer.records.deleted.json')
         }
+      },
+
+      RecordForm: {
+        record:     readFixtures('RecordForm.record.json'),
+        records:    readFixtures('RecordForm.records.json')
       }
 
     };
