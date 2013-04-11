@@ -48,23 +48,13 @@ var _t = (function(_t) {
 
 
   /**
-   * Respond 500 to a sinon request.
-   *
-   * @param {Object} request: The sinon request.
-   */
-  _t.respond500 = function(request) {
-    request.respond(500);
-  };
-
-
-  /**
    * Respond to all queued AJAX calls with a single response.
    *
    * @param {Object} response: The response body.
    */
   _t.respondAll200 = function(response) {
-    _.each(this.server.requests, _.bind(function(r) {
-      this.respond200(r, response);
+    _.each(this.server.requests, _.bind(function(request) {
+      this.respond200(request, response);
     }, this));
   };
 
@@ -92,6 +82,16 @@ var _t = (function(_t) {
     var request = this.getLastRequest();
     this.respond200(request, response, 'text/xml');
     return request;
+  };
+
+
+  /**
+   * Respond 500 to a sinon request.
+   *
+   * @param {Object} request: The sinon request.
+   */
+  _t.respond500 = function(request) {
+    request.respond(500);
   };
 
 
