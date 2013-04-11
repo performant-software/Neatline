@@ -92,6 +92,33 @@ describe('Map Vector Layers', function() {
   });
 
 
+  it('should not rebuild existing layers', function() {
+
+    // --------------------------------------------------------------------
+    // When records are ingested that are already represented with vector
+    // layers, the existing layers should not be rebuilt.
+    // --------------------------------------------------------------------
+
+    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+
+    // Store original OpenLayers id's.
+    var olIds1 = _.map(_.values(_t.vw.MAP.layers.vector), function(v) {
+      return v.id;
+    });
+
+    // Reload the same collection.
+    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+
+    // Get new OpenLayers id's.
+    var olIds2 = _.map(_.values(_t.vw.MAP.layers.vector), function(v) {
+      return v.id;
+    });
+
+    expect(olIds2).toEqual(olIds1);
+
+  });
+
+
   it('should garbage collect stale layers', function() {
 
     // --------------------------------------------------------------------
