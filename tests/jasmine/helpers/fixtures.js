@@ -76,6 +76,10 @@ var _t = (function(_t) {
           list:     readFixtures('SearchMapMirror.records.list.json'),
           map:      readFixtures('SearchMapMirror.records.map.json')
         }
+      },
+
+      SearchQuery: {
+        records:    readFixtures('SearchQuery.records.json')
       }
 
     };
