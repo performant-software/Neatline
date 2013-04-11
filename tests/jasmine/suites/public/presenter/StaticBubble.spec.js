@@ -19,7 +19,7 @@ describe('Static Bubble', function() {
   beforeEach(function() {
 
     _t.loadNeatline();
-    _t.respondLast200(_t.json.StaticBubble.records);
+    _t.respondMap200(_t.json.StaticBubble.records);
 
     layers = _t.vw.MAP.getVectorLayers();
     feature1 = layers[0].features[0];

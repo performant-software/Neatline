@@ -86,6 +86,42 @@ var _t = (function(_t) {
 
 
   /**
+   * Respond 200 to a map collection request.
+   *
+   * @param {Object} response: The response body.
+   */
+  _t.respondMap200 = function(response) {
+    _.each(this.server.requests, _.bind(function(request) {
+
+      // Check for map parameters.
+      var extent  = _.str.include(request.url, 'extent');
+      var zoom    = _.str.include(request.url, 'zoom');
+
+      if (extent && zoom) this.respond200(request, response);
+
+    }, this));
+  };
+
+
+  /**
+   * Respond 200 to a record list collection request.
+   *
+   * @param {Object} response: The response body.
+   */
+  _t.respondRecordList200 = function(response) {
+    _.each(this.server.requests, _.bind(function(request) {
+
+      // Check for record list parameters.
+      var offset  = _.str.include(request.url, 'offset');
+      var limit   = _.str.include(request.url, 'limit');
+
+      if (offset && limit) this.respond200(request, response);
+
+    }, this));
+  };
+
+
+  /**
    * Respond 500 to a sinon request.
    *
    * @param {Object} request: The sinon request.

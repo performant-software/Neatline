@@ -29,9 +29,14 @@ describe('Map Record Focusing', function() {
     var count, layer;
 
     beforeEach(function() {
-      _t.respondLast200(_t.json.MapRecordFocusing.records);
+
+      // Inject starting record collection.
+      _t.respondMap200(_t.json.MapRecordFocusing.records);
+
+      // Get layer, cache request count.
       layer = _t.vw.MAP.getVectorLayers()[0];
       count = _t.server.requests.count;
+
     });
 
     afterEach(function() {

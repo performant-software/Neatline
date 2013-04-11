@@ -19,7 +19,7 @@ describe('Map Cursor Events', function() {
   beforeEach(function() {
 
     _t.loadNeatline();
-    _t.respondLast200(_t.json.MapCursorEvents.records);
+    _t.respondMap200(_t.json.MapCursorEvents.records);
 
     layer = _t.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];
