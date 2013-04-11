@@ -83,7 +83,7 @@ describe('Record Form Save', function() {
     expect(params.item_id).           toEqual('3');
     expect(params.coverage).          toEqual('4');
     expect(params.tags).              toEqual('5');
-    expect(params.widgets).           toEqual(widgets);
+    expect(params.widgets).           toEqual('Widget2,Widget3');
     expect(params.presenter).         toEqual('Presenter3');
     expect(params.fill_color).        toEqual('#666666');
     expect(params.select_color).      toEqual('#777777');

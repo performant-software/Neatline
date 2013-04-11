@@ -120,7 +120,7 @@ class NeatlineRecord extends Neatline_AbstractRow
      * expression to set the `GEOMETRY` value. If `coverage` is undefined,
      * use `POINT(0 0)` as a de facto "null" value (ignored in queries).
      *
-     * @return array The array representation of the record fields.
+     * @return array An array representation of the record.
      */
     public function toArrayForSave()
     {

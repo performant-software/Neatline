@@ -50,9 +50,14 @@ rivets.formatters.recordId = function(id) {
  * @param {String} string: A comma-delimited string.
  * @return {Array}: The exploded array.
  */
-rivets.formatters.commaDelimited = function(value) {
-  if (_.isString(value)) return value.split(',');
-  else if (_.isNull(value)) return [];
+rivets.formatters.commaDelimited = {
+  read: function(value) {
+    if (_.isString(value)) return value.split(',');
+    else if (_.isNull(value)) return [];
+  },
+  publish: function(value) {
+    return value.join();
+  }
 };
 
 
