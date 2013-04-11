@@ -78,12 +78,11 @@ describe('Search Initialization', function() {
 
     afterEach(function() {
 
-      // Inject a new records collection.
-      _t.respondLast200(_t.json.records.pagination.r6);
-      var firstRecord = _t.getRecordListRows()[1];
+      _t.respondLast200(_t.json.SearchInit.records);
+      var row = _t.getRecordListRows()[1];
 
       // Record list should be updated.
-      expect($(firstRecord).find('.title')).toHaveText('Record0');
+      expect($(row).find('.title')).toHaveText('title');
 
     });
 

@@ -65,6 +65,17 @@ var _t = (function(_t) {
 
       RecordFormOpen: {
         records:    readFixtures('RecordFormOpen.records.json')
+      },
+
+      SearchInit: {
+        records:    readFixtures('SearchInit.records.json')
+      },
+
+      SearchMapMirror: {
+        records: {
+          list:     readFixtures('SearchMapMirror.records.list.json'),
+          map:      readFixtures('SearchMapMirror.records.map.json')
+        }
       }
 
     };

@@ -122,6 +122,7 @@ Neatline.module('Editor.Exhibit.Search', function(
      * @param {Object} e: The `keyup` event.
      */
     onKeystroke: function(e) {
+        console.log('keystroke');
 
       this.parse();
 

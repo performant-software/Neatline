@@ -15,7 +15,7 @@ describe('Search Map Mirroring', function() {
 
   beforeEach(function() {
     _t.loadEditor();
-    Neatline.global.page_length = 1;
+    _t.respondRecordList200(_t.json.SearchMapMirror.records.list);
   });
 
 
@@ -50,20 +50,17 @@ describe('Search Map Mirroring', function() {
     // immediately synchronize with the collection on the map.
     // --------------------------------------------------------------------
 
-    // Load 1 record on map.
-    _t.refreshMap(_t.json.records.pagination.r6);
+    _t.respondMap200(_t.json.SearchMapMirror.records.map);
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
-    // Record list should synchronize with map.
+    // List should synchronize with map.
     var recordRows = _t.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('Record0');
-    expect(recordRows.length).toEqual(2);
-
-    // No pagination.
-    expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
+    expect($(recordRows[1]).find('.title')).toHaveText('map1');
+    expect($(recordRows[2]).find('.title')).toHaveText('map2');
+    expect($(recordRows[3]).find('.title')).toHaveText('map3');
+    expect(recordRows.length).toEqual(4);
 
   });
 
@@ -75,24 +72,17 @@ describe('Search Map Mirroring', function() {
     // record list shold synchronize with the collection on the map.
     // --------------------------------------------------------------------
 
-    // Manually set the `records` reference on the map view to null to
-    // emulate the state of the view when the application starts before
-    // the first collection is ingested.
-    _t.vw.MAP.records = null;
+    _t.respondMap200(_t.json.SearchMapMirror.records.map);
 
-    // Load route with `map:` as query.
+    // Request route with `map:` as query.
     _t.navigate('records/search/query=map:');
 
-    // Load 1 record on map.
-    _t.refreshMap(_t.json.records.pagination.r6);
-
-    // Record list should synchronize with map.
+    // List should synchronize with map.
     var recordRows = _t.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('Record0');
-    expect(recordRows.length).toEqual(2);
-
-    // No pagination.
-    expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
+    expect($(recordRows[1]).find('.title')).toHaveText('map1');
+    expect($(recordRows[2]).find('.title')).toHaveText('map2');
+    expect($(recordRows[3]).find('.title')).toHaveText('map3');
+    expect(recordRows.length).toEqual(4);
 
   });
 
@@ -105,19 +95,38 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
-    // Load 2 records on map.
-    _t.refreshMap(_t.json.records.pagination.r5_6);
+    // Ingest new records on the map.
+    _t.refreshMap(_t.json.SearchMapMirror.records.map);
 
-    // Record list should synchronize with map.
+    // List should synchronize with map.
     var recordRows = _t.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('Record1');
-    expect($(recordRows[2]).find('.title')).toHaveText('Record0');
-    expect(recordRows.length).toEqual(3);
+    expect($(recordRows[1]).find('.title')).toHaveText('map1');
+    expect($(recordRows[2]).find('.title')).toHaveText('map2');
+    expect($(recordRows[3]).find('.title')).toHaveText('map3');
+    expect(recordRows.length).toEqual(4);
 
-    // No pagination.
+  });
+
+
+  it('should not show pagination when mirroring', function() {
+
+    // --------------------------------------------------------------------
+    // When map mirroring is active, the record pagination should not be
+    // displayed, even when the number of records exceeds the page limit.
+    // --------------------------------------------------------------------
+
+    // Set page length to 1.
+    Neatline.global.page_length = 1;
+
+    // Load 3 records on the map.
+    _t.respondMap200(_t.json.SearchMapMirror.records.map);
+
+    // Activate mirroring.
+    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+
+    // Pagination should not be visible.
     expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
 
   });
@@ -132,28 +141,23 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Backspace once.
-    _t.vw.SEARCH.__ui.search.val('map');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map').trigger('keyup');
 
     // Respond with default record collection.
-    _t.respondLast200(_t.json.records.vector.standard);
+    _t.respondLast200(_t.json.SearchMapMirror.records.list);
 
     // Update map records.
-    _t.refreshMap(_t.json.records.pagination.r5_6);
+    _t.refreshMap(_t.json.SearchMapMirror.records.map);
 
-    // Record list should not synchronize with the map.
+    // List should not synchronize with map.
     var recordRows = _t.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('title1');
-    expect($(recordRows[2]).find('.title')).toHaveText('title2');
-    expect($(recordRows[3]).find('.title')).toHaveText('title3');
+    expect($(recordRows[1]).find('.title')).toHaveText('list1');
+    expect($(recordRows[2]).find('.title')).toHaveText('list2');
+    expect($(recordRows[3]).find('.title')).toHaveText('list3');
     expect(recordRows.length).toEqual(4);
-
-    // Pagination visible.
-    expect(_t.vw.RECORDS.$el).toContain('.pagination');
 
   });
 
@@ -166,28 +170,23 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Clear the search box.
-    _t.vw.SEARCH.__ui.search.val('');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
+    _t.vw.SEARCH.__ui.search.val('').trigger('keyup');
 
     // Respond with default record collection.
-    _t.respondLast200(_t.json.records.vector.standard);
+    _t.respondLast200(_t.json.SearchMapMirror.records.list);
 
     // Update map records.
-    _t.refreshMap(_t.json.records.pagination.r5_6);
+    _t.refreshMap(_t.json.SearchMapMirror.records.map);
 
-    // Record list should not synchronize with the map.
+    // List should not synchronize with map.
     var recordRows = _t.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('title1');
-    expect($(recordRows[2]).find('.title')).toHaveText('title2');
-    expect($(recordRows[3]).find('.title')).toHaveText('title3');
+    expect($(recordRows[1]).find('.title')).toHaveText('list1');
+    expect($(recordRows[2]).find('.title')).toHaveText('list2');
+    expect($(recordRows[3]).find('.title')).toHaveText('list3');
     expect(recordRows.length).toEqual(4);
-
-    // Pagination visible.
-    expect(_t.vw.RECORDS.$el).toContain('.pagination');
 
   });
 
