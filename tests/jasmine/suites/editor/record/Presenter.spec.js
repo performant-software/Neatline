@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Presenter Form Interaction', function() {
+describe('Record Form Presenter', function() {
 
 
   var el;
@@ -19,7 +19,7 @@ describe('Presenter Form Interaction', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showRecordForm();
+    _t.showRecordForm('{}');
 
     el = {
       text:   _t.vw.RECORD.$('a[href="#record-text"]'),

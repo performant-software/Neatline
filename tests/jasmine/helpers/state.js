@@ -113,10 +113,12 @@ var _t = (function(_t) {
 
   /**
    * Navigate to the edit form for the first record.
+   *
+   * @param {Object} response: The response body.
    */
-  _t.showRecordForm = function() {
-    this.navigate('record/'+JSON.parse(_t.json.record.standard).id);
-    _t.respondLast200(_t.json.record.standard);
+  _t.showRecordForm = function(response) {
+    this.navigate('record/'+JSON.parse(response).id);
+    _t.respondLast200(response);
   };
 
 
