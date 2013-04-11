@@ -20,7 +20,6 @@ describe('Google Base Layer', function() {
 
     _t.loadNeatline();
 
-    // Mock Google API.
     window.google = {
       maps: {
         MapTypeId: {

@@ -81,9 +81,8 @@ describe('Map Vector Layers', function() {
   it('should garbage collect stale layers', function() {
 
     // --------------------------------------------------------------------
-    // When the map is refreshed, layers for records that are no longer
-    // present in the collection (either because they no longer intersect
-    // the viewport or because they were deleted) - should be removed.
+    // When the map is refreshed, layers associated with records that are
+    // no longer present in the collection  should be removed.
     // --------------------------------------------------------------------
 
     _t.refreshMap(_t.json.MapVectorLayers.records.regular);

@@ -47,7 +47,6 @@ describe('Widget', function() {
     // else on the page - the view should not be appended to the exhibit.
     // --------------------------------------------------------------------
 
-    // Add `#widget` container.
     $('body').append($('<div id="widget"></div>'));
 
     var inst = new view();

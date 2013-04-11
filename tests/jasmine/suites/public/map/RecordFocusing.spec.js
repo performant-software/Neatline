@@ -29,19 +29,14 @@ describe('Map Record Focusing', function() {
     var count, layer;
 
     beforeEach(function() {
-
-      // Render record on map.
       _t.respondLast200(_t.json.MapRecordFocusing.records);
-
-      // Get the layer, cache call count.
       layer = _t.vw.MAP.getVectorLayers()[0];
       count = _t.server.requests.count;
-
     });
 
     afterEach(function() {
 
-      // No request should have been issued.
+      // Should not load record from server.
       expect(_t.server.requests.count).toEqual(count);
 
       // Map should focus on record.
@@ -93,7 +88,7 @@ describe('Map Record Focusing', function() {
 
       Neatline.execute('MAP:focusByModel', model);
 
-      // Should not request data from server.
+      // Should not load record from server.
       expect(_t.server.requests.count).toEqual(count);
 
     });
@@ -104,7 +99,6 @@ describe('Map Record Focusing', function() {
       Neatline.vent.on('MAP:focused', function() { done = true; });
       Neatline.execute('MAP:focusById', 999);
 
-      // Respond to the GET request.
       var request = _t.respondLast200(_t.json.MapRecordFocusing.record);
       waitsFor(function() { return done; });
 

@@ -46,11 +46,9 @@ describe('Map Exhibit Defaults', function() {
     // layers defined in the `base_layers` global.
     // --------------------------------------------------------------------
 
-    // Initialize.
     _t.startApplication();
     _t.aliasNeatline();
 
-    // Base layers should be added to the map.
     expect(_t.vw.MAP.map.layers[0].name).toEqual('Layer1');
     expect(_t.vw.MAP.map.layers[1].name).toEqual('Layer2');
     expect(_t.vw.MAP.map.layers[2].name).toEqual('Layer3');
@@ -65,14 +63,11 @@ describe('Map Exhibit Defaults', function() {
     // to the layer with the `id` defined by the `base_layer` global.
     // --------------------------------------------------------------------
 
-    // Set the default base layer.
     Neatline.global.base_layer = 'Layer2';
 
-    // Initialize.
     _t.startApplication();
     _t.aliasNeatline();
 
-    // Default layer should be set.
     expect(_t.vw.MAP.map.baseLayer.name).toEqual('Layer2');
 
   });
@@ -86,11 +81,9 @@ describe('Map Exhibit Defaults', function() {
     // the layer switcher control should be added to the map.
     // --------------------------------------------------------------------
 
-    // Initialize.
     _t.startApplication();
     _t.aliasNeatline();
 
-    // Layer switcher should be enabled.
     expect(_t.getMapControlClassNames()).toContain(
       'OpenLayers.Control.LayerSwitcher'
     );
@@ -105,7 +98,6 @@ describe('Map Exhibit Defaults', function() {
     // switcher control should not be added to the map.
     // --------------------------------------------------------------------
 
-    // Just 1 base layer.
     Neatline.global.base_layers = [
       {
         title:  'Layer',
@@ -114,11 +106,9 @@ describe('Map Exhibit Defaults', function() {
       }
     ];
 
-    // Initialize.
     _t.startApplication();
     _t.aliasNeatline();
 
-    // Layer switcher should not be enabled.
     expect(_t.getMapControlClassNames()).not.toContain(
       'OpenLayers.Control.LayerSwitcher'
     );
@@ -133,15 +123,12 @@ describe('Map Exhibit Defaults', function() {
     // and `map_zoom` should be manifested on the map.
     // --------------------------------------------------------------------
 
-    // Set exhibit defaults.
     Neatline.global.map_focus = '1,2';
     Neatline.global.map_zoom = 10;
 
-    // Initialize.
     _t.startApplication();
     _t.aliasNeatline();
 
-    // Should set default focus.
     _t.assertMapViewport(1, 2, 10);
 
   });
