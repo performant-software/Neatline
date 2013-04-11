@@ -43,7 +43,7 @@ describe('Search Map Mirroring', function() {
   });
 
 
-  it('should start syncing with map when activated', function() {
+  it('should start mirroring when query pattern entered', function() {
 
     // --------------------------------------------------------------------
     // When `map:` is typed into the search box, the record list should
@@ -65,7 +65,7 @@ describe('Search Map Mirroring', function() {
   });
 
 
-  it('should start syncing with map on route request', function() {
+  it('should start mirroring on route request', function() {
 
     // --------------------------------------------------------------------
     // When a route is requested with `map:` as the search query, the
@@ -87,7 +87,7 @@ describe('Search Map Mirroring', function() {
   });
 
 
-  it('should synchronize when map is updated', function() {
+  it('should mirror when map is updated', function() {
 
     // --------------------------------------------------------------------
     // When map mirroring is active, the record list should display the
@@ -132,12 +132,11 @@ describe('Search Map Mirroring', function() {
   });
 
 
-  it('should stop syncing when deactivated via backspace', function() {
+  it('should stop mirroring when query pattern broken', function() {
 
     // --------------------------------------------------------------------
-    // When the `map:` query pattern is broken by a single keystroke (eg,
-    // when `map:` is changed to just `map`), the record list should stop
-    // mirroring the map.
+    // When the `map:` query pattern is broken, the record list should
+    // stop mirroring the map and start loading regular search results.
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
@@ -145,35 +144,6 @@ describe('Search Map Mirroring', function() {
 
     // Backspace once.
     _t.vw.SEARCH.__ui.search.val('map').trigger('keyup');
-
-    // Respond with default record collection.
-    _t.respondLast200(_t.json.SearchMapMirror.records.list);
-
-    // Update map records.
-    _t.refreshMap(_t.json.SearchMapMirror.records.map);
-
-    // List should not synchronize with map.
-    var recordRows = _t.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('list1');
-    expect($(recordRows[2]).find('.title')).toHaveText('list2');
-    expect($(recordRows[3]).find('.title')).toHaveText('list3');
-    expect(recordRows.length).toEqual(4);
-
-  });
-
-
-  it('should stop syncing when deactivated via clear', function() {
-
-    // --------------------------------------------------------------------
-    // When map mirroring is enabled and the search box is completely
-    // cleared, the record list should stop mirroring the map.
-    // --------------------------------------------------------------------
-
-    // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
-
-    // Clear the search box.
-    _t.vw.SEARCH.__ui.search.val('').trigger('keyup');
 
     // Respond with default record collection.
     _t.respondLast200(_t.json.SearchMapMirror.records.list);
