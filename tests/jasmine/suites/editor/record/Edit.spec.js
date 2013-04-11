@@ -25,7 +25,7 @@ describe('Record Form Edit', function() {
     // map edit layer should be updated.
     // --------------------------------------------------------------------
 
-    _t.showRecordForm();
+    _t.showRecordForm(_t.json.RecordForm.record);
 
     // Update record form model.
     _t.vw.RECORD.model.set('id', 999);
@@ -62,7 +62,8 @@ describe('Record Form Edit', function() {
 
     // The new id should point to the edit layer.
     expect(_t.vw.MAP.layers.vector[999].id).toEqual(
-      _t.vw.MAP.editLayer.id);
+      _t.vw.MAP.editLayer.id
+    );
 
   });
 

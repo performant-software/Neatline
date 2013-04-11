@@ -34,10 +34,8 @@ describe('Record Form Tabs', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    // Add record.
     _t.navigate('record/add');
 
-    // Walk tab slugs.
     _.each(_t.getTabSlugs(), function(slug) {
 
       // Click on the tab.
@@ -68,11 +66,9 @@ describe('Record Form Tabs', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    // Edit existing record.
-    var id = _t.getRecordListModels()[0].id;
-    _t.navigate('record/'+id);
+    _t.showRecordForm(_t.json.RecordForm.record);
+    var id = _t.vw.RECORD.model.id;
 
-    // Walk tab slugs.
     _.each(_t.getTabSlugs(), function(slug) {
 
       // Click on the tab.

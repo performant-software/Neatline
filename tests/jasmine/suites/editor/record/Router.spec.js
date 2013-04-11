@@ -17,8 +17,12 @@ describe('Record Router', function() {
 
 
   beforeEach(function() {
+
     _t.loadEditor();
+    _t.respondRecordList200(_t.json.RecordForm.records);
+
     href = $(_t.getRecordListRows()[0]).attr('href');
+
   });
 
 

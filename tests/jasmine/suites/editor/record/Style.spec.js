@@ -26,7 +26,7 @@ describe('Record Form Style Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showRecordForm();
+    _t.showRecordForm(_t.json.RecordForm.record);
 
     el = _.extend(_t.getRecordFormElements(), {
       setMinZoom: _t.vw.RECORD.$('a[name="set-min-zoom"]'),

@@ -19,6 +19,7 @@ describe('Record Form Open', function() {
   beforeEach(function() {
 
     _t.loadEditor();
+    _t.respondAll200(_t.json.RecordFormOpen.records);
 
     recordModels = _t.getRecordListModels();
     feature1 = _t.vw.MAP.getVectorLayers()[0].features[0];
@@ -81,13 +82,13 @@ describe('Record Form Open', function() {
       // is requested by a route, the record should be loaded.
       // ------------------------------------------------------------------
 
-      model = _t.recordFromJson(_t.json.record.standard);
+      model = _t.recordFromJson(_t.json.RecordForm.record);
 
       // Request unloaded record.
       _t.navigate('record/999');
 
       // Respond to the GET request.
-      _t.respondLast200(_t.json.record.standard);
+      _t.respondLast200(_t.json.RecordForm.record);
 
     });
 
@@ -115,9 +116,9 @@ describe('Record Form Open', function() {
     // with data from the record model.
     // --------------------------------------------------------------------
 
-    _t.showRecordForm();
+    _t.showRecordForm(_t.json.RecordForm.record);
 
-    var id = JSON.parse(_t.json.record.standard).id;
+    var id = JSON.parse(_t.json.RecordForm.record).id;
     var inputs = _t.getRecordFormElements();
 
     expect(inputs.id).              toHaveText('#'+id+':'),
@@ -147,8 +148,8 @@ describe('Record Form Open', function() {
     expect(inputs.maxZoom).         toHaveValue('16');
     expect(inputs.showAfterDate).   toHaveValue('17');
     expect(inputs.showBeforeDate).  toHaveValue('18');
-    expect(inputs.mapFocus).        toHaveValue('100,200');
-    expect(inputs.mapZoom).         toHaveValue('10');
+    expect(inputs.mapFocus).        toHaveValue('19');
+    expect(inputs.mapZoom).         toHaveValue('20');
 
   });
 
@@ -217,7 +218,7 @@ describe('Record Form Open', function() {
     // Open form.
     _t.click($(_t.getRecordListRows()[1]));
 
-    // Focus should be unchanged.
+    // Should focus on record.
     _t.assertMapViewport(100, 200, 10);
 
   });

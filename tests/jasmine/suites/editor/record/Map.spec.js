@@ -19,9 +19,7 @@ describe('Record Form Map Tab', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showRecordForm();
-
-    // Show "Map" tab.
+    _t.showRecordForm(_t.json.RecordForm.record);
     _t.vw.RECORD.activateTab('map');
 
     el = {

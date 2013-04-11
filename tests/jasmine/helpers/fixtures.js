@@ -61,6 +61,18 @@ var _t = (function(_t) {
       RecordForm: {
         record:     readFixtures('RecordForm.record.json'),
         records:    readFixtures('RecordForm.records.json')
+      },
+
+      RecordFormOpen: {
+        records:    readFixtures('RecordFormOpen.records.json')
+      }
+
+    };
+
+    this.xml = {
+
+      RecordFormText: {
+        items:      readFixtures('RecordFormText.items.xml')
       }
 
     };

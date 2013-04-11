@@ -19,7 +19,7 @@ describe('Record Form SVG', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showRecordForm();
+    _t.showRecordForm(_t.json.RecordForm.record);
 
     el = {
       link:     _t.vw.RECORD.$('a[href="#svg-modal"]'),
