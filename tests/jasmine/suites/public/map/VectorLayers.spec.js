@@ -28,6 +28,7 @@ describe('Map Vector Layers', function() {
     _t.respondMap200(_t.json.MapVectorLayers.records.regular);
     var layers = _t.vw.MAP.getVectorLayers();
 
+    // Should create layers for records.
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
     expect(layers[1].features[0].geometry.x).toEqual(3);
@@ -48,9 +49,18 @@ describe('Map Vector Layers', function() {
 
     _t.triggerMapMove();
 
+    // Should trigger GET request to /records.
+    _t.assertLastRequestRoute(Neatline.global.records_api);
+    _t.assertLastRequestMethod('GET');
+
+    // Should constrain by extent and zoom.
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
+
     _t.respondMap200(_t.json.MapVectorLayers.records.regular);
     var layers = _t.vw.MAP.getVectorLayers();
 
+    // Should create layers for records.
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
     expect(layers[1].features[0].geometry.x).toEqual(3);
@@ -69,9 +79,13 @@ describe('Map Vector Layers', function() {
     // that were not present in the last collection.
     // --------------------------------------------------------------------
 
+    // Load collection without record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
+
+    // Load collection with record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.regular);
 
+    // Should create layer for record 3.
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
@@ -85,9 +99,13 @@ describe('Map Vector Layers', function() {
     // no longer present in the collection  should be removed.
     // --------------------------------------------------------------------
 
+    // Load collection with record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+
+    // Load collection without record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
+    // Should remove layer for record 3.
     expect(_t.getVectorLayerByTitle('title3')).toBeUndefined();
     _t.assertVectorLayerCount(2);
 
@@ -102,10 +120,16 @@ describe('Map Vector Layers', function() {
     // the `nFrozen` property is true.
     // --------------------------------------------------------------------
 
+    // Load collection with record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+
+    // Freeze layer for record 3.
     _t.getVectorLayerByTitle('title3').nFrozen = true;
+
+    // Load collection without record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
+    // Should not remove frozen layer.
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
