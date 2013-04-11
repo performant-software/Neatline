@@ -13,28 +13,27 @@
 describe('Map Edit Layer', function() {
 
 
-  var models;
-
-
   beforeEach(function() {
     _t.loadEditor();
-    models = _t.getRecordListModels();
   });
 
 
   it('should create edit layer for existing record', function() {
 
     // --------------------------------------------------------------------
-    // When an edit form is opened for an existing record that is not
+    // When the edit form is opened for an existing record that is not
     // currently loaded on the map, a new layer should be created for the
     // record and set as the edit layer.
     // --------------------------------------------------------------------
 
-    // Load map without record 3.
-    _t.refreshMap(_t.json.records.vector.changed);
-    _t.assertVectorLayerCount(2);
+    // Load record list with record 3.
+    _t.respondRecordList200(_t.json.MapEditLayer.records.regular);
+    var models = _t.getRecordListModels();
 
-    // Open record 3 form.
+    // Load map without record 3.
+    _t.respondMap200(_t.json.MapEditLayer.records.deleted);
+
+    // Open edit form for record 3.
     _t.navigate('record/'+models[2].id);
 
     // Should create new layer for record 3.
@@ -43,8 +42,8 @@ describe('Map Edit Layer', function() {
     expect(record3Layer.features[0].geometry.y).toEqual(6);
     _t.assertVectorLayerCount(3);
 
-    // Record 2 layer should be edit layer.
-    expect(_t.vw.MAP.editLayer.nModel.id).toEqual(record3Layer.nModel.id);
+    // Record 3 layer should be edit layer.
+    expect(_t.vw.MAP.editLayer.id).toEqual(record3Layer.id);
 
   });
 
@@ -54,6 +53,8 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
     // When a new record is added, a new edit layer should be created.
     // --------------------------------------------------------------------
+
+    _t.respondAll200(_t.json.MapEditLayer.records.regular);
 
     // Add new record.
     _t.navigate('record/add');
@@ -75,11 +76,14 @@ describe('Map Edit Layer', function() {
     // if new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
+    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+    var models = _t.getRecordListModels();
+
     // Open form for record 3.
     _t.navigate('record/'+models[2].id);
 
     // Reload map without record 3.
-    _t.refreshMap(_t.json.records.vector.changed);
+    _t.refreshMap(_t.json.MapEditLayer.records.deleted);
 
     // Record 3 layer should still be present.
     expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
@@ -95,11 +99,13 @@ describe('Map Edit Layer', function() {
     // when new data is ingested.
     // --------------------------------------------------------------------
 
+    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+
     // Add new record.
     _t.navigate('record/add');
 
     // Reload the map.
-    _t.refreshMap(_t.json.records.vector.standard);
+    _t.refreshMap(_t.json.MapEditLayer.records.regular);
 
     // Edit layer still present.
     expect(_t.vw.MAP.layers.vector[undefined]).toBeDefined();
@@ -115,12 +121,17 @@ describe('Map Edit Layer', function() {
     // edit layer should start updating again in response to map moves.
     // --------------------------------------------------------------------
 
-    // Open record 3 form, then record list.
+    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+    var models = _t.getRecordListModels();
+
+    // Open record 3 form.
     _t.navigate('record/'+models[2].id);
+
+    // Close the form.
     _t.navigate('records');
 
     // Reload the map without record 3.
-    _t.refreshMap(_t.json.records.vector.changed);
+    _t.refreshMap(_t.json.MapEditLayer.records.deleted);
 
     // Record 2 layer should be cleared.
     expect(_t.getVectorLayerByTitle('title3')).toBeUndefined();
@@ -136,14 +147,16 @@ describe('Map Edit Layer', function() {
     // be garbage collected by the next data ingest.
     // --------------------------------------------------------------------
 
-    // Create new record.
+    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+
+    // Add new record.
     _t.navigate('record/add');
 
-    // Close without saving.
+    // Close the form.
     _t.navigate('records');
 
     // Refresh the map.
-    _t.refreshMap(_t.json.records.vector.standard);
+    _t.refreshMap(_t.json.MapEditLayer.records.regular);
 
     // Edit layer should be removed.
     expect(_t.getVectorLayerByTitle('title1')).toBeDefined();

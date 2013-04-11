@@ -49,6 +49,13 @@ var _t = (function(_t) {
 
       StaticBubble: {
         records:    readFixtures('StaticBubble.records.json')
+      },
+
+      MapEditLayer: {
+        records: {
+          regular:  readFixtures('MapEditLayer.records.regular.json'),
+          deleted:  readFixtures('MapEditLayer.records.deleted.json')
+        }
       }
 
     };
