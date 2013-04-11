@@ -124,10 +124,12 @@ var _t = (function(_t) {
 
   /**
    * Navigate to the exhibit styles form.
+   *
+   * @param {Object} response: The response body.
    */
-  _t.showStyles = function() {
+  _t.showStyles = function(response) {
     _t.navigate('styles');
-    _t.respondLast200(_t.json.exhibit);
+    _t.respondLast200(response);
   };
 
 

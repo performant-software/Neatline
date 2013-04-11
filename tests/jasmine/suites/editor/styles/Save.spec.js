@@ -19,7 +19,7 @@ describe('Styles Save', function() {
   beforeEach(function() {
 
     _t.loadEditor();
-    _t.showStyles();
+    _t.showStyles(_t.json.Styles.exhibit);
 
     el = {
       setFocus: _t.vw.STYLES.$('a[name="set-focus"]'),

@@ -98,6 +98,10 @@ var _t = (function(_t) {
 
       SearchQuery: {
         records:    readFixtures('SearchQuery.records.json')
+      },
+
+      Styles: {
+        exhibit:    readFixtures('Styles.exhibit.json')
       }
 
     };

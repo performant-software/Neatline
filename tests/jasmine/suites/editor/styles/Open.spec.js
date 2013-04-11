@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Styles initialization tests.
+ * Styles form population tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,31 +10,22 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Styles Initialization', function() {
+describe('Styles Open', function() {
 
 
   beforeEach(function() {
-    _t.setFixturesPath();
-    loadFixtures('editor-partial.html');
+    _t.loadEditor();
   });
 
 
   it('should populate form with exhibit data', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit starts, the form should be populated with values
-    // from `Neatline.global.exhibit`.
+    // When the "Styles" is displayed, the form should load exhibit data.
     // --------------------------------------------------------------------
 
-    // Mock exhibit.
-    Neatline.global.exhibit = {
-      styles: '1', map_focus: '2', map_zoom: 3
-    };
-
-    // Initialize.
-    _t.startApplication();
-    _t.aliasEditor();
-    _t.showStyles();
+    _t.navigate('styles');
+    _t.respondLast200(_t.json.Styles.exhibit);
 
     // Form should be populated.
     expect(_t.vw.STYLES.styles.getSession().getValue()).toEqual('1');
