@@ -47,6 +47,13 @@ var _t = (function(_t) {
         }
       },
 
+      MapLayerRefresh: {
+        records: {
+          regular:  readFixtures('MapLayerRefresh.records.regular.json'),
+          changed:  readFixtures('MapLayerRefresh.records.changed.json')
+        }
+      },
+
       StaticBubble: {
         records:    readFixtures('StaticBubble.records.json')
       },
