@@ -160,11 +160,15 @@ describe('Record Form Save', function() {
     // should be automatically refreshed to manifest synchronized styles.
     // --------------------------------------------------------------------
 
+    // Spy on event executor.
+    spyOn(Neatline, 'execute');
+
     // Click on "Save".
     el.save.trigger('click');
     _t.respondLast200('');
 
-    // TODO: Assert update
+    // Should refresh map.
+    expect(Neatline.execute).toHaveBeenCalledWith('MAP:refresh');
 
   });
 

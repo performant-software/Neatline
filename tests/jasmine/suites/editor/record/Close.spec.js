@@ -45,4 +45,23 @@ describe('Record Form Close', function() {
   });
 
 
+  it('should update the map', function() {
+
+    // --------------------------------------------------------------------
+    // When the form is closed, the map should be automatically refreshed
+    // to clear out any unsaved geometry changes.
+    // --------------------------------------------------------------------
+
+    // Spy on event executor.
+    spyOn(Neatline, 'execute');
+
+    // Click "X".
+    el.close.trigger('click');
+
+    // Should refresh map.
+    expect(Neatline.execute).toHaveBeenCalledWith('MAP:refresh');
+
+  });
+
+
 });

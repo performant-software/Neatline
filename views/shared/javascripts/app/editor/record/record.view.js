@@ -116,6 +116,7 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     onCloseClick: function() {
+      Neatline.execute('MAP:refresh');
       Neatline.execute('RECORDS:navToList');
       this.unbind();
     },

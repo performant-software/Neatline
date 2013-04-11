@@ -164,12 +164,16 @@ describe('Record Form Delete', function() {
     // the map should be automatically refreshed to manifest the deletion.
     // --------------------------------------------------------------------
 
+    // Spy on event executor.
+    spyOn(Neatline, 'execute');
+
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
     _t.respondLast200('');
 
-    // TODO: Assert update
+    // Should refresh map.
+    expect(Neatline.execute).toHaveBeenCalledWith('MAP:refresh');
 
   });
 
