@@ -27,9 +27,9 @@ describe('Map Layer Refresh', function() {
 
     // Load default layers.
     _t.refreshMap(_t.json.MapLayerRefresh.records.regular);
-    var layers = _t.vw.MAP.getVectorLayers();
 
-    // Should manifest original data.
+    // Should manifest original vector data.
+    var layers = _t.vw.MAP.getVectorLayers();
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
     expect(layers[1].features[0].geometry.x).toEqual(3);
@@ -38,13 +38,24 @@ describe('Map Layer Refresh', function() {
     expect(layers[2].features[0].geometry.y).toEqual(6);
     _t.assertVectorLayerCount(3);
 
+    // Should manifest original WMS data.
+    var layers = _t.vw.MAP.getWmsLayers();
+    expect(layers[0].url).toEqual('address1');
+    expect(layers[0].params.LAYERS).toEqual('layers1');
+    expect(layers[1].url).toEqual('address2');
+    expect(layers[1].params.LAYERS).toEqual('layers2');
+    expect(layers[2].url).toEqual('address3');
+    expect(layers[2].params.LAYERS).toEqual('layers3');
+    _t.assertWmsLayerCount(3);
+
     Neatline.execute('MAP:refresh');
 
     // Respond with changed coverage data.
     _t.respondLast200(_t.json.MapLayerRefresh.records.changed);
     var layers = _t.vw.MAP.getVectorLayers();
 
-    // Should manifest changed data.
+    // Should manifest changed vector data.
+    var layers = _t.vw.MAP.getVectorLayers();
     expect(layers[0].features[0].geometry.x).toEqual(7);
     expect(layers[0].features[0].geometry.y).toEqual(8);
     expect(layers[1].features[0].geometry.x).toEqual(9);
@@ -52,6 +63,16 @@ describe('Map Layer Refresh', function() {
     expect(layers[2].features[0].geometry.x).toEqual(11);
     expect(layers[2].features[0].geometry.y).toEqual(12);
     _t.assertVectorLayerCount(3);
+
+    // Should manifest changed WMS data.
+    var layers = _t.vw.MAP.getWmsLayers();
+    expect(layers[0].url).toEqual('address4');
+    expect(layers[0].params.LAYERS).toEqual('layers4');
+    expect(layers[1].url).toEqual('address5');
+    expect(layers[1].params.LAYERS).toEqual('layers5');
+    expect(layers[2].url).toEqual('address6');
+    expect(layers[2].params.LAYERS).toEqual('layers6');
+    _t.assertWmsLayerCount(3);
 
   });
 

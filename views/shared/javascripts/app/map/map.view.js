@@ -446,7 +446,7 @@ Neatline.module('Map', function(
      * @param {Function} evaluator: The boolean filtering function.
      * @param {Boolean} reset: If true, re-filter immediately.
      */
-    addFilter: function(key, evaluator, reset) {
+    setFilter: function(key, evaluator, reset) {
       this.filters[key] = evaluator;
       if (reset === true) this.filterAllLayers();
     },

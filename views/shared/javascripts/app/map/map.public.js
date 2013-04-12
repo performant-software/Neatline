@@ -63,16 +63,16 @@ Neatline.module('Map', function(
 
 
   /**
-   * Add a layer filter.
+   * Set a layer filter.
    *
    * @param {String} key: A key to identify the filter.
    * @param {Function} evaluator: The boolean filtering function.
    * @param {Boolean} reset: If true, re-filter immediately.
    */
-  var addFilter = function(key, evaluator, reset) {
-    Map.__view.addFilter(key, evaluator, reset);
+  var setFilter = function(key, evaluator, reset) {
+    Map.__view.setFilter(key, evaluator, reset);
   };
-  Neatline.commands.setHandler('MAP:addFilter', addFilter);
+  Neatline.commands.setHandler('MAP:setFilter', setFilter);
 
 
   /**
