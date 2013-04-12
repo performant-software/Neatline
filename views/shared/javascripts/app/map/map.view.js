@@ -29,6 +29,7 @@ Neatline.module('Map', function(
 
       this.layers = { vector: {}, wms: {} };
       this.formatWKT = new OpenLayers.Format.WKT();
+      this.filters = {};
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -397,7 +398,7 @@ Neatline.module('Map', function(
 
 
     /**
-     * Remove a vector layer from the map
+     * Remove a vector layer from the map.
      *
      * @param {OpenLayers.Layer.Vector}: The layer.
      */
@@ -408,7 +409,7 @@ Neatline.module('Map', function(
 
 
     /**
-     * Remove a WMS layer from the map
+     * Remove a WMS layer from the map.
      *
      * @param {OpenLayers.Layer.WMS}: The layer.
      */
@@ -419,7 +420,7 @@ Neatline.module('Map', function(
 
 
     /**
-     * Remove all layers from the map
+     * Remove all layers from the map.
      */
     removeAllLayers: function() {
 
@@ -435,6 +436,46 @@ Neatline.module('Map', function(
         this.removeWmsLayer(this.layers.wms[id]);
       }, this));
 
+    },
+
+
+    /**
+     * Register a layer filter.
+     *
+     * @param {String} key: A key to identify the filter.
+     * @param {Function} evaluator: The boolean filtering function.
+     * @param {Boolean} reset: If true, re-filter immediately.
+     */
+    addFilter: function(key, evaluator, reset) {
+      // TODO
+    },
+
+
+    /**
+     * Remove a layer filter.
+     *
+     * @param {String} key: The key of the filter to remove.
+     */
+    removeFilter: function(key) {
+      // TODO
+    },
+
+
+    /**
+     * Show a layer if it passes all filters; otherwise, hide it.
+     *
+     * @param {Object} layer: The layer to filter.
+     */
+    filterLayer: function(layer) {
+      // TODO
+    },
+
+
+    /**
+     * Pass all layers through the filtering system.
+     */
+    filterAllLayers: function() {
+      // TODO
     },
 
 
