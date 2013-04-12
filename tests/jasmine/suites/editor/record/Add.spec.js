@@ -117,6 +117,32 @@ describe('Record Form Add', function() {
   });
 
 
+  it('should not double-load layer for newly-saved record', function() {
+
+    // --------------------------------------------------------------------
+    // Once the new record is saved on the server, it will start arriving
+    // in result sets for viewport queries, including the one kicked off
+    // immediately after the first save succeeds. Since the new record is
+    // already represented on the map by the edit layer, a new layer for
+    // the saved record should not be built in addition to the edit layer.
+    // --------------------------------------------------------------------
+
+    // Add record, save.
+    _t.click(el.addButton);
+    el.saveButton.trigger('click');
+
+    // Respond to save with new id.
+    _t.respondLast200(_t.json.RecordFormAdd.record);
+
+    // Respond to map refresh with new collection.
+    _t.respondLast200(_t.json.RecordFormAdd.records);
+
+    // Should not double-load the new record.
+    _t.assertVectorLayerCount(1);
+
+  });
+
+
   it('should update the route after save', function() {
 
     // --------------------------------------------------------------------

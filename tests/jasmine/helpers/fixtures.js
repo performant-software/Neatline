@@ -70,6 +70,11 @@ var _t = (function(_t) {
         records:    readFixtures('RecordForm.records.json')
       },
 
+      RecordFormAdd: {
+        records:    readFixtures('RecordFormAdd.records.json'),
+        record:     readFixtures('RecordFormAdd.record.json')
+      },
+
       RecordFormOpen: {
         records:    readFixtures('RecordFormOpen.records.json')
       },
