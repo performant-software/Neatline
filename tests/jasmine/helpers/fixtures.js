@@ -47,6 +47,13 @@ var _t = (function(_t) {
         }
       },
 
+      MapWmsLayers: {
+        records: {
+          regular:  readFixtures('MapWmsLayers.records.regular.json'),
+          deleted:  readFixtures('MapWmsLayers.records.deleted.json')
+        }
+      },
+
       MapLayerRefresh: {
         records: {
           regular:  readFixtures('MapLayerRefresh.records.regular.json'),

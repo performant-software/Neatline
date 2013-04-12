@@ -29,14 +29,22 @@ var _t = (function(_t) {
 
 
   /**
-   * Assert the current viewport zoom and focus.
+   * Assert the number of vector layers.
    *
-   * @param {Number} lon: The focus longitude.
-   * @param {Number} lat: The focus latitude.
-   * @param {Number} zoom: The zoom.
+   * @param {Number} count: The number.
    */
   _t.assertVectorLayerCount = function(count) {
     expect(this.vw.MAP.getVectorLayers().length).toEqual(count);
+  };
+
+
+  /**
+   * Assert the number of WMS layers.
+   *
+   * @param {Number} count: The number.
+   */
+  _t.assertWmsLayerCount = function(count) {
+    expect(this.vw.MAP.getWmsLayers().length).toEqual(count);
   };
 
 

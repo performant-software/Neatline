@@ -21,8 +21,8 @@ describe('Map Vector Layers', function() {
   it('should load layers when exhibit starts', function() {
 
     // --------------------------------------------------------------------
-    // When the exhibit starts, the map should automatically load records
-    // that fall within the default viewport.
+    // When the exhibit starts, the map should construct vector layers for
+    // records that arrive in the initial query.
     // --------------------------------------------------------------------
 
     _t.respondMap200(_t.json.MapVectorLayers.records.regular);
@@ -43,21 +43,12 @@ describe('Map Vector Layers', function() {
   it('should load layers when map is moved', function() {
 
     // --------------------------------------------------------------------
-    // When the map is panned or zoomed, a GET request should be emitted
-    // to the records API with `extent` and `zoom` parameters.
+    // New vector layers should be loaded when the map is moved.
     // --------------------------------------------------------------------
 
     _t.triggerMapMove();
 
-    // Should trigger GET request to /records.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
-
-    // Should constrain by extent and zoom.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
-
-    _t.respondMap200(_t.json.MapVectorLayers.records.regular);
+    _t.respondLast200(_t.json.MapVectorLayers.records.regular);
     var layers = _t.vw.MAP.getVectorLayers();
 
     // Should create layers for records.
@@ -75,8 +66,8 @@ describe('Map Vector Layers', function() {
   it('should add new layers', function() {
 
     // --------------------------------------------------------------------
-    // When the map is refreshed, new layers should be created for records
-    // that were not present in the last collection.
+    // When the map is refreshed, new vector layers should be created for
+    // records that were not present in the last collection.
     // --------------------------------------------------------------------
 
     // Load collection without record 3.
@@ -122,8 +113,8 @@ describe('Map Vector Layers', function() {
   it('should garbage collect stale layers', function() {
 
     // --------------------------------------------------------------------
-    // When the map is refreshed, layers associated with records that are
-    // no longer present in the collection  should be removed.
+    // When the map is refreshed, vector layers associated with records
+    // that are no longer present in the collection should be removed.
     // --------------------------------------------------------------------
 
     // Load collection with record 3.
@@ -142,7 +133,7 @@ describe('Map Vector Layers', function() {
   it('should not garbage collect frozen layers', function() {
 
     // --------------------------------------------------------------------
-    // When the map is refreshed, existing layers associated with records
+    // When the map is refreshed, vector layers associated with records
     // that are absent from the new collection should _not_ be removed if
     // the `nFrozen` property is true.
     // --------------------------------------------------------------------

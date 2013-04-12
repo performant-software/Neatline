@@ -152,13 +152,26 @@ var _t = (function(_t) {
 
 
   /**
-   * Get the vector layer by record title.
+   * Get a vector layer by record title.
    *
    * @param {String} title: The record title.
    * @return {Object}: The layer.
    */
   _t.getVectorLayerByTitle = function(title) {
     return _.find(this.vw.MAP.getVectorLayers(), function(layer) {
+      return layer.name == title;
+    });
+  };
+
+
+  /**
+   * Get a WMS layer by record title.
+   *
+   * @param {String} title: The record title.
+   * @return {Object}: The layer.
+   */
+  _t.getWmsLayerByTitle = function(title) {
+    return _.find(this.vw.MAP.getWmsLayers(), function(layer) {
       return layer.name == title;
     });
   };

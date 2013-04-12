@@ -33,7 +33,10 @@ describe('Map Cursor Events', function() {
 
     _t.hoverOnMapFeature(feature);
 
+    // Should render `temporary` style.
     expect(feature.renderIntent).toEqual('temporary');
+
+    // Should publish `MAP:highlight`.
     expect(vent).toHaveBeenCalledWith('MAP:highlight', layer.nModel);
 
   });
@@ -44,7 +47,10 @@ describe('Map Cursor Events', function() {
     _t.hoverOnMapFeature(feature);
     _t.unHoverOnMapFeature();
 
+    // Should render `default` style.
     expect(feature.renderIntent).toEqual('default');
+
+    // Should publish `MAP:unhighlight`.
     expect(vent).toHaveBeenCalledWith('MAP:unhighlight', layer.nModel);
 
   });
@@ -54,7 +60,10 @@ describe('Map Cursor Events', function() {
 
     _t.clickOnMapFeature(feature);
 
+    // Should render `select` style.
     expect(feature.renderIntent).toEqual('select');
+
+    // Should publish `MAP:select`.
     expect(vent).toHaveBeenCalledWith('MAP:select', layer.nModel);
 
   });
@@ -65,8 +74,26 @@ describe('Map Cursor Events', function() {
     _t.clickOnMapFeature(feature);
     _t.clickOffMapFeature();
 
+    // Should render `default` style.
     expect(feature.renderIntent).toEqual('default');
+
+    // Should publish `MAP:unselect`.
     expect(vent).toHaveBeenCalledWith('MAP:unselect', layer.nModel);
+
+  });
+
+
+  it('should issue GET request when map is moved', function() {
+
+    _t.triggerMapMove();
+
+    // Should trigger GET request to /records.
+    _t.assertLastRequestRoute(Neatline.global.records_api);
+    _t.assertLastRequestMethod('GET');
+
+    // Should constrain by extent and zoom.
+    _t.assertLastRequestHasGetParameter('extent');
+    _t.assertLastRequestHasGetParameter('zoom');
 
   });
 
