@@ -447,7 +447,8 @@ Neatline.module('Map', function(
      * @param {Boolean} reset: If true, re-filter immediately.
      */
     addFilter: function(key, evaluator, reset) {
-      // TODO
+      this.filters[key] = evaluator;
+      if (reset === true) this.filterAllLayers();
     },
 
 
@@ -455,9 +456,11 @@ Neatline.module('Map', function(
      * Remove a layer filter.
      *
      * @param {String} key: The key of the filter to remove.
+     * @param {Boolean} reset: If true, re-filter immediately.
      */
-    removeFilter: function(key) {
-      // TODO
+    removeFilter: function(key, reset) {
+      delete this.filters[key];
+      if (reset === true) this.filterAllLayers();
     },
 
 
@@ -467,7 +470,16 @@ Neatline.module('Map', function(
      * @param {Object} layer: The layer to filter.
      */
     filterLayer: function(layer) {
-      // TODO
+
+      var visible = true;
+
+      // Pass the layer through each of the filters.
+      _.each(this.filters, _.bind(function(evaluator, key) {
+        visible = visible && evaluator(layer);
+      }, this));
+
+      layer.setVisibility(visible);
+
     },
 
 
@@ -475,7 +487,11 @@ Neatline.module('Map', function(
      * Pass all layers through the filtering system.
      */
     filterAllLayers: function() {
-      // TODO
+      _.each(this.layers, _.bind(function(group, key) {
+        _.each(group, _.bind(function(layer, id) {
+          this.filterLayer(layer);
+        }, this));
+      }, this));
     },
 
 

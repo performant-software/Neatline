@@ -56,7 +56,8 @@ rivets.formatters.commaDelimited = {
     else if (_.isNull(value)) return [];
   },
   publish: function(value) {
-    return value.join();
+    if (_.isArray(value)) value = value.join();
+    return value;
   }
 };
 

@@ -79,9 +79,10 @@ Neatline.module('Map', function(
    * Remove a layer filter.
    *
    * @param {String} key: The key of the filter to remove.
+   * @param {Boolean} reset: If true, re-filter immediately.
    */
-  var removeFilter = function(key) {
-    Map.__view.removeFilter(key);
+  var removeFilter = function(key, reset) {
+    Map.__view.removeFilter(key, reset);
   };
   Neatline.commands.setHandler('MAP:removeFilter', removeFilter);
 
