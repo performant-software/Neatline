@@ -23,7 +23,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Construct editing controls for record.
+   * Construct edit layer and controls for a record.
    *
    * @param {Object} model: The record model.
    */
@@ -117,18 +117,23 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Remove the editing controls.
+   * Remove editing controls and release the edit layer.
    */
   endEdit: function() {
 
-    // Remove controls.
+    // Remove the editing controls.
     _.each(this.controls, _.bind(function(control) {
       this.map.removeControl(control);
       control.deactivate();
     }, this));
 
-    // Unfreeze the edit layer.
-    this.editLayer.nFrozen = false;
+    // Unfreeze and de-reference the edit layer.
+    if (this.editLayer) {
+      this.editLayer.nFrozen = false;
+      this.editLayer = null;
+    }
+
+    // Activate the default cursor controls.
     this.activateControls();
 
   },
@@ -208,13 +213,13 @@ _.extend(Neatline.Map.View.prototype, {
 
     // (3) Update the settings on the regular polygon control.
 
-    // Sides:
-    var sides = parseInt(settings.poly.sides, 10) || 0;
-    this.controls.regPoly.handler.sides = Math.max(3, sides);
-
     // Snap angle:
     var snap = parseFloat(settings.poly.snap) || 0;
     this.controls.regPoly.handler.snapAngle = Math.max(0, snap);
+
+    // Sides:
+    var sides = parseInt(settings.poly.sides, 10) || 0;
+    this.controls.regPoly.handler.sides = Math.max(3, sides);
 
     // Irregular:
     this.controls.regPoly.handler.irregular = settings.poly.irreg;

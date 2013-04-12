@@ -327,7 +327,7 @@ describe('Record Form Map Tab', function() {
     // be updated with the new WKT string.
     // --------------------------------------------------------------------
 
-    // Create a new point, trigger modify.
+    // Add a point.
     var pt = new OpenLayers.Geometry.Point(3,4);
     _t.vw.MAP.controls.point.drawFeature(pt);
 
@@ -346,7 +346,7 @@ describe('Record Form Map Tab', function() {
     // be updated with the new WKT string.
     // --------------------------------------------------------------------
 
-    // Create a new point, trigger modify.
+    // Add line.
     var pt1   = new OpenLayers.Geometry.Point(3,4);
     var pt2   = new OpenLayers.Geometry.Point(5,6);
     var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
@@ -367,7 +367,7 @@ describe('Record Form Map Tab', function() {
     // should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
-    // Create a new point, trigger modify.
+    // Add a polygon.
     var pt1   = new OpenLayers.Geometry.Point(3,4);
     var pt2   = new OpenLayers.Geometry.Point(5,6);
     var pt3   = new OpenLayers.Geometry.Point(7,8);
@@ -390,6 +390,7 @@ describe('Record Form Map Tab', function() {
     // coverage text area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
+    // Add a geometry collection.
     var pt1 = new OpenLayers.Geometry.Point(3,4);
     var pt2 = new OpenLayers.Geometry.Point(5,6);
     var collection = new OpenLayers.Geometry.Collection([pt1, pt2]);
@@ -410,7 +411,7 @@ describe('Record Form Map Tab', function() {
     // text area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
-    // Create a new point, trigger modify.
+    // Add a polygon.
     var pt1   = new OpenLayers.Geometry.Point(1,2);
     var pt2   = new OpenLayers.Geometry.Point(3,4);
     var pt3   = new OpenLayers.Geometry.Point(5,6);
@@ -433,7 +434,7 @@ describe('Record Form Map Tab', function() {
     // area should be updated with the new WKT string.
     // --------------------------------------------------------------------
 
-    // Create a new point, trigger modify.
+    // Add a polygon.
     var pt1   = new OpenLayers.Geometry.Point(1,2);
     var pt2   = new OpenLayers.Geometry.Point(3,4);
     var pt3   = new OpenLayers.Geometry.Point(5,6);
@@ -488,6 +489,32 @@ describe('Record Form Map Tab', function() {
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual('');
+
+  });
+
+
+  it('should not save sketch geometry', function() {
+
+    // --------------------------------------------------------------------
+    // When geometry modified, the drag handle points added to the feature
+    // should not be saved as part of the coverage.
+    // --------------------------------------------------------------------
+
+    // Add a new line.
+    var pt1   = new OpenLayers.Geometry.Point(3,4);
+    var pt2   = new OpenLayers.Geometry.Point(5,6);
+    var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
+    _t.vw.MAP.controls.line.drawFeature(line);
+
+    // Select line, triger modify.
+    var feature = _t.vw.MAP.editLayer.features[1];
+    _t.vw.MAP.controls.edit.selectFeature(feature);
+    _t.vw.MAP.controls.edit.dragComplete();
+
+    // "Coverage" should be updated.
+    expect(el.coverage.val()).toEqual(
+      'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(3 4,5 6))'
+    );
 
   });
 

@@ -374,8 +374,8 @@ Neatline.module('Map', function(
      * @param {OpenLayers.Layer.Vector}: The layer.
      */
     removeVectorLayer: function(layer) {
-      delete this.layers.vector[layer.nModel.id];
       this.map.removeLayer(layer);
+      delete this.layers.vector[layer.nModel.id];
     },
 
 
@@ -385,8 +385,8 @@ Neatline.module('Map', function(
      * @param {OpenLayers.Layer.WMS}: The layer.
      */
     removeWmsLayer: function(layer) {
-      delete this.layers.wms[layer.nModel.id];
       this.map.removeLayer(layer);
+      delete this.layers.wms[layer.nModel.id];
     },
 
 

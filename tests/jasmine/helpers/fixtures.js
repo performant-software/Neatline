@@ -74,6 +74,11 @@ var _t = (function(_t) {
         records:    readFixtures('RecordFormOpen.records.json')
       },
 
+      RecordFormClose: {
+        records:    readFixtures('RecordFormClose.records.json'),
+        record:     readFixtures('RecordFormClose.record.json')
+      },
+
       RecordsList: {
         records: {
           regular:  readFixtures('RecordsList.records.regular.json'),
