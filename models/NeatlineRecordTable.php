@@ -187,15 +187,15 @@ class NeatlineRecordTable extends Omeka_Db_Table
     public function _filterByExtent($select, $extent)
     {
 
+        $wms = "is_wms = 1";
+
         // Match viewport intersection.
         $select->where(new Zend_Db_Expr(
-            "MBRIntersects(coverage, GeomFromText('$extent'))"
+            "MBRIntersects(coverage, GeomFromText('$extent')) OR $wms"
         ));
 
         // Omit empty coverages.
-        $select->where(new Zend_Db_Expr(
-            "AsText(coverage) != 'POINT(0 0)'"
-        ));
+        $select->where("is_coverage = 1 OR $wms");
 
         return $select;
 
