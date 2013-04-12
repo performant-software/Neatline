@@ -130,13 +130,17 @@ class NeatlineRecord extends Neatline_AbstractRow
         // Add the coverage.
         if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('{$fields['coverage']}')"
-            );
+                "GeomFromText('{$fields['coverage']}')");
+            $fields['is_coverage'] = 1;
         } else {
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('POINT(0 0)')"
-            );
+                "GeomFromText('POINT(0 0)')");
+            $fields['is_coverage'] = 0;
         }
+
+        // Check for WMS data.
+        $fields['is_wms'] = $fields['wms_address'] &&
+          $fields['wms_layers'] ? 1 : 0;
 
         return $fields;
 
