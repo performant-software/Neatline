@@ -157,7 +157,7 @@ var _t = (function(_t) {
    * @param {String} title: The record title.
    * @return {Object}: The layer.
    */
-  _t.getVectorLayerByTitle = function(title) {
+  _t.getVectorLayer = function(title) {
     return _.find(this.vw.MAP.getVectorLayers(), function(layer) {
       return layer.name == title;
     });
@@ -170,7 +170,7 @@ var _t = (function(_t) {
    * @param {String} title: The record title.
    * @return {Object}: The layer.
    */
-  _t.getWmsLayerByTitle = function(title) {
+  _t.getWmsLayer = function(title) {
     return _.find(this.vw.MAP.getWmsLayers(), function(layer) {
       return layer.name == title;
     });

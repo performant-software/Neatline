@@ -77,7 +77,7 @@ describe('Map Vector Layers', function() {
     _t.refreshMap(_t.json.MapVectorLayers.records.regular);
 
     // Should create layer for record 3.
-    expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
+    expect(_t.getVectorLayer('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
   });
@@ -124,7 +124,7 @@ describe('Map Vector Layers', function() {
     _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
     // Should remove layer for record 3.
-    expect(_t.getVectorLayerByTitle('title3')).toBeUndefined();
+    expect(_t.getVectorLayer('title3')).toBeUndefined();
     _t.assertVectorLayerCount(2);
 
   });
@@ -142,13 +142,13 @@ describe('Map Vector Layers', function() {
     _t.refreshMap(_t.json.MapVectorLayers.records.regular);
 
     // Freeze layer for record 3.
-    _t.getVectorLayerByTitle('title3').nFrozen = true;
+    _t.getVectorLayer('title3').nFrozen = true;
 
     // Load collection without record 3.
     _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
 
     // Should not remove frozen layer.
-    expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
+    expect(_t.getVectorLayer('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
   });

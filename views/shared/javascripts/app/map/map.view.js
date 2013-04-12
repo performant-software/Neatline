@@ -356,6 +356,7 @@ Neatline.module('Map', function(
 
       layer.nModel = record;
       layer.nFrozen = false;
+      this.filterLayer(layer);
 
       // Track, add to map.
       this.layers.vector[record.id] = layer;
@@ -387,6 +388,7 @@ Neatline.module('Map', function(
       );
 
       layer.nModel = record;
+      this.filterLayer(layer);
 
       // Track, add to map.
       this.layers.wms[record.id] = layer;
@@ -444,11 +446,10 @@ Neatline.module('Map', function(
      *
      * @param {String} key: A key to identify the filter.
      * @param {Function} evaluator: The boolean filtering function.
-     * @param {Boolean} reset: If true, re-filter immediately.
      */
-    setFilter: function(key, evaluator, reset) {
+    setFilter: function(key, evaluator) {
       this.filters[key] = evaluator;
-      if (reset === true) this.filterAllLayers();
+      this.filterAllLayers();
     },
 
 
@@ -456,11 +457,10 @@ Neatline.module('Map', function(
      * Remove a layer filter.
      *
      * @param {String} key: The key of the filter to remove.
-     * @param {Boolean} reset: If true, re-filter immediately.
      */
-    removeFilter: function(key, reset) {
+    removeFilter: function(key) {
       delete this.filters[key];
-      if (reset === true) this.filterAllLayers();
+      this.filterAllLayers();
     },
 
 

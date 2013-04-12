@@ -77,7 +77,7 @@ describe('Map WMS Layers', function() {
     _t.refreshMap(_t.json.MapWmsLayers.records.regular);
 
     // Should create layer for record 3.
-    expect(_t.getWmsLayerByTitle('title3')).toBeDefined();
+    expect(_t.getWmsLayer('title3')).toBeDefined();
     _t.assertWmsLayerCount(3);
 
   });
@@ -124,7 +124,7 @@ describe('Map WMS Layers', function() {
     _t.refreshMap(_t.json.MapWmsLayers.records.deleted);
 
     // Should remove layer for record 3.
-    expect(_t.getWmsLayerByTitle('title3')).toBeUndefined();
+    expect(_t.getWmsLayer('title3')).toBeUndefined();
     _t.assertWmsLayerCount(2);
 
   });

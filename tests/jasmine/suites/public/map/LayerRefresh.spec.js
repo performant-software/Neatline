@@ -85,13 +85,13 @@ describe('Map Layer Refresh', function() {
 
     // Load default layers, freeze layer 2.
     _t.refreshMap(_t.json.MapLayerRefresh.records.regular);
-    _t.getVectorLayerByTitle('title2').nFrozen = true;
+    _t.getVectorLayer('title2').nFrozen = true;
 
     Neatline.execute('MAP:refresh');
 
     // Respond with changed coverage data.
     _t.respondLast200(_t.json.MapLayerRefresh.records.changed);
-    var layer = _t.getVectorLayerByTitle('title2');
+    var layer = _t.getVectorLayer('title2');
 
     // Should not change layer 2 geometry.
     expect(layer.features[0].geometry.x).toEqual(3);

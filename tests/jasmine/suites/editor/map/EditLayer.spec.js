@@ -86,7 +86,7 @@ describe('Map Edit Layer', function() {
     _t.refreshMap(_t.json.MapEditLayer.records.deleted);
 
     // Record 3 layer should still be present.
-    expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
+    expect(_t.getVectorLayer('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
   });
@@ -134,7 +134,7 @@ describe('Map Edit Layer', function() {
     _t.refreshMap(_t.json.MapEditLayer.records.deleted);
 
     // Record 2 layer should be cleared.
-    expect(_t.getVectorLayerByTitle('title3')).toBeUndefined();
+    expect(_t.getVectorLayer('title3')).toBeUndefined();
 
   });
 
@@ -159,9 +159,9 @@ describe('Map Edit Layer', function() {
     _t.refreshMap(_t.json.MapEditLayer.records.regular);
 
     // Edit layer should be removed.
-    expect(_t.getVectorLayerByTitle('title1')).toBeDefined();
-    expect(_t.getVectorLayerByTitle('title2')).toBeDefined();
-    expect(_t.getVectorLayerByTitle('title3')).toBeDefined();
+    expect(_t.getVectorLayer('title1')).toBeDefined();
+    expect(_t.getVectorLayer('title2')).toBeDefined();
+    expect(_t.getVectorLayer('title3')).toBeDefined();
     _t.assertVectorLayerCount(3);
 
   });

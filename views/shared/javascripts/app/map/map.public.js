@@ -67,10 +67,9 @@ Neatline.module('Map', function(
    *
    * @param {String} key: A key to identify the filter.
    * @param {Function} evaluator: The boolean filtering function.
-   * @param {Boolean} reset: If true, re-filter immediately.
    */
-  var setFilter = function(key, evaluator, reset) {
-    Map.__view.setFilter(key, evaluator, reset);
+  var setFilter = function(key, evaluator) {
+    Map.__view.setFilter(key, evaluator);
   };
   Neatline.commands.setHandler('MAP:setFilter', setFilter);
 
@@ -79,10 +78,9 @@ Neatline.module('Map', function(
    * Remove a layer filter.
    *
    * @param {String} key: The key of the filter to remove.
-   * @param {Boolean} reset: If true, re-filter immediately.
    */
-  var removeFilter = function(key, reset) {
-    Map.__view.removeFilter(key, reset);
+  var removeFilter = function(key) {
+    Map.__view.removeFilter(key);
   };
   Neatline.commands.setHandler('MAP:removeFilter', removeFilter);
 

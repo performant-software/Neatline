@@ -61,6 +61,13 @@ var _t = (function(_t) {
         }
       },
 
+      MapLayerFilter: {
+        records: {
+          regular:  readFixtures('MapLayerFilter.records.regular.json'),
+          deleted:  readFixtures('MapLayerFilter.records.deleted.json')
+        }
+      },
+
       StaticBubble: {
         records:    readFixtures('StaticBubble.records.json')
       },
