@@ -209,12 +209,12 @@ _.extend(Neatline.Map.View.prototype, {
     // (3) Update the settings on the regular polygon control.
 
     // Sides:
-    var sides = _.isNaN(settings.poly.sides) ? 0 : settings.poly.sides;
+    var sides = parseInt(settings.poly.sides, 10) || 0;
     this.controls.regPoly.handler.sides = Math.max(3, sides);
 
     // Snap angle:
-    var snap = _.isNaN(settings.poly.snap) ? 0 : settings.poly.snap;
-    this.controls.regPoly.handler.snapAngle = parseFloat(snap);
+    var snap = parseFloat(settings.poly.snap) || 0;
+    this.controls.regPoly.handler.snapAngle = Math.max(0, snap);
 
     // Irregular:
     this.controls.regPoly.handler.irregular = settings.poly.irreg;

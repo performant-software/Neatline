@@ -50,8 +50,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Draw Point".
     el.pan.removeAttr('checked');
-    el.point.attr('checked', 'checked');
-    el.point.trigger('change');
+    el.point.attr('checked', 'checked').trigger('change');
 
     // "Draw Point" should be active.
     expect(_t.vw.MAP.controls.point.active).toBeTruthy();
@@ -67,8 +66,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Draw Line".
     el.pan.removeAttr('checked');
-    el.line.attr('checked', 'checked');
-    el.line.trigger('change');
+    el.line.attr('checked', 'checked').trigger('change');
 
     // "Draw Line" should be active.
     expect(_t.vw.MAP.controls.line.active).toBeTruthy();
@@ -84,8 +82,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Draw Polygon".
     el.pan.removeAttr('checked');
-    el.poly.attr('checked', 'checked');
-    el.poly.trigger('change');
+    el.poly.attr('checked', 'checked').trigger('change');
 
     // "Draw Polygon" should be active.
     expect(_t.vw.MAP.controls.poly.active).toBeTruthy();
@@ -101,8 +98,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Draw SVG".
     el.pan.removeAttr('checked');
-    el.svg.attr('checked', 'checked');
-    el.svg.trigger('change');
+    el.svg.attr('checked', 'checked').trigger('change');
 
     // "Draw SVG" should be active.
     expect(_t.vw.MAP.controls.svg.active).toBeTruthy();
@@ -119,8 +115,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Draw Regular Polygon".
     el.pan.removeAttr('checked');
-    el.regPoly.attr('checked', 'checked');
-    el.regPoly.trigger('change');
+    el.regPoly.attr('checked', 'checked').trigger('change');
 
     // "Draw Regular Polygon" should be active.
     expect(_t.vw.MAP.controls.regPoly.active).toBeTruthy();
@@ -131,13 +126,12 @@ describe('Record Form Map Tab', function() {
   it('should set sides', function() {
 
     // --------------------------------------------------------------------
-    // When a new value is entered into the "Sides" input, the `sides`
-    // property on the modifyFeature control should be updated.
+    // When the value in "Sides" input is changed, the `sides` property on
+    // the modifyFeature control should be updated.
     // --------------------------------------------------------------------
 
     // Set sides.
-    _t.vw.SPATIAL.__ui.sides.val('10');
-    _t.vw.SPATIAL.__ui.sides.trigger('change');
+    _t.vw.SPATIAL.__ui.sides.val('10').trigger('change');
 
     // "Sides" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
@@ -145,19 +139,56 @@ describe('Record Form Map Tab', function() {
   });
 
 
+  it('should block invalid sides', function() {
+
+    // --------------------------------------------------------------------
+    // When a value below 3 or a string is entered into the "Sides" input,
+    // the `sides` property should default to 3.
+    // --------------------------------------------------------------------
+
+    // Numbers below 3:
+    _.each(_.range(-1, 2), function(v) {
+      _t.vw.SPATIAL.__ui.sides.val(v).trigger('change');
+      expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
+    });
+
+    // String:
+    _t.vw.SPATIAL.__ui.sides.val('invalid').trigger('change');
+    expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
+
+  });
+
+
   it('should set snap angle', function() {
 
     // --------------------------------------------------------------------
-    // When a new value is entered into the "Snap Angle" input, the
-    // `snapAngle` property on the modifyFeature control should be updated.
+    // When the value in "Snap Angle" is changed, the `snapAngle` property
+    // on the modifyFeature control should be updated.
     // --------------------------------------------------------------------
 
     // Set snap angle.
-    _t.vw.SPATIAL.__ui.snap.val('45');
-    _t.vw.SPATIAL.__ui.snap.trigger('change');
+    _t.vw.SPATIAL.__ui.snap.val('45').trigger('change');
 
     // "Snap Angle" should be updated.
     expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
+
+  });
+
+
+  it('should block invalid snap angle', function() {
+
+    // --------------------------------------------------------------------
+    // When a negative value or a string is entered into the "Snap Angle"
+    // input, the `snapAngle` property should default to 0.
+    // --------------------------------------------------------------------
+
+    // Negative number:
+    _t.vw.SPATIAL.__ui.snap.val('-1').trigger('change');
+    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
+
+    // String:
+    _t.vw.SPATIAL.__ui.snap.val('invalid').trigger('change');
+    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
 
   });
 
@@ -170,15 +201,13 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set irregular.
-    _t.vw.SPATIAL.__ui.irreg.attr('checked', 'checked');
-    _t.vw.SPATIAL.__ui.irreg.trigger('change');
+    _t.vw.SPATIAL.__ui.irreg.attr('checked', 'checked').trigger('change');
 
     // "Irregular" be active.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    _t.vw.SPATIAL.__ui.irreg.removeAttr('checked');
-    _t.vw.SPATIAL.__ui.irreg.trigger('change');
+    _t.vw.SPATIAL.__ui.irreg.removeAttr('checked').trigger('change');
 
     // "Irregular" should be inactive.
     expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
@@ -195,8 +224,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Modify Shape".
     el.pan.removeAttr('checked');
-    el.modify.attr('checked', 'checked');
-    el.modify.trigger('change');
+    el.modify.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
@@ -218,8 +246,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Rotate Shape".
     el.pan.removeAttr('checked');
-    el.rotate.attr('checked', 'checked');
-    el.rotate.trigger('change');
+    el.rotate.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
@@ -241,8 +268,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Resize Shape".
     el.pan.removeAttr('checked');
-    el.resize.attr('checked', 'checked');
-    el.resize.trigger('change');
+    el.resize.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
@@ -264,8 +290,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Drag Shape".
     el.pan.removeAttr('checked');
-    el.drag.attr('checked', 'checked');
-    el.drag.trigger('change');
+    el.drag.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
@@ -287,8 +312,7 @@ describe('Record Form Map Tab', function() {
 
     // Check "Delete Shape".
     el.pan.removeAttr('checked');
-    el.remove.attr('checked', 'checked');
-    el.remove.trigger('change');
+    el.remove.attr('checked', 'checked').trigger('change');
 
     // "Delete Shape" should be active.
     expect(_t.vw.MAP.controls.remove.active).toBeTruthy();
