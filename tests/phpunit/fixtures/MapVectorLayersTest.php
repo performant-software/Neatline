@@ -32,6 +32,9 @@ class FixturesTest_MapVectorLayers extends Neatline_RecordsFixtureCase
         $record1->coverage = 'POINT(1 2)';
         $record2->coverage = 'POINT(3 4)';
         $record3->coverage = 'POINT(5 6)';
+        $record1->added = '2003-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2001-01-01';
 
         $record1->save();
         $record2->save();

@@ -30,6 +30,10 @@ class FixturesTest_RecordsList extends Neatline_RecordsFixtureCase
         $record1->body = 'body1';
         $record2->body = 'body2';
         $record3->body = 'body3';
+        $record1->added = '2003-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2001-01-01';
+
         $record1->save();
         $record2->save();
         $record3->save();

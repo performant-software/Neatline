@@ -27,6 +27,10 @@ class FixturesTest_SearchMapMirror extends Neatline_RecordsFixtureCase
         $record1->title = 'list1';
         $record2->title = 'list2';
         $record3->title = 'list3';
+        $record1->added = '2003-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2001-01-01';
+
         $record1->save();
         $record2->save();
         $record3->save();
@@ -50,6 +54,10 @@ class FixturesTest_SearchMapMirror extends Neatline_RecordsFixtureCase
         $record1->title = 'map1';
         $record2->title = 'map2';
         $record3->title = 'map3';
+        $record1->added = '2003-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2001-01-01';
+
         $record1->save();
         $record2->save();
         $record3->save();

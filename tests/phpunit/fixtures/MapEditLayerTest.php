@@ -16,8 +16,8 @@ class FixturesTest_MapEditLayer extends Neatline_RecordsFixtureCase
 
 
     /**
-     * `MapVectorLayers.records.regular.json`
-     * `MapVectorLayers.records.deleted.json`
+     * `MapEditLayer.records.regular.json`
+     * `MapEditLayer.records.deleted.json`
      */
     public function testMapEditLayer()
     {
