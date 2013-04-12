@@ -140,7 +140,7 @@ class NeatlineRecord extends Neatline_AbstractRow
 
         // Check for WMS data.
         $fields['is_wms'] = $fields['wms_address'] &&
-          $fields['wms_layers'] ? 1 : 0;
+            $fields['wms_layers'] ? 1 : 0;
 
         return $fields;
 
