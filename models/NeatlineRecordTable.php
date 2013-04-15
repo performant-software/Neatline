@@ -125,7 +125,7 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         // ** Limit
         if (isset($params['limit']) && isset($params['offset'])) {
-            $data['offset'] = $params['offset'];
+            $data['offset'] = (int) $params['offset'];
             $select = $this->_filterByLimit($select,
                 $params['limit'],
                 $params['offset']
