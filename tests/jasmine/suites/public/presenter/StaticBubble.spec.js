@@ -13,14 +13,21 @@
 describe('Static Bubble', function() {
 
 
-  var el, model;
+  var el, model1, model2;
 
 
   beforeEach(function() {
+
     _t.loadNeatline();
-    model = new Neatline.Shared.Record.Model({
-      presenter: 'StaticBubble', title: 'title', body: 'body'
+
+    model1 = new Neatline.Shared.Record.Model({
+      presenter: 'StaticBubble', title: 'title1', body: 'body1'
     });
+
+    model2 = new Neatline.Shared.Record.Model({
+      presenter: 'StaticBubble', title: 'title2', body: 'body2'
+    });
+
   });
 
 
@@ -30,14 +37,14 @@ describe('Static Bubble', function() {
 
       // ------------------------------------------------------------------
       // When the presenter is shown, the title should be displayed in the
-      // container (the body should stay hidden).
+      // container and the body should remain hidden.
       // ------------------------------------------------------------------
 
-      Neatline.execute('PRESENTER:show', model);
+      Neatline.execute('PRESENTER:show', model1);
 
       // Should populate title and body.
-      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title');
-      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body');
+      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title1');
+      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
 
       // Title should be visible.
       expect(_t.vw.BUBBLE.$('.title')).toBeVisible();
@@ -58,8 +65,8 @@ describe('Static Bubble', function() {
       // When the presenter is hidden, the bubble should be emptied.
       // ------------------------------------------------------------------
 
-      Neatline.execute('PRESENTER:show', model);
-      Neatline.execute('PRESENTER:hide', model);
+      Neatline.execute('PRESENTER:show', model1);
+      Neatline.execute('PRESENTER:hide', model1);
 
       // Bubble should be empty.
       expect(_t.vw.BUBBLE.$el).toBeEmpty();
@@ -69,112 +76,102 @@ describe('Static Bubble', function() {
   });
 
 
-  // it('should freeze bubble on select', function() {
+  describe('select', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a feature is selected, the bubble should stay visible when the
-  //   // cursor leaves the feature.
-  //   // --------------------------------------------------------------------
+    it('should show body and "X" when body is not empty', function() {
 
-  //   _t.hoverOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature1);
-  //   _t.unHoverOnMapFeature();
+      // ------------------------------------------------------------------
+      // When the presenter is selected and the record has body content,
+      // the body container and close "X" should be displayed.
+      // ------------------------------------------------------------------
 
-  //   // Bubble should still be visible.
-  //   expect(_t.vw.BUBBLE.$el).toBeVisible();
+      Neatline.execute('PRESENTER:select', model1);
 
-  // });
+      // Body and close "X" should be visible.
+      expect(_t.vw.BUBBLE.$('.body')).toBeVisible();
+      expect(_t.vw.BUBBLE.$('.close')).toBeVisible();
 
+    });
 
-  // it('should show body and close "X" when body is not empty', function() {
+    it('should not show body and "X" when body is empty', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When a feature is selected and the record has a non-null body, the
-  //   // body container and close "X" should be displayed.
-  //   // --------------------------------------------------------------------
+      // ------------------------------------------------------------------
+      // When the presenter is selected and the record has a null body,
+      // the body container and close "X" should _not_ be displayed.
+      // ------------------------------------------------------------------
 
-  //   layers[0].nModel.set('body', 'content');
+      model1.set('body', null);
+      Neatline.execute('PRESENTER:select', model1);
 
-  //   _t.hoverOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature1);
+      // Body and close "X" should be visible.
+      expect(_t.vw.BUBBLE.$('.body')).not.toBeVisible();
+      expect(_t.vw.BUBBLE.$('.close')).not.toBeVisible();
 
-  //   // Body/X should be visible.
-  //   expect(el.close).toBeVisible();
-  //   expect(el.body).toBeVisible();
+    });
 
-  // });
+    it('should add `bound` and `frozen` classes', function() {
 
+      // ------------------------------------------------------------------
+      // When the presenter is selected, the `bound` and `frozen` classes
+      // should be added to the container.
+      // ------------------------------------------------------------------
 
-  // it('should not show body and close "X" when body is empty', function() {
+      Neatline.execute('PRESENTER:select', model1);
 
-  //   // --------------------------------------------------------------------
-  //   // When a feature is selected and the record has a null body, the body
-  //   // container and close "X" should not be displayed.
-  //   // --------------------------------------------------------------------
+      // Should have `bound` and `frozen` classes.
+      expect(_t.vw.BUBBLE.$el).toHaveClass('bound');
+      expect(_t.vw.BUBBLE.$el).toHaveClass('frozen');
 
-  //   // Set null body.
-  //   layers[0].nModel.set('body', null);
+    });
 
-  //   // Highlight feature, then select.
-  //   _t.hoverOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature1);
+    it('should stay visible on `hide`', function() {
 
-  //   // Body, "X" should be not visible.
-  //   expect(el.body).not.toBeVisible();
-  //   expect(el.close).not.toBeVisible();
+      // ------------------------------------------------------------------
+      // When the presenter is selected, the bubble should not be emptied 
+      // when the presenter is hidden.
+      // ------------------------------------------------------------------
 
-  // });
+      Neatline.execute('PRESENTER:select', model1);
+      Neatline.execute('PRESENTER:hide', model1);
 
+      // Should not empty the bubble.
+      expect(_t.vw.BUBBLE.$el).not.toBeEmpty();
 
-  // it('should add the `frozen` class on feature select', function() {
+    });
 
-  //   // --------------------------------------------------------------------
-  //   // When a feature is selected, the `frozen` class should be added.
-  //   // --------------------------------------------------------------------
+    it('should not respond to `show` events', function() {
 
-  //   _t.hoverOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature1);
+      // ------------------------------------------------------------------
+      // When the presenter is selected, the bubble should not respond to
+      // `show` events for other records.
+      // ------------------------------------------------------------------
 
-  //   // Should add `frozen` class.
-  //   expect(_t.vw.BUBBLE.$el).toHaveClass('frozen');
+      Neatline.execute('PRESENTER:select', model1);
+      Neatline.execute('PRESENTER:show', model2);
 
-  // });
+      // Should not bind new model.
+      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title1');
+      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
 
+    });
 
-  // it('should not respond to hover events when frozen', function() {
+    it('should not respond to `select` events', function() {
 
-  //   // --------------------------------------------------------------------
-  //   // When the bubble is frozen and the cursor hovers over a feature for
-  //   // a different record, the bubble should not render the new record.
-  //   // --------------------------------------------------------------------
+      // ------------------------------------------------------------------
+      // When the presenter is selected, the bubble should respond to
+      // `select` events for other records.
+      // ------------------------------------------------------------------
 
-  //   _t.hoverOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature1);
-  //   _t.hoverOnMapFeature(feature2);
+      Neatline.execute('PRESENTER:select', model1);
+      Neatline.execute('PRESENTER:select', model2);
 
-  //   // Bubble content should not change.
-  //   expect(el.title.text()).toEqual('title1');
-  //   expect(el.body.text()).toEqual('body1');
+      // Should bind new model.
+      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title2');
+      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body2');
 
-  // });
+    });
 
-
-  // it('should respond to click events when frozen', function() {
-
-  //   // --------------------------------------------------------------------
-  //   // When the bubble is frozen and a different feature is clicked, the
-  //   // bubble should render the new record.
-  //   // --------------------------------------------------------------------
-
-  //   _t.hoverOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature1);
-  //   _t.clickOnMapFeature(feature2);
-
-  //   // Bubble content should change.
-  //   expect(el.title.text()).toEqual('title2');
-  //   expect(el.body.text()).toEqual('body2');
-
-  // });
+  });
 
 
   // describe('close', function() {
