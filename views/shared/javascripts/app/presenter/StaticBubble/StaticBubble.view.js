@@ -41,25 +41,6 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
     /**
-     * Get the window height and width.
-     */
-    measureWindow: function() {
-      this.windowH = this.window.outerHeight();
-      this.windowW = this.window.outerWidth();
-    },
-
-
-    /**
-     * Get the bubble height and width.
-     */
-    measureBubble: function() {
-      this.$el.height('');
-      this.bubbleH = this.el.scrollHeight;
-      this.bubbleW = this.$el.outerWidth();
-    },
-
-
-    /**
      * Render values, inject bubble, add move listener.
      *
      * @param {Object} model: The record model.
@@ -68,7 +49,7 @@ Neatline.module('Presenter.StaticBubble', function(
       if (!this.frozen && this.active) {
 
         // Store reference to mouseout callback.
-        this.onMouseOut  = _.bind(this.hide, this);
+        this.onMouseOut = _.bind(this.hide, this);
 
         // Bind to mousemove and mouseout.
         var map = Neatline.request('MAP:getMap');
