@@ -30,11 +30,11 @@ describe('Widget', function() {
     // When a widget is started and the view element is not attached to
     // the DOM (which is the case when a container for the the widget
     // has not been explicitly templated by the theme), the view element
-    // should be append to the exhibit container.
+    // should be append to the map container.
     // --------------------------------------------------------------------
 
     var inst = new view();
-    expect($('#neatline')).toContain('#widget');
+    expect($('#neatline-map')).toContain('#widget');
 
   });
 
@@ -50,7 +50,7 @@ describe('Widget', function() {
     $('body').append($('<div id="widget"></div>'));
 
     var inst = new view();
-    expect($('#neatline')).not.toContain('#widget');
+    expect($('#neatline-map')).not.toContain('#widget');
 
   });
 

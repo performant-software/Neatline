@@ -24,10 +24,10 @@ Neatline.module('Shared.Widget', function(
      * On startup, check to see if the view element is attached to the DOM
      * (which is the case if an element with the view's `id` is directly
      * templated on the page). If not, append the view element to the core
-     * `#neatline` container.
+     * `#neatline-map` container.
      */
     init: function() {
-      if (!$('#'+this.id).length) this.$el.appendTo($('#neatline'));
+      if (!$('#'+this.id).length) this.$el.appendTo($('#neatline-map'));
     },
 
 
