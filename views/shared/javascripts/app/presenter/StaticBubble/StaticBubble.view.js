@@ -41,25 +41,14 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
     /**
-     * Render values, inject bubble, add move listener.
+     * Render values and inject the bubble.
      *
      * @param {Object} model: The record model.
      */
     show: function(model) {
       if (!this.frozen && this.active) {
-
-        // Store reference to mouseout callback.
-        this.onMouseOut = _.bind(this.hide, this);
-
-        // Bind to mousemove and mouseout.
-        var map = Neatline.request('MAP:getMap');
-        map.events.register('mouseout', null, this.onMouseOut);
-
-        // Render template, inject bubble.
         rivets.bind(this.$el, { record: model });
         Neatline.Map.__view.$el.append(this.$el);
-        this.model = model;
-
       }
     },
 
@@ -68,10 +57,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (!this.frozen) {
-        this.$el.detach();
-        this.unbind();
-      }
+      if (!this.frozen) this.$el.detach();
     },
 
 
@@ -81,9 +67,9 @@ Neatline.module('Presenter.StaticBubble', function(
      * @param {Object} model: The record model.
      */
     select: function(model) {
-      this.show(model);
-      if (this.model.get('body')) this.$el.addClass('body');
+      if (model.get('body')) this.$el.addClass('body');
       this.$el.addClass('frozen');
+      this.show(model);
       this.frozen = true;
     },
 
@@ -112,15 +98,6 @@ Neatline.module('Presenter.StaticBubble', function(
      */
     deactivate: function() {
       this.active = false;
-    },
-
-
-    /**
-     * Unbind move and leave listeners.
-     */
-    unbind: function() {
-      var map = Neatline.request('MAP:getMap');
-      map.events.unregister('mouseout', null, this.onMouseOut);
     }
 
 

@@ -77,21 +77,6 @@ describe('Static Bubble', function() {
   });
 
 
-  it('should hide bubble when the cursor leaves the exhibit', function() {
-
-    // --------------------------------------------------------------------
-    // When the cursor leaves the exhibit, the bubble should disappear.
-    // --------------------------------------------------------------------
-
-    _t.hoverOnMapFeature(feature1);
-    _t.triggerMapMouseout();
-
-    // Bubble should not be visible.
-    expect(_t.vw.BUBBLE.$el).not.toBeVisible();
-
-  });
-
-
   it('should freeze bubble on select', function() {
 
     // --------------------------------------------------------------------
