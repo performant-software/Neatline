@@ -72,7 +72,9 @@ Neatline.module('Presenter.StaticBubble', function(
      * @param {Object} model: The record model.
      */
     show: function(model) {
-      if (!this.selected && this.active) this.__bind(model);
+      if (!this.selected && this.active) {
+        this.__bind(model);
+      }
     },
 
 
@@ -80,7 +82,9 @@ Neatline.module('Presenter.StaticBubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (!this.selected) this.__unbind();
+      if (!this.selected) {
+        this.__unbind();
+      }
     },
 
 
@@ -90,10 +94,12 @@ Neatline.module('Presenter.StaticBubble', function(
      * @param {Object} model: The record model.
      */
     select: function(model) {
-      if (model.get('body')) this.$el.addClass('body');
-      this.$el.addClass('frozen');
-      this.selected = true;
-      this.__bind(model);
+      if (this.active) {
+        if (model.get('body')) this.$el.addClass('body');
+        this.$el.addClass('selected');
+        this.selected = true;
+        this.__bind(model);
+      }
     },
 
 
@@ -101,7 +107,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Unfreeze and hide the bubble.
      */
     unselect: function() {
-      this.$el.removeClass('frozen body');
+      this.$el.removeClass('selected body');
       this.selected = false;
       this.__unbind();
     },
