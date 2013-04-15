@@ -32,6 +32,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
               stroke-opacity: 4;
             }
         ";
+
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record1->tags = 'tag1';

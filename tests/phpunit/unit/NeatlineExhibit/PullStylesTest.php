@@ -36,12 +36,15 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
               stroke-opacity: 6;
             }
         ";
+
         $record = new NeatlineRecord($exhibit);
-        $record->fill_color     = '7';
-        $record->fill_opacity   = 8;
-        $record->stroke_color   = '9';
-        $record->stroke_opacity = 10;
-        $record->tags = 'tag1,tag2';
+        $record->setArray(array(
+            'tags'              => 'tag1,tag2',
+            'fill_color'        => '7',
+            'fill_opacity'      => 8,
+            'stroke_color'      => '9',
+            'stroke_opacity'    => 10
+        ));
 
         // Pull styles.
         $exhibit->pullStyles($record);
@@ -81,6 +84,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
               invalid: value;
             }
         ";
+
         $record = new NeatlineRecord($exhibit);
         $record->fill_color = '2';
         $record->tags = 'tag';
@@ -112,6 +116,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
               fill-color: 1;
             }
         ";
+
         $record = new NeatlineRecord($exhibit);
         $record->fill_color = '2';
 
@@ -121,7 +126,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
 
             // `all` selector should be updated.
             'all' => array(
-                'fill_color' => '2',
+                'fill_color' => '2'
             )
 
         ));
@@ -141,6 +146,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
               point-image: url;
             }
         ";
+
         $record = new NeatlineRecord($exhibit);
         $record->point_image = null;
 

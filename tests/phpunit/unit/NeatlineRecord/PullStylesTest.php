@@ -36,6 +36,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               stroke-opacity: 6;
             }
         ";
+
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
@@ -58,7 +59,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
 
 
     /**
-     * `pullStyles` should pull values from the `auto` selector.
+     * `pullStyles` should pull values from the `all` selector.
      */
     public function testPullAllTag()
     {
@@ -72,6 +73,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               fill-opacity: 2;
             }
         ";
+
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
@@ -99,6 +101,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               fill-color: auto;
             }
         ";
+
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
@@ -126,6 +129,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               invalid: value;
             }
         ";
+
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
@@ -152,6 +156,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               point-image: none;
             }
         ";
+
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
