@@ -14,12 +14,10 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  StaticBubble.View = Backbone.Neatline.View.extend({
+  StaticBubble.View = Neatline.Shared.Widget.View.extend({
 
 
-    template:   '#static-bubble-template',
-    className:  'bubble',
-    id:         'static-bubble',
+    id: 'static-bubble',
 
     events: {
       'click .close': 'unselect'
@@ -32,22 +30,39 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
     /**
-     * Initialize state.
+     * Initialize state, compile template.
      */
     init: function() {
+
+      StaticBubble.View.__super__.init.apply(this);
+
       this.active   = true;   // True when bubble should be displayed.
       this.selected = false;  // True when bubble is frozen after a click.
+
+      this.template = _.template(
+        $('#static-bubble-template').html()
+      );
+
     },
 
 
     /**
-     * Render values and inject the bubble.
+     * Populate title and body.
      *
      * @param {Object} model: The record model.
      */
-    bind: function(model) {
-      rivets.bind(this.$el, { record: model });
-      Neatline.Map.__view.$el.append(this.$el);
+    __bind: function(model) {
+      this.$el.html(this.template({ record: model }));
+      this.$el.addClass('bound');
+    },
+
+
+    /**
+     * Clear title and body.
+     */
+    __unbind: function() {
+      this.$el.empty();
+      this.$el.removeClass('bound');
     },
 
 
@@ -57,7 +72,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * @param {Object} model: The record model.
      */
     show: function(model) {
-      if (!this.selected && this.active) this.bind(model);
+      if (!this.selected && this.active) this.__bind(model);
     },
 
 
@@ -65,7 +80,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (!this.selected) this.$el.detach();
+      if (!this.selected) this.__unbind();
     },
 
 
@@ -78,7 +93,7 @@ Neatline.module('Presenter.StaticBubble', function(
       if (model.get('body')) this.$el.addClass('body');
       this.$el.addClass('frozen');
       this.selected = true;
-      this.bind(model);
+      this.__bind(model);
     },
 
 
@@ -88,7 +103,7 @@ Neatline.module('Presenter.StaticBubble', function(
     unselect: function() {
       this.$el.removeClass('frozen body');
       this.selected = false;
-      this.hide();
+      this.__unbind();
     },
 
 

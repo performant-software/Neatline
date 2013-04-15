@@ -16,6 +16,6 @@
 
 <script id="static-bubble-template" type="text/templates">
   <a name="close" class="close">&times;</a>
-  <div class="title" data-html="record.title"></div>
-  <div class="body" data-html="record.body"></div>
+  <div class="title"><%= record.get('title') %></div>
+  <div class="body"><%= record.get('body') %></div>
 </script>

@@ -13,13 +13,13 @@
 describe('Presenter API', function() {
 
 
-  var model, execute;
+  var model, exec;
 
 
   beforeEach(function() {
     _t.loadNeatline();
     model = new Neatline.Shared.Record.Model({ presenter: 'P' });
-    exec  = spyOn(Neatline, 'execute').andCallThrough();
+    exec = spyOn(Neatline, 'execute').andCallThrough();
   });
 
 
