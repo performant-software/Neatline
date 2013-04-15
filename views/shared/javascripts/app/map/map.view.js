@@ -630,6 +630,7 @@ Neatline.module('Map', function(
      */
     onFeatureSelect: function(feature) {
       Neatline.vent.trigger('MAP:select', feature.layer.nModel);
+      Neatline.execute('PRESENTER:select', feature.layer.nModel);
     },
 
 
@@ -641,6 +642,7 @@ Neatline.module('Map', function(
      */
     onFeatureUnselect: function(feature) {
       Neatline.vent.trigger('MAP:unselect', feature.layer.nModel);
+      Neatline.execute('PRESENTER:unselect', feature.layer.nModel);
     },
 
 
@@ -652,6 +654,7 @@ Neatline.module('Map', function(
      */
     onFeatureHighlight: function(evt) {
       Neatline.vent.trigger('MAP:highlight', evt.feature.layer.nModel);
+      Neatline.execute('PRESENTER:show', evt.feature.layer.nModel);
     },
 
 
@@ -663,6 +666,7 @@ Neatline.module('Map', function(
      */
     onFeatureUnhighlight: function(evt) {
       Neatline.vent.trigger('MAP:unhighlight', evt.feature.layer.nModel);
+      Neatline.execute('PRESENTER:hide', evt.feature.layer.nModel);
     }
 
 

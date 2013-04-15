@@ -25,6 +25,7 @@ describe('Map Cursor Events', function() {
     feature = layer.features[0];
 
     vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    exec = spyOn(Neatline, 'execute').andCallThrough();
 
   });
 
@@ -36,8 +37,9 @@ describe('Map Cursor Events', function() {
     // Should render `temporary` style.
     expect(feature.renderIntent).toEqual('temporary');
 
-    // Should publish `MAP:highlight`.
+    // Should trigger `MAP:highlight` and `PRESENTER:show`.
     expect(vent).toHaveBeenCalledWith('MAP:highlight', layer.nModel);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:show', layer.nModel);
 
   });
 
@@ -50,8 +52,9 @@ describe('Map Cursor Events', function() {
     // Should render `default` style.
     expect(feature.renderIntent).toEqual('default');
 
-    // Should publish `MAP:unhighlight`.
+    // Should trigger `MAP:unhighlight` and `PRESENTER:hide`.
     expect(vent).toHaveBeenCalledWith('MAP:unhighlight', layer.nModel);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:hide', layer.nModel);
 
   });
 
@@ -63,8 +66,9 @@ describe('Map Cursor Events', function() {
     // Should render `select` style.
     expect(feature.renderIntent).toEqual('select');
 
-    // Should publish `MAP:select`.
+    // Should publish `MAP:select` and `PRESENTER:select`.
     expect(vent).toHaveBeenCalledWith('MAP:select', layer.nModel);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:select', layer.nModel);
 
   });
 
@@ -77,8 +81,9 @@ describe('Map Cursor Events', function() {
     // Should render `default` style.
     expect(feature.renderIntent).toEqual('default');
 
-    // Should publish `MAP:unselect`.
+    // Should publish `MAP:unselect` and `PRESENTER:unselect`.
     expect(vent).toHaveBeenCalledWith('MAP:unselect', layer.nModel);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:unselect', layer.nModel);
 
   });
 

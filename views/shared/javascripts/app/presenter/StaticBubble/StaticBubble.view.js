@@ -35,8 +35,19 @@ Neatline.module('Presenter.StaticBubble', function(
      * Initialize state.
      */
     init: function() {
-      this.active = true;   // True when bubble should be displayed.
-      this.frozen = false;  // True when bubble is frozen after a click.
+      this.active   = true;   // True when bubble should be displayed.
+      this.selected = false;  // True when bubble is frozen after a click.
+    },
+
+
+    /**
+     * Render values and inject the bubble.
+     *
+     * @param {Object} model: The record model.
+     */
+    bind: function(model) {
+      rivets.bind(this.$el, { record: model });
+      Neatline.Map.__view.$el.append(this.$el);
     },
 
 
@@ -46,10 +57,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * @param {Object} model: The record model.
      */
     show: function(model) {
-      if (!this.frozen && this.active) {
-        rivets.bind(this.$el, { record: model });
-        Neatline.Map.__view.$el.append(this.$el);
-      }
+      if (!this.selected && this.active) this.bind(model);
     },
 
 
@@ -57,7 +65,7 @@ Neatline.module('Presenter.StaticBubble', function(
      * Hide the bubble.
      */
     hide: function() {
-      if (!this.frozen) this.$el.detach();
+      if (!this.selected) this.$el.detach();
     },
 
 
@@ -69,8 +77,8 @@ Neatline.module('Presenter.StaticBubble', function(
     select: function(model) {
       if (model.get('body')) this.$el.addClass('body');
       this.$el.addClass('frozen');
-      this.show(model);
-      this.frozen = true;
+      this.selected = true;
+      this.bind(model);
     },
 
 
@@ -78,9 +86,8 @@ Neatline.module('Presenter.StaticBubble', function(
      * Unfreeze and hide the bubble.
      */
     unselect: function() {
-      Neatline.execute('MAP:unselect');
       this.$el.removeClass('frozen body');
-      this.frozen = false;
+      this.selected = false;
       this.hide();
     },
 
