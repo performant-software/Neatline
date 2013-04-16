@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for the Stamen layer handler.
+ * Tests for the Stamen base layer constructor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Stamen Base Layer', function() {
+describe('Stamen Base Layer Constructor', function() {
 
 
   var layer;

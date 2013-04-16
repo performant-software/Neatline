@@ -27,6 +27,7 @@ Neatline.module('Presenter', function(
     } catch (e) {}
   };
   Neatline.commands.setHandler('PRESENTER:show', show);
+  Neatline.vent.on('show', show);
 
 
   /**
@@ -42,6 +43,7 @@ Neatline.module('Presenter', function(
     } catch(e) {}
   };
   Neatline.commands.setHandler('PRESENTER:hide', hide);
+  Neatline.vent.on('hide', hide);
 
 
   /**
@@ -57,6 +59,7 @@ Neatline.module('Presenter', function(
     } catch (e) {}
   };
   Neatline.commands.setHandler('PRESENTER:select', select);
+  Neatline.vent.on('select', select);
 
 
   /**
@@ -72,6 +75,7 @@ Neatline.module('Presenter', function(
     } catch (e) {}
   };
   Neatline.commands.setHandler('PRESENTER:unselect', unselect);
+  Neatline.vent.on('unselect', unselect);
 
 
 });

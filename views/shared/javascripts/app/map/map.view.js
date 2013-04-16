@@ -623,50 +623,42 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is selected, publish `MAP:select` with the model
-     * instance that was used to construct the layer.
-     *
-     * @param {Object|OpenLayers.Feature} feature: The feature.
-     */
-    onFeatureSelect: function(feature) {
-      Neatline.vent.trigger('MAP:select', feature.layer.nModel);
-      Neatline.execute('PRESENTER:select', feature.layer.nModel);
-    },
-
-
-    /**
-     * When a feature is unselected, publish `MAP:unselect` with the model
-     * instance that was used to construct the layer.
-     *
-     * @param {Object|OpenLayers.Feature} feature: The feature.
-     */
-    onFeatureUnselect: function(feature) {
-      Neatline.vent.trigger('MAP:unselect', feature.layer.nModel);
-      Neatline.execute('PRESENTER:unselect', feature.layer.nModel);
-    },
-
-
-    /**
-     * When a feature is highlighted, publish `MAP:highlight` with the
-     * model instance that was used to construct the layer.
+     * When a feature is highlighted, trigger the `show` event.
      *
      * @param {Object} evt: The highlight event.
      */
     onFeatureHighlight: function(evt) {
-      Neatline.vent.trigger('MAP:highlight', evt.feature.layer.nModel);
-      Neatline.execute('PRESENTER:show', evt.feature.layer.nModel);
+      Neatline.vent.trigger('show', evt.feature.layer.nModel);
     },
 
 
     /**
-     * When a feature is un-highlighted, publish `MAP:unhighlight` with
-     * the model instance that was used to construct the layer.
+     * When a feature is unhighlighted, trigger the `hide` event.
      *
      * @param {Object} evt: The unhighlight event.
      */
     onFeatureUnhighlight: function(evt) {
-      Neatline.vent.trigger('MAP:unhighlight', evt.feature.layer.nModel);
-      Neatline.execute('PRESENTER:hide', evt.feature.layer.nModel);
+      Neatline.vent.trigger('hide', evt.feature.layer.nModel);
+    },
+
+
+    /**
+     * When a feature is selected, trigger the `select` event.
+     *
+     * @param {Object|OpenLayers.Feature} feature: The feature.
+     */
+    onFeatureSelect: function(feature) {
+      Neatline.vent.trigger('select', feature.layer.nModel);
+    },
+
+
+    /**
+     * When a feature is unselected, trigger the `unselect` event.
+     *
+     * @param {Object|OpenLayers.Feature} feature: The feature.
+     */
+    onFeatureUnselect: function(feature) {
+      Neatline.vent.trigger('unselect', feature.layer.nModel);
     }
 
 

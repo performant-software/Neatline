@@ -25,26 +25,24 @@ describe('Map Cursor Events', function() {
     feature = layer.features[0];
 
     vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
-    exec = spyOn(Neatline, 'execute').andCallThrough();
 
   });
 
 
-  it('should render and publish feature hover', function() {
+  it('should render and publish feature highlight', function() {
 
     _t.hoverOnMapFeature(feature);
 
     // Should render `temporary` style.
     expect(feature.renderIntent).toEqual('temporary');
 
-    // Should trigger `MAP:highlight` and `PRESENTER:show`.
-    expect(vent).toHaveBeenCalledWith('MAP:highlight', layer.nModel);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:show', layer.nModel);
+    // Should trigger `highlight`.
+    expect(vent).toHaveBeenCalledWith('show', layer.nModel);
 
   });
 
 
-  it('should render and publish feature unhover', function() {
+  it('should render and publish feature unhighlight', function() {
 
     _t.hoverOnMapFeature(feature);
     _t.unHoverOnMapFeature();
@@ -52,9 +50,8 @@ describe('Map Cursor Events', function() {
     // Should render `default` style.
     expect(feature.renderIntent).toEqual('default');
 
-    // Should trigger `MAP:unhighlight` and `PRESENTER:hide`.
-    expect(vent).toHaveBeenCalledWith('MAP:unhighlight', layer.nModel);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:hide', layer.nModel);
+    // Should trigger `unhighlight`.
+    expect(vent).toHaveBeenCalledWith('hide', layer.nModel);
 
   });
 
@@ -66,9 +63,8 @@ describe('Map Cursor Events', function() {
     // Should render `select` style.
     expect(feature.renderIntent).toEqual('select');
 
-    // Should publish `MAP:select` and `PRESENTER:select`.
-    expect(vent).toHaveBeenCalledWith('MAP:select', layer.nModel);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:select', layer.nModel);
+    // Should publish `select`.
+    expect(vent).toHaveBeenCalledWith('select', layer.nModel);
 
   });
 
@@ -81,9 +77,8 @@ describe('Map Cursor Events', function() {
     // Should render `default` style.
     expect(feature.renderIntent).toEqual('default');
 
-    // Should publish `MAP:unselect` and `PRESENTER:unselect`.
-    expect(vent).toHaveBeenCalledWith('MAP:unselect', layer.nModel);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:unselect', layer.nModel);
+    // Should publish `unselect`.
+    expect(vent).toHaveBeenCalledWith('unselect', layer.nModel);
 
   });
 
@@ -96,7 +91,7 @@ describe('Map Cursor Events', function() {
     _t.assertLastRequestRoute(Neatline.global.records_api);
     _t.assertLastRequestMethod('GET');
 
-    // Should constrain by extent and zoom.
+    // Should filter on extent and zoom.
     _t.assertLastRequestHasGetParameter('extent');
     _t.assertLastRequestHasGetParameter('zoom');
 

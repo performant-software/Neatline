@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for the WMS layer handler.
+ * Tests for the WMS base layer handler constructor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('WMS Base Layer', function() {
+describe('WMS Base Layer Constructor', function() {
 
 
   beforeEach(function() {

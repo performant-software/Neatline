@@ -49,15 +49,14 @@ describe('Static Bubble', function() {
 
     beforeEach(function() {
       Neatline.execute('PRESENTER:show', model1);
+      Neatline.execute('PRESENTER:hide', model1);
     });
 
-    it('should empty bubble', function() {
-      Neatline.execute('PRESENTER:hide', model1);
+    it('should empty the bubble', function() {
       expect(_t.vw.BUBBLE.$el).toBeEmpty();
     });
 
     it('should remove `bound` class', function() {
-      Neatline.execute('PRESENTER:hide', model1);
       expect(_t.vw.BUBBLE.$el).not.toHaveClass('bound');
     });
 

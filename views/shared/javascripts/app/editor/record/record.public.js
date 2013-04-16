@@ -93,7 +93,7 @@ Neatline.module('Editor.Record', function(
     }
   };
   Neatline.commands.setHandler('RECORD:navToForm', navToForm);
-  Neatline.vent.on('MAP:select', navToForm);
+  Neatline.vent.on('select', navToForm);
 
 
   /**

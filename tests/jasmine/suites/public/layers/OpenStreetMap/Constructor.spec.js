@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for the OpenStreetMap layer handler.
+ * Tests for the OpenStreetMap base layer constructor.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('OpenStreetMap Base Layer', function() {
+describe('OpenStreetMap Base Layer Constructor', function() {
 
 
   beforeEach(function() {
