@@ -12,8 +12,16 @@
  */
 
 
-class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
+abstract class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
 {
+
+
+    /**
+     * Get the Jasmine fixtures directory.
+     *
+     * @return string The directory.
+     */
+    abstract protected function getFixturesPath();
 
 
     /**
@@ -92,8 +100,7 @@ class Neatline_AbstractTestCase extends Omeka_Test_AppTestCase
     {
 
         // Open the fixture file.
-        $path = NL_DIR . '/tests/jasmine/fixtures/';
-        $fixture = fopen($path . $file, 'w');
+        $fixture = fopen($this->getFixturesPath() . $file, 'w');
 
         // Write fixture.
         fwrite($fixture, $body);

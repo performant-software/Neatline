@@ -53,4 +53,15 @@ class Neatline_TestCase extends Neatline_AbstractTestCase
     }
 
 
+    /**
+     * Get the Jasmine fixtures directory.
+     *
+     * @return string The directory.
+     */
+    protected function getFixturesPath()
+    {
+        return NL_DIR . '/tests/jasmine/fixtures/';
+    }
+
+
 }
