@@ -118,7 +118,7 @@ var _t = (function(_t) {
    */
   _t.showRecordForm = function(response) {
     this.navigate('record/'+JSON.parse(response).id);
-    _t.respondLast200(response);
+    this.respondLast200(response);
   };
 
 
@@ -128,8 +128,8 @@ var _t = (function(_t) {
    * @param {Object} response: The response body.
    */
   _t.showStyles = function(response) {
-    _t.navigate('styles');
-    _t.respondLast200(response);
+    this.navigate('styles');
+    this.respondLast200(response);
   };
 
 
