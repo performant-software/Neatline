@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_Html extends Neatline_TestCase
+class FixturesTest_HtmlPartials extends Neatline_TestCase
 {
 
 
@@ -34,8 +34,7 @@ class FixturesTest_Html extends Neatline_TestCase
         $exhibit->base_layer = 'OpenStreetMap';
         $exhibit->save();
 
-        // Set script path and exhibit variable.
-        get_view()->setScriptPath(NL_DIR . '/views/shared');
+        // Set exhibit on view.
         get_view()->neatline_exhibit = $exhibit;
 
     }
