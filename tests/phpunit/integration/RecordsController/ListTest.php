@@ -240,4 +240,33 @@ class RecordsControllerTest_List extends Neatline_TestCase
     }
 
 
+    /**
+     * The `widget` parameter should be passed to the query.
+     */
+    public function testWidgetFilter()
+    {
+
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
+        $record1->widgets = 'Widget1';
+        $record2->widgets = 'Widget2';
+
+        $record1->save();
+        $record2->save();
+
+        $this->request->setQuery(array(
+            'widget' => 'Widget1')
+        );
+
+        // GET with query that excludes record 2.
+        $this->dispatch('neatline/records');
+        $response = $this->getResponseArray();
+
+        // Should apply tags filter.
+        $this->assertEquals($response->records[0]->id, $record1->id);
+        $this->assertCount(1, $response->records);
+
+    }
+
+
 }
