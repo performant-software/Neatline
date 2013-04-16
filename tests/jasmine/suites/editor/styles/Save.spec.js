@@ -141,15 +141,14 @@ describe('Styles Save', function() {
     // should be automatically refreshed to manifest the new styles.
     // --------------------------------------------------------------------
 
-    // Spy on event executor.
-    spyOn(Neatline, 'execute');
+    spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Click on "Save".
     el.save.trigger('click');
     _t.respondLast200('');
 
-    // Should refresh map.
-    expect(Neatline.execute).toHaveBeenCalledWith('MAP:refresh');
+    // Should refresh the exhibit.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
 
   });
 

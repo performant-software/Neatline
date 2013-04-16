@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Layer Filter', function() {
+describe('Map Layer Filtering', function() {
 
 
   beforeEach(function() {
@@ -25,7 +25,7 @@ describe('Map Layer Filter', function() {
     // re-filter all vector and WMS layers on the map.
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.MapLayerFilter.records.regular);
+    _t.respondMap200(_t.json.MapLayerFiltering.records.regular);
 
     // By default, all layers visible.
     expect(_t.getVectorLayer('title1').getVisibility()).toBeTruthy();
@@ -36,7 +36,7 @@ describe('Map Layer Filter', function() {
     expect(_t.getWmsLayer('title3').getVisibility()).toBeTruthy();
 
     // Filter out records with title `title1`.
-    Neatline.execute('MAP:setFilter', 'title1', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title1', function(layer) {
       return layer.nModel.get('title') != 'title1';
     });
 
@@ -49,7 +49,7 @@ describe('Map Layer Filter', function() {
     expect(_t.getWmsLayer('title3').getVisibility()).toBeTruthy();
 
     // Filter out records with title `title2`.
-    Neatline.execute('MAP:setFilter', 'title2', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title2', function(layer) {
       return layer.nModel.get('title') != 'title2';
     });
 
@@ -62,7 +62,7 @@ describe('Map Layer Filter', function() {
     expect(_t.getWmsLayer('title3').getVisibility()).toBeTruthy();
 
     // Filter out records with title `title3`.
-    Neatline.execute('MAP:setFilter', 'title3', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title3', function(layer) {
       return layer.nModel.get('title') != 'title3';
     });
 
@@ -84,16 +84,16 @@ describe('Map Layer Filter', function() {
     // the passed key and re-filter all vector and WMS layers on the map.
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.MapLayerFilter.records.regular);
+    _t.respondMap200(_t.json.MapLayerFiltering.records.regular);
 
     // Filter out records with `title1`, `title2`, `title3`.
-    Neatline.execute('MAP:setFilter', 'title1', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title1', function(layer) {
       return layer.nModel.get('title') != 'title1';
     });
-    Neatline.execute('MAP:setFilter', 'title2', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title2', function(layer) {
       return layer.nModel.get('title') != 'title2';
     });
-    Neatline.execute('MAP:setFilter', 'title3', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title3', function(layer) {
       return layer.nModel.get('title') != 'title3';
     });
 
@@ -106,7 +106,7 @@ describe('Map Layer Filter', function() {
     expect(_t.getWmsLayer('title3').getVisibility()).toBeFalsy();
 
     // Remove `title1` filter.
-    Neatline.execute('MAP:removeFilter', 'title1');
+    Neatline.vent.trigger('removeFilter', 'title1');
 
     // Record 1 should be visible.
     expect(_t.getVectorLayer('title1').getVisibility()).toBeTruthy();
@@ -117,7 +117,7 @@ describe('Map Layer Filter', function() {
     expect(_t.getWmsLayer('title3').getVisibility()).toBeFalsy();
 
     // Remove `title2` filter.
-    Neatline.execute('MAP:removeFilter', 'title2');
+    Neatline.vent.trigger('removeFilter', 'title2');
 
     // Records 1 and 2 should be visible.
     expect(_t.getVectorLayer('title1').getVisibility()).toBeTruthy();
@@ -128,7 +128,7 @@ describe('Map Layer Filter', function() {
     expect(_t.getWmsLayer('title3').getVisibility()).toBeFalsy();
 
     // Remove `title3` filter.
-    Neatline.execute('MAP:removeFilter', 'title3');
+    Neatline.vent.trigger('removeFilter', 'title3');
 
     // Records 1, 2, and 3 should be visible.
     expect(_t.getVectorLayer('title1').getVisibility()).toBeTruthy();
@@ -148,15 +148,15 @@ describe('Map Layer Filter', function() {
     // through the filtering system before being added to the map.
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.MapLayerFilter.records.deleted);
+    _t.respondMap200(_t.json.MapLayerFiltering.records.deleted);
 
     // Filter out `title3`.
-    Neatline.execute('MAP:setFilter', 'title3', function(layer) {
+    Neatline.vent.trigger('setFilter', 'title3', function(layer) {
       return layer.nModel.get('title') != 'title3';
     });
 
     // Load collection with record 3.
-    _t.refreshMap(_t.json.MapLayerFilter.records.regular);
+    _t.refreshMap(_t.json.MapLayerFiltering.records.regular);
 
     // Records 3 should be hidden.
     expect(_t.getVectorLayer('title3').getVisibility()).toBeFalsy();

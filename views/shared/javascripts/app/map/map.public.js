@@ -35,6 +35,7 @@ Neatline.module('Map', function(
     Map.__view.publishPosition();
   };
   Neatline.commands.setHandler('MAP:refresh', refresh);
+  Neatline.vent.on('refresh', refresh);
 
 
   /**
@@ -46,6 +47,7 @@ Neatline.module('Map', function(
     Map.__view.focusByModel(model);
   };
   Neatline.commands.setHandler('MAP:focusByModel', focusByModel);
+  Neatline.vent.on('focus', focusByModel);
 
 
   /**
@@ -71,6 +73,7 @@ Neatline.module('Map', function(
     Map.__view.setFilter(key, evaluator);
   };
   Neatline.commands.setHandler('MAP:setFilter', setFilter);
+  Neatline.vent.on('setFilter', setFilter);
 
 
   /**
@@ -82,6 +85,7 @@ Neatline.module('Map', function(
     Map.__view.removeFilter(key);
   };
   Neatline.commands.setHandler('MAP:removeFilter', removeFilter);
+  Neatline.vent.on('removeFilter', removeFilter);
 
 
   /**

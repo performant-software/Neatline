@@ -117,7 +117,7 @@ Neatline.module('Editor.Record', function(
      */
     onCloseClick: function() {
       Neatline.execute('RECORDS:navToList');
-      Neatline.execute('MAP:refresh');
+      Neatline.vent.trigger('refresh');
       this.unbind();
     },
 
@@ -160,7 +160,7 @@ Neatline.module('Editor.Record', function(
       );
 
       // Refresh the map.
-      Neatline.execute('MAP:refresh');
+      Neatline.vent.trigger('refresh');
 
     },
 
@@ -190,7 +190,7 @@ Neatline.module('Editor.Record', function(
       this.onCloseClick();
 
       // Refresh the map.
-      Neatline.execute('MAP:refresh');
+      Neatline.vent.trigger('refresh');
 
     },
 

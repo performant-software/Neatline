@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for map layer refresh.
+ * Tests for map layer refreshing.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Layer Refresh', function() {
+describe('Map Layer Refreshing', function() {
 
 
   beforeEach(function() {
@@ -26,7 +26,7 @@ describe('Map Layer Refresh', function() {
     // --------------------------------------------------------------------
 
     // Load default layers.
-    _t.refreshMap(_t.json.MapLayerRefresh.records.regular);
+    _t.refreshMap(_t.json.MapLayerRefreshing.records.regular);
 
     // Should manifest original vector data.
     var layers = _t.vw.MAP.getVectorLayers();
@@ -48,10 +48,10 @@ describe('Map Layer Refresh', function() {
     expect(layers[2].params.LAYERS).toEqual('layers3');
     _t.assertWmsLayerCount(3);
 
-    Neatline.execute('MAP:refresh');
+    Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    _t.respondLast200(_t.json.MapLayerRefresh.records.changed);
+    _t.respondLast200(_t.json.MapLayerRefreshing.records.changed);
     var layers = _t.vw.MAP.getVectorLayers();
 
     // Should manifest changed vector data.
@@ -84,13 +84,13 @@ describe('Map Layer Refresh', function() {
     // --------------------------------------------------------------------
 
     // Load default layers, freeze layer 2.
-    _t.refreshMap(_t.json.MapLayerRefresh.records.regular);
+    _t.refreshMap(_t.json.MapLayerRefreshing.records.regular);
     _t.getVectorLayer('title2').nFrozen = true;
 
-    Neatline.execute('MAP:refresh');
+    Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    _t.respondLast200(_t.json.MapLayerRefresh.records.changed);
+    _t.respondLast200(_t.json.MapLayerRefreshing.records.changed);
     var layer = _t.getVectorLayer('title2');
 
     // Should not change layer 2 geometry.

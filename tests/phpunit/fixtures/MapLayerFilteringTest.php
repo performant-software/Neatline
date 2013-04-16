@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Fixture generator for "Map Layer Refresh" Jasmine suite.
+ * Fixture generator for "Map Layer Filtering" Jasmine suite.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -11,15 +11,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapLayerRefresh extends Neatline_RecordsFixtureCase
+class FixturesTest_MapLayerFiltering extends Neatline_RecordsFixtureCase
 {
 
 
     /**
-     * `MapLayerRefresh.records.regular.json`
-     * `MapLayerRefresh.records.changed.json`
+     * `MapLayerFiltering.records.json`
      */
-    public function testMapLayerRefresh()
+    public function testMapLayerFiltering()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -46,26 +45,14 @@ class FixturesTest_MapLayerRefresh extends Neatline_RecordsFixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'MapLayerRefresh.records.regular.json'
+            'MapLayerFiltering.records.regular.json'
         );
 
-        $record1->coverage = 'POINT(7 8)';
-        $record2->coverage = 'POINT(9 10)';
-        $record3->coverage = 'POINT(11 12)';
-        $record1->wms_address = 'address4';
-        $record2->wms_address = 'address5';
-        $record3->wms_address = 'address6';
-        $record1->wms_layers = 'layers4';
-        $record2->wms_layers = 'layers5';
-        $record3->wms_layers = 'layers6';
-
-        $record1->save();
-        $record2->save();
-        $record3->save();
+        $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'MapLayerRefresh.records.changed.json'
+            'MapLayerFiltering.records.deleted.json'
         );
 
     }

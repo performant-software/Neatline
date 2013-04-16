@@ -114,7 +114,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * When a save succeeds.
      */
     onSaveSuccess: function() {
-      Neatline.execute('MAP:refresh');
+      Neatline.vent.trigger('refresh');
       Neatline.execute('EDITOR:notifySuccess',
         STRINGS.exhibit.save.success
       );

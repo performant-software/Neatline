@@ -50,7 +50,7 @@ describe('Map Record Focusing', function() {
     });
 
     it('focusByModel', function() {
-      Neatline.execute('MAP:focusByModel', layer.nModel);
+      Neatline.vent.trigger('focus', layer.nModel);
     });
 
     it('focusById', function() {
@@ -91,7 +91,7 @@ describe('Map Record Focusing', function() {
       var model = _t.recordFromJson(_t.json.MapRecordFocusing.record);
       var count = _t.server.requests.count;
 
-      Neatline.execute('MAP:focusByModel', model);
+      Neatline.vent.trigger('focus', model);
 
       // Should not load record from server.
       expect(_t.server.requests.count).toEqual(count);

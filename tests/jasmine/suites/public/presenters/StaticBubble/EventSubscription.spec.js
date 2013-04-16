@@ -34,7 +34,7 @@ describe('Static Bubble Incoming Events', function() {
   describe('show', function() {
 
     beforeEach(function() {
-      Neatline.execute('PRESENTER:show', model1);
+      Neatline.vent.trigger('show', model1);
     });
 
     it('should populate the title and body', function() {
@@ -139,12 +139,12 @@ describe('Static Bubble Incoming Events', function() {
     });
 
     it('should not respond to `show` events', function() {
-      Neatline.execute('PRESENTER:show', model1);
+      Neatline.vent.trigger('show', model1);
       expect(_t.vw.BUBBLE.$el).toBeEmpty();
     });
 
     it('should not respond to `select` events', function() {
-      Neatline.execute('PRESENTER:select', model1);
+      Neatline.vent.trigger('select', model1);
       expect(_t.vw.BUBBLE.$el).toBeEmpty();
     });
 

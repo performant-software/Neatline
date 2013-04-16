@@ -45,17 +45,17 @@ var _t = (function(_t) {
         }
       },
 
-      MapLayerRefresh: {
+      MapLayerRefreshing: {
         records: {
-          regular:  readFixtures('MapLayerRefresh.records.regular.json'),
-          changed:  readFixtures('MapLayerRefresh.records.changed.json')
+          regular:  readFixtures('MapLayerRefreshing.records.regular.json'),
+          changed:  readFixtures('MapLayerRefreshing.records.changed.json')
         }
       },
 
-      MapLayerFilter: {
+      MapLayerFiltering: {
         records: {
-          regular:  readFixtures('MapLayerFilter.records.regular.json'),
-          deleted:  readFixtures('MapLayerFilter.records.deleted.json')
+          regular:  readFixtures('MapLayerFiltering.records.regular.json'),
+          deleted:  readFixtures('MapLayerFiltering.records.deleted.json')
         }
       },
 

@@ -157,23 +157,22 @@ describe('Record Form Delete', function() {
   });
 
 
-  it('should update the map when delete succeeds', function() {
+  it('should refresh the exhibit when delete succeeds', function() {
 
     // --------------------------------------------------------------------
     // When the "Yes, delete" button is clicked and the request succeeds,
     // the map should be automatically refreshed to manifest the deletion.
     // --------------------------------------------------------------------
 
-    // Spy on event executor.
-    spyOn(Neatline, 'execute');
+    spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
     _t.respondLast200('');
 
-    // Should refresh map.
-    expect(Neatline.execute).toHaveBeenCalledWith('MAP:refresh');
+    // Should refresh the exhibit.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
 
   });
 

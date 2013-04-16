@@ -45,15 +45,14 @@ describe('Record Form Close', function() {
   });
 
 
-  it('should update the map', function() {
+  it('should refresh the exhibit', function() {
 
     // --------------------------------------------------------------------
     // When the form is closed, the map should be automatically refreshed
     // to clear out any unsaved geometry changes.
     // --------------------------------------------------------------------
 
-    // Spy on event executor.
-    spyOn(Neatline, 'execute').andCallThrough();
+    spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Move the point to a different location.
     var feature = _t.vw.MAP.editLayer.features[0];
@@ -67,9 +66,9 @@ describe('Record Form Close', function() {
     // Click "X".
     el.close.trigger('click');
 
-    // Should refresh map.
-    expect(Neatline.execute).toHaveBeenCalledWith('MAP:refresh');
-    _t.respondLast200(_t.json.RecordFormClose.records);
+    // Should refresh the exhibit.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
+    _t.respondMap200(_t.json.RecordFormClose.records);
 
     // Should revert to the saved geometry.
     var layer = _t.vw.MAP.getVectorLayers()[0];
