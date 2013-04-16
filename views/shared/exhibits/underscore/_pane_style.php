@@ -138,6 +138,20 @@
       'style' => 'end-date'
   )); ?>
 
+  <?php echo common('neatline/input', array(
+      'name'  => 'show-after-date',
+      'label' => 'Show After Date',
+      'bind'  => 'record.show_after_date',
+      'style' => 'show-after-date'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
+      'name'  => 'show-before-date',
+      'label' => 'Show Before Date',
+      'bind'  => 'record.show_before_date',
+      'style' => 'show-before-date'
+  )); ?>
+
   <legend>Imagery</legend>
 
   <?php echo common('neatline/input', array(
@@ -178,20 +192,6 @@
       'bind'  => 'record.max_zoom',
       'style' => 'max-zoom',
       'useCurrent' => true
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'show-after-date',
-      'label' => 'Show After Date',
-      'bind'  => 'record.show_after_date',
-      'style' => 'show-after-date'
-  )); ?>
-
-  <?php echo common('neatline/input', array(
-      'name'  => 'show-before-date',
-      'label' => 'Show Before Date',
-      'bind'  => 'record.show_before_date',
-      'style' => 'show-before-date'
   )); ?>
 
   <?php echo common('neatline/input', array(

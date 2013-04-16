@@ -60,6 +60,7 @@ Neatline.module('Editor.Record', function(
       // Update map on model change.
       this.listenTo(this.model, 'change', _.bind(function() {
         Neatline.execute('MAPEDIT:updateModel', this.model);
+        console.log(this.model.get('stroke_width'));
       }, this));
 
     },

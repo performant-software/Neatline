@@ -220,4 +220,28 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
     }
 
 
+    /**
+     * When data is saved to a new, unsaved record, values from the `all`
+     * selector should be pulled to the record before it is used to update
+     * the exhibit CSS.
+     */
+    public function testPullAllTagWhenUnsaved()
+    {
+
+    }
+
+
+    /**
+     * When data is saved to an existing record, values from the `all`
+     * selector should _not_ be pulled to the record before it is used to
+     * update the exhibit CSS. Otherwise, existing values on the exhibit
+     * stylesheet would always clobber new values from the form, making it
+     * impossible to change any of the fields controlled by `all`.
+     */
+    public function testNotPullAllTagWhenSaved()
+    {
+
+    }
+
+
 }

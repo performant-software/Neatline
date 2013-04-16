@@ -40,7 +40,6 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $record1->save();
         $record2->save();
 
-        // Push styles.
         $exhibit->pushStyles();
         $record1 = $this->reload($record1);
         $record2 = $this->reload($record2);
@@ -77,7 +76,6 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $record->tags = 'tag';
         $record->save();
 
-        // Push styles.
         $exhibit->pushStyles();
         $record = $this->reload($record);
 
@@ -105,7 +103,6 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $record->tags = 'tag';
         $record->save();
 
-        // Push styles.
         $exhibit->pushStyles();
         $record = $this->reload($record);
 
@@ -132,7 +129,6 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $record->tags = 'tag';
         $record->save();
 
-        // Push styles.
         $exhibit->pushStyles();
         $record = $this->reload($record);
 
@@ -157,7 +153,6 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $record1 = $this->__record($exhibit);
         $record2 = $this->__record($exhibit);
 
-        // Push styles.
         $exhibit->pushStyles();
         $record1 = $this->reload($record1);
         $record2 = $this->reload($record2);
@@ -189,7 +184,6 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $record1->save();
         $record2->save();
 
-        // Push styles.
         $exhibit1->pushStyles();
         $record1 = $this->reload($record1);
         $record2 = $this->reload($record2);

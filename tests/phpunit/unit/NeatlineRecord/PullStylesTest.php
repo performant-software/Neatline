@@ -40,7 +40,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
-        // Pull `tag1` and `tag2`, save.
+        // Pull `tag1` and `tag2`.
         $record->pullStyles(array('tag1', 'tag2'));
         $record->save();
         $record = $this->reload($record);
@@ -105,7 +105,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
-        // Pull `tag`, save.
+        // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
         $record = $this->reload($record);
@@ -133,7 +133,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
-        // Pull `tag`, save.
+        // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
         $record = $this->reload($record);
@@ -160,7 +160,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
 
-        // Pull `tag`, save.
+        // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
         $record = $this->reload($record);

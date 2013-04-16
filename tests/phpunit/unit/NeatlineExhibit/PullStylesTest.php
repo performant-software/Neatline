@@ -46,11 +46,11 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
             'stroke_opacity'    => 10
         ));
 
-        // Pull styles.
         $exhibit->pullStyles($record);
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
 
-            // `tag1` and `tag2` styles updated.
+            // `tag1` and `tag2` styles should be updated.
+
             'tag1' => array(
                 'fill_color' => '7',
                 'fill_opacity' => '8'
@@ -60,7 +60,8 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
                 'stroke_opacity' => '10'
             ),
 
-            // `tag3` styles unchanged.
+            // `tag3` styles should be unchanged.
+
             'tag3' => array(
                 'stroke_color' => '5',
                 'stroke_opacity' => '6'
@@ -89,11 +90,11 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $record->fill_color = '2';
         $record->tags = 'tag';
 
-        // Pull styles.
         $exhibit->pullStyles($record);
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
 
             // Invalid property should be ignored.
+
             'tag' => array(
                 'fill_color' => '2',
                 'invalid' => 'value'
@@ -120,11 +121,11 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $record = new NeatlineRecord($exhibit);
         $record->fill_color = '2';
 
-        // Pull styles.
         $exhibit->pullStyles($record);
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
 
             // `all` selector should be updated.
+
             'all' => array(
                 'fill_color' => '2'
             )
@@ -150,11 +151,11 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $record = new NeatlineRecord($exhibit);
         $record->point_image = null;
 
-        // Pull styles.
         $exhibit->pullStyles($record);
         $this->assertEquals(_nl_readCSS($exhibit->styles), array(
 
             // `point-image` should pull `none`.
+
             'all' => array(
                 'point_image' => 'none'
             )
