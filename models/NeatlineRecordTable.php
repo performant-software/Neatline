@@ -70,12 +70,14 @@ class NeatlineRecordTable extends Omeka_Db_Table
      * @param NeatlineExhibit $exhibit The exhibit record.
      * @param array $params Associative array of filter parameters:
      *
-     *  - zoom:     The zoom level of the map.
-     *  - extent:   The viewport extent of the map.
-     *  - query:    A full-text search query.
-     *  - tags:     An array of tags.
-     *  - offset:   The number of records to skip.
-     *  - limit:    The number of records to get.
+     *  - zoom:         The zoom level of the map.
+     *  - extent:       The viewport extent of the map.
+     *  - query:        A full-text search query.
+     *  - tags:         An array of tags.
+     *  - widget:       A record widget activation.
+     *  - order:        A column to sort on.
+     *  - offset:       The number of records to skip.
+     *  - limit:        The number of records to get.
      *
      * @return array The collection of records.
      */
@@ -120,6 +122,13 @@ class NeatlineRecordTable extends Omeka_Db_Table
         if (isset($params['widget'])) {
             $select = $this->_filterByWidget($select,
                 $params['widget']
+            );
+        }
+
+        // ** Order
+        if (isset($params['order'])) {
+            $select = $this->_filterByOrder($select,
+                $params['order']
             );
         }
 
@@ -199,6 +208,20 @@ class NeatlineRecordTable extends Omeka_Db_Table
 
         return $select;
 
+    }
+
+
+    /**
+     * Order the query.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param string $column The column to order on.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterByOrder($select, $column)
+    {
+        $select->reset(Zend_Db_Select::ORDER);
+        return $select->order($column);
     }
 
 

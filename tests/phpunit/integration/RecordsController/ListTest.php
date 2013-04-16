@@ -109,7 +109,6 @@ class RecordsControllerTest_List extends Neatline_TestCase
             'zoom' => 1
         ));
 
-        // GET with zoom that excludes record 2.
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
@@ -138,45 +137,11 @@ class RecordsControllerTest_List extends Neatline_TestCase
           'extent' => 'POLYGON((0 0,0 2,2 2,2 0,0 0))'
         ));
 
-        // GET with extent that excludes record 2.
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply zoom filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
-        $this->assertCount(1, $response->records);
-
-    }
-
-
-    /**
-     * The `limit` and `offset` parameters should be passed to the query.
-     */
-    public function testLimitFilter()
-    {
-
-        $record1 = new NeatlineRecord($this->exhibit);
-        $record2 = new NeatlineRecord($this->exhibit);
-        $record3 = new NeatlineRecord($this->exhibit);
-        $record1->added = '2001-01-01';
-        $record2->added = '2002-01-01';
-        $record3->added = '2003-01-01';
-
-        $record1->save();
-        $record2->save();
-        $record3->save();
-
-        $this->request->setQuery(array(
-            'limit' => 1,
-            'offset' => 1
-        ));
-
-        // GET with limit that excludes records 1 and 3.
-        $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
-
-        // Should apply limit filter.
-        $this->assertEquals($response->records[0]->id, $record2->id);
         $this->assertCount(1, $response->records);
 
     }
@@ -200,7 +165,6 @@ class RecordsControllerTest_List extends Neatline_TestCase
             'query' => 'neatline'
         ));
 
-        // GET with query that excludes record 2.
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
@@ -229,7 +193,6 @@ class RecordsControllerTest_List extends Neatline_TestCase
             'tags' => array('tag1', 'tag2'))
         );
 
-        // GET with query that excludes record 2.
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
@@ -258,12 +221,79 @@ class RecordsControllerTest_List extends Neatline_TestCase
             'widget' => 'Widget1')
         );
 
-        // GET with query that excludes record 2.
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
-        // Should apply tags filter.
+        // Should apply widget filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
+        $this->assertCount(1, $response->records);
+
+    }
+
+
+    /**
+     * The `order` parameter should be passed to the query.
+     */
+    public function testOrderFilter()
+    {
+
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
+        $record3 = new NeatlineRecord($this->exhibit);
+        $record1->weight = 1;
+        $record2->weight = 2;
+        $record3->weight = 3;
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        $this->request->setQuery(array(
+            'order' => 'weight')
+        );
+
+        $this->dispatch('neatline/records');
+        $response = $this->getResponseArray();
+
+        // Should order on `weight`.
+        $this->assertEquals($response->records[0]->id, $record1->id);
+        $this->assertEquals($response->records[1]->id, $record2->id);
+        $this->assertEquals($response->records[2]->id, $record3->id);
+        $this->assertCount(3, $response->records);
+
+    }
+
+
+    /**
+     * The `limit` and `offset` parameters should be passed to the query.
+     */
+    public function testLimitFilter()
+    {
+
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
+        $record3 = new NeatlineRecord($this->exhibit);
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
+
+        $record1->save();
+        $record2->save();
+        $record3->save();
+
+        $this->request->setQuery(array(
+            'limit' => 1,
+            'offset' => 1
+        ));
+
+        $this->dispatch('neatline/records');
+        $response = $this->getResponseArray();
+
+        // Should apply limit filter.
+        $this->assertEquals($response->records[0]->id, $record2->id);
         $this->assertCount(1, $response->records);
 
     }
