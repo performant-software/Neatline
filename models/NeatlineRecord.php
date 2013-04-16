@@ -166,8 +166,10 @@ class NeatlineRecord extends Neatline_AbstractRow
     public function pullStyles($tags)
     {
 
-        // Always pull `all` tag.
-        $tags = array_merge($tags, array('all'));
+        // If the record is new, pull the `all` tag.
+        if (!$this->exists()) {
+            $tags = array_merge($tags, array('all'));
+        }
 
         // Parse the stylesheet.
         $css = _nl_readCSS($this->getExhibit()->styles);

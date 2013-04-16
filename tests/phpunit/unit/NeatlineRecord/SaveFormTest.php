@@ -228,6 +228,28 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
     public function testPullAllTagWhenUnsaved()
     {
 
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .all {
+              fill-color: 1;
+            }
+        ";
+        $exhibit->save();
+
+        // Save data to unsaved record.
+        $record = new NeatlineRecord($exhibit);
+        $record->saveForm(array('fill_color' => '2'));
+
+        // Should pull CSS value.
+        $this->assertEquals($record->fill_color, '1');
+
+        // CSS should be unchanged.
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+            'all' => array(
+                'fill_color' => '1'
+            )
+        ));
+
     }
 
 
@@ -240,6 +262,29 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
      */
     public function testNotPullAllTagWhenSaved()
     {
+
+        $exhibit = $this->__exhibit();
+        $exhibit->styles = "
+            .all {
+              fill-color: 1;
+            }
+        ";
+        $exhibit->save();
+
+        // Save data to existing record.
+        $record = $this->__record($exhibit);
+        $record->saveForm(array('fill_color' => '2'));
+        $exhibit = $this->reload($exhibit);
+
+        // Should not pull CSS value.
+        $this->assertEquals($record->fill_color, '2');
+
+        // CSS should be changed.
+        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+            'all' => array(
+                'fill_color' => '2'
+            )
+        ));
 
     }
 
