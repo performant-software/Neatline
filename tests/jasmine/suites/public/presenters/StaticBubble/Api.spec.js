@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Static bubble tests.
+ * Static bubble presenter API integration tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Static Bubble', function() {
+describe('Static Bubble API Integration', function() {
 
 
   var el, model1, model2;

@@ -75,6 +75,10 @@ var _t = (function(_t) {
         }
       },
 
+      StaticBubble: {
+        records:    readFixtures('StaticBubble.records.json')
+      },
+
       RecordForm: {
         record:     readFixtures('RecordForm.record.json'),
         records:    readFixtures('RecordForm.records.json')
