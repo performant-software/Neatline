@@ -20,7 +20,6 @@ var _t = (function(_t) {
   _t.loadNeatline = function() {
 
     // Load fixtures.
-    this.setFixturesPath();
     this.loadJsonFixtures();
     loadFixtures('neatline-partial.html');
     loadStyleFixtures('neatline.css');
@@ -39,7 +38,6 @@ var _t = (function(_t) {
   _t.loadEditor = function() {
 
     // Load fixtures.
-    this.setFixturesPath();
     this.loadJsonFixtures();
     loadFixtures('editor-partial.html');
     loadStyleFixtures('editor.css');

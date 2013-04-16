@@ -15,15 +15,6 @@ var _t = (function(_t) {
 
 
   /**
-   * Set the fixtures path.
-   */
-  _t.setFixturesPath = function() {
-    jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures';
-    jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/payloads';
-  };
-
-
-  /**
    * Read JSON fixtures.
    */
   _t.loadJsonFixtures = function() {
