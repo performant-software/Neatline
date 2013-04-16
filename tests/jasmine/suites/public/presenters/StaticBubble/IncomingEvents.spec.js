@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Static bubble presenter API integration tests.
+ * Static bubble incoming events tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Static Bubble API Integration', function() {
+describe('Static Bubble Incoming Events', function() {
 
 
   var el, model1, model2;
@@ -48,8 +48,8 @@ describe('Static Bubble API Integration', function() {
   describe('hide', function() {
 
     beforeEach(function() {
-      Neatline.execute('PRESENTER:show', model1);
-      Neatline.execute('PRESENTER:hide', model1);
+      Neatline.vent.trigger('show', model1);
+      Neatline.vent.trigger('hide', model1);
     });
 
     it('should empty the bubble', function() {
@@ -66,7 +66,7 @@ describe('Static Bubble API Integration', function() {
   describe('select', function() {
 
     beforeEach(function() {
-      Neatline.execute('PRESENTER:select', model1);
+      Neatline.vent.trigger('select', model1);
     });
 
     it('should add `bound` and `selected` classes', function() {
@@ -75,18 +75,18 @@ describe('Static Bubble API Integration', function() {
     });
 
     it('should not respond to `hide` events', function() {
-      Neatline.execute('PRESENTER:hide', model1);
+      Neatline.vent.trigger('hide', model1);
       expect(_t.vw.BUBBLE.$el).not.toBeEmpty();
     });
 
     it('should not respond to `show` events', function() {
-      Neatline.execute('PRESENTER:show', model2);
+      Neatline.vent.trigger('show', model2);
       expect(_t.vw.BUBBLE.$('.title')).toHaveText('title1');
       expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
     });
 
     it('should respond to `select` events', function() {
-      Neatline.execute('PRESENTER:select', model2);
+      Neatline.vent.trigger('select', model2);
       expect(_t.vw.BUBBLE.$('.title')).toHaveText('title2');
       expect(_t.vw.BUBBLE.$('.body')).toHaveText('body2');
     });
@@ -97,8 +97,8 @@ describe('Static Bubble API Integration', function() {
   describe('unselect', function() {
 
     beforeEach(function() {
-      Neatline.execute('PRESENTER:select', model1);
-      Neatline.execute('PRESENTER:unselect', model1);
+      Neatline.vent.trigger('select', model1);
+      Neatline.vent.trigger('unselect', model1);
     });
 
     it('should empty the bubble', function() {
@@ -116,7 +116,7 @@ describe('Static Bubble API Integration', function() {
   describe('close', function() {
 
     beforeEach(function() {
-      Neatline.execute('PRESENTER:select', model1);
+      Neatline.vent.trigger('select', model1);
       _t.vw.BUBBLE.$('.close').trigger('click');
     });
 
@@ -164,11 +164,11 @@ describe('Static Bubble API Integration', function() {
     });
 
     it('should start responding to `show` events', function() {
-      Neatline.execute('PRESENTER:show', model1);
+      Neatline.vent.trigger('show', model1);
     });
 
     it('should start responding to `select` events', function() {
-      Neatline.execute('PRESENTER:select', model1);
+      Neatline.vent.trigger('select', model1);
     });
 
   });

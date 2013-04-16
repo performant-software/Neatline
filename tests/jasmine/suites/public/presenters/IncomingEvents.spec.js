@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Presenter API tests.
+ * Presenter incoming events tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -19,34 +19,30 @@ describe('Presenter API', function() {
   beforeEach(function() {
     _t.loadNeatline();
     model = new Neatline.Shared.Record.Model({ presenter: 'P' });
-    exec = spyOn(Neatline, 'execute').andCallThrough();
+    exec = spyOn(Neatline, 'execute');
   });
 
 
   it('show', function() {
-    Neatline.commands.setHandler('PRESENTER:P:show', function() {});
-    Neatline.execute('PRESENTER:show', model);
+    Neatline.vent.trigger('show', model);
     expect(exec).toHaveBeenCalledWith('PRESENTER:P:show', model);
   });
 
 
   it('hide', function() {
-    Neatline.commands.setHandler('PRESENTER:P:hide', function() {});
-    Neatline.execute('PRESENTER:hide', model);
+    Neatline.vent.trigger('hide', model);
     expect(exec).toHaveBeenCalledWith('PRESENTER:P:hide', model);
   });
 
 
   it('select', function() {
-    Neatline.commands.setHandler('PRESENTER:P:select', function() {});
-    Neatline.execute('PRESENTER:select', model);
+    Neatline.vent.trigger('select', model);
     expect(exec).toHaveBeenCalledWith('PRESENTER:P:select', model);
   });
 
 
   it('unselect', function() {
-    Neatline.commands.setHandler('PRESENTER:P:unselect', function() {});
-    Neatline.execute('PRESENTER:unselect', model);
+    Neatline.vent.trigger('unselect', model);
     expect(exec).toHaveBeenCalledWith('PRESENTER:P:unselect', model);
   });
 
