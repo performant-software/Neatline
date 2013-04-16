@@ -208,7 +208,7 @@ Neatline.module('Map', function(
      * Publish the current focus and zoom of the map via `MAP:move`.
      */
     publishPosition: function() {
-      Neatline.vent.trigger('MAP:move', {
+      Neatline.execute('MAP:load', {
         extent: this.getExtentAsWKT(),
         zoom:   this.getZoom()
       });

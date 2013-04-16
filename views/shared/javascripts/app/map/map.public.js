@@ -25,7 +25,6 @@ Neatline.module('Map', function(
     });
   };
   Neatline.commands.setHandler('MAP:load', load);
-  Neatline.vent.on('MAP:move', load);
 
 
   /**
