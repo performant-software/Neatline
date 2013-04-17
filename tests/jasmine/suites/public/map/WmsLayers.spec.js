@@ -25,6 +25,8 @@ describe('Map WMS Layers', function() {
     // records with WMS data that arrive in the initial query. 
     // --------------------------------------------------------------------
 
+    _t.assertMapExtentQuery();
+
     _t.respondMap200(_t.json.MapWmsLayers.records.regular);
     var layers = _t.vw.MAP.getWmsLayers();
 
@@ -47,6 +49,8 @@ describe('Map WMS Layers', function() {
     // --------------------------------------------------------------------
 
     _t.triggerMapMove();
+
+    _t.assertMapExtentQuery();
 
     _t.respondLast200(_t.json.MapWmsLayers.records.regular);
     var layers = _t.vw.MAP.getWmsLayers();
