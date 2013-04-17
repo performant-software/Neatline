@@ -30,6 +30,13 @@ var _t = (function(_t) {
         record:     readFixtures('MapRecordFocusing.record.json')
       },
 
+      MapRecordIngesting: {
+        records: {
+          one:      readFixtures('MapRecordIngesting.records.one.json'),
+          two:      readFixtures('MapRecordIngesting.records.two.json')
+        }
+      },
+
       MapVectorLayers: {
         records: {
           regular:  readFixtures('MapVectorLayers.records.regular.json'),

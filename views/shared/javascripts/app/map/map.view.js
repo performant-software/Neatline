@@ -28,8 +28,10 @@ Neatline.module('Map', function(
     initialize: function() {
 
       this.layers = { vector: {}, wms: {} };
-      this.formatWKT = new OpenLayers.Format.WKT();
       this.filters = {};
+
+      this.formatWKT = new OpenLayers.Format.WKT();
+      this.isMoving = false;
 
       this.__initOpenLayers();
       this.__initBaseLayers();
@@ -155,14 +157,23 @@ Neatline.module('Map', function(
 
 
     /**
-     * Add a listener for the `moveend` event on the map, which is called
-     * when a pan or zoom is completed. Bind to `publishPosition`, which
-     * emits the current focus of the map and triggers off a data reload.
+     * Register listeners for `movestart` and `moveend`. When a move is
+     * started, flip the `isMoving` tracker, which is used to prevent new
+     * layers from being ingested _while_ the map is being moved, which
+     * can cause visual artifacts. When a move completes, issue a request
+     * for new layers that fall within the updated viewport extent.
      */
     __initEvents: function() {
-      this.map.events.register('moveend', this.map,
-        _.bind(this.publishPosition, this)
-      );
+
+      this.map.events.register('movestart', this.map, _.bind(function() {
+        this.isMoving = true;
+      }, this));
+
+      this.map.events.register('moveend', this.map, _.bind(function() {
+        this.isMoving = false;
+        this.publishPosition();
+      }, this));
+
     },
 
 
@@ -251,6 +262,8 @@ Neatline.module('Map', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
+
+      if (this.isMoving) return;
 
       // Build layers.
       this.ingestVectorLayers(records);
