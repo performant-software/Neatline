@@ -26,9 +26,7 @@ class Neatline_RecordsFixtureCase extends Neatline_TestCase
     {
         parent::setUp();
         $this->exhibit = $this->__exhibit();
-        $this->request->setQuery(array(
-          'exhibit_id' => $this->exhibit->id
-        ));
+        $this->request->setQuery('exhibit_id', $this->exhibit->id);
     }
 
 

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for map record focus commands.
+ * Tests for map record focus routines.
  *
  * @package     omeka
  * @subpackage  neatline
