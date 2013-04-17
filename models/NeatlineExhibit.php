@@ -184,8 +184,7 @@ class NeatlineExhibit extends Neatline_AbstractRow
      */
     protected function beforeDelete()
     {
-        $recordsTable = $this->getTable('NeatlineRecord');
-        $recordsTable->delete("{$this->_db->prefix}neatline_records",
+        $this->_db->delete("{$this->_db->prefix}neatline_records",
             array('exhibit_id = ?' => $this->id)
         );
     }
