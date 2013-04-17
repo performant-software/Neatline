@@ -75,8 +75,8 @@ describe('Map Outgoing Events', function() {
   it('should publish `unselect` on feature unselect', function() {
 
     // --------------------------------------------------------------------
-    // When a feature is unselected by a click on the map, the `unselect`
-    // event should be published with the feature's model.
+    // When a feature is unselected by a click elsewhere on the map, the
+    // `unselect` event should be published with the feature's model.
     // --------------------------------------------------------------------
 
     _t.clickOnMapFeature(feature);

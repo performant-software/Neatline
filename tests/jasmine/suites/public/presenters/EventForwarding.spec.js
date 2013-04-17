@@ -13,37 +13,83 @@
 describe('Presenter Event Forwarding', function() {
 
 
-  var model, exec;
+  var model1, model2, exec;
 
 
   beforeEach(function() {
+
     _t.loadNeatline();
-    model = new Neatline.Shared.Record.Model({ presenter: 'P' });
+
+    model1 = new Neatline.Shared.Record.Model({
+      presenter: 'Presenter1'
+    });
+
+    model2 = new Neatline.Shared.Record.Model({
+      presenter: 'Presenter2'
+    });
+
     exec = spyOn(Neatline, 'execute');
+
   });
 
 
   it('highlight', function() {
-    Neatline.vent.trigger('highlight', model);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:P:highlight', model);
+
+    Neatline.vent.trigger('highlight', model1);
+
+    expect(exec).toHaveBeenCalledWith(
+      'PRESENTER:Presenter1:highlight', model1
+    );
+
+    expect(exec).not.toHaveBeenCalledWith(
+      'PRESENTER:Presenter2:highlight', model2
+    );
+
   });
 
 
   it('unhighlight', function() {
-    Neatline.vent.trigger('unhighlight', model);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:P:unhighlight', model);
+
+    Neatline.vent.trigger('unhighlight', model1);
+
+    expect(exec).toHaveBeenCalledWith(
+      'PRESENTER:Presenter1:unhighlight', model1
+    );
+
+    expect(exec).not.toHaveBeenCalledWith(
+      'PRESENTER:Presenter2:unhighlight', model2
+    );
+
   });
 
 
   it('select', function() {
-    Neatline.vent.trigger('select', model);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:P:select', model);
+
+    Neatline.vent.trigger('select', model1);
+
+    expect(exec).toHaveBeenCalledWith(
+      'PRESENTER:Presenter1:select', model1
+    );
+
+    expect(exec).not.toHaveBeenCalledWith(
+      'PRESENTER:Presenter2:select', model2
+    );
+
   });
 
 
   it('unselect', function() {
-    Neatline.vent.trigger('unselect', model);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:P:unselect', model);
+
+    Neatline.vent.trigger('unselect', model1);
+
+    expect(exec).toHaveBeenCalledWith(
+      'PRESENTER:Presenter1:unselect', model1
+    );
+
+    expect(exec).not.toHaveBeenCalledWith(
+      'PRESENTER:Presenter2:unselect', model2
+    );
+
   });
 
 

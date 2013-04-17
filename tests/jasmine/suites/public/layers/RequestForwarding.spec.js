@@ -37,8 +37,8 @@ describe('Layers API', function() {
   it('should return a layer when a handler exists', function() {
 
     // --------------------------------------------------------------------
-    // When a layer is requested that has a type that is supported by one
-    // of the handlers, the request should return the layer.
+    // When a layer is requested with a type that is supported by any of
+    // the handlers, the request should return the layer.
     // --------------------------------------------------------------------
 
     Neatline.reqres.setHandler('LAYERS:LayerType', function() {

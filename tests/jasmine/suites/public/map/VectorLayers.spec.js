@@ -25,8 +25,6 @@ describe('Map Vector Layers', function() {
     // records that arrive in the initial query.
     // --------------------------------------------------------------------
 
-    _t.assertMapExtentQuery();
-
     _t.respondMap200(_t.json.MapVectorLayers.records.regular);
     var layers = _t.vw.MAP.getVectorLayers();
 
@@ -48,9 +46,7 @@ describe('Map Vector Layers', function() {
     // New vector layers should be loaded when the map is moved.
     // --------------------------------------------------------------------
 
-    _t.triggerMapMove();
-
-    _t.assertMapExtentQuery();
+    _t.triggerMapMoveEnd();
 
     _t.respondLast200(_t.json.MapVectorLayers.records.regular);
     var layers = _t.vw.MAP.getVectorLayers();

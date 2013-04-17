@@ -15,9 +15,17 @@ var _t = (function(_t) {
 
 
   /**
-   * Trigger a pan/zoom event on the map.
+   * Trigger a `movestart` event on the map.
    */
-  _t.triggerMapMove = function() {
+  _t.triggerMapMoveStart = function() {
+    this.vw.MAP.map.events.triggerEvent('movestart');
+  };
+
+
+  /**
+   * Trigger a `moveend` event on the map.
+   */
+  _t.triggerMapMoveEnd = function() {
     this.vw.MAP.map.events.triggerEvent('moveend');
   };
 
@@ -36,7 +44,7 @@ var _t = (function(_t) {
    * @param {Object} response: The response body.
    */
   _t.refreshMap = function(response) {
-    this.triggerMapMove();
+    this.triggerMapMoveEnd();
     this.respondLast200(response);
   };
 
