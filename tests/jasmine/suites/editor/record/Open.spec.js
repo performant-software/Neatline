@@ -238,26 +238,4 @@ describe('Record Form Open', function() {
   });
 
 
-  it('should not focus map when the form is opened via map', function() {
-
-    // --------------------------------------------------------------------
-    // When the user clicks on a map vector to open an edit form, the map
-    // should _not_ jump to the default focus position for the record that
-    // corresponds to the clicked geometry. This to prevent disorienting
-    // leaps that can occur when the default zoom for the clicked record
-    // is much wider or tighter than the current map zoom.
-    // --------------------------------------------------------------------
-
-    // Set center and zoom.
-    _t.setMapCenter(200, 300, 15);
-
-    // Trigger click on Record 1 feature.
-    _t.clickOnMapFeature(feature1);
-
-    // Focus should be unchanged.
-    _t.assertMapViewport(200, 300, 15);
-
-  });
-
-
 });

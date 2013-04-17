@@ -34,8 +34,8 @@ describe('Static Bubble Event Handlers', function() {
   describe('highlight', function() {
 
     // --------------------------------------------------------------------
-    // When the presenter is highlighted, the bubble should populate the
-    // title and body fields of the passed model.
+    // When the presenter is highlighted, the bubble should be populated
+    // with the title and body fields of the passed model.
     // --------------------------------------------------------------------
 
     beforeEach(function() {

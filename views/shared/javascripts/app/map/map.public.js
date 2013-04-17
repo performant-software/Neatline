@@ -47,7 +47,7 @@ Neatline.module('Map', function(
     Map.__view.focusByModel(model);
   };
   Neatline.commands.setHandler('MAP:focusByModel', focusByModel);
-  Neatline.vent.on('focus', focusByModel);
+  Neatline.vent.on('select', focusByModel);
 
 
   /**
