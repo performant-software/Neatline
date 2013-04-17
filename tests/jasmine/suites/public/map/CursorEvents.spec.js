@@ -67,19 +67,4 @@ describe('Map Cursor Events', function() {
   });
 
 
-  it('should issue GET request when map is moved', function() {
-
-    _t.triggerMapMove();
-
-    // Should trigger GET request to /records.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
-
-    // Should filter on extent and zoom.
-    _t.assertLastRequestHasGetParameter('extent');
-    _t.assertLastRequestHasGetParameter('zoom');
-
-  });
-
-
 });

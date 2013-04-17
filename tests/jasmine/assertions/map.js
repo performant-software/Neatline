@@ -29,6 +29,22 @@ var _t = (function(_t) {
 
 
   /**
+   * Assert that the last query was a map extent query.
+   */
+  _t.assertMapExtentQuery = function() {
+
+    // Should trigger GET request to /records.
+    this.assertLastRequestRoute(Neatline.global.records_api);
+    this.assertLastRequestMethod('GET');
+
+    // Should filter on extent and zoom.
+    this.assertLastRequestHasGetParameter('extent');
+    this.assertLastRequestHasGetParameter('zoom');
+
+  };
+
+
+  /**
    * Assert the number of vector layers.
    *
    * @param {Number} count: The number.
