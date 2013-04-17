@@ -115,7 +115,8 @@ Neatline.module('Map', function(
       this.clickControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
           onSelect:   this.onFeatureSelect,
-          onUnselect: this.onFeatureUnselect
+          onUnselect: this.onFeatureUnselect,
+          toggle: true
         }
       );
 

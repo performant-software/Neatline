@@ -24,34 +24,66 @@ describe('Map Outgoing Events', function() {
     layer = _t.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];
 
-    vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    vent = spyOn(Neatline.vent, 'trigger');
 
   });
 
 
   it('should publish `highlight` on feature highlight', function() {
+
+    // --------------------------------------------------------------------
+    // When the cursor hovers on a feature, the `highlight` event should
+    // be published with the feature's model.
+    // --------------------------------------------------------------------
+
     _t.hoverOnMapFeature(feature);
+
     expect(vent).toHaveBeenCalledWith('highlight', layer.nModel);
+
   });
 
 
   it('should publish `unhighlight` on feature unhighlight', function() {
+
+    // --------------------------------------------------------------------
+    // When the cursor leaves a feature, the `unhighlight` event should be
+    // published with the feature's model.
+    // --------------------------------------------------------------------
+
     _t.hoverOnMapFeature(feature);
     _t.unHoverOnMapFeature();
+
     expect(vent).toHaveBeenCalledWith('unhighlight', layer.nModel);
+
   });
 
 
   it('should publish `select` on feature select', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is clicked, the `select` event should be published
+    // with the feature's model.
+    // --------------------------------------------------------------------
+
     _t.clickOnMapFeature(feature);
+
     expect(vent).toHaveBeenCalledWith('select', layer.nModel, true);
+
   });
 
 
   it('should publish `unselect` on feature unselect', function() {
+
+    // --------------------------------------------------------------------
+    // When a feature is unselected by a click on the map, the `unselect`
+    // event should be published with the feature's model.
+    // --------------------------------------------------------------------
+
     _t.clickOnMapFeature(feature);
     _t.clickOffMapFeature();
+
     expect(vent).toHaveBeenCalledWith('unselect', layer.nModel);
+
   });
 
 
