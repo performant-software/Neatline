@@ -623,7 +623,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is highlighted, trigger the `highlight` event.
+     * When a feature is highlighted, trigger the `highlight` event with
+     * the model associated with the feature.
      *
      * @param {Object} evt: The highlight event.
      */
@@ -633,7 +634,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is unhighlighted, trigger the `unhighlight` event.
+     * When a feature is unhighlighted, trigger the `unhighlight` event
+     * with the model associated with the feature.
      *
      * @param {Object} evt: The unhighlight event.
      */
@@ -643,12 +645,18 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is selected, trigger the `select` event.
+     * When a feature is selected, trigger the `select` event with the
+     * model associated with the feature. Also publish a third parameter,
+     * {Boolean} `true`, to indicate that the event was initiated by a
+     * map click. This flag is used to suppress the map's default focusing
+     * response to `select` events, which can be discombobulating when
+     * the record's default zoom is much higher or lower than the current
+     * zoom level on the map, which produces a drastic context switch.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureSelect: function(feature) {
-      Neatline.vent.trigger('select', feature.layer.nModel);
+      Neatline.vent.trigger('select', feature.layer.nModel, true);
     },
 
 

@@ -44,7 +44,7 @@ describe('Map Outgoing Events', function() {
 
   it('should publish `select` on feature select', function() {
     _t.clickOnMapFeature(feature);
-    expect(vent).toHaveBeenCalledWith('select', layer.nModel);
+    expect(vent).toHaveBeenCalledWith('select', layer.nModel, true);
   });
 
 

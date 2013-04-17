@@ -57,6 +57,20 @@ function _nl_getStyles()
 
 
 /**
+ * Gather record tabs via the `neatline_record_tabs` filter.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return array An array of widget name => ids.
+ */
+function _nl_getRecordTabs($exhibit)
+{
+    return apply_filters('neatline_record_tabs', array(), array(
+        'exhibit' => $exhibit
+    ));
+}
+
+
+/**
  * Gather exhibit tabs via the `neatline_exhibit_tabs` filter.
  *
  * @param NeatlineExhibit $exhibit The exhibit.

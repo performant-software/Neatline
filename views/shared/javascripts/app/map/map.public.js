@@ -40,11 +40,17 @@ Neatline.module('Map', function(
 
   /**
    * Focus the map on the data extent for a record, identified by model.
+   * Unless {Boolean} `true` is passed as a second parameter, a flag that
+   * indicates that the event was triggered by a click on the map. When
+   * this is the case, suppress the default focusing response, which can
+   * be discombobulating when the record's default zoom is much higher or
+   * lower than the current zoom level of the map.
    *
    * @param {Object} model: The record model.
+   * @param {Boolean} mapClick: True if a map feature was clicked.
    */
-  var focusByModel = function(model) {
-    Map.__view.focusByModel(model);
+  var focusByModel = function(model, mapClick) {
+    if (mapClick !== true) Map.__view.focusByModel(model);
   };
   Neatline.commands.setHandler('MAP:focusByModel', focusByModel);
   Neatline.vent.on('select', focusByModel);

@@ -30,7 +30,6 @@ describe('Map Record Focusing', function() {
 
     beforeEach(function() {
 
-      // Inject starting record collection.
       _t.respondMap200(_t.json.MapRecordFocusing.records);
 
       // Get layer, cache request count.
@@ -112,6 +111,30 @@ describe('Map Record Focusing', function() {
       expect(request.url).toEqual(Neatline.global.records_api+'/999');
 
     });
+
+  });
+
+
+  it('should not focus map when vector layer is clicked', function() {
+
+    // --------------------------------------------------------------------
+    // When a map feature is clicked, the map should _not_ focus on the
+    // record that corresponds to the clicked geometry. This is to prevent
+    // disorienting leaps that can occur when the default zoom for the
+    // clicked record is much wider or tighter than the current map zoom.
+    // --------------------------------------------------------------------
+
+    _t.respondMap200(_t.json.MapRecordFocusing.records);
+    var feature = _t.vw.MAP.getVectorLayers()[0].features[0];
+
+    // Set center and zoom.
+    _t.setMapCenter(200, 300, 15);
+
+    // Click on feature.
+    _t.clickOnMapFeature(feature);
+
+    // Focus should be unchanged.
+    _t.assertMapViewport(200, 300, 15);
 
   });
 

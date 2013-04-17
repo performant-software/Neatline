@@ -221,9 +221,8 @@ describe('Record Form Open', function() {
   it('should focus map when the form is opened via editor', function() {
 
     // --------------------------------------------------------------------
-    // When an edit form is opened by way of the records pane (when the
-    // user clicks on one of the listings), the map should focus on the
-    // geometry vectors for that record.
+    // When the edit form is opened in response to a click on one of the
+    // listings in the record browser, the map should focus on the record.
     // --------------------------------------------------------------------
 
     // Set center and zoom.

@@ -30,7 +30,7 @@
 <?php echo $this->partial('exhibits/underscore/records.php'); ?>
 <?php echo $this->partial('exhibits/underscore/search.php'); ?>
 
-<!-- Plugin templates. ->
+<!-- Plugin templates. -->
 <?php fire_plugin_hook('neatline_editor_underscore', array(
   'exhibit' => _nl_exhibit()
 )); ?>
