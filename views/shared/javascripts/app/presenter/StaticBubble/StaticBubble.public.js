@@ -15,26 +15,26 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
   /**
-   * Show the bubble.
+   * Highlight the bubble.
    *
    * @param {Object} model: The record model.
    */
-  var show = function(model) {
-    StaticBubble.__view.show(model);
+  var highlight = function(model) {
+    StaticBubble.__view.highlight(model);
   };
   Neatline.commands.setHandler(
-    'PRESENTER:StaticBubble:show', show
+    'PRESENTER:StaticBubble:highlight', highlight
   );
 
 
   /**
-   * Hide the bubble.
+   * Unhighlight the bubble.
    */
-  var hide = function() {
-    StaticBubble.__view.hide();
+  var unhighlight = function() {
+    StaticBubble.__view.unhighlight();
   };
   Neatline.commands.setHandler(
-    'PRESENTER:StaticBubble:hide', hide
+    'PRESENTER:StaticBubble:unhighlight', unhighlight
   );
 
 

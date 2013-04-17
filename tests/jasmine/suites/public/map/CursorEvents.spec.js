@@ -37,7 +37,7 @@ describe('Map Cursor Events', function() {
     expect(feature.renderIntent).toEqual('temporary');
 
     // Should trigger `highlight`.
-    expect(vent).toHaveBeenCalledWith('show', layer.nModel);
+    expect(vent).toHaveBeenCalledWith('highlight', layer.nModel);
 
   });
 
@@ -51,7 +51,7 @@ describe('Map Cursor Events', function() {
     expect(feature.renderIntent).toEqual('default');
 
     // Should trigger `unhighlight`.
-    expect(vent).toHaveBeenCalledWith('hide', layer.nModel);
+    expect(vent).toHaveBeenCalledWith('unhighlight', layer.nModel);
 
   });
 

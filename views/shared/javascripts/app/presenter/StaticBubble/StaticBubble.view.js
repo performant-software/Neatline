@@ -67,11 +67,11 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
     /**
-     * Render values and inject the bubble.
+     * Display the bubble.
      *
      * @param {Object} model: The record model.
      */
-    show: function(model) {
+    highlight: function(model) {
       if (!this.selected && this.active) {
         this.bind(model);
       }
@@ -81,7 +81,7 @@ Neatline.module('Presenter.StaticBubble', function(
     /**
      * Hide the bubble.
      */
-    hide: function() {
+    unhighlight: function() {
       if (!this.selected) {
         this.unbind();
       }

@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Static bubble incoming events tests.
+ * Static bubble event subscription tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Static Bubble Incoming Events', function() {
+describe('Static Bubble Event Subscriptions', function() {
 
 
   var el, model1, model2;
@@ -31,10 +31,10 @@ describe('Static Bubble Incoming Events', function() {
   });
 
 
-  describe('show', function() {
+  describe('highlight', function() {
 
     beforeEach(function() {
-      Neatline.vent.trigger('show', model1);
+      Neatline.vent.trigger('highlight', model1);
     });
 
     it('should populate the title and body', function() {
@@ -45,11 +45,11 @@ describe('Static Bubble Incoming Events', function() {
   });
 
 
-  describe('hide', function() {
+  describe('unhighlight', function() {
 
     beforeEach(function() {
-      Neatline.vent.trigger('show', model1);
-      Neatline.vent.trigger('hide', model1);
+      Neatline.vent.trigger('highlight', model1);
+      Neatline.vent.trigger('unhighlight', model1);
     });
 
     it('should empty the bubble', function() {
@@ -74,13 +74,13 @@ describe('Static Bubble Incoming Events', function() {
       expect(_t.vw.BUBBLE.$el).toHaveClass('selected');
     });
 
-    it('should not respond to `hide` events', function() {
-      Neatline.vent.trigger('hide', model1);
+    it('should not respond to `unhighlight` events', function() {
+      Neatline.vent.trigger('unhighlight', model1);
       expect(_t.vw.BUBBLE.$el).not.toBeEmpty();
     });
 
-    it('should not respond to `show` events', function() {
-      Neatline.vent.trigger('show', model2);
+    it('should not respond to `highlight` events', function() {
+      Neatline.vent.trigger('highlight', model2);
       expect(_t.vw.BUBBLE.$('.title')).toHaveText('title1');
       expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
     });
@@ -138,8 +138,8 @@ describe('Static Bubble Incoming Events', function() {
       Neatline.vent.trigger('PRESENTER:deactivate');
     });
 
-    it('should not respond to `show` events', function() {
-      Neatline.vent.trigger('show', model1);
+    it('should not respond to `highlight` events', function() {
+      Neatline.vent.trigger('highlight', model1);
       expect(_t.vw.BUBBLE.$el).toBeEmpty();
     });
 
@@ -163,8 +163,8 @@ describe('Static Bubble Incoming Events', function() {
       expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
     });
 
-    it('should start responding to `show` events', function() {
-      Neatline.vent.trigger('show', model1);
+    it('should start responding to `highlight` events', function() {
+      Neatline.vent.trigger('highlight', model1);
     });
 
     it('should start responding to `select` events', function() {

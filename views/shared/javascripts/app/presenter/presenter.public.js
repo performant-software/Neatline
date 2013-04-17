@@ -15,35 +15,35 @@ Neatline.module('Presenter', function(
 
 
   /**
-   * Show the record.
+   * Highlight the record.
    *
    * @param {Object} model: The record model.
    */
-  var show = function(model) {
+  var highlight = function(model) {
     try {
       Neatline.execute(
-        'PRESENTER:'+model.get('presenter')+':show', model
+        'PRESENTER:'+model.get('presenter')+':highlight', model
       );
     } catch (e) {}
   };
-  Neatline.commands.setHandler('PRESENTER:show', show);
-  Neatline.vent.on('show', show);
+  Neatline.commands.setHandler('PRESENTER:highlight', highlight);
+  Neatline.vent.on('highlight', highlight);
 
 
   /**
-   * Hide the record.
+   * Unhighlight the record.
    *
    * @param {Object} model: The record model.
    */
-  var hide = function(model) {
+  var unhighlight = function(model) {
     try {
       Neatline.execute(
-        'PRESENTER:'+model.get('presenter')+':hide', model
+        'PRESENTER:'+model.get('presenter')+':unhighlight', model
       );
     } catch(e) {}
   };
-  Neatline.commands.setHandler('PRESENTER:hide', hide);
-  Neatline.vent.on('hide', hide);
+  Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
+  Neatline.vent.on('unhighlight', unhighlight);
 
 
   /**

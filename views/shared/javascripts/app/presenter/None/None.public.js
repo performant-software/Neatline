@@ -15,10 +15,10 @@ Neatline.module('Presenter.None', function(
 
 
   var none = function() {};
-  Neatline.commands.setHandler('PRESENTER:None:show',     none);
-  Neatline.commands.setHandler('PRESENTER:None:hide',     none);
-  Neatline.commands.setHandler('PRESENTER:None:select',   none);
-  Neatline.commands.setHandler('PRESENTER:None:unselect', none);
+  Neatline.commands.setHandler('PRESENTER:None:highlight',    none);
+  Neatline.commands.setHandler('PRESENTER:None:unhighlight',  none);
+  Neatline.commands.setHandler('PRESENTER:None:select',       none);
+  Neatline.commands.setHandler('PRESENTER:None:unselect',     none);
   Neatline.vent.on('PRESENTER:activate',    none);
   Neatline.vent.on('PRESENTER:deactivate',  none);
 

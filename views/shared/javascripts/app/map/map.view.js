@@ -623,22 +623,22 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is highlighted, trigger the `show` event.
+     * When a feature is highlighted, trigger the `highlight` event.
      *
      * @param {Object} evt: The highlight event.
      */
     onFeatureHighlight: function(evt) {
-      Neatline.vent.trigger('show', evt.feature.layer.nModel);
+      Neatline.vent.trigger('highlight', evt.feature.layer.nModel);
     },
 
 
     /**
-     * When a feature is unhighlighted, trigger the `hide` event.
+     * When a feature is unhighlighted, trigger the `unhighlight` event.
      *
      * @param {Object} evt: The unhighlight event.
      */
     onFeatureUnhighlight: function(evt) {
-      Neatline.vent.trigger('hide', evt.feature.layer.nModel);
+      Neatline.vent.trigger('unhighlight', evt.feature.layer.nModel);
     },
 
 

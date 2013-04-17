@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Presenter incoming events tests.
+ * Presenter event forwarding tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Presenter API', function() {
+describe('Presenter Event Forwarding', function() {
 
 
   var model, exec;
@@ -23,15 +23,15 @@ describe('Presenter API', function() {
   });
 
 
-  it('show', function() {
-    Neatline.vent.trigger('show', model);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:P:show', model);
+  it('highlight', function() {
+    Neatline.vent.trigger('highlight', model);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:P:highlight', model);
   });
 
 
-  it('hide', function() {
-    Neatline.vent.trigger('hide', model);
-    expect(exec).toHaveBeenCalledWith('PRESENTER:P:hide', model);
+  it('unhighlight', function() {
+    Neatline.vent.trigger('unhighlight', model);
+    expect(exec).toHaveBeenCalledWith('PRESENTER:P:unhighlight', model);
   });
 
 
