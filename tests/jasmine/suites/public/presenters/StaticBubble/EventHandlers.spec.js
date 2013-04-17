@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Static bubble event subscription tests.
+ * Static bubble event handler tests.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Static Bubble Event Subscriptions', function() {
+describe('Static Bubble Event Handlers', function() {
 
 
   var el, model1, model2;
@@ -33,6 +33,11 @@ describe('Static Bubble Event Subscriptions', function() {
 
   describe('highlight', function() {
 
+    // --------------------------------------------------------------------
+    // When the presenter is highlighted, the bubble should populate the
+    // title and body fields of the passed model.
+    // --------------------------------------------------------------------
+
     beforeEach(function() {
       Neatline.vent.trigger('highlight', model1);
     });
@@ -46,6 +51,11 @@ describe('Static Bubble Event Subscriptions', function() {
 
 
   describe('unhighlight', function() {
+
+    // --------------------------------------------------------------------
+    // When the presenter is unhighlighted, the bubble should be emptied
+    // of content and the `bound` class should be removed.
+    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('highlight', model1);
@@ -64,6 +74,13 @@ describe('Static Bubble Event Subscriptions', function() {
 
 
   describe('select', function() {
+
+    // --------------------------------------------------------------------
+    // When the presenter is selected, `bound` and `selected` classes
+    // should be added to the bubble. While selected, the bubble should
+    // not respond to `select` events for different records, but not to
+    // `highlight` or `unhighlight` events.
+    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('select', model1);
@@ -96,6 +113,11 @@ describe('Static Bubble Event Subscriptions', function() {
 
   describe('unselect', function() {
 
+    // --------------------------------------------------------------------
+    // When the presenter is unselected, the bubble should be emptied of
+    // content and the `bound` and `selected` classes should be removed.
+    // --------------------------------------------------------------------
+
     beforeEach(function() {
       Neatline.vent.trigger('select', model1);
       Neatline.vent.trigger('unselect', model1);
@@ -114,6 +136,11 @@ describe('Static Bubble Event Subscriptions', function() {
 
 
   describe('close', function() {
+
+    // --------------------------------------------------------------------
+    // When the bubble is closed, it should be emptied of content and the
+    // `bound` and `selected` classes should be removed.
+    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('select', model1);
@@ -134,6 +161,11 @@ describe('Static Bubble Event Subscriptions', function() {
 
   describe('deactivate', function() {
 
+    // --------------------------------------------------------------------
+    // When the presenter is deactivated, the bubble should not respond to
+    // `highlight` or `select` events.
+    // --------------------------------------------------------------------
+
     beforeEach(function() {
       Neatline.vent.trigger('PRESENTER:deactivate');
     });
@@ -152,6 +184,11 @@ describe('Static Bubble Event Subscriptions', function() {
 
 
   describe('activate', function() {
+
+    // --------------------------------------------------------------------
+    // When the presenter is activated after being deactivated, the bubble
+    // should start responding to `highlight` and `select` events.
+    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('PRESENTER:deactivate');

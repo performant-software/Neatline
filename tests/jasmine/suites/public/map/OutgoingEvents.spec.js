@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Tests for map cursor events.
+ * Tests for map outgoing events.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,7 +10,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Cursor Events', function() {
+describe('Map Outgoing Events', function() {
 
 
   var layer, feature, vent;
@@ -19,7 +19,7 @@ describe('Map Cursor Events', function() {
   beforeEach(function() {
 
     _t.loadNeatline();
-    _t.respondMap200(_t.json.MapCursorEvents.records);
+    _t.respondMap200(_t.json.MapOutgoingEvents.records);
 
     layer = _t.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];
@@ -30,40 +30,28 @@ describe('Map Cursor Events', function() {
 
 
   it('should publish `highlight` on feature highlight', function() {
-
     _t.hoverOnMapFeature(feature);
-
     expect(vent).toHaveBeenCalledWith('highlight', layer.nModel);
-
   });
 
 
   it('should publish `unhighlight` on feature unhighlight', function() {
-
     _t.hoverOnMapFeature(feature);
     _t.unHoverOnMapFeature();
-
     expect(vent).toHaveBeenCalledWith('unhighlight', layer.nModel);
-
   });
 
 
   it('should publish `select` on feature select', function() {
-
     _t.clickOnMapFeature(feature);
-
     expect(vent).toHaveBeenCalledWith('select', layer.nModel);
-
   });
 
 
   it('should publish `unselect` on feature unselect', function() {
-
     _t.clickOnMapFeature(feature);
     _t.clickOffMapFeature();
-
     expect(vent).toHaveBeenCalledWith('unselect', layer.nModel);
-
   });
 
 

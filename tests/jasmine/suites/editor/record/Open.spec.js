@@ -106,6 +106,20 @@ describe('Record Form Open', function() {
 
     });
 
+    it('when a record is selected', function() {
+
+      // ------------------------------------------------------------------
+      // When the `select` event is triggered (for example, but a click on
+      // a map feature), the model should be bound to the form.
+      // ------------------------------------------------------------------
+
+      model = _t.vw.MAP.getVectorLayers()[0].nModel;
+
+      // Select the model.
+      Neatline.vent.trigger('select', model);
+
+    });
+
   });
 
 

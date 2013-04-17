@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Fixture generator for "Map Cursor Events" Jasmine suite.
+ * Fixture generator for "Map Outgoing Events" Jasmine suite.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,9 +16,9 @@ class FixturesTest_MapCursorEvents extends Neatline_RecordsFixtureCase
 
 
     /**
-     * `MapCursorEvents.records.json`
+     * `MapOutgoingEvents.records.json`
      */
-    public function testMapCursorEvents()
+    public function testMapOutgoingEvents()
     {
 
         $record  = $this->__record($this->exhibit);
@@ -26,7 +26,7 @@ class FixturesTest_MapCursorEvents extends Neatline_RecordsFixtureCase
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'MapCursorEvents.records.json'
+            'MapOutgoingEvents.records.json'
         );
 
     }
