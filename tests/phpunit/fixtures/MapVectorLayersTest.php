@@ -63,6 +63,7 @@ class FixturesTest_MapVectorLayers extends Neatline_RecordsFixtureCase
         $record = $this->__record($this->exhibit);
 
         $record->setArray(array(
+            'coverage'          => 'POINT(1 2)',
             'fill_color'        => '1',
             'select_color'      => '2',
             'stroke_color'      => '3',

@@ -29,55 +29,39 @@ describe('Map Cursor Events', function() {
   });
 
 
-  it('should render and publish feature highlight', function() {
+  it('should publish `highlight` on feature highlight', function() {
 
     _t.hoverOnMapFeature(feature);
 
-    // Should render `temporary` style.
-    expect(feature.renderIntent).toEqual('temporary');
-
-    // Should trigger `highlight`.
     expect(vent).toHaveBeenCalledWith('highlight', layer.nModel);
 
   });
 
 
-  it('should render and publish feature unhighlight', function() {
+  it('should publish `unhighlight` on feature unhighlight', function() {
 
     _t.hoverOnMapFeature(feature);
     _t.unHoverOnMapFeature();
 
-    // Should render `default` style.
-    expect(feature.renderIntent).toEqual('default');
-
-    // Should trigger `unhighlight`.
     expect(vent).toHaveBeenCalledWith('unhighlight', layer.nModel);
 
   });
 
 
-  it('should render and publish feature select', function() {
+  it('should publish `select` on feature select', function() {
 
     _t.clickOnMapFeature(feature);
 
-    // Should render `select` style.
-    expect(feature.renderIntent).toEqual('select');
-
-    // Should publish `select`.
     expect(vent).toHaveBeenCalledWith('select', layer.nModel);
 
   });
 
 
-  it('should render and publish feature unselect', function() {
+  it('should publish `unselect` on feature unselect', function() {
 
     _t.clickOnMapFeature(feature);
     _t.clickOffMapFeature();
 
-    // Should render `default` style.
-    expect(feature.renderIntent).toEqual('default');
-
-    // Should publish `unselect`.
     expect(vent).toHaveBeenCalledWith('unselect', layer.nModel);
 
   });

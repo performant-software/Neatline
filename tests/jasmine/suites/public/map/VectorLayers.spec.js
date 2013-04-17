@@ -154,50 +154,116 @@ describe('Map Vector Layers', function() {
   });
 
 
-  it('should render styles', function() {
+  describe('style rendering', function() {
 
-    // --------------------------------------------------------------------
-    // Vector layer style maps should be constructed from record values.
-    // --------------------------------------------------------------------
+    var layer, feature;
 
-    _t.respondMap200(_t.json.MapVectorLayers.records.styles);
-    var layer = _t.vw.MAP.getVectorLayers()[0];
+    beforeEach(function() {
 
-    var def = layer.styleMap.styles['default'].defaultStyle;
-    var tmp = layer.styleMap.styles.temporary.defaultStyle;
-    var sel = layer.styleMap.styles.select.defaultStyle;
+      _t.respondMap200(_t.json.MapVectorLayers.records.styles);
 
-    expect(def.fillColor).        toEqual('1');
-    expect(tmp.fillColor).        toEqual('2');
-    expect(sel.fillColor).        toEqual('2');
+      layer = _t.vw.MAP.getVectorLayers()[0];
+      feature = layer.features[0];
 
-    expect(def.strokeColor).      toEqual('3');
-    expect(tmp.strokeColor).      toEqual('3');
-    expect(sel.strokeColor).      toEqual('3');
+    });
 
-    expect(def.fillOpacity).      toEqual(0.04);
-    expect(tmp.fillOpacity).      toEqual(0.05);
-    expect(sel.fillOpacity).      toEqual(0.05);
+    it('should build style maps', function() {
 
-    expect(def.graphicOpacity).   toEqual(0.04);
-    expect(tmp.graphicOpacity).   toEqual(0.05);
-    expect(sel.graphicOpacity).   toEqual(0.05);
+      // ------------------------------------------------------------------
+      // Vector layer style maps should be constructed from record values.
+      // ------------------------------------------------------------------
 
-    expect(def.strokeOpacity).    toEqual(0.06);
-    expect(tmp.strokeOpacity).    toEqual(0.06);
-    expect(sel.strokeOpacity).    toEqual(0.06);
+      var def = layer.styleMap.styles['default'].defaultStyle;
+      var tmp = layer.styleMap.styles.temporary.defaultStyle;
+      var sel = layer.styleMap.styles.select.defaultStyle;
 
-    expect(def.strokeWidth).      toEqual(7);
-    expect(tmp.strokeWidth).      toEqual(7);
-    expect(sel.strokeWidth).      toEqual(7);
+      expect(def.fillColor).        toEqual('1');
+      expect(tmp.fillColor).        toEqual('2');
+      expect(sel.fillColor).        toEqual('2');
 
-    expect(def.pointRadius).      toEqual(8);
-    expect(tmp.pointRadius).      toEqual(8);
-    expect(sel.pointRadius).      toEqual(8);
+      expect(def.strokeColor).      toEqual('3');
+      expect(tmp.strokeColor).      toEqual('3');
+      expect(sel.strokeColor).      toEqual('3');
 
-    expect(def.externalGraphic).  toEqual('9');
-    expect(tmp.externalGraphic).  toEqual('9');
-    expect(sel.externalGraphic).  toEqual('9');
+      expect(def.fillOpacity).      toEqual(0.04);
+      expect(tmp.fillOpacity).      toEqual(0.05);
+      expect(sel.fillOpacity).      toEqual(0.05);
+
+      expect(def.graphicOpacity).   toEqual(0.04);
+      expect(tmp.graphicOpacity).   toEqual(0.05);
+      expect(sel.graphicOpacity).   toEqual(0.05);
+
+      expect(def.strokeOpacity).    toEqual(0.06);
+      expect(tmp.strokeOpacity).    toEqual(0.06);
+      expect(sel.strokeOpacity).    toEqual(0.06);
+
+      expect(def.strokeWidth).      toEqual(7);
+      expect(tmp.strokeWidth).      toEqual(7);
+      expect(sel.strokeWidth).      toEqual(7);
+
+      expect(def.pointRadius).      toEqual(8);
+      expect(tmp.pointRadius).      toEqual(8);
+      expect(sel.pointRadius).      toEqual(8);
+
+      expect(def.externalGraphic).  toEqual('9');
+      expect(tmp.externalGraphic).  toEqual('9');
+      expect(sel.externalGraphic).  toEqual('9');
+
+    });
+
+    it('should render `temporary` intent on highlight', function() {
+
+      // ------------------------------------------------------------------
+      // When the cursor hovers on a feature, the `temporary` style should
+      // be applied to the geometry.
+      // ------------------------------------------------------------------
+
+      _t.hoverOnMapFeature(feature);
+
+      expect(feature.renderIntent).toEqual('temporary');
+
+    });
+
+    it('should render `default` intent on unhighlight', function() {
+
+      // ------------------------------------------------------------------
+      // When the cursor hovers off a feature, the `default` style should
+      // be applied to the geometry.
+      // ------------------------------------------------------------------
+
+      _t.hoverOnMapFeature(feature);
+      _t.unHoverOnMapFeature();
+
+      expect(feature.renderIntent).toEqual('default');
+
+    });
+
+    it('should render `select` intent on select', function() {
+
+      // ------------------------------------------------------------------
+      // When a feature is clicked, the `select` style should be applied
+      // to the geometry.
+      // ------------------------------------------------------------------
+
+      _t.clickOnMapFeature(feature);
+
+      expect(feature.renderIntent).toEqual('select');
+
+    });
+
+    it('should render `default` intent on unselect', function() {
+
+      // ------------------------------------------------------------------
+      // When a feature is unselected, the `default` style should be
+      // applied to the geometry.
+      // ------------------------------------------------------------------
+
+      _t.clickOnMapFeature(feature);
+      _t.clickOffMapFeature();
+
+      expect(feature.renderIntent).toEqual('default');
+
+    });
 
   });
 
