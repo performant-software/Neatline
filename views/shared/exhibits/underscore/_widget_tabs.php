@@ -13,30 +13,10 @@
 
 ?>
 
-<?php $tabs = _nl_getExhibitTabs(_nl_exhibit());
-  if (count($tabs) > 0): ?>
+<?php foreach (_nl_getExhibitTabs(_nl_exhibit()) as $label => $slug): ?>
 
-  <li class="dropdown plugins">
-
-    <!-- Dropdown. -->
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      Plugins <b class="caret"></b>
-    </a>
-
-    <ul class="dropdown-menu">
-      <?php foreach ($tabs as $label => $slug): ?>
-
-        <!-- Tabs. -->
-        <li class="tab">
-          <a
-            data-slug="<?php echo $slug; ?>"
-            href="#<?php echo $slug; ?>"
-          ><?php echo $label; ?></a>
-        </li>
-
-      <?php endforeach; ?>
-    </ul>
-
+  <li class="tab" data-slug="<?php echo $slug; ?>">
+    <a href="#<?php echo $slug; ?>"><?php echo $label; ?></a>
   </li>
 
-<?php endif; ?>
+<?php endforeach; ?>

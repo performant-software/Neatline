@@ -17,9 +17,11 @@
 
   <div class="control-group">
 
-    <label>Stylesheet</label>
+    <label><?php echo __('Stylesheet'); ?></label>
     <div class="controls">
-      <div class="inline-inputs"><div id="styles" /></div>
+      <div class="inline-inputs">
+        <div id="styles" /></div>
+      </div>
     </div>
 
     <?php echo common('neatline/input', array(
