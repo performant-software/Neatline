@@ -37,14 +37,8 @@ Neatline.module('Editor.Record', function(
 
     // Get or fetch the model.
     Neatline.request('RECORDS:getModel', id, function(record) {
-
-      // Bind model to form.
       Record.__view.bind(record);
-
-      // Display the form and tab.
-      Neatline.execute('EDITOR:display', ['RECORD']);
       Record.__view.activateTab(tab);
-
     });
 
   };
@@ -63,9 +57,6 @@ Neatline.module('Editor.Record', function(
 
     // Bind model to form.
     Record.__view.bind(record);
-
-    // Display form and tab.
-    Neatline.execute('EDITOR:display', ['RECORD']);
     Record.__view.activateTab(tab);
 
   };

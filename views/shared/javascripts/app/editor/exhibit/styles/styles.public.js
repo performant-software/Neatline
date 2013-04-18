@@ -15,17 +15,17 @@ Neatline.module('Editor.Exhibit.Styles', function(
 
 
   /**
-   * Append the form to the editor container.
+   * Display the form, load fresh exhibit data.
    *
    * @param {Object} container: The container element.
    */
   var display = function(container) {
+    Styles.__view.showIn(container);
     Styles.__view.model.fetch({ success: function() {
-      Styles.__view.showIn(container);
       Styles.__view.buildEditor();
     }})
   };
-  Neatline.commands.setHandler('ESTYLES:display', display);
+  Neatline.commands.setHandler('ESTYLE:display', display);
 
 
 });
