@@ -346,45 +346,6 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
 
 
     /**
-     * Records with defined a WMS address and layer(s) should always be
-     * matched by the extent filter, even when the record's coverage does
-     * not fall within the `extent` polygon or the coverage is empty.
-     */
-    public function testExtentFilterWmsLayerInclusion()
-    {
-
-        $exhibit = $this->__exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record1->wms_address = 'address1';
-        $record2->wms_address = 'address2';
-        $record1->wms_layers = 'layers1';
-        $record2->wms_layers = 'layers2';
-        $record1->added = '2001-01-01';
-        $record2->added = '2002-01-01';
-
-        // Non-overlapping.
-        $record1->coverage = 'POINT(2 2)';
-
-        // Empty.
-        $record2->coverage = null;
-
-        $record1->save();
-        $record2->save();
-
-        // Non-overlapping and empty coverages included.
-        $result = $this->__records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))')
-        );
-
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
-        $this->assertCount(2, $result['records']);
-
-    }
-
-
-    /**
      * `queryRecords` should filter on a search query.
      */
     public function testKeywordsFilter()
