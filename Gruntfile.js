@@ -1,4 +1,3 @@
-
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
@@ -284,8 +283,6 @@ module.exports = function(grunt) {
             cfg.stylus.shared+'/neatline/*.styl',
           './views/shared/css/payloads/editor.css':
             cfg.stylus.shared+'/editor/*.styl',
-          './views/admin/css/payloads/browse.css':
-            cfg.stylus.admin+'/browse.styl',
           './views/admin/css/payloads/form.css':
             cfg.stylus.admin+'/form.styl'
         }

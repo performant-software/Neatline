@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
 
 /**
- * Exhibit browse.
+ * Tests for widget tab tamplating.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -10,6 +10,6 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-
-a.editor
-  font-size 1.1em
+describe('Menu Widget Tabs', function() {
+  // TODO
+});
