@@ -26,6 +26,11 @@
       <a href="#styles">Styles</a>
     </li>
 
+    <!-- Widget tabs. -->
+    <?php echo $this->partial(
+      'exhibits/underscore/_widget_tabs.php'
+    ); ?>
+
   </ul>
 
 </script>
