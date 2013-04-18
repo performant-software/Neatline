@@ -4,7 +4,6 @@
   , "dependencies": {
 
       "jquery":                 ">= 1.8.3"
-    , "jquery-ui":              ">= 1.10.2"
     , "underscore":             ">= 1.4.4"
     , "underscore.string":      ">= 2.3.0"
     , "backbone":               ">= 0.9.10"
@@ -16,6 +15,7 @@
     , "jasmine-jquery":         ">= 1.4.2"
     , "sinon":                  ">= 1.6.0"
 
+    , "jquery-ui":              "https://github.com/jquery/jquery-ui.git"
     , "backbone.neatline":      "https://github.com/davidmcclure/backbone.neatline.git"
     , "backbone-safesync":      "https://github.com/amccloud/backbone-safesync.git"
     , "openlayers":             "https://github.com/davidmcclure/openlayers.git"

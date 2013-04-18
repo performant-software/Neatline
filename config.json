@@ -28,7 +28,7 @@
     "bootstrap":          "./components/bootstrap",
     "chosen":             "./components/chosen/chosen",
     "sinon":              "./components/sinon",
-    "jquery_ui":          "./components/jquery-ui/themes/smoothness",
+    "jquery_ui":          "./components/jquery-ui",
     "ckeditor":           "./components/ckeditor/dev/builder"
   },
 
@@ -36,11 +36,7 @@
 
     "js": {
       "jquery":           "./components/jquery/jquery.js",
-      "ui_core":          "./components/jquery-ui/ui/jquery.ui.core.js",
-      "ui_widget":        "./components/jquery-ui/ui/jquery.ui.widget.js",
-      "ui_position":      "./components/jquery-ui/ui/jquery.ui.position.js",
-      "ui_menu":          "./components/jquery-ui/ui/jquery.ui.menu.js",
-      "ui_autocomplete":  "./components/jquery-ui/ui/jquery.ui.autocomplete.js",
+      "jquery_ui":        "./components/jquery-ui/dist/jquery-ui.js",
       "underscore":       "./components/underscore/underscore.js",
       "underscore_s":     "./components/underscore.string/lib/underscore.string.js",
       "backbone":         "./components/backbone/backbone.js",
@@ -64,7 +60,7 @@
     },
 
     "css": {
-      "jquery_ui":        "./components/jquery-ui/themes/smoothness/jquery-ui.css",
+      "jquery_ui":        "./components/jquery-ui/dist/jquery-ui.min.css",
       "openlayers":       "./components/openlayers/theme/default/style.css",
       "bootstrap":        "./components/bootstrap/bootstrap/css/bootstrap.min.css",
       "toastr":           "./components/toastr/toastr.css",

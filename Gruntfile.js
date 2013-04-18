@@ -57,11 +57,11 @@ module.exports = function(grunt) {
         }
       },
 
-      build_ckeditor: {
-        command: './build.sh',
+      build_jquery_ui: {
+        command: 'npm install && grunt build',
         options: {
           execOptions: {
-            cwd: cfg.build.ckeditor
+            cwd: cfg.build.jquery_ui
           }
         }
       },
@@ -101,15 +101,6 @@ module.exports = function(grunt) {
         files: [{
           src: cfg.build.chosen+'/chosen-sprite.png',
           dest: cfg.payloads.admin.css,
-          expand: true,
-          flatten: true
-        }]
-      },
-
-      jquery_ui: {
-        files: [{
-          src: cfg.build.jquery_ui+'/images/*',
-          dest: cfg.payloads.shared.css+'/images',
           expand: true,
           flatten: true
         }]
@@ -181,11 +172,7 @@ module.exports = function(grunt) {
 
           // Vendor:
           cfg.vendor.js.jquery,
-          cfg.vendor.js.ui_core,
-          cfg.vendor.js.ui_widget,
-          cfg.vendor.js.ui_position,
-          cfg.vendor.js.ui_menu,
-          cfg.vendor.js.ui_autocomplete,
+          cfg.vendor.js.jquery_ui,
           cfg.vendor.js.underscore,
           cfg.vendor.js.underscore_s,
           cfg.vendor.js.backbone,
@@ -362,6 +349,7 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
+    'shell:build_jquery_ui',
     'shell:build_sinon',
     'compile',
     'copy'
