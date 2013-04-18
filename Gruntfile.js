@@ -355,6 +355,18 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', 'test');
 
+  // Build the application.
+  grunt.registerTask('build', [
+    'clean',
+    'shell:bower_cache_clean',
+    'shell:bower_install',
+    'shell:build_openlayers',
+    'shell:build_bootstrap',
+    'shell:build_sinon',
+    'compile',
+    'copy'
+  ]);
+
   // Assemble static assets.
   grunt.registerTask('compile', [
     'concat:form',
@@ -375,18 +387,6 @@ module.exports = function(grunt) {
     'concat:form_css',
     'concat:neatline_css',
     'concat:editor_css'
-  ]);
-
-  // Build the application.
-  grunt.registerTask('build', [
-    'clean',
-    'shell:bower_cache_clean',
-    'shell:bower_install',
-    'shell:build_openlayers',
-    'shell:build_bootstrap',
-    'shell:build_sinon',
-    'compile',
-    'copy'
   ]);
 
   // Run all tests.

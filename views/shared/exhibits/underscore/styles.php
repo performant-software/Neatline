@@ -20,7 +20,7 @@
     <label><?php echo __('Stylesheet'); ?></label>
     <div class="controls">
       <div class="inline-inputs">
-        <div id="styles" /></div>
+        <div id="styles"></div>
       </div>
     </div>
 
