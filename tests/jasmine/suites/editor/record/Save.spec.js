@@ -153,11 +153,11 @@ describe('Record Form Save', function() {
   });
 
 
-  it('should update the map when save succeeds', function() {
+  it('should refresh the exhibit when save succeeds', function() {
 
     // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request succeeds, the map
-    // should be automatically refreshed to manifest synchronized styles.
+    // When the "Save" button is clicked and the request succeeds, the
+    // exhibit should be refreshed to manifest synchronized styles.
     // --------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();

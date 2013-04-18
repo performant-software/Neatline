@@ -161,7 +161,7 @@ describe('Record Form Delete', function() {
 
     // --------------------------------------------------------------------
     // When the "Yes, delete" button is clicked and the request succeeds,
-    // the map should be automatically refreshed to manifest the deletion.
+    // the exhibit should be refreshed to manifest the deletion.
     // --------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();

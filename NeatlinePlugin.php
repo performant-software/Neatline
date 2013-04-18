@@ -183,19 +183,15 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register properties on `Neatline.global`.
      *
-     * @param array $globals The array of global properties.
+     * @param array $g The array of global properties.
      * @param array $args Array of arguments, with `exhibit`.
      * @return array The modified array.
      */
-    public function filterNeatlineGlobals($globals, $args)
+    public function filterNeatlineGlobals($g, $args)
     {
-        $globals = array_merge($globals,
-            _nl_exhibitGlobals($args['exhibit'])
-        );
-        $globals = array_merge($globals,
-            _nl_editorGlobals($args['exhibit'])
-        );
-        return $globals;
+        $g = array_merge($g, _nl_exhibitGlobals($args['exhibit']));
+        $g = array_merge($g, _nl_editorGlobals($args['exhibit']));
+        return $g;
     }
 
 

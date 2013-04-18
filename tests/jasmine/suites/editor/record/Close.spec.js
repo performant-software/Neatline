@@ -48,8 +48,8 @@ describe('Record Form Close', function() {
   it('should refresh the exhibit', function() {
 
     // --------------------------------------------------------------------
-    // When the form is closed, the map should be automatically refreshed
-    // to clear out any unsaved geometry changes.
+    // When the form is closed, the exhibit should be refreshed to clear
+    // out any unsaved geometry changes.
     // --------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
