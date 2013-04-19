@@ -13,7 +13,10 @@
 
 ?>
 
-<?php foreach (_nl_getExhibitTabs(_nl_exhibit()) as $label => $slug): ?>
+<?php
+  $tabs = (array) _nl_getExhibitTabs(_nl_exhibit());
+  foreach ($tabs as $label => $slug):
+?>
 
   <li class="tab" data-slug="<?php echo $slug; ?>">
     <a href="#<?php echo $slug; ?>"><?php echo $label; ?></a>
