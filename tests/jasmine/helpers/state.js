@@ -18,17 +18,10 @@ var _t = (function(_t) {
    * Load neatline application.
    */
   _t.loadNeatline = function() {
-
-    // Load fixtures.
     this.loadJsonFixtures();
     loadFixtures('neatline-partial.html');
     loadStyleFixtures('neatline.css');
-
-    // Start the application.
-    this.server = sinon.fakeServer.create();
-    this.startApplication();
-    this.aliasNeatline();
-
+    this.__initNeatline();
   };
 
 
@@ -36,18 +29,31 @@ var _t = (function(_t) {
    * Load editor application.
    */
   _t.loadEditor = function() {
-
-    // Load fixtures.
     this.loadJsonFixtures();
     loadFixtures('editor-partial.html');
     loadStyleFixtures('editor.css');
+    this.__initEditor();
+  };
 
-    // Start the application.
+
+  /**
+   * Mock the server, start Neatline.
+   */
+  _t.__initNeatline = function() {
+    this.server = sinon.fakeServer.create();
+    this.startApplication();
+    this.aliasNeatline();
+  };
+
+
+  /**
+   * Mock the server, start the editor.
+   */
+  _t.__initEditor = function() {
     this.server = sinon.fakeServer.create();
     this.startApplication();
     this.aliasEditor();
     this.navigate('');
-
   };
 
 
@@ -55,15 +61,10 @@ var _t = (function(_t) {
    * (Re)start the application.
    */
   _t.startApplication = function() {
-
-    // Reset the history.
     window.location.hash = null;
     Backbone.history.stop();
-
-    // Start Neatline.
     this.stopApplication();
     Neatline.start();
-
   };
 
 
