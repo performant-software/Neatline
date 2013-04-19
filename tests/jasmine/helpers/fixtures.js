@@ -15,6 +15,18 @@ var _t = (function(_t) {
 
 
   /**
+   * Set the fixture paths.
+   *
+   * @param {String} fixturesPath: JSON/HTML/XML fixtures path.
+   * @param {String} styleFixturesPath: CSS fixtures path.
+   */
+  _t.setFixturePaths = function(fixturesPath, styleFixturesPath) {
+    jasmine.getFixtures().fixturesPath = fixturesPath;
+    jasmine.getStyleFixtures().fixturesPath = styleFixturesPath;
+  },
+
+
+  /**
    * Read JSON fixtures.
    */
   _t.loadJsonFixtures = function() {
