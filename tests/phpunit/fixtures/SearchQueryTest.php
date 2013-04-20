@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_SearchQuery extends Neatline_RecordsFixtureCase
+class FixturesTest_SearchQuery extends Neatline_FixtureCase
 {
 
 
@@ -24,6 +24,7 @@ class FixturesTest_SearchQuery extends Neatline_RecordsFixtureCase
         $record1 = $this->__record($this->exhibit);
         $record2 = $this->__record($this->exhibit);
         $record3 = $this->__record($this->exhibit);
+
         $record1->title = 'result1';
         $record2->title = 'result2';
         $record3->title = 'result3';

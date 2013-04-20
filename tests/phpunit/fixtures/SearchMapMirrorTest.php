@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_SearchMapMirror extends Neatline_RecordsFixtureCase
+class FixturesTest_SearchMapMirror extends Neatline_FixtureCase
 {
 
 
@@ -24,6 +24,7 @@ class FixturesTest_SearchMapMirror extends Neatline_RecordsFixtureCase
         $record1 = $this->__record($this->exhibit);
         $record2 = $this->__record($this->exhibit);
         $record3 = $this->__record($this->exhibit);
+
         $record1->title = 'list1';
         $record2->title = 'list2';
         $record3->title = 'list3';
@@ -51,6 +52,7 @@ class FixturesTest_SearchMapMirror extends Neatline_RecordsFixtureCase
         $record1 = $this->__record($this->exhibit);
         $record2 = $this->__record($this->exhibit);
         $record3 = $this->__record($this->exhibit);
+
         $record1->title = 'map1';
         $record2->title = 'map2';
         $record3->title = 'map3';

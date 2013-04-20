@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapRecordIngesting extends Neatline_RecordsFixtureCase
+class FixturesTest_MapRecordIngesting extends Neatline_FixtureCase
 {
 
 
@@ -24,8 +24,10 @@ class FixturesTest_MapRecordIngesting extends Neatline_RecordsFixtureCase
 
         $record1 = $this->__record($this->exhibit);
         $record2 = $this->__record($this->exhibit);
+
         $record1->coverage = 'POINT(1 2)';
         $record2->coverage = 'POINT(3 4)';
+
         $record1->save();
         $record2->save();
 

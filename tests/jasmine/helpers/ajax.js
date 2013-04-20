@@ -42,8 +42,9 @@ var NL = (function(NL) {
    * @param {String} type: The content type.
    */
   NL.respond200 = function(request, response, type) {
-    type = type || 'application/json';
-    request.respond(200, { 'Content-Type': type }, response);
+    request.respond(
+      200, { 'Content-Type': type || 'application/json' }, response
+    );
   };
 
 

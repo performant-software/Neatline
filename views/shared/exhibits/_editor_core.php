@@ -31,6 +31,6 @@
 <?php echo $this->partial('exhibits/underscore/search.php'); ?>
 
 <!-- Plugin templates. -->
-<?php fire_plugin_hook('neatline_editor_underscore', array(
+<?php fire_plugin_hook('neatline_editor_templates', array(
   'exhibit' => _nl_exhibit()
 )); ?>

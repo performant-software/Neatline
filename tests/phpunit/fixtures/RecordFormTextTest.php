@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_RecordFormText extends Neatline_RecordsFixtureCase
+class FixturesTest_RecordFormText extends Neatline_FixtureCase
 {
 
 
@@ -24,6 +24,7 @@ class FixturesTest_RecordFormText extends Neatline_RecordsFixtureCase
         $item1 = $this->__item('Item 1');
         $item2 = $this->__item('Item 2');
         $item3 = $this->__item('Item 3');
+
         $item1->added = '2021-01-01';
         $item2->added = '2022-01-01';
         $item3->added = '2023-01-01';

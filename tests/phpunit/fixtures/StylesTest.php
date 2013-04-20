@@ -11,7 +11,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_Styles extends Neatline_RecordsFixtureCase
+class FixturesTest_Styles extends Neatline_FixtureCase
 {
 
 

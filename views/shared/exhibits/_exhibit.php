@@ -17,7 +17,7 @@
   <div id="neatline-map" class="neatline-block"></div>
 </div>
 
-<!-- JSON globals. -->
+<!-- Globals constants. -->
 <script type="text/javascript">
   Neatline.global = <?php echo Zend_Json::encode(
     _nl_getGlobals(_nl_exhibit())
@@ -28,6 +28,6 @@
 <?php echo $this->partial('exhibits/underscore/bubble.php'); ?>
 
 <!-- Plugin templates. -->
-<?php fire_plugin_hook('neatline_public_underscore', array(
+<?php fire_plugin_hook('neatline_public_templates', array(
   'exhibit' => _nl_exhibit()
 )); ?>

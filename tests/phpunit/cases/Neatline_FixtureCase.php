@@ -12,7 +12,7 @@
  */
 
 
-class Neatline_RecordsFixtureCase extends Neatline_TestCase
+class Neatline_FixtureCase extends Neatline_TestCase
 {
 
 
