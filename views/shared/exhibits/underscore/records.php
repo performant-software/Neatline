@@ -35,7 +35,7 @@
           <% if (!_.isEmpty(r.get('title'))) { %>
             <%= _.string.stripTags(r.get('title')) %>
           <% } else { %>
-            <%= STRINGS.placeholders.title %>
+            <%= STRINGS.record.placeholders.title %>
           <% } %>
         </span>
 

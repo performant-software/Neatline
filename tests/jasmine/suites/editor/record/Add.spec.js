@@ -48,7 +48,7 @@ describe('Record Form Add', function() {
     expect(el.leadId).toBeEmpty();
 
     // Form title should display placeholder.
-    expect(el.leadTitle.text()).toEqual(STRINGS.placeholders.title);
+    expect(el.leadTitle).toHaveText(STRINGS.record.placeholders.title);
 
     // Model should have exhibit id.
     var record = NL.vw.RECORD.model;

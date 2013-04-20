@@ -69,7 +69,7 @@ describe('Records List', function() {
 
     // Should strip out HTML tags.
     expect($(rows[1]).find('.title')).toHaveText(
-      STRINGS.placeholders.title
+      STRINGS.record.placeholders.title
     );
 
   });

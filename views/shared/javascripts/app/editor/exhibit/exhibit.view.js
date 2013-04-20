@@ -21,6 +21,7 @@ Neatline.module('Editor.Exhibit', function(
     tagName:  'header',
 
     ui: {
+      dropdowns: 'li.dropdown',
       tabs: 'li.tab'
     },
 
@@ -31,8 +32,18 @@ Neatline.module('Editor.Exhibit', function(
      * @param {String} tab: The tab to activate.
      */
     activateTab: function(tab) {
+
+      // Clear current activation.
+      this.__ui.dropdowns.removeClass('active');
       this.__ui.tabs.removeClass('active');
-      this.__ui.tabs.filter('[data-slug="'+tab+'"]').addClass('active');
+
+      // Activate tab.
+      var tab = this.__ui.tabs.filter('[data-slug="'+tab+'"]');
+      tab.addClass('active');
+
+      // Activate dropdown.
+      tab.parents('li.dropdown').addClass('active');
+
     }
 
 

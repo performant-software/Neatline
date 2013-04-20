@@ -17,38 +17,38 @@
   STRINGS = {
     record: {
       save: {
-        success: '<?php echo __('The record was saved successfully!'); ?>',
-        error: '<?php echo __('There was an error; the record was not saved.'); ?>'
+        success:  '<?php echo __('The record was saved successfully!'); ?>',
+        error:    '<?php echo __('There was an error; the record was not saved.'); ?>'
       },
       remove: {
-        success: '<?php echo __('The record was deleted successfully!'); ?>',
-        error: '<?php echo __('There was an error; the record was not deleted.'); ?>'
+        success:  '<?php echo __('The record was deleted successfully!'); ?>',
+        error:    '<?php echo __('There was an error; the record was not deleted.'); ?>'
       },
       add: {
-        success: '<?php echo __('New record created successfully!'); ?>',
-        error: '<?php echo __('There was an error; a new record was not created.'); ?>'
+        success:  '<?php echo __('New record created successfully!'); ?>',
+        error:    '<?php echo __('There was an error; a new record was not created.'); ?>'
+      },
+      placeholders: {
+        title:    '<?php echo __('[Untitled]'); ?>'
       }
     },
     exhibit: {
       save: {
-        success: '<?php echo __('The exhibit was saved successfully!'); ?>',
-        error: '<?php echo __('There was an error; the exhibit was not saved.'); ?>'
+        success:  '<?php echo __('The exhibit was saved successfully!'); ?>',
+        error:    '<?php echo __('There was an error; the exhibit was not saved.'); ?>'
       }
     },
     styles: {
       save: {
-        success: '<?php echo __('The styles were saved successfully!'); ?>',
-        error: '<?php echo __('There was an error; the styles were not saved.'); ?>'
+        success:  '<?php echo __('The styles were saved successfully!'); ?>',
+        error:    '<?php echo __('There was an error; the styles were not saved.'); ?>'
       }
     },
     svg: {
       parse: {
-        success: '<?php echo __('SVG parsed successfully!'); ?>',
-        error: '<?php echo __('There was an error; SVG could not be parsed.'); ?>'
+        success:  '<?php echo __('SVG parsed successfully!'); ?>',
+        error:    '<?php echo __('There was an error; SVG could not be parsed.'); ?>'
       }
-    },
-    placeholders: {
-      title: '<?php echo __('[Untitled]'); ?>'
     }
   };
 </script>
