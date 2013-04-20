@@ -12,7 +12,7 @@
  */
 
 
-class Neatline_TestCase extends Neatline_AbstractTestCase
+class Neatline_TestCase extends Neatline_AbstractCase
 {
 
 
