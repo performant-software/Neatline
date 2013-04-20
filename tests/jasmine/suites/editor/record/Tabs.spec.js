@@ -12,7 +12,7 @@ describe('Record Form Tabs', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
   });
 
 
@@ -32,12 +32,12 @@ describe('Record Form Tabs', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    _t.navigate('record/add');
+    NL.navigate('record/add');
 
-    _.each(_t.getTabSlugs(), function(slug) {
+    _.each(NL.getTabSlugs(), function(slug) {
 
       // Click on the tab.
-      var tab = _t.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      var tab = NL.vw.RECORD.$('a[href="#record-'+slug+'"]')
       tab.trigger('click');
 
       // Route should update.
@@ -64,13 +64,13 @@ describe('Record Form Tabs', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    _t.showRecordForm(_t.json.RecordForm.record);
-    var id = _t.vw.RECORD.model.id;
+    NL.showRecordForm(NL.json.RecordForm.record);
+    var id = NL.vw.RECORD.model.id;
 
-    _.each(_t.getTabSlugs(), function(slug) {
+    _.each(NL.getTabSlugs(), function(slug) {
 
       // Click on the tab.
-      var tab = _t.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      var tab = NL.vw.RECORD.$('a[href="#record-'+slug+'"]')
       tab.trigger('click');
 
       // Route should update.

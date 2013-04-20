@@ -12,7 +12,7 @@ describe('Styles Open', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
   });
 
 
@@ -22,13 +22,13 @@ describe('Styles Open', function() {
     // When the "Styles" is displayed, the form should load exhibit data.
     // --------------------------------------------------------------------
 
-    _t.navigate('styles');
-    _t.respondLast200(_t.json.Styles.exhibit);
+    NL.navigate('styles');
+    NL.respondLast200(NL.json.Styles.exhibit);
 
     // Form should be populated.
-    expect(_t.vw.STYLES.styles.getSession().getValue()).toEqual('1');
-    expect(_t.vw.STYLES.$('input[name="map-focus"]').val()).toEqual('2');
-    expect(_t.vw.STYLES.$('input[name="map-zoom"]').val()).toEqual('3');
+    expect(NL.vw.STYLES.styles.getSession().getValue()).toEqual('1');
+    expect(NL.vw.STYLES.$('input[name="map-focus"]').val()).toEqual('2');
+    expect(NL.vw.STYLES.$('input[name="map-zoom"]').val()).toEqual('3');
 
   });
 

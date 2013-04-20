@@ -11,7 +11,7 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
@@ -19,7 +19,7 @@ var _t = (function(_t) {
    *
    * @return {Object} request: The sinon request.
    */
-  _t.getLastRequest = function() {
+  NL.getLastRequest = function() {
     return _.last(this.server.requests);
   };
 
@@ -29,7 +29,7 @@ var _t = (function(_t) {
    *
    * @return {Object} params: The parameters.
    */
-  _t.getLastRequestParams = function() {
+  NL.getLastRequestParams = function() {
     return $.parseJSON(this.getLastRequest().requestBody);
   };
 
@@ -41,7 +41,7 @@ var _t = (function(_t) {
    * @param {Object} response: The response body.
    * @param {String} type: The content type.
    */
-  _t.respond200 = function(request, response, type) {
+  NL.respond200 = function(request, response, type) {
     type = type || 'application/json';
     request.respond(200, { 'Content-Type': type }, response);
   };
@@ -52,7 +52,7 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.respondAll200 = function(response) {
+  NL.respondAll200 = function(response) {
     _.each(this.server.requests, _.bind(function(request) {
       this.respond200(request, response);
     }, this));
@@ -65,7 +65,7 @@ var _t = (function(_t) {
    * @param {Object} response: The response body.
    * @return {Object} response: The last request.
    */
-  _t.respondLast200 = function(response) {
+  NL.respondLast200 = function(response) {
     var request = this.getLastRequest();
     this.respond200(request, response);
     return request;
@@ -78,7 +78,7 @@ var _t = (function(_t) {
    * @param {Object} response: The response body.
    * @return {Object} response: The last request.
    */
-  _t.respondXmlLast200 = function(response) {
+  NL.respondXmlLast200 = function(response) {
     var request = this.getLastRequest();
     this.respond200(request, response, 'text/xml');
     return request;
@@ -90,15 +90,11 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.respondMap200 = function(response) {
+  NL.respondMap200 = function(response) {
     _.each(this.server.requests, _.bind(function(request) {
-
-      // Check for map parameters.
-      var extent  = _.str.include(request.url, 'extent');
-      var zoom    = _.str.include(request.url, 'zoom');
-
+      var extent = _.str.include(request.url, 'extent');
+      var zoom   = _.str.include(request.url, 'zoom');
       if (extent && zoom) this.respond200(request, response);
-
     }, this));
   };
 
@@ -108,15 +104,11 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.respondRecordList200 = function(response) {
+  NL.respondRecordList200 = function(response) {
     _.each(this.server.requests, _.bind(function(request) {
-
-      // Check for record list parameters.
-      var offset  = _.str.include(request.url, 'offset');
-      var limit   = _.str.include(request.url, 'limit');
-
+      var offset = _.str.include(request.url, 'offset');
+      var limit  = _.str.include(request.url, 'limit');
       if (offset && limit) this.respond200(request, response);
-
     }, this));
   };
 
@@ -126,7 +118,7 @@ var _t = (function(_t) {
    *
    * @param {Object} request: The sinon request.
    */
-  _t.respond500 = function(request) {
+  NL.respond500 = function(request) {
     request.respond(500);
   };
 
@@ -136,14 +128,14 @@ var _t = (function(_t) {
    *
    * @return {Object} response: The last request.
    */
-  _t.respondLast500 = function() {
+  NL.respondLast500 = function() {
     var request = this.getLastRequest();
     this.respond500(request);
     return request;
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

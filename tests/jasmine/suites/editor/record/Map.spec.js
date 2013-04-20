@@ -16,25 +16,25 @@ describe('Record Form Map Tab', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
-    _t.vw.RECORD.activateTab('map');
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.vw.RECORD.activateTab('map');
 
     el = {
-      pan:      _t.vw.RECORD.$('input[value="pan"]'),
-      point:    _t.vw.RECORD.$('input[value="point"]'),
-      line:     _t.vw.RECORD.$('input[value="line"]'),
-      poly:     _t.vw.RECORD.$('input[value="poly"]'),
-      svg:      _t.vw.RECORD.$('input[value="svg"]'),
-      regPoly:  _t.vw.RECORD.$('input[value="regPoly"]'),
-      modify:   _t.vw.RECORD.$('input[value="modify"]'),
-      rotate:   _t.vw.RECORD.$('input[value="rotate"]'),
-      resize:   _t.vw.RECORD.$('input[value="resize"]'),
-      drag:     _t.vw.RECORD.$('input[value="drag"]'),
-      remove:   _t.vw.RECORD.$('input[value="remove"]'),
-      coverage: _t.vw.RECORD.$('textarea[name="coverage"]'),
-      clear:    _t.vw.RECORD.$('a[name="clear"]'),
-      parse:    _t.vw.RECORD.$('a[name="parse"]')
+      pan:      NL.vw.RECORD.$('input[value="pan"]'),
+      point:    NL.vw.RECORD.$('input[value="point"]'),
+      line:     NL.vw.RECORD.$('input[value="line"]'),
+      poly:     NL.vw.RECORD.$('input[value="poly"]'),
+      svg:      NL.vw.RECORD.$('input[value="svg"]'),
+      regPoly:  NL.vw.RECORD.$('input[value="regPoly"]'),
+      modify:   NL.vw.RECORD.$('input[value="modify"]'),
+      rotate:   NL.vw.RECORD.$('input[value="rotate"]'),
+      resize:   NL.vw.RECORD.$('input[value="resize"]'),
+      drag:     NL.vw.RECORD.$('input[value="drag"]'),
+      remove:   NL.vw.RECORD.$('input[value="remove"]'),
+      coverage: NL.vw.RECORD.$('textarea[name="coverage"]'),
+      clear:    NL.vw.RECORD.$('a[name="clear"]'),
+      parse:    NL.vw.RECORD.$('a[name="parse"]')
     };
 
   });
@@ -51,7 +51,7 @@ describe('Record Form Map Tab', function() {
     el.point.attr('checked', 'checked').trigger('change');
 
     // "Draw Point" should be active.
-    expect(_t.vw.MAP.controls.point.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.point.active).toBeTruthy();
 
   });
 
@@ -67,7 +67,7 @@ describe('Record Form Map Tab', function() {
     el.line.attr('checked', 'checked').trigger('change');
 
     // "Draw Line" should be active.
-    expect(_t.vw.MAP.controls.line.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.line.active).toBeTruthy();
 
   });
 
@@ -83,7 +83,7 @@ describe('Record Form Map Tab', function() {
     el.poly.attr('checked', 'checked').trigger('change');
 
     // "Draw Polygon" should be active.
-    expect(_t.vw.MAP.controls.poly.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.poly.active).toBeTruthy();
 
   });
 
@@ -99,7 +99,7 @@ describe('Record Form Map Tab', function() {
     el.svg.attr('checked', 'checked').trigger('change');
 
     // "Draw SVG" should be active.
-    expect(_t.vw.MAP.controls.svg.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.svg.active).toBeTruthy();
 
   });
 
@@ -116,7 +116,7 @@ describe('Record Form Map Tab', function() {
     el.regPoly.attr('checked', 'checked').trigger('change');
 
     // "Draw Regular Polygon" should be active.
-    expect(_t.vw.MAP.controls.regPoly.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.regPoly.active).toBeTruthy();
 
   });
 
@@ -129,10 +129,10 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set sides.
-    _t.vw.SPATIAL.__ui.sides.val('10').trigger('change');
+    NL.vw.SPATIAL.__ui.sides.val('10').trigger('change');
 
     // "Sides" should be updated.
-    expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
+    expect(NL.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
 
   });
 
@@ -146,13 +146,13 @@ describe('Record Form Map Tab', function() {
 
     // Numbers below 3:
     _.each(_.range(-1, 2), function(v) {
-      _t.vw.SPATIAL.__ui.sides.val(v).trigger('change');
-      expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
+      NL.vw.SPATIAL.__ui.sides.val(v).trigger('change');
+      expect(NL.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
     });
 
     // String:
-    _t.vw.SPATIAL.__ui.sides.val('invalid').trigger('change');
-    expect(_t.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
+    NL.vw.SPATIAL.__ui.sides.val('invalid').trigger('change');
+    expect(NL.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
 
   });
 
@@ -165,10 +165,10 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set snap angle.
-    _t.vw.SPATIAL.__ui.snap.val('45').trigger('change');
+    NL.vw.SPATIAL.__ui.snap.val('45').trigger('change');
 
     // "Snap Angle" should be updated.
-    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
+    expect(NL.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
 
   });
 
@@ -181,12 +181,12 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Negative number:
-    _t.vw.SPATIAL.__ui.snap.val('-1').trigger('change');
-    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
+    NL.vw.SPATIAL.__ui.snap.val('-1').trigger('change');
+    expect(NL.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
 
     // String:
-    _t.vw.SPATIAL.__ui.snap.val('invalid').trigger('change');
-    expect(_t.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
+    NL.vw.SPATIAL.__ui.snap.val('invalid').trigger('change');
+    expect(NL.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
 
   });
 
@@ -199,16 +199,16 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Set irregular.
-    _t.vw.SPATIAL.__ui.irreg.attr('checked', 'checked').trigger('change');
+    NL.vw.SPATIAL.__ui.irreg.attr('checked', 'checked').trigger('change');
 
     // "Irregular" be active.
-    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
+    expect(NL.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    _t.vw.SPATIAL.__ui.irreg.removeAttr('checked').trigger('change');
+    NL.vw.SPATIAL.__ui.irreg.removeAttr('checked').trigger('change');
 
     // "Irregular" should be inactive.
-    expect(_t.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
+    expect(NL.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);
 
   });
 
@@ -225,10 +225,10 @@ describe('Record Form Map Tab', function() {
     el.modify.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
-    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.edit.active).toBeTruthy();
 
     // Reshape should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+    expect(NL.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.RESHAPE
     );
 
@@ -247,10 +247,10 @@ describe('Record Form Map Tab', function() {
     el.rotate.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
-    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.edit.active).toBeTruthy();
 
     // Rotate should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+    expect(NL.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.ROTATE
     );
 
@@ -269,10 +269,10 @@ describe('Record Form Map Tab', function() {
     el.resize.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
-    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.edit.active).toBeTruthy();
 
     // Resize should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+    expect(NL.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.RESIZE
     );
 
@@ -291,10 +291,10 @@ describe('Record Form Map Tab', function() {
     el.drag.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
-    expect(_t.vw.MAP.controls.edit.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.edit.active).toBeTruthy();
 
     // Resize should be active.
-    expect(_t.vw.MAP.controls.edit.mode).toEqual(
+    expect(NL.vw.MAP.controls.edit.mode).toEqual(
       OpenLayers.Control.ModifyFeature.DRAG
     );
 
@@ -313,7 +313,7 @@ describe('Record Form Map Tab', function() {
     el.remove.attr('checked', 'checked').trigger('change');
 
     // "Delete Shape" should be active.
-    expect(_t.vw.MAP.controls.remove.active).toBeTruthy();
+    expect(NL.vw.MAP.controls.remove.active).toBeTruthy();
 
   });
 
@@ -327,7 +327,7 @@ describe('Record Form Map Tab', function() {
 
     // Add a point.
     var pt = new OpenLayers.Geometry.Point(3,4);
-    _t.vw.MAP.controls.point.drawFeature(pt);
+    NL.vw.MAP.controls.point.drawFeature(pt);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -348,7 +348,7 @@ describe('Record Form Map Tab', function() {
     var pt1   = new OpenLayers.Geometry.Point(3,4);
     var pt2   = new OpenLayers.Geometry.Point(5,6);
     var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
-    _t.vw.MAP.controls.line.drawFeature(line);
+    NL.vw.MAP.controls.line.drawFeature(line);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -371,7 +371,7 @@ describe('Record Form Map Tab', function() {
     var pt3   = new OpenLayers.Geometry.Point(7,8);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
-    _t.vw.MAP.controls.poly.drawFeature(poly);
+    NL.vw.MAP.controls.poly.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -392,7 +392,7 @@ describe('Record Form Map Tab', function() {
     var pt1 = new OpenLayers.Geometry.Point(3,4);
     var pt2 = new OpenLayers.Geometry.Point(5,6);
     var collection = new OpenLayers.Geometry.Collection([pt1, pt2]);
-    _t.vw.MAP.controls.svg.drawFeature(collection);
+    NL.vw.MAP.controls.svg.drawFeature(collection);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -415,7 +415,7 @@ describe('Record Form Map Tab', function() {
     var pt3   = new OpenLayers.Geometry.Point(5,6);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
-    _t.vw.MAP.controls.svg.drawFeature(poly);
+    NL.vw.MAP.controls.svg.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -438,7 +438,7 @@ describe('Record Form Map Tab', function() {
     var pt3   = new OpenLayers.Geometry.Point(5,6);
     var ring  = new OpenLayers.Geometry.LinearRing([pt1,pt2,pt3]);
     var poly  = new OpenLayers.Geometry.Polygon([ring]);
-    _t.vw.MAP.controls.regPoly.drawFeature(poly);
+    NL.vw.MAP.controls.regPoly.drawFeature(poly);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -456,13 +456,13 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Edit feature, set new point coords.
-    var feature = _t.vw.MAP.editLayer.features[0];
-    _t.vw.MAP.controls.edit.feature = feature;
+    var feature = NL.vw.MAP.editLayer.features[0];
+    NL.vw.MAP.controls.edit.feature = feature;
     feature.geometry.x = 2;
     feature.geometry.y = 3;
 
     // Trigger modification.
-    _t.vw.MAP.controls.edit.dragComplete();
+    NL.vw.MAP.controls.edit.dragComplete();
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -480,10 +480,10 @@ describe('Record Form Map Tab', function() {
     // --------------------------------------------------------------------
 
     // Edit feature, set new point coords.
-    var feature = _t.vw.MAP.editLayer.features[0];
+    var feature = NL.vw.MAP.editLayer.features[0];
 
     // Trigger modification.
-    _t.vw.MAP.controls.remove.selectFeature(feature);
+    NL.vw.MAP.controls.remove.selectFeature(feature);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual('');
@@ -502,12 +502,12 @@ describe('Record Form Map Tab', function() {
     var pt1   = new OpenLayers.Geometry.Point(3,4);
     var pt2   = new OpenLayers.Geometry.Point(5,6);
     var line  = new OpenLayers.Geometry.LineString([pt1,pt2]);
-    _t.vw.MAP.controls.line.drawFeature(line);
+    NL.vw.MAP.controls.line.drawFeature(line);
 
     // Select line, triger modify.
-    var feature = _t.vw.MAP.editLayer.features[1];
-    _t.vw.MAP.controls.edit.selectFeature(feature);
-    _t.vw.MAP.controls.edit.dragComplete();
+    var feature = NL.vw.MAP.editLayer.features[1];
+    NL.vw.MAP.controls.edit.selectFeature(feature);
+    NL.vw.MAP.controls.edit.dragComplete();
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual(
@@ -528,7 +528,7 @@ describe('Record Form Map Tab', function() {
     el.clear.trigger('click');
 
     // All features should be removed.
-    expect(_t.vw.MAP.editLayer.features.length).toEqual(0);
+    expect(NL.vw.MAP.editLayer.features.length).toEqual(0);
 
     // "Coverage" should be updated.
     expect(el.coverage.val()).toEqual('');
@@ -547,10 +547,10 @@ describe('Record Form Map Tab', function() {
     el.pan[0].checked = false; el.poly[0].checked = true;
 
     // Activate "Text" tab.
-    _t.vw.RECORD.activateTab('text');
+    NL.vw.RECORD.activateTab('text');
 
     // "Navigate" mode should be active.
-    expect(_t.vw.SPATIAL.getEditMode()).toEqual('pan');
+    expect(NL.vw.SPATIAL.getEditMode()).toEqual('pan');
 
   });
 

@@ -16,11 +16,11 @@ describe('Record Form Close', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordFormClose.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordFormClose.record);
 
     el = {
-      close: _t.vw.RECORD.$('a[name="close"]')
+      close: NL.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -37,8 +37,8 @@ describe('Record Form Close', function() {
     el.close.trigger('click');
 
     // Records list should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
+    expect(NL.vw.EDITOR.__ui.editor).not.toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
 
   });
 
@@ -53,23 +53,23 @@ describe('Record Form Close', function() {
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Move the point to a different location.
-    var feature = _t.vw.MAP.editLayer.features[0];
-    _t.vw.MAP.controls.edit.feature = feature;
+    var feature = NL.vw.MAP.editLayer.features[0];
+    NL.vw.MAP.controls.edit.feature = feature;
     feature.geometry.x = 3;
     feature.geometry.y = 4;
 
     // Trigger modification.
-    _t.vw.MAP.controls.edit.dragComplete();
+    NL.vw.MAP.controls.edit.dragComplete();
 
     // Click "X".
     el.close.trigger('click');
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
-    _t.respondMap200(_t.json.RecordFormClose.records);
+    NL.respondMap200(NL.json.RecordFormClose.records);
 
     // Should revert to the saved geometry.
-    var layer = _t.vw.MAP.getVectorLayers()[0];
+    var layer = NL.vw.MAP.getVectorLayers()[0];
     expect(layer.features[0].geometry.x).toEqual(1);
     expect(layer.features[0].geometry.y).toEqual(2);
 

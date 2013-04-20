@@ -12,7 +12,7 @@ describe('Layers API', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
   });
 
 

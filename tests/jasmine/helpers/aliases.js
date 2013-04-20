@@ -11,13 +11,13 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
    * Shortcut public views.
    */
-  _t.aliasNeatline = function() {
+  NL.aliasNeatline = function() {
     this.vw = {
       MAP:      Neatline.Map.__view,
       BUBBLE:   Neatline.Presenter.StaticBubble.__view
@@ -28,7 +28,7 @@ var _t = (function(_t) {
   /**
    * Shortcut editor views.
    */
-  _t.aliasEditor = function() {
+  NL.aliasEditor = function() {
     this.vw = {
       MAP:      Neatline.Map.__view,
       BUBBLE:   Neatline.Presenter.StaticBubble.__view,
@@ -44,7 +44,7 @@ var _t = (function(_t) {
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

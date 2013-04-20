@@ -16,16 +16,16 @@ describe('Record Form Add', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.respondRecordList200(_t.json.RecordForm.records);
+    NL.loadEditor();
+    NL.respondRecordList200(NL.json.RecordForm.records);
 
     el = {
-      addButton:    _t.vw.RECORDS.$('a[href="#record/add"]'),
-      closeButton:  _t.vw.RECORD.$('a[name="close"]'),
-      saveButton:   _t.vw.RECORD.$('a[name="save"]'),
-      styleTab:     _t.vw.RECORD.$('a[href="#record-style"]'),
-      leadId:       _t.vw.RECORD.$('p.lead span.id'),
-      leadTitle:    _t.vw.RECORD.$('p.lead span.title')
+      addButton:    NL.vw.RECORDS.$('a[href="#record/add"]'),
+      closeButton:  NL.vw.RECORD.$('a[name="close"]'),
+      saveButton:   NL.vw.RECORD.$('a[name="save"]'),
+      styleTab:     NL.vw.RECORD.$('a[href="#record-style"]'),
+      leadId:       NL.vw.RECORD.$('p.lead span.id'),
+      leadTitle:    NL.vw.RECORD.$('p.lead span.title')
     };
 
   });
@@ -39,10 +39,10 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(el.addButton);
+    NL.click(el.addButton);
 
     // Record form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
 
     // Form id should be empty.
     expect(el.leadId).toBeEmpty();
@@ -51,7 +51,7 @@ describe('Record Form Add', function() {
     expect(el.leadTitle.text()).toEqual(STRINGS.placeholders.title);
 
     // Model should have exhibit id.
-    var record = _t.vw.RECORD.model;
+    var record = NL.vw.RECORD.model;
     expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.
@@ -76,7 +76,7 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Open form.
-    _t.click($(_t.getRecordListRows()[1]));
+    NL.click($(NL.getRecordListRows()[1]));
 
     // Click "Style" tab.
     el.styleTab.tab('show');
@@ -85,10 +85,10 @@ describe('Record Form Add', function() {
     el.closeButton.trigger('click');
 
     // Add record.
-    _t.click(el.addButton);
+    NL.click(el.addButton);
 
     // "Text" should be active.
-    _t.assertActiveTab('text');
+    NL.assertActiveTab('text');
 
   });
 
@@ -100,17 +100,17 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record.
-    _t.click(el.addButton);
+    NL.click(el.addButton);
 
     // Click "Save".
     el.saveButton.trigger('click');
 
     // Route should be /record, method POST.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('POST');
+    NL.assertLastRequestRoute(Neatline.global.records_api);
+    NL.assertLastRequestMethod('POST');
 
     // Request should have exhibit id.
-    expect(_t.getLastRequestParams().exhibit_id).toBeDefined();
+    expect(NL.getLastRequestParams().exhibit_id).toBeDefined();
 
   });
 
@@ -126,17 +126,17 @@ describe('Record Form Add', function() {
     // --------------------------------------------------------------------
 
     // Add record, save.
-    _t.click(el.addButton);
+    NL.click(el.addButton);
     el.saveButton.trigger('click');
 
     // Respond to save with new id.
-    _t.respondLast200(_t.json.RecordFormAdd.record);
+    NL.respondLast200(NL.json.RecordFormAdd.record);
 
     // Respond to map refresh with new collection.
-    _t.respondLast200(_t.json.RecordFormAdd.records);
+    NL.respondLast200(NL.json.RecordFormAdd.records);
 
     // Should not double-load the new record.
-    _t.assertVectorLayerCount(1);
+    NL.assertVectorLayerCount(1);
 
   });
 
@@ -157,17 +157,17 @@ describe('Record Form Add', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    _.each(_t.getTabSlugs(), function(slug) {
+    _.each(NL.getTabSlugs(), function(slug) {
 
       // Open new form with the tab.
-      _t.navigate('record/add/'+slug);
+      NL.navigate('record/add/'+slug);
 
       // Click "Save".
       el.saveButton.trigger('click');
-      _t.respondLast200(_t.json.RecordForm.record);
+      NL.respondLast200(NL.json.RecordForm.record);
 
       // Route should be updated.
-      var id = $.parseJSON(_t.json.RecordForm.record).id;
+      var id = $.parseJSON(NL.json.RecordForm.record).id;
       expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
 
     });

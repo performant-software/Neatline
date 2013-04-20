@@ -16,13 +16,13 @@ describe('Record Form Presenter', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
 
     el = {
-      text:   _t.vw.RECORD.$('a[href="#record-text"]'),
-      map:    _t.vw.RECORD.$('a[href="#record-map"]'),
-      close:  _t.vw.RECORD.$('a[name="close"]')
+      text:   NL.vw.RECORD.$('a[href="#record-text"]'),
+      map:    NL.vw.RECORD.$('a[href="#record-map"]'),
+      close:  NL.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -39,7 +39,7 @@ describe('Record Form Presenter', function() {
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Request record map tab.
-    _t.navigate('record/add/map');
+    NL.navigate('record/add/map');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
@@ -103,7 +103,7 @@ describe('Record Form Presenter', function() {
     var exec = spyOn(Neatline, 'execute').andCallThrough();
 
     // Capture the form model.
-    var model = _t.vw.RECORD.model;
+    var model = NL.vw.RECORD.model;
 
     // Close the form.
     el.close.trigger('click');

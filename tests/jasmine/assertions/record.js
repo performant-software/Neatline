@@ -11,7 +11,7 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
@@ -19,7 +19,7 @@ var _t = (function(_t) {
    *
    * @param {String} slug: The tab slug.
    */
-  _t.assertActiveTab = function(slug) {
+  NL.assertActiveTab = function(slug) {
 
     var label = this.vw.RECORD.$('a[href="#record-'+slug+'"]');
     var panel = this.vw.RECORD.$('#record-'+slug);
@@ -31,7 +31,7 @@ var _t = (function(_t) {
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

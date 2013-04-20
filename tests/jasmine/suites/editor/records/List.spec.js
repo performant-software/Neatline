@@ -12,7 +12,7 @@ describe('Records List', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
   });
 
 
@@ -22,8 +22,8 @@ describe('Records List', function() {
     // The record browser pane should show a list of records.
     // --------------------------------------------------------------------
 
-    _t.respondRecordList200(_t.json.RecordsList.records.regular);
-    var models = _t.getRecordListModels(), rows = _t.getRecordListRows();
+    NL.respondRecordList200(NL.json.RecordsList.records.regular);
+    var models = NL.getRecordListModels(), rows = NL.getRecordListRows();
 
     // Should show titles and bodies.
     expect($(rows[0])).toHaveText('New Record');
@@ -49,8 +49,8 @@ describe('Records List', function() {
     // HTML tags in record titles should be stripped out.
     // --------------------------------------------------------------------
 
-    _t.respondRecordList200(_t.json.RecordsList.records.html);
-    var rows = _t.getRecordListRows();
+    NL.respondRecordList200(NL.json.RecordsList.records.html);
+    var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.
     expect($(rows[1]).find('.title')).toHaveText('title');
@@ -64,8 +64,8 @@ describe('Records List', function() {
     // Empty titles should be replaced as placeholders.
     // --------------------------------------------------------------------
 
-    _t.respondRecordList200(_t.json.RecordsList.records.empty);
-    var rows = _t.getRecordListRows();
+    NL.respondRecordList200(NL.json.RecordsList.records.empty);
+    var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.
     expect($(rows[1]).find('.title')).toHaveText(

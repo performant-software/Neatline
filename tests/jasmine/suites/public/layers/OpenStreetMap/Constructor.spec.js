@@ -12,7 +12,7 @@ describe('OpenStreetMap Base Layer Constructor', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
   });
 
 

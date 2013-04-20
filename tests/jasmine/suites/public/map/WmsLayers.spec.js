@@ -12,7 +12,7 @@ describe('Map WMS Layers', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
   });
 
 
@@ -23,8 +23,8 @@ describe('Map WMS Layers', function() {
     // records with WMS data that arrive in the initial query. 
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.MapWmsLayers.records.regular);
-    var layers = _t.vw.MAP.getWmsLayers();
+    NL.respondMap200(NL.json.MapWmsLayers.records.regular);
+    var layers = NL.vw.MAP.getWmsLayers();
 
     // Should create layers for records with WMS data.
     expect(layers[0].url).toEqual('address1');
@@ -33,7 +33,7 @@ describe('Map WMS Layers', function() {
     expect(layers[1].params.LAYERS).toEqual('layers2');
     expect(layers[2].url).toEqual('address3');
     expect(layers[2].params.LAYERS).toEqual('layers3');
-    _t.assertWmsLayerCount(3);
+    NL.assertWmsLayerCount(3);
 
   });
 
@@ -44,10 +44,10 @@ describe('Map WMS Layers', function() {
     // New WMS layers should be loaded when the map is moved.
     // --------------------------------------------------------------------
 
-    _t.triggerMapMoveEnd();
+    NL.triggerMapMoveEnd();
 
-    _t.respondLast200(_t.json.MapWmsLayers.records.regular);
-    var layers = _t.vw.MAP.getWmsLayers();
+    NL.respondLast200(NL.json.MapWmsLayers.records.regular);
+    var layers = NL.vw.MAP.getWmsLayers();
 
     // Should create layers for records with WMS data.
     expect(layers[0].url).toEqual('address1');
@@ -56,7 +56,7 @@ describe('Map WMS Layers', function() {
     expect(layers[1].params.LAYERS).toEqual('layers2');
     expect(layers[2].url).toEqual('address3');
     expect(layers[2].params.LAYERS).toEqual('layers3');
-    _t.assertWmsLayerCount(3);
+    NL.assertWmsLayerCount(3);
 
   });
 
@@ -69,14 +69,14 @@ describe('Map WMS Layers', function() {
     // --------------------------------------------------------------------
 
     // Load collection without record 3.
-    _t.refreshMap(_t.json.MapWmsLayers.records.deleted);
+    NL.refreshMap(NL.json.MapWmsLayers.records.deleted);
 
     // Load collection with record 3.
-    _t.refreshMap(_t.json.MapWmsLayers.records.regular);
+    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
 
     // Should create layer for record 3.
-    expect(_t.getWmsLayer('title3')).toBeDefined();
-    _t.assertWmsLayerCount(3);
+    expect(NL.getWmsLayer('title3')).toBeDefined();
+    NL.assertWmsLayerCount(3);
 
   });
 
@@ -88,18 +88,18 @@ describe('Map WMS Layers', function() {
     // layers, the existing layers should not be rebuilt.
     // --------------------------------------------------------------------
 
-    _t.refreshMap(_t.json.MapWmsLayers.records.regular);
+    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
 
     // Store original OpenLayers id's.
-    var olIds1 = _.map(_.values(_t.vw.MAP.layers.wms), function(v) {
+    var olIds1 = _.map(_.values(NL.vw.MAP.layers.wms), function(v) {
       return v.id;
     });
 
     // Reload the same collection.
-    _t.refreshMap(_t.json.MapWmsLayers.records.regular);
+    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
 
     // Get new OpenLayers id's.
-    var olIds2 = _.map(_.values(_t.vw.MAP.layers.wms), function(v) {
+    var olIds2 = _.map(_.values(NL.vw.MAP.layers.wms), function(v) {
       return v.id;
     });
 
@@ -116,14 +116,14 @@ describe('Map WMS Layers', function() {
     // --------------------------------------------------------------------
 
     // Load collection with record 3.
-    _t.refreshMap(_t.json.MapWmsLayers.records.regular);
+    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
 
     // Load collection without record 3.
-    _t.refreshMap(_t.json.MapWmsLayers.records.deleted);
+    NL.refreshMap(NL.json.MapWmsLayers.records.deleted);
 
     // Should remove layer for record 3.
-    expect(_t.getWmsLayer('title3')).toBeUndefined();
-    _t.assertWmsLayerCount(2);
+    expect(NL.getWmsLayer('title3')).toBeUndefined();
+    NL.assertWmsLayerCount(2);
 
   });
 

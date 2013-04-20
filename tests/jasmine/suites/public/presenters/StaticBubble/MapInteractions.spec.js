@@ -16,10 +16,10 @@ describe('Static Bubble Map Interactions', function() {
 
   beforeEach(function() {
 
-    _t.loadNeatline();
-    _t.respondMap200(_t.json.StaticBubble.records);
+    NL.loadNeatline();
+    NL.respondMap200(NL.json.StaticBubble.records);
 
-    layers = _t.vw.MAP.getVectorLayers();
+    layers = NL.vw.MAP.getVectorLayers();
     feature1 = layers[0].features[0];
     feature2 = layers[1].features[0];
 
@@ -33,8 +33,8 @@ describe('Static Bubble Map Interactions', function() {
     // container should be appended to the map container and invisible.
     // --------------------------------------------------------------------
 
-    expect(_t.vw.MAP.$el).toContain(_t.vw.BUBBLE.$el);
-    expect(_t.vw.BUBBLE.$el).not.toBeVisible();
+    expect(NL.vw.MAP.$el).toContain(NL.vw.BUBBLE.$el);
+    expect(NL.vw.BUBBLE.$el).not.toBeVisible();
 
   });
 
@@ -48,17 +48,17 @@ describe('Static Bubble Map Interactions', function() {
       // container. (The body should stay hidden).
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature1);
+      NL.hoverOnMapFeature(feature1);
 
       // Title and body should be populated.
-      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title1');
-      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
+      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
+      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body1');
 
       // Title should be visible.
-      expect(_t.vw.BUBBLE.$('.title')).toBeVisible();
+      expect(NL.vw.BUBBLE.$('.title')).toBeVisible();
 
       // Body should be hidden.
-      expect(_t.vw.BUBBLE.$('.body')).not.toBeVisible();
+      expect(NL.vw.BUBBLE.$('.body')).not.toBeVisible();
 
     });
 
@@ -69,13 +69,13 @@ describe('Static Bubble Map Interactions', function() {
       // a different record, the new record should not be highlighted.
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature1);
-      _t.hoverOnMapFeature(feature2);
+      NL.hoverOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
+      NL.hoverOnMapFeature(feature2);
 
       // Title and body should not change.
-      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title1');
-      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body1');
+      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
+      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body1');
 
     });
 
@@ -90,11 +90,11 @@ describe('Static Bubble Map Interactions', function() {
       // the bubble should be hidden.
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature1);
-      _t.unHoverOnMapFeature();
+      NL.hoverOnMapFeature(feature1);
+      NL.unHoverOnMapFeature();
 
       // Bubble should be hidden.
-      expect(_t.vw.BUBBLE.$el).not.toBeVisible();
+      expect(NL.vw.BUBBLE.$el).not.toBeVisible();
 
     });
 
@@ -105,12 +105,12 @@ describe('Static Bubble Map Interactions', function() {
       // bubble should be hidden.
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature1);
-      _t.unHoverOnMapFeature();
+      NL.hoverOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
+      NL.unHoverOnMapFeature();
 
       // Bubble should not be hidden.
-      expect(_t.vw.BUBBLE.$el).toBeVisible();
+      expect(NL.vw.BUBBLE.$el).toBeVisible();
 
     });
 
@@ -128,12 +128,12 @@ describe('Static Bubble Map Interactions', function() {
       // Set non-null body.
       layers[0].nModel.set('body', 'content');
 
-      _t.hoverOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature1);
+      NL.hoverOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
 
       // Body and close "X" should be visible.
-      expect(_t.vw.BUBBLE.$('.body')).toBeVisible();
-      expect(_t.vw.BUBBLE.$('.close')).toBeVisible();
+      expect(NL.vw.BUBBLE.$('.body')).toBeVisible();
+      expect(NL.vw.BUBBLE.$('.close')).toBeVisible();
 
     });
 
@@ -147,12 +147,12 @@ describe('Static Bubble Map Interactions', function() {
       // Set null body.
       layers[0].nModel.set('body', null);
 
-      _t.hoverOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature1);
+      NL.hoverOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
 
       // Body and close "X" should not be visible.
-      expect(_t.vw.BUBBLE.$('.body')).not.toBeVisible();
-      expect(_t.vw.BUBBLE.$('.close')).not.toBeVisible();
+      expect(NL.vw.BUBBLE.$('.body')).not.toBeVisible();
+      expect(NL.vw.BUBBLE.$('.close')).not.toBeVisible();
 
     });
 
@@ -163,13 +163,13 @@ describe('Static Bubble Map Interactions', function() {
       // bound to the bubble even if another record is already selected.
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature2);
+      NL.hoverOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature2);
 
       // Title and body should change.
-      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title2');
-      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body2');
+      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
+      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body2');
 
     });
 
@@ -184,29 +184,29 @@ describe('Static Bubble Map Interactions', function() {
     // --------------------------------------------------------------------
 
     beforeEach(function() {
-      _t.hoverOnMapFeature(feature1);
-      _t.clickOnMapFeature(feature1);
+      NL.hoverOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
     });
 
     afterEach(function() {
 
       // Bubble should be hidden.
-      expect(_t.vw.BUBBLE.$el).not.toBeVisible();
+      expect(NL.vw.BUBBLE.$el).not.toBeVisible();
 
-      _t.hoverOnMapFeature(feature2);
+      NL.hoverOnMapFeature(feature2);
 
       // Should start responding to highlight events.
-      expect(_t.vw.BUBBLE.$('.title')).toHaveText('title2');
-      expect(_t.vw.BUBBLE.$('.body')).toHaveText('body2');
+      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
+      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body2');
 
     });
 
     it('should close when close "X" is clicked', function() {
-      _t.vw.BUBBLE.$('.close').trigger('click');
+      NL.vw.BUBBLE.$('.close').trigger('click');
     });
 
     it('should close when a feature is unselected', function() {
-      _t.clickOffMapFeature();
+      NL.clickOffMapFeature();
     });
 
   });

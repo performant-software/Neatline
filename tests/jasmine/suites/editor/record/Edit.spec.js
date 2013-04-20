@@ -12,7 +12,7 @@ describe('Record Form Edit', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
   });
 
 
@@ -23,13 +23,13 @@ describe('Record Form Edit', function() {
     // map edit layer should be updated.
     // --------------------------------------------------------------------
 
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.showRecordForm(NL.json.RecordForm.record);
 
     // Update record form model.
-    _t.vw.RECORD.model.set('id', 999);
+    NL.vw.RECORD.model.set('id', 999);
 
     // Edit layer `nModel` should be updated.
-    expect(_t.vw.MAP.editLayer.nModel.id).toEqual(999);
+    expect(NL.vw.MAP.editLayer.nModel.id).toEqual(999);
 
   });
 
@@ -50,17 +50,17 @@ describe('Record Form Edit', function() {
     // the record is already represented on the map by the edit layer.
     // --------------------------------------------------------------------
 
-    _t.navigate('record/add');
+    NL.navigate('record/add');
 
     // Update record form.
-    _t.vw.RECORD.model.set('id', 999);
+    NL.vw.RECORD.model.set('id', 999);
 
     // `undefined` key should be replaced with new id.
-    expect(_t.vw.MAP.layers.vector[undefined]).toBeUndefined();
+    expect(NL.vw.MAP.layers.vector[undefined]).toBeUndefined();
 
     // The new id should point to the edit layer.
-    expect(_t.vw.MAP.layers.vector[999].id).toEqual(
-      _t.vw.MAP.editLayer.id
+    expect(NL.vw.MAP.layers.vector[999].id).toEqual(
+      NL.vw.MAP.editLayer.id
     );
 
   });

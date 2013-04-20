@@ -16,10 +16,10 @@ describe('Styles Router', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
+    NL.loadEditor();
 
     el = {
-      styles: _t.vw.EXHIBIT.$('li[data-slug="styles"]')
+      styles: NL.vw.EXHIBIT.$('li[data-slug="styles"]')
     };
 
   });
@@ -27,11 +27,11 @@ describe('Styles Router', function() {
 
   it('#styles', function() {
 
-    _t.showStyles(_t.json.Styles.exhibit);
+    NL.showStyles(NL.json.Styles.exhibit);
 
     // Tabs, styles form should be visible.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.EXHIBIT.$el);
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.STYLES.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.STYLES.$el);
 
     // "Styles" tab should be active.
     expect(el.styles).toHaveClass('active');

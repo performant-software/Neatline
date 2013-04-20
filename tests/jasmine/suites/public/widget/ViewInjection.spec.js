@@ -15,7 +15,7 @@ describe('Widget', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
     view = Neatline.Shared.Widget.View.extend({
       id: 'widget'
     });

@@ -16,7 +16,7 @@ describe('Presenter Event Forwarding', function() {
 
   beforeEach(function() {
 
-    _t.loadNeatline();
+    NL.loadNeatline();
 
     model1 = new Neatline.Shared.Record.Model({
       presenter: 'Presenter1'

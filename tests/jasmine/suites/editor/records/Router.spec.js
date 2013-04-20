@@ -16,10 +16,10 @@ describe('Records Router', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
+    NL.loadEditor();
 
     el = {
-      records: _t.vw.EXHIBIT.$('li[data-slug="records"]')
+      records: NL.vw.EXHIBIT.$('li[data-slug="records"]')
     };
 
   });
@@ -30,9 +30,9 @@ describe('Records Router', function() {
     afterEach(function() {
 
       // Tabs, search, records should be visible.
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.EXHIBIT.$el);
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.SEARCH.$el);
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.SEARCH.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
 
       // "Records" tab should be active.
       expect(el.records).toHaveClass('active');
@@ -40,23 +40,23 @@ describe('Records Router', function() {
     });
 
     it('empty', function() {
-      _t.navigate('');
+      NL.navigate('');
     });
 
     it('default', function() {
-      _t.navigate('records');
+      NL.navigate('records');
     });
 
     it('query', function() {
-      _t.navigate('records/search/query=test');
+      NL.navigate('records/search/query=test');
     });
 
     it('offset', function() {
-      _t.navigate('records/search/start=50');
+      NL.navigate('records/search/start=50');
     });
 
     it('query and offset', function() {
-      _t.navigate('records/search/query=test/start=50');
+      NL.navigate('records/search/query=test/start=50');
     });
 
   });

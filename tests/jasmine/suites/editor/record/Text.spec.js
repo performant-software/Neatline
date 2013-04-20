@@ -16,11 +16,11 @@ describe('Record Form Text Tab', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
 
     el = {
-      autocomplete: $(_t.vw.TEXT.__ui.item.autocomplete('widget')[0])
+      autocomplete: $(NL.vw.TEXT.__ui.item.autocomplete('widget')[0])
     };
 
   });
@@ -34,18 +34,18 @@ describe('Record Form Text Tab', function() {
     // --------------------------------------------------------------------
 
     // Enter item search query.
-    _t.vw.TEXT.__ui.item.autocomplete('search', 'item');
+    NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
 
     // Should produce GET request to /items/browse.
-    _t.assertLastRequestRoute(Neatline.global.items_api);
-    _t.assertLastRequestMethod('GET');
+    NL.assertLastRequestRoute(Neatline.global.items_api);
+    NL.assertLastRequestMethod('GET');
 
     // Should emit query and output format.
-    _t.assertLastRequestHasGetParameter('search', 'item');
-    _t.assertLastRequestHasGetParameter('output', 'omeka-xml');
+    NL.assertLastRequestHasGetParameter('search', 'item');
+    NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
 
     // Respond with items list.
-    _t.respondXmlLast200(_t.xml.RecordFormText.items);
+    NL.respondXmlLast200(NL.xml.RecordFormText.items);
 
     // Get widget container and items.
     var items = el.autocomplete.find('a');
@@ -66,19 +66,19 @@ describe('Record Form Text Tab', function() {
     // --------------------------------------------------------------------
 
     // Enter item search query.
-    _t.vw.TEXT.__ui.item.autocomplete('search', 'item');
-    _t.respondXmlLast200(_t.xml.RecordFormText.items);
+    NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
+    NL.respondXmlLast200(NL.xml.RecordFormText.items);
 
     // Click on the first option.
     el.autocomplete.find('a').first().click();
 
     // Should populate id.
-    expect(_t.vw.TEXT.__ui.item).toHaveValue(
-      $(_t.xml.RecordFormText.items).find('item').first().attr('itemId')
+    expect(NL.vw.TEXT.__ui.item).toHaveValue(
+      $(NL.xml.RecordFormText.items).find('item').first().attr('itemId')
     );
 
     // Should populate title.
-    expect(_t.vw.TEXT.__ui.title).toHaveValue('Item 3');
+    expect(NL.vw.TEXT.__ui.title).toHaveValue('Item 3');
 
   });
 

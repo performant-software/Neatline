@@ -11,7 +11,7 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
@@ -20,7 +20,7 @@ var _t = (function(_t) {
    * @param {String} json: The JSON string.
    * @return {Object} model: The model.
    */
-  _t.recordFromJson = function(json) {
+  NL.recordFromJson = function(json) {
     return new Neatline.Shared.Record.Model(JSON.parse(json));
   };
 
@@ -30,7 +30,7 @@ var _t = (function(_t) {
    *
    * @return {Object}: A hash of elements.
    */
-  _t.getRecordFormElements = function() {
+  NL.getRecordFormElements = function() {
     var form = this.vw.RECORD;
     return {
       id:             form.$('p.lead span.id'),
@@ -71,14 +71,14 @@ var _t = (function(_t) {
    *
    * @return {Array}: The slugs.
    */
-  _t.getTabSlugs = function() {
+  NL.getTabSlugs = function() {
     return _.map(this.vw.RECORD.__ui.tabs, function(tab) {
       return $(tab).attr('data-slug');
     });
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

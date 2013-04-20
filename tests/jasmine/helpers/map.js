@@ -11,13 +11,13 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
    * Trigger a `movestart` event on the map.
    */
-  _t.triggerMapMoveStart = function() {
+  NL.triggerMapMoveStart = function() {
     this.vw.MAP.map.events.triggerEvent('movestart');
   };
 
@@ -25,7 +25,7 @@ var _t = (function(_t) {
   /**
    * Trigger a `moveend` event on the map.
    */
-  _t.triggerMapMoveEnd = function() {
+  NL.triggerMapMoveEnd = function() {
     this.vw.MAP.map.events.triggerEvent('moveend');
   };
 
@@ -33,7 +33,7 @@ var _t = (function(_t) {
   /**
    * Trigger a mouseout event on the map.
    */
-  _t.triggerMapMouseout = function() {
+  NL.triggerMapMouseout = function() {
     this.vw.MAP.map.events.triggerEvent('mouseout');
   };
 
@@ -43,7 +43,7 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.refreshMap = function(response) {
+  NL.refreshMap = function(response) {
     this.triggerMapMoveEnd();
     this.respondLast200(response);
   };
@@ -54,7 +54,7 @@ var _t = (function(_t) {
    *
    * @param {Object} feature: The feature to be clicked on.
    */
-  _t.clickOnMapFeature = function(feature) {
+  NL.clickOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
     _.each(this.vw.MAP.getVectorLayers(), function(layer) {
@@ -78,7 +78,7 @@ var _t = (function(_t) {
   /**
    * Simulate a click out on a map feature.
    */
-  _t.clickOffMapFeature = function() {
+  NL.clickOffMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
     _.each(this.vw.MAP.getVectorLayers(), function(layer) {
@@ -100,7 +100,7 @@ var _t = (function(_t) {
    *
    * @param {Object} feature: The feature to be clicked on.
    */
-  _t.hoverOnMapFeature = function(feature) {
+  NL.hoverOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
     _.each(this.vw.MAP.getVectorLayers(), function(layer) {
@@ -120,7 +120,7 @@ var _t = (function(_t) {
   /**
    * Simulate a mouseleave on a map feature.
    */
-  _t.unHoverOnMapFeature = function() {
+  NL.unHoverOnMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
     _.each(this.vw.MAP.getVectorLayers(), function(layer) {
@@ -144,7 +144,7 @@ var _t = (function(_t) {
    * @param {Number} lat: The latitude.
    * @param {Number} zoom: The zoom level.
    */
-  _t.setMapCenter = function(lon, lat, zoom) {
+  NL.setMapCenter = function(lon, lat, zoom) {
     this.vw.MAP.map.setCenter([lon, lat], zoom);
   };
 
@@ -154,7 +154,7 @@ var _t = (function(_t) {
    *
    * @param {Number} zoom: The zoom level.
    */
-  _t.setMapZoom = function(zoom) {
+  NL.setMapZoom = function(zoom) {
     this.vw.MAP.map.zoomTo(zoom);
   };
 
@@ -165,7 +165,7 @@ var _t = (function(_t) {
    * @param {String} title: The record title.
    * @return {Object}: The layer.
    */
-  _t.getVectorLayer = function(title) {
+  NL.getVectorLayer = function(title) {
     return _.find(this.vw.MAP.getVectorLayers(), function(layer) {
       return layer.name == title;
     });
@@ -178,7 +178,7 @@ var _t = (function(_t) {
    * @param {String} title: The record title.
    * @return {Object}: The layer.
    */
-  _t.getWmsLayer = function(title) {
+  NL.getWmsLayer = function(title) {
     return _.find(this.vw.MAP.getWmsLayers(), function(layer) {
       return layer.name == title;
     });
@@ -190,14 +190,14 @@ var _t = (function(_t) {
    *
    * @param {Array}: A list of control `CLASS_NAME`s.
    */
-  _t.getMapControlClassNames = function() {
+  NL.getMapControlClassNames = function() {
     return _.map(this.vw.MAP.map.controls, function(control) {
       return control.CLASS_NAME;
     });
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

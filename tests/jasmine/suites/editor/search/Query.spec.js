@@ -15,7 +15,7 @@ describe('Search Query Execution', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
     pageLength = Neatline.global.page_length;
   });
 
@@ -28,10 +28,10 @@ describe('Search Query Execution', function() {
     // --------------------------------------------------------------------
 
     // Keyup with tag string in the box.
-    _t.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
 
     // Input should be bold.
-    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+    expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
 
   });
 
@@ -44,10 +44,10 @@ describe('Search Query Execution', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Input should be bold.
-    expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+    expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
 
   });
 
@@ -61,18 +61,18 @@ describe('Search Query Execution', function() {
     // --------------------------------------------------------------------
 
     // Exiting tags query.
-    _t.vw.SEARCH.__ui.search.val('tags:').trigger('keyup');
-    _t.vw.SEARCH.__ui.search.val('tags').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('tags:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('tags').trigger('keyup');
 
     // Input should not be bold.
-    expect(_t.vw.SEARCH.__ui.search).not.toHaveClass('bold');
+    expect(NL.vw.SEARCH.__ui.search).not.toHaveClass('bold');
 
     // Exiting map mirroring.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
-    _t.vw.SEARCH.__ui.search.val('map').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map').trigger('keyup');
 
     // Input should not be bold.
-    expect(_t.vw.SEARCH.__ui.search).not.toHaveClass('bold');
+    expect(NL.vw.SEARCH.__ui.search).not.toHaveClass('bold');
 
   });
 
@@ -86,20 +86,20 @@ describe('Search Query Execution', function() {
     // --------------------------------------------------------------------
 
     // Keyup with 'keyword' in the box.
-    _t.vw.SEARCH.__ui.search.val('word1 word2').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('word1 word2').trigger('keyup');
 
     // Should produce GET request to /records.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
+    NL.assertLastRequestRoute(Neatline.global.records_api);
+    NL.assertLastRequestMethod('GET');
 
     // `query`=word, default `limit` and `offset`.
-    _t.assertLastRequestHasGetParameter('query', 'word1+word2');
-    _t.assertLastRequestHasGetParameter('limit', pageLength);
-    _t.assertLastRequestHasGetParameter('offset', '0');
+    NL.assertLastRequestHasGetParameter('query', 'word1+word2');
+    NL.assertLastRequestHasGetParameter('limit', pageLength);
+    NL.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    _t.respondLast200(_t.json.SearchQuery.records);
-    var rows = _t.getRecordListRows();
+    NL.respondLast200(NL.json.SearchQuery.records);
+    var rows = NL.getRecordListRows();
 
     // Record list should be updated.
     expect($(rows[1]).find('.title')).toHaveText('result1');
@@ -118,23 +118,23 @@ describe('Search Query Execution', function() {
     // --------------------------------------------------------------------
 
     // Keyup with tag string in the box.
-    _t.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
 
     // Should produce GET request to /records.
-    _t.assertLastRequestRoute(Neatline.global.records_api);
-    _t.assertLastRequestMethod('GET');
+    NL.assertLastRequestRoute(Neatline.global.records_api);
+    NL.assertLastRequestMethod('GET');
 
     // `tags[]`=tag1, `tags[]`=tag2.
-    var request = _t.getLastRequest();
+    var request = NL.getLastRequest();
     expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
     // Default `limit` and `offset`.
-    _t.assertLastRequestHasGetParameter('limit', pageLength);
-    _t.assertLastRequestHasGetParameter('offset', '0');
+    NL.assertLastRequestHasGetParameter('limit', pageLength);
+    NL.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    _t.respondLast200(_t.json.SearchQuery.records);
-    var rows = _t.getRecordListRows();
+    NL.respondLast200(NL.json.SearchQuery.records);
+    var rows = NL.getRecordListRows();
 
     // Record list should be updated.
     expect($(rows[1]).find('.title')).toHaveText('result1');
@@ -153,7 +153,7 @@ describe('Search Query Execution', function() {
 
     it('one word', function() {
 
-      _t.vw.SEARCH.__ui.search.val('word1').trigger('keyup');
+      NL.vw.SEARCH.__ui.search.val('word1').trigger('keyup');
 
       expect(Backbone.history.fragment).toEqual(
         'records/search/query=word1'
@@ -163,7 +163,7 @@ describe('Search Query Execution', function() {
 
     it('multiple words', function() {
 
-      _t.vw.SEARCH.__ui.search.val('word1 word2 word3').trigger('keyup');
+      NL.vw.SEARCH.__ui.search.val('word1 word2 word3').trigger('keyup');
 
       // Spaces replaced with `+`.
       expect(Backbone.history.fragment).toEqual(
@@ -174,7 +174,7 @@ describe('Search Query Execution', function() {
 
     it('multiple words', function() {
 
-      _t.vw.SEARCH.__ui.search.val('').trigger('keyup');
+      NL.vw.SEARCH.__ui.search.val('').trigger('keyup');
 
       // Search parameters stripped away.
       expect(Backbone.history.fragment).toEqual('records');

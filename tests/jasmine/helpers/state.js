@@ -11,13 +11,13 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
    * Load neatline application.
    */
-  _t.loadNeatline = function() {
+  NL.loadNeatline = function() {
     this.loadJsonFixtures();
     loadFixtures('neatline-partial.html');
     loadStyleFixtures('neatline.css');
@@ -28,7 +28,7 @@ var _t = (function(_t) {
   /**
    * Load editor application.
    */
-  _t.loadEditor = function() {
+  NL.loadEditor = function() {
     this.loadJsonFixtures();
     loadFixtures('editor-partial.html');
     loadStyleFixtures('editor.css');
@@ -39,7 +39,7 @@ var _t = (function(_t) {
   /**
    * Mock the server, start Neatline.
    */
-  _t.__initNeatline = function() {
+  NL.__initNeatline = function() {
     this.server = sinon.fakeServer.create();
     this.startApplication();
     this.aliasNeatline();
@@ -49,7 +49,7 @@ var _t = (function(_t) {
   /**
    * Mock the server, start the editor.
    */
-  _t.__initEditor = function() {
+  NL.__initEditor = function() {
     this.server = sinon.fakeServer.create();
     this.startApplication();
     this.aliasEditor();
@@ -60,7 +60,7 @@ var _t = (function(_t) {
   /**
    * (Re)start the application.
    */
-  _t.startApplication = function() {
+  NL.startApplication = function() {
     window.location.hash = null;
     Backbone.history.stop();
     this.stopApplication();
@@ -71,7 +71,7 @@ var _t = (function(_t) {
   /**
    * Recursively stop all modules.
    */
-  _t.stopApplication = function() {
+  NL.stopApplication = function() {
     _.each(Neatline.submodules, function(m) { m.stop(); });
     Neatline._initCallbacks.reset();
   };
@@ -82,7 +82,7 @@ var _t = (function(_t) {
    *
    * @param {String} fragment: The URL fragment.
    */
-  _t.navigate = function(fragment) {
+  NL.navigate = function(fragment) {
     Backbone.history.fragment = null;
     Backbone.history.navigate(fragment, true);
   };
@@ -93,7 +93,7 @@ var _t = (function(_t) {
    *
    * @param {Object} el: The anchor element.
    */
-  _t.click = function(el) {
+  NL.click = function(el) {
     el.click();
     this.navigate(el.attr('href'));
   };
@@ -104,7 +104,7 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.showRecordList = function(response) {
+  NL.showRecordList = function(response) {
     this.navigate('records');
     this.respondLast200(response);
   };
@@ -115,7 +115,7 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.showRecordForm = function(response) {
+  NL.showRecordForm = function(response) {
     this.navigate('record/'+JSON.parse(response).id);
     this.respondLast200(response);
   };
@@ -126,13 +126,13 @@ var _t = (function(_t) {
    *
    * @param {Object} response: The response body.
    */
-  _t.showStyles = function(response) {
+  NL.showStyles = function(response) {
     this.navigate('styles');
     this.respondLast200(response);
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

@@ -16,16 +16,16 @@ describe('Record Form SVG', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
 
     el = {
-      link:     _t.vw.RECORD.$('a[href="#svg-modal"]'),
-      svg:      _t.vw.RECORD.$('textarea[name="svg"]'),
-      density:  _t.vw.RECORD.$('input[name="density"]'),
-      cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
-      parse:    _t.vw.RECORD.$('a[name="parse"]'),
-      modal:    _t.vw.RECORD.$('#svg-modal')
+      link:     NL.vw.RECORD.$('a[href="#svg-modal"]'),
+      svg:      NL.vw.RECORD.$('textarea[name="svg"]'),
+      density:  NL.vw.RECORD.$('input[name="density"]'),
+      cancel:   NL.vw.RECORD.$('a[name="cancel"]'),
+      parse:    NL.vw.RECORD.$('a[name="parse"]'),
+      modal:    NL.vw.RECORD.$('#svg-modal')
     };
 
   });
@@ -83,7 +83,7 @@ describe('Record Form SVG', function() {
     el.parse.trigger('click');
 
     // `geometry` on handler should be set.
-    expect(_t.vw.MAP.controls.svg.handler.geometry.equals(geo)).
+    expect(NL.vw.MAP.controls.svg.handler.geometry.equals(geo)).
       toBeTruthy();
 
   });
@@ -104,14 +104,14 @@ describe('Record Form SVG', function() {
     el.parse.trigger('click');
 
     // Capture the number of points in the geometry.
-    var c1 = _t.vw.MAP.controls.svg.handler.geometry.getVertices().length;
+    var c1 = NL.vw.MAP.controls.svg.handler.geometry.getVertices().length;
 
     // Set high density.
     el.density.val('2.0');
     el.parse.trigger('click');
 
     // Capture the number of points in the geometry.
-    var c2 = _t.vw.MAP.controls.svg.handler.geometry.getVertices().length;
+    var c2 = NL.vw.MAP.controls.svg.handler.geometry.getVertices().length;
 
     // Should be more points.
     expect(c2).toBeGreaterThan(c1);

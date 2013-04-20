@@ -11,13 +11,13 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
    * Read JSON fixtures.
    */
-  _t.loadJsonFixtures = function() {
+  NL.loadJsonFixtures = function() {
 
     this.json = {
 
@@ -146,7 +146,7 @@ var _t = (function(_t) {
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

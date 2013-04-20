@@ -11,7 +11,7 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
@@ -21,7 +21,7 @@ var _t = (function(_t) {
    * @param {Number} lat: The focus latitude.
    * @param {Number} zoom: The zoom.
    */
-  _t.assertMapViewport = function(lon, lat, zoom) {
+  NL.assertMapViewport = function(lon, lat, zoom) {
     expect(this.vw.MAP.map.getCenter().lon).toEqual(lon);
     expect(this.vw.MAP.map.getCenter().lat).toEqual(lat);
     expect(this.vw.MAP.map.getZoom()).toEqual(zoom);
@@ -31,7 +31,7 @@ var _t = (function(_t) {
   /**
    * Assert that the last query was a map extent query.
    */
-  _t.assertMapExtentQuery = function() {
+  NL.assertMapExtentQuery = function() {
 
     // Should trigger GET request to /records.
     this.assertLastRequestRoute(Neatline.global.records_api);
@@ -49,7 +49,7 @@ var _t = (function(_t) {
    *
    * @param {Number} count: The number.
    */
-  _t.assertVectorLayerCount = function(count) {
+  NL.assertVectorLayerCount = function(count) {
     expect(this.vw.MAP.getVectorLayers().length).toEqual(count);
   };
 
@@ -59,12 +59,12 @@ var _t = (function(_t) {
    *
    * @param {Number} count: The number.
    */
-  _t.assertWmsLayerCount = function(count) {
+  NL.assertWmsLayerCount = function(count) {
     expect(this.vw.MAP.getWmsLayers().length).toEqual(count);
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

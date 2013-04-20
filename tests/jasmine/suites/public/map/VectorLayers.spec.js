@@ -12,7 +12,7 @@ describe('Map Vector Layers', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
   });
 
 
@@ -23,8 +23,8 @@ describe('Map Vector Layers', function() {
     // records that arrive in the initial query.
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.MapVectorLayers.records.regular);
-    var layers = _t.vw.MAP.getVectorLayers();
+    NL.respondMap200(NL.json.MapVectorLayers.records.regular);
+    var layers = NL.vw.MAP.getVectorLayers();
 
     // Should create layers for records.
     expect(layers[0].features[0].geometry.x).toEqual(1);
@@ -33,7 +33,7 @@ describe('Map Vector Layers', function() {
     expect(layers[1].features[0].geometry.y).toEqual(4);
     expect(layers[2].features[0].geometry.x).toEqual(5);
     expect(layers[2].features[0].geometry.y).toEqual(6);
-    _t.assertVectorLayerCount(3);
+    NL.assertVectorLayerCount(3);
 
   });
 
@@ -44,10 +44,10 @@ describe('Map Vector Layers', function() {
     // New vector layers should be loaded when the map is moved.
     // --------------------------------------------------------------------
 
-    _t.triggerMapMoveEnd();
+    NL.triggerMapMoveEnd();
 
-    _t.respondLast200(_t.json.MapVectorLayers.records.regular);
-    var layers = _t.vw.MAP.getVectorLayers();
+    NL.respondLast200(NL.json.MapVectorLayers.records.regular);
+    var layers = NL.vw.MAP.getVectorLayers();
 
     // Should create layers for records.
     expect(layers[0].features[0].geometry.x).toEqual(1);
@@ -56,7 +56,7 @@ describe('Map Vector Layers', function() {
     expect(layers[1].features[0].geometry.y).toEqual(4);
     expect(layers[2].features[0].geometry.x).toEqual(5);
     expect(layers[2].features[0].geometry.y).toEqual(6);
-    _t.assertVectorLayerCount(3);
+    NL.assertVectorLayerCount(3);
 
   });
 
@@ -69,14 +69,14 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load collection without record 3.
-    _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
+    NL.refreshMap(NL.json.MapVectorLayers.records.deleted);
 
     // Load collection with record 3.
-    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+    NL.refreshMap(NL.json.MapVectorLayers.records.regular);
 
     // Should create layer for record 3.
-    expect(_t.getVectorLayer('title3')).toBeDefined();
-    _t.assertVectorLayerCount(3);
+    expect(NL.getVectorLayer('title3')).toBeDefined();
+    NL.assertVectorLayerCount(3);
 
   });
 
@@ -88,18 +88,18 @@ describe('Map Vector Layers', function() {
     // layers, the existing layers should not be rebuilt.
     // --------------------------------------------------------------------
 
-    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+    NL.refreshMap(NL.json.MapVectorLayers.records.regular);
 
     // Store original OpenLayers id's.
-    var olIds1 = _.map(_.values(_t.vw.MAP.layers.vector), function(v) {
+    var olIds1 = _.map(_.values(NL.vw.MAP.layers.vector), function(v) {
       return v.id;
     });
 
     // Reload the same collection.
-    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+    NL.refreshMap(NL.json.MapVectorLayers.records.regular);
 
     // Get new OpenLayers id's.
-    var olIds2 = _.map(_.values(_t.vw.MAP.layers.vector), function(v) {
+    var olIds2 = _.map(_.values(NL.vw.MAP.layers.vector), function(v) {
       return v.id;
     });
 
@@ -116,14 +116,14 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load collection with record 3.
-    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+    NL.refreshMap(NL.json.MapVectorLayers.records.regular);
 
     // Load collection without record 3.
-    _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
+    NL.refreshMap(NL.json.MapVectorLayers.records.deleted);
 
     // Should remove layer for record 3.
-    expect(_t.getVectorLayer('title3')).toBeUndefined();
-    _t.assertVectorLayerCount(2);
+    expect(NL.getVectorLayer('title3')).toBeUndefined();
+    NL.assertVectorLayerCount(2);
 
   });
 
@@ -137,17 +137,17 @@ describe('Map Vector Layers', function() {
     // --------------------------------------------------------------------
 
     // Load collection with record 3.
-    _t.refreshMap(_t.json.MapVectorLayers.records.regular);
+    NL.refreshMap(NL.json.MapVectorLayers.records.regular);
 
     // Freeze layer for record 3.
-    _t.getVectorLayer('title3').nFrozen = true;
+    NL.getVectorLayer('title3').nFrozen = true;
 
     // Load collection without record 3.
-    _t.refreshMap(_t.json.MapVectorLayers.records.deleted);
+    NL.refreshMap(NL.json.MapVectorLayers.records.deleted);
 
     // Should not remove frozen layer.
-    expect(_t.getVectorLayer('title3')).toBeDefined();
-    _t.assertVectorLayerCount(3);
+    expect(NL.getVectorLayer('title3')).toBeDefined();
+    NL.assertVectorLayerCount(3);
 
   });
 
@@ -158,9 +158,9 @@ describe('Map Vector Layers', function() {
 
     beforeEach(function() {
 
-      _t.respondMap200(_t.json.MapVectorLayers.records.styles);
+      NL.respondMap200(NL.json.MapVectorLayers.records.styles);
 
-      layer = _t.vw.MAP.getVectorLayers()[0];
+      layer = NL.vw.MAP.getVectorLayers()[0];
       feature = layer.features[0];
 
     });
@@ -216,7 +216,7 @@ describe('Map Vector Layers', function() {
       // be applied to the geometry.
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature);
+      NL.hoverOnMapFeature(feature);
 
       expect(feature.renderIntent).toEqual('temporary');
 
@@ -229,8 +229,8 @@ describe('Map Vector Layers', function() {
       // be applied to the geometry.
       // ------------------------------------------------------------------
 
-      _t.hoverOnMapFeature(feature);
-      _t.unHoverOnMapFeature();
+      NL.hoverOnMapFeature(feature);
+      NL.unHoverOnMapFeature();
 
       expect(feature.renderIntent).toEqual('default');
 
@@ -243,7 +243,7 @@ describe('Map Vector Layers', function() {
       // to the geometry.
       // ------------------------------------------------------------------
 
-      _t.clickOnMapFeature(feature);
+      NL.clickOnMapFeature(feature);
 
       expect(feature.renderIntent).toEqual('select');
 
@@ -256,8 +256,8 @@ describe('Map Vector Layers', function() {
       // applied to the geometry.
       // ------------------------------------------------------------------
 
-      _t.clickOnMapFeature(feature);
-      _t.clickOffMapFeature();
+      NL.clickOnMapFeature(feature);
+      NL.clickOffMapFeature();
 
       expect(feature.renderIntent).toEqual('default');
 

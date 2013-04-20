@@ -16,17 +16,17 @@ describe('Record Form Open', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.respondAll200(_t.json.RecordFormOpen.records);
+    NL.loadEditor();
+    NL.respondAll200(NL.json.RecordFormOpen.records);
 
-    recordModels = _t.getRecordListModels();
-    feature1 = _t.vw.MAP.getVectorLayers()[0].features[0];
-    feature2 = _t.vw.MAP.getVectorLayers()[1].features[0];
+    recordModels = NL.getRecordListModels();
+    feature1 = NL.vw.MAP.getVectorLayers()[0].features[0];
+    feature2 = NL.vw.MAP.getVectorLayers()[1].features[0];
 
     el = {
-      pan:    _t.vw.RECORD.$('input[value="pan"]'),
-      poly:   _t.vw.RECORD.$('input[value="poly"]'),
-      close:  _t.vw.RECORD.$('a[name="close"]')
+      pan:    NL.vw.RECORD.$('input[value="pan"]'),
+      poly:   NL.vw.RECORD.$('input[value="poly"]'),
+      close:  NL.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -39,8 +39,8 @@ describe('Record Form Open', function() {
     afterEach(function() {
 
       // The form should be displayed and populated with data.
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-      expect(_t.vw.RECORD.model.id).toEqual(model.id);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+      expect(NL.vw.RECORD.model.id).toEqual(model.id);
 
     });
 
@@ -54,7 +54,7 @@ describe('Record Form Open', function() {
       model = recordModels[0];
 
       // Click on a record listing.
-      _t.click($(_t.getRecordListRows()[1]));
+      NL.click($(NL.getRecordListRows()[1]));
 
     });
 
@@ -69,7 +69,7 @@ describe('Record Form Open', function() {
       model = recordModels[0];
 
       // Request an already-loaded record.
-      _t.navigate('record/'+recordModels[0].id);
+      NL.navigate('record/'+recordModels[0].id);
 
     });
 
@@ -80,13 +80,13 @@ describe('Record Form Open', function() {
       // is requested by a route, the record should be loaded.
       // ------------------------------------------------------------------
 
-      model = _t.recordFromJson(_t.json.RecordForm.record);
+      model = NL.recordFromJson(NL.json.RecordForm.record);
 
       // Request unloaded record.
-      _t.navigate('record/999');
+      NL.navigate('record/999');
 
       // Respond to the GET request.
-      _t.respondLast200(_t.json.RecordForm.record);
+      NL.respondLast200(NL.json.RecordForm.record);
 
     });
 
@@ -97,10 +97,10 @@ describe('Record Form Open', function() {
       // be bound to the form immediately.
       // ------------------------------------------------------------------
 
-      model = _t.vw.MAP.getVectorLayers()[0].nModel;
+      model = NL.vw.MAP.getVectorLayers()[0].nModel;
 
       // Click on map feature.
-      _t.clickOnMapFeature(feature1);
+      NL.clickOnMapFeature(feature1);
 
     });
 
@@ -111,7 +111,7 @@ describe('Record Form Open', function() {
       // a map feature), the model should be bound to the form.
       // ------------------------------------------------------------------
 
-      model = _t.vw.MAP.getVectorLayers()[0].nModel;
+      model = NL.vw.MAP.getVectorLayers()[0].nModel;
 
       // Select the model.
       Neatline.vent.trigger('select', model);
@@ -128,10 +128,10 @@ describe('Record Form Open', function() {
     // with data from the record model.
     // --------------------------------------------------------------------
 
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.showRecordForm(NL.json.RecordForm.record);
 
-    var id = JSON.parse(_t.json.RecordForm.record).id;
-    var inputs = _t.getRecordFormElements();
+    var id = JSON.parse(NL.json.RecordForm.record).id;
+    var inputs = NL.getRecordFormElements();
 
     expect(inputs.id).              toHaveText('#'+id+':'),
     expect(inputs.titleHeader).     toHaveText('title');
@@ -174,14 +174,14 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Open first record.
-    _t.navigate('record/'+recordModels[0].id);
+    NL.navigate('record/'+recordModels[0].id);
 
     // Null out `widgets` field.
     recordModels[1].set('widgets', null);
 
     // Open the form, get elements.
-    _t.navigate('record/'+recordModels[1].id);
-    var inputs = _t.getRecordFormElements();
+    NL.navigate('record/'+recordModels[1].id);
+    var inputs = NL.getRecordFormElements();
 
     // All widgets should be deselected.
     expect(inputs.widgets.val()).toBeNull();
@@ -201,17 +201,17 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Trigger click on Record 1 feature.
-    _t.clickOnMapFeature(feature1);
+    NL.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.RECORD.model.get('title')).toEqual('title1');
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.RECORD.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
-    _t.clickOnMapFeature(feature2);
+    NL.clickOnMapFeature(feature2);
 
     // Form should not display new model.
-    expect(_t.vw.RECORD.model.get('title')).toEqual('title1');
+    expect(NL.vw.RECORD.model.get('title')).toEqual('title1');
 
   });
 
@@ -224,13 +224,13 @@ describe('Record Form Open', function() {
     // --------------------------------------------------------------------
 
     // Set center and zoom.
-    _t.setMapCenter(200, 300, 15);
+    NL.setMapCenter(200, 300, 15);
 
     // Open form.
-    _t.click($(_t.getRecordListRows()[1]));
+    NL.click($(NL.getRecordListRows()[1]));
 
     // Should focus on record.
-    _t.assertMapViewport(100, 200, 10);
+    NL.assertMapViewport(100, 200, 10);
 
   });
 

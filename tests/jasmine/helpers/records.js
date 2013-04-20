@@ -11,7 +11,7 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
@@ -19,7 +19,7 @@ var _t = (function(_t) {
    *
    * @return {Array}: The DOM collection of <a> elements.
    */
-  _t.getRecordListRows = function() {
+  NL.getRecordListRows = function() {
     return this.vw.RECORDS.$el.find('.list a');
   };
 
@@ -29,12 +29,12 @@ var _t = (function(_t) {
    *
    * @return {Array}: The models.
    */
-  _t.getRecordListModels = function() {
+  NL.getRecordListModels = function() {
     return Neatline.Editor.Exhibit.Records.__collection.models;
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

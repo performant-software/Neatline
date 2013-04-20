@@ -16,14 +16,14 @@ describe('Record Form Delete', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
 
     el = {
-      delete1:  _t.vw.RECORD.$('a[href="#delete-modal"]'),
-      delete2:  _t.vw.RECORD.$('a[name="delete"]'),
-      cancel:   _t.vw.RECORD.$('a[name="cancel"]'),
-      modal:    _t.vw.RECORD.$('#delete-modal')
+      delete1:  NL.vw.RECORD.$('a[href="#delete-modal"]'),
+      delete2:  NL.vw.RECORD.$('a[name="delete"]'),
+      cancel:   NL.vw.RECORD.$('a[name="cancel"]'),
+      modal:    NL.vw.RECORD.$('#delete-modal')
     };
 
   });
@@ -72,15 +72,15 @@ describe('Record Form Delete', function() {
     // request should be issued to the records API.
     // --------------------------------------------------------------------
 
-    var id = _t.vw.RECORD.model.id;
+    var id = NL.vw.RECORD.model.id;
 
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
 
     // Route should be /record/:id, method DELETE.
-    _t.assertLastRequestRoute(Neatline.global.records_api+'/'+id);
-    _t.assertLastRequestMethod('DELETE');
+    NL.assertLastRequestRoute(Neatline.global.records_api+'/'+id);
+    NL.assertLastRequestMethod('DELETE');
 
   });
 
@@ -97,7 +97,7 @@ describe('Record Form Delete', function() {
 
     // Click on "Save".
     el.delete2.trigger('click');
-    _t.respondLast200('');
+    NL.respondLast200('');
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -119,7 +119,7 @@ describe('Record Form Delete', function() {
 
     // Click on "Save".
     el.delete2.trigger('click');
-    _t.respondLast500();
+    NL.respondLast500();
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
@@ -140,14 +140,14 @@ describe('Record Form Delete', function() {
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
-    _t.respondLast200('');
+    NL.respondLast200('');
 
     // Modal should be hidden.
     expect(el.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(_t.vw.EDITOR.__ui.editor).not.toContain(_t.vw.RECORD.$el);
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORDS.$el);
+    expect(NL.vw.EDITOR.__ui.editor).not.toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
@@ -167,7 +167,7 @@ describe('Record Form Delete', function() {
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
-    _t.respondLast200('');
+    NL.respondLast200('');
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');

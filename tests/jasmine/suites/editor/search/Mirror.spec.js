@@ -12,8 +12,8 @@ describe('Search Map Mirroring', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
-    _t.respondRecordList200(_t.json.SearchMapMirror.records.list);
+    NL.loadEditor();
+    NL.respondRecordList200(NL.json.SearchMapMirror.records.list);
   });
 
 
@@ -25,17 +25,17 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:`.
-    var c1 = _t.server.requests.length;
-    _t.vw.SEARCH.__ui.search.val('map:');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
-    var c2 = _t.server.requests.length;
+    var c1 = NL.server.requests.length;
+    NL.vw.SEARCH.__ui.search.val('map:');
+    NL.vw.SEARCH.__ui.search.trigger('keyup');
+    var c2 = NL.server.requests.length;
     expect(c2).toEqual(c1);
 
     // Keyup with `map:other`.
-    var c1 = _t.server.requests.length;
-    _t.vw.SEARCH.__ui.search.val('map:other');
-    _t.vw.SEARCH.__ui.search.trigger('keyup');
-    var c2 = _t.server.requests.length;
+    var c1 = NL.server.requests.length;
+    NL.vw.SEARCH.__ui.search.val('map:other');
+    NL.vw.SEARCH.__ui.search.trigger('keyup');
+    var c2 = NL.server.requests.length;
     expect(c2).toEqual(c1);
 
   });
@@ -48,13 +48,13 @@ describe('Search Map Mirroring', function() {
     // immediately synchronize with the collection on the map.
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.SearchMapMirror.records.map);
+    NL.respondMap200(NL.json.SearchMapMirror.records.map);
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // List should synchronize with map.
-    var recordRows = _t.getRecordListRows();
+    var recordRows = NL.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('map1');
     expect($(recordRows[2]).find('.title')).toHaveText('map2');
     expect($(recordRows[3]).find('.title')).toHaveText('map3');
@@ -70,13 +70,13 @@ describe('Search Map Mirroring', function() {
     // record list shold synchronize with the collection on the map.
     // --------------------------------------------------------------------
 
-    _t.respondMap200(_t.json.SearchMapMirror.records.map);
+    NL.respondMap200(NL.json.SearchMapMirror.records.map);
 
     // Request route with `map:` as query.
-    _t.navigate('records/search/query=map:');
+    NL.navigate('records/search/query=map:');
 
     // List should synchronize with map.
-    var recordRows = _t.getRecordListRows();
+    var recordRows = NL.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('map1');
     expect($(recordRows[2]).find('.title')).toHaveText('map2');
     expect($(recordRows[3]).find('.title')).toHaveText('map3');
@@ -93,13 +93,13 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Ingest new records on the map.
-    _t.refreshMap(_t.json.SearchMapMirror.records.map);
+    NL.refreshMap(NL.json.SearchMapMirror.records.map);
 
     // List should synchronize with map.
-    var recordRows = _t.getRecordListRows();
+    var recordRows = NL.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('map1');
     expect($(recordRows[2]).find('.title')).toHaveText('map2');
     expect($(recordRows[3]).find('.title')).toHaveText('map3');
@@ -119,13 +119,13 @@ describe('Search Map Mirroring', function() {
     Neatline.global.page_length = 1;
 
     // Load 3 records on the map.
-    _t.respondMap200(_t.json.SearchMapMirror.records.map);
+    NL.respondMap200(NL.json.SearchMapMirror.records.map);
 
     // Activate mirroring.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Pagination should not be visible.
-    expect(_t.vw.RECORDS.$el).not.toContain('.pagination');
+    expect(NL.vw.RECORDS.$el).not.toContain('.pagination');
 
   });
 
@@ -138,19 +138,19 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    _t.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Backspace once.
-    _t.vw.SEARCH.__ui.search.val('map').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('map').trigger('keyup');
 
     // Respond with default record collection.
-    _t.respondLast200(_t.json.SearchMapMirror.records.list);
+    NL.respondLast200(NL.json.SearchMapMirror.records.list);
 
     // Update map records.
-    _t.refreshMap(_t.json.SearchMapMirror.records.map);
+    NL.refreshMap(NL.json.SearchMapMirror.records.map);
 
     // List should not synchronize with map.
-    var recordRows = _t.getRecordListRows();
+    var recordRows = NL.getRecordListRows();
     expect($(recordRows[1]).find('.title')).toHaveText('list1');
     expect($(recordRows[2]).find('.title')).toHaveText('list2');
     expect($(recordRows[3]).find('.title')).toHaveText('list3');

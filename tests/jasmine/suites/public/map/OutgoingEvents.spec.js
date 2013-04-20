@@ -16,10 +16,10 @@ describe('Map Outgoing Events', function() {
 
   beforeEach(function() {
 
-    _t.loadNeatline();
-    _t.respondMap200(_t.json.MapOutgoingEvents.records);
+    NL.loadNeatline();
+    NL.respondMap200(NL.json.MapOutgoingEvents.records);
 
-    layer = _t.vw.MAP.getVectorLayers()[0];
+    layer = NL.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];
 
     vent = spyOn(Neatline.vent, 'trigger');
@@ -34,7 +34,7 @@ describe('Map Outgoing Events', function() {
     // be published with the feature's model.
     // --------------------------------------------------------------------
 
-    _t.hoverOnMapFeature(feature);
+    NL.hoverOnMapFeature(feature);
 
     expect(vent).toHaveBeenCalledWith('highlight', layer.nModel);
 
@@ -48,8 +48,8 @@ describe('Map Outgoing Events', function() {
     // published with the feature's model.
     // --------------------------------------------------------------------
 
-    _t.hoverOnMapFeature(feature);
-    _t.unHoverOnMapFeature();
+    NL.hoverOnMapFeature(feature);
+    NL.unHoverOnMapFeature();
 
     expect(vent).toHaveBeenCalledWith('unhighlight', layer.nModel);
 
@@ -63,7 +63,7 @@ describe('Map Outgoing Events', function() {
     // with the feature's model.
     // --------------------------------------------------------------------
 
-    _t.clickOnMapFeature(feature);
+    NL.clickOnMapFeature(feature);
 
     expect(vent).toHaveBeenCalledWith('select', layer.nModel, true);
 
@@ -77,8 +77,8 @@ describe('Map Outgoing Events', function() {
     // `unselect` event should be published with the feature's model.
     // --------------------------------------------------------------------
 
-    _t.clickOnMapFeature(feature);
-    _t.clickOffMapFeature();
+    NL.clickOnMapFeature(feature);
+    NL.clickOffMapFeature();
 
     expect(vent).toHaveBeenCalledWith('unselect', layer.nModel);
 

@@ -11,7 +11,7 @@
  */
 
 
-var _t = (function(_t) {
+var NL = (function(NL) {
 
 
   /**
@@ -19,7 +19,7 @@ var _t = (function(_t) {
    *
    * @param {String} method: The method.
    */
-  _t.assertLastRequestMethod = function(method) {
+  NL.assertLastRequestMethod = function(method) {
     var request = this.getLastRequest();
     expect(request.method).toEqual(method);
   };
@@ -30,7 +30,7 @@ var _t = (function(_t) {
    *
    * @param {String} route: The route.
    */
-  _t.assertLastRequestRoute = function(route) {
+  NL.assertLastRequestRoute = function(route) {
     var request = this.getLastRequest();
     expect(_.string.startsWith(request.url, route)).toBeTruthy();
   };
@@ -42,14 +42,14 @@ var _t = (function(_t) {
    * @param {String} key: The key.
    * @param {String} val: The value.
    */
-  _t.assertLastRequestHasGetParameter = function(key, val) {
+  NL.assertLastRequestHasGetParameter = function(key, val) {
     var request = this.getLastRequest();
     if (val) expect(request.url).toContain(key+'='+val);
     else expect(request.url).toContain(key);
   };
 
 
-  return _t;
+  return NL;
 
 
-})(_t || {});
+})(NL || {});

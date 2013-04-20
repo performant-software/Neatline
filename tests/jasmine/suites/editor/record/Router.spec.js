@@ -16,10 +16,10 @@ describe('Record Router', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.respondRecordList200(_t.json.RecordForm.records);
+    NL.loadEditor();
+    NL.respondRecordList200(NL.json.RecordForm.records);
 
-    href = $(_t.getRecordListRows()[0]).attr('href');
+    href = $(NL.getRecordListRows()[0]).attr('href');
 
   });
 
@@ -31,11 +31,11 @@ describe('Record Router', function() {
     // displayed and the "Text" tab should be activated by default.
     // --------------------------------------------------------------------
 
-    _t.navigate(href);
+    NL.navigate(href);
 
     // Record form should be visible, "Text" tab active.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    _t.assertActiveTab('text');
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+    NL.assertActiveTab('text');
 
   });
 
@@ -48,13 +48,13 @@ describe('Record Router', function() {
     // --------------------------------------------------------------------
 
     // Walk tabs.
-    _.each(_t.getTabSlugs(), function(slug) {
+    _.each(NL.getTabSlugs(), function(slug) {
 
-      _t.navigate(href+'/'+slug);
+      NL.navigate(href+'/'+slug);
 
       // Record form should be visible, requested tab active.
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-      _t.assertActiveTab(slug);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+      NL.assertActiveTab(slug);
 
     });
 
@@ -68,11 +68,11 @@ describe('Record Router', function() {
     // displayed and the "Text' tab should be activated by default.
     // --------------------------------------------------------------------
 
-    _t.navigate('record/add');
+    NL.navigate('record/add');
 
     // Record form should be visible, "Text" tab active.
-    expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-    _t.assertActiveTab('text');
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+    NL.assertActiveTab('text');
 
   });
 
@@ -85,13 +85,13 @@ describe('Record Router', function() {
     // --------------------------------------------------------------------
 
     // Walk tabs.
-    _.each(_t.getTabSlugs(), function(slug) {
+    _.each(NL.getTabSlugs(), function(slug) {
 
-      _t.navigate('record/add/'+slug);
+      NL.navigate('record/add/'+slug);
 
       // Record form should be visible, requested tab active.
-      expect(_t.vw.EDITOR.__ui.editor).toContain(_t.vw.RECORD.$el);
-      _t.assertActiveTab(slug);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+      NL.assertActiveTab(slug);
 
     });
 

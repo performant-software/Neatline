@@ -15,7 +15,7 @@ describe('Stamen Base Layer Constructor', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
   });
 
 

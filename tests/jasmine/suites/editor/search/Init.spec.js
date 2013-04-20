@@ -15,7 +15,7 @@ describe('Search Initialization', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
     perPage = Neatline.global.page_length;
   });
 
@@ -28,25 +28,25 @@ describe('Search Initialization', function() {
     // --------------------------------------------------------------------
 
     it('single-word query', function() {
-      _t.navigate('records/search/query=word');
-      expect(_t.vw.SEARCH.__ui.search).toHaveValue('word');
+      NL.navigate('records/search/query=word');
+      expect(NL.vw.SEARCH.__ui.search).toHaveValue('word');
     });
 
     it('multiple-word query', function() {
-      _t.navigate('records/search/query=word1+word2');
-      expect(_t.vw.SEARCH.__ui.search).toHaveValue('word1 word2');
+      NL.navigate('records/search/query=word1+word2');
+      expect(NL.vw.SEARCH.__ui.search).toHaveValue('word1 word2');
     });
 
     it('tags query', function() {
-      _t.navigate('records/search/query=tags:+tag1,+tag2');
-      expect(_t.vw.SEARCH.__ui.search).toHaveValue('tags: tag1, tag2');
-      expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+      NL.navigate('records/search/query=tags:+tag1,+tag2');
+      expect(NL.vw.SEARCH.__ui.search).toHaveValue('tags: tag1, tag2');
+      expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
     });
 
     it('map-mirror query', function() {
-      _t.navigate('records/search/query=map:');
-      expect(_t.vw.SEARCH.__ui.search).toHaveValue('map:');
-      expect(_t.vw.SEARCH.__ui.search).toHaveClass('bold');
+      NL.navigate('records/search/query=map:');
+      expect(NL.vw.SEARCH.__ui.search).toHaveValue('map:');
+      expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
     });
 
   });
@@ -61,9 +61,9 @@ describe('Search Initialization', function() {
     // --------------------------------------------------------------------
 
     // Initialize with `map:` query.
-    var c1 = _t.server.requests.length;
-    _t.navigate('records/search/query=map:');
-    var c2 = _t.server.requests.length;
+    var c1 = NL.server.requests.length;
+    NL.navigate('records/search/query=map:');
+    var c2 = NL.server.requests.length;
 
     // No GET request.
     expect(c2).toEqual(c1);
@@ -76,8 +76,8 @@ describe('Search Initialization', function() {
 
     afterEach(function() {
 
-      _t.respondLast200(_t.json.SearchInit.records);
-      var row = _t.getRecordListRows()[1];
+      NL.respondLast200(NL.json.SearchInit.records);
+      var row = NL.getRecordListRows()[1];
 
       // Record list should be updated.
       expect($(row).find('.title')).toHaveText('title');
@@ -87,115 +87,115 @@ describe('Search Initialization', function() {
 
     it('#', function() {
 
-      _t.navigate('');
+      NL.navigate('');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // Default `limit` and `offset`.
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '0');
 
     });
 
 
     it('#records', function() {
 
-      _t.navigate('records');
+      NL.navigate('records');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // Default `limit` and `offset`.
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '0');
 
     });
 
 
     it('#records/search/start=X', function() {
 
-      _t.navigate('records/search/start=10');
+      NL.navigate('records/search/start=10');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // `offset`=10, default `limit`.
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '10');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '10');
 
     });
 
 
     it('#records/search/query=X', function() {
 
-      _t.navigate('records/search/query=keywords');
+      NL.navigate('records/search/query=keywords');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // `query`=keywords, `offset`=0, default `limit`.
-      _t.assertLastRequestHasGetParameter('query', 'keywords');
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('query', 'keywords');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '0');
 
     });
 
 
     it('#records/search/query=tags:X,Y', function() {
 
-      _t.navigate('records/search/query=tags:+tag1,+tag2');
+      NL.navigate('records/search/query=tags:+tag1,+tag2');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // `tags[]`=tag1, `tags[]`=tag2.
-      var request = _t.getLastRequest();
+      var request = NL.getLastRequest();
       expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
       // `offset`=0, default `limit`.
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '0');
 
     });
 
 
     it('#records/search/query=X/start=Y', function() {
 
-      _t.navigate('records/search/query=keywords/start=10');
+      NL.navigate('records/search/query=keywords/start=10');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // `query`=keywords, `offset`=10.
-      _t.assertLastRequestHasGetParameter('query', 'keywords');
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '10');
+      NL.assertLastRequestHasGetParameter('query', 'keywords');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '10');
 
     });
 
 
     it('#records/search/query=tags/start=X', function() {
 
-      _t.navigate('records/search/query=tags:+tag1,+tag2/start=10');
+      NL.navigate('records/search/query=tags:+tag1,+tag2/start=10');
 
       // Should trigger GET request to /records.
-      _t.assertLastRequestRoute(Neatline.global.records_api);
-      _t.assertLastRequestMethod('GET');
+      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestMethod('GET');
 
       // `tags[]`=tag1, `tags[]`=tag2.
-      var request = _t.getLastRequest();
+      var request = NL.getLastRequest();
       expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
       // `offset`=0, default `limit`.
-      _t.assertLastRequestHasGetParameter('limit', perPage);
-      _t.assertLastRequestHasGetParameter('offset', '10');
+      NL.assertLastRequestHasGetParameter('limit', perPage);
+      NL.assertLastRequestHasGetParameter('offset', '10');
 
     });
 

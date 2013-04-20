@@ -16,7 +16,7 @@ describe('Google Base Layer Constructor', function() {
 
   beforeEach(function() {
 
-    _t.loadNeatline();
+    NL.loadNeatline();
 
     window.google = {
       maps: {

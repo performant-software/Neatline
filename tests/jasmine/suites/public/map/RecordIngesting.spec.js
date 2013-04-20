@@ -12,7 +12,7 @@ describe('Map Record Ingesting', function() {
 
 
   beforeEach(function() {
-    _t.loadNeatline();
+    NL.loadNeatline();
   });
 
 
@@ -23,7 +23,7 @@ describe('Map Record Ingesting', function() {
     // within the default extent of the map.
     // --------------------------------------------------------------------
 
-    _t.assertMapExtentQuery();
+    NL.assertMapExtentQuery();
 
   });
 
@@ -35,8 +35,8 @@ describe('Map Record Ingesting', function() {
     // that fall within the current extent of the map.
     // --------------------------------------------------------------------
 
-    _t.triggerMapMoveEnd();
-    _t.assertMapExtentQuery();
+    NL.triggerMapMoveEnd();
+    NL.assertMapExtentQuery();
 
   });
 
@@ -52,21 +52,21 @@ describe('Map Record Ingesting', function() {
     // --------------------------------------------------------------------
 
     // Load collection with one record.
-    _t.refreshMap(_t.json.MapRecordIngesting.records.one);
-    _t.assertVectorLayerCount(1);
+    NL.refreshMap(NL.json.MapRecordIngesting.records.one);
+    NL.assertVectorLayerCount(1);
 
-    _t.triggerMapMoveEnd();
-    _t.triggerMapMoveStart();
+    NL.triggerMapMoveEnd();
+    NL.triggerMapMoveStart();
 
     // The new collection should _not_ be ingested.
-    _t.respondLast200(_t.json.MapRecordIngesting.records.two);
-    _t.assertVectorLayerCount(1);
+    NL.respondLast200(NL.json.MapRecordIngesting.records.two);
+    NL.assertVectorLayerCount(1);
 
-    _t.triggerMapMoveEnd();
+    NL.triggerMapMoveEnd();
 
     // The new collection should be ingested.
-    _t.respondLast200(_t.json.MapRecordIngesting.records.two);
-    _t.assertVectorLayerCount(2);
+    NL.respondLast200(NL.json.MapRecordIngesting.records.two);
+    NL.assertVectorLayerCount(2);
 
   });
 

@@ -12,7 +12,7 @@ describe('Map Edit Layer', function() {
 
 
   beforeEach(function() {
-    _t.loadEditor();
+    NL.loadEditor();
   });
 
 
@@ -25,23 +25,23 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
 
     // Load record list with record 3.
-    _t.respondRecordList200(_t.json.MapEditLayer.records.regular);
-    var models = _t.getRecordListModels();
+    NL.respondRecordList200(NL.json.MapEditLayer.records.regular);
+    var models = NL.getRecordListModels();
 
     // Load map without record 3.
-    _t.respondMap200(_t.json.MapEditLayer.records.deleted);
+    NL.respondMap200(NL.json.MapEditLayer.records.deleted);
 
     // Open edit form for record 3.
-    _t.navigate('record/'+models[2].id);
+    NL.navigate('record/'+models[2].id);
 
     // Should create new layer for record 3.
-    var record3Layer = _t.vw.MAP.layers.vector[models[2].id];
+    var record3Layer = NL.vw.MAP.layers.vector[models[2].id];
     expect(record3Layer.features[0].geometry.x).toEqual(5);
     expect(record3Layer.features[0].geometry.y).toEqual(6);
-    _t.assertVectorLayerCount(3);
+    NL.assertVectorLayerCount(3);
 
     // Record 3 layer should be edit layer.
-    expect(_t.vw.MAP.editLayer.id).toEqual(record3Layer.id);
+    expect(NL.vw.MAP.editLayer.id).toEqual(record3Layer.id);
 
   });
 
@@ -52,17 +52,17 @@ describe('Map Edit Layer', function() {
     // When a new record is added, a new edit layer should be created.
     // --------------------------------------------------------------------
 
-    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+    NL.respondAll200(NL.json.MapEditLayer.records.regular);
 
     // Add new record.
-    _t.navigate('record/add');
+    NL.navigate('record/add');
 
     // Map should create new layer for unsaved record.
-    expect(_t.vw.MAP.layers.vector[undefined]).toBeDefined();
-    _t.assertVectorLayerCount(4);
+    expect(NL.vw.MAP.layers.vector[undefined]).toBeDefined();
+    NL.assertVectorLayerCount(4);
 
     // Map should set new layer as the edit layer.
-    expect(_t.vw.MAP.editLayer.nModel.id).toBeUndefined();
+    expect(NL.vw.MAP.editLayer.nModel.id).toBeUndefined();
 
   });
 
@@ -74,18 +74,18 @@ describe('Map Edit Layer', function() {
     // if new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
-    _t.respondAll200(_t.json.MapEditLayer.records.regular);
-    var models = _t.getRecordListModels();
+    NL.respondAll200(NL.json.MapEditLayer.records.regular);
+    var models = NL.getRecordListModels();
 
     // Open form for record 3.
-    _t.navigate('record/'+models[2].id);
+    NL.navigate('record/'+models[2].id);
 
     // Reload map without record 3.
-    _t.refreshMap(_t.json.MapEditLayer.records.deleted);
+    NL.refreshMap(NL.json.MapEditLayer.records.deleted);
 
     // Record 3 layer should still be present.
-    expect(_t.getVectorLayer('title3')).toBeDefined();
-    _t.assertVectorLayerCount(3);
+    expect(NL.getVectorLayer('title3')).toBeDefined();
+    NL.assertVectorLayerCount(3);
 
   });
 
@@ -97,17 +97,17 @@ describe('Map Edit Layer', function() {
     // when new data is ingested.
     // --------------------------------------------------------------------
 
-    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+    NL.respondAll200(NL.json.MapEditLayer.records.regular);
 
     // Add new record.
-    _t.navigate('record/add');
+    NL.navigate('record/add');
 
     // Reload the map.
-    _t.refreshMap(_t.json.MapEditLayer.records.regular);
+    NL.refreshMap(NL.json.MapEditLayer.records.regular);
 
     // Edit layer still present.
-    expect(_t.vw.MAP.layers.vector[undefined]).toBeDefined();
-    _t.assertVectorLayerCount(4);
+    expect(NL.vw.MAP.layers.vector[undefined]).toBeDefined();
+    NL.assertVectorLayerCount(4);
 
   });
 
@@ -119,20 +119,20 @@ describe('Map Edit Layer', function() {
     // edit layer should start updating again in response to map moves.
     // --------------------------------------------------------------------
 
-    _t.respondAll200(_t.json.MapEditLayer.records.regular);
-    var models = _t.getRecordListModels();
+    NL.respondAll200(NL.json.MapEditLayer.records.regular);
+    var models = NL.getRecordListModels();
 
     // Open record 3 form.
-    _t.navigate('record/'+models[2].id);
+    NL.navigate('record/'+models[2].id);
 
     // Close the form.
-    _t.navigate('records');
+    NL.navigate('records');
 
     // Reload the map without record 3.
-    _t.refreshMap(_t.json.MapEditLayer.records.deleted);
+    NL.refreshMap(NL.json.MapEditLayer.records.deleted);
 
     // Record 2 layer should be cleared.
-    expect(_t.getVectorLayer('title3')).toBeUndefined();
+    expect(NL.getVectorLayer('title3')).toBeUndefined();
 
   });
 
@@ -145,22 +145,22 @@ describe('Map Edit Layer', function() {
     // be garbage collected by the next data ingest.
     // --------------------------------------------------------------------
 
-    _t.respondAll200(_t.json.MapEditLayer.records.regular);
+    NL.respondAll200(NL.json.MapEditLayer.records.regular);
 
     // Add new record.
-    _t.navigate('record/add');
+    NL.navigate('record/add');
 
     // Close the form.
-    _t.navigate('records');
+    NL.navigate('records');
 
     // Refresh the map.
-    _t.refreshMap(_t.json.MapEditLayer.records.regular);
+    NL.refreshMap(NL.json.MapEditLayer.records.regular);
 
     // Edit layer should be removed.
-    expect(_t.getVectorLayer('title1')).toBeDefined();
-    expect(_t.getVectorLayer('title2')).toBeDefined();
-    expect(_t.getVectorLayer('title3')).toBeDefined();
-    _t.assertVectorLayerCount(3);
+    expect(NL.getVectorLayer('title1')).toBeDefined();
+    expect(NL.getVectorLayer('title2')).toBeDefined();
+    expect(NL.getVectorLayer('title3')).toBeDefined();
+    NL.assertVectorLayerCount(3);
 
   });
 

@@ -43,12 +43,12 @@ describe('Map Exhibit Defaults', function() {
     // layers defined in the `base_layers` global.
     // --------------------------------------------------------------------
 
-    _t.startApplication();
-    _t.aliasNeatline();
+    NL.startApplication();
+    NL.aliasNeatline();
 
-    expect(_t.vw.MAP.map.layers[0].name).toEqual('Layer1');
-    expect(_t.vw.MAP.map.layers[1].name).toEqual('Layer2');
-    expect(_t.vw.MAP.map.layers[2].name).toEqual('Layer3');
+    expect(NL.vw.MAP.map.layers[0].name).toEqual('Layer1');
+    expect(NL.vw.MAP.map.layers[1].name).toEqual('Layer2');
+    expect(NL.vw.MAP.map.layers[2].name).toEqual('Layer3');
 
   });
 
@@ -62,10 +62,10 @@ describe('Map Exhibit Defaults', function() {
 
     Neatline.global.base_layer = 'Layer2';
 
-    _t.startApplication();
-    _t.aliasNeatline();
+    NL.startApplication();
+    NL.aliasNeatline();
 
-    expect(_t.vw.MAP.map.baseLayer.name).toEqual('Layer2');
+    expect(NL.vw.MAP.map.baseLayer.name).toEqual('Layer2');
 
   });
 
@@ -78,10 +78,10 @@ describe('Map Exhibit Defaults', function() {
     // the layer switcher control should be added to the map.
     // --------------------------------------------------------------------
 
-    _t.startApplication();
-    _t.aliasNeatline();
+    NL.startApplication();
+    NL.aliasNeatline();
 
-    expect(_t.getMapControlClassNames()).toContain(
+    expect(NL.getMapControlClassNames()).toContain(
       'OpenLayers.Control.LayerSwitcher'
     );
 
@@ -103,10 +103,10 @@ describe('Map Exhibit Defaults', function() {
       }
     ];
 
-    _t.startApplication();
-    _t.aliasNeatline();
+    NL.startApplication();
+    NL.aliasNeatline();
 
-    expect(_t.getMapControlClassNames()).not.toContain(
+    expect(NL.getMapControlClassNames()).not.toContain(
       'OpenLayers.Control.LayerSwitcher'
     );
 
@@ -123,10 +123,10 @@ describe('Map Exhibit Defaults', function() {
     Neatline.global.map_focus = '1,2';
     Neatline.global.map_zoom = 10;
 
-    _t.startApplication();
-    _t.aliasNeatline();
+    NL.startApplication();
+    NL.aliasNeatline();
 
-    _t.assertMapViewport(1, 2, 10);
+    NL.assertMapViewport(1, 2, 10);
 
   });
 

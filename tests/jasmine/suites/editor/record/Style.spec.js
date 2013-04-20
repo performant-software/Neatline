@@ -15,21 +15,21 @@ describe('Record Form Style Tab', function() {
 
 
   var getStyles = function() {
-    std = _t.vw.MAP.editLayer.styleMap.styles['default'].defaultStyle;
-    tmp = _t.vw.MAP.editLayer.styleMap.styles.temporary.defaultStyle;
-    sel = _t.vw.MAP.editLayer.styleMap.styles.select.defaultStyle;
+    std = NL.vw.MAP.editLayer.styleMap.styles['default'].defaultStyle;
+    tmp = NL.vw.MAP.editLayer.styleMap.styles.temporary.defaultStyle;
+    sel = NL.vw.MAP.editLayer.styleMap.styles.select.defaultStyle;
   };
 
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
 
-    el = _.extend(_t.getRecordFormElements(), {
-      setMinZoom: _t.vw.RECORD.$('a[name="set-min-zoom"]'),
-      setMaxZoom: _t.vw.RECORD.$('a[name="set-max-zoom"]'),
-      setFocus:   _t.vw.RECORD.$('a[name="set-focus"]')
+    el = _.extend(NL.getRecordFormElements(), {
+      setMinZoom: NL.vw.RECORD.$('a[name="set-min-zoom"]'),
+      setMaxZoom: NL.vw.RECORD.$('a[name="set-max-zoom"]'),
+      setFocus:   NL.vw.RECORD.$('a[name="set-focus"]')
     });
 
   });
@@ -47,7 +47,7 @@ describe('Record Form Style Tab', function() {
 
       it('should update on `change`', function() {
         el.presenter.val('None').trigger('change');
-        var presenter = _t.vw.MAP.editLayer.nModel.get('presenter');
+        var presenter = NL.vw.MAP.editLayer.nModel.get('presenter');
         expect(presenter).toEqual('None');
       });
 
@@ -56,7 +56,7 @@ describe('Record Form Style Tab', function() {
     describe('shape color', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('fill_color', '#ffffff');
+        NL.vw.RECORD.model.set('fill_color', '#ffffff');
       });
 
       it('input `change`', function() {
@@ -77,7 +77,7 @@ describe('Record Form Style Tab', function() {
     describe('line color', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('stroke_color', '#ffffff');
+        NL.vw.RECORD.model.set('stroke_color', '#ffffff');
       });
 
       it('input `change`', function() {
@@ -98,7 +98,7 @@ describe('Record Form Style Tab', function() {
     describe('selected color', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('select_color', '#ffffff');
+        NL.vw.RECORD.model.set('select_color', '#ffffff');
       });
 
       it('input `change`', function() {
@@ -120,7 +120,7 @@ describe('Record Form Style Tab', function() {
     describe('shape opacity', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('fill_opacity', 50);
+        NL.vw.RECORD.model.set('fill_opacity', 50);
       });
 
       it('input `change`', function() {
@@ -142,7 +142,7 @@ describe('Record Form Style Tab', function() {
     describe('line opacity', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('stroke_opacity', 50);
+        NL.vw.RECORD.model.set('stroke_opacity', 50);
       });
 
       it('input `change`', function() {
@@ -165,7 +165,7 @@ describe('Record Form Style Tab', function() {
     describe('selected opacity', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('select_opacity', 50);
+        NL.vw.RECORD.model.set('select_opacity', 50);
       });
 
       it('input `change`', function() {
@@ -187,7 +187,7 @@ describe('Record Form Style Tab', function() {
     describe('line width', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('stroke_width', 50);
+        NL.vw.RECORD.model.set('stroke_width', 50);
       });
 
       it('input `change`', function() {
@@ -210,7 +210,7 @@ describe('Record Form Style Tab', function() {
     describe('point radius', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('point_radius', 50);
+        NL.vw.RECORD.model.set('point_radius', 50);
       });
 
       it('input `change`', function() {
@@ -233,7 +233,7 @@ describe('Record Form Style Tab', function() {
     describe('point image', function() {
 
       it('model `set`', function() {
-        _t.vw.RECORD.model.set('point_image', 'img.png');
+        NL.vw.RECORD.model.set('point_image', 'img.png');
       });
 
       it('input `change`', function() {
@@ -263,14 +263,14 @@ describe('Record Form Style Tab', function() {
     // should be populated with the current zoom.
     // --------------------------------------------------------------------
 
-    _t.setMapZoom(10);
+    NL.setMapZoom(10);
     el.setMinZoom.trigger('click');
 
     // Input should be updated.
     expect(el.minZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(_t.vw.RECORD.model.get('min_zoom')).toEqual('10');
+    expect(NL.vw.RECORD.model.get('min_zoom')).toEqual('10');
 
   });
 
@@ -282,14 +282,14 @@ describe('Record Form Style Tab', function() {
     // should be populated with the current zoom.
     // --------------------------------------------------------------------
 
-    _t.setMapZoom(10);
+    NL.setMapZoom(10);
     el.setMaxZoom.trigger('click');
 
     // Input should be updated.
     expect(el.maxZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(_t.vw.RECORD.model.get('max_zoom')).toEqual('10');
+    expect(NL.vw.RECORD.model.get('max_zoom')).toEqual('10');
 
   });
 
@@ -301,7 +301,7 @@ describe('Record Form Style Tab', function() {
     // default focus and zoom inputs should be populated.
     // --------------------------------------------------------------------
 
-    _t.setMapCenter(1, 2, 3);
+    NL.setMapCenter(1, 2, 3);
     el.setFocus.trigger('click');
 
     // Inputs should be updated.
@@ -309,8 +309,8 @@ describe('Record Form Style Tab', function() {
     expect(el.mapZoom).toHaveValue('3');
 
     // Model should be updated.
-    expect(_t.vw.RECORD.model.get('map_focus')).toEqual('1,2');
-    expect(_t.vw.RECORD.model.get('map_zoom')).toEqual('3');
+    expect(NL.vw.RECORD.model.get('map_focus')).toEqual('1,2');
+    expect(NL.vw.RECORD.model.get('map_zoom')).toEqual('3');
 
   });
 

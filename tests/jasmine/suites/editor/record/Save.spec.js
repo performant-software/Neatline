@@ -16,11 +16,11 @@ describe('Record Form Save', function() {
 
   beforeEach(function() {
 
-    _t.loadEditor();
-    _t.showRecordForm(_t.json.RecordForm.record);
+    NL.loadEditor();
+    NL.showRecordForm(NL.json.RecordForm.record);
 
     el = {
-      save: _t.vw.RECORD.$('a[name="save"]')
+      save: NL.vw.RECORD.$('a[name="save"]')
     };
 
   });
@@ -33,8 +33,8 @@ describe('Record Form Save', function() {
     // be issued to the record API with the new data.
     // --------------------------------------------------------------------
 
-    var id = _t.vw.RECORD.model.id;
-    var inputs = _t.getRecordFormElements();
+    var id = NL.vw.RECORD.model.id;
+    var inputs = NL.getRecordFormElements();
     var widgets = ['Widget2','Widget3'];
 
     inputs.titleInput.      val('1').           trigger('change');
@@ -69,11 +69,11 @@ describe('Record Form Save', function() {
     el.save.trigger('click');
 
     // Route should be /record/:id, method PUT.
-    _t.assertLastRequestRoute(Neatline.global.records_api+'/'+id);
-    _t.assertLastRequestMethod('PUT');
+    NL.assertLastRequestRoute(Neatline.global.records_api+'/'+id);
+    NL.assertLastRequestMethod('PUT');
 
     // Capture query parameters.
-    var params = _t.getLastRequestParams();
+    var params = NL.getLastRequestParams();
 
     // Check the query string for updated values.
     expect(params.title).             toEqual('1');
@@ -119,7 +119,7 @@ describe('Record Form Save', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    _t.respondLast200('');
+    NL.respondLast200('');
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -141,7 +141,7 @@ describe('Record Form Save', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    _t.respondLast500();
+    NL.respondLast500();
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
@@ -162,7 +162,7 @@ describe('Record Form Save', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    _t.respondLast200('');
+    NL.respondLast200('');
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
