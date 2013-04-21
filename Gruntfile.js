@@ -340,10 +340,6 @@ module.exports = function(grunt) {
 
   });
 
-
-  // Task aliases.
-  // -------------
-
   // Default task.
   grunt.registerTask('default', 'test');
 

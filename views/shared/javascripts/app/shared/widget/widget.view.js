@@ -26,7 +26,8 @@ Neatline.module('Shared.Widget', function(
      * templated on the page). If not, append the view element to the core
      * `#neatline-map` container.
      */
-    init: function() {
+    initialize: function() {
+      Widget.View.__super__.initialize.apply(this);
       if (!$('#'+this.id).length) this.$el.appendTo($('#neatline-map'));
     },
 
