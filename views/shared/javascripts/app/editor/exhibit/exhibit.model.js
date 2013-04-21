@@ -23,12 +23,12 @@ Neatline.module('Editor.Exhibit', function(
      * @return {String}: The url.
      */
     url: function() {
-      return Neatline.global.exhibits_api;
+      return Neatline.globals.exhibits_api;
     },
 
 
     defaults: function() {
-      return Neatline.global.exhibit;
+      return Neatline.globals.exhibit;
     }
 
 

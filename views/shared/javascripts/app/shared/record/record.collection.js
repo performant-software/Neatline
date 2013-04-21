@@ -30,7 +30,7 @@ Neatline.module('Shared.Record', function(
 
       // Add the exhibit id to the request.
       params = _.extend(params, {
-        exhibit_id: Neatline.global.exhibit.id
+        exhibit_id: Neatline.globals.exhibit.id
       });
 
       this.fetch({ reset: true, data: $.param(params), success: cb });
@@ -44,7 +44,7 @@ Neatline.module('Shared.Record', function(
      * @return {String}: The url.
      */
     url: function() {
-      return Neatline.global.records_api;
+      return Neatline.globals.records_api;
     },
 
 

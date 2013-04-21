@@ -51,7 +51,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
     onSearch: function(req, res) {
 
       // Request items.
-      $.get(Neatline.global.items_api, {
+      $.get(Neatline.globals.items_api, {
         output: 'omeka-xml',
         search: req.term
       }, function(xml) {

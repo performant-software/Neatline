@@ -15,7 +15,7 @@ describe('Map Exhibit Defaults', function() {
 
     loadFixtures('neatline-partial.html');
 
-    Neatline.global.base_layers = [
+    Neatline.globals.base_layers = [
       {
         title:  'Layer1',
         id:     'Layer1',
@@ -60,7 +60,7 @@ describe('Map Exhibit Defaults', function() {
     // to the layer with the `id` defined by the `base_layer` global.
     // --------------------------------------------------------------------
 
-    Neatline.global.base_layer = 'Layer2';
+    Neatline.globals.base_layer = 'Layer2';
 
     NL.startApplication();
     NL.aliasNeatline();
@@ -95,7 +95,7 @@ describe('Map Exhibit Defaults', function() {
     // switcher control should not be added to the map.
     // --------------------------------------------------------------------
 
-    Neatline.global.base_layers = [
+    Neatline.globals.base_layers = [
       {
         title:  'Layer',
         id:     'Layer',
@@ -120,8 +120,8 @@ describe('Map Exhibit Defaults', function() {
     // and `map_zoom` should be manifested on the map.
     // --------------------------------------------------------------------
 
-    Neatline.global.map_focus = '1,2';
-    Neatline.global.map_zoom = 10;
+    Neatline.globals.map_focus = '1,2';
+    Neatline.globals.map_zoom = 10;
 
     NL.startApplication();
     NL.aliasNeatline();

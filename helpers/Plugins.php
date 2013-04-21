@@ -82,3 +82,17 @@ function _nl_getGlobals($exhibit)
         'exhibit' => $exhibit
     ));
 }
+
+
+/**
+ * Gather strings exposed via the `neatline_strings` filter.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return array The modified array of key => values.
+ */
+function _nl_getStrings($exhibit)
+{
+    return apply_filters('neatline_strings', array(), array(
+        'exhibit' => $exhibit
+    ));
+}

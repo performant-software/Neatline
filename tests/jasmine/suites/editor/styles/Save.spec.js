@@ -76,7 +76,7 @@ describe('Styles Save', function() {
     el.save.trigger('click');
 
     // Route should be /neatline/put/:id, method PUT.
-    NL.assertLastRequestRoute(Neatline.global.exhibits_api);
+    NL.assertLastRequestRoute(Neatline.globals.exhibits_api);
     NL.assertLastRequestMethod('PUT');
 
     // Check query string values.

@@ -130,7 +130,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
       // Build parameters object.
       var params = _.extend(this.query, {
-        limit: Neatline.global.page_length,
+        limit: Neatline.globals.page_length,
         offset: 0
       });
 

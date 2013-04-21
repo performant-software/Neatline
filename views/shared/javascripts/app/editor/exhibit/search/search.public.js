@@ -42,7 +42,7 @@ Neatline.module('Editor.Exhibit.Search', function(
     // Load the record list.
     if (!Search.__view.mirroring) {
       Neatline.execute('RECORDS:load', _.extend(Search.__view.query, {
-        limit:  Neatline.global.page_length,
+        limit:  Neatline.globals.page_length,
         offset: start
       }));
     }

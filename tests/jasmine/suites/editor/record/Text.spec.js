@@ -37,7 +37,7 @@ describe('Record Form Text Tab', function() {
     NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
 
     // Should produce GET request to /items/browse.
-    NL.assertLastRequestRoute(Neatline.global.items_api);
+    NL.assertLastRequestRoute(Neatline.globals.items_api);
     NL.assertLastRequestMethod('GET');
 
     // Should emit query and output format.

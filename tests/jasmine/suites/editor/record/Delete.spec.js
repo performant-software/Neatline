@@ -79,7 +79,7 @@ describe('Record Form Delete', function() {
     el.delete2.trigger('click');
 
     // Route should be /record/:id, method DELETE.
-    NL.assertLastRequestRoute(Neatline.global.records_api+'/'+id);
+    NL.assertLastRequestRoute(Neatline.globals.records_api+'/'+id);
     NL.assertLastRequestMethod('DELETE');
 
   });

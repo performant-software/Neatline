@@ -52,7 +52,7 @@ describe('Record Form Add', function() {
 
     // Model should have exhibit id.
     var record = NL.vw.RECORD.model;
-    expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
+    expect(record.get('exhibit_id')).toEqual(Neatline.globals.exhibit.id);
 
     // Model should have defined styles.
     expect(_.isString(record.get('presenter'))).      toBeTruthy();
@@ -106,7 +106,7 @@ describe('Record Form Add', function() {
     el.saveButton.trigger('click');
 
     // Route should be /record, method POST.
-    NL.assertLastRequestRoute(Neatline.global.records_api);
+    NL.assertLastRequestRoute(Neatline.globals.records_api);
     NL.assertLastRequestMethod('POST');
 
     // Request should have exhibit id.

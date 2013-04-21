@@ -34,7 +34,7 @@ var NL = (function(NL) {
   NL.assertMapExtentQuery = function() {
 
     // Should trigger GET request to /records.
-    this.assertLastRequestRoute(Neatline.global.records_api);
+    this.assertLastRequestRoute(Neatline.globals.records_api);
     this.assertLastRequestMethod('GET');
 
     // Should filter on extent and zoom.

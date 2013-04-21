@@ -74,7 +74,7 @@ Neatline.module('Map', function(
       this.baseLayers = {};
 
       // Get the array of base layer instances.
-      _.each(Neatline.global.base_layers, _.bind(function(json) {
+      _.each(Neatline.globals.base_layers, _.bind(function(json) {
         var layer = Neatline.request('LAYERS:getLayer', json);
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
@@ -83,7 +83,7 @@ Neatline.module('Map', function(
       this.map.addLayers(_.values(this.baseLayers));
 
       // Set the default layer.
-      this.defaultLayer = this.baseLayers[Neatline.global.base_layer];
+      this.defaultLayer = this.baseLayers[Neatline.globals.base_layer];
       this.map.setBaseLayer(this.defaultLayer);
 
       // Add switcher for more than 1 layer.
@@ -139,11 +139,11 @@ Neatline.module('Map', function(
     __initViewport: function() {
 
       // Apply defaults if they exist.
-      if (_.isString(Neatline.global.map_focus) &&
-          _.isNumber(Neatline.global.map_zoom)) {
+      if (_.isString(Neatline.globals.map_focus) &&
+          _.isNumber(Neatline.globals.map_zoom)) {
           this.setViewport(
-            Neatline.global.map_focus,
-            Neatline.global.map_zoom
+            Neatline.globals.map_focus,
+            Neatline.globals.map_zoom
           );
       }
 

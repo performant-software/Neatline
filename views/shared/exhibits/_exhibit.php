@@ -17,17 +17,25 @@
   <div id="neatline-map" class="neatline-block"></div>
 </div>
 
-<!-- Globals constants. -->
-<script type="text/javascript">
-  Neatline.global = <?php echo Zend_Json::encode(
-    _nl_getGlobals(_nl_exhibit())
-  ); ?>
-</script>
-
-<!-- Underscore templates. -->
+<!-- Application templates. -->
 <?php echo $this->partial('exhibits/underscore/bubble.php'); ?>
 
 <!-- Plugin templates. -->
 <?php fire_plugin_hook('neatline_public_templates', array(
   'exhibit' => _nl_exhibit()
 )); ?>
+
+<!-- Global constants. -->
+<script type="text/javascript">
+  _.extend(Neatline, {
+
+    globals: <?php echo Zend_Json::encode(
+      _nl_getGlobals(_nl_exhibit())
+    ); ?>,
+
+    strings: <?php echo Zend_Json::encode(
+      _nl_getStrings(_nl_exhibit())
+    ); ?>
+
+  });
+</script>

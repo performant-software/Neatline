@@ -13,7 +13,7 @@ describe('Records Pagination', function() {
 
   beforeEach(function() {
     NL.loadEditor();
-    Neatline.global.page_length = 2;
+    Neatline.globals.page_length = 2;
   });
 
 
@@ -24,7 +24,7 @@ describe('Records Pagination', function() {
     // can fit into a single screen.
     // --------------------------------------------------------------------
 
-    Neatline.global.page_length = 10;
+    Neatline.globals.page_length = 10;
 
     // Load 2 records.
     NL.navigate('records');
