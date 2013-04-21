@@ -29,8 +29,8 @@ function _nl_mapApis()
  */
 function _nl_formAssets()
 {
-    queue_css_file('payloads/form');
-    queue_js_file('payloads/form');
+    queue_css_file('payloads/exhibit-form');
+    queue_js_file('payloads/exhibit-form');
 }
 
 
@@ -43,9 +43,11 @@ function _nl_neatlineAssets($exhibit)
 {
 
     _nl_mapApis();
+
     _nl_exhibitCss($exhibit);
-    queue_css_file('payloads/neatline');
-    queue_js_file('payloads/neatline');
+    queue_css_file('payloads/neatline-public');
+
+    queue_js_file('payloads/neatline-public');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_public_static', array(
@@ -64,8 +66,10 @@ function _nl_editorAssets($exhibit)
 {
 
     _nl_mapApis();
-    queue_css_file('payloads/editor');
-    queue_js_file('payloads/editor');
+
+    queue_css_file('payloads/neatline-editor');
+
+    queue_js_file('payloads/neatline-editor');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_editor_static', array(

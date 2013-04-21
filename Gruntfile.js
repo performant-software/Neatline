@@ -135,16 +135,16 @@ module.exports = function(grunt) {
 
     concat: {
 
-      form: {
+      exhibit_form: {
         src: [
           cfg.vendor.js.chosen,
           cfg.vendor.js.underscore_s,
-          cfg.src.admin+'/*.js'
+          cfg.src.admin+'/exhibit.form.js'
         ],
-        dest: cfg.payloads.admin.js+'/form.js'
+        dest: cfg.payloads.admin.js+'/exhibit-form.js'
       },
 
-      neatline: {
+      neatline_public: {
         src: [
 
           // Vendor:
@@ -170,13 +170,10 @@ module.exports = function(grunt) {
           cfg.src.shared+'/presenter/StaticBubble/*.js'
 
         ],
-        dest: cfg.payloads.shared.js+'/neatline.js'
+        dest: cfg.payloads.shared.js+'/neatline-public.js'
       },
 
-      editor: {
-        options: {
-          separator: ';'
-        },
+      neatline_editor: {
         src: [
 
           // Vendor:
@@ -216,54 +213,54 @@ module.exports = function(grunt) {
           cfg.src.shared+'/editor/map/*.js',
 
         ],
-        dest: cfg.payloads.shared.js+'/editor.js'
+        dest: cfg.payloads.shared.js+'/neatline-editor.js'
       },
 
-      form_css: {
+      exhibit_form_css: {
         src: [
           cfg.vendor.css.chosen,
-          cfg.payloads.admin.css+'/form.css'
+          cfg.payloads.admin.css+'/exhibit-form.css'
         ],
-        dest: cfg.payloads.admin.css+'/form.css'
+        dest: cfg.payloads.admin.css+'/exhibit-form.css'
       },
 
-      neatline_css: {
+      neatline_public_css: {
         src: [
           cfg.vendor.css.openlayers,
-          cfg.payloads.shared.css+'/neatline.css'
+          cfg.payloads.shared.css+'/neatline-public.css'
         ],
-        dest: cfg.payloads.shared.css+'/neatline.css'
+        dest: cfg.payloads.shared.css+'/neatline-public.css'
       },
 
-      editor_css: {
+      neatline_editor_css: {
         src: [
-          '<%= concat.neatline_css.src %>',
           cfg.vendor.css.jquery_ui,
           cfg.vendor.css.bootstrap,
           cfg.vendor.css.toastr,
           cfg.vendor.css.chosen,
-          cfg.payloads.shared.css+'/editor.css'
+          '<%= concat.neatline_public_css.src %>',
+          cfg.payloads.shared.css+'/neatline-editor.css'
         ],
-        dest: cfg.payloads.shared.css+'/editor.css'
+        dest: cfg.payloads.shared.css+'/neatline-editor.css'
       }
 
     },
 
     uglify: {
 
-      form: {
-        src: '<%= concat.form.src %>',
-        dest: cfg.payloads.admin.js+'/form.js'
+      exhibit_form: {
+        src: '<%= concat.exhibit_form.src %>',
+        dest: cfg.payloads.admin.js+'/exhibit-form.js'
       },
 
-      neatline: {
-        src: '<%= concat.neatline.src %>',
-        dest: cfg.payloads.shared.js+'/neatline.js'
+      neatline_public: {
+        src: '<%= concat.neatline_public.src %>',
+        dest: cfg.payloads.shared.js+'/neatline-public.js'
       },
 
-      editor: {
-        src: '<%= concat.editor.src %>',
-        dest: cfg.payloads.shared.js+'/editor.js'
+      neatline_editor: {
+        src: '<%= concat.neatline_editor.src %>',
+        dest: cfg.payloads.shared.js+'/neatline-editor.js'
       }
 
     },
@@ -275,12 +272,12 @@ module.exports = function(grunt) {
           paths: [cfg.stylus.shared]
         },
         files: {
-          './views/shared/css/payloads/neatline.css':
-            cfg.stylus.shared+'/neatline/*.styl',
-          './views/shared/css/payloads/editor.css':
+          './views/shared/css/payloads/neatline-public.css':
+            cfg.stylus.shared+'/public/*.styl',
+          './views/shared/css/payloads/neatline-editor.css':
             cfg.stylus.shared+'/editor/*.styl',
-          './views/admin/css/payloads/form.css':
-            cfg.stylus.admin+'/form.styl'
+          './views/admin/css/payloads/exhibit-form.css':
+            cfg.stylus.admin+'/exhibit-form.styl'
         }
       }
 
@@ -290,12 +287,11 @@ module.exports = function(grunt) {
 
       payload: {
         files: [
-          '<%= concat.form.src %>',
-          '<%= concat.neatline.src %>',
-          '<%= concat.editor.src %>',
+          '<%= concat.exhibit_form.src %>',
+          '<%= concat.neatline_public.src %>',
+          '<%= concat.neatline_editor.src %>',
           cfg.stylus.admin+'/**/*.styl',
-          cfg.stylus.shared+'/**/*.styl',
-          cfg.jasmine+'/helpers/*.js'
+          cfg.stylus.shared+'/**/*.styl'
         ],
         tasks: [
           'compile:concat'
@@ -316,14 +312,14 @@ module.exports = function(grunt) {
       },
 
       neatline: {
-        src: cfg.payloads.shared.js+'/neatline.js',
+        src: cfg.payloads.shared.js+'/neatline-public.js',
         options: {
           specs: cfg.jasmine+'/suites/public/**/*.spec.js'
         }
       },
 
       editor: {
-        src: cfg.payloads.shared.js+'/editor.js',
+        src: cfg.payloads.shared.js+'/neatline-editor.js',
         options: {
           specs: cfg.jasmine+'/suites/editor/**/*.spec.js'
         }
@@ -366,24 +362,24 @@ module.exports = function(grunt) {
 
   // Assemble static assets.
   grunt.registerTask('compile', [
-    'concat:form',
-    'concat:neatline',
-    'concat:editor',
+    'concat:exhibit_form',
+    'concat:neatline_public',
+    'concat:neatline_editor',
     'stylus',
-    'concat:form_css',
-    'concat:neatline_css',
-    'concat:editor_css'
+    'concat:exhibit_form_css',
+    'concat:neatline_public_css',
+    'concat:neatline_editor_css'
   ]);
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
-    'uglify:form',
-    'uglify:neatline',
-    'uglify:editor',
+    'uglify:exhibit_form',
+    'uglify:neatline_public',
+    'uglify:neatline_editor',
     'stylus',
-    'concat:form_css',
-    'concat:neatline_css',
-    'concat:editor_css'
+    'concat:exhibit_form_css',
+    'concat:neatline_public_css',
+    'concat:neatline_editor_css'
   ]);
 
   // Run all tests.
