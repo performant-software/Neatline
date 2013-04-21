@@ -25,18 +25,19 @@
   <?php echo flash(); ?>
   <h1><?php echo __('Neatline | Browse Exhibits'); ?></h1>
 
-  <?php if(_nl_areExhibits()): ?>
-  <div class="pagination"><?php echo pagination_links(); ?></div>
+  <?php if(nl_areExhibits()): ?>
 
-    <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>
-    <div id="neatline-<?php echo _nl_field('id'); ?>">
-      <h2 class="title"><?php echo _nl_link(); ?></h2>
-      <?php echo _nl_field('description'); ?>
-    </div>
-    <?php endforeach; ?>
+    <div class="pagination"><?php echo pagination_links(); ?></div>
 
-  <!-- Pagination. -->
-  <div class="pagination"><?php echo pagination_links(); ?></div>
+      <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>
+        <div id="neatline-<?php echo nl_field('id'); ?>">
+          <h2 class="title"><?php echo nl_link(); ?></h2>
+          <?php echo nl_field('description'); ?>
+        </div>
+      <?php endforeach; ?>
+
+    <div class="pagination"><?php echo pagination_links(); ?></div>
+
   <?php endif; ?>
 
 </div>

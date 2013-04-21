@@ -23,13 +23,13 @@
       'bind'  => 'record.tags'
   )); ?>
 
-  <?php if (count(_nl_getRecordWidgets())): ?>
+  <?php if (count(nl_getRecordWidgets())): ?>
     <?php echo common('neatline/select', array(
         'name'  => 'widgets',
         'label' => 'Widgets',
         'bind'  => 'record.widgets | commaDelimited',
         'style' => 'widgets',
-        'options' => _nl_getRecordWidgets(),
+        'options' => nl_getRecordWidgets(),
         'multi' => true,
     )); ?>
   <?php endif; ?>
@@ -39,7 +39,7 @@
       'label' => 'Presenter',
       'bind'  => 'record.presenter',
       'style' => 'presenter',
-      'options' => _nl_getPresenters()
+      'options' => nl_getPresenters()
   )); ?>
 
   <legend>Colors</legend>

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_writeCSS`.
+ * Tests for `nl_writeCSS`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,11 +16,11 @@ class HelpersTest_WriteCss extends Neatline_TestCase
 
 
     /**
-     * `_nl_writeCSS` should convert an array into a CSS string.
+     * `nl_writeCSS` should convert an array into a CSS string.
      */
     public function testwriteCSS()
     {
-        $this->assertEquals(_nl_writeCSS(array(
+        $this->assertEquals(nl_writeCSS(array(
             'tag1' => array(
                 'prop_1' => 'val1',
                 'prop_2' => 'val2'
@@ -49,7 +49,7 @@ CSS
      */
     public function testBreaks()
     {
-        $this->assertEquals(_nl_writeCSS(array(
+        $this->assertEquals(nl_writeCSS(array(
             'tag1' => array(
                 'prop_1' => 'val1'
             ),
@@ -75,7 +75,7 @@ CSS
      */
     public function testIndent()
     {
-        $this->assertEquals(_nl_writeCSS(array(
+        $this->assertEquals(nl_writeCSS(array(
             'tag' => array('prop' => 'val')
         ), null, 4), <<<CSS
 .tag {

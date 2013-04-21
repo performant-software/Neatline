@@ -17,7 +17,7 @@
  *
  * @return array An array of widget name => ids.
  */
-function _nl_getExhibitWidgets()
+function nl_getExhibitWidgets()
 {
     return apply_filters('neatline_exhibit_widgets', array());
 }
@@ -28,7 +28,7 @@ function _nl_getExhibitWidgets()
  *
  * @return array An array of widget name => ids.
  */
-function _nl_getRecordWidgets()
+function nl_getRecordWidgets()
 {
     return apply_filters('neatline_record_widgets', array());
 }
@@ -39,7 +39,7 @@ function _nl_getRecordWidgets()
  *
  * @return array An array of presenter name => ids.
  */
-function _nl_getPresenters()
+function nl_getPresenters()
 {
     return apply_filters('neatline_presenters', array());
 }
@@ -50,7 +50,7 @@ function _nl_getPresenters()
  *
  * @return array An array of column names.
  */
-function _nl_getStyles()
+function nl_getStyles()
 {
     return apply_filters('neatline_styles', array());
 }
@@ -62,7 +62,7 @@ function _nl_getStyles()
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return array An array of widget name => ids.
  */
-function _nl_getExhibitTabs($exhibit)
+function nl_getExhibitTabs($exhibit)
 {
     return apply_filters('neatline_exhibit_tabs', array(), array(
         'exhibit' => $exhibit
@@ -76,7 +76,7 @@ function _nl_getExhibitTabs($exhibit)
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The modified array of key => values.
  */
-function _nl_getGlobals($exhibit)
+function nl_getGlobals($exhibit)
 {
     return apply_filters('neatline_globals', array(), array(
         'exhibit' => $exhibit

@@ -19,11 +19,11 @@
 
   <meta charset="utf-8">
   <title><?php echo __(
-    'Neatline Editor: %s', _nl_exhibit()->title
+    'Neatline Editor: %s', nl_exhibit()->title
   ); ?></title>
 
   <?php
-  _nl_editorAssets(_nl_exhibit());
+  nl_queueNeatlineEditor(nl_exhibit());
   echo head_js(false);
   echo head_css();
   ?>

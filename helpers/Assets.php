@@ -13,21 +13,9 @@
 
 
 /**
- * Include the Google Maps API.
+ * Include static files for the exhibit form.
  */
-function _nl_mapApis()
-{
-    $head = get_view()->headScript();
-    $head->appendScript('', 'text/javascript', array('src' =>
-        'http://maps.google.com/maps/api/js?sensor=false')
-    );
-}
-
-
-/**
- * Include static files for add/edit form.
- */
-function _nl_formAssets()
+function nl_queueExhibitForm()
 {
     queue_css_file('payloads/exhibit-form');
     queue_js_file('payloads/exhibit-form');
@@ -39,14 +27,12 @@ function _nl_formAssets()
  *
  * @param NeatlineExhibit The exhibit.
  */
-function _nl_neatlineAssets($exhibit)
+function nl_queueNeatlinePublic($exhibit)
 {
 
-    _nl_mapApis();
-
-    _nl_exhibitCss($exhibit);
+    nl_queueGoogleMapsApi();
+    nl_queueExhibitCss($exhibit);
     queue_css_file('payloads/neatline-public');
-
     queue_js_file('payloads/neatline-public');
     queue_js_file('bootstrap');
 
@@ -62,13 +48,11 @@ function _nl_neatlineAssets($exhibit)
  *
  * @param NeatlineExhibit The exhibit.
  */
-function _nl_editorAssets($exhibit)
+function nl_queueNeatlineEditor($exhibit)
 {
 
-    _nl_mapApis();
-
+    nl_queueGoogleMapsApi();
     queue_css_file('payloads/neatline-editor');
-
     queue_js_file('payloads/neatline-editor');
     queue_js_file('bootstrap');
 
@@ -80,11 +64,35 @@ function _nl_editorAssets($exhibit)
 
 
 /**
+ * Include the Google Maps API.
+ */
+function nl_queueGoogleMapsApi()
+{
+    nl_appendScript(
+        'http://maps.google.com/maps/api/js?sensor=false'
+    );
+}
+
+
+/**
+ * Append a script to the <head> tag.
+ *
+ * @param string $script The script location.
+ */
+function nl_appendScript($script)
+{
+    get_view()->headScript()->appendScript(
+        '', 'text/javascript', array('src' => $script)
+    );
+}
+
+
+/**
  * Try to load an exhibit-specific css file.
  *
  * @param NeatlineExhibit The exhibit.
  */
-function _nl_exhibitCss($exhibit)
+function nl_queueExhibitCss($exhibit)
 {
     try {
         queue_css_file($exhibit->slug);
@@ -98,12 +106,12 @@ function _nl_exhibitCss($exhibit)
  * @param NeatlineExhibit The exhibit.
  * @return array The array of globals.
  */
-function _nl_exhibitGlobals($exhibit)
+function nl_exhibitGlobals($exhibit)
 {
     return array(
         'exhibit'       => $exhibit->toArray(),
         'records_api'   => public_url('neatline/records'),
-        'base_layers'   => _nl_getLayersForExhibit($exhibit),
+        'base_layers'   => nl_getLayersForExhibit($exhibit),
         'base_layer'    => $exhibit->base_layer,
         'map_zoom'      => $exhibit->map_zoom,
         'map_focus'     => $exhibit->map_focus
@@ -117,7 +125,7 @@ function _nl_exhibitGlobals($exhibit)
  * @param NeatlineExhibit The exhibit.
  * @return array The array of globals.
  */
-function _nl_editorGlobals($exhibit)
+function nl_editorGlobals($exhibit)
 {
     return array(
         'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),

@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_getLayers`.
+ * Tests for `nl_getLayers`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,11 +16,11 @@ class HelpersTest_GetLayers extends Neatline_TestCase
 
 
     /**
-     * `_nl_getLayers` should parse the JSON in the passed file.
+     * `nl_getLayers` should parse the JSON in the passed file.
      */
     public function testGetLayers()
     {
-        $this->assertEquals(_nl_getLayers(), array(
+        $this->assertEquals(nl_getLayers(), array(
             'Group1' => array(
                 array(
                     'title' => 'Layer 1',

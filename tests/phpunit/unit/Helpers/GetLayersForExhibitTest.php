@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_getLayersForExhibit`.
+ * Tests for `nl_getLayersForExhibit`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,7 +16,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_TestCase
 
 
     /**
-     * `_nl_getLayersForExhibit` should return layer definitions for the
+     * `nl_getLayersForExhibit` should return layer definitions for the
      * layers included in the `base_layers` field.
      */
     public function testDefaultLayerIsIncluded()
@@ -26,7 +26,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_TestCase
         $exhibit->base_layers   = 'Layer1,Layer2';
         $exhibit->base_layer    = 'Layer2';
 
-        $this->assertEquals(_nl_getLayersForExhibit($exhibit), array(
+        $this->assertEquals(nl_getLayersForExhibit($exhibit), array(
             array(
                 'title' => 'Layer 1',
                 'id'    => 'Layer1',
@@ -53,7 +53,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_TestCase
         $exhibit->base_layers   = 'Layer1,Layer2';
         $exhibit->base_layer    = 'Layer3';
 
-        $this->assertEquals(_nl_getLayersForExhibit($exhibit), array(
+        $this->assertEquals(nl_getLayersForExhibit($exhibit), array(
             array(
                 'title' => 'Layer 1',
                 'id'    => 'Layer1',

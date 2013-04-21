@@ -13,7 +13,7 @@
 
 ?>
 
-<?php $tabs = _nl_getExhibitTabs(_nl_exhibit());
+<?php $tabs = nl_getExhibitTabs(nl_exhibit());
   if (count($tabs) > 0): ?>
 
   <li class="dropdown plugins">

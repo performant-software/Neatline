@@ -25,7 +25,7 @@ class ExhibitsControllerTest_Show extends Neatline_TestCase
     {
         $exhibit = $this->__exhibit('slug');
         $this->dispatch('neatline/show/slug');
-        $this->assertEquals(_nl_exhibit()->id, $exhibit->id);
+        $this->assertEquals(nl_exhibit()->id, $exhibit->id);
     }
 
 

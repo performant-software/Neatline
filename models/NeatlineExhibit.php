@@ -51,7 +51,7 @@ class NeatlineExhibit extends Neatline_AbstractRow
      */
     public function hasWidget($id)
     {
-        return in_array($id, _nl_explode($this->widgets));
+        return in_array($id, nl_explode($this->widgets));
     }
 
 
@@ -72,13 +72,13 @@ class NeatlineExhibit extends Neatline_AbstractRow
     {
 
         // Parse the stylesheet.
-        $css = _nl_readCSS($this->styles);
+        $css = nl_readCSS($this->styles);
 
         // Load records table.
         $records = $this->getTable('NeatlineRecord');
 
         // Gather style columns.
-        $valid = _nl_getStyles();
+        $valid = nl_getStyles();
 
         foreach ($css as $tag => $rules) {
 
@@ -142,13 +142,13 @@ class NeatlineExhibit extends Neatline_AbstractRow
     {
 
         // Parse the stylesheet.
-        $css = _nl_readCSS($this->styles);
+        $css = nl_readCSS($this->styles);
 
         // Explode record tags.
-        $tags = _nl_explode($record->tags);
+        $tags = nl_explode($record->tags);
 
         // Gather style columns.
-        $valid = _nl_getStyles();
+        $valid = nl_getStyles();
 
         foreach ($css as $selector => $rules) {
 
@@ -174,7 +174,7 @@ class NeatlineExhibit extends Neatline_AbstractRow
         }
 
         // Recompile the stylesheet.
-        $this->styles = _nl_writeCSS($css);
+        $this->styles = nl_writeCSS($css);
 
     }
 

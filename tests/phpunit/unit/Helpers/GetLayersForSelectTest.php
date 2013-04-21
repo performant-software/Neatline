@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_getLayersForSelect`.
+ * Tests for `nl_getLayersForSelect`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,12 +16,12 @@ class HelpersTest_GetLayersForSelect extends Neatline_TestCase
 
 
     /**
-     * `_nl_getLayersForSelect` should convert the layers JSON to an array
+     * `nl_getLayersForSelect` should convert the layers JSON to an array
      * of `id` => `name` pairs.
      */
     public function testGetLayersForSelect()
     {
-        $this->assertEquals(_nl_getLayersForSelect(), array(
+        $this->assertEquals(nl_getLayersForSelect(), array(
             'Group1' => array(
                 'Layer1' => 'Layer 1',
                 'Layer2' => 'Layer 2'

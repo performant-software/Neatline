@@ -13,11 +13,11 @@
 
 ?>
 
-<?php _nl_formAssets(); ?>
+<?php nl_queueExhibitForm(); ?>
 
 <?php
   echo head(array(
-    'title' => __('Neatline | Edit "%s"', _nl_field('title')),
+    'title' => __('Neatline | Edit "%s"', nl_field('title')),
     'content_class' => 'neatline'
   ));
 ?>

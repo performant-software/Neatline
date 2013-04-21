@@ -15,7 +15,7 @@
 /**
  * Set the script path depth chart for item compilation.
  */
-function _nl_setView()
+function nl_setView()
 {
 
     $view = new Omeka_View;
@@ -43,9 +43,9 @@ function _nl_setView()
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return string The field value.
  */
-function _nl_field($fieldname, $exhibit=null)
+function nl_field($fieldname, $exhibit=null)
 {
-    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
+    $exhibit = $exhibit ? $exhibit : nl_exhibit();
     return $exhibit->$fieldname;
 }
 
@@ -55,7 +55,7 @@ function _nl_field($fieldname, $exhibit=null)
  *
  * @return NeatlineExhibit|null
  */
-function _nl_exhibit()
+function nl_exhibit()
 {
     return get_view()->neatline_exhibit;
 }
@@ -66,7 +66,7 @@ function _nl_exhibit()
  *
  * @return boolean
  */
-function _nl_areExhibits()
+function nl_areExhibits()
 {
     $view = get_view();
     return $view->neatline_exhibits && count($view->neatline_exhibits);
@@ -82,12 +82,12 @@ function _nl_areExhibits()
  * @param array $props Array of properties for the element.
  * @return string The HTML link.
  */
-function _nl_link($exhibit,$action,$text,$props=array(),$public=true) {
+function nl_link($exhibit,$action,$text,$props=array(),$public=true) {
 
-    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
+    $exhibit = $exhibit ? $exhibit : nl_exhibit();
 
     // Get the text and slug.
-    $text = $text ? $text : _nl_field('title', $exhibit);
+    $text = $text ? $text : nl_field('title', $exhibit);
     if ($action == 'show') { $slug = $exhibit->slug; }
     else { $slug = $exhibit->id; }
 
@@ -107,8 +107,8 @@ function _nl_link($exhibit,$action,$text,$props=array(),$public=true) {
  * @param NeatlineExhibit $exhibit The exhibit record.
  * @return integer The number of records.
  */
-function _nl_totalRecords($exhibit=null)
+function nl_totalRecords($exhibit=null)
 {
-    $exhibit = $exhibit ? $exhibit : _nl_exhibit();
+    $exhibit = $exhibit ? $exhibit : nl_exhibit();
     return (int) $exhibit->getNumberOfRecords();
 }

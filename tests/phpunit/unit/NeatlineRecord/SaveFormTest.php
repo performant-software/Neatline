@@ -138,7 +138,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $exhibit = $this->reload($exhibit);
 
         // Should update CSS.
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
             'tag' => array(
                 'fill_color' => '2'
             )
@@ -244,7 +244,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($record->fill_color, '1');
 
         // CSS should be unchanged.
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
             'all' => array(
                 'fill_color' => '1'
             )
@@ -280,7 +280,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($record->fill_color, '2');
 
         // CSS should be changed.
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
             'all' => array(
                 'fill_color' => '2'
             )

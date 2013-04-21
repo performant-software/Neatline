@@ -32,5 +32,5 @@
 
 <!-- Plugin templates. -->
 <?php fire_plugin_hook('neatline_editor_templates', array(
-  'exhibit' => _nl_exhibit()
+  'exhibit' => nl_exhibit()
 )); ?>

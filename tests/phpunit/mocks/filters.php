@@ -18,7 +18,7 @@
  * @param array $widgets Widgets, NAME => ID.
  * @return array The array, with mock widgets.
  */
-function _nl_mockWidgets($widgets)
+function nl_mockWidgets($widgets)
 {
     return array_merge($widgets, array(
         'Widget1 Label' => 'Widget1',
@@ -34,7 +34,7 @@ function _nl_mockWidgets($widgets)
  * @param array $presenters Presenters, NAME => ID.
  * @return array The array, with mock presenters.
  */
-function _nl_mockPresenters($presenters)
+function nl_mockPresenters($presenters)
 {
     return array_merge($presenters, array(
         'Presenter1 Label' => 'Presenter1',

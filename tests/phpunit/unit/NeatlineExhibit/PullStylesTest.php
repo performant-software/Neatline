@@ -47,7 +47,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         ));
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
 
             // `tag1` and `tag2` styles should be updated.
 
@@ -91,7 +91,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $record->tags = 'tag';
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
 
             // Invalid property should be ignored.
 
@@ -122,7 +122,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $record->fill_color = '2';
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
 
             // `all` selector should be updated.
 
@@ -152,7 +152,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $record->point_image = null;
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(_nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(nl_readCSS($exhibit->styles), array(
 
             // `point-image` should pull `none`.
 

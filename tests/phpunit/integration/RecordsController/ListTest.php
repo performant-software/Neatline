@@ -54,7 +54,7 @@ class RecordsControllerTest_List extends Neatline_TestCase
         $this->assertObjectHasAttribute('tags',     $records[0]);
 
         // Should emit styles.
-        foreach (_nl_getStyles() as $s) {
+        foreach (nl_getStyles() as $s) {
             $this->assertObjectHasAttribute($s, $records[0]);
         }
 

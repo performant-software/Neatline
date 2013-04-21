@@ -161,7 +161,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookAfterSaveItem($args)
     {
-        _nl_setView();
+        nl_setView();
         $records = $this->_db->getTable('NeatlineRecord');
         $records->syncItem($args['record']);
     }
@@ -190,10 +190,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineGlobals($globals, $args)
     {
         $globals = array_merge($globals,
-            _nl_exhibitGlobals($args['exhibit'])
+            nl_exhibitGlobals($args['exhibit'])
         );
         $globals = array_merge($globals,
-            _nl_editorGlobals($args['exhibit'])
+            nl_editorGlobals($args['exhibit'])
         );
         return $globals;
     }

@@ -29,7 +29,7 @@
 
 <div id="primary">
 
-  <?php if(_nl_areExhibits()): ?>
+  <?php if(nl_areExhibits()): ?>
   <div class="pagination"><?php echo pagination_links(); ?></div>
     <table class="neatline">
 
@@ -53,36 +53,36 @@
         <tr>
 
           <td class="title">
-            <?php echo _nl_link($e, 'editor', null,
+            <?php echo nl_link($e, 'editor', null,
               array('class' => 'editor'), false);
             ?>
             <ul class="action-links group">
               <li>
-                <?php echo _nl_link($e, 'show', __('Public View'),
+                <?php echo nl_link($e, 'show', __('Public View'),
                   array('class' => 'public'), true);
                 ?>
               </li>
               <li>
-                <?php echo _nl_link($e, 'edit', __('Exhibit Settings'),
+                <?php echo nl_link($e, 'edit', __('Exhibit Settings'),
                   array('class' => 'edit'), false);
                 ?>
               </li>
               <li>
-                <?php echo _nl_link($e, 'import', __('Import Items'),
+                <?php echo nl_link($e, 'import', __('Import Items'),
                   array('class' => 'import'), false);
                 ?>
               </li>
               <li>
-                <?php echo _nl_link($e, 'delete-confirm', __('Delete'),
+                <?php echo nl_link($e, 'delete-confirm', __('Delete'),
                   array('class' => 'delete-confirm'), false);
                 ?>
               </li>
             </ul>
           </td>
 
-          <td><?php echo format_date(_nl_field('modified')); ?></td>
-          <td><?php echo _nl_totalRecords(); ?></td>
-          <td><?php echo _nl_field('public')?__('Yes'):__('No'); ?></td>
+          <td><?php echo format_date(nl_field('modified')); ?></td>
+          <td><?php echo nl_totalRecords(); ?></td>
+          <td><?php echo nl_field('public')?__('Yes'):__('No'); ?></td>
 
         </tr>
         <?php endforeach; ?>

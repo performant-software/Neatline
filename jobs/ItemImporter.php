@@ -22,7 +22,7 @@ class ItemImporter extends Omeka_Job_AbstractJob
     public function perform()
     {
 
-        _nl_setView();
+        nl_setView();
 
         $__exhibits = $this->_db->getTable('NeatlineExhibit');
         $__records  = $this->_db->getTable('NeatlineRecord');

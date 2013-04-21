@@ -82,7 +82,7 @@ class NeatlineRecord extends Neatline_AbstractRow
     {
 
         // Cache the original tags string.
-        $oldTags = _nl_explode($this->tags);
+        $oldTags = nl_explode($this->tags);
 
         // Mass-assign the form.
         $this->setArray($values);
@@ -97,7 +97,7 @@ class NeatlineRecord extends Neatline_AbstractRow
         // have the effect of making the record _conform_ to the already-
         // established styling of other records with that tag - instead of
         // changing the other records to look like this record.
-        $newTags = _nl_explode($this->tags);
+        $newTags = nl_explode($this->tags);
         $this->pullStyles(array_diff($newTags, $oldTags));
         $this->save();
 
@@ -172,10 +172,10 @@ class NeatlineRecord extends Neatline_AbstractRow
         }
 
         // Parse the stylesheet.
-        $css = _nl_readCSS($this->getExhibit()->styles);
+        $css = nl_readCSS($this->getExhibit()->styles);
 
         // Gather style columns.
-        $valid = _nl_getStyles();
+        $valid = nl_getStyles();
 
         // Walk CSS rules.
         foreach ($css as $selector => $rules) {
@@ -232,7 +232,7 @@ class NeatlineRecord extends Neatline_AbstractRow
     public function getItemBody() {
 
         $exhibit = $this->getExhibit();
-        $tags = _nl_explode($this->tags);
+        $tags = nl_explode($this->tags);
 
         // Match `item-[slug]-[tag]`.
         foreach ($tags as $tag) { try {

@@ -18,7 +18,7 @@
  * @param string $list A comma-delimited list.
  * @return array The array of strings.
  */
-function _nl_explode($list)
+function nl_explode($list)
 {
     return explode(',', trim(str_replace(' ', '', $list)));
 }
@@ -30,7 +30,7 @@ function _nl_explode($list)
  * @param string $css CSS string.
  * @return array $styles An array of rules.
  */
-function _nl_readCSS($css)
+function nl_readCSS($css)
 {
 
     $styles = array();
@@ -81,7 +81,7 @@ function _nl_readCSS($css)
  * @param integer $indent Number of spaces to indent rules.
  * @return string $css CSS string.
  */
-function _nl_writeCSS($styles, $breaks=1, $indent=2)
+function nl_writeCSS($styles, $breaks=1, $indent=2)
 {
 
     $css = "";

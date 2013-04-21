@@ -17,7 +17,7 @@
  *
  * @return array The layers.
  */
-function _nl_getLayers()
+function nl_getLayers()
 {
     $file = Zend_Registry::get('layers');
     return Zend_Json::decode(file_get_contents($file));
@@ -29,10 +29,10 @@ function _nl_getLayers()
  *
  * @return array The select options.
  */
-function _nl_getLayersForSelect()
+function nl_getLayersForSelect()
 {
 
-    $groups = _nl_getLayers();
+    $groups = nl_getLayers();
     $options = array();
 
     // Walk the layer groups.
@@ -59,16 +59,16 @@ function _nl_getLayersForSelect()
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The layers.
  */
-function _nl_getLayersForExhibit($exhibit)
+function nl_getLayersForExhibit($exhibit)
 {
 
-    $groups = _nl_getLayers();
+    $groups = nl_getLayers();
     $subset = array();
 
     // Explode the list of ids in `base_layers` and merge the `base_layer`
     // id into the array, which ensures that at least 1 layer is included
     // in the case that `base_layers` is empty.
-    $ids = _nl_explode($exhibit->base_layers);
+    $ids = nl_explode($exhibit->base_layers);
     $ids = array_merge($ids, array($exhibit->base_layer));
 
     // Walk the layer groups.

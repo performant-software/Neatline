@@ -13,7 +13,7 @@
 
 ?>
 
-<?php _nl_formAssets(); ?>
+<?php nl_queueExhibitForm(); ?>
 
 <?php
   echo head(array(

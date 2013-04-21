@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_explode`.
+ * Tests for `nl_explode`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,15 +16,15 @@ class HelpersTest_Explode extends Neatline_TestCase
 
 
     /**
-     * `_nl_explode` should trim a string, scrub spaces, and split on ','.
+     * `nl_explode` should trim a string, scrub spaces, and split on ','.
      */
     public function testExplode()
     {
-        $this->assertEquals(_nl_explode('1,2,3'),
+        $this->assertEquals(nl_explode('1,2,3'),
             array('1', '2', '3'));
-        $this->assertEquals(_nl_explode(' 1,2,3 '),
+        $this->assertEquals(nl_explode(' 1,2,3 '),
             array('1','2','3'));
-        $this->assertEquals(_nl_explode(' 1, 2, 3 '),
+        $this->assertEquals(nl_explode(' 1, 2, 3 '),
             array('1','2','3'));
     }
 

@@ -13,15 +13,15 @@
 
 ?>
 
-<?php _nl_neatlineAssets(_nl_exhibit()); ?>
-<?php echo head(array('title' => _nl_field('title'))); ?>
+<?php nl_queueNeatlinePublic(nl_exhibit()); ?>
+<?php echo head(array('title' => nl_field('title'))); ?>
 
 <!-- Exhibit. -->
 <?php echo $this->partial('exhibits/_exhibit.php'); ?>
 
 <!-- Description. -->
 <div class="exhibit-description">
-    <?php echo _nl_field('description'); ?>
+    <?php echo nl_field('description'); ?>
 </div>
 
 <?php echo foot(); ?>

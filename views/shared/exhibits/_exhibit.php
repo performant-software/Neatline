@@ -20,7 +20,7 @@
 <!-- Globals constants. -->
 <script type="text/javascript">
   Neatline.global = <?php echo Zend_Json::encode(
-    _nl_getGlobals(_nl_exhibit())
+    nl_getGlobals(nl_exhibit())
   ); ?>
 </script>
 
@@ -29,5 +29,5 @@
 
 <!-- Plugin templates. -->
 <?php fire_plugin_hook('neatline_public_templates', array(
-  'exhibit' => _nl_exhibit()
+  'exhibit' => nl_exhibit()
 )); ?>

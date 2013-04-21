@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
 
 /**
- * Tests for `_nl_readCSS`.
+ * Tests for `nl_readCSS`.
  *
  * @package     omeka
  * @subpackage  neatline
@@ -16,11 +16,11 @@ class HelpersTest_ReadCss extends Neatline_TestCase
 
 
     /**
-     * `_nl_readCSS` should convert a CSS string into an array.
+     * `nl_readCSS` should convert a CSS string into an array.
      */
     public function testReadCSS()
     {
-        $this->assertEquals(_nl_readCSS("
+        $this->assertEquals(nl_readCSS("
             .tag1 {
                 prop-1: val1;
                 prop-2: val2;
