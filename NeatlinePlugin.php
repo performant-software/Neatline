@@ -40,7 +40,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
 
-        // Exhibits.
+        // Exhibits:
         // ---------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
@@ -64,7 +64,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query($sql);
 
 
-        // Records.
+        // Records:
         // --------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
