@@ -27,8 +27,8 @@ Neatline.module('Shared.Widget', function(
      * `#neatline-map` container.
      */
     initialize: function() {
-      Widget.View.__super__.initialize.apply(this);
       if (!$('#'+this.id).length) this.$el.appendTo($('#neatline-map'));
+      Widget.View.__super__.initialize.apply(this);
     },
 
 
