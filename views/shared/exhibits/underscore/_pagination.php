@@ -52,7 +52,7 @@
 
 <% if (
   !_.string.startsWith(query, 'map:') &&
-  records.count > Neatline.globals.page_length
+  records.count > Neatline.global.page_length
 ) { %>
 
   <div class="pagination">

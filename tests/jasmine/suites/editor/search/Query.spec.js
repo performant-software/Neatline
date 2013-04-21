@@ -16,7 +16,7 @@ describe('Search Query Execution', function() {
 
   beforeEach(function() {
     NL.loadEditor();
-    pageLength = Neatline.globals.page_length;
+    pageLength = Neatline.global.page_length;
   });
 
 
@@ -89,7 +89,7 @@ describe('Search Query Execution', function() {
     NL.vw.SEARCH.__ui.search.val('word1 word2').trigger('keyup');
 
     // Should produce GET request to /records.
-    NL.assertLastRequestRoute(Neatline.globals.records_api);
+    NL.assertLastRequestRoute(Neatline.global.records_api);
     NL.assertLastRequestMethod('GET');
 
     // `query`=word, default `limit` and `offset`.
@@ -121,7 +121,7 @@ describe('Search Query Execution', function() {
     NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
 
     // Should produce GET request to /records.
-    NL.assertLastRequestRoute(Neatline.globals.records_api);
+    NL.assertLastRequestRoute(Neatline.global.records_api);
     NL.assertLastRequestMethod('GET');
 
     // `tags[]`=tag1, `tags[]`=tag2.
