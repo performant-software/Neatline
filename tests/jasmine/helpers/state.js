@@ -20,7 +20,7 @@ var NL = (function(NL) {
   NL.loadNeatline = function() {
     this.loadJsonFixtures();
     loadFixtures('neatline-partial.html');
-    loadStyleFixtures('neatline.css');
+    loadStyleFixtures('neatline-public.css');
     this.__initNeatline();
   };
 
@@ -31,7 +31,7 @@ var NL = (function(NL) {
   NL.loadEditor = function() {
     this.loadJsonFixtures();
     loadFixtures('editor-partial.html');
-    loadStyleFixtures('editor.css');
+    loadStyleFixtures('neatline-editor.css');
     this.__initEditor();
   };
 

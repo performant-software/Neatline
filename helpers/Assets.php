@@ -32,6 +32,7 @@ function nl_queueNeatlinePublic($exhibit)
 
     nl_queueGoogleMapsApi();
     nl_queueExhibitCss($exhibit);
+
     queue_css_file('payloads/neatline-public');
     queue_js_file('payloads/neatline-public');
     queue_js_file('bootstrap');
@@ -52,6 +53,7 @@ function nl_queueNeatlineEditor($exhibit)
 {
 
     nl_queueGoogleMapsApi();
+
     queue_css_file('payloads/neatline-editor');
     queue_js_file('payloads/neatline-editor');
     queue_js_file('bootstrap');

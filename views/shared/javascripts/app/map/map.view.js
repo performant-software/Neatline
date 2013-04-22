@@ -489,7 +489,7 @@ Neatline.module('Map', function(
 
       // Pass the layer through each of the filters.
       _.each(this.filters, _.bind(function(evaluator, key) {
-        visible = visible && evaluator(layer);
+        visible = visible && evaluator(layer.nModel);
       }, this));
 
       layer.setVisibility(visible);
