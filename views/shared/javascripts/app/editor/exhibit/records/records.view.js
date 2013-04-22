@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.View = Backbone.Neatline.View.extend({
+  this.View = Backbone.Neatline.View.extend({
 
 
     className: 'records',

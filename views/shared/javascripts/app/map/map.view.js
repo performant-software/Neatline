@@ -14,7 +14,7 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.View = Backbone.View.extend({
+  this.View = Backbone.View.extend({
 
 
     options: {

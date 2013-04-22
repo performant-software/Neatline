@@ -14,7 +14,7 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.View = Backbone.Neatline.View.extend({
+  this.View = Backbone.Neatline.View.extend({
 
 
     ui: {

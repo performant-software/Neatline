@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Styles.addInitializer(function() {
+  this.addInitializer(function() {
     this.__view   = new Styles.View();
     this.__router = new Styles.Router();
   });

@@ -14,7 +14,7 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.addInitializer(function() {
+  this.addInitializer(function() {
     this.__collection = new Neatline.Shared.Record.Collection();
     this.__view = new Neatline.Map.View({ el: '#neatline-map' });
   });

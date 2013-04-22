@@ -14,7 +14,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.View = Backbone.Neatline.View.extend({
+  this.View = Backbone.Neatline.View.extend({
 
 
     events: {

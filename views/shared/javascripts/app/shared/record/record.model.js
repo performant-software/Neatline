@@ -14,7 +14,7 @@ Neatline.module('Shared.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.Model = Backbone.Model.extend({
+  this.Model = Backbone.Model.extend({
 
 
     /**

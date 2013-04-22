@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Styles.Router = Neatline.Editor.Router.extend({
+  this.Router = Neatline.Editor.Router.extend({
 
 
     routes: {
@@ -25,7 +25,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
     /**
      * Show the exhibit defaults form.
      */
-    'styles': function() {
+    styles: function() {
       Neatline.execute('EDITOR:display', ['EXHIBIT', 'ESTYLE']);
       Neatline.execute('EXHIBIT:activateTab', 'styles');
     }

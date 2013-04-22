@@ -25,7 +25,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   /**
    * Instantiate the tab view.
    */
-  Style.addInitializer(function() {
+  this.addInitializer(function() {
     this.__view = new Style.View({
       el: Neatline.request('RECORD:getElement')
     });

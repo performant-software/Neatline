@@ -14,7 +14,7 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.Router = Neatline.Editor.Router.extend({
+  this.Router = Neatline.Editor.Router.extend({
 
 
     routes: {

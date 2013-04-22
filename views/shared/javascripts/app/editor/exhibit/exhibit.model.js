@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.Model = Backbone.Model.extend({
+  this.Model = Backbone.Model.extend({
 
 
     /**

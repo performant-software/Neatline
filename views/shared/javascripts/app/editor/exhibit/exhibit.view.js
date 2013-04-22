@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.View = Backbone.Neatline.View.extend({
+  this.View = Backbone.Neatline.View.extend({
 
 
     template: '#exhibit-menu-template',

@@ -14,7 +14,7 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.Router = Backbone.Router.extend({
+  this.Router = Backbone.Router.extend({
     before: function() {
       Neatline.vent.trigger('ROUTER:before');
     }

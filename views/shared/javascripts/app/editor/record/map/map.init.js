@@ -25,7 +25,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   /**
    * Instantiate the tab view.
    */
-  Map.addInitializer(function() {
+  this.addInitializer(function() {
     this.__view = new Map.View({
       el: Neatline.request('RECORD:getElement')
     });

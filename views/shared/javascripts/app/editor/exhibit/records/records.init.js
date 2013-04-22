@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.addInitializer(function() {
+  this.addInitializer(function() {
     this.__collection = new Neatline.Shared.Record.Collection();
     this.__view =       new Records.View();
     this.__router =     new Records.Router();
