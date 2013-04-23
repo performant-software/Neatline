@@ -16,7 +16,6 @@ Neatline.module('Presenter.None', function(
 
 
   var none = function() {};
-
   Neatline.commands.setHandler(this.ID+':highlight',    none);
   Neatline.commands.setHandler(this.ID+':unhighlight',  none);
   Neatline.commands.setHandler(this.ID+':select',       none);

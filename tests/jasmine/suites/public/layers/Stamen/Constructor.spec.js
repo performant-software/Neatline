@@ -27,7 +27,7 @@ describe('Stamen Base Layer Constructor', function() {
 
   it('should construct a `toner` layer', function() {
 
-    layer = Neatline.request('LAYERS:Stamen', {
+    layer = Neatline.request('MAP:LAYERS:Stamen', {
       title: 'Title',
       properties: {
         provider: 'toner'
@@ -43,7 +43,7 @@ describe('Stamen Base Layer Constructor', function() {
 
   it('should construct a `terrain` layer', function() {
 
-    layer = Neatline.request('LAYERS:Stamen', {
+    layer = Neatline.request('MAP:LAYERS:Stamen', {
       title: 'Title',
       properties: {
         provider: 'terrain'
@@ -59,7 +59,7 @@ describe('Stamen Base Layer Constructor', function() {
 
   it('should construct a `watercolor` layer', function() {
 
-    layer = Neatline.request('LAYERS:Stamen', {
+    layer = Neatline.request('MAP:LAYERS:Stamen', {
       title: 'Title',
       properties: {
         provider: 'watercolor'

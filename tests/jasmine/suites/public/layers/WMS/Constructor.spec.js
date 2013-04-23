@@ -18,7 +18,7 @@ describe('WMS Base Layer Constructor', function() {
 
   it('should construct a WMS layer', function() {
 
-    var wms = Neatline.request('LAYERS:WMS', {
+    var wms = Neatline.request('MAP:LAYERS:WMS', {
       title: 'Title',
       properties: {
         address: 'address',

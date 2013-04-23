@@ -23,7 +23,7 @@ describe('Layers API', function() {
     // of the handlers, the request should return `null`.
     // --------------------------------------------------------------------
 
-    var layer = Neatline.request('LAYERS:getLayer', {
+    var layer = Neatline.request('MAP:LAYERS:getLayer', {
       type: 'LayerType'
     });
 
@@ -39,11 +39,11 @@ describe('Layers API', function() {
     // the handlers, the request should return the layer.
     // --------------------------------------------------------------------
 
-    Neatline.reqres.setHandler('LAYERS:LayerType', function() {
+    Neatline.reqres.setHandler('MAP:LAYERS:LayerType', function() {
       return true;
     });
 
-    var layer = Neatline.request('LAYERS:getLayer', {
+    var layer = Neatline.request('MAP:LAYERS:getLayer', {
       type: 'LayerType'
     });
 

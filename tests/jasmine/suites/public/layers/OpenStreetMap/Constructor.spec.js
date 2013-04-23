@@ -18,7 +18,7 @@ describe('OpenStreetMap Base Layer Constructor', function() {
 
   it('should construct an OpenStreetMap layer', function() {
 
-    var osm = Neatline.request('LAYERS:OpenStreetMap', {
+    var osm = Neatline.request('MAP:LAYERS:OpenStreetMap', {
       title: 'Title'
     });
 

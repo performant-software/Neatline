@@ -40,7 +40,7 @@ describe('Google Base Layer Constructor', function() {
 
   it('should construct a `physical` layer', function() {
 
-    layer = Neatline.request('LAYERS:Google', {
+    layer = Neatline.request('MAP:LAYERS:Google', {
       title: 'Title',
       properties: {
         provider: 'physical'
@@ -54,7 +54,7 @@ describe('Google Base Layer Constructor', function() {
 
   it('should construct a `streets` layer', function() {
 
-    layer = Neatline.request('LAYERS:Google', {
+    layer = Neatline.request('MAP:LAYERS:Google', {
       title: 'Title',
       properties: {
         provider: 'streets'
@@ -68,7 +68,7 @@ describe('Google Base Layer Constructor', function() {
 
   it('should construct a `satellite` layer', function() {
 
-    layer = Neatline.request('LAYERS:Google', {
+    layer = Neatline.request('MAP:LAYERS:Google', {
       title: 'Title',
       properties: {
         provider: 'satellite'
@@ -82,7 +82,7 @@ describe('Google Base Layer Constructor', function() {
 
   it('should construct a `hybrid` layer', function() {
 
-    layer = Neatline.request('LAYERS:Google', {
+    layer = Neatline.request('MAP:LAYERS:Google', {
       title: 'Title',
       properties: {
         provider: 'hybrid'
