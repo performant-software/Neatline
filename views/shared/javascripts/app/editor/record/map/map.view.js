@@ -89,7 +89,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         Neatline.execute('MAPEDIT:updateWKT', wkt);
 
         // Flash success.
-        Neatline.execute('EDITOR:notifySuccess',
+        Neatline.execute('E:notifySuccess',
           STRINGS.svg.parse.success
         );
 
@@ -97,7 +97,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         this.__ui.modal.modal('hide');
 
       } catch (e) {
-        Neatline.execute('EDITOR:notifyError',
+        Neatline.execute('E:notifyError',
           STRINGS.svg.parse.error
         );
       }

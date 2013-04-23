@@ -25,7 +25,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
    */
   this.addInitializer(function() {
     this.__view = new Text.View({
-      el: Neatline.request('RECORD:getElement')
+      el: Neatline.request('E:RECORD:getElement')
     });
   });
 

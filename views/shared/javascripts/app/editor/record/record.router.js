@@ -27,8 +27,8 @@ Neatline.module('Editor.Record', function(
      * Show add record form.
      */
     'record/add': function() {
-      Neatline.execute('EDITOR:display', ['RECORD']);
-      Neatline.execute('RECORD:bindNew', 'text');
+      Neatline.execute('E:display', ['E:RECORD']);
+      Neatline.execute('E:RECORD:bindNew', 'text');
     },
 
 
@@ -38,8 +38,8 @@ Neatline.module('Editor.Record', function(
      * @param {String} tab: The active tab.
      */
     'record/add/:tab': function(tab) {
-      Neatline.execute('EDITOR:display', ['RECORD']);
-      Neatline.execute('RECORD:bindNew', tab);
+      Neatline.execute('E:display', ['E:RECORD']);
+      Neatline.execute('E:RECORD:bindNew', tab);
     },
 
 
@@ -49,8 +49,8 @@ Neatline.module('Editor.Record', function(
      * @param {String} id: The record id.
      */
     'record/:id': function(id) {
-      Neatline.execute('EDITOR:display', ['RECORD']);
-      Neatline.execute('RECORD:bindId', id, 'text');
+      Neatline.execute('E:display', ['E:RECORD']);
+      Neatline.execute('E:RECORD:bindId', id, 'text');
     },
 
 
@@ -61,8 +61,8 @@ Neatline.module('Editor.Record', function(
      * @param {String} tab: The active tab.
      */
     'record/:id/:tab': function(id, tab) {
-      Neatline.execute('EDITOR:display', ['RECORD']);
-      Neatline.execute('RECORD:bindId', id, tab);
+      Neatline.execute('E:display', ['E:RECORD']);
+      Neatline.execute('E:RECORD:bindId', id, tab);
     }
 
 

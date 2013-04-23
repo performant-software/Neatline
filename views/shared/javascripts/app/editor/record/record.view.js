@@ -104,8 +104,8 @@ Neatline.module('Editor.Record', function(
       var id = this.model.id || 'add';
 
       // Update the route, notify tab views.
-      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.tab);
-      Neatline.vent.trigger('RECORD:tab:'+this.tab);
+      Neatline.execute('E:setRoute', 'record/'+id+'/'+this.tab);
+      Neatline.vent.trigger('E:RECORD:tab:'+this.tab);
 
     },
 
@@ -148,12 +148,12 @@ Neatline.module('Editor.Record', function(
     onSaveSuccess: function() {
 
       // Flash success.
-      Neatline.execute('EDITOR:notifySuccess',
+      Neatline.execute('E:notifySuccess',
         STRINGS.record.save.success
       );
 
       // Update the route.
-      Neatline.execute('EDITOR:setRoute',
+      Neatline.execute('E:setRoute',
         'record/'+this.model.id+'/'+this.tab
       );
 
@@ -167,7 +167,7 @@ Neatline.module('Editor.Record', function(
      * When a save fails.
      */
     onSaveError: function() {
-      Neatline.execute('EDITOR:notifyError',
+      Neatline.execute('E:notifyError',
         STRINGS.record.save.error
       );
     },
@@ -179,7 +179,7 @@ Neatline.module('Editor.Record', function(
     onDeleteSuccess: function() {
 
       // FLash success.
-      Neatline.execute('EDITOR:notifySuccess',
+      Neatline.execute('E:notifySuccess',
         STRINGS.record.remove.success
       );
 
@@ -197,7 +197,7 @@ Neatline.module('Editor.Record', function(
      * When a delete fails.
      */
     onDeleteError: function() {
-      Neatline.execute('EDITOR:notifyError',
+      Neatline.execute('E:notifyError',
         STRINGS.record.remove.error
       );
     }

@@ -19,7 +19,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     Style.__view.buildWidgets();
   };
   Neatline.commands.setHandler('RSTYLE:activate', activate);
-  Neatline.vent.on('RECORD:tab:style', activate);
+  Neatline.vent.on('E:RECORD:tab:style', activate);
 
 
 }});

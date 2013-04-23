@@ -20,7 +20,7 @@ Neatline.module('Editor.Record', function(
   var display = function(container) {
     Record.__view.showIn(container);
   };
-  Neatline.commands.setHandler('RECORD:display', display);
+  Neatline.commands.setHandler('E:RECORD:display', display);
 
 
   /**
@@ -40,7 +40,7 @@ Neatline.module('Editor.Record', function(
     });
 
   };
-  Neatline.commands.setHandler('RECORD:bindId', bindId);
+  Neatline.commands.setHandler('E:RECORD:bindId', bindId);
 
 
   /**
@@ -58,7 +58,7 @@ Neatline.module('Editor.Record', function(
     Record.__view.activateTab(tab);
 
   };
-  Neatline.commands.setHandler('RECORD:bindNew', bindNew);
+  Neatline.commands.setHandler('E:RECORD:bindNew', bindNew);
 
 
   /**
@@ -67,7 +67,7 @@ Neatline.module('Editor.Record', function(
   var unbind = function() {
     if (Record.__view.open) Record.__view.unbind();
   };
-  Neatline.commands.setHandler('RECORD:unbind', unbind);
+  Neatline.commands.setHandler('E:RECORD:unbind', unbind);
   Neatline.vent.on('ROUTER:before', unbind);
 
 
@@ -81,7 +81,7 @@ Neatline.module('Editor.Record', function(
       Record.__router.navigate('record/'+model.id, true);
     }
   };
-  Neatline.commands.setHandler('RECORD:navToForm', navToForm);
+  Neatline.commands.setHandler('E:RECORD:navToForm', navToForm);
   Neatline.vent.on('select', navToForm);
 
 
@@ -93,7 +93,7 @@ Neatline.module('Editor.Record', function(
   var setCoverage = function(coverage) {
     Record.__view.model.set('coverage', coverage);
   };
-  Neatline.commands.setHandler('RECORD:setCoverage', setCoverage);
+  Neatline.commands.setHandler('E:RECORD:setCoverage', setCoverage);
 
 
   /**
@@ -102,7 +102,7 @@ Neatline.module('Editor.Record', function(
   var getElement = function() {
     return Record.__view.$el;
   };
-  Neatline.reqres.setHandler('RECORD:getElement', getElement);
+  Neatline.reqres.setHandler('E:RECORD:getElement', getElement);
 
 
   /**
@@ -111,7 +111,7 @@ Neatline.module('Editor.Record', function(
   var getModel = function() {
     return Record.__view.model;
   };
-  Neatline.reqres.setHandler('RECORD:getModel', getModel);
+  Neatline.reqres.setHandler('E:RECORD:getModel', getModel);
 
 
 });

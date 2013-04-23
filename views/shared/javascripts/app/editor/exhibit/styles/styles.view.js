@@ -113,7 +113,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      */
     onSaveSuccess: function() {
       Neatline.vent.trigger('refresh');
-      Neatline.execute('EDITOR:notifySuccess',
+      Neatline.execute('E:notifySuccess',
         STRINGS.exhibit.save.success
       );
     },
@@ -123,7 +123,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * When a save fails.
      */
     onSaveError: function() {
-      Neatline.execute('EDITOR:notifyError',
+      Neatline.execute('E:notifyError',
         STRINGS.exhibit.save.error
       );
     }

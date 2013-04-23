@@ -13,13 +13,13 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Display a list of views inthe editor container.
+   * Display a list of views inthe E container.
    *
    * @param {Array} views: A list of views.
    */
   var display = function(views) {
 
-    // Clear the editor container.
+    // Clear the E container.
     Editor.__view.__ui.editor.children().detach();
 
     // Show each of the views.
@@ -28,7 +28,7 @@ Neatline.module('Editor', { startWithParent: false,
     });
 
   };
-  Neatline.commands.setHandler('EDITOR:display', display);
+  Neatline.commands.setHandler('E:display', display);
 
 
   /**
@@ -39,7 +39,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifySuccess = function(message) {
     Editor.__view.notifySuccess(message);
   };
-  Neatline.commands.setHandler('EDITOR:notifySuccess', notifySuccess);
+  Neatline.commands.setHandler('E:notifySuccess', notifySuccess);
 
 
   /**
@@ -50,7 +50,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifyError = function(message) {
     Editor.__view.notifyError(message);
   };
-  Neatline.commands.setHandler('EDITOR:notifyError', notifyError);
+  Neatline.commands.setHandler('E:notifyError', notifyError);
 
 
   /**
@@ -61,18 +61,18 @@ Neatline.module('Editor', { startWithParent: false,
   var setRoute = function(route) {
     Backbone.history.navigate(route, { replace: true });
   };
-  Neatline.commands.setHandler('EDITOR:setRoute', setRoute);
+  Neatline.commands.setHandler('E:setRoute', setRoute);
 
 
   /**
-   * Return the editor container div.
+   * Return the E container div.
    *
    * @return {Object}: The container.
    */
   var getContainer = function() {
-    return Editor.__view.__ui.editor
+    return Editor.__view.__ui.editor;
   };
-  Neatline.reqres.setHandler('EDITOR:getContainer', getContainer);
+  Neatline.reqres.setHandler('E:getContainer', getContainer);
 
 
 }});
