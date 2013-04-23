@@ -12,6 +12,9 @@ Neatline.module('Map.Layers.WMS', function(
   WMS, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'MAP:LAYERS:WMS';
+
+
   /**
    * Construct a WMS layer.
    *
@@ -27,7 +30,7 @@ Neatline.module('Map.Layers.WMS', function(
       }
     );
   };
-  Neatline.reqres.setHandler('MAP:LAYERS:WMS', layer);
+  Neatline.reqres.setHandler(this.ID, layer);
 
 
 });

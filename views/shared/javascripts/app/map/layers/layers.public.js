@@ -12,6 +12,9 @@ Neatline.module('Map.Layers', function(
   Layers, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'MAP:LAYERS';
+
+
   /**
    * Dispatch a layer request to the appropriate handler. If no handler
    * exists for the passed type and the request fails, return null.
@@ -26,7 +29,7 @@ Neatline.module('Map.Layers', function(
       return null;
     }
   };
-  Neatline.reqres.setHandler('MAP:LAYERS:getLayer', getLayer);
+  Neatline.reqres.setHandler(this.ID+':getLayer', getLayer);
 
 
 });

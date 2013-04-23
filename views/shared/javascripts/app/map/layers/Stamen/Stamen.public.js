@@ -12,6 +12,9 @@ Neatline.module('Map.Layers.Stamen', function(
   Stamen, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'MAP:LAYERS:Stamen';
+
+
   /**
    * Construct a Stamen layer - http://maps.stamen.com/.
    *
@@ -23,7 +26,7 @@ Neatline.module('Map.Layers.Stamen', function(
     layer.name = json.title;
     return layer;
   };
-  Neatline.reqres.setHandler('MAP:LAYERS:Stamen', layer);
+  Neatline.reqres.setHandler(this.ID, layer);
 
 
 });
