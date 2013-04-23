@@ -20,7 +20,7 @@ Neatline.module('Editor.Record', function(
   var display = function(container) {
     Record.__view.showIn(container);
   };
-  Neatline.commands.setHandler(this.ID+':display', display);
+  Neatline.commands.setHandler(Record.ID+':display', display);
 
 
   /**
@@ -42,7 +42,7 @@ Neatline.module('Editor.Record', function(
     );
 
   };
-  Neatline.commands.setHandler(this.ID+':bindId', bindId);
+  Neatline.commands.setHandler(Record.ID+':bindId', bindId);
 
 
   /**
@@ -60,7 +60,7 @@ Neatline.module('Editor.Record', function(
     Record.__view.activateTab(tab);
 
   };
-  Neatline.commands.setHandler(this.ID+':bindNew', bindNew);
+  Neatline.commands.setHandler(Record.ID+':bindNew', bindNew);
 
 
   /**
@@ -69,7 +69,7 @@ Neatline.module('Editor.Record', function(
   var unbind = function() {
     if (Record.__view.open) Record.__view.unbind();
   };
-  Neatline.commands.setHandler(this.ID+':unbind', unbind);
+  Neatline.commands.setHandler(Record.ID+':unbind', unbind);
   Neatline.vent.on('ROUTER:before', unbind);
 
 
@@ -83,7 +83,7 @@ Neatline.module('Editor.Record', function(
       Record.__router.navigate('record/'+args.model.id, true);
     }
   };
-  Neatline.commands.setHandler(this.ID+':navToForm', navToForm);
+  Neatline.commands.setHandler(Record.ID+':navToForm', navToForm);
   Neatline.vent.on('select', navToForm);
 
 
@@ -95,7 +95,7 @@ Neatline.module('Editor.Record', function(
   var setCoverage = function(coverage) {
     Record.__view.model.set('coverage', coverage);
   };
-  Neatline.commands.setHandler(this.ID+':setCoverage', setCoverage);
+  Neatline.commands.setHandler(Record.ID+':setCoverage', setCoverage);
 
 
   /**
@@ -104,7 +104,7 @@ Neatline.module('Editor.Record', function(
   var getElement = function() {
     return Record.__view.$el;
   };
-  Neatline.reqres.setHandler(this.ID+':getElement', getElement);
+  Neatline.reqres.setHandler(Record.ID+':getElement', getElement);
 
 
   /**
@@ -113,7 +113,7 @@ Neatline.module('Editor.Record', function(
   var getModel = function() {
     return Record.__view.model;
   };
-  Neatline.reqres.setHandler(this.ID+':getModel', getModel);
+  Neatline.reqres.setHandler(Record.ID+':getModel', getModel);
 
 
 });

@@ -12,12 +12,12 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'EDITOR:EXHIBIT:STYLES';
+  Styles.ID = 'EDITOR:EXHIBIT:STYLES';
 
 
-  this.addInitializer(function() {
-    this.__view   = new Styles.View();
-    this.__router = new Styles.Router();
+  Styles.addInitializer(function() {
+    Styles.__view   = new Styles.View();
+    Styles.__router = new Styles.Router();
   });
 
 

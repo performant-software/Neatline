@@ -12,7 +12,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.View = Backbone.Neatline.View.extend({
+  Styles.View = Backbone.Neatline.View.extend({
 
 
     template:   '#exhibit-styles-template',

@@ -28,7 +28,7 @@ Neatline.module('Editor', { startWithParent: false,
     });
 
   };
-  Neatline.commands.setHandler(this.ID+':display', display);
+  Neatline.commands.setHandler(Editor.ID+':display', display);
 
 
   /**
@@ -39,7 +39,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifySuccess = function(message) {
     Editor.__view.notifySuccess(message);
   };
-  Neatline.commands.setHandler(this.ID+':notifySuccess', notifySuccess);
+  Neatline.commands.setHandler(Editor.ID+':notifySuccess', notifySuccess);
 
 
   /**
@@ -50,18 +50,7 @@ Neatline.module('Editor', { startWithParent: false,
   var notifyError = function(message) {
     Editor.__view.notifyError(message);
   };
-  Neatline.commands.setHandler(this.ID+':notifyError', notifyError);
-
-
-  /**
-   * Update the route hash without adding to the history.
-   *
-   * @param {String} route: The new route.
-   */
-  var setRoute = function(route) {
-    Backbone.history.navigate(route, { replace: true });
-  };
-  Neatline.commands.setHandler(this.ID+':setRoute', setRoute);
+  Neatline.commands.setHandler(Editor.ID+':notifyError', notifyError);
 
 
   /**
@@ -72,7 +61,18 @@ Neatline.module('Editor', { startWithParent: false,
   var getContainer = function() {
     return Editor.__view.__ui.editor;
   };
-  Neatline.reqres.setHandler(this.ID+':getContainer', getContainer);
+  Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
+
+
+  /**
+   * Update the route hash without adding to the history.
+   *
+   * @param {String} route: The new route.
+   */
+  var setRoute = function(route) {
+    Backbone.history.navigate(route, { replace: true });
+  };
+  Neatline.commands.setHandler(Editor.ID+':setRoute', setRoute);
 
 
 }});

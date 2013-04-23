@@ -12,13 +12,13 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'EDITOR:EXHIBIT:RECORDS';
+  Records.ID = 'EDITOR:EXHIBIT:RECORDS';
 
 
-  this.addInitializer(function() {
-    this.__collection = new Neatline.Shared.Record.Collection();
-    this.__view =       new Records.View();
-    this.__router =     new Records.Router();
+  Records.addInitializer(function() {
+    Records.__collection =  new Neatline.Shared.Record.Collection();
+    Records.__view =        new Records.View();
+    Records.__router =      new Records.Router();
   });
 
 

@@ -12,7 +12,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.View = Backbone.Neatline.View.extend({
+  Records.View = Backbone.Neatline.View.extend({
 
 
     className: 'records',

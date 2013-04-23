@@ -12,7 +12,7 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   OpenStreetMap, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'MAP:LAYERS:OpenStreetMap';
+  OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';
 
 
   /**
@@ -24,7 +24,7 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   var layer = function(json) {
     return new OpenLayers.Layer.OSM(json.title);
   };
-  Neatline.reqres.setHandler(this.ID, layer);
+  Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
 
 
 });

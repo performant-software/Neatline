@@ -12,7 +12,7 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.View = Neatline.Shared.Widget.View.extend({
+  StaticBubble.View = Neatline.Shared.Widget.View.extend({
 
 
     id: 'static-bubble',

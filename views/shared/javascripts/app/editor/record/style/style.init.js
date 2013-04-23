@@ -12,7 +12,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'EDITOR:RECORD:STYLE';
+  Style.ID = 'EDITOR:RECORD:STYLE';
 
 
   /**
@@ -26,8 +26,8 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   /**
    * Instantiate the tab view.
    */
-  this.addInitializer(function() {
-    this.__view = new Style.View({
+  Style.addInitializer(function() {
+    Style.__view = new Style.View({
       el: Neatline.request('EDITOR:RECORD:getElement')
     });
   });

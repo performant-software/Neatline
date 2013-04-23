@@ -12,7 +12,7 @@ Neatline.module('Shared.Widget', function(
   Widget, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.View = Backbone.Neatline.View.extend({
+  Widget.View = Backbone.Neatline.View.extend({
 
 
     className: 'widget',

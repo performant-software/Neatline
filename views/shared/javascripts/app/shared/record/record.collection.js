@@ -12,7 +12,7 @@ Neatline.module('Shared.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.Collection = Backbone.Neatline.Collection.extend({
+  Record.Collection = Backbone.Neatline.Collection.extend({
 
 
     model: Neatline.Shared.Record.Model,

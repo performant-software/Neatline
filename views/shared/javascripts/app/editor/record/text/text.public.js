@@ -18,7 +18,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   var activate = function() {
     Text.__view.buildWidgets();
   };
-  Neatline.commands.setHandler(this.ID+':activate', activate);
+  Neatline.commands.setHandler(Text.ID+':activate', activate);
   Neatline.vent.on('EDITOR:RECORD:#text', activate);
 
 

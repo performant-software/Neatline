@@ -12,7 +12,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.Router = Neatline.Editor.Router.extend({
+  Styles.Router = Neatline.Editor.Router.extend({
 
 
     routes: {

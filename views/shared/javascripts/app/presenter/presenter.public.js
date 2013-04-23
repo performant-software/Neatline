@@ -12,6 +12,9 @@ Neatline.module('Presenter', function(
   Presenter, Neatline, Backbone, Marionette, $, _) {
 
 
+  Presenter.ID = 'PRESENTER';
+
+
   /**
    * Highlight the record.
    *

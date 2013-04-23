@@ -12,12 +12,12 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'MAP';
+  Map.ID = 'MAP';
 
 
-  this.addInitializer(function() {
-    this.__collection = new Neatline.Shared.Record.Collection();
-    this.__view = new Neatline.Map.View({ el: '#neatline-map' });
+  Map.addInitializer(function() {
+    Map.__collection = new Neatline.Shared.Record.Collection();
+    Map.__view = new Neatline.Map.View({ el: '#neatline-map' });
   });
 
 

@@ -20,7 +20,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var display = function(container) {
     Search.__view.showIn(container);
   };
-  Neatline.commands.setHandler(this.ID+':display', display);
+  Neatline.commands.setHandler(Search.ID+':display', display);
 
 
   /**
@@ -52,7 +52,7 @@ Neatline.module('Editor.Exhibit.Search', function(
     }
 
   };
-  Neatline.commands.setHandler(this.ID+':initialize', init);
+  Neatline.commands.setHandler(Search.ID+':initialize', init);
 
 
   /**
@@ -71,7 +71,7 @@ Neatline.module('Editor.Exhibit.Search', function(
     }
 
   };
-  Neatline.commands.setHandler(this.ID+':mirrorMap', mirror);
+  Neatline.commands.setHandler(Search.ID+':mirrorMap', mirror);
   Neatline.vent.on('MAP:ingest', mirror);
 
 
@@ -83,7 +83,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   var query = function() {
     return Search.__view.getQueryForUrl();
   };
-  Neatline.reqres.setHandler(this.ID+':getQueryForUrl', query);
+  Neatline.reqres.setHandler(Search.ID+':getQueryForUrl', query);
 
 
 });

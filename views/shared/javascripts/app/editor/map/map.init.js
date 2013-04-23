@@ -12,13 +12,13 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'EDITOR:MAP';
+  Map.ID = 'EDITOR:MAP';
 
 
-  this.addInitializer(function() {
-    this.__collection = Neatline.Map.__collection;
-    this.__view = Neatline.Map.__view;
-    this.__view.__initEditor();
+  Map.addInitializer(function() {
+    Map.__collection = Neatline.Map.__collection;
+    Map.__view = Neatline.Map.__view;
+    Map.__view.__initEditor();
   });
 
 

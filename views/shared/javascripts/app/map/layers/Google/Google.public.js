@@ -12,7 +12,7 @@ Neatline.module('Map.Layers.Google', function(
   Google, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'MAP:LAYERS:Google';
+  Google.ID = 'MAP:LAYERS:Google';
 
 
   /**
@@ -44,7 +44,7 @@ Neatline.module('Map.Layers.Google', function(
         });
     }
   };
-  Neatline.reqres.setHandler(this.ID, layer);
+  Neatline.reqres.setHandler(Google.ID, layer);
 
 
 });

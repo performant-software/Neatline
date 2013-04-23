@@ -12,7 +12,7 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'EDITOR';
+  Editor.ID = 'EDITOR';
 
 
   /**
@@ -36,7 +36,7 @@ Neatline.module('Editor', { startWithParent: false,
    * Initialize the layout view.
    */
   Editor.addInitializer(function() {
-    this.__view = new Editor.View({ el: 'body' });
+    Editor.__view = new Editor.View({ el: 'body' });
   });
 
 

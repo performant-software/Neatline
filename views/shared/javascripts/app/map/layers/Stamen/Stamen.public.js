@@ -12,7 +12,7 @@ Neatline.module('Map.Layers.Stamen', function(
   Stamen, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'MAP:LAYERS:Stamen';
+  Stamen.ID = 'MAP:LAYERS:Stamen';
 
 
   /**
@@ -26,7 +26,7 @@ Neatline.module('Map.Layers.Stamen', function(
     layer.name = json.title;
     return layer;
   };
-  Neatline.reqres.setHandler(this.ID, layer);
+  Neatline.reqres.setHandler(Stamen.ID, layer);
 
 
 });

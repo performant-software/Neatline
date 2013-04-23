@@ -12,7 +12,7 @@ Neatline.module('Map.Layers', function(
   Layers, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'MAP:LAYERS';
+  Layers.ID = 'MAP:LAYERS';
 
 
   /**
@@ -29,7 +29,7 @@ Neatline.module('Map.Layers', function(
       return null;
     }
   };
-  Neatline.reqres.setHandler(this.ID+':getLayer', getLayer);
+  Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
 
 
 });
