@@ -63,7 +63,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Publish the current edit control configuration.
      */
     onControlChange: function() {
-      Neatline.execute('E:MAP:updateEdit', {
+      Neatline.execute('EDITOR:MAP:updateEdit', {
         mode: this.getEditMode(),
         poly: this.getPolyOptions()
       });
@@ -86,10 +86,10 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
         // Covnert SVG, update handler.
         var wkt = SVGtoWKT.convert(val);
-        Neatline.execute('E:MAP:updateWKT', wkt);
+        Neatline.execute('EDITOR:MAP:updateWKT', wkt);
 
         // Flash success.
-        Neatline.execute('E:notifySuccess',
+        Neatline.execute('EDITOR:notifySuccess',
           STRINGS.svg.parse.success
         );
 
@@ -97,7 +97,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         this.__ui.modal.modal('hide');
 
       } catch (e) {
-        Neatline.execute('E:notifyError',
+        Neatline.execute('EDITOR:notifyError',
           STRINGS.svg.parse.error
         );
       }
@@ -109,7 +109,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Clear all features on the edit layer.
      */
     onClearClick: function() {
-      Neatline.execute('E:MAP:clearEditLayer');
+      Neatline.execute('EDITOR:MAP:clearEditLayer');
     },
 
 

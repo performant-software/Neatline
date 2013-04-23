@@ -12,7 +12,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'E:MAP';
+  this.ID = 'EDITOR:MAP';
 
 
   this.addInitializer(function() {

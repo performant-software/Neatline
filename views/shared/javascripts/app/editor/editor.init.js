@@ -12,7 +12,7 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'E';
+  this.ID = 'EDITOR';
 
 
   /**

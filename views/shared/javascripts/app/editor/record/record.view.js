@@ -52,12 +52,12 @@ Neatline.module('Editor.Record', function(
       this.open  = true;
 
       // Start map editing, bind model to form.
-      Neatline.execute('E:MAP:startEdit', this.model);
+      Neatline.execute('EDITOR:MAP:startEdit', this.model);
       rivets.bind(this.$el, { record: this.model });
 
       // Update map on model change.
       this.listenTo(this.model, 'change', _.bind(function() {
-        Neatline.execute('E:MAP:updateModel', this.model);
+        Neatline.execute('EDITOR:MAP:updateModel', this.model);
       }, this));
 
     },
@@ -69,7 +69,7 @@ Neatline.module('Editor.Record', function(
     unbind: function() {
 
       // Deactivate map editing.
-      Neatline.execute('E:MAP:endEdit', this.model);
+      Neatline.execute('EDITOR:MAP:endEdit', this.model);
 
       // Activate and close the presenter.
       Neatline.vent.trigger('PRESENTER:activate');
@@ -104,8 +104,8 @@ Neatline.module('Editor.Record', function(
       var id = this.model.id || 'add';
 
       // Update the route, notify tab views.
-      Neatline.execute('E:setRoute', 'record/'+id+'/'+this.tab);
-      Neatline.vent.trigger('E:RECORD:#'+this.tab);
+      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.tab);
+      Neatline.vent.trigger('EDITOR:RECORD:#'+this.tab);
 
     },
 
@@ -114,7 +114,7 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     onCloseClick: function() {
-      Neatline.execute('E:EXHIBIT:RECORDS:navToList');
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:navToList');
       Neatline.vent.trigger('refresh', { source: Record.ID });
       this.unbind();
     },
@@ -148,12 +148,12 @@ Neatline.module('Editor.Record', function(
     onSaveSuccess: function() {
 
       // Flash success.
-      Neatline.execute('E:notifySuccess',
+      Neatline.execute('EDITOR:notifySuccess',
         STRINGS.record.save.success
       );
 
       // Update the route.
-      Neatline.execute('E:setRoute',
+      Neatline.execute('EDITOR:setRoute',
         'record/'+this.model.id+'/'+this.tab
       );
 
@@ -167,7 +167,7 @@ Neatline.module('Editor.Record', function(
      * When a save fails.
      */
     onSaveError: function() {
-      Neatline.execute('E:notifyError',
+      Neatline.execute('EDITOR:notifyError',
         STRINGS.record.save.error
       );
     },
@@ -179,7 +179,7 @@ Neatline.module('Editor.Record', function(
     onDeleteSuccess: function() {
 
       // FLash success.
-      Neatline.execute('E:notifySuccess',
+      Neatline.execute('EDITOR:notifySuccess',
         STRINGS.record.remove.success
       );
 
@@ -197,7 +197,7 @@ Neatline.module('Editor.Record', function(
      * When a delete fails.
      */
     onDeleteError: function() {
-      Neatline.execute('E:notifyError',
+      Neatline.execute('EDITOR:notifyError',
         STRINGS.record.remove.error
       );
     }

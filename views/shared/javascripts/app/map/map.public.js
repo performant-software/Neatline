@@ -37,18 +37,6 @@ Neatline.module('Map', function(
 
 
   /**
-   * Focus by model, unless the event was triggered by the map.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    if (args.source !== 'MAP') focusByModel(args.model);
-  };
-  Neatline.commands.setHandler(this.ID+':select', select);
-  Neatline.vent.on('select', select);
-
-
-  /**
    * Focus the map on the data extent for a record, identified by model.
    *
    * @param {Object} model: A record model.
@@ -70,6 +58,18 @@ Neatline.module('Map', function(
     });
   };
   Neatline.commands.setHandler(this.ID+':focusById', focusById);
+
+
+  /**
+   * Focus by model, unless the event was triggered by the map.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var select = function(args) {
+    if (args.source !== 'MAP') focusByModel(args.model);
+  };
+  Neatline.commands.setHandler(this.ID+':select', select);
+  Neatline.vent.on('select', select);
 
 
   /**

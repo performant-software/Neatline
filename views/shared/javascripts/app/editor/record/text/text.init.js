@@ -12,7 +12,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'E:RECORD:TEXT';
+  this.ID = 'EDITOR:RECORD:TEXT';
 
 
   /**
@@ -28,7 +28,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
    */
   this.addInitializer(function() {
     this.__view = new Text.View({
-      el: Neatline.request('E:RECORD:getElement')
+      el: Neatline.request('EDITOR:RECORD:getElement')
     });
   });
 

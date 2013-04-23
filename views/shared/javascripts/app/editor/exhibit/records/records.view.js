@@ -36,11 +36,19 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} records: The records collection.
      */
     ingest: function(records) {
+
+      // Get query as URL param.
+      var query = Neatline.request(
+        'EDITOR:EXHIBIT:SEARCH:getQueryForUrl'
+      );
+
+      // Render record list.
       this.$el.html(this.template({
-        records: records,
-        query: Neatline.request('E:EXHIBIT:SEARCH:getQueryForUrl'),
-        limit: Neatline.global.page_length
+        records:  records,
+        limit:    Neatline.global.page_length,
+        query:    query
       }));
+
     },
 
 

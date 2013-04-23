@@ -66,7 +66,7 @@ describe('Record Form Close', function() {
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
-      source: 'E:RECORD'
+      source: 'EDITOR:RECORD'
     });
 
     // Respond with original geometry.

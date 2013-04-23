@@ -329,7 +329,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Convert to WKT, update the form.
     if (!_.isEmpty(features)) wkt = this.formatWKT.write(features);
-    Neatline.execute('E:RECORD:setCoverage', wkt);
+    Neatline.execute('EDITOR:RECORD:setCoverage', wkt);
 
   },
 

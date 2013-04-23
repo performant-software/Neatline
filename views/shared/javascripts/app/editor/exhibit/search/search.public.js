@@ -47,7 +47,7 @@ Neatline.module('Editor.Exhibit.Search', function(
       });
 
       // Query for records.
-      Neatline.execute('E:EXHIBIT:RECORDS:load', params);
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
 
     }
 
@@ -56,7 +56,9 @@ Neatline.module('Editor.Exhibit.Search', function(
 
 
   /**
-   * If mirroring is enabled, render the map collection in the browser.
+   * If mirroring is enabled, show map records in the browser.
+   *
+   * @param {Object} records: The records on the map.
    */
   var mirror = function(records) {
 
@@ -65,7 +67,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
     // Render in the record browser.
     if (records && Search.__view.mirroring) {
-      Neatline.execute('E:EXHIBIT:RECORDS:ingest', records);
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
     }
 
   };

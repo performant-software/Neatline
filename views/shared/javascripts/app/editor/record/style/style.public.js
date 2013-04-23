@@ -19,7 +19,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     Style.__view.buildWidgets();
   };
   Neatline.commands.setHandler(this.ID+':activate', activate);
-  Neatline.vent.on('E:RECORD:#style', activate);
+  Neatline.vent.on('EDITOR:RECORD:#style', activate);
 
 
 }});

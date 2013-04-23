@@ -17,7 +17,7 @@ Neatline.module('Editor.Exhibit.Records', function(
    *
    * @param {Object} container: The container element.
    */
-  var display = function(container) {
+  display = function(container) {
     Records.__view.showIn(container);
   };
   Neatline.commands.setHandler(this.ID+':display', display);

@@ -12,7 +12,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'E:RECORD:MAP';
+  this.ID = 'EDITOR:RECORD:MAP';
 
 
   /**
@@ -28,7 +28,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
    */
   this.addInitializer(function() {
     this.__view = new Map.View({
-      el: Neatline.request('E:RECORD:getElement')
+      el: Neatline.request('EDITOR:RECORD:getElement')
     });
   });
 

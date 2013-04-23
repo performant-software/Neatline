@@ -12,7 +12,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'E:EXHIBIT:RECORDS';
+  this.ID = 'EDITOR:EXHIBIT:RECORDS';
 
 
   this.addInitializer(function() {

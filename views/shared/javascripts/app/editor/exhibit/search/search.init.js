@@ -12,7 +12,7 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  this.ID = 'E:EXHIBIT:SEARCH';
+  this.ID = 'EDITOR:EXHIBIT:SEARCH';
 
 
   this.addInitializer(function() {
