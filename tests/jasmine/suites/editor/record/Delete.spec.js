@@ -170,7 +170,9 @@ describe('Record Form Delete', function() {
     NL.respondLast200('');
 
     // Should refresh the exhibit.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
+      source: 'E:RECORD'
+    });
 
   });
 

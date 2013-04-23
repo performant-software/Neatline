@@ -74,11 +74,11 @@ Neatline.module('Editor.Record', function(
   /**
    * Open a record edit form if one is not already open.
    *
-   * @param {Object} model: The record model.
+   * @param {Object} args: Event arguments.
    */
-  var navToForm = function(model) {
+  var navToForm = function(args) {
     if (!Record.__view.open) {
-      Record.__router.navigate('record/'+model.id, true);
+      Record.__router.navigate('record/'+args.model.id, true);
     }
   };
   Neatline.commands.setHandler(this.ID+':navToForm', navToForm);

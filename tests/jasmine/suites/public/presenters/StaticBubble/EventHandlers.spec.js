@@ -37,7 +37,7 @@ describe('Static Bubble Event Handlers', function() {
     // --------------------------------------------------------------------
 
     beforeEach(function() {
-      Neatline.vent.trigger('highlight', model1);
+      Neatline.vent.trigger('highlight', { model: model1 });
     });
 
     it('should populate the title and body', function() {
@@ -56,8 +56,8 @@ describe('Static Bubble Event Handlers', function() {
     // --------------------------------------------------------------------
 
     beforeEach(function() {
-      Neatline.vent.trigger('highlight', model1);
-      Neatline.vent.trigger('unhighlight', model1);
+      Neatline.vent.trigger('highlight', { model: model1 });
+      Neatline.vent.trigger('unhighlight', { model: model1 });
     });
 
     it('should empty the bubble', function() {
@@ -81,7 +81,7 @@ describe('Static Bubble Event Handlers', function() {
     // --------------------------------------------------------------------
 
     beforeEach(function() {
-      Neatline.vent.trigger('select', model1);
+      Neatline.vent.trigger('select', { model: model1 });
     });
 
     it('should add `bound` and `selected` classes', function() {
@@ -90,18 +90,18 @@ describe('Static Bubble Event Handlers', function() {
     });
 
     it('should not respond to `unhighlight` events', function() {
-      Neatline.vent.trigger('unhighlight', model1);
+      Neatline.vent.trigger('unhighlight', { model: model1 });
       expect(NL.vw.BUBBLE.$el).not.toBeEmpty();
     });
 
     it('should not respond to `highlight` events', function() {
-      Neatline.vent.trigger('highlight', model2);
+      Neatline.vent.trigger('highlight', { model: model2 });
       expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
       expect(NL.vw.BUBBLE.$('.body')).toHaveText('body1');
     });
 
     it('should respond to `select` events', function() {
-      Neatline.vent.trigger('select', model2);
+      Neatline.vent.trigger('select', { model: model2 });
       expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
       expect(NL.vw.BUBBLE.$('.body')).toHaveText('body2');
     });
@@ -117,8 +117,8 @@ describe('Static Bubble Event Handlers', function() {
     // --------------------------------------------------------------------
 
     beforeEach(function() {
-      Neatline.vent.trigger('select', model1);
-      Neatline.vent.trigger('unselect', model1);
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('unselect', { model: model1 });
     });
 
     it('should empty the bubble', function() {
@@ -141,7 +141,7 @@ describe('Static Bubble Event Handlers', function() {
     // --------------------------------------------------------------------
 
     beforeEach(function() {
-      Neatline.vent.trigger('select', model1);
+      Neatline.vent.trigger('select', { model: model1 });
       NL.vw.BUBBLE.$('.close').trigger('click');
     });
 
@@ -169,12 +169,12 @@ describe('Static Bubble Event Handlers', function() {
     });
 
     it('should not respond to `highlight` events', function() {
-      Neatline.vent.trigger('highlight', model1);
+      Neatline.vent.trigger('highlight', { model: model1 });
       expect(NL.vw.BUBBLE.$el).toBeEmpty();
     });
 
     it('should not respond to `select` events', function() {
-      Neatline.vent.trigger('select', model1);
+      Neatline.vent.trigger('select', { model: model1 });
       expect(NL.vw.BUBBLE.$el).toBeEmpty();
     });
 
@@ -199,11 +199,11 @@ describe('Static Bubble Event Handlers', function() {
     });
 
     it('should start responding to `highlight` events', function() {
-      Neatline.vent.trigger('highlight', model1);
+      Neatline.vent.trigger('highlight', { model: model1 });
     });
 
     it('should start responding to `select` events', function() {
-      Neatline.vent.trigger('select', model1);
+      Neatline.vent.trigger('select', { model: model1 });
     });
 
   });

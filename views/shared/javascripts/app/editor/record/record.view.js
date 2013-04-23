@@ -115,7 +115,7 @@ Neatline.module('Editor.Record', function(
      */
     onCloseClick: function() {
       Neatline.execute('E:EXHIBIT:RECORDS:navToList');
-      Neatline.vent.trigger('refresh');
+      Neatline.vent.trigger('refresh', { source: Record.ID });
       this.unbind();
     },
 
@@ -157,8 +157,8 @@ Neatline.module('Editor.Record', function(
         'record/'+this.model.id+'/'+this.tab
       );
 
-      // Refresh the map.
-      Neatline.vent.trigger('refresh');
+      // Refresh the exhibit.
+      Neatline.vent.trigger('refresh', { source: Record.ID });
 
     },
 
@@ -187,8 +187,8 @@ Neatline.module('Editor.Record', function(
       this.__ui.modal.modal('hide');
       this.onCloseClick();
 
-      // Refresh the map.
-      Neatline.vent.trigger('refresh');
+      // Refresh the exhibit.
+      Neatline.vent.trigger('refresh', { source: Record.ID });
 
     },
 

@@ -36,7 +36,10 @@ describe('Map Outgoing Events', function() {
 
     NL.hoverOnMapFeature(feature);
 
-    expect(vent).toHaveBeenCalledWith('highlight', layer.nModel);
+    expect(vent).toHaveBeenCalledWith('highlight', {
+      model:  layer.nModel,
+      source: 'MAP'
+    });
 
   });
 
@@ -51,7 +54,10 @@ describe('Map Outgoing Events', function() {
     NL.hoverOnMapFeature(feature);
     NL.unHoverOnMapFeature();
 
-    expect(vent).toHaveBeenCalledWith('unhighlight', layer.nModel);
+    expect(vent).toHaveBeenCalledWith('unhighlight', {
+      model:  layer.nModel,
+      source: 'MAP'
+    });
 
   });
 
@@ -65,7 +71,10 @@ describe('Map Outgoing Events', function() {
 
     NL.clickOnMapFeature(feature);
 
-    expect(vent).toHaveBeenCalledWith('select', layer.nModel, true);
+    expect(vent).toHaveBeenCalledWith('select', {
+      model:  layer.nModel,
+      source: 'MAP'
+    });
 
   });
 
@@ -80,7 +89,10 @@ describe('Map Outgoing Events', function() {
     NL.clickOnMapFeature(feature);
     NL.clickOffMapFeature();
 
-    expect(vent).toHaveBeenCalledWith('unselect', layer.nModel);
+    expect(vent).toHaveBeenCalledWith('unselect', {
+      model:  layer.nModel,
+      source: 'MAP'
+    });
 
   });
 

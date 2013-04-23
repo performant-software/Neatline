@@ -15,12 +15,13 @@ Neatline.module('Presenter', function(
   /**
    * Highlight the record.
    *
-   * @param {Object} model: The record model.
+   * @param {Object} args: Event arguments.
    */
-  var highlight = function(model) {
+  var highlight = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+model.get('presenter')+':highlight', model
+        'PRESENTER:'+args.model.get('presenter')+':highlight',
+        args.model
       );
     } catch (e) {}
   };
@@ -31,12 +32,13 @@ Neatline.module('Presenter', function(
   /**
    * Unhighlight the record.
    *
-   * @param {Object} model: The record model.
+   * @param {Object} args: Event arguments.
    */
-  var unhighlight = function(model) {
+  var unhighlight = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+model.get('presenter')+':unhighlight', model
+        'PRESENTER:'+args.model.get('presenter')+':unhighlight',
+        args.model
       );
     } catch(e) {}
   };
@@ -47,12 +49,13 @@ Neatline.module('Presenter', function(
   /**
    * Freeze the record.
    *
-   * @param {Object} model: The record model.
+   * @param {Object} args: Event arguments.
    */
-  var select = function(model) {
+  var select = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+model.get('presenter')+':select', model
+        'PRESENTER:'+args.model.get('presenter')+':select',
+        args.model
       );
     } catch (e) {}
   };
@@ -63,12 +66,13 @@ Neatline.module('Presenter', function(
   /**
    * Unfreeze and hide the record.
    *
-   * @param {Object} model: The record model.
+   * @param {Object} args: Event arguments.
    */
-  var unselect = function(model) {
+  var unselect = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+model.get('presenter')+':unselect', model
+        'PRESENTER:'+args.model.get('presenter')+':unselect',
+        args.model
       );
     } catch (e) {}
   };

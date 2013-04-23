@@ -114,7 +114,7 @@ describe('Record Form Open', function() {
       model = NL.vw.MAP.getVectorLayers()[0].nModel;
 
       // Select the model.
-      Neatline.vent.trigger('select', model);
+      Neatline.vent.trigger('select', { model: model });
 
     });
 

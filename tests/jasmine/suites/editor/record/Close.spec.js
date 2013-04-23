@@ -65,7 +65,11 @@ describe('Record Form Close', function() {
     el.close.trigger('click');
 
     // Should refresh the exhibit.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh');
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
+      source: 'E:RECORD'
+    });
+
+    // Respond with original geometry.
     NL.respondMap200(NL.json.RecordFormClose.records);
 
     // Should revert to the saved geometry.

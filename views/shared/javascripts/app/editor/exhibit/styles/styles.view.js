@@ -112,10 +112,17 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * When a save succeeds.
      */
     onSaveSuccess: function() {
-      Neatline.vent.trigger('refresh');
+
+      // Refresh the exhibit.
+      Neatline.vent.trigger('refresh', {
+        source: Styles.ID
+      });
+
+      // Flash success message.
       Neatline.execute('E:notifySuccess',
         STRINGS.exhibit.save.success
       );
+
     },
 
 
@@ -123,9 +130,12 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * When a save fails.
      */
     onSaveError: function() {
+
+      // Flash error message.
       Neatline.execute('E:notifyError',
         STRINGS.exhibit.save.error
       );
+
     }
 
 

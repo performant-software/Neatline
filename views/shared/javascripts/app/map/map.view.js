@@ -641,7 +641,10 @@ Neatline.module('Map', function(
      * @param {Object} evt: The highlight event.
      */
     onFeatureHighlight: function(evt) {
-      Neatline.vent.trigger('highlight', evt.feature.layer.nModel);
+      Neatline.vent.trigger('highlight', {
+        model:  evt.feature.layer.nModel,
+        source: Map.ID
+      });
     },
 
 
@@ -652,23 +655,24 @@ Neatline.module('Map', function(
      * @param {Object} evt: The unhighlight event.
      */
     onFeatureUnhighlight: function(evt) {
-      Neatline.vent.trigger('unhighlight', evt.feature.layer.nModel);
+      Neatline.vent.trigger('unhighlight', {
+        model:  evt.feature.layer.nModel,
+        source: Map.ID
+      });
     },
 
 
     /**
      * When a feature is selected, trigger the `select` event with the
-     * model associated with the feature. Also publish a third parameter,
-     * {Boolean} `true`, to indicate that the event was initiated by a
-     * map click. This flag is used to suppress the map's default focusing
-     * response to `select` events, which can be discombobulating when
-     * the record's default zoom is much higher or lower than the current
-     * zoom level on the map, which produces a drastic context switch.
+     * model associated with the feature.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureSelect: function(feature) {
-      Neatline.vent.trigger('select', feature.layer.nModel, true);
+      Neatline.vent.trigger('select', {
+        model:  feature.layer.nModel,
+        source: Map.ID
+      });
     },
 
 
@@ -678,7 +682,10 @@ Neatline.module('Map', function(
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureUnselect: function(feature) {
-      Neatline.vent.trigger('unselect', feature.layer.nModel);
+      Neatline.vent.trigger('unselect', {
+        model:  feature.layer.nModel,
+        source: Map.ID
+      });
     }
 
 

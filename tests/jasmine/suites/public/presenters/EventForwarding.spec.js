@@ -33,7 +33,7 @@ describe('Presenter Event Forwarding', function() {
 
   it('highlight', function() {
 
-    Neatline.vent.trigger('highlight', model1);
+    Neatline.vent.trigger('highlight', { model: model1 });
 
     expect(exec).toHaveBeenCalledWith(
       'PRESENTER:Presenter1:highlight', model1
@@ -48,7 +48,7 @@ describe('Presenter Event Forwarding', function() {
 
   it('unhighlight', function() {
 
-    Neatline.vent.trigger('unhighlight', model1);
+    Neatline.vent.trigger('unhighlight', { model: model1 });
 
     expect(exec).toHaveBeenCalledWith(
       'PRESENTER:Presenter1:unhighlight', model1
@@ -63,7 +63,7 @@ describe('Presenter Event Forwarding', function() {
 
   it('select', function() {
 
-    Neatline.vent.trigger('select', model1);
+    Neatline.vent.trigger('select', { model: model1 });
 
     expect(exec).toHaveBeenCalledWith(
       'PRESENTER:Presenter1:select', model1
@@ -78,7 +78,7 @@ describe('Presenter Event Forwarding', function() {
 
   it('unselect', function() {
 
-    Neatline.vent.trigger('unselect', model1);
+    Neatline.vent.trigger('unselect', { model: model1 });
 
     expect(exec).toHaveBeenCalledWith(
       'PRESENTER:Presenter1:unselect', model1

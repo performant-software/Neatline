@@ -37,21 +37,26 @@ Neatline.module('Map', function(
 
 
   /**
-   * Focus the map on the data extent for a record, identified by model.
-   * Unless {Boolean} `true` is passed as a second parameter, a flag that
-   * indicates that the event was triggered by a click on the map. When
-   * this is the case, suppress the default focusing response, which can
-   * be discombobulating when the record's default zoom is much higher or
-   * lower than the current zoom level of the map.
+   * Focus by model, unless the event was triggered by the map.
    *
-   * @param {Object} model: The record model.
-   * @param {Boolean} mapClick: True if a map feature was clicked.
+   * @param {Object} args: Event arguments.
    */
-  var focusByModel = function(model, mapClick) {
-    if (mapClick !== true) Map.__view.focusByModel(model);
+  var select = function(args) {
+    if (args.source !== 'MAP') focusByModel(args.model);
+  };
+  Neatline.commands.setHandler(this.ID+':select', select);
+  Neatline.vent.on('select', select);
+
+
+  /**
+   * Focus the map on the data extent for a record, identified by model.
+   *
+   * @param {Object} model: A record model.
+   */
+  var focusByModel = function(model) {
+    Map.__view.focusByModel(model);
   };
   Neatline.commands.setHandler(this.ID+':focusByModel', focusByModel);
-  Neatline.vent.on('select', focusByModel);
 
 
   /**
@@ -70,11 +75,10 @@ Neatline.module('Map', function(
   /**
    * Set a layer filter.
    *
-   * @param {String} key: A key to identify the filter.
-   * @param {Function} evaluator: The boolean filtering function.
+   * @param {Object} args: Event arguments.
    */
-  var setFilter = function(key, evaluator) {
-    Map.__view.setFilter(key, evaluator);
+  var setFilter = function(args) {
+    Map.__view.setFilter(args.key, args.evaluator);
   };
   Neatline.commands.setHandler(this.ID+':setFilter', setFilter);
   Neatline.vent.on('setFilter', setFilter);
@@ -83,10 +87,10 @@ Neatline.module('Map', function(
   /**
    * Remove a layer filter.
    *
-   * @param {String} key: The key of the filter to remove.
+   * @param {Object} args: Event arguments.
    */
-  var removeFilter = function(key) {
-    Map.__view.removeFilter(key);
+  var removeFilter = function(args) {
+    Map.__view.removeFilter(args.key);
   };
   Neatline.commands.setHandler(this.ID+':removeFilter', removeFilter);
   Neatline.vent.on('removeFilter', removeFilter);
