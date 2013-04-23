@@ -12,6 +12,9 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'PRESENTER:StaticBubble';
+
+
   this.addInitializer(function() {
     this.__view = new StaticBubble.View();
   });

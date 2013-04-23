@@ -18,7 +18,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   var activate = function() {
     Style.__view.buildWidgets();
   };
-  Neatline.commands.setHandler('E:RECORD:STYLE:activate', activate);
+  Neatline.commands.setHandler(this.ID+':activate', activate);
   Neatline.vent.on('E:RECORD:#style', activate);
 
 

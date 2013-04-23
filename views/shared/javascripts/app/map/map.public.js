@@ -22,7 +22,7 @@ Neatline.module('Map', function(
       Map.__view.ingest(records);
     });
   };
-  Neatline.commands.setHandler('MAP:load', load);
+  Neatline.commands.setHandler(this.ID+':load', load);
 
 
   /**
@@ -32,7 +32,7 @@ Neatline.module('Map', function(
     Map.__view.removeAllLayers();
     Map.__view.publishPosition();
   };
-  Neatline.commands.setHandler('MAP:refresh', refresh);
+  Neatline.commands.setHandler(this.ID+':refresh', refresh);
   Neatline.vent.on('refresh', refresh);
 
 
@@ -50,7 +50,7 @@ Neatline.module('Map', function(
   var focusByModel = function(model, mapClick) {
     if (mapClick !== true) Map.__view.focusByModel(model);
   };
-  Neatline.commands.setHandler('MAP:focusByModel', focusByModel);
+  Neatline.commands.setHandler(this.ID+':focusByModel', focusByModel);
   Neatline.vent.on('select', focusByModel);
 
 
@@ -64,7 +64,7 @@ Neatline.module('Map', function(
       focusByModel(model);
     });
   };
-  Neatline.commands.setHandler('MAP:focusById', focusById);
+  Neatline.commands.setHandler(this.ID+':focusById', focusById);
 
 
   /**
@@ -76,7 +76,7 @@ Neatline.module('Map', function(
   var setFilter = function(key, evaluator) {
     Map.__view.setFilter(key, evaluator);
   };
-  Neatline.commands.setHandler('MAP:setFilter', setFilter);
+  Neatline.commands.setHandler(this.ID+':setFilter', setFilter);
   Neatline.vent.on('setFilter', setFilter);
 
 
@@ -88,7 +88,7 @@ Neatline.module('Map', function(
   var removeFilter = function(key) {
     Map.__view.removeFilter(key);
   };
-  Neatline.commands.setHandler('MAP:removeFilter', removeFilter);
+  Neatline.commands.setHandler(this.ID+':removeFilter', removeFilter);
   Neatline.vent.on('removeFilter', removeFilter);
 
 
@@ -98,7 +98,7 @@ Neatline.module('Map', function(
   var unselect = function() {
     Map.__view.unselectAll();
   };
-  Neatline.commands.setHandler('MAP:unselect', unselect);
+  Neatline.commands.setHandler(this.ID+':unselect', unselect);
 
 
   /**
@@ -109,7 +109,7 @@ Neatline.module('Map', function(
   var getMap = function() {
     return Map.__view.map;
   };
-  Neatline.reqres.setHandler('MAP:getMap', getMap);
+  Neatline.reqres.setHandler(this.ID+':getMap', getMap);
 
 
   /**
@@ -120,7 +120,7 @@ Neatline.module('Map', function(
   var getRecords = function() {
     return Map.__collection;
   };
-  Neatline.reqres.setHandler('MAP:getRecords', getRecords);
+  Neatline.reqres.setHandler(this.ID+':getRecords', getRecords);
 
 
   /**
@@ -131,7 +131,7 @@ Neatline.module('Map', function(
   var getCenter = function() {
     return Map.__view.map.getCenter();
   };
-  Neatline.reqres.setHandler('MAP:getCenter', getCenter);
+  Neatline.reqres.setHandler(this.ID+':getCenter', getCenter);
 
 
   /**
@@ -142,7 +142,7 @@ Neatline.module('Map', function(
   var getZoom = function() {
     return Map.__view.map.getZoom();
   };
-  Neatline.reqres.setHandler('MAP:getZoom', getZoom);
+  Neatline.reqres.setHandler(this.ID+':getZoom', getZoom);
 
 
 });

@@ -20,7 +20,7 @@ Neatline.module('Editor.Exhibit', function(
   var display = function(container) {
     Exhibit.__view.showIn(container);
   };
-  Neatline.commands.setHandler('E:EXHIBIT:display', display);
+  Neatline.commands.setHandler(this.ID+':display', display);
 
 
   /**
@@ -31,7 +31,7 @@ Neatline.module('Editor.Exhibit', function(
   var tab = function(tab) {
     Exhibit.__view.activateTab(tab);
   };
-  Neatline.commands.setHandler('E:EXHIBIT:activateTab', tab);
+  Neatline.commands.setHandler(this.ID+':activateTab', tab);
 
 
 });

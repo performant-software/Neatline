@@ -23,7 +23,7 @@ Neatline.module('Map.Layers.Stamen', function(
     layer.name = json.title;
     return layer;
   };
-  Neatline.reqres.setHandler('LAYERS:Stamen', layer);
+  Neatline.reqres.setHandler('MAP:LAYERS:Stamen', layer);
 
 
 });

@@ -12,6 +12,9 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'E';
+
+
   /**
    * Start the editor before Neatline.
    */

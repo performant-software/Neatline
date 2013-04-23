@@ -12,6 +12,9 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'E:RECORD:MAP';
+
+
   /**
    * Start the tab after the form.
    */

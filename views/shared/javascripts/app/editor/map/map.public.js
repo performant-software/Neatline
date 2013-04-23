@@ -20,7 +20,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var startEdit = function(model) {
     Map.__view.startEdit(model);
   };
-  Neatline.commands.setHandler('E:MAP:startEdit', startEdit);
+  Neatline.commands.setHandler(this.ID+':startEdit', startEdit);
 
 
   /**
@@ -31,7 +31,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var endEdit = function(model) {
     Map.__view.endEdit();
   };
-  Neatline.commands.setHandler('E:MAP:endEdit', endEdit);
+  Neatline.commands.setHandler(this.ID+':endEdit', endEdit);
 
 
   /**
@@ -42,7 +42,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateEdit = function(settings) {
     Map.__view.updateEdit(settings);
   };
-  Neatline.commands.setHandler('E:MAP:updateEdit', updateEdit);
+  Neatline.commands.setHandler(this.ID+':updateEdit', updateEdit);
 
 
   /**
@@ -53,7 +53,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateWKT = function(wkt) {
     Map.__view.updateWKT(wkt);
   };
-  Neatline.commands.setHandler('E:MAP:updateWKT', updateWKT);
+  Neatline.commands.setHandler(this.ID+':updateWKT', updateWKT);
 
 
   /**
@@ -64,26 +64,26 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateModel = function(model) {
     Map.__view.updateModel(model);
   };
-  Neatline.commands.setHandler('E:MAP:updateModel', updateModel);
+  Neatline.commands.setHandler(this.ID+':updateModel', updateModel);
 
 
   /**
    * Empty the edit layer.
    */
-  var clearEditLayer = function() {
+  var clearLayer = function() {
     Map.__view.clearEditLayer();
   };
-  Neatline.commands.setHandler('E:MAP:clearEditLayer', clearEditLayer);
+  Neatline.commands.setHandler(this.ID+':clearEditLayer', clearLayer);
 
 
   /**
    * Raise the edit layer.
    */
-  var raiseEditLayer = function() {
+  var raiseLayer = function() {
     Map.__view.raiseEditLayer();
   };
-  Neatline.commands.setHandler('E:MAP:raiseEditLayer', raiseEditLayer);
-  Neatline.vent.on('MAP:ingest', raiseEditLayer);
+  Neatline.commands.setHandler(this.ID+':raiseEditLayer', raiseLayer);
+  Neatline.vent.on('MAP:ingest', raiseLayer);
 
 
 }});

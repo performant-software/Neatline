@@ -12,6 +12,9 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'E:EXHIBIT:RECORDS';
+
+
   this.addInitializer(function() {
     this.__collection = new Neatline.Shared.Record.Collection();
     this.__view =       new Records.View();

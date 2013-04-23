@@ -20,9 +20,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var highlight = function(model) {
     StaticBubble.__view.highlight(model);
   };
-  Neatline.commands.setHandler(
-    'PRESENTER:StaticBubble:highlight', highlight
-  );
+  Neatline.commands.setHandler(this.ID+':highlight', highlight);
 
 
   /**
@@ -31,9 +29,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var unhighlight = function() {
     StaticBubble.__view.unhighlight();
   };
-  Neatline.commands.setHandler(
-    'PRESENTER:StaticBubble:unhighlight', unhighlight
-  );
+  Neatline.commands.setHandler(this.ID+':unhighlight', unhighlight);
 
 
   /**
@@ -44,9 +40,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var select = function(model) {
     StaticBubble.__view.select(model);
   };
-  Neatline.commands.setHandler(
-    'PRESENTER:StaticBubble:select', select
-  );
+  Neatline.commands.setHandler(this.ID+':select', select);
 
 
   /**
@@ -55,9 +49,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var unselect = function() {
     StaticBubble.__view.unselect();
   };
-  Neatline.commands.setHandler(
-    'PRESENTER:StaticBubble:unselect', unselect
-  );
+  Neatline.commands.setHandler(this.ID+':unselect', unselect);
 
 
   /**
@@ -66,9 +58,7 @@ Neatline.module('Presenter.StaticBubble', function(
   var activate = function() {
     StaticBubble.__view.activate();
   };
-  Neatline.vent.on(
-    'PRESENTER:activate', activate
-  );
+  Neatline.vent.on('PRESENTER:activate', activate);
 
 
   /**
@@ -78,9 +68,7 @@ Neatline.module('Presenter.StaticBubble', function(
     StaticBubble.__view.deactivate();
     StaticBubble.__view.unselect();
   };
-  Neatline.vent.on(
-    'PRESENTER:deactivate', deactivate
-  );
+  Neatline.vent.on('PRESENTER:deactivate', deactivate);
 
 
 });

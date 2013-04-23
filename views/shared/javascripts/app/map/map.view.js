@@ -73,7 +73,7 @@ Neatline.module('Map', function(
 
       // Get the array of base layer instances.
       _.each(Neatline.global.base_layers, _.bind(function(json) {
-        var layer = Neatline.request('LAYERS:getLayer', json);
+        var layer = Neatline.request('MAP:LAYERS:getLayer', json);
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
 

@@ -12,6 +12,9 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'E:RECORD:STYLE';
+
+
   /**
    * Start the tab after the form.
    */

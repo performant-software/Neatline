@@ -12,6 +12,9 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'E:EXHIBIT';
+
+
   this.addInitializer(function() {
     this.__model  = new Neatline.Editor.Exhibit.Model();
     this.__view   = new Exhibit.View();

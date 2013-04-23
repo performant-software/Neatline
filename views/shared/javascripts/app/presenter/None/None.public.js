@@ -12,14 +12,17 @@ Neatline.module('Presenter.None', function(
   None, Neatline, Backbone, Marionette, $, _) {
 
 
+  this.ID = 'PRESENTER:None';
+
+
   var none = function() {};
 
-  Neatline.commands.setHandler('PRESENTER:None:highlight',    none);
-  Neatline.commands.setHandler('PRESENTER:None:unhighlight',  none);
-  Neatline.commands.setHandler('PRESENTER:None:select',       none);
-  Neatline.commands.setHandler('PRESENTER:None:unselect',     none);
-  Neatline.vent.on('PRESENTER:activate',                      none);
-  Neatline.vent.on('PRESENTER:deactivate',                    none);
+  Neatline.commands.setHandler(this.ID+':highlight',    none);
+  Neatline.commands.setHandler(this.ID+':unhighlight',  none);
+  Neatline.commands.setHandler(this.ID+':select',       none);
+  Neatline.commands.setHandler(this.ID+':unselect',     none);
+  Neatline.vent.on('PRESENTER:activate',                none);
+  Neatline.vent.on('PRESENTER:deactivate',              none);
 
 
 });

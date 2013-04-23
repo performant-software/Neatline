@@ -18,7 +18,7 @@ Neatline.module('Map.Layers.WMS', function(
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer.WMS}: The WMS layer.
    */
-  Neatline.reqres.setHandler('LAYERS:WMS', function(json) {
+  var layer = function(json) {
     return new OpenLayers.Layer.WMS(
       json.title,
       json.properties.address,
@@ -26,7 +26,8 @@ Neatline.module('Map.Layers.WMS', function(
         layers: json.properties.layers
       }
     );
-  });
+  };
+  Neatline.reqres.setHandler('MAP:LAYERS:WMS', layer);
 
 
 });

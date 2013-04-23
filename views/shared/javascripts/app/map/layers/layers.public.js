@@ -21,12 +21,12 @@ Neatline.module('Map.Layers', function(
    */
   var getLayer = function(json) {
     try {
-      return Neatline.request('LAYERS:'+json.type, json);
+      return Neatline.request('MAP:LAYERS:'+json.type, json);
     } catch (e) {
       return null;
     }
   };
-  Neatline.reqres.setHandler('LAYERS:getLayer', getLayer);
+  Neatline.reqres.setHandler('MAP:LAYERS:getLayer', getLayer);
 
 
 });
