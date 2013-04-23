@@ -39,11 +39,11 @@ Neatline.module('Editor.Exhibit.Search', function(
     /**
      * Populate the current search query from a route parameter.
      *
-     * @param {String} query: The query, with '+' replaced with ' '.
+     * @param {String} query: The query, with ' ' replaced with '+'.
      */
     setQueryFromUrl: function(query) {
 
-      // Convert `+`'s to spaces.
+      // Convert `+` -> ' ".
       if (_.isString(query)) query = query.replace(/\+/g, ' ');
 
       // Set the value and parse.
@@ -97,7 +97,7 @@ Neatline.module('Editor.Exhibit.Search', function(
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         this.mirroring = true;
-        Neatline.execute('SEARCH:mirrorMap');
+        Neatline.execute('E:EXHIBIT:SEARCH:mirrorMap');
         this.bold();
       }
 
@@ -134,7 +134,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
       // Load records.
       if (!this.mirroring) {
-        Neatline.execute('RECORDS:load', params);
+        Neatline.execute('E:EXHIBIT:RECORDS:load', params);
       }
 
     },

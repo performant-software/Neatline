@@ -24,8 +24,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * Show the exhibit defaults form.
      */
     styles: function() {
-      Neatline.execute('E:display', ['EXHIBIT', 'ESTYLE']);
-      Neatline.execute('EXHIBIT:activateTab', 'styles');
+      Neatline.execute('E:display', ['E:EXHIBIT', 'E:EXHIBIT:STYLES']);
+      Neatline.execute('E:EXHIBIT:activateTab', 'styles');
     }
 
 

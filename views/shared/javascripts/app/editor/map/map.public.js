@@ -20,7 +20,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var startEdit = function(model) {
     Map.__view.startEdit(model);
   };
-  Neatline.commands.setHandler('MAPEDIT:startEdit', startEdit);
+  Neatline.commands.setHandler('E:MAP:startEdit', startEdit);
 
 
   /**
@@ -31,7 +31,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var endEdit = function(model) {
     Map.__view.endEdit();
   };
-  Neatline.commands.setHandler('MAPEDIT:endEdit', endEdit);
+  Neatline.commands.setHandler('E:MAP:endEdit', endEdit);
 
 
   /**
@@ -42,7 +42,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateEdit = function(settings) {
     Map.__view.updateEdit(settings);
   };
-  Neatline.commands.setHandler('MAPEDIT:updateEdit', updateEdit);
+  Neatline.commands.setHandler('E:MAP:updateEdit', updateEdit);
 
 
   /**
@@ -53,7 +53,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateWKT = function(wkt) {
     Map.__view.updateWKT(wkt);
   };
-  Neatline.commands.setHandler('MAPEDIT:updateWKT', updateWKT);
+  Neatline.commands.setHandler('E:MAP:updateWKT', updateWKT);
 
 
   /**
@@ -64,7 +64,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var updateModel = function(model) {
     Map.__view.updateModel(model);
   };
-  Neatline.commands.setHandler('MAPEDIT:updateModel', updateModel);
+  Neatline.commands.setHandler('E:MAP:updateModel', updateModel);
 
 
   /**
@@ -73,7 +73,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var clearEditLayer = function() {
     Map.__view.clearEditLayer();
   };
-  Neatline.commands.setHandler('MAPEDIT:clearEditLayer', clearEditLayer);
+  Neatline.commands.setHandler('E:MAP:clearEditLayer', clearEditLayer);
 
 
   /**
@@ -82,7 +82,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   var raiseEditLayer = function() {
     Map.__view.raiseEditLayer();
   };
-  Neatline.commands.setHandler('MAPEDIT:raiseEditLayer', raiseEditLayer);
+  Neatline.commands.setHandler('E:MAP:raiseEditLayer', raiseEditLayer);
   Neatline.vent.on('MAP:ingest', raiseEditLayer);
 
 

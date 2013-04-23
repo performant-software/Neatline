@@ -18,8 +18,8 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   var activate = function() {
     Text.__view.buildWidgets();
   };
-  Neatline.commands.setHandler('TEXT:activate', activate);
-  Neatline.vent.on('E:RECORD:tab:text', activate);
+  Neatline.commands.setHandler('E:RECORD:TEXT:activate', activate);
+  Neatline.vent.on('E:RECORD:#text', activate);
 
 
 }});

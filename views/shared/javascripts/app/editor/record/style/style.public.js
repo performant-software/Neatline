@@ -18,8 +18,8 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   var activate = function() {
     Style.__view.buildWidgets();
   };
-  Neatline.commands.setHandler('RSTYLE:activate', activate);
-  Neatline.vent.on('E:RECORD:tab:style', activate);
+  Neatline.commands.setHandler('E:RECORD:STYLE:activate', activate);
+  Neatline.vent.on('E:RECORD:#style', activate);
 
 
 }});

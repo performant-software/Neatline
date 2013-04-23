@@ -52,12 +52,12 @@ Neatline.module('Editor.Record', function(
       this.open  = true;
 
       // Start map editing, bind model to form.
-      Neatline.execute('MAPEDIT:startEdit', this.model);
+      Neatline.execute('E:MAP:startEdit', this.model);
       rivets.bind(this.$el, { record: this.model });
 
       // Update map on model change.
       this.listenTo(this.model, 'change', _.bind(function() {
-        Neatline.execute('MAPEDIT:updateModel', this.model);
+        Neatline.execute('E:MAP:updateModel', this.model);
       }, this));
 
     },
@@ -69,7 +69,7 @@ Neatline.module('Editor.Record', function(
     unbind: function() {
 
       // Deactivate map editing.
-      Neatline.execute('MAPEDIT:endEdit', this.model);
+      Neatline.execute('E:MAP:endEdit', this.model);
 
       // Activate and close the presenter.
       Neatline.vent.trigger('PRESENTER:activate');
@@ -105,7 +105,7 @@ Neatline.module('Editor.Record', function(
 
       // Update the route, notify tab views.
       Neatline.execute('E:setRoute', 'record/'+id+'/'+this.tab);
-      Neatline.vent.trigger('E:RECORD:tab:'+this.tab);
+      Neatline.vent.trigger('E:RECORD:#'+this.tab);
 
     },
 
@@ -114,7 +114,7 @@ Neatline.module('Editor.Record', function(
      * Close the form.
      */
     onCloseClick: function() {
-      Neatline.execute('RECORDS:navToList');
+      Neatline.execute('E:EXHIBIT:RECORDS:navToList');
       Neatline.vent.trigger('refresh');
       this.unbind();
     },

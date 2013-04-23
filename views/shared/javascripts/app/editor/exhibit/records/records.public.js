@@ -20,7 +20,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var display = function(container) {
     Records.__view.showIn(container);
   };
-  Neatline.commands.setHandler('RECORDS:display', display);
+  Neatline.commands.setHandler('E:EXHIBIT:RECORDS:display', display);
 
 
   /**
@@ -33,7 +33,7 @@ Neatline.module('Editor.Exhibit.Records', function(
       ingest(records);
     });
   };
-  Neatline.commands.setHandler('RECORDS:load', load);
+  Neatline.commands.setHandler('E:EXHIBIT:RECORDS:load', load);
 
 
   /**
@@ -44,7 +44,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var ingest = function(records) {
     Records.__view.ingest(records);
   };
-  Neatline.commands.setHandler('RECORDS:ingest', ingest);
+  Neatline.commands.setHandler('E:EXHIBIT:RECORDS:ingest', ingest);
 
 
   /**
@@ -53,7 +53,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var navToList = function() {
     Records.__router.navigate('records', true);
   };
-  Neatline.commands.setHandler('RECORDS:navToList', navToList);
+  Neatline.commands.setHandler('E:EXHIBIT:RECORDS:navToList', navToList);
 
 
   /**
@@ -65,7 +65,7 @@ Neatline.module('Editor.Exhibit.Records', function(
   var getModel = function(id, cb) {
     Records.__collection.getOrFetch(id, cb);
   };
-  Neatline.reqres.setHandler('RECORDS:getModel', getModel);
+  Neatline.reqres.setHandler('E:EXHIBIT:RECORDS:getModel', getModel);
 
 
 });

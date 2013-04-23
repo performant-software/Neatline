@@ -20,7 +20,7 @@ Neatline.module('Editor.Exhibit', function(
   var display = function(container) {
     Exhibit.__view.showIn(container);
   };
-  Neatline.commands.setHandler('EXHIBIT:display', display);
+  Neatline.commands.setHandler('E:EXHIBIT:display', display);
 
 
   /**
@@ -28,10 +28,10 @@ Neatline.module('Editor.Exhibit', function(
    *
    * @param {String} tab: The tab to activate.
    */
-  var activateTab = function(tab) {
+  var tab = function(tab) {
     Exhibit.__view.activateTab(tab);
   };
-  Neatline.commands.setHandler('EXHIBIT:activateTab', activateTab);
+  Neatline.commands.setHandler('E:EXHIBIT:activateTab', tab);
 
 
 });
