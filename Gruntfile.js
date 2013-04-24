@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         stdout: true
       },
 
-      bower_cache_clean: {
+      bower_clean: {
         command: 'rm -rf ~/.bower && bower cache-clean'
       },
 
@@ -345,7 +345,7 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'shell:bower_cache_clean',
+    'shell:bower_clean',
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
