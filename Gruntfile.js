@@ -112,6 +112,15 @@ module.exports = function(grunt) {
           expand: true,
           flatten: true
         }]
+      },
+
+      colorpicker: {
+        files: [{
+          src: cfg.build.colorpicker+'/images/*',
+          dest: cfg.payloads.shared.css+'/images',
+          expand: true,
+          flatten: true
+        }]
       }
 
     },
@@ -304,6 +313,7 @@ module.exports = function(grunt) {
       options: {
         helpers: [
           cfg.vendor.js.jasmine_jquery,
+          cfg.vendor.js.jasmine_async,
           cfg.vendor.js.sinon,
           cfg.jasmine+'/helpers/*.js',
           cfg.jasmine+'/assertions/*.js'

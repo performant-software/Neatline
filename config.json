@@ -28,8 +28,7 @@
     "bootstrap":          "./components/bootstrap",
     "chosen":             "./components/chosen/chosen",
     "sinon":              "./components/sinon",
-    "jquery_ui":          "./components/jquery-ui",
-    "ckeditor":           "./components/ckeditor/dev/builder"
+    "jquery_ui":          "./components/jquery-ui"
   },
 
   "vendor": {
@@ -56,6 +55,7 @@
       "ace_mode":         "./components/ace-builds/src-noconflict/mode-css.js",
       "rivets":           "./components/rivets/lib/rivets.js",
       "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
+      "jasmine_async":    "./components/jasmine.async/src/jasmine.async.js",
       "sinon":            "./components/sinon/pkg/sinon.js"
     },
 

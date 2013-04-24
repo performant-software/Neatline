@@ -27,7 +27,7 @@ Neatline.module('Editor.Record', function(
    * Show form for an existing record.
    *
    * @param {Number|String} id: The record id.
-   * @param {String} tab: The active tab.
+   * @param {String} tab: The active tab slug.
    */
   var bindId = function(id, tab) {
 
@@ -48,7 +48,7 @@ Neatline.module('Editor.Record', function(
   /**
    * Show form for a new record.
    *
-   * @param {String} tab: The active tab.
+   * @param {String} tab: The active tab slug.
    */
   var bindNew = function(tab) {
 
