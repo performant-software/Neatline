@@ -22,15 +22,16 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
 
         $record = new NeatlineRecord();
         $record->coverage = 'POINT(1 1)';
-        $record->save();
-
-        // Should set coverage.
-        $record = $this->reload($record);
-        $this->assertEquals($record->coverage, 'POINT(1 1)');
 
         // Should flip on `is_coverage`.
         $array = $record->toArrayForSave();
         $this->assertEquals($array['is_coverage'], 1);
+
+        $record->save();
+        $record = $this->reload($record);
+
+        // Should set coverage.
+        $this->assertEquals($record->coverage, 'POINT(1 1)');
 
     }
 
@@ -43,15 +44,16 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
     {
 
         $record = new NeatlineRecord();
-        $record->save();
-
-        // Should set null coverage.
-        $record = $this->reload($record);
-        $this->assertNull($record->coverage);
 
         // Should flip off `is_coverage`.
         $array = $record->toArrayForSave();
         $this->assertEquals($array['is_coverage'], 0);
+
+        $record->save();
+        $record = $this->reload($record);
+
+        // Should set null coverage.
+        $this->assertNull($record->coverage);
 
     }
 
@@ -71,20 +73,19 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
         $record->coverage     = 'POINT(1 1)';
         $record->wms_address  = 'address';
         $record->wms_layers   = 'layers';
-        $record->save();
+        $record->point_radius = 10;
 
-        // Should set uber-coverage.
-        $record = $this->reload($record);
-        $this->assertEquals($record->coverage, 'GEOMETRYCOLLECTION('.
-            'POINT(9999999 9999999),'.
-            'POINT(-9999999 9999999),'.
-            'POINT(-9999999 -9999999),'.
-            'POINT(9999999 -9999999)'.
-        ')');
-
-        // Should flip on `is_coverage`.
         $array = $record->toArrayForSave();
+
+        // Should set `is_coverage` and `point_radiius`.
         $this->assertEquals($array['is_coverage'], 1);
+        $this->assertEquals($array['point_radius'], 0);
+
+        $record->save();
+        $record = $this->reload($record);
+
+        // Should set WMS coverage.
+        $this->assertEquals($record->coverage, $this->getWmsCoverage());
 
     }
 
@@ -99,21 +100,33 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
         $record = new NeatlineRecord();
         $record->wms_address  = 'address';
         $record->wms_layers   = 'layers';
-        $record->save();
+        $record->point_radius = 10;
 
-        // Should set uber-coverage.
-        $record = $this->reload($record);
-        $this->assertEquals($record->coverage, 'GEOMETRYCOLLECTION('.
-            'POINT(9999999 9999999),'.
-            'POINT(-9999999 9999999),'.
-            'POINT(-9999999 -9999999),'.
-            'POINT(9999999 -9999999)'.
-        ')');
-
-        // Should flip on `is_coverage`.
         $array = $record->toArrayForSave();
-        $this->assertEquals($array['is_coverage'], 1);
 
+        // Should set `is_coverage` and `point_radiius`.
+        $this->assertEquals($array['is_coverage'], 1);
+        $this->assertEquals($array['point_radius'], 0);
+
+        $record->save();
+        $record = $this->reload($record);
+
+        // Should set WMS coverage.
+        $this->assertEquals($record->coverage, $this->getWmsCoverage());
+
+    }
+
+
+    /**
+     * When a WMS layer is defined and a coverage is _not_ defined, the
+     * `is_coverage` flag should be flipped back on.
+     */
+    private function getWmsCoverage()
+    {
+        return 'GEOMETRYCOLLECTION('.
+            'POINT(9999999 99999999),POINT(-9999999 99999999),'.
+            'POINT(-9999999 -99999999),POINT(9999999 -99999999)'.
+        ')';
     }
 
 

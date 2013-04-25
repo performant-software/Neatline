@@ -161,10 +161,12 @@ class NeatlineRecord extends Neatline_AbstractRow
         if ($fields['wms_address'] && $fields['wms_layers']) {
 
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('GEOMETRYCOLLECTION(
-                    POINT(9999999 9999999),   POINT(-9999999 9999999),
-                    POINT(-9999999 -9999999), POINT(9999999 -9999999)
-                )')"
+                "GeomFromText('GEOMETRYCOLLECTION(".
+                    "POINT( 9999999  99999999),".
+                    "POINT(-9999999  99999999),".
+                    "POINT(-9999999 -99999999),".
+                    "POINT( 9999999 -99999999)".
+                ")')"
             );
 
             $fields['point_radius'] = 0;
