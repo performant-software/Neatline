@@ -44,8 +44,8 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
         $record->max_zoom           = 17;
         $record->map_zoom           = 18;
         $record->map_focus          = '19';
-        $record->wms_address        = '20';
-        $record->wms_layers         = '21';
+        // $record->wms_address        = '20';
+        // $record->wms_layers         = '21';
         $record->start_date         = '22';
         $record->end_date           = '23';
         $record->show_after_date    = '24';
@@ -76,8 +76,8 @@ class NeatlineRecordTableTest_QueryRecord extends Neatline_TestCase
         $this->assertEquals($records['max_zoom'],           17);
         $this->assertEquals($records['map_zoom'],           18);
         $this->assertEquals($records['map_focus'],          '19');
-        $this->assertEquals($records['wms_address'],        '20');
-        $this->assertEquals($records['wms_layers'],         '21');
+        // $this->assertEquals($records['wms_address'],        '20');
+        // $this->assertEquals($records['wms_layers'],         '21');
         $this->assertEquals($records['start_date'],         '22');
         $this->assertEquals($records['end_date'],           '23');
         $this->assertEquals($records['show_after_date'],    '24');

@@ -615,11 +615,11 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id]
       if (!layer) layer = this.buildVectorLayer(model);
 
-      // Try to get a focus and zoom.
+      // Try to get a custom focus.
       var focus = model.get('map_focus');
       var zoom  = model.get('map_zoom');
 
-      // If defined, apply.
+      // If focus is defined, apply.
       if (_.isString(focus) && _.isNumber(zoom)) {
         this.setViewport(focus, zoom);
       }

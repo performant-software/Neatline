@@ -67,10 +67,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $record2->map_zoom          = 36;
         $record1->map_focus         = '37';
         $record2->map_focus         = '38';
-        $record1->wms_address       = '39';
-        $record2->wms_address       = '40';
-        $record1->wms_layers        = '41';
-        $record2->wms_layers        = '42';
+        // $record1->wms_address       = '39';
+        // $record2->wms_address       = '40';
+        // $record1->wms_layers        = '41';
+        // $record2->wms_layers        = '42';
         $record1->start_date        = '43';
         $record2->start_date        = '44';
         $record1->end_date          = '45';
@@ -114,8 +114,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[0]['max_zoom'],        34);
         $this->assertEquals($records[0]['map_zoom'],        36);
         $this->assertEquals($records[0]['map_focus'],       '38');
-        $this->assertEquals($records[0]['wms_address'],     '40');
-        $this->assertEquals($records[0]['wms_layers'],      '42');
+        // $this->assertEquals($records[0]['wms_address'],     '40');
+        // $this->assertEquals($records[0]['wms_layers'],      '42');
         $this->assertEquals($records[0]['start_date'],      '44');
         $this->assertEquals($records[0]['end_date'],        '46');
         $this->assertEquals($records[0]['show_after_date'], '48');
@@ -144,8 +144,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[1]['max_zoom'],        33);
         $this->assertEquals($records[1]['map_zoom'],        35);
         $this->assertEquals($records[1]['map_focus'],       '37');
-        $this->assertEquals($records[1]['wms_address'],     '39');
-        $this->assertEquals($records[1]['wms_layers'],      '41');
+        // $this->assertEquals($records[1]['wms_address'],     '39');
+        // $this->assertEquals($records[1]['wms_layers'],      '41');
         $this->assertEquals($records[1]['start_date'],      '43');
         $this->assertEquals($records[1]['end_date'],        '45');
         $this->assertEquals($records[1]['show_after_date'], '47');

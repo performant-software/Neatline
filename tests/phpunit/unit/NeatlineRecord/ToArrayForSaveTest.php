@@ -86,7 +86,12 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
 
         // Should set WMS coverage.
         $this->assertEquals($record->coverage,
-            NeatlineRecord::WMS_COVERAGE
+            'GEOMETRYCOLLECTION('.
+                'POINT(9999999 99999999),'.
+                'POINT(-9999999 99999999),'.
+                'POINT(-9999999 -99999999),'.
+                'POINT(9999999 -99999999)'.
+            ')'
         );
 
     }
@@ -115,7 +120,12 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
 
         // Should set WMS coverage.
         $this->assertEquals($record->coverage,
-            NeatlineRecord::WMS_COVERAGE
+            'GEOMETRYCOLLECTION('.
+                'POINT(9999999 99999999),'.
+                'POINT(-9999999 99999999),'.
+                'POINT(-9999999 -99999999),'.
+                'POINT(9999999 -99999999)'.
+            ')'
         );
 
     }

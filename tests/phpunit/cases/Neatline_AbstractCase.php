@@ -126,7 +126,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      *
      * @param array $data Key-value pairs.
      */
-    public function writePut($data)
+    public function writePut($data = array())
     {
 
         // Open the file.
