@@ -85,7 +85,9 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
         $record = $this->reload($record);
 
         // Should set WMS coverage.
-        $this->assertEquals($record->coverage, $this->getWmsCoverage());
+        $this->assertEquals($record->coverage,
+            NeatlineRecord::WMS_COVERAGE
+        );
 
     }
 
@@ -112,21 +114,10 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
         $record = $this->reload($record);
 
         // Should set WMS coverage.
-        $this->assertEquals($record->coverage, $this->getWmsCoverage());
+        $this->assertEquals($record->coverage,
+            NeatlineRecord::WMS_COVERAGE
+        );
 
-    }
-
-
-    /**
-     * When a WMS layer is defined and a coverage is _not_ defined, the
-     * `is_coverage` flag should be flipped back on.
-     */
-    private function getWmsCoverage()
-    {
-        return 'GEOMETRYCOLLECTION('.
-            'POINT(9999999 99999999),POINT(-9999999 99999999),'.
-            'POINT(-9999999 -99999999),POINT(9999999 -99999999)'.
-        ')';
     }
 
 

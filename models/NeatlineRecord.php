@@ -45,6 +45,9 @@ class NeatlineRecord extends Neatline_AbstractRow
     public $weight;             // INT(10) UNSIGNED NULL
 
 
+    const WMS_COVERAGE = 'GEOMETRYCOLLECTION(POINT(9999999 99999999),POINT(-9999999 99999999),POINT(-9999999 -99999999),POINT(9999999 -99999999))';
+
+
     /**
      * Set foreign keys.
      *
@@ -161,12 +164,7 @@ class NeatlineRecord extends Neatline_AbstractRow
         if ($fields['wms_address'] && $fields['wms_layers']) {
 
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('GEOMETRYCOLLECTION(".
-                    "POINT( 9999999  99999999),".
-                    "POINT(-9999999  99999999),".
-                    "POINT(-9999999 -99999999),".
-                    "POINT( 9999999 -99999999)".
-                ")')"
+                "GeomFromText('".self::WMS_COVERAGE."')"
             );
 
             $fields['point_radius'] = 0;
