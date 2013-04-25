@@ -32,35 +32,4 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_TestCase
     }
 
 
-    /**
-     * `toArrayForSave` should set `is_wms`.
-     */
-    public function testSetIsWms()
-    {
-
-        $record = new NeatlineRecord();
-
-        $record->wms_address = null;
-        $record->wms_layers = null;
-        $arr = $record->toArrayForSave();
-        $this->assertEquals($arr['is_wms'], 0);
-
-        $record->wms_address = 'address';
-        $record->wms_layers = null;
-        $arr = $record->toArrayForSave();
-        $this->assertEquals($arr['is_wms'], 0);
-
-        $record->wms_address = null;
-        $record->wms_layers = 'layers';
-        $arr = $record->toArrayForSave();
-        $this->assertEquals($arr['is_wms'], 0);
-
-        $record->wms_address = 'address';
-        $record->wms_layers = 'layers';
-        $arr = $record->toArrayForSave();
-        $this->assertEquals($arr['is_wms'], 1);
-
-    }
-
-
 }

@@ -76,7 +76,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
             `is_coverage`       TINYINT(1) NOT NULL,
-            `is_wms`            TINYINT(1) NOT NULL,
             `title`             MEDIUMTEXT NULL,
             `body`              MEDIUMTEXT NULL,
             `coverage`          GEOMETRY NOT NULL,
