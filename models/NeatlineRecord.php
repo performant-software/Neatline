@@ -141,7 +141,7 @@ class NeatlineRecord extends Neatline_AbstractRow
         // NULL value (since spatially-indexed columns have to be defined
         // as NOT NULL) and flip `is_coverage` to 0, which is used to 
         // omit these records from viewport queries without having to run
-        // the binary geometries through the `AsText` function.
+        // the geometries through the `AsText` function at query-time.
 
         else {
 
@@ -162,7 +162,7 @@ class NeatlineRecord extends Neatline_AbstractRow
 
             $fields['coverage'] = new Zend_Db_Expr(
                 "GeomFromText('GEOMETRYCOLLECTION(
-                    POINT(-9999999 9999999),  POINT(9999999 9999999),
+                    POINT(9999999 9999999),   POINT(-9999999 9999999),
                     POINT(-9999999 -9999999), POINT(9999999 -9999999)
                 )')"
             );
