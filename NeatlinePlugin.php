@@ -42,6 +42,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // ---------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
+
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `added`             TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             `modified`          TIMESTAMP NULL,
@@ -56,7 +57,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `styles`            TEXT NULL,
             `map_focus`         VARCHAR(100) NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
+
              PRIMARY KEY        (`id`)
+
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
@@ -66,6 +69,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // --------
         $sql = "CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
+
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `item_id`           INT(10) UNSIGNED NULL,
             `exhibit_id`        INT(10) UNSIGNED NULL,
@@ -99,9 +103,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `show_after_date`   VARCHAR(100) NULL,
             `show_before_date`  VARCHAR(100) NULL,
             `weight`            INT(10) UNSIGNED NULL,
+
              PRIMARY KEY        (`id`),
+             INDEX              (`item_id`, `exhibit_id`),
              FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)
+
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
         $this->_db->query($sql);
