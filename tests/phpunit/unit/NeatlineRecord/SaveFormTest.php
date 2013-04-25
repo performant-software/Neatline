@@ -16,7 +16,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
     /**
      * `saveForm` should mass assign the input array to the record.
      */
-    public function testFieldAssignment()
+    public function testAssignFields()
     {
 
         $record = $this->__record();
@@ -41,13 +41,11 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
             'max_zoom'          => '17',
             'map_zoom'          => '18',
             'map_focus'         => '19',
-            'wms_address'       => '20',
-            'wms_layers'        => '21',
-            'start_date'        => '22',
-            'end_date'          => '23',
-            'show_after_date'   => '24',
-            'show_before_date'  => '25',
-            'weight'            => '26'
+            'start_date'        => '20',
+            'end_date'          => '21',
+            'show_after_date'   => '22',
+            'show_before_date'  => '23',
+            'weight'            => '24'
         ));
 
         $this->assertEquals($record->title,             '1');
@@ -69,21 +67,19 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($record->max_zoom,          17);
         $this->assertEquals($record->map_zoom,          18);
         $this->assertEquals($record->map_focus,         '19');
-        $this->assertEquals($record->wms_address,       '20');
-        $this->assertEquals($record->wms_layers,        '21');
-        $this->assertEquals($record->start_date,        '22');
-        $this->assertEquals($record->end_date,          '23');
-        $this->assertEquals($record->show_after_date,   '24');
-        $this->assertEquals($record->show_before_date,  '25');
-        $this->assertEquals($record->weight,            26);
+        $this->assertEquals($record->start_date,        '20');
+        $this->assertEquals($record->end_date,          '21');
+        $this->assertEquals($record->show_after_date,   '22');
+        $this->assertEquals($record->show_before_date,  '23');
+        $this->assertEquals($record->weight,            24);
 
     }
 
 
     /**
-     * `saveForm` should assign the `item_id` field.
+     * `saveForm` should assign `item_id`.
      */
-    public function testItemId()
+    public function testAssignItemId()
     {
         $record = $this->__record();
         $record->saveForm(array('item_id' => '1'));
@@ -92,9 +88,21 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
 
 
     /**
+     * `saveForm` should assign `wms_address` and `wms_layers`.
+     */
+    public function testAssignWmsFields()
+    {
+        $record = $this->__record();
+        $record->saveForm(array('wms_address'=>'1', 'wms_layers'=>'2'));
+        $this->assertEquals($record->wms_address, '1');
+        $this->assertEquals($record->wms_layers, '2');
+    }
+
+
+    /**
      * Empty/whitespace strings should be set as `null`.
      */
-    public function testEmptyStringBlocking()
+    public function testBlockEmptyStrings()
     {
 
         $record = $this->__record();

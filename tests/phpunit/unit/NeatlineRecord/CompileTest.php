@@ -9,32 +9,22 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTest_Compile extends Neatline_TestCase
+class NeatlineRecordTest_CompileItem extends Neatline_TestCase
 {
 
 
     /**
-     * Register the mock script path.
+     * `compileItem` should write the "Title" element on the parent item
+     * to `title` and the full metadata output to `body`.
      */
-    public function setUp()
-    {
-        parent::setUp();
-        get_view()->addScriptPath(NL_DIR . '/tests/phpunit/mocks/tmpl');
-    }
-
-
-    /**
-     * `compile` should write the DC "Title" element on the parent item to
-     * `title` and the compiled metadata output to `body`.
-     */
-    public function testCompile()
+    public function testCompileItem()
     {
 
         $exhibit = $this->__exhibit();
         $item = $this->__item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->compile();
+        $record->compileItem();
 
         // Title and body should be set.
         $this->assertEquals($record->title, 'title');

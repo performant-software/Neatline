@@ -40,9 +40,9 @@ class FixturesTest_MapLayerRefreshing extends Neatline_FixtureCase
         $record2->added         = '2002-01-01';
         $record3->added         = '2001-01-01';
 
-        $record1->save();
-        $record2->save();
-        $record3->save();
+        $record1->__save();
+        $record2->__save();
+        $record3->__save();
 
         $this->writeFixtureFromRoute('neatline/records',
             'MapLayerRefreshing.records.regular.json'
@@ -58,9 +58,9 @@ class FixturesTest_MapLayerRefreshing extends Neatline_FixtureCase
         $record2->wms_layers    = 'layers5';
         $record3->wms_layers    = 'layers6';
 
-        $record1->save();
-        $record2->save();
-        $record3->save();
+        $record1->__save();
+        $record2->__save();
+        $record3->__save();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',

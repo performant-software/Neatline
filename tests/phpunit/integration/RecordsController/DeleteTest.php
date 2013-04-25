@@ -33,8 +33,8 @@ class RecordsControllerTest_Delete extends Neatline_TestCase
         $this->assertEquals($c2, $c1-1);
 
         // Should delete the correct record.
-        $this->assertNull($this->__records->find($record2->id));
         $this->assertNotNull($this->__records->find($record1->id));
+        $this->assertNull($this->__records->find($record2->id));
 
     }
 

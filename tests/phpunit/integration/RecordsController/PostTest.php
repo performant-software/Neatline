@@ -43,13 +43,11 @@ class RecordsControllerTest_Post extends Neatline_TestCase
             'max_zoom'          => '18',
             'map_zoom'          => '19',
             'map_focus'         => '20',
-            // 'wms_address'       => '21',
-            // 'wms_layers'        => '22',
-            'start_date'        => '23',
-            'end_date'          => '24',
-            'show_after_date'   => '25',
-            'show_before_date'  => '26',
-            'weight'            => '27'
+            'start_date'        => '21',
+            'end_date'          => '22',
+            'show_after_date'   => '23',
+            'show_before_date'  => '24',
+            'weight'            => '25'
         )));
 
         $c1 = $this->__records->count();
@@ -87,26 +85,72 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->assertEquals($record->max_zoom,          18);
         $this->assertEquals($record->map_zoom,          19);
         $this->assertEquals($record->map_focus,         '20');
-        // $this->assertEquals($record->wms_address,       '21');
-        // $this->assertEquals($record->wms_layers,        '22');
-        $this->assertEquals($record->start_date,        '23');
-        $this->assertEquals($record->end_date,          '24');
-        $this->assertEquals($record->show_after_date,   '25');
-        $this->assertEquals($record->show_before_date,  '26');
-        $this->assertEquals($record->weight,            27);
+        $this->assertEquals($record->start_date,        '21');
+        $this->assertEquals($record->end_date,          '22');
+        $this->assertEquals($record->show_after_date,   '23');
+        $this->assertEquals($record->show_before_date,  '24');
+        $this->assertEquals($record->weight,            25);
 
     }
 
 
     /**
-     * POST should return all record attributes.
+     * POST should set the `item_id` field.
      */
-    public function testReturnRecord()
+    public function testSetItemId()
+    {
+
+        $item = $this->__item();
+        $exhibit = $this->__exhibit();
+
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id'    => $exhibit->id,
+            'item_id'       => $item->id
+        )));
+
+        $this->dispatch('neatline/records');
+        $record = $this->getLastRow($this->__records);
+
+        // Should update `item_id`.
+        $this->assertEquals($record->item_id, $item->id);
+
+    }
+
+
+    /**
+     * POST should set the `wms_address` and `wms_layers` fields.
+     */
+    public function testSetWmsFields()
     {
 
         $exhibit = $this->__exhibit();
 
-        // New record data.
+        $this->request->setMethod('POST')->setRawBody(
+          Zend_Json::encode(array(
+            'exhibit_id'    => $exhibit->id,
+            'wms_address'   => '1',
+            'wms_layers'    => '2',
+        )));
+
+        $this->dispatch('neatline/records');
+        $record = $this->getLastRow($this->__records);
+
+        // Should update WMS address/layers.
+        $this->assertEquals($record->wms_address, '1');
+        $this->assertEquals($record->wms_layers, '2');
+
+    }
+
+
+    /**
+     * POST should respond with all record attributes.
+     */
+    public function testResponse()
+    {
+
+        $exhibit = $this->__exhibit();
+
         $this->request->setMethod('POST')->setRawBody(
           Zend_Json::encode(array(
             'exhibit_id' => $exhibit->id
@@ -122,30 +166,6 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         foreach (array_keys($record->toArray()) as $k) {
             $this->assertObjectHasAttribute($k, $response);
         }
-
-    }
-
-
-    /**
-     * POST should update the `item_id` field.
-     */
-    public function testItemId()
-    {
-
-        $item    = $this->__item();
-        $exhibit = $this->__exhibit();
-
-        $this->request->setMethod('POST')->setRawBody(
-          Zend_Json::encode(array(
-            'exhibit_id'    => $exhibit->id,
-            'item_id'       => $item->id
-        )));
-
-        $this->dispatch('neatline/records');
-        $record = $this->getLastRow($this->__records);
-
-        // Should update `item_id`.
-        $this->assertEquals($record->item_id, $item->id);
 
     }
 

@@ -91,10 +91,10 @@ class NeatlineRecord extends Neatline_AbstractRow
         // Otherwise, the existing styles set for the tag(s) in the CSS
         // and on other records with the tag(s) would be clobbered in the
         // next step by the current values on the record being saved.
-        // The intuition here is that adding a new tag to a record should
-        // have the effect of making the record _conform_ to the already-
-        // established styling of other records with that tag - instead of
-        // changing the other records to look like this record.
+        // The intuition here is that act of adding a new tag to a record
+        // should have the effect of making the record _conform_ to the
+        // already-established styling of other records with that tag -
+        // instead of changing the other records to look like this record.
         $newTags = nl_explode($this->tags);
         $this->pullStyles(array_diff($newTags, $oldTags));
         $this->save();
@@ -115,7 +115,8 @@ class NeatlineRecord extends Neatline_AbstractRow
 
     /**
      * Before saving, replace the raw value of `coverage` with the MySQL
-     * expression to set the `GEOMETRY` value.
+     * expression to set the `GEOMETRY` value. If `coverage` is undefined,
+     * use `POINT(0 0)` as a de facto "null" value (ignored in queries).
      *
      * @return array An array representation of the record.
      */
@@ -124,54 +125,15 @@ class NeatlineRecord extends Neatline_AbstractRow
 
         $fields = parent::toArrayForSave();
 
-        // If a coverage is defined, set it directly on the column and
-        // flip the `is_coverage` flag to 1.
-
-        if ($fields['coverage']) {
-
+        // Add the coverage.
+        if (!empty($fields['coverage'])) {
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('{$fields['coverage']}')"
-            );
-
+                "GeomFromText('{$fields['coverage']}')");
             $fields['is_coverage'] = 1;
-
-        }
-
-        // If a coverage is not defined, set `POINT(0 0`)` as a de-facto
-        // NULL value (since spatially-indexed columns have to be defined
-        // as NOT NULL) and flip `is_coverage` to 0, which is used to 
-        // omit these records from viewport queries without having to run
-        // the geometries through the `AsText` function at query-time.
-
-        else {
-
+        } else {
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('POINT(0 0)')"
-            );
-
+                "GeomFromText('POINT(0 0)')");
             $fields['is_coverage'] = 0;
-
-        }
-
-        // If the record has a defined WMS address and layer(s), override
-        // the coverage set in the first two steps with a special coverage
-        // that will _always_ be matched by viewport extent queries - four
-        // points, one in each quadrant, with arbitrarily high values.
-
-        if ($fields['wms_address'] && $fields['wms_layers']) {
-
-            $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('GEOMETRYCOLLECTION(
-                    POINT( 9999999  99999999),
-                    POINT(-9999999  99999999),
-                    POINT(-9999999 -99999999),
-                    POINT( 9999999 -99999999)
-                )')"
-            );
-
-            $fields['point_radius'] = 0;
-            $fields['is_coverage'] = 1;
-
         }
 
         return $fields;
@@ -240,9 +202,36 @@ class NeatlineRecord extends Neatline_AbstractRow
 
 
     /**
+     * If the record has a defined WMS address and layer(s), ensure that
+     * the record will always be matched by viewport queries by overriding
+     * the coverage with a special geometry that will _always_ intersect
+     * the viewport - four points, one in each quadrant, with arbitrarily
+     * high values, effectively outlining a rectangle over the whole map.
+     */
+    public function compileWms() {
+
+        // If a WMS address and layer are defined.
+        if ($this->wms_address && $this->wms_layers) {
+
+            // Set the special coverage.
+            $this->coverage = 'GEOMETRYCOLLECTION(
+                POINT( 9999999  9999999),
+                POINT(-9999999  9999999),
+                POINT(-9999999 -9999999),
+                POINT( 9999999 -9999999)
+            )';
+
+            $this->is_coverage = 1;
+
+        }
+
+    }
+
+
+    /**
      * Compile Omeka item references.
      */
-    public function compile() {
+    public function compileItem() {
 
         // Break if no parent item.
         if (is_null($this->item_id)) return;
@@ -266,28 +255,28 @@ class NeatlineRecord extends Neatline_AbstractRow
         $exhibit = $this->getExhibit();
         $tags = nl_explode($this->tags);
 
-        // Match `item-[slug]-[tag]`.
+        // `item-[slug]-[tag]`.
         foreach ($tags as $tag) { try {
             return get_view()->partial(
                 'exhibits/item-'.$exhibit->slug.'-'.$tag.'.php'
             );
         } catch (Exception $e) {}}
 
-        // Match `item-[slug]`.
+        // `item-[slug]`.
         try {
             return get_view()->partial(
                 'exhibits/item-'.$exhibit->slug.'.php'
             );
         } catch (Exception $e) {}
 
-        // Match `item-[tag]`.
+        // `item-[tag]`.
         foreach ($tags as $tag) { try {
             return get_view()->partial(
                 'exhibits/item-'.$tag.'.php'
             );
         } catch (Exception $e) {}}
 
-        // Revert to default `item`.
+        // Fall back to default `item`.
         return get_view()->partial('exhibits/item.php');
 
     }
@@ -305,7 +294,8 @@ class NeatlineRecord extends Neatline_AbstractRow
      * Compile `title` and `body` before saving.
      */
     public function save() {
-        $this->compile();
+        $this->compileWms();
+        $this->compileItem();
         parent::save();
     }
 

@@ -21,33 +21,34 @@ class RecordsControllerTest_Put extends Neatline_TestCase
 
         $record = $this->__record();
 
-        $record->title              = '1';
-        $record->body               = '2';
-        $record->coverage           = 'POINT(3 3)';
-        $record->tags               = '4';
-        $record->widgets            = '5';
-        $record->presenter          = '6';
-        $record->fill_color         = '7';
-        $record->select_color       = '8';
-        $record->stroke_color       = '9';
-        $record->fill_opacity       = 10;
-        $record->select_opacity     = 11;
-        $record->stroke_opacity     = 12;
-        $record->stroke_width       = 13;
-        $record->point_radius       = 14;
-        $record->point_image        = '15';
-        $record->min_zoom           = 16;
-        $record->max_zoom           = 17;
-        $record->map_zoom           = 18;
-        $record->map_focus          = '19';
-        $record->start_date         = '20';
-        $record->end_date           = '21';
-        $record->show_after_date    = '22';
-        $record->show_before_date   = '23';
-        $record->weight             = 24;
-        $record->save();
+        $record->setArray(array(
+            'title'             => '1',
+            'body'              => '2',
+            'coverage'          => 'POINT(3 3)',
+            'tags'              => '4',
+            'widgets'           => '5',
+            'presenter'         => '6',
+            'fill_color'        => '7',
+            'select_color'      => '8',
+            'stroke_color'      => '9',
+            'fill_opacity'      => 10,
+            'select_opacity'    => 11,
+            'stroke_opacity'    => 12,
+            'stroke_width'      => 13,
+            'point_radius'      => 14,
+            'point_image'       => '15',
+            'min_zoom'          => 16,
+            'max_zoom'          => 17,
+            'map_zoom'          => 18,
+            'map_focus'         => '19',
+            'start_date'        => '20',
+            'end_date'          => '21',
+            'show_after_date'   => '22',
+            'show_before_date'  => '23',
+            'weight'            => 24
+        ));
 
-        $values = array(
+        $this->writePut(array(
             'title'             => '27',
             'body'              => '28',
             'coverage'          => 'POINT(29 29)',
@@ -72,13 +73,11 @@ class RecordsControllerTest_Put extends Neatline_TestCase
             'show_after_date'   => '49',
             'show_before_date'  => '50',
             'weight'            => '51'
-        );
+        ));
 
-        $this->writePut($values);
         $this->dispatch('neatline/records/'.$record->id);
         $record = $this->reload($record);
 
-        // Should update fields.
         $this->assertEquals($record->title,             '27');
         $this->assertEquals($record->body,              '28');
         $this->assertEquals($record->coverage,          'POINT(29 29)');
@@ -108,34 +107,12 @@ class RecordsControllerTest_Put extends Neatline_TestCase
 
 
     /**
-     * PUT should return all record attributes.
-     */
-    public function testReturnRecord()
-    {
-
-        $exhibit = $this->__exhibit();
-        $record  = $this->__record($exhibit);
-
-        $this->writePut();
-
-        $this->dispatch('neatline/records/'.$record->id);
-        $response = $this->getResponseArray();
-
-        // Should emit all attributes.
-        foreach (array_keys($record->toArray()) as $k) {
-            $this->assertObjectHasAttribute($k, $response);
-        }
-
-    }
-
-
-    /**
      * PUT should update the `item_id` field.
      */
-    public function testItemId()
+    public function testUpdateItemId()
     {
 
-        $item   = $this->__item();
+        $item = $this->__item();
         $record = $this->__record();
 
         $this->writePut(array('item_id' => $item->id));
@@ -151,27 +128,50 @@ class RecordsControllerTest_Put extends Neatline_TestCase
     /**
      * PUT should update the `wms_address` and `wms_layers` fields.
      */
-    public function testWmsFields()
+    public function testUpdateWmsFields()
     {
 
         $record = $this->__record();
 
         $record->setArray(array(
-            'wms_address' => '1',
-            'wms_layers'  => '2'
+            'item_id'       => '1',
+            'wms_address'   => '2',
+            'wms_layers'    => '3'
         ));
 
+        $record->save();
+
         $this->writePut(array(
-            'wms_address' => '3',
-            'wms_layers'  => '4'
+            'wms_address'   => '3',
+            'wms_layers'    => '4'
         ));
 
         $this->dispatch('neatline/records/'.$record->id);
         $record = $this->reload($record);
 
-        // Should update WMS layers/address.
+        // Should update WMS address/layers.
         $this->assertEquals($record->wms_address, '3');
         $this->assertEquals($record->wms_layers, '4');
+
+    }
+
+
+    /**
+     * PUT should respond with all record attributes.
+     */
+    public function testResponse()
+    {
+
+        $record = $this->__record();
+
+        $this->writePut();
+        $this->dispatch('neatline/records/'.$record->id);
+        $response = $this->getResponseArray();
+
+        // Should emit all attributes.
+        foreach (array_keys($record->toArray()) as $k) {
+            $this->assertObjectHasAttribute($k, $response);
+        }
 
     }
 
