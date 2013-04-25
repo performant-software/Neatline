@@ -115,8 +115,7 @@ class NeatlineRecord extends Neatline_AbstractRow
 
     /**
      * Before saving, replace the raw value of `coverage` with the MySQL
-     * expression to set the `GEOMETRY` value. If `coverage` is undefined,
-     * use `POINT(0 0)` as a de facto "null" value (ignored in queries).
+     * expression to set the `GEOMETRY` value.
      *
      * @return array An array representation of the record.
      */
@@ -125,15 +124,52 @@ class NeatlineRecord extends Neatline_AbstractRow
 
         $fields = parent::toArrayForSave();
 
-        // Add the coverage.
-        if (!empty($fields['coverage'])) {
+        // If a coverage is defined, set it directly on the column and
+        // flip the `is_coverage` flag to 1.
+
+        if ($fields['coverage']) {
+
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('{$fields['coverage']}')");
+                "GeomFromText('{$fields['coverage']}')"
+            );
+
             $fields['is_coverage'] = 1;
-        } else {
+
+        }
+
+        // If a coverage is not defined, set `POINT(0 0`)` as a de-facto
+        // NULL value (since spatially-indexed columns have to be defined
+        // as NOT NULL) and flip `is_coverage` to 0, which is used to 
+        // omit these records from viewport queries without having to run
+        // the binary geometries through the `AsText` function.
+
+        else {
+
             $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('POINT(0 0)')");
+                "GeomFromText('POINT(0 0)')"
+            );
+
             $fields['is_coverage'] = 0;
+
+        }
+
+        // If the record has a defined WMS address and layer(s), override
+        // the coverage set in the first two steps with a special coverage
+        // that will _always_ be matched by viewport extent queries - four
+        // points, one in each quadrant, with arbitrarily high values.
+
+        if ($fields['wms_address'] && $fields['wms_layers']) {
+
+            $fields['coverage'] = new Zend_Db_Expr(
+                "GeomFromText('GEOMETRYCOLLECTION(
+                    POINT(-9999999 9999999),  POINT(9999999 9999999),
+                    POINT(-9999999 -9999999), POINT(9999999 -9999999)
+                )')"
+            );
+
+            $fields['point_radius'] = 0;
+            $fields['is_coverage'] = 1;
+
         }
 
         return $fields;
