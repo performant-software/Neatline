@@ -14,9 +14,9 @@ class NeatlineRecordTest_Save extends Neatline_TestCase
 
 
     /**
-     * `save` should compile the record.
+     * `save` should compile an Omeka item reference.
      */
-    public function testCompileFields()
+    public function testCompileItem()
     {
 
         $item = insert_item(array(), array(
@@ -30,7 +30,7 @@ class NeatlineRecordTest_Save extends Neatline_TestCase
         $record = $this->__record(null, $item);
         $record->save();
 
-        // Should compile record.
+        // Should compile title and body.
         $this->assertNotNull($record->title);
         $this->assertNotNull($record->body);
 
