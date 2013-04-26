@@ -41,7 +41,7 @@ describe('Map Record Focusing', function() {
       // Should not load record from server.
       expect(NL.server.requests.count).toEqual(count);
 
-      // Map should focus on record.
+      // Map should focus.
       NL.assertMapViewport(100, 200, 10);
 
     });
@@ -113,52 +113,76 @@ describe('Map Record Focusing', function() {
   });
 
 
-  it('should not focus when vector layer is clicked', function() {
+  describe('vector layers', function() {
 
-    // --------------------------------------------------------------------
-    // When a map feature is clicked, the map should _not_ focus on the
-    // record that corresponds to the clicked geometry. This is to prevent
-    // disorienting leaps that can occur when the default zoom for the
-    // clicked record is much wider or tighter than the current map zoom.
-    // --------------------------------------------------------------------
+    it('should not focus when vector layer is clicked', function() {
 
-    NL.respondMap200(NL.json.MapRecordFocusing.records);
-    var feature = NL.vw.MAP.getVectorLayers()[0].features[0];
+      // ------------------------------------------------------------------
+      // When a map feature is clicked, the map should _not_ focus on the
+      // record that corresponds to the clicked geometry. This prevents
+      // disorienting leaps that can occur when the default zoom for the
+      // clicked record is much higher or lower the current map zoom.
+      // ------------------------------------------------------------------
 
-    // Set center and zoom.
-    NL.setMapCenter(200, 300, 15);
+      NL.respondMap200(NL.json.MapRecordFocusing.records);
+      var feature = NL.vw.MAP.getVectorLayers()[0].features[0];
 
-    // Click on feature.
-    NL.clickOnMapFeature(feature);
+      // Set center and zoom.
+      NL.setMapCenter(200, 300, 15);
 
-    // Focus should be unchanged.
-    NL.assertMapViewport(200, 300, 15);
+      // Click on feature.
+      NL.clickOnMapFeature(feature);
 
-  });
+      // Focus should be unchanged.
+      NL.assertMapViewport(200, 300, 15);
 
-
-  it('should not focus for model with WMS but no focus', function() {
-
-    // --------------------------------------------------------------------
-    // When a record is selected that has a WMS layer but no defined focus
-    // or zoom, the map should _not_ focus, since the record will have the
-    // generic coverage that covers the whole map, which, when focused on,
-    // has the effect of zooming out to the lowest possible level.
-    // --------------------------------------------------------------------
-
-    // TODO
+    });
 
   });
 
 
-  it('should focus for model with WMS layer and focus', function() {
+  describe('wms layers', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is selected that has a WMS layer and a defined focus
-    // and zoom, the map should apply the defaults as usual.
-    // --------------------------------------------------------------------
+    it('should not focus for model with WMS but no focus', function() {
 
-    // TODO
+      // ------------------------------------------------------------------
+      // When a record is selected that has a WMS layer but no defined
+      // focus or zoom, the map should _not_ focus, since the record will
+      // have the generic coverage that covers the whole map, which, when
+      // focused on, has the effect of zooming out to the highest level.
+      // ------------------------------------------------------------------
+
+      // Set center and zoom.
+      NL.setMapCenter(200, 300, 15);
+
+      // Select record with WMS layer, no focus.
+      var model = NL.recordFromJson(NL.json.MapRecordFocusing.wms.noFocus);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Map should not focus.
+      NL.assertMapViewport(200, 300, 15);
+
+    });
+
+
+    it('should focus for model with WMS and focus', function() {
+
+      // ------------------------------------------------------------------
+      // When a record is selected that has a WMS layer and defined focus
+      // and zoom values, the map should apply the defaults as usual.
+      // ------------------------------------------------------------------
+
+      // Set center and zoom.
+      NL.setMapCenter(200, 300, 15);
+
+      // Select record with WMS layer and focus.
+      var model = NL.recordFromJson(NL.json.MapRecordFocusing.wms.focus);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Map should focus.
+      NL.assertMapViewport(100, 200, 10);
+
+    });
 
   });
 

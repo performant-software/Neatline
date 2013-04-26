@@ -25,7 +25,11 @@ var NL = (function(NL) {
 
       MapRecordFocusing: {
         records:      readFixtures('MapRecordFocusing.records.json'),
-        record:       readFixtures('MapRecordFocusing.record.json')
+        record:       readFixtures('MapRecordFocusing.record.json'),
+        wms: {
+          noFocus:    readFixtures('MapRecordFocusing.wms.noFocus.json'),
+          focus:      readFixtures('MapRecordFocusing.wms.focus.json')
+        }
       },
 
       MapRecordIngesting: {

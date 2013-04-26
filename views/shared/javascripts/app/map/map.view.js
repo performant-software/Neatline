@@ -625,7 +625,7 @@ Neatline.module('Map', function(
       }
 
       // Otherwise, fit to viewport.
-      else if (model.get('coverage')) {
+      else if (model.get('coverage') && !model.get('is_wms')) {
         this.map.zoomToExtent(layer.getDataExtent());
       }
 
