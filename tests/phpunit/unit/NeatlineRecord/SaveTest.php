@@ -30,9 +30,30 @@ class NeatlineRecordTest_Save extends Neatline_TestCase
         $record = $this->__record(null, $item);
         $record->save();
 
-        // Should compile title and body.
+        // Should compile `title` and `body`.
         $this->assertNotNull($record->title);
         $this->assertNotNull($record->body);
+
+    }
+
+
+    /**
+     * `save` should compile the coverage when a WMS layer is defined.
+     */
+    public function testCompileWms()
+    {
+
+        $record = new NeatlineRecord();
+        $record->setArray(array(
+            'wms_address'   => 'address',
+            'wms_layers'    => 'layers'
+        ));
+
+        $record->save();
+
+        // Should `is_coverage` and `coverage`.
+        $this->assertEquals($record->is_coverage, 1);
+        $this->assertNotNull($record->coverage);
 
     }
 
