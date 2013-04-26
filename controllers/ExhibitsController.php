@@ -19,14 +19,14 @@ class Neatline_ExhibitsController extends Neatline_RestController
     public function init()
     {
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
-        $this->_table = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
         $this->_browseRecordsPerPage = get_option('per_page_admin');
     }
 
 
     /**
      * Update exhibit via PUT.
-     * @backbone
+     * @REST
      */
     public function putAction()
     {
@@ -47,13 +47,17 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
     /**
      * Load exhibit via GET.
-     * @backbone
+     * @REST
      */
     public function getAction()
     {
+
         $this->_helper->viewRenderer->setNoRender(true);
+
+        // Load and emit the exhibit.
         $exhibit = $this->_helper->db->findById();
         echo Zend_Json::encode($exhibit->toArray());
+
     }
 
 
@@ -146,7 +150,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function showAction()
     {
-        $exhibit = $this->_table->findBySlug($this->_request->slug);
+        $exhibit = $this->exhibits->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
     }
 

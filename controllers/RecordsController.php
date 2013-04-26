@@ -26,6 +26,7 @@ class Neatline_RecordsController extends Neatline_RestController
 
     /**
      * Get a collection of records.
+     * @REST
      */
     public function listAction()
     {
@@ -43,6 +44,7 @@ class Neatline_RecordsController extends Neatline_RestController
 
     /**
      * Get an individual record.
+     * @REST
      */
     public function getAction()
     {
@@ -54,6 +56,7 @@ class Neatline_RecordsController extends Neatline_RestController
 
     /**
      * Create a record.
+     * @REST
      */
     public function postAction()
     {
@@ -72,6 +75,7 @@ class Neatline_RecordsController extends Neatline_RestController
 
     /**
      * Update a record.
+     * @REST
      */
     public function putAction()
     {
@@ -92,6 +96,7 @@ class Neatline_RecordsController extends Neatline_RestController
 
     /**
      * Delete a record.
+     * @REST
      */
     public function deleteAction()
     {
