@@ -113,7 +113,7 @@ describe('Map Record Focusing', function() {
   });
 
 
-  it('should not focus map when vector layer is clicked', function() {
+  it('should not focus when vector layer is clicked', function() {
 
     // --------------------------------------------------------------------
     // When a map feature is clicked, the map should _not_ focus on the
@@ -133,6 +133,32 @@ describe('Map Record Focusing', function() {
 
     // Focus should be unchanged.
     NL.assertMapViewport(200, 300, 15);
+
+  });
+
+
+  it('should not focus for model with WMS but no focus', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is selected that has a WMS layer but no defined focus
+    // or zoom, the map should _not_ focus, since the record will have the
+    // generic coverage that covers the whole map, which, when focused on,
+    // has the effect of zooming out to the lowest possible level.
+    // --------------------------------------------------------------------
+
+    // TODO
+
+  });
+
+
+  it('should focus for model with WMS layer and focus', function() {
+
+    // --------------------------------------------------------------------
+    // When a record is selected that has a WMS layer and a defined focus
+    // and zoom, the map should apply the defaults as usual.
+    // --------------------------------------------------------------------
+
+    // TODO
 
   });
 
