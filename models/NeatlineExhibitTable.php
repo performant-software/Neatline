@@ -9,8 +9,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibitTable extends Omeka_Db_Table
+class NeatlineExhibitTable extends Neatline_ExpandableTable
 {
+
+
+    /**
+     * Gather expansion tables.
+     *
+     * @return array The tables.
+     */
+    public function getExpansionTables()
+    {
+        return apply_filters('neatline_exhibit_expansions', array());
+    }
 
 
     /**

@@ -96,6 +96,7 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
     {
 
         $table = $this->getTable();
+        $valid = $table->getColumns();
         $db = $table->getAdapter();
 
         $cols = array();
@@ -103,22 +104,31 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
         $bind = array();
         $set  = array();
 
-        // Build column and value arrays.
+        // Build column / value arrays.
         foreach ($values as $col => $val) {
+
+            // Pass if column doesn't exist.
+            if (!in_array($col, $valid)) continue;
+
+            // Register the column.
             $cols[] = $db->quoteIdentifier($col, true);
+
+            // Register the value.
             if ($val instanceof Zend_Db_Expr) {
                 $vals[] = $val->__toString();
             } else {
                 $vals[] = '?';
                 $bind[] = $val;
             }
+
         }
 
-        // Build update assignments.
+        // Build set array.
         foreach ($cols as $i => $col) {
             $set[] = sprintf('%s = %s', $col, $vals[$i]);
         }
 
+        // Build the query.
         $sql = sprintf(
             "INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s;",
             $db->quoteIdentifier($table->getTableName(), true),
