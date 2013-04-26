@@ -344,6 +344,31 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
 
 
     /**
+     * When a WMS address and layer(s) are defined on a record, the record
+     * should always be matched by extent queries.
+     */
+    public function testExtentFilterWmsLayerInclusion()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record = $this->__record($exhibit);
+        $record->wms_address = 'address';
+        $record->wms_layers = 'layers';
+
+        $record->save();
+
+        // WMS layer should be included.
+        $result = $this->__records->queryRecords($exhibit,
+            array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))')
+        );
+
+        $this->assertEquals($result['records'][0]['id'], $record->id);
+        $this->assertCount(1, $result['records']);
+
+    }
+
+
+    /**
      * `queryRecords` should filter on a search query.
      */
     public function testKeywordsFilter()
