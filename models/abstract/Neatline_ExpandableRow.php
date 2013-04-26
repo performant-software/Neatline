@@ -12,4 +12,28 @@
 abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
 {
 
+
+    /**
+     * Update expansions after saving.
+     *
+     * @param boolean $throwIfInvalid
+     */
+    public function save($throwIfInvalid = true)
+    {
+
+        parent::save($throwIfInvalid);
+
+        // Gather expansion tables.
+        $expansions = $this->getTable()->getExpansionTables();
+        if (!$expansions) return;
+
+        // Create or update expansions.
+        foreach ($expansions as $expansion) {
+            $row = $expansion->getOrCreate($this);
+            $row->setArray($this->toArrayForSave());
+            $row->save();
+        }
+
+    }
+
 }

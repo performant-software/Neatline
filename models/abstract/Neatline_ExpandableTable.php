@@ -30,15 +30,26 @@ abstract class Neatline_ExpandableTable extends Omeka_Db_Table
     {
 
         $select = parent::getSelect();
+
+        // Gather expansion tables.
+        $expansions = $this->getExpansionTables();
+        if (!$expansions) return $select;
+
+        // Get the table alias.
         $alias = $this->getTableAlias();
 
-        // Left join each of the expansions.
-        foreach ($this->getExpansionTables() as $expansion) {
+        // Left join the expansions.
+        foreach ($expansions as $expansion) {
+
             $eAlias = $expansion->getTableAlias();
             $eName  = $expansion->getTableName();
-            $select->joinLeft(array($eAlias => $eName),
-                "$alias.id = $eAlias.record_id"
+
+            $select->joinLeft(
+                array($eAlias => $eName),
+                "$alias.id = $eAlias.parent_id",
+                array()
             );
+
         }
 
         return $select;
