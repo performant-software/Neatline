@@ -202,11 +202,11 @@ class NeatlineRecord extends Neatline_AbstractRow
 
 
     /**
-     * If the record has a defined WMS address and layer(s), ensure that
-     * the record will always be matched by viewport queries by overriding
-     * the coverage with a special geometry that will _always_ intersect
-     * the viewport - four points, one in each quadrant, with arbitrarily
-     * high values, effectively outlining a rectangle over the whole map.
+     * If the record has a defined WMS address and layer, ensure that the
+     * record will always be matched by viewport queries by overriding the
+     * coverage with a special geometry that will _always_ intersect the
+     * viewport - four points, one in each quadrant, with arbitrarily high
+     * values, effectively outlining a rectangle over the entire map.
      */
     public function compileWms() {
 
@@ -229,7 +229,7 @@ class NeatlineRecord extends Neatline_AbstractRow
 
 
     /**
-     * Compile Omeka item references.
+     * Compile the Omeka item reference, if one exists.
      */
     public function compileItem() {
 
@@ -283,7 +283,7 @@ class NeatlineRecord extends Neatline_AbstractRow
 
 
     /**
-     * Expose unmodified save (used for testing).
+     * Alias unmodified save (used for testing).
      */
     public function __save() {
         parent::save();
@@ -291,7 +291,7 @@ class NeatlineRecord extends Neatline_AbstractRow
 
 
     /**
-     * Compile `title` and `body` before saving.
+     * Compile the item reference and WMS coverage.
      */
     public function save() {
         $this->compileWms();

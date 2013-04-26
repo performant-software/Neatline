@@ -26,7 +26,7 @@ class NeatlineRecordTest_CompileItem extends Neatline_TestCase
         $record = new NeatlineRecord($exhibit, $item);
         $record->compileItem();
 
-        // Title and body should be set.
+        // `title` and `body` should be set.
         $this->assertEquals($record->title, 'title');
         $this->assertEquals($record->body, $record->getItemBody());
 
