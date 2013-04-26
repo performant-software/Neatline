@@ -20,115 +20,121 @@ var NL = (function(NL) {
     this.json = {
 
       MapOutgoingEvents: {
-        records:    readFixtures('MapOutgoingEvents.records.json')
+        records:      readFixtures('MapOutgoingEvents.records.json')
       },
 
       MapRecordFocusing: {
-        records:    readFixtures('MapRecordFocusing.records.json'),
-        record:     readFixtures('MapRecordFocusing.record.json')
+        records:      readFixtures('MapRecordFocusing.records.json'),
+        record:       readFixtures('MapRecordFocusing.record.json')
       },
 
       MapRecordIngesting: {
         records: {
-          one:      readFixtures('MapRecordIngesting.records.one.json'),
-          two:      readFixtures('MapRecordIngesting.records.two.json')
+          one:        readFixtures('MapRecordIngesting.records.one.json'),
+          two:        readFixtures('MapRecordIngesting.records.two.json')
         }
       },
 
       MapVectorLayers: {
         records: {
-          regular:  readFixtures('MapVectorLayers.records.regular.json'),
-          deleted:  readFixtures('MapVectorLayers.records.deleted.json'),
-          styles:   readFixtures('MapVectorLayers.records.styles.json')
+          regular:    readFixtures('MapVectorLayers.records.regular.json'),
+          deleted:    readFixtures('MapVectorLayers.records.deleted.json'),
+          styles:     readFixtures('MapVectorLayers.records.styles.json')
         }
       },
 
       MapWmsLayers: {
         records: {
-          regular:  readFixtures('MapWmsLayers.records.regular.json'),
-          deleted:  readFixtures('MapWmsLayers.records.deleted.json')
+          regular:    readFixtures('MapWmsLayers.records.regular.json'),
+          deleted:    readFixtures('MapWmsLayers.records.deleted.json')
         }
       },
 
       MapLayerRefreshing: {
         records: {
-          regular:  readFixtures('MapLayerRefreshing.records.regular.json'),
-          changed:  readFixtures('MapLayerRefreshing.records.changed.json')
+          vector: {
+            regular:  readFixtures('MapLayerRefreshing.records.vector.regular.json'),
+            changed:  readFixtures('MapLayerRefreshing.records.vector.changed.json')
+          },
+          wms: {
+            regular:  readFixtures('MapLayerRefreshing.records.wms.regular.json'),
+            changed:  readFixtures('MapLayerRefreshing.records.wms.changed.json')
+          }
         }
       },
 
       MapLayerFiltering: {
         records: {
-          regular:  readFixtures('MapLayerFiltering.records.regular.json'),
-          deleted:  readFixtures('MapLayerFiltering.records.deleted.json')
+          regular:    readFixtures('MapLayerFiltering.records.regular.json'),
+          deleted:    readFixtures('MapLayerFiltering.records.deleted.json')
         }
       },
 
       MapEditLayer: {
         records: {
-          regular:  readFixtures('MapEditLayer.records.regular.json'),
-          deleted:  readFixtures('MapEditLayer.records.deleted.json')
+          regular:    readFixtures('MapEditLayer.records.regular.json'),
+          deleted:    readFixtures('MapEditLayer.records.deleted.json')
         }
       },
 
       StaticBubble: {
-        records:    readFixtures('StaticBubble.records.json')
+        records:      readFixtures('StaticBubble.records.json')
       },
 
       RecordForm: {
-        record:     readFixtures('RecordForm.record.json'),
-        records:    readFixtures('RecordForm.records.json')
+        record:       readFixtures('RecordForm.record.json'),
+        records:      readFixtures('RecordForm.records.json')
       },
 
       RecordFormAdd: {
-        records:    readFixtures('RecordFormAdd.records.json'),
-        record:     readFixtures('RecordFormAdd.record.json')
+        records:      readFixtures('RecordFormAdd.records.json'),
+        record:       readFixtures('RecordFormAdd.record.json')
       },
 
       RecordFormOpen: {
-        records:    readFixtures('RecordFormOpen.records.json')
+        records:      readFixtures('RecordFormOpen.records.json')
       },
 
       RecordFormClose: {
-        records:    readFixtures('RecordFormClose.records.json'),
-        record:     readFixtures('RecordFormClose.record.json')
+        records:      readFixtures('RecordFormClose.records.json'),
+        record:       readFixtures('RecordFormClose.record.json')
       },
 
       RecordsList: {
         records: {
-          regular:  readFixtures('RecordsList.records.regular.json'),
-          html:     readFixtures('RecordsList.records.html.json'),
-          empty:    readFixtures('RecordsList.records.empty.json')
+          regular:    readFixtures('RecordsList.records.regular.json'),
+          html:       readFixtures('RecordsList.records.html.json'),
+          empty:      readFixtures('RecordsList.records.empty.json')
         }
       },
 
       RecordsPagination: {
         records: {
-          p12:      readFixtures('RecordsPagination.records.p12.json'),
-          p23:      readFixtures('RecordsPagination.records.p23.json'),
-          p34:      readFixtures('RecordsPagination.records.p34.json'),
-          p56:      readFixtures('RecordsPagination.records.p56.json'),
-          p6:       readFixtures('RecordsPagination.records.p6.json')
+          p12:        readFixtures('RecordsPagination.records.p12.json'),
+          p23:        readFixtures('RecordsPagination.records.p23.json'),
+          p34:        readFixtures('RecordsPagination.records.p34.json'),
+          p56:        readFixtures('RecordsPagination.records.p56.json'),
+          p6:         readFixtures('RecordsPagination.records.p6.json')
         }
       },
 
       SearchInit: {
-        records:    readFixtures('SearchInit.records.json')
+        records:      readFixtures('SearchInit.records.json')
       },
 
       SearchMapMirror: {
         records: {
-          list:     readFixtures('SearchMapMirror.records.list.json'),
-          map:      readFixtures('SearchMapMirror.records.map.json')
+          list:       readFixtures('SearchMapMirror.records.list.json'),
+          map:        readFixtures('SearchMapMirror.records.map.json')
         }
       },
 
       SearchQuery: {
-        records:    readFixtures('SearchQuery.records.json')
+        records:      readFixtures('SearchQuery.records.json')
       },
 
       Styles: {
-        exhibit:    readFixtures('Styles.exhibit.json')
+        exhibit:      readFixtures('Styles.exhibit.json')
       }
 
     };
@@ -136,7 +142,7 @@ var NL = (function(NL) {
     this.xml = {
 
       RecordFormText: {
-        items:      readFixtures('RecordFormText.items.xml')
+        items:        readFixtures('RecordFormText.items.xml')
       }
 
     };

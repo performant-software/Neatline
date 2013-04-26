@@ -16,15 +16,15 @@ describe('Map Layer Refreshing', function() {
   });
 
 
-  it('should clear and rebuild all layers', function() {
+  it('should clear and rebuild vector layers', function() {
 
     // --------------------------------------------------------------------
     // The `MAP:refresh` command should completely wipe out all existing
-    // layers and reload records for the current viewport focus.
+    // vector layers and reload records for the current viewport focus.
     // --------------------------------------------------------------------
 
     // Load default layers.
-    NL.refreshMap(NL.json.MapLayerRefreshing.records.regular);
+    NL.refreshMap(NL.json.MapLayerRefreshing.records.vector.regular);
 
     // Should manifest original vector data.
     var layers = NL.vw.MAP.getVectorLayers();
@@ -35,6 +35,35 @@ describe('Map Layer Refreshing', function() {
     expect(layers[2].features[0].geometry.x).toEqual(5);
     expect(layers[2].features[0].geometry.y).toEqual(6);
     NL.assertVectorLayerCount(3);
+
+    Neatline.vent.trigger('refresh');
+
+    // Respond with changed coverage data.
+    NL.respondLast200(NL.json.MapLayerRefreshing.records.vector.changed);
+    var layers = NL.vw.MAP.getVectorLayers();
+
+    // Should manifest changed vector data.
+    var layers = NL.vw.MAP.getVectorLayers();
+    expect(layers[0].features[0].geometry.x).toEqual(7);
+    expect(layers[0].features[0].geometry.y).toEqual(8);
+    expect(layers[1].features[0].geometry.x).toEqual(9);
+    expect(layers[1].features[0].geometry.y).toEqual(10);
+    expect(layers[2].features[0].geometry.x).toEqual(11);
+    expect(layers[2].features[0].geometry.y).toEqual(12);
+    NL.assertVectorLayerCount(3);
+
+  });
+
+
+  it('should clear and rebuild WMS layers', function() {
+
+    // --------------------------------------------------------------------
+    // The `MAP:refresh` command should completely wipe out all existing
+    // WMS layers and reload records for the current viewport focus.
+    // --------------------------------------------------------------------
+
+    // Load default layers.
+    NL.refreshMap(NL.json.MapLayerRefreshing.records.wms.regular);
 
     // Should manifest original WMS data.
     var layers = NL.vw.MAP.getWmsLayers();
@@ -49,18 +78,8 @@ describe('Map Layer Refreshing', function() {
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(NL.json.MapLayerRefreshing.records.changed);
+    NL.respondLast200(NL.json.MapLayerRefreshing.records.wms.changed);
     var layers = NL.vw.MAP.getVectorLayers();
-
-    // Should manifest changed vector data.
-    var layers = NL.vw.MAP.getVectorLayers();
-    expect(layers[0].features[0].geometry.x).toEqual(7);
-    expect(layers[0].features[0].geometry.y).toEqual(8);
-    expect(layers[1].features[0].geometry.x).toEqual(9);
-    expect(layers[1].features[0].geometry.y).toEqual(10);
-    expect(layers[2].features[0].geometry.x).toEqual(11);
-    expect(layers[2].features[0].geometry.y).toEqual(12);
-    NL.assertVectorLayerCount(3);
 
     // Should manifest changed WMS data.
     var layers = NL.vw.MAP.getWmsLayers();
@@ -75,20 +94,20 @@ describe('Map Layer Refreshing', function() {
   });
 
 
-  it('should not rebuild frozen layers', function() {
+  it('should not rebuild frozen vector layers', function() {
 
     // --------------------------------------------------------------------
     // `MAP:refresh` should exclude frozen vector layers from refresh.
     // --------------------------------------------------------------------
 
     // Load default layers, freeze layer 2.
-    NL.refreshMap(NL.json.MapLayerRefreshing.records.regular);
+    NL.refreshMap(NL.json.MapLayerRefreshing.records.vector.regular);
     NL.getVectorLayer('title2').nFrozen = true;
 
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(NL.json.MapLayerRefreshing.records.changed);
+    NL.respondLast200(NL.json.MapLayerRefreshing.records.vector.changed);
     var layer = NL.getVectorLayer('title2');
 
     // Should not change layer 2 geometry.
