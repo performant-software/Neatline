@@ -152,11 +152,14 @@ describe('Map Record Focusing', function() {
       // focused on, has the effect of zooming out to the highest level.
       // ------------------------------------------------------------------
 
+      var model = NL.recordFromJson(
+        NL.json.MapRecordFocusing.wms.noFocus
+      );
+
       // Set center and zoom.
       NL.setMapCenter(200, 300, 15);
 
       // Select record with WMS layer, no focus.
-      var model = NL.recordFromJson(NL.json.MapRecordFocusing.wms.noFocus);
       Neatline.vent.trigger('select', { model: model });
 
       // Map should not focus.
@@ -172,11 +175,14 @@ describe('Map Record Focusing', function() {
       // and zoom values, the map should apply the defaults as usual.
       // ------------------------------------------------------------------
 
+      var model = NL.recordFromJson(
+        NL.json.MapRecordFocusing.wms.focus
+      );
+
       // Set center and zoom.
       NL.setMapCenter(200, 300, 15);
 
       // Select record with WMS layer and focus.
-      var model = NL.recordFromJson(NL.json.MapRecordFocusing.wms.focus);
       Neatline.vent.trigger('select', { model: model });
 
       // Map should focus.
