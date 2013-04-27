@@ -25,11 +25,7 @@ var NL = (function(NL) {
 
       MapRecordFocusing: {
         records:      readFixtures('MapRecordFocusing.records.json'),
-        record:       readFixtures('MapRecordFocusing.record.json'),
-        wms: {
-          noFocus:    readFixtures('MapRecordFocusing.wms.noFocus.json'),
-          focus:      readFixtures('MapRecordFocusing.wms.focus.json')
-        }
+        record:       readFixtures('MapRecordFocusing.record.json')
       },
 
       MapRecordIngesting: {
@@ -43,7 +39,8 @@ var NL = (function(NL) {
         records: {
           regular:    readFixtures('MapVectorLayers.records.regular.json'),
           deleted:    readFixtures('MapVectorLayers.records.deleted.json'),
-          styles:     readFixtures('MapVectorLayers.records.styles.json')
+          styles:     readFixtures('MapVectorLayers.records.styles.json'),
+          focusing:   readFixtures('MapVectorLayers.records.focusing.json')
         }
       },
 
@@ -51,6 +48,10 @@ var NL = (function(NL) {
         records: {
           regular:    readFixtures('MapWmsLayers.records.regular.json'),
           deleted:    readFixtures('MapWmsLayers.records.deleted.json')
+        },
+        record: {
+          noFocus:    readFixtures('MapWmsLayers.record.noFocus.json'),
+          focus:      readFixtures('MapWmsLayers.record.focus.json')
         }
       },
 

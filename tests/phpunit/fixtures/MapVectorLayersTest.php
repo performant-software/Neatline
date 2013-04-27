@@ -82,4 +82,26 @@ class FixturesTest_MapVectorLayers extends Neatline_FixtureCase
     }
 
 
+    /**
+     * `MapVectorLayers.records.focusing.json`
+     */
+    public function testFocusing()
+    {
+
+        $record = $this->__record($this->exhibit);
+
+        $record->setArray(array(
+            'map_focus' => '100,200',
+            'map_zoom'  => 10
+        ));
+
+        $record->save();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'MapVectorLayers.records.focusing.json'
+        );
+
+    }
+
+
 }

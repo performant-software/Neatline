@@ -24,7 +24,7 @@ abstract class Neatline_ExpansionRow extends Neatline_AbstractRow
     public function __construct($parent)
     {
         parent::__construct();
-        if (!is_null($record)) $this->parent_id = $parent->id;
+        if (!is_null($parent)) $this->parent_id = $parent->id;
     }
 
 

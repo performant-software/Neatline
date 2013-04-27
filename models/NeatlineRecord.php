@@ -17,8 +17,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $exhibit_id;         // INT(10) UNSIGNED NULL
     public $added;              // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;           // TIMESTAMP NULL
-    public $is_coverage;        // TINYINT(1) NOT NULL
-    public $is_wms;             // TINYINT(1) NOT NULL
+    public $is_coverage;        // TINYINT(1) NULL
+    public $is_wms;             // TINYINT(1) NULL
     public $title;              // MEDIUMTEXT NULL
     public $body;               // MEDIUMTEXT NULL
     public $coverage;           // GEOMETRY NOT NULL

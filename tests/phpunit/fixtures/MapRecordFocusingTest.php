@@ -45,39 +45,4 @@ class FixturesTest_MapRecordFocusing extends Neatline_FixtureCase
     }
 
 
-    /**
-     * `MapRecordFocusing.wms.noFocus.json`
-     * `MapRecordFocusing.wms.focus.json`
-     */
-    public function testWmsFocusing()
-    {
-
-        $record = new NeatlineRecord();
-
-        $record->setArray(array(
-            'wms_address' => 'address',
-            'wms_layers'  => 'layers'
-        ));
-
-        $record->save();
-
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'MapRecordFocusing.wms.noFocus.json'
-        );
-
-        $record->setArray(array(
-            'map_focus' => '100,200',
-            'map_zoom'  => 10
-        ));
-
-        $record->save();
-
-        $this->resetResponse();
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'MapRecordFocusing.wms.focus.json'
-        );
-
-    }
-
-
 }

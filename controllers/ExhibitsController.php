@@ -54,7 +54,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
         $this->_helper->viewRenderer->setNoRender(true);
 
-        // Load and emit the exhibit.
+        // Query and emit the exhibit.
         $exhibit = $this->_helper->db->findById();
         echo Zend_Json::encode($exhibit->toArray());
 
