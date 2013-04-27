@@ -43,8 +43,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
             'map_focus'         => '19',
             'start_date'        => '20',
             'end_date'          => '21',
-            'show_after_date'   => '22',
-            'show_before_date'  => '23',
+            'after_date'        => '22',
+            'before_date'       => '23',
             'weight'            => '24'
         ));
 
@@ -69,8 +69,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($record->map_focus,         '19');
         $this->assertEquals($record->start_date,        '20');
         $this->assertEquals($record->end_date,          '21');
-        $this->assertEquals($record->show_after_date,   '22');
-        $this->assertEquals($record->show_before_date,  '23');
+        $this->assertEquals($record->after_date,        '22');
+        $this->assertEquals($record->before_date,       '23');
         $this->assertEquals($record->weight,            24);
 
     }

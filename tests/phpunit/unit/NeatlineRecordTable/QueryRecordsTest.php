@@ -75,10 +75,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $record2->start_date        = '44';
         $record1->end_date          = '45';
         $record2->end_date          = '46';
-        $record1->show_after_date   = '47';
-        $record2->show_after_date   = '48';
-        $record1->show_before_date  = '49';
-        $record2->show_before_date  = '50';
+        $record1->after_date        = '47';
+        $record2->after_date        = '48';
+        $record1->before_date       = '49';
+        $record2->before_date       = '50';
         $record1->weight            = 51;
         $record2->weight            = 52;
 
@@ -118,8 +118,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[0]['wms_layers'],      '42');
         $this->assertEquals($records[0]['start_date'],      '44');
         $this->assertEquals($records[0]['end_date'],        '46');
-        $this->assertEquals($records[0]['show_after_date'], '48');
-        $this->assertEquals($records[0]['show_before_date'],'50');
+        $this->assertEquals($records[0]['after_date'],      '48');
+        $this->assertEquals($records[0]['before_date'],     '50');
         $this->assertEquals($records[0]['weight'],          52);
 
         // Record 1:
@@ -148,8 +148,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $this->assertEquals($records[1]['wms_layers'],      '41');
         $this->assertEquals($records[1]['start_date'],      '43');
         $this->assertEquals($records[1]['end_date'],        '45');
-        $this->assertEquals($records[1]['show_after_date'], '47');
-        $this->assertEquals($records[1]['show_before_date'],'49');
+        $this->assertEquals($records[1]['after_date'],      '47');
+        $this->assertEquals($records[1]['before_date'],     '49');
         $this->assertEquals($records[1]['weight'],          51);
 
     }

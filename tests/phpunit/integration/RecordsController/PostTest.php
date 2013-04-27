@@ -45,8 +45,8 @@ class RecordsControllerTest_Post extends Neatline_TestCase
             'map_focus'         => '20',
             'start_date'        => '21',
             'end_date'          => '22',
-            'show_after_date'   => '23',
-            'show_before_date'  => '24',
+            'after_date'        => '23',
+            'before_date'       => '24',
             'weight'            => '25'
         )));
 
@@ -87,8 +87,8 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->assertEquals($record->map_focus,         '20');
         $this->assertEquals($record->start_date,        '21');
         $this->assertEquals($record->end_date,          '22');
-        $this->assertEquals($record->show_after_date,   '23');
-        $this->assertEquals($record->show_before_date,  '24');
+        $this->assertEquals($record->after_date,        '23');
+        $this->assertEquals($record->before_date,       '24');
         $this->assertEquals($record->weight,            25);
 
     }

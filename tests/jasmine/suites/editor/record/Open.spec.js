@@ -158,8 +158,8 @@ describe('Record Form Open', function() {
     expect(inputs.wmsLayers).       toHaveValue('14');
     expect(inputs.minZoom).         toHaveValue('15');
     expect(inputs.maxZoom).         toHaveValue('16');
-    expect(inputs.showAfterDate).   toHaveValue('17');
-    expect(inputs.showBeforeDate).  toHaveValue('18');
+    expect(inputs.afterDate).       toHaveValue('17');
+    expect(inputs.beforeDate).      toHaveValue('18');
     expect(inputs.mapFocus).        toHaveValue('19');
     expect(inputs.mapZoom).         toHaveValue('20');
 

@@ -45,8 +45,8 @@ class FixturesTest_RecordForm extends Neatline_FixtureCase
             'wms_layers'        => '14',
             'min_zoom'          => 15,
             'max_zoom'          => 16,
-            'show_after_date'   => '17',
-            'show_before_date'  => '18',
+            'after_date'        => '17',
+            'before_date'       => '18',
             'map_focus'         => '19',
             'map_zoom'          => 20 
         ));

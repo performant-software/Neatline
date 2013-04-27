@@ -56,8 +56,8 @@ var NL = (function(NL) {
       wmsLayers:      form.$('input[name="wms-layers"]'),
       minZoom:        form.$('input[name="min-zoom"]'),
       maxZoom:        form.$('input[name="max-zoom"]'),
-      showAfterDate:  form.$('input[name="show-after-date"]'),
-      showBeforeDate: form.$('input[name="show-before-date"]'),
+      afterDate:      form.$('input[name="after-date"]'),
+      beforeDate:     form.$('input[name="before-date"]'),
       mapFocus:       form.$('input[name="map-focus"]'),
       mapZoom:        form.$('input[name="map-zoom"]')
     };

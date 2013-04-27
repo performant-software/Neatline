@@ -100,8 +100,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `wms_layers`        VARCHAR(100) NULL,
             `start_date`        VARCHAR(100) NULL,
             `end_date`          VARCHAR(100) NULL,
-            `show_after_date`   VARCHAR(100) NULL,
-            `show_before_date`  VARCHAR(100) NULL,
+            `after_date`        VARCHAR(100) NULL,
+            `before_date`       VARCHAR(100) NULL,
             `weight`            INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`),
@@ -246,8 +246,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             'wms_layers',
             'start_date',
             'end_date',
-            'show_after_date',
-            'show_before_date',
+            'after_date',
+            'before_date',
             'weight'
         ));
     }

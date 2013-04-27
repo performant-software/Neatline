@@ -42,8 +42,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $wms_layers;         // VARCHAR(100) NULL
     public $start_date;         // VARCHAR(100) NULL
     public $end_date;           // VARCHAR(100) NULL
-    public $show_after_date;    // VARCHAR(100) NULL
-    public $show_before_date;   // VARCHAR(100) NULL
+    public $after_date;         // VARCHAR(100) NULL
+    public $before_date;        // VARCHAR(100) NULL
     public $weight;             // INT(10) UNSIGNED NULL
 
 

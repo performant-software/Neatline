@@ -60,8 +60,8 @@ describe('Record Form Save', function() {
     inputs.wmsLayers.       val('19').          trigger('change');
     inputs.minZoom.         val('20').          trigger('change');
     inputs.maxZoom.         val('21').          trigger('change');
-    inputs.showAfterDate.   val('22').          trigger('change');
-    inputs.showBeforeDate.  val('23').          trigger('change');
+    inputs.afterDate.       val('22').          trigger('change');
+    inputs.beforeDate.      val('23').          trigger('change');
     inputs.mapFocus.        val('24').          trigger('change');
     inputs.mapZoom.         val('25').          trigger('change');
 
@@ -99,8 +99,8 @@ describe('Record Form Save', function() {
     expect(params.wms_layers).        toEqual('19');
     expect(params.min_zoom).          toEqual('20');
     expect(params.max_zoom).          toEqual('21');
-    expect(params.show_after_date).   toEqual('22');
-    expect(params.show_before_date).  toEqual('23');
+    expect(params.after_date).        toEqual('22');
+    expect(params.before_date).       toEqual('23');
     expect(params.map_focus).         toEqual('24');
     expect(params.map_zoom).          toEqual('25');
 

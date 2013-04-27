@@ -61,7 +61,7 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
     public function toArrayForExpansion()
     {
         $fields = $this->toArray();
-        unset($data['id'], $data['parent_id']);
+        unset($fields['id'], $fields['parent_id']);
         return $fields;
     }
 
@@ -85,7 +85,6 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
             $row = $expansion->getOrCreate($this);
             $row->setArray($this->toArrayForExpansion());
             $row->save();
-
         }
 
     }
