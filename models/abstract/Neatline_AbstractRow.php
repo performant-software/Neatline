@@ -80,7 +80,7 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 
         // Insert/udpate the master record.
         $this->runCallbacks('beforeSave', $args);
-        $this->id = $this->insertOrUpdate($this->toArrayForSave());
+        $this->insertOrUpdate($this->toArrayForSave());
         $this->runCallbacks('afterSave', $args);
 
     }
@@ -123,7 +123,7 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 
         }
 
-        // Build set array.
+        // Build update clauses.
         foreach ($cols as $i => $col) {
             $set[] = sprintf('%s = %s', $col, $vals[$i]);
         }
@@ -137,9 +137,12 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
             implode(', ', $set)
         );
 
-        // Query, return insert id.
+        // Insert or update.
+        $wasInserted = !$this->exists();
         $db->query($sql, array_merge($bind, $bind));
-        return (int) $db->lastInsertId();
+
+        // If record was inserted, set `id`.
+        if ($wasInserted) $this->id = $db->lastInsertId();
 
     }
 

@@ -71,7 +71,7 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
      *
      * @param boolean $throwIfInvalid
      */
-    public function save($throwIfInvalid = true)
+    public function save($throwIfInvalid = false)
     {
 
         parent::save($throwIfInvalid);
