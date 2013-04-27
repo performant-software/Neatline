@@ -18,7 +18,7 @@ Neatline.module('Editor.Exhibit.Records', function(
     className: 'records',
 
     events: {
-      'click a': 'click'
+      'click a[data-id]': 'click'
     },
 
 
