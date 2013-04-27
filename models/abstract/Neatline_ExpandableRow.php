@@ -54,6 +54,19 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
 
 
     /**
+     * Remove `id` and `parent_id` fields.
+     *
+     * @return array The record fields.
+     */
+    public function toArrayForExpansion()
+    {
+        $fields = $this->toArray();
+        unset($data['id'], $data['parent_id']);
+        return $fields;
+    }
+
+
+    /**
      * Update expansions after saving.
      *
      * @param boolean $throwIfInvalid
@@ -63,9 +76,6 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
 
         parent::save($throwIfInvalid);
 
-        // Get record data, without `id` field.
-        $data = $this->toArray(); unset($data['id']);
-
         // Gather expansion tables.
         $expansions = $this->getTable()->getExpansionTables();
         if (!$expansions) return;
@@ -73,7 +83,7 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
         // Create or update expansions.
         foreach ($expansions as $expansion) {
             $row = $expansion->getOrCreate($this);
-            $row->setArray($data);
+            $row->setArray($this->toArrayForExpansion());
             $row->save();
 
         }

@@ -81,7 +81,7 @@ describe('Static Bubble Map Interactions', function() {
 
   });
 
-  describe('unlighlight', function() {
+  describe('unhighlight', function() {
 
     it('should hide the bubble if it is not selected', function() {
 
