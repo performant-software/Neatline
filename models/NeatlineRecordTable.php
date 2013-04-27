@@ -138,6 +138,7 @@ class NeatlineRecordTable extends Neatline_ExpandableTable
 
         // Execute query.
         $data['records'] = $select->query()->fetchAll();
+        echo $select->__toString();
 
         // Strip off limit and columns.
         $select->reset(Zend_Db_Select::LIMIT_COUNT);

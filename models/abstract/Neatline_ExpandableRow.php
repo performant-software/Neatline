@@ -63,6 +63,9 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
 
         parent::save($throwIfInvalid);
 
+        // Get record data, without `id` field.
+        $data = $this->toArray(); unset($data['id']);
+
         // Gather expansion tables.
         $expansions = $this->getTable()->getExpansionTables();
         if (!$expansions) return;
@@ -70,8 +73,9 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
         // Create or update expansions.
         foreach ($expansions as $expansion) {
             $row = $expansion->getOrCreate($this);
-            $row->setArray($this->toArrayForSave());
+            $row->setArray($data);
             $row->save();
+
         }
 
     }
