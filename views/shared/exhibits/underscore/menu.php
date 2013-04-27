@@ -13,8 +13,15 @@
 
 <script id="exhibit-menu-template" type="text/templates">
 
+  <!-- Back to Omeka. -->
+  <a class="back" href="<?php echo url('neatline');?>">
+    &larr; Back to Omeka
+  </a>
+
+  <!-- Exhibit title. -->
   <p class="lead"><?php echo nl_exhibit()->title; ?></p>
 
+  <!-- Main navigation. -->
   <ul class="nav nav-pills">
 
     <li class="tab" data-slug="records">
