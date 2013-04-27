@@ -17,7 +17,7 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_TestCase
      * `getSelect` should select the plain-text value of `coverage` when
      * the field is defined.
      */
-    public function testCoverageWithDefinedValue()
+    public function testSelectCoverageAsText()
     {
 
         $record = new NeatlineRecord();
@@ -39,7 +39,7 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_TestCase
      * `getSelect` should select NULL for `coverage` when the plain-text
      * value of the field is `POINT(0 0)`.
      */
-    public function testCoverageWithPoint00Value()
+    public function testSelectEmptyCoverageAsNull()
     {
 
         $record = new NeatlineRecord();
@@ -60,7 +60,7 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_TestCase
     /**
      * `getSelect` should order records by `added`.
      */
-    public function testAddedOrdering()
+    public function testOrderByAdded()
     {
 
         $record1 = new NeatlineRecord();
