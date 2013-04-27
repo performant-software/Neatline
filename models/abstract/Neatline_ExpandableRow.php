@@ -36,7 +36,9 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
      */
     public function __get($name)
     {
-        return $this->expansions[$name];
+        if (array_key_exists($name, $this->expansions)) {
+            return $this->expansions[$name];
+        }
     }
 
 

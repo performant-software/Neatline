@@ -60,20 +60,6 @@ class NeatlineRecordTable extends Neatline_ExpandableTable
 
 
     /**
-     * Construct data array for individual record.
-     *
-     * @param int $id The record id.
-     * @return array The record data.
-     */
-    public function queryRecord($id)
-    {
-        $alias  = $this->getTableAlias();
-        $select = $this->getSelect()->where("$alias.id=?", $id);
-        return $this->_db->fetchRow($select);
-    }
-
-
-    /**
      * Construct records array for exhibit and editor.
      *
      * @param NeatlineExhibit $exhibit The exhibit record.

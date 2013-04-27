@@ -18,8 +18,9 @@ class Neatline_RecordsController extends Neatline_RestController
      */
     public function init()
     {
-        $this->records  = $this->_helper->db->getTable('NeatlineRecord');
+        $this->_helper->db->setDefaultModelName('NeatlineRecord');
         $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->records  = $this->_helper->db->getTable('NeatlineRecord');
         parent::init();
     }
 
@@ -48,9 +49,7 @@ class Neatline_RecordsController extends Neatline_RestController
      */
     public function getAction()
     {
-        echo Zend_Json::encode($this->records->queryRecord(
-            $this->_request->id
-        ));
+        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
     }
 
 

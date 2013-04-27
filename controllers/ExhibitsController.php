@@ -46,18 +46,13 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Load exhibit via GET.
+     * Fetch exhibit via GET.
      * @REST
      */
     public function getAction()
     {
-
         $this->_helper->viewRenderer->setNoRender(true);
-
-        // Query and emit the exhibit.
-        $exhibit = $this->_helper->db->findById();
-        echo Zend_Json::encode($exhibit->toArray());
-
+        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
     }
 
 
