@@ -122,6 +122,12 @@ class Neatline_ExhibitsController extends Neatline_RestController
                 )
             );
 
+            // Flash success.
+            $this->_helper->flashMessenger(
+                $this->_getImportStartedMessage(), 'success'
+            );
+
+            // Redirect to browse.
             $this->_helper->redirector('browse');
 
         }
@@ -153,7 +159,18 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
+     * Set the import started message.
+     */
+    protected function _getImportStartedMessage()
+    {
+        return __('The item import was successfully started!');
+    }
+
+
+    /**
      * Set the delete success message.
+     *
+     * @param NeatlineExhibit $exhibit
      */
     protected function _getDeleteSuccessMessage($exhibit)
     {
@@ -165,6 +182,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
     /**
      * Set the delete confirm message.
+     *
+     * @param NeatlineExhibit $exhibit
      */
     protected function _getDeleteConfirmMessage($exhibit)
     {
@@ -176,6 +195,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
     /**
      * Construct the details form.
+     *
+     * @param NeatlineExhibit $exhibit
      */
     private function _getExhibitForm($exhibit)
     {

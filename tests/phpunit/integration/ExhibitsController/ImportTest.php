@@ -42,6 +42,13 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
             'tags'          => 'tag1,tag2'
         ));
 
+        // Import items, save form.
+        $this->dispatch('neatline/import/'.$exhibit->id);
+
+        $this->resetResponse();
+        $this->resetRequest();
+
+        // Reload the form.
         $this->dispatch('neatline/import/'.$exhibit->id);
 
         // Inputs:
