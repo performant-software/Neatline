@@ -21,13 +21,36 @@ class ExhibitsControllerTest_Get extends Neatline_TestCase
 
         $exhibit = $this->__exhibit();
 
+        $exhibit->setArray(array(
+            'public'        => 1,
+            'query'         => '2',
+            'base_layers'   => '3',
+            'base_layer'    => '4',
+            'widgets'       => '5',
+            'title'         => '6',
+            'slug'          => '7',
+            'description'   => '8',
+            'styles'        => '9',
+            'map_focus'     => '10',
+            'map_zoom'      => 11
+        ));
+
+        $exhibit->save();
+
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
         $response = $this->getResponseArray();
 
-        // Should emit all attributes.
-        foreach (array_keys($exhibit->toArray()) as $k) {
-            $this->assertObjectHasAttribute($k, $response);
-        }
+        $this->assertEquals($response->public,       1);
+        $this->assertEquals($response->query,        '2');
+        $this->assertEquals($response->base_layers,  '3');
+        $this->assertEquals($response->base_layer,   '4');
+        $this->assertEquals($response->widgets,      '5');
+        $this->assertEquals($response->title,        '6');
+        $this->assertEquals($response->slug,         '7');
+        $this->assertEquals($response->description,  '8');
+        $this->assertEquals($response->styles,       '9');
+        $this->assertEquals($response->map_focus,    '10');
+        $this->assertEquals($response->map_zoom,     '11');
 
     }
 

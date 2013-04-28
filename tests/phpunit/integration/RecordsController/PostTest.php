@@ -22,33 +22,34 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         $this->request->setMethod('POST')->setRawBody(
-          Zend_Json::encode(array(
-            'exhibit_id'        => $exhibit->id,
-            'title'             => '1',
-            'body'              => '2',
-            'coverage'          => 'POINT(3 3)',
-            'tags'              => '4',
-            'widgets'           => array('5','6'),
-            'presenter'         => '7',
-            'fill_color'        => '8',
-            'select_color'      => '9',
-            'stroke_color'      => '10',
-            'fill_opacity'      => '11',
-            'select_opacity'    => '12',
-            'stroke_opacity'    => '13',
-            'stroke_width'      => '14',
-            'point_radius'      => '15',
-            'point_image'       => '16',
-            'min_zoom'          => '17',
-            'max_zoom'          => '18',
-            'map_zoom'          => '19',
-            'map_focus'         => '20',
-            'start_date'        => '21',
-            'end_date'          => '22',
-            'after_date'        => '23',
-            'before_date'       => '24',
-            'weight'            => '25'
-        )));
+            Zend_Json::encode(array(
+                'exhibit_id'        => $exhibit->id,
+                'title'             => '1',
+                'body'              => '2',
+                'coverage'          => 'POINT(3 3)',
+                'tags'              => '4',
+                'widgets'           => array('5','6'),
+                'presenter'         => '7',
+                'fill_color'        => '8',
+                'select_color'      => '9',
+                'stroke_color'      => '10',
+                'fill_opacity'      => '11',
+                'select_opacity'    => '12',
+                'stroke_opacity'    => '13',
+                'stroke_width'      => '14',
+                'point_radius'      => '15',
+                'point_image'       => '16',
+                'min_zoom'          => '17',
+                'max_zoom'          => '18',
+                'map_zoom'          => '19',
+                'map_focus'         => '20',
+                'start_date'        => '21',
+                'end_date'          => '22',
+                'after_date'        => '23',
+                'before_date'       => '24',
+                'weight'            => '25'
+            )
+        ));
 
         $c1 = $this->__records->count();
         $this->dispatch('neatline/records');
@@ -104,10 +105,11 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         $this->request->setMethod('POST')->setRawBody(
-          Zend_Json::encode(array(
-            'exhibit_id'    => $exhibit->id,
-            'item_id'       => $item->id
-        )));
+            Zend_Json::encode(array(
+                'exhibit_id'    => $exhibit->id,
+                'item_id'       => $item->id
+            )
+        ));
 
         $this->dispatch('neatline/records');
         $record = $this->getLastRow($this->__records);
@@ -127,11 +129,12 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         $this->request->setMethod('POST')->setRawBody(
-          Zend_Json::encode(array(
-            'exhibit_id'    => $exhibit->id,
-            'wms_address'   => '1',
-            'wms_layers'    => '2',
-        )));
+            Zend_Json::encode(array(
+                'exhibit_id'    => $exhibit->id,
+                'wms_address'   => '1',
+                'wms_layers'    => '2',
+            )
+        ));
 
         $this->dispatch('neatline/records');
         $record = $this->getLastRow($this->__records);
@@ -152,9 +155,10 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         $this->request->setMethod('POST')->setRawBody(
-          Zend_Json::encode(array(
-            'exhibit_id' => $exhibit->id
-        )));
+            Zend_Json::encode(array(
+                'exhibit_id' => $exhibit->id
+            )
+        ));
 
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();

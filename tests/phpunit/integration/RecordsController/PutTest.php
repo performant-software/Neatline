@@ -48,6 +48,8 @@ class RecordsControllerTest_Put extends Neatline_TestCase
             'weight'            => 24
         ));
 
+        $record->save();
+
         $this->writePut(array(
             'title'             => '27',
             'body'              => '28',

@@ -16,30 +16,55 @@ class ExhibitsControllerTest_Put extends Neatline_TestCase
     /**
      * PUT should update an exhibit.
      */
-    public function testPut()
+    public function testUpdateExhibit()
     {
 
         $exhibit = $this->__exhibit();
 
-        $exhibit->styles    = '1';
-        $exhibit->map_focus = '2';
-        $exhibit->map_zoom  = 3;
+        $exhibit->setArray(array(
+            'public'        => 0,
+            'query'         => '1',
+            'base_layers'   => '2',
+            'base_layer'    => '3',
+            'widgets'       => '4',
+            'title'         => '5',
+            'slug'          => '6',
+            'description'   => '7',
+            'styles'        => '8',
+            'map_focus'     => '9',
+            'map_zoom'      => 10
+        ));
+
         $exhibit->save();
 
-        $values = array(
-            'styles'        => '4',
-            'map_focus'     => '5',
-            'map_zoom'      => '6'
-        );
+        $this->writePut(array(
+            'public'        => '1',
+            'query'         => '2',
+            'base_layers'   => '3',
+            'base_layer'    => '4',
+            'widgets'       => '5',
+            'title'         => '6',
+            'slug'          => '7',
+            'description'   => '8',
+            'styles'        => '9',
+            'map_focus'     => '10',
+            'map_zoom'      => '11'
+        ));
 
-        $this->writePut($values);
-        $this->dispatch('neatline/put/'.$exhibit->id);
+        $this->dispatch('neatline/exhibits/'.$exhibit->id);
         $exhibit = $this->reload($exhibit);
 
-        // Should update fields.
-        $this->assertEquals($exhibit->styles,       '4');
-        $this->assertEquals($exhibit->map_focus,    '5');
-        $this->assertEquals($exhibit->map_zoom,     6);
+        $this->assertEquals($exhibit->public,       1);
+        $this->assertEquals($exhibit->query,        '2');
+        $this->assertEquals($exhibit->base_layers,  '3');
+        $this->assertEquals($exhibit->base_layer,   '4');
+        $this->assertEquals($exhibit->widgets,      '5');
+        $this->assertEquals($exhibit->title,        '6');
+        $this->assertEquals($exhibit->slug,         '7');
+        $this->assertEquals($exhibit->description,  '8');
+        $this->assertEquals($exhibit->styles,       '9');
+        $this->assertEquals($exhibit->map_focus,    '10');
+        $this->assertEquals($exhibit->map_zoom,     '11');
 
     }
 
@@ -63,9 +88,9 @@ class ExhibitsControllerTest_Put extends Neatline_TestCase
 
         $this->writePut($values);
         $this->dispatch('neatline/put/'.$exhibit->id);
+        $record = $this->reload($record);
 
-        // `styles` column should be updated.
-        $record = $this->__records->find($record->id);
+        // `styles` should be updated.
         $this->assertEquals($record->fill_color, 'color');
 
     }
