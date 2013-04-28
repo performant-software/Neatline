@@ -10,7 +10,7 @@
  */
 
 
-class ItemImporter extends Omeka_Job_AbstractJob
+class Neatline_ImportItems extends Omeka_Job_AbstractJob
 {
 
 

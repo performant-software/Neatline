@@ -182,9 +182,9 @@ class NeatlineExhibit extends Neatline_ExpandableRow
      */
     protected function beforeDelete()
     {
-        $this->_db->delete("{$this->_db->prefix}neatline_records",
-            array('exhibit_id = ?' => $this->id)
-        );
+        $records = $this->getTable('NeatlineRecord');
+        $children = $records->findBySql('exhibit_id=?', array($this->id));
+        foreach ($children as $child) $child->delete();
     }
 
 

@@ -33,7 +33,7 @@
 
     <!-- Widget tabs. -->
     <?php echo $this->partial(
-      'exhibits/underscore/_widget_tabs.php'
+      'exhibits/underscore/_exhibit_widget_tabs.php'
     ); ?>
 
   </ul>

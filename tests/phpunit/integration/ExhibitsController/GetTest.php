@@ -40,17 +40,17 @@ class ExhibitsControllerTest_Get extends Neatline_TestCase
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
         $response = $this->getResponseArray();
 
-        $this->assertEquals($response->public,       1);
-        $this->assertEquals($response->query,        '2');
-        $this->assertEquals($response->base_layers,  '3');
-        $this->assertEquals($response->base_layer,   '4');
-        $this->assertEquals($response->widgets,      '5');
-        $this->assertEquals($response->title,        '6');
-        $this->assertEquals($response->slug,         '7');
-        $this->assertEquals($response->description,  '8');
-        $this->assertEquals($response->styles,       '9');
-        $this->assertEquals($response->map_focus,    '10');
-        $this->assertEquals($response->map_zoom,     '11');
+        $this->assertEquals($response->public,          1);
+        $this->assertEquals($response->query,           '2');
+        $this->assertEquals($response->base_layers,     '3');
+        $this->assertEquals($response->base_layer,      '4');
+        $this->assertEquals($response->widgets,         '5');
+        $this->assertEquals($response->title,           '6');
+        $this->assertEquals($response->slug,            '7');
+        $this->assertEquals($response->description,     '8');
+        $this->assertEquals($response->styles,          '9');
+        $this->assertEquals($response->map_focus,       '10');
+        $this->assertEquals($response->map_zoom,        11);
 
     }
 

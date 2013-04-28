@@ -46,7 +46,7 @@ abstract class Neatline_ExpandableTable extends Omeka_Db_Table
             $select->joinLeft(
                 array($alias => $name),
                 "{$this->getTableAlias()}.id = $alias.parent_id",
-                array_diff($cols, array('id', 'parent_id'))
+                array_diff($cols, array('id'))
             );
 
         }

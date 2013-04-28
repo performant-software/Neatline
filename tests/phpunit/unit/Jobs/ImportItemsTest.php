@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ItemImporterTest_Explode extends Neatline_TestCase
+class ImportItemsTest_Explode extends Neatline_TestCase
 {
 
 
     /**
-     * `ItemImporter` should apply the search query.
+     * `Neatline_ImportItems` should apply the search query.
      */
     public function testCreateRecords()
     {
@@ -24,7 +24,7 @@ class ItemImporterTest_Explode extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('ItemImporter', array(
+            send('Neatline_ImportItems', array(
                 'query' => array('range' => $item1->id),
                 'exhibit_id' => $exhibit->id
             )
@@ -39,9 +39,9 @@ class ItemImporterTest_Explode extends Neatline_TestCase
 
 
     /**
-     * For any given Omeka item, `ItemImporter` should check to see if a
-     * Neatline record already exists in the exhibit for the item; if so,
-     * the record should be re-saved/compiled, but not duplicated.
+     * For any given Omeka item, `Neatline_ImportItems` should check to
+     * see if a record already exists in the exhibit for the item; if so,
+     * the record should be re-compiled, but not duplicated.
      */
     public function testBlockDuplicates()
     {
@@ -54,7 +54,7 @@ class ItemImporterTest_Explode extends Neatline_TestCase
         $record->__save();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('ItemImporter', array(
+            send('Neatline_ImportItems', array(
                 'query' => array('range' => $item->id),
                 'exhibit_id' => $exhibit->id
             )

@@ -19,86 +19,80 @@
   echo flash();
 ?>
 
-<div class="table-actions">
-  <a class="small green button" href="<?php echo url('neatline/add'); ?>">
-    <?php echo __('Create an Exhibit'); ?>
-  </a>
-</div>
+<a class="small green button" href="<?php echo url('neatline/add'); ?>">
+  <?php echo __('Create an Exhibit'); ?>
+</a>
 
 <div id="primary">
 
   <?php if(nl_areExhibits()): ?>
-  <div class="pagination"><?php echo pagination_links(); ?></div>
-    <table class="neatline">
 
-      <thead>
-        <tr>
-          <?php echo browse_sort_links(array(
-              __('Exhibit')   => 'title',
-              __('Modified')  => 'modified',
-              __('# Items')   => null,
-              __('Public')    => null
-          ), array(
-              'link_tag'      => 'th scope="col"'
-          )); ?>
-        </tr>
-      </thead>
+  <table class="neatline">
 
-      <tbody>
+    <thead>
+      <tr>
+        <?php echo browse_sort_links(array(
+            __('Exhibit')   => 'title',
+            __('Modified')  => 'modified',
+            __('# Items')   => null,
+            __('Public')    => null
+        ), array(
+            'link_tag'      => 'th scope="col"'
+        )); ?>
+      </tr>
+    </thead>
 
-        <!-- Exhibit listings. -->
-        <?php foreach(loop('NeatlineExhibit') as $e): ?>
-        <tr>
+    <tbody>
 
-          <td class="title">
-            <?php echo nl_link($e, 'editor', null,
-              array('class' => 'editor'), false);
-            ?>
-            <ul class="action-links group">
-              <li>
-                <?php echo nl_link($e, 'show', __('Public View'),
-                  array('class' => 'public'), true);
-                ?>
-              </li>
-              <li>
-                <?php echo nl_link($e, 'edit', __('Exhibit Settings'),
-                  array('class' => 'edit'), false);
-                ?>
-              </li>
-              <li>
-                <?php echo nl_link($e, 'import', __('Import Items'),
-                  array('class' => 'import'), false);
-                ?>
-              </li>
-              <li>
-                <?php echo nl_link($e, 'delete-confirm', __('Delete'),
-                  array('class' => 'delete-confirm'), false);
-                ?>
-              </li>
-            </ul>
-          </td>
+      <!-- Exhibit listings. -->
+      <?php foreach(loop('NeatlineExhibit') as $e): ?>
+      <tr>
 
-          <td><?php echo format_date(nl_field('modified')); ?></td>
-          <td><?php echo nl_totalRecords(); ?></td>
-          <td><?php echo nl_field('public')?__('Yes'):__('No'); ?></td>
+        <td class="title">
+          <?php echo nl_link($e, 'editor', null,
+            array('class' => 'editor'), false);
+          ?>
+          <ul class="action-links group">
+            <li>
+              <?php echo nl_link($e, 'show', __('Public View'),
+                array('class' => 'public'), true);
+              ?>
+            </li>
+            <li>
+              <?php echo nl_link($e, 'edit', __('Exhibit Settings'),
+                array('class' => 'edit'), false);
+              ?>
+            </li>
+            <li>
+              <?php echo nl_link($e, 'import', __('Import Items'),
+                array('class' => 'import'), false);
+              ?>
+            </li>
+            <li>
+              <?php echo nl_link($e, 'delete-confirm', __('Delete'),
+                array('class' => 'delete-confirm'), false);
+              ?>
+            </li>
+          </ul>
+        </td>
 
-        </tr>
-        <?php endforeach; ?>
+        <td><?php echo format_date(nl_field('modified')); ?></td>
+        <td><?php echo nl_totalRecords(); ?></td>
+        <td><?php echo nl_field('public')?__('Yes'):__('No'); ?></td>
 
-      </tbody>
+      </tr>
+      <?php endforeach; ?>
 
-    </table>
+    </tbody>
 
-  <!-- Pagination. -->
+  </table>
+
+  <!-- Bottom pagination. -->
   <div class="pagination"><?php echo pagination_links(); ?></div>
 
   <?php else: ?>
-    <p class="neatline-alert">
-      <?php echo __('There are no Neatline exhibits yet.'); ?>
-      <a href="<?php echo url('neatline/add'); ?>">
-        <?php echo __('Create one!'); ?>
-      </a>
-    </p>
+    <h2><?php echo __('You have no exhibits.'); ?></h2>
+    <p><?php echo __('Get started by creating a new one!'); ?></p>
   <?php endif; ?>
 
 </div>

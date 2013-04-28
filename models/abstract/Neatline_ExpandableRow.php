@@ -60,7 +60,8 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
      */
     public function toArrayForExpansion()
     {
-        $fields = $this->toArray(); unset($fields['id']);
+        $fields = $this->toArray();
+        unset($fields['id'], $fields['parent_id']);
         return $fields;
     }
 
@@ -86,6 +87,15 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
             $row->save();
         }
 
+    }
+
+
+    /**
+     * Alias unmodified save (used for testing).
+     */
+    public function __save()
+    {
+        parent::save();
     }
 
 }

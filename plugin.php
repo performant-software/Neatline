@@ -19,7 +19,7 @@ require_once NL_DIR . '/models/abstract/Neatline_ExpandableRow.php';
 require_once NL_DIR . '/models/abstract/Neatline_ExpansionTable.php';
 require_once NL_DIR . '/models/abstract/Neatline_ExpansionRow.php';
 require_once NL_DIR . '/controllers/abstract/Neatline_RestController.php';
-require_once NL_DIR . '/jobs/ItemImporter.php';
+require_once NL_DIR . '/jobs/Neatline_ImportItems.php';
 require_once NL_DIR . '/forms/ExhibitForm.php';
 require_once NL_DIR . '/helpers/Assets.php';
 require_once NL_DIR . '/helpers/Layers.php';

@@ -286,20 +286,20 @@ class NeatlineRecord extends Neatline_ExpandableRow
 
 
     /**
-     * Alias unmodified save (used for testing).
-     */
-    public function __save() {
-        parent::save();
-    }
-
-
-    /**
      * Compile the item reference and WMS coverage.
      */
     public function save() {
         $this->compileWms();
         $this->compileItem();
         parent::save();
+    }
+
+
+    /**
+     * Alias unmodified save (used for testing).
+     */
+    public function __save() {
+        parent::__save();
     }
 
 

@@ -64,7 +64,7 @@ class ExhibitsControllerTest_Put extends Neatline_TestCase
         $this->assertEquals($exhibit->description,  '8');
         $this->assertEquals($exhibit->styles,       '9');
         $this->assertEquals($exhibit->map_focus,    '10');
-        $this->assertEquals($exhibit->map_zoom,     '11');
+        $this->assertEquals($exhibit->map_zoom,     11);
 
     }
 
