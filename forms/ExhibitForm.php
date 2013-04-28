@@ -149,10 +149,10 @@ class Neatline_ExhibitForm extends Omeka_Form
         $this->addDisplayGroup(array(
             'title',
             'slug',
+            'description',
+            'widgets',
             'base_layers',
             'base_layer',
-            'widgets',
-            'description',
             'public'
         ), 'exhibit_info');
 

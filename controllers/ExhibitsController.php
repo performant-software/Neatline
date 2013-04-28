@@ -122,6 +122,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
                 )
             );
 
+            $this->_helper->redirector('browse');
+
         }
 
         // Populate query.
