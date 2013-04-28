@@ -21,12 +21,14 @@
   )); ?>
 
   <?php echo common('neatline/textarea', array(
+      'id'    => 'title',
       'name'  => 'title',
       'label' => 'Title',
       'bind'  => 'record.title'
   )); ?>
 
   <?php echo common('neatline/textarea', array(
+      'id'    => 'body',
       'name'  => 'body',
       'label' => 'Body',
       'bind'  => 'record.body'

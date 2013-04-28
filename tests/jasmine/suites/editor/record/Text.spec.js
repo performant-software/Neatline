@@ -60,10 +60,14 @@ describe('Record Form Text Tab', function() {
   it('should populate id and title on item select', function() {
 
     // --------------------------------------------------------------------
-    // When an autocomplete option is selected, the "Omeka ID" box should
-    // be populated with the id and the "Title" field should be populated
-    // with the title of the Omeka item.
+    // When an autocomplete result is chosen, the "Omeka ID" and "Title"
+    // inputs should be populated and the `item_id` and `title` fields on
+    // the record model should be synchronized with the inputs.
     // --------------------------------------------------------------------
+
+    // Get the id of the autocomplete result.
+    var items = $(NL.xml.RecordFormText.items);
+    var id = items.find('item').first().attr('itemId');
 
     // Enter item search query.
     NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
@@ -73,12 +77,12 @@ describe('Record Form Text Tab', function() {
     el.autocomplete.find('a').first().click();
 
     // Should populate id.
-    expect(NL.vw.TEXT.__ui.item).toHaveValue(
-      $(NL.xml.RecordFormText.items).find('item').first().attr('itemId')
-    );
+    expect(NL.vw.TEXT.__ui.item).toHaveValue(id);
+    expect(NL.vw.RECORD.model.get('item_id')).toEqual(id);
 
     // Should populate title.
     expect(NL.vw.TEXT.__ui.title).toHaveValue('Item 3');
+    expect(NL.vw.RECORD.model.get('title')).toEqual('Item 3');
 
   });
 

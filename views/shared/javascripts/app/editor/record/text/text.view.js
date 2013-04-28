@@ -14,11 +14,6 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
   Text.View = Backbone.Neatline.View.extend({
 
-
-    events: {
-      'shown ul.nav a': 'onTabChange'
-    },
-
     ui: {
       item:   'input[name="item-id"]',
       title:  'textarea[name="title"]',
@@ -77,8 +72,8 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
      * @param {Object} ui: The option.
      */
     onSelect: function(event, ui) {
-      this.__ui.item.change();
       this.__ui.title.val(ui.item.label).change();
+      this.__ui.item.val(ui.item.value).change();
     }
 
 
