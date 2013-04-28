@@ -1,0 +1,42 @@
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+
+@import 'var'
+
+
+.sp-replacer
+  box-sizing border-box
+  border-color $borderColor
+  margin-bottom 8px
+  background white
+  width 100%
+
+  &:hover
+    border-color $borderColor
+
+  .sp-preview
+    width 10%
+
+.sp-input-container
+  margin 0
+
+  .sp-input
+    font 14px "Helvetica Neue" !important;
+    padding 15px 8px
+    margin 0
+
+.sp-replacer.sp-active
+  border-color $borderColor
+
+.sp-container
+  border 1px solid $borderColor
+  border-top none
+  background #f4f4f4

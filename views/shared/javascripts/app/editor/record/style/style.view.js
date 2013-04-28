@@ -17,9 +17,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
     events: {
 
-      // Tab change.
-      'shown ul.nav a':               'onTabChange',
-
       // Set map-derived styles.
       'click a[name="set-min-zoom"]': 'onSetMinZoom',
       'click a[name="set-max-zoom"]': 'onSetMaxZoom',
@@ -42,6 +39,19 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      * Instantiate color pickers and draggers.
      */
     buildWidgets: function() {
+
+      // COLORS
+      this.$('input.color').spectrum({
+
+        showButtons: false,
+        clickoutFiresChange: true,
+        showInput: true,
+
+        move: function(color) {
+          $(this).val(color.toHexString()).trigger('change');
+        }
+
+      });
 
       // INTEGERS
       this.$('input.integer').draggableInput({

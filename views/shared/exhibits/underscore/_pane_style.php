@@ -47,7 +47,7 @@
       'label' => 'Fill Color',
       'bind'  => 'record.fill_color',
       'style' => 'fill-color',
-      'class' => 'preview'
+      'class' => 'preview color'
   )); ?>
 
   <?php echo common('neatline/input', array(
@@ -55,7 +55,7 @@
       'label' => 'Select Color',
       'bind'  => 'record.select_color',
       'style' => 'select-color',
-      'class' => 'preview'
+      'class' => 'preview color'
   )); ?>
 
   <?php echo common('neatline/input', array(
@@ -63,7 +63,7 @@
       'label' => 'Stroke Color',
       'bind'  => 'record.stroke_color',
       'style' => 'stroke-color',
-      'class' => 'preview'
+      'class' => 'preview color'
   )); ?>
 
   <legend>Opacities</legend>

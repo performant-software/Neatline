@@ -198,6 +198,7 @@ module.exports = function(grunt) {
           cfg.vendor.js.routefilter,
           cfg.vendor.js.draggable,
           cfg.vendor.js.toastr,
+          cfg.vendor.js.spectrum,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.ace,
           cfg.vendor.js.ace_theme,
@@ -245,6 +246,7 @@ module.exports = function(grunt) {
           cfg.vendor.css.jquery_ui,
           cfg.vendor.css.bootstrap,
           cfg.vendor.css.toastr,
+          cfg.vendor.css.spectrum,
           cfg.vendor.css.chosen,
           '<%= concat.neatline_public_css.src %>',
           cfg.payloads.shared.css+'/neatline-editor.css'
