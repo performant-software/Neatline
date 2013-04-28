@@ -31,7 +31,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Title.
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
-            'description'   => __('The title is displayed at the top of the exhibit.'),
+            'description'   => __('A title for the exhibit, displayed in the theme header.'),
             'size'          => 40,
             'value'         => $this->_exhibit->title,
             'required'      => true,
@@ -50,7 +50,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
-            'description'   => __('The URL slug is used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
+            'description'   => __('The string used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
             'value'         => $this->_exhibit->slug,
@@ -88,6 +88,23 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
+        // Description.
+        $this->addElement('textarea', 'description', array(
+            'label'         => __('Narrative'),
+            'description'   => __('A prose narrative to accompany the exhibit.'),
+            'value'         => $this->_exhibit->description,
+            'attribs'       => array('class' => 'html-editor', 'rows' => '10')
+        ));
+
+        // Widgets.
+        $this->addElement('multiselect', 'widgets', array(
+            'label'         => __('Widgets'),
+            'description'   => __('Select plugin widgets available in the exhibit.'),
+            'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
+            'multiOptions'  => array_flip(nl_getExhibitWidgets()),
+            'value'         => nl_explode($this->_exhibit->widgets),
+        ));
+
         // Base Layers.
         $this->addElement('multiselect', 'base_layers', array(
             'label'         => __('Base Layers'),
@@ -114,23 +131,6 @@ class Neatline_ExhibitForm extends Omeka_Form
                     )
                 )
             )
-        ));
-
-        // Widgets.
-        $this->addElement('multiselect', 'widgets', array(
-            'label'         => __('Widgets'),
-            'description'   => __('Select plugin widgets available in the exhibit.'),
-            'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
-            'multiOptions'  => array_flip(nl_getExhibitWidgets()),
-            'value'         => nl_explode($this->_exhibit->widgets),
-        ));
-
-        // Description.
-        $this->addElement('textarea', 'description', array(
-            'label'         => __('Description'),
-            'description'   => __('Introductory text for the exhibit.'),
-            'value'         => $this->_exhibit->description,
-            'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
 
         // Public.

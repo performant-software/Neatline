@@ -16,8 +16,8 @@ Neatline.module('Editor.Exhibit.Styles', function(
 
 
   Styles.addInitializer(function() {
-    Styles.__view   = new Styles.View();
     Styles.__router = new Styles.Router();
+    Styles.__view   = new Styles.View();
   });
 
 

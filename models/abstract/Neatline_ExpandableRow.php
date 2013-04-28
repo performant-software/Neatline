@@ -77,14 +77,32 @@ abstract class Neatline_ExpandableRow extends Neatline_AbstractRow
         parent::save($throwIfInvalid);
 
         // Gather expansion tables.
-        $expansions = $this->getTable()->getExpansionTables();
-        if (!$expansions) return;
+        $tables = $this->getTable()->getExpansionTables();
+        if (!$tables) return;
 
         // Create or update expansions.
-        foreach ($expansions as $expansion) {
-            $row = $expansion->getOrCreate($this);
+        foreach ($tables as $table) {
+            $row = $table->getOrCreate($this);
             $row->setArray($this->toArrayForExpansion());
             $row->save();
+        }
+
+    }
+
+
+    /**
+     * Delete all expansions before when the row is deleted.
+     */
+    protected function beforeDelete()
+    {
+
+        // Gather expansion tables.
+        $tables = $this->getTable()->getExpansionTables();
+        if (!$tables) return;
+
+        // Delete expansion rows.
+        foreach ($tables as $table) {
+            $table->deleteByParent($this);
         }
 
     }

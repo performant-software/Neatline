@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibitTest_BeforeDelete extends Neatline_TestCase
+class DeleteRecordsTest extends Neatline_TestCase
 {
 
 
     /**
-     * `beforeDelete` should delete all child records.
+     * `Neatline_DeleteRecords` should delete all records in an exhibit.
      */
-    public function testBeforeDelete()
+    public function testDeleteRecords()
     {
 
         $exhibit1   = $this->__exhibit();
@@ -26,7 +26,11 @@ class NeatlineExhibitTest_BeforeDelete extends Neatline_TestCase
         $record3    = $this->__record($exhibit2);
         $record4    = $this->__record($exhibit2);
 
-        $exhibit1->delete();
+        Zend_Registry::get('bootstrap')->getResource('jobs')->
+            send('Neatline_DeleteRecords', array(
+                'exhibit_id' => $exhibit1->id
+            )
+        );
 
         // Should delete exhibit 1 records.
         $this->assertNull($this->__records->find($record1->id));

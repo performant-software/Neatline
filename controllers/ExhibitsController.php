@@ -124,8 +124,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
             // Flash success.
             $this->_helper->flashMessenger(
-                $this->_getImportStartedMessage(), 'success'
-            );
+                $this->_getImportStartedMessage(), 'success');
 
             // Redirect to browse.
             $this->_helper->redirector('browse');
