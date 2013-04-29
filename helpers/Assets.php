@@ -110,6 +110,7 @@ function nl_exhibitGlobals($exhibit)
 {
     return array(
         'exhibit'       => $exhibit->toArray(),
+        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
         'records_api'   => public_url('neatline/records'),
         'base_layers'   => nl_getLayersForExhibit($exhibit),
         'base_layer'    => $exhibit->base_layer,
@@ -128,7 +129,6 @@ function nl_exhibitGlobals($exhibit)
 function nl_editorGlobals($exhibit)
 {
     return array(
-        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
         'items_api'     => url('items/browse'),
         'page_length'   => (int) get_plugin_ini('Neatline', 'page_length')
     );

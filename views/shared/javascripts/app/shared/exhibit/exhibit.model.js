@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit', function(
+Neatline.module('Shared.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 

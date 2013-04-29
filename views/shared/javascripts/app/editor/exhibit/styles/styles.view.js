@@ -35,7 +35,7 @@ Neatline.module('Editor.Exhibit.Styles', function(
      * Construct the exhibit model and bind to form.
      */
     init: function() {
-      this.model = new Neatline.Editor.Exhibit.Model();
+      this.model = new Neatline.Shared.Exhibit.Model();
       rivets.bind(this.$el, { exhibit: this.model });
     },
 

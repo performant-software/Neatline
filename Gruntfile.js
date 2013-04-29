@@ -169,6 +169,7 @@ module.exports = function(grunt) {
 
           // Neatline:
           cfg.src.shared+'/*.js',
+          cfg.src.shared+'/shared/exhibit/exhibit.model.js',
           cfg.src.shared+'/shared/record/record.model.js',
           cfg.src.shared+'/shared/record/record.collection.js',
           cfg.src.shared+'/shared/widget/*.js',
@@ -209,6 +210,7 @@ module.exports = function(grunt) {
 
           // Neatline:
           cfg.src.shared+'/*.js',
+          cfg.src.shared+'/shared/exhibit/exhibit.model.js',
           cfg.src.shared+'/shared/record/record.model.js',
           cfg.src.shared+'/shared/record/record.collection.js',
           cfg.src.shared+'/shared/widget/*.js',
