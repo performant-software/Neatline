@@ -8,6 +8,7 @@
 
 
 require 'rake/packagetask'
+require 'fileutils'
 
 
 class PackageTask < Rake::PackageTask
@@ -45,7 +46,7 @@ end
 
 PackageTask.new('Neatline') do |p|
 
-  p.version     = "test"
+  p.version     = IO.readlines('version')[0].strip
   p.need_tar_gz = true
   p.need_zip    = true
 
@@ -54,8 +55,6 @@ PackageTask.new('Neatline') do |p|
   p.package_files.include('plugin.ini')
   p.package_files.include('routes.ini')
   p.package_files.include('layers.json')
-
-  # Documentation:
   p.package_files.include('README.md')
 
   # Application:
@@ -67,12 +66,8 @@ PackageTask.new('Neatline') do |p|
   p.package_files.include('jobs/**/*.php')
   p.package_files.include('views/**/*.php')
 
-  # Javascript:
-  p.package_files.include('views/admin/javascripts/payloads/*.js')
-  p.package_files.include('views/shared/javascripts/payloads/*.js')
-
   # Static:
-  p.package_files.include('views/admin/css/payloads/*.css')
-  p.package_files.include('views/shared/css/payloads/*.css')
+  p.package_files.include('views/**/payloads/**/*')
+  p.package_files.include('views/**/payloads/**/*')
 
 end
