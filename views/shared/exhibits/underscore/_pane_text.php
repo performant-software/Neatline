@@ -24,42 +24,16 @@
       'id'    => 'title',
       'name'  => 'title',
       'label' => 'Title',
-      'bind'  => 'record.title'
+      'bind'  => 'record.title',
+      'editHtml' => true
   )); ?>
 
   <?php echo common('neatline/textarea', array(
       'id'    => 'body',
       'name'  => 'body',
       'label' => 'Body',
-      'bind'  => 'record.body'
+      'bind'  => 'record.body',
+      'editHtml' => true
   )); ?>
-
-  <!-- TODO|dev -->
-  <div id="body-toolbar" class="wysihtml5">
-
-    <a data-wysihtml5-command="bold" title="CTRL+B">Bold</a> •
-    <a data-wysihtml5-command="italic" title="CTRL+I">Italic</a> •
-    <a data-wysihtml5-command="underline" title="CTRL+U">Underline</a> •
-    <a data-wysihtml5-command="createLink">Insert link</a> •
-    <a data-wysihtml5-command="insertImage">Insert image</a> •
-    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1">h1</a> •
-    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2">h2</a> •
-    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3">h3</a> •
-    <a data-wysihtml5-command="insertUnorderedList">Unordered List</a> •
-    <a data-wysihtml5-command="insertOrderedList">Ordered List</a> •
-    <a data-wysihtml5-command="removeFormat">Clear Formatting</a> •
-    <a data-wysihtml5-action="change_view">Edit HTML</a>
-
-    <div data-wysihtml5-dialog="createLink" style="display: none;">
-      <label>URL: <input data-wysihtml5-dialog-field="href" value="http://"></label>
-      <a data-wysihtml5-dialog-action="save">OK</a> <a data-wysihtml5-dialog-action="cancel">Cancel</a>
-    </div>
-
-    <div data-wysihtml5-dialog="insertImage" style="display: none;">
-      <label>Image URL: <input data-wysihtml5-dialog-field="src" value="http://"></label>
-      <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
-    </div>
-
-  </div>
 
 </div>

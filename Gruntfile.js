@@ -199,8 +199,6 @@ module.exports = function(grunt) {
           cfg.vendor.js.routefilter,
           cfg.vendor.js.draggable,
           cfg.vendor.js.toastr,
-          cfg.vendor.js.wysihtml5_parser,
-          cfg.vendor.js.wysihtml5_lib,
           cfg.vendor.js.spectrum,
           cfg.vendor.js.bootstrap,
           cfg.vendor.js.ace,

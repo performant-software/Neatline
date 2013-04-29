@@ -12,10 +12,16 @@
 ?>
 
 <label>
+
   <?php echo __($label); ?>
-  <?php if (isset($style)): ?>
-    <code><?php echo $style; ?></code>
+
+  <!-- ( Edit HTML ). -->
+  <?php if (isset($editHtml) && $editHtml): ?>
+    ( <a class="label-link" name="html-<?php echo $name; ?>">
+        Edit HTML
+      </a> )
   <?php endif; ?>
+
 </label>
 
 <div class="controls <?php if (isset($class)) echo $class; ?>">

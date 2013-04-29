@@ -12,17 +12,23 @@
 ?>
 
 <label>
+
+  <!-- Label text. -->
   <?php echo __($label); ?>
+
+  <!-- Style slug. -->
   <?php if (isset($style)): ?>
     <code><?php echo $style; ?></code>
   <?php endif; ?>
-</label>
 
-<?php if (isset($useCurrent) && $useCurrent): ?>
-  ( <a class="use-current" name="set-<?php echo $name; ?>">
-      Use Current
-    </a> )
-<?php endif; ?>
+  <!-- ( Use Current ). -->
+  <?php if (isset($useCurrent) && $useCurrent): ?>
+    ( <a class="label-link" name="set-<?php echo $name; ?>">
+        Use Current
+      </a> )
+  <?php endif; ?>
+
+</label>
 
 <div class="controls">
   <div class="inline-inputs">

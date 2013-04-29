@@ -32,12 +32,6 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
         select: _.bind(this.onSelect, this)
       });
 
-      // WYSIHTML5
-      this.body = new wysihtml5.Editor('body', {
-        parserRules: wysihtml5ParserRules,
-        toolbar: 'body-toolbar'
-      });
-
     },
 
 

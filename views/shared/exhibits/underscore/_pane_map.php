@@ -58,9 +58,17 @@
   </div>
 
   <label class="radio">
+
     <input type="radio" name="mode" value="svg">
-    Draw SVG ( <a href="#svg-modal" data-toggle="modal">Enter Markup</a> )
-    <?php echo $this->partial('exhibits/underscore/_svg_modal.php'); ?>
+    Draw SVG ( <a href="#svg-modal" data-toggle="modal"
+      class="label-link">Enter Markup</a>
+    )
+
+    <!-- SVG modal. -->
+    <?php echo $this->partial(
+      'exhibits/underscore/_svg_modal.php'
+    ); ?>
+
   </label>
 
   <label class="radio">
@@ -89,7 +97,7 @@
   </label>
 
   <div class="control-group">
-    <a name="clear" class="btn btn-primary btn-mini">
+    <a name="clear" class="btn btn-primary btn-small">
       <i class="icon-refresh icon-white"></i> Clear all Geometry
     </a>
   </div>
