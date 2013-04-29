@@ -20,13 +20,17 @@ class Neatline_DeleteRecords extends Omeka_Job_AbstractJob
     public function perform()
     {
 
-        // Get child records.
-        $records = $this->_db->getTable('NeatlineRecord')->findBySql(
-            'exhibit_id=?', array($this->_options['exhibit_id'])
-        );
+        $__records = $this->_db->getTable('NeatlineRecord');
 
-        // Delete.
-        foreach ($records as $record) $record->delete();
+        // Select records in 1000-row pages.
+        $select = $__records->getSelect()
+            ->where('exhibit_id=?', $this->_options['exhibit_id'])
+            ->limit(1000);
+
+        // Load and delete records until none remain.
+        while (count($records = $__records->fetchObjects($select))) {
+            foreach ($records as $record) $record->delete();
+        }
 
     }
 
