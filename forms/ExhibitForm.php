@@ -50,7 +50,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
-            'description'   => __('The string used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
+            'description'   => __('A string used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
             'value'         => $this->_exhibit->slug,
@@ -99,7 +99,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Widgets.
         $this->addElement('multiselect', 'widgets', array(
             'label'         => __('Widgets'),
-            'description'   => __('Select plugin widgets available in the exhibit.'),
+            'description'   => __('Select the widgets available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
             'multiOptions'  => array_flip(nl_getExhibitWidgets()),
             'value'         => nl_explode($this->_exhibit->widgets),
@@ -117,7 +117,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Default Layer.
         $this->addElement('select', 'base_layer', array(
             'label'         => __('Default Layer'),
-            'description'   => __('Select which layer is visible by default when the exhibit loads.'),
+            'description'   => __('Select which layer is visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->_exhibit->base_layer),
@@ -136,7 +136,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Public.
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
-            'description'   => __('By default, exhibits are only visible to you.'),
+            'description'   => __('By default, exhibits are visible only to site administrators. Check here to publish the exhibit to the public site.'),
             'value'         => $this->_exhibit->public
         ));
 
