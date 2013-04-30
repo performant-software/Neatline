@@ -46,13 +46,30 @@ describe('Record Form Close', function() {
   it('should refresh the exhibit', function() {
 
     // --------------------------------------------------------------------
-    // When the form is closed, the exhibit should be refreshed to clear
-    // out any unsaved geometry changes.
+    // When the form is closed, the exhibit should be refreshed.
     // --------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
-    // Move the point to a different location.
+    // Click "X".
+    el.close.trigger('click');
+
+    // Should refresh the exhibit.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
+      source: 'EDITOR:RECORD'
+    });
+
+  });
+
+
+  it('should clear unsaved geometry changes', function() {
+
+    // --------------------------------------------------------------------
+    // When the form is closed, unsaved changes to the record' geometry
+    // that were made during the edit session should be cleared.
+    // --------------------------------------------------------------------
+
+    // Drag the point to a different location.
     var feature = NL.vw.MAP.editLayer.features[0];
     NL.vw.MAP.controls.edit.feature = feature;
     feature.geometry.x = 3;
@@ -63,11 +80,6 @@ describe('Record Form Close', function() {
 
     // Click "X".
     el.close.trigger('click');
-
-    // Should refresh the exhibit.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
-      source: 'EDITOR:RECORD'
-    });
 
     // Respond with original geometry.
     NL.respondMap200(NL.json.RecordFormClose.records);
