@@ -20,7 +20,9 @@ describe('Record Form Text Tab', function() {
     NL.showRecordForm(NL.json.RecordForm.record);
 
     el = {
-      autocomplete: $(NL.vw.TEXT.__ui.item.autocomplete('widget')[0])
+      autocomplete:   $(NL.vw.TEXT.__ui.item.autocomplete('widget')[0]),
+      editTitleHtml:  NL.vw.TEXT.$('a[data-textarea="title"]'),
+      editBodyHtml:   NL.vw.TEXT.$('a[data-textarea="body"]')
     };
 
   });
@@ -84,6 +86,72 @@ describe('Record Form Text Tab', function() {
     // Should populate title.
     expect(NL.vw.TEXT.__ui.title).toHaveValue('Item 3');
     expect(NL.vw.RECORD.model.get('title')).toEqual('Item 3');
+
+  });
+
+
+  describe('should show CKE when "Edit HTML" is clicked', function() {
+
+    // --------------------------------------------------------------------
+    // When the "Edit HTML" link next to the "Title" or "Body" textareas
+    // is clicked, CKEditor should be displayed with the field content.
+    // When the editor is minimized, the new value from CKEditor should be
+    // set in the textarea and the form model should be updated.
+    // --------------------------------------------------------------------
+
+    var async = new AsyncSpec(this);
+    var cke, input;
+
+    async.afterEach(function(done) {
+
+      // When editor is started.
+      // -----------------------
+      cke.on('instanceReady', function() {
+
+        // Should apply starting content.
+        var content = _.string.stripTags(cke.getData()).trim();
+        expect(content).toEqual('content1');
+
+        // Set new data.
+        cke.setData('content2');
+
+        // Minimize the editor.
+        cke.execCommand('maximize');
+
+      });
+
+      // When editor is destroyed.
+      // -------------------------
+      input.change(function() {
+
+        // Should update the model and input.
+        expect(NL.vw.RECORD.model.get(cke.name)).toEqual('content2');
+        expect(input).toHaveValue('content2');
+        done();
+
+      });
+
+    });
+
+    it('title', function() {
+
+      input = NL.vw.TEXT.__ui.title;
+      input.val('content1');
+
+      el.editTitleHtml.click();
+      cke = CKEDITOR.instances.title;
+
+    });
+
+    it('body', function() {
+
+      input = NL.vw.TEXT.__ui.body;
+      input.val('content1');
+
+      el.editBodyHtml.click();
+      cke = CKEDITOR.instances.body;
+
+    });
 
   });
 

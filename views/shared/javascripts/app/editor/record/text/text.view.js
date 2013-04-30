@@ -94,8 +94,10 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
       var ckeditor = CKEDITOR.replace(id);
       var textarea = $('#'+id);
 
-      // Mazimize by default.
+      // When the editor is started.
       ckeditor.on('instanceReady', function() {
+
+        // Maximize by default.
         ckeditor.execCommand('maximize');
 
         // Destroy on minimize.
