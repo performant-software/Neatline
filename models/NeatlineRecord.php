@@ -25,10 +25,10 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $tags;               // TEXT NULL
     public $widgets;            // TEXT NULL
     public $presenter;          // VARCHAR(100) NULL
-    public $fill_color;         // TINYTEXT NULL
-    public $select_color;       // TINYTEXT NULL
-    public $stroke_color;       // TINYTEXT NULL
-    public $point_image;        // TINYTEXT NULL
+    public $fill_color;         // VARCHAR(100) NULL
+    public $select_color;       // VARCHAR(100) NULL
+    public $stroke_color;       // VARCHAR(100) NULL
+    public $point_image;        // VARCHAR(100) NULL
     public $fill_opacity;       // INT(10) UNSIGNED NULL
     public $select_opacity;     // INT(10) UNSIGNED NULL
     public $stroke_opacity;     // INT(10) UNSIGNED NULL
