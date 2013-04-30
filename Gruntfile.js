@@ -20,7 +20,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-shell');
 
-  var cfg = grunt.file.readJSON('./config.json');
+  var paths = grunt.file.readJSON('./paths.json');
 
   grunt.initConfig({
 
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         command: 'python build.py full OpenLayers.js',
         options: {
           execOptions: {
-            cwd: cfg.build.openlayers
+            cwd: paths.build.openlayers
           }
         }
       },
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         command: 'npm install && make bootstrap',
         options: {
           execOptions: {
-            cwd: cfg.build.bootstrap
+            cwd: paths.build.bootstrap
           }
         }
       },
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
         command: './build.sh',
         options: {
           execOptions: {
-            cwd: cfg.build.ckeditor
+            cwd: paths.build.ckeditor
           }
         }
       },
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         command: 'npm install && grunt build',
         options: {
           execOptions: {
-            cwd: cfg.build.jquery_ui
+            cwd: paths.build.jquery_ui
           }
         }
       },
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
         command: './build',
         options: {
           execOptions: {
-            cwd: cfg.build.sinon
+            cwd: paths.build.sinon
           }
         }
       },
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
 
       bootstrap: {
         files: [{
-          src: cfg.build.bootstrap+'/img/*',
+          src: paths.build.bootstrap+'/img/*',
           dest: './views/shared/css/img/',
           expand: true,
           flatten: true
@@ -107,8 +107,8 @@ module.exports = function(grunt) {
 
       chosen: {
         files: [{
-          src: cfg.build.chosen+'/chosen-sprite.png',
-          dest: cfg.payloads.admin.css,
+          src: paths.build.chosen+'/chosen-sprite.png',
+          dest: paths.payloads.admin.css,
           expand: true,
           flatten: true
         }]
@@ -116,8 +116,8 @@ module.exports = function(grunt) {
 
       jquery_ui: {
         files: [{
-          src: cfg.build.jquery_ui+'/dist/images/*',
-          dest: cfg.payloads.shared.css+'/images',
+          src: paths.build.jquery_ui+'/dist/images/*',
+          dest: paths.payloads.shared.css+'/images',
           expand: true,
           flatten: true
         }]
@@ -125,17 +125,17 @@ module.exports = function(grunt) {
 
       ckeditor: {
         files: [{
-          cwd: cfg.build.ckeditor+'/release/ckeditor/',
+          cwd: paths.build.ckeditor+'/release/ckeditor/',
           src: '**',
-          dest: cfg.payloads.shared.js+'/ckeditor/',
+          dest: paths.payloads.shared.js+'/ckeditor/',
           expand: true
         }]
       },
 
       colorpicker: {
         files: [{
-          src: cfg.build.colorpicker+'/images/*',
-          dest: cfg.payloads.shared.css+'/images',
+          src: paths.build.colorpicker+'/images/*',
+          dest: paths.payloads.shared.css+'/images',
           expand: true,
           flatten: true
         }]
@@ -145,15 +145,15 @@ module.exports = function(grunt) {
 
     clean: {
       payloads: [
-        cfg.payloads.shared.js,
-        cfg.payloads.shared.css,
-        cfg.payloads.admin.js,
-        cfg.payloads.admin.css
+        paths.payloads.shared.js,
+        paths.payloads.shared.css,
+        paths.payloads.admin.js,
+        paths.payloads.admin.css
       ],
       fixtures: [
-        cfg.jasmine+'/fixtures/*.json',
-        cfg.jasmine+'/fixtures/*.html',
-        cfg.jasmine+'/fixtures/*.xml'
+        paths.jasmine+'/fixtures/*.json',
+        paths.jasmine+'/fixtures/*.html',
+        paths.jasmine+'/fixtures/*.xml'
       ],
       images: './views/shared/css/img',
       bower: './components'
@@ -163,115 +163,115 @@ module.exports = function(grunt) {
 
       exhibit_form: {
         src: [
-          cfg.vendor.js.chosen,
-          cfg.vendor.js.underscore_s,
-          cfg.src.admin+'/exhibit.form.js'
+          paths.vendor.js.chosen,
+          paths.vendor.js.underscore_s,
+          paths.src.admin+'/exhibit.form.js'
         ],
-        dest: cfg.payloads.admin.js+'/exhibit-form.js'
+        dest: paths.payloads.admin.js+'/exhibit-form.js'
       },
 
       neatline_public: {
         src: [
 
           // Vendor:
-          cfg.vendor.js.jquery,
-          cfg.vendor.js.underscore,
-          cfg.vendor.js.underscore_s,
-          cfg.vendor.js.backbone,
-          cfg.vendor.js.marionette,
-          cfg.vendor.js.neatline,
-          cfg.vendor.js.safesync,
-          cfg.vendor.js.openlayers,
-          cfg.vendor.js.stamen,
-          cfg.vendor.js.rivets,
+          paths.vendor.js.jquery,
+          paths.vendor.js.underscore,
+          paths.vendor.js.underscore_s,
+          paths.vendor.js.backbone,
+          paths.vendor.js.marionette,
+          paths.vendor.js.neatline,
+          paths.vendor.js.safesync,
+          paths.vendor.js.openlayers,
+          paths.vendor.js.stamen,
+          paths.vendor.js.rivets,
 
           // Neatline:
-          cfg.src.shared+'/*.js',
-          cfg.src.shared+'/shared/exhibit/exhibit.model.js',
-          cfg.src.shared+'/shared/record/record.model.js',
-          cfg.src.shared+'/shared/record/record.collection.js',
-          cfg.src.shared+'/shared/widget/*.js',
-          cfg.src.shared+'/map/**/*.js',
-          cfg.src.shared+'/presenter/*.js',
-          cfg.src.shared+'/presenter/None/*.js',
-          cfg.src.shared+'/presenter/StaticBubble/*.js'
+          paths.src.shared+'/*.js',
+          paths.src.shared+'/shared/exhibit/exhibit.model.js',
+          paths.src.shared+'/shared/record/record.model.js',
+          paths.src.shared+'/shared/record/record.collection.js',
+          paths.src.shared+'/shared/widget/*.js',
+          paths.src.shared+'/map/**/*.js',
+          paths.src.shared+'/presenter/*.js',
+          paths.src.shared+'/presenter/None/*.js',
+          paths.src.shared+'/presenter/StaticBubble/*.js'
 
         ],
-        dest: cfg.payloads.shared.js+'/neatline-public.js'
+        dest: paths.payloads.shared.js+'/neatline-public.js'
       },
 
       neatline_editor: {
         src: [
 
           // Vendor:
-          cfg.vendor.js.jquery,
-          cfg.vendor.js.jquery_ui,
-          cfg.vendor.js.underscore,
-          cfg.vendor.js.underscore_s,
-          cfg.vendor.js.backbone,
-          cfg.vendor.js.marionette,
-          cfg.vendor.js.neatline,
-          cfg.vendor.js.openlayers,
-          cfg.vendor.js.stamen,
-          cfg.vendor.js.svgtowkt,
-          cfg.vendor.js.routefilter,
-          cfg.vendor.js.draggable,
-          cfg.vendor.js.toastr,
-          cfg.vendor.js.spectrum,
-          cfg.vendor.js.bootstrap,
-          cfg.vendor.js.ace,
-          cfg.vendor.js.ace_theme,
-          cfg.vendor.js.ace_mode,
-          cfg.vendor.js.rivets,
+          paths.vendor.js.jquery,
+          paths.vendor.js.jquery_ui,
+          paths.vendor.js.underscore,
+          paths.vendor.js.underscore_s,
+          paths.vendor.js.backbone,
+          paths.vendor.js.marionette,
+          paths.vendor.js.neatline,
+          paths.vendor.js.openlayers,
+          paths.vendor.js.stamen,
+          paths.vendor.js.svgtowkt,
+          paths.vendor.js.routefilter,
+          paths.vendor.js.draggable,
+          paths.vendor.js.toastr,
+          paths.vendor.js.spectrum,
+          paths.vendor.js.bootstrap,
+          paths.vendor.js.ace,
+          paths.vendor.js.ace_theme,
+          paths.vendor.js.ace_mode,
+          paths.vendor.js.rivets,
 
           // Neatline:
-          cfg.src.shared+'/*.js',
-          cfg.src.shared+'/shared/exhibit/exhibit.model.js',
-          cfg.src.shared+'/shared/record/record.model.js',
-          cfg.src.shared+'/shared/record/record.collection.js',
-          cfg.src.shared+'/shared/widget/*.js',
-          cfg.src.shared+'/map/**/*.js',
-          cfg.src.shared+'/presenter/*.js',
-          cfg.src.shared+'/presenter/None/*.js',
-          cfg.src.shared+'/presenter/StaticBubble/*.js',
+          paths.src.shared+'/*.js',
+          paths.src.shared+'/shared/exhibit/exhibit.model.js',
+          paths.src.shared+'/shared/record/record.model.js',
+          paths.src.shared+'/shared/record/record.collection.js',
+          paths.src.shared+'/shared/widget/*.js',
+          paths.src.shared+'/map/**/*.js',
+          paths.src.shared+'/presenter/*.js',
+          paths.src.shared+'/presenter/None/*.js',
+          paths.src.shared+'/presenter/StaticBubble/*.js',
 
           // Editor:
-          cfg.src.shared+'/editor/*.js',
-          cfg.src.shared+'/editor/exhibit/**/*.js',
-          cfg.src.shared+'/editor/record/**/*.js',
-          cfg.src.shared+'/editor/map/*.js',
+          paths.src.shared+'/editor/*.js',
+          paths.src.shared+'/editor/exhibit/**/*.js',
+          paths.src.shared+'/editor/record/**/*.js',
+          paths.src.shared+'/editor/map/*.js',
 
         ],
-        dest: cfg.payloads.shared.js+'/neatline-editor.js'
+        dest: paths.payloads.shared.js+'/neatline-editor.js'
       },
 
       exhibit_form_css: {
         src: [
-          cfg.vendor.css.chosen,
-          cfg.payloads.admin.css+'/exhibit-form.css'
+          paths.vendor.css.chosen,
+          paths.payloads.admin.css+'/exhibit-form.css'
         ],
-        dest: cfg.payloads.admin.css+'/exhibit-form.css'
+        dest: paths.payloads.admin.css+'/exhibit-form.css'
       },
 
       neatline_public_css: {
         src: [
-          cfg.vendor.css.openlayers,
-          cfg.payloads.shared.css+'/neatline-public.css'
+          paths.vendor.css.openlayers,
+          paths.payloads.shared.css+'/neatline-public.css'
         ],
-        dest: cfg.payloads.shared.css+'/neatline-public.css'
+        dest: paths.payloads.shared.css+'/neatline-public.css'
       },
 
       neatline_editor_css: {
         src: [
-          cfg.vendor.css.jquery_ui,
-          cfg.vendor.css.bootstrap,
-          cfg.vendor.css.toastr,
-          cfg.vendor.css.spectrum,
-          cfg.vendor.css.chosen,
+          paths.vendor.css.jquery_ui,
+          paths.vendor.css.bootstrap,
+          paths.vendor.css.toastr,
+          paths.vendor.css.spectrum,
+          paths.vendor.css.chosen,
           '<%= concat.neatline_public_css.src %>',
-          cfg.payloads.shared.css+'/neatline-editor.css'
+          paths.payloads.shared.css+'/neatline-editor.css'
         ],
-        dest: cfg.payloads.shared.css+'/neatline-editor.css'
+        dest: paths.payloads.shared.css+'/neatline-editor.css'
       }
 
     },
@@ -280,17 +280,17 @@ module.exports = function(grunt) {
 
       exhibit_form: {
         src: '<%= concat.exhibit_form.src %>',
-        dest: cfg.payloads.admin.js+'/exhibit-form.js'
+        dest: paths.payloads.admin.js+'/exhibit-form.js'
       },
 
       neatline_public: {
         src: '<%= concat.neatline_public.src %>',
-        dest: cfg.payloads.shared.js+'/neatline-public.js'
+        dest: paths.payloads.shared.js+'/neatline-public.js'
       },
 
       neatline_editor: {
         src: '<%= concat.neatline_editor.src %>',
-        dest: cfg.payloads.shared.js+'/neatline-editor.js'
+        dest: paths.payloads.shared.js+'/neatline-editor.js'
       }
 
     },
@@ -299,15 +299,15 @@ module.exports = function(grunt) {
 
       compile: {
         options: {
-          paths: [cfg.stylus.shared]
+          paths: [paths.stylus.shared]
         },
         files: {
           './views/shared/css/payloads/neatline-public.css':
-            cfg.stylus.shared+'/public/*.styl',
+            paths.stylus.shared+'/public/*.styl',
           './views/shared/css/payloads/neatline-editor.css':
-            cfg.stylus.shared+'/editor/*.styl',
+            paths.stylus.shared+'/editor/*.styl',
           './views/admin/css/payloads/exhibit-form.css':
-            cfg.stylus.admin+'/exhibit-form.styl'
+            paths.stylus.admin+'/exhibit-form.styl'
         }
       }
 
@@ -320,8 +320,8 @@ module.exports = function(grunt) {
           '<%= concat.exhibit_form.src %>',
           '<%= concat.neatline_public.src %>',
           '<%= concat.neatline_editor.src %>',
-          cfg.stylus.admin+'/**/*.styl',
-          cfg.stylus.shared+'/**/*.styl'
+          paths.stylus.admin+'/**/*.styl',
+          paths.stylus.shared+'/**/*.styl'
         ],
         tasks: [
           'compile:concat'
@@ -334,28 +334,28 @@ module.exports = function(grunt) {
 
       options: {
         helpers: [
-          cfg.vendor.js.jasmine_jquery,
-          cfg.vendor.js.jasmine_async,
-          cfg.vendor.js.sinon,
-          cfg.jasmine+'/helpers/*.js',
-          cfg.jasmine+'/assertions/*.js'
+          paths.vendor.js.jasmine_jquery,
+          paths.vendor.js.jasmine_async,
+          paths.vendor.js.sinon,
+          paths.jasmine+'/helpers/*.js',
+          paths.jasmine+'/assertions/*.js'
         ]
       },
 
       neatline: {
-        src: cfg.payloads.shared.js+'/neatline-public.js',
+        src: paths.payloads.shared.js+'/neatline-public.js',
         options: {
-          specs: cfg.jasmine+'/suites/public/**/*.spec.js'
+          specs: paths.jasmine+'/suites/public/**/*.spec.js'
         }
       },
 
       editor: {
         src: [
-          cfg.payloads.shared.js+'/ckeditor/ckeditor.js',
-          cfg.payloads.shared.js+'/neatline-editor.js'
+          paths.payloads.shared.js+'/ckeditor/ckeditor.js',
+          paths.payloads.shared.js+'/neatline-editor.js'
         ],
         options: {
-          specs: cfg.jasmine+'/suites/editor/**/*.spec.js'
+          specs: paths.jasmine+'/suites/editor/**/*.spec.js'
         }
       }
 

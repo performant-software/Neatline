@@ -38,14 +38,14 @@ PackageTask.new('Neatline') do |p|
   p.need_tar_gz = true
   p.need_zip    = true
 
-  # Configuration:
+  # Configuration --
   p.package_files.include('plugin.php')
   p.package_files.include('plugin.ini')
   p.package_files.include('routes.ini')
   p.package_files.include('layers.json')
   p.package_files.include('README.md')
 
-  # Application:
+  # Application --
   p.package_files.include('NeatlinePlugin.php')
   p.package_files.include('models/**/*.php')
   p.package_files.include('controllers/**/*.php')
@@ -54,7 +54,7 @@ PackageTask.new('Neatline') do |p|
   p.package_files.include('jobs/**/*.php')
   p.package_files.include('views/**/*.php')
 
-  # Static:
+  # Static --
   p.package_files.include('views/**/payloads/**/*')
   p.package_files.include('views/**/payloads/**/*')
 
