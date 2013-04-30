@@ -27,7 +27,8 @@ rivets.formatters.recordLink = function(id) {
  * @return {String}: If the title is null, return the placeholder.
  */
 rivets.formatters.recordTitle = function(title) {
-  return title ? title : STRINGS.record.placeholders.title;
+  return title ? _.string.stripTags(title) :
+    STRINGS.record.placeholders.title;
 };
 
 
