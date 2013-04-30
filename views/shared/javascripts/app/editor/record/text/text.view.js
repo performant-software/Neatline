@@ -14,6 +14,11 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
   Text.View = Backbone.Neatline.View.extend({
 
+
+    events: {
+      'click a[data-textarea]': 'onEditHtmlClick'
+    },
+
     ui: {
       item:   'input[name="item-id"]',
       title:  'textarea[name="title"]',
@@ -74,6 +79,33 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
     onSelect: function(event, ui) {
       this.__ui.title.val(ui.item.label).change();
       this.__ui.item.val(ui.item.value).change();
+    },
+
+
+    /**
+     * Display a fullscreen CKEditor for a textarea.
+     *
+     * @param {Object} e: The click event.
+     */
+    onEditHtmlClick: function(e) {
+
+      // Instantiate the editor.
+      var id = $(e.target).attr('data-textarea');
+      var ckeditor = CKEDITOR.replace(id);
+      var textarea = $('#'+id);
+
+      // Mazimize by default.
+      ckeditor.on('instanceReady', function() {
+        ckeditor.execCommand('maximize');
+
+        // Destroy on minimize.
+        ckeditor.on('maximize', function() {
+          ckeditor.destroy();
+          textarea.change();
+        });
+
+      });
+
     }
 
 

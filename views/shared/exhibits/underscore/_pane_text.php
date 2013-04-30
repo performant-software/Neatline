@@ -25,7 +25,7 @@
       'name'  => 'title',
       'label' => 'Title',
       'bind'  => 'record.title',
-      'editHtml' => true
+      'editHtml' => 'title'
   )); ?>
 
   <?php echo common('neatline/textarea', array(
@@ -33,7 +33,7 @@
       'name'  => 'body',
       'label' => 'Body',
       'bind'  => 'record.body',
-      'editHtml' => true
+      'editHtml' => 'body'
   )); ?>
 
 </div>

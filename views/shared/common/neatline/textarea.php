@@ -16,8 +16,8 @@
   <?php echo __($label); ?>
 
   <!-- ( Edit HTML ). -->
-  <?php if (isset($editHtml) && $editHtml): ?>
-    ( <a class="label-link" name="html-<?php echo $name; ?>">
+  <?php if (isset($editHtml)): ?>
+    ( <a class="label-link" data-textarea="<?php echo $editHtml; ?>">
         Edit HTML
       </a> )
   <?php endif; ?>
