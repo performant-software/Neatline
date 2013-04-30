@@ -81,44 +81,74 @@ class Neatline_Migrate extends Omeka_Job_AbstractJob
 
         // `title`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `title` `title` MEDIUMTEXT NULL
         ");
 
         // `description`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `description` `description` MEDIUMTEXT NULL
         ");
 
         // `start_date`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `start_date` `start_date` VARCHAR(100) NULL
         ");
 
         // `end_date`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `end_date` `end_date` VARCHAR(100) NULL
         ");
 
         // `start_visible_date`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `start_visible_date` `after_date` VARCHAR(100) NULL
         ");
 
         // `end_visible_date`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `end_visible_date` `before_date` VARCHAR(100) NULL
         ");
 
         // `vector_color`
         $this->_db->query("
-            ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
             CHANGE `vector_color` `fill_color` VARCHAR(100) NULL
+        ");
+
+        // `stroke_color`
+        $this->_db->query("
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
+            CHANGE `stroke_color` `stroke_color` VARCHAR(100) NULL
+        ");
+
+        // `highlight_color`
+        $this->_db->query("
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
+            CHANGE `highlight_color` `select_color` VARCHAR(100) NULL
+        ");
+
+        // `vector_opacity`
+        $this->_db->query("
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
+            CHANGE `vector_opacity` `fill_opacity` INT(10) UNSIGNED NULL
+        ");
+
+        // `point_image`
+        $this->_db->query("
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
+            CHANGE `point_image` `point_image` VARCHAR(100) NULL
+        ");
+
+        // `map_bounds`
+        $this->_db->query("
+            ALTER TABLE `{$this->_db->prefix}neatline_records`
+            CHANGE `map_bounds` `map_focus` VARCHAR(100) NULL
         ");
 
     }
