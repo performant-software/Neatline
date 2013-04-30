@@ -54,7 +54,9 @@ PackageTask.new('Neatline') do |p|
   p.package_files.include('jobs/**/*.php')
   p.package_files.include('views/**/*.php')
 
-  # Static --
+  # Payloads --
+  p.package_files.include('views/shared/css/img/**/*')
+  p.package_files.include('views/shared/javascripts/bootstrap.js')
   p.package_files.include('views/**/payloads/**/*')
   p.package_files.include('views/**/payloads/**/*')
 

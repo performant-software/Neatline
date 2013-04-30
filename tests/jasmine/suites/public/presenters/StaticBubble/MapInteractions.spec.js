@@ -40,12 +40,12 @@ describe('Static Bubble Map Interactions', function() {
 
   describe('highlight', function() {
 
-    it('should show the title, not the body', function() {
+    it('should show the title, not the body or close "X"', function() {
 
       // ------------------------------------------------------------------
       // When the cursor hovers on a feature, the the record should be
       // bound to the bubble and the title should be displayed in the map
-      // container. (The body should stay hidden).
+      // container. The body and close "X" should stay hidden.
       // ------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
@@ -57,7 +57,8 @@ describe('Static Bubble Map Interactions', function() {
       // Title should be visible.
       expect(NL.vw.BUBBLE.$('.title')).toBeVisible();
 
-      // Body should be hidden.
+      // Close "X' and body should be hidden.
+      expect(NL.vw.BUBBLE.$('.close')).not.toBeVisible();
       expect(NL.vw.BUBBLE.$('.body')).not.toBeVisible();
 
     });
@@ -118,11 +119,11 @@ describe('Static Bubble Map Interactions', function() {
 
   describe('select', function() {
 
-    it('should show body and close "X" if body is non-null', function() {
+    it('should show close "X" and body if body is non-null', function() {
 
       // ------------------------------------------------------------------
-      // When a feature is selected, the body and close button should be
-      // displayed if the body content is non-null.
+      // When a feature is selected and the record body content is non-
+      // null, the body and close "X" should be displayed.
       // ------------------------------------------------------------------
 
       // Set non-null body.
@@ -137,11 +138,11 @@ describe('Static Bubble Map Interactions', function() {
 
     });
 
-    it('should not show body and close "X" if body is null', function() {
+    it('should show close "X" but not body if body is null', function() {
 
       // ------------------------------------------------------------------
-      // When a feature is selected, the body and close button should not
-      // be displayed if the body content is null.
+      // When a feature is selected and the record body content is null,
+      // the close "X" should be displayed but the body should be hidden.
       // ------------------------------------------------------------------
 
       // Set null body.
@@ -150,9 +151,11 @@ describe('Static Bubble Map Interactions', function() {
       NL.hoverOnMapFeature(feature1);
       NL.clickOnMapFeature(feature1);
 
-      // Body and close "X" should not be visible.
+      // Close "X" should be visible.
+      expect(NL.vw.BUBBLE.$('.close')).toBeVisible();
+
+      // Body should not be visible.
       expect(NL.vw.BUBBLE.$('.body')).not.toBeVisible();
-      expect(NL.vw.BUBBLE.$('.close')).not.toBeVisible();
 
     });
 
