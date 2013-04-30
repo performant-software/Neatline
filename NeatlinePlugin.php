@@ -39,8 +39,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
         // Exhibits:
-        // ---------
-        $sql = "CREATE TABLE IF NOT EXISTS
+        $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
 
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -60,14 +59,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
              PRIMARY KEY        (`id`)
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
         // Records:
-        // --------
-        $sql = "CREATE TABLE IF NOT EXISTS
+        $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
 
             `id`                INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -109,9 +105,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
              FULLTEXT KEY       (`title`, `body`),
              SPATIAL INDEX      (`coverage`)
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-
-        $this->_db->query($sql);
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
     }
@@ -124,14 +118,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
         // Exhibits:
-        $sql = "DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_exhibits`";
-        $this->_db->query($sql);
+        $this->_db->query("DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_exhibits`"
+        );
 
         // Records:
-        $sql = "DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_records`";
-        $this->_db->query($sql);
+        $this->_db->query("DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_records`"
+        );
 
     }
 
