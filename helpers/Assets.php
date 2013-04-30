@@ -54,6 +54,7 @@ function nl_queueNeatlineEditor($exhibit)
 
     queue_css_file('payloads/neatline-editor');
     queue_js_file('payloads/neatline-editor');
+    queue_js_file('payloads/ckeditor/ckeditor');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_editor_static', array(

@@ -26,6 +26,7 @@
     , "jquery-draggable-input": "https://github.com/saschagehlich/jquery-draggable-input.git"
     , "toastr":                 "https://github.com/davidmcclure/toastr.git"
     , "jasmine.async":          "https://github.com/derickbailey/jasmine.async.git"
+    , "ckeditor":               "https://github.com/ckeditor/ckeditor-dev.git"
 
   }
 }

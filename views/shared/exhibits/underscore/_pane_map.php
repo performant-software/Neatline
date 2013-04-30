@@ -13,30 +13,36 @@
 
 <div class="control-group map">
 
+
   <label class="radio">
     <input type="radio" name="mode" value="pan" checked>
     Navigate
   </label>
+
 
   <label class="radio">
     <input type="radio" name="mode" value="point">
     Draw Point
   </label>
 
+
   <label class="radio">
     <input type="radio" name="mode" value="line">
     Draw Line
   </label>
+
 
   <label class="radio">
     <input type="radio" name="mode" value="poly">
     Draw Polygon
   </label>
 
+
   <label class="radio">
     <input type="radio" name="mode" value="regPoly">
     Draw Regular Polygon
   </label>
+
 
   <div class="control-group indent regular-polygon">
 
@@ -57,6 +63,7 @@
 
   </div>
 
+
   <label class="radio">
 
     <input type="radio" name="mode" value="svg">
@@ -71,30 +78,36 @@
 
   </label>
 
+
   <label class="radio">
     <input type="radio" name="mode" value="modify">
     Modify Shape
   </label>
+
 
   <label class="radio">
     <input type="radio" name="mode" value="rotate">
     Rotate Shape
   </label>
 
+
   <label class="radio">
     <input type="radio" name="mode" value="resize">
     Resize Shape
   </label>
+
 
   <label class="radio">
     <input type="radio" name="mode" value="drag">
     Drag Shape
   </label>
 
+
   <label class="radio">
     <input type="radio" name="mode" value="remove">
     Delete Shape
   </label>
+
 
   <div class="control-group">
     <a name="clear" class="btn btn-primary btn-small">
@@ -102,7 +115,9 @@
     </a>
   </div>
 
+
   <hr>
+
 
   <?php echo common('neatline/textarea', array(
       'name'  => 'coverage',
@@ -110,5 +125,6 @@
       'bind'  => 'record.coverage',
       'class' => 'code'
   )); ?>
+
 
 </div>

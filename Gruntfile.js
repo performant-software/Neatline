@@ -56,6 +56,15 @@ module.exports = function(grunt) {
         }
       },
 
+      build_ckeditor: {
+        command: './build.sh',
+        options: {
+          execOptions: {
+            cwd: cfg.build.ckeditor
+          }
+        }
+      },
+
       build_jquery_ui: {
         command: 'npm install && grunt build',
         options: {
@@ -111,6 +120,15 @@ module.exports = function(grunt) {
           dest: cfg.payloads.shared.css+'/images',
           expand: true,
           flatten: true
+        }]
+      },
+
+      ckeditor: {
+        files: [{
+          cwd: cfg.build.ckeditor+'/release/ckeditor/',
+          src: '**',
+          dest: cfg.payloads.shared.js+'/ckeditor/',
+          expand: true
         }]
       },
 
@@ -332,7 +350,10 @@ module.exports = function(grunt) {
       },
 
       editor: {
-        src: cfg.payloads.shared.js+'/neatline-editor.js',
+        src: [
+          cfg.payloads.shared.js+'/ckeditor/ckeditor.js',
+          cfg.payloads.shared.js+'/neatline-editor.js'
+        ],
         options: {
           specs: cfg.jasmine+'/suites/editor/**/*.spec.js'
         }
@@ -363,6 +384,7 @@ module.exports = function(grunt) {
     'shell:bower_install',
     'shell:build_openlayers',
     'shell:build_bootstrap',
+    'shell:build_ckeditor',
     'shell:build_jquery_ui',
     'shell:build_sinon',
     'compile',

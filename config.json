@@ -27,6 +27,7 @@
     "openlayers":         "./components/openlayers/build",
     "bootstrap":          "./components/bootstrap",
     "chosen":             "./components/chosen/chosen",
+    "ckeditor":           "./components/ckeditor/dev/builder",
     "sinon":              "./components/sinon",
     "jquery_ui":          "./components/jquery-ui"
   },
