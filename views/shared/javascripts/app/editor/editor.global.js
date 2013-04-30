@@ -49,14 +49,17 @@ rivets.formatters.recordId = function(id) {
  * @return {Array}: The exploded array.
  */
 rivets.formatters.commaDelimited = {
+
   read: function(value) {
     if (_.isString(value)) return value.split(',');
     else if (_.isNull(value)) return [];
   },
+
   publish: function(value) {
     if (_.isArray(value)) value = value.join();
     return value;
   }
+
 };
 
 

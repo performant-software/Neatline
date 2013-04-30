@@ -109,14 +109,12 @@ describe('Record Form Text Tab', function() {
       cke.on('instanceReady', function() {
 
         // Should apply starting content.
-        var content = _.string.stripTags(cke.getData()).trim();
-        expect(content).toEqual('content1');
+        expect(cke.getData().trim()).toEqual('<p>1</p>');
 
-        // Set new data.
-        cke.setData('content2');
-
-        // Minimize the editor.
-        cke.execCommand('maximize');
+        // Set new data, minimize.
+        cke.setData('<p>2</p>', function() {
+          cke.execCommand('maximize');
+        });
 
       });
 
@@ -124,9 +122,12 @@ describe('Record Form Text Tab', function() {
       // -------------------------
       input.change(function() {
 
-        // Should update the model and input.
-        expect(NL.vw.RECORD.model.get(cke.name)).toEqual('content2');
-        expect(input).toHaveValue('content2');
+        // Should update the model.
+        var value = NL.vw.RECORD.model.get(cke.name).trim();
+        expect(value).toEqual('<p>2</p>');
+
+        // Should update the textarea.
+        expect(input.val().trim()).toEqual('<p>2</p>');
         done();
 
       });
@@ -136,7 +137,7 @@ describe('Record Form Text Tab', function() {
     it('title', function() {
 
       input = NL.vw.TEXT.__ui.title;
-      input.val('content1');
+      input.val('<p>1</p>');
 
       el.editTitleHtml.click();
       cke = CKEDITOR.instances.title;
@@ -146,7 +147,7 @@ describe('Record Form Text Tab', function() {
     it('body', function() {
 
       input = NL.vw.TEXT.__ui.body;
-      input.val('content1');
+      input.val('<p>1</p>');
 
       el.editBodyHtml.click();
       cke = CKEDITOR.instances.body;
