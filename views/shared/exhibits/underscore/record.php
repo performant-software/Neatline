@@ -15,7 +15,7 @@
 
   <!-- Close button. -->
   <?php echo $this->partial(
-    'exhibits/underscore/_close_button.php'
+    'exhibits/underscore/partials/close_button.php'
   ); ?>
 
   <!-- Header. -->
@@ -44,24 +44,24 @@
   <div class="tab-content">
     <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
-        'exhibits/underscore/_pane_text.php'
+        'exhibits/underscore/partials/pane_text.php'
       ); ?>
     </div>
     <div class="tab-pane map" id="record-map">
       <?php echo $this->partial(
-        'exhibits/underscore/_pane_map.php'
+        'exhibits/underscore/partials/pane_map.php'
       ); ?>
     </div>
     <div class="tab-pane style" id="record-style">
       <?php echo $this->partial(
-        'exhibits/underscore/_pane_style.php'
+        'exhibits/underscore/partials/pane_style.php'
       ); ?>
     </div>
   </div>
 
   <!-- Save/Delete buttons. -->
   <?php echo $this->partial(
-    'exhibits/underscore/_form_actions.php'
+    'exhibits/underscore/partials/form_actions.php'
   ); ?>
 
 </script>

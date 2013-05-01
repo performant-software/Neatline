@@ -18,10 +18,10 @@
 <div id="editor"></div>
 
 <!-- Exhibit. -->
-<?php echo $this->partial('exhibits/_exhibit.php'); ?>
+<?php echo $this->partial('exhibits/partials/exhibit.php'); ?>
 
 <!-- Strings. -->
-<?php echo $this->partial('exhibits/_strings.php'); ?>
+<?php echo $this->partial('exhibits/partials/strings.php'); ?>
 
 <!-- Underscore templates. -->
 <?php echo $this->partial('exhibits/underscore/menu.php'); ?>

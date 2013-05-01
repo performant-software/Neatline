@@ -15,7 +15,7 @@
 <?php echo head(array('title' => nl_field('title'))); ?>
 
 <!-- Exhibit. -->
-<?php echo $this->partial('exhibits/_exhibit.php'); ?>
+<?php echo $this->partial('exhibits/partials/exhibit.php'); ?>
 
 <!-- Description. -->
 <div class="exhibit-description">

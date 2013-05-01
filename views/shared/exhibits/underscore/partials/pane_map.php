@@ -73,7 +73,7 @@
 
     <!-- SVG modal. -->
     <?php echo $this->partial(
-      'exhibits/underscore/_svg_modal.php'
+      'exhibits/underscore/partials/svg_modal.php'
     ); ?>
 
   </label>
