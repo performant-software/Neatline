@@ -132,7 +132,7 @@ describe('Map WMS Layers', function() {
   });
 
 
-  describe('wms layers', function() {
+  describe('focusing', function() {
 
     it('should not focus for model with WMS but no focus', function() {
 

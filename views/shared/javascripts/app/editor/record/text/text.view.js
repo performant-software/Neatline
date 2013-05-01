@@ -34,8 +34,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
       // AUTOCOMPLETE
       this.__ui.item.autocomplete({
         source: _.bind(this.onSearch, this),
-        select: _.bind(this.onSelect, this),
-        delay:  0
+        select: _.bind(this.onSelect, this)
       });
 
     },

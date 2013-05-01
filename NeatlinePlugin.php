@@ -38,7 +38,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
 
 
-        // Exhibits:
+        // Exhibits
+        // --------
         $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_exhibits` (
 
@@ -62,7 +63,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
-        // Records:
+        // Records
+        // -------
         $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
 
