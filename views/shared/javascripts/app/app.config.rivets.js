@@ -10,12 +10,6 @@
 
 
 /**
- * OpenLayers theme image source.
- */
-OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
-
-
-/**
  * Backbone model adapter for Rivets.
  */
 rivets.configure({

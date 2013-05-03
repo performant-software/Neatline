@@ -16,7 +16,7 @@ jQuery(function($) {
   var slug  = $('input[name="slug"]');
   var typed = false;
 
-  slug.keyup(function() {
+  slug.change(function() {
     typed = true;
   });
 

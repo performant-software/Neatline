@@ -82,8 +82,8 @@ Neatline.module('Map', function(
       this.map.addLayers(_.values(this.baseLayers));
 
       // Set the default layer.
-      this.defaultLayer = this.baseLayers[Neatline.global.base_layer];
-      this.map.setBaseLayer(this.defaultLayer);
+      var defaultLayer = this.baseLayers[Neatline.global.base_layer];
+      this.map.setBaseLayer(defaultLayer);
 
     },
 

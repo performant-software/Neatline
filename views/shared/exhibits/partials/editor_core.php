@@ -19,9 +19,8 @@
 
 <!-- Exhibit. -->
 <?php echo $this->partial('exhibits/partials/exhibit.php'); ?>
-
-<!-- Strings. -->
 <?php echo $this->partial('exhibits/partials/strings.php'); ?>
+<?php echo $this->partial('exhibits/partials/loader.php'); ?>
 
 <!-- Underscore templates. -->
 <?php echo $this->partial('exhibits/underscore/menu.php'); ?>
