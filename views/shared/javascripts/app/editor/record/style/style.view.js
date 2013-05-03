@@ -43,13 +43,13 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
       // COLORS
       this.$('input.color').spectrum({
 
-        showButtons: false,
-        clickoutFiresChange: true,
-        showInput: true,
-
         move: function(color) {
           $(this).val(color.toHexString()).trigger('change');
-        }
+        },
+
+        showButtons: false,
+        clickoutFiresChange: true,
+        showInput: true
 
       });
 

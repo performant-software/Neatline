@@ -23,7 +23,7 @@
     , "stamen-neatline":        "https://github.com/scholarslab/stamen-neatline.git"
     , "svg-to-wkt":             "https://github.com/davidmcclure/svg-to-wkt.git"
     , "backbone.routefilter":   "https://github.com/boazsender/backbone.routefilter.git"
-    , "jquery-draggable-input": "https://github.com/saschagehlich/jquery-draggable-input.git"
+    , "jquery-draggable-input": "https://github.com/davidmcclure/jquery-draggable-input.git"
     , "toastr":                 "https://github.com/davidmcclure/toastr.git"
     , "jasmine.async":          "https://github.com/derickbailey/jasmine.async.git"
     , "ckeditor":               "https://github.com/ckeditor/ckeditor-dev.git"

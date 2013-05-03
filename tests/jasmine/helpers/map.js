@@ -183,18 +183,6 @@ var NL = (function(NL) {
   };
 
 
-  /**
-   * Get `CLASS_NAME`s for the map controls.
-   *
-   * @param {Array}: A list of control `CLASS_NAME`s.
-   */
-  NL.getMapControlClassNames = function() {
-    return _.map(this.vw.MAP.map.controls, function(control) {
-      return control.CLASS_NAME;
-    });
-  };
-
-
   return NL;
 
 
