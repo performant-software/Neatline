@@ -370,10 +370,6 @@ Neatline.module('Map', function(
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
-      // TODO|DUKE
-      // Set z-index.
-      this.map.setLayerIndex(layer, record.get('weight'));
-
       return layer;
 
     },
@@ -525,6 +521,7 @@ Neatline.module('Map', function(
       var strokeWidth   = parseInt(record.get('stroke_width'));
 
       return new OpenLayers.StyleMap({
+
         'default': new OpenLayers.Style({
           fillColor:        record.get('fill_color'),
           strokeColor:      record.get('stroke_color'),
@@ -535,9 +532,10 @@ Neatline.module('Map', function(
           graphicOpacity:   fillOpacity,
           strokeOpacity:    strokeOpacity
         }),
+
         'select': new OpenLayers.Style({
           fillColor:        record.get('select_color'),
-          strokeColor:      record.get('stroke_color'),
+          strokeColor:      record.get('select_color'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
@@ -545,9 +543,10 @@ Neatline.module('Map', function(
           graphicOpacity:   selectOpacity,
           strokeOpacity:    strokeOpacity
         }),
+
         'temporary': new OpenLayers.Style({
           fillColor:        record.get('select_color'),
-          strokeColor:      record.get('stroke_color'),
+          strokeColor:      record.get('select_color'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
@@ -555,6 +554,7 @@ Neatline.module('Map', function(
           graphicOpacity:   selectOpacity,
           strokeOpacity:    strokeOpacity
         })
+
       });
 
     },
