@@ -17,6 +17,7 @@ var NL = (function(NL) {
    */
   NL.triggerMapMoveStart = function() {
     this.vw.MAP.map.events.triggerEvent('movestart');
+    this.vw.MAP.map.dragging = true;
   };
 
 
@@ -25,6 +26,7 @@ var NL = (function(NL) {
    */
   NL.triggerMapMoveEnd = function() {
     this.vw.MAP.map.events.triggerEvent('moveend');
+    this.vw.MAP.map.dragging = false;
   };
 
 

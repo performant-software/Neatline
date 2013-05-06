@@ -25,18 +25,21 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
+      // Trackers for layers/filters.
       this.layers = { vector: {}, wms: {} };
       this.filters = {};
 
-      this.formatWKT = new OpenLayers.Format.WKT();
-      this.isMoving = false;
+      // WKT reader/writer.
+      this.wkt = new OpenLayers.Format.WKT();
 
+      // Startup routines.
       this.__initOpenLayers();
       this.__initBaseLayers();
       this.__initControls();
       this.__initViewport();
       this.__initEvents();
 
+      // Get starting data.
       this.publishPosition();
 
     },
@@ -49,14 +52,17 @@ Neatline.module('Map', function(
      */
     __initOpenLayers: function() {
 
-      // Widgets.
       var options = {
+        theme: null,
+        zoomMethod: null,
         controls: [
           new OpenLayers.Control.PanZoomBar(),
-          new OpenLayers.Control.Navigation({ documentDrag: true }),
-          new OpenLayers.Control.LayerSwitcher()
-        ],
-        theme: null
+          new OpenLayers.Control.LayerSwitcher(),
+          new OpenLayers.Control.Navigation({
+            dragPanOptions: { enableKinetic: false },
+            documentDrag: true
+          })
+        ]
       };
 
       // Instantiate map.
@@ -82,8 +88,8 @@ Neatline.module('Map', function(
       this.map.addLayers(_.values(this.baseLayers));
 
       // Set the default layer.
-      var defaultLayer = this.baseLayers[Neatline.global.base_layer];
-      this.map.setBaseLayer(defaultLayer);
+      this.defaultLayer = this.baseLayers[Neatline.global.base_layer];
+      this.map.setBaseLayer(this.defaultLayer);
 
     },
 
@@ -151,23 +157,13 @@ Neatline.module('Map', function(
 
 
     /**
-     * Register listeners for `movestart` and `moveend`. When a move is
-     * started, flip the `isMoving` tracker, which is used to prevent new
-     * layers from being ingested _while_ the map is being moved, which
-     * can cause visual artifacts. When a move completes, issue a request
-     * for new layers that fall within the updated viewport extent.
+     * When a move completes, issue a request for new layers that fall
+     * within the updated viewport extent.
      */
     __initEvents: function() {
-
-      this.map.events.register('movestart', this.map, _.bind(function() {
-        this.isMoving = true;
-      }, this));
-
       this.map.events.register('moveend', this.map, _.bind(function() {
-        this.isMoving = false;
         this.publishPosition();
       }, this));
-
     },
 
 
@@ -257,7 +253,7 @@ Neatline.module('Map', function(
      */
     ingest: function(records) {
 
-      if (this.isMoving) return;
+      if (this.map.dragging) return;
 
       // Build layers.
       this.ingestVectorLayers(records);
@@ -359,7 +355,7 @@ Neatline.module('Map', function(
 
       // Add features.
       if (record.get('coverage')) {
-        layer.addFeatures(this.formatWKT.read(record.get('coverage')));
+        layer.addFeatures(this.wkt.read(record.get('coverage')));
       }
 
       layer.nModel = record;
@@ -369,6 +365,10 @@ Neatline.module('Map', function(
       // Track, add to map.
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
+
+      // TODO|DUKE
+      // Set z-index.
+      this.map.setLayerIndex(layer, record.get('weight'));
 
       return layer;
 
@@ -578,7 +578,7 @@ Neatline.module('Map', function(
     getExtentAsWKT: function() {
       var extent = this.map.getExtent().toGeometry();
       var vector = new OpenLayers.Feature.Vector(extent);
-      return this.formatWKT.write(vector);
+      return this.wkt.write(vector);
     },
 
 

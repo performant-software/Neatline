@@ -58,13 +58,13 @@ describe('Map Record Ingesting', function() {
     NL.triggerMapMoveEnd();
     NL.triggerMapMoveStart();
 
-    // The new collection should _not_ be ingested.
+    // The 2-record collection should _not_ be ingested.
     NL.respondLast200(NL.json.MapRecordIngesting.records.two);
     NL.assertVectorLayerCount(1);
 
     NL.triggerMapMoveEnd();
 
-    // The new collection should be ingested.
+    // The 2-record collection _should_ be ingested.
     NL.respondLast200(NL.json.MapRecordIngesting.records.two);
     NL.assertVectorLayerCount(2);
 
