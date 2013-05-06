@@ -27,7 +27,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_TestCase
             'widgets'       => array('4','5'),
             'title'         => '6',
             'slug'          => '7',
-            'description'   => '8',
+            'narrative'     => '8',
             'public'        => '9',
             'styles'        => '10',
             'map_focus'     => '11',
@@ -41,7 +41,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($exhibit->widgets,      '4,5');
         $this->assertEquals($exhibit->title,        '6');
         $this->assertEquals($exhibit->slug,         '7');
-        $this->assertEquals($exhibit->description,  '8');
+        $this->assertEquals($exhibit->narrative,    '8');
         $this->assertEquals($exhibit->public,       9);
         $this->assertEquals($exhibit->styles,       10);
         $this->assertEquals($exhibit->map_focus,    11);

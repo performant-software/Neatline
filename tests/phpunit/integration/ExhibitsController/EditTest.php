@@ -21,7 +21,7 @@ class ExhibitsControllerTest_Edit extends Neatline_TestCase
 
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'Title';
-        $exhibit->description   = 'Description.';
+        $exhibit->narrative     = 'Narrative.';
         $exhibit->base_layers   = 'Layer1,Layer3';
         $exhibit->base_layer    = 'Layer3';
         $exhibit->widgets       = 'Widget1,Widget2';
@@ -59,10 +59,10 @@ class ExhibitsControllerTest_Edit extends Neatline_TestCase
             '//select[@name="widgets[]"]/
             option[@selected="selected"][@value="Widget2"]');
 
-        // Description:
+        // Narrative:
         $this->assertXpathContentContains(
-            '//textarea[@name="description"]',
-            'Description.');
+            '//textarea[@name="narrative"]',
+            'Narrative.');
 
         // Public.
         $this->assertXpath(
@@ -287,8 +287,8 @@ class ExhibitsControllerTest_Edit extends Neatline_TestCase
             'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer2',
             'widgets'       => array('Widget1', 'Widget2'),
-            'description'   => 'Description 2.',
-            'public'        => 0
+            'narrative'     => 'Narrative 2.',
+            'public'        => 1
         ));
 
         // Submit the form, reload exhibit.
@@ -301,8 +301,8 @@ class ExhibitsControllerTest_Edit extends Neatline_TestCase
         $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer2');
         $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->description,  'Description 2.');
-        $this->assertEquals($exhibit->public,       0);
+        $this->assertEquals($exhibit->narrative,    'Narrative 2.');
+        $this->assertEquals($exhibit->public,       1);
 
     }
 

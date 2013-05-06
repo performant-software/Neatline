@@ -29,7 +29,7 @@ class ExhibitsControllerTest_Get extends Neatline_TestCase
             'widgets'       => '5',
             'title'         => '6',
             'slug'          => '7',
-            'description'   => '8',
+            'narrative'     => '8',
             'styles'        => '9',
             'map_focus'     => '10',
             'map_zoom'      => 11
@@ -47,7 +47,7 @@ class ExhibitsControllerTest_Get extends Neatline_TestCase
         $this->assertEquals($response->widgets,         '5');
         $this->assertEquals($response->title,           '6');
         $this->assertEquals($response->slug,            '7');
-        $this->assertEquals($response->description,     '8');
+        $this->assertEquals($response->narrative,       '8');
         $this->assertEquals($response->styles,          '9');
         $this->assertEquals($response->map_focus,       '10');
         $this->assertEquals($response->map_zoom,        11);

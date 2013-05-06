@@ -88,11 +88,11 @@ class Neatline_ExhibitForm extends Omeka_Form
             )
         ));
 
-        // Description.
-        $this->addElement('textarea', 'description', array(
+        // Narrative.
+        $this->addElement('textarea', 'narrative', array(
             'label'         => __('Narrative'),
             'description'   => __('A prose narrative to accompany the exhibit.'),
-            'value'         => $this->_exhibit->description,
+            'value'         => $this->_exhibit->narrative,
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
 

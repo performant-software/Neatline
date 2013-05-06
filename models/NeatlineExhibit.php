@@ -21,7 +21,7 @@ class NeatlineExhibit extends Neatline_ExpandableRow
     public $widgets;        // TEXT NULL
     public $title;          // TEXT NULL
     public $slug;           // VARCHAR(100) NOT NULL
-    public $description;    // TEXT NULL
+    public $narrative;      // LONGTEXT NULL
     public $public = 0;     // TINYINT(1) NOT NULL
     public $styles;         // TEXT NULL
     public $map_focus;      // VARCHAR(100) NULL

@@ -57,8 +57,8 @@ class ExhibitsControllerTest_Add extends Neatline_TestCase
         $this->assertXpath($root.'/option[@value="Widget2"]');
         $this->assertXpath($root.'/option[@value="Widget3"]');
 
-        // Description:
-        $this->assertXpath('//textarea[@name="description"]');
+        // Narrative:
+        $this->assertXpath('//textarea[@name="narrative"]');
 
         // Public:
         $this->assertXpath('//input[@name="public"]');
@@ -256,7 +256,7 @@ class ExhibitsControllerTest_Add extends Neatline_TestCase
             'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer2',
             'widgets'       => array('Widget1', 'Widget2'),
-            'description'   => 'Description.',
+            'narrative'     => 'Narrative.',
             'public'        => 1
         ));
 
@@ -274,7 +274,7 @@ class ExhibitsControllerTest_Add extends Neatline_TestCase
         $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer2');
         $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->description,  'Description.');
+        $this->assertEquals($exhibit->narrative,    'Narrative.');
         $this->assertEquals($exhibit->public,       1);
 
     }
