@@ -30,7 +30,7 @@ Neatline.module('Map', function(
       this.filters = {};
 
       // WKT reader/writer.
-      this.wkt = new OpenLayers.Format.WKT();
+      this.formatWkt = new OpenLayers.Format.WKT();
 
       // Startup routines.
       this.__initOpenLayers();
@@ -52,9 +52,11 @@ Neatline.module('Map', function(
      */
     __initOpenLayers: function() {
 
-      var options = {
+      this.map = new OpenLayers.Map(this.el, {
+
         theme: null,
         zoomMethod: null,
+
         controls: [
           new OpenLayers.Control.PanZoomBar(),
           new OpenLayers.Control.LayerSwitcher(),
@@ -63,10 +65,8 @@ Neatline.module('Map', function(
             documentDrag: true
           })
         ]
-      };
 
-      // Instantiate map.
-      this.map = new OpenLayers.Map(this.el, options);
+      });
 
     },
 
@@ -355,7 +355,7 @@ Neatline.module('Map', function(
 
       // Add features.
       if (record.get('coverage')) {
-        layer.addFeatures(this.wkt.read(record.get('coverage')));
+        layer.addFeatures(this.formatWkt.read(record.get('coverage')));
       }
 
       layer.nModel = record;
@@ -578,7 +578,7 @@ Neatline.module('Map', function(
     getExtentAsWKT: function() {
       var extent = this.map.getExtent().toGeometry();
       var vector = new OpenLayers.Feature.Vector(extent);
-      return this.wkt.write(vector);
+      return this.formatWkt.write(vector);
     },
 
 

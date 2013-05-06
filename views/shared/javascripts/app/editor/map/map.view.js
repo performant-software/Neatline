@@ -29,16 +29,12 @@ _.extend(Neatline.Map.View.prototype, {
    */
   startEdit: function(model) {
 
-    // If a layer already exists on the map for the model that is being
-    // edited (for example, when the user opens the edit form by clicking
-    // on a map vector), use the exising layer as the edit layer. If a
-    // layer does not exist, create a new one for the model.
-
+    // Get or create a layer for the model.
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
-    this.editLayer.nFrozen = true;
 
-    // Create the set of editing controls for the edit layer.
+    // Freeze the edit layer.
+    this.editLayer.nFrozen = true;
 
     this.controls = {
 
@@ -255,7 +251,7 @@ _.extend(Neatline.Map.View.prototype, {
     // the last `change` event, update the key used to identify the edit
     // layer in the `layers.vector` hash. This is the case when the model
     // has been saved for the first time, and the original `undefined` id
-    // is replaced by the new id of the resource on the server.
+    // is replaced by the new `id` of the resource on the server.
 
     if (model.hasChanged('id')) {
       delete this.layers.vector[model.previous('id')];
@@ -288,11 +284,11 @@ _.extend(Neatline.Map.View.prototype, {
 
       if (!f._sketch) {
 
-        // If the feature is a geometry collection, "flatten" it into a
-        // series of regular, non-collection features by creating features
-        // from each of the component geometries. Otherwise, it's possible
-        // for layers with multiple features to be serialized as nested
-        // GEOMETRYCOLLECTION's, which can't be indexed by MySQL.
+        // If the feature is a collection, flatten it into an array of
+        // regular, non-collection features by creating new features from
+        // each of the component geometries. This prevents layers with
+        // multiple features from being serialized as nested collections,
+        // which can't be parsed by MySQL.
 
         if (f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Collection') {
           _.each(f.geometry.components, function(geo) {
@@ -307,7 +303,7 @@ _.extend(Neatline.Map.View.prototype, {
     });
 
     // Convert to WKT, update the form.
-    if (!_.isEmpty(features)) wkt = this.wkt.write(features);
+    if (!_.isEmpty(features)) wkt = this.formatWkt.write(features);
     Neatline.execute('EDITOR:RECORD:setCoverage', wkt);
 
   },
