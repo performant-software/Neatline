@@ -32,8 +32,7 @@ _.extend(Neatline.Map.View.prototype, {
     // If a layer already exists on the map for the model that is being
     // edited (for example, when the user opens the edit form by clicking
     // on a map vector), use the exising layer as the edit layer. If a
-    // layer does not exist, build a new layer form the model, freeze it,
-    // and add it to the map.
+    // layer does not exist, create a new one for the model.
 
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
@@ -45,61 +44,49 @@ _.extend(Neatline.Map.View.prototype, {
 
       // Draw Point.
       point: new OpenLayers.Control.DrawFeature(
-        this.editLayer,
-        OpenLayers.Handler.Point,
-        {
+        this.editLayer, OpenLayers.Handler.Point, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
       // Draw Line.
       line: new OpenLayers.Control.DrawFeature(
-        this.editLayer,
-        OpenLayers.Handler.Path,
-        {
+        this.editLayer, OpenLayers.Handler.Path, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
       // Draw Polygon.
       poly: new OpenLayers.Control.DrawFeature(
-        this.editLayer,
-        OpenLayers.Handler.Polygon,
-        {
+        this.editLayer, OpenLayers.Handler.Polygon, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
       // Draw Regular Polygon.
       regPoly: new OpenLayers.Control.DrawFeature(
-        this.editLayer,
-        OpenLayers.Handler.RegularPolygon,
-        {
+        this.editLayer, OpenLayers.Handler.RegularPolygon, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
       // Draw SVG.
       svg: new OpenLayers.Control.DrawFeature(
-        this.editLayer,
-        OpenLayers.Handler.Geometry,
-        {
+        this.editLayer, OpenLayers.Handler.Geometry, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
       // Modify Shape.
       edit: new OpenLayers.Control.ModifyFeature(
-        this.editLayer,
-        {
+        this.editLayer, {
           onModification: _.bind(this.publishWKT, this)
         }
       ),
 
       // Delete Shape.
       remove: new OpenLayers.Control.ModifyFeature(
-        this.editLayer,
-        {
+        this.editLayer, {
           onModificationStart: _.bind(this.removeFeature, this)
         }
       )
