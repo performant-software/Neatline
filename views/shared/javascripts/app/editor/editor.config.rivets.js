@@ -62,13 +62,3 @@ rivets.formatters.commaDelimited = {
   }
 
 };
-
-
-/**
- * Toastr globals.
- */
-toastr.options = {
-  timeOut:  2500,
-  fadeIn:   200,
-  fadeOut:  200
-};

@@ -53,7 +53,7 @@
 
     <div class="inline-inputs">
       <input type="text" name="snap" value="15" />
-      Snap Angle (degrees)
+      Snap Angle
     </div>
 
     <label class="checkbox">

@@ -184,8 +184,8 @@ describe('Map Vector Layers', function() {
       expect(sel.fillColor).        toEqual('2');
 
       expect(def.strokeColor).      toEqual('3');
-      expect(tmp.strokeColor).      toEqual('3');
-      expect(sel.strokeColor).      toEqual('3');
+      expect(tmp.strokeColor).      toEqual('2');
+      expect(sel.strokeColor).      toEqual('2');
 
       expect(def.fillOpacity).      toEqual(0.04);
       expect(tmp.fillOpacity).      toEqual(0.05);

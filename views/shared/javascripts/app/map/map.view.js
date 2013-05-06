@@ -53,7 +53,8 @@ Neatline.module('Map', function(
       var options = {
         controls: [
           new OpenLayers.Control.PanZoomBar(),
-          new OpenLayers.Control.Navigation({ documentDrag: true })
+          new OpenLayers.Control.Navigation({ documentDrag: true }),
+          new OpenLayers.Control.LayerSwitcher()
         ],
         theme: null
       };
@@ -81,13 +82,8 @@ Neatline.module('Map', function(
       this.map.addLayers(_.values(this.baseLayers));
 
       // Set the default layer.
-      this.defaultLayer = this.baseLayers[Neatline.global.base_layer];
-      this.map.setBaseLayer(this.defaultLayer);
-
-      // Add switcher for more than 1 layer.
-      if (_.values(this.baseLayers).length > 1) {
-        this.map.addControl(new OpenLayers.Control.LayerSwitcher());
-      }
+      var defaultLayer = this.baseLayers[Neatline.global.base_layer];
+      this.map.setBaseLayer(defaultLayer);
 
     },
 
@@ -406,6 +402,10 @@ Neatline.module('Map', function(
       this.layers.wms[record.id] = layer;
       this.map.addLayer(layer);
 
+      // TODO|DUKE
+      // Set z-index.
+      this.map.setLayerIndex(layer, record.get('weight'));
+
       return layer;
 
     },
@@ -521,6 +521,7 @@ Neatline.module('Map', function(
       var strokeWidth   = parseInt(record.get('stroke_width'));
 
       return new OpenLayers.StyleMap({
+
         'default': new OpenLayers.Style({
           fillColor:        record.get('fill_color'),
           strokeColor:      record.get('stroke_color'),
@@ -531,9 +532,10 @@ Neatline.module('Map', function(
           graphicOpacity:   fillOpacity,
           strokeOpacity:    strokeOpacity
         }),
+
         'select': new OpenLayers.Style({
           fillColor:        record.get('select_color'),
-          strokeColor:      record.get('stroke_color'),
+          strokeColor:      record.get('select_color'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
@@ -541,9 +543,10 @@ Neatline.module('Map', function(
           graphicOpacity:   selectOpacity,
           strokeOpacity:    strokeOpacity
         }),
+
         'temporary': new OpenLayers.Style({
           fillColor:        record.get('select_color'),
-          strokeColor:      record.get('stroke_color'),
+          strokeColor:      record.get('select_color'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
@@ -551,6 +554,7 @@ Neatline.module('Map', function(
           graphicOpacity:   selectOpacity,
           strokeOpacity:    strokeOpacity
         })
+
       });
 
     },

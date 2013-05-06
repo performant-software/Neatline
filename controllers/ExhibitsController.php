@@ -100,6 +100,17 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
+     * Browse exhibits.
+     */
+    public function browseAction()
+    {
+        $this->_setParam('sort_field', 'added');
+        $this->_setParam('sort_dir', 'd');
+        parent::browseAction();
+    }
+
+
+    /**
      * Import items from Omeka.
      */
     public function importAction()

@@ -19,9 +19,9 @@ class ImportItemsTest extends Neatline_TestCase
     public function testCreateRecords()
     {
 
+        $exhibit = $this->__exhibit();
         $item1 = $this->__item();
         $item2 = $this->__item();
-        $exhibit = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
