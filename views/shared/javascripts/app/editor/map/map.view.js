@@ -17,8 +17,8 @@ _.extend(Neatline.Map.View.prototype, {
    * Initialize editor-specific state trackers.
    */
   __initEditor: function() {
-    this.editLayer    = null;
-    this.isModifying  = false;
+    this.editLayer = null;
+    this.modifying = false;
   },
 
 
@@ -52,7 +52,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw line.
+      // Draw Line.
       line: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Path,
@@ -61,7 +61,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw polygon.
+      // Draw Polygon.
       poly: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Polygon,
@@ -70,7 +70,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw regular polygon.
+      // Draw Regular Polygon.
       regPoly: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.RegularPolygon,
@@ -79,7 +79,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Draw SVG geometry.
+      // Draw SVG.
       svg: new OpenLayers.Control.DrawFeature(
         this.editLayer,
         OpenLayers.Handler.Geometry,
@@ -88,7 +88,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Modify shape.
+      // Modify Shape.
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
@@ -96,7 +96,7 @@ _.extend(Neatline.Map.View.prototype, {
         }
       ),
 
-      // Delete shape.
+      // Delete Shape.
       remove: new OpenLayers.Control.ModifyFeature(
         this.editLayer,
         {
@@ -106,10 +106,8 @@ _.extend(Neatline.Map.View.prototype, {
 
     };
 
-    // Add the edit controls to map.
-    _.each(this.controls, _.bind(function(control, key) {
-      this.map.addControl(control);
-    }, this));
+    // Add the controls.
+    this.map.addControls(_.values(this.controls));
 
   },
 
@@ -119,10 +117,9 @@ _.extend(Neatline.Map.View.prototype, {
    */
   endEdit: function() {
 
-    // Remove the editing controls.
+    // Remove the controls.
     _.each(this.controls, _.bind(function(control) {
       this.map.removeControl(control);
-      control.deactivate();
     }, this));
 
     // Unfreeze and de-reference the edit layer.
@@ -146,16 +143,14 @@ _.extend(Neatline.Map.View.prototype, {
    */
   updateEdit: function(settings) {
 
-
     // (1) Reset the map to its default state.
 
-    this.isModifying = false;
+    this.modifying = false;
 
     this.activateControls();
     _.each(this.controls, function(control) {
       control.deactivate();
     });
-
 
     // (2) Apply the active editing mode.
 
@@ -222,7 +217,6 @@ _.extend(Neatline.Map.View.prototype, {
     // Irregular:
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
-
   },
 
 
@@ -245,7 +239,7 @@ _.extend(Neatline.Map.View.prototype, {
     // always be the "highest" layer on the map when one of the geometry
     // modification modes is active.
 
-    this.isModifying = true;
+    this.modifying = true;
     this.raiseEditLayer();
 
   },
@@ -348,7 +342,7 @@ _.extend(Neatline.Map.View.prototype, {
    * Push the edit layer to the top of the stack.
    */
   raiseEditLayer: function() {
-    if (!_.isNull(this.editLayer) && this.isModifying) {
+    if (!_.isNull(this.editLayer) && this.modifying) {
       this.map.raiseLayer(this.editLayer, this.map.layers.length);
     }
   },
