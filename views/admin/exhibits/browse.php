@@ -43,6 +43,9 @@
       </tr>
     </thead>
 
+  <!-- Top pagination. -->
+  <div class="pagination"><?php echo pagination_links(); ?></div>
+
     <tbody>
 
       <!-- Exhibit listings. -->
