@@ -31,7 +31,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Title.
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
-            'description'   => __('A title for the exhibit, displayed in the theme header.'),
+            'description'   => __('An exhibit title, displayed in the page title and theme header.'),
             'size'          => 40,
             'value'         => $this->_exhibit->title,
             'required'      => true,
@@ -50,7 +50,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
-            'description'   => __('A string used to form the public URL for the exhibit. Can contain letters, numbers, and hyphens.'),
+            'description'   => __('A string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
             'value'         => $this->_exhibit->slug,
@@ -91,7 +91,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         // Narrative.
         $this->addElement('textarea', 'narrative', array(
             'label'         => __('Narrative'),
-            'description'   => __('A prose narrative to accompany the exhibit.'),
+            'description'   => __('A prose narrative to introduce or contextualize the exhibit.'),
             'value'         => $this->_exhibit->narrative,
             'attribs'       => array('class' => 'html-editor', 'rows' => '10')
         ));
@@ -149,7 +149,7 @@ class Neatline_ExhibitForm extends Omeka_Form
         $this->addDisplayGroup(array(
             'title',
             'slug',
-            'description',
+            'narrative',
             'widgets',
             'base_layers',
             'base_layer',

@@ -19,13 +19,14 @@
   echo flash();
 ?>
 
-<a class="small green button" href="<?php echo url('neatline/add'); ?>">
-  <?php echo __('Create an Exhibit'); ?>
-</a>
-
 <div id="primary">
 
   <?php if(nl_areExhibits()): ?>
+
+  <a class="add small green button"
+    href="<?php echo url('neatline/add'); ?>">
+    <?php echo __('Create an Exhibit'); ?>
+  </a>
 
   <table class="neatline">
 
@@ -91,8 +92,15 @@
   <div class="pagination"><?php echo pagination_links(); ?></div>
 
   <?php else: ?>
+
     <h2><?php echo __('You have no exhibits.'); ?></h2>
     <p><?php echo __('Get started by creating a new one!'); ?></p>
+
+    <a class="add big green button"
+      href="<?php echo url('neatline/add'); ?>">
+      <?php echo __('Create an Exhibit'); ?>
+    </a>
+
   <?php endif; ?>
 
 </div>

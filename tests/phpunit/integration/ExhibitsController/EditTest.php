@@ -280,7 +280,6 @@ class ExhibitsControllerTest_Edit extends Neatline_TestCase
 
         $exhibit = $this->__exhibit();
 
-        // Valid form.
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title 2',
             'slug'          => 'slug-2',
