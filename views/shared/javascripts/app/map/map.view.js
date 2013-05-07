@@ -56,6 +56,7 @@ Neatline.module('Map', function(
 
         theme: null,
         zoomMethod: null,
+        panMethod:  null,
 
         controls: [
           new OpenLayers.Control.PanZoomBar(),
