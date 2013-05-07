@@ -103,13 +103,16 @@ Neatline.module('Map', function(
       // Build the hover control, bind callbacks.
       this.hoverControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
+
           hover: true,
-          highlightOnly: true,
           renderIntent: 'temporary',
+          highlightOnly: true,
+
           eventListeners: {
             featurehighlighted:   this.onFeatureHighlight,
             featureunhighlighted: this.onFeatureUnhighlight
           }
+
         }
       );
 
@@ -366,7 +369,7 @@ Neatline.module('Map', function(
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
-      // TODO|DUKE
+      // TODO|test
       // Set z-index.
       this.map.setLayerIndex(layer, record.get('weight'));
 
@@ -402,7 +405,7 @@ Neatline.module('Map', function(
       this.layers.wms[record.id] = layer;
       this.map.addLayer(layer);
 
-      // TODO|DUKE
+      // TODO|test
       // Set z-index.
       this.map.setLayerIndex(layer, record.get('weight'));
 
