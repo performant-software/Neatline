@@ -29,16 +29,18 @@ Neatline.module('Shared.Record', function(
 
     defaults: function() {
       return {
-        exhibit_id:     Neatline.global.exhibit.id,
-        presenter:      'StaticBubble',
-        fill_color:     '#00aeff',
-        select_color:   '#00aeff',
-        stroke_color:   '#000000',
-        fill_opacity:   30,
-        stroke_opacity: 90,
-        select_opacity: 50,
-        point_radius:   10,
-        stroke_width:   2
+        exhibit_id:             Neatline.global.exhibit.id,
+        presenter:              'StaticBubble',
+        fill_color:             '#00aeff',
+        fill_select_color:      '#00aeff',
+        stroke_color:           '#000000',
+        stroke_select_color:    '#000000',
+        fill_opacity:           30,
+        fill_select_opacity:    50,
+        stroke_opacity:         90,
+        stroke_select_opacity:  100,
+        point_radius:           10,
+        stroke_width:           2
       };
     }
 

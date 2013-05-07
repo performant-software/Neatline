@@ -16,11 +16,6 @@
   <!-- Label text. -->
   <?php echo __($label); ?>
 
-  <!-- Style slug. -->
-  <?php if (isset($style)): ?>
-    <code><?php echo $style; ?></code>
-  <?php endif; ?>
-
   <!-- ( Use Current ). -->
   <?php if (isset($useCurrent) && $useCurrent): ?>
     ( <a class="label-link" name="set-<?php echo $name; ?>">

@@ -11,12 +11,7 @@
 
 ?>
 
-<label>
-  <?php echo __($label); ?>
-  <?php if (isset($style)): ?>
-    <code><?php echo $style; ?></code>
-  <?php endif; ?>
-</label>
+<label><?php echo __($label); ?></label>
 
 <div class="controls">
   <div class="inline-inputs">

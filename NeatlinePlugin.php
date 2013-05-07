@@ -228,33 +228,40 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         return array_merge($styles, array(
 
+            // Groups
             'widgets',
             'presenter',
 
+            // Colors
             'fill_color',
             'fill_select_color',
             'stroke_color',
             'stroke_select_color',
 
+            // Opacities
             'fill_opacity',
             'fill_select_opacity',
             'stroke_opacity',
             'stroke_select_opacity',
 
+            // Dimensions
             'stroke_width',
             'point_radius',
             'zindex',
             'weight',
 
+            // Dates
             'start_date',
             'end_date',
             'after_date',
             'before_date',
 
+            // Imagery
             'point_image',
             'wms_address',
             'wms_layers',
 
+            // Visibility
             'min_zoom',
             'max_zoom',
             'map_focus',
