@@ -38,7 +38,11 @@ class Neatline_ImportItems extends Omeka_Job_AbstractJob
             );
 
             // Otherwise, create one.
-            if (!$record) $record = new NeatlineRecord($exhibit, $item);
+            if (!$record) {
+                $record = new NeatlineRecord($exhibit, $item);
+                $record->added = $item->added;
+            }
+
             $record->save();
 
         }

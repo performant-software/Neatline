@@ -19,9 +19,9 @@ class ImportItemsTest extends Neatline_TestCase
     public function testCreateRecords()
     {
 
-        $exhibit = $this->__exhibit();
-        $item1 = $this->__item();
-        $item2 = $this->__item();
+        $item1      = $this->__item();
+        $item2      = $this->__item();
+        $exhibit    = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
@@ -30,7 +30,7 @@ class ImportItemsTest extends Neatline_TestCase
             )
         );
 
-        // Should match item 1.
+        // Should match item 1, not item 2.
         $records = $this->__records->queryRecords($exhibit);
         $this->assertEquals($records['records'][0]['item_id'],$item1->id);
         $this->assertEquals($records['count'], 1);
@@ -43,11 +43,11 @@ class ImportItemsTest extends Neatline_TestCase
      * see if a record already exists in the exhibit for the item; if so,
      * the record should be re-compiled, but not duplicated.
      */
-    public function testBlockDuplicates()
+    public function testRecompileRecords()
     {
 
-        $item = $this->__item();
-        $exhibit = $this->__exhibit();
+        $item       = $this->__item();
+        $exhibit    = $this->__exhibit();
 
         // Create existing item-backed record.
         $record = new NeatlineRecord($exhibit, $item);
@@ -60,12 +60,45 @@ class ImportItemsTest extends Neatline_TestCase
             )
         );
 
-        // Should not duplicate item 1 record.
+        // Should not duplicate the record.
         $records = $this->__records->queryRecords($exhibit);
         $this->assertEquals($records['count'], 1);
 
-        // Should (re)compile the existing record.
+        // Should recompile the record.
         $this->assertNotNull($records['records'][0]['body']);
+
+    }
+
+
+    /**
+     * When a new record is created for an item, the `added` field on the
+     * record should be set to match the `added` field on the parent item.
+     * This ensures that the records will be listed in the Neatline editor
+     * in the same order as the parent items in the Omeka admin.
+     */
+    public function testSetRecordAdded()
+    {
+
+        $item = $this->__item();
+        $item->added = '2000-01-01 00:00:00';
+        $item->save();
+
+        $exhibit = $this->__exhibit();
+
+        Zend_Registry::get('bootstrap')->getResource('jobs')->
+            send('Neatline_ImportItems', array(
+                'query' => array('range' => $item->id),
+                'exhibit_id' => $exhibit->id
+            )
+        );
+
+        // Get the new record.
+        $record = $this->__records->findBySql(
+            'exhibit_id=?', array($exhibit->id), true
+        );
+
+        // Should set `added` to match item.
+        $this->assertEquals($record->added, '2000-01-01 00:00:00');
 
     }
 
