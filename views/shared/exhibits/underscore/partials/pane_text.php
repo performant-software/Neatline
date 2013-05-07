@@ -20,6 +20,12 @@
       'placeholder' => 'Search Omeka Items'
   )); ?>
 
+  <?php echo common('neatline/input', array(
+      'name'  => 'slug',
+      'label' => 'Slug',
+      'bind'  => 'record.slug'
+  )); ?>
+
   <?php echo common('neatline/textarea', array(
       'id'    => 'title',
       'name'  => 'title',
