@@ -303,9 +303,9 @@ module.exports = function(grunt) {
         },
         files: {
           './views/shared/css/payloads/neatline-public.css':
-            paths.stylus.shared+'/public/*.styl',
+            paths.stylus.shared+'/public/**/*.styl',
           './views/shared/css/payloads/neatline-editor.css':
-            paths.stylus.shared+'/editor/*.styl',
+            paths.stylus.shared+'/editor/**/*.styl',
           './views/admin/css/payloads/exhibit-form.css':
             paths.stylus.admin+'/exhibit-form.styl'
         }
