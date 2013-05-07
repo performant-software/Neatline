@@ -370,9 +370,8 @@ Neatline.module('Map', function(
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
-      // TODO|test
       // Set z-index.
-      this.map.setLayerIndex(layer, record.get('weight'));
+      this.map.setLayerIndex(layer, record.get('zindex'));
 
       return layer;
 
@@ -406,9 +405,8 @@ Neatline.module('Map', function(
       this.layers.wms[record.id] = layer;
       this.map.addLayer(layer);
 
-      // TODO|test
       // Set z-index.
-      this.map.setLayerIndex(layer, record.get('weight'));
+      this.map.setLayerIndex(layer, record.get('zindex'));
 
       return layer;
 

@@ -39,6 +39,7 @@ var NL = (function(NL) {
         records: {
           regular:    readFixtures('MapVectorLayers.records.regular.json'),
           deleted:    readFixtures('MapVectorLayers.records.deleted.json'),
+          zindex:     readFixtures('MapVectorLayers.records.zindex.json'),
           styles:     readFixtures('MapVectorLayers.records.styles.json'),
           focusing:   readFixtures('MapVectorLayers.records.focusing.json')
         }
@@ -47,7 +48,8 @@ var NL = (function(NL) {
       MapWmsLayers: {
         records: {
           regular:    readFixtures('MapWmsLayers.records.regular.json'),
-          deleted:    readFixtures('MapWmsLayers.records.deleted.json')
+          deleted:    readFixtures('MapWmsLayers.records.deleted.json'),
+          zindex:     readFixtures('MapWmsLayers.records.zindex.json')
         },
         record: {
           noFocus:    readFixtures('MapWmsLayers.record.noFocus.json'),

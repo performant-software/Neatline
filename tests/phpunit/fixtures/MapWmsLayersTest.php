@@ -60,6 +60,34 @@ class FixturesTest_MapWmsLayers extends Neatline_FixtureCase
 
 
     /**
+     * `MapWmsLayers.records.zindex.json`
+     */
+    public function testZIndex()
+    {
+
+        $record1 = $this->__record($this->exhibit);
+        $record2 = $this->__record($this->exhibit);
+
+        $record1->title         = 'title1';
+        $record2->title         = 'title2';
+        $record1->wms_address   = 'address1';
+        $record2->wms_address   = 'address2';
+        $record1->wms_layers    = 'layers1';
+        $record2->wms_layers    = 'layers2';
+        $record1->zindex        = 1;
+        $record2->zindex        = 2;
+
+        $record1->save();
+        $record2->save();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'MapWmsLayers.records.zindex.json'
+        );
+
+    }
+
+
+    /**
      * `MapWmsLayers.record.noFocus.json`
      * `MapWmsLayers.record.focus.json`
      */

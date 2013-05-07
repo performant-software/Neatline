@@ -156,6 +156,30 @@ describe('Map Vector Layers', function() {
   });
 
 
+  describe('zindex rendering', function() {
+
+    it('should apply `zindex` values', function() {
+
+      // ------------------------------------------------------------------
+      // The layer indices for vector layers should be set according to
+      // the value of the `zindex` fields on the record models.
+      // ------------------------------------------------------------------
+
+      NL.respondMap200(NL.json.MapVectorLayers.records.zindex);
+
+      // Get the two vector layers.
+      var layer1 = NL.getVectorLayer('title1');
+      var layer2 = NL.getVectorLayer('title2');
+
+      // Map should set layer indices.
+      expect(NL.vw.MAP.map.getLayerIndex(layer1)).toEqual(1);
+      expect(NL.vw.MAP.map.getLayerIndex(layer2)).toEqual(2);
+
+    });
+
+  });
+
+
   describe('style rendering', function() {
 
     var layer, feature;
