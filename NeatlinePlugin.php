@@ -43,20 +43,23 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query("CREATE TABLE IF NOT EXISTS
           `{$this->_db->prefix}neatline_exhibits` (
 
-          `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-          `added`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          `modified`      TIMESTAMP NULL,
-          `query`         TEXT NULL,
-          `base_layers`   TEXT NULL,
-          `base_layer`    VARCHAR(100) NULL,
-          `widgets`       TEXT NULL,
-          `title`         TEXT NULL,
-          `slug`          VARCHAR(100) NOT NULL,
-          `narrative`     LONGTEXT NULL,
-          `public`        TINYINT(1) NOT NULL,
-          `styles`        TEXT NULL,
-          `map_focus`     VARCHAR(100) NULL,
-          `map_zoom`      INT(10) UNSIGNED NULL,
+          `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          `modified`              TIMESTAMP NULL,
+          `query`                 TEXT NULL,
+
+          `base_layers`           TEXT NULL,
+          `base_layer`            VARCHAR(100) NULL,
+          `widgets`               TEXT NULL,
+
+          `title`                 TEXT NULL,
+          `slug`                  VARCHAR(100) NOT NULL,
+          `narrative`             LONGTEXT NULL,
+          `public`                TINYINT(1) NOT NULL,
+
+          `styles`                TEXT NULL,
+          `map_focus`             VARCHAR(100) NULL,
+          `map_zoom`              INT(10) UNSIGNED NULL,
 
            PRIMARY KEY            (`id`)
 
