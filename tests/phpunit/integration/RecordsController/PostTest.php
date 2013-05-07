@@ -24,31 +24,32 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->request->setMethod('POST')->setRawBody(
             Zend_Json::encode(array(
                 'exhibit_id'        => $exhibit->id,
-                'title'             => '1',
-                'body'              => '2',
-                'coverage'          => 'POINT(3 3)',
-                'tags'              => '4',
-                'widgets'           => array('5','6'),
-                'presenter'         => '7',
-                'fill_color'        => '8',
-                'select_color'      => '9',
-                'stroke_color'      => '10',
-                'fill_opacity'      => '11',
-                'select_opacity'    => '12',
-                'stroke_opacity'    => '13',
-                'stroke_width'      => '14',
-                'point_radius'      => '15',
-                'zindex'            => '16',
-                'weight'            => '17',
-                'start_date'        => '18',
-                'end_date'          => '19',
-                'after_date'        => '20',
-                'before_date'       => '21',
-                'point_image'       => '22',
-                'min_zoom'          => '23',
-                'max_zoom'          => '24',
-                'map_zoom'          => '25',
-                'map_focus'         => '26'
+                'slug'              => '1',
+                'title'             => '2',
+                'body'              => '3',
+                'coverage'          => 'POINT(4 4)',
+                'tags'              => '5',
+                'widgets'           => array('6','7'),
+                'presenter'         => '8',
+                'fill_color'        => '9',
+                'select_color'      => '10',
+                'stroke_color'      => '11',
+                'fill_opacity'      => '12',
+                'select_opacity'    => '13',
+                'stroke_opacity'    => '14',
+                'stroke_width'      => '15',
+                'point_radius'      => '16',
+                'zindex'            => '17',
+                'weight'            => '18',
+                'start_date'        => '19',
+                'end_date'          => '20',
+                'after_date'        => '21',
+                'before_date'       => '22',
+                'point_image'       => '23',
+                'min_zoom'          => '24',
+                'max_zoom'          => '25',
+                'map_zoom'          => '26',
+                'map_focus'         => '27'
             )
         ));
 
@@ -68,31 +69,32 @@ class RecordsControllerTest_Post extends Neatline_TestCase
 
         // Should update fields.
         $this->assertEquals($record->exhibit_id,        $exhibit->id);
-        $this->assertEquals($record->title,             '1');
-        $this->assertEquals($record->body,              '2');
-        $this->assertEquals($record->coverage,          'POINT(3 3)');
-        $this->assertEquals($record->tags,              '4');
-        $this->assertEquals($record->widgets,           '5,6');
-        $this->assertEquals($record->presenter,         '7');
-        $this->assertEquals($record->fill_color,        '8');
-        $this->assertEquals($record->select_color,      '9');
-        $this->assertEquals($record->stroke_color,      '10');
-        $this->assertEquals($record->fill_opacity,      11);
-        $this->assertEquals($record->select_opacity,    12);
-        $this->assertEquals($record->stroke_opacity,    13);
-        $this->assertEquals($record->stroke_width,      14);
-        $this->assertEquals($record->point_radius,      15);
-        $this->assertEquals($record->zindex,            16);
-        $this->assertEquals($record->weight,            17);
-        $this->assertEquals($record->start_date,        '18');
-        $this->assertEquals($record->end_date,          '19');
-        $this->assertEquals($record->after_date,        '20');
-        $this->assertEquals($record->before_date,       '21');
-        $this->assertEquals($record->point_image,       '22');
-        $this->assertEquals($record->min_zoom,          23);
-        $this->assertEquals($record->max_zoom,          24);
-        $this->assertEquals($record->map_zoom,          25);
-        $this->assertEquals($record->map_focus,         '26');
+        $this->assertEquals($record->slug,              '1');
+        $this->assertEquals($record->title,             '2');
+        $this->assertEquals($record->body,              '3');
+        $this->assertEquals($record->coverage,          'POINT(4 4)');
+        $this->assertEquals($record->tags,              '5');
+        $this->assertEquals($record->widgets,           '6,7');
+        $this->assertEquals($record->presenter,         '8');
+        $this->assertEquals($record->fill_color,        '9');
+        $this->assertEquals($record->select_color,      '10');
+        $this->assertEquals($record->stroke_color,      '11');
+        $this->assertEquals($record->fill_opacity,      12);
+        $this->assertEquals($record->select_opacity,    13);
+        $this->assertEquals($record->stroke_opacity,    14);
+        $this->assertEquals($record->stroke_width,      15);
+        $this->assertEquals($record->point_radius,      16);
+        $this->assertEquals($record->zindex,            17);
+        $this->assertEquals($record->weight,            18);
+        $this->assertEquals($record->start_date,        '19');
+        $this->assertEquals($record->end_date,          '20');
+        $this->assertEquals($record->after_date,        '21');
+        $this->assertEquals($record->before_date,       '22');
+        $this->assertEquals($record->point_image,       '23');
+        $this->assertEquals($record->min_zoom,          24);
+        $this->assertEquals($record->max_zoom,          25);
+        $this->assertEquals($record->map_zoom,          26);
+        $this->assertEquals($record->map_focus,         '27');
 
     }
 

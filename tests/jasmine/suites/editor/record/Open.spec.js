@@ -135,6 +135,7 @@ describe('Record Form Open', function() {
 
     expect(inputs.id).              toHaveText('#'+id+':'),
     expect(inputs.titleHeader).     toHaveText('title');
+    expect(inputs.slug).            toHaveValue('slug');
     expect(inputs.titleInput).      toHaveValue('title');
     expect(inputs.body).            toHaveValue('body');
     expect(inputs.itemId).          toHaveValue('1');

@@ -33,8 +33,9 @@ var NL = (function(NL) {
     return {
       id:             form.$('p.lead span.id'),
       titleHeader:    form.$('p.lead span.title'),
-      titleInput:     form.$('textarea[name="title"]'),
       itemId:         form.$('input[name="item-id"]'),
+      slug:           form.$('input[name="slug"]'),
+      titleInput:     form.$('textarea[name="title"]'),
       body:           form.$('textarea[name="body"]'),
       coverage:       form.$('textarea[name="coverage"]'),
       tags:           form.$('input[name="tags"]'),

@@ -23,6 +23,7 @@ class FixturesTest_RecordForm extends Neatline_FixtureCase
 
         $record->setArray(array(
             'item_id'           => 1,
+            'slug'              => 'slug',
             'title'             => 'title',
             'body'              => 'body',
             'tags'              => 'tags',
