@@ -150,18 +150,19 @@ describe('Record Form Open', function() {
     expect(inputs.strokeOpacity).   toHaveValue('6');
     expect(inputs.strokeWidth).     toHaveValue('7');
     expect(inputs.pointRadius).     toHaveValue('8');
-    expect(inputs.weight).          toHaveValue('9');
-    expect(inputs.startDate).       toHaveValue('10');
-    expect(inputs.endDate).         toHaveValue('11');
-    expect(inputs.pointImage).      toHaveValue('12');
-    expect(inputs.wmsAddress).      toHaveValue('13');
-    expect(inputs.wmsLayers).       toHaveValue('14');
-    expect(inputs.minZoom).         toHaveValue('15');
-    expect(inputs.maxZoom).         toHaveValue('16');
-    expect(inputs.afterDate).       toHaveValue('17');
-    expect(inputs.beforeDate).      toHaveValue('18');
-    expect(inputs.mapFocus).        toHaveValue('19');
-    expect(inputs.mapZoom).         toHaveValue('20');
+    expect(inputs.zindex).          toHaveValue('9');
+    expect(inputs.weight).          toHaveValue('10');
+    expect(inputs.startDate).       toHaveValue('11');
+    expect(inputs.endDate).         toHaveValue('12');
+    expect(inputs.afterDate).       toHaveValue('13');
+    expect(inputs.beforeDate).      toHaveValue('14');
+    expect(inputs.pointImage).      toHaveValue('15');
+    expect(inputs.wmsAddress).      toHaveValue('16');
+    expect(inputs.wmsLayers).       toHaveValue('17');
+    expect(inputs.minZoom).         toHaveValue('18');
+    expect(inputs.maxZoom).         toHaveValue('19');
+    expect(inputs.mapFocus).        toHaveValue('20');
+    expect(inputs.mapZoom).         toHaveValue('21');
 
   });
 

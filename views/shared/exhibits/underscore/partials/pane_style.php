@@ -111,6 +111,13 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
+      'name'  => 'zindex',
+      'label' => 'Z-Index',
+      'bind'  => 'record.zindex',
+      'style' => 'zindex'
+  )); ?>
+
+  <?php echo common('neatline/input', array(
       'name'  => 'weight',
       'label' => 'Order / Weight',
       'bind'  => 'record.weight',

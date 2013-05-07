@@ -37,18 +37,19 @@ class FixturesTest_RecordForm extends Neatline_FixtureCase
             'stroke_opacity'    => 6,
             'stroke_width'      => 7,
             'point_radius'      => 8,
-            'weight'            => 9,
-            'start_date'        => '10',
-            'end_date'          => '11',
-            'point_image'       => '12',
-            'wms_address'       => '13',
-            'wms_layers'        => '14',
-            'min_zoom'          => 15,
-            'max_zoom'          => 16,
-            'after_date'        => '17',
-            'before_date'       => '18',
-            'map_focus'         => '19',
-            'map_zoom'          => 20 
+            'zindex'            => 9,
+            'weight'            => 10,
+            'start_date'        => '11',
+            'end_date'          => '12',
+            'after_date'        => '13',
+            'before_date'       => '14',
+            'point_image'       => '15',
+            'wms_address'       => '16',
+            'wms_layers'        => '17',
+            'min_zoom'          => 18,
+            'max_zoom'          => 19,
+            'map_focus'         => '20',
+            'map_zoom'          => 21
         ));
 
         $record->__save();

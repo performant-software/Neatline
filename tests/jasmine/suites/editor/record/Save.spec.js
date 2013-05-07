@@ -52,18 +52,19 @@ describe('Record Form Save', function() {
     inputs.strokeOpacity.   val('11').          trigger('change');
     inputs.strokeWidth.     val('12').          trigger('change');
     inputs.pointRadius.     val('13').          trigger('change');
-    inputs.weight.          val('14').          trigger('change');
-    inputs.startDate.       val('15').          trigger('change');
-    inputs.endDate.         val('16').          trigger('change');
-    inputs.pointImage.      val('17').          trigger('change');
-    inputs.wmsAddress.      val('18').          trigger('change');
-    inputs.wmsLayers.       val('19').          trigger('change');
-    inputs.minZoom.         val('20').          trigger('change');
-    inputs.maxZoom.         val('21').          trigger('change');
-    inputs.afterDate.       val('22').          trigger('change');
-    inputs.beforeDate.      val('23').          trigger('change');
-    inputs.mapFocus.        val('24').          trigger('change');
-    inputs.mapZoom.         val('25').          trigger('change');
+    inputs.zindex.          val('14').          trigger('change');
+    inputs.weight.          val('15').          trigger('change');
+    inputs.startDate.       val('16').          trigger('change');
+    inputs.endDate.         val('17').          trigger('change');
+    inputs.afterDate.       val('18').          trigger('change');
+    inputs.beforeDate.      val('19').          trigger('change');
+    inputs.pointImage.      val('20').          trigger('change');
+    inputs.wmsAddress.      val('21').          trigger('change');
+    inputs.wmsLayers.       val('22').          trigger('change');
+    inputs.minZoom.         val('23').          trigger('change');
+    inputs.maxZoom.         val('24').          trigger('change');
+    inputs.mapFocus.        val('25').          trigger('change');
+    inputs.mapZoom.         val('26').          trigger('change');
 
     // Click "Save" button.
     el.save.trigger('click');
@@ -91,18 +92,19 @@ describe('Record Form Save', function() {
     expect(params.stroke_opacity).    toEqual('11');
     expect(params.stroke_width).      toEqual('12');
     expect(params.point_radius).      toEqual('13');
-    expect(params.weight).            toEqual('14');
-    expect(params.start_date).        toEqual('15');
-    expect(params.end_date).          toEqual('16');
-    expect(params.point_image).       toEqual('17');
-    expect(params.wms_address).       toEqual('18');
-    expect(params.wms_layers).        toEqual('19');
-    expect(params.min_zoom).          toEqual('20');
-    expect(params.max_zoom).          toEqual('21');
-    expect(params.after_date).        toEqual('22');
-    expect(params.before_date).       toEqual('23');
-    expect(params.map_focus).         toEqual('24');
-    expect(params.map_zoom).          toEqual('25');
+    expect(params.zindex).            toEqual('14');
+    expect(params.weight).            toEqual('15');
+    expect(params.start_date).        toEqual('16');
+    expect(params.end_date).          toEqual('17');
+    expect(params.after_date).        toEqual('18');
+    expect(params.before_date).       toEqual('19');
+    expect(params.point_image).       toEqual('20');
+    expect(params.wms_address).       toEqual('21');
+    expect(params.wms_layers).        toEqual('22');
+    expect(params.min_zoom).          toEqual('23');
+    expect(params.max_zoom).          toEqual('24');
+    expect(params.map_focus).         toEqual('25');
+    expect(params.map_zoom).          toEqual('26');
 
   });
 
