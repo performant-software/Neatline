@@ -36,16 +36,17 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
             'stroke_opacity'    => '12',
             'stroke_width'      => '13',
             'point_radius'      => '14',
-            'point_image'       => '15',
-            'min_zoom'          => '16',
-            'max_zoom'          => '17',
-            'map_zoom'          => '18',
-            'map_focus'         => '19',
-            'start_date'        => '20',
-            'end_date'          => '21',
-            'after_date'        => '22',
-            'before_date'       => '23',
-            'weight'            => '24'
+            'zindex'            => '15',
+            'weight'            => '16',
+            'start_date'        => '17',
+            'end_date'          => '18',
+            'after_date'        => '19',
+            'before_date'       => '20',
+            'point_image'       => '21',
+            'min_zoom'          => '22',
+            'max_zoom'          => '23',
+            'map_zoom'          => '24',
+            'map_focus'         => '25'
         ));
 
         $this->assertEquals($record->title,             '1');
@@ -62,16 +63,17 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
         $this->assertEquals($record->stroke_opacity,    12);
         $this->assertEquals($record->stroke_width,      13);
         $this->assertEquals($record->point_radius,      14);
-        $this->assertEquals($record->point_image,       '15');
-        $this->assertEquals($record->min_zoom,          16);
-        $this->assertEquals($record->max_zoom,          17);
-        $this->assertEquals($record->map_zoom,          18);
-        $this->assertEquals($record->map_focus,         '19');
-        $this->assertEquals($record->start_date,        '20');
-        $this->assertEquals($record->end_date,          '21');
-        $this->assertEquals($record->after_date,        '22');
-        $this->assertEquals($record->before_date,       '23');
-        $this->assertEquals($record->weight,            24);
+        $this->assertEquals($record->zindex,            15);
+        $this->assertEquals($record->weight,            16);
+        $this->assertEquals($record->start_date,        '17');
+        $this->assertEquals($record->end_date,          '18');
+        $this->assertEquals($record->after_date,        '19');
+        $this->assertEquals($record->before_date,       '20');
+        $this->assertEquals($record->point_image,       '21');
+        $this->assertEquals($record->min_zoom,          22);
+        $this->assertEquals($record->max_zoom,          23);
+        $this->assertEquals($record->map_zoom,          24);
+        $this->assertEquals($record->map_focus,         '25');
 
     }
 

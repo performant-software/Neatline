@@ -34,6 +34,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $stroke_opacity;     // INT(10) UNSIGNED NULL
     public $stroke_width;       // INT(10) UNSIGNED NULL
     public $point_radius;       // INT(10) UNSIGNED NULL
+    public $weight;             // INT(10) UNSIGNED NULL
+    public $zindex;             // INT(10) UNSIGNED NULL
     public $min_zoom;           // INT(10) UNSIGNED NULL
     public $max_zoom;           // INT(10) UNSIGNED NULL
     public $map_zoom;           // INT(10) UNSIGNED NULL
@@ -44,7 +46,6 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $end_date;           // VARCHAR(100) NULL
     public $after_date;         // VARCHAR(100) NULL
     public $before_date;        // VARCHAR(100) NULL
-    public $weight;             // INT(10) UNSIGNED NULL
 
 
     /**

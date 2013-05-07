@@ -38,16 +38,19 @@ class RecordsControllerTest_Get extends Neatline_TestCase
             'stroke_opacity'    => 12,
             'stroke_width'      => 13,
             'point_radius'      => 14,
-            'point_image'       => '15',
-            'min_zoom'          => 16,
-            'max_zoom'          => 17,
-            'map_zoom'          => 18,
-            'map_focus'         => '19',
-            'start_date'        => '20',
-            'end_date'          => '21',
-            'after_date'        => '22',
-            'before_date'       => '23',
-            'weight'            => 24
+            'zindex'            => 15,
+            'weight'            => 16,
+            'start_date'        => '17',
+            'end_date'          => '18',
+            'after_date'        => '19',
+            'before_date'       => '20',
+            'point_image'       => '21',
+            'wms_address'       => '22',
+            'wms_layers'        => '23',
+            'min_zoom'          => 24,
+            'max_zoom'          => 25,
+            'map_zoom'          => 26,
+            'map_focus'         => '27'
         ));
 
         $record->__save();
@@ -71,16 +74,19 @@ class RecordsControllerTest_Get extends Neatline_TestCase
         $this->assertEquals($response->stroke_opacity,  12);
         $this->assertEquals($response->stroke_width,    13);
         $this->assertEquals($response->point_radius,    14);
-        $this->assertEquals($response->point_image,     '15');
-        $this->assertEquals($response->min_zoom,        16);
-        $this->assertEquals($response->max_zoom,        17);
-        $this->assertEquals($response->map_zoom,        18);
-        $this->assertEquals($response->map_focus,       '19');
-        $this->assertEquals($response->start_date,      '20');
-        $this->assertEquals($response->end_date,        '21');
-        $this->assertEquals($response->after_date,      '22');
-        $this->assertEquals($response->before_date,     '23');
-        $this->assertEquals($response->weight,          24);
+        $this->assertEquals($response->zindex,          15);
+        $this->assertEquals($response->weight,          16);
+        $this->assertEquals($response->start_date,      '17');
+        $this->assertEquals($response->end_date,        '18');
+        $this->assertEquals($response->after_date,      '19');
+        $this->assertEquals($response->before_date,     '20');
+        $this->assertEquals($response->point_image,     '21');
+        $this->assertEquals($response->wms_address,     '22');
+        $this->assertEquals($response->wms_layers,      '23');
+        $this->assertEquals($response->min_zoom,        24);
+        $this->assertEquals($response->max_zoom,        25);
+        $this->assertEquals($response->map_zoom,        26);
+        $this->assertEquals($response->map_focus,       '27');
 
     }
 

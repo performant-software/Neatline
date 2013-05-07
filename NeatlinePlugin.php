@@ -90,6 +90,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `stroke_opacity`    INT(10) UNSIGNED NULL,
             `stroke_width`      INT(10) UNSIGNED NULL,
             `point_radius`      INT(10) UNSIGNED NULL,
+            `zindex`            INT(10) UNSIGNED NULL,
+            `weight`            INT(10) UNSIGNED NULL,
             `min_zoom`          INT(10) UNSIGNED NULL,
             `max_zoom`          INT(10) UNSIGNED NULL,
             `map_zoom`          INT(10) UNSIGNED NULL,
@@ -100,7 +102,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `end_date`          VARCHAR(100) NULL,
             `after_date`        VARCHAR(100) NULL,
             `before_date`       VARCHAR(100) NULL,
-            `weight`            INT(10) UNSIGNED NULL,
 
              PRIMARY KEY        (`id`),
              INDEX              (`item_id`, `exhibit_id`),
