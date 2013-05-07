@@ -13,40 +13,42 @@ class NeatlineRecord extends Neatline_ExpandableRow
 {
 
 
-    public $item_id;            // INT(10) UNSIGNED NULL
-    public $exhibit_id;         // INT(10) UNSIGNED NULL
-    public $added;              // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    public $modified;           // TIMESTAMP NULL
-    public $is_coverage;        // TINYINT(1) NULL
-    public $is_wms;             // TINYINT(1) NULL
-    public $slug;               // VARCHAR(100) NULL
-    public $title;              // MEDIUMTEXT NULL
-    public $body;               // MEDIUMTEXT NULL
-    public $coverage;           // GEOMETRY NOT NULL
-    public $tags;               // TEXT NULL
-    public $widgets;            // TEXT NULL
-    public $presenter;          // VARCHAR(100) NULL
-    public $fill_color;         // VARCHAR(100) NULL
-    public $select_color;       // VARCHAR(100) NULL
-    public $stroke_color;       // VARCHAR(100) NULL
-    public $fill_opacity;       // INT(10) UNSIGNED NULL
-    public $select_opacity;     // INT(10) UNSIGNED NULL
-    public $stroke_opacity;     // INT(10) UNSIGNED NULL
-    public $stroke_width;       // INT(10) UNSIGNED NULL
-    public $point_radius;       // INT(10) UNSIGNED NULL
-    public $zindex;             // INT(10) UNSIGNED NULL
-    public $weight;             // INT(10) UNSIGNED NULL
-    public $start_date;         // VARCHAR(100) NULL
-    public $end_date;           // VARCHAR(100) NULL
-    public $after_date;         // VARCHAR(100) NULL
-    public $before_date;        // VARCHAR(100) NULL
-    public $point_image;        // VARCHAR(100) NULL
-    public $wms_address;        // VARCHAR(100) NULL
-    public $wms_layers;         // VARCHAR(100) NULL
-    public $min_zoom;           // INT(10) UNSIGNED NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
-    public $map_zoom;           // INT(10) UNSIGNED NULL
-    public $map_focus;          // VARCHAR(100) NULL
+    public $item_id;                // INT(10) UNSIGNED NULL
+    public $exhibit_id;             // INT(10) UNSIGNED NULL
+    public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    public $modified;               // TIMESTAMP NULL
+    public $is_coverage;            // TINYINT(1) NULL
+    public $is_wms;                 // TINYINT(1) NULL
+    public $slug;                   // VARCHAR(100) NULL
+    public $title;                  // MEDIUMTEXT NULL
+    public $body;                   // MEDIUMTEXT NULL
+    public $coverage;               // GEOMETRY NOT NULL
+    public $tags;                   // TEXT NULL
+    public $widgets;                // TEXT NULL
+    public $presenter;              // VARCHAR(100) NULL
+    public $fill_color;             // VARCHAR(100) NULL
+    public $fill_select_color;      // VARCHAR(100) NULL
+    public $stroke_color;           // VARCHAR(100) NULL
+    public $stroke_select_color;    // VARCHAR(100) NULL
+    public $fill_opacity;           // INT(10) UNSIGNED NULL
+    public $fill_select_opacity;    // INT(10) UNSIGNED NULL
+    public $stroke_opacity;         // INT(10) UNSIGNED NULL
+    public $stroke_select_opacity;  // INT(10) UNSIGNED NULL
+    public $stroke_width;           // INT(10) UNSIGNED NULL
+    public $point_radius;           // INT(10) UNSIGNED NULL
+    public $zindex;                 // INT(10) UNSIGNED NULL
+    public $weight;                 // INT(10) UNSIGNED NULL
+    public $start_date;             // VARCHAR(100) NULL
+    public $end_date;               // VARCHAR(100) NULL
+    public $after_date;             // VARCHAR(100) NULL
+    public $before_date;            // VARCHAR(100) NULL
+    public $point_image;            // VARCHAR(100) NULL
+    public $wms_address;            // VARCHAR(100) NULL
+    public $wms_layers;             // VARCHAR(100) NULL
+    public $min_zoom;               // INT(10) UNSIGNED NULL
+    public $max_zoom;               // INT(10) UNSIGNED NULL
+    public $map_zoom;               // INT(10) UNSIGNED NULL
+    public $map_focus;              // VARCHAR(100) NULL
 
 
     /**

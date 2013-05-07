@@ -41,24 +41,24 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // Exhibits
         // --------
         $this->_db->query("CREATE TABLE IF NOT EXISTS
-            `{$this->_db->prefix}neatline_exhibits` (
+          `{$this->_db->prefix}neatline_exhibits` (
 
-            `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            `modified`              TIMESTAMP NULL,
-            `query`                 TEXT NULL,
-            `base_layers`           TEXT NULL,
-            `base_layer`            VARCHAR(100) NULL,
-            `widgets`               TEXT NULL,
-            `title`                 TEXT NULL,
-            `slug`                  VARCHAR(100) NOT NULL,
-            `narrative`             LONGTEXT NULL,
-            `public`                TINYINT(1) NOT NULL,
-            `styles`                TEXT NULL,
-            `map_focus`             VARCHAR(100) NULL,
-            `map_zoom`              INT(10) UNSIGNED NULL,
+          `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `added`         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          `modified`      TIMESTAMP NULL,
+          `query`         TEXT NULL,
+          `base_layers`   TEXT NULL,
+          `base_layer`    VARCHAR(100) NULL,
+          `widgets`       TEXT NULL,
+          `title`         TEXT NULL,
+          `slug`          VARCHAR(100) NOT NULL,
+          `narrative`     LONGTEXT NULL,
+          `public`        TINYINT(1) NOT NULL,
+          `styles`        TEXT NULL,
+          `map_focus`     VARCHAR(100) NULL,
+          `map_zoom`      INT(10) UNSIGNED NULL,
 
-             PRIMARY KEY            (`id`)
+           PRIMARY KEY            (`id`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
@@ -68,48 +68,56 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query("CREATE TABLE IF NOT EXISTS
             `{$this->_db->prefix}neatline_records` (
 
-            `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `item_id`               INT(10) UNSIGNED NULL,
-            `exhibit_id`            INT(10) UNSIGNED NULL,
-            `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            `modified`              TIMESTAMP NULL,
-            `is_coverage`           TINYINT(1) NULL,
-            `is_wms`                TINYINT(1) NULL,
-            `slug`                  VARCHAR(100) NULL,
-            `title`                 MEDIUMTEXT NULL,
-            `body`                  MEDIUMTEXT NULL,
-            `coverage`              GEOMETRY NOT NULL,
-            `tags`                  TEXT NULL,
-            `widgets`               TEXT NULL,
-            `presenter`             VARCHAR(100) NULL,
-            `fill_color`            VARCHAR(100) NULL,
-            `fill_select_color`     VARCHAR(100) NULL,
-            `stroke_color`          VARCHAR(100) NULL,
-            `stroke_select_color`   VARCHAR(100) NULL,
-            `fill_opacity`          INT(10) UNSIGNED NULL,
-            `fill_select_opacity`   INT(10) UNSIGNED NULL,
-            `stroke_opacity`        INT(10) UNSIGNED NULL,
-            `stroke_select_opacity` INT(10) UNSIGNED NULL,
-            `stroke_width`          INT(10) UNSIGNED NULL,
-            `point_radius`          INT(10) UNSIGNED NULL,
-            `zindex`                INT(10) UNSIGNED NULL,
-            `weight`                INT(10) UNSIGNED NULL,
-            `start_date`            VARCHAR(100) NULL,
-            `end_date`              VARCHAR(100) NULL,
-            `after_date`            VARCHAR(100) NULL,
-            `before_date`           VARCHAR(100) NULL,
-            `point_image`           VARCHAR(100) NULL,
-            `wms_address`           VARCHAR(100) NULL,
-            `wms_layers`            VARCHAR(100) NULL,
-            `min_zoom`              INT(10) UNSIGNED NULL,
-            `max_zoom`              INT(10) UNSIGNED NULL,
-            `map_zoom`              INT(10) UNSIGNED NULL,
-            `map_focus`             VARCHAR(100) NULL,
+          `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+          `item_id`               INT(10) UNSIGNED NULL,
+          `exhibit_id`            INT(10) UNSIGNED NULL,
+          `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          `modified`              TIMESTAMP NULL,
+          `is_coverage`           TINYINT(1) NULL,
+          `is_wms`                TINYINT(1) NULL,
 
-             PRIMARY KEY            (`id`),
-             INDEX                  (`item_id`, `exhibit_id`),
-             FULLTEXT KEY           (`title`, `body`),
-             SPATIAL INDEX          (`coverage`)
+          `slug`                  VARCHAR(100) NULL,
+          `title`                 MEDIUMTEXT NULL,
+          `body`                  MEDIUMTEXT NULL,
+          `coverage`              GEOMETRY NOT NULL,
+          `tags`                  TEXT NULL,
+
+          `widgets`               TEXT NULL,
+          `presenter`             VARCHAR(100) NULL,
+
+          `fill_color`            VARCHAR(100) NULL,
+          `fill_select_color`     VARCHAR(100) NULL,
+          `stroke_color`          VARCHAR(100) NULL,
+          `stroke_select_color`   VARCHAR(100) NULL,
+
+          `fill_opacity`          INT(10) UNSIGNED NULL,
+          `fill_select_opacity`   INT(10) UNSIGNED NULL,
+          `stroke_opacity`        INT(10) UNSIGNED NULL,
+          `stroke_select_opacity` INT(10) UNSIGNED NULL,
+
+          `stroke_width`          INT(10) UNSIGNED NULL,
+          `point_radius`          INT(10) UNSIGNED NULL,
+          `zindex`                INT(10) UNSIGNED NULL,
+          `weight`                INT(10) UNSIGNED NULL,
+
+          `start_date`            VARCHAR(100) NULL,
+          `end_date`              VARCHAR(100) NULL,
+          `after_date`            VARCHAR(100) NULL,
+          `before_date`           VARCHAR(100) NULL,
+
+          `point_image`           VARCHAR(100) NULL,
+          `wms_address`           VARCHAR(100) NULL,
+          `wms_layers`            VARCHAR(100) NULL,
+
+          `min_zoom`              INT(10) UNSIGNED NULL,
+          `max_zoom`              INT(10) UNSIGNED NULL,
+          `map_zoom`              INT(10) UNSIGNED NULL,
+          `map_focus`             VARCHAR(100) NULL,
+
+           PRIMARY KEY            (`id`),
+           INDEX                  (`item_id`, `exhibit_id`),
+           FULLTEXT KEY           (`title`, `body`),
+           SPATIAL INDEX          (`coverage`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
@@ -227,28 +235,39 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function filterNeatlineStyles($styles)
     {
         return array_merge($styles, array(
+
             'widgets',
             'presenter',
+
             'fill_color',
-            'select_color',
+            'fill_select_color',
             'stroke_color',
+            'stroke_select_color',
+
             'fill_opacity',
+            'fill_select_opacity',
             'stroke_opacity',
-            'select_opacity',
+            'stroke_select_opacity',
+
             'stroke_width',
             'point_radius',
-            'point_image',
-            'min_zoom',
-            'max_zoom',
-            'map_focus',
-            'map_zoom',
-            'wms_address',
-            'wms_layers',
+            'zindex',
+            'weight',
+
             'start_date',
             'end_date',
             'after_date',
             'before_date',
-            'weight'
+
+            'point_image',
+            'wms_address',
+            'wms_layers',
+
+            'min_zoom',
+            'max_zoom',
+            'map_focus',
+            'map_zoom'
+
         ));
     }
 
