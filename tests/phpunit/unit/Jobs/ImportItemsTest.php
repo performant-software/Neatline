@@ -19,9 +19,10 @@ class ImportItemsTest extends Neatline_TestCase
     public function testCreateRecords()
     {
 
-        $item1      = $this->__item();
-        $item2      = $this->__item();
-        $exhibit    = $this->__exhibit();
+        $item1 = $this->__item();
+        $item2 = $this->__item();
+
+        $exhibit = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
@@ -46,8 +47,9 @@ class ImportItemsTest extends Neatline_TestCase
     public function testRecompileRecords()
     {
 
-        $item       = $this->__item();
-        $exhibit    = $this->__exhibit();
+        $item = $this->__item();
+
+        $exhibit = $this->__exhibit();
 
         // Create existing item-backed record.
         $record = new NeatlineRecord($exhibit, $item);
@@ -92,7 +94,7 @@ class ImportItemsTest extends Neatline_TestCase
             )
         );
 
-        // Get the new record.
+        // Load the new record.
         $record = $this->__records->findBySql(
             'exhibit_id=?', array($exhibit->id), true
         );
