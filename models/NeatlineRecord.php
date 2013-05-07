@@ -29,24 +29,24 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $fill_color;         // VARCHAR(100) NULL
     public $select_color;       // VARCHAR(100) NULL
     public $stroke_color;       // VARCHAR(100) NULL
-    public $point_image;        // VARCHAR(100) NULL
     public $fill_opacity;       // INT(10) UNSIGNED NULL
     public $select_opacity;     // INT(10) UNSIGNED NULL
     public $stroke_opacity;     // INT(10) UNSIGNED NULL
     public $stroke_width;       // INT(10) UNSIGNED NULL
     public $point_radius;       // INT(10) UNSIGNED NULL
-    public $weight;             // INT(10) UNSIGNED NULL
     public $zindex;             // INT(10) UNSIGNED NULL
-    public $min_zoom;           // INT(10) UNSIGNED NULL
-    public $max_zoom;           // INT(10) UNSIGNED NULL
-    public $map_zoom;           // INT(10) UNSIGNED NULL
-    public $map_focus;          // VARCHAR(100) NULL
-    public $wms_address;        // VARCHAR(100) NULL
-    public $wms_layers;         // VARCHAR(100) NULL
+    public $weight;             // INT(10) UNSIGNED NULL
     public $start_date;         // VARCHAR(100) NULL
     public $end_date;           // VARCHAR(100) NULL
     public $after_date;         // VARCHAR(100) NULL
     public $before_date;        // VARCHAR(100) NULL
+    public $point_image;        // VARCHAR(100) NULL
+    public $wms_address;        // VARCHAR(100) NULL
+    public $wms_layers;         // VARCHAR(100) NULL
+    public $min_zoom;           // INT(10) UNSIGNED NULL
+    public $max_zoom;           // INT(10) UNSIGNED NULL
+    public $map_zoom;           // INT(10) UNSIGNED NULL
+    public $map_focus;          // VARCHAR(100) NULL
 
 
     /**
