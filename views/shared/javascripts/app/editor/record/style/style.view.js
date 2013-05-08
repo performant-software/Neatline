@@ -53,14 +53,14 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
       });
 
+      // OPACITIES
+      this.$('input.opacity').draggableInput({
+        type: 'float', min: 0, max: 1, scrollPrecision: 0.002
+      });
+
       // INTEGERS
       this.$('input.integer').draggableInput({
         type: 'integer', min: 0, max: 1000
-      });
-
-      // OPACITIES
-      this.$('input.opacity').draggableInput({
-        type: 'integer', min: 0, max: 100
       });
 
     },

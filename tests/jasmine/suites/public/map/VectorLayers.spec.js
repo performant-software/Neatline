@@ -211,17 +211,17 @@ describe('Map Vector Layers', function() {
       expect(tmp.strokeColor).      toEqual('4');
       expect(sel.strokeColor).      toEqual('4');
 
-      expect(def.fillOpacity).      toEqual(0.05);
-      expect(tmp.fillOpacity).      toEqual(0.06);
-      expect(sel.fillOpacity).      toEqual(0.06);
+      expect(def.fillOpacity).      toEqual(0.5);
+      expect(tmp.fillOpacity).      toEqual(0.6);
+      expect(sel.fillOpacity).      toEqual(0.6);
 
-      expect(def.graphicOpacity).   toEqual(0.05);
-      expect(tmp.graphicOpacity).   toEqual(0.06);
-      expect(sel.graphicOpacity).   toEqual(0.06);
+      expect(def.graphicOpacity).   toEqual(0.5);
+      expect(tmp.graphicOpacity).   toEqual(0.6);
+      expect(sel.graphicOpacity).   toEqual(0.6);
 
-      expect(def.strokeOpacity).    toEqual(0.07);
-      expect(tmp.strokeOpacity).    toEqual(0.08);
-      expect(sel.strokeOpacity).    toEqual(0.08);
+      expect(def.strokeOpacity).    toEqual(0.7);
+      expect(tmp.strokeOpacity).    toEqual(0.8);
+      expect(sel.strokeOpacity).    toEqual(0.8);
 
       expect(def.strokeWidth).      toEqual(9);
       expect(tmp.strokeWidth).      toEqual(9);

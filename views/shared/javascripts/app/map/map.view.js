@@ -393,7 +393,7 @@ Neatline.module('Map', function(
           transparent: true
         }, {
           displayOutsideMaxExtent: true,
-          opacity: record.get('fill_opacity') / 100,
+          opacity: parseFloat(record.get('fill_opacity')),
           isBaseLayer: false
         }
       );
@@ -528,17 +528,12 @@ Neatline.module('Map', function(
       var strokeWidth         = record.get('stroke_width');
       var pointRadius         = record.get('point_radius');
 
-      fillOpacity             = parseInt(fillOpacity, 10);
-      fillOpacitySelect       = parseInt(fillOpacitySelect, 10);
-      strokeOpacity           = parseInt(strokeOpacity, 10);
-      strokeOpacitySelect     = parseInt(strokeOpacitySelect, 10);
-      strokeWidth             = parseInt(strokeWidth, 10);
-      pointRadius             = parseInt(pointRadius, 10);
-
-      fillOpacity             /= 100;
-      fillOpacitySelect       /= 100;
-      strokeOpacity           /= 100;
-      strokeOpacitySelect     /= 100;
+      fillOpacity             = parseFloat(fillOpacity);
+      fillOpacitySelect       = parseFloat(fillOpacitySelect);
+      strokeOpacity           = parseFloat(strokeOpacity);
+      strokeOpacitySelect     = parseFloat(strokeOpacitySelect);
+      strokeWidth             = parseInt(strokeWidth);
+      pointRadius             = parseInt(pointRadius);
 
       return new OpenLayers.StyleMap({
 

@@ -33,10 +33,10 @@ class RecordsControllerTest_Put extends Neatline_TestCase
             'fill_color_select'     => '9',
             'stroke_color'          => '10',
             'stroke_color_select'   => '11',
-            'fill_opacity'          => '12',
-            'fill_opacity_select'   => '13',
-            'stroke_opacity'        => '14',
-            'stroke_opacity_select' => '15',
+            'fill_opacity'          => '0.12',
+            'fill_opacity_select'   => '0.13',
+            'stroke_opacity'        => '0.14',
+            'stroke_opacity_select' => '0.15',
             'stroke_width'          => '16',
             'point_radius'          => '17',
             'zindex'                => '18',
@@ -66,10 +66,10 @@ class RecordsControllerTest_Put extends Neatline_TestCase
             'fill_color_select'     => '11',
             'stroke_color'          => '12',
             'stroke_color_select'   => '13',
-            'fill_opacity'          => '14',
-            'fill_opacity_select'   => '15',
-            'stroke_opacity'        => '16',
-            'stroke_opacity_select' => '17',
+            'fill_opacity'          => '0.14',
+            'fill_opacity_select'   => '0.15',
+            'stroke_opacity'        => '0.16',
+            'stroke_opacity_select' => '0.17',
             'stroke_width'          => '18',
             'point_radius'          => '19',
             'zindex'                => '20',
@@ -99,10 +99,10 @@ class RecordsControllerTest_Put extends Neatline_TestCase
         $this->assertEquals($record->fill_color_select,     '11');
         $this->assertEquals($record->stroke_color,          '12');
         $this->assertEquals($record->stroke_color_select,   '13');
-        $this->assertEquals($record->fill_opacity,          14);
-        $this->assertEquals($record->fill_opacity_select,   15);
-        $this->assertEquals($record->stroke_opacity,        16);
-        $this->assertEquals($record->stroke_opacity_select, 17);
+        $this->assertEquals($record->fill_opacity,          0.14);
+        $this->assertEquals($record->fill_opacity_select,   0.15);
+        $this->assertEquals($record->stroke_opacity,        0.16);
+        $this->assertEquals($record->stroke_opacity_select, 0.17);
         $this->assertEquals($record->stroke_width,          18);
         $this->assertEquals($record->point_radius,          19);
         $this->assertEquals($record->zindex,                20);

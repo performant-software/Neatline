@@ -30,10 +30,10 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public $fill_color_select;      // VARCHAR(100) NULL
     public $stroke_color;           // VARCHAR(100) NULL
     public $stroke_color_select;    // VARCHAR(100) NULL
-    public $fill_opacity;           // INT(10) UNSIGNED NULL
-    public $fill_opacity_select;    // INT(10) UNSIGNED NULL
-    public $stroke_opacity;         // INT(10) UNSIGNED NULL
-    public $stroke_opacity_select;  // INT(10) UNSIGNED NULL
+    public $fill_opacity;           // DECIMAL(3,2) NULL
+    public $fill_opacity_select;    // DECIMAL(3,2) NULL
+    public $stroke_opacity;         // DECIMAL(3,2) NULL
+    public $stroke_opacity_select;  // DECIMAL(3,2) NULL
     public $stroke_width;           // INT(10) UNSIGNED NULL
     public $point_radius;           // INT(10) UNSIGNED NULL
     public $zindex;                 // INT(10) UNSIGNED NULL

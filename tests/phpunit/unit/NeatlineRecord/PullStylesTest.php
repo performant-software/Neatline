@@ -30,8 +30,8 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               stroke-color-select: 4;
             }
             .tag3 {
-              fill-opacity: 5;
-              fill-opacity-select: 6;
+              zindex: 5;
+              weight: 6;
             }
         ";
 
@@ -50,8 +50,8 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $this->assertEquals($record->stroke_color_select, '4');
 
         // Should not pull `tag3`.
-        $this->assertNull($record->fill_opacity);
-        $this->assertNull($record->fill_opacity_select);
+        $this->assertNull($record->zindex);
+        $this->assertNull($record->weight);
 
     }
 
@@ -68,7 +68,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
               fill-color: 1;
             }
             .tag {
-              fill-opacity: 2;
+              stroke-color: 2;
             }
         ";
 
@@ -82,7 +82,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
 
         // Should pull `tag` and `all`.
         $this->assertEquals($record->fill_color, '1');
-        $this->assertEquals($record->fill_opacity, 2);
+        $this->assertEquals($record->stroke_color, '2');
 
     }
 

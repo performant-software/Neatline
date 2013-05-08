@@ -23,11 +23,11 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
-              fill-opacity: 2;
+              fill-color-select: 2;
             }
             .tag2 {
               stroke-color: 3;
-              stroke-opacity: 4;
+              stroke-color-select: 4;
             }
         ";
 
@@ -44,15 +44,15 @@ class NeatlineExhibitTest_PushStyles extends Neatline_TestCase
 
         // Record 1 should have `tag1` styles.
         $this->assertEquals($record1->fill_color, '1');
-        $this->assertEquals($record1->fill_opacity, 2);
+        $this->assertEquals($record1->fill_color_select, '2');
         $this->assertNull($record1->stroke_color);
-        $this->assertNull($record1->stroke_opacity);
+        $this->assertNull($record1->stroke_color_select);
 
         // Record 2 should have `tag2` styles.
         $this->assertEquals($record2->stroke_color, '3');
-        $this->assertEquals($record2->stroke_opacity, 4);
+        $this->assertEquals($record2->stroke_color_select, '4');
         $this->assertNull($record2->fill_color);
-        $this->assertNull($record2->fill_opacity);
+        $this->assertNull($record2->fill_color_select);
 
     }
 

@@ -35,10 +35,10 @@ class RecordsControllerTest_Post extends Neatline_TestCase
                 'fill_color_select'     => '10',
                 'stroke_color'          => '11',
                 'stroke_color_select'   => '12',
-                'fill_opacity'          => '13',
-                'fill_opacity_select'   => '14',
-                'stroke_opacity'        => '15',
-                'stroke_opacity_select' => '16',
+                'fill_opacity'          => '0.13',
+                'fill_opacity_select'   => '0.14',
+                'stroke_opacity'        => '0.15',
+                'stroke_opacity_select' => '0.16',
                 'stroke_width'          => '17',
                 'point_radius'          => '18',
                 'zindex'                => '19',
@@ -82,10 +82,10 @@ class RecordsControllerTest_Post extends Neatline_TestCase
         $this->assertEquals($r->fill_color_select,      '10');
         $this->assertEquals($r->stroke_color,           '11');
         $this->assertEquals($r->stroke_color_select,    '12');
-        $this->assertEquals($r->fill_opacity,           13);
-        $this->assertEquals($r->fill_opacity_select,    14);
-        $this->assertEquals($r->stroke_opacity,         15);
-        $this->assertEquals($r->stroke_opacity_select,  16);
+        $this->assertEquals($r->fill_opacity,           0.13);
+        $this->assertEquals($r->fill_opacity_select,    0.14);
+        $this->assertEquals($r->stroke_opacity,         0.15);
+        $this->assertEquals($r->stroke_opacity_select,  0.16);
         $this->assertEquals($r->stroke_width,           17);
         $this->assertEquals($r->point_radius,           18);
         $this->assertEquals($r->zindex,                 19);

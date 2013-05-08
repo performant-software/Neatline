@@ -23,25 +23,25 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
-              fill-opacity: 2;
+              fill-color-select: 2;
             }
             .tag2 {
               stroke-color: 3;
-              stroke-opacity: 4;
+              stroke-color-select: 4;
             }
             .tag3 {
-              stroke-color: 5;
-              stroke-opacity: 6;
+              zindex: 5;
+              weight: 6;
             }
         ";
 
         $record = new NeatlineRecord($exhibit);
         $record->setArray(array(
-            'tags'              => 'tag1,tag2',
-            'fill_color'        => '7',
-            'fill_opacity'      => 8,
-            'stroke_color'      => '9',
-            'stroke_opacity'    => 10
+            'tags'                  => 'tag1,tag2',
+            'fill_color'            => '7',
+            'fill_color_select'     => '8',
+            'stroke_color'          => '9',
+            'stroke_color_select'   => '10'
         ));
 
         $exhibit->pullStyles($record);
@@ -51,18 +51,18 @@ class NeatlineExhibitTest_PullStyles extends Neatline_TestCase
 
             'tag1' => array(
                 'fill_color' => '7',
-                'fill_opacity' => '8'
+                'fill_color_select' => '8'
             ),
             'tag2' => array(
                 'stroke_color' => '9',
-                'stroke_opacity' => '10'
+                'stroke_color_select' => '10'
             ),
 
             // `tag3` styles should be unchanged.
 
             'tag3' => array(
-                'stroke_color' => '5',
-                'stroke_opacity' => '6'
+                'zindex' => '5',
+                'weight' => '6'
             )
 
         ));

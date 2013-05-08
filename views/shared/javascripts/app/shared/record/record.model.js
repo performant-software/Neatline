@@ -35,10 +35,10 @@ Neatline.module('Shared.Record', function(
         fill_color_select:      '#00aeff',
         stroke_color:           '#000000',
         stroke_color_select:    '#000000',
-        fill_opacity:           30,
-        fill_opacity_select:    40,
-        stroke_opacity:         90,
-        stroke_opacity_select:  100,
+        fill_opacity:           0.3,
+        fill_opacity_select:    0.4,
+        stroke_opacity:         0.9,
+        stroke_opacity_select:  1.0,
         point_radius:           10,
         stroke_width:           2
       };

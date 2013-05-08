@@ -142,15 +142,15 @@ describe('Record Form Style Tab', function() {
     describe('Fill Opacity', function() {
 
       it('model `set`', function() {
-        NL.vw.RECORD.model.set('fill_opacity', 50);
+        NL.vw.RECORD.model.set('fill_opacity', 0.5);
       });
 
       it('input `change`', function() {
-        el.fillOpacity.val(50).trigger('change');
+        el.fillOpacity.val(0.5).trigger('change');
       });
 
       it('input `keyup`', function() {
-        el.fillOpacity.val(50).trigger('keyup');
+        el.fillOpacity.val(0.5).trigger('keyup');
       });
 
       afterEach(function() {
@@ -164,15 +164,15 @@ describe('Record Form Style Tab', function() {
     describe('Fill Opacity (Selected)', function() {
 
       it('model `set`', function() {
-        NL.vw.RECORD.model.set('fill_opacity_select', 50);
+        NL.vw.RECORD.model.set('fill_opacity_select', 0.5);
       });
 
       it('input `change`', function() {
-        el.fillOpacitySelect.val('50').trigger('change');
+        el.fillOpacitySelect.val('0.5').trigger('change');
       });
 
       it('input `keyup`', function() {
-        el.fillOpacitySelect.val('50').trigger('keyup');
+        el.fillOpacitySelect.val('0.5').trigger('keyup');
       });
 
       afterEach(function() {
@@ -188,15 +188,15 @@ describe('Record Form Style Tab', function() {
     describe('Stroke Opacity', function() {
 
       it('model `set`', function() {
-        NL.vw.RECORD.model.set('stroke_opacity', 50);
+        NL.vw.RECORD.model.set('stroke_opacity', 0.5);
       });
 
       it('input `change`', function() {
-        el.strokeOpacity.val(50).trigger('change');
+        el.strokeOpacity.val(0.5).trigger('change');
       });
 
       it('input `keyup`', function() {
-        el.strokeOpacity.val(50).trigger('keyup');
+        el.strokeOpacity.val(0.5).trigger('keyup');
       });
 
       afterEach(function() {
@@ -209,15 +209,15 @@ describe('Record Form Style Tab', function() {
     describe('Stroke Opacity (Selected)', function() {
 
       it('model `set`', function() {
-        NL.vw.RECORD.model.set('stroke_opacity_select', 50);
+        NL.vw.RECORD.model.set('stroke_opacity_select', 0.5);
       });
 
       it('input `change`', function() {
-        el.strokeOpacitySelect.val('50').trigger('change');
+        el.strokeOpacitySelect.val('0.5').trigger('change');
       });
 
       it('input `keyup`', function() {
-        el.strokeOpacitySelect.val('50').trigger('keyup');
+        el.strokeOpacitySelect.val('0.5').trigger('keyup');
       });
 
       afterEach(function() {
