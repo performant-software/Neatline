@@ -516,17 +516,15 @@ Neatline.module('Map', function(
      */
     getStyleMap: function(record) {
 
-      var fillOpacity         = parseInt(record.get('fill_opacity'));
-      var fillSelectOpacity   = parseInt(record.get('fill_select_opacity'));
-      var strokeOpacity       = parseInt(record.get('stroke_opacity'));
-      var strokeSelectOpacity = parseInt(record.get('stroke_select_opacity'));
-      var pointRadius         = parseInt(record.get('point_radius'));
-      var strokeWidth         = parseInt(record.get('stroke_width'));
+      // Opacities:
+      var fill1   = parseInt(record.get('fill_opacity'))/100;
+      var fill2   = parseInt(record.get('fill_opacity_select'))/100;
+      var stroke1 = parseInt(record.get('stroke_opacity'))/100;
+      var stroke2 = parseInt(record.get('stroke_opacity_select'))/100;
 
-      fillOpacity         /= 100;
-      fillSelectOpacity   /= 100;
-      strokeOpacity       /= 100;
-      strokeSelectOpacity /= 100;
+      // Dimensions:
+      var pointRadius = parseInt(record.get('point_radius'));
+      var strokeWidth = parseInt(record.get('stroke_width'));
 
       return new OpenLayers.StyleMap({
 
@@ -536,31 +534,31 @@ Neatline.module('Map', function(
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
-          fillOpacity:      fillOpacity,
-          strokeOpacity:    strokeOpacity,
-          graphicOpacity:   fillOpacity
+          fillOpacity:      fill1,
+          strokeOpacity:    stroke1,
+          graphicOpacity:   fill1
         }),
 
         'select': new OpenLayers.Style({
-          fillColor:        record.get('fill_select_color'),
-          strokeColor:      record.get('stroke_select_color'),
+          fillColor:        record.get('fill_color_select'),
+          strokeColor:      record.get('stroke_color_select'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
-          fillOpacity:      fillSelectOpacity,
-          strokeOpacity:    strokeSelectOpacity,
-          graphicOpacity:   fillSelectOpacity
+          fillOpacity:      fill2,
+          strokeOpacity:    stroke2,
+          graphicOpacity:   fill2
         }),
 
         'temporary': new OpenLayers.Style({
-          fillColor:        record.get('fill_select_color'),
-          strokeColor:      record.get('stroke_select_color'),
+          fillColor:        record.get('fill_color_select'),
+          strokeColor:      record.get('stroke_color_select'),
           externalGraphic:  record.get('point_image'),
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
-          fillOpacity:      fillSelectOpacity,
-          strokeOpacity:    strokeSelectOpacity,
-          graphicOpacity:   fillSelectOpacity
+          fillOpacity:      fill2,
+          strokeOpacity:    stroke2,
+          graphicOpacity:   fill2
         })
 
       });

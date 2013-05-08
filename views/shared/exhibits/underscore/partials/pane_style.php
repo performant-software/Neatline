@@ -51,10 +51,10 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
-      'name'  => 'fill-select-color',
-      'label' => 'Fill Select Color',
-      'bind'  => 'record.fill_select_color',
-      'style' => 'fill-select-color',
+      'name'  => 'fill-color-select',
+      'label' => 'Fill Color (Selected)',
+      'bind'  => 'record.fill_color_select',
+      'style' => 'fill-color-select',
       'class' => 'preview color'
   )); ?>
 
@@ -67,10 +67,10 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
-      'name'  => 'stroke-select-color',
-      'label' => 'Stroke Select Color',
-      'bind'  => 'record.stroke_select_color',
-      'style' => 'stroke-select-color',
+      'name'  => 'stroke-color-select',
+      'label' => 'Stroke Color (Selected)',
+      'bind'  => 'record.stroke_color_select',
+      'style' => 'stroke-color-select',
       'class' => 'preview color'
   )); ?>
 
@@ -85,10 +85,10 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
-      'name'  => 'fill-select-opacity',
-      'label' => 'Fill Select Opacity',
-      'bind'  => 'record.fill_select_opacity',
-      'style' => 'fill-select-opacity',
+      'name'  => 'fill-opacity-select',
+      'label' => 'Fill Opacity (Selected)',
+      'bind'  => 'record.fill_opacity_select',
+      'style' => 'fill-opacity-select',
       'class' => 'preview opacity'
   )); ?>
 
@@ -101,10 +101,10 @@
   )); ?>
 
   <?php echo common('neatline/input', array(
-      'name'  => 'stroke-select-opacity',
-      'label' => 'Stroke Select Opacity',
-      'bind'  => 'record.stroke_select_opacity',
-      'style' => 'stroke-select-opacity',
+      'name'  => 'stroke-opacity-select',
+      'label' => 'Stroke Opacity (Selected)',
+      'bind'  => 'record.stroke_opacity_select',
+      'style' => 'stroke-opacity-select',
       'class' => 'preview opacity'
   )); ?>
 

@@ -43,9 +43,9 @@ describe('Record Form Style Tab', function() {
     // map on the edit layer should be rebuilt.
     // --------------------------------------------------------------------
 
-    describe('presenter', function() {
+    describe('Presenter', function() {
 
-      it('should update on `change`', function() {
+      it('input `change`', function() {
         el.presenter.val('None').trigger('change');
         var presenter = NL.vw.MAP.editLayer.nModel.get('presenter');
         expect(presenter).toEqual('None');
@@ -53,7 +53,7 @@ describe('Record Form Style Tab', function() {
 
     });
 
-    describe('shape color', function() {
+    describe('Fill Color', function() {
 
       it('model `set`', function() {
         NL.vw.RECORD.model.set('fill_color', '#ffffff');
@@ -74,7 +74,29 @@ describe('Record Form Style Tab', function() {
 
     });
 
-    describe('line color', function() {
+    describe('Fill Color (Selected)', function() {
+
+      it('model `set`', function() {
+        NL.vw.RECORD.model.set('fill_color_select', '#ffffff');
+      });
+
+      it('input `change`', function() {
+        el.fillColorSelect.val('#ffffff').trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.fillColorSelect.val('#ffffff').trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(tmp.fillColor).toEqual('#ffffff');
+        expect(sel.fillColor).toEqual('#ffffff');
+      });
+
+    });
+
+    describe('Stroke Color', function() {
 
       it('model `set`', function() {
         NL.vw.RECORD.model.set('stroke_color', '#ffffff');
@@ -95,29 +117,29 @@ describe('Record Form Style Tab', function() {
 
     });
 
-    describe('selected color', function() {
+    describe('Stroke Color (Selected)', function() {
 
       it('model `set`', function() {
-        NL.vw.RECORD.model.set('select_color', '#ffffff');
+        NL.vw.RECORD.model.set('stroke_color_select', '#ffffff');
       });
 
       it('input `change`', function() {
-        el.selectColor.val('#ffffff').trigger('change');
+        el.strokeColorSelect.val('#ffffff').trigger('change');
       });
 
       it('input `keyup`', function() {
-        el.selectColor.val('#ffffff').trigger('keyup');
+        el.strokeColorSelect.val('#ffffff').trigger('keyup');
       });
 
       afterEach(function() {
         getStyles();
-        expect(tmp.fillColor).toEqual('#ffffff');
-        expect(sel.fillColor).toEqual('#ffffff');
+        expect(tmp.strokeColor).toEqual('#ffffff');
+        expect(sel.strokeColor).toEqual('#ffffff');
       });
 
     });
 
-    describe('shape opacity', function() {
+    describe('Fill Opacity', function() {
 
       it('model `set`', function() {
         NL.vw.RECORD.model.set('fill_opacity', 50);
@@ -139,7 +161,31 @@ describe('Record Form Style Tab', function() {
 
     });
 
-    describe('line opacity', function() {
+    describe('Fill Opacity (Selected)', function() {
+
+      it('model `set`', function() {
+        NL.vw.RECORD.model.set('fill_opacity_select', 50);
+      });
+
+      it('input `change`', function() {
+        el.fillOpacitySelect.val('50').trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.fillOpacitySelect.val('50').trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
+        expect(tmp.fillOpacity).toEqual(0.5);
+        expect(sel.fillOpacity).toEqual(0.5);
+        expect(tmp.graphicOpacity).toEqual(0.5);
+        expect(sel.graphicOpacity).toEqual(0.5);
+      });
+
+    });
+
+    describe('Stroke Opacity', function() {
 
       it('model `set`', function() {
         NL.vw.RECORD.model.set('stroke_opacity', 50);
@@ -156,35 +202,33 @@ describe('Record Form Style Tab', function() {
       afterEach(function() {
         getStyles();
         expect(std.strokeOpacity).toEqual(0.5);
+      });
+
+    });
+
+    describe('Stroke Opacity (Selected)', function() {
+
+      it('model `set`', function() {
+        NL.vw.RECORD.model.set('stroke_opacity_select', 50);
+      });
+
+      it('input `change`', function() {
+        el.strokeOpacitySelect.val('50').trigger('change');
+      });
+
+      it('input `keyup`', function() {
+        el.strokeOpacitySelect.val('50').trigger('keyup');
+      });
+
+      afterEach(function() {
+        getStyles();
         expect(tmp.strokeOpacity).toEqual(0.5);
         expect(sel.strokeOpacity).toEqual(0.5);
       });
 
     });
 
-    describe('selected opacity', function() {
-
-      it('model `set`', function() {
-        NL.vw.RECORD.model.set('select_opacity', 50);
-      });
-
-      it('input `change`', function() {
-        el.selectOpacity.val(50).trigger('change');
-      });
-
-      it('input `keyup`', function() {
-        el.selectOpacity.val(50).trigger('keyup');
-      });
-
-      afterEach(function() {
-        getStyles();
-        expect(tmp.fillOpacity).toEqual(0.5);
-        expect(sel.fillOpacity).toEqual(0.5);
-      });
-
-    });
-
-    describe('line width', function() {
+    describe('Stroke Width', function() {
 
       it('model `set`', function() {
         NL.vw.RECORD.model.set('stroke_width', 50);
@@ -207,7 +251,7 @@ describe('Record Form Style Tab', function() {
 
     });
 
-    describe('point radius', function() {
+    describe('Point Radius', function() {
 
       it('model `set`', function() {
         NL.vw.RECORD.model.set('point_radius', 50);

@@ -23,15 +23,15 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
-              fill-opacity: 2;
+              fill-color-select: 2;
             }
             .tag2 {
-              select-color: 3;
-              select-opacity: 4;
+              stroke-color: 3;
+              stroke-color-select: 4;
             }
             .tag3 {
-              stroke-color: 5;
-              stroke-opacity: 6;
+              fill-opacity: 5;
+              fill-opacity-select: 6;
             }
         ";
 
@@ -45,13 +45,13 @@ class NeatlineRecordTest_PullStyles extends Neatline_TestCase
 
         // Should pull `tag1` and `tag2`.
         $this->assertEquals($record->fill_color, '1');
-        $this->assertEquals($record->fill_opacity, 2);
-        $this->assertEquals($record->select_color, '3');
-        $this->assertEquals($record->select_opacity, 4);
+        $this->assertEquals($record->fill_color_select, '2');
+        $this->assertEquals($record->stroke_color, '3');
+        $this->assertEquals($record->stroke_color_select, '4');
 
         // Should not pull `tag3`.
-        $this->assertNull($record->stroke_color);
-        $this->assertNull($record->stroke_opacity);
+        $this->assertNull($record->fill_opacity);
+        $this->assertNull($record->fill_opacity_select);
 
     }
 

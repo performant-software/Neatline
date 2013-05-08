@@ -208,32 +208,32 @@ describe('Map Vector Layers', function() {
       expect(sel.fillColor).        toEqual('2');
 
       expect(def.strokeColor).      toEqual('3');
-      expect(tmp.strokeColor).      toEqual('2');
-      expect(sel.strokeColor).      toEqual('2');
+      expect(tmp.strokeColor).      toEqual('4');
+      expect(sel.strokeColor).      toEqual('4');
 
-      expect(def.fillOpacity).      toEqual(0.04);
-      expect(tmp.fillOpacity).      toEqual(0.05);
-      expect(sel.fillOpacity).      toEqual(0.05);
+      expect(def.fillOpacity).      toEqual(0.05);
+      expect(tmp.fillOpacity).      toEqual(0.06);
+      expect(sel.fillOpacity).      toEqual(0.06);
 
-      expect(def.graphicOpacity).   toEqual(0.04);
-      expect(tmp.graphicOpacity).   toEqual(0.05);
-      expect(sel.graphicOpacity).   toEqual(0.05);
+      expect(def.graphicOpacity).   toEqual(0.05);
+      expect(tmp.graphicOpacity).   toEqual(0.06);
+      expect(sel.graphicOpacity).   toEqual(0.06);
 
-      expect(def.strokeOpacity).    toEqual(0.06);
-      expect(tmp.strokeOpacity).    toEqual(0.06);
-      expect(sel.strokeOpacity).    toEqual(0.06);
+      expect(def.strokeOpacity).    toEqual(0.07);
+      expect(tmp.strokeOpacity).    toEqual(0.08);
+      expect(sel.strokeOpacity).    toEqual(0.08);
 
-      expect(def.strokeWidth).      toEqual(7);
-      expect(tmp.strokeWidth).      toEqual(7);
-      expect(sel.strokeWidth).      toEqual(7);
+      expect(def.strokeWidth).      toEqual(9);
+      expect(tmp.strokeWidth).      toEqual(9);
+      expect(sel.strokeWidth).      toEqual(9);
 
-      expect(def.pointRadius).      toEqual(8);
-      expect(tmp.pointRadius).      toEqual(8);
-      expect(sel.pointRadius).      toEqual(8);
+      expect(def.pointRadius).      toEqual(10);
+      expect(tmp.pointRadius).      toEqual(10);
+      expect(sel.pointRadius).      toEqual(10);
 
-      expect(def.externalGraphic).  toEqual('9');
-      expect(tmp.externalGraphic).  toEqual('9');
-      expect(sel.externalGraphic).  toEqual('9');
+      expect(def.externalGraphic).  toEqual('11');
+      expect(tmp.externalGraphic).  toEqual('11');
+      expect(sel.externalGraphic).  toEqual('11');
 
     });
 

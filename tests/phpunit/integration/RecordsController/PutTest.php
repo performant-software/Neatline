@@ -22,94 +22,100 @@ class RecordsControllerTest_Put extends Neatline_TestCase
         $record = $this->__record();
 
         $record->setArray(array(
-            'slug'              => '1',
-            'title'             => '2',
-            'body'              => '3',
-            'coverage'          => 'POINT(4 4)',
-            'tags'              => '5',
-            'widgets'           => '6',
-            'presenter'         => '7',
-            'fill_color'        => '8',
-            'select_color'      => '9',
-            'stroke_color'      => '10',
-            'fill_opacity'      => '11',
-            'select_opacity'    => '12',
-            'stroke_opacity'    => '13',
-            'stroke_width'      => '14',
-            'point_radius'      => '15',
-            'zindex'            => '16',
-            'weight'            => '17',
-            'start_date'        => '18',
-            'end_date'          => '19',
-            'after_date'        => '20',
-            'before_date'       => '21',
-            'point_image'       => '22',
-            'min_zoom'          => '23',
-            'max_zoom'          => '24',
-            'map_zoom'          => '25',
-            'map_focus'         => '26'
+            'slug'                  => '1',
+            'title'                 => '2',
+            'body'                  => '3',
+            'coverage'              => 'POINT(4 4)',
+            'tags'                  => '5',
+            'widgets'               => '6',
+            'presenter'             => '7',
+            'fill_color'            => '8',
+            'fill_color_select'     => '9',
+            'stroke_color'          => '10',
+            'stroke_color_select'   => '11',
+            'fill_opacity'          => '12',
+            'fill_opacity_select'   => '13',
+            'stroke_opacity'        => '14',
+            'stroke_opacity_select' => '15',
+            'stroke_width'          => '16',
+            'point_radius'          => '17',
+            'zindex'                => '18',
+            'weight'                => '19',
+            'start_date'            => '20',
+            'end_date'              => '21',
+            'after_date'            => '22',
+            'before_date'           => '23',
+            'point_image'           => '24',
+            'min_zoom'              => '25',
+            'max_zoom'              => '26',
+            'map_zoom'              => '27',
+            'map_focus'             => '28'
         ));
 
         $record->save();
 
         $this->writePut(array(
-            'slug'              => '2',
-            'title'             => '3',
-            'body'              => '4',
-            'coverage'          => 'POINT(5 5)',
-            'tags'              => '6',
-            'widgets'           => array('7','8'),
-            'presenter'         => '9',
-            'fill_color'        => '10',
-            'select_color'      => '11',
-            'stroke_color'      => '12',
-            'fill_opacity'      => '13',
-            'select_opacity'    => '14',
-            'stroke_opacity'    => '15',
-            'stroke_width'      => '16',
-            'point_radius'      => '17',
-            'zindex'            => '18',
-            'weight'            => '19',
-            'start_date'        => '20',
-            'end_date'          => '21',
-            'after_date'        => '22',
-            'before_date'       => '23',
-            'point_image'       => '24',
-            'min_zoom'          => '25',
-            'max_zoom'          => '26',
-            'map_zoom'          => '27',
-            'map_focus'         => '28'
+            'slug'                  => '2',
+            'title'                 => '3',
+            'body'                  => '4',
+            'coverage'              => 'POINT(5 5)',
+            'tags'                  => '6',
+            'widgets'               => array('7','8'),
+            'presenter'             => '9',
+            'fill_color'            => '10',
+            'fill_color_select'     => '11',
+            'stroke_color'          => '12',
+            'stroke_color_select'   => '13',
+            'fill_opacity'          => '14',
+            'fill_opacity_select'   => '15',
+            'stroke_opacity'        => '16',
+            'stroke_opacity_select' => '17',
+            'stroke_width'          => '18',
+            'point_radius'          => '19',
+            'zindex'                => '20',
+            'weight'                => '21',
+            'start_date'            => '22',
+            'end_date'              => '23',
+            'after_date'            => '24',
+            'before_date'           => '25',
+            'point_image'           => '26',
+            'min_zoom'              => '27',
+            'max_zoom'              => '28',
+            'map_zoom'              => '29',
+            'map_focus'             => '30'
         ));
 
         $this->dispatch('neatline/records/'.$record->id);
         $record = $this->reload($record);
 
-        $this->assertEquals($record->slug,              '2');
-        $this->assertEquals($record->title,             '3');
-        $this->assertEquals($record->body,              '4');
-        $this->assertEquals($record->coverage,          'POINT(5 5)');
-        $this->assertEquals($record->tags,              '6');
-        $this->assertEquals($record->widgets,           '7,8');
-        $this->assertEquals($record->presenter,         '9');
-        $this->assertEquals($record->fill_color,        '10');
-        $this->assertEquals($record->select_color,      '11');
-        $this->assertEquals($record->stroke_color,      '12');
-        $this->assertEquals($record->fill_opacity,      13);
-        $this->assertEquals($record->select_opacity,    14);
-        $this->assertEquals($record->stroke_opacity,    15);
-        $this->assertEquals($record->stroke_width,      16);
-        $this->assertEquals($record->point_radius,      17);
-        $this->assertEquals($record->zindex,            18);
-        $this->assertEquals($record->weight,            19);
-        $this->assertEquals($record->start_date,        '20');
-        $this->assertEquals($record->end_date,          '21');
-        $this->assertEquals($record->after_date,        '22');
-        $this->assertEquals($record->before_date,       '23');
-        $this->assertEquals($record->point_image,       '24');
-        $this->assertEquals($record->min_zoom,          25);
-        $this->assertEquals($record->max_zoom,          26);
-        $this->assertEquals($record->map_zoom,          27);
-        $this->assertEquals($record->map_focus,         '28');
+        $this->assertEquals($record->slug,                  '2');
+        $this->assertEquals($record->title,                 '3');
+        $this->assertEquals($record->body,                  '4');
+        $this->assertEquals($record->coverage,              'POINT(5 5)');
+        $this->assertEquals($record->tags,                  '6');
+        $this->assertEquals($record->widgets,               '7,8');
+        $this->assertEquals($record->presenter,             '9');
+        $this->assertEquals($record->fill_color,            '10');
+        $this->assertEquals($record->fill_color_select,     '11');
+        $this->assertEquals($record->stroke_color,          '12');
+        $this->assertEquals($record->stroke_color_select,   '13');
+        $this->assertEquals($record->fill_opacity,          14);
+        $this->assertEquals($record->fill_opacity_select,   15);
+        $this->assertEquals($record->stroke_opacity,        16);
+        $this->assertEquals($record->stroke_opacity_select, 17);
+        $this->assertEquals($record->stroke_width,          18);
+        $this->assertEquals($record->point_radius,          19);
+        $this->assertEquals($record->zindex,                20);
+        $this->assertEquals($record->weight,                21);
+        $this->assertEquals($record->start_date,            '22');
+        $this->assertEquals($record->end_date,              '23');
+        $this->assertEquals($record->after_date,            '24');
+        $this->assertEquals($record->before_date,           '25');
+        $this->assertEquals($record->point_image,           '26');
+        $this->assertEquals($record->min_zoom,              27);
+        $this->assertEquals($record->max_zoom,              28);
+        $this->assertEquals($record->map_zoom,              29);
+        $this->assertEquals($record->map_focus,             '30');
 
     }
 

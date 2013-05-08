@@ -83,13 +83,13 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `widgets`               TEXT NULL,
         `presenter`             VARCHAR(100) NULL,
         `fill_color`            VARCHAR(100) NULL,
-        `fill_select_color`     VARCHAR(100) NULL,
+        `fill_color_select`     VARCHAR(100) NULL,
         `stroke_color`          VARCHAR(100) NULL,
-        `stroke_select_color`   VARCHAR(100) NULL,
+        `stroke_color_select`   VARCHAR(100) NULL,
         `fill_opacity`          INT(10) UNSIGNED NULL,
-        `fill_select_opacity`   INT(10) UNSIGNED NULL,
+        `fill_opacity_select`   INT(10) UNSIGNED NULL,
         `stroke_opacity`        INT(10) UNSIGNED NULL,
-        `stroke_select_opacity` INT(10) UNSIGNED NULL,
+        `stroke_opacity_select` INT(10) UNSIGNED NULL,
         `stroke_width`          INT(10) UNSIGNED NULL,
         `point_radius`          INT(10) UNSIGNED NULL,
         `zindex`                INT(10) UNSIGNED NULL,
@@ -234,15 +234,15 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
             // Colors
             'fill_color',
-            'fill_select_color',
+            'fill_color_select',
             'stroke_color',
-            'stroke_select_color',
+            'stroke_color_select',
 
             // Opacities
             'fill_opacity',
-            'fill_select_opacity',
+            'fill_opacity_select',
             'stroke_opacity',
-            'stroke_select_opacity',
+            'stroke_opacity_select',
 
             // Dimensions
             'stroke_width',

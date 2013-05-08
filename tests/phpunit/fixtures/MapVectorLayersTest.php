@@ -87,16 +87,18 @@ class FixturesTest_MapVectorLayers extends Neatline_FixtureCase
         $record = $this->__record($this->exhibit);
 
         $record->setArray(array(
-            'coverage'          => 'POINT(1 2)',
-            'fill_color'        => '1',
-            'select_color'      => '2',
-            'stroke_color'      => '3',
-            'fill_opacity'      => 4,
-            'select_opacity'    => 5,
-            'stroke_opacity'    => 6,
-            'stroke_width'      => 7,
-            'point_radius'      => 8,
-            'point_image'       => '9'
+            'coverage'              => 'POINT(1 2)',
+            'fill_color'            => '1',
+            'fill_color_select'     => '2',
+            'stroke_color'          => '3',
+            'stroke_color_select'   => '4',
+            'fill_opacity'          => 5,
+            'fill_opacity_select'   => 6,
+            'stroke_opacity'        => 7,
+            'stroke_opacity_select' => 8,
+            'stroke_width'          => 9,
+            'point_radius'          => 10,
+            'point_image'           => '11'
         ));
 
         $record->save();

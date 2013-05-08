@@ -32,13 +32,13 @@ Neatline.module('Shared.Record', function(
         exhibit_id:             Neatline.global.exhibit.id,
         presenter:              'StaticBubble',
         fill_color:             '#00aeff',
-        fill_select_color:      '#00aeff',
+        fill_color_select:      '#00aeff',
         stroke_color:           '#000000',
-        stroke_select_color:    '#000000',
+        stroke_color_select:    '#000000',
         fill_opacity:           30,
-        fill_select_opacity:    50,
+        fill_opacity_select:    40,
         stroke_opacity:         90,
-        stroke_select_opacity:  100,
+        stroke_opacity_select:  100,
         point_radius:           10,
         stroke_width:           2
       };
