@@ -38,7 +38,7 @@ describe('Record Form SVG', function() {
     // be displayed.
     // --------------------------------------------------------------------
 
-    // Click on "Enter Markup".
+    // Click "Enter Markup".
     el.link.trigger('click');
 
     // Modal and overlay should be visible.
@@ -55,10 +55,10 @@ describe('Record Form SVG', function() {
     // the form should return to its normal state.
     // --------------------------------------------------------------------
 
-    // Click on "Enter Markup".
+    // Click "Enter Markup".
     el.link.trigger('click');
 
-    // Click on "Cancel".
+    // Click "Cancel".
     el.cancel.trigger('click');
 
     // Modal should be closed.
@@ -185,7 +185,7 @@ describe('Record Form SVG', function() {
     // When new SVG is not parsed successfully, the modal stay open.
     // --------------------------------------------------------------------
 
-    // Click on "Enter Markup".
+    // Click "Enter Markup".
     el.link.trigger('click');
 
     // Parse invalid SVG.

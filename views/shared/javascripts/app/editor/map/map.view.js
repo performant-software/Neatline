@@ -100,19 +100,18 @@ _.extend(Neatline.Map.View.prototype, {
    */
   endEdit: function() {
 
-    // Remove the controls.
-    _.each(this.controls, _.bind(function(control) {
-      this.map.removeControl(control);
-    }, this));
+    // Remove the edit controls.
+    this.deactivateEditControls();
+    this.removeEditControls();
 
-    // Unfreeze and de-reference the edit layer.
+    // Activate default controls.
+    this.activateControls();
+
+    // Release the edit layer.
     if (this.editLayer) {
       this.editLayer.nFrozen = false;
       this.editLayer = null;
     }
-
-    // Activate the default cursor controls.
-    this.activateControls();
 
   },
 
@@ -129,11 +128,8 @@ _.extend(Neatline.Map.View.prototype, {
     // (1) Reset the map to its default state.
 
     this.modifying = false;
-
+    this.deactivateEditControls();
     this.activateControls();
-    _.each(this.controls, function(control) {
-      control.deactivate();
-    });
 
     // (2) Apply the active editing mode.
 
@@ -306,6 +302,26 @@ _.extend(Neatline.Map.View.prototype, {
     if (!_.isEmpty(features)) wkt = this.formatWkt.write(features);
     Neatline.execute('EDITOR:RECORD:setCoverage', wkt);
 
+  },
+
+
+  /**
+   * Deactivate all edit controls.
+   */
+  deactivateEditControls: function() {
+    _.each(this.controls, function(control) {
+      control.deactivate();
+    });
+  },
+
+
+  /**
+   * Remove all edit controls from the map.
+   */
+  removeEditControls: function() {
+    _.each(this.controls, _.bind(function(control) {
+      this.map.removeControl(control);
+    }, this));
   },
 
 
