@@ -156,6 +156,24 @@ describe('Map WMS Layers', function() {
   });
 
 
+  describe('style rendering', function() {
+
+    it('should render opacities', function() {
+
+      // ------------------------------------------------------------------
+      // WMS layer opacities should be set from the `fill_opacity` field.
+      // ------------------------------------------------------------------
+
+      NL.respondMap200(NL.json.MapWmsLayers.records.styles);
+
+      // Should set WMS layer opacity.
+      expect(NL.vw.MAP.getWmsLayers()[0].opacity).toEqual(0.5);
+
+    });
+
+  });
+
+
   describe('focusing', function() {
 
     it('should not focus for model with WMS but no focus', function() {

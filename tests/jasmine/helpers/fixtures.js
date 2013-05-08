@@ -49,7 +49,8 @@ var NL = (function(NL) {
         records: {
           regular:    readFixtures('MapWmsLayers.records.regular.json'),
           deleted:    readFixtures('MapWmsLayers.records.deleted.json'),
-          zindex:     readFixtures('MapWmsLayers.records.zindex.json')
+          zindex:     readFixtures('MapWmsLayers.records.zindex.json'),
+          styles:     readFixtures('MapWmsLayers.records.styles.json')
         },
         record: {
           noFocus:    readFixtures('MapWmsLayers.record.noFocus.json'),

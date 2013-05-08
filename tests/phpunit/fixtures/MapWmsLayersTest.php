@@ -88,6 +88,29 @@ class FixturesTest_MapWmsLayers extends Neatline_FixtureCase
 
 
     /**
+     * `MapWmsLayers.records.styles.json`
+     */
+    public function testStyles()
+    {
+
+        $record = $this->__record($this->exhibit);
+
+        $record->setArray(array(
+            'wms_address'   => 'address',
+            'wms_layers'    => 'layers',
+            'fill_opacity'  => 0.5
+        ));
+
+        $record->save();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'MapWmsLayers.records.styles.json'
+        );
+
+    }
+
+
+    /**
      * `MapWmsLayers.record.noFocus.json`
      * `MapWmsLayers.record.focus.json`
      */
