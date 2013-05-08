@@ -100,14 +100,12 @@ _.extend(Neatline.Map.View.prototype, {
    */
   endEdit: function() {
 
-    // Remove the edit controls.
-    this.deactivateEditControls();
+    // Reset controls.
     this.removeEditControls();
-
-    // Activate default controls.
+    this.deactivateEditControls();
     this.activateControls();
 
-    // Release the edit layer.
+    // Release edit layer.
     if (this.editLayer) {
       this.editLayer.nFrozen = false;
       this.editLayer = null;
@@ -284,7 +282,7 @@ _.extend(Neatline.Map.View.prototype, {
         // regular, non-collection features by creating new features from
         // each of the component geometries. This prevents layers with
         // multiple features from being serialized as nested collections,
-        // which can't be parsed by MySQL.
+        // which can't be indexed by MySQL.
 
         if (f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Collection') {
           _.each(f.geometry.components, function(geo) {
