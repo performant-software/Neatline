@@ -11,11 +11,11 @@
 describe('Record Form Style Tab', function() {
 
 
-  var el, std, tmp, sel;
+  var el, def, tmp, sel;
 
 
   var getStyles = function() {
-    std = NL.vw.MAP.editLayer.styleMap.styles['default'].defaultStyle;
+    def = NL.vw.MAP.editLayer.styleMap.styles['default'].defaultStyle;
     tmp = NL.vw.MAP.editLayer.styleMap.styles.temporary.defaultStyle;
     sel = NL.vw.MAP.editLayer.styleMap.styles.select.defaultStyle;
   };
@@ -69,7 +69,7 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.fillColor).toEqual('#ffffff');
+        expect(def.fillColor).toEqual('#ffffff');
       });
 
     });
@@ -112,7 +112,7 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.strokeColor).toEqual('#ffffff');
+        expect(def.strokeColor).toEqual('#ffffff');
       });
 
     });
@@ -155,8 +155,8 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.fillOpacity).toEqual(0.5);
-        expect(std.graphicOpacity).toEqual(0.5);
+        expect(def.fillOpacity).toEqual(0.5);
+        expect(def.graphicOpacity).toEqual(0.5);
       });
 
     });
@@ -201,7 +201,7 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.strokeOpacity).toEqual(0.5);
+        expect(def.strokeOpacity).toEqual(0.5);
       });
 
     });
@@ -244,7 +244,7 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.strokeWidth).toEqual(50);
+        expect(def.strokeWidth).toEqual(50);
         expect(tmp.strokeWidth).toEqual(50);
         expect(sel.strokeWidth).toEqual(50);
       });
@@ -267,7 +267,7 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.pointRadius).toEqual(50);
+        expect(def.pointRadius).toEqual(50);
         expect(tmp.pointRadius).toEqual(50);
         expect(sel.pointRadius).toEqual(50);
       });
@@ -290,7 +290,7 @@ describe('Record Form Style Tab', function() {
 
       afterEach(function() {
         getStyles();
-        expect(std.externalGraphic).toEqual('img.png');
+        expect(def.externalGraphic).toEqual('img.png');
         expect(tmp.externalGraphic).toEqual('img.png');
         expect(sel.externalGraphic).toEqual('img.png');
       });
