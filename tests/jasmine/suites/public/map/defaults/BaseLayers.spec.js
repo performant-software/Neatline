@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Exhibit Defaults', function() {
+describe('Map Base Layers', function() {
 
 
   beforeEach(function() {
@@ -66,24 +66,6 @@ describe('Map Exhibit Defaults', function() {
     NL.aliasNeatline();
 
     expect(NL.vw.MAP.map.baseLayer.name).toEqual('Layer2');
-
-  });
-
-
-  it('should set exhibit default focus and zoom', function() {
-
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the viewport defined by the `map_focus`
-    // and `map_zoom` should be manifested on the map.
-    // --------------------------------------------------------------------
-
-    Neatline.global.map_focus = '1,2';
-    Neatline.global.map_zoom = 10;
-
-    NL.startApplication();
-    NL.aliasNeatline();
-
-    NL.assertMapViewport(1, 2, 10);
 
   });
 
