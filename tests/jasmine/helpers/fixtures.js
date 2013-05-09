@@ -82,17 +82,6 @@ var NL = (function(NL) {
         records:      readFixtures('StaticBubble.records.json')
       },
 
-      SearchMapMirror: {
-        records: {
-          list:       readFixtures('SearchMapMirror.records.list.json'),
-          map:        readFixtures('SearchMapMirror.records.map.json')
-        }
-      },
-
-      SearchQuery: {
-        records:      readFixtures('SearchQuery.records.json')
-      },
-
       Styles: {
         exhibit:      readFixtures('Styles.exhibit.json')
       }

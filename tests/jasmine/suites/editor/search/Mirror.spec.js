@@ -11,9 +11,15 @@
 describe('Search Map Mirroring', function() {
 
 
+  var fx = {
+    list: readFixtures('EditorSearchMirror.list.json'),
+    map:  readFixtures('EditorSearchMirror.map.json')
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
-    NL.respondRecordList200(NL.json.SearchMapMirror.records.list);
+    NL.respondRecordList200(fx.list);
   });
 
 
@@ -48,7 +54,7 @@ describe('Search Map Mirroring', function() {
     // immediately synchronize with the collection on the map.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.SearchMapMirror.records.map);
+    NL.respondMap200(fx.map);
 
     // Keyup with `map:` in the box.
     NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
@@ -70,7 +76,7 @@ describe('Search Map Mirroring', function() {
     // record list shold synchronize with the collection on the map.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.SearchMapMirror.records.map);
+    NL.respondMap200(fx.map);
 
     // Request route with `map:` as query.
     NL.navigate('records/search/query=map:');
@@ -96,7 +102,7 @@ describe('Search Map Mirroring', function() {
     NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
 
     // Ingest new records on the map.
-    NL.refreshMap(NL.json.SearchMapMirror.records.map);
+    NL.refreshMap(fx.map);
 
     // List should synchronize with map.
     var recordRows = NL.getRecordListRows();
@@ -119,7 +125,7 @@ describe('Search Map Mirroring', function() {
     Neatline.global.page_length = 1;
 
     // Load 3 records on the map.
-    NL.respondMap200(NL.json.SearchMapMirror.records.map);
+    NL.respondMap200(fx.map);
 
     // Activate mirroring.
     NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
@@ -144,10 +150,10 @@ describe('Search Map Mirroring', function() {
     NL.vw.SEARCH.__ui.search.val('map').trigger('keyup');
 
     // Respond with default record collection.
-    NL.respondLast200(NL.json.SearchMapMirror.records.list);
+    NL.respondLast200(fx.list);
 
     // Update map records.
-    NL.refreshMap(NL.json.SearchMapMirror.records.map);
+    NL.refreshMap(fx.map);
 
     // List should not synchronize with map.
     var recordRows = NL.getRecordListRows();

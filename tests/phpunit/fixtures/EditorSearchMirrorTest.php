@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_SearchMapMirror extends Neatline_FixtureCase
+class FixturesTest_EditorSearchMirror extends Neatline_FixtureCase
 {
 
 
     /**
-     * `SearchMapMirror.records.list.json`
+     * `EditorSearchMirror.records.list.json`
      */
     public function testListRecords()
     {
@@ -35,7 +35,7 @@ class FixturesTest_SearchMapMirror extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'SearchMapMirror.records.list.json'
+            'EditorSearchMirror.list.json'
         );
 
     }
@@ -63,7 +63,7 @@ class FixturesTest_SearchMapMirror extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'SearchMapMirror.records.map.json'
+            'EditorSearchMirror.map.json'
         );
 
     }

@@ -11,12 +11,14 @@
 describe('Search Query Execution', function() {
 
 
-  var pageLength;
+  var perPage, fx = {
+    records: readFixtures('EditorSearchQuery.records.json')
+  };
 
 
   beforeEach(function() {
     NL.loadEditor();
-    pageLength = Neatline.global.page_length;
+    perPage = Neatline.global.page_length;
   });
 
 
@@ -94,11 +96,11 @@ describe('Search Query Execution', function() {
 
     // `query`=word, default `limit` and `offset`.
     NL.assertLastRequestHasGetParameter('query', 'word1+word2');
-    NL.assertLastRequestHasGetParameter('limit', pageLength);
+    NL.assertLastRequestHasGetParameter('limit', perPage);
     NL.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    NL.respondLast200(NL.json.SearchQuery.records);
+    NL.respondLast200(fx.records);
     var rows = NL.getRecordListRows();
 
     // Record list should be updated.
@@ -129,11 +131,11 @@ describe('Search Query Execution', function() {
     expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
     // Default `limit` and `offset`.
-    NL.assertLastRequestHasGetParameter('limit', pageLength);
+    NL.assertLastRequestHasGetParameter('limit', perPage);
     NL.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    NL.respondLast200(NL.json.SearchQuery.records);
+    NL.respondLast200(fx.records);
     var rows = NL.getRecordListRows();
 
     // Record list should be updated.
