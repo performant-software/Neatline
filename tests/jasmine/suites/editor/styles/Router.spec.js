@@ -11,7 +11,9 @@
 describe('Styles Router', function() {
 
 
-  var el;
+  var el, fx = {
+    exhibit: readFixtures('EditorStyles.exhibit.json')
+  };
 
 
   beforeEach(function() {
@@ -28,7 +30,7 @@ describe('Styles Router', function() {
   it('#styles', function() {
 
     NL.navigate('styles');
-    NL.respondLast200(NL.json.Styles.exhibit);
+    NL.respondLast200(fx.exhibit);
 
     // Tabs, styles form should be visible.
     expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);

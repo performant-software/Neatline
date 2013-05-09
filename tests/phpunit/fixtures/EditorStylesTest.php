@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_Styles extends Neatline_FixtureCase
+class FixturesTest_EditorStyles extends Neatline_FixtureCase
 {
 
 
     /**
-     * `Styles.exhibit.json`
+     * `EditorStyles.exhibit.json`
      */
-    public function testStyles()
+    public function testExhibit()
     {
 
         $exhibit = $this->__exhibit();
@@ -26,7 +26,7 @@ class FixturesTest_Styles extends Neatline_FixtureCase
         $exhibit->save();
 
         $this->writeFixtureFromRoute('neatline/exhibits/'.$exhibit->id,
-            'Styles.exhibit.json'
+            'EditorStyles.exhibit.json'
         );
 
     }

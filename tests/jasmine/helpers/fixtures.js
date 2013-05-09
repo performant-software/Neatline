@@ -80,10 +80,6 @@ var NL = (function(NL) {
 
       StaticBubble: {
         records:      readFixtures('StaticBubble.records.json')
-      },
-
-      Styles: {
-        exhibit:      readFixtures('Styles.exhibit.json')
       }
 
     };

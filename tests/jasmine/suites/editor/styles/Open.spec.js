@@ -11,6 +11,11 @@
 describe('Styles Open', function() {
 
 
+  var fx = {
+    exhibit: readFixtures('EditorStyles.exhibit.json')
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });
@@ -23,7 +28,7 @@ describe('Styles Open', function() {
     // --------------------------------------------------------------------
 
     NL.navigate('styles');
-    NL.respondLast200(NL.json.Styles.exhibit);
+    NL.respondLast200(fx.exhibit);
 
     // Form should be populated.
     expect(NL.vw.STYLES.styles.getSession().getValue()).toEqual('1');

@@ -11,13 +11,15 @@
 describe('Styles Save', function() {
 
 
-  var el;
+  var el, fx = {
+    exhibit: readFixtures('EditorStyles.exhibit.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showStyles(NL.json.Styles.exhibit);
+    NL.showStyles(fx.exhibit);
 
     el = {
       setFocus: NL.vw.STYLES.$('a[name="set-focus"]'),
