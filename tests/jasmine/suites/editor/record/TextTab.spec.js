@@ -12,7 +12,8 @@ describe('Record Form Text Tab', function() {
 
 
   var el, fx = {
-    record: read('EditorRecord.record.json')
+    record: read('EditorRecord.record.json'),
+    items:  read('EditorRecordTextTab.items.xml')
   };
 
 
@@ -49,7 +50,7 @@ describe('Record Form Text Tab', function() {
     NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
 
     // Respond with items list.
-    NL.respondXmlLast200(NL.xml.RecordFormText.items);
+    NL.respondXmlLast200(fx.items);
 
     // Get widget container and items.
     var items = el.autocomplete.find('a');
@@ -71,12 +72,12 @@ describe('Record Form Text Tab', function() {
     // --------------------------------------------------------------------
 
     // Get the id of the autocomplete result.
-    var items = $(NL.xml.RecordFormText.items);
+    var items = $(fx.items);
     var id = items.find('item').first().attr('itemId');
 
     // Enter item search query.
     NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
-    NL.respondXmlLast200(NL.xml.RecordFormText.items);
+    NL.respondXmlLast200(fx.items);
 
     // Click on the first option.
     el.autocomplete.find('a').first().click();

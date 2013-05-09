@@ -35,16 +35,6 @@ var NL = (function(NL) {
         }
       },
 
-      MapVectorLayers: {
-        records: {
-          regular:    readFixtures('MapVectorLayers.records.regular.json'),
-          deleted:    readFixtures('MapVectorLayers.records.deleted.json'),
-          zindex:     readFixtures('MapVectorLayers.records.zindex.json'),
-          styles:     readFixtures('MapVectorLayers.records.styles.json'),
-          focusing:   readFixtures('MapVectorLayers.records.focusing.json')
-        }
-      },
-
       MapWmsLayers: {
         records: {
           regular:    readFixtures('MapWmsLayers.records.regular.json'),
@@ -60,14 +50,6 @@ var NL = (function(NL) {
 
       StaticBubble: {
         records:      readFixtures('StaticBubble.records.json')
-      }
-
-    };
-
-    this.xml = {
-
-      RecordFormText: {
-        items:        readFixtures('RecordFormText.items.xml')
       }
 
     };
