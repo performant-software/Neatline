@@ -9,14 +9,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersWmsLayerManagement
-    extends Neatline_FixtureCase
+class FixturesTest_PublicMapWmsAddRemove extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersWmsLayerManagement.regular.json`
-     * `PublicMapLayersWmsLayerManagement.deleted.json`
+     * `PublicMapWmsAddRemove.regular.json`
+     * `PublicMapWmsAddRemove.deleted.json`
      */
     public function testRecords()
     {
@@ -47,14 +46,14 @@ class FixturesTest_PublicMapLayersWmsLayerManagement
         $record4->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersWmsLayerManagement.regular.json'
+            'PublicMapWmsAddRemove.regular.json'
         );
 
         $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersWmsLayerManagement.deleted.json'
+            'PublicMapWmsAddRemove.deleted.json'
         );
 
     }

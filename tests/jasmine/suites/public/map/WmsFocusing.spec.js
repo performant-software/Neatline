@@ -12,8 +12,8 @@ describe('WMS Layer Viewport Focusing', function() {
 
 
   var fx = {
-    noFocus: read('PublicMapLayersWmsViewportFocusing.noFocus.json'),
-    focus:   read('PublicMapLayersWmsViewportFocusing.focus.json')
+    noFocus: read('PublicMapWmsFocusing.noFocus.json'),
+    focus:   read('PublicMapWmsFocusing.focus.json')
   };
 
 

@@ -12,7 +12,7 @@ describe('WMS Layer Zindex Rendering', function() {
 
 
   var fx = {
-    records: read('PublicMapLayersWmsZindexRendering.records.json')
+    records: read('PublicMapWmsZindex.records.json')
   };
 
 

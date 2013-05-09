@@ -9,13 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersWmsOpacityRendering
-    extends Neatline_FixtureCase
+class FixturesTest_PublicMapWmsOpacity extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersWmsOpacityRendering.records.json`
+     * `PublicMapWmsOpacity.records.json`
      */
     public function testRecords()
     {
@@ -31,7 +30,7 @@ class FixturesTest_PublicMapLayersWmsOpacityRendering
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersWmsOpacityRendering.records.json'
+            'PublicMapWmsOpacity.records.json'
         );
 
     }

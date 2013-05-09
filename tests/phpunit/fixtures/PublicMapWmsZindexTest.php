@@ -9,15 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersWmsZindexRendering
-    extends Neatline_FixtureCase
+class FixturesTest_PublicMapWmsZindex extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersWmsZindexRendering.records.json`
+     * `PublicMapWmsZindex.records.json`
      */
-    public function testZIndex()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -36,7 +35,7 @@ class FixturesTest_PublicMapLayersWmsZindexRendering
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersWmsZindexRendering.records.json'
+            'PublicMapWmsZindex.records.json'
         );
 
     }
