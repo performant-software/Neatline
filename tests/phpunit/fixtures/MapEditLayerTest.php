@@ -14,8 +14,8 @@ class FixturesTest_MapEditLayer extends Neatline_FixtureCase
 
 
     /**
-     * `MapEditLayer.records.regular.json`
-     * `MapEditLayer.records.deleted.json`
+     * `MapEditLayer.records.record3.json`
+     * `MapEditLayer.records.noRecord3.json`
      */
     public function testMapEditLayer()
     {
@@ -36,14 +36,14 @@ class FixturesTest_MapEditLayer extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'MapEditLayer.records.regular.json'
+            'MapEditLayer.records.record3.json'
         );
 
         $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'MapEditLayer.records.deleted.json'
+            'MapEditLayer.records.noRecord3.json'
         );
 
     }

@@ -78,13 +78,6 @@ var NL = (function(NL) {
         }
       },
 
-      MapEditLayer: {
-        records: {
-          regular:    readFixtures('MapEditLayer.records.regular.json'),
-          deleted:    readFixtures('MapEditLayer.records.deleted.json')
-        }
-      },
-
       StaticBubble: {
         records:      readFixtures('StaticBubble.records.json')
       },

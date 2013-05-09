@@ -11,6 +11,12 @@
 describe('Map Edit Layer', function() {
 
 
+  var fx = {
+    noRecord3: readFixtures('MapEditLayer.records.noRecord3.json'),
+    record3:   readFixtures('MapEditLayer.records.record3.json')
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });
@@ -25,17 +31,17 @@ describe('Map Edit Layer', function() {
     // --------------------------------------------------------------------
 
     // Load record list with record 3.
-    NL.respondRecordList200(NL.json.MapEditLayer.records.regular);
-    var models = NL.getRecordListModels();
+    NL.respondRecordList200(fx.record3);
+    var record3 = NL.getRecordListModels()[2];
 
     // Load map without record 3.
-    NL.respondMap200(NL.json.MapEditLayer.records.deleted);
+    NL.respondMap200(fx.noRecord3);
 
     // Open edit form for record 3.
-    NL.navigate('record/'+models[2].id);
+    NL.navigate('record/'+record3.id);
 
     // Should create new layer for record 3.
-    var record3Layer = NL.vw.MAP.layers.vector[models[2].id];
+    var record3Layer = NL.vw.MAP.layers.vector[record3.id];
     expect(record3Layer.features[0].geometry.x).toEqual(5);
     expect(record3Layer.features[0].geometry.y).toEqual(6);
     NL.assertVectorLayerCount(3);
@@ -52,7 +58,7 @@ describe('Map Edit Layer', function() {
     // When a new record is added, a new edit layer should be created.
     // --------------------------------------------------------------------
 
-    NL.respondAll200(NL.json.MapEditLayer.records.regular);
+    NL.respondAll200(fx.record3);
 
     // Add new record.
     NL.navigate('record/add');
@@ -74,14 +80,14 @@ describe('Map Edit Layer', function() {
     // if new data is ingested that does not include the record.
     // --------------------------------------------------------------------
 
-    NL.respondAll200(NL.json.MapEditLayer.records.regular);
-    var models = NL.getRecordListModels();
+    NL.respondAll200(fx.record3);
+    var record3 = NL.getRecordListModels()[2];
 
     // Open form for record 3.
-    NL.navigate('record/'+models[2].id);
+    NL.navigate('record/'+record3.id);
 
     // Reload map without record 3.
-    NL.refreshMap(NL.json.MapEditLayer.records.deleted);
+    NL.refreshMap(fx.noRecord3);
 
     // Record 3 layer should still be present.
     expect(NL.getVectorLayer('title3')).toBeDefined();
@@ -97,13 +103,13 @@ describe('Map Edit Layer', function() {
     // when new data is ingested.
     // --------------------------------------------------------------------
 
-    NL.respondAll200(NL.json.MapEditLayer.records.regular);
+    NL.respondAll200(fx.record3);
 
     // Add new record.
     NL.navigate('record/add');
 
     // Reload the map.
-    NL.refreshMap(NL.json.MapEditLayer.records.regular);
+    NL.refreshMap(fx.record3);
 
     // Edit layer still present.
     expect(NL.vw.MAP.layers.vector[undefined]).toBeDefined();
@@ -119,17 +125,17 @@ describe('Map Edit Layer', function() {
     // edit layer should start updating again in response to map moves.
     // --------------------------------------------------------------------
 
-    NL.respondAll200(NL.json.MapEditLayer.records.regular);
-    var models = NL.getRecordListModels();
+    NL.respondAll200(fx.record3);
+    var record3 = NL.getRecordListModels()[2];
 
     // Open record 3 form.
-    NL.navigate('record/'+models[2].id);
+    NL.navigate('record/'+record3.id);
 
     // Close the form.
     NL.navigate('records');
 
-    // Reload the map without record 3.
-    NL.refreshMap(NL.json.MapEditLayer.records.deleted);
+    // Reload map without record 3.
+    NL.refreshMap(fx.noRecord3);
 
     // Record 2 layer should be cleared.
     expect(NL.getVectorLayer('title3')).toBeUndefined();
@@ -145,7 +151,7 @@ describe('Map Edit Layer', function() {
     // be garbage collected by the next data ingest.
     // --------------------------------------------------------------------
 
-    NL.respondAll200(NL.json.MapEditLayer.records.regular);
+    NL.respondAll200(fx.record3);
 
     // Add new record.
     NL.navigate('record/add');
@@ -154,7 +160,7 @@ describe('Map Edit Layer', function() {
     NL.navigate('records');
 
     // Refresh the map.
-    NL.refreshMap(NL.json.MapEditLayer.records.regular);
+    NL.refreshMap(fx.record3);
 
     // Edit layer should be removed.
     expect(NL.getVectorLayer('title1')).toBeDefined();
