@@ -11,13 +11,16 @@
 describe('Record Form Close', function() {
 
 
-  var el;
+  var el, fx = {
+    records: readFixtures('EditorRecordClose.records.json'),
+    record:  readFixtures('EditorRecordClose.record.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(NL.json.RecordFormClose.record);
+    NL.showRecordForm(fx.record);
 
     el = {
       pan:    NL.vw.RECORD.$('input[value="pan"]'),
@@ -84,7 +87,7 @@ describe('Record Form Close', function() {
     el.close.trigger('click');
 
     // Respond with original geometry.
-    NL.respondMap200(NL.json.RecordFormClose.records);
+    NL.respondMap200(fx.records);
 
     // Should revert to the saved geometry.
     var layer = NL.vw.MAP.getVectorLayers()[0];

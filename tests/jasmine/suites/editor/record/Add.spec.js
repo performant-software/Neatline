@@ -11,13 +11,16 @@
 describe('Record Form Add', function() {
 
 
-  var el;
+  var el, fx =  {
+    records: readFixtures('EditorRecordAdd.records.json'),
+    record:  readFixtures('EditorRecordAdd.record.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondRecordList200(NL.json.RecordForm.records);
+    NL.respondRecordList200(fx.records);
 
     el = {
       addButton:    NL.vw.RECORDS.$('a[href="#record/add"]'),
@@ -132,10 +135,10 @@ describe('Record Form Add', function() {
     el.saveButton.trigger('click');
 
     // Respond to save with new id.
-    NL.respondLast200(NL.json.RecordFormAdd.record);
+    NL.respondLast200(fx.record);
 
     // Respond to map refresh with new collection.
-    NL.respondLast200(NL.json.RecordFormAdd.records);
+    NL.respondLast200(fx.records);
 
     // Should not double-load the new record.
     NL.assertVectorLayerCount(1);
@@ -166,10 +169,10 @@ describe('Record Form Add', function() {
 
       // Click "Save".
       el.saveButton.trigger('click');
-      NL.respondLast200(NL.json.RecordForm.record);
+      NL.respondLast200(fx.record);
 
       // Route should be updated.
-      var id = $.parseJSON(NL.json.RecordForm.record).id;
+      var id = $.parseJSON(fx.record).id;
       expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
 
     });

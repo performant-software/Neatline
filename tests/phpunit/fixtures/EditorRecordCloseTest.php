@@ -14,8 +14,8 @@ class FixturesTest_RecordFormClose extends Neatline_FixtureCase
 
 
     /**
-     * `RecordFormClose.records.json`
-     * `RecordFormClose.record.json`
+     * `EditorRecordClose.records.json`
+     * `EditorRecordClose.record.json`
      */
     public function testRecords()
     {
@@ -26,14 +26,14 @@ class FixturesTest_RecordFormClose extends Neatline_FixtureCase
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordFormClose.records.json'
+            'EditorRecordClose.records.json'
         );
 
         $this->resetResponse();
         $this->resetRequest();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'RecordFormClose.record.json'
+            'EditorRecordClose.record.json'
         );
 
     }

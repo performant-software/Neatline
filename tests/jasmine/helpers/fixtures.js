@@ -87,18 +87,8 @@ var NL = (function(NL) {
         records:      readFixtures('RecordForm.records.json')
       },
 
-      RecordFormAdd: {
-        records:      readFixtures('RecordFormAdd.records.json'),
-        record:       readFixtures('RecordFormAdd.record.json')
-      },
-
       RecordFormOpen: {
         records:      readFixtures('RecordFormOpen.records.json')
-      },
-
-      RecordFormClose: {
-        records:      readFixtures('RecordFormClose.records.json'),
-        record:       readFixtures('RecordFormClose.record.json')
       },
 
       RecordsList: {
