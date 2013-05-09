@@ -11,6 +11,13 @@
 describe('Records List', function() {
 
 
+  var fx = {
+    defaultList: readFixtures('EditorRecordsList.defaultList.json'),
+    titleTags:   readFixtures('EditorRecordsList.titleTags.json'),
+    emptyTitle:  readFixtures('EditorRecordsList.emptyTitle.json')
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });
@@ -22,7 +29,7 @@ describe('Records List', function() {
     // The record browser pane should show a list of records.
     // --------------------------------------------------------------------
 
-    NL.respondRecordList200(NL.json.RecordsList.records.regular);
+    NL.respondRecordList200(fx.defaultList);
     var models = NL.getRecordListModels(), rows = NL.getRecordListRows();
 
     // Should show titles and bodies.
@@ -49,7 +56,7 @@ describe('Records List', function() {
     // HTML tags in record titles should be stripped out.
     // --------------------------------------------------------------------
 
-    NL.respondRecordList200(NL.json.RecordsList.records.html);
+    NL.respondRecordList200(fx.titleTags);
     var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.
@@ -64,7 +71,7 @@ describe('Records List', function() {
     // Empty titles should be replaced as placeholders.
     // --------------------------------------------------------------------
 
-    NL.respondRecordList200(NL.json.RecordsList.records.empty);
+    NL.respondRecordList200(fx.emptyTitle);
     var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.

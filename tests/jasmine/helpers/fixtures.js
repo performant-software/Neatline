@@ -82,14 +82,6 @@ var NL = (function(NL) {
         records:      readFixtures('StaticBubble.records.json')
       },
 
-      RecordsList: {
-        records: {
-          regular:    readFixtures('RecordsList.records.regular.json'),
-          html:       readFixtures('RecordsList.records.html.json'),
-          empty:      readFixtures('RecordsList.records.empty.json')
-        }
-      },
-
       RecordsPagination: {
         records: {
           p12:        readFixtures('RecordsPagination.records.p12.json'),

@@ -9,12 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_RecordsList extends Neatline_FixtureCase
+class FixturesTest_EditorRecordsList extends Neatline_FixtureCase
 {
 
 
     /**
-     * `RecordsList.records.regular.json`
+     * `EditorRecordsList.records.defaultList.json`
+     * `EditorRecordsList.records.titleTags.json`
+     * `EditorRecordsList.records.emptyTitle.json`
      */
     public function testRegular()
     {
@@ -38,39 +40,23 @@ class FixturesTest_RecordsList extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsList.records.regular.json'
+            'EditorRecordsList.defaultList.json'
         );
 
-    }
+        $record1->title = '<tag>title</tag>';
+        $record1->save();
 
-
-    /**
-     * `RecordsList.records.html.json`
-     */
-    public function testHtmlTagsInTitle()
-    {
-
-        $record = $this->__record($this->exhibit);
-        $record->title = '<tag>title</tag>';
-        $record->save();
-
+        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsList.records.html.json'
+            'EditorRecordsList.titleTags.json'
         );
 
-    }
+        $record1->title = null;
+        $record1->save();
 
-
-    /**
-     * `RecordsList.records.empty.json`
-     */
-    public function testEmptyTitle()
-    {
-
-        $record = $this->__record($this->exhibit);
-
+        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsList.records.empty.json'
+            'EditorRecordsList.emptyTitle.json'
         );
 
     }
