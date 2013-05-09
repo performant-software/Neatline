@@ -20,7 +20,9 @@ describe('Record Form Close', function() {
     NL.showRecordForm(NL.json.RecordFormClose.record);
 
     el = {
-      close: NL.vw.RECORD.$('a[name="close"]')
+      pan:    NL.vw.RECORD.$('input[value="pan"]'),
+      poly:   NL.vw.RECORD.$('input[value="poly"]'),
+      close:  NL.vw.RECORD.$('a[name="close"]')
     };
 
   });
@@ -88,6 +90,26 @@ describe('Record Form Close', function() {
     var layer = NL.vw.MAP.getVectorLayers()[0];
     expect(layer.features[0].geometry.x).toEqual(1);
     expect(layer.features[0].geometry.y).toEqual(2);
+
+  });
+
+
+  it('should deactivate edit control', function() {
+
+    // --------------------------------------------------------------------
+    // When the form is closed, the map editing control that is currently
+    // active should be deactivated.
+    // --------------------------------------------------------------------
+
+    // Activate "Draw Polygon".
+    el.pan.removeAttr('checked');
+    el.poly.attr('checked', 'checked').trigger('change');
+
+    // Click "X".
+    el.close.trigger('click');
+
+    // Should deactivate edit control.
+    expect(NL.vw.MAP.controls.poly.active).toBeFalsy();
 
   });
 
