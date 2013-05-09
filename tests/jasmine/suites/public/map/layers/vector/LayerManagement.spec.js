@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Vector Layer Rendering', function() {
+describe('Vector Layer Create/Delete', function() {
 
 
   beforeEach(function() {

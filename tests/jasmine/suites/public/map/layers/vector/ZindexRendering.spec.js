@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Vector Layer Zindex Rendering', function() {
+describe('Vector Layer Zindex Rendering', function() {
 
 
   beforeEach(function() {

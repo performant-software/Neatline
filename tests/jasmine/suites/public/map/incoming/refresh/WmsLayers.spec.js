@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map WMS Layer Refreshing', function() {
+describe('WMS Layer Refreshing', function() {
 
 
   var fx = {

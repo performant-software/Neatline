@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Vector Layer Style Rendering', function() {
+describe('Vector Layer Style Rendering', function() {
 
 
   var layer, feature;
