@@ -11,6 +11,12 @@
 describe('WMS Layer Viewport Focusing', function() {
 
 
+  var fx = {
+    noFocus: read('PublicMapLayersWmsViewportFocusing.noFocus.json'),
+    focus:   read('PublicMapLayersWmsViewportFocusing.focus.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -25,7 +31,7 @@ describe('WMS Layer Viewport Focusing', function() {
     // has the effect of zooming out to the highest level.
     // --------------------------------------------------------------------
 
-    var model = NL.recordFromJson(NL.json.MapWmsLayers.record.noFocus);
+    var model = NL.recordFromJson(fx.noFocus);
 
     // Set center and zoom.
     NL.setMapCenter(200, 300, 15);
@@ -46,7 +52,7 @@ describe('WMS Layer Viewport Focusing', function() {
     // and zoom values, the map should apply the defaults as usual.
     // --------------------------------------------------------------------
 
-    var model = NL.recordFromJson(NL.json.MapWmsLayers.record.focus);
+    var model = NL.recordFromJson(fx.focus);
 
     // Set center and zoom.
     NL.setMapCenter(200, 300, 15);

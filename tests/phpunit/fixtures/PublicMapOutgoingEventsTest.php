@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapCursorEvents extends Neatline_FixtureCase
+class FixturesTest_PublicMapOutgoingEvents extends Neatline_FixtureCase
 {
 
 
     /**
-     * `MapOutgoingEvents.records.json`
+     * `PublicMapOutgoingEvents.records.json`
      */
     public function testMapOutgoingEvents()
     {
@@ -24,7 +24,7 @@ class FixturesTest_MapCursorEvents extends Neatline_FixtureCase
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'MapOutgoingEvents.records.json'
+            'PublicMapOutgoingEvents.records.json'
         );
 
     }

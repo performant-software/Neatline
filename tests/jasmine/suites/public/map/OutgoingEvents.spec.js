@@ -11,13 +11,15 @@
 describe('Map Outgoing Events', function() {
 
 
-  var layer, feature, vent;
+  var layer, feature, vent, fx = {
+    records: readFixtures('PublicMapOutgoingEvents.records.json'),
+  };
 
 
   beforeEach(function() {
 
     NL.loadNeatline();
-    NL.respondMap200(NL.json.MapOutgoingEvents.records);
+    NL.respondMap200(fx.records);
 
     layer = NL.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];

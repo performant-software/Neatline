@@ -11,6 +11,11 @@
 describe('WMS Layer Opacity Rendering', function() {
 
 
+  var fx = {
+    records: read('PublicMapLayersWmsOpacityRendering.records.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -22,7 +27,7 @@ describe('WMS Layer Opacity Rendering', function() {
     // WMS layer opacities should be set from the `fill_opacity` field.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.MapWmsLayers.records.styles);
+    NL.respondMap200(fx.records);
 
     // Should set WMS layer opacity.
     expect(NL.vw.MAP.getWmsLayers()[0].opacity).toEqual(0.5);

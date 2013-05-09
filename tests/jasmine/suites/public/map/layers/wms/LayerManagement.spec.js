@@ -11,6 +11,12 @@
 describe('WMS Layer Create/Delete', function() {
 
 
+  var fx = {
+    regular: read('PublicMapLayersWmsLayerManagement.regular.json'),
+    deleted: read('PublicMapLayersWmsLayerManagement.deleted.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -23,7 +29,7 @@ describe('WMS Layer Create/Delete', function() {
     // records with WMS data that arrive in the initial query. 
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.MapWmsLayers.records.regular);
+    NL.respondMap200(fx.regular);
     var layers = NL.vw.MAP.getWmsLayers();
 
     // Should create layers for records with WMS data.
@@ -46,7 +52,7 @@ describe('WMS Layer Create/Delete', function() {
 
     NL.triggerMapMoveEnd();
 
-    NL.respondLast200(NL.json.MapWmsLayers.records.regular);
+    NL.respondLast200(fx.regular);
     var layers = NL.vw.MAP.getWmsLayers();
 
     // Should create layers for records with WMS data.
@@ -69,10 +75,10 @@ describe('WMS Layer Create/Delete', function() {
     // --------------------------------------------------------------------
 
     // Load collection without record 3.
-    NL.refreshMap(NL.json.MapWmsLayers.records.deleted);
+    NL.refreshMap(fx.deleted);
 
     // Load collection with record 3.
-    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
+    NL.refreshMap(fx.regular);
 
     // Should create layer for record 3.
     expect(NL.getWmsLayer('title3')).toBeDefined();
@@ -88,7 +94,7 @@ describe('WMS Layer Create/Delete', function() {
     // layers, the existing layers should not be rebuilt.
     // --------------------------------------------------------------------
 
-    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
+    NL.refreshMap(fx.regular);
 
     // Store original OpenLayers id's.
     var olIds1 = _.map(_.values(NL.vw.MAP.layers.wms), function(v) {
@@ -96,7 +102,7 @@ describe('WMS Layer Create/Delete', function() {
     });
 
     // Reload the same collection.
-    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
+    NL.refreshMap(fx.regular);
 
     // Get new OpenLayers id's.
     var olIds2 = _.map(_.values(NL.vw.MAP.layers.wms), function(v) {
@@ -116,10 +122,10 @@ describe('WMS Layer Create/Delete', function() {
     // --------------------------------------------------------------------
 
     // Load collection with record 3.
-    NL.refreshMap(NL.json.MapWmsLayers.records.regular);
+    NL.refreshMap(fx.regular);
 
     // Load collection without record 3.
-    NL.refreshMap(NL.json.MapWmsLayers.records.deleted);
+    NL.refreshMap(fx.deleted);
 
     // Should remove layer for record 3.
     expect(NL.getWmsLayer('title3')).toBeUndefined();

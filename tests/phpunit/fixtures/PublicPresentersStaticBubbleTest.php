@@ -9,14 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_StaticBubble extends Neatline_FixtureCase
+class FixturesTest_PublicPresentersStaticBubble
+    extends Neatline_FixtureCase
 {
 
 
     /**
-     * `StaticBubble.records.json`
+     * `PublicPresentersStaticBubble.records.json`
      */
-    public function testStaticBubble()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -37,7 +38,7 @@ class FixturesTest_StaticBubble extends Neatline_FixtureCase
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'StaticBubble.records.json'
+            'PublicPresentersStaticBubble.records.json'
         );
 
     }

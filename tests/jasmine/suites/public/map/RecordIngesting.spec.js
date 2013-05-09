@@ -8,7 +8,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Record Ingesting', function() {
+describe('Map Record Loading', function() {
+
+
+  var fx = {
+    one: readFixtures('PublicMapRecordLoading.one.json'),
+    two: readFixtures('PublicMapRecordLoading.two.json')
+  };
 
 
   beforeEach(function() {
@@ -52,20 +58,20 @@ describe('Map Record Ingesting', function() {
     // --------------------------------------------------------------------
 
     // Load collection with one record.
-    NL.refreshMap(NL.json.MapRecordIngesting.records.one);
+    NL.refreshMap(fx.one);
     NL.assertVectorLayerCount(1);
 
     NL.triggerMapMoveEnd();
     NL.triggerMapMoveStart();
 
-    // The 2-record collection should _not_ be ingested.
-    NL.respondLast200(NL.json.MapRecordIngesting.records.two);
+    // The new collection should _not_ be ingested.
+    NL.respondLast200(fx.two);
     NL.assertVectorLayerCount(1);
 
     NL.triggerMapMoveEnd();
 
-    // The 2-record collection _should_ be ingested.
-    NL.respondLast200(NL.json.MapRecordIngesting.records.two);
+    // The new collection _should_ be ingested.
+    NL.respondLast200(fx.two);
     NL.assertVectorLayerCount(2);
 
   });

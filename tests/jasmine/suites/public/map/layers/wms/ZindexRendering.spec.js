@@ -11,6 +11,11 @@
 describe('WMS Layer Zindex Rendering', function() {
 
 
+  var fx = {
+    records: read('PublicMapLayersWmsZindexRendering.records.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -23,7 +28,7 @@ describe('WMS Layer Zindex Rendering', function() {
     // value of the `zindex` fields on the record models.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.MapWmsLayers.records.zindex);
+    NL.respondMap200(fx.records);
 
     // Get the two vector layers.
     var layer1 = NL.getWmsLayer('title1');

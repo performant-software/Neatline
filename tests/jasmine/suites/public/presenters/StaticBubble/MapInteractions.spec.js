@@ -11,13 +11,15 @@
 describe('Static Bubble Map Interactions', function() {
 
 
-  var el, layers, feature1, feature2;
+  var el, layers, feature1, feature2, fx = {
+    records: readFixtures('PublicPresentersStaticBubble.records.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadNeatline();
-    NL.respondMap200(NL.json.StaticBubble.records);
+    NL.respondMap200(fx.records);
 
     layers = NL.vw.MAP.getVectorLayers();
     feature1 = layers[0].features[0];

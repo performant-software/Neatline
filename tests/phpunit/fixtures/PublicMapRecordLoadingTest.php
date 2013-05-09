@@ -9,15 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapRecordIngesting extends Neatline_FixtureCase
+class FixturesTest_PublicMapRecordLoading extends Neatline_FixtureCase
 {
 
 
     /**
-     * `MapRecordIngesting.records.two.json`
-     * `MapRecordIngesting.records.one.json`
+     * `PublicMapRecordLoading.two.json`
+     * `PublicMapRecordLoading.one.json`
      */
-    public function testMapRecordIngesting()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -30,14 +30,14 @@ class FixturesTest_MapRecordIngesting extends Neatline_FixtureCase
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'MapRecordIngesting.records.two.json'
+            'PublicMapRecordLoading.two.json'
         );
 
         $record2->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'MapRecordIngesting.records.one.json'
+            'PublicMapRecordLoading.one.json'
         );
 
     }

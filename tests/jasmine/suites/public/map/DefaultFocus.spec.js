@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Default Focus/Zoom', function() {
+describe('Map Default Focus', function() {
 
 
   beforeEach(function() {

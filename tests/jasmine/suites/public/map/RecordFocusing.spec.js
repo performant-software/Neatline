@@ -11,6 +11,12 @@
 describe('Map Record Focusing', function() {
 
 
+  var fx = {
+    records: readFixtures('PublicMapRecordFocusing.records.json'),
+    record:  readFixtures('PublicMapRecordFocusing.record.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -28,7 +34,7 @@ describe('Map Record Focusing', function() {
 
     beforeEach(function() {
 
-      NL.respondMap200(NL.json.MapRecordFocusing.records);
+      NL.respondMap200(fx.records);
 
       // Get layer, cache request count.
       layer = NL.vw.MAP.getVectorLayers()[0];
@@ -85,7 +91,7 @@ describe('Map Record Focusing', function() {
     it('select', function() {
 
       // Create a model that does not have a layer.
-      var model = NL.recordFromJson(NL.json.MapRecordFocusing.record);
+      var model = NL.recordFromJson(fx.record);
       var count = NL.server.requests.count;
 
       Neatline.vent.trigger('select', { model: model });
@@ -101,7 +107,7 @@ describe('Map Record Focusing', function() {
       Neatline.vent.on('MAP:focused', function() { done = true; });
       Neatline.execute('MAP:focusById', 999);
 
-      var request = NL.respondLast200(NL.json.MapRecordFocusing.record);
+      var request = NL.respondLast200(fx.record);
       waitsFor(function() { return done; });
 
       // Should load record from server.
