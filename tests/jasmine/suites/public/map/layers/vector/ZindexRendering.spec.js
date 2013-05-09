@@ -11,6 +11,11 @@
 describe('Vector Layer Zindex Rendering', function() {
 
 
+  var fx = {
+    records: read('PublicMapLayersVectorZindexRendering.records.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -23,7 +28,7 @@ describe('Vector Layer Zindex Rendering', function() {
     // value of the `zindex` fields on the record models.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.MapVectorLayers.records.zindex);
+    NL.respondMap200(fx.records);
 
     // Get the two vector layers.
     var layer1 = NL.getVectorLayer('title1');

@@ -12,8 +12,8 @@ describe('Map Layer Filtering', function() {
 
 
   var fx = {
-    noRecord3: readFixtures('PublicMapLayerFiltering.noRecord3.json'),
-    record3:   readFixtures('PublicMapLayerFiltering.record3.json')
+    regular: readFixtures('PublicMapLayerFiltering.regular.json'),
+    deleted: readFixtures('PublicMapLayerFiltering.deleted.json')
   };
 
 
@@ -29,7 +29,7 @@ describe('Map Layer Filtering', function() {
     // filter all vector and WMS layers on the map.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.record3);
+    NL.respondMap200(fx.regular);
 
     // By default, all layers visible.
     expect(NL.getVectorLayer('title1'). getVisibility()).toBeTruthy();
@@ -97,7 +97,7 @@ describe('Map Layer Filtering', function() {
     // passed key and re-filter all vector and WMS layers on the map.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.record3);
+    NL.respondMap200(fx.regular);
 
     // Filter out records with `title1`, `title2`, `title3`.
 
@@ -173,7 +173,8 @@ describe('Map Layer Filtering', function() {
     // through the filtering system before being added to the map.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(fx.noRecord3);
+    // Load collection without record 3.
+    NL.respondMap200(fx.deleted);
 
     // Filter out `title3`.
     Neatline.vent.trigger('setFilter', {
@@ -184,7 +185,7 @@ describe('Map Layer Filtering', function() {
     });
 
     // Load collection with record 3.
-    NL.refreshMap(fx.record3);
+    NL.refreshMap(fx.regular);
 
     // Records 3 should be hidden.
     expect(NL.getVectorLayer('title3'). getVisibility()).toBeFalsy();

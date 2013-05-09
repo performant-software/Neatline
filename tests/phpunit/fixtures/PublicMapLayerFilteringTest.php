@@ -14,8 +14,8 @@ class FixturesTest_PublicMapLayerFiltering extends Neatline_FixtureCase
 
 
     /**
-     * `PublicMapLayerFiltering.record3.json`
-     * `PublicMapLayerFiltering.noRecord3.json`
+     * `PublicMapLayerFiltering.regular.json`
+     * `PublicMapLayerFiltering.deleted.json`
      */
     public function testRecords()
     {
@@ -45,14 +45,14 @@ class FixturesTest_PublicMapLayerFiltering extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayerFiltering.record3.json'
+            'PublicMapLayerFiltering.regular.json'
         );
 
         $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayerFiltering.noRecord3.json'
+            'PublicMapLayerFiltering.deleted.json'
         );
 
     }

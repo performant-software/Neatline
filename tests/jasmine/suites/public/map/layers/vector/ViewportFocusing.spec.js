@@ -11,6 +11,11 @@
 describe('Vector Layer Viewport Focusing', function() {
 
 
+  var fx = {
+    records: read('PublicMapLayersVectorViewportFocusing.records.json')
+  };
+
+
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -25,7 +30,7 @@ describe('Vector Layer Viewport Focusing', function() {
     // is much higher is much higher or lower the current map zoom.
     // --------------------------------------------------------------------
 
-    NL.respondMap200(NL.json.MapVectorLayers.records.focusing);
+    NL.respondMap200(fx.records);
     var feature = NL.vw.MAP.getVectorLayers()[0].features[0];
 
     // Set center and zoom.

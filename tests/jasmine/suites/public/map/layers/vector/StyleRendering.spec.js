@@ -11,13 +11,15 @@
 describe('Vector Layer Style Rendering', function() {
 
 
-  var layer, feature;
+  var layer, feature, fx = {
+    records: read('PublicMapLayersVectorStyleRendering.records.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadNeatline();
-    NL.respondMap200(NL.json.MapVectorLayers.records.styles);
+    NL.respondMap200(fx.records);
 
     layer = NL.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];
