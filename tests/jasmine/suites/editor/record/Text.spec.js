@@ -11,13 +11,15 @@
 describe('Record Form Text Tab', function() {
 
 
-  var el;
+  var el, fx = {
+    record: readFixtures('EditorRecord.record.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.showRecordForm(fx.record);
 
     el = {
       autocomplete:   $(NL.vw.TEXT.__ui.item.autocomplete('widget')[0]),

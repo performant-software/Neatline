@@ -11,13 +11,15 @@
 describe('Record Router', function() {
 
 
-  var href;
+  var href, fx = {
+    records: readFixtures('EditorRecord.records.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondRecordList200(NL.json.RecordForm.records);
+    NL.respondRecordList200(fx.records);
 
     href = $(NL.getRecordListRows()[0]).attr('href');
 

@@ -11,13 +11,16 @@
 describe('Record Form Open', function() {
 
 
-  var el, recordModels, feature1, feature2;
+  var el, recordModels, feature1, feature2, fx = {
+    records: readFixtures('EditorRecordOpen.records.json'),
+    record:  readFixtures('EditorRecord.record.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondAll200(NL.json.RecordFormOpen.records);
+    NL.respondAll200(fx.records);
 
     recordModels = NL.getRecordListModels();
     feature1 = NL.vw.MAP.getVectorLayers()[0].features[0];
@@ -80,13 +83,13 @@ describe('Record Form Open', function() {
       // is requested by a route, the record should be loaded.
       // ------------------------------------------------------------------
 
-      model = NL.recordFromJson(NL.json.RecordForm.record);
+      model = NL.recordFromJson(fx.record);
 
       // Request unloaded record.
       NL.navigate('record/999');
 
       // Respond to the GET request.
-      NL.respondLast200(NL.json.RecordForm.record);
+      NL.respondLast200(fx.record);
 
     });
 
@@ -128,9 +131,9 @@ describe('Record Form Open', function() {
     // with data from the record model.
     // --------------------------------------------------------------------
 
-    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.showRecordForm(fx.record);
 
-    var id = JSON.parse(NL.json.RecordForm.record).id;
+    var id = JSON.parse(fx.record).id;
     var inputs = NL.getRecordFormElements();
 
     expect(inputs.id).                  toHaveText('#'+id+':'),

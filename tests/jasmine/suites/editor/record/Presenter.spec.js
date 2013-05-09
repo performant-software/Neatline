@@ -11,13 +11,15 @@
 describe('Record Form Presenter', function() {
 
 
-  var el;
+  var el, fx = {
+    record: readFixtures('EditorRecord.record.json')
+  };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.showRecordForm(fx.record);
 
     el = {
       text:   NL.vw.RECORD.$('a[href="#record-text"]'),

@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_RecordForm extends Neatline_FixtureCase
+class FixturesTest_EditorRecord extends Neatline_FixtureCase
 {
 
 
     /**
-     * `RecordForm.record.json`
+     * `EditorRecord.record.json`
      */
     public function testRecord()
     {
@@ -58,14 +58,14 @@ class FixturesTest_RecordForm extends Neatline_FixtureCase
         $record->__save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'RecordForm.record.json'
+            'EditorRecord.record.json'
         );
 
     }
 
 
     /**
-     * `RecordForm.records.json`
+     * `EditorRecord.records.json`
      */
     public function testRecords()
     {
@@ -86,7 +86,7 @@ class FixturesTest_RecordForm extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordForm.records.json'
+            'EditorRecord.records.json'
         );
 
     }

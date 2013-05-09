@@ -11,6 +11,11 @@
 describe('Record Form Edit', function() {
 
 
+  var fx = {
+    record: readFixtures('EditorRecord.record.json')
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });
@@ -23,7 +28,7 @@ describe('Record Form Edit', function() {
     // map edit layer should be updated.
     // --------------------------------------------------------------------
 
-    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.showRecordForm(fx.record);
 
     // Update record form model.
     NL.vw.RECORD.model.set('id', 999);

@@ -11,6 +11,11 @@
 describe('Record Form Tabs', function() {
 
 
+  var fx = {
+    record: readFixtures('EditorRecord.record.json')
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });
@@ -64,7 +69,7 @@ describe('Record Form Tabs', function() {
     // etc.
     // --------------------------------------------------------------------
 
-    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.showRecordForm(fx.record);
     var id = NL.vw.RECORD.model.id;
 
     _.each(NL.getTabSlugs(), function(slug) {

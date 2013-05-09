@@ -11,7 +11,9 @@
 describe('Record Form Style Tab', function() {
 
 
-  var el, def, tmp, sel;
+  var el, def, tmp, sel, fx = {
+    record: readFixtures('EditorRecord.record.json')
+  };
 
 
   var getStyles = function() {
@@ -24,7 +26,7 @@ describe('Record Form Style Tab', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(NL.json.RecordForm.record);
+    NL.showRecordForm(fx.record);
 
     el = _.extend(NL.getRecordFormElements(), {
       setMinZoom: NL.vw.RECORD.$('a[name="set-min-zoom"]'),
