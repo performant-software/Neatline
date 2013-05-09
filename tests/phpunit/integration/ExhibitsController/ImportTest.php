@@ -51,18 +51,22 @@ class ExhibitsControllerTest_Import extends Neatline_TestCase
         // Reload the form.
         $this->dispatch('neatline/import/'.$exhibit->id);
 
-        // Inputs:
+        // Keywords, Range, and Tags:
         $this->assertXpath('//input[@name="search"][@value="Keywords"]');
         $this->assertXpath('//input[@name="range"][@value="1-10"]');
         $this->assertXpath('//input[@name="tags"][@value="tag1,tag2"]');
 
-        // Selects:
-        $this->assertXpath(
-            '//select[@name="collection"]/option[@selected="selected"]
-            [@label="Collection"]');
-        $this->assertXpath(
-            '//select[@name="type"]/option[@selected="selected"]
-            [@label="Type"]');
+        // Collection:
+        $this->assertXpathContentContains(
+            '//select[@name="collection"]/option[@selected="selected"]',
+            'Collection'
+        );
+
+        // Type:
+        $this->assertXpathContentContains(
+            '//select[@name="type"]/option[@selected="selected"]',
+            'Type'
+        );
 
     }
 
