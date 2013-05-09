@@ -58,26 +58,6 @@ var NL = (function(NL) {
         }
       },
 
-      MapLayerRefreshing: {
-        records: {
-          vector: {
-            regular:  readFixtures('MapLayerRefreshing.records.vector.regular.json'),
-            changed:  readFixtures('MapLayerRefreshing.records.vector.changed.json')
-          },
-          wms: {
-            regular:  readFixtures('MapLayerRefreshing.records.wms.regular.json'),
-            changed:  readFixtures('MapLayerRefreshing.records.wms.changed.json')
-          }
-        }
-      },
-
-      MapLayerFiltering: {
-        records: {
-          regular:    readFixtures('MapLayerFiltering.records.regular.json'),
-          deleted:    readFixtures('MapLayerFiltering.records.deleted.json')
-        }
-      },
-
       StaticBubble: {
         records:      readFixtures('StaticBubble.records.json')
       }

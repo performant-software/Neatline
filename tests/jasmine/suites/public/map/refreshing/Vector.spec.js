@@ -8,7 +8,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Layer Refreshing', function() {
+describe('Map Vector Layer Refreshing', function() {
+
+
+  var fx = {
+    original: readFixtures('PublicMapRefreshingVector.original.json'),
+    changed:  readFixtures('PublicMapRefreshingVector.changed.json')
+  };
 
 
   beforeEach(function() {
@@ -24,7 +30,7 @@ describe('Map Layer Refreshing', function() {
     // --------------------------------------------------------------------
 
     // Load default layers.
-    NL.refreshMap(NL.json.MapLayerRefreshing.records.vector.regular);
+    NL.refreshMap(fx.original);
 
     // Should manifest original vector data.
     var layers = NL.vw.MAP.getVectorLayers();
@@ -39,7 +45,7 @@ describe('Map Layer Refreshing', function() {
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(NL.json.MapLayerRefreshing.records.vector.changed);
+    NL.respondLast200(fx.changed);
     var layers = NL.vw.MAP.getVectorLayers();
 
     // Should manifest changed vector data.
@@ -55,45 +61,6 @@ describe('Map Layer Refreshing', function() {
   });
 
 
-  it('should clear and rebuild WMS layers', function() {
-
-    // --------------------------------------------------------------------
-    // The `MAP:refresh` command should completely wipe out all existing
-    // WMS layers and reload records for the current viewport focus.
-    // --------------------------------------------------------------------
-
-    // Load default layers.
-    NL.refreshMap(NL.json.MapLayerRefreshing.records.wms.regular);
-
-    // Should manifest original WMS data.
-    var layers = NL.vw.MAP.getWmsLayers();
-    expect(layers[0].url).toEqual('address1');
-    expect(layers[0].params.LAYERS).toEqual('layers1');
-    expect(layers[1].url).toEqual('address2');
-    expect(layers[1].params.LAYERS).toEqual('layers2');
-    expect(layers[2].url).toEqual('address3');
-    expect(layers[2].params.LAYERS).toEqual('layers3');
-    NL.assertWmsLayerCount(3);
-
-    Neatline.vent.trigger('refresh');
-
-    // Respond with changed coverage data.
-    NL.respondLast200(NL.json.MapLayerRefreshing.records.wms.changed);
-    var layers = NL.vw.MAP.getVectorLayers();
-
-    // Should manifest changed WMS data.
-    var layers = NL.vw.MAP.getWmsLayers();
-    expect(layers[0].url).toEqual('address4');
-    expect(layers[0].params.LAYERS).toEqual('layers4');
-    expect(layers[1].url).toEqual('address5');
-    expect(layers[1].params.LAYERS).toEqual('layers5');
-    expect(layers[2].url).toEqual('address6');
-    expect(layers[2].params.LAYERS).toEqual('layers6');
-    NL.assertWmsLayerCount(3);
-
-  });
-
-
   it('should not rebuild frozen vector layers', function() {
 
     // --------------------------------------------------------------------
@@ -101,13 +68,13 @@ describe('Map Layer Refreshing', function() {
     // --------------------------------------------------------------------
 
     // Load default layers, freeze layer 2.
-    NL.refreshMap(NL.json.MapLayerRefreshing.records.vector.regular);
+    NL.refreshMap(fx.original);
     NL.getVectorLayer('title2').nFrozen = true;
 
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(NL.json.MapLayerRefreshing.records.vector.changed);
+    NL.respondLast200(fx.changed);
     var layer = NL.getVectorLayer('title2');
 
     // Should not change layer 2 geometry.

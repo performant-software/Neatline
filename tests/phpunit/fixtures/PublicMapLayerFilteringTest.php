@@ -9,14 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_MapLayerFiltering extends Neatline_FixtureCase
+class FixturesTest_PublicMapLayerFiltering extends Neatline_FixtureCase
 {
 
 
     /**
-     * `MapLayerFiltering.records.json`
+     * `PublicMapLayerFiltering.record3.json`
+     * `PublicMapLayerFiltering.noRecord3.json`
      */
-    public function testMapLayerFiltering()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -44,14 +45,14 @@ class FixturesTest_MapLayerFiltering extends Neatline_FixtureCase
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'MapLayerFiltering.records.regular.json'
+            'PublicMapLayerFiltering.record3.json'
         );
 
         $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'MapLayerFiltering.records.deleted.json'
+            'PublicMapLayerFiltering.noRecord3.json'
         );
 
     }
