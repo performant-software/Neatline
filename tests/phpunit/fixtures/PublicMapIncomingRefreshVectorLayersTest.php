@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapIncomingRefreshVector
+class FixturesTest_PublicMapIncomingRefreshVectorLayers
     extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapIncomingRefreshVector.original.json`
-     * `PublicMapIncomingRefreshVector.changed.json`
+     * `PublicMapIncomingRefreshVectorLayers.original.json`
+     * `PublicMapIncomingRefreshVectorLayers.changed.json`
      */
     public function testRecords()
     {
@@ -40,7 +40,7 @@ class FixturesTest_PublicMapIncomingRefreshVector
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapIncomingRefreshVector.original.json'
+            'PublicMapIncomingRefreshVectorLayers.original.json'
         );
 
         $record1->coverage  = 'POINT(7 8)';
@@ -53,7 +53,7 @@ class FixturesTest_PublicMapIncomingRefreshVector
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapIncomingRefreshVector.changed.json'
+            'PublicMapIncomingRefreshVectorLayers.changed.json'
         );
 
     }

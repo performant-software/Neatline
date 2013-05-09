@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapIncomingRefreshWms
+class FixturesTest_PublicMapIncomingRefreshWmsLayers
     extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapIncomingRefreshWms.original.json`
-     * `PublicMapIncomingRefreshWms.changed.json`
+     * `PublicMapIncomingRefreshWmsLayers.original.json`
+     * `PublicMapIncomingRefreshWmsLayers.changed.json`
      */
     public function testRecords()
     {
@@ -43,7 +43,7 @@ class FixturesTest_PublicMapIncomingRefreshWms
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapIncomingRefreshWms.original.json'
+            'PublicMapIncomingRefreshWmsLayers.original.json'
         );
 
         $record1->wms_address   = 'address4';
@@ -59,7 +59,7 @@ class FixturesTest_PublicMapIncomingRefreshWms
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapIncomingRefreshWms.changed.json'
+            'PublicMapIncomingRefreshWmsLayers.changed.json'
         );
 
     }

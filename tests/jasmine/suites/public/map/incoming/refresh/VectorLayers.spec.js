@@ -12,8 +12,8 @@ describe('Vector Layer Refreshing', function() {
 
 
   var fx = {
-    original: read('PublicMapIncomingRefreshVector.original.json'),
-    changed:  read('PublicMapIncomingRefreshVector.changed.json')
+    original: read('PublicMapIncomingRefreshVectorLayers.original.json'),
+    changed:  read('PublicMapIncomingRefreshVectorLayers.changed.json')
   };
 
 

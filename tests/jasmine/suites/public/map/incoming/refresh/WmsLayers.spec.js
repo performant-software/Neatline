@@ -12,8 +12,8 @@ describe('WMS Layer Refreshing', function() {
 
 
   var fx = {
-    original: read('PublicMapIncomingRefreshWms.original.json'),
-    changed:  read('PublicMapIncomingRefreshWms.changed.json')
+    original: read('PublicMapIncomingRefreshWmsLayers.original.json'),
+    changed:  read('PublicMapIncomingRefreshWmsLayers.changed.json')
   };
 
 
