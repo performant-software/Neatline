@@ -11,6 +11,15 @@
 describe('Records Pagination', function() {
 
 
+  var fx = {
+    p12: readFixtures('EditorRecordsPagination.p12.json'),
+    p23: readFixtures('EditorRecordsPagination.p23.json'),
+    p34: readFixtures('EditorRecordsPagination.p34.json'),
+    p56: readFixtures('EditorRecordsPagination.p56.json'),
+    p6:  readFixtures('EditorRecordsPagination.p6.json')
+  }
+
+
   beforeEach(function() {
     NL.loadEditor();
     Neatline.global.page_length = 2;
@@ -28,7 +37,7 @@ describe('Records Pagination', function() {
 
     // Load 2 records.
     NL.navigate('records');
-    NL.respondLast200(NL.json.RecordsPagination.records.p12);
+    NL.respondLast200(fx.p12);
 
     // Paginators should be hidden.
     expect(NL.vw.RECORDS.$el).not.toContain('.pagination');
@@ -45,7 +54,7 @@ describe('Records Pagination', function() {
 
       // Load records 1-2.
       NL.navigate('records/search/query=x+y/start=0');
-      NL.respondLast200(NL.json.RecordsPagination.records.p12);
+      NL.respondLast200(fx.p12);
 
       // << disabled, >> enabled.
       NL.assertPaginationPrevDisabled();
@@ -61,7 +70,7 @@ describe('Records Pagination', function() {
 
       // Load records 1-2.
       NL.navigate('records/search/start=0');
-      NL.respondLast200(NL.json.RecordsPagination.records.p12);
+      NL.respondLast200(fx.p12);
 
       // << disabled, >> enabled.
       NL.assertPaginationPrevDisabled();
@@ -85,7 +94,7 @@ describe('Records Pagination', function() {
 
       // Load records 2-3.
       NL.navigate('records/search/query=x+y/start=1');
-      NL.respondLast200(NL.json.RecordsPagination.records.p23);
+      NL.respondLast200(fx.p23);
 
       // << enabled, >> enabled.
       NL.assertPaginationPrevEnabled();
@@ -101,7 +110,7 @@ describe('Records Pagination', function() {
 
       // Load records 2-3.
       NL.navigate('records/search/start=1');
-      NL.respondLast200(NL.json.RecordsPagination.records.p23);
+      NL.respondLast200(fx.p23);
 
       // << enabled, >> enabled.
       NL.assertPaginationPrevEnabled();
@@ -125,7 +134,7 @@ describe('Records Pagination', function() {
 
       // Load records 3-4.
       NL.navigate('records/search/query=x+y/start=2');
-      NL.respondLast200(NL.json.RecordsPagination.records.p34);
+      NL.respondLast200(fx.p34);
 
       // << enabled, >> enabled.
       NL.assertPaginationPrevEnabled();
@@ -141,7 +150,7 @@ describe('Records Pagination', function() {
 
       // Load records 3-4.
       NL.navigate('records/search/start=2');
-      NL.respondLast200(NL.json.RecordsPagination.records.p34);
+      NL.respondLast200(fx.p34);
 
       // << enabled, >> enabled.
       NL.assertPaginationPrevEnabled();
@@ -165,7 +174,7 @@ describe('Records Pagination', function() {
 
       // Load records 5-6.
       NL.navigate('records/search/query=x+y/start=4');
-      NL.respondLast200(NL.json.RecordsPagination.records.p56);
+      NL.respondLast200(fx.p56);
 
       // << enabled, >> disabled.
       NL.assertPaginationPrevEnabled();
@@ -181,7 +190,7 @@ describe('Records Pagination', function() {
 
       // Load records 5-6.
       NL.navigate('records/search/start=4');
-      NL.respondLast200(NL.json.RecordsPagination.records.p56);
+      NL.respondLast200(fx.p56);
 
       // << enabled, >> disabled.
       NL.assertPaginationPrevEnabled();
@@ -205,7 +214,7 @@ describe('Records Pagination', function() {
 
       // Load record 6.
       NL.navigate('records/search/query=x+y/start=5');
-      NL.respondLast200(NL.json.RecordsPagination.records.p6);
+      NL.respondLast200(fx.p6);
 
       // << enabled, >> disabled.
       NL.assertPaginationPrevEnabled();
@@ -221,7 +230,7 @@ describe('Records Pagination', function() {
 
       // Load record 6.
       NL.navigate('records/search/start=5');
-      NL.respondLast200(NL.json.RecordsPagination.records.p6);
+      NL.respondLast200(fx.p6);
 
       // << enabled, >> disabled.
       NL.assertPaginationPrevEnabled();

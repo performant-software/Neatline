@@ -14,54 +14,54 @@ class FixturesTest_RecordsPagination extends Neatline_FixtureCase
 
 
     /**
-     * `RecordsPagination.records.p12.json`
-     * `RecordsPagination.records.p23.json`
-     * `RecordsPagination.records.p34.json`
-     * `RecordsPagination.records.p56.json`
-     * `RecordsPagination.records.p6.json`
+     * `EditorRecordsPagination.p12.json`
+     * `EditorRecordsPagination.p23.json`
+     * `EditorRecordsPagination.p34.json`
+     * `EditorRecordsPagination.p56.json`
+     * `EditorRecordsPagination.p6.json`
      */
     public function testRecordsPagination()
     {
 
         for ($i = 0; $i<6; $i++) {
             $record = new NeatlineRecord($this->exhibit);
-            $record->added  = '200'.$i.'-01-01';
-            $record->title  = 'Record'.$i;
+            $record->added = '200'.$i.'-01-01';
+            $record->title = 'Record'.$i;
             $record->save();
         }
 
         // Records 1-2.
         $this->request->setQuery(array('limit' => 2, 'offset' => 0));
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsPagination.records.p12.json'
+            'EditorRecordsPagination.p12.json'
         );
 
         // Records 2-3.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 1));
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsPagination.records.p23.json'
+            'EditorRecordsPagination.p23.json'
         );
 
         // Records 3-4.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 2));
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsPagination.records.p34.json'
+            'EditorRecordsPagination.p34.json'
         );
 
         // Records 5-6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 4));
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsPagination.records.p56.json'
+            'EditorRecordsPagination.p56.json'
         );
 
         // Record 6.
         $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 5));
         $this->writeFixtureFromRoute('neatline/records',
-            'RecordsPagination.records.p6.json'
+            'EditorRecordsPagination.p6.json'
         );
 
     }
