@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Presenter Event Forwarding', function() {
+describe('Presenter API', function() {
 
 
   var model1, model2, exec;
