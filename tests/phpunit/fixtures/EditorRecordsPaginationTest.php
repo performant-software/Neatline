@@ -20,7 +20,7 @@ class FixturesTest_RecordsPagination extends Neatline_FixtureCase
      * `EditorRecordsPagination.p56.json`
      * `EditorRecordsPagination.p6.json`
      */
-    public function testRecordsPagination()
+    public function testRecords()
     {
 
         for ($i = 0; $i<6; $i++) {

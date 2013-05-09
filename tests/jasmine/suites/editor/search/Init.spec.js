@@ -11,7 +11,9 @@
 describe('Search Initialization', function() {
 
 
-  var perPage;
+  var perPage, fx = {
+    records: readFixtures('EditorSearchInit.records.json')
+  };
 
 
   beforeEach(function() {
@@ -76,7 +78,7 @@ describe('Search Initialization', function() {
 
     afterEach(function() {
 
-      NL.respondLast200(NL.json.SearchInit.records);
+      NL.respondLast200(fx.records);
       var row = NL.getRecordListRows()[1];
 
       // Record list should be updated.

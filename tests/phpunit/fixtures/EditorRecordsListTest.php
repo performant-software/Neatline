@@ -18,7 +18,7 @@ class FixturesTest_EditorRecordsList extends Neatline_FixtureCase
      * `EditorRecordsList.records.titleTags.json`
      * `EditorRecordsList.records.emptyTitle.json`
      */
-    public function testRegular()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);

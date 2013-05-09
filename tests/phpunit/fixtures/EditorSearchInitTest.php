@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_SearchInit extends Neatline_FixtureCase
+class FixturesTest_EditorSearchInit extends Neatline_FixtureCase
 {
 
 
     /**
-     * `SearchInit.records.json`
+     * `EditorSearchInit.records.json`
      */
-    public function testSearchInit()
+    public function testRecords()
     {
 
         $record = $this->__record($this->exhibit);
@@ -24,7 +24,7 @@ class FixturesTest_SearchInit extends Neatline_FixtureCase
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'SearchInit.records.json'
+            'EditorSearchInit.records.json'
         );
 
     }

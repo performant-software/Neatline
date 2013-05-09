@@ -17,7 +17,7 @@ class FixturesTest_EditorMapEditLayer extends Neatline_FixtureCase
      * `EditorMapEditLayer.record3.json`
      * `EditorMapEditLayer.noRecord3.json`
      */
-    public function testMapEditLayer()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
