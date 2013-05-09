@@ -12,7 +12,7 @@ describe('Vector Layer Zindex Rendering', function() {
 
 
   var fx = {
-    records: read('PublicMapLayersVectorZindexRendering.records.json')
+    records: read('PublicMapVectorZindex.records.json')
   };
 
 

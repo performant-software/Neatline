@@ -9,14 +9,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersVectorLayerManagement
-    extends Neatline_FixtureCase
+class FixturesTest_PublicMapVectorAddRemove extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersVectorLayerManagement.regular.json`
-     * `PublicMapLayersVectorLayerManagement.deleted.json`
+     * `PublicMapVectorAddRemove.regular.json`
+     * `PublicMapVectorAddRemove.deleted.json`
      */
     public function testRecords()
     {
@@ -40,14 +39,14 @@ class FixturesTest_PublicMapLayersVectorLayerManagement
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersVectorLayerManagement.regular.json'
+            'PublicMapVectorAddRemove.regular.json'
         );
 
         $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersVectorLayerManagement.deleted.json'
+            'PublicMapVectorAddRemove.deleted.json'
         );
 
     }

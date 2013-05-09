@@ -9,13 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersVectorViewportFocusing
-    extends Neatline_FixtureCase
+class FixturesTest_PublicMapVectorFocusing extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersVectorViewportFocusing.records.json`
+     * `PublicMapVectorFocusing.records.json`
      */
     public function testRecords()
     {
@@ -30,7 +29,7 @@ class FixturesTest_PublicMapLayersVectorViewportFocusing
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersVectorViewportFocusing.records.json'
+            'PublicMapVectorFocusing.records.json'
         );
 
     }

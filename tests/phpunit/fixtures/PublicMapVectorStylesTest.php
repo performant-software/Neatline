@@ -9,13 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersVectorStyleRendering
-    extends Neatline_FixtureCase
+class FixturesTest_PublicMapVectorStyles extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersVectorStyleRendering.records.json`
+     * `PublicMapVectorStyles.records.json`
      */
     public function testRecords()
     {
@@ -40,7 +39,7 @@ class FixturesTest_PublicMapLayersVectorStyleRendering
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersVectorStyleRendering.records.json'
+            'PublicMapVectorStyles.records.json'
         );
 
     }

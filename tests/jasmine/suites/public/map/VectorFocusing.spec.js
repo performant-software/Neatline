@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Vector Layer Viewport Focusing', function() {
+describe('Vector Layer Focusing', function() {
 
 
   var fx = {
-    records: read('PublicMapLayersVectorViewportFocusing.records.json')
+    records: read('PublicMapVectorFocusing.records.json')
   };
 
 

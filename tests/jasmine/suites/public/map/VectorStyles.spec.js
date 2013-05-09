@@ -12,7 +12,7 @@ describe('Vector Layer Style Rendering', function() {
 
 
   var layer, feature, fx = {
-    records: read('PublicMapLayersVectorStyleRendering.records.json')
+    records: read('PublicMapVectorStyles.records.json')
   };
 
 

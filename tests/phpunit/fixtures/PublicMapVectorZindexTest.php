@@ -9,13 +9,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapLayersVectorZindexRendering
+class FixturesTest_PublicMapVectorZindex
     extends Neatline_FixtureCase
 {
 
 
     /**
-     * `PublicMapLayersVectorZindexRendering.records.json`
+     * `PublicMapVectorZindex.records.json`
      */
     public function testZIndex()
     {
@@ -34,7 +34,7 @@ class FixturesTest_PublicMapLayersVectorZindexRendering
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapLayersVectorZindexRendering.records.json'
+            'PublicMapVectorZindex.records.json'
         );
 
     }
