@@ -12,11 +12,11 @@ describe('Records Pagination', function() {
 
 
   var fx = {
-    p12: readFixtures('EditorRecordsPagination.p12.json'),
-    p23: readFixtures('EditorRecordsPagination.p23.json'),
-    p34: readFixtures('EditorRecordsPagination.p34.json'),
-    p56: readFixtures('EditorRecordsPagination.p56.json'),
-    p6:  readFixtures('EditorRecordsPagination.p6.json')
+    p12: read('EditorRecordsPagination.p12.json'),
+    p23: read('EditorRecordsPagination.p23.json'),
+    p34: read('EditorRecordsPagination.p34.json'),
+    p56: read('EditorRecordsPagination.p56.json'),
+    p6:  read('EditorRecordsPagination.p6.json')
   }
 
 

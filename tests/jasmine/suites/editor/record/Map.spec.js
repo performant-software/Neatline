@@ -12,7 +12,7 @@ describe('Record Form Map Tab', function() {
 
 
   var el, fx = {
-    record: readFixtures('EditorRecord.record.json')
+    record: read('EditorRecord.record.json')
   };
 
 

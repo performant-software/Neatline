@@ -12,8 +12,8 @@ describe('Record Form Close', function() {
 
 
   var el, fx = {
-    records: readFixtures('EditorRecordClose.records.json'),
-    record:  readFixtures('EditorRecordClose.record.json')
+    records: read('EditorRecordClose.records.json'),
+    record:  read('EditorRecordClose.record.json')
   };
 
 

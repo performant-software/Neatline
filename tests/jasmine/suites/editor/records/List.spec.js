@@ -12,9 +12,9 @@ describe('Records List', function() {
 
 
   var fx = {
-    defaultList: readFixtures('EditorRecordsList.defaultList.json'),
-    titleTags:   readFixtures('EditorRecordsList.titleTags.json'),
-    emptyTitle:  readFixtures('EditorRecordsList.emptyTitle.json')
+    defaultList: read('EditorRecordsList.defaultList.json'),
+    titleTags:   read('EditorRecordsList.titleTags.json'),
+    emptyTitle:  read('EditorRecordsList.emptyTitle.json')
   };
 
 

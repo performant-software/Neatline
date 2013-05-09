@@ -12,7 +12,7 @@ describe('Search Initialization', function() {
 
 
   var perPage, fx = {
-    records: readFixtures('EditorSearchInit.records.json')
+    records: read('EditorSearchInit.records.json')
   };
 
 

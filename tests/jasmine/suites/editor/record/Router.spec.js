@@ -12,7 +12,7 @@ describe('Record Router', function() {
 
 
   var href, fx = {
-    records: readFixtures('EditorRecord.records.json')
+    records: read('EditorRecord.records.json')
   };
 
 

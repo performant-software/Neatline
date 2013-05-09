@@ -12,8 +12,8 @@ describe('Record Form Open', function() {
 
 
   var el, recordModels, feature1, feature2, fx = {
-    records: readFixtures('EditorRecordOpen.records.json'),
-    record:  readFixtures('EditorRecord.record.json')
+    records: read('EditorRecordOpen.records.json'),
+    record:  read('EditorRecord.record.json')
   };
 
 

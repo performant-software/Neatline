@@ -12,8 +12,8 @@ describe('Map Edit Layer', function() {
 
 
   var fx = {
-    noRecord3: readFixtures('EditorMapEditLayer.noRecord3.json'),
-    record3:   readFixtures('EditorMapEditLayer.record3.json')
+    noRecord3: read('EditorMapEditLayer.noRecord3.json'),
+    record3:   read('EditorMapEditLayer.record3.json')
   };
 
 

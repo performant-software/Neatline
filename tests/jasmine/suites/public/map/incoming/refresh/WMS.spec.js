@@ -12,8 +12,8 @@ describe('Map WMS Layer Refreshing', function() {
 
 
   var fx = {
-    original: readFixtures('PublicMapRefreshingWms.original.json'),
-    changed:  readFixtures('PublicMapRefreshingWms.changed.json')
+    original: read('PublicMapIncomingRefreshWms.original.json'),
+    changed:  read('PublicMapIncomingRefreshWms.changed.json')
   };
 
 

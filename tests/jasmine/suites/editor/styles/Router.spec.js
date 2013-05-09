@@ -12,7 +12,7 @@ describe('Styles Router', function() {
 
 
   var el, fx = {
-    exhibit: readFixtures('EditorStyles.exhibit.json')
+    exhibit: read('EditorStyles.exhibit.json')
   };
 
 

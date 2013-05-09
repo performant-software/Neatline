@@ -12,7 +12,7 @@ describe('Styles Open', function() {
 
 
   var fx = {
-    exhibit: readFixtures('EditorStyles.exhibit.json')
+    exhibit: read('EditorStyles.exhibit.json')
   };
 
 

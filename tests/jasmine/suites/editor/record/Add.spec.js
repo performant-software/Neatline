@@ -12,8 +12,8 @@ describe('Record Form Add', function() {
 
 
   var el, fx =  {
-    records: readFixtures('EditorRecordAdd.records.json'),
-    record:  readFixtures('EditorRecordAdd.record.json')
+    records: read('EditorRecordAdd.records.json'),
+    record:  read('EditorRecordAdd.record.json')
   };
 
 

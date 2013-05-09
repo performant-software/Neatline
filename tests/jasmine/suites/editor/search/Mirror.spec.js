@@ -12,8 +12,8 @@ describe('Search Map Mirroring', function() {
 
 
   var fx = {
-    list: readFixtures('EditorSearchMirror.list.json'),
-    map:  readFixtures('EditorSearchMirror.map.json')
+    list: read('EditorSearchMirror.list.json'),
+    map:  read('EditorSearchMirror.map.json')
   };
 
 

@@ -12,8 +12,8 @@ describe('Map Vector Layer Refreshing', function() {
 
 
   var fx = {
-    original: readFixtures('PublicMapRefreshingVector.original.json'),
-    changed:  readFixtures('PublicMapRefreshingVector.changed.json')
+    original: read('PublicMapIncomingRefreshVector.original.json'),
+    changed:  read('PublicMapIncomingRefreshVector.changed.json')
   };
 
 
