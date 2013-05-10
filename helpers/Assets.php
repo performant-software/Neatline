@@ -107,30 +107,17 @@ function nl_queueExhibitCss($exhibit)
  * @param NeatlineExhibit The exhibit.
  * @return array The array of globals.
  */
-function nl_exhibitGlobals($exhibit)
+function nl_globals($exhibit)
 {
     return array(
         'exhibit'       => $exhibit->toArray(),
-        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
         'records_api'   => public_url('neatline/records'),
+        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
+        'items_api'     => url('items/browse'),
         'base_layers'   => nl_getLayersForExhibit($exhibit),
+        'page_length'   => (int) get_plugin_ini('Neatline','page_length'),
         'base_layer'    => $exhibit->base_layer,
         'map_zoom'      => $exhibit->map_zoom,
         'map_focus'     => $exhibit->map_focus
-    );
-}
-
-
-/**
- * Construct editor globals array.
- *
- * @param NeatlineExhibit The exhibit.
- * @return array The array of globals.
- */
-function nl_editorGlobals($exhibit)
-{
-    return array(
-        'items_api'     => url('items/browse'),
-        'page_length'   => (int) get_plugin_ini('Neatline', 'page_length')
     );
 }
