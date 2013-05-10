@@ -42,7 +42,7 @@ Neatline.module('Editor.Exhibit.Search', function(
 
       // Merge route parameters into query.
       var params = _.extend(Search.__view.query, {
-        limit:  Neatline.global.page_length,
+        limit:  Neatline.global.per_page,
         offset: start
       });
 

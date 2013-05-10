@@ -122,7 +122,7 @@ describe('Search Map Mirroring', function() {
     // --------------------------------------------------------------------
 
     // Set page length to 1.
-    Neatline.global.page_length = 1;
+    Neatline.global.per_page = 1;
 
     // Load 3 records on the map.
     NL.respondMap200(fx.map);

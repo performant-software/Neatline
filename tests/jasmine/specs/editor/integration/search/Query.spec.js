@@ -18,7 +18,7 @@ describe('Search Query Execution', function() {
 
   beforeEach(function() {
     NL.loadEditor();
-    perPage = Neatline.global.page_length;
+    perPage = Neatline.global.per_page;
   });
 
 

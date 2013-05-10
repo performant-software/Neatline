@@ -114,7 +114,7 @@ function nl_globals($exhibit)
         'records_api'   => public_url('neatline/records'),
         'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
         'items_api'     => url('items/browse'),
-        'page_length'   => (int) get_plugin_ini('Neatline','page_length'),
+        'per_page'      => (int) get_plugin_ini('Neatline', 'per_page'),
         'base_layers'   => nl_getLayersForExhibit($exhibit)
     );
 }
