@@ -23,8 +23,8 @@ describe('Map Default Focus', function() {
     // and `map_zoom` should be manifested on the map.
     // --------------------------------------------------------------------
 
-    Neatline.global.map_focus = '1,2';
-    Neatline.global.map_zoom = 10;
+    Neatline.global.exhibit.map_focus = '1,2';
+    Neatline.global.exhibit.map_zoom = 10;
 
     NL.startApplication();
     NL.aliasNeatline();

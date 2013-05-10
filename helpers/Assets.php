@@ -11,6 +11,30 @@
 
 
 /**
+ * Append a script to the <head> tag.
+ *
+ * @param string $script The script location.
+ */
+function nl_appendScript($script)
+{
+    get_view()->headScript()->appendScript(
+        '', 'text/javascript', array('src' => $script)
+    );
+}
+
+
+/**
+ * Include the Google Maps API.
+ */
+function nl_queueGoogleMapsApi()
+{
+    nl_appendScript(
+        'http://maps.google.com/maps/api/js?sensor=false'
+    );
+}
+
+
+/**
  * Include static files for the exhibit form.
  */
 function nl_queueExhibitForm()
@@ -65,30 +89,6 @@ function nl_queueNeatlineEditor($exhibit)
 
 
 /**
- * Include the Google Maps API.
- */
-function nl_queueGoogleMapsApi()
-{
-    nl_appendScript(
-        'http://maps.google.com/maps/api/js?sensor=false'
-    );
-}
-
-
-/**
- * Append a script to the <head> tag.
- *
- * @param string $script The script location.
- */
-function nl_appendScript($script)
-{
-    get_view()->headScript()->appendScript(
-        '', 'text/javascript', array('src' => $script)
-    );
-}
-
-
-/**
  * Try to load an exhibit-specific css file.
  *
  * @param NeatlineExhibit The exhibit.
@@ -114,10 +114,7 @@ function nl_globals($exhibit)
         'records_api'   => public_url('neatline/records'),
         'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
         'items_api'     => url('items/browse'),
-        'base_layers'   => nl_getLayersForExhibit($exhibit),
         'page_length'   => (int) get_plugin_ini('Neatline','page_length'),
-        'base_layer'    => $exhibit->base_layer,
-        'map_zoom'      => $exhibit->map_zoom,
-        'map_focus'     => $exhibit->map_focus
+        'base_layers'   => nl_getLayersForExhibit($exhibit)
     );
 }

@@ -60,7 +60,7 @@ describe('Map Base Layers', function() {
     // to the layer with the `id` defined by the `base_layer` global.
     // --------------------------------------------------------------------
 
-    Neatline.global.base_layer = 'Layer2';
+    Neatline.global.exhibit.base_layer = 'Layer2';
 
     NL.startApplication();
     NL.aliasNeatline();
