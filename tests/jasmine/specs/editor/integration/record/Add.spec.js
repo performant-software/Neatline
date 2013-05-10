@@ -54,9 +54,8 @@ describe('Record Form Add', function() {
     expect(el.leadTitle).toHaveText(STRINGS.record.placeholders.title);
 
     // Model should have exhibit id.
-    expect(NL.vw.RECORD.model.get('exhibit_id')).toEqual(
-      Neatline.global.exhibit.id
-    );
+    var record = NL.vw.RECORD.model;
+    expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.
     expect(_.isString(record.get('presenter'))).            toBeTruthy();
