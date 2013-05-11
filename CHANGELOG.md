@@ -24,7 +24,7 @@
 
   - Adds JavaScript routing to the editor, which makes it possible to use the browser's Back and Forward buttons to move between different application states.
 
-  - Makes it possible to configure the list of available base layers on a per-exhibit basis, instead of just including all base layers in all exhibits.
+  - Makes it possible to configure the list of available base layers on a per-exhibit basis, instead of automatically including all base layers in all exhibits.
 
   - Adds support for more granular control over the colors and opacities of map geometries.
 
@@ -40,7 +40,7 @@
 
   - Removes the interactive layout builder that made it possible to interactively drag-and-drop the positions and dimensions of the widgets in an exhibit. This was a brittle feature that made it difficult for theme designers to customize the look and feel of exhibits, something that's much easier in 2.0.
 
-  - Removes the ability to use static images as the base layer for exhibits. This was an experimental feature that was significantly limited by the fact that the entire image was loaded in bulk into the browser JavaScript environment, which becomes increasingly unperformant as the size of the image grows. In 2.0, this feature is superseded by the ability to add custom base layers to exhibits, which makes it possible to build exhibits on non-spatial WMS layers, which enjoy all the scalabilty of regular spatial tiles.
+  - Removes the ability to use static images as the base layer for exhibits. This was an experimental feature that was significantly limited by the fact that the entire image was loaded in bulk into the browser JavaScript environment, which becomes increasingly unperformant as the size of the image grows. In 2.0, this feature is superseded by the ability to add custom base layers to exhibits an an abstract sense, which makes it possible to build exhibits on non-spatial WMS layers, which enjoy all the scalabilty of regular spatial tiles.
 
 #### User-Interface Changes
 
@@ -56,7 +56,7 @@
 
   - Rewrites the front-end (editing environment and public-facing exhibit application) using [Backbone.js](https://github.com/documentcloud/backbone) and [Marionette](https://github.com/marionettejs/backbone.marionette).
 
-  - Adds a structured "sub-plugin" system that makes it easy for developers to implement custom functionality for specific projects.
+  - Adds a structured "sub-plugin" system that makes it easy for developers to implement custom functionality - everything from simple JavaScript widgets up to really extensive modifications that extend the core data model and add completely new interactions.
 
   - Converts the core record and exhibit controllers into a REST APIs that integrate smoothly with the Backbone.js front-end.
 
