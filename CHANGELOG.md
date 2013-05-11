@@ -9,30 +9,44 @@
     * **[NeatlineWaypoints](https://github.com/scholarslab/nl-widget-Waypoints)** - Adds list of sortable waypoints.
     * **[NeatlineSimile](https://github.com/scholarslab/nl-widget-Simile)** - The SIMILE timeline widget.
 
+### API Changes
+
+  * Rewrites the front-end (editing environment and public-facing exhibit application) using [Backbone.js](https://github.com/documentcloud/backbone) and [Marionette](https://github.com/marionettejs/backbone.marionette).
+
+  * Converts the core record and exhibit controllers into a REST APIs that integrate smoothly with the Backbone.js front-end.
+
+  * Adds a structured "sub-plugin" system that makes it easy for developers to implement custom functionality for specific projects.
+
 #### New Features
 
-  * Adds support for real-time spatial querying using the MySQL spatial extensions. Whenever the user pans or zooms the map, the front-end application issues a request to the records API with the current focus and zoom level and renders just the subset of the collection that falls within the current viewport.
+  * Adds support for real-time spatial querying using the MySQL spatial extensions. Whenever the user pans or zooms the map, the set of records on the map is automatically updated with just the subset of the collection that falls within the current viewport.
 
-  * Makes it possible to configure the set of available base layers on a per-exhibit basis, instead of including all layers in all exhibits.
+  * Makes it possible to import SVG documents created in vector editing tools like Adobe Illustrator or Inkscape and dynamically position them as first-class geometry on the map.
 
-  * Adds a suite of features to the editor that makes it easier to work with really large collections of records - full-text search, tag search, a "spatial" search mode in which the record browser displays just the records visible in the map viewport, and paged browsing.
+  * Adds an interactive "stylesheet" system (inspired by Mike Migurski's [Cascadenik](https://github.com/mapnik/Cascadenik)) that makes it possible to use a dialect of CSS to make bulk updates to large batches of records grouped together by tags.
 
-  * Adds "Min Zoom" and "Max Zoom" fields to records, which make it possible to constrain the zoom levels at which individual records phase in and out of visibility.
+  * Makes it possible to add custom base layers, which, among other things, makes it possible to annotate completely non-spatial entities - paintings, photographs, documents, and anything else that can be captured as an image
 
-  * Adds "Fill Color (Selected)" and "Stroke Color (Selected)" fields to records, which makes it possible to define separate values for fill and stroke "accent" colors, which are rendered when a feature is highlighted or selected.
+  * Adds a cluster of features to the editor that makes it easier to work with really large collections of records - full-text search, tag search, a "spatial" search mode in which the record browser displays just the records visible in the map viewport, and paged browsing.
 
-  * Adds "Z-Index" field to records, which makes it possible to set the vertical stacking order for vector and WMS layers.
+  * Adds JavaScript routing to the editor, which makes it possible to use the browser's Back and Forward buttons to move back and forth between different application states.
 
-  * Adds a user-facing input for the "Weight" field, which can be used to set the linear sequencing of records (for example, on the Waypoints widget).
+  * Makes it possible to configure the list of available base layers on a per-exhibit basis, instead of just including all base layers in all exhibits.
+
+  * Adds support for more granular control over the colors and opacities of map geometries.
 
 #### Changed Features
 
-  - item import
-  - wms layers
+  * Improves the process by which Omeka items are imported into Neatline exhibits. Instead distinguishing between "Neatline" and "Omeka" records, _everything_ is a Neatline record, and any Neatline record can be linked to any Omeka item in the underlying collection.
+
+  * Replaces CLEditor (the rich-text editor used on the "Title" and "Body" fields) with CKEditor, a more robust editor that makes it easier to create well-formatted record content and import video and audio media.
+
+  * Makes it possible to add WMS overlays to exhibits by entering a WMS address and layer id directly into the edit form for a Neatline record (instead of linking the record to an Omeka item, that in turn has a WMS layer by way of the old NeatlineMaps plugin).
 
 #### Removed Features
 
-  - layout editor
+  * Removes the interactive layout builder that made it possible to interactively drag-and-drop the positions and dimensions of the widgets in an exhibit. This was a brittle feature that made it extremely difficult for theme designers to customize the look and feel of exhibits. The new version refactors the markup and styling 
+
   - static image backgrounds
 
 #### User-Interface Changes
@@ -41,34 +55,4 @@
   - makes item browser thinner
   - moves to text-based interface for geoemtry drawing
 
-#### API Changes and Additions
 
-  * Rewrites the front-end (editing environment and public-facing exhibit application) in [Backbone.js](https://github.com/documentcloud/backbone) and [Marionette](https://github.com/marionettejs/backbone.marionette).
-
-  * Converts the core record and exhibit controllers into a REST APIs that integrates smoothly with the Backbone.js front-end.
-
-  * Adds a structured "sub-plugin" system that makes it easy for developers to implement custom functionality for specific projects. Sub-plugins are just Omeka plugins sit adjacent to the Neatline installation and hook into the core application according to any combination of three basic patterns:
-
-    **Layers** - Add custom base layer types. Neatline ships with support for Google API layers, Stamen Design layers, OpenStreetMap, and WMS layers; the layers sub-plugin pattern allows developers to add completely custom "handlers" for any type of layer that can be displayed OpenLayers (see the [documentation](http://dev.openlayers.org/docs/files/OpenLayers/Layer/WMS-js.html) for the complete list). For example, if a developer wanted to use a tile set created in [TileMill](http://mapbox.com/tilemill/) and delivered by a [TileStream](https://github.com/mapbox/tilestream) server, she could write a layer sub-plugin that would provide a constructor for TileStream layers.
-
-    **Presenters** - Each record in an exhibit can now be assigned to a "presenter," which determines the behaviors that occur when a user interacts with the representation of a record in the exhibit (for example, when the cursor hovers or clicks on a map vector). Neatline ships with a generic presenter called "Static Bubble" that displays record data in a styleable pop-up bubble overlayed on the map. Custom presenters can be used to implement almost any kind of "view" on individual records - floating bubbles, fullscreen overlays, or complex interfaces that would allow the user to view multiple records at once.
-
-    **Widgets** - The most open-ended and complex type of sub-plugin, widgets are essentially any kind of component that sits alongside the map in an exhibit in order to display information or control how information is displayed elsewhere in the exhibit. For example, [NeatlineSimile](https://github.com/scholarslab/nl-widget-Simile) and [NeatlineWaypoints](https://github.com/scholarslab/nl-widget-Waypoints) - which implement the timeline and item-browser components that were bundled together with Neatline in the first release - are both written as widget subplugins.
-
-  * In support of the sub-plugin architecture, adds "row expansion" system that makes it easy for sub-plugins to extend the ```NeatlineExhibit``` and ```NeatlineRecord``` with custom fields without having to manually respond to individual insert/save/delete hooks triggered by the parent models.
-
-  * In support of the sub-plugin architecture, adds a set of Neatline-specific hooks and filters that can be used to register expansion ables, register exhibit and record widgets, register global JavaScript attributes, queue static assets, add underscore templates, and add tabs/panels to the enditing environment:
-
-    * Hooks:
-      * ```neatline_public_templates```
-      * ```neatline_editor_templates```
-      * ```neatline_public_static```
-      * ```neatline_editor_static```
-
-    * Filters:
-      * ```neatline_exhibit_expansions```
-      * ```neatline_record_expansions```
-      * ```neatline_exhibit_widgets```
-      * ```neatline_record_widgets```
-      * ```neatline_exhibit_tabs```
-      * ```neatline_globals```
