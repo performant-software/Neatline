@@ -5,6 +5,7 @@
   * Migrates the codebase to Omeka 2.x.
 
   * Splits the functionality in the 1.x series into three separate plugins:
+
     * **[Neatline](https://github.com/scholarslab/Neatline)** - The core map-making toolkit and content management system.
     * **[NeatlineWaypoints](https://github.com/scholarslab/nl-widget-Waypoints)** - Adds list of sortable waypoints.
     * **[NeatlineSimile](https://github.com/scholarslab/nl-widget-Simile)** - The SIMILE timeline widget.
@@ -13,9 +14,11 @@
 
   * Rewrites the front-end (editing environment and public-facing exhibit application) using [Backbone.js](https://github.com/documentcloud/backbone) and [Marionette](https://github.com/marionettejs/backbone.marionette).
 
+  * Adds a structured "sub-plugin" system that makes it easy for developers to implement custom functionality for specific projects.
+
   * Converts the core record and exhibit controllers into a REST APIs that integrate smoothly with the Backbone.js front-end.
 
-  * Adds a structured "sub-plugin" system that makes it easy for developers to implement custom functionality for specific projects.
+  * Changes the spatial data serialization format from KML to WKT, which can be indexed and queried by MySQL.
 
 #### New Features
 
@@ -39,20 +42,28 @@
 
   * Improves the process by which Omeka items are imported into Neatline exhibits. Instead distinguishing between "Neatline" and "Omeka" records, _everything_ is a Neatline record, and any Neatline record can be linked to any Omeka item in the underlying collection.
 
-  * Replaces CLEditor (the rich-text editor used on the "Title" and "Body" fields) with CKEditor, a more robust editor that makes it easier to create well-formatted record content and import video and audio media.
+  * Replaces CLEditor (the rich-text editor used on the "Title" and "Body" fields) with CKEditor, a more robust editor that makes it easier to create well-formatted record content and import video and audio media. Also adds a "fullscreen" editing mode for long-format content.
 
   * Makes it possible to add WMS overlays to exhibits by entering a WMS address and layer id directly into the edit form for a Neatline record (instead of linking the record to an Omeka item, that in turn has a WMS layer by way of the old NeatlineMaps plugin).
 
 #### Removed Features
 
-  * Removes the interactive layout builder that made it possible to interactively drag-and-drop the positions and dimensions of the widgets in an exhibit. This was a brittle feature that made it extremely difficult for theme designers to customize the look and feel of exhibits. The new version refactors the markup and styling 
+  * Removes the interactive layout builder that made it possible to interactively drag-and-drop the positions and dimensions of the widgets in an exhibit. This was a brittle feature that made it difficult for theme designers to customize the look and feel of exhibits, something that's much easier in 2.0.
 
-  - static image backgrounds
+  * Removes the ability to use static images as the base layer for exhibits. This was an experimental feature that was significantly limited by the fact that the entire image was loaded in bulk into the browser JavaScript environment, which becomes increasingly unperformant as the size of the image grows. In 2.0, this feature is superseded by the ability to add custom base layers to exhibits, which makes it possible to build exhibits on non-spatial WMS layers, which enjoy all the scalabilty of regular spatial tiles.
 
 #### User-Interface Changes
 
-  - refactors exhibit browse layout
-  - makes item browser thinner
-  - moves to text-based interface for geoemtry drawing
+  * Makes the exhibit browse interface more intuitive: The main exhibit title links to the editor, not the public view.
 
+  * Makes the editor more minimalistic and unobtrusive: Squeezes the width of the item browser and gets rid of the top navigation bar.
 
+  * Simplifies the layout of the record editing form: Consolidates to just three tabs: "Text," "Map," and "Style."
+
+  * Makes the geometry editing controls more clean: Gets rid of the icon-bar, replaces with text-labelled radio buttons.
+
+#### Development Workflow Changes
+
+  * Uses [Grunt](http://gruntjs.com/) to manage dependencies, build the application, compile static assets, and run tests.
+
+  * Moves to [Stylus](https://github.com/learnboost/stylus) for all application stylesheets.
