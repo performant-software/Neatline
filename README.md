@@ -1,7 +1,7 @@
 # Neatline
 
-**Neatline is a lightweight, extensible framework for building interactive maps and publishing them on the web**.
+Neatline is a lightweight, extensible framework for building interactive maps and publishing them on the web.
 
-Built as a plugin for Omeka, a digital collection-management and web-publication framework developed by the Roy Rosenzweig Center for History and New Media, Neatline adds a powerful and intuitive digital map-making environment that makes it easy to create and maintain geospatial information as a collection of "records" plotted on a map, and to bind the information together into interactive exhibits that tell stories and make arguments.
+Built as a plugin for [Omeka](http://omeka.org/), a digital collection-management framework developed by the [Roy Rosenzweig Center for History and New Media](http://chnm.gmu.edu/), Neatline adds a powerful and intuitive digital map-making environment that makes it easy to create and maintain geospatial information as a collection of "records" plotted on a map, and to bind the information together into interactive exhibits that tell stories and make arguments.
 
 Designed for scholars, archivists, journalists, and students, Neatline is designed to provide a flexible and unobtrusive set of tools that can be adapted to fit the needs of a wide range of digital mapping projects. When something is missing from the core feature set, a flexible programming API and "sub-plugin" system makes it easy for developers to add custom functionality for specific projects - everything from simple JavaScript widgets (legends, sliders, layers, etc.) up to really elaborate modifications that extend the core data model and add completely new interactions.
