@@ -1,4 +1,4 @@
-# v2.0-alpha1 (pending)
+# v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1))
 
 #### Architectural Changes
 

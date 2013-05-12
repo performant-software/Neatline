@@ -22,14 +22,14 @@ class Neatline_ImportItems extends Omeka_Job_AbstractJob
 
         nl_setView();
 
+        // Get application tables.
         $__exhibits = $this->_db->getTable('NeatlineExhibit');
         $__records  = $this->_db->getTable('NeatlineRecord');
 
-        // Get exhibit and items.
+        // Load exhibit, query items.
         $exhibit = $__exhibits->find($this->_options['exhibit_id']);
         $items = get_records('Item', $this->_options['query'], 100000);
 
-        // Create records.
         foreach ($items as $item) {
 
             // Try to find a record.

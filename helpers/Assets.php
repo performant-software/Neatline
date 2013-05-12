@@ -11,30 +11,6 @@
 
 
 /**
- * Append a script to the <head> tag.
- *
- * @param string $script The script location.
- */
-function nl_appendScript($script)
-{
-    get_view()->headScript()->appendScript(
-        '', 'text/javascript', array('src' => $script)
-    );
-}
-
-
-/**
- * Include the Google Maps API.
- */
-function nl_queueGoogleMapsApi()
-{
-    nl_appendScript(
-        'http://maps.google.com/maps/api/js?sensor=false'
-    );
-}
-
-
-/**
  * Include static files for the exhibit form.
  */
 function nl_queueExhibitForm()
@@ -85,6 +61,30 @@ function nl_queueNeatlineEditor($exhibit)
         'exhibit' => $exhibit
     ));
 
+}
+
+
+/**
+ * Append a script to the <head> tag.
+ *
+ * @param string $script The script location.
+ */
+function nl_appendScript($script)
+{
+    get_view()->headScript()->appendScript(
+        '', 'text/javascript', array('src' => $script)
+    );
+}
+
+
+/**
+ * Include the Google Maps API.
+ */
+function nl_queueGoogleMapsApi()
+{
+    nl_appendScript(
+        'http://maps.google.com/maps/api/js?sensor=false'
+    );
 }
 
 
