@@ -40,17 +40,17 @@
 
   - Removes the interactive layout builder that made it possible to interactively drag-and-drop the positions and dimensions of the widgets in an exhibit. This was a brittle feature that made it difficult for theme designers to customize the look and feel of exhibits, something that's much easier in 2.0.
 
-  - Removes the ability to use static images as the base layer for exhibits. This was an experimental feature that was significantly limited by the fact that the entire image was loaded in bulk into the browser JavaScript environment, which becomes increasingly unperformant as the size of the image grows. In 2.0, this feature is superseded by the ability to add custom base layers to exhibits an an abstract sense, which makes it possible to build exhibits on non-spatial WMS layers, which enjoy all the scalabilty of regular spatial tiles.
+  - Removes the ability to use static images as the base layer for exhibits. This was an experimental feature that was significantly limited by the fact that the entire image was loaded in bulk into the browser JavaScript environment, which becomes increasingly unperformant as the size of the image grows. In 2.0, this feature is superseded by the ability to add custom base layers to exhibits an an abstract sense - this makes it possible to build exhibits on non-spatial WMS layers, which enjoy all the performance characteristics of regular spatial tile sets.
 
 #### User-Interface Changes
 
-  - Makes the exhibit browse interface more intuitive: The main exhibit title links to the editor, not the public view.
+  - Makes the exhibit browsing interface more intuitive: The main exhibit title links to the editor, not the public view.
 
-  - Makes the editor more minimalistic and unobtrusive: Squeezes the width of the item browser and gets rid of the top navigation bar.
+  - Makes the editing interface more minimalistic: Reduces the width of the content management pane and eliminates the top navigation bar.
 
-  - Simplifies the layout of the record editing form: Consolidates to just three tabs: "Text," "Map," and "Style."
+  - Simplifies the layout of the record editing form: Consolidates tabs to "Text," "Map," and "Style."
 
-  - Makes the geometry editing controls more clean: Gets rid of the icon-bar, replaces with text-labelled radio buttons.
+  - Makes the geometry add/edit/delete controls more semantic: Gets rid of the icon-bar, replaces with text-labelled radio buttons.
 
 ### API Changes
 
