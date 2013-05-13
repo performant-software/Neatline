@@ -32,14 +32,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Create tables.
+     * Create exhibit and record tables.
      */
     public function hookInstall()
     {
 
 
-        // Exhibits
-        // --------
         $this->_db->query("CREATE TABLE IF NOT EXISTS
         `{$this->_db->prefix}neatline_exhibits` (
 
@@ -63,8 +61,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
-        // Records
-        // -------
         $this->_db->query("CREATE TABLE IF NOT EXISTS
         `{$this->_db->prefix}neatline_records` (
 
@@ -118,7 +114,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Drop tables.
+     * Drop exhibit and record tables.
      */
     public function hookUninstall()
     {
@@ -159,7 +155,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Propagate item changes to Neatline records.
+     * Propagate item updates to Neatline records.
      *
      * @param array $args Array of arguments, with `record`.
      */

@@ -37,12 +37,14 @@ function records(exhibit_id, count, zoom, color, tags) {
       'tags,'+
       'presenter,'+
       'fill_color,'+
+      'fill_color_select,'+
       'stroke_color,'+
-      'select_color,'+
-      'point_radius,'+
-      'stroke_opacity,'+
+      'stroke_color_select,'+
       'fill_opacity,'+
-      'select_opacity,'+
+      'fill_opacity_select,'+
+      'stroke_opacity,'+
+      'stroke_opacity_select,'+
+      'point_radius,'+
       'stroke_width,'+
       'min_zoom,'+
       'max_zoom,'+
@@ -66,12 +68,14 @@ function records(exhibit_id, count, zoom, color, tags) {
       '"'+tags+'",'+
       '"StaticBubble",'+
       '"'+color+'",'+
-      '"#000000",'+
       '"'+color+'",'+
+      '"#000000",'+
+      '"#000000",'+
+      0.3+','+
+      0.5+','+
+      0.8+','+
+      1.0
       rad+','+
-      100+','+
-      30+','+
-      50+','+
       1+','+
       zoom+','+
       zoom+','+
