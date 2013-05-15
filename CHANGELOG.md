@@ -6,7 +6,7 @@
 
   - When attempting to load an exhibit-specific CSS file, Neatline now looks for files in ```exhibit/exhibit-slug.css```, instead of just looking for a file in a top-level plugin/theme ```css``` directory. This avoids the (unlikely) situation in which an exhibit slug happens to be the same as an existing CSS file that was not intended to function as an exhibit stylesheet.
 
-  - When an exhibit is displayed, Neatline will now also attempt to load an exhibit-specific _JavaScript_ file at ```exhibits/exhibit-slug.js```.
+  - When an exhibit is displayed, Neatline will now also attempt to load an exhibit-specific JavaScript file at ```exhibits/exhibit-slug.js```. This makes it possible to add exhibit-specific JavaScript functionalities that are too small or specific to warrant a sub-plugin.
 
 # v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1))
 
