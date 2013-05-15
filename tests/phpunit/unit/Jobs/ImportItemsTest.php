@@ -114,4 +114,31 @@ class ImportItemsTest extends Neatline_TestCase
     }
 
 
+    /**
+     * `Neatline_ImportItems` should manually update the `webDir` property
+     * on the filesystem adapter.
+     */
+    public function testSetWebDir()
+    {
+
+        $item = $this->__item();
+
+        $exhibit = $this->__exhibit();
+
+        Zend_Registry::get('bootstrap')->getResource('jobs')->
+            send('Neatline_ImportItems', array(
+
+                'web_dir'       => 'webDir',
+                'exhibit_id'    => $exhibit->id,
+                'query'         => array()
+
+            )
+        );
+
+        // Should set new adapter.
+        $this->assertEquals(nl_getWebDir(), 'webDir');
+
+    }
+
+
 }
