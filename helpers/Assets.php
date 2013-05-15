@@ -29,12 +29,13 @@ function nl_queueNeatlinePublic($exhibit)
 {
 
     nl_queueGoogleMapsApi();
-    nl_queueExhibitCss($exhibit);
-    nl_queueExhibitJs($exhibit);
 
     queue_css_file('payloads/neatline-public');
     queue_js_file('payloads/neatline-public');
     queue_js_file('bootstrap');
+
+    nl_queueExhibitCss($exhibit);
+    nl_queueExhibitJs($exhibit);
 
     fire_plugin_hook('neatline_public_static', array(
         'exhibit' => $exhibit
