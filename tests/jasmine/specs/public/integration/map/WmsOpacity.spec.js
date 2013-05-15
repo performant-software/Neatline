@@ -12,7 +12,7 @@ describe('WMS Layer Opacity Rendering', function() {
 
 
   var fx = {
-    records: read('PublicMapLayersWmsOpacityRendering.records.json')
+    records: read('PublicMapWmsOpacity.records.json')
   };
 
 
