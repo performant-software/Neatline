@@ -1,4 +1,4 @@
-# v2.0-alpha1
+# v2.0-alpha2 (pending)
 
   - Fixes bug that was causing paths to file attachments in item-backed records created by way of the "Import Items" flow to point to the local filesystem, not the web-accessible location of the files. (d3b880a243ae8daaeeea00236bda55cdb569b149)
 
