@@ -1,3 +1,9 @@
+# v2.0-alpha1
+
+  - Fixes bug that was causing paths to file attachments in item-backed records created by way of the "Import Items" flow to point to the local filesystem, not the web-accessible location of the files. (d3b880a243ae8daaeeea00236bda55cdb569b149)
+
+  - In the ```item.php``` template used to determine the structure of the compiled item metadata in Neatline records, moves the file display below the default metadata output to conform with Omeka's default item show view.
+
 # v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1))
 
 #### Architectural Changes
