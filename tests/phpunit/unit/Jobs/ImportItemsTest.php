@@ -121,8 +121,6 @@ class ImportItemsTest extends Neatline_TestCase
     public function testSetWebDir()
     {
 
-        $item = $this->__item();
-
         $exhibit = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
