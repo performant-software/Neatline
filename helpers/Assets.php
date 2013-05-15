@@ -30,6 +30,7 @@ function nl_queueNeatlinePublic($exhibit)
 
     nl_queueGoogleMapsApi();
     nl_queueExhibitCss($exhibit);
+    nl_queueExhibitJs($exhibit);
 
     queue_css_file('payloads/neatline-public');
     queue_js_file('payloads/neatline-public');
@@ -97,6 +98,19 @@ function nl_queueExhibitCss($exhibit)
 {
     try {
         queue_css_file($exhibit->slug);
+    } catch (Exception $e) {}
+}
+
+
+/**
+ * Try to load an exhibit-specific JavaScript file.
+ *
+ * @param NeatlineExhibit The exhibit.
+ */
+function nl_queueExhibitJs($exhibit)
+{
+    try {
+        queue_js_file($exhibit->slug);
     } catch (Exception $e) {}
 }
 
