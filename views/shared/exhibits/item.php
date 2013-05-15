@@ -11,11 +11,11 @@
 
 ?>
 
-<!-- Files. -->
-<?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
-
 <!-- Elements. -->
 <?php echo all_element_texts('item'); ?>
+
+<!-- Files. -->
+<?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
 
 <!-- Pulgins. -->
 <?php fire_plugin_hook('public_items_show', array(
