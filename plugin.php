@@ -23,6 +23,7 @@ require_once NL_DIR . '/jobs/Neatline_ImportItems.php';
 require_once NL_DIR . '/jobs/Neatline_DeleteRecords.php';
 require_once NL_DIR . '/forms/ExhibitForm.php';
 require_once NL_DIR . '/helpers/Assets.php';
+require_once NL_DIR . '/helpers/jobs.php';
 require_once NL_DIR . '/helpers/Layers.php';
 require_once NL_DIR . '/helpers/Plugins.php';
 require_once NL_DIR . '/helpers/Styles.php';

@@ -128,14 +128,16 @@ class Neatline_ExhibitsController extends Neatline_RestController
             // Import items.
             Zend_Registry::get('bootstrap')->getResource('jobs')->
                 sendLongRunning('Neatline_ImportItems', array(
-                    'exhibit_id' => $exhibit->id,
-                    'query' => $post
+                    'web_dir'       => nl_getWebDir(),
+                    'exhibit_id'    => $exhibit->id,
+                    'query'         => $post
                 )
             );
 
             // Flash success.
             $this->_helper->flashMessenger(
-                $this->_getImportStartedMessage(), 'success');
+                $this->_getImportStartedMessage(), 'success'
+            );
 
             // Redirect to browse.
             $this->_helper->redirector('browse');

@@ -26,8 +26,11 @@ class ImportItemsTest extends Neatline_TestCase
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
-                'query' => array('range' => $item1->id),
-                'exhibit_id' => $exhibit->id
+
+                'web_dir'       => nl_getWebDir(),
+                'exhibit_id'    => $exhibit->id,
+                'query'         => array('range' => $item1->id)
+
             )
         );
 
@@ -57,8 +60,11 @@ class ImportItemsTest extends Neatline_TestCase
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
-                'query' => array('range' => $item->id),
-                'exhibit_id' => $exhibit->id
+
+                'web_dir'       => nl_getWebDir(),
+                'exhibit_id'    => $exhibit->id,
+                'query'         => array('range' => $item->id)
+
             )
         );
 
@@ -89,8 +95,11 @@ class ImportItemsTest extends Neatline_TestCase
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
-                'query' => array('range' => $item->id),
-                'exhibit_id' => $exhibit->id
+
+                'web_dir'       => nl_getWebDir(),
+                'exhibit_id'    => $exhibit->id,
+                'query'         => array('range' => $item->id)
+
             )
         );
 
