@@ -156,9 +156,9 @@ function neatline_queueNeatlineAssets($exhibit)
     queue_js('jquery.getscrollbarwidth', 'javascripts/libraries');
 
     // Vendor.
+    neatline_queueSimileApi();
     queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
     queue_js('libraries/tile.stamen', 'javascripts');
-    queue_js('libraries/simile/timeline-api/timeline-api', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
     queue_js('libraries/underscore-min', 'javascripts');
     queue_js('libraries/moment.min', 'javascripts');
@@ -182,6 +182,40 @@ function neatline_queueExhibitCss($exhibit)
     try {
         queue_css($exhibit->slug);
     } catch (Exception $e) {}
+}
+
+
+/**
+ * Append a script to the <head> tag.
+ *
+ * @param string $script The script location.
+ */
+function neatline_appendScript($script)
+{
+    __v()->headScript()->appendScript(
+        '', 'text/javascript', array('src' => $script)
+    );
+}
+
+
+/**
+ * Include the Simile API.
+ */
+function neatline_queueSimileApi()
+{
+
+    // SimileAjax
+    neatline_appendScript(web_path_to(
+        'javascripts/libraries/simile/ajax/simile-ajax-api.js') .
+        '?bundle=true'
+    );
+
+    // Timeline
+    neatline_appendScript(web_path_to(
+        'javascripts/libraries/simile/js/timeline-api.js') .
+        '?bundle=true'
+    );
+
 }
 
 /**

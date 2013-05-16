@@ -102,20 +102,11 @@
             OpenLayers.Util.onImageLoadErrorColor = 'transparent';
             OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
 
-            var tiled;
-            var pureCoverage = true;
-
             // Pink tile avoidance.
             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
 
             // Make OL compute scale according to WMS spec.
             OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
-
-            // Set tile image format.
-            var format = 'image/png';
-            if (pureCoverage) {
-                format = 'image/png8';
-            }
 
             // Build the default bounds array.
             var bounds = new OpenLayers.Bounds(
@@ -696,8 +687,7 @@
          */
         _selectRecord: function(record) {
 
-            // If the record exists and there is a map feature.
-            if (record && record.layer.features.length > 0) {
+            if (record) {
 
                 // Get bounds.
                 var bounds = record.data.bounds || record.data.center;
