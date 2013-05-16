@@ -187,11 +187,12 @@ class NeatlineExhibit extends Neatline_ExpandableRow
         $records = $this->getTable('NeatlineRecord');
         $rName = $records->getTableName();
 
+        // Gather record expansion tables.
         foreach (nl_getRecordExpansions() as $expansion) {
 
             $eName = $expansion->getTableName();
 
-            // Delete record expansion rows.
+            // Delete expansion rows on child records.
             $this->_db->query("DELETE $eName FROM $eName
                 INNER JOIN $rName ON $eName.parent_id = $rName.id
                 WHERE $rName.exhibit_id = $this->id
@@ -199,7 +200,7 @@ class NeatlineExhibit extends Neatline_ExpandableRow
 
         }
 
-        // Delete records.
+        // Delete child records.
         $records->delete($rName, array('exhibit_id=?' => $this->id));
 
     }
