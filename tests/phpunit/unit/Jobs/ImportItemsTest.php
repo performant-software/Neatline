@@ -133,7 +133,7 @@ class ImportItemsTest extends Neatline_TestCase
             )
         );
 
-        // Should set new adapter.
+        // Should set new `webDir`.
         $this->assertEquals(nl_getWebDir(), 'webDir');
 
     }

@@ -631,7 +631,7 @@ Neatline.module('Map', function(
     focusByModel: function(model) {
 
       // Get a layer for the model.
-      var layer = this.layers.vector[model.id]
+      var layer = this.layers.vector[model.id];
       if (!layer) layer = this.buildVectorLayer(model);
 
       // Try to get a custom focus.

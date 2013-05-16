@@ -93,12 +93,14 @@ class ExhibitsControllerTest_AdminImport extends Neatline_TestCase
 
         $jobs = $this->mockJobDispatcher();
 
-        // Should dispatch item import.
+        // Should dispatch `Neatline_ImportItems`.
         $jobs->expects($this->once())->method('sendLongRunning')->with(
             'Neatline_ImportItems', array(
+
                 'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $this->exhibit->id,
                 'query'         => $this->query
+
             )
         );
 
