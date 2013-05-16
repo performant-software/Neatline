@@ -152,7 +152,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     public function mockJobDispatcher()
     {
 
-        // Create the mock dispatcher.
+        // Create a testing-double job dispatcher.
         $jobs = $this->getMockBuilder('Omeka_Job_Dispatcher_Default')
             ->disableOriginalConstructor()
             ->getMock();
