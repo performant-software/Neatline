@@ -145,6 +145,27 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Inject and return a mock `Omeka_Job_Dispatcher_Default`.
+     *
+     * @return Omeka_Job_Dispatcher_Default.
+     */
+    public function mockJobDispatcher()
+    {
+
+        // Create the mock dispatcher.
+        $jobs = $this->getMockBuilder('Omeka_Job_Dispatcher_Default')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        // Inject the mock.
+        Zend_Registry::set('job_dispatcher', $jobs);
+
+        return $jobs;
+
+    }
+
+
+    /**
      * Get the body of the last response as an array.
      *
      * @return array The response data.

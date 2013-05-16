@@ -91,13 +91,7 @@ class ExhibitsControllerTest_AdminImport extends Neatline_TestCase
     public function testStartImport()
     {
 
-        // Create a mock dispatcher.
-        $jobs = $this->getMockBuilder('Omeka_Job_Dispatcher_Default')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        // Inject the testing double.
-        Zend_Registry::set('job_dispatcher', $jobs);
+        $jobs = $this->mockJobDispatcher();
 
         // Should dispatch item import.
         $jobs->expects($this->once())->method('sendLongRunning')->with(
