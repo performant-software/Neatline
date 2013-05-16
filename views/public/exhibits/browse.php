@@ -23,15 +23,16 @@
   <?php echo flash(); ?>
   <h1><?php echo __('Neatline | Browse Exhibits'); ?></h1>
 
-  <?php if(nl_areExhibits()): ?>
+  <?php if (nl_areExhibits()): ?>
 
     <div class="pagination"><?php echo pagination_links(); ?></div>
 
-      <?php foreach (loop('NeatlineExhibit') as $exhibit): ?>
-        <div id="neatline-<?php echo nl_field('id'); ?>">
-          <h2 class="title"><?php echo nl_link(); ?></h2>
-          <?php echo nl_field('description'); ?>
-        </div>
+      <?php foreach (loop('NeatlineExhibit') as $e): ?>
+        <h2>
+          <?php echo nl_link($e, 'show', nl_field('title'),
+            array('class' => 'neatline'), true);
+          ?>
+        </h2>
       <?php endforeach; ?>
 
     <div class="pagination"><?php echo pagination_links(); ?></div>

@@ -49,7 +49,7 @@
     <tbody>
 
       <!-- Exhibit listings. -->
-      <?php foreach(loop('NeatlineExhibit') as $e): ?>
+      <?php foreach (loop('NeatlineExhibit') as $e): ?>
       <tr>
 
         <td class="title">

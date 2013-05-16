@@ -9,20 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_Browse extends Neatline_TestCase
+class ExhibitsControllerTest_AdminBrowse extends Neatline_TestCase
 {
-
-
-    /**
-     * INDEX action should redirect to BROWSE.
-     */
-    public function testIndexRedirect()
-    {
-        $this->dispatch('neatline');
-        $this->assertModule('neatline');
-        $this->assertController('exhibits');
-        $this->assertAction('browse');
-    }
 
 
     /**
@@ -105,14 +93,15 @@ class ExhibitsControllerTest_Browse extends Neatline_TestCase
 
 
     /**
-     * When the number of exhibits is greater than the admin pagination
-     * limit, the maximum number of exhibits that can fit on a page should
-     * be listed and pagination links should be displayed.
+     * When the number of exhibits is greater than the page length, the
+     * maximum number of exhibits that can fit on a page should be listed
+     * and pagination links should be displayed.
      */
     public function testPagination()
     {
 
-        // Set paging limit to 2.
+        // Set admin page length to 2.
+        set_option('per_page_public', 10);
         set_option('per_page_admin', 2);
 
         $exhibit1 = $this->__exhibit('slug1');

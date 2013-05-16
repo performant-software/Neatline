@@ -20,7 +20,6 @@ class Neatline_ExhibitsController extends Neatline_RestController
     {
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->_browseRecordsPerPage = get_option('per_page_admin');
     }
 
 
@@ -167,6 +166,16 @@ class Neatline_ExhibitsController extends Neatline_RestController
     {
         $exhibit = $this->exhibits->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
+    }
+
+
+    /**
+     * Return the pagination page length.
+     */
+    protected function _getBrowseRecordsPerPage()
+    {
+        if (is_admin_theme()) return (int) get_option('per_page_admin');
+        else return (int) get_option('per_page_public');
     }
 
 

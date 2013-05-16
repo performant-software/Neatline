@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_Import extends Neatline_TestCase
+class ExhibitsControllerTest_AdminImport extends Neatline_TestCase
 {
 
 
