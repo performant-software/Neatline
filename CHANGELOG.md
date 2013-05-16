@@ -16,7 +16,7 @@
 
   - Fixes bug that was causing paths to file attachments in item-backed records created by way of the "Import Items" flow to point to the local filesystem, not the web-accessible location of the files.
 
-  - Fixes bugs in public exhibit browse view - changed the listings to point to the slug-based exhibit links and got rid of PHP warnings caused by malformed helper calls.
+  - Fixes bugs in public exhibit browse view - changes the listings to point to the slug-based exhibit links and got rid of PHP warnings caused by malformed helper calls.
 
 # v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1))
 

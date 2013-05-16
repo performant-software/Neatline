@@ -14,59 +14,102 @@ class ExhibitsControllerTest_AdminImport extends Neatline_TestCase
 
 
     /**
+     * Insert item type and collection, set POST data.
+     */
+    public function setUp()
+    {
+
+        parent::setUp();
+
+        // Exhibit:
+        $this->exhibit = $this->__exhibit();
+
+        // Item type:
+        $this->type = insert_item_type(array('name' => 'Type'));
+
+        // Collection:
+        $this->collection = insert_collection(array(), array(
+            'Dublin Core' => array ('Title' => array(
+                array('text' => 'Collection', 'html' => false)
+            ))
+        ));
+
+        // Query:
+        $this->query = array(
+            'search'        => 'Keywords',
+            'range'         => '1-10',
+            'collection'    => $this->collection->id,
+            'type'          => $this->type->id,
+            'tags'          => 'tag1,tag2'
+        );
+
+        // Set POST data.
+        $this->request->setMethod('POST')->setPost($this->query);
+
+    }
+
+
+    /**
      * Query values should be saved and re-populated.
      */
     public function testSaveQuery()
     {
 
-        $exhibit = $this->__exhibit();
-
-        // Create mock collection.
-        $collection = insert_collection(array(), array(
-            'Dublin Core' => array (
-                'Title' => array(
-                    array('text' => 'Collection', 'html' => false)
-                )
-            )
-        ));
-
-        // Create mock type.
-        $type = insert_item_type(array('name' => 'Type'));
-
-        // Set POST data.
-        $this->request->setMethod('POST')->setPost(array(
-            'search'        => 'Keywords',
-            'range'         => '1-10',
-            'collection'    => $collection->id,
-            'type'          => $type->id,
-            'tags'          => 'tag1,tag2'
-        ));
-
-        // Import items, save form.
-        $this->dispatch('neatline/import/'.$exhibit->id);
+        // Import items.
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
 
         $this->resetResponse();
         $this->resetRequest();
 
         // Reload the form.
-        $this->dispatch('neatline/import/'.$exhibit->id);
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
 
-        // Keywords, Range, and Tags:
+        // Should populate keywords, range, and tags:
         $this->assertXpath('//input[@name="search"][@value="Keywords"]');
         $this->assertXpath('//input[@name="range"][@value="1-10"]');
         $this->assertXpath('//input[@name="tags"][@value="tag1,tag2"]');
 
-        // Collection:
+        // Should populate collection:
         $this->assertXpathContentContains(
             '//select[@name="collection"]/option[@selected="selected"]',
             'Collection'
         );
 
-        // Type:
+        // Should populate type:
         $this->assertXpathContentContains(
             '//select[@name="type"]/option[@selected="selected"]',
             'Type'
         );
+
+    }
+
+
+    /**
+     * When "Import Items" is clicked, the `Neatline_ImportItems` job 
+     * should be dispatched with the query parameters.
+     */
+    public function testStartImport()
+    {
+
+        // Create a mock dispatcher.
+        $jobs = $this->getMockBuilder('Omeka_Job_Dispatcher_Default')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        // Inject the testing double.
+        Zend_Registry::set('job_dispatcher', $jobs);
+
+        // Should dispatch item import.
+        $jobs->expects($this->once())->method('sendLongRunning')->with(
+            'Neatline_ImportItems', array(
+                'web_dir'       => nl_getWebDir(),
+                'exhibit_id'    => $this->exhibit->id,
+                'query'         => $this->query
+            )
+        );
+
+        // Import items.
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
 
     }
 

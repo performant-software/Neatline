@@ -125,8 +125,8 @@ class Neatline_ExhibitsController extends Neatline_RestController
             $exhibit->save();
 
             // Import items.
-            Zend_Registry::get('bootstrap')->getResource('jobs')->
-                sendLongRunning('Neatline_ImportItems', array(
+            Zend_Registry::get('job_dispatcher')->sendLongRunning(
+                'Neatline_ImportItems', array(
                     'web_dir'       => nl_getWebDir(),
                     'exhibit_id'    => $exhibit->id,
                     'query'         => $post
