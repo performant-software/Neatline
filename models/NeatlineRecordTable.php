@@ -20,7 +20,7 @@ class NeatlineRecordTable extends Neatline_ExpandableTable
      */
     public function getExpansionTables()
     {
-        return apply_filters('neatline_record_expansions', array());
+        return nl_getRecordExpansions();
     }
 
 

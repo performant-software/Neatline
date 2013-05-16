@@ -55,6 +55,28 @@ function nl_getStyles()
 
 
 /**
+ * Gather exhibit expansion tables.
+ *
+ * @return array An array of `Neatline_ExpansionTable`.
+ */
+function nl_getExhibitExpansions()
+{
+    return apply_filters('neatline_exhibit_expansions', array());
+}
+
+
+/**
+ * Gather record expansion tables.
+ *
+ * @return array An array of `Neatline_ExpansionTable`.
+ */
+function nl_getRecordExpansions()
+{
+    return apply_filters('neatline_record_expansions', array());
+}
+
+
+/**
  * Gather exhibit tabs via the `neatline_exhibit_tabs` filter.
  *
  * @param NeatlineExhibit $exhibit The exhibit.

@@ -20,7 +20,7 @@ class NeatlineExhibitTable extends Neatline_ExpandableTable
      */
     public function getExpansionTables()
     {
-        return apply_filters('neatline_exhibit_expansions', array());
+        return nl_getExhibitExpansions();
     }
 
 

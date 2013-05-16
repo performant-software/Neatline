@@ -182,11 +182,13 @@ class NeatlineExhibit extends Neatline_ExpandableRow
      */
     protected function beforeDelete()
     {
+
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             sendLongRunning('Neatline_DeleteRecords', array(
                 'exhibit_id' => $this->id
             )
         );
+
     }
 
 

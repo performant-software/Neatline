@@ -114,22 +114,3 @@ function nl_queueExhibitJs($exhibit)
         queue_js_file('exhibits/'.$exhibit->slug);
     } catch (Exception $e) {}
 }
-
-
-/**
- * Construct exhibit globals array.
- *
- * @param NeatlineExhibit The exhibit.
- * @return array The array of globals.
- */
-function nl_globals($exhibit)
-{
-    return array(
-        'exhibit'       => $exhibit->toArray(),
-        'records_api'   => public_url('neatline/records'),
-        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
-        'items_api'     => url('items/browse'),
-        'per_page'      => (int) get_plugin_ini('Neatline', 'per_page'),
-        'base_layers'   => nl_getLayersForExhibit($exhibit)
-    );
-}
