@@ -86,7 +86,7 @@ class ExhibitsControllerTest_AdminImport extends Neatline_TestCase
 
     /**
      * When "Import Items" is clicked, the `Neatline_ImportItems` job 
-     * should be dispatched with the query parameters.
+     * should be dispatched with the item query parameters.
      */
     public function testStartImport()
     {

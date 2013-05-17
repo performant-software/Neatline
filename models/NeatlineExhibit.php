@@ -183,6 +183,8 @@ class NeatlineExhibit extends Neatline_ExpandableRow
     protected function beforeDelete()
     {
 
+        parent::beforeDelete();
+
         // Get records table and name.
         $records = $this->getTable('NeatlineRecord');
         $rName = $records->getTableName();

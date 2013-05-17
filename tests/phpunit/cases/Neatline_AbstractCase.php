@@ -147,7 +147,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     /**
      * Inject and return a mock `Omeka_Job_Dispatcher_Default`.
      *
-     * @return Omeka_Job_Dispatcher_Default.
+     * @return Omeka_Job_Dispatcher_Default PHPUnit mock.
      */
     public function mockJobDispatcher()
     {
