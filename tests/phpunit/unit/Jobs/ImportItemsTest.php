@@ -35,9 +35,9 @@ class ImportItemsTest extends Neatline_TestCase
         );
 
         // Should match item 1, not item 2.
-        $records = $this->__records->queryRecords($exhibit);
-        $this->assertEquals($records['records'][0]['item_id'],$item1->id);
-        $this->assertEquals($records['count'], 1);
+        $records = $this->getRecordsByExhibit($exhibit);
+        $this->assertEquals($records[0]['item_id'], $item1->id);
+        $this->assertCount(1, $records);
 
     }
 
@@ -69,11 +69,11 @@ class ImportItemsTest extends Neatline_TestCase
         );
 
         // Should not duplicate the record.
-        $records = $this->__records->queryRecords($exhibit);
-        $this->assertEquals($records['count'], 1);
+        $records = $this->getRecordsByExhibit($exhibit);
+        $this->assertCount(1, $records);
 
         // Should recompile the record.
-        $this->assertNotNull($records['records'][0]['body']);
+        $this->assertNotNull($records[0]['body']);
 
     }
 
@@ -103,12 +103,8 @@ class ImportItemsTest extends Neatline_TestCase
             )
         );
 
-        // Load the new record.
-        $record = $this->__records->findBySql(
-            'exhibit_id=?', array($exhibit->id), true
-        );
-
         // Should set `added` to match item.
+        $record = $this->getRecordsByExhibit($exhibit, true);
         $this->assertEquals($record->added, '2000-01-01 00:00:00');
 
     }
@@ -140,9 +136,7 @@ class ImportItemsTest extends Neatline_TestCase
         );
 
         // Load the new record.
-        $record = $this->__records->findBySql(
-            'exhibit_id=?', array($exhibit->id), true
-        );
+        $record = $this->getRecordsByExhibit($exhibit, true);
 
         // Parse `body` HTML.
         $doc = new DOMDocument();

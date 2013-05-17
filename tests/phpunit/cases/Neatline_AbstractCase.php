@@ -166,6 +166,21 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Query all records in an exhibit.
+     *
+     * @param NeatlineExhibit $exhibit The parent exhibit.
+     * @param boolean $findOne If true, return only first record.
+     * @return array The child records.
+     */
+    public function getRecordsByExhibit($exhibit, $findOne=false)
+    {
+        return $this->__records->findBySql(
+            'exhibit_id=?', array($exhibit->id), $findOne
+        );
+    }
+
+
+    /**
      * Get the body of the last response as an array.
      *
      * @return array The response data.
