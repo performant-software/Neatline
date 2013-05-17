@@ -111,10 +111,11 @@ class ImportItemsTest extends Neatline_TestCase
 
 
     /**
-     * `Neatline_ImportItems` should manually update the `webDir` property
-     * on the filesystem adapter.
+     * The import job should manually update the `webDir` property on the
+     * filesystem adapter. This ensures that file links will point to the
+     * web-accessible URLs of the files, not the local filesystem.
      */
-    public function testSetWebDir()
+    public function testSetWebDirectory()
     {
 
         $item = $this->__item();
