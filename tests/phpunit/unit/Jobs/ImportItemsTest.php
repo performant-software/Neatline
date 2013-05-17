@@ -121,20 +121,42 @@ class ImportItemsTest extends Neatline_TestCase
     public function testSetWebDir()
     {
 
+        $item = $this->__item();
+
         $exhibit = $this->__exhibit();
+
+        insert_files_for_item($item, 'Filesystem', array(
+            NL_DIR . '/tests/phpunit/mocks/file.txt'
+        ));
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_ImportItems', array(
 
                 'web_dir'       => 'webDir',
                 'exhibit_id'    => $exhibit->id,
-                'query'         => array()
+                'query'         => array('range' => $item->id)
 
             )
         );
 
-        // Should set new `webDir`.
-        $this->assertEquals(nl_getWebDir(), 'webDir');
+        // Load the new record.
+        $record = $this->__records->findBySql(
+            'exhibit_id=?', array($exhibit->id), true
+        );
+
+        // Parse `body` HTML.
+        $doc = new DOMDocument();
+        $doc->loadHTML($record->body);
+
+        // Query for the file link.
+        $xpath = new DOMXpath($doc);
+        $anchor = $xpath->query('//a[@class="download-file"]')->item(0);
+
+        // Link should start with 'webDir/'
+        $this->assertEquals(
+            substr($anchor->getAttribute('href'), 0, 7),
+            'webDir/'
+        );
 
     }
 
