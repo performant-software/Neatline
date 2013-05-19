@@ -56,6 +56,17 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
+     * Browse exhibits.
+     */
+    public function browseAction()
+    {
+        $this->_setParam('sort_field', 'added');
+        $this->_setParam('sort_dir', 'd');
+        parent::browseAction();
+    }
+
+
+    /**
      * Create a new exhibit.
      */
     public function addAction()
@@ -95,17 +106,6 @@ class Neatline_ExhibitsController extends Neatline_RestController
         $this->view->neatline_exhibit = $exhibit;
         $this->view->form = $form;
 
-    }
-
-
-    /**
-     * Browse exhibits.
-     */
-    public function browseAction()
-    {
-        $this->_setParam('sort_field', 'added');
-        $this->_setParam('sort_dir', 'd');
-        parent::browseAction();
     }
 
 
@@ -151,21 +151,21 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Edit exhibit.
-     */
-    public function editorAction()
-    {
-        $this->view->neatline_exhibit = $this->_helper->db->findById();
-    }
-
-
-    /**
      * Show exhibit.
      */
     public function showAction()
     {
         $exhibit = $this->exhibits->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
+    }
+
+
+    /**
+     * Edit exhibit.
+     */
+    public function editorAction()
+    {
+        $this->view->neatline_exhibit = $this->_helper->db->findById();
     }
 
 

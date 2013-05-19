@@ -97,8 +97,7 @@ function nl_queueGoogleMapsApi()
  */
 function nl_queueExhibitCss($exhibit)
 {
-    try {
-        queue_css_file('exhibits/'.$exhibit->slug);
+    try { queue_css_file($exhibit->slug);
     } catch (Exception $e) {}
 }
 
@@ -110,7 +109,6 @@ function nl_queueExhibitCss($exhibit)
  */
 function nl_queueExhibitJs($exhibit)
 {
-    try {
-        queue_js_file('exhibits/'.$exhibit->slug);
+    try { queue_js_file($exhibit->slug);
     } catch (Exception $e) {}
 }

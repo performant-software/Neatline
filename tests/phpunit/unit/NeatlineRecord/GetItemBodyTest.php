@@ -19,7 +19,7 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
     public function setUp()
     {
         parent::setUp();
-        get_view()->addScriptPath(NL_DIR . '/tests/phpunit/mocks/tmpl');
+        get_view()->addScriptPath(NL_DIR . '/tests/phpunit/mocks/theme');
     }
 
 

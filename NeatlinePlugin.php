@@ -58,7 +58,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
          PRIMARY KEY            (`id`)
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
         $this->_db->query("CREATE TABLE IF NOT EXISTS

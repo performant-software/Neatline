@@ -18,7 +18,7 @@ function nl_setView()
 
     $view = new Omeka_View();
 
-    // Omeka and Neatline templates.
+    // Omeka/Neatline templates.
     $view->addScriptPath(VIEW_SCRIPTS_DIR);
     $view->addScriptPath(NL_DIR.'/views/shared');
 
@@ -33,27 +33,43 @@ function nl_setView()
 
 
 /**
- * Return specific field for a neatline record.
+ * Returns a link to a Neatline exhibit.
  *
- * @param string $fieldname The model attribute.
- * @param NeatlineExhibit $exhibit The exhibit.
- * @return string The field value.
+ * @param NeatlineExhibit|null $exhibit The exhibit record.
+ * @param string $action The action for the link.
+ * @param string $text The link text.
+ * @param array $props Array of properties for the element.
+ * @return string The HTML link.
  */
-function nl_field($fieldname, $exhibit=null)
-{
+function nl_link($exhibit, $action, $text, $props=array(), $public=true) {
+
+    // Get exhibit and link text.
     $exhibit = $exhibit ? $exhibit : nl_exhibit();
-    return $exhibit->$fieldname;
+    $text = $text ? $text : nl_field('title');
+
+    // Form the exhibit identifier.
+    if ($action == 'show') $identifier = $exhibit->slug;
+    else $identifier = $exhibit->id;
+
+    // Construct the exhibit route.
+    $route = 'neatline/'.$action.'/'.$identifier;
+    $props['href'] = $public ? public_url($route) : url($route);
+
+    return '<a '.tag_attributes($props).'>'.$text.'</a>';
+
 }
 
 
 /**
- * Returns the current neatline.
+ * Count the records in an exhibit.
  *
- * @return NeatlineExhibit|null
+ * @param NeatlineExhibit $exhibit The exhibit record.
+ * @return integer The number of records.
  */
-function nl_exhibit()
+function nl_totalRecords($exhibit=null)
 {
-    return get_view()->neatline_exhibit;
+    $exhibit = $exhibit ? $exhibit : nl_exhibit();
+    return (int) $exhibit->getNumberOfRecords();
 }
 
 
@@ -70,41 +86,25 @@ function nl_areExhibits()
 
 
 /**
- * Returns a link to a Neatline exhibit.
+ * Returns the current neatline.
  *
- * @param NeatlineExhibit|null $exhibit The exhibit record.
- * @param string $action The action for the link. Default is 'show'.
- * @param string $text HTML for the text of the link.
- * @param array $props Array of properties for the element.
- * @return string The HTML link.
+ * @return NeatlineExhibit|null
  */
-function nl_link($exhibit, $action, $text, $props=array(), $public=true) {
-
-    $exhibit = $exhibit ? $exhibit : nl_exhibit();
-
-    // Get the text and slug.
-    $text = $text ? $text : nl_field('title', $exhibit);
-    if ($action == 'show') { $slug = $exhibit->slug; }
-    else { $slug = $exhibit->id; }
-
-    // Form the route.
-    $route = 'neatline/' . $action . '/' . $slug;
-    $uri = $public ? public_url($route) : url($route);
-    $props['href'] = $uri;
-
-    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
-
+function nl_exhibit()
+{
+    return get_view()->neatline_exhibit;
 }
 
 
 /**
- * Count the records in an exhibit.
+ * Return specific field for a neatline record.
  *
- * @param NeatlineExhibit $exhibit The exhibit record.
- * @return integer The number of records.
+ * @param string $fieldname The model attribute.
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return string The field value.
  */
-function nl_totalRecords($exhibit=null)
+function nl_field($fieldname, $exhibit=null)
 {
     $exhibit = $exhibit ? $exhibit : nl_exhibit();
-    return (int) $exhibit->getNumberOfRecords();
+    return $exhibit->$fieldname;
 }
