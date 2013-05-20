@@ -27,7 +27,7 @@ class NeatlineRecordTest_Save extends Neatline_TestCase
             )
         ));
 
-        $record = $this->__record(null, $item);
+        $record = new NeatlineRecord(null, $item);
         $record->save();
 
         // Should compile `title` and `body`.
@@ -51,8 +51,11 @@ class NeatlineRecordTest_Save extends Neatline_TestCase
 
         $record->save();
 
-        // Should `is_coverage` and `coverage`.
+        // Should flip `is_coverage` and `is_wms`.
         $this->assertEquals($record->is_coverage, 1);
+        $this->assertEquals($record->is_wms, 1);
+
+        // Should compile `coverage`.
         $this->assertNotNull($record->coverage);
 
     }

@@ -13,6 +13,13 @@ class NeatlineRecordTest_CompileItem extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockTheme();
+    }
+
+
     /**
      * `compileItem` should write the "Title" element on the parent item
      * to `title` and the full metadata output to `body`.
@@ -20,15 +27,15 @@ class NeatlineRecordTest_CompileItem extends Neatline_TestCase
     public function testCompileItem()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->__exhibit('slug');
         $item = $this->__item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->compileItem();
 
         // `title` and `body` should be set.
+        $this->assertRegExp('/item-slug\n/', $record->getItemBody());
         $this->assertEquals($record->title, 'title');
-        $this->assertEquals($record->body, $record->getItemBody());
 
     }
 

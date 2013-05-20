@@ -13,14 +13,22 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockTheme();
+    }
+
+
     /**
      * `hookAfterSaveItem` should update records that reference the item.
      */
     public function testHookAfterSaveItem()
     {
 
-        $item = insert_item();
-        $record = $this->__record(null, $item);
+        $exhibit    = $this->__exhibit('slug');
+        $item       = $this->__item('title');
+        $record     = $this->__record($exhibit, $item);
 
         // Update the item.
         update_item($item, array(), array(
@@ -33,8 +41,8 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
 
         // Record should be compiled.
         $record = $this->reload($record);
-        $this->assertNotNull($record->title);
-        $this->assertNotNull($record->body);
+        $this->assertRegExp('/item-slug\n/', $record->getItemBody());
+        $this->assertEquals($record->title, 'title');
 
     }
 
