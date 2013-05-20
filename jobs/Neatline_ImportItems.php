@@ -20,7 +20,7 @@ class Neatline_ImportItems extends Omeka_Job_AbstractJob
     public function perform()
     {
 
-        nl_setView();
+        nl_setView(); // Mock the view.
 
         // Manually set the base web directory passed from the controller
         // action. This ensures that links to file attachments will point
