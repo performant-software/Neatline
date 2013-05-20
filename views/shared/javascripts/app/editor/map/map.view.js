@@ -38,54 +38,54 @@ _.extend(Neatline.Map.View.prototype, {
     // regular garbage collection process and ensure that the layer stays
     // at the top of the stack by setting an arbitrarily high z-index.
 
+    this.map.setLayerIndex(this.editLayer, 9999);
     this.editLayer.nFrozen = true;
-    this.raiseEditLayer();
 
     this.controls = {
 
-      // Draw Point.
+      // DRAW POINT
       point: new OpenLayers.Control.DrawFeature(
         this.editLayer, OpenLayers.Handler.Point, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
-      // Draw Line.
+      // DRAW LINE
       line: new OpenLayers.Control.DrawFeature(
         this.editLayer, OpenLayers.Handler.Path, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
-      // Draw Polygon.
+      // DRAW POLYGON
       poly: new OpenLayers.Control.DrawFeature(
         this.editLayer, OpenLayers.Handler.Polygon, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
-      // Draw Regular Polygon.
+      // DRAW REGULAR POLYGON
       regPoly: new OpenLayers.Control.DrawFeature(
         this.editLayer, OpenLayers.Handler.RegularPolygon, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
-      // Draw SVG.
+      // DRAW SVG
       svg: new OpenLayers.Control.DrawFeature(
         this.editLayer, OpenLayers.Handler.Geometry, {
           featureAdded: _.bind(this.publishWKT, this)
         }
       ),
 
-      // Modify Shape.
+      // MODIFY SHAPE
       edit: new OpenLayers.Control.ModifyFeature(
         this.editLayer, {
           onModification: _.bind(this.publishWKT, this)
         }
       ),
 
-      // Delete Shape.
+      // DELETE SHAPE
       remove: new OpenLayers.Control.ModifyFeature(
         this.editLayer, {
           onModificationStart: _.bind(this.removeFeature, this)
@@ -162,22 +162,26 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'modify':
-        this.controls.edit.mode = modes.RESHAPE;
+        this.controls.edit.mode =
+          OpenLayers.Control.ModifyFeature.RESHAPE;
         this.activateModifying();
         break;
 
       case 'rotate':
-        this.controls.edit.mode = modes.ROTATE;
+        this.controls.edit.mode =
+          OpenLayers.Control.ModifyFeature.ROTATE;
         this.activateModifying();
         break;
 
       case 'resize':
-        this.controls.edit.mode = modes.RESIZE;
+        this.controls.edit.mode =
+          OpenLayers.Control.ModifyFeature.RESIZE;
         this.activateModifying();
         break;
 
       case 'drag':
-        this.controls.edit.mode = modes.DRAG;
+        this.controls.edit.mode =
+          OpenLayers.Control.ModifyFeature.DRAG;
         this.activateModifying();
         break;
 
@@ -190,15 +194,15 @@ _.extend(Neatline.Map.View.prototype, {
     // Update the regular polygon settings.
     // ------------------------------------
 
-    // Snap angle:
+    // SNAP ANGLE
     var snap = parseFloat(settings.poly.snap) || 0;
     this.controls.regPoly.handler.snapAngle = Math.max(0, snap);
 
-    // Sides:
+    // SIDES
     var sides = parseInt(settings.poly.sides, 10) || 0;
     this.controls.regPoly.handler.sides = Math.max(3, sides);
 
-    // Irregular:
+    // IRREGULAR
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
   },
@@ -324,16 +328,6 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.remove.unselectFeature(feature);
     this.editLayer.destroyFeatures([feature]);
     this.publishWKT();
-  },
-
-
-  /**
-   * Push the edit layer to the top of the stack.
-   */
-  raiseEditLayer: function() {
-    if (!_.isNull(this.editLayer)) {
-      this.map.setLayerIndex(this.editLayer, 9999);
-    }
   },
 
 
