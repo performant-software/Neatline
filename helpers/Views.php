@@ -23,8 +23,8 @@ function nl_setView()
     $view->addScriptPath(NL_DIR.'/views/shared');
 
     // Theme templates.
-    $view->addScriptPath(
-        PUBLIC_THEME_DIR.'/'.get_option('public_theme').'/neatline'
+    $view->addScriptPath(PUBLIC_THEME_DIR . '/' .
+        get_option('public_theme') . '/neatline'
     );
 
     // Register the view.
