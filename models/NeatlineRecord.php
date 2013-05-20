@@ -242,9 +242,10 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public function compileItem()
     {
 
+        nl_setTemplatePaths();
+
         // Break if no parent item.
         if (is_null($this->item_id)) return;
-        nl_setTemplatePaths();
 
         // Get the item, set on view.
         $item = get_record_by_id('Item', $this->item_id);
@@ -263,6 +264,7 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public function getItemBody()
     {
 
+        // Get exhibit, explode tags.
         $exhibit = $this->getExhibit();
         $tags = nl_explode($this->tags);
 

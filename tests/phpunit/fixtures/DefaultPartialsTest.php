@@ -17,7 +17,7 @@ class FixturesTest_DefaultPartials extends Neatline_TestCase
 
 
     /**
-     * Inject the real `layers.json`, mock exhibit.
+     * Inject the real `layers.json` and mock the exhibit.
      */
     public function setUp()
     {

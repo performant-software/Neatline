@@ -116,7 +116,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     public function writeFixtureFromRoute($route, $file)
     {
         $this->dispatch($route);
-        $response = $this->getResponse()->getBody('default');
+        $response = $this->getResponseBody();
         $this->writeFixture($response, $file);
     }
 
@@ -230,13 +230,24 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Get the body of the last response.
+     *
+     * @return array The response body.
+     */
+    public function getResponseBody()
+    {
+        return $this->getResponse()->getBody('default');
+    }
+
+
+    /**
      * Get the body of the last response as an array.
      *
      * @return array The response data.
      */
     public function getResponseArray()
     {
-        return json_decode($this->getResponse()->getBody('default'));
+        return json_decode($this->getResponseBody());
     }
 
 

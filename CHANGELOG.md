@@ -2,15 +2,11 @@
 
 #### New Features
 
-  - When an exhibit is displayed, Neatline will now also attempt to load an exhibit-specific JavaScript file at ```exhibits/exhibit-slug.js```. This makes it possible to add exhibit-specific JavaScript functionalities that are too small or specific to warrant a sub-plugin.
-
   - The exhibits controller now respects the two separate options for admin and public page lengths (```per_page_admin```, ```per_page_public```).
 
 #### Changed Features
 
   - In the ```item.php``` template used to determine the structure of the compiled item metadata in Neatline records, moves the file display below the default metadata output to conform with Omeka's default item show view.
-
-  - When attempting to load an exhibit-specific CSS file, Neatline now looks for files in ```exhibit/exhibit-slug.css```, instead of just looking for a file in a top-level plugin/theme ```css``` directory. This avoids the (unlikely) situation in which an exhibit slug happens to be the same as an existing CSS file that was not intended to function as an exhibit stylesheet.
 
 #### Bug Fixes
 
