@@ -133,7 +133,7 @@ Neatline.module('Map', function(
 
       // Add to map, activate.
       this.map.addControls([this.hoverControl, this.clickControl]);
-      this.activateControls();
+      this.activatePublicControls();
 
     },
 
@@ -174,7 +174,7 @@ Neatline.module('Map', function(
     /**
      * Activate the hover and click controls.
      */
-    activateControls: function() {
+    activatePublicControls: function() {
       this.hoverControl.activate();
       this.clickControl.activate();
     },
@@ -183,7 +183,7 @@ Neatline.module('Map', function(
     /**
      * Deactivate the hover and click controls.
      */
-    deactivateControls: function() {
+    deactivatePublicControls: function() {
       this.hoverControl.deactivate();
       this.clickControl.deactivate();
     },

@@ -76,14 +76,4 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Neatline.commands.setHandler(Map.ID+':clearEditLayer', clearLayer);
 
 
-  /**
-   * Raise the edit layer.
-   */
-  var raiseLayer = function() {
-    Map.__view.raiseEditLayer();
-  };
-  Neatline.commands.setHandler(Map.ID+':raiseEditLayer', raiseLayer);
-  Neatline.vent.on('MAP:ingest', raiseLayer);
-
-
 }});

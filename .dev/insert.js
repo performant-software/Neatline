@@ -33,7 +33,7 @@ function color() {
 }
 
 
-function records(exhibit_id, count, zoom) {
+function records(exhibit_id, count, zoom, color) {
 
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
@@ -73,12 +73,12 @@ function records(exhibit_id, count, zoom) {
     sql += '(' +
       exhibit_id+','+       // exhibit_id
       1+','+                // is_coverage
-      '"Precinct '+n+'",'+  // title
+      '"Record '+n+'",'+    // title
       '"'+bod+'",'+         // body
       '"'+tags+'",'+        // tags
       '"StaticBubble",'+    // presenter
-      '"#000000",'+         // fill_color
-      '"#000000",'+         // fill_color_select
+      '"'+color+'",'+       // fill_color
+      '"'+color+'",'+       // fill_color_select
       '"#000000",'+         // stroke_color
       '"#000000",'+         // stroke_color_select
       0.5+','+              // fill_opacity

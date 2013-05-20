@@ -18,7 +18,6 @@ _.extend(Neatline.Map.View.prototype, {
    */
   __initEditor: function() {
     this.editLayer = null;
-    this.modifying = false;
   },
 
 
@@ -33,8 +32,9 @@ _.extend(Neatline.Map.View.prototype, {
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
 
-    // Freeze the edit layer.
+    // Freeze and raise the layer.
     this.editLayer.nFrozen = true;
+    this.raiseEditLayer();
 
     this.controls = {
 
@@ -101,9 +101,9 @@ _.extend(Neatline.Map.View.prototype, {
   endEdit: function() {
 
     // Reset controls.
-    this.removeEditControls();
-    this.deactivateEditControls();
-    this.activateControls();
+    this.removeEditorControls();
+    this.deactivateEditorControls();
+    this.activatePublicControls();
 
     // Release edit layer.
     if (this.editLayer) {
@@ -125,9 +125,8 @@ _.extend(Neatline.Map.View.prototype, {
 
     // (1) Reset the map to its default state.
 
-    this.modifying = false;
-    this.deactivateEditControls();
-    this.activateControls();
+    this.deactivateEditorControls();
+    this.activatePublicControls();
 
     // (2) Apply the active editing mode.
 
@@ -198,27 +197,12 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Activate the `edit` control.
+   * Deactivate the default cursor controls on the map and switch on the
+   * `edit` `modifyFeatures` control.
    */
   activateModifying: function() {
-
-    // First, deactivate the default cursor controls on the map and switch
-    // on the `edit` control, which provides its own selection controls.
-
-    this.deactivateControls();
+    this.deactivatePublicControls();
     this.controls.edit.activate();
-
-    // Then, push the edit layer to the top of the stack of vector layers.
-    // Since OpenLayers automatically manages the z-indices of map layers,
-    // it's possible for the edit layer to be "buried" underneath other
-    // layers on the map, making it impossible to select or manipulate the
-    // geometries on the edit layer. This ensures that the edit layer will
-    // always be the "highest" layer on the map when one of the geometry
-    // modification modes is active.
-
-    this.modifying = true;
-    this.raiseEditLayer();
-
   },
 
 
@@ -306,7 +290,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Deactivate all edit controls.
    */
-  deactivateEditControls: function() {
+  deactivateEditorControls: function() {
     _.each(this.controls, function(control) {
       control.deactivate();
     });
@@ -316,7 +300,7 @@ _.extend(Neatline.Map.View.prototype, {
   /**
    * Remove all edit controls from the map.
    */
-  removeEditControls: function() {
+  removeEditorControls: function() {
     _.each(this.controls, _.bind(function(control) {
       this.map.removeControl(control);
     }, this));
@@ -339,8 +323,8 @@ _.extend(Neatline.Map.View.prototype, {
    * Push the edit layer to the top of the stack.
    */
   raiseEditLayer: function() {
-    if (!_.isNull(this.editLayer) && this.modifying) {
-      this.map.raiseLayer(this.editLayer, this.map.layers.length);
+    if (!_.isNull(this.editLayer)) {
+      this.map.setLayerIndex(this.editLayer, 9999);
     }
   },
 
