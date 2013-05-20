@@ -13,9 +13,6 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
 {
 
 
-    /**
-     * Register the mock theme scripts.
-     */
     public function setUp()
     {
         parent::setUp();

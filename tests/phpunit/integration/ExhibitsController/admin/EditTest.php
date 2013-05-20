@@ -13,6 +13,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockLayers();
+    }
+
+
     /**
      * EDIT should display the exhibit edit form.
      */

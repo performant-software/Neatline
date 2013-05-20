@@ -39,11 +39,6 @@ class Neatline_TestCase extends Neatline_AbstractCase
         add_filter('neatline_record_widgets', 'nl_mockWidgets');
         add_filter('neatline_presenters', 'nl_mockPresenters');
 
-        // Register layers.
-        Zend_Registry::set('layers',
-            NL_DIR . '/tests/phpunit/mocks/layers.json'
-        );
-
         // Register script paths.
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
         get_view()->addScriptPath(NL_DIR . '/views/shared');

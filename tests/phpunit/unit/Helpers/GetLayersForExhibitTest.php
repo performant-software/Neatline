@@ -13,6 +13,13 @@ class HelpersTest_GetLayersForExhibit extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockLayers();
+    }
+
+
     /**
      * `nl_getLayersForExhibit` should return layer definitions for the
      * layers included in the `base_layers` field.

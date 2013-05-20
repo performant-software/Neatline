@@ -177,6 +177,17 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Register the mock layers JSON.
+     */
+    public function mockLayers()
+    {
+        Zend_Registry::set('layers',
+            NL_DIR . '/tests/phpunit/mocks/layers.json'
+        );
+    }
+
+
+    /**
      * Query all records in an exhibit.
      *
      * @param NeatlineExhibit $exhibit The parent exhibit.

@@ -13,6 +13,13 @@ class HelpersTest_GetLayers extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockLayers();
+    }
+
+
     /**
      * `nl_getLayers` should parse the JSON in the passed file.
      */

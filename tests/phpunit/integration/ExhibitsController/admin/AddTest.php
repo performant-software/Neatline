@@ -13,6 +13,13 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockLayers();
+    }
+
+
     /**
      * ADD should display the add exhibit form.
      */

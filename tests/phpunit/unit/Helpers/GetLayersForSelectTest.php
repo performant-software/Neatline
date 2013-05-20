@@ -13,6 +13,13 @@ class HelpersTest_GetLayersForSelect extends Neatline_TestCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockLayers();
+    }
+
+
     /**
      * `nl_getLayersForSelect` should convert the layers JSON to an array
      * of `id` => `name` pairs.
