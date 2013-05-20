@@ -13,7 +13,7 @@
 /**
  * Set the script paths for template compilation.
  */
-function nl_setView()
+function nl_setScriptPaths()
 {
 
     // Omeka and Neatline templates.

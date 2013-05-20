@@ -21,7 +21,7 @@ class Neatline_ImportItems extends Omeka_Job_AbstractJob
     {
 
         nl_setWebDir($this->_options['web_dir']);
-        nl_setView();
+        nl_setScriptPaths();
 
         // Get application tables.
         $__exhibits = $this->_db->getTable('NeatlineExhibit');

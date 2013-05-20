@@ -34,7 +34,7 @@ class Neatline_TestCase extends Neatline_AbstractCase
         $this->__exhibits = $this->db->getTable('NeatlineExhibit');
         $this->__records  = $this->db->getTable('NeatlineRecord');
 
-        nl_setView();
+        nl_setScriptPaths();
 
     }
 

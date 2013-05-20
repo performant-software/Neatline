@@ -161,7 +161,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookAfterSaveItem($args)
     {
-        nl_setView();
+        nl_setScriptPaths();
         $records = $this->_db->getTable('NeatlineRecord');
         $records->syncItem($args['record']);
     }
