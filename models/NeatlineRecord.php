@@ -214,7 +214,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
      * viewport - four points, one in each quadrant, with arbitrarily high
      * values, effectively outlining a rectangle over the entire map.
      */
-    public function compileWms() {
+    public function compileWms()
+    {
 
         // If a WMS address and layer are defined.
         if ($this->wms_address && $this->wms_layers) {
@@ -238,7 +239,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     /**
      * Compile the Omeka item reference, if one exists.
      */
-    public function compileItem() {
+    public function compileItem()
+    {
 
         // Break if no parent item.
         if (is_null($this->item_id)) return;
@@ -257,7 +259,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     /**
      * Compile the record's `body` field from the parent Omeka item.
      */
-    public function getItemBody() {
+    public function getItemBody()
+    {
 
         $exhibit = $this->getExhibit();
         $tags = nl_explode($this->tags);
@@ -292,7 +295,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     /**
      * Compile the item reference and WMS coverage.
      */
-    public function save() {
+    public function save()
+    {
         $this->compileWms();
         $this->compileItem();
         parent::save();
@@ -302,7 +306,8 @@ class NeatlineRecord extends Neatline_ExpandableRow
     /**
      * Alias unmodified save (used for testing).
      */
-    public function __save() {
+    public function __save()
+    {
         parent::__save();
     }
 

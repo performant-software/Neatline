@@ -20,6 +20,9 @@ class Neatline_ImportItems extends Omeka_Job_AbstractJob
     public function perform()
     {
 
+        // Manually set the base web directory passed from the controller
+        // action. This ensures that links to file attachments will point
+        // to the web-accessible locations, not to the local filesystem.
         nl_setWebDir($this->_options['web_dir']);
         nl_setView();
 

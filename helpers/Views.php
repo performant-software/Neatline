@@ -20,7 +20,7 @@ function nl_setView()
 
     // Omeka and Neatline templates.
     $view->setScriptPath(VIEW_SCRIPTS_DIR);
-    $view->addScriptPath(NL_DIR.'/views/shared');
+    $view->addScriptPath(NL_DIR . '/views/shared');
 
     // Theme templates.
     $view->addScriptPath(PUBLIC_THEME_DIR . '/' .

@@ -148,9 +148,8 @@ class RecordsControllerTest_Put extends Neatline_TestCase
         $record = $this->__record();
 
         $record->setArray(array(
-            'item_id'       => '1',
-            'wms_address'   => '2',
-            'wms_layers'    => '3'
+            'wms_address'   => '1',
+            'wms_layers'    => '2'
         ));
 
         $record->save();
