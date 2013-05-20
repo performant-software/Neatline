@@ -13,17 +13,22 @@
 /**
  * Set the script paths for template compilation.
  */
-function nl_setScriptPaths()
+function nl_setView()
 {
 
+    $view = new Omeka_View();
+
     // Omeka and Neatline templates.
-    get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
-    get_view()->addScriptPath(NL_DIR.'/views/shared');
+    $view->setScriptPath(VIEW_SCRIPTS_DIR);
+    $view->addScriptPath(NL_DIR.'/views/shared');
 
     // Theme templates.
-    get_view()->addScriptPath(
+    $view->addScriptPath(
         PUBLIC_THEME_DIR.'/'.get_option('public_theme').'/neatline'
     );
+
+    // Register the view.
+    Zend_Registry::set('view', $view);
 
 }
 
