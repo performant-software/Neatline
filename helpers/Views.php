@@ -18,11 +18,16 @@ function nl_setView()
 
     $view = new Omeka_View();
 
-    // Omeka and Neatline templates.
+    // Default Omeka templates:
+    // ------------------------
     $view->addScriptPath(VIEW_SCRIPTS_DIR);
+
+    // Neatline plugin templates:
+    // --------------------------
     $view->addScriptPath(NL_DIR . '/views/shared');
 
-    // Theme templates.
+    // Public theme templates:
+    // -----------------------
     $view->addScriptPath(PUBLIC_THEME_DIR . '/' .
         get_option('public_theme') . '/neatline'
     );
