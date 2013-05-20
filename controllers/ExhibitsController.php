@@ -180,15 +180,6 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Set the import started message.
-     */
-    protected function _getImportStartedMessage()
-    {
-        return __('The item import was successfully started!');
-    }
-
-
-    /**
      * Set the delete success message.
      *
      * @param NeatlineExhibit $exhibit
@@ -211,6 +202,15 @@ class Neatline_ExhibitsController extends Neatline_RestController
       return __('This will delete "%s" and its associated metadata.',
           $exhibit->title
       );
+    }
+
+
+    /**
+     * Set the import started message.
+     */
+    protected function _getImportStartedMessage()
+    {
+        return __('The item import was successfully started!');
     }
 
 

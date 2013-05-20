@@ -52,10 +52,10 @@ function nl_link($exhibit, $action, $text, $props=array(), $public=true) {
     else $identifier = $exhibit->id;
 
     // Construct the exhibit route.
-    $route = 'neatline/'.$action.'/'.$identifier;
+    $route = 'neatline/' . $action . '/' . $identifier;
     $props['href'] = $public ? public_url($route) : url($route);
 
-    return '<a '.tag_attributes($props).'>'.$text.'</a>';
+    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 
 }
 

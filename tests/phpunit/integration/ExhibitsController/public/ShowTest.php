@@ -21,9 +21,13 @@ class ExhibitsControllerTest_PublicShow extends Neatline_TestCase
      */
     public function testLoadExhibit()
     {
+
         $exhibit = $this->__exhibit('slug');
         $this->dispatch('neatline/show/slug');
+
+        // Should bind exhibit to view.
         $this->assertEquals(nl_exhibit()->id, $exhibit->id);
+
     }
 
 

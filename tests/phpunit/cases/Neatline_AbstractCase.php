@@ -40,7 +40,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      * @param string $title The exhibit title.
      * @return Omeka_record $item The item.
      */
-    public function __item($title='test-title')
+    public function __item($title='Test Title')
     {
         return $item = insert_item(array(), array(
             'Dublin Core' => array (
@@ -162,6 +162,17 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
         return $jobs;
 
+    }
+
+
+    /**
+     * Register the mock theme scripts.
+     */
+    public function mockTheme()
+    {
+        get_view()->addScriptPath(
+            NL_DIR . '/tests/phpunit/mocks/theme/neatline'
+        );
     }
 
 

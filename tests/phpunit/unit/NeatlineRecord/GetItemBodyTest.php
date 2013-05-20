@@ -14,12 +14,12 @@ class NeatlineRecordTest_GetItemBody extends Neatline_TestCase
 
 
     /**
-     * Register the mock script path.
+     * Register the mock theme scripts.
      */
     public function setUp()
     {
         parent::setUp();
-        get_view()->addScriptPath(NL_DIR . '/tests/phpunit/mocks/theme');
+        $this->mockTheme();
     }
 
 
