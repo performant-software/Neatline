@@ -34,10 +34,6 @@ class Neatline_TestCase extends Neatline_AbstractCase
         $this->__exhibits = $this->db->getTable('NeatlineExhibit');
         $this->__records  = $this->db->getTable('NeatlineRecord');
 
-        // Set script paths.
-        get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
-        get_view()->addScriptPath(NL_DIR . '/views/shared');
-
     }
 
 

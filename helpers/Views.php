@@ -11,33 +11,6 @@
 
 
 /**
- * Set the script paths for template compilation.
- */
-function nl_setView()
-{
-
-    $view = new Omeka_View();
-
-    // Default Omeka templates:
-    // ------------------------
-    $view->addScriptPath(VIEW_SCRIPTS_DIR);
-
-    // Neatline plugin templates:
-    // --------------------------
-    $view->addScriptPath(NL_DIR . '/views/shared');
-
-    // Public theme templates:
-    // -----------------------
-    $view->addScriptPath(PUBLIC_THEME_DIR . '/' .
-        get_option('public_theme') . '/neatline'
-    );
-
-    Zend_Registry::set('view', $view);
-
-}
-
-
-/**
  * Returns a link to a Neatline exhibit.
  *
  * @param NeatlineExhibit|null $exhibit The exhibit record.

@@ -11,6 +11,31 @@
 
 
 /**
+ * Register the template paths necessary for the item compilations.
+ */
+function nl_setTemplatePaths()
+{
+
+    $view = get_view();
+
+    // Default Omeka templates:
+    // ------------------------
+    $view->addScriptPath(VIEW_SCRIPTS_DIR);
+
+    // Neatline plugin templates:
+    // --------------------------
+    $view->addScriptPath(NL_DIR . '/views/shared');
+
+    // Public theme templates:
+    // -----------------------
+    $view->addScriptPath(PUBLIC_THEME_DIR . '/' .
+        get_option('public_theme') . '/neatline'
+    );
+
+}
+
+
+/**
  * Get the `webDir` attribute on the filesystem adapter.
  */
 function nl_getWebDir()

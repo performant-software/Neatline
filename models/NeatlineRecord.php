@@ -244,6 +244,7 @@ class NeatlineRecord extends Neatline_ExpandableRow
 
         // Break if no parent item.
         if (is_null($this->item_id)) return;
+        nl_setTemplatePaths();
 
         // Get the item, set on view.
         $item = get_record_by_id('Item', $this->item_id);
