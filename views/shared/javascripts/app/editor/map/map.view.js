@@ -28,11 +28,16 @@ _.extend(Neatline.Map.View.prototype, {
    */
   startEdit: function(model) {
 
-    // Get or create a layer for the model.
+    // If a vector layer already exists for the record, use it as the edit
+    // layer. Otherwise, create a new layer from the model.
+
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
 
-    // Freeze and raise the layer.
+    // Flip on the `nFrozen` flag on the edit layer to exempt it from the
+    // regular garbage collection process and ensure that the layer stays
+    // at the top of the stack by setting an arbitrarily high z-index.
+
     this.editLayer.nFrozen = true;
     this.raiseEditLayer();
 
@@ -123,12 +128,14 @@ _.extend(Neatline.Map.View.prototype, {
    */
   updateEdit: function(settings) {
 
-    // (1) Reset the map to its default state.
+    // Reset the controls.
+    // -------------------
 
     this.deactivateEditorControls();
     this.activatePublicControls();
 
-    // (2) Apply the active editing mode.
+    // Set the active editing mode.
+    // ----------------------------
 
     var modes = OpenLayers.Control.ModifyFeature;
 
@@ -180,7 +187,8 @@ _.extend(Neatline.Map.View.prototype, {
 
     }
 
-    // (3) Update the settings on the regular polygon control.
+    // Update the regular polygon settings.
+    // ------------------------------------
 
     // Snap angle:
     var snap = parseFloat(settings.poly.snap) || 0;
