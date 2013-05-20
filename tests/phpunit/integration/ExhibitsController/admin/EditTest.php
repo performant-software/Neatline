@@ -16,7 +16,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->mockWidgets();
+        $this->mockExhibitWidgets();
         $this->mockPresenters();
         $this->mockLayers();
     }

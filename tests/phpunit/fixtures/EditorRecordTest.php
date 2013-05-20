@@ -13,6 +13,14 @@ class FixturesTest_EditorRecord extends Neatline_FixtureCase
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockRecordWidgets();
+        $this->mockPresenters();
+    }
+
+
     /**
      * `EditorRecord.record.json`
      */

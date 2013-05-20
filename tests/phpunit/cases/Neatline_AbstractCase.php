@@ -166,11 +166,19 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Register mock record widgets filter callback.
+     * Register mock exhibit widgets filter callback.
      */
-    public function mockWidgets()
+    public function mockExhibitWidgets()
     {
         add_filter('neatline_exhibit_widgets', 'nl_mockWidgets');
+    }
+
+
+    /**
+     * Register mock record widgets filter callback.
+     */
+    public function mockRecordWidgets()
+    {
         add_filter('neatline_record_widgets', 'nl_mockWidgets');
     }
 

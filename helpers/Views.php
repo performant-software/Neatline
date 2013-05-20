@@ -11,23 +11,19 @@
 
 
 /**
- * Set the script path depth chart for item compilation.
+ * Set the script paths for template compilation.
  */
 function nl_setView()
 {
 
-    $view = new Omeka_View();
-
     // Omeka and Neatline templates.
-    $view->setScriptPath(VIEW_SCRIPTS_DIR);
-    $view->addScriptPath(NL_DIR.'/views/shared');
+    get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
+    get_view()->addScriptPath(NL_DIR.'/views/shared');
 
     // Theme templates.
-    $theme = get_option('public_theme');
-    $view->addScriptPath(PUBLIC_THEME_DIR.'/'.$theme.'/neatline');
-
-    // Register the view.
-    Zend_Registry::set('view', $view);
+    get_view()->addScriptPath(
+        PUBLIC_THEME_DIR.'/'.get_option('public_theme').'/neatline'
+    );
 
 }
 
@@ -47,7 +43,7 @@ function nl_link($exhibit, $action, $text, $props=array(), $public=true) {
     $exhibit = $exhibit ? $exhibit : nl_exhibit();
     $text = $text ? $text : nl_field('title');
 
-    // Form the exhibit identifier.
+    // Get the exhibit identifier.
     if ($action == 'show') $identifier = $exhibit->slug;
     else $identifier = $exhibit->id;
 
@@ -55,6 +51,7 @@ function nl_link($exhibit, $action, $text, $props=array(), $public=true) {
     $route = 'neatline/' . $action . '/' . $identifier;
     $props['href'] = $public ? public_url($route) : url($route);
 
+    // Return the anchor tag.
     return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
 
 }

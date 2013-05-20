@@ -23,6 +23,8 @@ class FixturesTest_DefaultPartials extends Neatline_TestCase
     {
 
         parent::setUp();
+        $this->mockRecordWidgets();
+        $this->mockPresenters();
 
         // Inject real `layers.json`.
         Zend_Registry::set('layers', NL_DIR . '/layers.json');
