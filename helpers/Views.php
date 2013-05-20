@@ -19,7 +19,7 @@ function nl_setView()
     $view = new Omeka_View();
 
     // Omeka and Neatline templates.
-    $view->setScriptPath(VIEW_SCRIPTS_DIR);
+    $view->addScriptPath(VIEW_SCRIPTS_DIR);
     $view->addScriptPath(NL_DIR . '/views/shared');
 
     // Theme templates.
@@ -27,7 +27,6 @@ function nl_setView()
         get_option('public_theme') . '/neatline'
     );
 
-    // Register the view.
     Zend_Registry::set('view', $view);
 
 }
