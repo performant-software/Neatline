@@ -166,13 +166,21 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Register the mock theme scripts.
+     * Register mock record widgets filter callback.
      */
-    public function mockTheme()
+    public function mockWidgets()
     {
-        get_view()->addScriptPath(
-            NL_DIR . '/tests/phpunit/mocks/theme/neatline'
-        );
+        add_filter('neatline_exhibit_widgets', 'nl_mockWidgets');
+        add_filter('neatline_record_widgets', 'nl_mockWidgets');
+    }
+
+
+    /**
+     * Register mock presenters filter callback.
+     */
+    public function mockPresenters()
+    {
+        add_filter('neatline_presenters', 'nl_mockPresenters');
     }
 
 
@@ -183,6 +191,17 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     {
         Zend_Registry::set('layers',
             NL_DIR . '/tests/phpunit/mocks/layers.json'
+        );
+    }
+
+
+    /**
+     * Register the mock theme scripts.
+     */
+    public function mockTheme()
+    {
+        get_view()->addScriptPath(
+            NL_DIR . '/tests/phpunit/mocks/theme/neatline'
         );
     }
 

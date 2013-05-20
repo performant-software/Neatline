@@ -34,11 +34,6 @@ class Neatline_TestCase extends Neatline_AbstractCase
         $this->__exhibits = $this->db->getTable('NeatlineExhibit');
         $this->__records  = $this->db->getTable('NeatlineRecord');
 
-        // Register widget and presenter mocks.
-        add_filter('neatline_exhibit_widgets', 'nl_mockWidgets');
-        add_filter('neatline_record_widgets', 'nl_mockWidgets');
-        add_filter('neatline_presenters', 'nl_mockPresenters');
-
         // Register script paths.
         get_view()->setScriptPath(VIEW_SCRIPTS_DIR);
         get_view()->addScriptPath(NL_DIR . '/views/shared');
