@@ -302,6 +302,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
         $record1->widgets = 'Widget1';
         $record2->widgets = 'Widget1,Widget2';
         $record3->widgets = 'Widget3';
+        $record1->added = '2001-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2003-01-01';
 
         $record1->save();
         $record2->save();
@@ -312,8 +315,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_TestCase
             array('widget' => 'Widget1')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertEquals($result['records'][1]['id'], $record1->id);
         $this->assertCount(2, $result['records']);
 
     }
