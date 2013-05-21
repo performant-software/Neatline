@@ -10,7 +10,7 @@
 
 #### Bug Fixes
 
-  - Fixes problem in the Omeka item-import workflow that was causing extremely large imports to fail. Previously, the background process was loading the entire batch of matched Omeka items in a single query; when the number of matched items got too high, the process would run out of memory and fail. Now, we process items in 500-record pages, which means that the importer can handle indefinitely large imports.
+  - Fixes a problem in the Omeka item-import workflow that was causing imports of very large collections of items to fail. Previously, the background process was loading the entire batch of matched Omeka items in a single query; when the number of items got too high, the process would run out of memory and fail. Now, items are queried in 500-record pages, which means that the importer can handle arbitrarily large imports.
 
   - Fixes bug that was causing paths to file attachments in item-backed records created by way of the "Import Items" flow to point to the local filesystem, not the web-accessible location of the files.
 
