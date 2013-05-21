@@ -19,7 +19,7 @@
   </a>
 
   <!-- Exhibit title. -->
-  <p class="lead"><?php echo nl_exhibit()->title; ?></p>
+  <p class="lead"><?php echo nl_getExhibitField('title'); ?></p>
 
   <!-- Main navigation. -->
   <ul class="nav nav-pills">

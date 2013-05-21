@@ -21,7 +21,7 @@
 
 <div id="primary">
 
-  <?php if(nl_areExhibits()): ?>
+  <?php if(nl_exhibitsHaveBeenCreated()): ?>
 
   <a class="add small green button"
     href="<?php echo url('neatline/add'); ?>">
@@ -48,41 +48,59 @@
 
     <tbody>
 
-      <!-- Exhibit listings. -->
       <?php foreach (loop('NeatlineExhibit') as $e): ?>
       <tr>
 
+        <!-- Exhibit -->
         <td class="title">
-          <?php echo nl_getExhibitLink($e, 'editor', null,
-            array('class' => 'editor'), false);
-          ?>
+
+          <?php echo nl_getExhibitLink(
+            $e, 'editor', null,
+            array('class' => 'editor'), false
+          );?>
+
           <ul class="action-links group">
             <li>
-              <?php echo nl_getExhibitLink($e, 'show', __('Public View'),
-                array('class' => 'public'), true);
-              ?>
+              <?php echo nl_getExhibitLink(
+                $e, 'show', __('Public View'),
+                array('class' => 'public'), true
+              );?>
             </li>
             <li>
-              <?php echo nl_getExhibitLink($e, 'edit', __('Exhibit Settings'),
-                array('class' => 'edit'), false);
-              ?>
+              <?php echo nl_getExhibitLink(
+                $e, 'edit', __('Exhibit Settings'),
+                array('class' => 'edit'), false
+              );?>
             </li>
             <li>
-              <?php echo nl_getExhibitLink($e, 'import', __('Import Items'),
-                array('class' => 'import'), false);
-              ?>
+              <?php echo nl_getExhibitLink(
+                $e, 'import', __('Import Items'),
+                array('class' => 'import'), false
+              );?>
             </li>
             <li>
-              <?php echo nl_getExhibitLink($e, 'delete-confirm', __('Delete'),
-                array('class' => 'delete-confirm'), false);
-              ?>
+              <?php echo nl_getExhibitLink(
+                $e, 'delete-confirm', __('Delete'),
+                array('class' => 'delete-confirm'), false
+              );?>
             </li>
           </ul>
         </td>
 
-        <td><?php echo format_date(nl_field('modified')); ?></td>
-        <td><?php echo nl_totalRecords(); ?></td>
-        <td><?php echo nl_field('public')?__('Yes'):__('No'); ?></td>
+        <!-- Modified -->
+        <td>
+          <?php echo format_date(nl_getExhibitField('modified')); ?>
+        </td>
+
+        <!-- # Items -->
+        <td>
+          <?php echo nl_getExhibitRecordCount(); ?>
+        </td>
+
+        <!-- Public -->
+        <td>
+          <?php echo nl_getExhibitField('public')?__('Yes'):__('No'); ?>
+        </td>
 
       </tr>
       <?php endforeach; ?>

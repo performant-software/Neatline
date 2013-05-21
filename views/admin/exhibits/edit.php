@@ -15,7 +15,7 @@
 
 <?php
   echo head(array(
-    'title' => __('Neatline | Edit "%s"', nl_field('title')),
+    'title' => __('Neatline | Edit "%s"', nl_getExhibitField('title')),
     'content_class' => 'neatline'
   ));
 ?>

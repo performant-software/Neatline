@@ -17,11 +17,11 @@
 
   <meta charset="utf-8">
   <title><?php echo __(
-    'Neatline Editor: %s', nl_exhibit()->title
+    'Neatline Editor: %s', nl_getExhibit()->title
   ); ?></title>
 
   <?php
-    nl_queueNeatlineEditor(nl_exhibit());
+    nl_queueNeatlineEditor(nl_getExhibit());
     echo head_js(false);
     echo head_css();
   ?>

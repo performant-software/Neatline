@@ -57,8 +57,8 @@ function nl_getExhibitLink(
 {
 
     // Get exhibit and link text.
-    $exhibit = $exhibit ? $exhibit : nl_exhibit();
-    $text = $text ? $text : nl_field('title');
+    $exhibit = $exhibit ? $exhibit : nl_getExhibit();
+    $text = $text ? $text : nl_getExhibitField('title');
 
     // Get the exhibit identifier.
     if ($action == 'show') $identifier = $exhibit->slug;
@@ -80,31 +80,30 @@ function nl_getExhibitLink(
  * @param NeatlineExhibit $exhibit The exhibit record.
  * @return integer The number of records.
  */
-function nl_totalRecords($exhibit=null)
+function nl_getExhibitRecordCount($exhibit=null)
 {
-    $exhibit = $exhibit ? $exhibit : nl_exhibit();
+    $exhibit = $exhibit ? $exhibit : nl_getExhibit();
     return (int) $exhibit->getNumberOfRecords();
 }
 
 
 /**
- * Are there any exhibits bound on the view.
+ * Have any exhibits been created?
  *
  * @return boolean
  */
-function nl_areExhibits()
+function nl_exhibitsHaveBeenCreated()
 {
-    $view = get_view();
-    return $view->neatline_exhibits && count($view->neatline_exhibits);
+    return count(get_view()->neatline_exhibits);
 }
 
 
 /**
- * Returns the current neatline.
+ * Returns the current exhibit.
  *
  * @return NeatlineExhibit|null
  */
-function nl_exhibit()
+function nl_getExhibit()
 {
     return get_view()->neatline_exhibit;
 }
@@ -117,8 +116,8 @@ function nl_exhibit()
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return string The field value.
  */
-function nl_field($fieldname, $exhibit=null)
+function nl_getExhibitField($fieldname, $exhibit=null)
 {
-    $exhibit = $exhibit ? $exhibit : nl_exhibit();
+    $exhibit = $exhibit ? $exhibit : nl_getExhibit();
     return $exhibit->$fieldname;
 }

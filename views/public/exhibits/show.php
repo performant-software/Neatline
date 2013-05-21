@@ -11,15 +11,15 @@
 
 ?>
 
-<?php nl_queueNeatlinePublic(nl_exhibit()); ?>
-<?php echo head(array('title' => nl_field('title'))); ?>
+<?php nl_queueNeatlinePublic(nl_getExhibit()); ?>
+<?php echo head(array('title' => nl_getExhibitField('title'))); ?>
 
 <!-- Exhibit. -->
 <?php echo $this->partial('exhibits/partials/exhibit.php'); ?>
 
 <!-- Description. -->
 <div class="exhibit-description">
-    <?php echo nl_field('description'); ?>
+    <?php echo nl_getExhibitField('description'); ?>
 </div>
 
 <?php echo foot(); ?>
