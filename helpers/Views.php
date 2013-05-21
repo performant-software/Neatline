@@ -99,17 +99,6 @@ function nl_exhibitsHaveBeenCreated()
 
 
 /**
- * Returns the current exhibit.
- *
- * @return NeatlineExhibit|null
- */
-function nl_getExhibit()
-{
-    return get_view()->neatline_exhibit;
-}
-
-
-/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute.
@@ -120,4 +109,15 @@ function nl_getExhibitField($fieldname, $exhibit=null)
 {
     $exhibit = $exhibit ? $exhibit : nl_getExhibit();
     return $exhibit->$fieldname;
+}
+
+
+/**
+ * Returns the current exhibit.
+ *
+ * @return NeatlineExhibit|null
+ */
+function nl_getExhibit()
+{
+    return get_view()->neatline_exhibit;
 }
