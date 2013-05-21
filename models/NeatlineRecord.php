@@ -242,8 +242,6 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public function compileItem()
     {
 
-        nl_setTemplatePaths();
-
         // Break if no parent item.
         if (is_null($this->item_id)) return;
 

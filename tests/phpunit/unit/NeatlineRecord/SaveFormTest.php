@@ -89,9 +89,15 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
      */
     public function testAssignItemId()
     {
+
+        nl_mockView();
+
         $record = $this->__record();
         $record->saveForm(array('item_id' => '1'));
+
+        // Should assign `item_id`.
         $this->assertEquals($record->item_id, 1);
+
     }
 
 
@@ -100,10 +106,14 @@ class NeatlineRecordTest_SaveForm extends Neatline_TestCase
      */
     public function testAssignWmsFields()
     {
+
         $record = $this->__record();
         $record->saveForm(array('wms_address'=>'1', 'wms_layers'=>'2'));
+
+        // Should assign WMS fields.
         $this->assertEquals($record->wms_address, '1');
         $this->assertEquals($record->wms_layers, '2');
+
     }
 
 

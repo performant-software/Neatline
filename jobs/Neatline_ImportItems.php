@@ -20,8 +20,7 @@ class Neatline_ImportItems extends Omeka_Job_AbstractJob
     public function perform()
     {
 
-        // Mock the view.
-        Zend_Registry::set('view', new Omeka_View());
+        nl_mockView();
 
         // Manually set the base web directory passed from the controller
         // action. This ensures that links to file attachments will point

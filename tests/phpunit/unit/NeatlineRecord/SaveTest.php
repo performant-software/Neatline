@@ -19,6 +19,8 @@ class NeatlineRecordTest_Save extends Neatline_TestCase
     public function testCompileItem()
     {
 
+        nl_mockView();
+
         $item = insert_item(array(), array(
             'Dublin Core' => array (
                 'Title' => array(

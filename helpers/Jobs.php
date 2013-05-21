@@ -13,14 +13,14 @@
 /**
  * Register the template paths necessary for the item compilations.
  */
-function nl_setTemplatePaths()
+function nl_mockView()
 {
 
-    $view = get_view();
+    $view = new Omeka_View();
 
     // Default Omeka templates:
     // ------------------------
-    $view->addScriptPath(VIEW_SCRIPTS_DIR);
+    $view->setScriptPath(VIEW_SCRIPTS_DIR);
 
     // Neatline plugin templates:
     // --------------------------
@@ -31,6 +31,8 @@ function nl_setTemplatePaths()
     $view->addScriptPath(PUBLIC_THEME_DIR . '/' .
         get_option('public_theme') . '/neatline'
     );
+
+    Zend_Registry::set('view', $view);
 
 }
 

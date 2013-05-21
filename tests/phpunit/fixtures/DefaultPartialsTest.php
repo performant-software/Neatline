@@ -24,6 +24,7 @@ class FixturesTest_DefaultPartials extends Neatline_TestCase
 
         parent::setUp();
 
+        nl_mockView();
         $this->mockRecordWidgets();
         $this->mockPresenters();
 
@@ -37,7 +38,6 @@ class FixturesTest_DefaultPartials extends Neatline_TestCase
 
         // Set exhibit on view.
         get_view()->neatline_exhibit = $exhibit;
-        nl_setTemplatePaths();
 
     }
 
