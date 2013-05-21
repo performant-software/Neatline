@@ -10,6 +10,8 @@
 
 #### Bug Fixes
 
+  - Fixes problem in the Omeka item-import workflow that was causing extremely large imports to fail. Previously, the background process was loading the entire batch of matched Omeka items in a single query; when the number of matched items got too high, the process would run out of memory and fail. Now, we process items in 500-record pages, which means that the importer can handle indefinitely large imports.
+
   - Fixes bug that was causing paths to file attachments in item-backed records created by way of the "Import Items" flow to point to the local filesystem, not the web-accessible location of the files.
 
   - Fixes bugs in public exhibit browse view - changes the listings to point to the slug-based exhibit links and got rid of PHP warnings caused by malformed helper calls.
