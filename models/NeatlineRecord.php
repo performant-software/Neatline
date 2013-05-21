@@ -251,44 +251,7 @@ class NeatlineRecord extends Neatline_ExpandableRow
 
         // Pull title and body.
         $this->title = metadata($item, array('Dublin Core', 'Title'));
-        $this->body = $this->getItemBody();
-
-    }
-
-
-    /**
-     * Compile the record's `body` field from the parent Omeka item.
-     */
-    public function getItemBody()
-    {
-
-        // Get exhibit, explode tags.
-        $exhibit = $this->getExhibit();
-        $tags = nl_explode($this->tags);
-
-        // `item-[slug]-[tag]`.
-        foreach ($tags as $tag) { try {
-            return get_view()->partial(
-                'exhibits/item-'.$exhibit->slug.'-'.$tag.'.php'
-            );
-        } catch (Exception $e) {}}
-
-        // `item-[slug]`.
-        try {
-            return get_view()->partial(
-                'exhibits/item-'.$exhibit->slug.'.php'
-            );
-        } catch (Exception $e) {}
-
-        // `item-[tag]`.
-        foreach ($tags as $tag) { try {
-            return get_view()->partial(
-                'exhibits/item-'.$tag.'.php'
-            );
-        } catch (Exception $e) {}}
-
-        // Fall back to default `item`.
-        return get_view()->partial('exhibits/item.php');
+        $this->body = nl_getItemMarkup($this);
 
     }
 

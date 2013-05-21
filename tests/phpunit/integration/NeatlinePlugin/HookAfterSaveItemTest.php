@@ -41,7 +41,7 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
 
         // Record should be compiled.
         $record = $this->reload($record);
-        $this->assertRegExp('/item-slug\n/', $record->getItemBody());
+        $this->assertRegExp('/item-slug\n/', nl_getItemMarkup($record));
         $this->assertEquals($record->title, 'title');
 
     }

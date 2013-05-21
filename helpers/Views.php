@@ -11,6 +11,39 @@
 
 
 /**
+ * Compile the record `body` markup from the parent item.
+ *
+ * @param NeatlineRecord $record The record.
+ * @return string The item metadata.
+ */
+function nl_getItemMarkup($record)
+{
+
+    // Get exhibit, explode tags.
+    $exhibit = $record->getExhibit();
+    $tags = nl_explode($record->tags);
+
+    // `item-[slug]-[tag]`.
+    foreach ($tags as $tag) { try {
+        return get_view()->partial(
+            'exhibits/item-'.$exhibit->slug.'-'.$tag.'.php'
+        );
+    } catch (Exception $e) {}}
+
+    // `item-[slug]`.
+    try {
+        return get_view()->partial(
+            'exhibits/item-'.$exhibit->slug.'.php'
+        );
+    } catch (Exception $e) {}
+
+    // Fall back to default `item`.
+    return get_view()->partial('exhibits/item.php');
+
+}
+
+
+/**
  * Returns a link to a Neatline exhibit.
  *
  * @param NeatlineExhibit|null $exhibit The exhibit record.
@@ -19,7 +52,9 @@
  * @param array $props Array of properties for the element.
  * @return string The HTML link.
  */
-function nl_link($exhibit, $action, $text, $props=array(), $public=true) {
+function nl_getExhibitLink(
+    $exhibit, $action, $text, $props=array(), $public=true)
+{
 
     // Get exhibit and link text.
     $exhibit = $exhibit ? $exhibit : nl_exhibit();

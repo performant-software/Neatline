@@ -53,27 +53,27 @@
       <tr>
 
         <td class="title">
-          <?php echo nl_link($e, 'editor', null,
+          <?php echo nl_getExhibitLink($e, 'editor', null,
             array('class' => 'editor'), false);
           ?>
           <ul class="action-links group">
             <li>
-              <?php echo nl_link($e, 'show', __('Public View'),
+              <?php echo nl_getExhibitLink($e, 'show', __('Public View'),
                 array('class' => 'public'), true);
               ?>
             </li>
             <li>
-              <?php echo nl_link($e, 'edit', __('Exhibit Settings'),
+              <?php echo nl_getExhibitLink($e, 'edit', __('Exhibit Settings'),
                 array('class' => 'edit'), false);
               ?>
             </li>
             <li>
-              <?php echo nl_link($e, 'import', __('Import Items'),
+              <?php echo nl_getExhibitLink($e, 'import', __('Import Items'),
                 array('class' => 'import'), false);
               ?>
             </li>
             <li>
-              <?php echo nl_link($e, 'delete-confirm', __('Delete'),
+              <?php echo nl_getExhibitLink($e, 'delete-confirm', __('Delete'),
                 array('class' => 'delete-confirm'), false);
               ?>
             </li>

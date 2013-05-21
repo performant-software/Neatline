@@ -29,7 +29,7 @@
 
       <?php foreach (loop('NeatlineExhibit') as $e): ?>
         <h2>
-          <?php echo nl_link($e, 'show', nl_field('title'),
+          <?php echo nl_getExhibitLink($e, 'show', nl_field('title'),
             array('class' => 'neatline'), true);
           ?>
         </h2>

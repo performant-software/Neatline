@@ -34,7 +34,7 @@ class NeatlineRecordTest_CompileItem extends Neatline_TestCase
         $record->compileItem();
 
         // `title` and `body` should be set.
-        $this->assertRegExp('/item-slug\n/', $record->getItemBody());
+        $this->assertRegExp('/item-slug\n/', nl_getItemMarkup($record));
         $this->assertEquals($record->title, 'title');
 
     }
