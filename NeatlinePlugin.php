@@ -143,6 +143,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookDefineAcl($args)
     {
 
+
         $acl = $args['acl'];
 
         // Register resources.
@@ -153,96 +154,77 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             $acl->addResource('NeatlineRecord');
         }
 
-        // Anonymous:
-        // ----------
 
-        // Anyone can retrieve exhibits.
+        // Anonymous:
+        // ----------------------------------------------------------------
+
+        // Anyone can view exhibits.
         $acl->allow(null, 'NeatlineExhibit', array(
+            'index',
             'show',
             'browse',
             'get'
         ));
 
-        // Anyone can retrieve records.
+        // Anyone can view records.
         $acl->allow(null, 'NeatlineRecord', array(
+            'index',
             'list',
             'get'
         ));
 
+
+        // Researcher and Contributor:
+        // ----------------------------------------------------------------
+
+        $rc = array('researcher', 'contributor');
+
+        // R&C can create exhibits.
+        $acl->allow($rc, 'NeatlineExhibit', 'add');
+
+        // R&C can edit their own exhibits.
+        $acl->allow($rc, 'NeatlineExhibit', array(
+            'editSelf',
+            'editorSelf',
+            'putSelf',
+            'importSelf',
+            'delete-confirm',
+            'deleteSelf'
+        ));
+        $acl->allow($rc, 'NeatlineExhibit', array(
+            'edit',
+            'editor',
+            'put',
+            'import',
+            'delete'
+        ), new Omeka_Acl_Assert_Ownership);
+
+        // R&C can edit their own records.
+        $acl->allow($rc, 'NeatlineRecord', array(
+            'postSelf',
+            'putSelf',
+            'deleteSelf'
+        ));
+        $acl->allow($rc, 'NeatlineRecord', array(
+            'post',
+            'put',
+            'delete'
+        ), new Neatline_Acl_Assert_ExhibitOrRecordOwnership);
+
+
         // Contributor:
-        // ------------
+        // ----------------------------------------------------------------
 
-        // Contributors can create exhibits.
-        $acl->allow('contributor', 'NeatlineExhibit', 'add');
+        // Contributors can access the editor for all exhibits.
+        $acl->allow('contributor', 'NeatlineExhibit', 'editor');
 
-        // Contributors can edit their own exhibits.
-        $acl->allow('contributor', 'NeatlineExhibit', array(
-            'editSelf',
-            'editorSelf',
-            'putSelf',
-            'importSelf',
-            'deleteSelf'
-        ));
-        $acl->allow('contributor', 'NeatlineExhibit', array(
-            'edit',
-            'editor',
-            'put',
-            'import',
-            'delete'
-        ), new Omeka_Acl_Assert_Ownership);
 
-        // Contributors can edit records in their own exhibits.
-        $acl->allow('contributor', 'NeatlineRecord', array(
-            'postSelf',
-            'putSelf',
-            'deleteSelf'
-        ));
-        $acl->allow('contributor', 'NeatlineRecord', array(
-            'post',
-            'put',
-            'delete'
-        ), new Neatline_Acl_Assert_ExhibitOwnership);
+        // Super and Admin:
+        // ----------------------------------------------------------------
 
-        // Admin:
-        // ------
-
-        // Admins can create exhibits.
-        $acl->allow('admin', 'NeatlineExhibit', 'add');
-
-        // Admins can edit their own exhibits.
-        $acl->allow('admin', 'NeatlineExhibit', array(
-            'editSelf',
-            'editorSelf',
-            'putSelf',
-            'importSelf',
-            'deleteSelf'
-        ));
-        $acl->allow('admin', 'NeatlineExhibit', array(
-            'edit',
-            'editor',
-            'put',
-            'import',
-            'delete'
-        ), new Omeka_Acl_Assert_Ownership);
-
-        // Admins can edit their own records in all exhibits.
-        $acl->allow('admin', 'NeatlineRecord', array(
-            'postSelf',
-            'putSelf',
-            'deleteSelf'
-        ));
-        $acl->allow('admin', 'NeatlineRecord', array(
-            'post',
-            'put',
-            'delete'
-        ), new Omeka_Acl_Assert_Ownership);
-
-        // Super:
-        // ------
-
-        // Supers can do everything.
-        $acl->allow('super', 'NeatlineExhibit');
-        $acl->allow('super', 'NeatlineRecord');
+        // Supers and admins can do everything.
+        $acl->allow(array('super', 'admin'), 'NeatlineExhibit');
+        $acl->allow(array('super', 'admin'), 'NeatlineRecord');
 
 
     }
