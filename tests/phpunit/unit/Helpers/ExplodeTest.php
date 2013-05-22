@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class HelpersTest_Explode extends Neatline_TestCase
+class HelpersTest_Explode extends Neatline_DefaultCase
 {
 
 

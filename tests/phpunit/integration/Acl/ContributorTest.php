@@ -9,7 +9,9 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_Contributor extends Neatline_TestCase
+class AclTest_Contributor extends Neatline_DefaultCase
 {
-    // TODO
+    public function testStub()
+    {
+    }
 }
