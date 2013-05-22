@@ -11,7 +11,6 @@
 
 ?>
 
-<?php nl_queueNeatlinePublic(nl_getExhibit()); ?>
 <?php echo head(array('title' => nl_getExhibitField('title'))); ?>
 
 <!-- Exhibit. -->

@@ -155,8 +155,14 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function showAction()
     {
+
+        // Get exhibit by slug.
         $exhibit = $this->exhibits->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlinePublic($exhibit);
+
     }
 
 
@@ -165,7 +171,14 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function editorAction()
     {
-        $this->view->neatline_exhibit = $this->_helper->db->findById();
+
+        // Get exhibit by id.
+        $exhibit = $this->_helper->db->findById();
+        $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlineEditor($exhibit);
+
     }
 
 
