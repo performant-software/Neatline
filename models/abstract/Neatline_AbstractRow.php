@@ -22,6 +22,17 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 
 
     /**
+     * Is the record owned by a given user?
+     *
+     * @param Omeka_User $user A user record.
+     */
+    public function isOwnedBy($user)
+    {
+        return $this->user_id == $user->id;
+    }
+
+
+    /**
      * Set a field if the passed value is not whitespace.
      *
      * @param string $key The name of the field.
