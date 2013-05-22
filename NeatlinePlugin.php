@@ -43,9 +43,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_exhibits` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `user_id`               INT(10) UNSIGNED NOT NULL,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `modified`              TIMESTAMP NULL,
+        `modified`              TIMESTAMP NOT NULL,
         `query`                 TEXT NULL,
         `base_layers`           TEXT NULL,
         `base_layer`            VARCHAR(100) NULL,
@@ -67,10 +67,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_records` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `user_id`               INT(10) UNSIGNED NOT NULL,
         `item_id`               INT(10) UNSIGNED NULL,
         `exhibit_id`            INT(10) UNSIGNED NULL,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `modified`              TIMESTAMP NULL,
+        `modified`              TIMESTAMP NOT NULL,
         `is_coverage`           TINYINT(1) NULL,
         `is_wms`                TINYINT(1) NULL,
         `slug`                  VARCHAR(100) NULL,
@@ -152,15 +153,15 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             $acl->addResource('NeatlineRecord');
         }
 
-        // Supers can do everything.
-        $acl->allow('super', 'NeatlineExhibit');
-        $acl->allow('super', 'NeatlineRecord');
-
         // Anyone can `show` exhibits.
         $acl->allow(null, 'NeatlineExhibit', 'show');
 
         // Anyone can `list` and `get` records.
         $acl->allow(null, 'NeatlineRecord', array('list', 'get'));
+
+        // Supers can do everything.
+        $acl->allow('super', 'NeatlineExhibit');
+        $acl->allow('super', 'NeatlineRecord');
 
     }
 
