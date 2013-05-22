@@ -4,7 +4,7 @@
 
   - Adds 3-tier ACL system to make Neatline easier to use in a classroom setting:
 
-    - **Researcher** users can add/edit/delete their own exhibits, add/edit/delete records in their own exhibits, but can't edit exhibits that they don't own.
+    - **Researcher** users can add/edit/delete their own exhibits, add/edit/delete records in their own exhibits, but can't make any changes to exhibits that they don't own.
 
     - **Contributor** users have the same privileges as Researchers, but with the added ability to add/edit/delete their _own_ records in _other_ users' exhibits.
 
