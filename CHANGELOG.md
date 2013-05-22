@@ -2,6 +2,14 @@
 
 #### New Features
 
+  - Adds 3-tier ACL system to make Neatline easier to use in a classroom setting:
+
+    - **Researcher** users can add/edit/delete their own exhibits, add/edit/delete records in their own exhibits, but can't edit exhibits that they don't own.
+
+    - **Contributor** users have the same privileges as Researchers, but with the added ability to add/edit/delete their _own_ records in _other_ users' exhibits.
+
+    - **Admin** and **Super** users can do everything.
+
   - The exhibits controller now respects the two separate options for admin and public page lengths (```per_page_admin```, ```per_page_public```).
 
 #### Changed Features
