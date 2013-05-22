@@ -22,6 +22,7 @@ require_once NL_DIR . '/controllers/abstract/Neatline_RestController.php';
 require_once NL_DIR . '/jobs/Neatline_ImportItems.php';
 require_once NL_DIR . '/acl/ExhibitOrRecordOwnership.php';
 require_once NL_DIR . '/forms/ExhibitForm.php';
+require_once NL_DIR . '/helpers/Acl.php';
 require_once NL_DIR . '/helpers/Assets.php';
 require_once NL_DIR . '/helpers/Globals.php';
 require_once NL_DIR . '/helpers/jobs.php';

@@ -3,10 +3,11 @@
   , "version": "2.0.0"
   , "private": false
   , "dependencies": {
-      "mysql": ">= 2.0.0-alpha4"
-    , "underscore": ">= 1.4.2"
-    , "underscore.string": ">= 2.3.1"
-    , "randy": ">= 1.4.0"
-    , "async": ">= 0.1.22"
+      "mysql":              ">= 2.0.0-alpha4"
+    , "underscore":         ">= 1.4.2"
+    , "underscore.string":  ">= 2.3.1"
+    , "randy":              ">= 1.4.0"
+    , "async":              ">= 0.1.22"
+    , "request":            ">= 2.21.0"
   }
 }

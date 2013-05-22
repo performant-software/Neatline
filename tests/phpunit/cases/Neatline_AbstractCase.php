@@ -10,16 +10,8 @@
  */
 
 
-abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
+class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 {
-
-
-    /**
-     * Get the Jasmine fixtures directory.
-     *
-     * @return string The directory.
-     */
-    abstract protected function getFixturesPath();
 
 
     /**
@@ -272,6 +264,17 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     public function getLastRow($table)
     {
         return end($table->findAll());
+    }
+
+
+    /**
+     * Log out the current user and reset the request/response.
+     */
+    public function logout()
+    {
+        $this->dispatch('users/logout');
+        $this->resetRequest();
+        $this->resetResponse();
     }
 
 
