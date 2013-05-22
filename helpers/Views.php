@@ -99,6 +99,17 @@ function nl_exhibitsHaveBeenCreated()
 
 
 /**
+ * Render and return the exhibit partial.
+ *
+ * @return string The exhibit markup.
+ */
+function nl_getExhibitMarkup()
+{
+    return get_view()->partial('exhibits/partials/exhibit.php');
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute.

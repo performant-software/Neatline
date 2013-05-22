@@ -99,5 +99,4 @@ function nl_defineAcl($acl)
     $acl->allow(array('super', 'admin'), 'NeatlineExhibit');
     $acl->allow(array('super', 'admin'), 'NeatlineRecord');
 
-
 }

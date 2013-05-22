@@ -268,13 +268,12 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
-     * Log out the current user and reset the request/response.
+     * Log out the currently-authenticated user.
      */
     public function logout()
     {
-        $this->dispatch('users/logout');
-        $this->resetRequest();
-        $this->resetResponse();
+        Zend_Controller_Action_HelperBroker::getStaticHelper('Acl')
+            ->setCurrentUser(null);
     }
 
 

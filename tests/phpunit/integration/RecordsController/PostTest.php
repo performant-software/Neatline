@@ -52,8 +52,8 @@ class RecordsControllerTest_Post extends Neatline_DefaultCase
                 'max_zoom'              => '27',
                 'map_zoom'              => '28',
                 'map_focus'             => '29'
-            )
-        ));
+            ))
+        );
 
         $c1 = $this->__records->count();
         $this->dispatch('neatline/records');
