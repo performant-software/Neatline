@@ -17,6 +17,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'define_acl',
         'initialize',
         'define_routes',
         'after_save_item'
@@ -128,6 +129,27 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`"
         );
+
+    }
+
+
+    /**
+     * Define the ACL.
+     *
+     * @param array $args Zend_Acl instance under `acl` key.
+     */
+    public function hookDefineAcl($args)
+    {
+
+        $acl = $args['acl'];
+
+        // Register resources.
+        if (!$acl->has('NeatlineExhibit')) {
+            $acl->addResource('NeatlineExhibit');
+        }
+        if (!$acl->has('NeatlineRecord')) {
+            $acl->addResource('NeatlineRecord');
+        }
 
     }
 

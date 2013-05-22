@@ -276,4 +276,15 @@ class NeatlineRecord extends Neatline_ExpandableRow
     }
 
 
+    /**
+     * Associate the model with an ACL resource id.
+     *
+     * @return string The resource id..
+     */
+    public function getResourceId()
+    {
+        return 'NeatlineRecord';
+    }
+
+
 }
