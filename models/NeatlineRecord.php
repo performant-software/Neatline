@@ -10,6 +10,7 @@
  */
 
 class NeatlineRecord extends Neatline_ExpandableRow
+    implements Zend_Acl_Resource_Interface
 {
 
 
