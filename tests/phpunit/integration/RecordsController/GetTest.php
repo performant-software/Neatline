@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordsControllerTest_Get extends Neatline_TestCase
+class RecordsControllerTest_Get extends Neatline_DefaultCase
 {
 
 

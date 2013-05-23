@@ -10,13 +10,15 @@
  */
 
 class NeatlineRecord extends Neatline_ExpandableRow
+    implements Zend_Acl_Resource_Interface
 {
 
 
+    public $user_id;                // INT(10) UNSIGNED NOT NULL
     public $item_id;                // INT(10) UNSIGNED NULL
     public $exhibit_id;             // INT(10) UNSIGNED NULL
     public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    public $modified;               // TIMESTAMP NULL
+    public $modified;               // TIMESTAMP NOT NULL
     public $is_coverage;            // TINYINT(1) NULL
     public $is_wms;                 // TINYINT(1) NULL
     public $slug;                   // VARCHAR(100) NULL
@@ -273,6 +275,17 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public function __save()
     {
         parent::__save();
+    }
+
+
+    /**
+     * Associate the model with an ACL resource id.
+     *
+     * @return string The resource id..
+     */
+    public function getResourceId()
+    {
+        return 'Neatline_Records';
     }
 
 

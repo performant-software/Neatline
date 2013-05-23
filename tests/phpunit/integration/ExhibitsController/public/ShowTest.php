@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_PublicShow extends Neatline_TestCase
+class ExhibitsControllerTest_PublicShow extends Neatline_DefaultCase
 {
 
 
@@ -21,13 +21,20 @@ class ExhibitsControllerTest_PublicShow extends Neatline_TestCase
      */
     public function testLoadExhibit()
     {
-
         $exhibit = $this->__exhibit('slug');
         $this->dispatch('neatline/show/slug');
-
-        // Should bind exhibit to view.
         $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
+    }
 
+
+    /**
+     * SHOW should display exhibit container.
+     */
+    public function testBaseMarkup()
+    {
+        $exhibit = $this->__exhibit();
+        $this->dispatch('neatline/editor/'.$exhibit->id);
+        $this->assertXpath('//div[@id="editor"]');
     }
 
 

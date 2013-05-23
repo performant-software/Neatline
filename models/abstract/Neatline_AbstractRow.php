@@ -12,6 +12,25 @@
 abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 {
 
+    /**
+     * Initialize record ownership mixin.
+     */
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_Owner($this, 'user_id');
+    }
+
+
+    /**
+     * Is the record owned by a given user?
+     *
+     * @param Omeka_User $user A user record.
+     */
+    public function isOwnedBy($user)
+    {
+        return $this->user_id == $user->id;
+    }
+
 
     /**
      * Set a field if the passed value is not whitespace.

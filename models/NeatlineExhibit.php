@@ -10,11 +10,13 @@
  */
 
 class NeatlineExhibit extends Neatline_ExpandableRow
+    implements Zend_Acl_Resource_Interface
 {
 
 
+    public $user_id;        // INT(10) UNSIGNED NOT NULL
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    public $modified;       // TIMESTAMP NULL
+    public $modified;       // TIMESTAMP NOT NULL
     public $query;          // TEXT NULL
     public $base_layers;    // TEXT NULL
     public $base_layer;     // VARCHAR(100) NULL
@@ -205,6 +207,17 @@ class NeatlineExhibit extends Neatline_ExpandableRow
         // Delete child records.
         $records->delete($rName, array('exhibit_id=?' => $this->id));
 
+    }
+
+
+    /**
+     * Associate the model with an ACL resource id.
+     *
+     * @return string The resource id..
+     */
+    public function getResourceId()
+    {
+        return 'Neatline_Exhibits';
     }
 
 

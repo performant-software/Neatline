@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
+class NeatlinePluginTest_HookAfterSaveItem extends Neatline_DefaultCase
 {
 
 

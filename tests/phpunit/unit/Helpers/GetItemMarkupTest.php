@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class HelpersTest_GetItemMarkup extends Neatline_TestCase
+class HelpersTest_GetItemMarkup extends Neatline_DefaultCase
 {
 
 

@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_AdminPut extends Neatline_TestCase
+class ExhibitsControllerTest_AdminPut extends Neatline_DefaultCase
 {
 
 
@@ -37,7 +37,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_TestCase
 
         $exhibit->save();
 
-        $this->writePut(array(
+        $this->setPut(array(
             'public'        => '1',
             'query'         => '2',
             'base_layers'   => '3',
@@ -86,7 +86,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_TestCase
             }
         ");
 
-        $this->writePut($values);
+        $this->setPut($values);
         $this->dispatch('neatline/put/'.$exhibit->id);
         $record = $this->reload($record);
 

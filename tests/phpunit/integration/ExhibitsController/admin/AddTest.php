@@ -9,15 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_AdminAdd extends Neatline_TestCase
+class ExhibitsControllerTest_AdminAdd extends Neatline_DefaultCase
 {
 
 
     public function setUp()
     {
         parent::setUp();
-        $this->mockExhibitWidgets();
         $this->mockPresenters();
+        $this->mockExhibitWidgets();
         $this->mockLayers();
     }
 

@@ -24,49 +24,6 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
-     * Update exhibit via PUT.
-     * @REST
-     */
-    public function putAction()
-    {
-
-        $this->_helper->viewRenderer->setNoRender(true);
-
-        // Update the exhibit.
-        $exhibit = $this->_helper->db->findById();
-        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
-            Zend_Registry::get('fileIn')), true
-        ));
-
-        // Propagate CSS.
-        $exhibit->pushStyles();
-
-    }
-
-
-    /**
-     * Fetch exhibit via GET.
-     * @REST
-     */
-    public function getAction()
-    {
-        $this->_helper->viewRenderer->setNoRender(true);
-        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
-    }
-
-
-    /**
-     * Browse exhibits.
-     */
-    public function browseAction()
-    {
-        $this->_setParam('sort_field', 'added');
-        $this->_setParam('sort_dir', 'd');
-        parent::browseAction();
-    }
-
-
-    /**
      * Create a new exhibit.
      */
     public function addAction()
@@ -92,6 +49,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function editAction()
     {
+
 
         $exhibit = $this->_helper->db->findById();
         $form = $this->_getExhibitForm($exhibit);
@@ -151,12 +109,61 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
+     * Update exhibit via PUT.
+     * @REST
+     */
+    public function putAction()
+    {
+
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Update the exhibit.
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
+            Zend_Registry::get('fileIn')), true
+        ));
+
+        // Propagate CSS.
+        $exhibit->pushStyles();
+
+    }
+
+
+    /**
+     * Browse exhibits.
+     */
+    public function browseAction()
+    {
+        $this->_setParam('sort_field', 'added');
+        $this->_setParam('sort_dir', 'd');
+        parent::browseAction();
+    }
+
+
+    /**
+     * Fetch exhibit via GET.
+     * @REST
+     */
+    public function getAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
+    }
+
+
+    /**
      * Show exhibit.
      */
     public function showAction()
     {
+
+        // Get exhibit by slug.
         $exhibit = $this->exhibits->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlinePublic($exhibit);
+
     }
 
 

@@ -17,6 +17,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'define_acl',
         'initialize',
         'define_routes',
         'after_save_item'
@@ -42,8 +43,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_exhibits` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `user_id`               INT(10) UNSIGNED NOT NULL,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `modified`              TIMESTAMP NULL,
+        `modified`              TIMESTAMP NOT NULL,
         `query`                 TEXT NULL,
         `base_layers`           TEXT NULL,
         `base_layer`            VARCHAR(100) NULL,
@@ -65,10 +67,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_records` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `user_id`               INT(10) UNSIGNED NOT NULL,
         `item_id`               INT(10) UNSIGNED NULL,
         `exhibit_id`            INT(10) UNSIGNED NULL,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `modified`              TIMESTAMP NULL,
+        `modified`              TIMESTAMP NOT NULL,
         `is_coverage`           TINYINT(1) NULL,
         `is_wms`                TINYINT(1) NULL,
         `slug`                  VARCHAR(100) NULL,
@@ -110,6 +113,75 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
+        // $this->_db->query("CREATE TABLE IF NOT EXISTS
+        // `{$this->_db->prefix}neatline_tags` (
+
+        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        // `tag`                   VARCHAR(100) NULL,
+
+        //  PRIMARY KEY            (`id`)
+
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
+        // $this->_db->query("CREATE TABLE IF NOT EXISTS
+        // `{$this->_db->prefix}neatline_tag_links` (
+
+        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        // `record_id`             INT(10) UNSIGNED NOT NULL,
+        // `tag_id`                INT(10) UNSIGNED NOT NULL,
+
+        //  PRIMARY KEY            (`id`)
+
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
+        // $this->_db->query("CREATE TABLE IF NOT EXISTS
+        // `{$this->_db->prefix}neatline_exhibit_widgets` (
+
+        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        // `widget`                VARCHAR(100) NULL,
+
+        //  PRIMARY KEY            (`id`)
+
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
+        // $this->_db->query("CREATE TABLE IF NOT EXISTS
+        // `{$this->_db->prefix}neatline_exhibit_widget_links` (
+
+        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        // `parent_id`             INT(10) UNSIGNED NOT NULL,
+        // `widget_id`             INT(10) UNSIGNED NOT NULL,
+
+        //  PRIMARY KEY            (`id`)
+
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
+        // $this->_db->query("CREATE TABLE IF NOT EXISTS
+        // `{$this->_db->prefix}neatline_record_widgets` (
+
+        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        // `widget`                VARCHAR(100) NULL,
+
+        //  PRIMARY KEY            (`id`)
+
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
+        // $this->_db->query("CREATE TABLE IF NOT EXISTS
+        // `{$this->_db->prefix}neatline_record_widget_links` (
+
+        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        // `parent_id`             INT(10) UNSIGNED NOT NULL,
+        // `widget_id`             INT(10) UNSIGNED NOT NULL,
+
+        //  PRIMARY KEY            (`id`)
+
+        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
     }
 
 
@@ -129,6 +201,17 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             `{$this->_db->prefix}neatline_records`"
         );
 
+    }
+
+
+    /**
+     * Define the ACL.
+     *
+     * @param array $args Zend_Acl instance under `acl` key.
+     */
+    public function hookDefineAcl($args)
+    {
+        nl_defineAcl($args['acl']);
     }
 
 

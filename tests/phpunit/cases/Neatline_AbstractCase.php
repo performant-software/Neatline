@@ -10,16 +10,8 @@
  */
 
 
-abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
+class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 {
-
-
-    /**
-     * Get the Jasmine fixtures directory.
-     *
-     * @return string The directory.
-     */
-    abstract protected function getFixturesPath();
 
 
     /**
@@ -35,10 +27,37 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Create a User.
+     *
+     * @param string $name An identifier.
+     * @param string $role The user's role.
+     * @return User $item The item.
+     */
+    public function __user($name='user', $role='super')
+    {
+
+        $user = new User;
+        $user->setArray(array(
+            'name'      => $name,
+            'email'     => $name.'@test.org',
+            'username'  => $name,
+            'role'      => $role,
+            'active'    => 1
+        ));
+
+        $user->setPassword('password');
+        $user->save();
+
+        return $user;
+
+    }
+
+
+    /**
      * Create an Item.
      *
      * @param string $title The exhibit title.
-     * @return Omeka_record $item The item.
+     * @return Item $item The item.
      */
     public function __item($title='Test Title')
     {
@@ -56,7 +75,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      * Create a Neatline exhibit.
      *
      * @param string $slug The exhibit slug.
-     * @return Omeka_record $neatline The exhibit.
+     * @return NeatlineExhibit $neatline The exhibit.
      */
     public function __exhibit($slug='test-slug')
     {
@@ -126,7 +145,7 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      *
      * @param array $data Key-value pairs.
      */
-    public function writePut($data = array())
+    public function setPut($data=array())
     {
 
         // Open the file.
@@ -141,6 +160,19 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
         Zend_Registry::set('fileIn', $mockPath);
         $this->request->setMethod('PUT');
 
+    }
+
+
+    /**
+     * Mock out POST data before a request.
+     *
+     * @param array $data Key-value pairs.
+     */
+    public function setPost($data=array())
+    {
+        $this->request->setMethod('POST')->setRawBody(
+            Zend_Json::encode($data)
+        );
     }
 
 
@@ -272,6 +304,53 @@ abstract class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     public function getLastRow($table)
     {
         return end($table->findAll());
+    }
+
+
+    /**
+     * Log out the currently-authenticated user.
+     */
+    public function logout()
+    {
+
+        // Clear out user on the bootstrap.
+        $bootstrap = $this->application->getBootstrap();
+        $bootstrap->auth->getStorage()->write(null);
+        $bootstrap->getContainer()->currentuser = null;
+        $bootstrap->currentUser = null;
+
+        // Clear out the current user.
+        Zend_Controller_Action_HelperBroker::getStaticHelper('Acl')
+            ->setCurrentUser(null);
+
+    }
+
+
+    /**
+     * Log in as a "Researcher" user.
+     *
+     * @param $name An identifier for the user.
+     * @return Omeka_User The new user.
+     */
+    public function loginAsResearcher($name='user')
+    {
+        $user = $this->__user($name, 'researcher');
+        $this->_authenticateUser($user);
+        return $user;
+    }
+
+
+    /**
+     * Log in as a "Contributor" user.
+     *
+     * @param $name An identifier for the user.
+     * @return Omeka_User The new user.
+     */
+    public function loginAsContributor($name='user')
+    {
+        $user = $this->__user($name, 'contributor');
+        $this->_authenticateUser($user);
+        return $user;
     }
 
 
