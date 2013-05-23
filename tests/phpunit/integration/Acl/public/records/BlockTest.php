@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicRecord extends Neatline_DefaultCase
+class AclTest_PublicRecordBlock extends Neatline_DefaultCase
 {
 
 
@@ -22,32 +22,6 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
         $this->exhibit  = $this->__exhibit();
         $this->record   = $this->__record($this->exhibit);
         $this->logout();
-    }
-
-
-    /**
-     * Public users should be able to `get` records.
-     */
-    public function testAllowGet()
-    {
-        $this->dispatch('neatline/records/'.$this->record->id);
-        $this->assertNotAction('login');
-    }
-
-
-    /**
-     * Public users should be able to `list` records.
-     */
-    public function testAllowList()
-    {
-
-        $this->request->setQuery(array(
-            'exhibit_id' => $this->exhibit->id
-        ));
-
-        $this->dispatch('neatline/records');
-        $this->assertNotAction('login');
-
     }
 
 
