@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicExhibitAllow extends Neatline_DefaultCase
+class AclTest_PublicExhibitsAllow extends Neatline_DefaultCase
 {
 
 
@@ -25,9 +25,9 @@ class AclTest_PublicExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Public users should be able to `browse` exhibits.
+     * Public users should be able to browse exhibits.
      */
-    public function testAllowBrowse()
+    public function testCanBrowseExhibits()
     {
         $this->dispatch('neatline');
         $this->assertNotAction('login');
@@ -35,9 +35,9 @@ class AclTest_PublicExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Public users should be able to `show` exhibits.
+     * Public users should be able to view exhibits.
      */
-    public function testAllowShow()
+    public function testCanViewExhibits()
     {
         $this->dispatch('neatline/show/slug');
         $this->assertNotAction('login');
@@ -45,9 +45,9 @@ class AclTest_PublicExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Public users should be able to `get` exhibits.
+     * Public users should be able to get individual exhibits.
      */
-    public function testAllowGet()
+    public function testCanGetExhibits()
     {
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertNotAction('login');

@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ResearcherExhibitBlock extends Neatline_DefaultCase
+class AclTest_ResearcherExhibitsBlock extends Neatline_DefaultCase
 {
 
 
@@ -23,9 +23,10 @@ class AclTest_ResearcherExhibitBlock extends Neatline_DefaultCase
 
 
     /**
-     * Should be NOT able to edit settings for other users' exhibits.
+     * Researchers should be NOT able to edit settings for other users'
+     * exhibits.
      */
-    public function testBlockEditNonSelf()
+    public function testCannotEditOtherUsersExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
@@ -37,9 +38,10 @@ class AclTest_ResearcherExhibitBlock extends Neatline_DefaultCase
 
 
     /**
-     * Should NOT be able to import items into other users' exhibits.
+     * Researchers should NOT be able to import items into other users'
+     * exhibits.
      */
-    public function testBlockImportNonSelf()
+    public function testCannotImportItemsIntoOtherUsersExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
@@ -51,20 +53,21 @@ class AclTest_ResearcherExhibitBlock extends Neatline_DefaultCase
 
 
     /**
-     * Should NOT be able to update other users' exhibits.
+     * Researchers should NOT be able to update other users' exhibits.
      */
-    public function testBlockPutNonSelf()
+    public function testCannotUpdateOtherUsersExhibits()
     {
-        $this->writePut(array());
+        $this->setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertAction('forbidden');
     }
 
 
     /**
-     * Should NOT be able to open the editor for other users' exhibits.
+     * Researchers should NOT be able to open the editor for other users'
+     * exhibits.
      */
-    public function testBlockEditorNonSelf()
+    public function testCannotOpenEditorForOtherUsersExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/editor/'.$this->exhibit->id);
@@ -75,7 +78,7 @@ class AclTest_ResearcherExhibitBlock extends Neatline_DefaultCase
     /**
      * Should NOT be able delete other users' exhibits.
      */
-    public function testBlockDeleteNonSelf()
+    public function testCannotDeleteOtherUsersExhibits()
     {
         $this->request->setMethod('POST');
         $this->dispatch('neatline/delete/'.$this->exhibit->id);

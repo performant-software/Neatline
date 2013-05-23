@@ -21,39 +21,37 @@ class RecordsControllerTest_Post extends Neatline_DefaultCase
 
         $exhibit = $this->__exhibit();
 
-        $this->request->setMethod('POST')->setRawBody(
-            Zend_Json::encode(array(
-                'exhibit_id'            => $exhibit->id,
-                'slug'                  => '1',
-                'title'                 => '2',
-                'body'                  => '3',
-                'coverage'              => 'POINT(4 4)',
-                'tags'                  => '5',
-                'widgets'               => array('6','7'),
-                'presenter'             => '8',
-                'fill_color'            => '9',
-                'fill_color_select'     => '10',
-                'stroke_color'          => '11',
-                'stroke_color_select'   => '12',
-                'fill_opacity'          => '0.13',
-                'fill_opacity_select'   => '0.14',
-                'stroke_opacity'        => '0.15',
-                'stroke_opacity_select' => '0.16',
-                'stroke_width'          => '17',
-                'point_radius'          => '18',
-                'zindex'                => '19',
-                'weight'                => '20',
-                'start_date'            => '21',
-                'end_date'              => '22',
-                'after_date'            => '23',
-                'before_date'           => '24',
-                'point_image'           => '25',
-                'min_zoom'              => '26',
-                'max_zoom'              => '27',
-                'map_zoom'              => '28',
-                'map_focus'             => '29'
-            ))
-        );
+        $this->setPost(array(
+            'exhibit_id'            => $exhibit->id,
+            'slug'                  => '1',
+            'title'                 => '2',
+            'body'                  => '3',
+            'coverage'              => 'POINT(4 4)',
+            'tags'                  => '5',
+            'widgets'               => array('6','7'),
+            'presenter'             => '8',
+            'fill_color'            => '9',
+            'fill_color_select'     => '10',
+            'stroke_color'          => '11',
+            'stroke_color_select'   => '12',
+            'fill_opacity'          => '0.13',
+            'fill_opacity_select'   => '0.14',
+            'stroke_opacity'        => '0.15',
+            'stroke_opacity_select' => '0.16',
+            'stroke_width'          => '17',
+            'point_radius'          => '18',
+            'zindex'                => '19',
+            'weight'                => '20',
+            'start_date'            => '21',
+            'end_date'              => '22',
+            'after_date'            => '23',
+            'before_date'           => '24',
+            'point_image'           => '25',
+            'min_zoom'              => '26',
+            'max_zoom'              => '27',
+            'map_zoom'              => '28',
+            'map_focus'             => '29'
+        ));
 
         $c1 = $this->__records->count();
         $this->dispatch('neatline/records');
@@ -112,11 +110,9 @@ class RecordsControllerTest_Post extends Neatline_DefaultCase
         $item = $this->__item();
         $exhibit = $this->__exhibit();
 
-        $this->request->setMethod('POST')->setRawBody(
-            Zend_Json::encode(array(
-                'exhibit_id'    => $exhibit->id,
-                'item_id'       => $item->id
-            )
+        $this->setPost(array(
+            'exhibit_id'    => $exhibit->id,
+            'item_id'       => $item->id
         ));
 
         $this->dispatch('neatline/records');
@@ -136,12 +132,10 @@ class RecordsControllerTest_Post extends Neatline_DefaultCase
 
         $exhibit = $this->__exhibit();
 
-        $this->request->setMethod('POST')->setRawBody(
-            Zend_Json::encode(array(
-                'exhibit_id'    => $exhibit->id,
-                'wms_address'   => '1',
-                'wms_layers'    => '2',
-            )
+        $this->setPost(array(
+            'exhibit_id'    => $exhibit->id,
+            'wms_address'   => '1',
+            'wms_layers'    => '2',
         ));
 
         $this->dispatch('neatline/records');
@@ -162,10 +156,8 @@ class RecordsControllerTest_Post extends Neatline_DefaultCase
 
         $exhibit = $this->__exhibit();
 
-        $this->request->setMethod('POST')->setRawBody(
-            Zend_Json::encode(array(
-                'exhibit_id' => $exhibit->id
-            )
+        $this->setPost(array(
+            'exhibit_id' => $exhibit->id
         ));
 
         $this->dispatch('neatline/records');

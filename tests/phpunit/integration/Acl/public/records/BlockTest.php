@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicRecordBlock extends Neatline_DefaultCase
+class AclTest_PublicRecordsBlock extends Neatline_DefaultCase
 {
 
 
@@ -26,9 +26,9 @@ class AclTest_PublicRecordBlock extends Neatline_DefaultCase
 
 
     /**
-     * Public users should NOT be able to `post` records.
+     * Public users should NOT be able to create new records.
      */
-    public function testBlockPost()
+    public function testCannotCreateRecords()
     {
         $this->request->setMethod('POST');
         $this->dispatch('neatline/records');
@@ -39,18 +39,18 @@ class AclTest_PublicRecordBlock extends Neatline_DefaultCase
     /**
      * Public users should NOT be able to `put` records.
      */
-    public function testBlockPut()
+    public function testCannotUpdateRecords()
     {
-        $this->writePut(array());
+        $this->setPut(array());
         $this->dispatch('neatline/records/'.$this->record->id);
         $this->assertAction('login');
     }
 
 
     /**
-     * Public users should NOT be able to `delete` records.
+     * Public users should NOT be able to delete records.
      */
-    public function testBlockDelete()
+    public function testCannotDeleteRecords()
     {
         $this->request->setMethod('DELETE');
         $this->dispatch('neatline/records/'.$this->record->id);

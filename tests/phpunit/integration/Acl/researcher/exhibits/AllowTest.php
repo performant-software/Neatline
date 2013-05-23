@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
+class AclTest_ResearcherExhibitsAllow extends Neatline_DefaultCase
 {
 
 
@@ -22,9 +22,9 @@ class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to create their own exhibits.
+     * Researchers should be able to create their own exhibits.
      */
-    public function testAllowAddSelf()
+    public function testCanCreateOwnExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/add');
@@ -36,9 +36,9 @@ class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to edit settings for their own exhibits.
+     * Researchers should be able to edit settings for their own exhibits.
      */
-    public function testAllowEditSelf()
+    public function testCanEditOwnExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
@@ -50,9 +50,9 @@ class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to import items into their own exhibits.
+     * Researchers should be able to import items to their own exhibits.
      */
-    public function testAllowImportSelf()
+    public function testCanImportItemsIntoOwnExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
@@ -64,20 +64,20 @@ class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to update their own exhibits.
+     * Researchers should be able to update their own exhibits.
      */
-    public function testAllowPutSelf()
+    public function testCanUpdateOwnExhibits()
     {
-        $this->writePut(array());
+        $this->setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
     }
 
 
     /**
-     * Should be able to open the editor for their own exhibits.
+     * Researchers should be able to open editor for their own exhibits.
      */
-    public function testAllowEditorSelf()
+    public function testCanOpenEditorForOwnExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/editor/'.$this->exhibit->id);
@@ -86,9 +86,9 @@ class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to view the delete-confirm modal.
+     * Researchers should be able to view the delete-confirm modal.
      */
-    public function testAllowDeleteConfirmSelf()
+    public function testCanOpenDeleteModalForOwnExhibits()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/delete-confirm/'.$this->exhibit->id);
@@ -97,9 +97,9 @@ class AclTest_ResearcherExhibitAllow extends Neatline_DefaultCase
 
 
     /**
-     * Should be able delete their own exhibits.
+     * Researchers should be able delete their own exhibits.
      */
-    public function testAllowDeleteSelf()
+    public function testCanDeleteOwnExhibits()
     {
         $this->request->setMethod('POST');
         $this->setExpectedException('Omeka_Controller_Exception_404');

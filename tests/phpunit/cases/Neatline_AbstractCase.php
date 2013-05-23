@@ -118,7 +118,7 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      *
      * @param array $data Key-value pairs.
      */
-    public function writePut($data = array())
+    public function setPut($data=array())
     {
 
         // Open the file.
@@ -133,6 +133,19 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
         Zend_Registry::set('fileIn', $mockPath);
         $this->request->setMethod('PUT');
 
+    }
+
+
+    /**
+     * Mock out POST data before a request.
+     *
+     * @param array $data Key-value pairs.
+     */
+    public function setPost($data=array())
+    {
+        $this->request->setMethod('POST')->setRawBody(
+            Zend_Json::encode($data)
+        );
     }
 
 
@@ -290,21 +303,26 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      * Log in as a "Researcher" user.
      *
      * @param $name An identifier for the user.
+     * @return Omeka_User The new user.
      */
     public function loginAsResearcher($name='user')
     {
 
-        $this->user             = new User;
-        $this->user->name       = $name;
-        $this->user->email      = $name.'@test.org';
-        $this->user->username   = $name;
-        $this->user->role       = 'researcher';
-        $this->user->active     = 1;
+        $user = new User;
 
-        $this->user->setPassword('password');
-        $this->user->save();
+        $user->setArray(array(
+            'name'      => $name,
+            'email'     => $name.'@test.org',
+            'username'  => $name,
+            'role'      => 'researcher',
+            'active'    => 1
+        ));
 
-        $this->_authenticateUser($this->user);
+        $user->setPassword('password');
+        $user->save();
+
+        $this->_authenticateUser($user);
+        return $user;
 
     }
 

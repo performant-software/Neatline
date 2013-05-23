@@ -54,7 +54,7 @@ class RecordsControllerTest_Put extends Neatline_DefaultCase
 
         $record->save();
 
-        $this->writePut(array(
+        $this->setPut(array(
             'slug'                  => '2',
             'title'                 => '3',
             'body'                  => '4',
@@ -129,7 +129,7 @@ class RecordsControllerTest_Put extends Neatline_DefaultCase
         $item = $this->__item();
         $record = $this->__record();
 
-        $this->writePut(array('item_id' => $item->id));
+        $this->setPut(array('item_id' => $item->id));
         $this->dispatch('neatline/records/'.$record->id);
         $record = $this->reload($record);
 
@@ -154,7 +154,7 @@ class RecordsControllerTest_Put extends Neatline_DefaultCase
 
         $record->save();
 
-        $this->writePut(array(
+        $this->setPut(array(
             'wms_address'   => '3',
             'wms_layers'    => '4'
         ));
@@ -177,7 +177,7 @@ class RecordsControllerTest_Put extends Neatline_DefaultCase
 
         $record = $this->__record();
 
-        $this->writePut();
+        $this->setPut();
         $this->dispatch('neatline/records/'.$record->id);
         $response = $this->getResponseArray();
 

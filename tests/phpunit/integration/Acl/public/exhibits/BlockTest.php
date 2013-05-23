@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicExhibitBlock extends Neatline_DefaultCase
+class AclTest_PublicExhibitsBlock extends Neatline_DefaultCase
 {
 
 
@@ -25,11 +25,11 @@ class AclTest_PublicExhibitBlock extends Neatline_DefaultCase
 
 
     /**
-     * Public users should NOT be able to `put` exhibits.
+     * Public users should NOT be able to update exhibits.
      */
-    public function testBlockPut()
+    public function testCannotUpdateExhibits()
     {
-        $this->writePut(array());
+        $this->setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertAction('login');
     }
