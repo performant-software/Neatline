@@ -43,6 +43,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
 
         $this->_clearSchema();
         $this->_createSchema1();
+        $this->_migrate();
     }
 
     /**
@@ -57,6 +58,20 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
         $this->_createSchema2();
 
         parent::tearDown();
+    }
+
+    /**
+     * This triggers the plugin's migration.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    private function _migrate()
+    {
+        $this->_helper->pluginBroker->setCurrentPluginDirName('Neatline');
+        $plugin = new NeatlinePlugin();
+        $plugin->hookUpgrade('1.1.3', '2.0.0');
+        $this->_plugin = $plugin;
     }
 
     /**

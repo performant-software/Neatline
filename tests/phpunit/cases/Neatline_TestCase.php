@@ -29,6 +29,7 @@ class Neatline_TestCase extends Neatline_AbstractCase
         // Install the plugin.
         $pluginHelper = new Omeka_Test_Helper_Plugin;
         $pluginHelper->setUp('Neatline');
+        $this->_helper = $pluginHelper;
 
         // Get plugin tables.
         $this->__exhibits = $this->db->getTable('NeatlineExhibit');

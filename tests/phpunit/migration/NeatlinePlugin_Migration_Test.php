@@ -20,7 +20,11 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      **/
     public function testCopyTables()
     {
-        $this->assertTrue(false);
+        $tables = $this->db->listTables();
+        $prefix = "{$this->db->prefix}neatline_";
+        $this->assertContains("{$prefix}exhibits_migrate", $tables);
+        $this->assertContains("{$prefix}data_records_migrate", $tables);
+        $this->assertContains("{$prefix}base_layers_migrate", $tables);
     }
 
 }
