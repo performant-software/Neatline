@@ -15,60 +15,84 @@ class AclTest_ResearcherExhibit extends Neatline_DefaultCase
 
     public function setUp()
     {
-
         parent::setUp();
-        $this->mockPresenters();
-        $this->mockExhibitWidgets();
-        $this->mockLayers();
-
         $this->loginAsResearcher();
         $this->exhibit = $this->__exhibit('slug');
-
     }
 
 
     /**
-     * Researchers should be able to edit settings for their exhibits.
+     * Should be able to create their own exhibits.
+     */
+    public function testAllowAddSelf()
+    {
+        $this->request->setMethod('GET');
+        $this->dispatch('neatline/add');
+        $this->assertNotAction('forbidden');
+        $this->request->setMethod('POST');
+        $this->dispatch('neatline/add');
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Should be able to edit settings for their own exhibits.
      */
     public function testAllowEditSelf()
     {
-
-        $this->request->setMethod('POST')->setPost(array(
-            'title'         => 'Title 2',
-            'slug'          => 'slug-2',
-            'base_layers'   => array('Layer1', 'Layer2'),
-            'base_layer'    => 'Layer2',
-            'widgets'       => array('Widget1', 'Widget2'),
-            'narrative'     => 'Narrative 2.',
-            'public'        => 1
-        ));
-
+        $this->request->setMethod('GET');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $exhibit = $this->reload($this->exhibit);
-        $this->assertEquals($exhibit->title, 'Title 2');
-
+        $this->assertNotAction('forbidden');
+        $this->request->setMethod('POST');
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
+        $this->assertNotAction('forbidden');
     }
 
 
     /**
-     * Researchers should be able to open the editor for their exhibits.
+     * Should be able to import items into their own exhibits.
      */
-    public function testAllowEditorSelf()
+    public function testAllowImportSelf()
     {
-        $this->dispatch('neatline/editor/'.$this->exhibit->id);
-        $this->assertEquals(nl_getExhibitField('id'), $this->exhibit->id);
+        $this->request->setMethod('GET');
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
+        $this->assertNotAction('forbidden');
+        $this->request->setMethod('POST');
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
+        $this->assertNotAction('forbidden');
     }
 
 
     /**
-     * Researchers should be able to update their own exhibits.
+     * Should be able to update their own exhibits.
      */
     public function testAllowPutSelf()
     {
-        $this->writePut(array('title' => 'title'));
+        $this->writePut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
-        $this->exhibit = $this->reload($this->exhibit);
-        $this->assertEquals($this->exhibit->title, 'title');
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Should be able to open the editor for their own exhibits.
+     */
+    public function testAllowEditorSelf()
+    {
+        $this->request->setMethod('GET');
+        $this->dispatch('neatline/editor/'.$this->exhibit->id);
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Should be able see delete confirm message for their own exhibits.
+     */
+    public function testAllowDeleteConfirmSelf()
+    {
+        $this->request->setMethod('GET');
+        $this->dispatch('neatline/delete-confirm/'.$this->exhibit->id);
+        $this->assertNotAction('forbidden');
     }
 
 
