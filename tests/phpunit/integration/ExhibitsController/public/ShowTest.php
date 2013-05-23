@@ -16,6 +16,13 @@ class ExhibitsControllerTest_PublicShow extends Neatline_DefaultCase
     protected $_isAdminTest = false;
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->mockTheme();
+    }
+
+
     /**
      * SHOW should load exhibits by slug.
      */
@@ -28,13 +35,26 @@ class ExhibitsControllerTest_PublicShow extends Neatline_DefaultCase
 
 
     /**
-     * SHOW should display exhibit container.
+     * When no custon exhibit template is provided, SHOW should render the
+     * default `show` template from the plugin.
      */
-    public function testBaseMarkup()
+    public function testDefaultTemplate()
     {
-        $exhibit = $this->__exhibit();
-        $this->dispatch('neatline/editor/'.$exhibit->id);
-        $this->assertXpath('//div[@id="editor"]');
+        $exhibit = $this->__exhibit('slug');
+        $this->dispatch('neatline/show/slug');
+        $this->assertXpath('//div[@id="neatline"]');
+    }
+
+
+    /**
+     * When a custom template is provided, SHOW should render the exhibit-
+     * specific template instead of the default.
+     */
+    public function testCustomTemplate()
+    {
+        $exhibit = $this->__exhibit('custom');
+        $this->dispatch('neatline/show/custom');
+        $this->assertRegExp('/custom\n/', $this->getResponseBody());
     }
 
 

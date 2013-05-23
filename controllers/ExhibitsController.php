@@ -157,12 +157,18 @@ class Neatline_ExhibitsController extends Neatline_RestController
     public function showAction()
     {
 
+        $this->_helper->viewRenderer->setNoRender(true);
+
         // Get exhibit by slug.
         $exhibit = $this->exhibits->findBySlug($this->_request->slug);
         $this->view->neatline_exhibit = $exhibit;
 
         // Queue static assets.
         nl_queueNeatlinePublic($exhibit);
+
+        // Render template.
+        try { $this->render("themes/$exhibit->slug/template"); }
+        catch (Exception $e) { $this->render('show'); }
 
     }
 

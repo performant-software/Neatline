@@ -26,12 +26,15 @@ class AclTest_ResearcherExhibitsAllow extends Neatline_DefaultCase
      */
     public function testCanCreateOwnExhibits()
     {
+
         $this->request->setMethod('GET');
         $this->dispatch('neatline/add');
         $this->assertNotAction('forbidden');
+
         $this->request->setMethod('POST');
         $this->dispatch('neatline/add');
         $this->assertNotAction('forbidden');
+
     }
 
 
@@ -40,12 +43,15 @@ class AclTest_ResearcherExhibitsAllow extends Neatline_DefaultCase
      */
     public function testCanEditOwnExhibits()
     {
+
         $this->request->setMethod('GET');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
+
         $this->request->setMethod('POST');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
+
     }
 
 
@@ -54,12 +60,15 @@ class AclTest_ResearcherExhibitsAllow extends Neatline_DefaultCase
      */
     public function testCanImportItemsIntoOwnExhibits()
     {
+
         $this->request->setMethod('GET');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
+
         $this->request->setMethod('POST');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
+
     }
 
 
