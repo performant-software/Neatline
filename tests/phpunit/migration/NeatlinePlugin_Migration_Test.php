@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlinePlugin_Migration_Test extends Neatline_TestCase
+class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 {
 
     /**
@@ -18,7 +18,7 @@ class NeatlinePlugin_Migration_Test extends Neatline_TestCase
      * @return void
      * @author Eric Rochester
      **/
-    public function testTest()
+    public function testCopyTables()
     {
         $this->assertTrue(false);
     }
