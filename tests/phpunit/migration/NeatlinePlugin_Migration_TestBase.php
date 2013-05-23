@@ -88,6 +88,11 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
         $db->query("DROP TABLE IF EXISTS {$prefix}exhibits;");
         $db->query("DROP TABLE IF EXISTS {$prefix}data_records;");
         $db->query("DROP TABLE IF EXISTS {$prefix}base_layers;");
+
+        $db->query("DROP TABLE IF EXISTS {$prefix}exhibits_migrate;");
+        $db->query("DROP TABLE IF EXISTS {$prefix}data_records_migrate;");
+        $db->query("DROP TABLE IF EXISTS {$prefix}base_layers_migrate;");
+
         $db->query("DROP TABLE IF EXISTS {$prefix}records;");
 
         foreach (self::$_mapStyles as $style => $value) {
