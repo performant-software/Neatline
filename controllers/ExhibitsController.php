@@ -171,14 +171,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function editorAction()
     {
-
-        // Get exhibit by id.
-        $exhibit = $this->_helper->db->findById();
-        $this->view->neatline_exhibit = $exhibit;
-
-        // Queue static assets.
-        nl_queueNeatlineEditor($exhibit);
-
+        $this->view->neatline_exhibit = $this->_helper->db->findById();
     }
 
 

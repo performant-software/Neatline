@@ -11,7 +11,18 @@
 
 
 /**
- * Explode a comma-delimited string. Trim and strip whitespace.
+ * Define a 3-tier ACL:
+ *
+ *  - Researchers can create/update/delete their own exhibits and records
+ *  inside their own exhibits. They can also update and delete records in
+ *  their own exhibits that were created by other users.
+ *
+ *  - Contributors have all the same privileges as Researchers, but with
+ *  the added ability to create/update/delete their own records in _other_
+ *  users' exhibits. They can't update/delete other users' records in
+ *  other users' exhibits, and can't update/delete other users' exhibits.
+ *
+ *  - Supers and Admins can do everything.
  *
  * @param string $list A comma-delimited list.
  */
