@@ -26,9 +26,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to GET records.
+     * Public users should be able to `get` records.
      */
-    public function testCanGet()
+    public function testAllowGet()
     {
         $this->dispatch('neatline/records/'.$this->record->id);
         $this->assertNotEmpty($this->getResponseArray());
@@ -36,9 +36,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to LIST records.
+     * Public users should be able to `list` records.
      */
-    public function testCanList()
+    public function testAllowList()
     {
 
         $this->request->setQuery(array(
@@ -52,9 +52,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
 
 
     /**
-     * Should not be able to POST records.
+     * Public users should NOT be able to `post` records.
      */
-    public function testCannotPost()
+    public function testBlockPost()
     {
 
         $this->request->setMethod('POST')->setRawBody(
@@ -73,9 +73,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
 
 
     /**
-     * Should not be able to PUT records.
+     * Public users should NOT be able to `put` records.
      */
-    public function testCannotPut()
+    public function testBlockPut()
     {
         $this->writePut(array('title' => 'title'));
         $this->dispatch('neatline/records/'.$this->record->id);
@@ -84,9 +84,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
 
 
     /**
-     * Should not be able to DELETE records.
+     * Public users should NOT be able to `delete` records.
      */
-    public function testCannotDelete()
+    public function testBlockDelete()
     {
 
         $this->request->setMethod('DELETE');

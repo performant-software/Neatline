@@ -14,6 +14,17 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_DefaultCase
 
 
     /**
+     * SHOW should load exhibits by id.
+     */
+    public function testLoadExhibit()
+    {
+        $exhibit = $this->__exhibit();
+        $this->dispatch('neatline/editor/'.$exhibit->id);
+        $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
+    }
+
+
+    /**
      * EDITOR should display editor and exhibit containers.
      */
     public function testBaseMarkup()

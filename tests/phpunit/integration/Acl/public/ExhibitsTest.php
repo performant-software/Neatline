@@ -25,9 +25,9 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to browse exhibits.
+     * Public users should be able to `browse` exhibits.
      */
-    public function testCanBrowse()
+    public function testAllowBrowse()
     {
         $this->dispatch('neatline');
         $this->assertXpath('//a[@class="neatline"]');
@@ -35,9 +35,9 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to view exhibits.
+     * Public users should be able to `show` exhibits.
      */
-    public function testCanShow()
+    public function testAllowShow()
     {
         $this->dispatch('neatline/show/slug');
         $this->assertXpath('//div[@id="neatline"]');
@@ -45,9 +45,9 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
 
 
     /**
-     * Should be able to GET exhibits.
+     * Public users should be able to `get` exhibits.
      */
-    public function testCanGet()
+    public function testAllowGet()
     {
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertNotEmpty($this->getResponseArray());
@@ -55,9 +55,9 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
 
 
     /**
-     * Should not be able to PUT exhibits.
+     * Public users should NOT be able to `put` exhibits.
      */
-    public function testCannotPut()
+    public function testBlockPut()
     {
         $this->writePut(array('title' => 'title'));
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);

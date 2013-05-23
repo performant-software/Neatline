@@ -286,4 +286,25 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
     }
 
 
+    /**
+     * Log in as a "Researcher" user.
+     */
+    public function loginAsResearcher()
+    {
+
+        $this->user             = new User;
+        $this->user->name       = 'researcher';
+        $this->user->email      = 'researcher@test.org';
+        $this->user->username   = 'researcher';
+        $this->user->role       = 'researcher';
+        $this->user->active     = 1;
+
+        $this->user->setPassword('researcher');
+        $this->user->save();
+
+        $this->_authenticateUser($this->user);
+
+    }
+
+
 }

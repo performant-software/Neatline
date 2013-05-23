@@ -16,8 +16,8 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_DefaultCase
     public function setUp()
     {
         parent::setUp();
-        $this->mockExhibitWidgets();
         $this->mockPresenters();
+        $this->mockExhibitWidgets();
         $this->mockLayers();
     }
 
@@ -250,8 +250,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_DefaultCase
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should save exhibit.
-        $exhibit = $this->__exhibits->find($exhibit->id);
-        $this->assertEquals($exhibit->title, 'title');
+        $this->assertEquals($this->reload($exhibit)->title, 'title');
 
     }
 
@@ -301,7 +300,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_DefaultCase
 
         // Submit the form, reload exhibit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-        $exhibit = $this->__exhibits->find($exhibit->id);
+        $exhibit = $this->reload($exhibit);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title 2');

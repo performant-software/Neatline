@@ -16,8 +16,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_DefaultCase
     public function setUp()
     {
         parent::setUp();
-        $this->mockExhibitWidgets();
         $this->mockPresenters();
+        $this->mockExhibitWidgets();
         $this->mockLayers();
     }
 

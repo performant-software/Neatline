@@ -93,6 +93,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
     public function editAction()
     {
 
+
         $exhibit = $this->_helper->db->findById();
         $form = $this->_getExhibitForm($exhibit);
 
