@@ -27,10 +27,37 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
 
 
     /**
+     * Create a User.
+     *
+     * @param string $name An identifier.
+     * @param string $role The user's role.
+     * @return User $item The item.
+     */
+    public function __user($name='user', $role='super')
+    {
+
+        $user = new User;
+        $user->setArray(array(
+            'name'      => $name,
+            'email'     => $name.'@test.org',
+            'username'  => $name,
+            'role'      => $role,
+            'active'    => 1
+        ));
+
+        $user->setPassword('password');
+        $user->save();
+
+        return $user;
+
+    }
+
+
+    /**
      * Create an Item.
      *
      * @param string $title The exhibit title.
-     * @return Omeka_record $item The item.
+     * @return Item $item The item.
      */
     public function __item($title='Test Title')
     {
@@ -48,7 +75,7 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      * Create a Neatline exhibit.
      *
      * @param string $slug The exhibit slug.
-     * @return Omeka_record $neatline The exhibit.
+     * @return NeatlineExhibit $neatline The exhibit.
      */
     public function __exhibit($slug='test-slug')
     {
@@ -307,23 +334,23 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      */
     public function loginAsResearcher($name='user')
     {
-
-        $user = new User;
-
-        $user->setArray(array(
-            'name'      => $name,
-            'email'     => $name.'@test.org',
-            'username'  => $name,
-            'role'      => 'researcher',
-            'active'    => 1
-        ));
-
-        $user->setPassword('password');
-        $user->save();
-
+        $user = $this->__user($name, 'researcher');
         $this->_authenticateUser($user);
         return $user;
+    }
 
+
+    /**
+     * Log in as a "Contributor" user.
+     *
+     * @param $name An identifier for the user.
+     * @return Omeka_User The new user.
+     */
+    public function loginAsContributor($name='user')
+    {
+        $user = $this->__user($name, 'contributor');
+        $this->_authenticateUser($user);
+        return $user;
     }
 
 

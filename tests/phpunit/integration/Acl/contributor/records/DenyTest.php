@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicRecordsDeny extends Neatline_DefaultCase
+class AclTest_ContributorRecordsDeny extends Neatline_DefaultCase
 {
 
 
@@ -18,43 +18,39 @@ class AclTest_PublicRecordsDeny extends Neatline_DefaultCase
 
     public function setUp()
     {
+
         parent::setUp();
+
+        $this->loginAsResearcher('user1');
         $this->exhibit  = $this->__exhibit();
         $this->record   = $this->__record($this->exhibit);
-        $this->logout();
+
+        $this->loginAsResearcher('user2');
+
     }
 
 
     /**
-     * Public users should NOT be able to create new records.
+     * Contributors should NOT be able to update other users' records in
+     * other users' exhibits.
      */
-    public function testCannotCreateRecords()
-    {
-        $this->request->setMethod('POST');
-        $this->dispatch('neatline/records');
-        $this->assertAction('login');
-    }
-
-
-    /**
-     * Public users should NOT be able to `put` records.
-     */
-    public function testCannotUpdateRecords()
+    public function testCanUpdateOtherUsersRecordsInOtherUsersExhibits()
     {
         $this->setPut(array());
         $this->dispatch('neatline/records/'.$this->record->id);
-        $this->assertAction('login');
+        $this->assertAction('forbidden');
     }
 
 
     /**
-     * Public users should NOT be able to delete records.
+     * Contributors should NOT be able to delete other users' records in
+     * other users' exhibits.
      */
-    public function testCannotDeleteRecords()
+    public function testCanDeleteOtherUsersRecordsInOtherUsersExhibits()
     {
         $this->request->setMethod('DELETE');
         $this->dispatch('neatline/records/'.$this->record->id);
-        $this->assertAction('login');
+        $this->assertAction('forbidden');
     }
 
 

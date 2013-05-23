@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ResearcherExhibitsBlock extends Neatline_DefaultCase
+class AclTest_ResearcherExhibitsDeny extends Neatline_DefaultCase
 {
 
 
@@ -17,7 +17,7 @@ class AclTest_ResearcherExhibitsBlock extends Neatline_DefaultCase
     {
         parent::setUp();
         $this->loginAsResearcher('user1');
-        $this->exhibit = $this->__exhibit('slug');
+        $this->exhibit = $this->__exhibit();
         $this->loginAsResearcher('user2');
     }
 
