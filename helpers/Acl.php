@@ -39,6 +39,9 @@ function nl_defineAcl($acl)
     }
 
 
+    $acl->deny();
+
+
     // Public:
     // --------------------------------------------------------------------
 
@@ -80,7 +83,6 @@ function nl_defineAcl($acl)
         'editor',
         'put',
         'import',
-        'delete'
     ), new Omeka_Acl_Assert_Ownership);
 
     // R&C can edit their own records.

@@ -272,8 +272,17 @@ class Neatline_AbstractCase extends Omeka_Test_AppTestCase
      */
     public function logout()
     {
+
+        // Clear out user on the bootstrap.
+        $bootstrap = $this->application->getBootstrap();
+        $bootstrap->auth->getStorage()->write(null);
+        $bootstrap->getContainer()->currentuser = null;
+        $bootstrap->currentUser = null;
+
+        // Clear out the current user.
         Zend_Controller_Action_HelperBroker::getStaticHelper('Acl')
             ->setCurrentUser(null);
+
     }
 
 

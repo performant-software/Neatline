@@ -182,17 +182,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
-        // $this->_db->query("CREATE TABLE IF NOT EXISTS
-        // `{$this->_db->prefix}neatline_presenters` (
-
-        // `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        // `presenter`             VARCHAR(100) NULL,
-
-        //  PRIMARY KEY            (`id`)
-
-        // ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
-
-
     }
 
 
