@@ -63,8 +63,11 @@ function nl_defineAcl($acl)
 
     $rc = array('researcher', 'contributor');
 
-    // R&C can create exhibits.
-    $acl->allow($rc, 'Neatline_Exhibits', 'add');
+    // R&C can add and delete-confirm exhibits.
+    $acl->allow($rc, 'Neatline_Exhibits', array(
+        'add',
+        'delete-confirm'
+    ));
 
     // R&C can edit their own exhibits.
     $acl->allow($rc, 'Neatline_Exhibits', array(
@@ -72,7 +75,6 @@ function nl_defineAcl($acl)
         'editorSelf',
         'putSelf',
         'importSelf',
-        'delete-confirm',
         'deleteSelf'
     ));
     $acl->allow($rc, 'Neatline_Exhibits', array(
@@ -80,6 +82,7 @@ function nl_defineAcl($acl)
         'editor',
         'put',
         'import',
+        'delete'
     ), new Omeka_Acl_Assert_Ownership);
 
     // R&C can edit their own records.

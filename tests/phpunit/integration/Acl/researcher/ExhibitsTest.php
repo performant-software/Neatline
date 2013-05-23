@@ -86,12 +86,24 @@ class AclTest_ResearcherExhibit extends Neatline_DefaultCase
 
 
     /**
-     * Should be able see delete confirm message for their own exhibits.
+     * Should be able to view the delete-confirm modal.
      */
     public function testAllowDeleteConfirmSelf()
     {
         $this->request->setMethod('GET');
         $this->dispatch('neatline/delete-confirm/'.$this->exhibit->id);
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Should be able delete their own exhibits.
+     */
+    public function testAllowDeleteSelf()
+    {
+        $this->request->setMethod('POST');
+        $this->setExpectedException('Omeka_Controller_Exception_404');
+        $this->dispatch('neatline/delete/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
     }
 

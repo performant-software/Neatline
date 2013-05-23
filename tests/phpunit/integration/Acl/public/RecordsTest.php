@@ -31,7 +31,7 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
     public function testAllowGet()
     {
         $this->dispatch('neatline/records/'.$this->record->id);
-        $this->assertNotEmpty($this->getResponseArray());
+        $this->assertNotAction('login');
     }
 
 
@@ -46,7 +46,7 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
         ));
 
         $this->dispatch('neatline/records');
-        $this->assertNotEmpty($this->getResponseArray());
+        $this->assertNotAction('login');
 
     }
 
@@ -56,19 +56,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
      */
     public function testBlockPost()
     {
-
-        $this->request->setMethod('POST')->setRawBody(
-            Zend_Json::encode(array(
-                'exhibit_id' => $this->exhibit->id
-            ))
-        );
-
-        $c1 = $this->__records->count();
+        $this->request->setMethod('POST');
         $this->dispatch('neatline/records');
-        $c2 = $this->__records->count();
-
-        $this->assertEquals($c2, $c1);
-
+        $this->assertAction('login');
     }
 
 
@@ -77,9 +67,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
      */
     public function testBlockPut()
     {
-        $this->writePut(array('title' => 'title'));
+        $this->writePut(array());
         $this->dispatch('neatline/records/'.$this->record->id);
-        $this->assertNull($this->reload($this->record)->title);
+        $this->assertAction('login');
     }
 
 
@@ -88,15 +78,9 @@ class AclTest_PublicRecord extends Neatline_DefaultCase
      */
     public function testBlockDelete()
     {
-
         $this->request->setMethod('DELETE');
-
-        $c1 = $this->__records->count();
         $this->dispatch('neatline/records/'.$this->record->id);
-        $c2 = $this->__records->count();
-
-        $this->assertEquals($c2, $c1);
-
+        $this->assertAction('login');
     }
 
 

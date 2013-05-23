@@ -30,7 +30,7 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
     public function testAllowBrowse()
     {
         $this->dispatch('neatline');
-        $this->assertXpath('//a[@class="neatline"]');
+        $this->assertNotAction('login');
     }
 
 
@@ -40,7 +40,7 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
     public function testAllowShow()
     {
         $this->dispatch('neatline/show/slug');
-        $this->assertXpath('//div[@id="neatline"]');
+        $this->assertNotAction('login');
     }
 
 
@@ -50,7 +50,7 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
     public function testAllowGet()
     {
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
-        $this->assertNotEmpty($this->getResponseArray());
+        $this->assertNotAction('login');
     }
 
 
@@ -59,9 +59,9 @@ class AclTest_PublicExhibit extends Neatline_DefaultCase
      */
     public function testBlockPut()
     {
-        $this->writePut(array('title' => 'title'));
+        $this->writePut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
-        $this->assertNull($this->reload($this->exhibit)->title);
+        $this->assertAction('login');
     }
 
 
