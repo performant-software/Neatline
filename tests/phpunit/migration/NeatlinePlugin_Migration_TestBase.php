@@ -43,6 +43,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
 
         $this->_clearSchema();
         $this->_createSchema1();
+        $this->_loadFixtures();
         $this->_migrate();
     }
 
@@ -303,6 +304,35 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
+    }
+
+    /**
+     * This loads the fixtures from tests/phpunit/migration/fixtures.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    private function _loadFixtures()
+    {
+        $db          = $this->db;
+        $exhibits    = $db->getTable('NeatlineExhibit');
+        $dataRecords = $db->getTable('NeatlineDataRecord');
+
+        $json = file_get_contents(
+            NL_DIR . '/tests/phpunit/migration/fixtures/hotchkiss-exhibits.json'
+        );
+        $data = json_decode($json);
+        foreach ($data as $row) {
+            $exhibits->insert($data);
+        }
+
+        $json = file_get_contents(
+            NL_DIR . '/tests/phpunit/migration/fixtures/hotchkiss-data-records.json'
+        );
+        $data = json_decode($json);
+        foreach ($data as $row) {
+            $dataRecords->insert($data);
+        }
     }
 
 }

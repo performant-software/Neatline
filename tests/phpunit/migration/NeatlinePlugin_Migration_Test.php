@@ -41,5 +41,29 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertContains("{$prefix}records",  $tables);
     }
 
+    /**
+     * Tests whether the fixtures are working.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testFixtureLoading()
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+
+        $sql    = "SELECT COUNT(*) FROM {$prefix}exhibits_migrate;";
+        $counts = $db->query($sql);
+        foreach ($counts as $c) {
+            $this->assertEquals(0, $c);
+        }
+
+        $sql    = "SELECT COUNT(*) FROM {$prefix}data_records_migrate;";
+        $counts = $db->query($sql);
+        foreach ($counts as $c) {
+            $this->assertEquals(0, $c);
+        }
+    }
+
 }
 
