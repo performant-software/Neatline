@@ -217,7 +217,7 @@ class NeatlineExhibit extends Neatline_ExpandableRow
      */
     public function getResourceId()
     {
-        return 'NeatlineExhibit';
+        return 'Neatline_Exhibits';
     }
 
 

@@ -285,7 +285,7 @@ class NeatlineRecord extends Neatline_ExpandableRow
      */
     public function getResourceId()
     {
-        return 'NeatlineRecord';
+        return 'Neatline_Records';
     }
 
 

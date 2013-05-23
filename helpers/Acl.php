@@ -31,22 +31,19 @@ function nl_defineAcl($acl)
 
 
     // Register resources.
-    if (!$acl->has('NeatlineExhibit')) {
-        $acl->addResource('NeatlineExhibit');
+    if (!$acl->has('Neatline_Exhibits')) {
+        $acl->addResource('Neatline_Exhibits');
     }
-    if (!$acl->has('NeatlineRecord')) {
-        $acl->addResource('NeatlineRecord');
+    if (!$acl->has('Neatline_Records')) {
+        $acl->addResource('Neatline_Records');
     }
-
-
-    $acl->deny();
 
 
     // Public:
     // --------------------------------------------------------------------
 
     // Anyone can view exhibits.
-    $acl->allow(null, 'NeatlineExhibit', array(
+    $acl->allow(null, 'Neatline_Exhibits', array(
         'index',
         'show',
         'browse',
@@ -54,7 +51,7 @@ function nl_defineAcl($acl)
     ));
 
     // Anyone can view records.
-    $acl->allow(null, 'NeatlineRecord', array(
+    $acl->allow(null, 'Neatline_Records', array(
         'index',
         'list',
         'get'
@@ -67,10 +64,10 @@ function nl_defineAcl($acl)
     $rc = array('researcher', 'contributor');
 
     // R&C can create exhibits.
-    $acl->allow($rc, 'NeatlineExhibit', 'add');
+    $acl->allow($rc, 'Neatline_Exhibits', 'add');
 
     // R&C can edit their own exhibits.
-    $acl->allow($rc, 'NeatlineExhibit', array(
+    $acl->allow($rc, 'Neatline_Exhibits', array(
         'editSelf',
         'editorSelf',
         'putSelf',
@@ -78,7 +75,7 @@ function nl_defineAcl($acl)
         'delete-confirm',
         'deleteSelf'
     ));
-    $acl->allow($rc, 'NeatlineExhibit', array(
+    $acl->allow($rc, 'Neatline_Exhibits', array(
         'edit',
         'editor',
         'put',
@@ -86,12 +83,12 @@ function nl_defineAcl($acl)
     ), new Omeka_Acl_Assert_Ownership);
 
     // R&C can edit their own records.
-    $acl->allow($rc, 'NeatlineRecord', array(
+    $acl->allow($rc, 'Neatline_Records', array(
         'postSelf',
         'putSelf',
         'deleteSelf'
     ));
-    $acl->allow($rc, 'NeatlineRecord', array(
+    $acl->allow($rc, 'Neatline_Records', array(
         'post',
         'put',
         'delete'
@@ -102,14 +99,14 @@ function nl_defineAcl($acl)
     // --------------------------------------------------------------------
 
     // Contributors can access the editor for all exhibits.
-    $acl->allow('contributor', 'NeatlineExhibit', 'editor');
+    $acl->allow('contributor', 'Neatline_Exhibits', 'editor');
 
 
     // Super and Admin:
     // --------------------------------------------------------------------
 
     // Supers and admins can do everything.
-    $acl->allow(array('super', 'admin'), 'NeatlineExhibit');
-    $acl->allow(array('super', 'admin'), 'NeatlineRecord');
+    $acl->allow(array('super', 'admin'), 'Neatline_Exhibits');
+    $acl->allow(array('super', 'admin'), 'Neatline_Records');
 
 }
