@@ -31,8 +31,8 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_DefaultCase
     {
         $exhibit = $this->__exhibit();
         $this->dispatch('neatline/editor/'.$exhibit->id);
-        $this->assertXpath('//div[@id="neatline"]');
-        $this->assertXpath('//div[@id="editor"]');
+        $this->assertQuery('#neatline');
+        $this->assertQuery('#editor');
     }
 
 

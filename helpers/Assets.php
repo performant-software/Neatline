@@ -64,6 +64,36 @@ function nl_queueNeatlineEditor($exhibit)
 
 
 /**
+ * Include exhibit-specific CSS assets.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ */
+function nl_queueExhibitCss($exhibit)
+{
+    foreach (glob(nl_getExhibitThemeDir($exhibit).'/*.css') as $file) {
+        queue_css_file(basename($file, '.css'), null, false,
+            "exhibits/themes/$exhibit->slug"
+        );
+    }
+}
+
+
+/**
+ * Include exhibit-specific JS assets.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ */
+function nl_queueExhibitJs($exhibit)
+{
+    foreach (glob(nl_getExhibitThemeDir($exhibit).'/*.js') as $file) {
+        queue_js_file(basename($file, '.js'),
+            "exhibits/themes/$exhibit->slug"
+        );
+    }
+}
+
+
+/**
  * Include the Google Maps API.
  */
 function nl_queueGoogleMapsApi()
@@ -84,4 +114,18 @@ function nl_appendScript($script)
     get_view()->headScript()->appendScript(
         '', 'text/javascript', array('src' => $script)
     );
+}
+
+
+/**
+ * Form the path to an exhibit's custom theme assets.
+ *
+ * @param string The theme path.
+ */
+function nl_getExhibitThemeDir($exhibit)
+{
+
+    return PUBLIC_THEME_DIR.'/'.get_option('public_theme').
+        "/neatline/exhibits/themes/$exhibit->slug";
+
 }

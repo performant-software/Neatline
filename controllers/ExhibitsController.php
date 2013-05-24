@@ -165,8 +165,10 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
         // Queue static assets.
         nl_queueNeatlinePublic($exhibit);
+        nl_queueExhibitJs($exhibit);
+        nl_queueExhibitCss($exhibit);
 
-        // Render template.
+        // Try to render exhibit-specific template.
         try { $this->render("themes/$exhibit->slug/template"); }
         catch (Exception $e) { $this->render('show'); }
 

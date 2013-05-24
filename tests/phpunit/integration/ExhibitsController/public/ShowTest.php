@@ -42,7 +42,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_DefaultCase
     {
         $exhibit = $this->__exhibit('slug');
         $this->dispatch('neatline/show/slug');
-        $this->assertXpath('//div[@id="neatline"]');
+        $this->assertQuery('#neatline');
     }
 
 
@@ -54,7 +54,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_DefaultCase
     {
         $exhibit = $this->__exhibit('custom');
         $this->dispatch('neatline/show/custom');
-        $this->assertRegExp('/custom\n/', $this->getResponseBody());
+        $this->assertQueryContentContains('h1', 'custom');
     }
 
 
