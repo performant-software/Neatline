@@ -40,7 +40,7 @@ describe('Static Bubble Map Interactions', function() {
 
   });
 
-  describe('highlight', function() {
+  describe('when cursor hovers on a feature', function() {
 
     it('should show the title, not the body or close "X"', function() {
 
@@ -84,7 +84,7 @@ describe('Static Bubble Map Interactions', function() {
 
   });
 
-  describe('unhighlight', function() {
+  describe('when cursor leaves a feature', function() {
 
     it('should hide the bubble if it is not selected', function() {
 
@@ -117,9 +117,23 @@ describe('Static Bubble Map Interactions', function() {
 
     });
 
+    it('should hide the bubble when cursor leaves exhibit', function() {
+
+      // ------------------------------------------------------------------
+      // When the cursor leaves the exhibit, the bubble should be hidden.
+      // ------------------------------------------------------------------
+
+      NL.hoverOnMapFeature(feature1);
+      NL.triggerMapMouseout();
+
+      // Bubble should be hidden.
+      expect(NL.vw.BUBBLE.$el).not.toBeVisible();
+
+    });
+
   });
 
-  describe('select', function() {
+  describe('when a feature is clicked', function() {
 
     it('should show close "X" and body if body is non-null', function() {
 
@@ -180,7 +194,7 @@ describe('Static Bubble Map Interactions', function() {
 
   });
 
-  describe('close', function() {
+  describe('when a feature is unselected', function() {
 
     // --------------------------------------------------------------------
     // When the bubble is closed by clicking the close "X" or unselecting
@@ -206,7 +220,7 @@ describe('Static Bubble Map Interactions', function() {
 
     });
 
-    it('should close when close "X" is clicked', function() {
+    it('should close when "X" is clicked', function() {
       NL.vw.BUBBLE.$('.close').trigger('click');
     });
 
