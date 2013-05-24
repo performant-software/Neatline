@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class NeatlineRow_Expandable extends NeatlineRow_Abstract
+abstract class Neatline_Row_Expandable extends Neatline_Row_Abstract
 {
 
 

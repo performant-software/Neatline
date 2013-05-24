@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class NeatlineTable_Expansion extends Omeka_Db_Table
+abstract class Neatline_Table_Expansion extends Omeka_Db_Table
 {
 
 
     /**
      * Get an expansion row for a record.
      *
-     * @param NeatlineRow_Expandable $parent The parent record.
+     * @param Neatline_Row_Expandable $parent The parent record.
      */
     public function findByParent($parent)
     {
@@ -29,7 +29,7 @@ abstract class NeatlineTable_Expansion extends Omeka_Db_Table
     /**
      * Delete an expansion row for a record.
      *
-     * @param NeatlineRow_Expandable $parent The parent record.
+     * @param Neatline_Row_Expandable $parent The parent record.
      */
     public function deleteByParent($parent)
     {
@@ -42,8 +42,8 @@ abstract class NeatlineTable_Expansion extends Omeka_Db_Table
      * Try to get an existing expansion row for a parent record. If one
      * doesn't exist, create a new one.
      *
-     * @param NeatlineRow_Expandable $parent The parent record.
-     * @return NeatlineRow_Expansion $parent The expansion.
+     * @param Neatline_Row_Expandable $parent The parent record.
+     * @return Neatline_Row_Expansion $parent The expansion.
      */
     public function getOrCreate($parent)
     {

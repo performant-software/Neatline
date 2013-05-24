@@ -20,11 +20,11 @@ require_once NL_DIR.'/migrations/abstract/NeatlineMigration_Abstract.php';
 require_once NL_DIR.'/migrations/NeatlineMigration_20alpha2.php';
 
 // MODELS
-require_once NL_DIR.'/models/abstract/NeatlineRow_Abstract.php';
-require_once NL_DIR.'/models/abstract/NeatlineTable_Expandable.php';
-require_once NL_DIR.'/models/abstract/NeatlineRow_Expandable.php';
-require_once NL_DIR.'/models/abstract/NeatlineTable_Expansion.php';
-require_once NL_DIR.'/models/abstract/NeatlineRow_Expansion.php';
+require_once NL_DIR.'/models/abstract/Neatline_Row_Abstract.php';
+require_once NL_DIR.'/models/abstract/Neatline_Row_Expandable.php';
+require_once NL_DIR.'/models/abstract/Neatline_Row_Expansion.php';
+require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
+require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
 
 // CONTROLLERS
 require_once NL_DIR.'/controllers/abstract/Neatline_RestController.php';

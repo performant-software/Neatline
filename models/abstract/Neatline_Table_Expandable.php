@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class NeatlineTable_Expandable extends Omeka_Db_Table
+abstract class Neatline_Table_Expandable extends Omeka_Db_Table
 {
 
 
