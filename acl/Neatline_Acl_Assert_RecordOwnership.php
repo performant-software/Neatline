@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_Acl_Assert_ExhibitOrRecordOwnership
+class Neatline_Acl_Assert_RecordOwnership
     implements Zend_Acl_Assert_Interface
 {
 

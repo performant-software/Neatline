@@ -27,13 +27,13 @@ require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
 
 // CONTROLLERS
-require_once NL_DIR.'/controllers/abstract/Neatline_RestController.php';
+require_once NL_DIR.'/controllers/abstract/NeatlineController_Rest.php';
 
 // BACKGROUND JOBS
 require_once NL_DIR.'/jobs/Neatline_ImportItems.php';
 
 // ACL ASSERTIONS
-require_once NL_DIR.'/acl/ExhibitOrRecordOwnership.php';
+require_once NL_DIR.'/acl/Neatline_Acl_Assert_RecordOwnership.php';
 
 // FORMS
 require_once NL_DIR.'/forms/ExhibitForm.php';

@@ -88,7 +88,7 @@ function nl_defineAcl($acl)
     $acl->allow('contributor', 'Neatline_Records', array(
         'put',
         'delete'
-    ), new Neatline_Acl_Assert_ExhibitOrRecordOwnership);
+    ), new Neatline_Acl_Assert_RecordOwnership);
 
 
     // Super and Admin:
