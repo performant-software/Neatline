@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_ExpansionRow extends Neatline_AbstractRow
+abstract class NeatlineRow_Expansion extends NeatlineRow_Abstract
 {
 
 
@@ -19,7 +19,7 @@ abstract class Neatline_ExpansionRow extends Neatline_AbstractRow
     /**
      * Set parent record foreign key.
      *
-     * @param Neatline_AbstractRow $parent The parent record.
+     * @param NeatlineRow_Abstract $parent The parent record.
      */
     public function __construct($parent)
     {

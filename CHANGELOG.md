@@ -32,20 +32,6 @@
 
   - Fixes bugs in public exhibit browse view - changes the listings to point to the slug-based exhibit links and got rid of PHP warnings caused by malformed helper calls.
 
-#### API Changes
-
-  - Gets rid of the ```getItemBody``` method on ```NeatlineRecord```, replaces it with the ```nl_getItemMarkup``` view helper.
-
-  - Renames ```nl_link``` to ```nl_getExhibitLink```.
-
-  - Renames ```nl_totalRecords``` to ```nl_getExhibitRecordCount```.
-
-  - Renames ```nl_areExhibits``` to ```nl_exhibitsHaveBeenCreated```.
-
-  - Renames ```nl_field``` to ```nl_getExhibitField```.
-
-  - Renames ```nl_exhibit``` to ```nl_getExhibit```.
-
 # v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1))
 
 #### Architectural Changes

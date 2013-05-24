@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibit extends Neatline_ExpandableRow
+class NeatlineExhibit extends NeatlineRow_Expandable
     implements Zend_Acl_Resource_Interface
 {
 
