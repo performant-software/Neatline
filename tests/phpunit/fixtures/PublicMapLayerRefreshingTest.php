@@ -10,7 +10,7 @@
  */
 
 class FixturesTest_PublicMapIncomingRefreshVectorLayers
-    extends Neatline_FixtureCase
+    extends Neatline_Case_Fixture
 {
 
 

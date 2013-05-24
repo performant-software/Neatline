@@ -17,7 +17,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
-        'upgrade',
         'define_acl',
         'initialize',
         'define_routes',
@@ -201,23 +200,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`"
         );
-
-    }
-
-
-    /**
-     * Upgrade the plugin.
-     *
-     * @param array $args Contains: `old_version` and 'new_version`.
-     */
-    public function hookUpgrade($args)
-    {
-
-        $oldVersion = $args['old_version'];
-
-        if ($oldVersion < '2.0-alpha2') {
-            new NeatlineMigration_20alpha2();
-        }
 
     }
 

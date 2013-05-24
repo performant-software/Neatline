@@ -10,7 +10,7 @@
  */
 
 
-class Neatline_AbstractCase extends Omeka_Test_AppTestCase
+class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 {
 
 

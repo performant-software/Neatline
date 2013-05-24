@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class NeatlineController_Rest
+abstract class Neatline_Controller_Rest
     extends Omeka_Controller_AbstractActionController
 {
 

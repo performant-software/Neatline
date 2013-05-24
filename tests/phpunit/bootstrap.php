@@ -20,7 +20,7 @@ require_once OMEKA_DIR . '/application/tests/bootstrap.php';
 require_once NL_DIR . '/NeatlinePlugin.php';
 
 // Load abstract test cases, mock filters.
-require_once 'cases/Neatline_AbstractCase.php';
-require_once 'cases/Neatline_DefaultCase.php';
-require_once 'cases/Neatline_FixtureCase.php';
+require_once 'cases/Neatline_Case_Abstract.php';
+require_once 'cases/Neatline_Case_Default.php';
+require_once 'cases/Neatline_Case_Fixture.php';
 require_once 'mocks/filters.php';

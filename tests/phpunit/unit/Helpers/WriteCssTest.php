@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class HelpersTest_WriteCss extends Neatline_DefaultCase
+class HelpersTest_WriteCss extends Neatline_Case_Default
 {
 
 

@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_ExhibitForm extends Omeka_Form
+class Neatline_Form_Exhibit extends Omeka_Form
 {
 
 

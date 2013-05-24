@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_AdminImport extends Neatline_DefaultCase
+class ExhibitsControllerTest_AdminImport extends Neatline_Case_Default
 {
 
 
@@ -85,7 +85,7 @@ class ExhibitsControllerTest_AdminImport extends Neatline_DefaultCase
 
 
     /**
-     * When "Import Items" is clicked, the `Neatline_ImportItems` job 
+     * When "Import Items" is clicked, the `Neatline_Job_ImportItems` job 
      * should be dispatched with the item query parameters.
      */
     public function testStartImport()
@@ -93,9 +93,9 @@ class ExhibitsControllerTest_AdminImport extends Neatline_DefaultCase
 
         $jobs = $this->mockJobDispatcher();
 
-        // Should dispatch `Neatline_ImportItems`.
+        // Should dispatch `Neatline_Job_ImportItems`.
         $jobs->expects($this->once())->method('sendLongRunning')->with(
-            'Neatline_ImportItems', array(
+            'Neatline_Job_ImportItems', array(
 
                 'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $this->exhibit->id,

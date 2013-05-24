@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_RecordsPagination extends Neatline_FixtureCase
+class FixturesTest_RecordsPagination extends Neatline_Case_Fixture
 {
 
 

@@ -10,7 +10,7 @@
  */
 
 
-class Neatline_FixtureCase extends Neatline_DefaultCase
+class Neatline_Case_Fixture extends Neatline_Case_Default
 {
 
 

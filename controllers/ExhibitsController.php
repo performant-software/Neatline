@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_ExhibitsController extends NeatlineController_Rest
+class Neatline_ExhibitsController extends Neatline_Controller_Rest
 {
 
 
@@ -84,7 +84,7 @@ class Neatline_ExhibitsController extends NeatlineController_Rest
 
             // Import items.
             Zend_Registry::get('job_dispatcher')->sendLongRunning(
-                'Neatline_ImportItems', array(
+                'Neatline_Job_ImportItems', array(
                     'web_dir'       => nl_getWebDir(),
                     'exhibit_id'    => $exhibit->id,
                     'query'         => $post
@@ -235,7 +235,7 @@ class Neatline_ExhibitsController extends NeatlineController_Rest
      */
     private function _getExhibitForm($exhibit)
     {
-        return new Neatline_ExhibitForm(array('exhibit' => $exhibit));
+        return new Neatline_Form_Exhibit(array('exhibit' => $exhibit));
     }
 
 

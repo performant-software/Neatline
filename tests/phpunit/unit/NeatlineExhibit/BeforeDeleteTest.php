@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibitTest_BeforeDelete extends Neatline_DefaultCase
+class NeatlineExhibitTest_BeforeDelete extends Neatline_Case_Default
 {
 
 

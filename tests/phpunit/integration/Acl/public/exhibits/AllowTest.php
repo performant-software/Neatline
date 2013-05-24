@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicExhibitsAllow extends Neatline_DefaultCase
+class AclTest_PublicExhibitsAllow extends Neatline_Case_Default
 {
 
 
