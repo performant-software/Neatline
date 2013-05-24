@@ -22,6 +22,8 @@
 
   - In the ```item.php``` template used to determine the structure of the compiled item metadata in Neatline records, moves the file display below the default metadata output to conform with Omeka's default item show view.
 
+  - When the static bubble is displayed in response to the cursor hovering on a map feature, and then the cursor leaves the exhibit without first leaving the feature (eg, when the edge of the map occludes part of the feature), hide the static bubble as if the feature had been unselected. This prevents the bubble from getting "stuck" until the cursor re-enters the exhibit.
+
 #### Bug Fixes
 
   - Fixes bug in the Omeka "Import Items" workflow that was causing very large imports to fail. Previously, the background process was loading the entire batch of matched items in bulk; when the number of items got too high, the process would run out of memory and fail. Now, items are queried processed in 500-record pages.

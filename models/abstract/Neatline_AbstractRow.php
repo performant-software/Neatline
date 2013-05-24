@@ -22,7 +22,7 @@ abstract class Neatline_AbstractRow extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Is the record owned by a given user?
+     * Return true if the passed used owns the row (if the record's
      *
      * @param Omeka_User $user A user record.
      */
