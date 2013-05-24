@@ -8,6 +8,14 @@
 
     - **Admin** and **Super** users can do everything.
 
+  - Makes it possible to create custom themes for individual Neatline exhibits:
+
+    - Themes are defined by creating a directory with a name that matches an exhibit slug under ```neatline/exhibits/themes/```, relative to the root of the public theme. For example, if an exhibit has a slug of ```exhibit-slug```, Neatline will load theme assets from ```neatline/exhibits/themes/exhibit-slug```.
+
+    - Inside the theme directory, a ```tempalate.php``` file can be defined. If present, this template will be rendered instead of the default ```show.php``` that ships with Neatline.
+
+    - All ```.js``` and ```.css``` files in the directory will be queued in the public view for the exhibit after the core application assets.
+
   - The exhibits controller now respects the two separate options for admin and public page lengths (```per_page_admin```, ```per_page_public```).
 
 #### Changed Features
