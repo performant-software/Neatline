@@ -12,27 +12,46 @@
 
 if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
+// PLUGIN
 require_once NL_DIR . '/NeatlinePlugin.php';
-require_once NL_DIR . '/models/abstract/Neatline_AbstractRow.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpandableTable.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpandableRow.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpansionTable.php';
-require_once NL_DIR . '/models/abstract/Neatline_ExpansionRow.php';
-require_once NL_DIR . '/controllers/abstract/Neatline_RestController.php';
-require_once NL_DIR . '/jobs/Neatline_ImportItems.php';
-require_once NL_DIR . '/acl/ExhibitOrRecordOwnership.php';
-require_once NL_DIR . '/forms/ExhibitForm.php';
-require_once NL_DIR . '/helpers/Acl.php';
-require_once NL_DIR . '/helpers/Assets.php';
-require_once NL_DIR . '/helpers/Globals.php';
-require_once NL_DIR . '/helpers/jobs.php';
-require_once NL_DIR . '/helpers/Layers.php';
-require_once NL_DIR . '/helpers/Plugins.php';
-require_once NL_DIR . '/helpers/Styles.php';
-require_once NL_DIR . '/helpers/Views.php';
 
+// MIGRATIONS
+require_once NL_DIR.'/migrations/abstract/NeatlineMigration_Abstract.php';
+require_once NL_DIR.'/migrations/NeatlineMigration_20alpha2.php';
+
+// MODELS
+require_once NL_DIR.'/models/abstract/Neatline_AbstractRow.php';
+require_once NL_DIR.'/models/abstract/Neatline_ExpandableTable.php';
+require_once NL_DIR.'/models/abstract/Neatline_ExpandableRow.php';
+require_once NL_DIR.'/models/abstract/Neatline_ExpansionTable.php';
+require_once NL_DIR.'/models/abstract/Neatline_ExpansionRow.php';
+
+// CONTROLLERS
+require_once NL_DIR.'/controllers/abstract/Neatline_RestController.php';
+
+// BACKGROUND JOBS
+require_once NL_DIR.'/jobs/Neatline_ImportItems.php';
+
+// ACL ASSERTIONS
+require_once NL_DIR.'/acl/ExhibitOrRecordOwnership.php';
+
+// FORMS
+require_once NL_DIR.'/forms/ExhibitForm.php';
+
+// HELPERS
+require_once NL_DIR.'/helpers/Acl.php';
+require_once NL_DIR.'/helpers/Assets.php';
+require_once NL_DIR.'/helpers/Globals.php';
+require_once NL_DIR.'/helpers/jobs.php';
+require_once NL_DIR.'/helpers/Layers.php';
+require_once NL_DIR.'/helpers/Plugins.php';
+require_once NL_DIR.'/helpers/Styles.php';
+require_once NL_DIR.'/helpers/Views.php';
+
+// Register layers JSON and PUT path.
 Zend_Registry::set('layers', NL_DIR . '/layers.json');
 Zend_Registry::set('fileIn', 'php://input');
 
+// Start plugin.
 $neatline = new NeatlinePlugin();
 $neatline->setUp();

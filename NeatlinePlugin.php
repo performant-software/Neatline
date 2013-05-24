@@ -17,6 +17,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'upgrade',
         'define_acl',
         'initialize',
         'define_routes',
@@ -205,9 +206,26 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
+     * Upgrade the plugin.
+     *
+     * @param array $args Contains: `old_version` and 'new_version`.
+     */
+    public function hookUpgrade($args)
+    {
+
+        $oldVersion = $args['old_version'];
+
+        if ($oldVersion < '2.0-alpha2') {
+            new NeatlineMigration_20alpha2();
+        }
+
+    }
+
+
+    /**
      * Define the ACL.
      *
-     * @param array $args Zend_Acl instance under `acl` key.
+     * @param array $args Contains: `acl` (Zend_Acl).
      */
     public function hookDefineAcl($args)
     {
@@ -227,7 +245,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register routes.
      *
-     * @param array $args Zend_Config instance under `router` key.
+     * @param array $args Contains: `router` (Zend_Config).
      */
     public function hookDefineRoutes($args)
     {
@@ -240,7 +258,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Propagate item updates to Neatline records.
      *
-     * @param array $args Array of arguments, with `record`.
+     * @param array $args Contains: `record` (Item).
      */
     public function hookAfterSaveItem($args)
     {
@@ -266,7 +284,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * Register properties on `Neatline.global`.
      *
      * @param array $globals The array of global properties.
-     * @param array $args Array of arguments, with `exhibit`.
+     * @param array $args Contains: `exhibit` (NeatlineExhibit).
      * @return array The modified array.
      */
     public function filterNeatlineGlobals($globals, $args)
