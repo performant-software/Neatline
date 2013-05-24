@@ -64,6 +64,18 @@ function nl_queueNeatlineEditor($exhibit)
 
 
 /**
+ * Include exhibit-specific theme assets.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ */
+function nl_queueExhibitTheme($exhibit)
+{
+    nl_queueExhibitCss($exhibit);
+    nl_queueExhibitJs($exhibit);
+}
+
+
+/**
  * Include exhibit-specific CSS assets.
  *
  * @param NeatlineExhibit $exhibit The exhibit.

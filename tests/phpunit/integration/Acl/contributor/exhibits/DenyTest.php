@@ -9,51 +9,55 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ResearcherExhibitsDeny extends Neatline_DefaultCase
+class AclTest_ContributorExhibitsDeny extends Neatline_DefaultCase
 {
 
 
     public function setUp()
     {
         parent::setUp();
-        $this->loginAsResearcher('user1');
+        $this->loginAsContributor('user1');
         $this->exhibit = $this->__exhibit();
-        $this->loginAsResearcher('user2');
+        $this->loginAsContributor('user2');
     }
 
 
     /**
-     * Researchers should be NOT able to edit settings for other users'
+     * Contributors should be NOT able to edit settings for other users'
      * exhibits.
      */
     public function testCannotEditOtherUsersExhibits()
     {
-        $this->request->setMethod('GET');
+
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('forbidden');
+
         $this->request->setMethod('POST');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('forbidden');
+
     }
 
 
     /**
-     * Researchers should NOT be able to import items into other users'
+     * Contributors should NOT be able to import items into other users'
      * exhibits.
      */
     public function testCannotImportItemsIntoOtherUsersExhibits()
     {
-        $this->request->setMethod('GET');
+
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
+
         $this->request->setMethod('POST');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
+
     }
 
 
     /**
-     * Researchers should NOT be able to update other users' exhibits.
+     * Contributors should NOT be able to update other users' exhibits.
      */
     public function testCannotUpdateOtherUsersExhibits()
     {
@@ -64,19 +68,18 @@ class AclTest_ResearcherExhibitsDeny extends Neatline_DefaultCase
 
 
     /**
-     * Researchers should NOT be able to open the editor for other users'
+     * Contributors should NOT be able to open the editor for other users'
      * exhibits.
      */
     public function testCannotOpenEditorForOtherUsersExhibits()
     {
-        $this->request->setMethod('GET');
         $this->dispatch('neatline/editor/'.$this->exhibit->id);
         $this->assertAction('forbidden');
     }
 
 
     /**
-     * Should NOT be able delete other users' exhibits.
+     * Contributors should NOT be able delete other users' exhibits.
      */
     public function testCannotDeleteOtherUsersExhibits()
     {

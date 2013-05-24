@@ -58,25 +58,23 @@ function nl_defineAcl($acl)
     ));
 
 
-    // Researcher and Contributor:
+    // Contributor:
     // --------------------------------------------------------------------
 
-    $rc = array('researcher', 'contributor');
-
-    // R&C can add and delete-confirm exhibits.
-    $acl->allow($rc, 'Neatline_Exhibits', array(
+    // Contributors can add and delete-confirm exhibits.
+    $acl->allow('contributor', 'Neatline_Exhibits', array(
         'add', 'delete-confirm'
     ));
 
-    // R&C can edit their own exhibits.
-    $acl->allow($rc, 'Neatline_Exhibits', array(
+    // Contributors can edit their own exhibits.
+    $acl->allow('contributor', 'Neatline_Exhibits', array(
         'editSelf',
         'editorSelf',
         'putSelf',
         'importSelf',
         'deleteSelf'
     ));
-    $acl->allow($rc, 'Neatline_Exhibits', array(
+    $acl->allow('contributor', 'Neatline_Exhibits', array(
         'edit',
         'editor',
         'put',
@@ -84,25 +82,18 @@ function nl_defineAcl($acl)
         'delete'
     ), new Omeka_Acl_Assert_Ownership);
 
-    // R&C can create their own records.
-    $acl->allow($rc, 'Neatline_Records', 'post');
+    // Contributors can create their own records.
+    $acl->allow('contributor', 'Neatline_Records', 'post');
 
-    // R&C can edit/elete their own records.
-    $acl->allow($rc, 'Neatline_Records', array(
+    // Contributors can edit/elete their own records.
+    $acl->allow('contributor', 'Neatline_Records', array(
         'putSelf',
         'deleteSelf'
     ));
-    $acl->allow($rc, 'Neatline_Records', array(
+    $acl->allow('contributor', 'Neatline_Records', array(
         'put',
         'delete'
     ), new Neatline_Acl_Assert_ExhibitOrRecordOwnership);
-
-
-    // Contributor:
-    // --------------------------------------------------------------------
-
-    // Contributors can access the editor for all exhibits.
-    $acl->allow('contributor', 'Neatline_Exhibits', 'editor');
 
 
     // Super and Admin:
