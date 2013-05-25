@@ -15,8 +15,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     public $user_id;        // INT(10) UNSIGNED NOT NULL DEFAULT 0
-    public $added;          // TIMESTAMP NOT NULL
-    public $modified;       // TIMESTAMP NOT NULL
+    public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    public $modified;       // TIMESTAMP NULL
     public $query;          // TEXT NULL
     public $base_layers;    // TEXT NULL
     public $base_layer;     // VARCHAR(100) NULL

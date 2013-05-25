@@ -18,7 +18,20 @@ class Neatline_Migration_20alpha2 extends Neatline_Migration_Abstract
      */
     public function migrate()
     {
+        $this->changeExhibitsTableEngine();
         $this->addUserIdColumns();
+    }
+
+
+    /**
+     * Change the `ENGINE` on the exhibits table to `InnoDB`.
+     */
+    public function changeExhibitsTableEngine()
+    {
+        $this->_db->query(
+            "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ENGINE=InnoDB"
+        );
     }
 
 
