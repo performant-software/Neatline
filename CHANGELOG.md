@@ -2,11 +2,13 @@
 
 #### New Features
 
-  - Adds two-tier ACL system to make Neatline easier to use in a classroom setting:
+  - Adds three-tier ACL system to make Neatline easier to use in a classroom setting:
 
-    - **Contributor** users can add/edit/delete their own exhibits, add/edit/delete records in their own exhibits, but can't make any changes to exhibits that they don't own.
+    - **Researcher** users are denied all Neatline-related privileges - they can't create, edit, or delete Neatline exhibits or records.
 
-    - **Admin** and **Super** users can do everything.
+    - **Contributor** users can add/edit/delete their own exhibits and add/edit/delete records in their own exhibits, but can't make edit or delete exhibits that they don't own.
+
+    - **Admin** and **Super** users are granted all privileges - they can create/edit/delete all Neatline exhibits and records, regardless of who originally created the content.
 
   - Makes it possible to create custom themes for individual Neatline exhibits:
 
