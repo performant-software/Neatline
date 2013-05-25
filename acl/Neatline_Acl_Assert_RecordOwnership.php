@@ -31,12 +31,12 @@ class Neatline_Acl_Assert_RecordOwnership
         if (!($role instanceof User)) return false;
 
         else {
-            return $acl->isAllowed($role, $resource, $allPriv) || (
+            return
+                $acl->isAllowed($role, $resource, $allPriv) || (
                 $acl->isAllowed($role, $resource, $selfPriv) &&
-                $this->_userOwnsRecord($role, $resource)
-            );
+                $this->_userOwnsRecord($role, $resource));
         }
-        
+
     }
 
     /**
@@ -44,7 +44,8 @@ class Neatline_Acl_Assert_RecordOwnership
      */
     private function _userOwnsRecord($user, $record)
     {
-        return $record->getExhibit()->isOwnedBy($user) ||
+        return
+            $record->getExhibit()->isOwnedBy($user) ||
             $record->isOwnedBy($user);
     }
 

@@ -22,13 +22,17 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Return true if the passed used owns the row (if the record's
+     * Return true if the passed used owns the row (if the id of the user
+     * matches the `user_id` on the row). Also return true if `user_id` is
+     * 0, which is used as a generic value for records/exhibits that have
+     * been migrated from previous version of Neatline that did not record
+     * user ownerhsip.
      *
      * @param Omeka_User $user A user record.
      */
     public function isOwnedBy($user)
     {
-        return $this->user_id == $user->id;
+        return $this->user_id == $user->id || $this->user_id == 0;
     }
 
 
