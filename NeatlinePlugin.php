@@ -17,7 +17,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
-        'update',
+        'upgrade',
         'define_acl',
         'initialize',
         'define_routes',
@@ -44,8 +44,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_exhibits` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `user_id`               INT(10) UNSIGNED NOT NULL,
-        `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `user_id`               INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        `added`                 TIMESTAMP NOT NULL,
         `modified`              TIMESTAMP NOT NULL,
         `query`                 TEXT NULL,
         `base_layers`           TEXT NULL,
@@ -68,10 +68,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_records` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `user_id`               INT(10) UNSIGNED NOT NULL,
+        `user_id`               INT(10) UNSIGNED NOT NULL DEFAULT 0,
         `item_id`               INT(10) UNSIGNED NULL,
         `exhibit_id`            INT(10) UNSIGNED NULL,
-        `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `added`                 TIMESTAMP NOT NULL,
         `modified`              TIMESTAMP NOT NULL,
         `is_coverage`           TINYINT(1) NULL,
         `is_wms`                TINYINT(1) NULL,
@@ -137,11 +137,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Define the ACL.
+     * Upgrade the plugin.
      *
      * @param array $args Contains: `old_version` and `new_version`.
      */
-    public function hookUpdate($args)
+    public function hookUpgrade($args)
     {
 
         $oldVersion = $args['old_version'];

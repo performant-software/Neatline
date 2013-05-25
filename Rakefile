@@ -47,6 +47,8 @@ PackageTask.new('Neatline') do |p|
 
   # Application --
   p.package_files.include('NeatlinePlugin.php')
+  p.package_files.include('migrations/**/*.php')
+  p.package_files.include('acl/**/*.php')
   p.package_files.include('models/**/*.php')
   p.package_files.include('controllers/**/*.php')
   p.package_files.include('forms/**/*.php')
