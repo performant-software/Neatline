@@ -11,5 +11,14 @@
 
 abstract class Neatline_Table_Tagging extends Omeka_Db_Table
 {
-    // TODO
+
+
+    /**
+     * Get the associated tag table.
+     *
+     * @return Neatline_Table_Tag The tag table.
+     */
+    abstract public function getTagTable();
+
+
 }
