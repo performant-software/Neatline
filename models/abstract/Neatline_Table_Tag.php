@@ -20,18 +20,7 @@ abstract class Neatline_Table_Tag extends Omeka_Db_Table
      */
     public function getTag($tag)
     {
-        // TODO
-    }
-
-
-    /**
-     * Insert a collection of tags.
-     *
-     * @param array $tags A collection of tags.
-     */
-    public function insertTags($tags)
-    {
-        // TODO
+        return $this->findBySql('tag=?', array($tag), true);
     }
 
 

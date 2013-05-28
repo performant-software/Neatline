@@ -16,4 +16,16 @@ abstract class Neatline_Row_Tag extends Neatline_Row_Abstract
     public $tag; // VARCHAR(100) NULL
 
 
+    /**
+     * Set the `tag` field.
+     *
+     * @param string $tag The tag name.
+     */
+    public function __construct($tag = null)
+    {
+        parent::__construct();
+        $this->tag = $tag;
+    }
+
+
 }
