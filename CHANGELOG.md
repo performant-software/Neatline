@@ -1,4 +1,4 @@
-# v2.0-alpha2 ([pending](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2))
+# v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2))
 
 #### New Features
 
