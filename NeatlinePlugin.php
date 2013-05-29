@@ -281,6 +281,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $db->query("ALTER TABLE {$prefix}base_layers  RENAME TO {$prefix}base_layers{$ext};");
 
         $this->hookInstall();
+
+        Zend_Registry::get('job_dispatcher')->sendLongRunning(
+            'Neatline_UpgradeJob', array(
+                'web_dir'       => nl_getWebDir()
+            )
+        );
     }
 
 

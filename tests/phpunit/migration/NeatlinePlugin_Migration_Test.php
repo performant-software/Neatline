@@ -65,5 +65,31 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         }
     }
 
+    /**
+     * Tests whether the background job is started.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testBackgroundJob()
+    {
+        $db     = $this->db;
+        $table  = $db->getTable('Processes');
+
+        $select = $db
+            ->select()
+            ->from("{$db->prefix}processes")
+            ->where("class='Omeka_Job_Process_Wrapper'")
+            ->where("args LIKE '%Neatline_UpgradeJob%'")
+            ->where("status='starting'")
+            ->where("PID IS NULL")
+            ;
+
+        $q    = $select->query();
+        $jobs = $q->fetchAll();
+
+        $this->assertGreaterThan(0, $jobs);
+    }
+
 }
 
