@@ -29,6 +29,7 @@ require_once NL_DIR . '/helpers/Layers.php';
 require_once NL_DIR . '/helpers/Plugins.php';
 require_once NL_DIR . '/helpers/Styles.php';
 require_once NL_DIR . '/helpers/Views.php';
+require_once NL_DIR . '/helpers/Neatline/Helper/Migration.php';
 
 Zend_Registry::set('layers', NL_DIR . '/layers.json');
 Zend_Registry::set('fileIn', 'php://input');

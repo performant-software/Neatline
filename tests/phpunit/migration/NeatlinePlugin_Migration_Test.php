@@ -91,5 +91,17 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertGreaterThan(0, $jobs);
     }
 
+    /**
+     * The titles get transferred correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateTitle()
+    {
+        $helper = new Neatline_Helper_Migration(null, $this->db);
+        $helper->migrateData();
+    }
+
 }
 

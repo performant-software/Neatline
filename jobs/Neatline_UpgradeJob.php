@@ -14,6 +14,8 @@ class Neatline_UpgradeJob extends Omeka_Job_AbstractJob
 
     public function perform()
     {
+        $helper = new Neatline_Helper_Migration(null, $this->_db);
+        $helper->migrateData();
     }
 
 }

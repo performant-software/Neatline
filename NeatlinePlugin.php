@@ -272,22 +272,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      **/
     public function hookUpgrade($oldVersion, $newVersion)
     {
-        $db     = $this->_db;
-        $prefix = "{$db->prefix}neatline_";
-        $ext    = "_migrate";
-
-        $db->query("ALTER TABLE {$prefix}exhibits     RENAME TO {$prefix}exhibits{$ext};");
-        $db->query("ALTER TABLE {$prefix}data_records RENAME TO {$prefix}data_records{$ext};");
-        $db->query("ALTER TABLE {$prefix}base_layers  RENAME TO {$prefix}base_layers{$ext};");
-
-        $this->hookInstall();
-
-        Zend_Registry::get('job_dispatcher')->sendLongRunning(
-            'Neatline_UpgradeJob', array(
-                'web_dir'       => nl_getWebDir()
-            )
-        );
+        $helper = new Neatline_Helper_Migration($this, $this->_db);
+        $helper->migrate();
     }
-
 
 }
