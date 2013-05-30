@@ -34,7 +34,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Create tables.
+     * Create exhibit and record tables.
      */
     public function hookInstall()
     {
@@ -108,40 +108,17 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
          PRIMARY KEY            (`id`),
          INDEX                  (`item_id`, `exhibit_id`),
-         FULLTEXT KEY           (`title`, `body`),
+         FULLTEXT KEY           (`title`, `body`, `tags`),
          SPATIAL INDEX          (`coverage`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
-
-
-        $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_record_tags` (
-
-        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `name`                  VARCHAR(100) NULL,
-
-         PRIMARY KEY            (`id`)
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
-
-
-        $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_record_tag_maps` (
-
-        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `object_id`             INT(10) UNSIGNED NULL,
-        `tag_id`                INT(10) UNSIGNED NULL,
-
-         PRIMARY KEY            (`id`)
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
     }
 
 
     /**
-     * Drop tables.
+     * Drop exhibit and record tables.
      */
     public function hookUninstall()
     {
@@ -152,14 +129,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`"
-        );
-
-        $this->_db->query("DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_record_tags`"
-        );
-
-        $this->_db->query("DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_record_tag_maps`"
         );
 
     }
