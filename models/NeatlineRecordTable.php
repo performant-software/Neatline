@@ -258,7 +258,9 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     public function _filterByTags($select, $tags)
     {
         foreach ($tags as $tag) {
-            $select->where("tags REGEXP ?", "[[:<:]]".$tag."[[:>:]]");
+            $select->where(
+                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)", $tag
+            );
         }
         return $select;
     }
@@ -273,7 +275,9 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      */
     public function _filterByWidget($select, $widget)
     {
-        $select->where("widgets REGEXP ?", "[[:<:]]".$widget."[[:>:]]");
+        $select->where(
+            "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)", $widget
+        );
         return $select;
     }
 

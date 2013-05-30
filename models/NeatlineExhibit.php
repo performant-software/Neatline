@@ -87,7 +87,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
             // If selector is `all`, update all records in the exhibit;
             // otherwise, just match records with the tag.
             if ($tag != 'all') {
-                $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
+                $where['MATCH (tags) AGAINST (? IN BOOLEAN MODE)']= $tag;
             }
 
             // Walk valid CSS rules.

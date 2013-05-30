@@ -77,11 +77,11 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $record  = new NeatlineRecord($exhibit);
-        $record->tags = 'tag';
+        $record->tags = 'tag1';
         $record->save();
 
         $values = array('styles' => "
-            .tag {
+            .tag1 {
               fill-color: color;
             }
         ");

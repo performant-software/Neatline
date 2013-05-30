@@ -149,13 +149,13 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
-            .tag {
+            .tag1 {
               fill-color: 1;
             }
         ";
         $exhibit->save();
         $record = new NeatlineRecord($exhibit);
-        $record->tags = 'tag';
+        $record->tags = 'tag1';
 
         // Save form with new `fill_color`.
         $record->saveForm(array('fill_color' => '2'));
@@ -163,7 +163,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         // Should update CSS.
         $this->assertEquals(nl_readCSS($exhibit->styles), array(
-            'tag' => array(
+            'tag1' => array(
                 'fill_color' => '2'
             )
         ));
@@ -180,15 +180,15 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
-            .tag {
+            .tag1 {
               fill-color: 1;
             }
         ";
         $exhibit->save();
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
-        $record1->tags = 'tag';
-        $record2->tags = 'tag';
+        $record1->tags = 'tag1';
+        $record2->tags = 'tag1';
         $record1->save();
         $record2->save();
 
@@ -213,7 +213,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
-            .tag {
+            .tag1 {
               fill-color: 1;
             }
         ";
@@ -222,7 +222,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         // Record 1 synchronized with CSS.
         $record1 = new NeatlineRecord($exhibit);
         $record1->fill_color = '1';
-        $record1->tags = 'tag';
+        $record1->tags = 'tag1';
         $record1->save();
 
         // Record 2 not synchronized.
@@ -230,8 +230,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $record2->fill_color = '2';
         $record2->save();
 
-        // Add `tag` to record 2, along with un-synchronized style.
-        $record2->saveForm(array('tags' => 'tag', 'fill_color' => '2'));
+        // Add `tag1` to record 2, along with un-synchronized style.
+        $record2->saveForm(array('tags' => 'tag1', 'fill_color' => '2'));
         $record1 = $this->reload($record1);
         $record2 = $this->reload($record2);
 

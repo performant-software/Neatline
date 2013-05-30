@@ -22,7 +22,7 @@ var client = mysql.createConnection({
   user:     'omeka',
   password: 'omeka',
   port:     8889,
-  database: 'alpha2'
+  database: 'alpha3'
 });
 
 client.connect();

@@ -65,13 +65,13 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
-            .tag {
+            .tag1 {
               fill-color: color;
               stroke-color: auto;
             }
         ";
         $record = new NeatlineRecord($exhibit);
-        $record->tags = 'tag';
+        $record->tags = 'tag1';
         $record->save();
 
         $exhibit->pushStyles();
@@ -92,13 +92,13 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
-            .tag {
+            .tag1 {
               point-image: none;
             }
         ";
         $record = new NeatlineRecord($exhibit);
         $record->point_image = 'img';
-        $record->tags = 'tag';
+        $record->tags = 'tag1';
         $record->save();
 
         $exhibit->pushStyles();
@@ -118,13 +118,13 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit();
         $exhibit->styles = "
-            .tag {
+            .tag1 {
               fill-color: color;
               invalid: value;
             }
         ";
         $record = new NeatlineRecord($exhibit);
-        $record->tags = 'tag';
+        $record->tags = 'tag1';
         $record->save();
 
         $exhibit->pushStyles();
@@ -171,14 +171,14 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $exhibit1 = $this->__exhibit();
         $exhibit2 = $this->__exhibit();
         $exhibit1->styles = "
-            .tag {
+            .tag1 {
               fill-color: color;
             }
         ";
         $record1 = new NeatlineRecord($exhibit1);
         $record2 = new NeatlineRecord($exhibit2);
-        $record1->tags = 'tag';
-        $record2->tags = 'tag';
+        $record1->tags = 'tag1';
+        $record2->tags = 'tag1';
         $record1->save();
         $record2->save();
 
