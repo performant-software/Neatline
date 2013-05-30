@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_Row_Tagging extends Neatline_Row_Abstract
+abstract class Neatline_Row_TagMap extends Neatline_Row_Abstract
 {
 
 
-    public $row_id; // INT(10) UNSIGNED NULL
-    public $tag_id; // INT(10) UNSIGNED NULL
+    public $object_id;  // INT(10) UNSIGNED NULL
+    public $tag_id;     // INT(10) UNSIGNED NULL
 
 
 }
