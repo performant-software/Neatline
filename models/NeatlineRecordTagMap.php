@@ -9,5 +9,5 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTagMapping extends Neatline_Row_TagMap
+class NeatlineRecordTagMap extends Neatline_Row_Map
 {}

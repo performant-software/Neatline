@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_Row_TagMap extends Neatline_Row_Abstract
+abstract class Neatline_Row_Map extends Neatline_Row_Abstract
 {
 
 

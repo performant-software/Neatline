@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-abstract class Neatline_Table_TagMap extends Omeka_Db_Table
+abstract class Neatline_Table_Map extends Omeka_Db_Table
 {
 
 
