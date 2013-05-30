@@ -24,11 +24,11 @@ require_once NL_DIR.'/models/abstract/Neatline_Row_Abstract.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Expansion.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Tag.php';
-require_once NL_DIR.'/models/abstract/Neatline_Row_Tagging.php';
+require_once NL_DIR.'/models/abstract/Neatline_Row_TagMap.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Tag.php';
-require_once NL_DIR.'/models/abstract/Neatline_Table_Tagging.php';
+require_once NL_DIR.'/models/abstract/Neatline_Table_TagMap.php';
 
 // CONTROLLERS
 require_once NL_DIR.'/controllers/abstract/Neatline_Controller_Rest.php';

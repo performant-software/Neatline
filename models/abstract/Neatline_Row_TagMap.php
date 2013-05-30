@@ -18,7 +18,7 @@ abstract class Neatline_Row_TagMap extends Neatline_Row_Abstract
 
 
     /**
-     * Set foreign keys.
+     * Set object and tag references.
      *
      * @param Omeka_Record_AbstractRecord $object The tagged object.
      * @param Neatline_Row_Tag $tag A tag record.
