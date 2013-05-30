@@ -321,17 +321,17 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
         $json = file_get_contents(
             NL_DIR . '/tests/phpunit/migration/fixtures/hotchkiss-exhibits.json'
         );
-        $data = json_decode($json);
+        $data = json_decode($json, true);
         foreach ($data as $row) {
-            $exhibits->insert($data);
+            $db->insert('NeatlineExhibit', $row);
         }
 
         $json = file_get_contents(
             NL_DIR . '/tests/phpunit/migration/fixtures/hotchkiss-data-records.json'
         );
-        $data = json_decode($json);
+        $data = json_decode($json, true);
         foreach ($data as $row) {
-            $dataRecords->insert($data);
+            $db->insert('NeatlineDataRecord', $row);
         }
     }
 

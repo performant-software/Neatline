@@ -52,17 +52,17 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $db     = $this->db;
         $prefix = "{$db->prefix}neatline_";
 
-        $sql    = "SELECT COUNT(*) FROM {$prefix}exhibits_migrate;";
-        $counts = $db->query($sql);
-        foreach ($counts as $c) {
-            $this->assertEquals(0, $c);
-        }
+        $sql    = "SELECT COUNT(*) AS c FROM {$prefix}exhibits_migrate;";
+        $stmt   = $db->query($sql);
+        $stmt->setFetchMode(Zend_Db::FETCH_NUM);
+        $counts = $stmt->fetchAll();
+        $this->assertNotEquals(0, $counts[0][0]);
 
-        $sql    = "SELECT COUNT(*) FROM {$prefix}data_records_migrate;";
-        $counts = $db->query($sql);
-        foreach ($counts as $c) {
-            $this->assertEquals(0, $c);
-        }
+        $sql    = "SELECT COUNT(*) AS c FROM {$prefix}data_records_migrate;";
+        $stmt   = $db->query($sql);
+        $stmt->setFetchMode(Zend_Db::FETCH_NUM);
+        $counts = $stmt->fetchAll();
+        $this->assertNotEquals(0, $counts[0][0]);
     }
 
     /**
@@ -74,8 +74,6 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     public function testBackgroundJob()
     {
         $db     = $this->db;
-        $table  = $db->getTable('Processes');
-
         $select = $db
             ->select()
             ->from("{$db->prefix}processes")
@@ -99,8 +97,37 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      **/
     public function testMigrateTitle()
     {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+
         $helper = new Neatline_Helper_Migration(null, $this->db);
         $helper->migrateData();
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}exhibits_migrate");
+        $q      = $select->query();
+        $v1     = $q->fetchAll();
+        $names1 = array();
+        foreach ($v1 as $e) {
+            $names1[] = $e['name'];
+        }
+        sort($names1);
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}exhibits");
+        $q  = $select->query();
+        $v2 = $q->fetchAll();
+        $names2 = array();
+        foreach ($v2 as $e) {
+            $names2[] = $e['title'];
+        }
+        sort($names2);
+
+        $this->assertNotEmpty($names1);
+        $this->assertNotEmpty($names2);
+        $this->assertEquals($names1, $names2);
     }
 
 }
