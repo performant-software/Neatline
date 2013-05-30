@@ -32,12 +32,12 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
 
         $tags = $this->getTagTable();
 
-        // Delete existing taggings.
+        // Drop old mappings.
         $this->deleteMappings($object);
 
-        // Insert new taggings.
+        // Insert new mapings.
         foreach ($names as $name) {
-            $this->createTagging($object, $tags->getOrCreateTag($name));
+            $this->createMapping($object, $tags->getOrCreateTag($name));
         }
 
     }
@@ -51,7 +51,7 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
     public function deleteMappings($object)
     {
         $this->delete($this->getTableName(), array(
-            'object_id=?', $object->id
+            'object_id=?' => $object->id
         ));
     }
 
@@ -65,10 +65,15 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
      */
     public function createMapping($object, $tag)
     {
+
         $class = $this->_target;
+
+        // Create new mapping.
         $tagging = new $class($object, $tag);
         $tagging->save();
+
         return $tagging;
+
     }
 
 

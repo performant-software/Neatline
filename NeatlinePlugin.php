@@ -115,7 +115,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
         $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_tags` (
+        `{$this->_db->prefix}neatline_record_tags` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
         `name`                  VARCHAR(100) NULL,
@@ -126,7 +126,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
         $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_tag_maps` (
+        `{$this->_db->prefix}neatline_record_tag_mappings` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
         `object_id`             INT(10) UNSIGNED NULL,

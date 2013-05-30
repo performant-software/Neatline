@@ -9,5 +9,5 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineTag extends Neatline_Row_Tag
+class NeatlineRecordTag extends Neatline_Row_Tag
 {}

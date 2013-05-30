@@ -118,6 +118,11 @@ class NeatlineRecord extends Neatline_Row_Expandable
         // propagate the new rules to all other records in the exhibit.
         $exhibit->pushStyles();
 
+        // TODO|dev
+        $this->getTable('NeatlineRecordTagMapping')->createMappings(
+            $this, $newTags
+        );
+
     }
 
 

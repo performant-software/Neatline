@@ -45,10 +45,15 @@ abstract class Neatline_Table_Tag extends Omeka_Db_Table
      */
     public function createTag($name)
     {
+
         $class = $this->_target;
+
+        // Create new tag.
         $tag = new $class($name);
         $tag->save();
+
         return $tag;
+
     }
 
 
