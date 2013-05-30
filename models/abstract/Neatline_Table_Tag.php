@@ -14,13 +14,26 @@ abstract class Neatline_Table_Tag extends Omeka_Db_Table
 
 
     /**
-     * Get a tag by name.
+     * Get or create a tag by name.
      *
      * @param string $name A tag name.
      */
+    public function getOrCreateTag($name)
+    {
+        $tag = $this->getTag($name);
+        return $tag ? $tag : $this->createTag($name);
+    }
+
+
+    /**
+     * Get a tag by name.
+     *
+     * @param string $name A tag name.
+     * @return Neatline_Row_Tag The existing tag record.
+     */
     public function getTag($name)
     {
-        return $this->findBySql('tag=?', array($name), true);
+        return $this->findBySql('name=?', array($name), true);
     }
 
 
@@ -28,6 +41,7 @@ abstract class Neatline_Table_Tag extends Omeka_Db_Table
      * Create a tag by name.
      *
      * @param string $name A tag name.
+     * @return Neatline_Row_Tag The new tag record.
      */
     public function createTag($name)
     {

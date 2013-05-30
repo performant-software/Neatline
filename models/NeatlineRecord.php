@@ -56,8 +56,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
     /**
      * Set foreign keys.
      *
-     * @param Item $item The item record.
      * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param Item $item The item record.
      */
     public function __construct($exhibit = null, $item = null)
     {

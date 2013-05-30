@@ -22,29 +22,6 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
 
 
     /**
-     * Delete all tag mappings for an object.
-     *
-     * @param Omeka_Record_AbstractRecord $object The tagged object.
-     */
-    public function deleteTaggings($object)
-    {
-        // TODO
-    }
-
-
-    /**
-     * Insert an individual tagging for an object.
-     *
-     * @param Omeka_Record_AbstractRecord $object The tagged object.
-     * @param Neatline_Row_Tag $tag A tag record.
-     */
-    public function createTagging($object, $tag)
-    {
-        // TODO
-    }
-
-
-    /**
      * Insert a collection of taggings for an object.
      *
      * @param Omeka_Record_AbstractRecord $object The tagged object.
@@ -53,15 +30,45 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
     public function insertTaggings($object, $names)
     {
 
-        // Delete existings taggings.
-        $this->deleteTaggings($object);
         $tags = $this->getTagTable();
+
+        // Delete existing taggings.
+        $this->deleteTaggings($object);
 
         // Insert new taggings.
         foreach ($names as $name) {
-            $this->insertTagging($object, $tags->getOrCreate($name));
+            $this->createTagging($object, $tags->getOrCreateTag($name));
         }
 
+    }
+
+
+    /**
+     * Delete all tag mappings for an object.
+     *
+     * @param Omeka_Record_AbstractRecord $object The tagged object.
+     */
+    public function deleteTaggings($object)
+    {
+        $this->delete($this->getTableName(), array(
+            'object_id=?', $object->id
+        ));
+    }
+
+
+    /**
+     * Insert an individual tagging for an object.
+     *
+     * @param Omeka_Record_AbstractRecord $object The tagged object.
+     * @param Neatline_Row_Tag $tag A tag record.
+     * @return Neatline_Row_TagMap $tagging The new tagging.
+     */
+    public function createTagging($object, $tag)
+    {
+        $class = $this->_target;
+        $tagging = new $class($object, $tag);
+        $tagging->save();
+        return $tagging;
     }
 
 

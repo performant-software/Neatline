@@ -17,4 +17,18 @@ abstract class Neatline_Row_TagMap extends Neatline_Row_Abstract
     public $tag_id;     // INT(10) UNSIGNED NULL
 
 
+    /**
+     * Set foreign keys.
+     *
+     * @param Omeka_Record_AbstractRecord $object The tagged object.
+     * @param Neatline_Row_Tag $tag A tag record.
+     */
+    public function __construct($object = null, $tag = null)
+    {
+        parent::__construct();
+        if (!is_null($object)) $this->object_id = $object->id;
+        if (!is_null($tag)) $this->tag_id = $tag->id;
+    }
+
+
 }
