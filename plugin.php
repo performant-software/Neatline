@@ -23,12 +23,8 @@ require_once NL_DIR.'/migrations/Neatline_Migration_20alpha2.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Abstract.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Expansion.php';
-require_once NL_DIR.'/models/abstract/Neatline_Row_Map.php';
-require_once NL_DIR.'/models/abstract/Neatline_Row_Tag.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
-require_once NL_DIR.'/models/abstract/Neatline_Table_Map.php';
-require_once NL_DIR.'/models/abstract/Neatline_Table_Tag.php';
 
 // CONTROLLERS
 require_once NL_DIR.'/controllers/abstract/Neatline_Controller_Rest.php';
