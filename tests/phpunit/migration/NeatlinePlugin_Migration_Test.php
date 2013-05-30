@@ -90,44 +90,95 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
-     * The titles get transferred correctly.
+     * This triggers the migration.
      *
      * @return void
      * @author Eric Rochester
      **/
-    public function testMigrateTitle()
+    protected function _migrate()
+    {
+        $helper = new Neatline_Helper_Migration(null, $this->db);
+        $helper->migrateData();
+    }
+
+    /**
+     * This tests whether a field was transfered correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testMigration($table_a, $a, $table_b, $b)
     {
         $db     = $this->db;
         $prefix = "{$db->prefix}neatline_";
 
-        $helper = new Neatline_Helper_Migration(null, $this->db);
-        $helper->migrateData();
-
         $select = $db
             ->select()
-            ->from("{$prefix}exhibits_migrate");
-        $q      = $select->query();
-        $v1     = $q->fetchAll();
-        $names1 = array();
+            ->from("{$prefix}{$table_a}_migrate");
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
         foreach ($v1 as $e) {
-            $names1[] = $e['name'];
+            $values1[] = $e[$a];
         }
-        sort($names1);
+        sort($values1);
 
         $select = $db
             ->select()
-            ->from("{$prefix}exhibits");
-        $q  = $select->query();
-        $v2 = $q->fetchAll();
-        $names2 = array();
+            ->from("{$prefix}{$table_b}");
+        $q       = $select->query();
+        $v2      = $q->fetchAll();
+        $values2 = array();
         foreach ($v2 as $e) {
-            $names2[] = $e['title'];
+            $values2[] = $e[$b];
         }
-        sort($names2);
+        sort($values2);
 
-        $this->assertNotEmpty($names1);
-        $this->assertNotEmpty($names2);
-        $this->assertEquals($names1, $names2);
+        $this->assertNotEmpty($values1);
+        $this->assertNotEmpty($values2);
+        $this->assertEquals($values1, $values2);
+    }
+
+    /**
+     * This tests whether a field was transfered correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testExhibitMigration($a, $b)
+    {
+        $this->_testMigration('exhibits', $a, 'exhibits', $b);
+    }
+
+    /**
+     * This tests that simply transfered fields are handled correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateExhibitSimpleTransfers()
+    {
+        $this->_migrate();
+        $this->_testExhibitMigration('id',                 'id');
+        $this->_testExhibitMigration('name',               'title');
+        $this->_testExhibitMigration('slug',               'slug');
+        $this->_testExhibitMigration('public',             'public');
+        $this->_testExhibitMigration('description',        'narrative');
+        $this->_testExhibitMigration('modified',           'modified');
+        $this->_testExhibitMigration('query',              'query');
+        $this->_testExhibitMigration('default_map_bounds', 'map_focus');
+        $this->_testExhibitMigration('default_map_zoom',   'map_zoom');
+    }
+
+    /**
+     * This tests that simply transfered data record fields are handled 
+     * correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateDataRecordSimpleTransfers()
+    {
     }
 
 }

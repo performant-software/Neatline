@@ -96,6 +96,28 @@ class Neatline_Helper_Migration
      **/
     public function migrateData()
     {
+        $db     = $this->_db;
+        $prefix = "{$db->prefix}neatline_";
+        $ext    = "_migrate";
+
+        $sql = <<<SQL
+INSERT INTO {$prefix}exhibits
+    (id, title, slug, public, narrative, modified, query, map_focus, map_zoom)
+    SELECT id, name, slug, public, description, modified, query,
+        default_map_bounds, default_map_zoom
+    FROM {$prefix}exhibits${ext};
+SQL;
+
+        $db->beginTransaction();
+
+        try {
+            $db->query($sql);
+
+            $db->commit();
+        } catch (Exception $e) {
+            $db->rollback();
+            echo $e->getMessage();
+        }
     }
 
 }
