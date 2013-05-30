@@ -34,7 +34,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Create exhibit and record tables.
+     * Create tables.
      */
     public function hookInstall()
     {
@@ -114,23 +114,52 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
 
+        $this->_db->query("CREATE TABLE IF NOT EXISTS
+        `{$this->_db->prefix}neatline_tags` (
+
+        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `name`                  VARCHAR(100) NULL,
+
+         PRIMARY KEY            (`id`)
+
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
+        $this->_db->query("CREATE TABLE IF NOT EXISTS
+        `{$this->_db->prefix}neatline_tag_maps` (
+
+        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `object_id`             INT(10) UNSIGNED NULL,
+        `tag_id`                INT(10) UNSIGNED NULL,
+
+         PRIMARY KEY            (`id`)
+
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+
     }
 
 
     /**
-     * Drop exhibit and record tables.
+     * Drop tables.
      */
     public function hookUninstall()
     {
 
-        // Exhibits:
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_exhibits`"
         );
 
-        // Records:
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`"
+        );
+
+        $this->_db->query("DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_tags`"
+        );
+
+        $this->_db->query("DROP TABLE IF EXISTS
+            `{$this->_db->prefix}neatline_tag_maps`"
         );
 
     }

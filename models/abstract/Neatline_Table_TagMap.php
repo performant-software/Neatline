@@ -22,18 +22,18 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
 
 
     /**
-     * Insert a collection of taggings for an object.
+     * Insert a collection of tag mappings for an object.
      *
      * @param Omeka_Record_AbstractRecord $object The tagged object.
      * @param array $names A array of tag names.
      */
-    public function insertTaggings($object, $names)
+    public function createMappings($object, $names)
     {
 
         $tags = $this->getTagTable();
 
         // Delete existing taggings.
-        $this->deleteTaggings($object);
+        $this->deleteMappings($object);
 
         // Insert new taggings.
         foreach ($names as $name) {
@@ -48,7 +48,7 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
      *
      * @param Omeka_Record_AbstractRecord $object The tagged object.
      */
-    public function deleteTaggings($object)
+    public function deleteMappings($object)
     {
         $this->delete($this->getTableName(), array(
             'object_id=?', $object->id
@@ -57,13 +57,13 @@ abstract class Neatline_Table_TagMap extends Omeka_Db_Table
 
 
     /**
-     * Insert an individual tagging for an object.
+     * Insert an individual tag mapping for an object.
      *
      * @param Omeka_Record_AbstractRecord $object The tagged object.
      * @param Neatline_Row_Tag $tag A tag record.
      * @return Neatline_Row_TagMap $tagging The new tagging.
      */
-    public function createTagging($object, $tag)
+    public function createMapping($object, $tag)
     {
         $class = $this->_target;
         $tagging = new $class($object, $tag);
