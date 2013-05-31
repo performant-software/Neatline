@@ -18,7 +18,9 @@ Neatline.module('Editor.Exhibit.Records', function(
     className: 'records',
 
     events: {
-      'click a[data-id]': 'click'
+      'mouseenter a[data-id]':  'onMouseenter',
+      'mouseleave a[data-id]':  'onMouseleave',
+      'click a[data-id]':       'onClick'
     },
 
 
@@ -37,6 +39,8 @@ Neatline.module('Editor.Exhibit.Records', function(
      */
     ingest: function(records) {
 
+      this.records = records;
+
       // Get query as URL param.
       var query = Neatline.request(
         'EDITOR:EXHIBIT:SEARCH:getQueryForUrl'
@@ -44,7 +48,7 @@ Neatline.module('Editor.Exhibit.Records', function(
 
       // Render record list.
       this.$el.html(this.template({
-        records:  records,
+        records:  this.records,
         limit:    Neatline.global.per_page,
         query:    query
       }));
@@ -53,13 +57,41 @@ Neatline.module('Editor.Exhibit.Records', function(
 
 
     /**
-     * Focus the map when a record row is clicked.
+     * Trigger `highlight` when the cursor hovers on a record row.
      *
      * @param {Object} e: The click event.
      */
-    click: function(e) {
+    onMouseenter: function(e) {
+      // TODO
+    },
+
+
+    /**
+     * Trigger `unhighlight` when the cursor leaves a record row.
+     *
+     * @param {Object} e: The click event.
+     */
+    onMouseleave: function(e) {
+      // TODO
+    },
+
+
+    /**
+     * Trigger `select` a record row is clicked.
+     *
+     * @param {Object} e: The click event.
+     */
+    onClick: function(e) {
+
+      // Get the `data-id` attribute on the row.
       var id = parseInt($(e.currentTarget).attr('data-id'), 10);
-      Neatline.execute('MAP:focusById', id);
+
+      // Publish `select` event.
+      Neatline.vent.trigger('select', {
+        model:  this.records.get(id),
+        source: Records.ID
+      });
+
     }
 
 
