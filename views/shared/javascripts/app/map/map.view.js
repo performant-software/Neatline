@@ -647,11 +647,11 @@ Neatline.module('Map', function(
     /**
      * Highglight all features on a layer, identified by record id.
      *
-     * @param {Number} id: The record id.
+     * @param {Object} model: The record model.
      */
-    highlightById: function(id) {
+    highlightByModel: function(model) {
 
-      var layer = this.layers.vector[id];
+      var layer = this.layers.vector[model.id];
       if (!layer) return;
 
       // Render `temporary` intent.
@@ -665,11 +665,11 @@ Neatline.module('Map', function(
     /**
      * Unhighglight all features on a layer, identified by record id.
      *
-     * @param {Number} id: The record id.
+     * @param {Object} model: The record model.
      */
-    unhighlightById: function(id) {
+    unhighlightByModel: function(model) {
 
-      var layer = this.layers.vector[id];
+      var layer = this.layers.vector[model.id];
       if (!layer) return;
 
       // Render `default` intent.
@@ -683,11 +683,11 @@ Neatline.module('Map', function(
     /**
      * Select all features on a layer, identified by record id.
      *
-     * @param {Number} id: The record id.
+     * @param {Object} model: The record model.
      */
-    selectById: function(id) {
+    selectByModel: function(model) {
 
-      var layer = this.layers.vector[id];
+      var layer = this.layers.vector[model.id];
       if (!layer) return;
 
       // Render `select` intent.
@@ -701,10 +701,10 @@ Neatline.module('Map', function(
     /**
      * Unselect all features on a layer, identified by record id.
      *
-     * @param {Number} id: The record id.
+     * @param {Object} model: The record model.
      */
-    unselectById: function(id) {
-      this.unhighlightById(id);
+    unselectByModel: function(model) {
+      this.unhighlightByModel(model);
     },
 
 
@@ -717,7 +717,7 @@ Neatline.module('Map', function(
     onFeatureHighlight: function(evt) {
 
       // Highlight sibling features.
-      this.highlightById(evt.feature.layer.nModel.id);
+      this.highlightByModel(evt.feature.layer.nModel);
 
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
@@ -737,7 +737,7 @@ Neatline.module('Map', function(
     onFeatureUnhighlight: function(evt) {
 
       // Unhighlight sibling features.
-      this.unhighlightById(evt.feature.layer.nModel.id);
+      this.unhighlightByModel(evt.feature.layer.nModel);
 
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
@@ -757,7 +757,7 @@ Neatline.module('Map', function(
     onFeatureSelect: function(feature) {
 
       // Select sibling features.
-      this.selectById(feature.layer.nModel.id);
+      this.selectByModel(feature.layer.nModel);
 
       // Publish `select` event.
       Neatline.vent.trigger('select', {
@@ -776,7 +776,7 @@ Neatline.module('Map', function(
     onFeatureUnselect: function(feature) {
 
       // Unselect sibling features.
-      this.unselectById(feature.layer.nModel.id);
+      this.unselectByModel(feature.layer.nModel);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {

@@ -61,17 +61,6 @@ Neatline.module('Map', function(
 
 
   /**
-   * Highlight features for a record, identified by id.
-   *
-   * @param {Number} id: The record id.
-   */
-  var highlightById = function(id) {
-    // TODO
-  };
-  Neatline.commands.setHandler(Map.ID+':highlightById', highlightById);
-
-
-  /**
    * Focus by model, unless the event was triggered by the map.
    *
    * @param {Object} args: Event arguments.
