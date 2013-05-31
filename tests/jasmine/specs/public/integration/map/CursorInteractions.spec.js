@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Cursor Interactions', function() {
+describe('Cursor Interactions', function() {
 
 
   var layer1, layer2, fx = {

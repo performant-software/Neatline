@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Vector Layer Refreshing', function() {
+describe('Layer Refreshing', function() {
 
 
   var fx = {

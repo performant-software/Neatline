@@ -699,16 +699,6 @@ Neatline.module('Map', function(
 
 
     /**
-     * Unselect all features on a layer, identified by record id.
-     *
-     * @param {Object} model: The record model.
-     */
-    unselectByModel: function(model) {
-      this.unhighlightByModel(model);
-    },
-
-
-    /**
      * When a feature is highlighted, trigger the `highlight` event with
      * the model associated with the feature.
      *
@@ -776,7 +766,7 @@ Neatline.module('Map', function(
     onFeatureUnselect: function(feature) {
 
       // Unselect sibling features.
-      this.unselectByModel(feature.layer.nModel);
+      this.unhighlightByModel(feature.layer.nModel);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {

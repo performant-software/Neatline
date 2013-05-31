@@ -86,19 +86,6 @@ Neatline.module('Map', function(
 
 
   /**
-   * Focus the map on the data extent for a record, identified by id.
-   *
-   * @param {Number} id: The record id.
-   */
-  var focusById = function(id) {
-    Map.__collection.getOrFetch(id, function(model) {
-      focusByModel(model);
-    });
-  };
-  Neatline.commands.setHandler(Map.ID+':focusById', focusById);
-
-
-  /**
    * Set a layer filter.
    *
    * @param {Object} args: Event arguments.

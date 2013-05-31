@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Base Layers', function() {
+describe('Base Layers', function() {
 
 
   beforeEach(function() {
