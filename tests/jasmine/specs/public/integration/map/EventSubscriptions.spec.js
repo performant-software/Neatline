@@ -22,6 +22,47 @@ describe('Event Subscriptions', function() {
   });
 
 
+  describe('highlight', function() {
+
+    it('should highlight features', function() {
+
+      // ------------------------------------------------------------------
+      // When `highlight` is triggered with a record that has a vector
+      // layer on the map, the map should highlight the features.
+      // ------------------------------------------------------------------
+
+      NL.respondMap200(fx.records);
+      var layer = NL.vw.MAP.getVectorLayers()[0];
+      
+      Neatline.vent.trigger('highlight', { model: layer.nModel });
+      expect(layer.features[0].renderIntent).toEqual('temporary');
+
+    });
+
+  });
+
+
+  describe('unhighlight', function() {
+
+    it('should unhighlight features', function() {
+
+      // ------------------------------------------------------------------
+      // When `unhighlight` is triggered with a record that has a vector
+      // layer on the map, the map should unhighlight the features.
+      // ------------------------------------------------------------------
+
+      NL.respondMap200(fx.records);
+      var layer = NL.vw.MAP.getVectorLayers()[0];
+      
+      Neatline.vent.trigger('highlight', { model: layer.nModel });
+      Neatline.vent.trigger('unhighlight', { model: layer.nModel });
+      expect(layer.features[0].renderIntent).toEqual('default');
+      
+    });
+
+  });
+
+
   describe('select', function() {
 
     it('should focus when a layer already exists', function() {
@@ -95,6 +136,43 @@ describe('Event Subscriptions', function() {
       // Focus should be unchanged.
       NL.assertMapViewport(200, 300, 15);
 
+    });
+
+    it('should unhighlight features', function() {
+
+      // ------------------------------------------------------------------
+      // When a record is selected that already has a vector layer on the
+      // map, the layers' features should be _un_highlighted.
+      // ------------------------------------------------------------------
+
+      NL.respondMap200(fx.records);
+      var layer = NL.vw.MAP.getVectorLayers()[0];
+      
+      Neatline.vent.trigger('highlight', { model: layer.nModel });
+      Neatline.vent.trigger('select', { model: layer.nModel });
+      expect(layer.features[0].renderIntent).toEqual('default');
+      
+    });
+
+  });
+
+
+  describe('unselect', function() {
+
+    it('should unhighlight features', function() {
+
+      // ------------------------------------------------------------------
+      // When `unhighlight` is triggered with a record that has a vector
+      // layer on the map, the map should unhighlight the features.
+      // ------------------------------------------------------------------
+
+      NL.respondMap200(fx.records);
+      var layer = NL.vw.MAP.getVectorLayers()[0];
+      
+      Neatline.vent.trigger('highlight', { model: layer.nModel });
+      Neatline.vent.trigger('unselect', { model: layer.nModel });
+      expect(layer.features[0].renderIntent).toEqual('default');
+      
     });
 
   });

@@ -9,13 +9,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapCursorInteractions
+class FixturesTest_PublicMapVectorRenderIntent
     extends Neatline_Case_Fixture
 {
 
 
     /**
-     * `PublicMapCursorInteractions.records.json`
+     * `PublicMapVectorRenderIntents.records.json`
      */
     public function testRecords()
     {
@@ -30,7 +30,7 @@ class FixturesTest_PublicMapCursorInteractions
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapCursorInteractions.records.json'
+            'PublicMapVectorRenderIntent.records.json'
         );
 
     }

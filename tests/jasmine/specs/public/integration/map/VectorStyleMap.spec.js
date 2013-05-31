@@ -8,22 +8,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Vector Layer Style Rendering', function() {
+describe('Vector Layer Style Maps', function() {
 
 
-  var layer, feature, fx = {
-    records: read('PublicMapVectorStyles.records.json')
+  var fx = {
+    records: read('PublicMapVectorStyleMap.records.json')
   };
 
 
   beforeEach(function() {
-
     NL.loadNeatline();
     NL.respondMap200(fx.records);
-
-    layer = NL.vw.MAP.getVectorLayers()[0];
-    feature = layer.features[0];
-
   });
 
 
@@ -33,6 +28,8 @@ describe('Vector Layer Style Rendering', function() {
     // When vector layers are ingested, the style maps should be created
     // from record values.
     // --------------------------------------------------------------------
+
+    var layer = NL.vw.MAP.getVectorLayers()[0];
 
     var def = layer.styleMap.styles['default'].defaultStyle;
     var tmp = layer.styleMap.styles.temporary.defaultStyle;
@@ -69,61 +66,6 @@ describe('Vector Layer Style Rendering', function() {
     expect(def.externalGraphic).  toEqual('11');
     expect(tmp.externalGraphic).  toEqual('11');
     expect(sel.externalGraphic).  toEqual('11');
-
-  });
-
-  it('should render `temporary` intent on highlight', function() {
-
-    // --------------------------------------------------------------------
-    // When the cursor hovers on a feature, the `temporary` style should
-    // be applied to the geometry.
-    // --------------------------------------------------------------------
-
-    NL.hoverOnMapFeature(feature);
-
-    expect(feature.renderIntent).toEqual('temporary');
-
-  });
-
-  it('should render `default` intent on unhighlight', function() {
-
-    // --------------------------------------------------------------------
-    // When the cursor hovers off a feature, the `default` style should be
-    // applied to the geometry.
-    // --------------------------------------------------------------------
-
-    NL.hoverOnMapFeature(feature);
-    NL.unHoverOnMapFeature();
-
-    expect(feature.renderIntent).toEqual('default');
-
-  });
-
-  it('should render `select` intent on select', function() {
-
-    // --------------------------------------------------------------------
-    // When a feature is clicked, the `select` style should be applied to
-    // the geometry.
-    // --------------------------------------------------------------------
-
-    NL.clickOnMapFeature(feature);
-
-    expect(feature.renderIntent).toEqual('select');
-
-  });
-
-
-  it('should render `default` intent on unselect', function() {
-
-    // --------------------------------------------------------------------
-    // When a feature is unselected, the `default` style should be applied
-    // to the geometry.
-    // --------------------------------------------------------------------
-
-    NL.clickOnMapFeature(feature);
-    NL.clickOffMapFeature();
-
-    expect(feature.renderIntent).toEqual('default');
 
   });
 

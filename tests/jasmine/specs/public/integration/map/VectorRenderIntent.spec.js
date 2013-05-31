@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Cursor Interactions', function() {
+describe('Vector Layer Render Intents', function() {
 
 
   var layer1, layer2, fx = {
-    records: readFixtures('PublicMapCursorInteractions.records.json')
+    records: readFixtures('PublicMapVectorRenderIntent.records.json')
   };
 
 
