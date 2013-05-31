@@ -102,7 +102,6 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} e: The click event.
      */
     onClick: function(e) {
-      this.onMouseleave(e);
       Neatline.vent.trigger('select', {
         model:  this.getModelByEvent(e),
         source: Records.ID

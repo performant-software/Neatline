@@ -37,12 +37,16 @@ Neatline.module('Map', function(
 
 
   /**
-   * Focus by model, unless the event was triggered by the map.
+   * Unhighlight the layer that corresponds to the passed model and then
+   * focus on its extent (unless the event was triggered by the map).
    *
    * @param {Object} args: Event arguments.
    */
   var select = function(args) {
-    if (args.source !== 'MAP') focusByModel(args.model);
+    if (args.source !== 'MAP') {
+      Map.__view.unhighlightByModel(args.model);
+      focusByModel(args.model);
+    }
   };
   Neatline.commands.setHandler(Map.ID+':select', select);
   Neatline.vent.on('select', select);
@@ -71,6 +75,7 @@ Neatline.module('Map', function(
     Map.__view.unhighlightByModel(args.model);
   };
   Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
+  Neatline.commands.setHandler(Map.ID+':unselect', unhighlight);
   Neatline.vent.on('unhighlight', unhighlight);
 
 
