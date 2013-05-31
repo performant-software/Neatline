@@ -97,15 +97,6 @@ Neatline.module('Map', function(
 
 
   /**
-   * Unselect all features.
-   */
-  var unselect = function() {
-    Map.__view.unselectAll();
-  };
-  Neatline.commands.setHandler(Map.ID+':unselect', unselect);
-
-
-  /**
    * Emit the OpenLayers map instance.
    *
    * @return {Object}: The map.

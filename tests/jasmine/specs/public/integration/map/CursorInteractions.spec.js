@@ -11,8 +11,25 @@
 describe('Map Cursor Interactions', function() {
 
 
+  var layer1, layer2, fx = {
+    records: readFixtures('PublicMapCursorInteractions.records.json')
+  };
+
+
   beforeEach(function() {
+
     NL.loadNeatline();
+    NL.respondMap200(fx.records);
+
+    layer1 = NL.vw.MAP.getVectorLayers()[0];
+    layer2 = NL.vw.MAP.getVectorLayers()[1];
+
+  });
+
+
+  afterEach(function() {
+    expect(layer2.features[0].renderIntent).toEqual('default');
+    expect(layer2.features[1].renderIntent).toEqual('default');
   });
 
 
@@ -22,6 +39,11 @@ describe('Map Cursor Interactions', function() {
     // When cursor hovers on a feature, all of the features on the layer
     // should be redrawn with the `temporary` render intent.
     // --------------------------------------------------------------------
+
+    NL.hoverOnMapFeature(layer1.features[0]);
+
+    expect(layer1.features[0].renderIntent).toEqual('temporary');
+    expect(layer1.features[1].renderIntent).toEqual('temporary');
 
   });
 
@@ -33,6 +55,12 @@ describe('Map Cursor Interactions', function() {
     // should be redrawn with the `default` render intent.
     // --------------------------------------------------------------------
 
+    NL.hoverOnMapFeature(layer1.features[0]);
+    NL.unHoverOnMapFeature();
+
+    expect(layer1.features[0].renderIntent).toEqual('default');
+    expect(layer1.features[1].renderIntent).toEqual('default');
+
   });
 
 
@@ -43,6 +71,11 @@ describe('Map Cursor Interactions', function() {
     // be redrawn with the `select` render intent.
     // --------------------------------------------------------------------
 
+    NL.clickOnMapFeature(layer1.features[0]);
+
+    expect(layer1.features[0].renderIntent).toEqual('select');
+    expect(layer1.features[1].renderIntent).toEqual('select');
+
   });
 
 
@@ -52,6 +85,12 @@ describe('Map Cursor Interactions', function() {
     // When the cursor clicks off a feature, all of the features on the
     // layer should be redrawn with the `default` render intent.
     // --------------------------------------------------------------------
+
+    NL.clickOnMapFeature(layer1.features[0]);
+    NL.clickOffMapFeature();
+
+    expect(layer1.features[0].renderIntent).toEqual('default');
+    expect(layer1.features[1].renderIntent).toEqual('default');
 
   });
 

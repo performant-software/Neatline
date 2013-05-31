@@ -202,15 +202,6 @@ Neatline.module('Map', function(
 
 
     /**
-     * Unselect all selected features.
-     */
-    unselectAll: function() {
-      this.hoverControl.unselectAll();
-      this.clickControl.unselectAll();
-    },
-
-
-    /**
      * Publish the current focus and zoom of the map via `MAP:move`.
      */
     publishPosition: function() {
