@@ -111,8 +111,8 @@ Neatline.module('Map', function(
           highlightOnly: true,
 
           eventListeners: {
-            featurehighlighted:   this.onFeatureHighlight,
-            featureunhighlighted: this.onFeatureUnhighlight
+            featurehighlighted:   _.bind(this.onFeatureHighlight, this),
+            featureunhighlighted: _.bind(this.onFeatureUnhighlight, this)
           }
 
         }
@@ -121,8 +121,8 @@ Neatline.module('Map', function(
       // Build the click control, bind callbacks.
       this.clickControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
-          onSelect:   this.onFeatureSelect,
-          onUnselect: this.onFeatureUnselect,
+          onSelect:   _.bind(this.onFeatureSelect, this),
+          onUnselect: _.bind(this.onFeatureUnselect, this),
           toggle: true
         }
       );
@@ -645,6 +645,70 @@ Neatline.module('Map', function(
 
 
     /**
+     * Highglight all features on a layer, identified by record id.
+     *
+     * @param {Number} id: The record id.
+     */
+    highlightById: function(id) {
+
+      var layer = this.layers.vector[id];
+      if (!layer) return;
+
+      // Render `temporary` intent.
+      _.each(layer.features, function(feature) {
+        layer.drawFeature(feature, 'temporary');
+      });
+
+    },
+
+
+    /**
+     * Unhighglight all features on a layer, identified by record id.
+     *
+     * @param {Number} id: The record id.
+     */
+    unhighlightById: function(id) {
+
+      var layer = this.layers.vector[id];
+      if (!layer) return;
+
+      // Render `default` intent.
+      _.each(layer.features, function(feature) {
+        layer.drawFeature(feature, 'default');
+      });
+
+    },
+
+
+    /**
+     * Select all features on a layer, identified by record id.
+     *
+     * @param {Number} id: The record id.
+     */
+    selectById: function(id) {
+
+      var layer = this.layers.vector[id];
+      if (!layer) return;
+
+      // Render `select` intent.
+      _.each(layer.features, function(feature) {
+        layer.drawFeature(feature, 'select');
+      });
+
+    },
+
+
+    /**
+     * Unselect all features on a layer, identified by record id.
+     *
+     * @param {Number} id: The record id.
+     */
+    unselectById: function(id) {
+      this.unhighlightById(id);
+    },
+
+
+    /**
      * When a feature is highlighted, trigger the `highlight` event with
      * the model associated with the feature.
      *
@@ -653,9 +717,7 @@ Neatline.module('Map', function(
     onFeatureHighlight: function(evt) {
 
       // Highlight sibling features.
-      _.each(evt.feature.layer.features, function(feature) {
-        evt.feature.layer.drawFeature(feature, 'temporary');
-      });
+      this.highlightById(evt.feature.layer.nModel.id);
 
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
@@ -675,9 +737,7 @@ Neatline.module('Map', function(
     onFeatureUnhighlight: function(evt) {
 
       // Unhighlight sibling features.
-      _.each(evt.feature.layer.features, function(feature) {
-        evt.feature.layer.drawFeature(feature, 'default');
-      });
+      this.unhighlightById(evt.feature.layer.nModel.id);
 
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
@@ -697,9 +757,7 @@ Neatline.module('Map', function(
     onFeatureSelect: function(feature) {
 
       // Select sibling features.
-      _.each(feature.layer.features, function(feature) {
-        feature.layer.drawFeature(feature, 'select');
-      });
+      this.selectById(feature.layer.nModel.id);
 
       // Publish `select` event.
       Neatline.vent.trigger('select', {
@@ -718,9 +776,7 @@ Neatline.module('Map', function(
     onFeatureUnselect: function(feature) {
 
       // Unselect sibling features.
-      _.each(feature.layer.features, function(feature) {
-        feature.layer.drawFeature(feature, 'default');
-      });
+      this.unselectById(feature.layer.nModel.id);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
