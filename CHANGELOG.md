@@ -1,3 +1,9 @@
+# v2.0 (pending)
+
+#### Changed Features
+
+  - Changes all tag-based queries to use MySQL full-text search instead of regular expression matching. This improves performance, but means that tags have to be at least 4 characters in length in order to be indexed.
+
 # v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
 
 #### New Features
