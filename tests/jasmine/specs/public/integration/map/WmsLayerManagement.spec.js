@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('WMS Layer Add/Remove', function() {
+describe('WMS Layer Management', function() {
 
 
   var fx = {
-    regular: read('PublicMapWmsAddRemove.regular.json'),
-    deleted: read('PublicMapWmsAddRemove.deleted.json')
+    regular: read('PublicMapWmsLayerManagement.regular.json'),
+    deleted: read('PublicMapWmsLayerManagement.deleted.json')
   };
 
 

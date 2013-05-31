@@ -415,6 +415,7 @@ module.exports = function(grunt) {
 
   // Run all tests.
   grunt.registerTask('test', [
+    'clean:fixtures',
     'shell:phpunit',
     'jasmine'
   ]);

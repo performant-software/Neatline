@@ -9,20 +9,24 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapVectorStyleMap extends Neatline_Case_Fixture
+class FixturesTest_PublicMapVectorStyles
+    extends Neatline_Case_Fixture
 {
 
 
     /**
-     * `PublicMapVectorStyleMap.records.json`
+     * `PublicMapVectorStyles.records.json`
      */
     public function testRecords()
     {
 
-        $record = $this->__record($this->exhibit);
+        $record1 = $this->__record($this->exhibit);
+        $record2 = $this->__record($this->exhibit);
 
-        $record->setArray(array(
-            'coverage'              => 'POINT(1 2)',
+        $record1->coverage = 'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))';
+        $record2->coverage = 'GEOMETRYCOLLECTION(POINT(5 6),POINT(7 8))';
+
+        $record1->setArray(array(
             'fill_color'            => '1',
             'fill_color_select'     => '2',
             'stroke_color'          => '3',
@@ -36,10 +40,11 @@ class FixturesTest_PublicMapVectorStyleMap extends Neatline_Case_Fixture
             'point_image'           => '11'
         ));
 
-        $record->save();
+        $record1->save();
+        $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapVectorStyleMap.records.json'
+            'PublicMapVectorStyles.records.json'
         );
 
     }

@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Vector Layer Add/Remove', function() {
+describe('Vector Layer Management', function() {
 
 
   var fx = {
-    regular: read('PublicMapVectorAddRemove.regular.json'),
-    deleted: read('PublicMapVectorAddRemove.deleted.json')
+    regular: read('PublicMapVectorLayerManagement.regular.json'),
+    deleted: read('PublicMapVectorLayerManagement.deleted.json')
   };
 
 
