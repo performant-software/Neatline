@@ -1,10 +1,12 @@
 # v2.0-alpha3 (pending)
 
+#### Added Features
+
+  - When the cursor hovers/blurs on listings in the record-browser panel in the editor, corresponding features on the map will highlight/unhighlight.
+
 #### Changed Features
 
   - Changes all tag queries to use MySQL full-text search instead of regular expression matching. This improves performance, but means that tags have to be at least four characters in length in order by be indexed by MySQL.
-
-means that tags have to be at least 4 characters in length in order to be indexed.
 
 # v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
 
