@@ -57,12 +57,28 @@ Neatline.module('Editor.Exhibit.Records', function(
 
 
     /**
+     * Get the model that corresponds to a DOM event.
+     *
+     * @param {Object} e: A DOM event.
+     */
+    getModelByEvent: function(e) {
+      return this.records.get(
+        parseInt($(e.currentTarget).attr('data-id'), 10)
+      );
+    },
+
+
+    /**
      * Trigger `highlight` when the cursor hovers on a record row.
      *
      * @param {Object} e: The click event.
      */
     onMouseenter: function(e) {
-      // TODO
+      // TODO|dev
+      Neatline.vent.trigger('highlight', {
+        model:  this.getModelByEvent(e),
+        source: Records.ID
+      });
     },
 
 
@@ -72,7 +88,11 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} e: The click event.
      */
     onMouseleave: function(e) {
-      // TODO
+      // TODO|dev
+      Neatline.vent.trigger('unhighlight', {
+        model:  this.getModelByEvent(e),
+        source: Records.ID
+      });
     },
 
 
@@ -82,16 +102,11 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} e: The click event.
      */
     onClick: function(e) {
-
-      // Get the `data-id` attribute on the row.
-      var id = parseInt($(e.currentTarget).attr('data-id'), 10);
-
-      // Publish `select` event.
+      this.onMouseleave(e);
       Neatline.vent.trigger('select', {
-        model:  this.records.get(id),
+        model:  this.getModelByEvent(e),
         source: Records.ID
       });
-
     }
 
 
