@@ -660,10 +660,18 @@ Neatline.module('Map', function(
      * @param {Object} evt: The highlight event.
      */
     onFeatureHighlight: function(evt) {
+
+      // Highlight sibling features.
+      _.each(evt.feature.layer.features, function(feature) {
+        evt.feature.layer.drawFeature(feature, 'temporary');
+      });
+
+      // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
         model:  evt.feature.layer.nModel,
         source: Map.ID
       });
+
     },
 
 
@@ -674,10 +682,18 @@ Neatline.module('Map', function(
      * @param {Object} evt: The unhighlight event.
      */
     onFeatureUnhighlight: function(evt) {
+
+      // Unhighlight sibling features.
+      _.each(evt.feature.layer.features, function(feature) {
+        evt.feature.layer.drawFeature(feature, 'default');
+      });
+
+      // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
         model:  evt.feature.layer.nModel,
         source: Map.ID
       });
+
     },
 
 
@@ -688,10 +704,18 @@ Neatline.module('Map', function(
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureSelect: function(feature) {
+
+      // Select sibling features.
+      _.each(feature.layer.features, function(feature) {
+        feature.layer.drawFeature(feature, 'select');
+      });
+
+      // Publish `select` event.
       Neatline.vent.trigger('select', {
         model:  feature.layer.nModel,
         source: Map.ID
       });
+
     },
 
 
@@ -701,10 +725,18 @@ Neatline.module('Map', function(
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureUnselect: function(feature) {
+
+      // Unselect sibling features.
+      _.each(feature.layer.features, function(feature) {
+        feature.layer.drawFeature(feature, 'default');
+      });
+
+      // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
         model:  feature.layer.nModel,
         source: Map.ID
       });
+
     }
 
 
