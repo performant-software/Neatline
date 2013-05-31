@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Outgoing Events', function() {
+describe('Map Event Publications', function() {
 
 
   var layer, feature, vent, fx = {
-    records: readFixtures('PublicMapOutgoingEvents.records.json'),
+    records: readFixtures('PublicMapEventPublications.records.json')
   };
 
 
@@ -21,9 +21,11 @@ describe('Map Outgoing Events', function() {
     NL.loadNeatline();
     NL.respondMap200(fx.records);
 
+    // Get layer and feature.
     layer = NL.vw.MAP.getVectorLayers()[0];
     feature = layer.features[0];
 
+    // Spy on the event aggregator.
     vent = spyOn(Neatline.vent, 'trigger');
 
   });
