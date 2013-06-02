@@ -9,13 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorMapEditLayer extends Neatline_Case_Fixture
+class FixturesTest_EditorMapEditLayerManagement
+    extends Neatline_Case_Fixture
 {
 
 
     /**
-     * `EditorMapEditLayer.record3.json`
-     * `EditorMapEditLayer.noRecord3.json`
+     * `EditorMapEditLayerManagement.record3.json`
+     * `EditorMapEditLayerManagement.noRecord3.json`
      */
     public function testRecords()
     {
@@ -39,14 +40,14 @@ class FixturesTest_EditorMapEditLayer extends Neatline_Case_Fixture
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorMapEditLayer.record3.json'
+            'EditorMapEditLayerManagement.record3.json'
         );
 
         $record3->delete();
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorMapEditLayer.noRecord3.json'
+            'EditorMapEditLayerManagement.noRecord3.json'
         );
 
     }
