@@ -30,7 +30,8 @@ describe('Records List', function() {
     // --------------------------------------------------------------------
 
     NL.respondRecordList200(fx.defaultList);
-    var models = NL.getRecordListModels(), rows = NL.getRecordListRows();
+
+    var rows = NL.getRecordListRows();
 
     // Should show titles and bodies.
     expect($(rows[0])).toHaveText('New Record');
@@ -40,6 +41,8 @@ describe('Records List', function() {
     expect($(rows[2]).find('.body')).toHaveText('body2');
     expect($(rows[3]).find('.title')).toHaveText('title3');
     expect($(rows[3]).find('.body')).toHaveText('body3');
+
+    var models = NL.getRecordListModels();
 
     // Should link to edit forms.
     expect($(rows[0]).attr('href')).toEqual('#record/add');

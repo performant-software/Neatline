@@ -51,10 +51,10 @@ describe('Record Form Save', function() {
     inputs.fillColorSelect.     val('#888888').     trigger('change');
     inputs.strokeColor.         val('#999999').     trigger('change');
     inputs.strokeColorSelect.   val('#999999').     trigger('change');
-    inputs.fillOpacity.         val('0.10').          trigger('change');
-    inputs.fillOpacitySelect.   val('0.11').          trigger('change');
-    inputs.strokeOpacity.       val('0.12').          trigger('change');
-    inputs.strokeOpacitySelect. val('0.13').          trigger('change');
+    inputs.fillOpacity.         val('0.10').        trigger('change');
+    inputs.fillOpacitySelect.   val('0.11').        trigger('change');
+    inputs.strokeOpacity.       val('0.12').        trigger('change');
+    inputs.strokeOpacitySelect. val('0.13').        trigger('change');
     inputs.strokeWidth.         val('14').          trigger('change');
     inputs.pointRadius.         val('15').          trigger('change');
     inputs.zindex.              val('16').          trigger('change');

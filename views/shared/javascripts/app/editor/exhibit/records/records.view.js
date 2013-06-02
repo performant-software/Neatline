@@ -74,7 +74,6 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} e: The click event.
      */
     onMouseenter: function(e) {
-      // TODO|dev
       Neatline.vent.trigger('highlight', {
         model:  this.getModelByEvent(e),
         source: Records.ID
@@ -88,7 +87,6 @@ Neatline.module('Editor.Exhibit.Records', function(
      * @param {Object} e: The click event.
      */
     onMouseleave: function(e) {
-      // TODO|dev
       Neatline.vent.trigger('unhighlight', {
         model:  this.getModelByEvent(e),
         source: Records.ID

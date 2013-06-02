@@ -11,28 +11,75 @@
 describe('Records Events', function() {
 
 
-  var fx = {
+  var model, row, vent, fx = {
     records: read('EditorRecordsEvents.json')
   };
 
 
   beforeEach(function() {
+
     NL.loadEditor();
+    NL.respondRecordList200(fx.records);
+
+    // Get model and row from list.
+    model = NL.getRecordListModels()[0];
+    row = NL.getRecordListRows()[1];
+
+    // Spy on the event aggregator.
+    vent = spyOn(Neatline.vent, 'trigger');
+
   });
 
 
   it('should publish `highlight` on row mouseenter', function() {
-    // TODO
+
+    // --------------------------------------------------------------------
+    // When the cursor hovers on a record listing, the `highlight` event
+    // should be published with the feature's model.
+    // --------------------------------------------------------------------
+
+    $(row).trigger('mouseenter');
+
+    expect(vent).toHaveBeenCalledWith('highlight', {
+      model:  model,
+      source: 'EDITOR:EXHIBIT:RECORDS'
+    });
+
   });
 
 
   it('should publish `unhighlight` on row mouseleave', function() {
-    // TODO
+
+    // --------------------------------------------------------------------
+    // When the cursor leaves a record listing, the `unhighlight` event
+    // should be published with the feature's model.
+    // --------------------------------------------------------------------
+
+    $(row).trigger('mouseenter');
+    $(row).trigger('mouseleave');
+
+    expect(vent).toHaveBeenCalledWith('unhighlight', {
+      model:  model,
+      source: 'EDITOR:EXHIBIT:RECORDS'
+    });
+
   });
 
 
   it('should publish `select` on row click', function() {
-    // TODO
+
+    // --------------------------------------------------------------------
+    // When a record listing is clicked, the `unhighlight` event should be
+    // published with the feature's model.
+    // --------------------------------------------------------------------
+
+    $(row).trigger('click');
+
+    expect(vent).toHaveBeenCalledWith('select', {
+      model:  model,
+      source: 'EDITOR:EXHIBIT:RECORDS'
+    });
+
   });
 
 
