@@ -110,7 +110,7 @@ describe('`select` Event Subscription (Vector Layers)', function() {
     
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     Neatline.vent.trigger('select', { model: layer.nModel });
-    expect(layer.features[0].renderIntent).toEqual('default');
+    NL.assertDefaultIntent(layer.features[0]);
     
   });
 

@@ -76,8 +76,7 @@ describe('Vector Layer Styles', function() {
   describe('render intent manifestations', function() {
 
     afterEach(function() {
-      expect(layer2.features[0].renderIntent).toEqual('default');
-      expect(layer2.features[1].renderIntent).toEqual('default');
+      NL.assertDefaultIntent(layer2);
     });
 
     it('should highlight all the features on the layer', function() {
@@ -88,9 +87,7 @@ describe('Vector Layer Styles', function() {
       // ------------------------------------------------------------------
 
       NL.hoverOnMapFeature(layer1.features[0]);
-
-      expect(layer1.features[0].renderIntent).toEqual('temporary');
-      expect(layer1.features[1].renderIntent).toEqual('temporary');
+      NL.assertTemporaryIntent(layer1);
 
     });
 
@@ -103,9 +100,7 @@ describe('Vector Layer Styles', function() {
 
       NL.hoverOnMapFeature(layer1.features[0]);
       NL.unHoverOnMapFeature();
-
-      expect(layer1.features[0].renderIntent).toEqual('default');
-      expect(layer1.features[1].renderIntent).toEqual('default');
+      NL.assertDefaultIntent(layer1);
 
     });
 
@@ -117,9 +112,7 @@ describe('Vector Layer Styles', function() {
       // ------------------------------------------------------------------
 
       NL.clickOnMapFeature(layer1.features[0]);
-
-      expect(layer1.features[0].renderIntent).toEqual('select');
-      expect(layer1.features[1].renderIntent).toEqual('select');
+      NL.assertSelectIntent(layer1);
 
     });
 
@@ -132,9 +125,7 @@ describe('Vector Layer Styles', function() {
 
       NL.clickOnMapFeature(layer1.features[0]);
       NL.clickOffMapFeature();
-
-      expect(layer1.features[0].renderIntent).toEqual('default');
-      expect(layer1.features[1].renderIntent).toEqual('default');
+      NL.assertDefaultIntent(layer1);
 
     });
 

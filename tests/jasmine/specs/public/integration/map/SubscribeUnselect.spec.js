@@ -33,7 +33,7 @@ describe('`unselect` Event Subscription', function() {
     
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     Neatline.vent.trigger('unselect', { model: layer.nModel });
-    expect(layer.features[0].renderIntent).toEqual('default');
+    NL.assertDefaultIntent(layer.features[0]);
     
   });
 

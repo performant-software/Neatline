@@ -62,6 +62,42 @@ var NL = (function(NL) {
   };
 
 
+  /**
+   * Assert that all features on a layer have the `default` intent.
+   *
+   * @param {OpenLayers.Layer.Vector} layer: The layer.
+   */
+  NL.assertDefaultIntent = function(layer) {
+    _.each(layer.features, function(feature) {
+      expect(feature.renderIntent).toEqual('default');
+    });
+  };
+
+
+  /**
+   * Assert that all features on a layer have the `temporary` intent.
+   *
+   * @param {OpenLayers.Layer.Vector} layer: The layer.
+   */
+  NL.assertTemporaryIntent = function(layer) {
+    _.each(layer.features, function(feature) {
+      expect(feature.renderIntent).toEqual('temporary');
+    });
+  };
+
+
+  /**
+   * Assert that all features on a layer have the `select` intent.
+   *
+   * @param {OpenLayers.Layer.Vector} layer: The layer.
+   */
+  NL.assertSelectIntent = function(layer) {
+    _.each(layer.features, function(feature) {
+      expect(feature.renderIntent).toEqual('select');
+    });
+  };
+
+
   return NL;
 
 

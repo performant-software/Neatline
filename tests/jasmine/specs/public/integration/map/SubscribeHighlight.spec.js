@@ -32,7 +32,7 @@ describe('`highlight` Event Subscription', function() {
     var layer = NL.vw.MAP.getVectorLayers()[0];
     
     Neatline.vent.trigger('highlight', { model: layer.nModel });
-    expect(layer.features[0].renderIntent).toEqual('temporary');
+    NL.assertTemporaryIntent(layer.features[0]);
 
   });
 
