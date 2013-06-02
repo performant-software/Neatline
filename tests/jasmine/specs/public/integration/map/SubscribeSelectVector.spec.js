@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('`select` Event Subscription', function() {
+describe('`select` Event Subscription (Vector Layers)', function() {
 
 
   var fx = {
@@ -25,8 +25,8 @@ describe('`select` Event Subscription', function() {
   it('should focus when a layer already exists', function() {
 
     // --------------------------------------------------------------------
-    // When `select` is triggered with a record that has a vector layer on
-    // the map, the map should focus on the existing layer.
+    // When `select` is triggered with a record that has a vector layer
+    // on the map, the map should focus on the existing layer.
     // --------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
@@ -50,8 +50,8 @@ describe('`select` Event Subscription', function() {
 
     // --------------------------------------------------------------------
     // When `select` is triggered with a record that does _not_ have a
-    // vector layer on the map, a new layer should be created and the map
-    // should focus on the new layer.
+    // vector layer on the map, the map should create a new layer for the
+    // record and focus on it.
     // --------------------------------------------------------------------
 
     // Create a model that does not have a layer.
@@ -74,7 +74,7 @@ describe('`select` Event Subscription', function() {
   });
 
 
-  it('should not focus when vector layer is clicked', function() {
+  it('should not focus when feature is clicked', function() {
 
     // --------------------------------------------------------------------
     // When a map feature is clicked, the map should _not_ focus on the

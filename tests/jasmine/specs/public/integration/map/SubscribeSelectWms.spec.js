@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('WMS Layer Viewport Focusing', function() {
+describe('`select` Event Subscription (WMS Layers)', function() {
 
 
   var fx = {
-    noFocus: read('PublicMapWmsFocusing.noFocus.json'),
-    focus:   read('PublicMapWmsFocusing.focus.json')
+    noFocus: read('PublicMapSubscribeSelectWms.noFocus.json'),
+    focus:   read('PublicMapSubscribeSelectWms.focus.json')
   };
 
 

@@ -9,13 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapWmsFocusing extends Neatline_Case_Fixture
+class FixturesTest_PublicMapSubscribeSelectWms
+    extends Neatline_Case_Fixture
 {
 
 
     /**
-     * `PublicMapLayersWmsViewportFocusing.noFocus.json`
-     * `PublicMapLayersWmsViewportFocusing.focus.json`
+     * `PublicMapSubscribeSelectWms.noFocus.json`
+     * `PublicMapSubscribeSelectWms.focus.json`
      */
     public function testFocusing()
     {
@@ -30,7 +31,7 @@ class FixturesTest_PublicMapWmsFocusing extends Neatline_Case_Fixture
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'PublicMapWmsFocusing.noFocus.json'
+            'PublicMapSubscribeSelectWms.noFocus.json'
         );
 
         $record->setArray(array(
@@ -42,7 +43,7 @@ class FixturesTest_PublicMapWmsFocusing extends Neatline_Case_Fixture
 
         $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'PublicMapWmsFocusing.focus.json'
+            'PublicMapSubscribeSelectWms.focus.json'
         );
 
     }
