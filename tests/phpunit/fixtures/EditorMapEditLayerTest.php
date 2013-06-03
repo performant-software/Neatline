@@ -44,7 +44,6 @@ class FixturesTest_EditorMapEditLayer extends Neatline_Case_Fixture
 
         $record3->delete();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'EditorMapEditLayer.noRecord3.json'
         );

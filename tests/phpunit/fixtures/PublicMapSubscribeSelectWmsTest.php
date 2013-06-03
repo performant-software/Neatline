@@ -41,7 +41,6 @@ class FixturesTest_PublicMapSubscribeSelectWms
 
         $record->save();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
             'PublicMapSubscribeSelectWms.focus.json'
         );

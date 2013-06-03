@@ -45,7 +45,6 @@ class FixturesTest_PublicMapVectorLayerManagement
 
         $record3->delete();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'PublicMapVectorLayerManagement.deleted.json'
         );

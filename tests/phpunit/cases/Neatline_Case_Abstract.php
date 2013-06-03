@@ -134,9 +134,15 @@ class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     public function writeFixtureFromRoute($route, $file)
     {
+
+        // Load the page.
+        $this->resetResponse();
         $this->dispatch($route);
+
+        // Write the fixture.
         $response = $this->getResponseBody();
         $this->writeFixture($response, $file);
+
     }
 
 

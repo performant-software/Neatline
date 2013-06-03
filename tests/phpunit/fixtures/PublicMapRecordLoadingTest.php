@@ -35,7 +35,6 @@ class FixturesTest_PublicMapRecordLoading extends Neatline_Case_Fixture
 
         $record2->delete();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'PublicMapRecordLoading.one.json'
         );

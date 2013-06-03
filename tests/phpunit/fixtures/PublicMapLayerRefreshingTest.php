@@ -51,7 +51,6 @@ class FixturesTest_PublicMapIncomingRefreshVectorLayers
         $record2->save();
         $record3->save();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'PublicMapLayerRefreshing.vector.changed.json'
         );
@@ -102,7 +101,6 @@ class FixturesTest_PublicMapIncomingRefreshVectorLayers
         $record2->save();
         $record3->save();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'PublicMapLayerRefreshing.wms.changed.json'
         );

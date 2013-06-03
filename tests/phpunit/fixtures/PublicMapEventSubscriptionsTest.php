@@ -35,9 +35,7 @@ class FixturesTest_PublicMapEventSubscriptions extends Neatline_Case_Fixture
             'PublicMapEventSubscriptions.records.json'
         );
 
-        $this->resetResponse();
         $this->resetRequest();
-
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
             'PublicMapEventSubscriptions.record.json'
         );

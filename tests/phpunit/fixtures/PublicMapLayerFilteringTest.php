@@ -50,7 +50,6 @@ class FixturesTest_PublicMapLayerFiltering extends Neatline_Case_Fixture
 
         $record3->delete();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'PublicMapLayerFiltering.deleted.json'
         );

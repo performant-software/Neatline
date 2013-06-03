@@ -52,7 +52,6 @@ class FixturesTest_PublicMapWmsLayerManagement
 
         $record3->delete();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'PublicMapWmsLayerManagement.deleted.json'
         );

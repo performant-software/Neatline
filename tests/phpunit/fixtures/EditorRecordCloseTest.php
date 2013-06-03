@@ -29,9 +29,7 @@ class FixturesTest_EditorRecordClose extends Neatline_Case_Fixture
             'EditorRecordClose.records.json'
         );
 
-        $this->resetResponse();
         $this->resetRequest();
-
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
             'EditorRecordClose.record.json'
         );

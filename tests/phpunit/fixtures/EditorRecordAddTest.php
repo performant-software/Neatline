@@ -24,14 +24,11 @@ class FixturesTest_EditorRecordAdd extends Neatline_Case_Fixture
         $record->coverage = 'POINT(1 2)';
         $record->save();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordAdd.records.json'
         );
 
-        $this->resetResponse();
         $this->resetRequest();
-
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
             'EditorRecordAdd.record.json'
         );

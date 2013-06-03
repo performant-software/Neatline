@@ -37,28 +37,24 @@ class FixturesTest_RecordsPagination extends Neatline_Case_Fixture
         );
 
         // Records 2-3.
-        $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 1));
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p23.json'
         );
 
         // Records 3-4.
-        $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 2));
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p34.json'
         );
 
         // Records 5-6.
-        $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 4));
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p56.json'
         );
 
         // Record 6.
-        $this->resetResponse();
         $this->request->setQuery(array('limit' => 2, 'offset' => 5));
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p6.json'

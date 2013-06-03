@@ -46,7 +46,6 @@ class FixturesTest_EditorRecordsList extends Neatline_Case_Fixture
         $record1->title = '<tag>title</tag>';
         $record1->save();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordsList.titleTags.json'
         );
@@ -54,7 +53,6 @@ class FixturesTest_EditorRecordsList extends Neatline_Case_Fixture
         $record1->title = null;
         $record1->save();
 
-        $this->resetResponse();
         $this->writeFixtureFromRoute('neatline/records',
             'EditorRecordsList.emptyTitle.json'
         );
