@@ -10,7 +10,7 @@
 
 #### Bug Fixes
 
-  - The default exhibit show template now displays the exhibit title and narrative, as one would expect.
+  - Fixes broken helper calls in the default exhibit show template the were causing the exhibit title and narrative fields not to be displayed above and below the exhibit.
 
 # v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
 

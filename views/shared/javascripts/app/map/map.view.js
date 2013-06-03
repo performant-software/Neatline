@@ -15,6 +15,8 @@ Neatline.module('Map', function(
   Map.View = Backbone.View.extend({
 
 
+    el: '#neatline-map',
+
     options: {
       defaultZoom: 6
     },
