@@ -8,6 +8,10 @@
 
   - Changes all tag queries to use MySQL full-text search instead of regular expression matching. This improves performance, but means that tags have to be at least four characters in length in order by be indexed by MySQL.
 
+#### Bug Fixes
+
+  - The default exhibit show template now displays the exhibit title and narrative, as one would expect.
+
 # v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
 
 #### New Features
