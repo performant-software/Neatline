@@ -110,6 +110,17 @@ function nl_getExhibitMarkup()
 
 
 /**
+ * Render and return the exhibit narrative partial.
+ *
+ * @return string The narrative markup.
+ */
+function nl_getNarrativeMarkup()
+{
+    return get_view()->partial('exhibits/partials/narrative.php');
+}
+
+
+/**
  * Return specific field for a neatline record.
  *
  * @param string $fieldname The model attribute.

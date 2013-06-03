@@ -11,8 +11,9 @@
 
 ?>
 
-<!-- Page header. -->
-<?php echo head(array('title' => nl_getExhibitField('title'))); ?>
+<?php echo head(array(
+  'title' => nl_getExhibitField('title'))
+); ?>
 
 <!-- Title. -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
@@ -21,9 +22,6 @@
 <?php echo nl_getExhibitMarkup(); ?>
 
 <!-- Narrative. -->
-<div id="neatline-narrative">
-  <?php echo nl_getExhibitField('narrative'); ?>
-</div>
+<?php echo nl_getNarrativeMarkup(); ?>
 
-<!-- Page footer. -->
 <?php echo foot(); ?>
