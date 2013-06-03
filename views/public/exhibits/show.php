@@ -11,14 +11,17 @@
 
 ?>
 
+<!-- Page header. -->
 <?php echo head(array('title' => nl_getExhibitField('title'))); ?>
+
+<!-- Title. -->
+<h1><?php echo nl_getExhibitField('title'); ?></h1>
 
 <!-- Exhibit. -->
 <?php echo nl_getExhibitMarkup(); ?>
 
-<!-- Description. -->
-<div class="exhibit-description">
-    <?php echo nl_getExhibitField('description'); ?>
-</div>
+<!-- Narrative. -->
+<div id="narrative"><?php echo nl_getExhibitField('narrative'); ?></div>
 
+<!-- Page footer. -->
 <?php echo foot(); ?>

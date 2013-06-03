@@ -310,7 +310,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record2->save();
         $record3->save();
 
-        // Query for tag1 and tag2.
+        // Query for `tag1` and `tag2`.
         $result = $this->__records->queryRecords($exhibit,
             array('widget' => 'Widget1')
         );
@@ -318,6 +318,32 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertEquals($result['records'][0]['id'], $record2->id);
         $this->assertEquals($result['records'][1]['id'], $record1->id);
         $this->assertCount(2, $result['records']);
+
+    }
+
+
+    /**
+     * `queryRecords` should filter on a slug query.
+     */
+    public function testSlugFilter()
+    {
+
+        $exhibit = $this->__exhibit();
+        $record1 = new NeatlineRecord($exhibit);
+        $record2 = new NeatlineRecord($exhibit);
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+
+        $record1->save();
+        $record2->save();
+
+        // Query for `slug1`.
+        $result = $this->__records->queryRecords($exhibit,
+            array('slug' => 'slug-1')
+        );
+
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertCount(1, $result['records']);
 
     }
 

@@ -24,7 +24,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
 
 
     /**
-     * SHOW should load exhibits by slug.
+     * SHOW should load the exhibit by slug.
      */
     public function testLoadExhibit()
     {
@@ -40,9 +40,23 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
      */
     public function testDefaultTemplate()
     {
+
         $exhibit = $this->__exhibit('slug');
+        $exhibit->title = 'title';
+        $exhibit->narrative = 'narrative';
+        $exhibit->save();
+
         $this->dispatch('neatline/show/slug');
+
+        // Should show title.
+        $this->assertQueryContentContains('h1', 'title');
+
+        // Should show exhibit.
         $this->assertQuery('#neatline');
+
+        // Should show narrative.
+        $this->assertQueryContentContains('#narrative', 'narrative');
+
     }
 
 

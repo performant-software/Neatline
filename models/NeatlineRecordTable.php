@@ -70,6 +70,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *  - query:        A full-text search query.
      *  - tags:         An array of tags.
      *  - widget:       A record widget activation.
+     *  - slug:         A record slug.
      *  - order:        A column to sort on.
      *  - offset:       The number of records to skip.
      *  - limit:        The number of records to get.
@@ -99,7 +100,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             );
         }
 
-        // ** Keywords
+        // ** Query
         if (isset($params['query'])) {
             $select = $this->_filterByKeywords($select,
                 $params['query']
@@ -117,6 +118,13 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         if (isset($params['widget'])) {
             $select = $this->_filterByWidget($select,
                 $params['widget']
+            );
+        }
+
+        // ** Slug
+        if (isset($params['slug'])) {
+            $select = $this->_filterBySlug($select,
+                $params['slug']
             );
         }
 
@@ -279,6 +287,19 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)", $widget
         );
         return $select;
+    }
+
+
+    /**
+     * Filter by slug query.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param string $slug A record slug.
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function _filterBySlug($select, $slug)
+    {
+        return $select->where('slug=?', $slug);
     }
 
 
