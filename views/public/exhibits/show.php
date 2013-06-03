@@ -21,7 +21,9 @@
 <?php echo nl_getExhibitMarkup(); ?>
 
 <!-- Narrative. -->
-<div id="narrative"><?php echo nl_getExhibitField('narrative'); ?></div>
+<div id="neatline-narrative">
+  <?php echo nl_getExhibitField('narrative'); ?>
+</div>
 
 <!-- Page footer. -->
 <?php echo foot(); ?>

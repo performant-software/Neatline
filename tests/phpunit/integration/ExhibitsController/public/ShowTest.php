@@ -55,7 +55,9 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
         $this->assertQuery('#neatline');
 
         // Should show narrative.
-        $this->assertQueryContentContains('#narrative', 'narrative');
+        $this->assertQueryContentContains(
+            '#neatline-narrative', 'narrative'
+        );
 
     }
 
