@@ -74,6 +74,12 @@ Neatline.module('Editor.Record', function(
       // Activate and close the presenter.
       Neatline.vent.trigger('PRESENTER:activate');
 
+      // Unselect the record.
+      Neatline.vent.trigger('unselect', {
+        model: this.model,
+        source: Record.ID
+      });
+
       // Unbind model listeners.
       this.stopListening(this.model);
       this.open = false;

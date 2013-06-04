@@ -98,21 +98,4 @@ describe('Map `select` Event Subscription (Vector Layers)', function() {
   });
 
 
-  it('should unhighlight features', function() {
-
-    // --------------------------------------------------------------------
-    // When a record is selected that already has a vector layer on the
-    // map, the layers' features should be _un_highlighted.
-    // --------------------------------------------------------------------
-
-    NL.respondMap200(fx.records);
-    var layer = NL.vw.MAP.getVectorLayers()[0];
-    
-    Neatline.vent.trigger('highlight', { model: layer.nModel });
-    Neatline.vent.trigger('select', { model: layer.nModel });
-    NL.assertDefaultIntent(layer.features[0]);
-    
-  });
-
-
 });

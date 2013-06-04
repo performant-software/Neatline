@@ -48,6 +48,26 @@ describe('Record Form Close', function() {
   });
 
 
+  it('should unselect the record', function() {
+
+    // --------------------------------------------------------------------
+    // When the form is closed, the bound model should be unselected.
+    // --------------------------------------------------------------------
+
+    spyOn(Neatline.vent, 'trigger').andCallThrough();
+
+    // Click "X".
+    el.close.trigger('click');
+
+    // Should unselect the record.
+    expect(Neatline.vent.trigger).toHaveBeenCalledWith('unselect', {
+      source: 'EDITOR:RECORD',
+      model:  NL.vw.RECORD.model
+    });
+
+  });
+
+
   it('should refresh the exhibit', function() {
 
     // --------------------------------------------------------------------
