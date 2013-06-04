@@ -14,7 +14,7 @@ class FixturesTest_PublicMapIncomingRefreshVectorLayers
 {
 
 
-    public function testVector()
+    public function testVectorRecords()
     {
 
         $record1 = $this->__record($this->exhibit);
@@ -54,7 +54,7 @@ class FixturesTest_PublicMapIncomingRefreshVectorLayers
     }
 
 
-    public function testWms()
+    public function testWmsRecords()
     {
 
         $record1 = $this->__record($this->exhibit);

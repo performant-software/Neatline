@@ -9,7 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapEventSubscriptions extends Neatline_Case_Fixture
+class FixturesTest_PublicMapEventSubscriptions
+    extends Neatline_Case_Fixture
 {
 
 
