@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorRecordsListRendering
+class FixturesTest_EditorRecordsListTemplating
     extends Neatline_Case_Fixture
 {
 
@@ -36,21 +36,21 @@ class FixturesTest_EditorRecordsListRendering
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorRecordsListRendering.defaultList.json'
+            'EditorRecordsListTemplating.defaultList.json'
         );
 
         $record1->title = '<tag>title</tag>';
         $record1->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorRecordsListRendering.titleTags.json'
+            'EditorRecordsListTemplating.titleTags.json'
         );
 
         $record1->title = null;
         $record1->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorRecordsListRendering.emptyTitle.json'
+            'EditorRecordsListTemplating.emptyTitle.json'
         );
 
     }

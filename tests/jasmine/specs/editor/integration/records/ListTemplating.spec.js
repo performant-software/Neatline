@@ -12,9 +12,9 @@ describe('Records List Rendering', function() {
 
 
   var fx = {
-    defaultList: read('EditorRecordsListRendering.defaultList.json'),
-    titleTags:   read('EditorRecordsListRendering.titleTags.json'),
-    emptyTitle:  read('EditorRecordsListRendering.emptyTitle.json')
+    defaultList: read('EditorRecordsListTemplating.defaultList.json'),
+    titleTags:   read('EditorRecordsListTemplating.titleTags.json'),
+    emptyTitle:  read('EditorRecordsListTemplating.emptyTitle.json')
   };
 
 
