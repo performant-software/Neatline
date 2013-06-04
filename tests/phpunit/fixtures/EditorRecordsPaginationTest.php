@@ -13,13 +13,6 @@ class FixturesTest_RecordsPagination extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `EditorRecordsPagination.p12.json`
-     * `EditorRecordsPagination.p23.json`
-     * `EditorRecordsPagination.p34.json`
-     * `EditorRecordsPagination.p56.json`
-     * `EditorRecordsPagination.p6.json`
-     */
     public function testRecords()
     {
 

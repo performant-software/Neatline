@@ -13,9 +13,6 @@ class FixturesTest_EditorRecordItemSearch extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `EditorRecordItemSearch.items.xml`
-     */
     public function testItems()
     {
 

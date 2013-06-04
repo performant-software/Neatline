@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Layer Filtering', function() {
+describe('Map Layer Filtering', function() {
 
 
   var fx = {

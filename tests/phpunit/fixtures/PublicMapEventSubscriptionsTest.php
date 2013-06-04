@@ -13,20 +13,16 @@ class FixturesTest_PublicMapEventSubscriptions extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `PublicMapEventSubscriptions.records.json`
-     * `PublicMapEventSubscriptions.record.json`
-     */
     public function testRecords()
     {
 
         $record = $this->__record($this->exhibit);
 
         $record->setArray(array(
-            'point_radius' => 1,
-            'coverage'  => 'POINT(1 2)',
-            'map_focus' => '100,200',
-            'map_zoom'  => 10
+            'point_radius'  => 1,
+            'coverage'      => 'POINT(1 2)',
+            'map_focus'     => '100,200',
+            'map_zoom'      => 10
         ));
 
         $record->save();

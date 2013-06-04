@@ -21,9 +21,6 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
     }
 
 
-    /**
-     * `EditorRecord.record.json`
-     */
     public function testRecord()
     {
 
@@ -72,9 +69,6 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
     }
 
 
-    /**
-     * `EditorRecord.records.json`
-     */
     public function testRecords()
     {
 

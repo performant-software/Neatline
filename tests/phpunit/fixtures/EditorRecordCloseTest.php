@@ -13,10 +13,6 @@ class FixturesTest_EditorRecordClose extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `EditorRecordClose.records.json`
-     * `EditorRecordClose.record.json`
-     */
     public function testRecords()
     {
 

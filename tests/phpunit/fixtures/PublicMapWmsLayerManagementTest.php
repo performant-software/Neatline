@@ -14,10 +14,6 @@ class FixturesTest_PublicMapWmsLayerManagement
 {
 
 
-    /**
-     * `PublicMapWmsAddRemove.regular.json`
-     * `PublicMapWmsAddRemove.deleted.json`
-     */
     public function testRecords()
     {
 

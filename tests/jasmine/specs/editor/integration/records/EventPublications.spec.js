@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Records Events', function() {
+describe('Records Event Publications', function() {
 
 
   var model, row, vent, fx = {
-    records: read('EditorRecordsEvents.json')
+    records: read('EditorRecordsEventPublications.json')
   };
 
 

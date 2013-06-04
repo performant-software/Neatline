@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('`select` Event Subscription (WMS Layers)', function() {
+describe('Map `select` Event Subscription (WMS Layers)', function() {
 
 
   var fx = {

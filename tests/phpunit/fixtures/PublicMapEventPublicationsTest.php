@@ -14,9 +14,6 @@ class FixturesTest_PublicMapEventPublications
 {
 
 
-    /**
-     * `PublicMapEventPublications.records.json`
-     */
     public function testRecords()
     {
 

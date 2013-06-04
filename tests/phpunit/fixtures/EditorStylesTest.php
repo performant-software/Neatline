@@ -13,9 +13,6 @@ class FixturesTest_EditorStyles extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `EditorStyles.exhibit.json`
-     */
     public function testExhibit()
     {
 

@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Event Publications', function() {
+describe('Map Event Publications', function() {
 
 
   var layer, feature, vent, fx = {

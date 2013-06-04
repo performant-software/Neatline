@@ -13,10 +13,6 @@ class FixturesTest_PublicMapRecordLoading extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `PublicMapRecordLoading.two.json`
-     * `PublicMapRecordLoading.one.json`
-     */
     public function testRecords()
     {
 

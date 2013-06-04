@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Loading', function() {
+describe('Map Record Loading', function() {
 
 
   var fx = {

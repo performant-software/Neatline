@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Vector Layer Styles', function() {
+describe('Map Vector Layer Styles', function() {
 
 
   var layer1, layer2, fx = {

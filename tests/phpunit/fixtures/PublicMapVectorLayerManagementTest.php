@@ -14,10 +14,6 @@ class FixturesTest_PublicMapVectorLayerManagement
 {
 
 
-    /**
-     * `PublicMapVectorLayerManagement.regular.json`
-     * `PublicMapVectorLayerManagement.deleted.json`
-     */
     public function testRecords()
     {
 

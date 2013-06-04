@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('`highlight` Event Subscription', function() {
+describe('Map `highlight` Event Subscription', function() {
 
 
   var fx = {

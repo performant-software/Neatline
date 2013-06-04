@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('WMS Layer Opacity Rendering', function() {
+describe('Map WMS Layer Opacity Rendering', function() {
 
 
   var fx = {

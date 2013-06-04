@@ -13,9 +13,6 @@ class FixturesTest_PublicMapWmsZindex extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `PublicMapWmsZindex.records.json`
-     */
     public function testRecords()
     {
 

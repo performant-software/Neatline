@@ -14,9 +14,6 @@ class FixturesTest_PublicPresentersStaticBubble
 {
 
 
-    /**
-     * `PublicPresentersStaticBubble.records.json`
-     */
     public function testRecords()
     {
 

@@ -8,13 +8,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Records List', function() {
+describe('Records List Rendering', function() {
 
 
   var fx = {
-    defaultList: read('EditorRecordsList.defaultList.json'),
-    titleTags:   read('EditorRecordsList.titleTags.json'),
-    emptyTitle:  read('EditorRecordsList.emptyTitle.json')
+    defaultList: read('EditorRecordsListRendering.defaultList.json'),
+    titleTags:   read('EditorRecordsListRendering.titleTags.json'),
+    emptyTitle:  read('EditorRecordsListRendering.emptyTitle.json')
   };
 
 

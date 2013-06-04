@@ -14,9 +14,6 @@ class FixturesTest_PublicMapVectorStyles
 {
 
 
-    /**
-     * `PublicMapVectorStyles.records.json`
-     */
     public function testRecords()
     {
 

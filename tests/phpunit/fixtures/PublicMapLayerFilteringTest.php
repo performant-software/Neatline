@@ -13,10 +13,6 @@ class FixturesTest_PublicMapLayerFiltering extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `PublicMapLayerFiltering.regular.json`
-     * `PublicMapLayerFiltering.deleted.json`
-     */
     public function testRecords()
     {
 

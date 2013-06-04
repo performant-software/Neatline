@@ -13,10 +13,7 @@ class FixturesTest_PublicMapVectorZindex extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `PublicMapVectorZindex.records.json`
-     */
-    public function testZIndex()
+    public function testRecords()
     {
 
         $record1 = $this->__record($this->exhibit);

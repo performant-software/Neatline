@@ -13,10 +13,6 @@ class FixturesTest_EditorMapEditLayer extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `EditorMapEditLayer.record3.json`
-     * `EditorMapEditLayer.noRecord3.json`
-     */
     public function testRecords()
     {
 

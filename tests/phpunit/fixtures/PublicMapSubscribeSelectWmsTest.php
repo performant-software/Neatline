@@ -14,11 +14,7 @@ class FixturesTest_PublicMapSubscribeSelectWms
 {
 
 
-    /**
-     * `PublicMapSubscribeSelectWms.noFocus.json`
-     * `PublicMapSubscribeSelectWms.focus.json`
-     */
-    public function testFocusing()
+    public function testRecords()
     {
 
         $record = new NeatlineRecord();

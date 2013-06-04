@@ -13,9 +13,6 @@ class FixturesTest_PublicMapWmsOpacity extends Neatline_Case_Fixture
 {
 
 
-    /**
-     * `PublicMapWmsOpacity.records.json`
-     */
     public function testRecords()
     {
 

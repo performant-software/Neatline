@@ -14,10 +14,6 @@ class FixturesTest_PublicMapIncomingRefreshVectorLayers
 {
 
 
-    /**
-     * `PublicMapLayerRefreshing.vector.original.json`
-     * `PublicMapLayerRefreshing.vector.changed.json`
-     */
     public function testVector()
     {
 
@@ -58,10 +54,6 @@ class FixturesTest_PublicMapIncomingRefreshVectorLayers
     }
 
 
-    /**
-     * `PublicMapLayerRefreshing.wms.original.json`
-     * `PublicMapLayerRefreshing.wms.changed.json`
-     */
     public function testWms()
     {
 
