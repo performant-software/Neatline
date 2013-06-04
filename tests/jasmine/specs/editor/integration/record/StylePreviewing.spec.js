@@ -11,6 +11,13 @@
 describe('Record Form Style Previewing', function() {
 
 
+  // ----------------------------------------------------------------------
+  // When the form model changes - either by a direct update to the model
+  // or by a change/keyup event on the form inputs - the style map on the
+  // edit layer should be rebuilt with the updated value.
+  // ----------------------------------------------------------------------
+
+
   var el, def, tmp, sel, fx = {
     record: read('EditorRecord.record.json')
   };
@@ -28,13 +35,6 @@ describe('Record Form Style Previewing', function() {
     NL.showRecordForm(fx.record);
     el = NL.getRecordFormElements();
   });
-
-
-  // ----------------------------------------------------------------------
-  // When the form model changes - either by a direct update to the model
-  // or by a change/keyup event on the form inputs - the style map on the
-  // edit layer should be rebuilt with the updated value.
-  // ----------------------------------------------------------------------
 
 
   describe('Presenter', function() {

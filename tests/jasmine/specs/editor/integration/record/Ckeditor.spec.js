@@ -11,7 +11,18 @@
 describe('Record Form CKEditor Integration', function() {
 
 
-  var el, fx = {
+  // ----------------------------------------------------------------------
+  // When the "Edit HTML" link next to the "Title" or "Body" textareas is
+  // clicked, CKEditor should be displayed with the field content. When
+  // the editor is minimized, the new value from CKEditor should be set in
+  // the textarea and the form model should be updated.
+  // ----------------------------------------------------------------------
+
+
+  var async = new AsyncSpec(this);
+
+
+  var el, cke, input, fx = {
     record: read('EditorRecord.record.json')
   };
 
@@ -28,16 +39,6 @@ describe('Record Form CKEditor Integration', function() {
 
   });
 
-
-  // ----------------------------------------------------------------------
-  // When the "Edit HTML" link next to the "Title" or "Body" textareas is
-  // clicked, CKEditor should be displayed with the field content. When
-  // the editor is minimized, the new value from CKEditor should be set in
-  // the textarea and the form model should be updated.
-  // ----------------------------------------------------------------------
-
-  var async = new AsyncSpec(this);
-  var cke, input;
 
   async.afterEach(function(done) {
 
