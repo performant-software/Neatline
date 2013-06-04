@@ -73,7 +73,6 @@ Neatline.module('Editor.Record', function(
 
       // Activate and close the presenter.
       Neatline.vent.trigger('PRESENTER:activate');
-      Neatline.execute('PRESENTER:unselect', this.model);
 
       // Unbind model listeners.
       this.stopListening(this.model);

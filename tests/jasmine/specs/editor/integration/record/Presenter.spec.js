@@ -90,11 +90,10 @@ describe('Record Form Presenter', function() {
   });
 
 
-  it('should unselect, activate when the form is closed', function() {
+  it('should activate when the form is closed', function() {
 
     // --------------------------------------------------------------------
-    // When the record form is closed, the presenter should be unselected
-    // and activated.
+    // When the record form is closed, the presenter should be activated.
     // --------------------------------------------------------------------
 
     // Select "Map".
@@ -112,7 +111,6 @@ describe('Record Form Presenter', function() {
 
     // Presenter should activate.
     expect(vent).toHaveBeenCalledWith('PRESENTER:activate');
-    expect(exec).toHaveBeenCalledWith('PRESENTER:unselect', model);
 
   });
 
