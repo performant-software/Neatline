@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorRecordTextTab extends Neatline_Case_Fixture
+class FixturesTest_EditorRecordItemSearch extends Neatline_Case_Fixture
 {
 
 
     /**
-     * `EditorRecordTextTab.items.xml`
+     * `EditorRecordItemSearch.items.xml`
      */
     public function testItems()
     {
@@ -34,7 +34,7 @@ class FixturesTest_EditorRecordTextTab extends Neatline_Case_Fixture
         $this->request->setQuery(array('output' => 'omeka-xml'));
 
         $this->writeFixtureFromRoute('items/browse',
-            'EditorRecordTextTab.items.xml'
+            'EditorRecordItemSearch.items.xml'
         );
 
     }
