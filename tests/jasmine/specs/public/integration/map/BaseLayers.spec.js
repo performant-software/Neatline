@@ -15,7 +15,7 @@ describe('Map Base Layers', function() {
 
     loadFixtures('neatline-partial.html');
 
-    Neatline.global.base_layers = [
+    Neatline.g.neatline.base_layers = [
       {
         title:  'Layer1',
         id:     'Layer1',
@@ -60,7 +60,7 @@ describe('Map Base Layers', function() {
     // to the layer with the `id` defined by the `base_layer` global.
     // --------------------------------------------------------------------
 
-    Neatline.global.exhibit.base_layer = 'Layer2';
+    Neatline.g.neatline.exhibit.base_layer = 'Layer2';
 
     NL.startApplication();
     NL.aliasNeatline();

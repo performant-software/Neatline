@@ -49,7 +49,7 @@ Neatline.module('Editor.Exhibit.Records', function(
       // Render record list.
       this.$el.html(this.template({
         records:  this.records,
-        limit:    Neatline.global.per_page,
+        limit:    Neatline.g.neatline.per_page,
         query:    query
       }));
 

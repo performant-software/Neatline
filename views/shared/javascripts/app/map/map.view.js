@@ -27,12 +27,19 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      // Trackers for layers/filters.
+      // An nested object that contains references to all vector and WMS
+      // layers currently on the map, keyed by record id.
       this.layers = { vector: {}, wms: {} };
+
+      // An object that contains references to all filters registered on
+      // the map, keyed by filter slug.
       this.filters = {};
 
       // WKT reader/writer.
       this.formatWkt = new OpenLayers.Format.WKT();
+
+      // The currently-selected record model.
+      this.selectedModel = null;
 
       // Startup routines.
       this.__initOpenLayers();
@@ -82,7 +89,7 @@ Neatline.module('Map', function(
       this.baseLayers = {};
 
       // Build array of base layer instances.
-      _.each(Neatline.global.base_layers, _.bind(function(json) {
+      _.each(Neatline.g.neatline.base_layers, _.bind(function(json) {
         var layer = Neatline.request('MAP:LAYERS:getLayer', json);
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
@@ -92,7 +99,7 @@ Neatline.module('Map', function(
 
       // Set default layer.
       this.map.setBaseLayer(
-        this.baseLayers[Neatline.global.exhibit.base_layer]
+        this.baseLayers[Neatline.g.neatline.exhibit.base_layer]
       );
 
     },
@@ -100,12 +107,11 @@ Neatline.module('Map', function(
 
     /**
      * Construct, add, and activate hover and click controls to the map.
-     * `hoverControl` handles highlighting, `clickControl` handles clicks.
      */
     __initControls: function() {
 
       // Build the hover control, bind callbacks.
-      this.hoverControl = new OpenLayers.Control.SelectFeature(
+      this.highlightControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
 
           hover: true,
@@ -121,20 +127,19 @@ Neatline.module('Map', function(
       );
 
       // Build the click control, bind callbacks.
-      this.clickControl = new OpenLayers.Control.SelectFeature(
+      this.selectControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
           onSelect:   _.bind(this.onFeatureSelect, this),
-          onUnselect: _.bind(this.onFeatureUnselect, this),
-          toggle: true
+          onUnselect: _.bind(this.onFeatureUnselect, this)
         }
       );
 
       // Enable panning when cursor is over feature.
-      this.hoverControl.handlers.feature.stopDown = false;
-      this.clickControl.handlers.feature.stopDown = false;
+      this.highlightControl.handlers.feature.stopDown = false;
+      this.selectControl.handlers.feature.stopDown = false;
 
       // Add to map, activate.
-      this.map.addControls([this.hoverControl, this.clickControl]);
+      this.map.addControls([this.highlightControl, this.selectControl]);
       this.activatePublicControls();
 
     },
@@ -145,8 +150,8 @@ Neatline.module('Map', function(
      */
     __initViewport: function() {
 
-      var focus = Neatline.global.exhibit.map_focus;
-      var zoom  = Neatline.global.exhibit.map_zoom;
+      var focus = Neatline.g.neatline.exhibit.map_focus;
+      var zoom  = Neatline.g.neatline.exhibit.map_zoom;
 
       // Apply defaults if they exist.
       if (_.isString(focus) && _.isNumber(zoom)) {
@@ -177,8 +182,8 @@ Neatline.module('Map', function(
      * Activate the hover and click controls.
      */
     activatePublicControls: function() {
-      this.hoverControl.activate();
-      this.clickControl.activate();
+      this.highlightControl.activate();
+      this.selectControl.activate();
     },
 
 
@@ -186,8 +191,8 @@ Neatline.module('Map', function(
      * Deactivate the hover and click controls.
      */
     deactivatePublicControls: function() {
-      this.hoverControl.deactivate();
-      this.clickControl.deactivate();
+      this.highlightControl.deactivate();
+      this.selectControl.deactivate();
     },
 
 
@@ -197,9 +202,17 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
+
+      // Update the controls.
       var layers = this.getVectorLayers();
-      this.hoverControl.setLayer(layers);
-      this.clickControl.setLayer(layers);
+      this.highlightControl.setLayer(layers);
+      this.selectControl.setLayer(layers);
+
+      // TODO|TDD
+      if (!_.isNull(this.selectedModel)) {
+        this.selectByModel(this.selectedModel);
+      }
+
     },
 
 
@@ -657,9 +670,9 @@ Neatline.module('Map', function(
       if (!layer) return;
 
       // Render `temporary` intent.
-      _.each(layer.features, function(feature) {
+      _.each(layer.features, _.bind(function(feature) {
         layer.drawFeature(feature, 'temporary');
-      });
+      }, this));
 
     },
 
@@ -675,9 +688,9 @@ Neatline.module('Map', function(
       if (!layer) return;
 
       // Render `default` intent.
-      _.each(layer.features, function(feature) {
+      _.each(layer.features, _.bind(function(feature) {
         layer.drawFeature(feature, 'default');
-      });
+      }, this));
 
     },
 
@@ -692,11 +705,44 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer) return;
 
-      // Render `select` intent.
-      _.each(layer.features, function(feature) {
-        layer.drawFeature(feature, 'select');
-      });
+      _.each(layer.features, _.bind(function(feature) {
 
+        // Render `select` intent, register the feature as selected.
+
+        layer.drawFeature(feature, 'select');
+        layer.selectedFeatures.push(feature);
+
+        // Set the `_lastHighlighter` attribute on the feature to the id
+        // of the select control. This has the effect of "freezing" the
+        // render intent and preventing it from being switched back to the
+        // `default` intent by the highlight control.
+
+        // TODO|TDD
+        feature._lastHighlighter = this.selectControl.id;
+
+      }, this));
+
+      // Mock a feature handler on the select control, which ensures that
+      // the layer can be unselected by clicking elsewhere on the map.
+
+      // TODO|TDD
+      this.selectControl.handlers.feature.lastFeature =
+        layer.selectedFeatures[0];
+
+      // Track model.
+      this.selectedModel = model;
+
+    },
+
+
+    /**
+     * Unselect all features on a layer, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    unselectByModel: function(model) {
+      this.unhighlightByModel(model);
+      this.selectedModel = null;
     },
 
 
@@ -768,7 +814,7 @@ Neatline.module('Map', function(
     onFeatureUnselect: function(feature) {
 
       // Unselect sibling features.
-      this.unhighlightByModel(feature.layer.nModel);
+      this.unselectByModel(feature.layer.nModel);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {

@@ -21,12 +21,12 @@ Neatline.module('Shared.Exhibit', function(
      * @return {String}: The url.
      */
     url: function() {
-      return Neatline.global.exhibits_api;
+      return Neatline.g.neatline.exhibits_api;
     },
 
 
     defaults: function() {
-      return Neatline.global.exhibit;
+      return Neatline.g.neatline.exhibit;
     }
 
 

@@ -53,9 +53,8 @@ describe('Record Form Add', function() {
     // Form title should display placeholder.
     expect(el.leadTitle).toHaveText(STRINGS.record.placeholders.title);
 
-    // Model should have exhibit id.
+    // Get the form model.
     var record = NL.vw.RECORD.model;
-    expect(record.get('exhibit_id')).toEqual(Neatline.global.exhibit.id);
 
     // Model should have defined styles.
     expect(_.isString(record.get('presenter'))).            toBeTruthy();
@@ -111,7 +110,7 @@ describe('Record Form Add', function() {
     el.saveButton.trigger('click');
 
     // Route should be /record, method POST.
-    NL.assertLastRequestRoute(Neatline.global.records_api);
+    NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
     NL.assertLastRequestMethod('POST');
 
     // Request should have exhibit id.

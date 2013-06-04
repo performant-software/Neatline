@@ -43,7 +43,10 @@ Neatline.module('Map', function(
    * @param {Object} args: Event arguments.
    */
   var select = function(args) {
-    if (args.source !== 'MAP') focusByModel(args.model);
+    if (args.source !== 'MAP') {
+      focusByModel(args.model);
+      Map.__view.selectByModel(args.model);
+    }
   };
   Neatline.commands.setHandler(Map.ID+':select', select);
   Neatline.vent.on('select', select);

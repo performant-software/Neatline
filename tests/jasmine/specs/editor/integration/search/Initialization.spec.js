@@ -18,7 +18,7 @@ describe('Search Initialization', function() {
 
   beforeEach(function() {
     NL.loadEditor();
-    perPage = Neatline.global.per_page;
+    perPage = Neatline.g.neatline.per_page;
   });
 
 
@@ -92,7 +92,7 @@ describe('Search Initialization', function() {
       NL.navigate('');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // Default `limit` and `offset`.
@@ -107,7 +107,7 @@ describe('Search Initialization', function() {
       NL.navigate('records');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // Default `limit` and `offset`.
@@ -122,7 +122,7 @@ describe('Search Initialization', function() {
       NL.navigate('records/search/start=10');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // `offset`=10, default `limit`.
@@ -137,7 +137,7 @@ describe('Search Initialization', function() {
       NL.navigate('records/search/query=keywords');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // `query`=keywords, `offset`=0, default `limit`.
@@ -153,7 +153,7 @@ describe('Search Initialization', function() {
       NL.navigate('records/search/query=tags:+tag1,+tag2');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // `tags[]`=tag1, `tags[]`=tag2.
@@ -172,7 +172,7 @@ describe('Search Initialization', function() {
       NL.navigate('records/search/query=keywords/start=10');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // `query`=keywords, `offset`=10.
@@ -188,7 +188,7 @@ describe('Search Initialization', function() {
       NL.navigate('records/search/query=tags:+tag1,+tag2/start=10');
 
       // Should trigger GET request to /records.
-      NL.assertLastRequestRoute(Neatline.global.records_api);
+      NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
       // `tags[]`=tag1, `tags[]`=tag2.
