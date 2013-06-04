@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Edit Layer', function() {
+describe('Map Edit Layer Management', function() {
 
 
   var fx = {
-    noRecord3: read('EditorMapEditLayer.noRecord3.json'),
-    record3:   read('EditorMapEditLayer.record3.json')
+    noRecord3: read('EditorMapEditLayerManagement.noRecord3.json'),
+    record3:   read('EditorMapEditLayerManagement.record3.json')
   };
 
 
