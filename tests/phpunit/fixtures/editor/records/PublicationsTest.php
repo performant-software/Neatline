@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorRecordsEventPublications
+class FixturesTest_EditorRecordsPublications
     extends Neatline_Case_Fixture
 {
 
@@ -25,7 +25,7 @@ class FixturesTest_EditorRecordsEventPublications
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorRecordsEventPublications.json'
+            'EditorRecordsPublications.json'
         );
 
     }
