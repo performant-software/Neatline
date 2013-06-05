@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | SVG Import', function() {
+describe('Record | SVG Import', function() {
 
 
   var el, fx = {

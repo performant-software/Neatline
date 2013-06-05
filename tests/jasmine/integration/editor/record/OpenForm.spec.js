@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | Open Form', function() {
+describe('Record | Open Form', function() {
 
 
   var el, recordModels, feature1, feature2, fx = {
-    records: read('EditorRecordOpen.records.json'),
+    records: read('EditorRecordOpenForm.records.json'),
     record:  read('EditorRecord.record.json')
   };
 

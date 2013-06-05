@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorRecordClose extends Neatline_Case_Fixture
+class FixturesTest_EditorRecordCreateRecord extends Neatline_Case_Fixture
 {
 
 
@@ -18,16 +18,15 @@ class FixturesTest_EditorRecordClose extends Neatline_Case_Fixture
 
         $record = $this->__record($this->exhibit);
         $record->coverage = 'POINT(1 2)';
-        $record->point_radius = 10;
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorRecordClose.records.json'
+            'EditorRecordCreateRecord.records.json'
         );
 
         $this->resetRequest();
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'EditorRecordClose.record.json'
+            'EditorRecordCreateRecord.record.json'
         );
 
     }

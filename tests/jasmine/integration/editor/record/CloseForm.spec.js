@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | Close Form', function() {
+describe('Record | Close Form', function() {
 
 
   var el, fx = {
-    records: read('EditorRecordClose.records.json'),
-    record:  read('EditorRecordClose.record.json')
+    records: read('EditorRecordCloseForm.records.json'),
+    record:  read('EditorRecordCloseForm.record.json')
   };
 
 

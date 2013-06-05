@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | Router', function() {
+describe('Record | Router', function() {
 
 
   var href, fx = {

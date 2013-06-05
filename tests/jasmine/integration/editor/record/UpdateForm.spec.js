@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | Update Form', function() {
+describe('Record | Update Form', function() {
 
 
   var fx = {

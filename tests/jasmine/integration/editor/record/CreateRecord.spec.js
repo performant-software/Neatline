@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | Create Record', function() {
+describe('Record | Create Record', function() {
 
 
   var el, fx =  {
-    records: read('EditorRecordAdd.records.json'),
-    record:  read('EditorRecordAdd.record.json')
+    records: read('EditorRecordCreateRecord.records.json'),
+    record:  read('EditorRecordCreateRecord.record.json')
   };
 
 

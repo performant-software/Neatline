@@ -17,7 +17,7 @@ describe('Records | Pagination', function() {
     p34: read('EditorRecordsPagination.p34.json'),
     p56: read('EditorRecordsPagination.p56.json'),
     p6:  read('EditorRecordsPagination.p6.json')
-  }
+  };
 
 
   beforeEach(function() {

@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form | Geometry Controls', function() {
+describe('Record | Geometry Controls', function() {
 
 
   var el, fx = {
