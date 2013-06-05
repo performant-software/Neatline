@@ -12,6 +12,12 @@
 
   - Fixes broken helper calls in the default exhibit show template the were causing the exhibit title and narrative fields not to be displayed above and below the exhibit.
 
+  - When a vector layer is selected on the map and the map is panned or zoomed, the previously-selected layer is now re-selected after the new data arives.
+
+  - When a vector layer has been selected by an externally-triggered event (for example, clicking on a record in the browser panel in the editor), the layer is now "durably" selected as if it had been clicked directly on the map. (Previously, features would unhighlight as they would if the layer were not selected if the cursor passed over a feature and then exited it.)
+
+  - When a vector layer has been selected from without, it is now possible to unselect the layer as usual by clicking on the map's base layer.
+
 # v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
 
 #### New Features
