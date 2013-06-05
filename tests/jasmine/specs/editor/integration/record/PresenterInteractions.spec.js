@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Presenter', function() {
+describe('Record Form | Presenter Interactions', function() {
 
 
   var el, fx = {

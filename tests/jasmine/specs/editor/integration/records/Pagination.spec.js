@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Records Pagination', function() {
+describe('Records | Pagination', function() {
 
 
   var fx = {

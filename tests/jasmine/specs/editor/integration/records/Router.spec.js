@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Records Router', function() {
+describe('Records | Router', function() {
 
 
   var el;

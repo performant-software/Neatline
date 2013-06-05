@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Search Map Mirroring', function() {
+describe('Search | Map Mirroring', function() {
 
 
   var fx = {

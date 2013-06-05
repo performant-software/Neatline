@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Tab Route Updating', function() {
+describe('Record Form | Route Updating', function() {
 
 
   var fx = {

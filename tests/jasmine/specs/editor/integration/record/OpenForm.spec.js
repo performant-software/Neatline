@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Open', function() {
+describe('Record Form | Open Form', function() {
 
 
   var el, recordModels, feature1, feature2, fx = {

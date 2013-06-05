@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Google Base Layer Constructor', function() {
+describe('Layers | Google', function() {
 
 
   var layer;

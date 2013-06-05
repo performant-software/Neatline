@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map WMS Layer Zindex Rendering', function() {
+describe('Map | WMS Zindex', function() {
 
 
   var fx = {

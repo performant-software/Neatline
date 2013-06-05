@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Close', function() {
+describe('Record Form | Close Form', function() {
 
 
   var el, fx = {

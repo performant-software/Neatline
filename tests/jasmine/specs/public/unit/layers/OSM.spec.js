@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('OpenStreetMap Base Layer Constructor', function() {
+describe('Layers | OpenStreetMap', function() {
 
 
   beforeEach(function() {

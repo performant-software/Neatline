@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Styles Save', function() {
+describe('Styles | Save Styles', function() {
 
 
   var el, fx = {

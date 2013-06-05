@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Widget', function() {
+describe('Widget | View Injection', function() {
 
 
   var view;

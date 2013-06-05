@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Styles Router', function() {
+describe('Styles | Router', function() {
 
 
   var el, fx = {

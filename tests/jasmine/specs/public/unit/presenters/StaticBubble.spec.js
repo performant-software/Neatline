@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Static Bubble Event Handlers', function() {
+describe('Presenters | Static Bubble', function() {
 
 
   var el, model1, model2;

@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Static Bubble Map Interactions', function() {
+describe('Presenters | Static Bubble', function() {
 
 
   var el, layers, feature1, feature2, fx = {

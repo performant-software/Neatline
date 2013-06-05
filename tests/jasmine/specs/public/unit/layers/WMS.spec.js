@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('WMS Base Layer Constructor', function() {
+describe('Layers | Web Map Service', function() {
 
 
   beforeEach(function() {

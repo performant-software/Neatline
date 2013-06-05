@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Styles Open', function() {
+describe('Styles | Open Form', function() {
 
 
   var fx = {

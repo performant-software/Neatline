@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Add', function() {
+describe('Record Form | Create Record', function() {
 
 
   var el, fx =  {

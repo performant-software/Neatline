@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Style Previewing', function() {
+describe('Record Form | Style Previewing', function() {
 
 
   // ----------------------------------------------------------------------

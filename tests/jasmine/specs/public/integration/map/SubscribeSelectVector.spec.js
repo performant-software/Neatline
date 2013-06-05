@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map `select` Event Subscription (Vector Layers)', function() {
+describe('Map | Subscribe `select` (Vector Layers)', function() {
 
 
   var fx = {

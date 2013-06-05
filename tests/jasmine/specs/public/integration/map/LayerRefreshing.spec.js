@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Layer Refreshing', function() {
+describe('Map | Layer Refreshing', function() {
 
 
   var fx = {

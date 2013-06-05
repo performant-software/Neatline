@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map Edit Layer Management', function() {
+describe('Map | Edit Layer Management', function() {
 
 
   var fx = {

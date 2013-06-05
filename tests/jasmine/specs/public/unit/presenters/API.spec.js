@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Presenter API', function() {
+describe('Presenters | API', function() {
 
 
   var model1, model2, exec;

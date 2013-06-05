@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record Form Item Search', function() {
+describe('Record Form | Item Search', function() {
 
 
   var el, fx = {
