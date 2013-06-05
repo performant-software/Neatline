@@ -12,8 +12,8 @@ describe('Map | Record Loading', function() {
 
 
   var fx = {
-    one: readFixtures('PublicMapRecordLoading.one.json'),
-    two: readFixtures('PublicMapRecordLoading.two.json')
+    one: readFixtures('NeatlineMapRecordLoading.one.json'),
+    two: readFixtures('NeatlineMapRecordLoading.two.json')
   };
 
 

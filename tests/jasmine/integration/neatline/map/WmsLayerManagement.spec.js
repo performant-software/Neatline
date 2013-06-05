@@ -12,8 +12,8 @@ describe('Map | WMS Layer Management', function() {
 
 
   var fx = {
-    regular: read('PublicMapWmsLayerManagement.regular.json'),
-    deleted: read('PublicMapWmsLayerManagement.deleted.json')
+    regular: read('NeatlineMapWmsLayerManagement.regular.json'),
+    deleted: read('NeatlineMapWmsLayerManagement.deleted.json')
   };
 
 

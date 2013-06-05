@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicPresentersStaticBubble
+class FixturesTest_NeatlinePresentersStaticBubble
     extends Neatline_Case_Fixture
 {
 
@@ -35,7 +35,7 @@ class FixturesTest_PublicPresentersStaticBubble
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicPresentersStaticBubble.records.json'
+            'NeatlinePresentersStaticBubble.records.json'
         );
 
     }

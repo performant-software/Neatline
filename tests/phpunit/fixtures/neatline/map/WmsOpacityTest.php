@@ -9,20 +9,25 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapEventPublications
-    extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapWmsOpacity extends Neatline_Case_Fixture
 {
 
 
     public function testRecords()
     {
 
-        $record  = $this->__record($this->exhibit);
-        $record->coverage = 'POINT(1 2)';
+        $record = $this->__record($this->exhibit);
+
+        $record->setArray(array(
+            'wms_address'   => 'address',
+            'wms_layers'    => 'layers',
+            'fill_opacity'  => 0.5
+        ));
+
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapEventPublications.records.json'
+            'NeatlineMapWmsOpacity.records.json'
         );
 
     }

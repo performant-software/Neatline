@@ -13,12 +13,12 @@ describe('Map | Layer Refreshing', function() {
 
   var fx = {
     vector: {
-      original: read('PublicMapLayerRefreshing.vector.original.json'),
-      changed:  read('PublicMapLayerRefreshing.vector.changed.json')
+      original: read('NeatlineMapLayerRefreshing.vector.original.json'),
+      changed:  read('NeatlineMapLayerRefreshing.vector.changed.json')
     },
     wms: {
-      original: read('PublicMapLayerRefreshing.wms.original.json'),
-      changed:  read('PublicMapLayerRefreshing.wms.changed.json')
+      original: read('NeatlineMapLayerRefreshing.wms.original.json'),
+      changed:  read('NeatlineMapLayerRefreshing.wms.changed.json')
     }
   };
 

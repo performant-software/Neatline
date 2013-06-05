@@ -12,7 +12,7 @@ describe('Map | Vector Styles', function() {
 
 
   var layer1, layer2, fx = {
-    records: readFixtures('PublicMapVectorStyles.records.json')
+    records: readFixtures('NeatlineMapVectorStyles.records.json')
   };
 
 

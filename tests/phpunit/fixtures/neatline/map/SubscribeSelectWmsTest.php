@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapSubscribeSelectWms
+class FixturesTest_NeatlineMapSubscribeSelectWms
     extends Neatline_Case_Fixture
 {
 
@@ -27,7 +27,7 @@ class FixturesTest_PublicMapSubscribeSelectWms
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'PublicMapSubscribeSelectWms.noFocus.json'
+            'NeatlineMapSubscribeSelectWms.noFocus.json'
         );
 
         $record->setArray(array(
@@ -38,7 +38,7 @@ class FixturesTest_PublicMapSubscribeSelectWms
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records/'.$record->id,
-            'PublicMapSubscribeSelectWms.focus.json'
+            'NeatlineMapSubscribeSelectWms.focus.json'
         );
 
     }

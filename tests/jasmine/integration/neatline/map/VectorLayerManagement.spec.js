@@ -12,8 +12,8 @@ describe('Map | Vector Layer Management', function() {
 
 
   var fx = {
-    regular: read('PublicMapVectorLayerManagement.regular.json'),
-    deleted: read('PublicMapVectorLayerManagement.deleted.json')
+    regular: read('NeatlineMapVectorLayerManagement.regular.json'),
+    deleted: read('NeatlineMapVectorLayerManagement.deleted.json')
   };
 
 

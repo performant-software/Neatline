@@ -12,8 +12,8 @@ describe('Map | Layer Filtering', function() {
 
 
   var fx = {
-    regular: readFixtures('PublicMapLayerFiltering.regular.json'),
-    deleted: readFixtures('PublicMapLayerFiltering.deleted.json')
+    regular: readFixtures('NeatlineMapLayerFiltering.regular.json'),
+    deleted: readFixtures('NeatlineMapLayerFiltering.deleted.json')
   };
 
 

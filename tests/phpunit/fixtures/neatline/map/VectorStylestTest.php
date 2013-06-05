@@ -9,8 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_PublicMapVectorStyles
-    extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapVectorStyles extends Neatline_Case_Fixture
 {
 
 
@@ -41,7 +40,7 @@ class FixturesTest_PublicMapVectorStyles
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'PublicMapVectorStyles.records.json'
+            'NeatlineMapVectorStyles.records.json'
         );
 
     }

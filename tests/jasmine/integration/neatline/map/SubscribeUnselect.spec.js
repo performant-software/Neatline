@@ -12,7 +12,7 @@ describe('Map | Subscribe `unselect`', function() {
 
 
   var fx = {
-    records: readFixtures('PublicMapEventSubscriptions.records.json')
+    records: readFixtures('NeatlineMapSubscriptions.records.json')
   };
 
 

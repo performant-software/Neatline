@@ -12,8 +12,8 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
 
 
   var fx = {
-    noFocus: read('PublicMapSubscribeSelectWms.noFocus.json'),
-    focus:   read('PublicMapSubscribeSelectWms.focus.json')
+    noFocus: read('NeatlineMapSubscribeSelectWms.noFocus.json'),
+    focus:   read('NeatlineMapSubscribeSelectWms.focus.json')
   };
 
 
