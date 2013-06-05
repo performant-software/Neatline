@@ -74,6 +74,32 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
   });
 
 
+  it('should select the layer', function() {
+
+    // --------------------------------------------------------------------
+    // When `select` is triggered, features on the corresponding vector
+    // layer should be selected as if they had been clicked by the cursor.
+    // For example, they should not respond to highlight events - when the
+    // cursor leaves a feature, it should not be unhighlighted.
+    // --------------------------------------------------------------------
+
+    // TODO
+
+  });
+
+
+  it('should be possible to unselect the layer', function() {
+
+    // --------------------------------------------------------------------
+    // When a layer is selected in response to a `select` event, it should
+    // be possible to unselect the layer by clicking on the base layer.
+    // --------------------------------------------------------------------
+
+    // TODO
+
+  });
+
+
   it('should not focus when feature is clicked', function() {
 
     // --------------------------------------------------------------------
