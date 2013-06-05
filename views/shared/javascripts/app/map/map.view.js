@@ -22,6 +22,10 @@ Neatline.module('Map', function(
     },
 
 
+    // INITIALIZERS
+    // --------------------------------------------------------------------
+
+
     /**
      * Initialize the map and publish initial request for data.
      */
@@ -178,6 +182,10 @@ Neatline.module('Map', function(
     },
 
 
+    // CONTROLS
+    // --------------------------------------------------------------------
+
+
     /**
      * Activate the hover and click controls.
      */
@@ -212,6 +220,46 @@ Neatline.module('Map', function(
       if (!_.isNull(this.selectedModel)) {
         this.selectByModel(this.selectedModel);
       }
+
+    },
+
+
+    // VIEWPORT
+    // --------------------------------------------------------------------
+
+
+    /**
+     * Focus the position and zoom to center around the passed model.
+     *
+     * - If the model has a non-null `map_focus` and `map_zoom`, set the
+     *   viewport using these values.
+     *
+     * - Otherwise, automatically fit the viewport around the extent of
+     *   the model's geometries, except when coverage is `POINT(0 0)`.
+     *
+     * @param {Object} model: The record model.
+     */
+    focusByModel: function(model) {
+
+      // Get a layer for the model.
+      var layer = this.layers.vector[model.id];
+      if (!layer) layer = this.buildVectorLayer(model);
+
+      // Try to get a custom focus.
+      var focus = model.get('map_focus');
+      var zoom  = model.get('map_zoom');
+
+      // If focus is defined, apply.
+      if (_.isString(focus) && _.isNumber(zoom)) {
+        this.setViewport(focus, zoom);
+      }
+
+      // Otherwise, fit to viewport.
+      else if (model.get('coverage') && !model.get('is_wms')) {
+        this.map.zoomToExtent(layer.getDataExtent());
+      }
+
+      Neatline.vent.trigger('MAP:focused');
 
     },
 
@@ -253,6 +301,10 @@ Neatline.module('Map', function(
       geolocate.activate();
 
     },
+
+
+    // LAYERS
+    // --------------------------------------------------------------------
 
 
     /**
@@ -461,6 +513,10 @@ Neatline.module('Map', function(
     },
 
 
+    // FILTERS
+    // --------------------------------------------------------------------
+
+
     /**
      * Register a layer filter.
      *
@@ -513,6 +569,10 @@ Neatline.module('Map', function(
         }, this));
       }, this));
     },
+
+
+    // STYLES
+    // --------------------------------------------------------------------
 
 
     /**
@@ -581,93 +641,8 @@ Neatline.module('Map', function(
     },
 
 
-    /**
-     * Get the current zoom level.
-     *
-     * @return {Number}: The zoom level.
-     */
-    getZoom: function(model) {
-      return this.map.getZoom();
-    },
-
-
-    /**
-     * Get the current map viewport bounds as a WKT polygon string.
-     *
-     * @return {String}: The WKT string.
-     */
-    getExtentAsWKT: function() {
-      var extent = this.map.getExtent().toGeometry();
-      var vector = new OpenLayers.Feature.Vector(extent);
-      return this.formatWkt.write(vector);
-    },
-
-
-    /**
-     * Get an array of all vector layers.
-     *
-     * @return {Array}: The array of layers.
-     */
-    getVectorLayers: function() {
-      return _.values(this.layers.vector);
-    },
-
-
-    /**
-     * Get an array of all WMS layers.
-     *
-     * @return {Array}: The array of layers.
-     */
-    getWmsLayers: function() {
-      return _.values(this.layers.wms);
-    },
-
-
-    /**
-     * Is the passed model the same as the currently-selected model?
-     *
-     * @return {Object}: A record model.
-     */
-    modelIsSelected: function(model) {
-      if (this.selectedModel) return this.selectedModel.id == model.id;
-      else return false;
-    },
-
-
-    /**
-     * Focus the position and zoom to center around the passed model.
-     *
-     * - If the model has a non-null `map_focus` and `map_zoom`, set the
-     *   viewport using these values.
-     *
-     * - Otherwise, automatically fit the viewport around the extent of
-     *   the model's geometries, except when coverage is `POINT(0 0)`.
-     *
-     * @param {Object} model: The record model.
-     */
-    focusByModel: function(model) {
-
-      // Get a layer for the model.
-      var layer = this.layers.vector[model.id];
-      if (!layer) layer = this.buildVectorLayer(model);
-
-      // Try to get a custom focus.
-      var focus = model.get('map_focus');
-      var zoom  = model.get('map_zoom');
-
-      // If focus is defined, apply.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
-      }
-
-      // Otherwise, fit to viewport.
-      else if (model.get('coverage') && !model.get('is_wms')) {
-        this.map.zoomToExtent(layer.getDataExtent());
-      }
-
-      Neatline.vent.trigger('MAP:focused');
-
-    },
+    // RENDERERS
+    // --------------------------------------------------------------------
 
 
     /**
@@ -764,6 +739,10 @@ Neatline.module('Map', function(
     },
 
 
+    // PUBLISHERS
+    // --------------------------------------------------------------------
+
+
     /**
      * When a feature is highlighted, trigger the `highlight` event with
      * the model associated with the feature.
@@ -840,6 +819,63 @@ Neatline.module('Map', function(
         source: Map.ID
       });
 
+    },
+
+
+    // HELPERS
+    // --------------------------------------------------------------------
+
+
+    /**
+     * Get the current zoom level.
+     *
+     * @return {Number}: The zoom level.
+     */
+    getZoom: function(model) {
+      return this.map.getZoom();
+    },
+
+
+    /**
+     * Get the current map viewport bounds as a WKT polygon string.
+     *
+     * @return {String}: The WKT string.
+     */
+    getExtentAsWKT: function() {
+      var extent = this.map.getExtent().toGeometry();
+      var vector = new OpenLayers.Feature.Vector(extent);
+      return this.formatWkt.write(vector);
+    },
+
+
+    /**
+     * Get an array of all vector layers.
+     *
+     * @return {Array}: The array of layers.
+     */
+    getVectorLayers: function() {
+      return _.values(this.layers.vector);
+    },
+
+
+    /**
+     * Get an array of all WMS layers.
+     *
+     * @return {Array}: The array of layers.
+     */
+    getWmsLayers: function() {
+      return _.values(this.layers.wms);
+    },
+
+
+    /**
+     * Is the passed model the same as the currently-selected model?
+     *
+     * @return {Object}: A record model.
+     */
+    modelIsSelected: function(model) {
+      if (this.selectedModel) return this.selectedModel.id == model.id;
+      else return false;
     }
 
 
