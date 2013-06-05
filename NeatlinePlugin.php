@@ -210,7 +210,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Register properties on `Neatline.global`.
+     * Register properties on `Neatline.g`.
      *
      * @param array $globals The array of global properties.
      * @param array $args Contains: `exhibit` (NeatlineExhibit).

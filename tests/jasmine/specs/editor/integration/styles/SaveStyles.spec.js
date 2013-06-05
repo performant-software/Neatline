@@ -29,27 +29,6 @@ describe('Styles | Save Styles', function() {
   });
 
 
-  it('should populate default focus and zoom', function() {
-
-    // --------------------------------------------------------------------
-    // When the "Use Current Viewport as Default" button is clicked, the
-    // default focus and zoom inputs should be populated.
-    // --------------------------------------------------------------------
-
-    NL.setMapCenter(1, 2, 3);
-    el.setFocus.trigger('click');
-
-    // Inputs should be updated.
-    expect(NL.vw.STYLES.__ui.mapFocus).toHaveValue('1,2');
-    expect(NL.vw.STYLES.__ui.mapZoom).toHaveValue('3');
-
-    // Model should be updated.
-    expect(NL.vw.STYLES.model.get('map_focus')).toEqual('1,2');
-    expect(NL.vw.STYLES.model.get('map_zoom')).toEqual('3');
-
-  });
-
-
   it('should synchronize model with stylesheet editor', function() {
 
     // --------------------------------------------------------------------
