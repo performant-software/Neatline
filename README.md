@@ -1,6 +1,4 @@
-
 ![Neatline Logo](http://neatline.org/wp-content/themes/neatline-wp-theme/images/neatline-logo-rgb.png)
-
 # Neatline
 
 **Neatline is a lightweight, extensible framework for building interactive maps and publishing them on the web.**
