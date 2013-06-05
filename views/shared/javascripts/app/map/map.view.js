@@ -724,7 +724,6 @@ Neatline.module('Map', function(
       // Mock a feature handler on the select control, which ensures that
       // the layer can be unselected by clicking elsewhere on the map.
 
-      // TODO|TDD
       this.selectControl.handlers.feature.lastFeature =
         layer.selectedFeatures[0];
 

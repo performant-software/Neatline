@@ -106,7 +106,17 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // be possible to unselect the layer by clicking on the base layer.
     // --------------------------------------------------------------------
 
-    // TODO
+    NL.respondMap200(fx.records);
+
+    // Select model for the vector layer.
+    var layer = NL.vw.MAP.getVectorLayers()[0];
+    Neatline.vent.trigger('select', { model: layer.nModel });
+
+    // Click off layer.
+    NL.clickOffMapFeature();
+
+    // Should unselect.
+    NL.assertDefaultIntent(layer);
 
   });
 
