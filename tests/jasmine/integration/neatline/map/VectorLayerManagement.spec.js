@@ -114,20 +114,6 @@ describe('Map | Vector Layer Management', function() {
   });
 
 
-  it('should reselect currently selected layer', function() {
-
-    // --------------------------------------------------------------------
-    // When a layer is selected and the map is refreshed, the previously-
-    // selected layer should be re-selected after the new layers are added
-    // to the map (it will be automatically unselected when the highlight
-    // and select controls are updated with the new set of layers).
-    // --------------------------------------------------------------------
-
-    // TODO
-
-  });
-
-
   it('should garbage collect stale layers', function() {
 
     // --------------------------------------------------------------------

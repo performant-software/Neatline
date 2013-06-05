@@ -121,6 +121,30 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
   });
 
 
+  it('should reselect currently selected layer after ingest', function() {
+
+    // --------------------------------------------------------------------
+    // When a layer is selected and the map is refreshed, the previously-
+    // selected layer should be re-selected after the new layers are added
+    // to the map (it will be automatically unselected when the highlight
+    // and select controls are updated with the new set of layers).
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.records);
+
+    // Select model for the vector layer.
+    var layer = NL.vw.MAP.getVectorLayers()[0];
+    Neatline.vent.trigger('select', { model: layer.nModel });
+
+    // Ingest fresh records.
+    NL.refreshMap(fx.records);
+
+    // Should re-select layer.
+    NL.assertSelectIntent(layer);
+
+  });
+
+
   it('should not focus when feature is clicked', function() {
 
     // --------------------------------------------------------------------
