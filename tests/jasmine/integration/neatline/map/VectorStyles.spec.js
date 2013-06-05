@@ -87,6 +87,7 @@ describe('Map | Vector Styles', function() {
       // ------------------------------------------------------------------
 
       NL.hoverOnMapFeature(layer1.features[0]);
+
       NL.assertTemporaryIntent(layer1);
 
     });
@@ -100,6 +101,7 @@ describe('Map | Vector Styles', function() {
 
       NL.hoverOnMapFeature(layer1.features[0]);
       NL.unHoverOnMapFeature();
+
       NL.assertDefaultIntent(layer1);
 
     });
@@ -112,6 +114,7 @@ describe('Map | Vector Styles', function() {
       // ------------------------------------------------------------------
 
       NL.clickOnMapFeature(layer1.features[0]);
+
       NL.assertSelectIntent(layer1);
 
     });
@@ -125,6 +128,7 @@ describe('Map | Vector Styles', function() {
 
       NL.clickOnMapFeature(layer1.features[0]);
       NL.clickOffMapFeature();
+
       NL.assertDefaultIntent(layer1);
 
     });

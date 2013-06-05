@@ -717,7 +717,6 @@ Neatline.module('Map', function(
         // render intent and preventing it from being switched back to the
         // `default` intent by the highlight control.
 
-        // TODO|TDD
         feature._lastHighlighter = this.selectControl.id;
 
       }, this));

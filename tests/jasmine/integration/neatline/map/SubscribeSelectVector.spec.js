@@ -11,7 +11,7 @@
 describe('Map | Subscribe `select` (Vector Layers)', function() {
 
 
-  var fx = {
+  var model, fx = {
     records: readFixtures('NeatlineMapSubscriptions.records.json'),
     record:  readFixtures('NeatlineMapSubscriptions.record.json')
   };
@@ -54,7 +54,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // record and focus on it.
     // --------------------------------------------------------------------
 
-    // Create a model that does not have a layer.
+    // Create model with no vector layer.
     var model = NL.recordFromJson(fx.record);
     var count = NL.server.requests.count;
 
@@ -83,7 +83,18 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // cursor leaves a feature, it should not be unhighlighted.
     // --------------------------------------------------------------------
 
-    // TODO
+    NL.respondMap200(fx.records);
+
+    // Select model for the vector layer.
+    var layer = NL.vw.MAP.getVectorLayers()[0];
+    Neatline.vent.trigger('select', { model: layer.nModel });
+
+    // Hover, then unhover.
+    NL.hoverOnMapFeature(layer.features[0]);
+    NL.unHoverOnMapFeature();
+
+    // Should not unhighlight.
+    NL.assertSelectIntent(layer);
 
   });
 
