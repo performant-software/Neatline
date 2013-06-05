@@ -32,7 +32,24 @@ describe('Map | Subscribe `highlight`', function() {
     var layer = NL.vw.MAP.getVectorLayers()[0];
     
     Neatline.vent.trigger('highlight', { model: layer.nModel });
-    NL.assertTemporaryIntent(layer.features[0]);
+    NL.assertTemporaryIntent(layer);
+
+  });
+
+
+  it('should not highlight features for selected layer', function() {
+
+    // --------------------------------------------------------------------
+    // When `highlight` is triggered with a record that selected on the
+    // map, the features should not be highlighted.
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.records);
+    var layer = NL.vw.MAP.getVectorLayers()[0];
+    
+    Neatline.vent.trigger('select', { model: layer.nModel });
+    Neatline.vent.trigger('highlight', { model: layer.nModel });
+    NL.assertSelectIntent(layer);
 
   });
 

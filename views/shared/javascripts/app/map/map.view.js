@@ -208,7 +208,7 @@ Neatline.module('Map', function(
       this.highlightControl.setLayer(layers);
       this.selectControl.setLayer(layers);
 
-      // TODO|TDD
+      // Re-select the previously-selected model
       if (!_.isNull(this.selectedModel)) {
         this.selectByModel(this.selectedModel);
       }
@@ -624,6 +624,17 @@ Neatline.module('Map', function(
 
 
     /**
+     * Is the passed model the same as the currently-selected model?
+     *
+     * @return {Object}: A record model.
+     */
+    modelIsSelected: function(model) {
+      if (this.selectedModel) return this.selectedModel.id == model.id;
+      else return false;
+    },
+
+
+    /**
      * Focus the position and zoom to center around the passed model.
      *
      * - If the model has a non-null `map_focus` and `map_zoom`, set the
@@ -667,7 +678,7 @@ Neatline.module('Map', function(
     highlightByModel: function(model) {
 
       var layer = this.layers.vector[model.id];
-      if (!layer) return;
+      if (!layer || this.modelIsSelected(model)) return;
 
       // Render `temporary` intent.
       _.each(layer.features, _.bind(function(feature) {
@@ -685,7 +696,7 @@ Neatline.module('Map', function(
     unhighlightByModel: function(model) {
 
       var layer = this.layers.vector[model.id];
-      if (!layer) return;
+      if (!layer || this.modelIsSelected(model)) return;
 
       // Render `default` intent.
       _.each(layer.features, _.bind(function(feature) {
@@ -739,8 +750,17 @@ Neatline.module('Map', function(
      * @param {Object} model: The record model.
      */
     unselectByModel: function(model) {
-      this.unhighlightByModel(model);
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      // Render `default` intent.
+      _.each(layer.features, _.bind(function(feature) {
+        layer.drawFeature(feature, 'default');
+      }, this));
+
       this.selectedModel = null;
+
     },
 
 

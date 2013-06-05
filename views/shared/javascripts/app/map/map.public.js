@@ -53,7 +53,7 @@ Neatline.module('Map', function(
 
 
   /**
-   * Highlight by model, unless the event was triggered by the map.
+   * Highlight by model.
    *
    * @param {Object} args: Event arguments.
    */
@@ -65,7 +65,7 @@ Neatline.module('Map', function(
 
 
   /**
-   * Unhighlight by model, unless the event was triggered by the map.
+   * Unhighlight by model.
    *
    * @param {Object} args: Event arguments.
    */
@@ -74,7 +74,18 @@ Neatline.module('Map', function(
   };
   Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
   Neatline.vent.on('unhighlight', unhighlight);
-  Neatline.vent.on('unselect', unhighlight);
+
+
+  /**
+   * Unselect by model.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var unselect = function(args) {
+    Map.__view.unselectByModel(args.model);
+  };
+  Neatline.commands.setHandler(Map.ID+':unselect', unselect);
+  Neatline.vent.on('unselect', unselect);
 
 
   /**

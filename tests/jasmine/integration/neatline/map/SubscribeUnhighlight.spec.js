@@ -21,7 +21,7 @@ describe('Map | Subscribe `unhighlight`', function() {
   });
 
 
-  it('should unhighlight features', function() {
+  it('should unhighlight features for highlighted layer', function() {
 
     // --------------------------------------------------------------------
     // When `unhighlight` is triggered with a record that has a vector
@@ -33,8 +33,25 @@ describe('Map | Subscribe `unhighlight`', function() {
     
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     Neatline.vent.trigger('unhighlight', { model: layer.nModel });
-    NL.assertDefaultIntent(layer.features[0]);
+    NL.assertDefaultIntent(layer);
     
+  });
+
+
+  it('should not unhighlight features for selected layer', function() {
+
+    // --------------------------------------------------------------------
+    // When `unhighlight` is triggered with a record that is selected on
+    // on the map, the features should not be unhighlighted.
+    // --------------------------------------------------------------------
+
+    NL.respondMap200(fx.records);
+    var layer = NL.vw.MAP.getVectorLayers()[0];
+    
+    Neatline.vent.trigger('select', { model: layer.nModel });
+    Neatline.vent.trigger('unhighlight', { model: layer.nModel });
+    NL.assertSelectIntent(layer);
+
   });
 
 

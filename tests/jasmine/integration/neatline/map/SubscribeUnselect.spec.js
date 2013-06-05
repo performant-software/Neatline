@@ -21,7 +21,7 @@ describe('Map | Subscribe `unselect`', function() {
   });
 
 
-  it('should unhighlight features', function() {
+  it('should unselect features', function() {
 
     // --------------------------------------------------------------------
     // When `unselect` is triggered with a record that has a vector layer
@@ -31,9 +31,9 @@ describe('Map | Subscribe `unselect`', function() {
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];
     
-    Neatline.vent.trigger('highlight', { model: layer.nModel });
+    Neatline.vent.trigger('select', { model: layer.nModel });
     Neatline.vent.trigger('unselect', { model: layer.nModel });
-    NL.assertDefaultIntent(layer.features[0]);
+    NL.assertDefaultIntent(layer);
     
   });
 
