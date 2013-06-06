@@ -124,6 +124,15 @@ Neatline.module('Map', function(
 
 
   /**
+   * Refresh the map after it is resized.
+   */
+  var updateSize = function() {
+    Map.__view.map.updateSize();
+  };
+  Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
+
+
+  /**
    * Emit the OpenLayers map instance.
    *
    * @return {Object}: The map.
