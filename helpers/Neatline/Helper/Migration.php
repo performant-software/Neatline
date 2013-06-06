@@ -83,7 +83,7 @@ class Neatline_Helper_Migration
     {
         Zend_Registry::get('job_dispatcher')->sendLongRunning(
             'Neatline_UpgradeJob', array(
-                'web_dir'       => nl_getWebDir()
+                'web_dir' => nl_getWebDir()
             )
         );
     }
@@ -100,23 +100,46 @@ class Neatline_Helper_Migration
         $prefix = "{$db->prefix}neatline_";
         $ext    = "_migrate";
 
-        $sql = <<<SQL
+        $exhibits = <<<SQL
 INSERT INTO {$prefix}exhibits
     (id, title, slug, public, narrative, modified, query, map_focus, map_zoom)
     SELECT id, name, slug, public, description, modified, query,
         default_map_bounds, default_map_zoom
-    FROM {$prefix}exhibits${ext};
+    FROM {$prefix}exhibits{$ext};
 SQL;
+/*
+ *         $records = <<<SQL
+ * INSERT INTO {$prefix}records (id, coverage)
+ *     VALUES (?, ?);
+ * SQL;
+ *         $insertRecord = $db->prepare($records);
+ */
 
         $db->beginTransaction();
 
         try {
-            $db->query($sql);
+            $db->query($exhibits);
+
+            $q    = $db->query("SELECT * FROM {$prefix}data_records{$ext};");
+            $q->setFetchMode(Zend_Db::FETCH_OBJ);
+            $rows = $q->fetchAll();
+            // TODO: Handle WKT|WKT|WKT in geocoverage. GeometryCollection(WKT, WKT, WKT)
+            $i = 0;
+            foreach ($rows as $row) {
+                $i += 1;
+                $nlr = new NeatlineRecord(null, null);
+                $nlr->id = $row->id;
+                if (!is_null($row->geocoverage)) {
+                    $nlr->coverage = $row->geocoverage;
+                }
+                $nlr->save();
+            }
 
             $db->commit();
         } catch (Exception $e) {
             $db->rollback();
             echo $e->getMessage();
+            throw $e;
         }
     }
 

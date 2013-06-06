@@ -123,14 +123,11 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         }
         sort($values1);
 
-        $select = $db
-            ->select()
-            ->from("{$prefix}{$table_b}");
-        $q       = $select->query();
-        $v2      = $q->fetchAll();
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
         $values2 = array();
         foreach ($v2 as $e) {
-            $values2[] = $e[$b];
+            $values2[] = $e->$b;
         }
         sort($values2);
 
@@ -140,14 +137,59 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
-     * This tests whether a field was transfered correctly.
+     * This tests whether an exhibit field was transfered correctly.
      *
      * @return void
      * @author Eric Rochester
      **/
     protected function _testExhibitMigration($a, $b)
     {
-        $this->_testMigration('exhibits', $a, 'exhibits', $b);
+        $this->_testMigration('exhibits', $a, 'NeatlineExhibit', $b);
+    }
+
+    /**
+     * This tests whether a record field was transfered correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testRecordMigration($a, $b)
+    {
+        $this->_testMigration('data_records', $a, 'NeatlineRecord', $b);
+    }
+
+    /**
+     * This tests whether the migration handles all data items.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateCounts()
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+
+        $this->_migrate();
+
+        $q     = $db->query("SELECT COUNT(*) FROM {$prefix}exhibits_migrate;");
+        $c_old = $q->fetch();
+
+        $q     = $db->query("SELECT COUNT(*) FROM {$prefix}exhibits;");
+        $c_new = $q->fetch();
+
+        $this->assertEquals($c_old['COUNT(*)'], $c_new['COUNT(*)']);
+        $this->assertGreaterThan(0, $c_old['COUNT(*)']);
+        $this->assertGreaterThan(0, $c_new['COUNT(*)']);
+
+        $q     = $db->query("SELECT COUNT(*) FROM {$prefix}data_records_migrate;");
+        $c_old = $q->fetch();
+
+        $q     = $db->query("SELECT COUNT(*) FROM {$prefix}records;");
+        $c_new = $q->fetch();
+
+        $this->assertEquals($c_old['COUNT(*)'], $c_new['COUNT(*)']);
+        $this->assertGreaterThan(0, $c_old['COUNT(*)']);
+        $this->assertGreaterThan(0, $c_new['COUNT(*)']);
     }
 
     /**
@@ -179,6 +221,20 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      **/
     public function testMigrateDataRecordSimpleTransfers()
     {
+        $this->_migrate();
+        $this->_testRecordMigration('id', 'id');
+    }
+
+    /**
+     * This tests whether the coverage field is correctly handled.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    function testMigrateDataRecordCoverage()
+    {
+        $this->_migrate();
+        $this->_testRecordMigration('geocoverage', 'coverage');
     }
 
 }
