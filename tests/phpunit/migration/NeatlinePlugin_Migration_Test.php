@@ -114,22 +114,20 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
         $select = $db
             ->select()
-            ->from("{$prefix}{$table_a}_migrate");
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
         $q       = $select->query();
         $v1      = $q->fetchAll();
         $values1 = array();
         foreach ($v1 as $e) {
-            $values1[] = $e[$a];
+            $values1[$e['id']] = $e[$a];
         }
-        sort($values1);
 
         $t2 = $db->getTable($table_b);
         $v2 = $t2->findAll();
         $values2 = array();
         foreach ($v2 as $e) {
-            $values2[] = $e->$b;
+            $values2[$e->id] = $e->$b;
         }
-        sort($values2);
 
         $this->assertNotEmpty($values1);
         $this->assertNotEmpty($values2);
@@ -213,7 +211,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
-     * This tests that simply transfered data record fields are handled 
+     * This tests that simply transfered data record fields are handled
      * correctly.
      *
      * @return void
@@ -233,8 +231,163 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      **/
     function testMigrateDataRecordCoverage()
     {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $table_b = 'NeatlineRecord';
+        $a       = 'geocoverage';
+        $b       = 'coverage';
+
         $this->_migrate();
-        $this->_testRecordMigration('geocoverage', 'coverage');
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $value = $e[$a];
+            $parts = explode('|', $value);
+            if (count($parts) > 1) {
+                $value = 'GEOMETRYCOLLECTION(' . implode(',', $parts) . ')';
+            }
+            $values1[$e['id']] = $value;
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        $values2 = array();
+        foreach ($v2 as $e) {
+            $values2[$e->id] = $e->$b;
+        }
+
+        $this->assertNotEmpty($values1);
+        $this->assertNotEmpty($values2);
+        $this->assertEquals($values1, $values2);
+    }
+
+    function testMigrateDataRowCoverageKML()
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+        $tname  = $prefix . "data_records_migrate";
+        $sql    = "SELECT COUNT(*) FROM $tname;";
+        $insert = <<<SQL
+INSERT INTO $tname
+    (id, item_id, use_dc_metadata, exhibit_id, parent_record_id, show_bubble,
+        title, slug, description, start_date, end_date, start_visible_date,
+        end_visible_date, geocoverage, left_percent, right_percent, vector_color,
+        stroke_color, highlight_color, vector_opacity, select_opacity, stroke_opacity,
+        graphic_opacity, stroke_width, point_radius, point_image, space_active,
+        time_active, items_active, display_order, map_bounds, map_zoom)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+        ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+SQL;
+
+        $db->delete($tname);
+        $this->assertEquals(0, $db->fetchOne($sql));
+
+        $db->query(
+            $insert,
+            array(
+                1,
+                null,
+                null,
+                1,
+                null,
+                0,
+                'A title',
+                null,
+                'Some descriptive text.',
+                '2013-01-01',
+                '2013-12-31',
+                null,
+                null,
+                '<kml xmlns="http://earth.google.com/kml/2.0"><Folder><name>OpenLayers export</name><description>Exported on Tue May 21 2013 14:18:48 GMT-0400 (EDT)</description><Placemark><name>OpenLayers.Feature.Vector_294</name><description>No description available</description><Polygon><outerBoundaryIs><LinearRing><coordinates>-10722123.575577,5383403.6586166 -10746583.424625,5275780.3228061 -10643852.058624,4952910.3153745 -10174222.956905,4962694.2549936 -10130195.228619,5065425.6209946 -10076383.560714,5119237.2888999 -10032355.832428,5207292.7454721 -10159547.047477,5295348.2020444 -10159547.047477,5383403.6586166 -10722123.575577,5383403.6586166</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark></Folder></kml>',
+                0,
+                100,
+                '#ff1971',
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                1,
+                1,
+                1,
+                null,
+                '-9748621.5834729, 4808597.2059922',
+                5
+            ));
+        $db->query(
+            $insert,
+            array(
+                2,
+                null,
+                null,
+                1,
+                null,
+                0,
+                'Another title',
+                null,
+                'Something else descriptive',
+                '2012-08-01',
+                '2013-04-01',
+                '2012-08-01',
+                '2013-04-01',
+                '<kml xmlns="http://earth.google.com/kml/2.0"><Folder><name>OpenLayers export</name><description>Exported on Tue May 21 2013 14:18:48 GMT-0400 (EDT)</description><Placemark><name>OpenLayers.Feature.Vector_734</name><description>No description available</description><Point><coordinates>-8736595.329118,4583260.8466388</coordinates></Point></Placemark></Folder></kml>',
+                13,
+                87,
+                null,
+                null,
+                null,
+                80,
+                null,
+                null,
+                null,
+                null,
+                10,
+                null,
+                1,
+                1,
+                1,
+                null,
+                null,
+                null,
+            ));
+
+        $this->assertEquals(2, $db->fetchOne($sql));
+
+        $this->_migrate();
+
+        $table = $db->getTable('NeatlineRecord');
+        $recs  = $table->findAll();
+
+        $this->assertCount(2, $recs);
+
+        foreach ($recs as $r) {
+            if ($r->id == 1) {
+                $this->assertEquals(
+                    'POLYGON((-10722123.575577 5383403.6586166,-10746583.424625 5275780.3228061,-10643852.058624 4952910.3153745,-10174222.956905 4962694.2549936,-10130195.228619 5065425.6209946,-10076383.560714 5119237.2888999,-10032355.832428 5207292.7454721,-10159547.047477 5295348.2020444,-10159547.047477 5383403.6586166,-10722123.575577 5383403.6586166))',
+                    $r->coverage
+                );
+
+            } else if ($r->id == 2) {
+                $this->assertEquals(
+                    'POINT(-8736595.329118 4583260.8466388)',
+                    $r->coverage
+                );
+
+            } else {
+                $this->assertTrue(false, 'Invalid ID #.');
+            }
+        }
+
     }
 
 }

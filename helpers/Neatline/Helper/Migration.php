@@ -9,6 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+require_once('geoPHP.inc');
+
 class Neatline_Helper_Migration
 {
 
@@ -107,13 +109,6 @@ INSERT INTO {$prefix}exhibits
         default_map_bounds, default_map_zoom
     FROM {$prefix}exhibits{$ext};
 SQL;
-/*
- *         $records = <<<SQL
- * INSERT INTO {$prefix}records (id, coverage)
- *     VALUES (?, ?);
- * SQL;
- *         $insertRecord = $db->prepare($records);
- */
 
         $db->beginTransaction();
 
@@ -123,14 +118,23 @@ SQL;
             $q    = $db->query("SELECT * FROM {$prefix}data_records{$ext};");
             $q->setFetchMode(Zend_Db::FETCH_OBJ);
             $rows = $q->fetchAll();
-            // TODO: Handle WKT|WKT|WKT in geocoverage. GeometryCollection(WKT, WKT, WKT)
             $i = 0;
             foreach ($rows as $row) {
                 $i += 1;
                 $nlr = new NeatlineRecord(null, null);
                 $nlr->id = $row->id;
                 if (!is_null($row->geocoverage)) {
-                    $nlr->coverage = $row->geocoverage;
+                    $coverage = $row->geocoverage;
+
+                    if (strpos($coverage, '<?xml') === 0 ||
+                        strpos($coverage, '<kml') === 0) {
+                        $coverage = geoPHP::load($coverage,'kml')->out('wkt');
+
+                    } else if (strpos($coverage, '|') !== FALSE) {
+                        $covs = explode('|', $coverage);
+                        $coverage = 'GeometryCollection(' . implode(',', $covs) . ')';
+                    }
+                    $nlr->coverage = $coverage;
                 }
                 $nlr->save();
             }
