@@ -10,7 +10,7 @@
 
 #### API Changes
 
-    - Before querying for records, the records API will now pass out a `Omeka_Db_Select` instance to a `neatline_query_records` filter. This makes it possible for sub-plugins to implement custom API parameters.
+  - Before querying for records, the records API will now pass out a `Omeka_Db_Select` instance to a `neatline_query_records` filter. This makes it possible for sub-plugins to implement custom API parameters.
 
 #### Bug Fixes
 
