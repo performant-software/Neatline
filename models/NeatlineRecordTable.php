@@ -144,8 +144,10 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             );
         }
 
-        // Allow plugins to modify the select.
-        $select = apply_filters('neatline_query_records', $select);
+        // Pass select to plugins for modification.
+        $select = apply_filters('neatline_query_records',
+            $select, $params
+        );
 
         // Execute query.
         $data['records'] = $select->query()->fetchAll();
