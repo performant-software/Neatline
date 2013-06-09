@@ -8,6 +8,10 @@
 
   - Changes all tag queries to use MySQL full-text search instead of regular expression matching. This improves performance, but means that tags have to be at least four characters in length in order by be indexed by MySQL.
 
+#### API Changes
+
+    - Before querying for records, the records API will now pass out a `Omeka_Db_Select` instance to a `neatline_query_records` filter. This makes it possible for sub-plugins to implement custom API parameters.
+
 #### Bug Fixes
 
   - Fixes broken helper calls in the default exhibit show template the were causing the exhibit title and narrative fields not to be displayed above and below the exhibit.

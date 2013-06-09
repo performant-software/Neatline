@@ -25,7 +25,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Select `coverage` as plain-text and order by creation date.
+     * Get a starting selection object for record queries.
      *
      * @return Omeka_Db_Select The modified select.
      */
@@ -65,15 +65,15 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param NeatlineExhibit $exhibit The exhibit record.
      * @param array $params Associative array of filter parameters:
      *
-     *  - zoom:         The zoom level of the map.
-     *  - extent:       The viewport extent of the map.
-     *  - query:        A full-text search query.
-     *  - tags:         An array of tags.
-     *  - widget:       A record widget activation.
-     *  - slug:         A record slug.
-     *  - order:        A column to sort on.
-     *  - offset:       The number of records to skip.
-     *  - limit:        The number of records to get.
+     *  - zoom:     The zoom level of the map.
+     *  - extent:   The viewport extent of the map.
+     *  - query:    A full-text search query.
+     *  - tags:     An array of tags.
+     *  - widget:   A record widget activation.
+     *  - slug:     A record slug.
+     *  - order:    A column to sort on.
+     *  - offset:   The number of records to skip.
+     *  - limit:    The number of records to get.
      *
      * @return array The collection of records.
      */
@@ -143,6 +143,9 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
                 $params['offset']
             );
         }
+
+        // Allow plugins to modify the select.
+        $select = apply_filters('neatline_query_records', $select);
 
         // Execute query.
         $data['records'] = $select->query()->fetchAll();
