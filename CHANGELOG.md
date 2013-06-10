@@ -10,6 +10,8 @@
 
   - Changes all tag queries to use MySQL full-text search instead of regular expression matching. This improves performance, but means that tags have to be at least four characters in length in order by be indexed by MySQL.
 
+  - Closing a static bubble by clicking on the "X" link now triggers the global `unselect` event, which has the effect of "closing" the record elsewhere in the exhibit (eg, unselecting map features, un-highlighting tagged spans in the narrative).
+
 #### API Changes
 
   - Just before executing a query, the records API will now pass out the fully-formed `Omeka_Db_Select` instance by way of the `neatline_query_records` filter, which can be used by sub-plugins to implement custom API parameters.
