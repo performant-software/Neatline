@@ -240,6 +240,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         $record1->title = 'title1';
         $record2->title = 'title2';
+        $record1->body  = 'body1';
+        $record2->body  = 'body2';
+        $record1->slug  = 'slug1';
+        $record2->slug  = 'slug2';
         $record1->save();
         $record2->save();
 
@@ -251,11 +255,6 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertEquals($result['records'][0]['id'], $record1->id);
         $this->assertCount(1, $result['records']);
 
-        $record1->body = 'body1';
-        $record2->body = 'body2';
-        $record1->save();
-        $record2->save();
-
         // Should search in `body` field.
         $result = $this->__records->queryRecords($exhibit,
             array('query' => 'body1')
@@ -263,11 +262,6 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         $this->assertEquals($result['records'][0]['id'], $record1->id);
         $this->assertCount(1, $result['records']);
-
-        $record1->slug = 'slug1';
-        $record2->slug = 'slug2';
-        $record1->save();
-        $record2->save();
 
         // Should search in `body` field.
         $result = $this->__records->queryRecords($exhibit,
