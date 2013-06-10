@@ -4,6 +4,8 @@
 
   - When the cursor hovers/blurs on listings in the record-browser panel in the editor, corresponding features on the map will highlight/unhighlight.
 
+  - Fulltext searches in the editor will now match content in the "Slug" field, in addition to "Title" and "Body".
+
 #### Changed Features
 
   - Changes all tag queries to use MySQL full-text search instead of regular expression matching. This improves performance, but means that tags have to be at least four characters in length in order by be indexed by MySQL.
