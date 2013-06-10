@@ -41,6 +41,18 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
     {
         parent::setUp();
 
+        /*
+         * $pluginHelper = new Omeka_Test_Helper_Plugin;
+         * $pluginHelper->setUp('Exhibits');
+         */
+
+        $v = get_view();
+        $v->setScriptPath(array(
+            VIEW_SCRIPTS_DIR,
+            NL_DIR . '/views/shared'
+            // NL_DIR . '/tests/phpunit/mocks/theme/neatline'
+        ));
+
         $this->_clearSchema();
         $this->_createSchema1();
         $this->_loadFixtures();
