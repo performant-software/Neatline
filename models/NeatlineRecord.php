@@ -246,12 +246,30 @@ class NeatlineRecord extends Neatline_ExpandableRow
         if (is_null($this->item_id)) return;
 
         // Get the item, set on view.
+        try {
+            $old = get_current_record('item');
+        } catch (Exception $e) {
+            $old = null;
+        }
         $item = get_record_by_id('Item', $this->item_id);
-        get_view()->item = $item;
+        if (is_null($item)) {
+            return;
+        }
+        try {
+            set_current_record('item', $item);
 
-        // Pull title and body.
-        $this->title = metadata($item, array('Dublin Core', 'Title'));
-        $this->body = nl_getItemMarkup($this);
+            // Pull title and body.
+            $this->title = metadata($item, array('Dublin Core', 'Title'));
+            $this->body = nl_getItemMarkup($this);
+        } catch (Exception $e) {
+            if (!is_null($old)) {
+                set_current_record('item', $old);
+            }
+            throw $e;
+        }
+        if (!is_null($old)) {
+            set_current_record('item', $old);
+        }
 
     }
 
