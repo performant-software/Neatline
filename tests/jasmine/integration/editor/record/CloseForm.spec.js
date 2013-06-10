@@ -61,8 +61,8 @@ describe('Record | Close Form', function() {
 
     // Should unselect the record.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('unselect', {
-      source: 'EDITOR:RECORD',
-      model:  NL.vw.RECORD.model
+      model:  NL.vw.RECORD.model,
+      source: Neatline.Editor.Record.ID
     });
 
   });
@@ -81,7 +81,7 @@ describe('Record | Close Form', function() {
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
-      source: 'EDITOR:RECORD'
+      source: Neatline.Editor.Record.ID
     });
 
   });

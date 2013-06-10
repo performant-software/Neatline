@@ -42,7 +42,7 @@ describe('Records | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('highlight', {
       model:  model,
-      source: 'EDITOR:EXHIBIT:RECORDS'
+      source: Neatline.Editor.Exhibit.Records.ID
     });
 
   });
@@ -60,7 +60,7 @@ describe('Records | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('unhighlight', {
       model:  model,
-      source: 'EDITOR:EXHIBIT:RECORDS'
+      source: Neatline.Editor.Exhibit.Records.ID
     });
 
   });
@@ -77,7 +77,7 @@ describe('Records | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('select', {
       model:  model,
-      source: 'EDITOR:EXHIBIT:RECORDS'
+      source: Neatline.Editor.Exhibit.Records.ID
     });
 
   });

@@ -136,12 +136,16 @@ describe('Presenters | Static Bubble', function() {
   describe('close', function() {
 
     // --------------------------------------------------------------------
-    // When the bubble is closed, it should be emptied of content and the
-    // `bound` and `selected` classes should be removed.
+    // When the close "X" button is clicked, the bubble container should
+    // be emptied, the `bound` and `selected` classes should be removed,
+    // and `unselect` event should be published.
     // --------------------------------------------------------------------
+
+    var vent;
 
     beforeEach(function() {
       Neatline.vent.trigger('select', { model: model1 });
+      vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
       NL.vw.BUBBLE.$('.close').trigger('click');
     });
 
@@ -152,6 +156,13 @@ describe('Presenters | Static Bubble', function() {
     it('should remove `bound` and `selected` classes', function() {
       expect(NL.vw.BUBBLE.$el).not.toHaveClass('bound');
       expect(NL.vw.BUBBLE.$el).not.toHaveClass('selected');
+    });
+
+    it('should publish `unselect`', function() {
+      expect(vent).toHaveBeenCalledWith('unselect', {
+        source: Neatline.Presenter.StaticBubble.ID,
+        model:  model1
+      });
     });
 
   });

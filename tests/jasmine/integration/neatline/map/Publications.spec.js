@@ -42,7 +42,7 @@ describe('Map | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('highlight', {
       model:  layer.nModel,
-      source: 'MAP'
+      source: Neatline.Map.ID
     });
 
   });
@@ -60,7 +60,7 @@ describe('Map | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('unhighlight', {
       model:  layer.nModel,
-      source: 'MAP'
+      source: Neatline.Map.ID
     });
 
   });
@@ -77,7 +77,7 @@ describe('Map | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('select', {
       model:  layer.nModel,
-      source: 'MAP'
+      source: Neatline.Map.ID
     });
 
   });
@@ -95,7 +95,7 @@ describe('Map | Publications', function() {
 
     expect(vent).toHaveBeenCalledWith('unselect', {
       model:  layer.nModel,
-      source: 'MAP'
+      source: Neatline.Map.ID
     });
 
   });

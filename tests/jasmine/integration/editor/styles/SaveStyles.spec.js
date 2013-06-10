@@ -128,7 +128,7 @@ describe('Styles | Save Styles', function() {
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
-      source: 'EDITOR:EXHIBIT:STYLES'
+      source: Neatline.Editor.Exhibit.Styles.ID
     });
 
   });

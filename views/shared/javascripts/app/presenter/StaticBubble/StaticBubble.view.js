@@ -18,7 +18,7 @@ Neatline.module('Presenter.StaticBubble', function(
     id: 'static-bubble',
 
     events: {
-      'click .close': 'unselect'
+      'click .close': 'onClose'
     },
 
     ui: {
@@ -43,11 +43,33 @@ Neatline.module('Presenter.StaticBubble', function(
 
 
     /**
+     * Hide the bubble and publish the `unselect` event.
+     */
+    onClose: function() {
+
+      this.unselect()
+
+      // Publish `unselect` event.
+      Neatline.vent.trigger('unselect', {
+        model:  this.model,
+        source: StaticBubble.ID
+      });
+
+    },
+
+
+    // HELPERS
+    // --------------------------------------------------------------------
+
+
+    /**
      * Populate title and body.
      *
      * @param {Object} model: The record model.
      */
     bind: function(model) {
+
+      this.model = model;
 
       // Store reference to mouseout callback.
       this.onMouseOut = _.bind(this.unhighlight, this);
@@ -57,7 +79,7 @@ Neatline.module('Presenter.StaticBubble', function(
       map.events.register('mouseout', null, this.onMouseOut);
 
       // Render template, add `bound` class.
-      this.$el.html(this.template({ record: model }));
+      this.$el.html(this.template({ record: this.model }));
       this.$el.addClass('bound');
 
     },
@@ -77,6 +99,10 @@ Neatline.module('Presenter.StaticBubble', function(
       this.$el.removeClass('bound');
 
     },
+
+
+    // API METHODS
+    // --------------------------------------------------------------------
 
 
     /**
