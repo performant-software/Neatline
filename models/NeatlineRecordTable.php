@@ -146,8 +146,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
         // Pass select to plugins for modification.
         $select = apply_filters('neatline_query_records',
-            $select, $params
-        );
+            $select, $params);
 
         // Execute query.
         $data['records'] = $select->query()->fetchAll();
@@ -255,7 +254,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     public function _filterByKeywords($select, $query)
     {
         $select->where(
-            "MATCH (title, body) AGAINST (? IN BOOLEAN MODE)", $query
+            "MATCH (title, body, slug) AGAINST (? IN BOOLEAN MODE)",
+            $query
         );
         return $select;
     }
@@ -272,7 +272,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
         foreach ($tags as $tag) {
             $select->where(
-                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)", $tag
+                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)",
+                $tag
             );
         }
         return $select;
@@ -289,7 +290,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     public function _filterByWidget($select, $widget)
     {
         $select->where(
-            "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)", $widget
+            "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)",
+            $widget
         );
         return $select;
     }

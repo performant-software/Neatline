@@ -145,7 +145,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertEquals($result['records'][1]['id'], $record1->id);
         $this->assertCount(2, $result['records']);
 
-        // Record1 intersection.
+        // Record 1 intersection.
         $result = $this->__records->queryRecords($exhibit,
             array('extent' => 'POLYGON((1 1,1 3,3 3,3 1,1 1))')
         );
@@ -153,7 +153,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertEquals($result['records'][0]['id'], $record1->id);
         $this->assertCount(1, $result['records']);
 
-        // Record2 intersection.
+        // Record 2 intersection.
         $result = $this->__records->queryRecords($exhibit,
             array('extent' => 'POLYGON((5 5,5 7,7 7,7 5,5 5))')
         );
@@ -161,7 +161,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertEquals($result['records'][0]['id'], $record2->id);
         $this->assertCount(1, $result['records']);
 
-        // Record1 and record2 intersection.
+        // Record 1 and record 2 intersection.
         $result = $this->__records->queryRecords($exhibit,
             array('extent' => 'POLYGON((1 1,1 5,5 5,5 1,1 1))')
         );
@@ -227,7 +227,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * `queryRecords` should filter on a search query.
+     * `queryRecords` should search for keywords in the `title`, `body`,
+     * and `slug` fields.
      */
     public function testKeywordsFilter()
     {
@@ -236,26 +237,45 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
-        $record3 = new NeatlineRecord($exhibit);
-        $record1->title = '1 neatline 2';
-        $record2->body  = '3 neatline 4';
-        $record3->body  = 'omeka';
-        $record1->added = '2001-01-01';
-        $record2->added = '2002-01-01';
-        $record3->added = '2003-01-01';
 
+        $record1->title = 'title1';
+        $record2->title = 'title2';
         $record1->save();
         $record2->save();
-        $record3->save();
 
-        // Query for 'neatline'.
+        // Should search in `title` field.
         $result = $this->__records->queryRecords($exhibit,
-            array('query' => 'neatline')
+            array('query' => 'title1')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
-        $this->assertCount(2, $result['records']);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertCount(1, $result['records']);
+
+        $record1->body = 'body1';
+        $record2->body = 'body2';
+        $record1->save();
+        $record2->save();
+
+        // Should search in `body` field.
+        $result = $this->__records->queryRecords($exhibit,
+            array('query' => 'body1')
+        );
+
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertCount(1, $result['records']);
+
+        $record1->slug = 'slug1';
+        $record2->slug = 'slug2';
+        $record1->save();
+        $record2->save();
+
+        // Should search in `body` field.
+        $result = $this->__records->queryRecords($exhibit,
+            array('query' => 'slug1')
+        );
+
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertCount(1, $result['records']);
 
     }
 
