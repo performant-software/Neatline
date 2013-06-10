@@ -118,25 +118,8 @@ SQL;
             $q    = $db->query("SELECT * FROM {$prefix}data_records{$ext};");
             $q->setFetchMode(Zend_Db::FETCH_OBJ);
             $rows = $q->fetchAll();
-            $i = 0;
             foreach ($rows as $row) {
-                $i += 1;
-                $nlr = new NeatlineRecord(null, null);
-                $nlr->id = $row->id;
-                if (!is_null($row->geocoverage)) {
-                    $coverage = $row->geocoverage;
-
-                    if (strpos($coverage, '<?xml') === 0 ||
-                        strpos($coverage, '<kml') === 0) {
-                        $coverage = geoPHP::load($coverage,'kml')->out('wkt');
-
-                    } else if (strpos($coverage, '|') !== FALSE) {
-                        $covs = explode('|', $coverage);
-                        $coverage = 'GeometryCollection(' . implode(',', $covs) . ')';
-                    }
-                    $nlr->coverage = $coverage;
-                }
-                $nlr->save();
+                $this->_migrateDataRecord($row)->save();
             }
 
             $db->commit();
@@ -145,6 +128,73 @@ SQL;
             echo $e->getMessage();
             throw $e;
         }
+    }
+
+    /**
+     * This populates a new NeatlineRecord from the data passed in and saves it.
+     *
+     * @param $data object The data from the data record as an object.
+     *
+     * @return NeatlineRecord
+     * @author Eric Rochester
+     **/
+    protected function _migrateDataRecord($data)
+    {
+        $nlr = new NeatlineRecord(null, null);
+
+        // id
+        $nlr->id = $data->id;
+
+        // item_id
+        $nlr->item_id = $data->item_id;
+
+        // use_dc_metadata
+        // exhibit_id
+        // parent_record_id
+        // show_bubble
+        // title
+        // slug
+        // description
+        // start_date
+        // end_date
+        // start_visible_date
+        // end_visible_date
+
+        // geocoverage
+        if (!is_null($data->geocoverage)) {
+            $coverage = $data->geocoverage;
+
+            if (strpos($coverage, '<?xml') === 0 ||
+                strpos($coverage, '<kml') === 0) {
+                    $coverage = geoPHP::load($coverage,'kml')->out('wkt');
+
+                } else if (strpos($coverage, '|') !== FALSE) {
+                    $covs = explode('|', $coverage);
+                    $coverage = 'GeometryCollection(' . implode(',', $covs) . ')';
+                }
+            $nlr->coverage = $coverage;
+        }
+
+        // left_percent
+        // right_percent
+        // vector_color
+        // stroke_color
+        // highlight_color
+        // vector_opacity
+        // select_opacity
+        // stroke_opacity
+        // graphic_opacity
+        // stroke_width
+        // point_radius
+        // point_image
+        // space_active
+        // time_active
+        // items_active
+        // display_order
+        // map_bounds
+        // map_zoom
+
+        return $nlr;
     }
 
 }
