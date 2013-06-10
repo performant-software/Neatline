@@ -123,7 +123,7 @@ class ImportItemsTest extends Neatline_Case_Default
         $exhibit = $this->__exhibit();
 
         insert_files_for_item($item, 'Filesystem', array(
-            NL_DIR . '/tests/phpunit/mocks/file.txt'
+            NL_TEST_DIR . '/mocks/file.txt'
         ));
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
