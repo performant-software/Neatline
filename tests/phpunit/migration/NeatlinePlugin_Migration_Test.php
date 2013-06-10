@@ -157,6 +157,61 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
+     * This tests whether the values from an int field matches a decimal field.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testDecimalMigration($a, $b)
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $table_b = 'NeatlineRecord';
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $values1[$e['id']] = is_null($e[$a]) ? null : (string)($e[$a] / 100.0);
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        $values2 = array();
+        foreach ($v2 as $e) {
+            $values2[$e->id] = $e->$b;
+        }
+
+        $this->assertNotEmpty($values1);
+        $this->assertNotEmpty($values2);
+        $this->assertEquals($values1, $values2);
+    }
+
+    /**
+     * This tests whether the given field has any non-NULL values.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testAllNull($b)
+    {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_b = 'NeatlineRecord';
+
+        $t2 = $db->getTable($table_b);
+        $c  = $db->fetchRow(
+            "SELECT COUNT(*) FROM {$t2->getTableName()} "
+            . "WHERE $b IS NOT NULL;"
+        );
+        $this->assertEquals(0, $c['COUNT(*)']);
+    }
+
+    /**
      * This tests whether the migration handles all data items.
      *
      * @return void
@@ -220,7 +275,82 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     public function testMigrateDataRecordSimpleTransfers()
     {
         $this->_migrate();
-        $this->_testRecordMigration('id', 'id');
+
+        $this->_testRecordMigration('id',                 'id');
+        $this->_testRecordMigration('exhibit_id',         'exhibit_id');
+        $this->_testRecordMigration('title',              'title');
+        $this->_testRecordMigration('slug',               'slug');
+        $this->_testRecordMigration('start_date',         'start_date');
+        $this->_testRecordMigration('end_date',           'end_date');
+        $this->_testRecordMigration('start_visible_date', 'after_date');
+        $this->_testRecordMigration('end_visible_date',   'before_date');
+        $this->_testRecordMigration('vector_color',       'fill_color');
+        $this->_testRecordMigration('stroke_color',       'stroke_color');
+        $this->_testRecordMigration('highlight_color',    'fill_color_select');
+        $this->_testRecordMigration('stroke_width',       'stroke_width');
+        $this->_testRecordMigration('point_radius',       'point_radius');
+        $this->_testRecordMigration('point_image',        'point_image');
+        $this->_testRecordMigration('display_order',      'weight');
+        $this->_testRecordMigration('map_bounds',         'map_focus');
+        $this->_testRecordMigration('map_zoom',           'map_zoom');
+
+    }
+
+    /**
+     * This tests fields that are converted from ints to decimals.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateDataRecordDecimals()
+    {
+        $this->_migrate();
+
+        $this->_testDecimalMigration('vector_opacity', 'fill_opacity');
+        $this->_testDecimalMigration('stroke_opacity', 'stroke_opacity');
+        $this->_testDecimalMigration('select_opacity', 'fill_opacity_select');
+    }
+
+    /**
+     * item_id should never be propagated, since it can clobber title fields.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateToNull()
+    {
+        $this->_migrate();
+
+        $this->_testAllNull('item_id');
+        $this->_testAllNull('tags');
+        $this->_testAllNull('stroke_color_select');
+        $this->_testAllNull('stroke_opacity_select');
+        $this->_testAllNull('zindex');
+        $this->_testAllNull('min_zoom');
+        $this->_testAllNull('max_zoom');
+    }
+
+    /**
+     * This tests that the added and modified fields are set to the very recent 
+     * past (i.e., the last three seconds).
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testAddedModifiedDates()
+    {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_b = 'NeatlineRecord';
+        $b       = 'added';
+
+        $t2 = $db->getTable($table_b);
+        $c  = $db->fetchRow(
+            "SELECT COUNT(*) FROM {$t2->getTableName()} "
+            . "WHERE $b IS NOT NULL AND "
+            . "$b <= ADDDATE(NOW(), INTERVAL -3 SECOND);"
+        );
+        $this->assertEquals(0, $c['COUNT(*)']);
     }
 
     /**
@@ -246,9 +376,11 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $q       = $select->query();
         $v1      = $q->fetchAll();
         $values1 = array();
+        $is1     = array();
         foreach ($v1 as $e) {
-            $value = $e[$a];
-            $parts = explode('|', $value);
+            $value         = $e[$a];
+            $is1[$e['id']] = (int)!is_null($value);
+            $parts         = explode('|', $value);
             if (count($parts) > 1) {
                 $value = 'GEOMETRYCOLLECTION(' . implode(',', $parts) . ')';
             }
@@ -258,13 +390,20 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $t2 = $db->getTable($table_b);
         $v2 = $t2->findAll();
         $values2 = array();
+        $is2     = array();
         foreach ($v2 as $e) {
             $values2[$e->id] = $e->$b;
+            $is2[$e->id]     = $e->is_coverage;
         }
 
         $this->assertNotEmpty($values1);
         $this->assertNotEmpty($values2);
         $this->assertEquals($values1, $values2);
+
+        $this->assertNotEmpty($is1);
+        $this->assertNotEmpty($is2);
+        $this->assertEquals($is1, $is2);
+
     }
 
     function testMigrateDataRowCoverageKML()
@@ -385,6 +524,159 @@ SQL;
 
             } else {
                 $this->assertTrue(false, 'Invalid ID #.');
+            }
+        }
+
+    }
+
+    /**
+     * This tests the description/body fields.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateBody()
+    {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $a       = 'description';
+        $table_b = 'NeatlineRecord';
+        $b       = 'body';
+
+        $this->_migrate();
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate",
+                   array('id', $a, 'use_dc_metadata', 'item_id'));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $body = null;
+            if (is_null($e[$a])
+                && $e['use_dc_metadata']
+                && !is_null($e['item_id'])) {
+
+                $item = get_record_by_id('Item', $e['item_id']);
+                if (!is_null($item)) {
+                    set_current_record('item', $item);
+                    $body = get_view()->partial('exhibits/item.php');
+                }
+
+            } else {
+                $body = $e[$a];
+            }
+            $values1[$e['id']] = $body;
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        $values2 = array();
+        foreach ($v2 as $e) {
+            $values2[$e->id] = $e->$b;
+        }
+
+        $this->assertNotEmpty($values1);
+        $this->assertNotEmpty($values2);
+        $this->assertEquals($values1, $values2);
+    }
+
+    /**
+     * This tests whether show_bubble gets transfered to presenter correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateShowBubble()
+    {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $a       = 'show_bubble';
+        $table_b = 'NeatlineRecord';
+        $b       = 'presenter';
+
+        $this->_migrate();
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $values1[$e['id']] = $e[$a] ? 'StaticBubble' : 'None';
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        $values2 = array();
+        foreach ($v2 as $e) {
+            $values2[$e->id] = $e->$b;
+        }
+
+        $this->assertNotEmpty($values1);
+        $this->assertNotEmpty($values2);
+        $this->assertEquals($values1, $values2);
+    }
+
+    /**
+     * This tests whether widgets is getting set correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function testMigrateWidgets()
+    {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $table_b = 'NeatlineRecord';
+        $b       = 'presenter';
+
+        $this->_migrate();
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate",
+                   array('id', 'time_active', 'items_active'));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $index1  = array();
+        foreach ($v1 as $el1) {
+            $index1[$el1['id']] = array($el1['time_active'],
+                                        $el1['items_active']);
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        foreach ($v2 as $el2) {
+            $el1 = $index1[$el2->id];
+
+            if ($el1[0]) {
+                $this->assertTrue(
+                    strpos('Simile', $el2->widgets) !== FALSE,
+                    "time_active item missing Simile widget ({$el2->id})"
+                );
+            } else {
+                $this->assertTrue(
+                    strpos('Simile', $el2->widgets) === FALSE,
+                    "time_active item includes Simile widget ({$el2->id})"
+                );
+            }
+
+            if ($el1[1]) {
+                $this->assertTrue(
+                    strpos('Waypoints', $el2->widgets) !== FALSE,
+                    "items_active item missing Waypoints widget ({$el2->id})"
+                );
+            } else {
+                $this->assertTrue(
+                    strpos('Waypoints', $el2->widgets) === FALSE,
+                    "items_active item includes Waypoints widget ({$el2->id})"
+                );
             }
         }
 

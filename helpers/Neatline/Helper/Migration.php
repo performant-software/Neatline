@@ -131,6 +131,17 @@ SQL;
     }
 
     /**
+     * This returns a null-checked, scaled opacity value.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    private function _opacity($input)
+    {
+        return is_null($input) ? null : $input / 100.0;
+    }
+
+    /**
      * This populates a new NeatlineRecord from the data passed in and saves it.
      *
      * @param $data object The data from the data record as an object.
@@ -141,24 +152,101 @@ SQL;
     protected function _migrateDataRecord($data)
     {
         $nlr = new NeatlineRecord(null, null);
+        $now = new Zend_Db_Expr('NOW()');
 
-        // id
-        $nlr->id = $data->id;
+        $nlr->id                    = $data->id;
+        $nlr->item_id               = null;
+        $nlr->exhibit_id            = $data->exhibit_id;
+        $nlr->added                 = $now;
+        $nlr->modified              = $now;
+        $nlr->title                 = $data->title;
+        $nlr->slug                  = $data->slug;
+        $nlr->tags                  = null;
+        $nlr->start_date            = $data->start_date;
+        $nlr->end_date              = $data->end_date;
+        $nlr->after_date            = $data->start_visible_date;
+        $nlr->before_date           = $data->end_visible_date;
+        $nlr->presenter             = $data->show_bubble ? 'StaticBubble' : 'None';
 
-        // item_id
-        $nlr->item_id = $data->item_id;
+        // TODO: David, check these particularly, please.
+        $nlr->fill_color            = $data->vector_color;
+        $nlr->fill_opacity          = $this->_opacity($data->vector_opacity);
+        $nlr->stroke_color          = $data->stroke_color;
+        $nlr->stroke_opacity        = $this->_opacity($data->stroke_opacity);
+        $nlr->fill_color_select     = $data->highlight_color;
+        $nlr->fill_opacity_select   = $this->_opacity($data->select_opacity);
+        $nlr->stroke_color_select   = null;
+        $nlr->stroke_opacity_select = null;
 
+        $nlr->stroke_width          = $data->stroke_width;
+        $nlr->point_radius          = $data->point_radius;
+        $nlr->point_image           = $data->point_image;
+        $nlr->zindex                = null;
+        $nlr->weight                = $data->display_order;
+        $nlr->map_focus             = $data->map_bounds;
+        $nlr->map_zoom              = $data->map_zoom;
+        $nlr->min_zoom              = null;
+        $nlr->max_zoom              = null;
+
+        // WMS fields
+        // TODO: Testing
+        if (plugin_is_active('NeatlineMaps') && !is_null($data->item_id)) {
+            $services = $db->getTable('NeatlineMapsService');
+            $sql = "SELECT m.item_id AS item_id, m.address AS address m.layers AS layers "
+                . "FROM `{$services->getTableName()}` m"
+                . "WHERE item_id=?;";
+            $results = $db->fetchAll($sql, $data->item_id);
+            foreach ($results as $r) {
+                $nlr->is_wms      = true;
+                $nlr->wms_address = $r['address'];
+                $nlr->wms_layers  = $r['layers'];
+            }
+        }
+
+        // time_active, items_active
+        $widgets = array();
+        if ($data->time_active) {
+            $widgets[] = 'Simile';
+        }
+        if ($data->items_active) {
+            $widgets[] = 'Waypoints';
+        }
+        $nlr->widgets = implode(',', $widgets);
+
+        // Dropped:
         // use_dc_metadata
-        // exhibit_id
-        // parent_record_id
-        // show_bubble
-        // title
-        // slug
+        // graphic_opacity
+        // left_percent
+        // right_percent
+        // space_active
+
         // description
-        // start_date
-        // end_date
-        // start_visible_date
-        // end_visible_date
+        if (is_null($data->description)
+            && !is_null($data->item_id)
+            && $data->use_dc_metadata) {
+
+            $item = get_record_by_id('Item', $data->item_id);
+            if (!is_null($item)) {
+                try {
+                    $old = get_current_record('item', $item);
+                } catch (Exception $e) {
+                    $old = null;
+                }
+                set_current_record('item', $item);
+                try {
+                    $nlr->body = nl_getItemMarkup($nlr);
+                } catch (Exception $e) {
+                    set_current_record('item', $old);
+                    throw $e;
+                }
+                if (!is_null($old)) {
+                    set_current_record('item', $old);
+                }
+            }
+
+        } else {
+            $nlr->body = $data->description;
+        }
 
         // geocoverage
         if (!is_null($data->geocoverage)) {
@@ -172,27 +260,14 @@ SQL;
                     $covs = explode('|', $coverage);
                     $coverage = 'GeometryCollection(' . implode(',', $covs) . ')';
                 }
-            $nlr->coverage = $coverage;
+            $nlr->coverage    = $coverage;
+            $nlr->is_coverage = TRUE;
+        } else {
+            $nlr->is_coverage = FALSE;
         }
 
-        // left_percent
-        // right_percent
-        // vector_color
-        // stroke_color
-        // highlight_color
-        // vector_opacity
-        // select_opacity
-        // stroke_opacity
-        // graphic_opacity
-        // stroke_width
-        // point_radius
-        // point_image
-        // space_active
-        // time_active
-        // items_active
-        // display_order
-        // map_bounds
-        // map_zoom
+        // // Old Fields
+        // parent_record_id
 
         return $nlr;
     }
