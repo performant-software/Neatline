@@ -85,6 +85,14 @@ class Neatline_Form_Exhibit extends Omeka_Form
             )
         ));
 
+        // Description.
+        $this->addElement('textarea', 'description', array(
+            'label'         => __('Description'),
+            'description'   => __('A short snippet of text describing the exhibit. Used to summarize the project in exhibit browse listings.'),
+            'value'         => $this->_exhibit->description,
+            'attribs'       => array('rows' => '5')
+        ));
+
         // Narrative.
         $this->addElement('textarea', 'narrative', array(
             'label'         => __('Narrative'),
@@ -146,6 +154,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addDisplayGroup(array(
             'title',
             'slug',
+            'description',
             'narrative',
             'widgets',
             'base_layers',

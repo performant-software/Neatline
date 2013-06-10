@@ -36,6 +36,18 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         // Slug:
         $this->assertXpath('//input[@name="slug"]');
 
+        // Description:
+        $this->assertXpath('//textarea[@name="description"]');
+
+        // Narrative:
+        $this->assertXpath('//textarea[@name="narrative"]');
+
+        // Widgets:
+        $root = '//select[@name="widgets[]"]';
+        $this->assertXpath($root.'/option[@value="Widget1"]');
+        $this->assertXpath($root.'/option[@value="Widget2"]');
+        $this->assertXpath($root.'/option[@value="Widget3"]');
+
         // Base Layers:
         $root = '//select[@name="base_layers[]"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
@@ -59,15 +71,6 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/optgroup[@label="Group3"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
-
-        // Widgets:
-        $root = '//select[@name="widgets[]"]';
-        $this->assertXpath($root.'/option[@value="Widget1"]');
-        $this->assertXpath($root.'/option[@value="Widget2"]');
-        $this->assertXpath($root.'/option[@value="Widget3"]');
-
-        // Narrative:
-        $this->assertXpath('//textarea[@name="narrative"]');
 
         // Public:
         $this->assertXpath('//input[@name="public"]');
@@ -262,10 +265,11 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title',
             'slug'          => 'slug',
+            'description'   => 'Description.',
+            'narrative'     => 'Narrative.',
+            'widgets'       => array('Widget1', 'Widget2'),
             'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer2',
-            'widgets'       => array('Widget1', 'Widget2'),
-            'narrative'     => 'Narrative.',
             'public'        => 1
         ));
 
@@ -280,10 +284,11 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title');
         $this->assertEquals($exhibit->slug,         'slug');
+        $this->assertEquals($exhibit->description,  'Description.');
+        $this->assertEquals($exhibit->narrative,    'Narrative.');
+        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer2');
-        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->narrative,    'Narrative.');
         $this->assertEquals($exhibit->public,       1);
 
     }

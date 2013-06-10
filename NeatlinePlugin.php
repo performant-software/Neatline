@@ -53,6 +53,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `widgets`               TEXT NULL,
         `title`                 TEXT NULL,
         `slug`                  VARCHAR(100) NOT NULL,
+        `description`           TEXT NULL,
         `narrative`             LONGTEXT NULL,
         `public`                TINYINT(1) NOT NULL,
         `styles`                TEXT NULL,

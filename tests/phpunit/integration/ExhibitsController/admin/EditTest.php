@@ -30,6 +30,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         $exhibit = $this->__exhibit('slug');
         $exhibit->title         = 'Title';
+        $exhibit->description   = 'Description.';
         $exhibit->narrative     = 'Narrative.';
         $exhibit->base_layers   = 'Layer1,Layer3';
         $exhibit->base_layer    = 'Layer3';
@@ -47,6 +48,24 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->assertXpath(
             '//input[@name="slug"][@value="slug"]');
 
+        // Description:
+        $this->assertXpathContentContains(
+            '//textarea[@name="description"]',
+            'Description.');
+
+        // Narrative:
+        $this->assertXpathContentContains(
+            '//textarea[@name="narrative"]',
+            'Narrative.');
+
+        // Widgets:
+        $this->assertXpath(
+            '//select[@name="widgets[]"]/
+            option[@selected="selected"][@value="Widget1"]');
+        $this->assertXpath(
+            '//select[@name="widgets[]"]/
+            option[@selected="selected"][@value="Widget2"]');
+
         // Base Layers:
         $this->assertXpath(
             '//select[@name="base_layers[]"]/optgroup/
@@ -59,19 +78,6 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->assertXpath(
             '//select[@name="base_layer"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
-
-        // Widgets:
-        $this->assertXpath(
-            '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget1"]');
-        $this->assertXpath(
-            '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget2"]');
-
-        // Narrative:
-        $this->assertXpathContentContains(
-            '//textarea[@name="narrative"]',
-            'Narrative.');
 
         // Public.
         $this->assertXpath(
@@ -291,10 +297,11 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title 2',
             'slug'          => 'slug-2',
+            'description'   => 'Description 2.',
+            'narrative'     => 'Narrative 2.',
+            'widgets'       => array('Widget1', 'Widget2'),
             'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer2',
-            'widgets'       => array('Widget1', 'Widget2'),
-            'narrative'     => 'Narrative 2.',
             'public'        => 1
         ));
 
@@ -305,10 +312,11 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title 2');
         $this->assertEquals($exhibit->slug,         'slug-2');
+        $this->assertEquals($exhibit->description,  'Description 2.');
+        $this->assertEquals($exhibit->narrative,    'Narrative 2.');
+        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer2');
-        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->narrative,    'Narrative 2.');
         $this->assertEquals($exhibit->public,       1);
 
     }
