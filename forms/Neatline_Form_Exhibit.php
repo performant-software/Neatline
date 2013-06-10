@@ -13,13 +13,16 @@ class Neatline_Form_Exhibit extends Omeka_Form
 {
 
 
+    private $exhibit;
+
+
     /**
      * Construct the exhibit add/edit form.
      */
     public function init()
     {
         parent::init();
-        $this->registerElements();
+        $this->_registerElements();
     }
 
 
@@ -37,7 +40,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
     /**
      * Define the form elements.
      */
-    public function registerElements()
+    private function _registerElements()
     {
 
         // Title.
@@ -171,7 +174,6 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'widgets',
             'base_layers',
             'base_layer',
-            'image',
             'public'
         ), 'exhibit_info');
 
