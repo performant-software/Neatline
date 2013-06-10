@@ -31,7 +31,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Title.
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
-            'description'   => __('An exhibit title, displayed in the page title and theme header.'),
+            'description'   => __('A title for the exhibit, displayed in the page header in the public view for the exhibit.'),
             'size'          => 40,
             'value'         => $this->_exhibit->title,
             'required'      => true,
@@ -50,7 +50,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Slug.
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
-            'description'   => __('A string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
+            'description'   => __('A unique string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
             'value'         => $this->_exhibit->slug,
@@ -76,11 +76,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
                         'table'     => $this->_exhibit->getTable()->getTableName(),
                         'adapter'   => $this->_exhibit->getDb()->getAdapter(),
                         'field'     => 'slug',
-                        'exclude'   => array(
-                            'field' => 'id',
-                            'value' => (int)$this->_exhibit->id
-                        ),
-                        'messages'  =>  array(
+                        'exclude'   => array('field' => 'id', 'value' => (int)$this->_exhibit->id),
+                        'messages'  => array(
                             'recordFound' => __('The slug is already in use.')
                         )
                     )
@@ -91,15 +88,15 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Narrative.
         $this->addElement('textarea', 'narrative', array(
             'label'         => __('Narrative'),
-            'description'   => __('A prose narrative to introduce or contextualize the exhibit.'),
+            'description'   => __('A long-format prose narrative to accompany exhibit.'),
             'value'         => $this->_exhibit->narrative,
-            'attribs'       => array('class' => 'html-editor', 'rows' => '10')
+            'attribs'       => array('rows' => '10')
         ));
 
         // Widgets.
         $this->addElement('multiselect', 'widgets', array(
             'label'         => __('Widgets'),
-            'description'   => __('Select the widgets available in the exhibit.'),
+            'description'   => __('Select the sub-plugin widgets available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
             'multiOptions'  => array_flip(nl_getExhibitWidgets()),
             'value'         => nl_explode($this->_exhibit->widgets),
@@ -118,7 +115,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('select', 'base_layer', array(
             'label'         => __('Default Layer'),
             'description'   => __('Select which layer is visible by default when the exhibit starts.'),
-            'attribs'       => array('data-placeholder' => 'Select a layer'),
+            'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->_exhibit->base_layer),
             'required'      => true,
@@ -153,6 +150,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'widgets',
             'base_layers',
             'base_layer',
+            'image',
             'public'
         ), 'exhibit_info');
 
