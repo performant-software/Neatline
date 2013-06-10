@@ -13,27 +13,39 @@ class Neatline_Form_Exhibit extends Omeka_Form
 {
 
 
-    private $_exhibit;
-
-
     /**
      * Construct the exhibit add/edit form.
      */
     public function init()
     {
-
         parent::init();
+        $this->registerElements();
+    }
 
-        $this->setMethod('post');
-        $this->setAttrib('id', 'add-exhibit-form');
-        $this->addElementPrefixPath('Neatline', dirname(__FILE__));
+
+    /**
+     * Bind an exhibit record to the form.
+     *
+     * @param NeatlineExhibit $exhibit The exhibit record.
+     */
+    public function setExhibit(NeatlineExhibit $exhibit)
+    {
+        $this->exhibit = $exhibit;
+    }
+
+
+    /**
+     * Define the form elements.
+     */
+    public function registerElements()
+    {
 
         // Title.
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
             'description'   => __('A title for the exhibit, displayed in the page header in the public view for the exhibit.'),
             'size'          => 40,
-            'value'         => $this->_exhibit->title,
+            'value'         => $this->exhibit->title,
             'required'      => true,
             'class'         => 'title',
             'validators'    => array(
@@ -53,7 +65,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'description'   => __('A unique string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
             'required'      => true,
-            'value'         => $this->_exhibit->slug,
+            'value'         => $this->exhibit->slug,
             'filters'       => array('StringTrim'),
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -73,10 +85,10 @@ class Neatline_Form_Exhibit extends Omeka_Form
                 ),
                 array('validator' => 'Db_NoRecordExists', 'options' =>
                     array(
-                        'table'     => $this->_exhibit->getTable()->getTableName(),
-                        'adapter'   => $this->_exhibit->getDb()->getAdapter(),
+                        'table'     => $this->exhibit->getTable()->getTableName(),
+                        'adapter'   => $this->exhibit->getDb()->getAdapter(),
                         'field'     => 'slug',
-                        'exclude'   => array('field' => 'id', 'value' => (int)$this->_exhibit->id),
+                        'exclude'   => array('field' => 'id', 'value' => (int)$this->exhibit->id),
                         'messages'  => array(
                             'recordFound' => __('The slug is already in use.')
                         )
@@ -89,7 +101,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('textarea', 'description', array(
             'label'         => __('Description'),
             'description'   => __('A short snippet of text describing the exhibit. Used to summarize the project in exhibit browse listings.'),
-            'value'         => $this->_exhibit->description,
+            'value'         => $this->exhibit->description,
             'attribs'       => array('rows' => '5')
         ));
 
@@ -97,7 +109,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('textarea', 'narrative', array(
             'label'         => __('Narrative'),
             'description'   => __('A long-format prose narrative to accompany exhibit.'),
-            'value'         => $this->_exhibit->narrative,
+            'value'         => $this->exhibit->narrative,
             'attribs'       => array('rows' => '10')
         ));
 
@@ -107,7 +119,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'description'   => __('Select the sub-plugin widgets available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
             'multiOptions'  => array_flip(nl_getExhibitWidgets()),
-            'value'         => nl_explode($this->_exhibit->widgets),
+            'value'         => nl_explode($this->exhibit->widgets),
         ));
 
         // Base Layers.
@@ -116,7 +128,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'description'   => __('Select the base layers available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
-            'value'         => nl_explode($this->_exhibit->base_layers)
+            'value'         => nl_explode($this->exhibit->base_layers)
         ));
 
         // Default Layer.
@@ -125,7 +137,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'description'   => __('Select which layer is visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
-            'value'         => nl_explode($this->_exhibit->base_layer),
+            'value'         => nl_explode($this->exhibit->base_layer),
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -142,7 +154,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
             'description'   => __('By default, exhibits are visible only to site administrators. Check here to publish the exhibit to the public site.'),
-            'value'         => $this->_exhibit->public
+            'value'         => $this->exhibit->public
         ));
 
         // Submit.
@@ -168,15 +180,6 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'submit'
         ), 'submit_button');
 
-    }
-
-
-    /**
-     * Bind an exhibit record to the form.
-     */
-    public function setExhibit(NeatlineExhibit $exhibit)
-    {
-        $this->_exhibit = $exhibit;
     }
 
 
