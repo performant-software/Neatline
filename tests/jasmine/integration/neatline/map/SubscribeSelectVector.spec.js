@@ -74,53 +74,6 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
   });
 
 
-  it('should select the layer', function() {
-
-    // --------------------------------------------------------------------
-    // When `select` is triggered, features on the corresponding vector
-    // layer should be selected as if they had been clicked by the cursor.
-    // For example, they should not respond to highlight events - when the
-    // cursor leaves a feature, it should not be unhighlighted.
-    // --------------------------------------------------------------------
-
-    NL.respondMap200(fx.records);
-
-    // Select model for the vector layer.
-    var layer = NL.vw.MAP.getVectorLayers()[0];
-    Neatline.vent.trigger('select', { model: layer.nModel });
-
-    // Hover, then unhover.
-    NL.hoverOnMapFeature(layer.features[0]);
-    NL.unHoverOnMapFeature();
-
-    // Should not unhighlight.
-    NL.assertSelectIntent(layer);
-
-  });
-
-
-  it('should be possible to unselect the layer', function() {
-
-    // --------------------------------------------------------------------
-    // When a layer is selected in response to a `select` event, it should
-    // be possible to unselect the layer by clicking on the base layer.
-    // --------------------------------------------------------------------
-
-    NL.respondMap200(fx.records);
-
-    // Select model for the vector layer.
-    var layer = NL.vw.MAP.getVectorLayers()[0];
-    Neatline.vent.trigger('select', { model: layer.nModel });
-
-    // Click off layer.
-    NL.clickOffMapFeature();
-
-    // Should unselect.
-    NL.assertDefaultIntent(layer);
-
-  });
-
-
   it('should reselect currently selected layer after ingest', function() {
 
     // --------------------------------------------------------------------

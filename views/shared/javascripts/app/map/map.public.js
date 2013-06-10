@@ -43,7 +43,7 @@ Neatline.module('Map', function(
    * @param {Object} args: Event arguments.
    */
   var select = function(args) {
-    if (args.source !== 'MAP') {
+    if (args.source !== Map.ID) {
       focusByModel(args.model);
       Map.__view.selectByModel(args.model);
     }

@@ -655,10 +655,14 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
 
-      // Render `temporary` intent.
+      this.ISOLATED = true;
+
+      // Highlight features.
       _.each(layer.features, _.bind(function(feature) {
-        layer.drawFeature(feature, 'temporary');
+        this.highlightControl.highlight(feature);
       }, this));
+
+      this.ISOLATED = false;
 
     },
 
@@ -673,10 +677,14 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
 
-      // Render `default` intent.
+      this.ISOLATED = true;
+
+      // Unhighlight features.
       _.each(layer.features, _.bind(function(feature) {
-        layer.drawFeature(feature, 'default');
+        this.highlightControl.unhighlight(feature);
       }, this));
+
+      this.ISOLATED = false;
 
     },
 
@@ -691,29 +699,14 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer) return;
 
+      this.ISOLATED = true;
+
+      // Select features.
       _.each(layer.features, _.bind(function(feature) {
-
-        // Render `select` intent, register the feature as selected.
-
-        layer.drawFeature(feature, 'select');
-        layer.selectedFeatures.push(feature);
-
-        // Set the `_lastHighlighter` attribute on the feature to the id
-        // of the select control. This has the effect of "freezing" the
-        // render intent and preventing it from being switched back to the
-        // `default` intent by the highlight control.
-
-        feature._lastHighlighter = this.selectControl.id;
-
+        this.selectControl.select(feature);
       }, this));
 
-      // Mock a feature handler on the select control, which ensures that
-      // the layer can be unselected by clicking elsewhere on the map.
-
-      this.selectControl.handlers.feature.lastFeature =
-        layer.selectedFeatures[0];
-
-      // Track model.
+      this.ISOLATED = false;
       this.selectedModel = model;
 
     },
@@ -729,11 +722,14 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer) return;
 
-      // Render `default` intent.
+      this.ISOLATED = true;
+
+      // Unselect features.
       _.each(layer.features, _.bind(function(feature) {
-        layer.drawFeature(feature, 'default');
+        this.selectControl.unselect(feature);
       }, this));
 
+      this.ISOLATED = false;
       this.selectedModel = null;
 
     },
@@ -750,6 +746,8 @@ Neatline.module('Map', function(
      * @param {Object} evt: The highlight event.
      */
     onFeatureHighlight: function(evt) {
+
+      if (this.ISOLATED) return;
 
       // Highlight sibling features.
       this.highlightByModel(evt.feature.layer.nModel);
@@ -771,6 +769,8 @@ Neatline.module('Map', function(
      */
     onFeatureUnhighlight: function(evt) {
 
+      if (this.ISOLATED) return;
+
       // Unhighlight sibling features.
       this.unhighlightByModel(evt.feature.layer.nModel);
 
@@ -791,6 +791,8 @@ Neatline.module('Map', function(
      */
     onFeatureSelect: function(feature) {
 
+      if (this.ISOLATED) return;
+
       // Select sibling features.
       this.selectByModel(feature.layer.nModel);
 
@@ -809,6 +811,8 @@ Neatline.module('Map', function(
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
     onFeatureUnselect: function(feature) {
+
+      if (this.ISOLATED) return;
 
       // Unselect sibling features.
       this.unselectByModel(feature.layer.nModel);

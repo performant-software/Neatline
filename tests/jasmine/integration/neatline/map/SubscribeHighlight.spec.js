@@ -40,7 +40,7 @@ describe('Map | Subscribe `highlight`', function() {
   it('should not highlight features for selected layer', function() {
 
     // --------------------------------------------------------------------
-    // When `highlight` is triggered with a record that selected on the
+    // When `highlight` is triggered with a record that is selected on the
     // map, the features should not be highlighted.
     // --------------------------------------------------------------------
 
