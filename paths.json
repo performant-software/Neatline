@@ -44,6 +44,7 @@
       "neatline":         "./components/backbone.neatline/lib/backbone.neatline.js",
       "safesync":         "./components/backbone-safesync/backbone-safesync.js",
       "openlayers":       "./components/openlayers/build/OpenLayers.js",
+      "bootstrap":        "./components/bootstrap/docs/assets/js/bootstrap.js",
       "stamen":           "./components/stamen-neatline/stamen.neatline.js",
       "svgtowkt":         "./components/svg-to-wkt/svg-to-wkt.js",
       "routefilter":      "./components/backbone.routefilter/dist/backbone.routefilter.js",
@@ -51,7 +52,6 @@
       "toastr":           "./components/toastr/toastr.js",
       "spectrum":         "./components/spectrum/spectrum.js",
       "chosen":           "./components/chosen/chosen/chosen.jquery.js",
-      "bootstrap":        "./components/bootstrap/bootstrap/js/bootstrap.min.js",
       "ace":              "./components/ace-builds/src-noconflict/ace.js",
       "ace_theme":        "./components/ace-builds/src-noconflict/theme-clouds.js",
       "ace_mode":         "./components/ace-builds/src-noconflict/mode-css.js",
@@ -64,7 +64,7 @@
     "css": {
       "jquery_ui":        "./components/jquery-ui/dist/jquery-ui.min.css",
       "openlayers":       "./components/openlayers/theme/default/style.css",
-      "bootstrap":        "./components/bootstrap/bootstrap/css/bootstrap.min.css",
+      "bootstrap":        "./components/bootstrap/docs/assets/css/bootstrap.css",
       "toastr":           "./components/toastr/toastr.css",
       "spectrum":         "./components/spectrum/spectrum.css",
       "chosen":           "./components/chosen/chosen/chosen.css"

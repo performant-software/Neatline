@@ -47,15 +47,6 @@ module.exports = function(grunt) {
         }
       },
 
-      build_bootstrap: {
-        command: 'npm install && make bootstrap',
-        options: {
-          execOptions: {
-            cwd: paths.build.bootstrap
-          }
-        }
-      },
-
       build_ckeditor: {
         command: './build.sh',
         options: {
@@ -388,7 +379,6 @@ module.exports = function(grunt) {
     'shell:bower_clean',
     'shell:bower_install',
     'shell:build_openlayers',
-    'shell:build_bootstrap',
     'shell:build_ckeditor',
     'shell:build_jquery_ui',
     'shell:build_sinon',
