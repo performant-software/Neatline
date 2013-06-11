@@ -10,9 +10,10 @@
 
 module.exports = function(grunt) {
 
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
@@ -270,18 +271,36 @@ module.exports = function(grunt) {
     uglify: {
 
       exhibit_form: {
-        src: '<%= concat.exhibit_form.src %>',
-        dest: paths.payloads.admin.js+'/exhibit-form.js'
+        src: '<%= concat.exhibit_form.dest %>',
+        dest: '<%= concat.exhibit_form.dest %>'
       },
 
       neatline_public: {
-        src: '<%= concat.neatline_public.src %>',
-        dest: paths.payloads.shared.js+'/neatline-public.js'
+        src: '<%= concat.neatline_public.dest %>',
+        dest: '<%= concat.neatline_public.dest %>'
       },
 
       neatline_editor: {
-        src: '<%= concat.neatline_editor.src %>',
-        dest: paths.payloads.shared.js+'/neatline-editor.js'
+        src: '<%= concat.neatline_editor.dest %>',
+        dest: '<%= concat.neatline_editor.dest %>'
+      }
+
+    },
+
+    cssmin: {
+
+      admin: {
+        cwd: paths.payloads.admin.css,
+        dest: paths.payloads.admin.css,
+        expand: true,
+        src: '*.css'
+      },
+
+      shared: {
+        cwd: paths.payloads.shared.css,
+        dest: paths.payloads.shared.css,
+        expand: true,
+        src: '*.css'
       }
 
     },
@@ -399,13 +418,9 @@ module.exports = function(grunt) {
 
   // Assemble/min static assets.
   grunt.registerTask('compile:min', [
-    'uglify:exhibit_form',
-    'uglify:neatline_public',
-    'uglify:neatline_editor',
-    'stylus',
-    'concat:exhibit_form_css',
-    'concat:neatline_public_css',
-    'concat:neatline_editor_css'
+    'compile',
+    'uglify',
+    'cssmin'
   ]);
 
   // Run all tests.
