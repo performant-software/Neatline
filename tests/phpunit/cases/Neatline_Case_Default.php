@@ -27,21 +27,13 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
         $this->_authenticateUser($this->user);
 
         // Install the plugin.
-        $pluginHelper = new Omeka_Test_Helper_Plugin;
-        $pluginHelper->setUp('Neatline');
+        $helper = new Omeka_Test_Helper_Plugin;
+        $helper->setUp('Neatline');
 
-        // If a concrete `plugins.json` file exists.
-        if (file_exists(NL_TEST_DIR . '/plugins.json')) {
-
-            // Parse the JSON.
-            $file = file_get_contents(NL_TEST_DIR . '/plugins.json');
-            $json = Zend_Json::decode($file);
-
-            // Install the listed sub-plugins.
-            foreach ($json['plugins'] as $plugin) {
-                $pluginHelper->setUp($plugin);
-            }
-
+        // Install sub-plugins.
+        if (file_exists(NL_TEST_DIR . '/plugins.ini')) {
+            $config = new Zend_Config_Ini(NL_TEST_DIR . '/plugins.ini');
+            foreach ($config->plugins as $plugin) $helper->setUp($plugin);
         }
 
         // Get plugin tables.

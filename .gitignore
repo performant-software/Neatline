@@ -13,4 +13,4 @@ views/admin/css/payloads
 views/shared/css/payloads
 views/shared/css/img
 
-tests/phpunit/plugins.json
+tests/phpunit/plugins.ini
