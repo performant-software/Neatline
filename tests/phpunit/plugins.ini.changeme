@@ -1,5 +1,5 @@
 ; Rename this file to `plugins.ini` and edit the list to define other
-; plugins that should be loaded along with Neatline before each test.
+; plugins that should be installed along with Neatline before each test.
 
 plugins[]="NeatlineNarrative"
 plugins[]="NeatlineWaypoints"
