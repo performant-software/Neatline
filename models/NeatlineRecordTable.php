@@ -84,64 +84,48 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $select = $this->getSelect();
 
         // Filter by exhibit.
-        $select = $this->_filterByExhibit($select, $exhibit);
+        $this->filterByExhibit($select, $exhibit);
 
         // ** Zoom
         if (isset($params['zoom'])) {
-            $select = $this->_filterByZoom($select,
-                $params['zoom']
-            );
+            $this->filterByZoom($select, $params['zoom']);
         }
 
         // ** Extent
         if (isset($params['extent'])) {
-            $select = $this->_filterByExtent($select,
-                $params['extent']
-            );
+            $this->filterByExtent($select, $params['extent']);
         }
 
         // ** Query
         if (isset($params['query'])) {
-            $select = $this->_filterByKeywords($select,
-                $params['query']
-            );
+            $this->filterByKeywords($select, $params['query']);
         }
 
         // ** Tags
         if (isset($params['tags'])) {
-            $select = $this->_filterByTags($select,
-                $params['tags']
-            );
+            $this->filterByTags($select, $params['tags']);
         }
 
         // ** Widget
         if (isset($params['widget'])) {
-            $select = $this->_filterByWidget($select,
-                $params['widget']
-            );
+            $this->filterByWidget($select, $params['widget']);
         }
 
         // ** Slug
         if (isset($params['slug'])) {
-            $select = $this->_filterBySlug($select,
-                $params['slug']
-            );
+            $this->filterBySlug($select, $params['slug']);
         }
 
         // ** Order
         if (isset($params['order'])) {
-            $select = $this->_filterByOrder($select,
-                $params['order']
-            );
+            $this->filterByOrder($select, $params['order']);
         }
 
         // ** Limit
-        if (isset($params['limit']) && isset($params['offset'])) {
-            $data['offset'] = (int) $params['offset'];
-            $select = $this->_filterByLimit($select,
-                $params['limit'],
-                $params['offset']
-            );
+        if (isset($params['limit'])) {
+            $offset = isset($params['offset']) ? $params['offset'] : 0;
+            $this->filterByLimit($select, $params['limit'], $offset);
+            $data['offset'] = $offset;
         }
 
         // Pass select to plugins for modification.
@@ -171,11 +155,10 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param NeatlineExhibit $exhibit The exhibit.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByExhibit($select, $exhibit)
+    public function filterByExhibit($select, $exhibit)
     {
-        return $select->where("exhibit_id = ?", $exhibit->id);
+        $select->where("exhibit_id = ?", $exhibit->id);
     }
 
 
@@ -184,13 +167,11 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param integer $zoom The zoom level.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByZoom($select, $zoom)
+    public function filterByZoom($select, $zoom)
     {
         $select->where("min_zoom IS NULL OR min_zoom<=?", $zoom);
         $select->where("max_zoom IS NULL OR max_zoom>=?", $zoom);
-        return $select;
     }
 
 
@@ -199,9 +180,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $extent The extent, as a WKT polygon.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByExtent($select, $extent)
+    public function filterByExtent($select, $extent)
     {
 
         // Match viewport intersection.
@@ -212,8 +192,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         // Omit empty coverages.
         $select->where("is_coverage = 1");
 
-        return $select;
-
     }
 
 
@@ -222,12 +200,11 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $column The column to order on.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByOrder($select, $column)
+    public function filterByOrder($select, $column)
     {
         $select->reset(Zend_Db_Select::ORDER);
-        return $select->order($column);
+        $select->order($column);
     }
 
 
@@ -237,11 +214,10 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param Omeka_Db_Select $select The starting select.
      * @param int $offset The starting offset.
      * @param int $limit The number of records to select.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByLimit($select, $limit, $offset)
+    public function filterByLimit($select, $limit, $offset)
     {
-        return $select->limit($limit, $offset);
+        $select->limit($limit, $offset);
     }
 
 
@@ -250,15 +226,13 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $query The search query.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByKeywords($select, $query)
+    public function filterByKeywords($select, $query)
     {
         $select->where(
             "MATCH (title, body, slug) AGAINST (? IN BOOLEAN MODE)",
             $query
         );
-        return $select;
     }
 
 
@@ -267,9 +241,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param array $tags An array of tags.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByTags($select, $tags)
+    public function filterByTags($select, $tags)
     {
         foreach ($tags as $tag) {
             $select->where(
@@ -277,7 +250,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
                 $tag
             );
         }
-        return $select;
     }
 
 
@@ -286,15 +258,13 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $widget A widget id.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterByWidget($select, $widget)
+    public function filterByWidget($select, $widget)
     {
         $select->where(
             "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)",
             $widget
         );
-        return $select;
     }
 
 
@@ -303,11 +273,10 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $slug A record slug.
-     * @return Omeka_Db_Select The filtered select.
      */
-    public function _filterBySlug($select, $slug)
+    public function filterBySlug($select, $slug)
     {
-        return $select->where('slug=?', $slug);
+        $select->where('slug=?', $slug);
     }
 
 
