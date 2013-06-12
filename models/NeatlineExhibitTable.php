@@ -34,14 +34,10 @@ class NeatlineExhibitTable extends Neatline_Table_Expandable
 
         $select = parent::getSelect();
 
-        // TODO|dev
-        $permissions = new Omeka_Db_Select_PublicPermissions(
-            'Neatline_Exhibits'
-        );
-
-        $permissions->apply(
-            $select, 'neatline_exhibits', 'user_id', 'public'
-        );
+        // Hide non-public exhibits from anonymous users.
+        if (!is_allowed('Neatline_Exhibits', 'showPrivate')) {
+            $select->where('public=1');
+        }
 
         return $select;
 
