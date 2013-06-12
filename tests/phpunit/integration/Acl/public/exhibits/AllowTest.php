@@ -19,7 +19,7 @@ class AclTest_PublicExhibitsAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit = $this->__exhibit('slug');
+        $this->exhibit = $this->__exhibit('slug', true);
         $this->logout();
     }
 

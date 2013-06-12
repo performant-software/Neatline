@@ -23,7 +23,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be NOT able to edit settings for other users'
+     * Contributors should not be able to edit settings for other users'
      * exhibits.
      */
     public function testCannotEditOtherUsersExhibits()
@@ -40,7 +40,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should NOT be able to import items into other users'
+     * Contributors should not be able to import items into other users'
      * exhibits.
      */
     public function testCannotImportItemsIntoOtherUsersExhibits()
@@ -57,7 +57,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should NOT be able to update other users' exhibits.
+     * Contributors should not be able to update other users' exhibits.
      */
     public function testCannotUpdateOtherUsersExhibits()
     {
@@ -68,7 +68,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should NOT be able to open the editor for other users'
+     * Contributors should not be able to open the editor for other users'
      * exhibits.
      */
     public function testCannotOpenEditorForOtherUsersExhibits()
@@ -79,7 +79,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should NOT be able delete other users' exhibits.
+     * Contributors should not be able delete other users' exhibits.
      */
     public function testCannotDeleteOtherUsersExhibits()
     {

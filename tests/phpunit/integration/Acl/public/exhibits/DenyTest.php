@@ -25,7 +25,7 @@ class AclTest_PublicExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should NOT be able to update exhibits.
+     * Public users should not be able to update exhibits.
      */
     public function testCannotUpdateExhibits()
     {

@@ -75,12 +75,14 @@ class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * Create a Neatline exhibit.
      *
      * @param string $slug The exhibit slug.
+     * @param boolean $public True if the exhibit is public.
      * @return NeatlineExhibit $neatline The exhibit.
      */
-    public function __exhibit($slug='test-slug')
+    public function __exhibit($slug='test-slug', $public=false)
     {
         $exhibit = new NeatlineExhibit;
         $exhibit->slug = $slug;
+        $exhibit->public = $public;
         $exhibit->save();
         return $exhibit;
     }
