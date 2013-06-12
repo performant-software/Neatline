@@ -33,12 +33,11 @@
     <thead>
       <tr>
         <?php echo browse_sort_links(array(
-            __('Exhibit')   => 'title',
-            __('Modified')  => 'modified',
+            __('Exhibit')   => null,
+            __('Modified')  => null,
             __('# Items')   => null,
             __('Public')    => null
-        ), array(
-            'link_tag'      => 'th scope="col"'
+        ), array('link_tag' => 'th scope="col"'
         )); ?>
       </tr>
     </thead>
