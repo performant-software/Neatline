@@ -25,6 +25,30 @@ class NeatlineExhibitTable extends Neatline_Table_Expandable
 
 
     /**
+     * Add public/private filtering to exhibit queries.
+     *
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function getSelect()
+    {
+
+        $select = parent::getSelect();
+
+        // TODO|dev
+        $permissions = new Omeka_Db_Select_PublicPermissions(
+            'Neatline_Exhibits'
+        );
+
+        $permissions->apply(
+            $select, 'neatline_exhibits', 'user_id', 'public'
+        );
+
+        return $select;
+
+    }
+
+
+    /**
      * Find exhibit by slug.
      *
      * @param string $slug The slug.
