@@ -80,11 +80,15 @@ class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     public function __exhibit($slug='test-slug', $public=false)
     {
+
         $exhibit = new NeatlineExhibit;
-        $exhibit->slug = $slug;
-        $exhibit->public = $public;
+        $exhibit->setArray(array(
+            'slug' => $slug, 'public' => $public
+        ));
+
         $exhibit->save();
         return $exhibit;
+
     }
 
 
