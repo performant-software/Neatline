@@ -33,7 +33,7 @@ function color() {
 }
 
 
-function records(exhibit_id, count, zoom, color) {
+function records(exhibit_id, count, zoom, color, tags) {
 
   // Base insert.
   var sql = 'INSERT INTO omeka_neatline_records (' +
@@ -66,9 +66,6 @@ function records(exhibit_id, count, zoom, color) {
     var geo = 'GeomFromText("POINT('+lon+' '+lat+')")';
     var rad = randy.randInt(10,100);
     var bod = wp.slice(off, off+500);
-
-    var tags = 'precinct, '+
-      randy.choice(['democrat', 'republican']);
 
     sql += '(' +
       exhibit_id+','+       // exhibit_id
@@ -115,11 +112,11 @@ client.query(sql, function(err, res) {
     wp = text;
     len = text.length
 
-    records(res.insertId, 200, 6, color());
-    records(res.insertId, 1000, 7, color());
-    records(res.insertId, 5000, 8, color());
-    records(res.insertId, 20000, 9, color());
-    records(res.insertId, 73800, 10, color());
+    records(res.insertId, 200, 6, color(), 'level1');
+    records(res.insertId, 1000, 7, color(), 'level2');
+    records(res.insertId, 5000, 8, color(), 'level3');
+    records(res.insertId, 20000, 9, color(), 'level4');
+    records(res.insertId, 73800, 10, color(), 'level5');
 
     client.end(function() {
       process.exit();
