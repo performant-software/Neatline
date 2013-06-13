@@ -14,6 +14,37 @@ require_once('geoPHP.inc');
 class Neatline_Helper_Migration
 {
 
+    protected static $_zoomIndex = array(
+        array( 300, 3),
+        array( 200, 3),
+        array( 100, 3),
+        array(  50, 3),
+        array( 300, 4),
+        array( 200, 4),
+        array( 100, 4),
+        array(  50, 4),
+        array( 300, 5),
+        array( 200, 5),
+        array( 100, 5),
+        array(  50, 5),
+        array( 300, 6),
+        array( 200, 6),
+        array( 100, 6),
+        array(  50, 6),
+        array( 300, 7),
+        array( 200, 7),
+        array( 100, 7),
+        array(  50, 7),
+        array( 300, 8),
+        array( 200, 8),
+        array( 100, 8),
+        array(  50, 8),
+        array( 300, 9),
+        array( 200, 9),
+        array( 100, 9),
+        array(  50, 9)
+    );
+
     /**
      * The NeatlinePlugin
      *
@@ -114,6 +145,7 @@ SQL;
 
         try {
             $db->query($exhibits);
+            $this->_migrateSimileExhibit();
 
             $q    = $db->query("SELECT * FROM {$prefix}data_records{$ext};");
             $q->setFetchMode(Zend_Db::FETCH_OBJ);
@@ -128,6 +160,72 @@ SQL;
             echo $e->getMessage();
             throw $e;
         }
+    }
+
+    /**
+     * This migrates the data from the exhibit to a new table for the 
+     * NeatlineSimile widget.
+     *
+     * TODO: test
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _migrateSimileExhibit()
+    {
+        $db     = $this->_db;
+        $prefix = "{$db->prefix}neatline_";
+        $ext    = "_migrate";
+        $table  = $db->getTable('NeatlineExhibit');
+        $alias  = $table->getTableAlias();
+        $select = $db
+            ->select()
+            ->from(array('m' => "{$prefix}exhibits{$ext}"))
+            ->where('m.is_timeline=1');
+        $results = $db->fetchAll($select);
+
+        if (count($results) > 0) {
+            $db->query(<<<SQL
+CREATE TABLE IF NOT EXISTS
+    `{$prefix}simile_exhibit_expansions` (
+        `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `parent_id`     INT(10) UNSIGNED NULL,
+
+        `simile_default_date`       VARCHAR(100) NULL,
+        `simile_interval_unit`      VARCHAR(100) NULL,
+        `simile_interval_pixels`    INT(10) UNSIGNED NULL,
+        `simile_tape_height`        INT(10) UNSIGNED NULL,
+        `simile_track_height`       INT(10) UNSIGNED NULL,
+
+         PRIMARY KEY        (`id`)
+
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+SQL
+);
+            $sql = <<<SQL
+INSERT INTO `{$prefix}simile_exhibit_expansions`
+    (parent_id, simile_default_date, simile_interval_unit,
+     simile_interval_pixels, simile_tape_height, simile_track_height)
+    VALUES (?, ?, ?, ?, 10, 30);
+SQL;
+
+            foreach ($results as $r) {
+                $focus  = $r['default_timeline_zoom'];
+                if (is_null($focus)) {
+                    $pixels = null;
+                    $units  = null;
+                } else {
+                    $zoom   = Neatline_Helper_Migration::$_zoomIndex[$focus];
+                    $pixels = $zoom[0];
+                    $unit   = $zoom[1];
+                }
+                $db->query(
+                    $sql,
+                    array($r['id'], $r['default_focus_date'], $unit, $pixels
+                ));
+            }
+        }
+
     }
 
     /**
@@ -266,7 +364,7 @@ SQL;
             $nlr->is_coverage = FALSE;
         }
 
-        // // Old Fields
+        // TODO: // Old Fields
         // parent_record_id
 
         return $nlr;
