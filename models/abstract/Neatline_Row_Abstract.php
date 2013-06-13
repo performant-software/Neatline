@@ -64,7 +64,7 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * By default, just set all fields directly on the record.
+     * By default, set all fields directly on the record.
      *
      * @param array $values The POST/PUT data.
      */

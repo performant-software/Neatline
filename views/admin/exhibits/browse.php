@@ -34,11 +34,10 @@
       <tr>
         <?php echo browse_sort_links(array(
             __('Exhibit')   => null,
-            __('Modified')  => null,
+            __('Created')   => null,
             __('# Items')   => null,
             __('Public')    => null
-        ), array('link_tag' => 'th scope="col"'
-        )); ?>
+        ), array('link_tag' => 'th scope="col"')); ?>
       </tr>
     </thead>
 
@@ -86,9 +85,9 @@
           </ul>
         </td>
 
-        <!-- Modified -->
+        <!-- Created -->
         <td>
-          <?php echo format_date(nl_getExhibitField('modified')); ?>
+          <?php echo format_date(nl_getExhibitField('added')); ?>
         </td>
 
         <!-- # Items -->
