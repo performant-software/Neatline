@@ -63,6 +63,7 @@ function nl_defineAcl($acl)
 
     // Contributors can edit their own exhibits.
     $acl->allow('contributor', 'Neatline_Exhibits', array(
+        'showSelfNotPublic',
         'editSelf',
         'editorSelf',
         'putSelf',

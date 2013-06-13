@@ -29,9 +29,11 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
     public function testCannotEditOtherUsersExhibits()
     {
 
+        $this->expect404();
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('forbidden');
 
+        $this->expect404();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('forbidden');
@@ -46,9 +48,11 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
     public function testCannotImportItemsIntoOtherUsersExhibits()
     {
 
+        $this->expect404();
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
 
+        $this->expect404();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
@@ -61,6 +65,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
      */
     public function testCannotUpdateOtherUsersExhibits()
     {
+        $this->expect404();
         $this->setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertAction('forbidden');
@@ -73,6 +78,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
      */
     public function testCannotOpenEditorForOtherUsersExhibits()
     {
+        $this->expect404();
         $this->dispatch('neatline/editor/'.$this->exhibit->id);
         $this->assertAction('forbidden');
     }
@@ -83,6 +89,7 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
      */
     public function testCannotDeleteOtherUsersExhibits()
     {
+        $this->expect404();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/delete/'.$this->exhibit->id);
         $this->assertAction('forbidden');

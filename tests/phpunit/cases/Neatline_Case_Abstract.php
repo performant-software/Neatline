@@ -362,4 +362,13 @@ class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     }
 
 
+    /**
+     * Register an expected 404 controller exception.
+     */
+    public function expect404()
+    {
+        $this->setExpectedException('Omeka_Controller_Exception_404');
+    }
+
+
 }
