@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicExhibitsDeny extends Neatline_Case_Default
+class AclTest_AnonymousExhibitsPublicDeny extends Neatline_Case_Default
 {
 
 
@@ -25,7 +25,7 @@ class AclTest_PublicExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to PUT exhibits.
+     * Anonymous users should not be able to PUT exhibits.
      */
     public function testCannotUpdateExhibits()
     {

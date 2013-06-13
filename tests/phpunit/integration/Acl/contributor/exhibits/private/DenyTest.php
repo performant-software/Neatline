@@ -13,10 +13,15 @@ class AclTest_ContributorExhibitsPrivateDeny extends Neatline_Case_Default
 {
 
 
+    protected $_isAdminTest = false;
+
+
     public function setUp()
     {
         parent::setUp();
-        // TODO
+        $this->loginAsContributor('user1');
+        $this->exhibit = $this->__exhibit('slug', false);
+        $this->loginAsContributor('user2');
     }
 
 
@@ -26,17 +31,24 @@ class AclTest_ContributorExhibitsPrivateDeny extends Neatline_Case_Default
      */
     public function testCannotViewOtherUsersPrivateExhibits()
     {
-        // TODO
+        $this->expect404();
+        $this->dispatch('neatline/show/slug');
     }
 
 
     /**
-     * Contributors should not be able to view browse listings for private
-     * exhibits owned by other users.
+     * Contributors should not be able to browse private exhibits owned by
+     * other users.
      */
-    public function testCanBrowseOtherUsersPrivateExhibits()
+    public function testCannotBrowseOtherUsersPrivateExhibits()
     {
-        // TODO
+
+        $this->dispatch('neatline');
+
+        // Should not list private exhibit.
+        $this->assertNotXpath('//a[@class="neatline"][@href="'.
+            public_url('neatline/show/slug').'"]'
+        );
     }
 
 

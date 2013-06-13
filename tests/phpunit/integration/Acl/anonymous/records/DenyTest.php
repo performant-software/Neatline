@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicRecordsDeny extends Neatline_Case_Default
+class AclTest_AnonymousRecordsDeny extends Neatline_Case_Default
 {
 
 
@@ -26,7 +26,7 @@ class AclTest_PublicRecordsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to POST new records.
+     * Anonymous users should not be able to POST new records.
      */
     public function testCannotCreateRecords()
     {
@@ -37,7 +37,7 @@ class AclTest_PublicRecordsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to PUT records.
+     * Anonymous users should not be able to PUT records.
      */
     public function testCannotUpdateRecords()
     {
@@ -48,7 +48,7 @@ class AclTest_PublicRecordsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to DELETE records.
+     * Anonymous users should not be able to DELETE records.
      */
     public function testCannotDeleteRecords()
     {

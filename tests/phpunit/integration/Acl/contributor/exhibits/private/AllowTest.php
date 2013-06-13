@@ -14,10 +14,14 @@ class AclTest_ContributorExhibitsPrivateAllow
 {
 
 
+    protected $_isAdminTest = false;
+
+
     public function setUp()
     {
         parent::setUp();
-        // TODO
+        $this->loginAsContributor();
+        $this->exhibit = $this->__exhibit('slug', false);
     }
 
 
@@ -26,7 +30,8 @@ class AclTest_ContributorExhibitsPrivateAllow
      */
     public function testCanViewOwnPrivateExhibits()
     {
-        // TODO
+        $this->dispatch('neatline/show/slug');
+        $this->assertNotAction('forbidden');
     }
 
 
@@ -35,7 +40,15 @@ class AclTest_ContributorExhibitsPrivateAllow
      */
     public function testCanBrowseOwnPrivateExhibits()
     {
-        // TODO
+
+        $this->dispatch('neatline');
+        $this->assertNotAction('forbidden');
+
+        // Should list private exhibit.
+        $this->assertXpath('//a[@class="neatline"][@href="'.
+            public_url('neatline/show/slug').'"]'
+        );
+
     }
 
 

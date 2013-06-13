@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_PublicRecordsAllow extends Neatline_Case_Default
+class AclTest_AnonymousRecordsAllow extends Neatline_Case_Default
 {
 
 
@@ -26,7 +26,7 @@ class AclTest_PublicRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Public users should be able to GET individual records.
+     * Anonymous users should be able to GET individual records.
      */
     public function testCanGetRecords()
     {
@@ -36,7 +36,7 @@ class AclTest_PublicRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Public users should be able to GET collections of records.
+     * Anonymous users should be able to GET collections of records.
      */
     public function testCanListRecords()
     {
