@@ -73,7 +73,7 @@
             </li>
             <li>
               <?php echo nl_getExhibitLink(
-                $e, 'import', __('Import Items'),
+                $e, 'import', __('Import Omeka Items'),
                 array('class' => 'import'), false
               );?>
             </li>
