@@ -18,6 +18,8 @@
 
 #### Bug Fixes
 
+  - Previously, exhibits marked public were not getting filtered out of the public browse listings, and were visible to all users. This is fixed.
+
   - Fixes broken helper calls in the default exhibit show template the were causing the exhibit title and narrative fields not to be displayed above and below the exhibit.
 
   - When a vector layer is selected on the map and the map is panned or zoomed, the previously-selected layer is now re-selected after the new data arives.
