@@ -19,7 +19,7 @@ class AclTest_PublicExhibitsAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit = $this->__exhibit('slug', true);
+        $this->exhibit = $this->__exhibit('slug');
         $this->logout();
     }
 
@@ -35,7 +35,7 @@ class AclTest_PublicExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Public users should be able to view exhibits.
+     * Public users should be able to show exhibits.
      */
     public function testCanViewExhibits()
     {
@@ -45,7 +45,7 @@ class AclTest_PublicExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Public users should be able to get individual exhibits.
+     * Public users should be able to GET individual exhibits.
      */
     public function testCanGetExhibits()
     {

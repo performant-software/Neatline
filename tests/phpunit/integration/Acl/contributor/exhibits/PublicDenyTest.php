@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
+class AclTest_ContributorExhibitsPublicDeny extends Neatline_Case_Default
 {
 
 
@@ -23,17 +23,15 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should not be able to edit settings for other users'
+     * Contributors should not be able edit details for other users'
      * exhibits.
      */
     public function testCannotEditOtherUsersExhibits()
     {
 
-        $this->expect404();
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('forbidden');
 
-        $this->expect404();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('forbidden');
@@ -48,11 +46,9 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
     public function testCannotImportItemsIntoOtherUsersExhibits()
     {
 
-        $this->expect404();
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
 
-        $this->expect404();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
@@ -65,7 +61,6 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
      */
     public function testCannotUpdateOtherUsersExhibits()
     {
-        $this->expect404();
         $this->setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertAction('forbidden');
@@ -78,18 +73,16 @@ class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
      */
     public function testCannotOpenEditorForOtherUsersExhibits()
     {
-        $this->expect404();
         $this->dispatch('neatline/editor/'.$this->exhibit->id);
         $this->assertAction('forbidden');
     }
 
 
     /**
-     * Contributors should not be able delete other users' exhibits.
+     * Contributors should not be able to delete other users' exhibits.
      */
     public function testCannotDeleteOtherUsersExhibits()
     {
-        $this->expect404();
         $this->request->setMethod('POST');
         $this->dispatch('neatline/delete/'.$this->exhibit->id);
         $this->assertAction('forbidden');

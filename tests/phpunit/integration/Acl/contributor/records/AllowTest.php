@@ -34,7 +34,7 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to create their own records to their
+     * Contributors should be able to create their own records in their
      * own exhibits.
      */
     public function testCanCreateOwnRecordsInOwnExhibits()

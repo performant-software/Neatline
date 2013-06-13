@@ -19,14 +19,14 @@ class AclTest_PublicRecordsAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit  = $this->__exhibit('slug', true);
+        $this->exhibit  = $this->__exhibit('slug');
         $this->record   = $this->__record($this->exhibit);
         $this->logout();
     }
 
 
     /**
-     * Public users should be able to get individual records.
+     * Public users should be able to GET individual records.
      */
     public function testCanGetRecords()
     {
@@ -36,7 +36,7 @@ class AclTest_PublicRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Public users should be able to get collections of records.
+     * Public users should be able to GET collections of records.
      */
     public function testCanListRecords()
     {

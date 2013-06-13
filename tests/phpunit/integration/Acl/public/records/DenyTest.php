@@ -26,7 +26,7 @@ class AclTest_PublicRecordsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to create new records.
+     * Public users should not be able to POST new records.
      */
     public function testCannotCreateRecords()
     {
@@ -37,7 +37,7 @@ class AclTest_PublicRecordsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to `put` records.
+     * Public users should not be able to PUT records.
      */
     public function testCannotUpdateRecords()
     {
@@ -48,7 +48,7 @@ class AclTest_PublicRecordsDeny extends Neatline_Case_Default
 
 
     /**
-     * Public users should not be able to delete records.
+     * Public users should not be able to DELETE records.
      */
     public function testCannotDeleteRecords()
     {

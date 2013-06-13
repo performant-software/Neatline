@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ContributorExhibitsAllow extends Neatline_Case_Default
+class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
 {
 
 
@@ -38,7 +38,7 @@ class AclTest_ContributorExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to edit settings for their own exhibits.
+     * Contributors should be able to edit their own exhibits.
      */
     public function testCanEditOwnExhibits()
     {
@@ -54,7 +54,8 @@ class AclTest_ContributorExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to import items to their own exhibits.
+     * Contributors should be able to import items into their own
+     * exhibits.
      */
     public function testCanImportItemsIntoOwnExhibits()
     {
@@ -81,7 +82,8 @@ class AclTest_ContributorExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to open editor for their own exhibits.
+     * Contributors should be able to open the editor for their own
+     * exhibits.
      */
     public function testCanOpenEditorForOwnExhibits()
     {
@@ -91,7 +93,8 @@ class AclTest_ContributorExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to view the delete-confirm modal.
+     * Contributors should be able to open the delete confirmation modal
+     * for their own exhibits.
      */
     public function testCanOpenDeleteModalForOwnExhibits()
     {
@@ -101,7 +104,7 @@ class AclTest_ContributorExhibitsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able delete their own exhibits.
+     * Contributors should be able to delete their own exhibits.
      */
     public function testCanDeleteOwnExhibits()
     {
