@@ -88,6 +88,13 @@ module.exports = function(grunt) {
 
     copy: {
 
+      layers: {
+        files: [{
+          src: 'layers.json.changeme',
+          dest: 'layers.json'
+        }]
+      },
+
       bootstrap: {
         files: [{
           src: paths.build.bootstrap+'/img/*',
