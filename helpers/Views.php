@@ -23,21 +23,29 @@ function nl_getItemMarkup($record)
     $exhibit = $record->getExhibit();
     $tags = nl_explode($record->tags);
 
-    // `item-[slug]-[tag]`.
+    // First, try to render a `item-[tag].php` template in the exhibit-
+    // specific theme for the exhibit:
+
     foreach ($tags as $tag) { try {
         return get_view()->partial(
-            'exhibits/item-'.$exhibit->slug.'-'.$tag.'.php'
+            'exhibits/themes/'.$exhibit->slug.'/item-'.$tag.'.php'
         );
     } catch (Exception $e) {}}
 
-    // `item-[slug]`.
+    // Next, try to render a generic `item.php` template in the exhibit-
+    // specific theme for the exhibit.
+
     try {
         return get_view()->partial(
-            'exhibits/item-'.$exhibit->slug.'.php'
+            'exhibits/themes/'.$exhibit->slug.'/item.php'
         );
     } catch (Exception $e) {}
 
-    // Fall back to default `item`.
+
+    // If no exhibit-specific templates can be found, fall back to the
+    // global `item.php` template, which is included in the core plugin
+    // and can also be overridden in the public theme.
+
     return get_view()->partial('exhibits/item.php');
 
 }
