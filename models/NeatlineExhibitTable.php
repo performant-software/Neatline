@@ -40,9 +40,7 @@ class NeatlineExhibitTable extends Neatline_Table_Expandable
         );
 
         // Filter out private exhibits for public users.
-        $permissions->apply($select, $this->getTableAlias(),
-            'user_id', 'public'
-        );
+        $permissions->apply($select, $this->getTableAlias());
 
         return $select;
 

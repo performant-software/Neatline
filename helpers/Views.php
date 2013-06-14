@@ -33,7 +33,7 @@ function nl_getItemMarkup($record)
     } catch (Exception $e) {}}
 
     // Next, try to render a generic `item.php` template in the exhibit-
-    // specific theme for the exhibit.
+    // specific theme for the exhibit:
 
     try {
         return get_view()->partial(
@@ -44,7 +44,7 @@ function nl_getItemMarkup($record)
 
     // If no exhibit-specific templates can be found, fall back to the
     // global `item.php` template, which is included in the core plugin
-    // and can also be overridden in the public theme.
+    // and can also be overridden in the public theme:
 
     return get_view()->partial('exhibits/item.php');
 

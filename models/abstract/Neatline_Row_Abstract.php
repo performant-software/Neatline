@@ -17,22 +17,22 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
      */
     protected function _initializeMixins()
     {
-        $this->_mixins[] = new Mixin_Owner($this, 'user_id');
+        $this->_mixins[] = new Mixin_Owner($this);
     }
 
 
     /**
-     * Return true if the passed used owns the row (if the id of the user
-     * matches the `user_id` on the row). Also return true if `user_id` is
-     * 0, which is used as a generic value for records/exhibits that have
-     * been migrated from previous version of Neatline that did not record
-     * user ownerhsip.
+     * Return true if the passed user owns the row (if the id of the user
+     * matches the `owner_id` on the row). Also return true if `owner_id`
+     * is 0, which is used as a de-factor NULL value for records/exhibits
+     * that have been migrated from earlier versions of Neatline that did
+     * not track user ownerhsip.
      *
      * @param Omeka_User $user A user record.
      */
     public function isOwnedBy($user)
     {
-        return $this->user_id == $user->id || $this->user_id == 0;
+        return $this->owner_id == $user->id || $this->owner_id == 0;
     }
 
 

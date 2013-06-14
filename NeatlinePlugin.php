@@ -44,7 +44,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_exhibits` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `user_id`               INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         `modified`              TIMESTAMP NULL,
         `query`                 TEXT NULL,
@@ -68,7 +68,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `{$this->_db->prefix}neatline_records` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `user_id`               INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
         `item_id`               INT(10) UNSIGNED NULL,
         `exhibit_id`            INT(10) UNSIGNED NULL,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

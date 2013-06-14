@@ -21,10 +21,10 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
 
     /**
-     * `nl_getItemMarkup` should try to match `item-[tag]` templates in
-     * the exhibit-specific theme first; if more than one tag on the
-     * record has a corresponding template, the template for the leftmost
-     * tag in the list should take precedence.
+     * `nl_getItemMarkup` should first try to match `item-[tag]` templates
+     * in the exhibit-specific theme; if more than one tag on the record
+     * has a corresponding template, the template for the leftmost tag in
+     * the list should take precedence.
      */
     public function testTagTemplate()
     {
@@ -64,9 +64,9 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
 
     /**
-     * When none of the custom templates in the exhibit-specific theme
-     * matches, fall back to the default `item` template, defined either 
-     * in the theme or the core plugin.
+     * When none of the templates in the exhibit-specific theme matches 
+     * the record, revert to the global `item` template, which is provided
+     * by the core plugin and can also be overridden in the theme.
      */
     public function testDefaultTemplate()
     {
