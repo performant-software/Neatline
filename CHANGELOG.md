@@ -18,7 +18,7 @@
 
   - For consistency with the rest of the theme, exhibit-specific themes now need to define a ```show.php``` file in order to override the default template, instead of ```template.php```.
 
-  - Previously, custom templates for Omeka items imported into Neatline exhibits could be defined in the top-level ```neatline/exhibits``` public theme directory. Now, the code will instead look for these files under the _exhibit-specific_ theme directory for the exhibit. For example, if an exhibit has a URL slug of ```exhibit-slug```, the item templates will now be searched for under ```neatline/exhibits/themes/exhibit-slug```, along with the rest of the exhibit-specific assets. This makes it possible to completely clump together all of the exhibit-specific content in a single location, instead of having is scattered in different places in the theme.
+  - Previously, custom templates for Omeka items imported into Neatline exhibits could be defined under ```neatline/exhibits``` in the public theme. Now, the code will instead look for these files under the _exhibit-specific_ theme directory for the exhibit. For example, if an exhibit has a URL slug of ```exhibit-slug```, the item templates will now be searched for under ```neatline/exhibits/themes/exhibit-slug```, along with the rest of the exhibit-specific assets.
 
 #### Bug Fixes
 
