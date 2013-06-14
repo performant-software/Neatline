@@ -16,6 +16,8 @@
 
   - Just before executing a query, the records API will now pass out the fully-formed `Omeka_Db_Select` instance by way of the `neatline_query_records` filter, which can be used by sub-plugins to implement custom API parameters.
 
+  - For consistency with the rest of the theme, exhibit-specific themes now need to define a ```show.php``` file in order to override the default template, instead of ```template.php```.
+
 #### Bug Fixes
 
   - Previously, exhibits marked public were not getting filtered out of the public browse listings, and were visible to all users. This is fixed.
