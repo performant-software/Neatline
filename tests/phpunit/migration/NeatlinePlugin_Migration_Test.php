@@ -162,7 +162,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      * @return void
      * @author Eric Rochester
      **/
-    protected function _testDecimalMigration($a, $b)
+    protected function _testMigrateDecimalParentStyle($a, $b)
     {
         $db     = $this->db;
         $prefix = "{$db->prefix}neatline_";
@@ -181,14 +181,45 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
         $t2 = $db->getTable($table_b);
         $v2 = $t2->findAll();
-        $values2 = array();
         foreach ($v2 as $e) {
-            $values2[$e->id] = $e->$b;
+            $this->assertTrue(
+                is_null($values1[$e->id]) || $values1[$e->id] == $e->$b,
+                "Not true that {$values1[$e->id]} == null || {$e->$b}."
+            );
+        }
+    }
+
+    /**
+     * This tests that a value get the parent's style.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testMigrateParentStyle($a, $b)
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $table_b = 'NeatlineRecord';
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $values1[$e['id']] = $e[$a];
         }
 
-        $this->assertNotEmpty($values1);
-        $this->assertNotEmpty($values2);
-        $this->assertEquals($values1, $values2);
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        foreach ($v2 as $e) {
+            $this->assertTrue(
+                is_null($values1[$e->id]) || $values1[$e->id] == $e->$b,
+                "Not true that {$values1[$e->id]} == null || {$e->$b}."
+            );
+        }
     }
 
     /**
@@ -287,8 +318,6 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testRecordMigration('vector_color',       'fill_color');
         $this->_testRecordMigration('stroke_color',       'stroke_color');
         $this->_testRecordMigration('highlight_color',    'fill_color_select');
-        $this->_testRecordMigration('stroke_width',       'stroke_width');
-        $this->_testRecordMigration('point_radius',       'point_radius');
         $this->_testRecordMigration('point_image',        'point_image');
         $this->_testRecordMigration('display_order',      'weight');
         $this->_testRecordMigration('map_bounds',         'map_focus');
@@ -297,18 +326,20 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
-     * This tests fields that are converted from ints to decimals.
+     * This tests fields that are pulled from a style hierarchy.
      *
      * @return void
      * @author Eric Rochester
      **/
-    public function testMigrateDataRecordDecimals()
+    public function testMigrateParentStyle()
     {
         $this->_migrate();
 
-        $this->_testDecimalMigration('vector_opacity', 'fill_opacity');
-        $this->_testDecimalMigration('stroke_opacity', 'stroke_opacity');
-        $this->_testDecimalMigration('select_opacity', 'fill_opacity_select');
+        $this->_testMigrateDecimalParentStyle('vector_opacity', 'fill_opacity');
+        $this->_testMigrateDecimalParentStyle('stroke_opacity', 'stroke_opacity');
+        $this->_testMigrateDecimalParentStyle('select_opacity', 'fill_opacity_select');
+        $this->_testMigrateParentStyle('stroke_width', 'stroke_width');
+        $this->_testMigrateParentStyle('point_radius', 'point_radius');
     }
 
     /**

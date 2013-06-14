@@ -249,6 +249,19 @@ SQL;
      **/
     protected function _migrateDataRecord($data)
     {
+        $db = $this->_db;
+        $q  = $db->query(
+            "SELECT * FROM {$db->prefix}neatline_exhibits_migrate WHERE id=?;",
+            array($data->exhibit_id)
+        );
+        $q->setFetchMode(Zend_Db::FETCH_OBJ);
+        $results = $q->fetchAll();
+        if (count($results) == 0) {
+            $exhibit = null;
+        } else {
+            $exhibit = $results[0];
+        }
+
         $nlr = new NeatlineRecord(null, null);
         $now = new Zend_Db_Expr('NOW()');
 
@@ -268,16 +281,15 @@ SQL;
 
         // TODO: David, check these particularly, please.
         $nlr->fill_color            = $data->vector_color;
-        $nlr->fill_opacity          = $this->_opacity($data->vector_opacity);
+        $nlr->fill_opacity          = $this->_opacity($this->_getStyle($exhibit, $data, 'vector_opacity'));
         $nlr->stroke_color          = $data->stroke_color;
-        $nlr->stroke_opacity        = $this->_opacity($data->stroke_opacity);
+        $nlr->stroke_opacity        = $this->_opacity($this->_getStyle($exhibit, $data, 'stroke_opacity'));
         $nlr->fill_color_select     = $data->highlight_color;
-        $nlr->fill_opacity_select   = $this->_opacity($data->select_opacity);
+        $nlr->fill_opacity_select   = $this->_opacity($this->_getStyle($exhibit, $data, 'select_opacity'));
         $nlr->stroke_color_select   = null;
         $nlr->stroke_opacity_select = null;
-
-        $nlr->stroke_width          = $data->stroke_width;
-        $nlr->point_radius          = $data->point_radius;
+        $nlr->stroke_width          = $this->_getStyle($exhibit, $data, 'stroke_width');
+        $nlr->point_radius          = $this->_getStyle($exhibit, $data, 'point_radius');
         $nlr->point_image           = $data->point_image;
         $nlr->zindex                = null;
         $nlr->weight                = $data->display_order;
@@ -310,13 +322,6 @@ SQL;
             $widgets[] = 'Waypoints';
         }
         $nlr->widgets = implode(',', $widgets);
-
-        // Dropped:
-        // use_dc_metadata
-        // graphic_opacity
-        // left_percent
-        // right_percent
-        // space_active
 
         // description
         if (is_null($data->description)
@@ -364,10 +369,53 @@ SQL;
             $nlr->is_coverage = FALSE;
         }
 
-        // TODO: // Old Fields
-        // parent_record_id
+        // Dropped:
+        // parent_record_id (handled in the calls to _getStyle above)
+        // use_dc_metadata
+        // graphic_opacity
+        // left_percent
+        // right_percent
+        // space_active
 
         return $nlr;
+    }
+
+    /**
+     * This returns a style property for the old table record.
+     *
+     * @param object $exhibit The old data exhibit.
+     * @param object $data    The old data object.
+     * @param string $style   The style name.
+     *
+     * @return string|int|null The style value.
+     * @author Eric Rochester
+     **/
+    protected function _getStyle($exhibit, $data, $style_name)
+    {
+        $style = null;
+
+        if (is_null($style) && !is_null($data->$style_name)) {
+            $style = $data->$style_name;
+        }
+
+        if (is_null($style) && !is_null($data->parent_record_id)) {
+            $db = $this->_db;
+            $q  = $db->query(
+                "SELECT * FROM {$db->prefix}neatline_data_records_migrate WHERE id=?;",
+                array($data->parent_record_id)
+            );
+            $q->setFetchMode(Zend_Db::FETCH_OBJ);
+            $parent = $q->fetch();
+
+            $style = $this->_getStyle($exhibit, $parent, $style_name);
+        }
+
+        $default_name = "default_$style_name";
+        if (!is_null($exhibit) && is_null($style) && !is_null($exhibit->$default_name)) {
+            $style = $exhibit->$default_name;
+        }
+
+        return $style;
     }
 
 }
