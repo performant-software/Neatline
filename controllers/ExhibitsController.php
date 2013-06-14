@@ -171,7 +171,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         nl_queueExhibitTheme($exhibit);
 
         // Try to render exhibit-specific template.
-        try { $this->render("themes/$exhibit->slug/template"); }
+        try { $this->render("themes/$exhibit->slug/show"); }
         catch (Exception $e) { $this->render('show'); }
 
     }
