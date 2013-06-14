@@ -118,9 +118,9 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
 
     /**
-     * Empty/whitespace strings should be set as `null`.
+     * `saveForm` should cast empty/whitespace strings to NULL.
      */
-    public function testBlockEmptyStrings()
+    public function testCastWhitespaceToNull()
     {
 
         $record = $this->__record();

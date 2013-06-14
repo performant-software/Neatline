@@ -17,6 +17,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $owner_id;       // INT(10) UNSIGNED NOT NULL DEFAULT 0
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
+    public $published;      // TIMESTAMP NULL
     public $query;          // TEXT NULL
     public $base_layers;    // TEXT NULL
     public $base_layer;     // VARCHAR(100) NULL
@@ -28,6 +29,29 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $styles;         // TEXT NULL
     public $map_focus;      // VARCHAR(100) NULL
     public $map_zoom;       // INT(10) UNSIGNED NULL
+
+
+    /**
+     * If the exhibit is being published to the public site for the first
+     * time, update the `published` timestamp.
+     *
+     * @param array $values The POST/PUT data.
+     */
+    public function saveForm($values)
+    {
+
+        // Assign the values.
+        $this->setArray($values);
+
+        // Set `published` timestamp, if the exhibit is being set "public"
+        // for the first time.
+        if (is_null($this->published) && $this->public == 1) {
+            $this->published = date(self::DATE_FORMAT);
+        }
+
+        $this->save();
+
+    }
 
 
     /**

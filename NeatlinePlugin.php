@@ -47,6 +47,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         `modified`              TIMESTAMP NULL,
+        `published`             TIMESTAMP NULL,
         `query`                 TEXT NULL,
         `base_layers`           TEXT NULL,
         `base_layer`            VARCHAR(100) NULL,

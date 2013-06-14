@@ -51,9 +51,9 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
 
 
     /**
-     * `saveForm` should set empty/whitespace strings as `null`.
+     * `saveForm` should cast empty/whitespace strings to NULL.
      */
-    public function testWhitespaceBlocking()
+    public function testCastWhitespaceToNull()
     {
 
         $exhibit = $this->__exhibit();
@@ -69,6 +69,27 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
         $this->assertNull($exhibit->map_zoom);
         $exhibit->saveForm(array('map_zoom' => ' '));
         $this->assertNull($exhibit->map_zoom);
+
+    }
+
+
+    /**
+     * `saveForm` set the `published` timestamp when the exhibit is marked
+     * as "Public" for the first time.
+     */
+    public function testSetPublishedTimestamp()
+    {
+
+        $exhibit = $this->__exhibit();
+
+        // Should set when `public` is flipped on for the first time.
+        $exhibit->saveForm(array('public' => 1));
+        $this->assertNotNull($exhibit->published);
+
+        // Should not update when the exhibit is re-saved as "Public".
+        $exhibit->published = '2000-01-01';
+        $exhibit->saveForm(array('public' => 1));
+        $this->assertEquals($exhibit->published, '2000-01-01');
 
     }
 

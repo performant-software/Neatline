@@ -12,6 +12,10 @@
 abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 {
 
+
+    const DATE_FORMAT = 'Y-m-d h:i:s';
+
+
     /**
      * Initialize record ownership mixin.
      */
@@ -64,27 +68,28 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * By default, set all fields directly on the record.
-     *
-     * @param array $values The POST/PUT data.
-     */
-    public function saveForm($values)
-    {
-        $this->setArray($values);
-        $this->save();
-    }
-
-
-    /**
-     * Before saving, update the `modified` timestamp.
+     * Cast the row to an array of data to be inserted into the database.
+     * By default, just alias the regular `toArray` method. This is broken
+     * out and used by `insertOrUpdate` in order to make it possible for
+     * concrete row classes to modify or wrap field values before saving,
+     * without changing the publicly-accessible values on the object (for
+     * example, WKT strings need to be wrapped in `GeomFromText` database
+     * expressions before being inserted).
      *
      * @return array The array representation of the record fields.
      */
     public function toArrayForSave()
     {
-        $fields = parent::toArray();
-        $fields['modified'] = new Zend_Db_Expr('NOW()');
-        return $fields;
+        return $this->toArray();
+    }
+
+
+    /**
+     * Update the `modified` timestamp when the row is saved.
+     */
+    public function beforeSave()
+    {
+        $this->modified = date(self::DATE_FORMAT);
     }
 
 
