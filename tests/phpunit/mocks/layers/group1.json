@@ -1,0 +1,16 @@
+{
+
+  "Group1": [
+    {
+      "title": "Layer 1",
+      "id": "Layer1",
+      "type": "Type1"
+    },
+    {
+      "title": "Layer 2",
+      "id": "Layer2",
+      "type": "Type2"
+    }
+  ]
+
+}

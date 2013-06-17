@@ -11,14 +11,23 @@
 
 
 /**
- * Read and parse the `layers.json` file.
+ * Read and merge all layer definition files.
  *
  * @return array The layers.
  */
 function nl_getLayers()
 {
-    $file = Zend_Registry::get('layers');
-    return Zend_Json::decode(file_get_contents($file));
+
+    $layers = array();
+
+    // Read and merge all of the layer definition files.
+    foreach (glob(Zend_Registry::get('layers').'/*.json') as $file) {
+        $group = Zend_Json::decode(file_get_contents($file));
+        $layers = array_merge($layers, $group);
+    }
+
+    return $layers;
+
 }
 
 
@@ -66,6 +75,7 @@ function nl_getLayersForExhibit($exhibit)
     // Explode the list of ids in `base_layers` and merge the `base_layer`
     // id into the array, which ensures that at least 1 layer is included
     // in the case that `base_layers` is empty.
+
     $ids = nl_explode($exhibit->base_layers);
     $ids = array_merge($ids, array($exhibit->base_layer));
 

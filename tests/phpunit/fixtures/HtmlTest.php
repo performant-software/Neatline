@@ -28,8 +28,8 @@ class FixturesTest_Html extends Neatline_Case_Default
         $this->mockRecordWidgets();
         $this->mockPresenters();
 
-        // Inject real `layers.json`.
-        Zend_Registry::set('layers', NL_DIR . '/layers.json');
+        // Inject real layer definition files.
+        Zend_Registry::set('layers', NL_DIR . '/layers');
 
         // Create exhibit.
         $exhibit = $this->__exhibit();

@@ -49,7 +49,7 @@ require_once NL_DIR.'/helpers/Styles.php';
 require_once NL_DIR.'/helpers/Views.php';
 
 // Register layers JSON and PUT path.
-Zend_Registry::set('layers', NL_DIR . '/layers.json');
+Zend_Registry::set('layers', NL_DIR . '/layers');
 Zend_Registry::set('fileIn', 'php://input');
 
 // Start plugin.

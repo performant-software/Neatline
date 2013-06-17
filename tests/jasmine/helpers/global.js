@@ -14,3 +14,9 @@
  */
 jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures';
 jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/payloads';
+
+
+/**
+ * Alias `readFixtures`.
+ */
+var read = readFixtures;

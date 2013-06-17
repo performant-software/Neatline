@@ -241,7 +241,7 @@ class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     public function mockLayers()
     {
-        Zend_Registry::set('layers', NL_TEST_DIR . '/mocks/layers.json');
+        Zend_Registry::set('layers', NL_TEST_DIR . '/mocks/layers');
     }
 
 
