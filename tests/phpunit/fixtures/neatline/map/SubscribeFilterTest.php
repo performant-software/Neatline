@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapSubscribeRemoveFilter
+class FixturesTest_NeatlineMapSubscribeFilter
     extends Neatline_Case_Fixture
 {
 
@@ -42,7 +42,13 @@ class FixturesTest_NeatlineMapSubscribeRemoveFilter
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'NeatlineMapSubscribeRemoveFilter.json'
+            'NeatlineMapSubscribeFilter.regular.json'
+        );
+
+        $record3->delete();
+
+        $this->writeFixtureFromRoute('neatline/records',
+            'NeatlineMapSubscribeFilter.deleted.json'
         );
 
     }

@@ -12,8 +12,8 @@ describe('Map | Subscribe `setFilter`', function() {
 
 
   var fx = {
-    regular: readFixtures('NeatlineMapSubscribeSetFilter.regular.json'),
-    deleted: readFixtures('NeatlineMapSubscribeSetFilter.deleted.json')
+    regular: readFixtures('NeatlineMapSubscribeFilter.regular.json'),
+    deleted: readFixtures('NeatlineMapSubscribeFilter.deleted.json')
   };
 
 
