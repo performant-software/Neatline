@@ -22,6 +22,8 @@
 
 #### Bug Fixes
 
+  - Fixes bug found by [Mark Olson](mark.olson@duke.edu) in the SVG-to-WKT conversion library that was causing SVG documents with complex polygonal elements (eg ```<polygon>```, ```<polyline>```) to fail to parse when pasted into the Neatline editor. 
+
   - Previously, exhibits marked public were not getting filtered out of the public browse listings, and were visible to all users. This is fixed.
 
   - Fixes broken helper calls in the default exhibit show template the were causing the exhibit title and narrative fields not to be displayed above and below the exhibit.
