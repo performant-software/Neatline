@@ -60,6 +60,5 @@ PackageTask.new('Neatline') do |p|
   p.package_files.include('views/shared/css/img/**/*')
   p.package_files.include('views/shared/javascripts/bootstrap.js')
   p.package_files.include('views/**/payloads/**/*')
-  p.package_files.include('views/**/payloads/**/*')
 
 end

@@ -12,7 +12,7 @@ describe('Map | Subscribe `removeFilter`', function() {
 
 
   var fx = {
-    records: readFixtures('NeatlineMapSubscribeFilter.regular.json')
+    records: readFixtures('NeatlineMapSubscribeRemoveFilter.json')
   };
 
 
