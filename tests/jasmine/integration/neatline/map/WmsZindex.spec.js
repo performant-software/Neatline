@@ -12,7 +12,7 @@ describe('Map | WMS Zindex', function() {
 
 
   var fx = {
-    records: read('NeatlineMapWmsZindex.records.json')
+    records: read('NeatlineMapWmsZindex.json')
   };
 
 

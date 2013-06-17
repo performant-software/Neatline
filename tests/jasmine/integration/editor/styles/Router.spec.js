@@ -12,7 +12,7 @@ describe('Styles | Router', function() {
 
 
   var el, fx = {
-    exhibit: read('EditorStyles.exhibit.json')
+    exhibit: read('EditorStyles.json')
   };
 
 

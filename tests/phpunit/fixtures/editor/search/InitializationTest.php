@@ -22,7 +22,7 @@ class FixturesTest_EditorSearchInitialization
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorSearchInitialization.records.json'
+            'EditorSearchInitialization.json'
         );
 
     }

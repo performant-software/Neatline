@@ -12,7 +12,7 @@ describe('Styles | Open Form', function() {
 
 
   var fx = {
-    exhibit: read('EditorStyles.exhibit.json')
+    exhibit: read('EditorStyles.json')
   };
 
 

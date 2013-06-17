@@ -35,7 +35,7 @@ class FixturesTest_NeatlinePresentersStaticBubble
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'NeatlinePresentersStaticBubble.records.json'
+            'NeatlinePresentersStaticBubble.json'
         );
 
     }

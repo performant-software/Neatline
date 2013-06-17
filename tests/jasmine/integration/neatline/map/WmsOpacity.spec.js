@@ -12,7 +12,7 @@ describe('Map | WMS Opacity', function() {
 
 
   var fx = {
-    records: read('NeatlineMapWmsOpacity.records.json')
+    records: read('NeatlineMapWmsOpacity.json')
   };
 
 

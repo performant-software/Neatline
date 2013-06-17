@@ -33,7 +33,7 @@ class FixturesTest_EditorSearchQueryExecution
         $record3->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'EditorSearchQueryExecution.records.json'
+            'EditorSearchQueryExecution.json'
         );
 
     }

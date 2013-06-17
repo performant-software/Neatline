@@ -12,7 +12,7 @@ describe('Map | Vector Zindex', function() {
 
 
   var fx = {
-    records: read('NeatlineMapVectorZindex.records.json')
+    records: read('NeatlineMapVectorZindex.json')
   };
 
 

@@ -30,7 +30,7 @@ class FixturesTest_NeatlineMapVectorZindex extends Neatline_Case_Fixture
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'NeatlineMapVectorZindex.records.json'
+            'NeatlineMapVectorZindex.json'
         );
 
     }

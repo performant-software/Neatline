@@ -12,7 +12,7 @@ describe('Search | Query Execution', function() {
 
 
   var perPage, fx = {
-    records: read('EditorSearchQueryExecution.records.json')
+    records: read('EditorSearchQueryExecution.json')
   };
 
 

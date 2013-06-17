@@ -21,7 +21,7 @@ class FixturesTest_NeatlineMapPublications extends Neatline_Case_Fixture
         $record->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'NeatlineMapPublications.records.json'
+            'NeatlineMapPublications.json'
         );
 
     }

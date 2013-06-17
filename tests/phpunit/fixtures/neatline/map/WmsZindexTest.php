@@ -32,7 +32,7 @@ class FixturesTest_NeatlineMapWmsZindex extends Neatline_Case_Fixture
         $record2->save();
 
         $this->writeFixtureFromRoute('neatline/records',
-            'NeatlineMapWmsZindex.records.json'
+            'NeatlineMapWmsZindex.json'
         );
 
     }

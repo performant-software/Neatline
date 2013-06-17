@@ -12,7 +12,7 @@ describe('Map | Publications', function() {
 
 
   var layer, feature, vent, fx = {
-    records: readFixtures('NeatlineMapPublications.records.json')
+    records: readFixtures('NeatlineMapPublications.json')
   };
 
 

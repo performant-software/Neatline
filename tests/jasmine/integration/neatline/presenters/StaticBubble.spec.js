@@ -12,7 +12,7 @@ describe('Presenters | Static Bubble', function() {
 
 
   var el, layers, feature1, feature2, fx = {
-    records: read('NeatlinePresentersStaticBubble.records.json')
+    records: read('NeatlinePresentersStaticBubble.json')
   };
 
 

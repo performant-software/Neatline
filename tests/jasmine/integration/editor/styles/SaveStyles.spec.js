@@ -12,7 +12,7 @@ describe('Styles | Save Styles', function() {
 
 
   var el, fx = {
-    exhibit: read('EditorStyles.exhibit.json')
+    exhibit: read('EditorStyles.json')
   };
 
 

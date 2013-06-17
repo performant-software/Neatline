@@ -23,7 +23,7 @@ class FixturesTest_EditorStyles extends Neatline_Case_Fixture
         $exhibit->save();
 
         $this->writeFixtureFromRoute('neatline/exhibits/'.$exhibit->id,
-            'EditorStyles.exhibit.json'
+            'EditorStyles.json'
         );
 
     }
