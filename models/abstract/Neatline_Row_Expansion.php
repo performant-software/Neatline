@@ -28,4 +28,29 @@ abstract class Neatline_Row_Expansion extends Neatline_Row_Abstract
     }
 
 
+    /**
+     * Mass-assign an associative array to the record.
+     *
+     * @param array $values The array of values.
+     */
+    public function setArray($values)
+    {
+
+        // If the expansion has already exists, set the values directly.
+
+        if ($this->exists()) parent::setArray($values);
+
+        // Otherwise, don't set fields that both (a) have a default value
+        // provided by the model class and (b) for which a default, left-
+        // joined NULL value is passed from the parent record. This stops
+        // the default value from being overwritten by the NULL default.
+
+        else foreach ($values as $k => $v) {
+            if (!is_null($this->$k) && is_null($v)) continue;
+            $this->setNotEmpty($k, $v);
+        }
+
+    }
+
+
 }
