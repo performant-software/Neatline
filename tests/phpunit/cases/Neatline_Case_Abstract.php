@@ -10,8 +10,16 @@
  */
 
 
-class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
+abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 {
+
+
+    /**
+     * Get the Jasmine fixtures directory.
+     *
+     * @return string The directory.
+     */
+    abstract protected function getFixturesPath();
 
 
     /**
