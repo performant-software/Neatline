@@ -13,26 +13,26 @@
 if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
 $migrations                 = NL_DIR.'/migrations';
-$models                     = NL_DIR.'/models/abstract';
-$controllers                = NL_DIR.'/controllers/abstract';
+$models                     = NL_DIR.'/models';
+$controllers                = NL_DIR.'/controllers';
 $jobs                       = NL_DIR.'/jobs';
+$assertions                 = NL_DIR.'/assertions';
 $forms                      = NL_DIR.'/forms';
-$acl                        = NL_DIR.'/acl';
 $helpers                    = NL_DIR.'/helpers';
 
 require_once NL_DIR.        '/NeatlinePlugin.php';
 require_once $migrations.   '/abstract/Neatline_Migration_Abstract.php';
 require_once $migrations.   '/2.0-alpha2/Neatline_Migration_20alpha2.php';
 require_once $migrations.   '/2.0-alpha3/Neatline_Migration_20alpha3.php';
-require_once $models.       '/Neatline_Row_Abstract.php';
-require_once $models.       '/Neatline_Row_Expandable.php';
-require_once $models.       '/Neatline_Row_Expansion.php';
-require_once $models.       '/Neatline_Table_Expandable.php';
-require_once $models.       '/Neatline_Table_Expansion.php';
-require_once $controllers.  '/Neatline_Controller_Rest.php';
+require_once $models.       '/abstract/Neatline_Row_Abstract.php';
+require_once $models.       '/abstract/Neatline_Row_Expandable.php';
+require_once $models.       '/abstract/Neatline_Row_Expansion.php';
+require_once $models.       '/abstract/Neatline_Table_Expandable.php';
+require_once $models.       '/abstract/Neatline_Table_Expansion.php';
+require_once $controllers.  '/abstract/Neatline_Controller_Rest.php';
 require_once $jobs.         '/Neatline_Job_ImportItems.php';
+require_once $assertions.   '/Neatline_Acl_Assert_RecordOwnership.php';
 require_once $forms.        '/Neatline_Form_Exhibit.php';
-require_once $acl.          '/Neatline_Acl_Assert_RecordOwnership.php';
 require_once $helpers.      '/Acl.php';
 require_once $helpers.      '/Assets.php';
 require_once $helpers.      '/Globals.php';
