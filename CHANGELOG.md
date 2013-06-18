@@ -1,4 +1,4 @@
-# v2.0-alpha3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha2...2.0-alpha3)) ~ June 18, 2013
+# v2.0-alpha3 (pending)
 
 #### Added Features
 
