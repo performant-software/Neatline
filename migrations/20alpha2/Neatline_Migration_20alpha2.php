@@ -18,15 +18,15 @@ class Neatline_Migration_20alpha2 extends Neatline_Migration_Abstract
      */
     public function migrate()
     {
-        $this->changeExhibitsTableEngine();
-        $this->addUserIdColumns();
+        $this->_changeExhibitsTableEngine();
+        $this->_addUserIdColumns();
     }
 
 
     /**
      * Change the `ENGINE` on the exhibits table to `InnoDB`.
      */
-    public function changeExhibitsTableEngine()
+    private function _changeExhibitsTableEngine()
     {
         $this->_db->query(
             "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
@@ -38,7 +38,7 @@ class Neatline_Migration_20alpha2 extends Neatline_Migration_Abstract
     /**
      * Add `user_id` columns to the exhibit and record models.
      */
-    public function addUserIdColumns()
+    private function _addUserIdColumns()
     {
 
         $this->_db->query(

@@ -20,8 +20,17 @@ class v20alpha1_v20alpha2Test_Migrate extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_clearSchema();
-        $this->_createSchema1();
+        $this->_createSchema();
         $this->_migrate();
+    }
+
+
+    /**
+     * Reinstall the current schema.
+     */
+    public function tearDown()
+    {
+        $this->_clearSchema();
     }
 
 
@@ -30,11 +39,11 @@ class v20alpha1_v20alpha2Test_Migrate extends Neatline_Case_Default
      */
     private function _clearSchema()
     {
-        $this->_db->query("DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_exhibits`"
+        $this->db->query("DROP TABLE IF EXISTS
+            `{$this->__exhibits->getTableName()}`"
         );
-        $this->_db->query("DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_records`"
+        $this->db->query("DROP TABLE IF EXISTS
+            `{$this->__records->getTableName()}`"
         );
     }
 
@@ -42,11 +51,13 @@ class v20alpha1_v20alpha2Test_Migrate extends Neatline_Case_Default
     /**
      * Install 2.0-alpha1 schema.
      */
-    private function _createSchema1()
+    private function _createSchema()
     {
 
-        $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_exhibits` (
+        // Copied from 3fd48a3f0fcc44fd5c01672d401908e7a91ab265.
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS
+        `{$this->db->prefix}neatline_exhibits` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -67,8 +78,8 @@ class v20alpha1_v20alpha2Test_Migrate extends Neatline_Case_Default
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
-        $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_records` (
+        $this->db->query("CREATE TABLE IF NOT EXISTS
+        `{$this->db->prefix}neatline_records` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
         `item_id`               INT(10) UNSIGNED NULL,
@@ -123,9 +134,26 @@ class v20alpha1_v20alpha2Test_Migrate extends Neatline_Case_Default
      */
     private function _migrate()
     {
-        $this->_helper->pluginBroker->setCurrentPluginDirName('Neatline');
         $plugin = new NeatlinePlugin();
         $plugin->hookUpgrade('2.0-alpha1', '2.0-alpha2');
+    }
+
+
+    /**
+     * The exhibits table engine should be changed to InnoDB.
+     */
+    public function testChangeExhibitsTableEngine()
+    {
+        // TODO
+    }
+
+
+    /**
+     * A `user_id` column should be added to the exhibits/records tables.
+     */
+    public function testAddUserIdColumns()
+    {
+        // TODO
     }
 
 
