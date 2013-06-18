@@ -1,7 +1,0 @@
-; Rename this file to `migrations.ini` and define initial and target
-; version numbers. With this file present, before each test the suite will
-; install the database schema for the initial version and run the upgrade
-; to the new version.
-
-old_version="2.0-alpha2"
-new_version="2.0-alpha3"

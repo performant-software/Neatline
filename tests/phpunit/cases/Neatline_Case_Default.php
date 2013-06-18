@@ -22,41 +22,11 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
 
         parent::setUp();
 
-        $this->executeMigration();
-        $this->authenticateDefaultUser();
-        $this->installPlugins();
-        $this->getPluginTables();
-
-    }
-
-
-    /**
-     * If a `migrations.ini` file is provided, install the database schema
-     * for the old version and update to the new version.
-     */
-    protected function executeMigration()
-    {
-        // TODO
-    }
-
-
-    /**
-     * Authenticate the default super user account.
-     */
-    protected function authenticateDefaultUser()
-    {
+        // Authenticate and set the current user.
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
-    }
 
-
-    /**
-     * Install Neatline and any sibling plugins defined in `plugins.ini`.
-     */
-    protected function installPlugins()
-    {
-
-        // Install Neatline.
+        // Install the plugin.
         $helper = new Omeka_Test_Helper_Plugin;
         $helper->setUp('Neatline');
 
@@ -66,16 +36,10 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
             foreach ($config->plugins as $plugin) $helper->setUp($plugin);
         }
 
-    }
-
-
-    /**
-     * Store references to the exhibits and records table managers.
-     */
-    protected function getPluginTables()
-    {
+        // Get plugin tables.
         $this->__exhibits = $this->db->getTable('NeatlineExhibit');
         $this->__records  = $this->db->getTable('NeatlineRecord');
+
     }
 
 
