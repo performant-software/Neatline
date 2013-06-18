@@ -13,21 +13,26 @@ abstract class Neatline_Migration_Abstract
 {
 
 
+    protected $_plugin;
     protected $_db;
 
 
     /**
-     * Set the database object, call `migrate`.
+     * Store plugin and database, call `migrate`.
+     *
+     * @param $plugin NeatlinePlugin The plugin manager class.
+     * @param $db Omeka_Db The database connection.
      */
-    public function __construct()
+    public function __construct($plugin, $db)
     {
-        $this->_db = Zend_Registry::get('bootstrap')->getResource('Db');
+        $this->_plugin = $plugin;
+        $this->_db = $db;
         $this->migrate();
     }
 
 
     /**
-     * Perform a migration.
+     * Perform the migration.
      */
     abstract public function migrate();
 

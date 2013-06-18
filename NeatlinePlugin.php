@@ -146,7 +146,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         $oldVersion = $args['old_version'];
 
         if ($oldVersion < '2.0-alpha2') {
-            new Neatline_Migration_20alpha2;
+            new Neatline_Migration_20alpha2($this, $this->_db);
         }
 
     }

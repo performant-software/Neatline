@@ -14,7 +14,8 @@ class ImportItemsTest extends Neatline_Case_Default
 
 
     /**
-     * `Neatline_Job_ImportItems` should apply the search query.
+     * `Neatline_Job_ImportItems` should create Neatline records for all
+     * items that match the search query.
      */
     public function testCreateRecords()
     {

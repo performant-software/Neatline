@@ -20,7 +20,7 @@
 
   - Previously, custom templates for Omeka items imported into Neatline exhibits could be defined under ```neatline/exhibits``` in the public theme. Now, the code will instead look for these templates under the _exhibit-specific_ theme directory for the exhibit. For example, if an exhibit has a URL slug of ```exhibit-slug```, the item templates will now be searched for under ```neatline/exhibits/themes/exhibit-slug```, along with the rest of the exhibit-specific assets.
 
-  - Previously, all layer definitions were included in a single ```layers.json``` file in the top-level plugin directory. This file has been moved to ```/layers/default.json```, and, instead of adding layers to ```defaults.json```, it's now possible to provide definitions in separate files. Eg, ```wms.json```, ```tilestream.json```, etc.
+  - Previously, all layer definitions were included in a single ```layers.json``` file in the top-level plugin directory. This file has been moved to ```/layers/default.json```, and, instead of adding layers to ```defaults.json```, it's now possible to provide definitions for any number of layer groups in separate files. Eg, ```wms.json```, ```tilestream.json```, etc.
 
 #### Bug Fixes
 
