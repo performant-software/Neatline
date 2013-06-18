@@ -136,16 +136,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUpgrade($args)
     {
-
-        $oldVersion = $args['old_version'];
-
-        if ($oldVersion < '2.0-alpha2') {
+        if ($args['old_version'] < '2.0-alpha2') {
             new Neatline_Migration_20alpha2($this, $this->_db);
         }
-        if ($oldVersion < '2.0-alpha3') {
+        if ($args['old_version'] < '2.0-alpha3') {
             new Neatline_Migration_20alpha3($this, $this->_db);
         }
-
     }
 
 
@@ -245,40 +241,40 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         return array_merge($styles, array(
 
-            // Groups
+            // GROUPS
             'widgets',
             'presenter',
 
-            // Colors
+            // COLORS
             'fill_color',
             'fill_color_select',
             'stroke_color',
             'stroke_color_select',
 
-            // Opacities
+            // OPACITIES
             'fill_opacity',
             'fill_opacity_select',
             'stroke_opacity',
             'stroke_opacity_select',
 
-            // Dimensions
+            // DIMENSIONS
             'stroke_width',
             'point_radius',
             'zindex',
             'weight',
 
-            // Dates
+            // DATES
             'start_date',
             'end_date',
             'after_date',
             'before_date',
 
-            // Imagery
+            // IMAGERY
             'point_image',
             'wms_address',
             'wms_layers',
 
-            // Visibility
+            // VISIBILITY
             'min_zoom',
             'max_zoom',
             'map_focus',
