@@ -39,7 +39,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
-
         $this->_db->query("CREATE TABLE IF NOT EXISTS
         `{$this->_db->prefix}neatline_exhibits` (
 
@@ -63,7 +62,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
          PRIMARY KEY            (`id`)
 
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
-
 
         $this->_db->query("CREATE TABLE IF NOT EXISTS
         `{$this->_db->prefix}neatline_records` (
@@ -114,7 +112,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
-
     }
 
 
@@ -147,6 +144,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         if ($oldVersion < '2.0-alpha2') {
             new Neatline_Migration_20alpha2($this, $this->_db);
+        }
+
+        if ($oldVersion < '2.0-alpha3') {
+            new Neatline_Migration_20alpha3($this, $this->_db);
         }
 
     }
