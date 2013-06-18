@@ -120,15 +120,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUninstall()
     {
-
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_exhibits`"
         );
-
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`"
         );
-
     }
 
 
@@ -145,7 +142,6 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         if ($oldVersion < '2.0-alpha2') {
             new Neatline_Migration_20alpha2($this, $this->_db);
         }
-
         if ($oldVersion < '2.0-alpha3') {
             new Neatline_Migration_20alpha3($this, $this->_db);
         }

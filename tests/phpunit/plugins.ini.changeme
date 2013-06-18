@@ -3,4 +3,3 @@
 
 plugins[]="NeatlineNarrative"
 plugins[]="NeatlineWaypoints"
-plugins[]="NeatlineSimile"
