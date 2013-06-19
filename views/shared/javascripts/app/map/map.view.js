@@ -15,9 +15,15 @@ Neatline.module('Map', function(
   Map.View = Backbone.View.extend({
 
 
+    el: '#neatline-map',
+
     options: {
       defaultZoom: 6
     },
+
+
+    // INITIALIZERS
+    // --------------------------------------------------------------------
 
 
     /**
@@ -25,12 +31,19 @@ Neatline.module('Map', function(
      */
     initialize: function() {
 
-      // Trackers for layers/filters.
+      // An nested object that contains references to all vector and WMS
+      // layers currently on the map, keyed by record id.
       this.layers = { vector: {}, wms: {} };
+
+      // An object that contains references to all filters registered on
+      // the map, keyed by filter slug.
       this.filters = {};
 
       // WKT reader/writer.
       this.formatWkt = new OpenLayers.Format.WKT();
+
+      // The currently-selected record model.
+      this.selectedModel = null;
 
       // Startup routines.
       this.__initOpenLayers();
@@ -80,7 +93,7 @@ Neatline.module('Map', function(
       this.baseLayers = {};
 
       // Build array of base layer instances.
-      _.each(Neatline.global.base_layers, _.bind(function(json) {
+      _.each(Neatline.g.neatline.base_layers, _.bind(function(json) {
         var layer = Neatline.request('MAP:LAYERS:getLayer', json);
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
@@ -90,7 +103,7 @@ Neatline.module('Map', function(
 
       // Set default layer.
       this.map.setBaseLayer(
-        this.baseLayers[Neatline.global.exhibit.base_layer]
+        this.baseLayers[Neatline.g.neatline.exhibit.base_layer]
       );
 
     },
@@ -98,12 +111,11 @@ Neatline.module('Map', function(
 
     /**
      * Construct, add, and activate hover and click controls to the map.
-     * `hoverControl` handles highlighting, `clickControl` handles clicks.
      */
     __initControls: function() {
 
       // Build the hover control, bind callbacks.
-      this.hoverControl = new OpenLayers.Control.SelectFeature(
+      this.highlightControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
 
           hover: true,
@@ -111,28 +123,27 @@ Neatline.module('Map', function(
           highlightOnly: true,
 
           eventListeners: {
-            featurehighlighted:   this.onFeatureHighlight,
-            featureunhighlighted: this.onFeatureUnhighlight
+            featurehighlighted:   _.bind(this.onFeatureHighlight, this),
+            featureunhighlighted: _.bind(this.onFeatureUnhighlight, this)
           }
 
         }
       );
 
       // Build the click control, bind callbacks.
-      this.clickControl = new OpenLayers.Control.SelectFeature(
+      this.selectControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
-          onSelect:   this.onFeatureSelect,
-          onUnselect: this.onFeatureUnselect,
-          toggle: true
+          onSelect:   _.bind(this.onFeatureSelect, this),
+          onUnselect: _.bind(this.onFeatureUnselect, this)
         }
       );
 
       // Enable panning when cursor is over feature.
-      this.hoverControl.handlers.feature.stopDown = false;
-      this.clickControl.handlers.feature.stopDown = false;
+      this.highlightControl.handlers.feature.stopDown = false;
+      this.selectControl.handlers.feature.stopDown = false;
 
       // Add to map, activate.
-      this.map.addControls([this.hoverControl, this.clickControl]);
+      this.map.addControls([this.highlightControl, this.selectControl]);
       this.activatePublicControls();
 
     },
@@ -143,8 +154,8 @@ Neatline.module('Map', function(
      */
     __initViewport: function() {
 
-      var focus = Neatline.global.exhibit.map_focus;
-      var zoom  = Neatline.global.exhibit.map_zoom;
+      var focus = Neatline.g.neatline.exhibit.map_focus;
+      var zoom  = Neatline.g.neatline.exhibit.map_zoom;
 
       // Apply defaults if they exist.
       if (_.isString(focus) && _.isNumber(zoom)) {
@@ -171,12 +182,16 @@ Neatline.module('Map', function(
     },
 
 
+    // CONTROLS
+    // --------------------------------------------------------------------
+
+
     /**
      * Activate the hover and click controls.
      */
     activatePublicControls: function() {
-      this.hoverControl.activate();
-      this.clickControl.activate();
+      this.highlightControl.activate();
+      this.selectControl.activate();
     },
 
 
@@ -184,8 +199,8 @@ Neatline.module('Map', function(
      * Deactivate the hover and click controls.
      */
     deactivatePublicControls: function() {
-      this.hoverControl.deactivate();
-      this.clickControl.deactivate();
+      this.highlightControl.deactivate();
+      this.selectControl.deactivate();
     },
 
 
@@ -195,18 +210,57 @@ Neatline.module('Map', function(
      * rebuild by the `ingest` flow.
      */
     updateControls: function() {
+
+      // Update the controls.
       var layers = this.getVectorLayers();
-      this.hoverControl.setLayer(layers);
-      this.clickControl.setLayer(layers);
+      this.highlightControl.setLayer(layers);
+      this.selectControl.setLayer(layers);
+
+      // Re-select the previously-selected model
+      if (!_.isNull(this.selectedModel)) {
+        this.selectByModel(this.selectedModel);
+      }
+
     },
 
 
+    // VIEWPORT
+    // --------------------------------------------------------------------
+
+
     /**
-     * Unselect all selected features.
+     * Focus the position and zoom to center around the passed model.
+     *
+     * - If the model has a non-null `map_focus` and `map_zoom`, set the
+     *   viewport using these values.
+     *
+     * - Otherwise, automatically fit the viewport around the extent of
+     *   the model's geometries, except when coverage is `POINT(0 0)`.
+     *
+     * @param {Object} model: The record model.
      */
-    unselectAll: function() {
-      this.hoverControl.unselectAll();
-      this.clickControl.unselectAll();
+    focusByModel: function(model) {
+
+      // Get a layer for the model.
+      var layer = this.layers.vector[model.id];
+      if (!layer) layer = this.buildVectorLayer(model);
+
+      // Try to get a custom focus.
+      var focus = model.get('map_focus');
+      var zoom  = model.get('map_zoom');
+
+      // If focus is defined, apply.
+      if (_.isString(focus) && _.isNumber(zoom)) {
+        this.setViewport(focus, zoom);
+      }
+
+      // Otherwise, fit to viewport.
+      else if (model.get('coverage') && !model.get('is_wms')) {
+        this.map.zoomToExtent(layer.getDataExtent());
+      }
+
+      Neatline.vent.trigger('MAP:focused');
+
     },
 
 
@@ -247,6 +301,10 @@ Neatline.module('Map', function(
       geolocate.activate();
 
     },
+
+
+    // LAYERS
+    // --------------------------------------------------------------------
 
 
     /**
@@ -455,6 +513,10 @@ Neatline.module('Map', function(
     },
 
 
+    // FILTERS
+    // --------------------------------------------------------------------
+
+
     /**
      * Register a layer filter.
      *
@@ -507,6 +569,10 @@ Neatline.module('Map', function(
         }, this));
       }, this));
     },
+
+
+    // STYLES
+    // --------------------------------------------------------------------
 
 
     /**
@@ -575,6 +641,195 @@ Neatline.module('Map', function(
     },
 
 
+    // RENDERERS
+    // --------------------------------------------------------------------
+
+
+    /**
+     * Highglight all features on a layer, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    highlightByModel: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer || this.modelIsSelected(model)) return;
+
+      this.ISOLATED = true;
+
+      // Highlight features.
+      _.each(layer.features, _.bind(function(feature) {
+        this.highlightControl.highlight(feature);
+      }, this));
+
+      this.ISOLATED = false;
+
+    },
+
+
+    /**
+     * Unhighglight all features on a layer, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    unhighlightByModel: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer || this.modelIsSelected(model)) return;
+
+      this.ISOLATED = true;
+
+      // Unhighlight features.
+      _.each(layer.features, _.bind(function(feature) {
+        this.highlightControl.unhighlight(feature);
+      }, this));
+
+      this.ISOLATED = false;
+
+    },
+
+
+    /**
+     * Select all features on a layer, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    selectByModel: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      this.ISOLATED = true;
+
+      // Select features.
+      _.each(layer.features, _.bind(function(feature) {
+        this.selectControl.select(feature);
+      }, this));
+
+      this.ISOLATED = false;
+      this.selectedModel = model;
+
+    },
+
+
+    /**
+     * Unselect all features on a layer, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    unselectByModel: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      this.ISOLATED = true;
+
+      // Unselect features.
+      _.each(layer.features, _.bind(function(feature) {
+        this.selectControl.unselect(feature);
+      }, this));
+
+      this.ISOLATED = false;
+      this.selectedModel = null;
+
+    },
+
+
+    // PUBLISHERS
+    // --------------------------------------------------------------------
+
+
+    /**
+     * When a feature is highlighted, trigger the `highlight` event with
+     * the model associated with the feature.
+     *
+     * @param {Object} evt: The highlight event.
+     */
+    onFeatureHighlight: function(evt) {
+
+      if (this.ISOLATED) return;
+
+      // Highlight sibling features.
+      this.highlightByModel(evt.feature.layer.nModel);
+
+      // Publish `highlight` event.
+      Neatline.vent.trigger('highlight', {
+        model:  evt.feature.layer.nModel,
+        source: Map.ID
+      });
+
+    },
+
+
+    /**
+     * When a feature is unhighlighted, trigger the `unhighlight` event
+     * with the model associated with the feature.
+     *
+     * @param {Object} evt: The unhighlight event.
+     */
+    onFeatureUnhighlight: function(evt) {
+
+      if (this.ISOLATED) return;
+
+      // Unhighlight sibling features.
+      this.unhighlightByModel(evt.feature.layer.nModel);
+
+      // Publish `unhighlight` event.
+      Neatline.vent.trigger('unhighlight', {
+        model:  evt.feature.layer.nModel,
+        source: Map.ID
+      });
+
+    },
+
+
+    /**
+     * When a feature is selected, trigger the `select` event with the
+     * model associated with the feature.
+     *
+     * @param {Object|OpenLayers.Feature} feature: The feature.
+     */
+    onFeatureSelect: function(feature) {
+
+      if (this.ISOLATED) return;
+
+      // Select sibling features.
+      this.selectByModel(feature.layer.nModel);
+
+      // Publish `select` event.
+      Neatline.vent.trigger('select', {
+        model:  feature.layer.nModel,
+        source: Map.ID
+      });
+
+    },
+
+
+    /**
+     * When a feature is unselected, trigger the `unselect` event.
+     *
+     * @param {Object|OpenLayers.Feature} feature: The feature.
+     */
+    onFeatureUnselect: function(feature) {
+
+      if (this.ISOLATED) return;
+
+      // Unselect sibling features.
+      this.unselectByModel(feature.layer.nModel);
+
+      // Publish `unselect` event.
+      Neatline.vent.trigger('unselect', {
+        model:  feature.layer.nModel,
+        source: Map.ID
+      });
+
+    },
+
+
+    // HELPERS
+    // --------------------------------------------------------------------
+
+
     /**
      * Get the current zoom level.
      *
@@ -618,93 +873,13 @@ Neatline.module('Map', function(
 
 
     /**
-     * Focus the position and zoom to center around the passed model.
+     * Is the passed model the same as the currently-selected model?
      *
-     * - If the model has a non-null `map_focus` and `map_zoom`, set the
-     *   viewport using these values.
-     *
-     * - Otherwise, automatically fit the viewport around the extent of
-     *   the model's geometries, except when coverage is `POINT(0 0)`.
-     *
-     * @param {Object} model: The record model.
+     * @return {Object}: A record model.
      */
-    focusByModel: function(model) {
-
-      // Get a layer for the model.
-      var layer = this.layers.vector[model.id];
-      if (!layer) layer = this.buildVectorLayer(model);
-
-      // Try to get a custom focus.
-      var focus = model.get('map_focus');
-      var zoom  = model.get('map_zoom');
-
-      // If focus is defined, apply.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
-      }
-
-      // Otherwise, fit to viewport.
-      else if (model.get('coverage') && !model.get('is_wms')) {
-        this.map.zoomToExtent(layer.getDataExtent());
-      }
-
-      Neatline.vent.trigger('MAP:focused');
-
-    },
-
-
-    /**
-     * When a feature is highlighted, trigger the `highlight` event with
-     * the model associated with the feature.
-     *
-     * @param {Object} evt: The highlight event.
-     */
-    onFeatureHighlight: function(evt) {
-      Neatline.vent.trigger('highlight', {
-        model:  evt.feature.layer.nModel,
-        source: Map.ID
-      });
-    },
-
-
-    /**
-     * When a feature is unhighlighted, trigger the `unhighlight` event
-     * with the model associated with the feature.
-     *
-     * @param {Object} evt: The unhighlight event.
-     */
-    onFeatureUnhighlight: function(evt) {
-      Neatline.vent.trigger('unhighlight', {
-        model:  evt.feature.layer.nModel,
-        source: Map.ID
-      });
-    },
-
-
-    /**
-     * When a feature is selected, trigger the `select` event with the
-     * model associated with the feature.
-     *
-     * @param {Object|OpenLayers.Feature} feature: The feature.
-     */
-    onFeatureSelect: function(feature) {
-      Neatline.vent.trigger('select', {
-        model:  feature.layer.nModel,
-        source: Map.ID
-      });
-    },
-
-
-    /**
-     * When a feature is unselected, trigger the `unselect` event.
-     *
-     * @param {Object|OpenLayers.Feature} feature: The feature.
-     */
-    onFeatureUnselect: function(feature) {
-      Neatline.vent.trigger('unselect', {
-        model:  feature.layer.nModel,
-        source: Map.ID
-      });
+    modelIsSelected: function(model) {
+      if (this.selectedModel) return this.selectedModel.id == model.id;
+      else return false;
     }
 
 

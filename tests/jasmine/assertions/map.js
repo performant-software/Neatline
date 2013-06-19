@@ -32,7 +32,7 @@ var NL = (function(NL) {
   NL.assertMapExtentQuery = function() {
 
     // Should trigger GET request to /records.
-    this.assertLastRequestRoute(Neatline.global.records_api);
+    this.assertLastRequestRoute(Neatline.g.neatline.records_api);
     this.assertLastRequestMethod('GET');
 
     // Should filter on extent and zoom.
@@ -59,6 +59,42 @@ var NL = (function(NL) {
    */
   NL.assertWmsLayerCount = function(count) {
     expect(this.vw.MAP.getWmsLayers().length).toEqual(count);
+  };
+
+
+  /**
+   * Assert that all features on a layer have the `default` intent.
+   *
+   * @param {OpenLayers.Layer.Vector} layer: The layer.
+   */
+  NL.assertDefaultIntent = function(layer) {
+    _.each(layer.features, function(feature) {
+      expect(feature.renderIntent).toEqual('default');
+    });
+  };
+
+
+  /**
+   * Assert that all features on a layer have the `temporary` intent.
+   *
+   * @param {OpenLayers.Layer.Vector} layer: The layer.
+   */
+  NL.assertTemporaryIntent = function(layer) {
+    _.each(layer.features, function(feature) {
+      expect(feature.renderIntent).toEqual('temporary');
+    });
+  };
+
+
+  /**
+   * Assert that all features on a layer have the `select` intent.
+   *
+   * @param {OpenLayers.Layer.Vector} layer: The layer.
+   */
+  NL.assertSelectIntent = function(layer) {
+    _.each(layer.features, function(feature) {
+      expect(feature.renderIntent).toEqual('select');
+    });
   };
 
 

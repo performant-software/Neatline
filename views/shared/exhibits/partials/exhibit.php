@@ -17,7 +17,7 @@
 
 <!-- Globals constants. -->
 <script type="text/javascript">
-  Neatline.global = <?php echo Zend_Json::encode(
+  Neatline.g = <?php echo Zend_Json::encode(
     nl_getGlobals(nl_getExhibit())
   ); ?>
 </script>

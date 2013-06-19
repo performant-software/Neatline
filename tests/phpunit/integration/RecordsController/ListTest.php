@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class RecordsControllerTest_List extends Neatline_TestCase
+class RecordsControllerTest_List extends Neatline_Case_Default
 {
 
 
@@ -318,8 +318,8 @@ class RecordsControllerTest_List extends Neatline_TestCase
         $record2->save();
 
         $this->request->setQuery(array(
-            'tags' => array('tag1', 'tag2'))
-        );
+            'tags' => array('tag1', 'tag2')
+        ));
 
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
@@ -346,13 +346,41 @@ class RecordsControllerTest_List extends Neatline_TestCase
         $record2->save();
 
         $this->request->setQuery(array(
-            'widget' => 'Widget1')
-        );
+            'widget' => 'Widget1'
+        ));
 
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
 
         // Should apply widget filter.
+        $this->assertEquals($response->records[0]->id, $record1->id);
+        $this->assertCount(1, $response->records);
+
+    }
+
+
+    /**
+     * The `slug` parameter should be passed to the query.
+     */
+    public function testSlugFilter()
+    {
+
+        $record1 = new NeatlineRecord($this->exhibit);
+        $record2 = new NeatlineRecord($this->exhibit);
+        $record1->slug = 'slug-1';
+        $record2->slug = 'slug-2';
+
+        $record1->save();
+        $record2->save();
+
+        $this->request->setQuery(array(
+            'slug' => 'slug-1'
+        ));
+
+        $this->dispatch('neatline/records');
+        $response = $this->getResponseArray();
+
+        // Should apply slug filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
         $this->assertCount(1, $response->records);
 
@@ -380,8 +408,8 @@ class RecordsControllerTest_List extends Neatline_TestCase
         $record3->save();
 
         $this->request->setQuery(array(
-            'order' => 'weight')
-        );
+            'order' => 'weight'
+        ));
 
         $this->dispatch('neatline/records');
         $response = $this->getResponseArray();
@@ -413,8 +441,8 @@ class RecordsControllerTest_List extends Neatline_TestCase
         $record3->save();
 
         $this->request->setQuery(array(
-            'limit' => 1,
-            'offset' => 1
+            'limit'   => 1,
+            'offset'  => 1
         ));
 
         $this->dispatch('neatline/records');

@@ -42,13 +42,15 @@ PackageTask.new('Neatline') do |p|
   p.package_files.include('plugin.php')
   p.package_files.include('plugin.ini')
   p.package_files.include('routes.ini')
-  p.package_files.include('layers.json')
   p.package_files.include('README.md')
 
   # Application --
   p.package_files.include('NeatlinePlugin.php')
+  p.package_files.include('migrations/**/*.php')
+  p.package_files.include('acl/**/*.php')
   p.package_files.include('models/**/*.php')
   p.package_files.include('controllers/**/*.php')
+  p.package_files.include('layers/**/*.json')
   p.package_files.include('forms/**/*.php')
   p.package_files.include('helpers/**/*.php')
   p.package_files.include('jobs/**/*.php')
@@ -57,7 +59,6 @@ PackageTask.new('Neatline') do |p|
   # Payloads --
   p.package_files.include('views/shared/css/img/**/*')
   p.package_files.include('views/shared/javascripts/bootstrap.js')
-  p.package_files.include('views/**/payloads/**/*')
   p.package_files.include('views/**/payloads/**/*')
 
 end

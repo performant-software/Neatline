@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
+class NeatlinePluginTest_HookAfterSaveItem extends Neatline_Case_Default
 {
 
 
@@ -26,8 +26,8 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
     public function testHookAfterSaveItem()
     {
 
-        $exhibit    = $this->__exhibit('slug');
         $item       = $this->__item('title');
+        $exhibit    = $this->__exhibit();
         $record     = $this->__record($exhibit, $item);
 
         // Update the item.
@@ -41,7 +41,7 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_TestCase
 
         // Record should be compiled.
         $record = $this->reload($record);
-        $this->assertRegExp('/item-slug\n/', nl_getItemMarkup($record));
+        $this->assertRegExp('/item\n/', nl_getItemMarkup($record));
         $this->assertEquals($record->title, 'title');
 
     }

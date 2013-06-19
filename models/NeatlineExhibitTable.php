@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibitTable extends Neatline_ExpandableTable
+class NeatlineExhibitTable extends Neatline_Table_Expandable
 {
 
 
@@ -21,6 +21,29 @@ class NeatlineExhibitTable extends Neatline_ExpandableTable
     public function getExpansionTables()
     {
         return nl_getExhibitExpansions();
+    }
+
+
+    /**
+     * Add public/private permissions filtering to base select.
+     *
+     * @return Omeka_Db_Select The filtered select.
+     */
+    public function getSelect()
+    {
+
+        $select = parent::getSelect();
+
+        // Create the permissions manager.
+        $permissions = new Omeka_Db_Select_PublicPermissions(
+            'Neatline_Exhibits'
+        );
+
+        // Filter out private exhibits for public users.
+        $permissions->apply($select, $this->getTableAlias());
+
+        return $select;
+
     }
 
 

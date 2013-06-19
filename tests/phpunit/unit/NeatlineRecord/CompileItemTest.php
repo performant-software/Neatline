@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTest_CompileItem extends Neatline_TestCase
+class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
 {
 
 
@@ -27,14 +27,14 @@ class NeatlineRecordTest_CompileItem extends Neatline_TestCase
     public function testCompileItem()
     {
 
-        $exhibit = $this->__exhibit('slug');
+        $exhibit = $this->__exhibit();
         $item = $this->__item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->compileItem();
 
         // `title` and `body` should be set.
-        $this->assertRegExp('/item-slug\n/', nl_getItemMarkup($record));
+        $this->assertRegExp('/item\n/', nl_getItemMarkup($record));
         $this->assertEquals($record->title, 'title');
 
     }

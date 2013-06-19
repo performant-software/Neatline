@@ -9,12 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibit extends Neatline_ExpandableRow
+class NeatlineExhibit extends Neatline_Row_Expandable
+    implements Zend_Acl_Resource_Interface
 {
 
 
+    public $owner_id;       // INT(10) UNSIGNED NOT NULL DEFAULT 0
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
+    public $published;      // TIMESTAMP NULL
     public $query;          // TEXT NULL
     public $base_layers;    // TEXT NULL
     public $base_layer;     // VARCHAR(100) NULL
@@ -26,6 +29,29 @@ class NeatlineExhibit extends Neatline_ExpandableRow
     public $styles;         // TEXT NULL
     public $map_focus;      // VARCHAR(100) NULL
     public $map_zoom;       // INT(10) UNSIGNED NULL
+
+
+    /**
+     * If the exhibit is being published to the public site for the first
+     * time, update the `published` timestamp.
+     *
+     * @param array $values The POST/PUT data.
+     */
+    public function saveForm($values)
+    {
+
+        // Assign the values.
+        $this->setArray($values);
+
+        // Set `published` timestamp, if the exhibit is being set "public"
+        // for the first time.
+        if (is_null($this->published) && $this->public == 1) {
+            $this->published = date(self::DATE_FORMAT);
+        }
+
+        $this->save();
+
+    }
 
 
     /**
@@ -85,7 +111,7 @@ class NeatlineExhibit extends Neatline_ExpandableRow
             // If selector is `all`, update all records in the exhibit;
             // otherwise, just match records with the tag.
             if ($tag != 'all') {
-                $where['tags REGEXP ?'] = '[[:<:]]'.$tag.'[[:>:]]';
+                $where['MATCH (tags) AGAINST (? IN BOOLEAN MODE)']= $tag;
             }
 
             // Walk valid CSS rules.
@@ -205,6 +231,17 @@ class NeatlineExhibit extends Neatline_ExpandableRow
         // Delete child records.
         $records->delete($rName, array('exhibit_id=?' => $this->id));
 
+    }
+
+
+    /**
+     * Associate the model with an ACL resource id.
+     *
+     * @return string The resource id..
+     */
+    public function getResourceId()
+    {
+        return 'Neatline_Exhibits';
     }
 
 

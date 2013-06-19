@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_ExhibitsController extends Neatline_RestController
+class Neatline_ExhibitsController extends Neatline_Controller_Rest
 {
 
 
@@ -20,49 +20,6 @@ class Neatline_ExhibitsController extends Neatline_RestController
     {
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-    }
-
-
-    /**
-     * Update exhibit via PUT.
-     * @REST
-     */
-    public function putAction()
-    {
-
-        $this->_helper->viewRenderer->setNoRender(true);
-
-        // Update the exhibit.
-        $exhibit = $this->_helper->db->findById();
-        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
-            Zend_Registry::get('fileIn')), true
-        ));
-
-        // Propagate CSS.
-        $exhibit->pushStyles();
-
-    }
-
-
-    /**
-     * Fetch exhibit via GET.
-     * @REST
-     */
-    public function getAction()
-    {
-        $this->_helper->viewRenderer->setNoRender(true);
-        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
-    }
-
-
-    /**
-     * Browse exhibits.
-     */
-    public function browseAction()
-    {
-        $this->_setParam('sort_field', 'added');
-        $this->_setParam('sort_dir', 'd');
-        parent::browseAction();
     }
 
 
@@ -92,6 +49,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     public function editAction()
     {
+
 
         $exhibit = $this->_helper->db->findById();
         $form = $this->_getExhibitForm($exhibit);
@@ -126,7 +84,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
             // Import items.
             Zend_Registry::get('job_dispatcher')->sendLongRunning(
-                'Neatline_ImportItems', array(
+                'Neatline_Job_ImportItems', array(
                     'web_dir'       => nl_getWebDir(),
                     'exhibit_id'    => $exhibit->id,
                     'query'         => $post
@@ -151,12 +109,71 @@ class Neatline_ExhibitsController extends Neatline_RestController
 
 
     /**
+     * Update exhibit via PUT.
+     * @REST
+     */
+    public function putAction()
+    {
+
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Update the exhibit.
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
+            Zend_Registry::get('fileIn')), true
+        ));
+
+        // Propagate CSS.
+        $exhibit->pushStyles();
+
+    }
+
+
+    /**
+     * Browse exhibits.
+     */
+    public function browseAction()
+    {
+        $this->_setParam('sort_field', 'added');
+        $this->_setParam('sort_dir', 'd');
+        parent::browseAction();
+    }
+
+
+    /**
+     * Fetch exhibit via GET.
+     * @REST
+     */
+    public function getAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
+    }
+
+
+    /**
      * Show exhibit.
      */
     public function showAction()
     {
+
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Try to find an exhibit with the requested slug.
         $exhibit = $this->exhibits->findBySlug($this->_request->slug);
+        if (!$exhibit) throw new Omeka_Controller_Exception_404;
+
+        // Assign exhibit to view.
         $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlinePublic($exhibit);
+        nl_queueExhibitTheme($exhibit);
+
+        // Try to render exhibit-specific template.
+        try { $this->render("themes/$exhibit->slug/show"); }
+        catch (Exception $e) { $this->render('show'); }
+
     }
 
 
@@ -221,7 +238,7 @@ class Neatline_ExhibitsController extends Neatline_RestController
      */
     private function _getExhibitForm($exhibit)
     {
-        return new Neatline_ExhibitForm(array('exhibit' => $exhibit));
+        return new Neatline_Form_Exhibit(array('exhibit' => $exhibit));
     }
 
 

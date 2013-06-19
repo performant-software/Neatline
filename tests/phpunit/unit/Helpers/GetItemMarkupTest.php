@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class HelpersTest_GetItemMarkup extends Neatline_TestCase
+class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 {
 
 
@@ -21,55 +21,57 @@ class HelpersTest_GetItemMarkup extends Neatline_TestCase
 
 
     /**
-     * `nl_getItemMetadata` should match `item-[slug]-[tag]` files first;
-     * if more than one tag on the record has a tag-specific template, the
-     * template for the leftmost tag in the list should take precedence.
+     * `nl_getItemMarkup` should first try to match `item-[tag]` templates
+     * in the exhibit-specific theme; if more than one tag on the record
+     * has a corresponding template, the template for the leftmost tag in
+     * the list should take precedence.
      */
-    public function testSlugTagTemplate()
+    public function testTagTemplate()
     {
 
-        $exhibit = $this->__exhibit('slug');
+        $exhibit = $this->__exhibit('custom');
         $r = $this->__record($exhibit);
 
         // `tag1` first.
         $r->tags = 'tag1,tag2';
-        $this->assertRegExp('/item-slug-tag1\n/', nl_getItemMarkup($r));
+        $this->assertRegExp('/custom-item-tag1\n/', nl_getItemMarkup($r));
 
         // `tag2` first.
         $r->tags = 'tag2,tag1';
-        $this->assertRegExp('/item-slug-tag2\n/', nl_getItemMarkup($r));
+        $this->assertRegExp('/custom-item-tag2\n/', nl_getItemMarkup($r));
 
     }
 
 
     /**
-     * When none of the `item-[slug]-[tag]` templates matches the record,
-     * `nl_getItemMetadata` try to match an `item-[slug]` template.
+     * When none of the `item-[tag]` templates matches the record, try to
+     * render an `item` template in the exhibit-specific theme.
      */
     public function testSlugTemplate()
     {
 
-        $exhibit = $this->__exhibit('slug');
+        $exhibit = $this->__exhibit('custom');
         $r = $this->__record($exhibit);
 
         // No tags.
-        $this->assertRegExp('/item-slug\n/', nl_getItemMarkup($r));
+        $this->assertRegExp('/custom-item\n/', nl_getItemMarkup($r));
 
         // No matching tags.
         $record->tags = 'tag3';
-        $this->assertRegExp('/item-slug\n/', nl_getItemMarkup($r));
+        $this->assertRegExp('/custom-item\n/', nl_getItemMarkup($r));
 
     }
 
 
     /**
-     * When none of the custom templates matches, `nl_getItemMetadata`
-     * should render the default `item` template.
+     * When none of the templates in the exhibit-specific theme matches 
+     * the record, revert to the global `item` template, which is provided
+     * by the core plugin and can also be overridden in the theme.
      */
     public function testDefaultTemplate()
     {
 
-        $exhibit = $this->__exhibit('another-slug');
+        $exhibit = $this->__exhibit('no-custom-theme');
         $r = $this->__record($exhibit);
 
         // No custom templates.

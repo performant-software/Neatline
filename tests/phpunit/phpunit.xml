@@ -5,6 +5,7 @@
     <testsuite name="Neatline Tests">
         <directory>unit</directory>
         <directory>integration</directory>
+        <directory>migrations</directory>
         <directory>fixtures</directory>
         <directory>migration</directory>
     </testsuite>

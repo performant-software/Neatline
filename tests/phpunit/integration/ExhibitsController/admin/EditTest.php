@@ -9,15 +9,15 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
+class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 {
 
 
     public function setUp()
     {
         parent::setUp();
-        $this->mockExhibitWidgets();
         $this->mockPresenters();
+        $this->mockExhibitWidgets();
         $this->mockLayers();
     }
 
@@ -29,12 +29,16 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
     {
 
         $exhibit = $this->__exhibit('slug');
-        $exhibit->title         = 'Title';
-        $exhibit->narrative     = 'Narrative.';
-        $exhibit->base_layers   = 'Layer1,Layer3';
-        $exhibit->base_layer    = 'Layer3';
-        $exhibit->widgets       = 'Widget1,Widget2';
-        $exhibit->public        = 1;
+
+        $exhibit->setArray(array(
+            'title'         => 'Title',
+            'narrative'     => 'Narrative.',
+            'widgets'       => 'Widget1,Widget2',
+            'base_layers'   => 'Layer1,Layer3',
+            'base_layer'    => 'Layer3',
+            'public'        => 1
+        ));
+
         $exhibit->save();
 
         $this->dispatch('neatline/edit/'.$exhibit->id);
@@ -46,6 +50,19 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
         // Slug:
         $this->assertXpath(
             '//input[@name="slug"][@value="slug"]');
+
+        // Narrative:
+        $this->assertXpathContentContains(
+            '//textarea[@name="narrative"]',
+            'Narrative.');
+
+        // Widgets:
+        $this->assertXpath(
+            '//select[@name="widgets[]"]/
+            option[@selected="selected"][@value="Widget1"]');
+        $this->assertXpath(
+            '//select[@name="widgets[]"]/
+            option[@selected="selected"][@value="Widget2"]');
 
         // Base Layers:
         $this->assertXpath(
@@ -59,19 +76,6 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
         $this->assertXpath(
             '//select[@name="base_layer"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
-
-        // Widgets:
-        $this->assertXpath(
-            '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget1"]');
-        $this->assertXpath(
-            '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget2"]');
-
-        // Narrative:
-        $this->assertXpathContentContains(
-            '//textarea[@name="narrative"]',
-            'Narrative.');
 
         // Public.
         $this->assertXpath(
@@ -250,8 +254,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should save exhibit.
-        $exhibit = $this->__exhibits->find($exhibit->id);
-        $this->assertEquals($exhibit->title, 'title');
+        $this->assertEquals($this->reload($exhibit)->title, 'title');
 
     }
 
@@ -292,24 +295,24 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_TestCase
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title 2',
             'slug'          => 'slug-2',
+            'narrative'     => 'Narrative 2.',
+            'widgets'       => array('Widget1', 'Widget2'),
             'base_layers'   => array('Layer1', 'Layer2'),
             'base_layer'    => 'Layer2',
-            'widgets'       => array('Widget1', 'Widget2'),
-            'narrative'     => 'Narrative 2.',
             'public'        => 1
         ));
 
         // Submit the form, reload exhibit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-        $exhibit = $this->__exhibits->find($exhibit->id);
+        $exhibit = $this->reload($exhibit);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title 2');
         $this->assertEquals($exhibit->slug,         'slug-2');
+        $this->assertEquals($exhibit->narrative,    'Narrative 2.');
+        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
         $this->assertEquals($exhibit->base_layer,   'Layer2');
-        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->narrative,    'Narrative 2.');
         $this->assertEquals($exhibit->public,       1);
 
     }

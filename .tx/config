@@ -5,4 +5,3 @@ host = https://www.transifex.com
 file_filter = languages/<lang>.po
 source_file = languages/Neatline.pot
 source_lang = en
-

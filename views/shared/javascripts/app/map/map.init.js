@@ -17,7 +17,7 @@ Neatline.module('Map', function(
 
   Map.addInitializer(function() {
     Map.__collection = new Neatline.Shared.Record.Collection();
-    Map.__view = new Neatline.Map.View({ el: '#neatline-map' });
+    Map.__view = new Neatline.Map.View();
   });
 
 

@@ -18,7 +18,7 @@
  */
 function nl_globals($exhibit)
 {
-    return array(
+    return array('neatline' => array(
 
         // Exhibit.
         // ----------------------------------------------------------------
@@ -38,5 +38,5 @@ function nl_globals($exhibit)
         // ----------------------------------------------------------------
         'base_layers'   => nl_getLayersForExhibit($exhibit)
 
-    );
+    ));
 }

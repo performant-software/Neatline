@@ -17,6 +17,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_hooks = array(
         'install',
         'uninstall',
+        'upgrade',
+        'define_acl',
         'initialize',
         'define_routes',
         'after_save_item',
@@ -38,13 +40,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
-
         $this->_db->query("CREATE TABLE IF NOT EXISTS
         `{$this->_db->prefix}neatline_exhibits` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         `modified`              TIMESTAMP NULL,
+        `published`             TIMESTAMP NULL,
         `query`                 TEXT NULL,
         `base_layers`           TEXT NULL,
         `base_layer`            VARCHAR(100) NULL,
@@ -61,11 +64,11 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
-
         $this->_db->query("CREATE TABLE IF NOT EXISTS
         `{$this->_db->prefix}neatline_records` (
 
         `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
         `item_id`               INT(10) UNSIGNED NULL,
         `exhibit_id`            INT(10) UNSIGNED NULL,
         `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -103,13 +106,12 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         `map_zoom`              INT(10) UNSIGNED NULL,
         `map_focus`             VARCHAR(100) NULL,
 
-         PRIMARY KEY            (`id`),
-         INDEX                  (`item_id`, `exhibit_id`),
-         FULLTEXT KEY           (`title`, `body`),
-         SPATIAL INDEX          (`coverage`)
+         PRIMARY KEY        (`id`),
+         INDEX              (`item_id`, `exhibit_id`),
+         FULLTEXT KEY       (`title`, `body`, `slug`, `tags`, `widgets`),
+         SPATIAL INDEX      (`coverage`)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
-
 
     }
 
@@ -119,17 +121,39 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUninstall()
     {
-
-        // Exhibits:
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_exhibits`"
         );
-
-        // Records:
         $this->_db->query("DROP TABLE IF EXISTS
             `{$this->_db->prefix}neatline_records`"
         );
+    }
 
+
+    /**
+     * Upgrade the plugin.
+     *
+     * @param array $args Contains: `old_version` and `new_version`.
+     */
+    public function hookUpgrade($args)
+    {
+        if ($args['old_version'] < '2.0-alpha2') {
+            new Neatline_Migration_20alpha2($this, $this->_db);
+        }
+        if ($args['old_version'] < '2.0-alpha3') {
+            new Neatline_Migration_20alpha3($this, $this->_db);
+        }
+    }
+
+
+    /**
+     * Define the ACL.
+     *
+     * @param array $args Contains: `acl` (Zend_Acl).
+     */
+    public function hookDefineAcl($args)
+    {
+        nl_defineAcl($args['acl']);
     }
 
 
@@ -145,20 +169,20 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Register routes.
      *
-     * @param array $args Zend_Config instance under `router` key.
+     * @param array $args Contains: `router` (Zend_Config).
      */
     public function hookDefineRoutes($args)
     {
         $args['router']->addConfig(new Zend_Config_Ini(
-            NL_DIR . '/routes.ini', 'routes')
-        );
+            NL_DIR . '/routes.ini'
+        ));
     }
 
 
     /**
      * Propagate item updates to Neatline records.
      *
-     * @param array $args Array of arguments, with `record`.
+     * @param array $args Contains: `record` (Item).
      */
     public function hookAfterSaveItem($args)
     {
@@ -181,10 +205,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     /**
-     * Register properties on `Neatline.global`.
+     * Register properties on `Neatline.g`.
      *
      * @param array $globals The array of global properties.
-     * @param array $args Array of arguments, with `exhibit`.
+     * @param array $args Contains: `exhibit` (NeatlineExhibit).
      * @return array The modified array.
      */
     public function filterNeatlineGlobals($globals, $args)
@@ -218,40 +242,40 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     {
         return array_merge($styles, array(
 
-            // Groups
+            // GROUPS
             'widgets',
             'presenter',
 
-            // Colors
+            // COLORS
             'fill_color',
             'fill_color_select',
             'stroke_color',
             'stroke_color_select',
 
-            // Opacities
+            // OPACITIES
             'fill_opacity',
             'fill_opacity_select',
             'stroke_opacity',
             'stroke_opacity_select',
 
-            // Dimensions
+            // DIMENSIONS
             'stroke_width',
             'point_radius',
             'zindex',
             'weight',
 
-            // Dates
+            // DATES
             'start_date',
             'end_date',
             'after_date',
             'before_date',
 
-            // Imagery
+            // IMAGERY
             'point_image',
             'wms_address',
             'wms_layers',
 
-            // Visibility
+            // VISIBILITY
             'min_zoom',
             'max_zoom',
             'map_focus',
@@ -270,10 +294,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      * @return void
      * @author Eric Rochester
      **/
-    public function hookUpgrade($oldVersion, $newVersion)
-    {
-        $helper = new Neatline_Helper_Migration($this, $this->_db);
-        $helper->migrate();
-    }
+    // public function hookUpgrade($oldVersion, $newVersion)
+    // {
+    //     $helper = new Neatline_Helper_Migration($this, $this->_db);
+    //     $helper->migrate();
+    // }
 
 }

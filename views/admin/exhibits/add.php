@@ -16,7 +16,7 @@
 <?php
   echo head(array(
     'title' => __('Neatline | Create an Exhibit'),
-    'content_class' => 'neatline'
+    'bodyclass' => 'add'
   ));
 ?>
 

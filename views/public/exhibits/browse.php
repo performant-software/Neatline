@@ -11,12 +11,10 @@
 
 ?>
 
-<?php
-  echo head(array(
-    'title' => __('Neatline | Browse Exhibits'),
-    'content_class' => 'neatline'
-  ));
-?>
+<?php echo head(array(
+  'title' => __('Neatline | Browse Exhibits'),
+  'content_class' => 'neatline'
+)); ?>
 
 <div id="primary">
 

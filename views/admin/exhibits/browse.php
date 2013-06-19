@@ -33,13 +33,11 @@
     <thead>
       <tr>
         <?php echo browse_sort_links(array(
-            __('Exhibit')   => 'title',
-            __('Modified')  => 'modified',
+            __('Exhibit')   => null,
+            __('Created')   => null,
             __('# Items')   => null,
             __('Public')    => null
-        ), array(
-            'link_tag'      => 'th scope="col"'
-        )); ?>
+        ), array('link_tag' => 'th scope="col"')); ?>
       </tr>
     </thead>
 
@@ -51,33 +49,41 @@
       <?php foreach (loop('NeatlineExhibit') as $e): ?>
       <tr>
 
-        <!-- Exhibit -->
         <td class="title">
 
+          <!-- Title. -->
           <?php echo nl_getExhibitLink(
             $e, 'editor', null,
             array('class' => 'editor'), false
           );?>
 
           <ul class="action-links group">
+
+            <!-- Public View. -->
             <li>
               <?php echo nl_getExhibitLink(
                 $e, 'show', __('Public View'),
                 array('class' => 'public'), true
               );?>
             </li>
+
+            <!-- Exhibit Settings. -->
             <li>
               <?php echo nl_getExhibitLink(
                 $e, 'edit', __('Exhibit Settings'),
                 array('class' => 'edit'), false
               );?>
             </li>
+
+            <!-- Import Omeka Items. -->
             <li>
               <?php echo nl_getExhibitLink(
-                $e, 'import', __('Import Items'),
+                $e, 'import', __('Import Omeka Items'),
                 array('class' => 'import'), false
               );?>
             </li>
+
+            <!-- Delete. -->
             <li>
               <?php echo nl_getExhibitLink(
                 $e, 'delete-confirm', __('Delete'),
@@ -87,9 +93,9 @@
           </ul>
         </td>
 
-        <!-- Modified -->
+        <!-- Created -->
         <td>
-          <?php echo format_date(nl_getExhibitField('modified')); ?>
+          <?php echo format_date(nl_getExhibitField('added')); ?>
         </td>
 
         <!-- # Items -->

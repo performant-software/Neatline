@@ -18,7 +18,9 @@ Neatline.module('Editor.Exhibit.Records', function(
     className: 'records',
 
     events: {
-      'click a[data-id]': 'click'
+      'mouseenter a[data-id]':  'onMouseenter',
+      'mouseleave a[data-id]':  'onMouseleave',
+      'click a[data-id]':       'onClick'
     },
 
 
@@ -37,6 +39,8 @@ Neatline.module('Editor.Exhibit.Records', function(
      */
     ingest: function(records) {
 
+      this.records = records;
+
       // Get query as URL param.
       var query = Neatline.request(
         'EDITOR:EXHIBIT:SEARCH:getQueryForUrl'
@@ -44,8 +48,8 @@ Neatline.module('Editor.Exhibit.Records', function(
 
       // Render record list.
       this.$el.html(this.template({
-        records:  records,
-        limit:    Neatline.global.per_page,
+        records:  this.records,
+        limit:    Neatline.g.neatline.per_page,
         query:    query
       }));
 
@@ -53,13 +57,53 @@ Neatline.module('Editor.Exhibit.Records', function(
 
 
     /**
-     * Focus the map when a record row is clicked.
+     * Get the model that corresponds to a DOM event.
+     *
+     * @param {Object} e: A DOM event.
+     */
+    getModelByEvent: function(e) {
+      return this.records.get(
+        parseInt($(e.currentTarget).attr('data-id'), 10)
+      );
+    },
+
+
+    /**
+     * Trigger `highlight` when the cursor hovers on a record row.
      *
      * @param {Object} e: The click event.
      */
-    click: function(e) {
-      var id = parseInt($(e.currentTarget).attr('data-id'), 10);
-      Neatline.execute('MAP:focusById', id);
+    onMouseenter: function(e) {
+      Neatline.vent.trigger('highlight', {
+        model:  this.getModelByEvent(e),
+        source: Records.ID
+      });
+    },
+
+
+    /**
+     * Trigger `unhighlight` when the cursor leaves a record row.
+     *
+     * @param {Object} e: The click event.
+     */
+    onMouseleave: function(e) {
+      Neatline.vent.trigger('unhighlight', {
+        model:  this.getModelByEvent(e),
+        source: Records.ID
+      });
+    },
+
+
+    /**
+     * Trigger `select` a record row is clicked.
+     *
+     * @param {Object} e: The click event.
+     */
+    onClick: function(e) {
+      Neatline.vent.trigger('select', {
+        model:  this.getModelByEvent(e),
+        source: Records.ID
+      });
     }
 
 

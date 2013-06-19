@@ -9,12 +9,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class ImportItemsTest extends Neatline_TestCase
+class ImportItemsTest extends Neatline_Case_Default
 {
 
 
     /**
-     * `Neatline_ImportItems` should apply the search query.
+     * `Neatline_Job_ImportItems` should create Neatline records for all
+     * items that match the search query.
      */
     public function testCreateRecords()
     {
@@ -25,7 +26,7 @@ class ImportItemsTest extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('Neatline_ImportItems', array(
+            send('Neatline_Job_ImportItems', array(
 
                 'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $exhibit->id,
@@ -43,9 +44,9 @@ class ImportItemsTest extends Neatline_TestCase
 
 
     /**
-     * For any given Omeka item, `Neatline_ImportItems` should check to
-     * see if a record already exists in the exhibit for the item; if so,
-     * the record should be re-compiled, but not duplicated.
+     * For any given Omeka item, `Neatline_Job_ImportItems` should check
+     * to see if a record already exists in the exhibit for the item; if
+     * so, the record should be re-compiled, but not duplicated.
      */
     public function testRecompileRecords()
     {
@@ -59,7 +60,7 @@ class ImportItemsTest extends Neatline_TestCase
         $record->__save();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('Neatline_ImportItems', array(
+            send('Neatline_Job_ImportItems', array(
 
                 'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $exhibit->id,
@@ -94,7 +95,7 @@ class ImportItemsTest extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('Neatline_ImportItems', array(
+            send('Neatline_Job_ImportItems', array(
 
                 'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $exhibit->id,
@@ -123,11 +124,11 @@ class ImportItemsTest extends Neatline_TestCase
         $exhibit = $this->__exhibit();
 
         insert_files_for_item($item, 'Filesystem', array(
-            NL_DIR . '/tests/phpunit/mocks/file.txt'
+            NL_TEST_DIR . '/mocks/file.txt'
         ));
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('Neatline_ImportItems', array(
+            send('Neatline_Job_ImportItems', array(
 
                 'web_dir'       => 'webDir',
                 'exhibit_id'    => $exhibit->id,

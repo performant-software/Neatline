@@ -9,10 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecord extends Neatline_ExpandableRow
+class NeatlineRecord extends Neatline_Row_Expandable
+    implements Zend_Acl_Resource_Interface
 {
 
 
+    public $owner_id;               // INT(10) UNSIGNED NOT NULL DEFAULT 0
     public $item_id;                // INT(10) UNSIGNED NULL
     public $exhibit_id;             // INT(10) UNSIGNED NULL
     public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -52,10 +54,10 @@ class NeatlineRecord extends Neatline_ExpandableRow
 
 
     /**
-     * Set foreign keys.
+     * Set exhibit and item references.
      *
-     * @param Item $item The item record.
      * @param NeatlineExhibit $exhibit The exhibit record.
+     * @param Item $item The item record.
      */
     public function __construct($exhibit = null, $item = null)
     {
@@ -290,6 +292,17 @@ class NeatlineRecord extends Neatline_ExpandableRow
     public function __save()
     {
         parent::__save();
+    }
+
+
+    /**
+     * Associate the model with an ACL resource id.
+     *
+     * @return string The resource id..
+     */
+    public function getResourceId()
+    {
+        return 'Neatline_Records';
     }
 
 

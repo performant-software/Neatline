@@ -37,6 +37,58 @@ Neatline.module('Map', function(
 
 
   /**
+   * Unhighlight the layer that corresponds to the passed model and then
+   * focus on its extent (unless the event was triggered by the map).
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var select = function(args) {
+    if (args.source !== Map.ID) {
+      focusByModel(args.model);
+      Map.__view.selectByModel(args.model);
+    }
+  };
+  Neatline.commands.setHandler(Map.ID+':select', select);
+  Neatline.vent.on('select', select);
+
+
+  /**
+   * Highlight by model.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var highlight = function(args) {
+    Map.__view.highlightByModel(args.model);
+  };
+  Neatline.commands.setHandler(Map.ID+':highlight', highlight);
+  Neatline.vent.on('highlight', highlight);
+
+
+  /**
+   * Unhighlight by model.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var unhighlight = function(args) {
+    Map.__view.unhighlightByModel(args.model);
+  };
+  Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
+  Neatline.vent.on('unhighlight', unhighlight);
+
+
+  /**
+   * Unselect by model.
+   *
+   * @param {Object} args: Event arguments.
+   */
+  var unselect = function(args) {
+    Map.__view.unselectByModel(args.model);
+  };
+  Neatline.commands.setHandler(Map.ID+':unselect', unselect);
+  Neatline.vent.on('unselect', unselect);
+
+
+  /**
    * Focus the map on the data extent for a record, identified by model.
    *
    * @param {Object} model: A record model.
@@ -45,31 +97,6 @@ Neatline.module('Map', function(
     Map.__view.focusByModel(model);
   };
   Neatline.commands.setHandler(Map.ID+':focusByModel', focusByModel);
-
-
-  /**
-   * Focus the map on the data extent for a record, identified by id.
-   *
-   * @param {Number} id: The record id.
-   */
-  var focusById = function(id) {
-    Map.__collection.getOrFetch(id, function(model) {
-      focusByModel(model);
-    });
-  };
-  Neatline.commands.setHandler(Map.ID+':focusById', focusById);
-
-
-  /**
-   * Focus by model, unless the event was triggered by the map.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    if (args.source !== 'MAP') focusByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':select', select);
-  Neatline.vent.on('select', select);
 
 
   /**
@@ -97,12 +124,12 @@ Neatline.module('Map', function(
 
 
   /**
-   * Unselect all features.
+   * Refresh the map after it is resized.
    */
-  var unselect = function() {
-    Map.__view.unselectAll();
+  var updateSize = function() {
+    Map.__view.map.updateSize();
   };
-  Neatline.commands.setHandler(Map.ID+':unselect', unselect);
+  Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
 
 
   /**

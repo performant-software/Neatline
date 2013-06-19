@@ -57,7 +57,7 @@ function nl_getStyles()
 /**
  * Gather exhibit expansion tables.
  *
- * @return array An array of `Neatline_ExpansionTable`.
+ * @return array An array of `Neatline_Table_Expansion`.
  */
 function nl_getExhibitExpansions()
 {
@@ -68,7 +68,7 @@ function nl_getExhibitExpansions()
 /**
  * Gather record expansion tables.
  *
- * @return array An array of `Neatline_ExpansionTable`.
+ * @return array An array of `Neatline_Table_Expansion`.
  */
 function nl_getRecordExpansions()
 {

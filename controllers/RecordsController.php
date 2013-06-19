@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_RecordsController extends Neatline_RestController
+class Neatline_RecordsController extends Neatline_Controller_Rest
 {
 
 
@@ -101,6 +101,16 @@ class Neatline_RecordsController extends Neatline_RestController
     {
         $record = $this->records->find($this->_request->id);
         $record->delete();
+    }
+
+
+    /**
+     * TODO|dev.
+     * @REST
+     */
+    public function debugAction()
+    {
+        echo $this->_helper->acl->getResourceName();
     }
 
 

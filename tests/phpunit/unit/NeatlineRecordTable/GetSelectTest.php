@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTableTest_GetSelect extends Neatline_TestCase
+class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
 {
 
 

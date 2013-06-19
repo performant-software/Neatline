@@ -12,16 +12,20 @@ jQuery(function($) {
 
   $('.chosen').chosen();
 
-  var title = $('input[name="title"]');
-  var slug  = $('input[name="slug"]');
-  var typed = false;
+  if ($('body').hasClass('add')) {
 
-  slug.change(function() {
-    typed = true;
-  });
+    var title = $('input[name="title"]');
+    var slug  = $('input[name="slug"]');
+    var typed = false;
 
-  title.keyup(function() {
-    if (!typed) slug.val(_.string.slugify(title.val()));
-  });
+    slug.change(function() {
+      typed = true;
+    });
+
+    title.keyup(function() {
+      if (!typed) slug.val(_.string.slugify(title.val()));
+    });
+
+  }
 
 });
