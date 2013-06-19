@@ -26,7 +26,7 @@
   "build": {
     "openlayers":         "./components/openlayers/build",
     "bootstrap":          "./components/bootstrap",
-    "chosen":             "./components/chosen/chosen",
+    "chosen":             "./components/chosen/public",
     "ckeditor":           "./components/ckeditor/dev/builder",
     "sinon":              "./components/sinon",
     "jquery_ui":          "./components/jquery-ui"
@@ -51,7 +51,7 @@
       "draggable":        "./components/jquery-draggable-input/jquery-draggable-input.js",
       "toastr":           "./components/toastr/toastr.js",
       "spectrum":         "./components/spectrum/spectrum.js",
-      "chosen":           "./components/chosen/chosen/chosen.jquery.js",
+      "chosen":           "./components/chosen/public/chosen.jquery.js",
       "ace":              "./components/ace-builds/src-noconflict/ace.js",
       "ace_theme":        "./components/ace-builds/src-noconflict/theme-clouds.js",
       "ace_mode":         "./components/ace-builds/src-noconflict/mode-css.js",
@@ -67,7 +67,7 @@
       "bootstrap":        "./components/bootstrap/docs/assets/css/bootstrap.css",
       "toastr":           "./components/toastr/toastr.css",
       "spectrum":         "./components/spectrum/spectrum.css",
-      "chosen":           "./components/chosen/chosen/chosen.css"
+      "chosen":           "./components/chosen/public/chosen.css"
     }
 
   }
