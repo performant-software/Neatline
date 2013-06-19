@@ -11,7 +11,7 @@
 
 require_once('geoPHP.inc');
 
-class Neatline_Helper_Migration
+class Neatline_Migration_200
 {
 
     protected static $_zoomIndex = array(
@@ -215,7 +215,7 @@ SQL;
                     $pixels = null;
                     $units  = null;
                 } else {
-                    $zoom   = Neatline_Helper_Migration::$_zoomIndex[$focus];
+                    $zoom   = Neatline_Migration_200::$_zoomIndex[$focus];
                     $pixels = $zoom[0];
                     $unit   = $zoom[1];
                 }

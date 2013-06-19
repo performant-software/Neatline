@@ -97,7 +97,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      **/
     protected function _migrate()
     {
-        $helper = new Neatline_Helper_Migration(null, $this->db);
+        $helper = new Neatline_Migration_200(null, $this->db);
         $helper->migrateData();
     }
 
