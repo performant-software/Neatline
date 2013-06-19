@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -12,35 +12,36 @@
 
 if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 
-$migrations                 = NL_DIR.'/migrations';
-$models                     = NL_DIR.'/models';
-$controllers                = NL_DIR.'/controllers';
-$jobs                       = NL_DIR.'/jobs';
-$assertions                 = NL_DIR.'/assertions';
-$forms                      = NL_DIR.'/forms';
-$helpers                    = NL_DIR.'/helpers';
+// PLUGIN
+require_once NL_DIR.'/NeatlinePlugin.php';
 
-require_once NL_DIR.        '/NeatlinePlugin.php';
-require_once $migrations.   '/abstract/Neatline_Migration_Abstract.php';
-require_once $migrations.   '/2.0-alpha2/Neatline_Migration_20alpha2.php';
-require_once $migrations.   '/2.0-alpha3/Neatline_Migration_20alpha3.php';
-require_once $models.       '/abstract/Neatline_Row_Abstract.php';
-require_once $models.       '/abstract/Neatline_Row_Expandable.php';
-require_once $models.       '/abstract/Neatline_Row_Expansion.php';
-require_once $models.       '/abstract/Neatline_Table_Expandable.php';
-require_once $models.       '/abstract/Neatline_Table_Expansion.php';
-require_once $controllers.  '/abstract/Neatline_Controller_Rest.php';
-require_once $jobs.         '/Neatline_Job_ImportItems.php';
-require_once $assertions.   '/Neatline_Acl_Assert_RecordOwnership.php';
-require_once $forms.        '/Neatline_Form_Exhibit.php';
-require_once $helpers.      '/Acl.php';
-require_once $helpers.      '/Assets.php';
-require_once $helpers.      '/Globals.php';
-require_once $helpers.      '/Jobs.php';
-require_once $helpers.      '/Layers.php';
-require_once $helpers.      '/Plugins.php';
-require_once $helpers.      '/Styles.php';
-require_once $helpers.      '/Views.php';
+// MIGRATIONS
+require_once NL_DIR.'/migrations/abstract/Neatline_Migration_Abstract.php';
+require_once NL_DIR.'/migrations/2.0-alpha2/Neatline_Migration_20alpha2.php';
+require_once NL_DIR.'/migrations/2.0-alpha3/Neatline_Migration_20alpha3.php';
+
+// MODELS
+require_once NL_DIR.'/models/abstract/Neatline_Row_Abstract.php';
+require_once NL_DIR.'/models/abstract/Neatline_Row_Expandable.php';
+require_once NL_DIR.'/models/abstract/Neatline_Row_Expansion.php';
+require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
+require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
+
+// MISCELLANEOUS
+require_once NL_DIR.'/controllers/abstract/Neatline_Controller_Rest.php';
+require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';
+require_once NL_DIR.'/assertions/Neatline_Acl_Assert_RecordOwnership.php';
+require_once NL_DIR.'/forms/Neatline_Form_Exhibit.php';
+
+// HELPERS
+require_once NL_DIR.'/helpers/Acl.php';
+require_once NL_DIR.'/helpers/Assets.php';
+require_once NL_DIR.'/helpers/Globals.php';
+require_once NL_DIR.'/helpers/Jobs.php';
+require_once NL_DIR.'/helpers/Layers.php';
+require_once NL_DIR.'/helpers/Plugins.php';
+require_once NL_DIR.'/helpers/Styles.php';
+require_once NL_DIR.'/helpers/Views.php';
 
 Zend_Registry::set('layers', NL_DIR.'/layers');
 Zend_Registry::set('fileIn', 'php://input');
