@@ -300,20 +300,5 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         ));
     }
 
-    /**
-     * This updates a Neatline installation by doing the database schema
-     * changes and kicking off an update job in the background.
-     *
-     * @param string $oldVersion
-     * @param string $newVersion
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    // public function hookUpgrade($oldVersion, $newVersion)
-    // {
-    //     $helper = new Neatline_Helper_Migration($this, $this->_db);
-    //     $helper->migrate();
-    // }
 
 }

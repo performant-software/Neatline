@@ -27,7 +27,6 @@
     , "toastr":                 "https://github.com/davidmcclure/toastr.git"
     , "jasmine.async":          "https://github.com/derickbailey/jasmine.async.git"
     , "ckeditor":               "https://github.com/ckeditor/ckeditor-dev.git"
-    , "geophp":                 "git@github.com:davidmcclure/geoPHP.git"
 
   }
 }
