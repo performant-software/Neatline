@@ -18,8 +18,21 @@ class Neatline_Migration_20alpha3 extends Neatline_Migration_Abstract
      */
     public function migrate()
     {
+        $this->_addPublishedColumn();
         $this->_renameUserIdColumns();
         $this->_addFulltextIndexes();
+    }
+
+
+    /**
+     * Add a `published` column to the exhibits table.
+     */
+    private function _addPublishedColumn()
+    {
+        $this->_db->query(
+            "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
+            ADD COLUMN `published` TIMESTAMP NULL"
+        );
     }
 
 
