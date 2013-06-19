@@ -29,7 +29,7 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
         // Install the plugin.
         $helper = new Omeka_Test_Helper_Plugin;
         $helper->setUp('Neatline');
-        $this->_helper = $pluginHelper; // TODO|fix
+        $this->_helper = $helper; // TODO|fix
 
         // Install sibling plugins.
         if (file_exists(NL_TEST_DIR . '/plugins.ini')) {

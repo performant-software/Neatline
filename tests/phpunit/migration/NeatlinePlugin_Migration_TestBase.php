@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlinePlugin_Migration_TestBase extends Neatline_TestCase
+class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
 {
 
     // Set default map style attributes.

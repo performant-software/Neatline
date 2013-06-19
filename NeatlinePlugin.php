@@ -137,12 +137,28 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUpgrade($args)
     {
-        if ($args['old_version'] < '2.0-alpha2') {
-            new Neatline_Migration_20alpha2($this, $this->_db);
+
+        $old = $args['old_version'];
+
+        // If the plugin is being upgraded from the 1.x series, just run
+        // the 2.0.0 migration, which encompasses the alpha migrations.
+
+        if ($old <= '1.1.3') {
+            new Neatline_Migration_200($this, $this->_db);
         }
-        if ($args['old_version'] < '2.0-alpha3') {
-            new Neatline_Migration_20alpha3($this, $this->_db);
+
+        // If the previous version was one of the 2.0 alpha releases, run
+        // the the alpha2 and/or alpha3 migrations.
+
+        else if ($old < '2.0.0') {
+            if ($old < '2.0-alpha2') {
+                new Neatline_Migration_20alpha2($this, $this->_db);
+            }
+            if ($old < '2.0-alpha3') {
+                new Neatline_Migration_20alpha3($this, $this->_db);
+            }
         }
+
     }
 
 
