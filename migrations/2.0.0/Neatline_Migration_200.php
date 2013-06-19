@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-require_once NL_DIR . '/libraries/geoPHP/geoPHP.inc';
+require_once dirname(__FILE__) . '/libraries/geoPHP/geoPHP.inc';
 
 class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
