@@ -75,8 +75,17 @@ module.exports = function(grunt) {
         }
       },
 
-      phpunit: {
-        command: 'phpunit --color',
+      phpunit_application: {
+        command: 'phpunit --configuration phpunit.application.xml',
+        options: {
+          execOptions: {
+            cwd: './tests/phpunit'
+          }
+        }
+      },
+
+      phpunit_migrations: {
+        command: 'phpunit --configuration phpunit.migrations.xml',
         options: {
           execOptions: {
             cwd: './tests/phpunit'
@@ -430,15 +439,10 @@ module.exports = function(grunt) {
     'cssmin'
   ]);
 
-  // Run all tests.
-  grunt.registerTask('test', [
-    'clean:fixtures',
-    'shell:phpunit',
-    'jasmine'
+  // Run application PHPUnit suite.
+  grunt.registerTask('phpunit', [
+    'shell:phpunit_application'
   ]);
-
-  // Run PHPUnit.
-  grunt.registerTask('phpunit', 'shell:phpunit');
 
   // Build and mount public Jasmine suite.
   grunt.registerTask('jasmine:neatline:server', [
@@ -450,6 +454,21 @@ module.exports = function(grunt) {
   grunt.registerTask('jasmine:editor:server', [
     'jasmine:editor:build',
     'connect'
+  ]);
+
+  // Run application tests.
+  grunt.registerTask('test', [
+    'clean:fixtures',
+    'shell:phpunit_application',
+    'jasmine'
+  ]);
+
+  // Run application tests.
+  grunt.registerTask('test:all', [
+    'clean:fixtures',
+    'shell:phpunit_application',
+    'shell:phpunit_migrations',
+    'jasmine'
   ]);
 
 

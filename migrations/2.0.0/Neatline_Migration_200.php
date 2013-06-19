@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-require_once('geoPHP.inc');
+require_once NL_DIR . '/components/geophp/geoPHP.inc';
 
 class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
@@ -247,6 +247,7 @@ SQL;
         $now = new Zend_Db_Expr('NOW()');
 
         $nlr->id                    = $data->id;
+        $nlr->owner_id              = 0;
         $nlr->item_id               = null;
         $nlr->exhibit_id            = $data->exhibit_id;
         $nlr->added                 = $now;
@@ -338,7 +339,7 @@ SQL;
 
             if (strpos($coverage, '<?xml') === 0 ||
                 strpos($coverage, '<kml') === 0) {
-                    $coverage = geoPHP::load($coverage,'kml')->out('wkt');
+                    $coverage = geoPHP::load($coverage, 'kml')->out('wkt');
 
                 } else if (strpos($coverage, '|') !== FALSE) {
                     $covs = explode('|', $coverage);

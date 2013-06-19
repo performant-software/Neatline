@@ -2,10 +2,9 @@
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
          verbose="true">
-    <testsuite name="Neatline Tests">
+    <testsuite name="Neatline Application Tests">
         <directory>unit</directory>
         <directory>integration</directory>
         <directory>fixtures</directory>
-        <directory>migration</directory>
     </testsuite>
 </phpunit>

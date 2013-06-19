@@ -2,7 +2,7 @@
 /**
  * GeometryCollection: A heterogenous collection of geometries  
  */
-class GeometryCollection extends Collection 
+class GeometryCollection extends GeoCollection
 {
   protected $geom_type = 'GeometryCollection';
   

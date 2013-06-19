@@ -9,6 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+require_once 'NeatlinePlugin_Migration_TestBase.php';
+
 class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 {
 
@@ -243,6 +245,23 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
+     * Assert that all rows in a table have value `0` for a given field.
+     *
+     * @param Omeka_Db_Table $table
+     * @param string $field
+     * @return void
+     * @author David McClure
+     **/
+    protected function _testAllZero($table, $field)
+    {
+        $c  = $this->db->fetchRow(
+            "SELECT COUNT(*) FROM {$table->getTableName()} "
+            . "WHERE $field != 0;"
+        );
+        $this->assertEquals(0, $c['COUNT(*)']);
+    }
+
+    /**
      * This tests whether the migration handles all data items.
      *
      * @return void
@@ -362,6 +381,19 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
+     * All `owner_id` columns on exhibits and records should be set to 0.
+     *
+     * @return void
+     * @author David McClure
+     **/
+    public function testOwnerIds()
+    {
+        $this->_migrate();
+        $this->_testAllZero($this->__exhibits, 'owner_id');
+        $this->_testAllZero($this->__records, 'owner_id');
+    }
+
+    /**
      * This tests that the added and modified fields are set to the very recent 
      * past (i.e., the last three seconds).
      *
@@ -385,7 +417,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
-     * This tests whether the coverage field is correctly handled.
+     * This tests whether a WKT coverage field is correctly handled.
      *
      * @return void
      * @author Eric Rochester
@@ -437,6 +469,12 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
     }
 
+    /**
+     * This tests whether a KML coverage field is correctly handled.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
     function testMigrateDataRowCoverageKML()
     {
         $db     = $this->db;

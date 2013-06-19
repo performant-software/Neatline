@@ -50,7 +50,6 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         $v->setScriptPath(array(
             VIEW_SCRIPTS_DIR,
             NL_DIR . '/views/shared'
-            // NL_DIR . '/tests/phpunit/mocks/theme/neatline'
         ));
 
         $this->_clearSchema();
@@ -331,7 +330,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         $dataRecords = $db->getTable('NeatlineDataRecord');
 
         $json = file_get_contents(
-            NL_DIR . '/tests/phpunit/migration/fixtures/hotchkiss-exhibits.json'
+            dirname(__FILE__) . '/fixtures/hotchkiss-exhibits.json'
         );
         $data = json_decode($json, true);
         foreach ($data as $row) {
@@ -339,7 +338,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         }
 
         $json = file_get_contents(
-            NL_DIR . '/tests/phpunit/migration/fixtures/hotchkiss-data-records.json'
+            dirname(__FILE__) . '/fixtures/hotchkiss-data-records.json'
         );
         $data = json_decode($json, true);
         foreach ($data as $row) {

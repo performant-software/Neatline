@@ -25,4 +25,3 @@ require_once 'cases/Neatline_Case_Abstract.php';
 require_once 'cases/Neatline_Case_Default.php';
 require_once 'cases/Neatline_Case_Fixture.php';
 require_once 'mocks/filters.php';
-require_once 'migration/NeatlinePlugin_Migration_TestBase.php';
