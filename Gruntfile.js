@@ -75,17 +75,8 @@ module.exports = function(grunt) {
         }
       },
 
-      phpunit_application: {
-        command: 'phpunit --configuration phpunit.application.xml',
-        options: {
-          execOptions: {
-            cwd: './tests/phpunit'
-          }
-        }
-      },
-
-      phpunit_migrations: {
-        command: 'phpunit --configuration phpunit.migrations.xml',
+      phpunit: {
+        command: 'phpunit --color',
         options: {
           execOptions: {
             cwd: './tests/phpunit'
@@ -405,7 +396,7 @@ module.exports = function(grunt) {
 
   });
 
-  // Default task.
+  // Run tests by default.
   grunt.registerTask('default', 'test');
 
   // Build the application.
@@ -421,7 +412,7 @@ module.exports = function(grunt) {
     'copy'
   ]);
 
-  // Assemble static assets.
+  // Concat static assets.
   grunt.registerTask('compile', [
     'concat:exhibit_form',
     'concat:neatline_public',
@@ -432,44 +423,35 @@ module.exports = function(grunt) {
     'concat:neatline_editor_css'
   ]);
 
-  // Assemble/min static assets.
+  // Minify static assets.
   grunt.registerTask('compile:min', [
     'compile',
     'uglify',
     'cssmin'
   ]);
 
-  // Run application PHPUnit suite.
+  // Run PHPUnit suite.
   grunt.registerTask('phpunit', [
-    'shell:phpunit_application'
+    'shell:phpunit'
   ]);
 
-  // Build and mount public Jasmine suite.
+  // Mount public Jasmine suite.
   grunt.registerTask('jasmine:neatline:server', [
     'jasmine:neatline:build',
     'connect'
   ]);
 
-  // Build and mount editor Jasmine suite.
+  // Mount editor Jasmine suite.
   grunt.registerTask('jasmine:editor:server', [
     'jasmine:editor:build',
     'connect'
   ]);
 
-  // Run application tests.
+  // Run all tests.
   grunt.registerTask('test', [
     'clean:fixtures',
-    'shell:phpunit_application',
+    'phpunit',
     'jasmine'
   ]);
-
-  // Run application tests.
-  grunt.registerTask('test:all', [
-    'clean:fixtures',
-    'shell:phpunit_application',
-    'shell:phpunit_migrations',
-    'jasmine'
-  ]);
-
 
 };
