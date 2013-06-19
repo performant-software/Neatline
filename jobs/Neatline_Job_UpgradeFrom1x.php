@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_UpgradeJob extends Omeka_Job_AbstractJob
+class Neatline_Job_UpgradeFrom1x extends Omeka_Job_AbstractJob
 {
 
     public function perform()

@@ -115,7 +115,7 @@ class Neatline_Helper_Migration
     public function queueJob()
     {
         Zend_Registry::get('job_dispatcher')->sendLongRunning(
-            'Neatline_UpgradeJob', array(
+            'Neatline_Job_UpgradeFrom1x', array(
                 'web_dir' => nl_getWebDir()
             )
         );

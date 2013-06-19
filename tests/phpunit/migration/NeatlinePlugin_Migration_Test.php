@@ -78,7 +78,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
             ->select()
             ->from("{$db->prefix}processes")
             ->where("class='Omeka_Job_Process_Wrapper'")
-            ->where("args LIKE '%Neatline_UpgradeJob%'")
+            ->where("args LIKE '%Neatline_Job_UpgradeFrom1x%'")
             ->where("status='starting'")
             ->where("PID IS NULL")
             ;
