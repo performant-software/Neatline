@@ -80,7 +80,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
      **/
     private function _migrate()
     {
-        $this->_helper->pluginBroker->setCurrentPluginDirName('Neatline');
+        $this->helper->pluginBroker->setCurrentPluginDirName('Neatline');
         $plugin = new NeatlinePlugin();
         $plugin->hookUpgrade('1.1.3', '2.0.0');
         $this->_plugin = $plugin;
