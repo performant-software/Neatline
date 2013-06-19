@@ -109,6 +109,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
      **/
     public function migrateData()
     {
+
         $db     = $this->_db;
         $prefix = "{$db->prefix}neatline_";
         $ext    = "_migrate";
