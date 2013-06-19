@@ -11,7 +11,7 @@
 
 require_once('geoPHP.inc');
 
-class Neatline_Migration_200
+class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
 
     protected static $_zoomIndex = array(
@@ -44,26 +44,6 @@ class Neatline_Migration_200
         array( 100, 9),
         array(  50, 9)
     );
-
-    /**
-     * The NeatlinePlugin
-     *
-     * @var NeatlinePlugin
-     **/
-    protected $_plugin;
-
-    /**
-     * This is the database.
-     *
-     * @var Omeka_Db
-     **/
-    protected $_db;
-
-    public function __construct($plugin, $db)
-    {
-        $this->_plugin = $plugin;
-        $this->_db     = $db;
-    }
 
     /**
      * This controls migrating the data.
