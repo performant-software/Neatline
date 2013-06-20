@@ -92,176 +92,6 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     }
 
     /**
-     * This triggers the migration.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _migrate()
-    {
-        $helper = new Neatline_Migration_200(null, $this->db, false);
-        $helper->migrateData();
-    }
-
-    /**
-     * This tests whether a field was transfered correctly.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _testMigration($table_a, $a, $table_b, $b)
-    {
-        $db     = $this->db;
-        $prefix = "{$db->prefix}neatline_";
-
-        $select = $db
-            ->select()
-            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
-        $q       = $select->query();
-        $v1      = $q->fetchAll();
-        $values1 = array();
-        foreach ($v1 as $e) {
-            $values1[$e['id']] = $e[$a];
-        }
-
-        $t2 = $db->getTable($table_b);
-        $v2 = $t2->findAll();
-        $values2 = array();
-        foreach ($v2 as $e) {
-            $values2[$e->id] = $e->$b;
-        }
-
-        $this->assertNotEmpty($values1);
-        $this->assertNotEmpty($values2);
-        $this->assertEquals($values1, $values2);
-    }
-
-    /**
-     * This tests whether an exhibit field was transfered correctly.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _testExhibitMigration($a, $b)
-    {
-        $this->_testMigration('exhibits', $a, 'NeatlineExhibit', $b);
-    }
-
-    /**
-     * This tests whether a record field was transfered correctly.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _testRecordMigration($a, $b)
-    {
-        $this->_testMigration('data_records', $a, 'NeatlineRecord', $b);
-    }
-
-    /**
-     * This tests whether the values from an int field matches a decimal field.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _testMigrateDecimalParentStyle($a, $b)
-    {
-        $db     = $this->db;
-        $prefix = "{$db->prefix}neatline_";
-        $table_a = 'data_records';
-        $table_b = 'NeatlineRecord';
-
-        $select = $db
-            ->select()
-            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
-        $q       = $select->query();
-        $v1      = $q->fetchAll();
-        $values1 = array();
-        foreach ($v1 as $e) {
-            $values1[$e['id']] = is_null($e[$a]) ? null : (string)($e[$a] / 100.0);
-        }
-
-        $t2 = $db->getTable($table_b);
-        $v2 = $t2->findAll();
-        foreach ($v2 as $e) {
-            $this->assertTrue(
-                is_null($values1[$e->id]) || $values1[$e->id] == $e->$b,
-                "Not true that {$values1[$e->id]} == null || {$e->$b}."
-            );
-        }
-    }
-
-    /**
-     * This tests that a value get the parent's style.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _testMigrateParentStyle($a, $b)
-    {
-        $db     = $this->db;
-        $prefix = "{$db->prefix}neatline_";
-        $table_a = 'data_records';
-        $table_b = 'NeatlineRecord';
-
-        $select = $db
-            ->select()
-            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
-        $q       = $select->query();
-        $v1      = $q->fetchAll();
-        $values1 = array();
-        foreach ($v1 as $e) {
-            $values1[$e['id']] = $e[$a];
-        }
-
-        $t2 = $db->getTable($table_b);
-        $v2 = $t2->findAll();
-        foreach ($v2 as $e) {
-            $this->assertTrue(
-                is_null($values1[$e->id]) || $values1[$e->id] == $e->$b,
-                "Not true that {$values1[$e->id]} == null || {$e->$b}."
-            );
-        }
-    }
-
-    /**
-     * This tests whether the given field has any non-NULL values.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _testAllNull($b)
-    {
-        $db      = $this->db;
-        $prefix  = "{$db->prefix}neatline_";
-        $table_b = 'NeatlineRecord';
-
-        $t2 = $db->getTable($table_b);
-        $c  = $db->fetchRow(
-            "SELECT COUNT(*) FROM {$t2->getTableName()} "
-            . "WHERE $b IS NOT NULL;"
-        );
-        $this->assertEquals(0, $c['COUNT(*)']);
-    }
-
-    /**
-     * Assert that all rows in a table have value `0` for a given field.
-     *
-     * @param Omeka_Db_Table $table
-     * @param string $field
-     * @return void
-     * @author David McClure
-     **/
-    protected function _testAllZero($table, $field)
-    {
-        $c  = $this->db->fetchRow(
-            "SELECT COUNT(*) FROM {$table->getTableName()} "
-            . "WHERE $field != 0;"
-        );
-        $this->assertEquals(0, $c['COUNT(*)']);
-    }
-
-    /**
      * This tests whether the migration handles all data items.
      *
      * @return void
@@ -422,7 +252,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
      * @return void
      * @author Eric Rochester
      **/
-    function testMigrateDataRecordCoverage()
+    function testMigrateDataRecordCoverageWKT()
     {
         $db      = $this->db;
         $prefix  = "{$db->prefix}neatline_";
@@ -751,5 +581,174 @@ SQL;
 
     }
 
-}
+    /**
+     * This triggers the migration.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _migrate()
+    {
+        $helper = new Neatline_Migration_200(null, $this->db, false);
+        $helper->migrateData();
+    }
 
+    /**
+     * This tests whether a field was transfered correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testMigration($table_a, $a, $table_b, $b)
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $values1[$e['id']] = $e[$a];
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        $values2 = array();
+        foreach ($v2 as $e) {
+            $values2[$e->id] = $e->$b;
+        }
+
+        $this->assertNotEmpty($values1);
+        $this->assertNotEmpty($values2);
+        $this->assertEquals($values1, $values2);
+    }
+
+    /**
+     * This tests whether an exhibit field was transfered correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testExhibitMigration($a, $b)
+    {
+        $this->_testMigration('exhibits', $a, 'NeatlineExhibit', $b);
+    }
+
+    /**
+     * This tests whether a record field was transfered correctly.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testRecordMigration($a, $b)
+    {
+        $this->_testMigration('data_records', $a, 'NeatlineRecord', $b);
+    }
+
+    /**
+     * This tests whether the values from an int field matches a decimal field.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testMigrateDecimalParentStyle($a, $b)
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $table_b = 'NeatlineRecord';
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $values1[$e['id']] = is_null($e[$a]) ? null : (string)($e[$a] / 100.0);
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        foreach ($v2 as $e) {
+            $this->assertTrue(
+                is_null($values1[$e->id]) || $values1[$e->id] == $e->$b,
+                "Not true that {$values1[$e->id]} == null || {$e->$b}."
+            );
+        }
+    }
+
+    /**
+     * This tests that a value get the parent's style.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testMigrateParentStyle($a, $b)
+    {
+        $db     = $this->db;
+        $prefix = "{$db->prefix}neatline_";
+        $table_a = 'data_records';
+        $table_b = 'NeatlineRecord';
+
+        $select = $db
+            ->select()
+            ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+        $q       = $select->query();
+        $v1      = $q->fetchAll();
+        $values1 = array();
+        foreach ($v1 as $e) {
+            $values1[$e['id']] = $e[$a];
+        }
+
+        $t2 = $db->getTable($table_b);
+        $v2 = $t2->findAll();
+        foreach ($v2 as $e) {
+            $this->assertTrue(
+                is_null($values1[$e->id]) || $values1[$e->id] == $e->$b,
+                "Not true that {$values1[$e->id]} == null || {$e->$b}."
+            );
+        }
+    }
+
+    /**
+     * This tests whether the given field has any non-NULL values.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _testAllNull($b)
+    {
+        $db      = $this->db;
+        $prefix  = "{$db->prefix}neatline_";
+        $table_b = 'NeatlineRecord';
+
+        $t2 = $db->getTable($table_b);
+        $c  = $db->fetchRow(
+            "SELECT COUNT(*) FROM {$t2->getTableName()} "
+            . "WHERE $b IS NOT NULL;"
+        );
+        $this->assertEquals(0, $c['COUNT(*)']);
+    }
+
+    /**
+     * Assert that all rows in a table have value `0` for a given field.
+     *
+     * @param Omeka_Db_Table $table
+     * @param string $field
+     * @return void
+     * @author David McClure
+     **/
+    protected function _testAllZero($table, $field)
+    {
+        $c  = $this->db->fetchRow(
+            "SELECT COUNT(*) FROM {$table->getTableName()} "
+            . "WHERE $field != 0;"
+        );
+        $this->assertEquals(0, $c['COUNT(*)']);
+    }
+
+}

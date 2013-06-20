@@ -14,6 +14,7 @@ require_once dirname(__FILE__) . '/libraries/geoPHP/geoPHP.inc';
 class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
 
+
     protected static $_zoomIndex = array(
         array( 300, 3),
         array( 200, 3),
@@ -45,6 +46,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
         array(  50, 9)
     );
 
+
     /**
      * This controls migrating the data.
      *
@@ -57,6 +59,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
         $this->installTables();
         $this->queueJob();
     }
+
 
     /**
      * This backs up the old the database tables.
@@ -75,6 +78,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
         $db->query("ALTER TABLE {$prefix}base_layers  RENAME TO {$prefix}base_layers{$ext};");
     }
 
+
     /**
      * This installs the new (v2) tables.
      *
@@ -85,6 +89,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
     {
         $this->_plugin->hookInstall();
     }
+
 
     /**
      * This queues the background job to migrate the data.
@@ -100,6 +105,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
             )
         );
     }
+
 
     /**
      * This migrates the data from the old (v1) databases to the new (v2).
@@ -156,6 +162,7 @@ SQL;
             throw $e;
         }
     }
+
 
     /**
      * This migrates the data from the exhibit to a new table for the 
@@ -221,6 +228,7 @@ SQL;
 
     }
 
+
     /**
      * This returns a null-checked, scaled opacity value.
      *
@@ -231,6 +239,7 @@ SQL;
     {
         return is_null($input) ? null : $input / 100.0;
     }
+
 
     /**
      * This populates a new NeatlineRecord from the data passed in and saves it.
@@ -370,7 +379,9 @@ SQL;
         // space_active
 
         return $nlr;
+
     }
+
 
     /**
      * This returns a style property for the old table record.
@@ -410,5 +421,5 @@ SQL;
         return $style;
     }
 
-}
 
+}

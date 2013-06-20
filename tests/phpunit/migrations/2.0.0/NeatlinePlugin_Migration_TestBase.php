@@ -12,6 +12,7 @@
 class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
 {
 
+
     // Set default map style attributes.
     private static $_mapStyles = array(
         'vector_color'        => "#196aff",
@@ -30,6 +31,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         'context_band_height' => "35"
     );
 
+
     /**
      * This sets the the database schema and data with fixtures for Neatline
      * v1.
@@ -41,15 +43,8 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
     {
         parent::setUp();
 
-        /*
-         * $pluginHelper = new Omeka_Test_Helper_Plugin;
-         * $pluginHelper->setUp('Exhibits');
-         */
-
-        $v = get_view();
-        $v->setScriptPath(array(
-            VIEW_SCRIPTS_DIR,
-            NL_DIR . '/views/shared'
+        get_view()->setScriptPath(array(
+            VIEW_SCRIPTS_DIR, NL_DIR . '/views/shared'
         ));
 
         $this->_clearSchema();
@@ -57,6 +52,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         $this->_loadFixtures();
         $this->_migrate();
     }
+
 
     /**
      * This sets up tables for Neatline v2.
@@ -68,9 +64,9 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
     {
         $this->_clearSchema();
         $this->_createSchema2();
-
         parent::tearDown();
     }
+
 
     /**
      * This triggers the plugin's migration.
@@ -85,6 +81,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         $plugin->hookUpgrade('1.1.3', '2.0.0');
         $this->_plugin = $plugin;
     }
+
 
     /**
      * This removes all Neatline database tables.
@@ -111,6 +108,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
             delete_option($style);
         }
     }
+
 
     /**
      * This builds the schema for Neatline 1.
@@ -235,6 +233,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         }
     }
 
+
     /**
      * This builds the schema for Neatline 2.
      *
@@ -317,6 +316,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
 
     }
 
+
     /**
      * This loads the fixtures from tests/phpunit/migration/fixtures.
      *
@@ -346,6 +346,5 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         }
     }
 
+
 }
-
-

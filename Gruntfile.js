@@ -444,6 +444,12 @@ module.exports = function(grunt) {
     'shell:phpunit_application'
   ]);
 
+  // TODO|temp
+  // Run migrations PHPUnit suite.
+  grunt.registerTask('phpunit:migrations', [
+    'shell:phpunit_migrations'
+  ]);
+
   // Mount public Jasmine suite.
   grunt.registerTask('jasmine:neatline:server', [
     'jasmine:neatline:build',
