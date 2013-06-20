@@ -14,6 +14,7 @@ require_once 'NeatlinePlugin_Migration_TestBase.php';
 class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 {
 
+
     /**
      * This tests that old tables are renamed.
      *
@@ -29,6 +30,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertContains("{$prefix}base_layers_migrate",  $tables);
     }
 
+
     /**
      * This tests that new tables are created.
      *
@@ -42,6 +44,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertContains("{$prefix}exhibits", $tables);
         $this->assertContains("{$prefix}records",  $tables);
     }
+
 
     /**
      * Tests whether the fixtures are working.
@@ -67,6 +70,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertNotEquals(0, $counts[0][0]);
     }
 
+
     /**
      * Tests whether the background job is started.
      *
@@ -90,6 +94,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
         $this->assertGreaterThan(0, $jobs);
     }
+
 
     /**
      * This tests whether the migration handles all data items.
@@ -125,6 +130,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertGreaterThan(0, $c_new['COUNT(*)']);
     }
 
+
     /**
      * This tests that simply transfered fields are handled correctly.
      *
@@ -144,6 +150,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testExhibitMigration('default_map_bounds', 'map_focus');
         $this->_testExhibitMigration('default_map_zoom',   'map_zoom');
     }
+
 
     /**
      * This tests that simply transfered data record fields are handled
@@ -174,6 +181,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
     }
 
+
     /**
      * This tests fields that are pulled from a style hierarchy.
      *
@@ -190,6 +198,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testMigrateParentStyle('stroke_width', 'stroke_width');
         $this->_testMigrateParentStyle('point_radius', 'point_radius');
     }
+
 
     /**
      * item_id should never be propagated, since it can clobber title fields.
@@ -210,6 +219,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testAllNull('max_zoom');
     }
 
+
     /**
      * All `owner_id` columns on exhibits and records should be set to 0.
      *
@@ -222,6 +232,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testAllZero($this->__exhibits, 'owner_id');
         $this->_testAllZero($this->__records, 'owner_id');
     }
+
 
     /**
      * This tests that the added and modified fields are set to the very recent 
@@ -245,6 +256,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         );
         $this->assertEquals(0, $c['COUNT(*)']);
     }
+
 
     /**
      * This tests whether a WKT coverage field is correctly handled.
@@ -298,6 +310,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->assertEquals($is1, $is2);
 
     }
+
 
     /**
      * This tests whether a KML coverage field is correctly handled.
@@ -428,6 +441,7 @@ SQL;
 
     }
 
+
     /**
      * This tests the description/body fields.
      *
@@ -482,6 +496,7 @@ SQL;
         $this->assertEquals($values1, $values2);
     }
 
+
     /**
      * This tests whether show_bubble gets transfered to presenter correctly.
      *
@@ -520,6 +535,7 @@ SQL;
         $this->assertNotEmpty($values2);
         $this->assertEquals($values1, $values2);
     }
+
 
     /**
      * This tests whether widgets is getting set correctly.
@@ -581,6 +597,89 @@ SQL;
 
     }
 
+
+    /**
+     * WMS layers created by way of the old NeatlineMaps plugin should
+     * be migrated into the `wms_address` and `wms_layers` fields.
+     *
+     * @return void
+     * @author David McClure
+     **/
+    public function testMigrateWmsLayers()
+    {
+
+    }
+
+
+    /**
+     * The old `default_base_layer` field on the exhibit model should be
+     * migrated to the new `base_layer` field, which now takes a layer slug
+     * instead of a foreign key.
+     *
+     * @return void
+     * @author David McClure
+     **/
+    public function testMigrateDefaultBaseLayer()
+    {
+
+        $this->_migrate();
+
+        // Get old exhibit rows.
+        $oldExhibits = $this->db->select()
+            ->from("{$this->db->prefix}neatline_exhibits_migrate")
+            ->query()->fetchAll();
+
+        // Index the original `default_base_layer` field by record id.
+
+        $oldIndex = array();
+        foreach ($oldExhibits as $exhibit) {
+            $oldIndex[$exhibit['id']] = $exhibit['default_base_layer'];
+        }
+
+        // Get new exhibit rows.
+        $newExhibits = $this->db->select()
+            ->from("{$this->db->prefix}neatline_exhibits")
+            ->query()->fetchAll();
+
+        // Index the new `base_layer` field by record id.
+
+        $newIndex = array();
+        foreach ($newExhibits as $exhibit) {
+            $newIndex[$exhibit['id']] = $exhibit['base_layer'];
+        }
+
+        foreach ($oldIndex as $id => $defaultBaseLayer) {
+            switch ($defaultBaseLayer) {
+                case 1:
+                    $this->assertEquals($newIndex[$id], 'OpenStreetMap');
+                    break;
+                case 2:
+                    $this->assertEquals($newIndex[$id], 'GooglePhysical');
+                    break;
+                case 3:
+                    $this->assertEquals($newIndex[$id], 'GoogleStreets');
+                    break;
+                case 4:
+                    $this->assertEquals($newIndex[$id], 'GoogleHybrid');
+                    break;
+                case 5:
+                    $this->assertEquals($newIndex[$id], 'GoogleSatellite');
+                    break;
+                case 6:
+                    $this->assertEquals($newIndex[$id], 'StamenWatercolor');
+                    break;
+                case 7:
+                    $this->assertEquals($newIndex[$id], 'StamenToner');
+                    break;
+                case 8:
+                    $this->assertEquals($newIndex[$id], 'StamenTerrain');
+                    break;
+            }
+        }
+
+    }
+
+
     /**
      * This triggers the migration.
      *
@@ -592,6 +691,7 @@ SQL;
         $helper = new Neatline_Migration_200(null, $this->db, false);
         $helper->migrateData();
     }
+
 
     /**
      * This tests whether a field was transfered correctly.
@@ -626,6 +726,7 @@ SQL;
         $this->assertEquals($values1, $values2);
     }
 
+
     /**
      * This tests whether an exhibit field was transfered correctly.
      *
@@ -637,6 +738,7 @@ SQL;
         $this->_testMigration('exhibits', $a, 'NeatlineExhibit', $b);
     }
 
+
     /**
      * This tests whether a record field was transfered correctly.
      *
@@ -647,6 +749,7 @@ SQL;
     {
         $this->_testMigration('data_records', $a, 'NeatlineRecord', $b);
     }
+
 
     /**
      * This tests whether the values from an int field matches a decimal field.
@@ -681,6 +784,7 @@ SQL;
         }
     }
 
+
     /**
      * This tests that a value get the parent's style.
      *
@@ -714,6 +818,7 @@ SQL;
         }
     }
 
+
     /**
      * This tests whether the given field has any non-NULL values.
      *
@@ -734,6 +839,7 @@ SQL;
         $this->assertEquals(0, $c['COUNT(*)']);
     }
 
+
     /**
      * Assert that all rows in a table have value `0` for a given field.
      *
@@ -750,5 +856,6 @@ SQL;
         );
         $this->assertEquals(0, $c['COUNT(*)']);
     }
+
 
 }
