@@ -21,8 +21,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'define_acl',
         'initialize',
         'define_routes',
-        'after_save_item',
-        'upgrade'
+        'after_save_item'
     );
 
 
