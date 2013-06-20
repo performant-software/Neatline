@@ -165,7 +165,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
         $this->_testRecordMigration('id',                 'id');
         $this->_testRecordMigration('exhibit_id',         'exhibit_id');
-        $this->_testRecordMigration('title',              'title');
+        $this->_testRecordMigration('item_id',            'item_id');
         $this->_testRecordMigration('slug',               'slug');
         $this->_testRecordMigration('start_date',         'start_date');
         $this->_testRecordMigration('end_date',           'end_date');
@@ -210,7 +210,6 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
     {
         $this->_migrate();
 
-        $this->_testAllNull('item_id');
         $this->_testAllNull('tags');
         $this->_testAllNull('stroke_color_select');
         $this->_testAllNull('stroke_opacity_select');
@@ -608,6 +607,40 @@ SQL;
     public function testMigrateWmsLayers()
     {
 
+        $this->_installNeatlineMaps();
+        $this->_migrate();
+
+        // Get new record rows.
+        $newRecords = $this->db->select()
+            ->from("{$this->db->prefix}neatline_records")
+            ->query()->fetchAll();
+
+        foreach ($newRecords as $record) {
+            if (!is_null($record['item_id'])) {
+
+                // For each of the new exhibit rows that has an `item_id`
+                // reference, try to find a corresponding WMS service.
+
+                $service = $this->db->select()
+                    ->from("{$this->db->prefix}neatline_maps_services")
+                    ->where("item_id={$record['item_id']}")
+                    ->query()->fetch();
+
+                // Check that the new `wms_address` and `wms_layers` fields
+                // on the records match the values on the old services.
+
+                if ($service) {
+                    $this->assertEquals(
+                        $record['wms_address'], $service['address']
+                    );
+                    $this->assertEquals(
+                        $record['wms_layers'], $service['layers']
+                    );
+                }
+
+            }
+        }
+
     }
 
 
@@ -690,6 +723,22 @@ SQL;
     {
         $helper = new Neatline_Migration_200(null, $this->db, false);
         $helper->migrateData();
+    }
+
+
+    /**
+     * Mock an installation of NeatlineMaps.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    protected function _installNeatlineMaps()
+    {
+        $this->db->insert('Plugin', array(
+            'name' => 'NeatlineMaps',
+            'version' => '1.0.1',
+            'active' => 1
+        ));
     }
 
 

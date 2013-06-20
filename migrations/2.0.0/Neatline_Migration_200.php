@@ -269,7 +269,7 @@ SQL;
 
         $nlr->id                    = $data->id;
         $nlr->owner_id              = 0;
-        $nlr->item_id               = null;
+        $nlr->item_id               = $data->item_id;
         $nlr->exhibit_id            = $data->exhibit_id;
         $nlr->added                 = $now;
         $nlr->modified              = $now;
@@ -306,7 +306,7 @@ SQL;
             $sql = "SELECT m.item_id AS item_id, m.address AS address m.layers AS layers "
                 . "FROM `{$services->getTableName()}` m"
                 . "WHERE item_id=?;";
-            $results = $db->fetchAll($sql, $data->item_id);
+            $results = $db->fetch($sql, $data->item_id);
             foreach ($results as $r) {
                 $nlr->is_wms      = true;
                 $nlr->wms_address = $r['address'];

@@ -118,8 +118,20 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
      **/
     private function _createSchema1()
     {
+
         $db     = $this->db;
         $prefix = "{$db->prefix}neatline_";
+
+        // Web map services table.
+        $sql = "CREATE TABLE IF NOT EXISTS `{$prefix}maps_services` (
+            `id`              int(10) unsigned not null auto_increment,
+            `item_id`         int(10) unsigned unique,
+            `address`         text collate utf8_unicode_ci,
+            `layers`          text collate utf8_unicode_ci,
+            PRIMARY KEY (`id`)
+        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+
+        $db->query($sql);
 
         $sql = "CREATE TABLE IF NOT EXISTS `{$prefix}exhibits` (
                 `id`                          int(10) unsigned not null auto_increment,
@@ -231,6 +243,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         foreach (self::$_mapStyles as $style => $value) {
           set_option($style, $value);
         }
+
     }
 
 
@@ -318,7 +331,7 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
 
 
     /**
-     * This loads the fixtures from tests/phpunit/migration/fixtures.
+     * Load the Hotchkiss fixtures.
      *
      * @return void
      * @author Eric Rochester
@@ -343,6 +356,14 @@ class NeatlinePlugin_Migration_TestBase extends Neatline_Case_Default
         $data = json_decode($json, true);
         foreach ($data as $row) {
             $db->insert('NeatlineDataRecord', $row);
+        }
+
+        $json = file_get_contents(
+            dirname(__FILE__) . '/fixtures/hotchkiss-maps-services.json'
+        );
+        $data = json_decode($json, true);
+        foreach ($data as $row) {
+            $db->insert('NeatlineMapsService', $row);
         }
     }
 
