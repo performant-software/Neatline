@@ -300,18 +300,22 @@ SQL;
         $nlr->min_zoom              = null;
         $nlr->max_zoom              = null;
 
+
         // WMS fields
-        if (plugin_is_active('NeatlineMaps') && !is_null($data->item_id)) {
-            $services = $db->getTable('NeatlineMapsService');
-            $sql = "SELECT m.item_id AS item_id, m.address AS address m.layers AS layers "
-                . "FROM `{$services->getTableName()}` m"
-                . "WHERE item_id=?;";
-            $results = $db->fetch($sql, $data->item_id);
-            foreach ($results as $r) {
+        $nlMaps = $db->describeTable("{$db->prefix}neatline_maps_services");
+        if ($nlMaps && !is_null($data->item_id)) {
+
+            $service = $db->select()
+                ->from("{$db->prefix}neatline_maps_services")
+                ->where("item_id={$data->item_id}")
+                ->query()->fetch();
+
+            if ($service) {
                 $nlr->is_wms      = true;
-                $nlr->wms_address = $r['address'];
-                $nlr->wms_layers  = $r['layers'];
+                $nlr->wms_address = $service['address'];
+                $nlr->wms_layers  = $service['layers'];
             }
+
         }
 
         // time_active, items_active
@@ -360,14 +364,14 @@ SQL;
                 strpos($coverage, '<kml') === 0) {
                     $coverage = geoPHP::load($coverage, 'kml')->out('wkt');
 
-                } else if (strpos($coverage, '|') !== FALSE) {
+                } else if (strpos($coverage, '|') !== false) {
                     $covs = explode('|', $coverage);
                     $coverage = 'GeometryCollection(' . implode(',', $covs) . ')';
                 }
             $nlr->coverage    = $coverage;
-            $nlr->is_coverage = TRUE;
+            $nlr->is_coverage = true;
         } else {
-            $nlr->is_coverage = FALSE;
+            $nlr->is_coverage = false;
         }
 
         // Dropped:

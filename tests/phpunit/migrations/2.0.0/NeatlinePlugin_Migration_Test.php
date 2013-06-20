@@ -277,10 +277,12 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $select = $db
             ->select()
             ->from("{$prefix}{$table_a}_migrate", array('id', $a));
+
         $q       = $select->query();
         $v1      = $q->fetchAll();
         $values1 = array();
         $is1     = array();
+
         foreach ($v1 as $e) {
             $value         = $e[$a];
             $is1[$e['id']] = (int)!is_null($value);
@@ -295,18 +297,11 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $v2 = $t2->findAll();
         $values2 = array();
         $is2     = array();
+
         foreach ($v2 as $e) {
-            $values2[$e->id] = $e->$b;
-            $is2[$e->id]     = $e->is_coverage;
+            if (!$e->is_wms) $this->assertEquals($e->coverage, $values1[$e->id]);
+            $this->assertEquals($e->is_coverage, (int) !is_null($e->coverage));
         }
-
-        $this->assertNotEmpty($values1);
-        $this->assertNotEmpty($values2);
-        $this->assertEquals($values1, $values2);
-
-        $this->assertNotEmpty($is1);
-        $this->assertNotEmpty($is2);
-        $this->assertEquals($is1, $is2);
 
     }
 
@@ -601,13 +596,12 @@ SQL;
      * WMS layers created by way of the old NeatlineMaps plugin should
      * be migrated into the `wms_address` and `wms_layers` fields.
      *
-     * @return void
+     * @return voi
      * @author David McClure
      **/
     public function testMigrateWmsLayers()
     {
 
-        $this->_installNeatlineMaps();
         $this->_migrate();
 
         // Get new record rows.
@@ -723,22 +717,6 @@ SQL;
     {
         $helper = new Neatline_Migration_200(null, $this->db, false);
         $helper->migrateData();
-    }
-
-
-    /**
-     * Mock an installation of NeatlineMaps.
-     *
-     * @return void
-     * @author Eric Rochester
-     **/
-    protected function _installNeatlineMaps()
-    {
-        $this->db->insert('Plugin', array(
-            'name' => 'NeatlineMaps',
-            'version' => '1.0.1',
-            'active' => 1
-        ));
     }
 
 
