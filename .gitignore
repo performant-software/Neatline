@@ -5,7 +5,8 @@ components
 pkg
 
 _SpecRunner.html
-layers.json
+
+layers/*!default.json
 
 views/admin/javascripts/payloads
 views/shared/javascripts/payloads

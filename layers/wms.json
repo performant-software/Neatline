@@ -1,0 +1,15 @@
+{
+  "WMS Layers": [
+
+    {
+      "title": "Icarus",
+      "id": "Icarus",
+      "type": "WMS",
+      "properties": {
+        "address": "http://localhost:8080/geoserver/dclure/wms",
+        "layers": "dclure:icarus"
+      }
+    }
+
+  ]
+}
