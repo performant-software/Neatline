@@ -6,7 +6,8 @@ pkg
 
 _SpecRunner.html
 
-layers/*!default.json
+layers
+!layers/default.json
 
 views/admin/javascripts/payloads
 views/shared/javascripts/payloads
