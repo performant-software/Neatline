@@ -43,8 +43,9 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         // Assign the values.
         $this->setArray($values);
 
-        // Set `published` timestamp, if the exhibit is being set "public"
-        // for the first time.
+        // If the exhibit is being set "public" for the first time, set
+        // the `published` timestamp to the current date.
+
         if (is_null($this->published) && $this->public == 1) {
             $this->published = date(self::DATE_FORMAT);
         }

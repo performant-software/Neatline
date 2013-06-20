@@ -75,8 +75,17 @@ module.exports = function(grunt) {
         }
       },
 
-      phpunit: {
-        command: 'phpunit --color',
+      phpunit_application: {
+        command: 'phpunit',
+        options: {
+          execOptions: {
+            cwd: './tests/phpunit'
+          }
+        }
+      },
+
+      phpunit_migrations: {
+        command: 'phpunit migrations',
         options: {
           execOptions: {
             cwd: './tests/phpunit'
@@ -430,9 +439,9 @@ module.exports = function(grunt) {
     'cssmin'
   ]);
 
-  // Run PHPUnit suite.
+  // Run application PHPUnit suite.
   grunt.registerTask('phpunit', [
-    'shell:phpunit'
+    'shell:phpunit_application'
   ]);
 
   // Mount public Jasmine suite.
@@ -447,10 +456,18 @@ module.exports = function(grunt) {
     'connect'
   ]);
 
-  // Run all tests.
+  // Run application tests.
   grunt.registerTask('test', [
     'clean:fixtures',
-    'phpunit',
+    'shell:phpunit_application',
+    'jasmine'
+  ]);
+
+  // Run all tests.
+  grunt.registerTask('test:all', [
+    'clean:fixtures',
+    'shell:phpunit_application',
+    'shell:phpunit_migrations',
     'jasmine'
   ]);
 

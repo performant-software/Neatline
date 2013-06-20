@@ -24,4 +24,3 @@ class Neatline_Job_UpgradeFrom1x extends Omeka_Job_AbstractJob
 
 
 }
-

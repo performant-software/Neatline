@@ -116,16 +116,30 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
 
         $exhibits = <<<SQL
 INSERT INTO {$prefix}exhibits
-    (id, title, slug, public, narrative, modified, query, map_focus, map_zoom)
+    (id, title, slug, public, narrative, modified, query, map_focus, map_zoom, base_layer)
     SELECT id, name, slug, public, description, modified, query,
-        default_map_bounds, default_map_zoom
+        default_map_bounds, default_map_zoom, default_base_layer
     FROM {$prefix}exhibits{$ext};
+SQL;
+
+        $layers = <<<SQL
+UPDATE {$prefix}exhibits SET base_layer = CASE
+    WHEN base_layer = 1 THEN 'OpenStreetMap'
+    WHEN base_layer = 2 THEN 'GooglePhysical'
+    WHEN base_layer = 3 THEN 'GoogleStreets'
+    WHEN base_layer = 4 THEN 'GoogleHybrid'
+    WHEN base_layer = 5 THEN 'GoogleSatellite'
+    WHEN base_layer = 6 THEN 'StamenWatercolor'
+    WHEN base_layer = 7 THEN 'StamenToner'
+    WHEN base_layer = 8 THEN 'StamenTerrain'
+END
 SQL;
 
         $db->beginTransaction();
 
         try {
             $db->query($exhibits);
+            $db->query($layers);
             $this->_migrateSimileExhibit();
 
             $q    = $db->query("SELECT * FROM {$prefix}data_records{$ext};");
@@ -146,8 +160,6 @@ SQL;
     /**
      * This migrates the data from the exhibit to a new table for the 
      * NeatlineSimile widget.
-     *
-     * TODO: test
      *
      * @return void
      * @author Eric Rochester
@@ -261,7 +273,6 @@ SQL;
         $nlr->before_date           = $data->end_visible_date;
         $nlr->presenter             = $data->show_bubble ? 'StaticBubble' : 'None';
 
-        // TODO: David, check these particularly, please.
         $nlr->fill_color            = $data->vector_color;
         $nlr->fill_opacity          = $this->_opacity($this->_getStyle($exhibit, $data, 'vector_opacity'));
         $nlr->stroke_color          = $data->stroke_color;
@@ -281,7 +292,6 @@ SQL;
         $nlr->max_zoom              = null;
 
         // WMS fields
-        // TODO: Testing
         if (plugin_is_active('NeatlineMaps') && !is_null($data->item_id)) {
             $services = $db->getTable('NeatlineMapsService');
             $sql = "SELECT m.item_id AS item_id, m.address AS address m.layers AS layers "
