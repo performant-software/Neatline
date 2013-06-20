@@ -28,9 +28,12 @@ require_once NL_DIR.'/models/abstract/Neatline_Row_Expansion.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
 
+// JOBS
+require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';
+require_once NL_DIR.'/jobs/Neatline_Job_UpgradeFrom1x.php';
+
 // MISCELLANEOUS
 require_once NL_DIR.'/controllers/abstract/Neatline_Controller_Rest.php';
-require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';
 require_once NL_DIR.'/assertions/Neatline_Acl_Assert_RecordOwnership.php';
 require_once NL_DIR.'/forms/Neatline_Form_Exhibit.php';
 
