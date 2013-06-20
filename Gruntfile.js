@@ -405,7 +405,7 @@ module.exports = function(grunt) {
 
   });
 
-  // Run tests by default.
+  // Run application tests.
   grunt.registerTask('default', 'test');
 
   // Build the application.
@@ -439,7 +439,7 @@ module.exports = function(grunt) {
     'cssmin'
   ]);
 
-  // Run application PHPUnit suite.
+  // Run default PHPUnit suite.
   grunt.registerTask('phpunit', [
     'shell:phpunit_application'
   ]);
