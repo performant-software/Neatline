@@ -602,6 +602,7 @@ SQL;
     public function testMigrateWmsLayers()
     {
 
+        $this->_installMapServicesTable();
         $this->_migrate();
 
         // Get new record rows.
@@ -634,6 +635,8 @@ SQL;
 
             }
         }
+
+        $this->_uninstallMapServicesTable();
 
     }
 
@@ -717,6 +720,52 @@ SQL;
     {
         $helper = new Neatline_Migration_200(null, $this->db, false);
         $helper->migrateData();
+    }
+
+
+    /**
+     * Create the `neatline_maps_services` table.
+     *
+     * @return void
+     * @author David McClure
+     **/
+    protected function _installMapServicesTable()
+    {
+
+        $this->db->query("CREATE TABLE IF NOT EXISTS
+            `{$this->db->prefix}neatline_maps_services` (
+
+            `id`        int(10) unsigned not null auto_increment,
+            `item_id`   int(10) unsigned unique,
+            `address`   text collate utf8_unicode_ci,
+            `layers`    text collate utf8_unicode_ci,
+
+            PRIMARY KEY (`id`)
+
+        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+
+        $json = file_get_contents(
+            dirname(__FILE__) . '/fixtures/hotchkiss-maps-services.json'
+        );
+        $data = json_decode($json, true);
+        foreach ($data as $row) {
+            $this->db->insert('NeatlineMapsService', $row);
+        }
+
+    }
+
+
+    /**
+     * Drop the `neatline_maps_services` table.
+     *
+     * @return void
+     * @author David McClure
+     **/
+    protected function _uninstallMapServicesTable()
+    {
+        $this->db->query(
+            "DROP TABLE IF EXISTS {$this->db->prefix}neatline_maps_services;"
+        );
     }
 
 

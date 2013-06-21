@@ -302,8 +302,7 @@ SQL;
 
 
         // WMS fields
-        $nlMaps = $db->describeTable("{$db->prefix}neatline_maps_services");
-        if ($nlMaps && !is_null($data->item_id)) {
+        try { if (!is_null($data->item_id)) {
 
             $service = $db->select()
                 ->from("{$db->prefix}neatline_maps_services")
@@ -316,7 +315,7 @@ SQL;
                 $nlr->wms_layers  = $service['layers'];
             }
 
-        }
+        }} catch (Exception $e) {};
 
         // time_active, items_active
         $widgets = array();
