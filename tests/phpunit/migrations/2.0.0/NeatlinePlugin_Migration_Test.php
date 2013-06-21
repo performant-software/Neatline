@@ -192,6 +192,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testMigrateDecimalParentStyle('vector_opacity', 'fill_opacity');
         $this->_testMigrateDecimalParentStyle('stroke_opacity', 'stroke_opacity');
         $this->_testMigrateDecimalParentStyle('select_opacity', 'fill_opacity_select');
+
         $this->_testMigrateParentStyle('vector_color', 'fill_color');
         $this->_testMigrateParentStyle('stroke_color', 'stroke_color');
         $this->_testMigrateParentStyle('highlight_color', 'fill_color_select');
