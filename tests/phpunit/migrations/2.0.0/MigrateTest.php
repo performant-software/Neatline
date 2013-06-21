@@ -137,4 +137,93 @@ SQL;
     }
 
 
+    /**
+     * The old `default_base_layer` foreign key references should be moved
+     * to the corresponding layer slugs in the new `base_layers` field.
+     */
+    public function testSetDefaultBaseLayers()
+    {
+
+        $this->_loadFixture('SetDefaultBaseLayers.exhibits.json');
+
+        $this->_upgrade();
+        $this->_migrate();
+
+        // ----------------------------------------------------------------
+
+        $OpenStreetMap = $this->__exhibits->findBySql(
+            'title=?', array('OpenStreetMap'), true
+        );
+        $this->assertEquals(
+            $OpenStreetMap->base_layer, 'OpenStreetMap'
+        );
+
+        // ----------------------------------------------------------------
+
+        $GooglePhysical = $this->__exhibits->findBySql(
+            'title=?', array('GooglePhysical'), true
+        );
+        $this->assertEquals(
+            $GooglePhysical->base_layer, 'GooglePhysical'
+        );
+
+        // ----------------------------------------------------------------
+
+        $GoogleStreets = $this->__exhibits->findBySql(
+            'title=?', array('GoogleStreets'), true
+        );
+        $this->assertEquals(
+            $GoogleStreets->base_layer, 'GoogleStreets'
+        );
+
+        // ----------------------------------------------------------------
+
+        $GoogleHybrid = $this->__exhibits->findBySql(
+            'title=?', array('GoogleHybrid'), true
+        );
+        $this->assertEquals(
+            $GoogleHybrid->base_layer, 'GoogleHybrid'
+        );
+
+        // ----------------------------------------------------------------
+
+        $GoogleSatellite = $this->__exhibits->findBySql(
+            'title=?', array('GoogleSatellite'), true
+        );
+        $this->assertEquals(
+            $GoogleSatellite->base_layer, 'GoogleSatellite'
+        );
+
+        // ----------------------------------------------------------------
+
+        $StamenWatercolor = $this->__exhibits->findBySql(
+            'title=?', array('StamenWatercolor'), true
+        );
+        $this->assertEquals(
+            $StamenWatercolor->base_layer, 'StamenWatercolor'
+        );
+
+        // ----------------------------------------------------------------
+
+        $StamenToner = $this->__exhibits->findBySql(
+            'title=?', array('StamenToner'), true
+        );
+        $this->assertEquals(
+            $StamenToner->base_layer, 'StamenToner'
+        );
+
+        // ----------------------------------------------------------------
+
+        $StamenTerrain = $this->__exhibits->findBySql(
+            'title=?', array('StamenTerrain'), true
+        );
+        $this->assertEquals(
+            $StamenTerrain->base_layer, 'StamenTerrain'
+        );
+
+        // ----------------------------------------------------------------
+
+    }
+
+
 }
