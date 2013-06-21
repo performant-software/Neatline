@@ -16,7 +16,7 @@ class Migration200Test_BackupTables extends Neatline_Case_Migration
     /**
      * TODO
      */
-    public function testExplode()
+    public function test()
     {
         $this->assertTrue(true);
     }
