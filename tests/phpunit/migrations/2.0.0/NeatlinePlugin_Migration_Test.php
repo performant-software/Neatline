@@ -171,9 +171,6 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testRecordMigration('end_date',           'end_date');
         $this->_testRecordMigration('start_visible_date', 'after_date');
         $this->_testRecordMigration('end_visible_date',   'before_date');
-        $this->_testRecordMigration('vector_color',       'fill_color');
-        $this->_testRecordMigration('stroke_color',       'stroke_color');
-        $this->_testRecordMigration('highlight_color',    'fill_color_select');
         $this->_testRecordMigration('point_image',        'point_image');
         $this->_testRecordMigration('display_order',      'weight');
         $this->_testRecordMigration('map_bounds',         'map_focus');
@@ -195,6 +192,10 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_testMigrateDecimalParentStyle('vector_opacity', 'fill_opacity');
         $this->_testMigrateDecimalParentStyle('stroke_opacity', 'stroke_opacity');
         $this->_testMigrateDecimalParentStyle('select_opacity', 'fill_opacity_select');
+        $this->_testMigrateParentStyle('vector_color', 'fill_color');
+        $this->_testMigrateParentStyle('stroke_color', 'stroke_color');
+        $this->_testMigrateParentStyle('highlight_color', 'fill_color_select');
+        $this->_testMigrateParentStyle('highlight_color', 'stroke_color_select');
         $this->_testMigrateParentStyle('stroke_width', 'stroke_width');
         $this->_testMigrateParentStyle('point_radius', 'point_radius');
     }
@@ -211,8 +212,6 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
         $this->_migrate();
 
         $this->_testAllNull('tags');
-        $this->_testAllNull('stroke_color_select');
-        $this->_testAllNull('stroke_opacity_select');
         $this->_testAllNull('zindex');
         $this->_testAllNull('min_zoom');
         $this->_testAllNull('max_zoom');
@@ -718,8 +717,11 @@ SQL;
      **/
     protected function _migrate()
     {
-        $helper = new Neatline_Migration_200(null, $this->db, false);
-        $helper->migrateData();
+        Zend_Registry::get('bootstrap')->getResource('jobs')->
+            send('Neatline_Job_UpgradeFrom1x', array(
+                'web_dir' => nl_getWebDir(),
+            )
+        );
     }
 
 

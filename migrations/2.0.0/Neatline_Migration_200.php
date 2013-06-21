@@ -284,12 +284,12 @@ SQL;
 
         $nlr->fill_color            = $data->vector_color;
         $nlr->fill_opacity          = $this->_opacity($this->_getStyle($exhibit, $data, 'vector_opacity'));
-        $nlr->stroke_color          = $data->stroke_color;
+        $nlr->stroke_color          = $this->_getStyle($exhibit, $data, 'stroke_color');
         $nlr->stroke_opacity        = $this->_opacity($this->_getStyle($exhibit, $data, 'stroke_opacity'));
-        $nlr->fill_color_select     = $data->highlight_color;
+        $nlr->fill_color_select     = $this->_getStyle($exhibit, $data, 'highlight_color');
         $nlr->fill_opacity_select   = $this->_opacity($this->_getStyle($exhibit, $data, 'select_opacity'));
-        $nlr->stroke_color_select   = null;
-        $nlr->stroke_opacity_select = null;
+        $nlr->stroke_color_select   = $this->_getStyle($exhibit, $data, 'highlight_color');
+        $nlr->stroke_opacity_select = $this->_opacity($this->_getStyle($exhibit, $data, 'select_opacity'));
         $nlr->stroke_width          = $this->_getStyle($exhibit, $data, 'stroke_width');
         $nlr->point_radius          = $this->_getStyle($exhibit, $data, 'point_radius');
         $nlr->point_image           = $data->point_image;
@@ -333,6 +333,7 @@ SQL;
             && $data->use_dc_metadata) {
 
             $item = get_record_by_id('Item', $data->item_id);
+
             if (!is_null($item)) {
                 try {
                     $old = get_current_record('item', $item);
