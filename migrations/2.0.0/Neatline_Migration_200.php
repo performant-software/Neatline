@@ -30,7 +30,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
     public function migrateData()
     {
 
-        $this->_db->beginTransaction();
+        $this->db->beginTransaction();
 
         try {
 
@@ -41,10 +41,10 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
             $this->_migrateSimileDefaults();
             $this->_moveRecordsToNewTable();
 
-            $this->_db->commit();
+            $this->db->commit();
 
         } catch (Exception $e) {
-            $this->_db->rollback();
+            $this->db->rollback();
             throw $e;
         }
 
@@ -56,18 +56,26 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
      */
     private function _backupOldTables()
     {
-        $this->_db->query(
-            "ALTER TABLE `{$this->_db->prefix}neatline_exhibits`
-            RENAME TO `{$this->_db->prefix}neatline_exhibits_migrate`"
-        );
-        $this->_db->query(
-            "ALTER TABLE `{$this->_db->prefix}neatline_data_records`
-            RENAME TO `{$this->_db->prefix}neatline_data_records_migrate`"
-        );
-        $this->_db->query(
-            "ALTER TABLE `{$this->_db->prefix}neatline_base_layers`
-            RENAME TO `{$this->_db->prefix}neatline_base_layers_migrate`"
-        );
+
+        $sql1 = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_exhibits
+        RENAME TO {$this->db->prefix}neatline_exhibits_migrate;
+SQL;
+
+        $sql2 = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_data_records
+        RENAME TO {$this->db->prefix}neatline_data_records_migrate;
+SQL;
+
+        $sql3 = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_base_layers
+        RENAME TO {$this->db->prefix}neatline_base_layers_migrate;
+SQL;
+
+        $this->db->query($sql1);
+        $this->db->query($sql2);
+        $this->db->query($sql3);
+
     }
 
 
@@ -102,7 +110,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
 
         $sql = <<<SQL
 
-        INSERT INTO {$this->_db->prefix}neatline_exhibits (
+        INSERT INTO {$this->db->prefix}neatline_exhibits (
 
             id,
             title,
@@ -128,11 +136,11 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
             default_map_zoom,
             default_base_layer
 
-        FROM {$this->_db->prefix}neatline_exhibits_migrate;
+        FROM {$this->db->prefix}neatline_exhibits_migrate;
 
 SQL;
 
-        $this->_db->query($sql);
+        $this->db->query($sql);
 
     }
 
@@ -145,8 +153,7 @@ SQL;
     {
 
         $sql = <<<SQL
-
-        UPDATE {$this->_db->prefix}neatline_exhibits
+        UPDATE {$this->db->prefix}neatline_exhibits
 
         SET base_layer = CASE
             WHEN base_layer = 1 THEN 'OpenStreetMap'
@@ -158,10 +165,9 @@ SQL;
             WHEN base_layer = 7 THEN 'StamenToner'
             WHEN base_layer = 8 THEN 'StamenTerrain'
         END;
-
 SQL;
 
-        $this->_db->query($sql);
+        $this->db->query($sql);
 
     }
 
@@ -177,7 +183,7 @@ SQL;
 
         CREATE TABLE IF NOT EXISTS
 
-            {$this->_db->prefix}neatline_simile_exhibit_expansions
+            {$this->db->prefix}neatline_simile_exhibit_expansions
 
             `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `parent_id`     INT(10) UNSIGNED NULL,
@@ -194,7 +200,7 @@ SQL;
 
 SQL;
 
-        $this->_db->query($sql);
+        $this->db->query($sql);
 
     }
 

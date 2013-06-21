@@ -75,17 +75,8 @@ module.exports = function(grunt) {
         }
       },
 
-      phpunit_application: {
+      phpunit: {
         command: 'phpunit',
-        options: {
-          execOptions: {
-            cwd: './tests/phpunit'
-          }
-        }
-      },
-
-      phpunit_migrations: {
-        command: 'phpunit migrations',
         options: {
           execOptions: {
             cwd: './tests/phpunit'
@@ -441,13 +432,7 @@ module.exports = function(grunt) {
 
   // Run default PHPUnit suite.
   grunt.registerTask('phpunit', [
-    'shell:phpunit_application'
-  ]);
-
-  // TODO|temp
-  // Run migrations PHPUnit suite.
-  grunt.registerTask('phpunit:migrations', [
-    'shell:phpunit_migrations'
+    'shell:phpunit'
   ]);
 
   // Mount public Jasmine suite.
@@ -465,15 +450,14 @@ module.exports = function(grunt) {
   // Run application tests.
   grunt.registerTask('test', [
     'clean:fixtures',
-    'shell:phpunit_application',
+    'phpunit',
     'jasmine'
   ]);
 
   // Run all tests.
   grunt.registerTask('test:all', [
     'clean:fixtures',
-    'shell:phpunit_application',
-    'shell:phpunit_migrations',
+    'phpunit',
     'jasmine'
   ]);
 

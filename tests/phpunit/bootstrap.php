@@ -23,5 +23,6 @@ require_once NL_DIR . '/NeatlinePlugin.php';
 // Load abstract test cases, mock filters.
 require_once 'cases/Neatline_Case_Abstract.php';
 require_once 'cases/Neatline_Case_Default.php';
+require_once 'cases/Neatline_Case_Migration.php';
 require_once 'cases/Neatline_Case_Fixture.php';
 require_once 'mocks/filters.php';

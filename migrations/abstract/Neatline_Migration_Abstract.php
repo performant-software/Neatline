@@ -13,8 +13,8 @@ abstract class Neatline_Migration_Abstract
 {
 
 
-    protected $_plugin;
-    protected $_db;
+    protected $plugin;
+    protected $db;
 
 
     /**
@@ -27,8 +27,8 @@ abstract class Neatline_Migration_Abstract
     public function __construct($plugin, $db, $start=true)
     {
 
-        $this->_plugin = $plugin;
-        $this->_db = $db;
+        $this->plugin = $plugin;
+        $this->db = $db;
 
         if ($start) $this->migrate();
 
