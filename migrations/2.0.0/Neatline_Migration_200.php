@@ -103,6 +103,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
         $sql = <<<SQL
 
         INSERT INTO {$this->_db->prefix}neatline_exhibits (
+
             id,
             title,
             slug,
@@ -113,7 +114,9 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
             map_focus,
             map_zoom,
             base_layer
+
         ) SELECT
+
             id,
             name,
             slug,
@@ -124,6 +127,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
             default_map_bounds,
             default_map_zoom,
             default_base_layer
+
         FROM {$this->_db->prefix}neatline_exhibits_migrate;
 
 SQL;
@@ -143,6 +147,7 @@ SQL;
         $sql = <<<SQL
 
         UPDATE {$this->_db->prefix}neatline_exhibits
+
         SET base_layer = CASE
             WHEN base_layer = 1 THEN 'OpenStreetMap'
             WHEN base_layer = 2 THEN 'GooglePhysical'
