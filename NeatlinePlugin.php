@@ -39,78 +39,89 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
-        $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_exhibits` (
+        $exhibits = <<<SQL
 
-        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
-        `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `modified`              TIMESTAMP NULL,
-        `published`             TIMESTAMP NULL,
-        `query`                 TEXT NULL,
-        `base_layers`           TEXT NULL,
-        `base_layer`            VARCHAR(100) NULL,
-        `widgets`               TEXT NULL,
-        `title`                 TEXT NULL,
-        `slug`                  VARCHAR(100) NOT NULL,
-        `narrative`             LONGTEXT NULL,
-        `public`                TINYINT(1) NOT NULL,
-        `styles`                TEXT NULL,
-        `map_focus`             VARCHAR(100) NULL,
-        `map_zoom`              INT(10) UNSIGNED NULL,
+        CREATE TABLE IF NOT EXISTS
+        {$this->_db->prefix}neatline_exhibits (
 
-         PRIMARY KEY            (`id`)
+        id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        owner_id                INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        modified                TIMESTAMP NULL,
+        published               TIMESTAMP NULL,
+        query                   TEXT NULL,
+        base_layers             TEXT NULL,
+        base_layer              VARCHAR(100) NULL,
+        widgets                 TEXT NULL,
+        title                   TEXT NULL,
+        slug                    VARCHAR(100) NOT NULL,
+        narrative               LONGTEXT NULL,
+        public                  TINYINT(1) NOT NULL,
+        styles                  TEXT NULL,
+        map_focus               VARCHAR(100) NULL,
+        map_zoom                INT(10) UNSIGNED NULL,
 
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+        PRIMARY KEY            (id)
 
-        $this->_db->query("CREATE TABLE IF NOT EXISTS
-        `{$this->_db->prefix}neatline_records` (
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-        `id`                    INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        `owner_id`              INT(10) UNSIGNED NOT NULL DEFAULT 0,
-        `item_id`               INT(10) UNSIGNED NULL,
-        `exhibit_id`            INT(10) UNSIGNED NULL,
-        `added`                 TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        `modified`              TIMESTAMP NULL,
-        `is_coverage`           TINYINT(1) NULL,
-        `is_wms`                TINYINT(1) NULL,
-        `slug`                  VARCHAR(100) NULL,
-        `title`                 MEDIUMTEXT NULL,
-        `body`                  MEDIUMTEXT NULL,
-        `coverage`              GEOMETRY NOT NULL,
-        `tags`                  TEXT NULL,
-        `widgets`               TEXT NULL,
-        `presenter`             VARCHAR(100) NULL,
-        `fill_color`            VARCHAR(100) NULL,
-        `fill_color_select`     VARCHAR(100) NULL,
-        `stroke_color`          VARCHAR(100) NULL,
-        `stroke_color_select`   VARCHAR(100) NULL,
-        `fill_opacity`          DECIMAL(3,2) NULL,
-        `fill_opacity_select`   DECIMAL(3,2) NULL,
-        `stroke_opacity`        DECIMAL(3,2) NULL,
-        `stroke_opacity_select` DECIMAL(3,2) NULL,
-        `stroke_width`          INT(10) UNSIGNED NULL,
-        `point_radius`          INT(10) UNSIGNED NULL,
-        `zindex`                INT(10) UNSIGNED NULL,
-        `weight`                INT(10) UNSIGNED NULL,
-        `start_date`            VARCHAR(100) NULL,
-        `end_date`              VARCHAR(100) NULL,
-        `after_date`            VARCHAR(100) NULL,
-        `before_date`           VARCHAR(100) NULL,
-        `point_image`           VARCHAR(100) NULL,
-        `wms_address`           VARCHAR(100) NULL,
-        `wms_layers`            VARCHAR(100) NULL,
-        `min_zoom`              INT(10) UNSIGNED NULL,
-        `max_zoom`              INT(10) UNSIGNED NULL,
-        `map_zoom`              INT(10) UNSIGNED NULL,
-        `map_focus`             VARCHAR(100) NULL,
+SQL;
 
-         PRIMARY KEY        (`id`),
-         INDEX              (`item_id`, `exhibit_id`),
-         FULLTEXT KEY       (`title`, `body`, `slug`, `tags`, `widgets`),
-         SPATIAL INDEX      (`coverage`)
+        $records = <<<SQL
 
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
+        CREATE TABLE IF NOT EXISTS
+        {$this->_db->prefix}neatline_records (
+
+        id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+        owner_id                INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        item_id                 INT(10) UNSIGNED NULL,
+        exhibit_id              INT(10) UNSIGNED NULL,
+        added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        modified                TIMESTAMP NULL,
+        is_coverage             TINYINT(1) NULL,
+        is_wms                  TINYINT(1) NULL,
+        slug                    VARCHAR(100) NULL,
+        title                   MEDIUMTEXT NULL,
+        body                    MEDIUMTEXT NULL,
+        coverage                GEOMETRY NOT NULL,
+        tags                    TEXT NULL,
+        widgets                 TEXT NULL,
+        presenter               VARCHAR(100) NULL,
+        fill_color              VARCHAR(100) NULL,
+        fill_color_select       VARCHAR(100) NULL,
+        stroke_color            VARCHAR(100) NULL,
+        stroke_color_select     VARCHAR(100) NULL,
+        fill_opacity            DECIMAL(3,2) NULL,
+        fill_opacity_select     DECIMAL(3,2) NULL,
+        stroke_opacity          DECIMAL(3,2) NULL,
+        stroke_opacity_select   DECIMAL(3,2) NULL,
+        stroke_width            INT(10) UNSIGNED NULL,
+        point_radius            INT(10) UNSIGNED NULL,
+        zindex                  INT(10) UNSIGNED NULL,
+        weight                  INT(10) UNSIGNED NULL,
+        start_date              VARCHAR(100) NULL,
+        end_date                VARCHAR(100) NULL,
+        after_date              VARCHAR(100) NULL,
+        before_date             VARCHAR(100) NULL,
+        point_image             VARCHAR(100) NULL,
+        wms_address             VARCHAR(100) NULL,
+        wms_layers              VARCHAR(100) NULL,
+        min_zoom                INT(10) UNSIGNED NULL,
+        max_zoom                INT(10) UNSIGNED NULL,
+        map_zoom                INT(10) UNSIGNED NULL,
+        map_focus               VARCHAR(100) NULL,
+
+        PRIMARY KEY             (id),
+        INDEX                   (item_id, exhibit_id),
+        FULLTEXT KEY            (title, body, slug, tags, widgets),
+        SPATIAL INDEX           (coverage)
+
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SQL;
+
+        $this->_db->query($exhibits);
+        $this->_db->query($records);
 
     }
 
@@ -120,12 +131,18 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUninstall()
     {
-        $this->_db->query("DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_exhibits`"
-        );
-        $this->_db->query("DROP TABLE IF EXISTS
-            `{$this->_db->prefix}neatline_records`"
-        );
+
+        $exhibits = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_exhibits
+SQL;
+
+        $records = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_records
+SQL;
+
+        $this->_db->query($exhibits);
+        $this->_db->query($records);
+
     }
 
 

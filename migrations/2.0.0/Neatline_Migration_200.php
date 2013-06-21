@@ -34,13 +34,11 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
 
         try {
 
-            // MIGRATE
             $this->_moveExhibitsToNewTable();
             $this->_setDefaultBaseLayers();
             $this->_createSimileExpansion();
             $this->_migrateSimileDefaults();
             $this->_moveRecordsToNewTable();
-
             $this->db->commit();
 
         } catch (Exception $e) {
@@ -84,7 +82,7 @@ SQL;
      */
     private function _installNewTables()
     {
-        $this->_plugin->hookInstall();
+        $this->plugin->hookInstall();
     }
 
 
@@ -94,9 +92,7 @@ SQL;
     private function _queueMigration()
     {
         Zend_Registry::get('job_dispatcher')->sendLongRunning(
-            'Neatline_Job_UpgradeFrom1x', array(
-                'web_dir' => nl_getWebDir()
-            )
+            'Neatline_Job_UpgradeFrom1x'
         );
     }
 

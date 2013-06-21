@@ -21,6 +21,7 @@ class Neatline_Case_Migration extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_create1xSchema();
+        $this->_upgrade();
     }
 
 
@@ -44,24 +45,24 @@ class Neatline_Case_Migration extends Neatline_Case_Default
         DROP TABLE {$this->db->prefix}neatline_exhibits
 SQL;
 
-        $sql2 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_exhibits_migrate
-SQL;
-
         $sql3 = <<<SQL
         DROP TABLE {$this->db->prefix}neatline_data_records
-SQL;
-
-        $sql4 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_data_records_migrate
 SQL;
 
         $sql5 = <<<SQL
         DROP TABLE {$this->db->prefix}neatline_records
 SQL;
 
+        $sql2 = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_exhibits_migrate
+SQL;
+
+        $sql4 = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_data_records_migrate
+SQL;
+
         $sql6 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_base_layers
+        DROP TABLE {$this->db->prefix}neatline_base_layers_migrate
 SQL;
 
         try { $this->db->query($sql1); } catch (Exception $e) {}
@@ -79,6 +80,8 @@ SQL;
      */
     protected function _create1xSchema()
     {
+
+        $this->_clearSchema();
 
         $this->db->query("CREATE TABLE IF NOT EXISTS `{$this->db->prefix}neatline_exhibits` (
 
@@ -219,6 +222,28 @@ SQL;
         $this->_clearSchema();
         $plugin = new NeatlinePlugin();
         $plugin->hookInstall();
+    }
+
+
+    /**
+     * Trigger the `upgrade` hook.
+     */
+    protected function _upgrade()
+    {
+        $this->helper->pluginBroker->setCurrentPluginDirName('Neatline');
+        $this->plugin = new NeatlinePlugin();
+        $this->plugin->hookUpgrade('1.1.3', '2.0.0');
+    }
+
+
+    /**
+     * Run the migration job.
+     */
+    protected function _migrate()
+    {
+        Zend_Registry::get('job_dispatcher')->send(
+            'Neatline_Job_UpgradeFrom1x'
+        );
     }
 
 
