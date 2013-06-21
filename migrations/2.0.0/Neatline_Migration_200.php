@@ -200,12 +200,13 @@ SQL;
      */
     private function _migrateSimileDefaults()
     {
-        // TODO
+
     }
 
 
     /**
-     * TODO.
+     * Load all of the old record rows, migrate the data, and save new 2.x
+     * records on the `neatline_records` table.`
      */
     private function _moveRecordsToNewTable()
     {
@@ -220,6 +221,7 @@ SQL;
 
         foreach ($oldRecords as $old) {
             $new = new NeatlineRecord;
+            $this->__processExtantFields($old, $new);
             $new->save();
         }
 
@@ -227,11 +229,23 @@ SQL;
 
 
     /**
-     * TODO.
+     * Set all fields that have direct equivalents in the new schema. Set
+     * the `owner_id` field to the default 0.
      */
     private function __processExtantFields($old, $new)
     {
-        // TODO
+        $new->id            = $old->id;
+        $new->exhibit_id    = $old->exhibit_id;
+        $new->title         = $old->title;
+        $new->slug          = $old->slug;
+        $new->start_date    = $old->start_date;
+        $new->end_date      = $old->end_date;
+        $new->after_date    = $old->start_visible_date;
+        $new->before_date   = $old->end_visible_date;
+        $new->point_image   = $old->point_image;
+        $new->weight        = $old->display_order;
+        $new->map_focus     = $old->map_bounds;
+        $new->map_zoom      = $old->map_zoom;
     }
 
 
@@ -240,7 +254,7 @@ SQL;
      */
     private function __processInheritedFields($old, $new)
     {
-        // TODO
+
     }
 
 
@@ -249,7 +263,7 @@ SQL;
      */
     private function __processTitleAndBody($old, $new)
     {
-        // TODO
+
     }
 
 
@@ -258,7 +272,7 @@ SQL;
      */
     private function __processActivations($old, $new)
     {
-        // TODO
+
     }
 
 
@@ -267,7 +281,7 @@ SQL;
      */
     private function __processCoverage($old, $new)
     {
-        // TODO
+
     }
 
 
@@ -276,7 +290,7 @@ SQL;
      */
     private function __processWmsLayer($old, $new)
     {
-        // TODO
+
     }
 
 

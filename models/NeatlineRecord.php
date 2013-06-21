@@ -14,7 +14,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
 {
 
 
-    public $owner_id;               // INT(10) UNSIGNED NOT NULL DEFAULT 0
+    public $owner_id = 0;           // INT(10) UNSIGNED NOT NULL DEFAULT 0
     public $item_id;                // INT(10) UNSIGNED NULL
     public $exhibit_id;             // INT(10) UNSIGNED NULL
     public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP

@@ -284,7 +284,7 @@ SQL;
      * @param string $t1
      * @param string $t2
      */
-    protected function _assertMigration($f1, $f2, $t1, $t2)
+    protected function _migration($f1, $f2, $t1, $t2)
     {
 
         $sql1 = <<<SQL
@@ -319,9 +319,9 @@ SQL;
      * @param string $f1
      * @param string $f2
      */
-    protected function _assertExhibitMigration($f1, $f2)
+    protected function _exhibitMigration($f1, $f2)
     {
-        $this->_assertMigration(
+        $this->_migration(
             $f1, $f2, 'neatline_exhibits_migrate', 'neatline_exhibits'
         );
     }
@@ -333,9 +333,9 @@ SQL;
      * @param string $f1
      * @param string $f2
      */
-    protected function _assertRecordMigration($f1, $f2)
+    protected function _recordMigration($f1, $f2)
     {
-        $this->_assertMigration(
+        $this->_migration(
             $f1, $f2, 'neatline_data_records_migrate', 'neatline_records'
         );
     }

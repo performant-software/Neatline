@@ -49,7 +49,7 @@ class Migrate200Test extends Neatline_Case_Migrate200
         $this->assertContains("{$p}records", $tables);
 
         $exhibits = $this->db->describeTable("{$p}exhibits");
-        $records = $this->db->describeTable("{$p}records");
+        $records  = $this->db->describeTable("{$p}records");
 
         $this->assertArrayHasKey('widgets', $exhibits);
         $this->assertArrayHasKey('widgets', $records);
@@ -227,8 +227,8 @@ SQL;
 
 
     /**
-     * All values on the old exhibit table that have a direct equivalent
-     * on the new exhibits table should be migrated directly.
+     * All values on the old exhibits table that have a direct equivalent
+     * on the new table should be migrated directly.
      */
     public function testMigrateExtantExhibitFields()
     {
@@ -238,15 +238,43 @@ SQL;
         $this->_upgrade();
         $this->_migrate();
 
-        $this->_assertExhibitMigration('id',                'id');
-        $this->_assertExhibitMigration('modified',          'modified');
-        $this->_assertExhibitMigration('name',              'title');
-        $this->_assertExhibitMigration('description',       'narrative');
-        $this->_assertExhibitMigration('slug',              'slug');
-        $this->_assertExhibitMigration('public',            'public');
-        $this->_assertExhibitMigration('query',             'query');
-        $this->_assertExhibitMigration('default_map_bounds','map_focus');
-        $this->_assertExhibitMigration('default_map_zoom',  'map_zoom');
+        $this->_exhibitMigration('id',                  'id');
+        $this->_exhibitMigration('modified',            'modified');
+        $this->_exhibitMigration('name',                'title');
+        $this->_exhibitMigration('description',         'narrative');
+        $this->_exhibitMigration('slug',                'slug');
+        $this->_exhibitMigration('public',              'public');
+        $this->_exhibitMigration('query',               'query');
+        $this->_exhibitMigration('default_map_bounds',  'map_focus');
+        $this->_exhibitMigration('default_map_zoom',    'map_zoom');
+
+    }
+
+
+    /**
+     * All values on the old records table that have a direct equivalent
+     * on the new table should be migrated directly.
+     */
+    public function testMigrateExtantRecordFields()
+    {
+
+        $this->_loadFixture('Hotchkiss.records.json');
+
+        $this->_upgrade();
+        $this->_migrate();
+
+        $this->_recordMigration('id',                   'id');
+        $this->_recordMigration('exhibit_id',           'exhibit_id');
+        $this->_recordMigration('title',                'title');
+        $this->_recordMigration('slug',                 'slug');
+        $this->_recordMigration('start_date',           'start_date');
+        $this->_recordMigration('end_date',             'end_date');
+        $this->_recordMigration('start_visible_date',   'after_date');
+        $this->_recordMigration('end_visible_date',     'before_date');
+        $this->_recordMigration('point_image',          'point_image');
+        $this->_recordMigration('display_order',        'weight');
+        $this->_recordMigration('map_bounds',           'map_focus');
+        $this->_recordMigration('map_zoom',             'map_zoom');
 
     }
 
