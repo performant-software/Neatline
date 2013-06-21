@@ -30,16 +30,21 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
     public function migrateData()
     {
 
-        $this->db->beginTransaction();
+        $this->_db->beginTransaction();
 
         try {
 
-            // Migrate the data.
+            // MIGRATE
             $this->_moveExhibitsToNewTable();
             $this->_setDefaultBaseLayers();
+            $this->_createSimileExpansion();
+            $this->_migrateSimileDefaults();
+            $this->_moveRecordsToNewTable();
+
+            $this->_db->commit();
 
         } catch (Exception $e) {
-            $this->db->rollback();
+            $this->_db->rollback();
             throw $e;
         }
 
@@ -94,15 +99,168 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
      */
     private function _moveExhibitsToNewTable()
     {
+
+        $sql = <<<SQL
+
+        INSERT INTO {$this->_db->prefix}neatline_exhibits (
+            id,
+            title,
+            slug,
+            public,
+            narrative,
+            modified,
+            query,
+            map_focus,
+            map_zoom,
+            base_layer
+        ) SELECT
+            id,
+            name,
+            slug,
+            public,
+            description,
+            modified,
+            query,
+            default_map_bounds,
+            default_map_zoom,
+            default_base_layer
+        FROM {$this->_db->prefix}neatline_exhibits_migrate;
+
+SQL;
+
+        $this->_db->query($sql);
+
+    }
+
+
+    /**
+     * Transfer all exhibit rows from the renamed migration table into the
+     * new `neatline_exhibits` table.
+     */
+    private function _setDefaultBaseLayers()
+    {
+
+        $sql = <<<SQL
+
+        UPDATE {$this->_db->prefix}neatline_exhibits
+        SET base_layer = CASE
+            WHEN base_layer = 1 THEN 'OpenStreetMap'
+            WHEN base_layer = 2 THEN 'GooglePhysical'
+            WHEN base_layer = 3 THEN 'GoogleStreets'
+            WHEN base_layer = 4 THEN 'GoogleHybrid'
+            WHEN base_layer = 5 THEN 'GoogleSatellite'
+            WHEN base_layer = 6 THEN 'StamenWatercolor'
+            WHEN base_layer = 7 THEN 'StamenToner'
+            WHEN base_layer = 8 THEN 'StamenTerrain'
+        END;
+
+SQL;
+
+        $this->_db->query($sql);
+
+    }
+
+
+    /**
+     * Insert the `neatline_simile_exhibit_expansions` table created by
+     * the NeatlineSimile widget.
+     */
+    private function _createSimileExpansion()
+    {
+
+        $sql = <<<SQL
+
+        CREATE TABLE IF NOT EXISTS
+
+            {$this->_db->prefix}neatline_simile_exhibit_expansions
+
+            `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            `parent_id`     INT(10) UNSIGNED NULL,
+
+            `simile_default_date`       VARCHAR(100) NULL,
+            `simile_interval_unit`      VARCHAR(100) NULL,
+            `simile_interval_pixels`    INT(10) UNSIGNED NULL,
+            `simile_tape_height`        INT(10) UNSIGNED NULL,
+            `simile_track_height`       INT(10) UNSIGNED NULL,
+
+             PRIMARY KEY        (`id`)
+
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SQL;
+
+        $this->_db->query($sql);
+
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function _migrateSimileDefaults()
+    {
         // TODO
     }
 
 
     /**
-     * Update all of the `base_layer` fields on the new exhibit records
-     * with the layer slug that corresponds to the old foreign key.
+     * TODO.
      */
-    private function _setDefaultBaseLayers()
+    private function _moveRecordsToNewTable()
+    {
+        // TODO
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processExtantFields()
+    {
+        // TODO
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processInheritedFields()
+    {
+        // TODO
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processTitleAndBody()
+    {
+        // TODO
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processActivations()
+    {
+        // TODO
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processCoverage()
+    {
+        // TODO
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processWmsLayer()
     {
         // TODO
     }
