@@ -21,7 +21,6 @@ class Neatline_Case_Migrate200 extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_create1xSchema();
-        $this->_upgrade();
     }
 
 
@@ -226,35 +225,6 @@ SQL;
 
 
     /**
-     * Populate database with JSON fixtures.
-     *
-     * @param string $slug The fixtures directory.
-     */
-    protected function _loadFixtures($slug)
-    {
-
-        $path = dirname(dirname(__FILE__)) . '/fixtures/' . $slug;
-
-        // `exhibits.json`
-        try {
-            $data = file_get_contents($path.'/exhibits.json');
-            foreach (Zend_Json::decode($data) as $row) {
-                $this->db->insert('NeatlineExhibit', $row);
-            }
-        } catch (Exception $e) {}
-
-        // `records.json`
-        try {
-            $data = file_get_contents($path.'/records.json');
-            foreach (Zend_Json::decode($data) as $row) {
-                $this->db->insert('NeatlineRecord', $row);
-            }
-        } catch (Exception $e) {}
-
-    }
-
-
-    /**
      * Trigger the `upgrade` hook.
      */
     protected function _upgrade()
@@ -273,6 +243,35 @@ SQL;
         Zend_Registry::get('job_dispatcher')->send(
             'Neatline_Job_UpgradeFrom1x'
         );
+    }
+
+
+    /**
+     * Load JSON fixtures.
+     *
+     * @param string $fixture The fixture file.
+     */
+    protected function _loadFixture($fixture)
+    {
+
+        // Read the file.
+        $path = dirname(dirname(__FILE__)).'/fixtures/'.$fixture;
+        $json = Zend_Json::decode(file_get_contents($path));
+
+        // `exhibits.json`
+        if (strpos($path, 'exhibits.json')) {
+            foreach ($json as $row) {
+                $this->db->insert('NeatlineExhibit', $row);
+            }
+        }
+
+        // `records.json`
+        if (strpos($path, 'records.json')) {
+            foreach ($json as $row) {
+                $this->db->insert('NeatlineDataRecord', $row);
+            }
+        }
+
     }
 
 

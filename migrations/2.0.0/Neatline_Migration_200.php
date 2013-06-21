@@ -36,7 +36,6 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
 
             $this->_moveExhibitsToNewTable();
             $this->_setDefaultBaseLayers();
-            $this->_createSimileExpansion();
             $this->_migrateSimileDefaults();
             $this->_moveRecordsToNewTable();
             $this->db->commit();
@@ -82,7 +81,35 @@ SQL;
      */
     private function _installNewTables()
     {
+
+        // Install the default Neatline tables.
+
         $this->plugin->hookInstall();
+
+        // Install the SIMILE exhibit expansion table.
+
+        $sql = <<<SQL
+
+        CREATE TABLE IF NOT EXISTS
+        {$this->db->prefix}neatline_simile_exhibit_expansions (
+
+            id          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            parent_id   INT(10) UNSIGNED NULL,
+
+            simile_default_date     VARCHAR(100) NULL,
+            simile_interval_unit    VARCHAR(100) NULL,
+            simile_interval_pixels  INT(10) UNSIGNED NULL,
+            simile_tape_height      INT(10) UNSIGNED NULL,
+            simile_track_height     INT(10) UNSIGNED NULL,
+
+            PRIMARY KEY             (id)
+
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SQL;
+
+        $this->db->query($sql);
+
     }
 
 
@@ -169,39 +196,6 @@ SQL;
 
 
     /**
-     * Insert the `neatline_simile_exhibit_expansions` table created by
-     * the NeatlineSimile widget.
-     */
-    private function _createSimileExpansion()
-    {
-
-        $sql = <<<SQL
-
-        CREATE TABLE IF NOT EXISTS
-
-            {$this->db->prefix}neatline_simile_exhibit_expansions
-
-            `id`            INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `parent_id`     INT(10) UNSIGNED NULL,
-
-            `simile_default_date`       VARCHAR(100) NULL,
-            `simile_interval_unit`      VARCHAR(100) NULL,
-            `simile_interval_pixels`    INT(10) UNSIGNED NULL,
-            `simile_tape_height`        INT(10) UNSIGNED NULL,
-            `simile_track_height`       INT(10) UNSIGNED NULL,
-
-             PRIMARY KEY        (`id`)
-
-        ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-SQL;
-
-        $this->db->query($sql);
-
-    }
-
-
-    /**
      * TODO.
      */
     private function _migrateSimileDefaults()
@@ -215,14 +209,27 @@ SQL;
      */
     private function _moveRecordsToNewTable()
     {
-        // TODO
+
+        $sql = <<<SQL
+        SELECT * FROM {$this->db->prefix}neatline_data_records_migrate;
+SQL;
+
+        $q = $this->db->query($sql);
+        $q->setFetchMode(Zend_Db::FETCH_OBJ);
+        $oldRecords = $q->fetchAll();
+
+        foreach ($oldRecords as $old) {
+            $new = new NeatlineRecord;
+            $new->save();
+        }
+
     }
 
 
     /**
      * TODO.
      */
-    private function __processExtantFields()
+    private function __processExtantFields($old, $new)
     {
         // TODO
     }
@@ -231,7 +238,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processInheritedFields()
+    private function __processInheritedFields($old, $new)
     {
         // TODO
     }
@@ -240,7 +247,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processTitleAndBody()
+    private function __processTitleAndBody($old, $new)
     {
         // TODO
     }
@@ -249,7 +256,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processActivations()
+    private function __processActivations($old, $new)
     {
         // TODO
     }
@@ -258,7 +265,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processCoverage()
+    private function __processCoverage($old, $new)
     {
         // TODO
     }
@@ -267,7 +274,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processWmsLayer()
+    private function __processWmsLayer($old, $new)
     {
         // TODO
     }
