@@ -226,4 +226,29 @@ SQL;
     }
 
 
+    /**
+     * All values on the old exhibit table that have a direct equivalent
+     * on the new exhibits table should be migrated directly.
+     */
+    public function testMigrateExtantExhibitFields()
+    {
+
+        $this->_loadFixture('Hotchkiss.exhibits.json');
+
+        $this->_upgrade();
+        $this->_migrate();
+
+        $this->_assertExhibitMigration('id',                'id');
+        $this->_assertExhibitMigration('modified',          'modified');
+        $this->_assertExhibitMigration('name',              'title');
+        $this->_assertExhibitMigration('description',       'narrative');
+        $this->_assertExhibitMigration('slug',              'slug');
+        $this->_assertExhibitMigration('public',            'public');
+        $this->_assertExhibitMigration('query',             'query');
+        $this->_assertExhibitMigration('default_map_bounds','map_focus');
+        $this->_assertExhibitMigration('default_map_zoom',  'map_zoom');
+
+    }
+
+
 }

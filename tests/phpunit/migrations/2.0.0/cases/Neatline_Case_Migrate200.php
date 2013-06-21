@@ -275,4 +275,70 @@ SQL;
     }
 
 
+    /**
+     * Assert that all values for field A on table X are the same as all
+     * values for field B on table Y.
+     *
+     * @param string $f1
+     * @param string $f2
+     * @param string $t1
+     * @param string $t2
+     */
+    protected function _assertMigration($f1, $f2, $t1, $t2)
+    {
+
+        $sql1 = <<<SQL
+        SELECT id, $f1 from {$this->db->prefix}$t1;
+SQL;
+
+        $sql2 = <<<SQL
+        SELECT id, $f2 from {$this->db->prefix}$t2;
+SQL;
+
+        $rows1 = $this->db->query($sql1)->fetchAll();
+        $rows2 = $this->db->query($sql2)->fetchAll();
+
+        $values1 = array();
+        foreach ($rows1 as $row) {
+            $values1[$row['id']] = $row[$f1];
+        }
+
+        $values2 = array();
+        foreach ($rows2 as $row) {
+            $values2[$row['id']] = $row[$f2];
+        }
+
+        $this->assertEquals($values1, $values2);
+
+    }
+
+
+    /**
+     * Assert that an exhibit field was migrated to the new table.
+     *
+     * @param string $f1
+     * @param string $f2
+     */
+    protected function _assertExhibitMigration($f1, $f2)
+    {
+        $this->_assertMigration(
+            $f1, $f2, 'neatline_exhibits_migrate', 'neatline_exhibits'
+        );
+    }
+
+
+    /**
+     * Assert that a record field was migrated to the new table.
+     *
+     * @param string $f1
+     * @param string $f2
+     */
+    protected function _assertRecordMigration($f1, $f2)
+    {
+        $this->_assertMigration(
+            $f1, $f2, 'neatline_data_records_migrate', 'neatline_records'
+        );
+    }
+
+
 }
