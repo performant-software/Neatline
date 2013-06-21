@@ -269,7 +269,7 @@ SQL;
 
         $nlr->id                    = $data->id;
         $nlr->owner_id              = 0;
-        $nlr->item_id               = $data->item_id;
+        $nlr->item_id               = null;
         $nlr->exhibit_id            = $data->exhibit_id;
         $nlr->added                 = $now;
         $nlr->modified              = $now;

@@ -165,7 +165,7 @@ class NeatlinePlugin_Migration_Test extends NeatlinePlugin_Migration_TestBase
 
         $this->_testRecordMigration('id',                 'id');
         $this->_testRecordMigration('exhibit_id',         'exhibit_id');
-        $this->_testRecordMigration('item_id',            'item_id');
+        $this->_testRecordMigration('title',              'title');
         $this->_testRecordMigration('slug',               'slug');
         $this->_testRecordMigration('start_date',         'start_date');
         $this->_testRecordMigration('end_date',           'end_date');
