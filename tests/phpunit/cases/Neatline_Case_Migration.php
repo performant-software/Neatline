@@ -80,8 +80,6 @@ SQL;
     protected function _create1xSchema()
     {
 
-
-        // EXHIBITS
         $this->db->query("CREATE TABLE IF NOT EXISTS `{$this->db->prefix}neatline_exhibits` (
 
             `id`                            int(10) unsigned not null auto_increment,
@@ -125,8 +123,6 @@ SQL;
 
         ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
-
-        // RECORDS
         $this->db->query("CREATE TABLE IF NOT EXISTS `{$this->db->prefix}neatline_data_records` (
 
             `id`                    int(10) unsigned not null auto_increment,
@@ -166,8 +162,6 @@ SQL;
 
         ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci");
 
-
-        // LAYERS
         $this->db->query("CREATE TABLE IF NOT EXISTS `{$this->db->prefix}neatline_base_layers` (
 
             `id`    int(10) unsigned not null auto_increment,
@@ -193,8 +187,6 @@ SQL;
             $table->insert(array('name' => $baseLayer));
         }
 
-
-        // STYLES
         $defaultStyles = array(
             'vector_color'        => '#196aff',
             'stroke_color'        => '#000000',
@@ -215,7 +207,6 @@ SQL;
         foreach ($defaultStyles as $style => $value) {
           set_option($style, $value);
         }
-
 
     }
 
