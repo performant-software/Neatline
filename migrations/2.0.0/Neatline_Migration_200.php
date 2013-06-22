@@ -227,7 +227,6 @@ SQL;
             $new = new NeatlineRecord;
             $this->__processExtantFields($old, $new);
             $this->__processCoverage($old, $new);
-            var_dump($new->coverage);
             $new->save();
         }
 
@@ -276,7 +275,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processActivations($old, $new)
+    private function __processWidgets($old, $new)
     {
 
     }

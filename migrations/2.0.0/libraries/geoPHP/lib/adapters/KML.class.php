@@ -98,7 +98,9 @@ class KML extends GeoAdapter
         $geometries[] = $this->$function($this->xmlobj->documentElement);
       }
     }
-    return geoPHP::geometryReduce($geometries);
+    // TODO|dev
+    // return geoPHP::geometryReduce($geometries);
+    return new GeometryCollection($geometries);
   }
 
   protected function childElements($xml, $nodename = '') {

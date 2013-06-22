@@ -31,17 +31,10 @@ class Migrate200Test_ProcessCoverage extends Neatline_Case_Migrate200
      */
     public function testWKTtoWKT()
     {
-
-        $this->_loadFixture('ProcessCoverage.records.json');
-
-        $this->_upgrade();
-        $this->_migrate();
-
         $this->assertEquals(
             $this->_getRecordByTitle('WKT')->coverage,
             'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))'
         );
-
     }
 
 
@@ -51,17 +44,10 @@ class Migrate200Test_ProcessCoverage extends Neatline_Case_Migrate200
      */
     public function testKMLtoWKT()
     {
-
-        $this->_loadFixture('ProcessCoverage.records.json');
-
-        $this->_upgrade();
-        $this->_migrate();
-
         $this->assertEquals(
             $this->_getRecordByTitle('KML')->coverage,
             'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))'
         );
-
     }
 
 
