@@ -229,7 +229,7 @@ SQL;
             $new = new NeatlineRecord;
 
             $this->__processExtantFields($old, $new);
-            $this->__processBody($old, $new);
+            // $this->__processBody($old, $new);
             $this->__processWidgets($old, $new);
             $this->__processCoverage($old, $new);
             $this->__processWmsLayer($old, $new);
@@ -266,25 +266,25 @@ SQL;
      * field directly to the new `body` field. Otherwise, use the compiled
      * metadata output from the parent item.
      */
-    private function __processBody($old, $new)
-    {
+    // private function __processBody($old, $new)
+    // {
 
-        if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
-            $new->body = $old->description;
-        }
+    //     if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
+    //         $new->body = $old->description;
+    //     }
 
-        else if (!is_null($old->item_id)) {
+    //     else if (!is_null($old->item_id)) {
 
-            // Get the parent item, set on view.
-            $item = get_record_by_id('Item', $old->item_id);
-            get_view()->item = $item;
+    //         // Get the parent item, set on view.
+    //         $item = get_record_by_id('Item', $old->item_id);
+    //         get_view()->item = $item;
 
-            // Migrate the compiled metadata output.
-            $new->body = get_view()->partial('exhibits/item.php');
+    //         // Migrate the compiled metadata output.
+    //         $new->body = get_view()->partial('exhibits/item.php');
 
-        }
+    //     }
 
-    }
+    // }
 
 
     /**

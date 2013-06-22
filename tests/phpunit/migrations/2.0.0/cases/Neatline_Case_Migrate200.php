@@ -21,7 +21,6 @@ class Neatline_Case_Migrate200 extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_create1xSchema();
-        $this->_mockTheme();
     }
 
 
