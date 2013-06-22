@@ -228,11 +228,13 @@ SQL;
         foreach ($oldRecords as $old) {
             $new = new NeatlineRecord;
 
-            $this->__processExtantFields($old, $new);
-            // $this->__processBody($old, $new);
-            $this->__processWidgets($old, $new);
-            $this->__processCoverage($old, $new);
-            $this->__processWmsLayer($old, $new);
+            $this->__processExtantFields    ($old, $new);
+            $this->__processInheritedFields ($old, $new);
+            $this->__processBody            ($old, $new);
+            $this->__processPresenter       ($old, $new);
+            $this->__processWidgets         ($old, $new);
+            $this->__processCoverage        ($old, $new);
+            $this->__processWmsLayer        ($old, $new);
 
             $new->save();
         }
@@ -257,6 +259,15 @@ SQL;
         $new->weight        = $old->display_order;
         $new->map_focus     = $old->map_bounds;
         $new->map_zoom      = $old->map_zoom;
+    }
+
+
+    /**
+     * TODO.
+     */
+    private function __processInheritedFields($old, $new)
+    {
+
     }
 
 
@@ -288,20 +299,12 @@ SQL;
 
 
     /**
-     * TODO.
-     */
-    private function __processInheritedFields($old, $new)
-    {
-
-    }
-
-
-    /**
-     * TODO.
+     * If `show_bubble` on the old record is flipped on, set `presenter`
+     * on the new record to `StaticBubble`; otherwise, `None`.
      */
     private function __processPresenter($old, $new)
     {
-
+        $new->presenter = $old->show_bubble ? 'StaticBubble' : 'None';
     }
 
 
