@@ -69,6 +69,10 @@ SQL;
         DROP TABLE {$this->db->prefix}neatline_maps_services
 SQL;
 
+        $sql8 = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_simile_exhibit_expansions
+SQL;
+
         try { $this->db->query($sql1); } catch (Exception $e) {}
         try { $this->db->query($sql2); } catch (Exception $e) {}
         try { $this->db->query($sql3); } catch (Exception $e) {}
@@ -76,6 +80,7 @@ SQL;
         try { $this->db->query($sql5); } catch (Exception $e) {}
         try { $this->db->query($sql6); } catch (Exception $e) {}
         try { $this->db->query($sql7); } catch (Exception $e) {}
+        try { $this->db->query($sql8); } catch (Exception $e) {}
 
     }
 
@@ -403,6 +408,28 @@ SQL;
         return $this->_records->findBySql(
             'title=?', array($title), true
         );
+    }
+
+
+    /**
+     * Get the SIMILE expansion row that corresponds to an exhibit.
+     *
+     * @param NeatlineExhibit $exhibit
+     */
+    protected function _getSimileExpansionByExhibit($exhibit)
+    {
+
+        $sql = <<<SQL
+        SELECT * FROM
+        {$this->db->prefix}neatline_simile_exhibit_expansions
+        WHERE parent_id={$exhibit->id};
+SQL;
+
+
+        $q = $this->db->query($sql);
+        $q->setFetchMode(Zend_Db::FETCH_OBJ);
+        return $q->fetch();
+
     }
 
 

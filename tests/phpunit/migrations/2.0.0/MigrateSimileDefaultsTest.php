@@ -27,22 +27,32 @@ class Migrate200Test_MigrateSimileDefaults
 
 
     /**
-     * If the timeline was enabled on an old exhibit, a SIMILE expansion
-     * row should be created for the new exhibit.
-     */
-    public function testCreateExpansionWhenTimelineActive()
-    {
-        // TODO
-    }
-
-
-    /**
      * If the timeline was not enabled on the old exhibit, an expansion
      * should not be created.
      */
     public function testNotCreateExpansionWhenTimelineInactive()
     {
-        // TODO
+        $this->assertFalse($this->_getSimileExpansionByExhibit(
+            $this->_getExhibitByTitle('No Timeline')
+        ));
+    }
+
+
+    /**
+     * If the timeline was enabled on an old exhibit, a SIMILE expansion
+     * row should be created for the new exhibit.
+     */
+    public function testCreateExpansionWhenTimelineActive()
+    {
+
+        $expansion = $this->_getSimileExpansionByExhibit(
+            $this->_getExhibitByTitle('Timeline Zoom')
+        );
+
+        $this->assertEquals($expansion->simile_default_date,    '2000');
+        $this->assertEquals($expansion->simile_tape_height,     10);
+        $this->assertEquals($expansion->simile_track_height,    30);
+
     }
 
 
@@ -53,7 +63,14 @@ class Migrate200Test_MigrateSimileDefaults
      */
     public function testMigrateExistingZoom()
     {
-        // TODO
+
+        $expansion = $this->_getSimileExpansionByExhibit(
+            $this->_getExhibitByTitle('Timeline Zoom')
+        );
+
+        $this->assertEquals($expansion->simile_interval_unit,   'HOUR');
+        $this->assertEquals($expansion->simile_interval_pixels, 300);
+
     }
 
 
@@ -63,7 +80,14 @@ class Migrate200Test_MigrateSimileDefaults
      */
     public function testSetDefaultZoom()
     {
-        // TODO
+
+        $expansion = $this->_getSimileExpansionByExhibit(
+            $this->_getExhibitByTitle('Timeline No Zoom')
+        );
+
+        $this->assertEquals($expansion->simile_interval_unit,   'YEAR');
+        $this->assertEquals($expansion->simile_interval_pixels, 100);
+
     }
 
 

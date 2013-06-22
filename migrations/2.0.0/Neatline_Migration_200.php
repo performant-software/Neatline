@@ -251,15 +251,18 @@ SQL;
 
         foreach ($oldExhibits as $old) {
 
-            // Only create expansion if the timeline was enabled.
+            // Don't create an expansion if the timeline was disabled on
+            // the old exhibit.
 
             if (!$old->is_timeline) continue;
 
             // If it is defined, convert the old zoom index into the new
-            // unit and pixels tuple.
+            // unit and pixels values.
 
-            if ($old->default_timeline_zoom) {
-                $zoom   = self::$_zoomIndex[$old->default_timeline_zoom];
+            $index = $old->default_timeline_zoom;
+
+            if (!is_null($index)) {
+                $zoom   = self::$_zoomIndex[$index];
                 $pixels = $zoom[0];
                 $unit   = $zoom[1];
             } else {
