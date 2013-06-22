@@ -228,6 +228,7 @@ SQL;
             $this->__processExtantFields($old, $new);
             $this->__processWidgets($old, $new);
             $this->__processCoverage($old, $new);
+            $this->__processWmsLayer($old, $new);
             $new->save();
         }
 
@@ -235,8 +236,7 @@ SQL;
 
 
     /**
-     * Set all fields that have direct equivalents in the new schema. Set
-     * the `owner_id` field to the default 0.
+     * Set all fields that have direct equivalents in the new schema.
      */
     private function __processExtantFields($old, $new)
     {
@@ -274,7 +274,8 @@ SQL;
 
 
     /**
-     * TODO.
+     * Convert the old `items_active` and `timeline_active` fields to the
+     * new `Wapoints` and `Simile` slugs.
      */
     private function __processWidgets($old, $new)
     {
@@ -290,7 +291,9 @@ SQL;
 
 
     /**
-     * TODO.
+     * If the old `geocoverage` is a KML value, convert to WKT. If it is
+     * WKT, replace the `|` delimiter with `,` and wrap the pieces inside
+     * of a `GEOMETRYCOLLECTION`.
      */
     private function __processCoverage($old, $new)
     {
@@ -314,10 +317,35 @@ SQL;
 
 
     /**
-     * TODO.
+     * If a record has WMS service record, populate the new `wms_address`
+     * and `wms_layers` fields if the old record was active on the map.
      */
     private function __processWmsLayer($old, $new)
     {
+
+        // Only try to migrate a WMS layer if the record both (a) has a
+        // parent item and (b) was active on the map.
+
+        if (is_null($old->item_id) || !$old->space_active) return;
+
+        $sql = <<<SQL
+        SELECT * from {$this->db->prefix}neatline_maps_services
+        WHERE item_id={$old->item_id};
+SQL;
+
+        // Wrap the query in a try/catch, since NeatlineMaps may not be
+        // installed, in which case the services table would be absent.
+
+        try {
+
+            $service = $this->db->query($sql)->fetch();
+
+            if ($service) {
+                $new->wms_address = $service['address'];
+                $new->wms_layers = $service['layers'];
+            }
+
+        } catch (Exception $e) {}
 
     }
 

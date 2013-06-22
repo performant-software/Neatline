@@ -35,7 +35,7 @@ class Neatline_Case_Migrate200 extends Neatline_Case_Default
 
 
     /**
-     * Clear the existing 2.x schema.
+     * Clear all Neatline tables.
      */
     protected function _clearSchema()
     {
@@ -64,12 +64,17 @@ SQL;
         DROP TABLE {$this->db->prefix}neatline_base_layers_migrate
 SQL;
 
+        $sql7 = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_maps_services
+SQL;
+
         try { $this->db->query($sql1); } catch (Exception $e) {}
         try { $this->db->query($sql2); } catch (Exception $e) {}
         try { $this->db->query($sql3); } catch (Exception $e) {}
         try { $this->db->query($sql4); } catch (Exception $e) {}
         try { $this->db->query($sql5); } catch (Exception $e) {}
         try { $this->db->query($sql6); } catch (Exception $e) {}
+        try { $this->db->query($sql7); } catch (Exception $e) {}
 
     }
 
@@ -225,6 +230,33 @@ SQL;
 
 
     /**
+     * Create the `neatline_maps_services` table.
+     */
+    protected function _createServicesTable()
+    {
+
+        $sql = <<<SQL
+
+        CREATE TABLE IF NOT EXISTS
+        {$this->db->prefix}neatline_maps_services (
+
+            id      int(10) unsigned not null auto_increment,
+            item_id int(10) unsigned unique,
+            address text collate utf8_unicode_ci,
+            layers  text collate utf8_unicode_ci,
+
+            PRIMARY KEY (id)
+
+        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+SQL;
+
+        $this->db->query($sql);
+
+    }
+
+
+    /**
      * Trigger the `upgrade` hook.
      */
     protected function _upgrade()
@@ -269,6 +301,13 @@ SQL;
         if (strpos($path, 'records.json')) {
             foreach ($json as $row) {
                 $this->db->insert('NeatlineDataRecord', $row);
+            }
+        }
+
+        // `services.json`
+        if (strpos($path, 'services.json')) {
+            foreach ($json as $row) {
+                $this->db->insert('NeatlineMapsService', $row);
             }
         }
 
