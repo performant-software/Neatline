@@ -29,6 +29,7 @@ require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
 
 // JOBS
+require_once NL_DIR.'/jobs/abstract/Neatline_Job_MockView.php';
 require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';
 require_once NL_DIR.'/jobs/Neatline_Job_UpgradeFrom1x.php';
 

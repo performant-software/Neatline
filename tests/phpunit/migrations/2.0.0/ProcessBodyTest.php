@@ -31,10 +31,10 @@ class Migrate200Test_ProcessBody extends Neatline_Case_Migrate200
      */
     public function testNoParentItem()
     {
-        // $this->assertEquals(
-            // $this->_getRecordByTitle('No Parent')->body,
-            // 'No parent body.'
-        // );
+        $this->assertEquals(
+            $this->_getRecordByTitle('No Parent')->body,
+            'No parent body.'
+        );
     }
 
 
@@ -42,26 +42,26 @@ class Migrate200Test_ProcessBody extends Neatline_Case_Migrate200
      * If the record has a parent item and `use_dc_metadata` is true, the
      * `description` field should be migrated directly.
      */
-    // public function testParentItemUseDcMetadataDisabled()
-    // {
-    //     $this->assertEquals(
-    //         $this->_getRecordByTitle('DC Disabled')->body,
-    //         'DC disabled body.'
-    //     );
-    // }
+    public function testParentItemUseDcMetadataDisabled()
+    {
+        $this->assertEquals(
+            $this->_getRecordByTitle('DC Disabled')->body,
+            'DC disabled body.'
+        );
+    }
 
 
     /**
      * If the record has a parent item and `use_dc_metadata` is false, the
      * parent item's metadata output should be migrated.
      */
-    // public function testParentItemUseDcMetadataEnabled()
-    // {
-    //     $this->assertRegExp(
-    //         '/item\n/',
-    //         $this->_getRecordByTitle('DC Enabled')->body
-    //     );
-    // }
+    public function testParentItemUseDcMetadataEnabled()
+    {
+        $this->assertRegExp(
+            '/item\n/',
+            $this->_getRecordByTitle('DC Enabled')->body
+        );
+    }
 
 
 }

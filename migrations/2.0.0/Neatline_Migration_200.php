@@ -42,6 +42,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
             $this->_setDefaultBaseLayers();
             $this->_migrateSimileDefaults();
             $this->_moveRecordsToNewTable();
+
             $this->db->commit();
 
         } catch (Exception $e) {
@@ -280,20 +281,20 @@ SQL;
     private function __processBody($old, $new)
     {
 
-    //     if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
-    //         $new->body = $old->description;
-    //     }
+        if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
+            $new->body = $old->description;
+        }
 
-    //     else if (!is_null($old->item_id)) {
+        else if (!is_null($old->item_id)) {
 
-    //         // Get the parent item, set on view.
-    //         $item = get_record_by_id('Item', $old->item_id);
-    //         get_view()->item = $item;
+            // Get the parent item, set on view.
+            $item = get_record_by_id('Item', $old->item_id);
+            get_view()->item = $item;
 
-    //         // Migrate the compiled metadata output.
-    //         $new->body = get_view()->partial('exhibits/item.php');
+            // Migrate the compiled metadata output.
+            $new->body = get_view()->partial('exhibits/item.php');
 
-    //     }
+        }
 
     }
 
