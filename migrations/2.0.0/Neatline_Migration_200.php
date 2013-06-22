@@ -273,12 +273,12 @@ SQL;
 
     /**
      * If the record does not have a parent item - or if it does, and the
-     * `use_dc_metadata` flag is flipped off - migrade the `description`
+     * `use_dc_metadata` flag is flipped off - migrate the `description`
      * field directly to the new `body` field. Otherwise, use the compiled
      * metadata output from the parent item.
      */
-    // private function __processBody($old, $new)
-    // {
+    private function __processBody($old, $new)
+    {
 
     //     if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
     //         $new->body = $old->description;
@@ -295,7 +295,7 @@ SQL;
 
     //     }
 
-    // }
+    }
 
 
     /**
