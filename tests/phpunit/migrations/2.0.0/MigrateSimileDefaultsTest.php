@@ -14,11 +14,33 @@ class Migrate200Test_MigrateSimileDefaults
 {
 
 
+    public function setUp()
+    {
+
+        parent::setUp();
+        $this->_loadFixture('MigrateSimileDefaults.exhibits.json');
+
+        $this->_upgrade();
+        $this->_migrate();
+
+    }
+
+
     /**
-     * The `default_focus_date` from the old exhibit should be migrated
-     * directly to the new `simile_default_date`.
+     * If the timeline was enabled on an old exhibit, a SIMILE expansion
+     * row should be created for the new exhibit.
      */
-    public function testSetDefaultDate()
+    public function testCreateExpansionWhenTimelineActive()
+    {
+        // TODO
+    }
+
+
+    /**
+     * If the timeline was not enabled on the old exhibit, an expansion
+     * should not be created.
+     */
+    public function testNotCreateExpansionWhenTimelineInactive()
     {
         // TODO
     }
