@@ -44,33 +44,26 @@ class Neatline_Case_Migrate200 extends Neatline_Case_Default
         $sql1 = <<<SQL
         DROP TABLE {$this->db->prefix}neatline_exhibits
 SQL;
-
-        $sql3 = <<<SQL
+        $sql2 = <<<SQL
         DROP TABLE {$this->db->prefix}neatline_data_records
 SQL;
-
-        $sql5 = <<<SQL
+        $sql3 = <<<SQL
         DROP TABLE {$this->db->prefix}neatline_records
 SQL;
-
-        $sql2 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_exhibits_migrate
-SQL;
-
         $sql4 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_data_records_migrate
+        DROP TABLE {$this->db->prefix}neatline_simile_exhibit_expansions
 SQL;
-
-        $sql6 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_base_layers_migrate
-SQL;
-
-        $sql7 = <<<SQL
+        $sql5 = <<<SQL
         DROP TABLE {$this->db->prefix}neatline_maps_services
 SQL;
-
+        $sql6 = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_exhibits_migrate
+SQL;
+        $sql7 = <<<SQL
+        DROP TABLE {$this->db->prefix}neatline_data_records_migrate
+SQL;
         $sql8 = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_simile_exhibit_expansions
+        DROP TABLE {$this->db->prefix}neatline_base_layers_migrate
 SQL;
 
         try { $this->db->query($sql1); } catch (Exception $e) {}
