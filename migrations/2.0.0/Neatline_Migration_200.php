@@ -285,7 +285,7 @@ SQL;
             $new->body = $old->description;
         }
 
-        else if (!is_null($old->item_id)) {
+        else if (!is_null($old->item_id) && $old->use_dc_metadata == 1) {
 
             // Get the parent item, set on view.
             $item = get_record_by_id('Item', $old->item_id);

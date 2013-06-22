@@ -21,6 +21,7 @@ class Neatline_Case_Migrate200 extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_create1xSchema();
+        $this->_mockTheme();
     }
 
 
@@ -272,11 +273,8 @@ SQL;
      */
     protected function _migrate()
     {
-        Zend_Registry::get('job_dispatcher')->send(
-            'Neatline_Job_UpgradeFrom1x', array(
-                'web_dir' => nl_getWebDir()
-            )
-        );
+        $helper = new Neatline_Migration_200(null, $this->db, false);
+        $helper->migrateData();
     }
 
 
