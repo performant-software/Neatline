@@ -17,14 +17,14 @@ class FixturesTest_EditorRecordsPublications
     public function testRecords()
     {
 
-        $record = $this->__record($this->exhibit);
+        $record = $this->_record($this->exhibit);
 
         $record->title = 'title';
         $record->body  = 'body';
 
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordsPublications.json'
         );
 

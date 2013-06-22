@@ -16,7 +16,7 @@ class HelpersTest_GetLayersForSelect extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockLayers();
+        $this->_mockLayers();
     }
 
 

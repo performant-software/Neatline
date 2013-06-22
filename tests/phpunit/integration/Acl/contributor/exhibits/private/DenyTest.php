@@ -19,9 +19,9 @@ class AclTest_ContributorExhibitsPrivateDeny extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->loginAsContributor('user1');
-        $this->exhibit = $this->__exhibit('slug', false);
-        $this->loginAsContributor('user2');
+        $this->_loginAsContributor('user1');
+        $this->exhibit = $this->_exhibit('slug', false);
+        $this->_loginAsContributor('user2');
     }
 
 
@@ -31,7 +31,7 @@ class AclTest_ContributorExhibitsPrivateDeny extends Neatline_Case_Default
      */
     public function testCannotViewOtherUsersPrivateExhibits()
     {
-        $this->expect404();
+        $this->_expect404();
         $this->dispatch('neatline/show/slug');
     }
 

@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Migrate200Test_MigrateExtantFields extends Neatline_Case_Migrate200
+class Migrate200Test_ProcessExtantFields extends Neatline_Case_Migrate200
 {
 
 
@@ -17,7 +17,7 @@ class Migrate200Test_MigrateExtantFields extends Neatline_Case_Migrate200
      * All values on the old exhibits table that have a direct equivalent
      * on the new table should be migrated directly.
      */
-    public function testMigrateExtantExhibitFields()
+    public function testProcessExtantExhibitFields()
     {
 
         $this->_loadFixture('Hotchkiss.exhibits.json');
@@ -42,7 +42,7 @@ class Migrate200Test_MigrateExtantFields extends Neatline_Case_Migrate200
      * All values on the old records table that have a direct equivalent
      * on the new table should be migrated directly.
      */
-    public function testMigrateExtantRecordFields()
+    public function testProcessExtantRecordFields()
     {
 
         $this->_loadFixture('Hotchkiss.records.json');

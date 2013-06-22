@@ -16,7 +16,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockLayers();
+        $this->_mockLayers();
     }
 
 
@@ -27,7 +27,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
     public function testDefaultLayerIsIncluded()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->base_layers   = 'Layer1,Layer2';
         $exhibit->base_layer    = 'Layer2';
 
@@ -54,7 +54,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
     public function testDefaultLayerIsExcluded()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->base_layers   = 'Layer1,Layer2';
         $exhibit->base_layer    = 'Layer3';
 

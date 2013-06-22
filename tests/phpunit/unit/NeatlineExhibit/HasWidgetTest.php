@@ -19,7 +19,7 @@ class NeatlineExhibitTest_HasWidget extends Neatline_Case_Default
     public function testHasWidget()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->widgets = 'Widget1,Widget2';
 
         // True if the widget is enabled.

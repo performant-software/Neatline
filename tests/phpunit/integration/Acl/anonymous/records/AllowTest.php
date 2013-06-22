@@ -19,9 +19,9 @@ class AclTest_AnonymousRecordsAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit  = $this->__exhibit('slug');
-        $this->record   = $this->__record($this->exhibit);
-        $this->logout();
+        $this->exhibit  = $this->_exhibit('slug');
+        $this->record   = $this->_record($this->exhibit);
+        $this->_logout();
     }
 
 

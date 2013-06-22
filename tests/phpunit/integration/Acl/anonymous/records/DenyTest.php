@@ -19,9 +19,9 @@ class AclTest_AnonymousRecordsDeny extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit  = $this->__exhibit();
-        $this->record   = $this->__record($this->exhibit);
-        $this->logout();
+        $this->exhibit  = $this->_exhibit();
+        $this->record   = $this->_record($this->exhibit);
+        $this->_logout();
     }
 
 
@@ -41,7 +41,7 @@ class AclTest_AnonymousRecordsDeny extends Neatline_Case_Default
      */
     public function testCannotUpdateRecords()
     {
-        $this->setPut(array());
+        $this->_setPut(array());
         $this->dispatch('neatline/records/'.$this->record->id);
         $this->assertAction('login');
     }

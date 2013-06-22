@@ -21,12 +21,12 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
         parent::setUp();
 
-        $user1 = $this->loginAsContributor('user1');
-        $this->exhibit = $this->__exhibit();
-        $this->record1 = $this->__record($this->exhibit);
+        $user1 = $this->_loginAsContributor('user1');
+        $this->exhibit = $this->_exhibit();
+        $this->record1 = $this->_record($this->exhibit);
 
-        $user2 = $this->loginAsContributor('user2');
-        $this->record2 = $this->__record($this->exhibit);
+        $user2 = $this->_loginAsContributor('user2');
+        $this->record2 = $this->_record($this->exhibit);
 
         $this->_authenticateUser($user1);
 
@@ -39,7 +39,7 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
      */
     public function testCanCreateOwnRecordsInOwnExhibits()
     {
-        $this->setPost(array('exhibit_id' => $this->exhibit->id));
+        $this->_setPost(array('exhibit_id' => $this->exhibit->id));
         $this->dispatch('neatline/records');
         $this->assertNotAction('forbidden');
     }
@@ -51,7 +51,7 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
      */
     public function testCanUpdateOwnRecordsInOwnExhibits()
     {
-        $this->setPut(array());
+        $this->_setPut(array());
         $this->dispatch('neatline/records/'.$this->record1->id);
         $this->assertNotAction('forbidden');
     }
@@ -75,7 +75,7 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
      */
     public function testCanUpdateOtherUsersRecordsInOwnExhibits()
     {
-        $this->setPut(array());
+        $this->_setPut(array());
         $this->dispatch('neatline/records/'.$this->record2->id);
         $this->assertNotAction('forbidden');
     }

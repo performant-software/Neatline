@@ -16,9 +16,9 @@ class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
     public function testListRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title = 'list1';
         $record2->title = 'list2';
@@ -31,7 +31,7 @@ class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorSearchMapMirroring.list.json'
         );
 
@@ -41,9 +41,9 @@ class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
     public function testMapRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title = 'map1';
         $record2->title = 'map2';
@@ -56,7 +56,7 @@ class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorSearchMapMirroring.map.json'
         );
 

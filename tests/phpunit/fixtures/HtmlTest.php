@@ -25,14 +25,14 @@ class FixturesTest_Html extends Neatline_Case_Default
         parent::setUp();
 
         nl_mockView();
-        $this->mockRecordWidgets();
-        $this->mockPresenters();
+        $this->_mockRecordWidgets();
+        $this->_mockPresenters();
 
         // Inject real layer definition files.
         Zend_Registry::set('layers', NL_DIR . '/layers');
 
         // Create exhibit.
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->base_layer = 'OpenStreetMap';
         $exhibit->save();
 
@@ -44,7 +44,7 @@ class FixturesTest_Html extends Neatline_Case_Default
 
     public function testNeatlinePartial()
     {
-        $this->writeFixture(
+        $this->_writeFixture(
             get_view()->partial('exhibits/partials/exhibit.php'),
             'neatline-partial.html'
         );
@@ -53,7 +53,7 @@ class FixturesTest_Html extends Neatline_Case_Default
 
     public function testEditorPartial()
     {
-        $this->writeFixture(
+        $this->_writeFixture(
             get_view()->partial('exhibits/partials/editor_core.php'),
             'editor-partial.html'
         );

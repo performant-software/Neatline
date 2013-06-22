@@ -19,8 +19,8 @@ class RecordsControllerTest_Get extends Neatline_Case_Default
     public function testGet()
     {
 
-        $exhibit    = $this->__exhibit();
-        $item       = $this->__item();
+        $exhibit    = $this->_exhibit();
+        $item       = $this->_item();
         $record     = new NeatlineRecord($exhibit, $item);
 
         $record->setArray(array(
@@ -59,7 +59,7 @@ class RecordsControllerTest_Get extends Neatline_Case_Default
         $record->__save();
 
         $this->dispatch('neatline/records/'.$record->id);
-        $r = $this->getResponseArray();
+        $r = $this->_getResponseArray();
 
         $this->assertEquals($r->id,                     $record->id);
         $this->assertEquals($r->item_id,                $item->id);

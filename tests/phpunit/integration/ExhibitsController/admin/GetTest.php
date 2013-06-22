@@ -19,7 +19,7 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
     public function testGet()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $exhibit->setArray(array(
             'public'        => 1,
@@ -38,7 +38,7 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
         $exhibit->save();
 
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         $this->assertEquals($response->public,          1);
         $this->assertEquals($response->query,           '2');

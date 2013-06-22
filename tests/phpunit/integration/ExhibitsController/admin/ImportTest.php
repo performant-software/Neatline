@@ -22,7 +22,7 @@ class ExhibitsControllerTest_AdminImport extends Neatline_Case_Default
         parent::setUp();
 
         // Exhibit:
-        $this->exhibit = $this->__exhibit();
+        $this->exhibit = $this->_exhibit();
 
         // Item type:
         $this->type = insert_item_type(array('name' => 'Type'));
@@ -85,13 +85,13 @@ class ExhibitsControllerTest_AdminImport extends Neatline_Case_Default
 
 
     /**
-     * When "Import Items" is clicked, the `Neatline_Job_ImportItems` job 
+     * When "Import Items" is clicked, the `Neatline_Job_ImportItems` job
      * should be dispatched with the item query parameters.
      */
     public function testStartImport()
     {
 
-        $jobs = $this->mockJobDispatcher();
+        $jobs = $this->_mockJobDispatcher();
 
         // Should dispatch `Neatline_Job_ImportItems`.
         $jobs->expects($this->once())->method('sendLongRunning')->with(

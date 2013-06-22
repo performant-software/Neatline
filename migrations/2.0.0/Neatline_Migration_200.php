@@ -258,6 +258,15 @@ SQL;
     /**
      * TODO.
      */
+    private function __processBody($old, $new)
+    {
+
+    }
+
+
+    /**
+     * TODO.
+     */
     private function __processInheritedFields($old, $new)
     {
 
@@ -267,7 +276,7 @@ SQL;
     /**
      * TODO.
      */
-    private function __processTitleAndBody($old, $new)
+    private function __processPresenter($old, $new)
     {
 
     }

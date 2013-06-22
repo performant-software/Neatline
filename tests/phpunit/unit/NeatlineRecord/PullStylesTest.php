@@ -19,7 +19,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
     public function testPullStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
@@ -41,7 +41,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         // Pull `tag1` and `tag2`.
         $record->pullStyles(array('tag1', 'tag2'));
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should pull `tag1` and `tag2`.
         $this->assertEquals($record->fill_color, '1');
@@ -62,7 +62,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
     public function testPullAllTag()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .all {
               fill-color: 1;
@@ -78,7 +78,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should pull `tag` and `all`.
         $this->assertEquals($record->fill_color, '1');
@@ -93,7 +93,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
     public function testAutoValues()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag {
               fill-color: auto;
@@ -106,7 +106,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // `auto` value should be ignored.
         $this->assertNull($record->fill_color);
@@ -120,7 +120,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
     public function testInvalidSelectors()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag {
               fill-color: color;
@@ -134,7 +134,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Invalid property should be ignored.
         $this->assertEquals($record->fill_color, 'color');
@@ -148,7 +148,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
     public function testNoneCssValues()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag {
               point-image: none;
@@ -161,7 +161,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         // Pull `tag`.
         $record->pullStyles(array('tag'));
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // `none` should be cast to NULL.
         $this->assertNull($record->point_image);

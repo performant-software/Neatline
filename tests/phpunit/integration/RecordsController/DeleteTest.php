@@ -19,22 +19,22 @@ class RecordsControllerTest_Delete extends Neatline_Case_Default
     public function testDelete()
     {
 
-        $exhibit = $this->__exhibit();
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
+        $exhibit = $this->_exhibit();
+        $record1 = $this->_record($exhibit);
+        $record2 = $this->_record($exhibit);
 
         $this->request->setMethod('DELETE');
 
-        $c1 = $this->__records->count();
+        $c1 = $this->_records->count();
         $this->dispatch('neatline/records/'.$record2->id);
-        $c2 = $this->__records->count();
+        $c2 = $this->_records->count();
 
         // Should delete a record.
         $this->assertEquals($c2, $c1-1);
 
         // Should delete the correct record.
-        $this->assertNotNull($this->__records->find($record1->id));
-        $this->assertNull($this->__records->find($record2->id));
+        $this->assertNotNull($this->_records->find($record1->id));
+        $this->assertNull($this->_records->find($record2->id));
 
     }
 

@@ -16,8 +16,8 @@ class FixturesTest_NeatlineMapVectorStyles extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
 
         $record1->coverage = 'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))';
         $record2->coverage = 'GEOMETRYCOLLECTION(POINT(5 6),POINT(7 8))';
@@ -39,7 +39,7 @@ class FixturesTest_NeatlineMapVectorStyles extends Neatline_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapVectorStyles.json'
         );
 

@@ -19,7 +19,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
     public function testUpdateExhibit()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $exhibit->setArray(array(
             'public'        => 0,
@@ -37,7 +37,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
         $exhibit->save();
 
-        $this->setPut(array(
+        $this->_setPut(array(
             'public'        => '1',
             'query'         => '2',
             'base_layers'   => '3',
@@ -52,7 +52,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $exhibit = $this->reload($exhibit);
+        $exhibit = $this->_reload($exhibit);
 
         $this->assertEquals($exhibit->public,       1);
         $this->assertEquals($exhibit->query,        '2');
@@ -75,7 +75,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
     public function testUpdateStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $record  = new NeatlineRecord($exhibit);
         $record->tags = 'tag1';
         $record->save();
@@ -86,9 +86,9 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
             }
         ");
 
-        $this->setPut($values);
+        $this->_setPut($values);
         $this->dispatch('neatline/put/'.$exhibit->id);
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // `styles` should be updated.
         $this->assertEquals($record->fill_color, 'color');

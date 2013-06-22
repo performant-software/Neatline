@@ -23,9 +23,9 @@ class ExhibitsControllerTest_PublicBrowse extends Neatline_Case_Default
     public function testExhibitList()
     {
 
-        $exhibit1 = $this->__exhibit('slug1');
-        $exhibit2 = $this->__exhibit('slug2');
-        $exhibit3 = $this->__exhibit('slug3');
+        $exhibit1 = $this->_exhibit('slug1');
+        $exhibit2 = $this->_exhibit('slug2');
+        $exhibit3 = $this->_exhibit('slug3');
         $exhibit1->title = "Exhibit 1";
         $exhibit2->title = "Exhibit 2";
         $exhibit3->title = "Exhibit 3";
@@ -65,10 +65,10 @@ class ExhibitsControllerTest_PublicBrowse extends Neatline_Case_Default
         set_option('per_page_public', 2);
         set_option('per_page_admin', 10);
 
-        $exhibit1 = $this->__exhibit('slug1');
-        $exhibit2 = $this->__exhibit('slug2');
-        $exhibit3 = $this->__exhibit('slug3');
-        $exhibit4 = $this->__exhibit('slug4');
+        $exhibit1 = $this->_exhibit('slug1');
+        $exhibit2 = $this->_exhibit('slug2');
+        $exhibit3 = $this->_exhibit('slug3');
+        $exhibit4 = $this->_exhibit('slug4');
         $exhibit1->added = '2001-01-01';
         $exhibit2->added = '2002-01-01';
         $exhibit3->added = '2003-01-01';

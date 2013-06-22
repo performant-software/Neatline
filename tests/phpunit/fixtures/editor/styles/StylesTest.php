@@ -16,13 +16,13 @@ class FixturesTest_EditorStyles extends Neatline_Case_Fixture
     public function testExhibit()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles    = '1';
         $exhibit->map_focus = '2';
         $exhibit->map_zoom  = '3';
         $exhibit->save();
 
-        $this->writeFixtureFromRoute('neatline/exhibits/'.$exhibit->id,
+        $this->_writeFixtureFromRoute('neatline/exhibits/'.$exhibit->id,
             'EditorStyles.json'
         );
 

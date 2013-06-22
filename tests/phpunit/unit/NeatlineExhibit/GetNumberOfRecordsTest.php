@@ -18,12 +18,12 @@ class NeatlineExhibitTest_GetNumberOfRecords extends Neatline_Case_Default
      */
     public function testGetNumberOfRecords()
     {
-        $exhibit = $this->__exhibit();
-        $record1 = $this->__record($exhibit);
+        $exhibit = $this->_exhibit();
+        $record1 = $this->_record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 1);
-        $record2 = $this->__record($exhibit);
+        $record2 = $this->_record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 2);
-        $record3 = $this->__record($exhibit);
+        $record3 = $this->_record($exhibit);
         $this->assertEquals($exhibit->getNumberOfRecords(), 3);
     }
 

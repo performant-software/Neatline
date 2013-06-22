@@ -17,9 +17,9 @@ class FixturesTest_NeatlineMapLayerRefreshing
     public function testVectorRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title     = 'title1';
         $record2->title     = 'title2';
@@ -35,7 +35,7 @@ class FixturesTest_NeatlineMapLayerRefreshing
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapLayerRefreshing.vector.original.json'
         );
 
@@ -47,7 +47,7 @@ class FixturesTest_NeatlineMapLayerRefreshing
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapLayerRefreshing.vector.changed.json'
         );
 
@@ -57,9 +57,9 @@ class FixturesTest_NeatlineMapLayerRefreshing
     public function testWmsRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title         = 'title1';
         $record2->title         = 'title2';
@@ -78,7 +78,7 @@ class FixturesTest_NeatlineMapLayerRefreshing
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapLayerRefreshing.wms.original.json'
         );
 
@@ -93,7 +93,7 @@ class FixturesTest_NeatlineMapLayerRefreshing
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapLayerRefreshing.wms.changed.json'
         );
 

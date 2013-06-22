@@ -16,9 +16,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockPresenters();
-        $this->mockExhibitWidgets();
-        $this->mockLayers();
+        $this->_mockPresenters();
+        $this->_mockExhibitWidgets();
+        $this->_mockLayers();
     }
 
 
@@ -87,9 +87,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -112,9 +112,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -137,9 +137,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -162,9 +162,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -187,9 +187,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -207,7 +207,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
     {
 
         // Create an exhibit.
-        $exhibit = $this->__exhibit('test-exhibit');
+        $exhibit = $this->_exhibit('test-exhibit');
 
         // Duplicate slug.
         $this->request->setMethod('POST')->setPost(array(
@@ -215,9 +215,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 1);
+        $this->assertEquals($this->_exhibits->count(), 1);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 1);
+        $this->assertEquals($this->_exhibits->count(), 1);
         $this->assertAction('add');
 
         // Should flash error.
@@ -240,9 +240,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->assertAction('add');
 
         // Should flash error.
@@ -270,12 +270,12 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Should create new exhibit.
-        $this->assertEquals($this->__exhibits->count(), 0);
+        $this->assertEquals($this->_exhibits->count(), 0);
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->__exhibits->count(), 1);
+        $this->assertEquals($this->_exhibits->count(), 1);
 
         // Get the new exhibit.
-        $exhibit = $this->getLastRow($this->__exhibits);
+        $exhibit = $this->_getLastRow($this->_exhibits);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title');

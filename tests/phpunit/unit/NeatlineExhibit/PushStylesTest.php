@@ -19,7 +19,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
     public function testPushStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
@@ -39,8 +39,8 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record2->save();
 
         $exhibit->pushStyles();
-        $record1 = $this->reload($record1);
-        $record2 = $this->reload($record2);
+        $record1 = $this->_reload($record1);
+        $record2 = $this->_reload($record2);
 
         // Record 1 should have `tag1` styles.
         $this->assertEquals($record1->fill_color, '1');
@@ -63,7 +63,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
     public function testAutoValues()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: color;
@@ -75,7 +75,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record->save();
 
         $exhibit->pushStyles();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should ignore rules with `auto` value.
         $this->assertEquals($record->fill_color, 'color');
@@ -90,7 +90,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
     public function testNoneValues()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               point-image: none;
@@ -102,7 +102,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record->save();
 
         $exhibit->pushStyles();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should push `none` as NULL.
         $this->assertNull($record->point_image);
@@ -116,7 +116,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
     public function testInvalidSelectors()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: color;
@@ -128,7 +128,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record->save();
 
         $exhibit->pushStyles();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should ignore rules with non-style properties.
         $this->assertEquals($record->fill_color, 'color');
@@ -142,18 +142,18 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
     public function testAllSelector()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .all {
               fill-color: color;
             }
         ";
-        $record1 = $this->__record($exhibit);
-        $record2 = $this->__record($exhibit);
+        $record1 = $this->_record($exhibit);
+        $record2 = $this->_record($exhibit);
 
         $exhibit->pushStyles();
-        $record1 = $this->reload($record1);
-        $record2 = $this->reload($record2);
+        $record1 = $this->_reload($record1);
+        $record2 = $this->_reload($record2);
 
         // Both records should be updated.
         $this->assertEquals($record1->fill_color, 'color');
@@ -168,8 +168,8 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
     public function testExhibitIsolation()
     {
 
-        $exhibit1 = $this->__exhibit();
-        $exhibit2 = $this->__exhibit();
+        $exhibit1 = $this->_exhibit();
+        $exhibit2 = $this->_exhibit();
         $exhibit1->styles = "
             .tag1 {
               fill-color: color;
@@ -183,8 +183,8 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record2->save();
 
         $exhibit1->pushStyles();
-        $record1 = $this->reload($record1);
-        $record2 = $this->reload($record2);
+        $record1 = $this->_reload($record1);
+        $record2 = $this->_reload($record2);
 
         // Just exhibit 1 records should be updated.
         $this->assertEquals($record1->fill_color, 'color');

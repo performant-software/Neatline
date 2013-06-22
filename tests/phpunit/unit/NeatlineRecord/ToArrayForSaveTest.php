@@ -28,7 +28,7 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_Case_Default
         $this->assertEquals($array['is_coverage'], 1);
 
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should set coverage.
         $this->assertEquals($record->coverage, 'POINT(1 1)');
@@ -50,7 +50,7 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_Case_Default
         $this->assertEquals($array['is_coverage'], 0);
 
         $record->save();
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should set null coverage.
         $this->assertNull($record->coverage);

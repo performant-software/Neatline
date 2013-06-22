@@ -17,7 +17,7 @@ class FixturesTest_NeatlineMapSubscriptions
     public function testRecords()
     {
 
-        $record = $this->__record($this->exhibit);
+        $record = $this->_record($this->exhibit);
 
         $record->setArray(array(
             'point_radius'  => 1,
@@ -28,12 +28,12 @@ class FixturesTest_NeatlineMapSubscriptions
 
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapSubscriptions.records.json'
         );
 
         $this->resetRequest();
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
             'NeatlineMapSubscriptions.record.json'
         );
 

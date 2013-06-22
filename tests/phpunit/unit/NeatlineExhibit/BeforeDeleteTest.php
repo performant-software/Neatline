@@ -19,22 +19,22 @@ class NeatlineExhibitTest_BeforeDelete extends Neatline_Case_Default
     public function testDeleteRecords()
     {
 
-        $exhibit1   = $this->__exhibit();
-        $exhibit2   = $this->__exhibit();
-        $record1    = $this->__record($exhibit1);
-        $record2    = $this->__record($exhibit1);
-        $record3    = $this->__record($exhibit2);
-        $record4    = $this->__record($exhibit2);
+        $exhibit1   = $this->_exhibit();
+        $exhibit2   = $this->_exhibit();
+        $record1    = $this->_record($exhibit1);
+        $record2    = $this->_record($exhibit1);
+        $record3    = $this->_record($exhibit2);
+        $record4    = $this->_record($exhibit2);
 
         $exhibit1->delete();
 
         // Should delete exhibit 1 records.
-        $this->assertNull($this->__records->find($record1->id));
-        $this->assertNull($this->__records->find($record2->id));
+        $this->assertNull($this->_records->find($record1->id));
+        $this->assertNull($this->_records->find($record2->id));
 
         // Should not delete exhibit 2 records.
-        $this->assertNotNull($this->__records->find($record3->id));
-        $this->assertNotNull($this->__records->find($record4->id));
+        $this->assertNotNull($this->_records->find($record3->id));
+        $this->assertNotNull($this->_records->find($record4->id));
 
     }
 

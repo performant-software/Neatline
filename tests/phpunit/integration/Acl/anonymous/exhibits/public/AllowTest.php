@@ -19,8 +19,8 @@ class AclTest_AnonymousExhibitsPublicAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit = $this->__exhibit('slug');
-        $this->logout();
+        $this->exhibit = $this->_exhibit('slug');
+        $this->_logout();
     }
 
 

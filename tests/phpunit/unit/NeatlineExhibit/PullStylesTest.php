@@ -19,7 +19,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
     public function testPullStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
@@ -76,7 +76,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
     public function testInvalidSelectors()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag {
               fill-color: 1;
@@ -109,7 +109,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
     public function testAllSelector()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .all {
               fill-color: 1;
@@ -139,7 +139,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
     public function testNullRecordValues()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .all {
               point-image: url;

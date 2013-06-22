@@ -19,7 +19,7 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
     public function testUpdateRecord()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
 
         $record->setArray(array(
             'slug'                  => '1',
@@ -54,7 +54,7 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
 
         $record->save();
 
-        $this->setPut(array(
+        $this->_setPut(array(
             'slug'                  => '2',
             'title'                 => '3',
             'body'                  => '4',
@@ -86,7 +86,7 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records/'.$record->id);
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         $this->assertEquals($record->slug,                  '2');
         $this->assertEquals($record->title,                 '3');
@@ -126,12 +126,12 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
     public function testUpdateItemId()
     {
 
-        $item = $this->__item();
-        $record = $this->__record();
+        $item = $this->_item();
+        $record = $this->_record();
 
-        $this->setPut(array('item_id' => $item->id));
+        $this->_setPut(array('item_id' => $item->id));
         $this->dispatch('neatline/records/'.$record->id);
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should update `item_id`.
         $this->assertEquals($record->item_id, $item->id);
@@ -145,7 +145,7 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
     public function testUpdateWmsFields()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
 
         $record->setArray(array(
             'wms_address'   => '1',
@@ -154,13 +154,13 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
 
         $record->save();
 
-        $this->setPut(array(
+        $this->_setPut(array(
             'wms_address'   => '3',
             'wms_layers'    => '4'
         ));
 
         $this->dispatch('neatline/records/'.$record->id);
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
 
         // Should update WMS address/layers.
         $this->assertEquals($record->wms_address, '3');
@@ -175,11 +175,11 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
     public function testResponse()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
 
-        $this->setPut();
+        $this->_setPut();
         $this->dispatch('neatline/records/'.$record->id);
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {

@@ -18,8 +18,8 @@ class NeatlineExhibitTableTest_FindBySlug extends Neatline_Case_Default
      */
     public function testFindBySlug()
     {
-        $exhibit = $this->__exhibit('test-slug');
-        $retrieved = $this->__exhibits->findBySlug('test-slug');
+        $exhibit = $this->_exhibit('test-slug');
+        $retrieved = $this->_exhibits->findBySlug('test-slug');
         $this->assertEquals($retrieved->id, $exhibit->id);
     }
 
@@ -29,8 +29,8 @@ class NeatlineExhibitTableTest_FindBySlug extends Neatline_Case_Default
      */
     public function testFindBySlugEscaping()
     {
-        $exhibit = $this->__exhibit('---slug-1-');
-        $retrievedExhibit = $this->__exhibits->findBySlug('"; err;');
+        $exhibit = $this->_exhibit('---slug-1-');
+        $retrievedExhibit = $this->_exhibits->findBySlug('"; err;');
         $this->assertNull($retrievedExhibit);
     }
 

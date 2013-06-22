@@ -19,8 +19,8 @@ class NeatlineRecordTest_Construct extends Neatline_Case_Default
     public function testSetParentReferences()
     {
 
-        $exhibit    = $this->__exhibit();
-        $item       = $this->__item();
+        $exhibit    = $this->_exhibit();
+        $item       = $this->_item();
         $record     = new NeatlineRecord($exhibit, $item);
 
         // Item and exhibit keys should be set.
@@ -36,7 +36,7 @@ class NeatlineRecordTest_Construct extends Neatline_Case_Default
     public function testNoItem()
     {
 
-        $exhibit    = $this->__exhibit();
+        $exhibit    = $this->_exhibit();
         $record     = new NeatlineRecord($exhibit);
 
         // Exhibit key should be set.

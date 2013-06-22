@@ -19,9 +19,9 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
     public function testCreateRecord()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
-        $this->setPost(array(
+        $this->_setPost(array(
             'exhibit_id'            => $exhibit->id,
             'slug'                  => '1',
             'title'                 => '2',
@@ -53,19 +53,19 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
             'map_focus'             => '29'
         ));
 
-        $c1 = $this->__records->count();
+        $c1 = $this->_records->count();
         $this->dispatch('neatline/records');
-        $c2 = $this->__records->count();
+        $c2 = $this->_records->count();
 
         // Should create new record.
         $this->assertEquals($c2, $c1+1);
 
         // Should emit new id.
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
         $this->assertNotNull($response->id);
 
         // Load the new record.
-        $r = $this->__records->find($response->id);
+        $r = $this->_records->find($response->id);
 
         // Should update fields.
         $this->assertEquals($r->exhibit_id,             $exhibit->id);
@@ -107,16 +107,16 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
     public function testSetItemId()
     {
 
-        $item = $this->__item();
-        $exhibit = $this->__exhibit();
+        $item = $this->_item();
+        $exhibit = $this->_exhibit();
 
-        $this->setPost(array(
+        $this->_setPost(array(
             'exhibit_id'    => $exhibit->id,
             'item_id'       => $item->id
         ));
 
         $this->dispatch('neatline/records');
-        $record = $this->getLastRow($this->__records);
+        $record = $this->_getLastRow($this->_records);
 
         // Should update `item_id`.
         $this->assertEquals($record->item_id, $item->id);
@@ -130,16 +130,16 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
     public function testSetWmsFields()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
-        $this->setPost(array(
+        $this->_setPost(array(
             'exhibit_id'    => $exhibit->id,
             'wms_address'   => '1',
             'wms_layers'    => '2',
         ));
 
         $this->dispatch('neatline/records');
-        $record = $this->getLastRow($this->__records);
+        $record = $this->_getLastRow($this->_records);
 
         // Should update WMS address/layers.
         $this->assertEquals($record->wms_address, '1');
@@ -154,17 +154,17 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
     public function testResponse()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
-        $this->setPost(array(
+        $this->_setPost(array(
             'exhibit_id' => $exhibit->id
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Get the new record.
-        $record = $this->getLastRow($this->__records);
+        $record = $this->_getLastRow($this->_records);
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {

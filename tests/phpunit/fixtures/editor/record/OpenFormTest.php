@@ -16,9 +16,9 @@ class FixturesTest_EditorRecordOpenForm extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title     = 'title1';
         $record2->title     = 'title2';
@@ -40,7 +40,7 @@ class FixturesTest_EditorRecordOpenForm extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordOpenForm.records.json'
         );
 

@@ -387,7 +387,7 @@ SQL;
      */
     protected function _getExhibitByTitle($title)
     {
-        return $this->__exhibits->findBySql(
+        return $this->_exhibits->findBySql(
             'title=?', array($title), true
         );
     }
@@ -400,7 +400,7 @@ SQL;
      */
     protected function _getRecordByTitle($title)
     {
-        return $this->__records->findBySql(
+        return $this->_records->findBySql(
             'title=?', array($title), true
         );
     }

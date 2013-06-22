@@ -19,7 +19,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
     public function testSaveForm()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $exhibit->saveForm(array(
             'base_layers'   => array('1','2'),
@@ -34,7 +34,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
             'map_zoom'      => '12'
         ));
 
-        $exhibit = $this->__exhibits->find($exhibit->id);
+        $exhibit = $this->_exhibits->find($exhibit->id);
 
         $this->assertEquals($exhibit->base_layers,  '1,2');
         $this->assertEquals($exhibit->base_layer,   '3');
@@ -56,7 +56,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
     public function testCastWhitespaceToNull()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // String field.
         $exhibit->saveForm(array('title' => ''));
@@ -80,7 +80,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
     public function testSetPublishedTimestamp()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Should set when `public` is flipped on for the first time.
         $exhibit->saveForm(array('public' => 1));

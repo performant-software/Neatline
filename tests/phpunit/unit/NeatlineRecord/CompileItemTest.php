@@ -16,7 +16,7 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockTheme();
+        $this->_mockTheme();
     }
 
 
@@ -27,8 +27,8 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
     public function testCompileItem()
     {
 
-        $exhibit = $this->__exhibit();
-        $item = $this->__item('title');
+        $exhibit = $this->_exhibit();
+        $item = $this->_item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->compileItem();

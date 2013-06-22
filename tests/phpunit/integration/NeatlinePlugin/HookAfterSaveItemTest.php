@@ -16,7 +16,7 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockTheme();
+        $this->_mockTheme();
     }
 
 
@@ -26,9 +26,9 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_Case_Default
     public function testHookAfterSaveItem()
     {
 
-        $item       = $this->__item('title');
-        $exhibit    = $this->__exhibit();
-        $record     = $this->__record($exhibit, $item);
+        $item       = $this->_item('title');
+        $exhibit    = $this->_exhibit();
+        $record     = $this->_record($exhibit, $item);
 
         // Update the item.
         update_item($item, array(), array(
@@ -40,7 +40,7 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_Case_Default
         ));
 
         // Record should be compiled.
-        $record = $this->reload($record);
+        $record = $this->_reload($record);
         $this->assertRegExp('/item\n/', nl_getItemMarkup($record));
         $this->assertEquals($record->title, 'title');
 

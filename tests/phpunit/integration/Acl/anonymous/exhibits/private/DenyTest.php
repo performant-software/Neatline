@@ -19,8 +19,8 @@ class AclTest_AnonymousExhibitsPrivateDeny extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit = $this->__exhibit('slug', false);
-        $this->logout();
+        $this->exhibit = $this->_exhibit('slug', false);
+        $this->_logout();
     }
 
 
@@ -29,7 +29,7 @@ class AclTest_AnonymousExhibitsPrivateDeny extends Neatline_Case_Default
      */
     public function testCannotViewPrivateExhibits()
     {
-        $this->expect404();
+        $this->_expect404();
         $this->dispatch('neatline/show/slug');
     }
 

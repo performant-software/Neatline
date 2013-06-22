@@ -17,9 +17,9 @@ class FixturesTest_EditorSearchQueryExecution
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title = 'result1';
         $record2->title = 'result2';
@@ -32,7 +32,7 @@ class FixturesTest_EditorSearchQueryExecution
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorSearchQueryExecution.json'
         );
 

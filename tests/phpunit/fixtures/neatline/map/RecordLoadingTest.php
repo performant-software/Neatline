@@ -16,8 +16,8 @@ class FixturesTest_NeatlineMapRecordLoading extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
 
         $record1->coverage = 'POINT(1 2)';
         $record2->coverage = 'POINT(3 4)';
@@ -25,13 +25,13 @@ class FixturesTest_NeatlineMapRecordLoading extends Neatline_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapRecordLoading.two.json'
         );
 
         $record2->delete();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapRecordLoading.one.json'
         );
 

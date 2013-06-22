@@ -20,10 +20,10 @@ class ImportItemsTest extends Neatline_Case_Default
     public function testCreateRecords()
     {
 
-        $item1 = $this->__item();
-        $item2 = $this->__item();
+        $item1 = $this->_item();
+        $item2 = $this->_item();
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_Job_ImportItems', array(
@@ -36,7 +36,7 @@ class ImportItemsTest extends Neatline_Case_Default
         );
 
         // Should match item 1, not item 2.
-        $records = $this->getRecordsByExhibit($exhibit);
+        $records = $this->_getRecordsByExhibit($exhibit);
         $this->assertEquals($records[0]['item_id'], $item1->id);
         $this->assertCount(1, $records);
 
@@ -51,9 +51,9 @@ class ImportItemsTest extends Neatline_Case_Default
     public function testRecompileRecords()
     {
 
-        $item = $this->__item();
+        $item = $this->_item();
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Create existing item-backed record.
         $record = new NeatlineRecord($exhibit, $item);
@@ -70,7 +70,7 @@ class ImportItemsTest extends Neatline_Case_Default
         );
 
         // Should not duplicate the record.
-        $records = $this->getRecordsByExhibit($exhibit);
+        $records = $this->_getRecordsByExhibit($exhibit);
         $this->assertCount(1, $records);
 
         // Should recompile the record.
@@ -88,11 +88,11 @@ class ImportItemsTest extends Neatline_Case_Default
     public function testSetRecordAdded()
     {
 
-        $item = $this->__item();
+        $item = $this->_item();
         $item->added = '2000-01-01 00:00:00';
         $item->save();
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_Job_ImportItems', array(
@@ -105,7 +105,7 @@ class ImportItemsTest extends Neatline_Case_Default
         );
 
         // Should set `added` to match item.
-        $record = $this->getRecordsByExhibit($exhibit, true);
+        $record = $this->_getRecordsByExhibit($exhibit, true);
         $this->assertEquals($record->added, '2000-01-01 00:00:00');
 
     }
@@ -119,9 +119,9 @@ class ImportItemsTest extends Neatline_Case_Default
     public function testSetWebDirectory()
     {
 
-        $item = $this->__item();
+        $item = $this->_item();
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         insert_files_for_item($item, 'Filesystem', array(
             NL_TEST_DIR . '/mocks/file.txt'
@@ -138,7 +138,7 @@ class ImportItemsTest extends Neatline_Case_Default
         );
 
         // Load the new record.
-        $record = $this->getRecordsByExhibit($exhibit, true);
+        $record = $this->_getRecordsByExhibit($exhibit, true);
 
         // Parse `body` HTML.
         $doc = new DOMDocument();

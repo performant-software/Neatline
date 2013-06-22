@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapSubscribeSelectWms
 
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
             'NeatlineMapSubscribeSelectWms.noFocus.json'
         );
 
@@ -37,7 +37,7 @@ class FixturesTest_NeatlineMapSubscribeSelectWms
 
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
             'NeatlineMapSubscribeSelectWms.focus.json'
         );
 

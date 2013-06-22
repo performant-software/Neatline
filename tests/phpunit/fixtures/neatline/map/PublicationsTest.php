@@ -16,11 +16,11 @@ class FixturesTest_NeatlineMapPublications extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record  = $this->__record($this->exhibit);
+        $record  = $this->_record($this->exhibit);
         $record->coverage = 'POINT(1 2)';
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapPublications.json'
         );
 

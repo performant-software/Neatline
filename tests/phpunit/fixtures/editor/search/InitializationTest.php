@@ -17,11 +17,11 @@ class FixturesTest_EditorSearchInitialization
     public function testRecords()
     {
 
-        $record = $this->__record($this->exhibit);
+        $record = $this->_record($this->exhibit);
         $record->title = 'title';
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorSearchInitialization.json'
         );
 

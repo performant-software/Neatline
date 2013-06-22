@@ -16,8 +16,8 @@ class FixturesTest_NeatlineMapVectorZindex extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
 
         $record1->title     = 'title1';
         $record2->title     = 'title2';
@@ -29,7 +29,7 @@ class FixturesTest_NeatlineMapVectorZindex extends Neatline_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapVectorZindex.json'
         );
 

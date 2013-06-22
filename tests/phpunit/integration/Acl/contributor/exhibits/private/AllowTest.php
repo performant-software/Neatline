@@ -20,8 +20,8 @@ class AclTest_ContributorExhibitsPrivateAllow
     public function setUp()
     {
         parent::setUp();
-        $this->loginAsContributor();
-        $this->exhibit = $this->__exhibit('slug', false);
+        $this->_loginAsContributor();
+        $this->exhibit = $this->_exhibit('slug', false);
     }
 
 

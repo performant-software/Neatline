@@ -18,7 +18,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
      */
     public function testLoadExhibit()
     {
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $this->dispatch('neatline/editor/'.$exhibit->id);
         $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
     }
@@ -29,7 +29,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
      */
     public function testBaseMarkup()
     {
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $this->dispatch('neatline/editor/'.$exhibit->id);
         $this->assertQuery('#neatline');
         $this->assertQuery('#editor');

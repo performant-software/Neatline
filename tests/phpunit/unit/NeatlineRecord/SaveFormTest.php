@@ -19,7 +19,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testAssignFields()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
 
         $record->saveForm(array(
             'slug'                  => '1',
@@ -92,7 +92,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         nl_mockView();
 
-        $record = $this->__record();
+        $record = $this->_record();
         $record->saveForm(array('item_id' => '1'));
 
         // Should assign `item_id`.
@@ -107,7 +107,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testAssignWmsFields()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
         $record->saveForm(array('wms_address'=>'1', 'wms_layers'=>'2'));
 
         // Should assign WMS fields.
@@ -123,7 +123,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testCastWhitespaceToNull()
     {
 
-        $record = $this->__record();
+        $record = $this->_record();
 
         // String field.
         $record->saveForm(array('fill_color' => ''));
@@ -147,7 +147,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testUpdateExhibitStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
@@ -159,7 +159,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         // Save form with new `fill_color`.
         $record->saveForm(array('fill_color' => '2'));
-        $exhibit = $this->reload($exhibit);
+        $exhibit = $this->_reload($exhibit);
 
         // Should update CSS.
         $this->assertEquals(nl_readCSS($exhibit->styles), array(
@@ -178,7 +178,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testPushStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
@@ -194,7 +194,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         // Save record 1 with new `fill_color`.
         $record1->saveForm(array('fill_color' => '2'));
-        $record2 = $this->reload($record2);
+        $record2 = $this->_reload($record2);
 
         // Should update record 2.
         $this->assertEquals($record2->fill_color, '2');
@@ -211,7 +211,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testPullStyles()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .tag1 {
               fill-color: 1;
@@ -232,8 +232,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
         // Add `tag1` to record 2, along with un-synchronized style.
         $record2->saveForm(array('tags' => 'tag1', 'fill_color' => '2'));
-        $record1 = $this->reload($record1);
-        $record2 = $this->reload($record2);
+        $record1 = $this->_reload($record1);
+        $record2 = $this->_reload($record2);
 
         // Record 1 should be unchanged.
         $this->assertEquals($record1->fill_color, '1');
@@ -252,7 +252,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testPullAllTagWhenUnsaved()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .all {
               fill-color: 1;
@@ -287,7 +287,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testNotPullAllTagWhenSaved()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
         $exhibit->styles = "
             .all {
               fill-color: 1;
@@ -296,9 +296,9 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $exhibit->save();
 
         // Save data to existing record.
-        $record = $this->__record($exhibit);
+        $record = $this->_record($exhibit);
         $record->saveForm(array('fill_color' => '2'));
-        $exhibit = $this->reload($exhibit);
+        $exhibit = $this->_reload($exhibit);
 
         // Should not pull CSS value.
         $this->assertEquals($record->fill_color, '2');

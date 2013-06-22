@@ -16,7 +16,7 @@ class FixturesTest_NeatlineMapWmsOpacity extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record = $this->__record($this->exhibit);
+        $record = $this->_record($this->exhibit);
 
         $record->setArray(array(
             'wms_address'   => 'address',
@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapWmsOpacity extends Neatline_Case_Fixture
 
         $record->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'NeatlineMapWmsOpacity.json'
         );
 

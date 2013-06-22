@@ -19,7 +19,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      *
      * @return string The directory.
      */
-    abstract protected function getFixturesPath();
+    abstract protected function _getFixturesPath();
 
 
     /**
@@ -28,10 +28,10 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     public function tearDown()
     {
         $this->db->query("DELETE FROM
-            `{$this->__exhibits->getTableName()}` WHERE 1=1"
+            `{$this->_exhibits->getTableName()}` WHERE 1=1"
         );
         $this->db->query("DELETE FROM
-            `{$this->__records->getTableName()}` WHERE 1=1"
+            `{$this->_records->getTableName()}` WHERE 1=1"
         );
         parent::tearDown();
     }
@@ -44,7 +44,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param string $role The user's role.
      * @return User $item The item.
      */
-    protected function __user($name='user', $role='super')
+    protected function _user($name='user', $role='super')
     {
 
         $user = new User;
@@ -70,7 +70,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param string $title The exhibit title.
      * @return Item $item The item.
      */
-    protected function __item($title='Test Title')
+    protected function _item($title='Test Title')
     {
         return $item = insert_item(array(), array(
             'Dublin Core' => array (
@@ -89,7 +89,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param boolean $public True if the exhibit is public.
      * @return NeatlineExhibit $neatline The exhibit.
      */
-    protected function __exhibit($slug='test-slug', $public=true)
+    protected function _exhibit($slug='test-slug', $public=true)
     {
 
         $exhibit = new NeatlineExhibit;
@@ -110,11 +110,11 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param Item $item The parent item.
      * @return NeatlineRecord $record The record.
      */
-    protected function __record($exhibit=null, $item=null)
+    protected function _record($exhibit=null, $item=null)
     {
 
         // Get parent exhibit.
-        if (is_null($exhibit)) $exhibit = $this->__exhibit();
+        if (is_null($exhibit)) $exhibit = $this->_exhibit();
 
         // Create record.
         $record = new NeatlineRecord($exhibit, $item);
@@ -130,11 +130,11 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param string $body The fixture body.
      * @param string $file The name of the fixture file.
      */
-    protected function writeFixture($body, $file)
+    protected function _writeFixture($body, $file)
     {
 
         // Open the fixture file.
-        $fixture = fopen($this->getFixturesPath() . $file, 'w');
+        $fixture = fopen($this->_getFixturesPath() . $file, 'w');
 
         // Write fixture.
         fwrite($fixture, $body);
@@ -149,7 +149,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param string $route The resource location.
      * @param string $file The name of the fixture file.
      */
-    protected function writeFixtureFromRoute($route, $file)
+    protected function _writeFixtureFromRoute($route, $file)
     {
 
         // Load the page.
@@ -157,8 +157,8 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
         $this->dispatch($route);
 
         // Write the fixture.
-        $response = $this->getResponseBody();
-        $this->writeFixture($response, $file);
+        $response = $this->_getResponseBody();
+        $this->_writeFixture($response, $file);
 
     }
 
@@ -168,7 +168,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      *
      * @param array $data Key-value pairs.
      */
-    protected function setPut($data=array())
+    protected function _setPut($data=array())
     {
 
         // Open the file.
@@ -191,7 +191,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      *
      * @param array $data Key-value pairs.
      */
-    protected function setPost($data=array())
+    protected function _setPost($data=array())
     {
         $this->request->setMethod('POST')->setRawBody(
             Zend_Json::encode($data)
@@ -204,7 +204,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      *
      * @return Omeka_Job_Dispatcher_Default PHPUnit mock.
      */
-    protected function mockJobDispatcher()
+    protected function _mockJobDispatcher()
     {
 
         // Create a testing-double job dispatcher.
@@ -223,7 +223,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Register mock exhibit widgets filter callback.
      */
-    protected function mockExhibitWidgets()
+    protected function _mockExhibitWidgets()
     {
         add_filter('neatline_exhibit_widgets', 'nl_mockWidgets');
     }
@@ -232,7 +232,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Register mock record widgets filter callback.
      */
-    protected function mockRecordWidgets()
+    protected function _mockRecordWidgets()
     {
         add_filter('neatline_record_widgets', 'nl_mockWidgets');
     }
@@ -241,16 +241,16 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Register mock presenters filter callback.
      */
-    protected function mockPresenters()
+    protected function _mockPresenters()
     {
-        add_filter('neatline_presenters', 'nl_mockPresenters');
+        add_filter('neatline_presenters', 'nl__mockPresenters');
     }
 
 
     /**
      * Register the mock layers JSON.
      */
-    protected function mockLayers()
+    protected function _mockLayers()
     {
         Zend_Registry::set('layers', NL_TEST_DIR . '/mocks/layers');
     }
@@ -259,7 +259,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Register the mock theme scripts.
      */
-    protected function mockTheme()
+    protected function _mockTheme()
     {
         get_view()->addScriptPath(NL_TEST_DIR . '/mocks/theme/neatline');
     }
@@ -272,9 +272,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param boolean $findOne If true, return only first record.
      * @return array The child records.
      */
-    protected function getRecordsByExhibit($exhibit, $findOne=false)
+    protected function _getRecordsByExhibit($exhibit, $findOne=false)
     {
-        return $this->__records->findBySql(
+        return $this->_records->findBySql(
             'exhibit_id=?', array($exhibit->id), $findOne
         );
     }
@@ -285,7 +285,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      *
      * @return array The response body.
      */
-    protected function getResponseBody()
+    protected function _getResponseBody()
     {
         return $this->getResponse()->getBody('default');
     }
@@ -296,19 +296,19 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      *
      * @return array The response data.
      */
-    protected function getResponseArray()
+    protected function _getResponseArray()
     {
-        return json_decode($this->getResponseBody());
+        return json_decode($this->_getResponseBody());
     }
 
 
     /**
      * Reload a record.
      *
-     * @param Omeka_Record_AbstractRecord $record A record to reload.
-     * @return Omeka_Record_AbstractRecord The reloaded record.
+     * @param Omeka_Record_AbstractRecord $record A record to _reload.
+     * @return Omeka_Record_AbstractRecord The _reloaded record.
      */
-    protected function reload($record)
+    protected function _reload($record)
     {
         return $record->getTable()->find($record->id);
     }
@@ -320,7 +320,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param Omeka_Db_Table $table A table.
      * @return Neatline_AbstractRecord The last record.
      */
-    protected function getLastRow($table)
+    protected function _getLastRow($table)
     {
         return end($table->findAll());
     }
@@ -329,7 +329,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Log out the currently-authenticated user.
      */
-    protected function logout()
+    protected function _logout()
     {
 
         // Clear out user on the bootstrap.
@@ -351,9 +351,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param $name An identifier for the user.
      * @return Omeka_User The new user.
      */
-    protected function loginAsResearcher($name='user')
+    protected function _loginAsResearcher($name='user')
     {
-        $user = $this->__user($name, 'researcher');
+        $user = $this->_user($name, 'researcher');
         $this->_authenticateUser($user);
         return $user;
     }
@@ -365,9 +365,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      * @param $name An identifier for the user.
      * @return Omeka_User The new user.
      */
-    protected function loginAsContributor($name='user')
+    protected function _loginAsContributor($name='user')
     {
-        $user = $this->__user($name, 'contributor');
+        $user = $this->_user($name, 'contributor');
         $this->_authenticateUser($user);
         return $user;
     }
@@ -376,7 +376,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Register an expected 404 controller exception.
      */
-    protected function expect404()
+    protected function _expect404()
     {
         $this->setExpectedException('Omeka_Controller_Exception_404');
     }

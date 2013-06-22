@@ -19,7 +19,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockTheme();
+        $this->_mockTheme();
     }
 
 
@@ -28,7 +28,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
      */
     public function testLoadExhibit()
     {
-        $exhibit = $this->__exhibit('slug');
+        $exhibit = $this->_exhibit('slug');
         $this->dispatch('neatline/show/slug');
         $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
     }
@@ -41,7 +41,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
     public function testDefaultTemplate()
     {
 
-        $exhibit = $this->__exhibit('slug');
+        $exhibit = $this->_exhibit('slug');
         $exhibit->title = 'title';
         $exhibit->narrative = 'narrative';
         $exhibit->save();
@@ -68,7 +68,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
      */
     public function testCustomTemplate()
     {
-        $exhibit = $this->__exhibit('custom');
+        $exhibit = $this->_exhibit('custom');
         $this->dispatch('neatline/show/custom');
         $this->assertQueryContentContains('h1', 'custom');
     }

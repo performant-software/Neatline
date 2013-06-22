@@ -16,8 +16,8 @@ class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->loginAsContributor();
-        $this->exhibit = $this->__exhibit('slug');
+        $this->_loginAsContributor();
+        $this->exhibit = $this->_exhibit('slug');
     }
 
 
@@ -75,7 +75,7 @@ class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
      */
     public function testCanUpdateOwnExhibits()
     {
-        $this->setPut(array());
+        $this->_setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
     }

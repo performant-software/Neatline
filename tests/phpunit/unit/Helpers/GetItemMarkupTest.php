@@ -16,7 +16,7 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockTheme();
+        $this->_mockTheme();
     }
 
 
@@ -29,8 +29,8 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function testTagTemplate()
     {
 
-        $exhibit = $this->__exhibit('custom');
-        $r = $this->__record($exhibit);
+        $exhibit = $this->_exhibit('custom');
+        $r = $this->_record($exhibit);
 
         // `tag1` first.
         $r->tags = 'tag1,tag2';
@@ -50,8 +50,8 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function testSlugTemplate()
     {
 
-        $exhibit = $this->__exhibit('custom');
-        $r = $this->__record($exhibit);
+        $exhibit = $this->_exhibit('custom');
+        $r = $this->_record($exhibit);
 
         // No tags.
         $this->assertRegExp('/custom-item\n/', nl_getItemMarkup($r));
@@ -71,8 +71,8 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function testDefaultTemplate()
     {
 
-        $exhibit = $this->__exhibit('no-custom-theme');
-        $r = $this->__record($exhibit);
+        $exhibit = $this->_exhibit('no-custom-theme');
+        $r = $this->_record($exhibit);
 
         // No custom templates.
         $this->assertRegExp('/item\n/', nl_getItemMarkup($r));

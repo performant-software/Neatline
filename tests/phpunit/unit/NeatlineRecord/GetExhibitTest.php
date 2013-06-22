@@ -19,7 +19,7 @@ class NeatlineRecordTest_GetExhibit extends Neatline_Case_Default
     public function testGetExhibit()
     {
 
-        $exhibit    = $this->__exhibit();
+        $exhibit    = $this->_exhibit();
         $record     = new NeatlineRecord($exhibit);
 
         $retrieved = $record->getExhibit();

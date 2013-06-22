@@ -22,7 +22,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         parent::setUp();
 
         // Create exhibit.
-        $this->exhibit = $this->__exhibit();
+        $this->exhibit = $this->_exhibit();
 
         // Set GET parameter.
         $this->request->setQuery(array(
@@ -38,8 +38,8 @@ class RecordsControllerTest_List extends Neatline_Case_Default
     public function testList()
     {
 
-        $item1      = $this->__item();
-        $item2      = $this->__item();
+        $item1      = $this->_item();
+        $item2      = $this->_item();
         $record1    = new NeatlineRecord($this->exhibit, $item1);
         $record2    = new NeatlineRecord($this->exhibit, $item2);
 
@@ -112,7 +112,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         $this->dispatch('neatline/records');
 
         // Get response, alias records.
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
         $r = $response->records;
 
         // `count` should equal result size.
@@ -195,7 +195,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
     public function testExhibitFilter()
     {
 
-        $exhibit2 = $this->__exhibit();
+        $exhibit2 = $this->_exhibit();
         $record1 = new NeatlineRecord($this->exhibit);
         $record2 = new NeatlineRecord($this->exhibit);
         $record3 = new NeatlineRecord($exhibit2);
@@ -208,7 +208,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         $record3->save();
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
         $records = $response->records;
 
         // Should apply exhibit filter.
@@ -238,7 +238,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply zoom filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -266,7 +266,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply zoom filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -294,7 +294,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply query filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -322,7 +322,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply tags filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -350,7 +350,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply widget filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -378,7 +378,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply slug filter.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -412,7 +412,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should order on `weight`.
         $this->assertEquals($response->records[0]->id, $record1->id);
@@ -446,7 +446,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->getResponseArray();
+        $response = $this->_getResponseArray();
 
         // Should apply limit filter.
         $this->assertEquals($response->records[0]->id, $record2->id);

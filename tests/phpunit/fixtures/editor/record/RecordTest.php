@@ -16,15 +16,15 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
     public function setUp()
     {
         parent::setUp();
-        $this->mockRecordWidgets();
-        $this->mockPresenters();
+        $this->_mockRecordWidgets();
+        $this->_mockPresenters();
     }
 
 
     public function testRecord()
     {
 
-        $record = $this->__record($this->exhibit);
+        $record = $this->_record($this->exhibit);
 
         $record->setArray(array(
             'item_id'               => 1,
@@ -62,7 +62,7 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
 
         $record->__save();
 
-        $this->writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
             'EditorRecord.record.json'
         );
 
@@ -72,9 +72,9 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
     public function testRecords()
     {
 
-        $record1 = $this->__record($this->exhibit);
-        $record2 = $this->__record($this->exhibit);
-        $record3 = $this->__record($this->exhibit);
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
 
         $record1->title = 'title1';
         $record2->title = 'title2';
@@ -87,7 +87,7 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->writeFixtureFromRoute('neatline/records',
+        $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecord.records.json'
         );
 

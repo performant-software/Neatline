@@ -16,9 +16,9 @@ class FixturesTest_EditorRecordItemSearch extends Neatline_Case_Fixture
     public function testItems()
     {
 
-        $item1 = $this->__item('Item 1');
-        $item2 = $this->__item('Item 2');
-        $item3 = $this->__item('Item 3');
+        $item1 = $this->_item('Item 1');
+        $item2 = $this->_item('Item 2');
+        $item3 = $this->_item('Item 3');
 
         $item1->added = '2021-01-01';
         $item2->added = '2022-01-01';
@@ -30,7 +30,7 @@ class FixturesTest_EditorRecordItemSearch extends Neatline_Case_Fixture
 
         $this->request->setQuery(array('output' => 'omeka-xml'));
 
-        $this->writeFixtureFromRoute('items/browse',
+        $this->_writeFixtureFromRoute('items/browse',
             'EditorRecordItemSearch.items.xml'
         );
 

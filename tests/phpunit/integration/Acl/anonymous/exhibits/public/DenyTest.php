@@ -19,8 +19,8 @@ class AclTest_AnonymousExhibitsPublicDeny extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->exhibit = $this->__exhibit('slug');
-        $this->logout();
+        $this->exhibit = $this->_exhibit('slug');
+        $this->_logout();
     }
 
 
@@ -29,7 +29,7 @@ class AclTest_AnonymousExhibitsPublicDeny extends Neatline_Case_Default
      */
     public function testCannotUpdateExhibits()
     {
-        $this->setPut(array());
+        $this->_setPut(array());
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertAction('login');
     }

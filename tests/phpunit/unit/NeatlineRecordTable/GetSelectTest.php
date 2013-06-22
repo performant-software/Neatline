@@ -25,8 +25,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         $record->save();
 
         // Query for the record.
-        $record = $this->__records->fetchObject(
-            $this->__records->getSelect()
+        $record = $this->_records->fetchObject(
+            $this->_records->getSelect()
         );
 
         // Coverage should be selected as plaintext.
@@ -47,8 +47,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         $record->save();
 
         // Query for the record.
-        $record = $this->__records->fetchObject(
-            $this->__records->getSelect()
+        $record = $this->_records->fetchObject(
+            $this->_records->getSelect()
         );
 
         // Coverage should be null.
@@ -75,8 +75,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         $record3->save();
 
         // Query for the records.
-        $records = $this->__records->fetchObjects(
-            $this->__records->getSelect()
+        $records = $this->_records->fetchObjects(
+            $this->_records->getSelect()
         );
 
         // Should be in reverse chronological order.

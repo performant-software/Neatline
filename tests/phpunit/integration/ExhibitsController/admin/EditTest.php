@@ -16,9 +16,9 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->mockPresenters();
-        $this->mockExhibitWidgets();
-        $this->mockLayers();
+        $this->_mockPresenters();
+        $this->_mockExhibitWidgets();
+        $this->_mockLayers();
     }
 
 
@@ -28,7 +28,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testBaseMarkup()
     {
 
-        $exhibit = $this->__exhibit('slug');
+        $exhibit = $this->_exhibit('slug');
 
         $exhibit->setArray(array(
             'title'         => 'Title',
@@ -90,7 +90,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoTitleError()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Missing title.
         $this->request->setMethod('POST')->setPost(array(
@@ -115,7 +115,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoSlugError()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Missing slug:
         $this->request->setMethod('POST')->setPost(array(
@@ -140,7 +140,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testInvalidSlugWithSpacesError()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Spaces:
         $this->request->setMethod('POST')->setPost(array(
@@ -165,7 +165,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testInvalidSlugWithCapsError()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Capitals:
         $this->request->setMethod('POST')->setPost(array(
@@ -190,7 +190,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testInvalidSlugWithNonAlphasError()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Non-alphanumerics:
         $this->request->setMethod('POST')->setPost(array(
@@ -214,8 +214,8 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testDuplicateSlugError()
     {
 
-        $exhibit1 = $this->__exhibit('slug-1');
-        $exhibit2 = $this->__exhibit('slug-2');
+        $exhibit1 = $this->_exhibit('slug-1');
+        $exhibit2 = $this->_exhibit('slug-2');
 
         // Duplicate slug.
         $this->request->setMethod('POST')->setPost(array(
@@ -239,7 +239,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testUnchangedSlug()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Unchanged slug.
         $this->request->setMethod('POST')->setPost(array(
@@ -254,7 +254,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should save exhibit.
-        $this->assertEquals($this->reload($exhibit)->title, 'title');
+        $this->assertEquals($this->_reload($exhibit)->title, 'title');
 
     }
 
@@ -265,7 +265,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoDefaultLayersError()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         // Missing title.
         $this->request->setMethod('POST')->setPost(array(
@@ -290,7 +290,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testSuccess()
     {
 
-        $exhibit = $this->__exhibit();
+        $exhibit = $this->_exhibit();
 
         $this->request->setMethod('POST')->setPost(array(
             'title'         => 'Title 2',
@@ -302,9 +302,9 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'public'        => 1
         ));
 
-        // Submit the form, reload exhibit.
+        // Submit the form, _reload exhibit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-        $exhibit = $this->reload($exhibit);
+        $exhibit = $this->_reload($exhibit);
 
         // Should set fields.
         $this->assertEquals($exhibit->title,        'Title 2');
