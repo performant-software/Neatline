@@ -287,6 +287,7 @@ SQL;
     private function __processCoverage($old, $new)
     {
 
+        if (!$old->space_active) return;
         $coverage = $old->geocoverage;
 
         // KML
@@ -295,7 +296,7 @@ SQL;
         }
 
         // WKT
-        else if (strpos($coverage, '|') !== false) {
+        else if (!is_null($coverage)) {
             $new->coverage = 'GEOMETRYCOLLECTION(' .
                 implode(',', explode('|', $coverage)) .
             ')';

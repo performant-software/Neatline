@@ -26,27 +26,65 @@ class Migrate200Test_ProcessCoverage extends Neatline_Case_Migrate200
 
 
     /**
-     * If `geocoverage` on the old table is in WKT format, split on the
-     * `|` delimiter and wrap the features in a `GEOMETRYCOLLECTION`.
+     * If `geocoverage` is a single-feature WKT string, wrap it inside of
+     * a `GEOMETRYCOLLECTION` and set it directly.
      */
-    public function testWKTtoWKT()
+    public function testSingleFeatureWKT()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('WKT')->coverage,
+            $this->_getRecordByTitle('Single Feature WKT')->coverage,
+            'GEOMETRYCOLLECTION(POINT(1 1))'
+        );
+    }
+
+
+    /**
+     * If `geocoverage` is a multi-feature WKT string, replace the old `|`
+     * delimiter with `,` and wrap in a `GEOMETRYCOLLECTION`.
+     */
+    public function testMultiFeatureWKT()
+    {
+        $this->assertEquals(
+            $this->_getRecordByTitle('Multi Feature WKT')->coverage,
             'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))'
         );
     }
 
 
     /**
-     * If `geocoverage` on the old table is in KML format, convert to WKT
-     * with the geoPHP library.
+     * If `geocoverage` is KML string, convert to WKT with geoPHP.
      */
-    public function testKMLtoWKT()
+    public function testRegularKML()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('KML')->coverage,
+            $this->_getRecordByTitle('Regular KML')->coverage,
+            'GEOMETRYCOLLECTION(POINT(1 1))'
+        );
+    }
+
+
+    /**
+     * If `geocoverage` is a collection of points/lines/polygons, geoPHP
+     * should convert to `GEOMETRYCOLLECTION`, not `MULTI`-XX, which can't
+     * be indexed in MySQL.
+     */
+    public function testMultiFeatureKML()
+    {
+        $this->assertEquals(
+            $this->_getRecordByTitle('Multi Feature KML')->coverage,
             'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))'
+        );
+    }
+
+
+    /**
+     * If a record has a `geocoverage` but is not active on the map, the
+     * coverage should not be migrated.
+     */
+    public function testMapInactive()
+    {
+        $this->assertNull(
+            $this->_getRecordByTitle('Map Inactive')->coverage
         );
     }
 
