@@ -279,6 +279,13 @@ SQL;
     private function __processWidgets($old, $new)
     {
 
+        $widgets = array();
+
+        if ($old->items_active) $widgets[] = 'Waypoints';
+        if ($old->time_active)  $widgets[] = 'Simile';
+
+        $new->widgets = implode(',', $widgets);
+
     }
 
 

@@ -57,7 +57,7 @@ class Migrate200Test_ProcessWidgets extends Neatline_Case_Migrate200
     public function testTimeline()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Items')->widgets,
+            $this->_getRecordByTitle('Timeline')->widgets,
             'Simile'
         );
     }
