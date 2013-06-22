@@ -226,6 +226,7 @@ SQL;
         foreach ($oldRecords as $old) {
             $new = new NeatlineRecord;
             $this->__processExtantFields($old, $new);
+            $this->__processWidgets($old, $new);
             $this->__processCoverage($old, $new);
             $new->save();
         }
