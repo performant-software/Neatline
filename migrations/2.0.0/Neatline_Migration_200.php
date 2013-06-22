@@ -9,6 +9,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+
+require_once dirname(__FILE__) . '/libraries/geoPHP/geoPHP.inc';
+
+
 class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
 
@@ -222,6 +226,8 @@ SQL;
         foreach ($oldRecords as $old) {
             $new = new NeatlineRecord;
             $this->__processExtantFields($old, $new);
+            $this->__processCoverage($old, $new);
+            var_dump($new->coverage);
             $new->save();
         }
 
@@ -281,6 +287,20 @@ SQL;
      */
     private function __processCoverage($old, $new)
     {
+
+        $coverage = $old->geocoverage;
+
+        // KML
+        if (strpos($coverage, '<kml') === 0) {
+            $new->coverage = geoPHP::load($coverage, 'kml')->out('wkt');
+        }
+
+        // WKT
+        else if (strpos($coverage, '|') !== false) {
+            $new->coverage = 'GEOMETRYCOLLECTION(' .
+                implode(',', explode('|', $coverage)) .
+            ')';
+        }
 
     }
 

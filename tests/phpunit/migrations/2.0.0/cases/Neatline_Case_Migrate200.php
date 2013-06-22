@@ -341,4 +341,30 @@ SQL;
     }
 
 
+    /**
+     * Fetch an exhibit by `title`.
+     *
+     * @param string $title
+     */
+    protected function _getExhibitByTitle($title)
+    {
+        return $this->__exhibits->findBySql(
+            'title=?', array($title), true
+        );
+    }
+
+
+    /**
+     * Fetch a record by `title`.
+     *
+     * @param string $title
+     */
+    protected function _getRecordByTitle($title)
+    {
+        return $this->__records->findBySql(
+            'title=?', array($title), true
+        );
+    }
+
+
 }

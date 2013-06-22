@@ -133,11 +133,11 @@ SQL;
     {
 
         $exhibits = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_exhibits
+        DROP TABLE {$this->_db->prefix}neatline_exhibits
 SQL;
 
         $records = <<<SQL
-        DROP TABLE {$this->db->prefix}neatline_records
+        DROP TABLE {$this->_db->prefix}neatline_records
 SQL;
 
         $this->_db->query($exhibits);
