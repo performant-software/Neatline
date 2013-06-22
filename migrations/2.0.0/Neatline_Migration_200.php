@@ -123,7 +123,9 @@ SQL;
     private function _queueMigration()
     {
         Zend_Registry::get('job_dispatcher')->sendLongRunning(
-            'Neatline_Job_UpgradeFrom1x'
+            'Neatline_Job_UpgradeFrom1x', array(
+                'web_dir' => nl_getWebDir()
+            )
         );
     }
 
@@ -225,10 +227,13 @@ SQL;
 
         foreach ($oldRecords as $old) {
             $new = new NeatlineRecord;
+
             $this->__processExtantFields($old, $new);
+            $this->__processBody($old, $new);
             $this->__processWidgets($old, $new);
             $this->__processCoverage($old, $new);
             $this->__processWmsLayer($old, $new);
+
             $new->save();
         }
 
@@ -256,10 +261,28 @@ SQL;
 
 
     /**
-     * TODO.
+     * If the record does not have a parent item - or if it does, and the
+     * `use_dc_metadata` flag is flipped off - migrade the `description`
+     * field directly to the new `body` field. Otherwise, use the compiled
+     * metadata output from the parent item.
      */
     private function __processBody($old, $new)
     {
+
+        if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
+            $new->body = $old->description;
+        }
+
+        else if (!is_null($old->item_id)) {
+
+            // Get the parent item, set on view.
+            $item = get_record_by_id('Item', $old->item_id);
+            get_view()->item = $item;
+
+            // Migrate the compiled metadata output.
+            $new->body = get_view()->partial('exhibits/item.php');
+
+        }
 
     }
 

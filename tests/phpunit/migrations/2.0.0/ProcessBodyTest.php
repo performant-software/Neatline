@@ -18,7 +18,6 @@ class Migrate200Test_ProcessBody extends Neatline_Case_Migrate200
 
         parent::setUp();
         $this->_loadFixture('ProcessBody.records.json');
-        $this->_mockTheme();
 
         $this->_upgrade();
         $this->_migrate();
@@ -32,7 +31,10 @@ class Migrate200Test_ProcessBody extends Neatline_Case_Migrate200
      */
     public function testNoParentItem()
     {
-        // TODO
+        $this->assertEquals(
+            $this->_getRecordByTitle('No Parent')->body,
+            'No parent body.'
+        );
     }
 
 
@@ -42,7 +44,10 @@ class Migrate200Test_ProcessBody extends Neatline_Case_Migrate200
      */
     public function testParentItemUseDcMetadataDisabled()
     {
-        // TODO
+        $this->assertEquals(
+            $this->_getRecordByTitle('DC Disabled')->body,
+            'DC disabled body.'
+        );
     }
 
 
@@ -52,7 +57,10 @@ class Migrate200Test_ProcessBody extends Neatline_Case_Migrate200
      */
     public function testParentItemUseDcMetadataEnabled()
     {
-        // TODO
+        $this->assertRegExp(
+            '/item\n/',
+            $this->_getRecordByTitle('DC Enabled')->body
+        );
     }
 
 
