@@ -318,6 +318,7 @@ SQL;
         $oldRecords = $q->fetchAll();
 
         foreach ($oldRecords as $old) {
+
             $new = new NeatlineRecord;
 
             $this->__processExtantFields    ($old, $new);
@@ -329,6 +330,7 @@ SQL;
             $this->__processWmsLayer        ($old, $new);
 
             $new->save();
+
         }
 
     }
@@ -355,10 +357,47 @@ SQL;
 
 
     /**
-     * TODO.
+     * Flatten out the old style inheritance system by directly setting
+     * the inherited values on the new record.
      */
     private function __processInheritedFields($old, $new)
     {
+
+        // COLORS
+        $new->fill_color = $this->__getStyle(
+            $old, 'vector_color'
+        );
+        $new->fill_color_select = $this->__getStyle(
+            $old, 'highlight_color'
+        );
+        $new->stroke_color = $this->__getStyle(
+            $old, 'stroke_color'
+        );
+        $new->stroke_color_select = $this->__getStyle(
+            $old, 'highlight_color'
+        );
+
+        // OPACITIES
+        $new->fill_opacity = $this->__getStyle(
+            $old, 'vector_opacity'
+        ) / 100;
+        $new->fill_opacity_select = $this->__getStyle(
+            $old, 'select_opacity'
+        ) / 100;
+        $new->stroke_opacity = $this->__getStyle(
+            $old, 'stroke_opacity'
+        ) / 100;
+        $new->stroke_opacity_select = $this->__getStyle(
+            $old, 'select_opacity'
+        ) / 100;
+
+        // DIMENSIONS
+        $new->stroke_width = $this->__getStyle(
+            $old, 'stroke_width'
+        );
+        $new->point_radius = $this->__getStyle(
+            $old, 'point_radius'
+        );
 
     }
 
@@ -480,7 +519,7 @@ SQL;
     /**
      * Get the concrete value for an inherited field on a data record.
      */
-    private static function __getInheritedStyle($record, $field)
+    private function __getStyle($record, $field)
     {
 
         // If the field is present on the record, return it directly.
@@ -494,14 +533,14 @@ SQL;
 
             $sql = <<<SQL
             SELECT * from {$this->db->prefix}neatline_data_records_migrate
-            WHERE id={$record->parent_record_id}
+            WHERE id={$record->parent_record_id};
 SQL;
 
             $q = $this->db->query($sql);
             $q->setFetchMode(Zend_Db::FETCH_OBJ);
             $parent = $q->fetch();
 
-            return self::__getInheritedStyle($parent, $field);
+            return $this->__getStyle($parent, $field);
 
         }
 
@@ -510,9 +549,11 @@ SQL;
             // If there is no parent record, load the exhibit and try to
             // find a default value for the field.
 
+            if (is_null($record->exhibit_id)) return;
+
             $sql = <<<SQL
             SELECT * from {$this->db->prefix}neatline_exhibits_migrate
-            WHERE id={$record->exhibit_id}
+            WHERE id={$record->exhibit_id};
 SQL;
 
             $q = $this->db->query($sql);
