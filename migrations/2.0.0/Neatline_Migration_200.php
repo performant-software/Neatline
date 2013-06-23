@@ -580,9 +580,7 @@ SQL;
             WHERE id={$record->exhibit_id};
 SQL;
 
-            $q = $this->db->query($sql);
-            $q->setFetchMode(Zend_Db::FETCH_OBJ);
-            $exhibit = $q->fetch();
+            $exhibit = $this->db->query($sql)->fetch();
 
             if (!is_null($exhibit['default_'.$field])) {
                 return $exhibit['default_'.$field];
