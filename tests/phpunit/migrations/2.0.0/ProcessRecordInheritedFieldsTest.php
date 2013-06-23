@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Migrate200Test_ProcessInheritedFields
+class Migrate200Test_ProcessRecordInheritedFields
     extends Neatline_Case_Migrate200
 {
 

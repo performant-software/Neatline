@@ -304,7 +304,7 @@ SQL;
 
     /**
      * Load all of the old record rows, migrate the data, and save new 2.x
-     * records on the `neatline_records` table.`
+     * records on the `neatline_records` table.
      */
     private function _moveRecordsToNewTable()
     {
@@ -321,13 +321,13 @@ SQL;
 
             $new = new NeatlineRecord;
 
-            $this->__processExtantFields    ($old, $new);
-            $this->__processInheritedFields ($old, $new);
-            $this->__processBody            ($old, $new);
-            $this->__processPresenter       ($old, $new);
-            $this->__processWidgets         ($old, $new);
-            $this->__processCoverage        ($old, $new);
-            $this->__processWmsLayer        ($old, $new);
+            $this->__processRecordExtantFields      ($old, $new);
+            $this->__processRecordInheritedFields   ($old, $new);
+            $this->__processRecordBody              ($old, $new);
+            $this->__processRecordPresenter         ($old, $new);
+            $this->__processRecordWidgets           ($old, $new);
+            $this->__processRecordCoverage          ($old, $new);
+            $this->__processRecordWmsLayer          ($old, $new);
 
             try { $new->save(); } catch(Exception $e) {}
 
@@ -342,7 +342,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processExtantFields($old, $new)
+    private function __processRecordExtantFields($old, $new)
     {
         $new->id            = $old->id;
         $new->exhibit_id    = $old->exhibit_id;
@@ -366,7 +366,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processInheritedFields($old, $new)
+    private function __processRecordInheritedFields($old, $new)
     {
 
         $fColor         = $this->__getStyle($old, 'vector_color');
@@ -403,7 +403,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processBody($old, $new)
+    private function __processRecordBody($old, $new)
     {
 
         if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
@@ -431,7 +431,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processPresenter($old, $new)
+    private function __processRecordPresenter($old, $new)
     {
         $new->presenter = $old->show_bubble ? 'StaticBubble' : 'None';
     }
@@ -444,7 +444,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processWidgets($old, $new)
+    private function __processRecordWidgets($old, $new)
     {
 
         $widgets = array();
@@ -465,7 +465,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processCoverage($old, $new)
+    private function __processRecordCoverage($old, $new)
     {
 
         if (!$old->space_active) return;
@@ -495,7 +495,7 @@ SQL;
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
      */
-    private function __processWmsLayer($old, $new)
+    private function __processRecordWmsLayer($old, $new)
     {
 
         // Only try to migrate a WMS layer if the record both (a) has a
