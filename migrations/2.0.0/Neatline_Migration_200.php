@@ -338,6 +338,9 @@ SQL;
 
     /**
      * Set all fields that have direct equivalents in the new schema.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processExtantFields($old, $new)
     {
@@ -359,6 +362,9 @@ SQL;
     /**
      * Flatten out the old style inheritance system by directly setting
      * the inherited values on the new record.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processInheritedFields($old, $new)
     {
@@ -407,6 +413,9 @@ SQL;
      * `use_dc_metadata` flag is flipped off - migrate the `description`
      * field directly to the new `body` field. Otherwise, use the compiled
      * metadata output from the parent item.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processBody($old, $new)
     {
@@ -432,6 +441,9 @@ SQL;
     /**
      * If `show_bubble` on the old record is flipped on, set `presenter`
      * on the new record to `StaticBubble`; otherwise, `None`.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processPresenter($old, $new)
     {
@@ -442,6 +454,9 @@ SQL;
     /**
      * Convert the old `items_active` and `timeline_active` fields to the
      * new `Wapoints` and `Simile` slugs.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processWidgets($old, $new)
     {
@@ -460,6 +475,9 @@ SQL;
      * If the old `geocoverage` is a KML value, convert to WKT. If it is
      * WKT, replace the `|` delimiter with `,` and wrap the pieces inside
      * of a `GEOMETRYCOLLECTION`.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processCoverage($old, $new)
     {
@@ -485,6 +503,9 @@ SQL;
     /**
      * If a record has WMS service record, populate the new `wms_address`
      * and `wms_layers` fields if the old record was active on the map.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __processWmsLayer($old, $new)
     {
@@ -518,6 +539,9 @@ SQL;
 
     /**
      * Get the concrete value for an inherited field on a data record.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
      */
     private function __getStyle($record, $field)
     {
