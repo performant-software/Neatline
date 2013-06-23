@@ -29,10 +29,11 @@ class Neatline_Migration_20alpha3 extends Neatline_Migration_Abstract
      */
     private function _addPublishedColumn()
     {
-        $this->db->query(
-            "ALTER TABLE `{$this->db->prefix}neatline_exhibits`
-            ADD COLUMN `published` TIMESTAMP NULL"
-        );
+        $sql = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_exhibits
+        ADD COLUMN published TIMESTAMP NULL;
+SQL;
+        $this->db->query($sql);
     }
 
 
@@ -42,17 +43,19 @@ class Neatline_Migration_20alpha3 extends Neatline_Migration_Abstract
     private function _renameUserIdColumns()
     {
 
-        $this->db->query(
-            "ALTER TABLE `{$this->db->prefix}neatline_exhibits`
-            CHANGE COLUMN `user_id` `owner_id`
-            INT(10) UNSIGNED NOT NULL DEFAULT 0"
-        );
+        $sql = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_exhibits
+        CHANGE COLUMN user_id owner_id
+        INT(10) UNSIGNED NOT NULL DEFAULT 0;
+SQL;
+        $this->db->query($sql);
 
-        $this->db->query(
-            "ALTER TABLE `{$this->db->prefix}neatline_records`
-            CHANGE COLUMN `user_id` `owner_id`
-            INT(10) UNSIGNED NOT NULL DEFAULT 0"
-        );
+        $sql = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_records
+        CHANGE COLUMN user_id owner_id
+        INT(10) UNSIGNED NOT NULL DEFAULT 0;
+SQL;
+        $this->db->query($sql);
 
     }
 
@@ -62,10 +65,11 @@ class Neatline_Migration_20alpha3 extends Neatline_Migration_Abstract
      */
     private function _addFulltextIndexes()
     {
-        $this->db->query(
-            "ALTER TABLE `{$this->db->prefix}neatline_records`
-            ADD FULLTEXT(`slug`, `tags`, `widgets`)"
-        );
+        $sql = <<<SQL
+        ALTER TABLE {$this->db->prefix}neatline_records
+        ADD FULLTEXT(slug, tags, widgets);
+SQL;
+        $this->db->query($sql);
     }
 
 
