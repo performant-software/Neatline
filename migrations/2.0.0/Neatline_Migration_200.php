@@ -329,7 +329,7 @@ SQL;
             $this->__processCoverage        ($old, $new);
             $this->__processWmsLayer        ($old, $new);
 
-            $new->save();
+            try { $new->save(); } catch(Exception $e) {}
 
         }
 
