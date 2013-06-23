@@ -487,7 +487,9 @@ SQL;
 
         // KML
         if (strpos($coverage, '<kml') === 0) {
-            $new->coverage = geoPHP::load($coverage, 'kml')->out('wkt');
+            try {
+                $new->coverage = geoPHP::load($coverage)->out('wkt');
+            } catch (Exception $e) {}
         }
 
         // WKT
