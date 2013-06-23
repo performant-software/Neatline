@@ -477,4 +477,60 @@ SQL;
     }
 
 
+    /**
+     * Get the concrete value for an inherited field on a data record.
+     */
+    private static function __getInheritedStyle($record, $field)
+    {
+
+        // If the field is present on the record, return it directly.
+
+        if (!is_null($record->$field)) return $record->$field;
+
+        // Otherwise, if the record has a parent reference, load the
+        // parent and recurse.
+
+        else if (!is_null($record->parent_record_id)) {
+
+            $sql = <<<SQL
+            SELECT * from {$this->db->prefix}neatline_data_records_migrate
+            WHERE id={$record->parent_record_id}
+SQL;
+
+            $q = $this->db->query($sql);
+            $q->setFetchMode(Zend_Db::FETCH_OBJ);
+            $parent = $q->fetch();
+
+            return self::__getInheritedStyle($parent, $field);
+
+        }
+
+        else {
+
+            // If there is no parent record, load the exhibit and try to
+            // find a default value for the field.
+
+            $sql = <<<SQL
+            SELECT * from {$this->db->prefix}neatline_exhibits_migrate
+            WHERE id={$record->exhibit_id}
+SQL;
+
+            $q = $this->db->query($sql);
+            $q->setFetchMode(Zend_Db::FETCH_OBJ);
+            $exhibit = $q->fetch();
+
+            if (!is_null($exhibit['default_'.$field])) {
+                return $exhibit['default_'.$field];
+            }
+
+            // If no exhibit default is defined, fall back to the global
+            // default stored in the site options.
+
+            else return get_option($field);
+
+        }
+
+    }
+
+
 }
