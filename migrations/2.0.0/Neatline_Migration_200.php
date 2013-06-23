@@ -369,41 +369,27 @@ SQL;
     private function __processInheritedFields($old, $new)
     {
 
-        // COLORS
-        $new->fill_color = $this->__getStyle(
-            $old, 'vector_color'
-        );
-        $new->fill_color_select = $this->__getStyle(
-            $old, 'highlight_color'
-        );
-        $new->stroke_color = $this->__getStyle(
-            $old, 'stroke_color'
-        );
-        $new->stroke_color_select = $this->__getStyle(
-            $old, 'highlight_color'
-        );
+        $fColor         = $this->__getStyle($old, 'vector_color');
+        $fColorSelect   = $this->__getStyle($old, 'highlight_color');
+        $sColor         = $this->__getStyle($old, 'stroke_color');
+        $sColorSelect   = $this->__getStyle($old, 'highlight_color');
+        $fOpacity       = $this->__getStyle($old, 'vector_opacity')/100;
+        $fOpacitySelect = $this->__getStyle($old, 'select_opacity')/100;
+        $sOpacity       = $this->__getStyle($old, 'stroke_opacity')/100;
+        $sOpacitySelect = $this->__getStyle($old, 'select_opacity')/100;
+        $sWidth         = $this->__getStyle($old, 'stroke_width');
+        $pRadius        = $this->__getStyle($old, 'point_radius');
 
-        // OPACITIES
-        $new->fill_opacity = $this->__getStyle(
-            $old, 'vector_opacity'
-        ) / 100;
-        $new->fill_opacity_select = $this->__getStyle(
-            $old, 'select_opacity'
-        ) / 100;
-        $new->stroke_opacity = $this->__getStyle(
-            $old, 'stroke_opacity'
-        ) / 100;
-        $new->stroke_opacity_select = $this->__getStyle(
-            $old, 'select_opacity'
-        ) / 100;
-
-        // DIMENSIONS
-        $new->stroke_width = $this->__getStyle(
-            $old, 'stroke_width'
-        );
-        $new->point_radius = $this->__getStyle(
-            $old, 'point_radius'
-        );
+        $new->fill_color                = $fColor;
+        $new->fill_color_select         = $fColorSelect;
+        $new->stroke_color              = $sColor;
+        $new->stroke_color_select       = $sColorSelect;
+        $new->fill_opacity              = $fOpacity;
+        $new->fill_opacity_select       = $fOpacitySelect;
+        $new->stroke_opacity            = $sOpacity;
+        $new->stroke_opacity_select     = $sOpacitySelect;
+        $new->stroke_width              = $sWidth;
+        $new->point_radius              = $pRadius;
 
     }
 
