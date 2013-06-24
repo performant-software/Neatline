@@ -56,8 +56,6 @@ class Migrate200Test_ProcessRecordExtantFields
         $this->_recordMigration('slug',                 'slug');
         $this->_recordMigration('start_date',           'start_date');
         $this->_recordMigration('end_date',             'end_date');
-        $this->_recordMigration('start_visible_date',   'after_date');
-        $this->_recordMigration('end_visible_date',     'before_date');
         $this->_recordMigration('point_image',          'point_image');
         $this->_recordMigration('display_order',        'weight');
         $this->_recordMigration('map_bounds',           'map_focus');

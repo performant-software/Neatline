@@ -29,14 +29,20 @@ class Migrate200Test_ProcessRecordInheritedFields
 
 
     /**
-     * When local values are defined for inherited styles, migrate the
+     * When local values are defined for inherited fields, migrate the
      * values directly to the new record.
      */
     public function testUseLocalValuesWhenPresent()
     {
-        $this->_assertFlattenedStyles(
-            $this->_getRecordByTitle('Parent Record')
-        );
+
+        // STYLES
+        $record = $this->_getRecordByTitle('Parent Record');
+        $this->_assertFlattenedStyles($record);
+
+        // VISIBILITY
+        $this->assertEquals($record->after_date,    '2000');
+        $this->assertEquals($record->before_date,   '2010');
+
     }
 
 
@@ -46,9 +52,15 @@ class Migrate200Test_ProcessRecordInheritedFields
      */
     public function testFlattenParentInheritance()
     {
-        $this->_assertFlattenedStyles(
-            $this->_getRecordByTitle('Child Record')
-        );
+
+        // STYLES
+        $record = $this->_getRecordByTitle('Child Record');
+        $this->_assertFlattenedStyles($record);
+
+        // VISIBILITY
+        $this->assertEquals($record->after_date,    '2000');
+        $this->assertEquals($record->before_date,   '2010');
+
     }
 
 
@@ -73,20 +85,20 @@ class Migrate200Test_ProcessRecordInheritedFields
     {
 
         // COLORS
-        $this->assertEquals($record->fill_color, '#111111');
-        $this->assertEquals($record->fill_color_select, '#333333');
-        $this->assertEquals($record->stroke_color, '#222222');
-        $this->assertEquals($record->stroke_color_select, '#333333');
+        $this->assertEquals($record->fill_color,            '#111111');
+        $this->assertEquals($record->fill_color_select,     '#333333');
+        $this->assertEquals($record->stroke_color,          '#222222');
+        $this->assertEquals($record->stroke_color_select,   '#333333');
 
         // OPACITIES
-        $this->assertEquals($record->fill_opacity, 0.04);
-        $this->assertEquals($record->fill_opacity_select, 0.05);
-        $this->assertEquals($record->stroke_opacity, 0.06);
+        $this->assertEquals($record->fill_opacity,          0.04);
+        $this->assertEquals($record->fill_opacity_select,   0.05);
+        $this->assertEquals($record->stroke_opacity,        0.06);
         $this->assertEquals($record->stroke_opacity_select, 0.05);
 
         // DIMENSIONS
-        $this->assertEquals($record->stroke_width, 8);
-        $this->assertEquals($record->point_radius, 9);
+        $this->assertEquals($record->stroke_width,          8);
+        $this->assertEquals($record->point_radius,          9);
 
     }
 

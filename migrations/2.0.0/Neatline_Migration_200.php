@@ -356,8 +356,6 @@ SQL;
         $new->slug          = $old->slug;
         $new->start_date    = $old->start_date;
         $new->end_date      = $old->end_date;
-        $new->after_date    = $old->start_visible_date;
-        $new->before_date   = $old->end_visible_date;
         $new->point_image   = $old->point_image;
         $new->weight        = $old->display_order;
         $new->map_focus     = $old->map_bounds;
@@ -385,6 +383,8 @@ SQL;
         $sOpacitySelect = $this->__getStyle($old, 'select_opacity')/100;
         $sWidth         = $this->__getStyle($old, 'stroke_width');
         $pRadius        = $this->__getStyle($old, 'point_radius');
+        $aDate          = $this->__getStyle($old, 'start_visible_date');
+        $bDate          = $this->__getStyle($old, 'end_visible_date');
 
         $new->fill_color                = $fColor;
         $new->fill_color_select         = $fColorSelect;
@@ -396,6 +396,8 @@ SQL;
         $new->stroke_opacity_select     = $sOpacitySelect;
         $new->stroke_width              = $sWidth;
         $new->point_radius              = $pRadius;
+        $new->after_date                = $aDate;
+        $new->before_date               = $bDate;
 
     }
 
@@ -575,12 +577,19 @@ SQL;
 SQL;
 
             $exhibit = $this->db->query($sql)->fetch();
+            $key = 'default_' . $field;
 
-            if (!is_null($exhibit['default_'.$field])) {
-                return $exhibit['default_'.$field];
-            }
+            // If the old exhibit does have have a `default_`-prefixed
+            // attribute for the field, return NULL.
 
-            // If no exhibit default is defined, fall back to the global
+            if (!$exhibit || !array_key_exists($key, $exhibit)) return;
+
+            // If the exhibit has a default attribute with a non-null
+            // value, return the exhibit default.
+
+            else if (!is_null($exhibit[$key])) return $exhibit[$key];
+
+            // If exhibit-default field is empty, fall back to the global
             // default stored in the site options.
 
             else return get_option($field);

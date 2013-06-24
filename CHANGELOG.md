@@ -1,6 +1,8 @@
-# v2.0-alpha3 (pending)
+# v2.0-rc1 (pending)
 
 #### Added Features
+
+  - Adds 2.0.0 migration, which makes it possible to upgrade installations of the 1.x series of releases.
 
   - When the cursor hovers/blurs on listings in the record-browser panel in the editor, corresponding features on the map will highlight/unhighlight.
 
