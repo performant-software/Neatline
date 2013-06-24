@@ -72,7 +72,6 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
 
             $this->_moveExhibitsToNewTable();
             $this->_setDefaultBaseLayers();
-            $this->_migrateSimileDefaults();
             $this->_moveRecordsToNewTable();
 
             $this->db->commit();
@@ -170,40 +169,6 @@ SQL;
     private function _moveExhibitsToNewTable()
     {
 
-//         $sql = <<<SQL
-
-//         INSERT INTO {$this->db->prefix}neatline_exhibits (
-
-//             id,
-//             title,
-//             slug,
-//             public,
-//             narrative,
-//             modified,
-//             query,
-//             map_focus,
-//             map_zoom,
-//             base_layer
-
-//         ) SELECT
-
-//             id,
-//             name,
-//             slug,
-//             public,
-//             description,
-//             modified,
-//             query,
-//             default_map_bounds,
-//             default_map_zoom,
-//             default_base_layer
-
-//         FROM {$this->db->prefix}neatline_exhibits_migrate;
-
-// SQL;
-
-//         $this->db->query($sql);
-
         $sql = <<<SQL
         SELECT * FROM {$this->db->prefix}neatline_exhibits_migrate;
 SQL;
@@ -213,9 +178,14 @@ SQL;
         $oldExhibits = $q->fetchAll();
 
         foreach ($oldExhibits as $old) {
+
             $new = new NeatlineExhibit;
+
             $this->__processExhbibitExtantFields($old, $new);
+            $this->__processExhibitSimileDefaults($old, $new);
+
             $new->save();
+
         }
 
     }
@@ -234,7 +204,6 @@ SQL;
         $new->slug          = $old->slug;
         $new->public        = $old->public;
         $new->narrative     = $old->description;
-        $new->modified      = $old->modified;
         $new->query         = $old->query;
         $new->map_focus     = $old->default_map_bounds;
         $new->map_zoom      = $old->default_map_zoom;
@@ -272,67 +241,50 @@ SQL;
     /**
      * Migrate the old `default_focus_date` and `default_timeline_zoom`
      * fields to the new SIMILE exhibit expansions table.
+     *
+     * @param object $old The original `neatline_exhibits` row.
+     * @param NeatlineExhibit $new The new exhibit instance.
      */
-    private function _migrateSimileDefaults()
+    private function __processExhibitSimileDefaults($old, $new)
     {
 
-        $sql = <<<SQL
-        SELECT * FROM {$this->db->prefix}neatline_exhibits_migrate;
-SQL;
+        $index = $old->default_timeline_zoom;
 
-        $q = $this->db->query($sql);
-        $q->setFetchMode(Zend_Db::FETCH_OBJ);
-        $oldExhibits = $q->fetchAll();
-
-        foreach ($oldExhibits as $old) {
-
-            // Don't create an expansion if the timeline was disabled on
-            // the old exhibit.
-
-            if (!$old->is_timeline) continue;
-
-            // If it is defined, convert the old zoom index into the new
-            // unit and pixels values.
-
-            $index = $old->default_timeline_zoom;
-
-            if (!is_null($index)) {
-                $zoom   = self::$_zoomIndex[$index];
-                $pixels = $zoom[0];
-                $unit   = $zoom[1];
-            } else {
-                $pixels = 100;
-                $unit   = 'YEAR';
-            }
-
-            $sql = <<<SQL
-
-            INSERT INTO
-            {$this->db->prefix}neatline_simile_exhibit_expansions (
-
-                parent_id,
-                simile_default_date,
-                simile_interval_unit,
-                simile_interval_pixels,
-                simile_tape_height,
-                simile_track_height
-
-            ) VALUES (
-
-                {$old->id},
-                "{$old->default_focus_date}",
-                "$unit",
-                $pixels,
-                10,
-                30
-
-            );
-
-SQL;
-
-            $this->db->query($sql);
-
+        if (!is_null($index)) {
+            $zoom   = self::$_zoomIndex[$index];
+            $pixels = $zoom[0];
+            $unit   = $zoom[1];
+        } else {
+            $pixels = 100;
+            $unit   = 'YEAR';
         }
+
+        $sql = <<<SQL
+
+        INSERT INTO
+        {$this->db->prefix}neatline_simile_exhibit_expansions (
+
+            parent_id,
+            simile_default_date,
+            simile_interval_unit,
+            simile_interval_pixels,
+            simile_tape_height,
+            simile_track_height
+
+        ) VALUES (
+
+            {$new->id},
+            "{$old->default_focus_date}",
+            "$unit",
+            $pixels,
+            10,
+            30
+
+        );
+
+SQL;
+
+        $this->db->query($sql);
 
     }
 

@@ -27,7 +27,6 @@ class Migrate200Test_ProcessRecordExtantFields
         $this->_migrate();
 
         $this->_exhibitMigration('id',                  'id');
-        $this->_exhibitMigration('modified',            'modified');
         $this->_exhibitMigration('name',                'title');
         $this->_exhibitMigration('description',         'narrative');
         $this->_exhibitMigration('slug',                'slug');

@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Migrate200Test_MigrateSimileDefaults
+class Migrate200Test_ProcessExhibitSimileDefaults
     extends Neatline_Case_Migrate200
 {
 
@@ -18,7 +18,7 @@ class Migrate200Test_MigrateSimileDefaults
     {
 
         parent::setUp();
-        $this->_loadFixture('MigrateSimileDefaults.exhibits');
+        $this->_loadFixture('ProcessExhibitSimileDefaults.exhibits');
 
         $this->_upgrade();
         $this->_migrate();
@@ -27,22 +27,10 @@ class Migrate200Test_MigrateSimileDefaults
 
 
     /**
-     * If the timeline was not enabled on the old exhibit, an expansion
-     * should not be created.
+     * The `default_focus_date` field should be migrated directly, and
+     * default values should be set for the tape and track heights.
      */
-    public function testNotCreateExpansionWhenTimelineInactive()
-    {
-        $this->assertFalse($this->_getSimileExpansionByExhibit(
-            $this->_getExhibitByTitle('No Timeline')
-        ));
-    }
-
-
-    /**
-     * If the timeline was enabled on an old exhibit, a SIMILE expansion
-     * row should be created for the new exhibit.
-     */
-    public function testCreateExpansionWhenTimelineActive()
+    public function testSetExtantFields()
     {
 
         $expansion = $this->_getSimileExpansionByExhibit(
@@ -57,11 +45,11 @@ class Migrate200Test_MigrateSimileDefaults
 
 
     /**
-     * If the old `default_timeline_zoom` field is non-null, set the new
-     * `simile_interval_unit` and `simile_interval_pixels` fields with the
-     * values that correspond to the old zoom index.
+     * If the old `default_timeline_zoom` field is non-null, the new
+     * `simile_interval_unit` and `simile_interval_pixels` fields should
+     * be set with the values that correspond to the old zoom index.
      */
-    public function testMigrateExistingZoom()
+    public function testSetExistingZoom()
     {
 
         $expansion = $this->_getSimileExpansionByExhibit(
@@ -75,8 +63,8 @@ class Migrate200Test_MigrateSimileDefaults
 
 
     /**
-     * If `default_timeline_zoom` field is null, set default values on the
-     * new expansion row.
+     * If `default_timeline_zoom` field is null, the default values should
+     * be set on the new expansion row.
      */
     public function testSetDefaultZoom()
     {
