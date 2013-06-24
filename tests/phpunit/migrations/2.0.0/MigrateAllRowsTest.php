@@ -14,60 +14,33 @@ class Migrate200Test_MigrateAllRows extends Neatline_Case_Migrate200
 
 
     /**
-     * All exhibit rows should be migrated into the new table.
+     * All exhibit and record rows should be moved to the new tables.
      */
-    public function testMigrateAllExhibits()
+    public function tearDown()
     {
-
-        $this->_loadFixture('Hotchkiss.exhibits.json');
 
         $this->_upgrade();
         $this->_migrate();
 
-        $c1sql = <<<SQL
-        SELECT COUNT(*) FROM
-        {$this->db->prefix}neatline_exhibits_migrate
-SQL;
-
-        $c2sql = <<<SQL
-        SELECT COUNT(*) FROM
-        {$this->db->prefix}neatline_exhibits
-SQL;
-
-        $c1 = $this->db->query($c1sql)->fetch();
-        $c2 = $this->db->query($c2sql)->fetch();
-
+        // EXHIBIT
+        $c1 = $this->_countRows('neatline_exhibits_migrate');
+        $c2 = $this->_countRows('neatline_exhibits');
         $this->assertEquals($c1, $c2);
+
+        // RECORDS
+        $c1 = $this->_countRows('neatline_data_records_migrate');
+        $c2 = $this->_countRows('neatline_records');
+        $this->assertEquals($c1, $c2);
+
+        parent::tearDown();
 
     }
 
 
-    /**
-     * All record rows should be migrated into the new table.
-     */
-    public function testMigrateAllRecords()
+    public function testHotchkiss()
     {
-
+        $this->_loadFixture('Hotchkiss.exhibits.json');
         $this->_loadFixture('Hotchkiss.records.json');
-
-        $this->_upgrade();
-        $this->_migrate();
-
-        $c1sql = <<<SQL
-        SELECT COUNT(*) FROM
-        {$this->db->prefix}neatline_data_records_migrate
-SQL;
-
-        $c2sql = <<<SQL
-        SELECT COUNT(*) FROM
-        {$this->db->prefix}neatline_records
-SQL;
-
-        $c1 = $this->db->query($c1sql)->fetch();
-        $c2 = $this->db->query($c2sql)->fetch();
-
-        $this->assertEquals($c1, $c2);
-
     }
 
 

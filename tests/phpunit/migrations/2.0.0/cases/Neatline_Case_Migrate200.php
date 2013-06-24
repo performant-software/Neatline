@@ -426,4 +426,18 @@ SQL;
     }
 
 
+    /**
+     * Count the rows in a table.
+     *
+     * @param string $table
+     */
+    protected function _countRows($table)
+    {
+        $sql = <<<SQL
+        SELECT COUNT(*) FROM {$this->db->prefix}$table
+SQL;
+        return $this->db->query($sql)->fetch();
+    }
+
+
 }
