@@ -18,7 +18,7 @@ class Migrate200Test_ProcessRecordWidgets
     {
 
         parent::setUp();
-        $this->_loadFixture('ProcessWidgets.records.json');
+        $this->_loadFixture('ProcessWidgets.records');
 
         $this->_upgrade();
         $this->_migrate();

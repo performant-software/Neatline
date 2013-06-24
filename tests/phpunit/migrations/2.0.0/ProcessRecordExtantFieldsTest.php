@@ -21,7 +21,7 @@ class Migrate200Test_ProcessRecordExtantFields
     public function testProcessExtantExhibitFields()
     {
 
-        $this->_loadFixture('Hotchkiss.exhibits.json');
+        $this->_loadFixture('Hotchkiss.exhibits');
 
         $this->_upgrade();
         $this->_migrate();
@@ -46,7 +46,7 @@ class Migrate200Test_ProcessRecordExtantFields
     public function testProcessExtantRecordFields()
     {
 
-        $this->_loadFixture('Hotchkiss.records.json');
+        $this->_loadFixture('Hotchkiss.records');
 
         $this->_upgrade();
         $this->_migrate();

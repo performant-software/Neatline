@@ -19,8 +19,8 @@ class Migrate200Test_ProcessRecordInheritedFields
 
         parent::setUp();
 
-        $this->_loadFixture('ProcessInheritedFields.exhibits.json');
-        $this->_loadFixture('ProcessInheritedFields.records.json');
+        $this->_loadFixture('ProcessInheritedFields.exhibits');
+        $this->_loadFixture('ProcessInheritedFields.records');
 
         $this->_upgrade();
         $this->_migrate();

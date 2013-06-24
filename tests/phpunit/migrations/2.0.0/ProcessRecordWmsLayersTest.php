@@ -20,8 +20,8 @@ class Migrate200Test_ProcessRecordWmsLayers
         parent::setUp();
         $this->_createServicesTable();
 
-        $this->_loadFixture('ProcessWmsLayers.services.json');
-        $this->_loadFixture('ProcessWmsLayers.records.json');
+        $this->_loadFixture('ProcessWmsLayers.services');
+        $this->_loadFixture('ProcessWmsLayers.records');
 
         $this->_upgrade();
         $this->_migrate();

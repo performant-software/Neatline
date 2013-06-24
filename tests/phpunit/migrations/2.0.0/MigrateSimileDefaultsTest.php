@@ -18,7 +18,7 @@ class Migrate200Test_MigrateSimileDefaults
     {
 
         parent::setUp();
-        $this->_loadFixture('MigrateSimileDefaults.exhibits.json');
+        $this->_loadFixture('MigrateSimileDefaults.exhibits');
 
         $this->_upgrade();
         $this->_migrate();

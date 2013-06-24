@@ -18,7 +18,7 @@ class Migrate200Test_ProcessRecordCoverage
     {
 
         parent::setUp();
-        $this->_loadFixture('ProcessCoverage.records.json');
+        $this->_loadFixture('ProcessCoverage.records');
 
         $this->_upgrade();
         $this->_migrate();
