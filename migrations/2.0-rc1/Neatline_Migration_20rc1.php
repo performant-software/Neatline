@@ -9,12 +9,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Neatline_Migration_20alpha3 extends Neatline_Migration_Abstract
+class Neatline_Migration_20rc1 extends Neatline_Migration_Abstract
 {
 
 
     /**
-     * Migrate to `2.0-alpha3`.
+     * Migrate to `2.0-rc1`.
      */
     public function migrate()
     {

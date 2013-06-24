@@ -18,7 +18,7 @@ require_once NL_DIR.'/NeatlinePlugin.php';
 // MIGRATIONS
 require_once NL_DIR.'/migrations/abstract/Neatline_Migration_Abstract.php';
 require_once NL_DIR.'/migrations/2.0-alpha2/Neatline_Migration_20alpha2.php';
-require_once NL_DIR.'/migrations/2.0-alpha3/Neatline_Migration_20alpha3.php';
+require_once NL_DIR.'/migrations/2.0-rc1/Neatline_Migration_20rc1.php';
 require_once NL_DIR.'/migrations/2.0.0/Neatline_Migration_200.php';
 
 // MODELS

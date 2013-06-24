@@ -170,8 +170,8 @@ SQL;
             if ($old < '2.0-alpha2') {
                 new Neatline_Migration_20alpha2($this, $this->_db);
             }
-            if ($old < '2.0-alpha3') {
-                new Neatline_Migration_20alpha3($this, $this->_db);
+            if ($old < '2.0-rc1') {
+                new Neatline_Migration_20rc1($this, $this->_db);
             }
         }
 
