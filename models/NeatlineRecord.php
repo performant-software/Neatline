@@ -133,16 +133,14 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
         $fields = parent::toArrayForSave();
 
+        // Set the `is_coverage` tracker.
+        $fields['is_coverage'] = !is_null($fields['coverage']) ? 1 : 0;
+
         // Add the coverage.
-        if (!empty($fields['coverage'])) {
-            $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('{$fields['coverage']}')");
-            $fields['is_coverage'] = 1;
-        } else {
-            $fields['coverage'] = new Zend_Db_Expr(
-                "GeomFromText('POINT(0 0)')");
-            $fields['is_coverage'] = 0;
-        }
+        $fields['coverage'] = new Zend_Db_Expr("COALESCE(
+            GeomFromText('{$fields['coverage']}'),
+            GeomFromText('POINT(0 0)')
+        )");
 
         return $fields;
 
