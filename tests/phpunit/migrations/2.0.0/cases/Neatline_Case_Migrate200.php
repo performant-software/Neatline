@@ -286,25 +286,25 @@ SQL;
 
         // Read the file.
         $path = dirname(dirname(__FILE__)).'/fixtures/'.$fixture;
-        $json = Zend_Json::decode(file_get_contents($path));
+        eval(file_get_contents($path));
 
-        // `exhibits.json`
-        if (strpos($path, 'exhibits.json')) {
-            foreach ($json as $row) {
+        // Exhibits:
+        if (strpos($path, 'exhibits')) {
+            foreach ($rows as $row) {
                 $this->db->insert('NeatlineExhibit', $row);
             }
         }
 
-        // `records.json`
-        if (strpos($path, 'records.json')) {
-            foreach ($json as $row) {
+        // Records:
+        if (strpos($path, 'records')) {
+            foreach ($rows as $row) {
                 $this->db->insert('NeatlineDataRecord', $row);
             }
         }
 
-        // `services.json`
-        if (strpos($path, 'services.json')) {
-            foreach ($json as $row) {
+        // Services
+        if (strpos($path, 'services')) {
+            foreach ($rows as $row) {
                 $this->db->insert('NeatlineMapsService', $row);
             }
         }

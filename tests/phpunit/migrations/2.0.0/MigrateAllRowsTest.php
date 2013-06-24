@@ -39,8 +39,22 @@ class Migrate200Test_MigrateAllRows extends Neatline_Case_Migrate200
 
     public function testHotchkiss()
     {
-        $this->_loadFixture('Hotchkiss.exhibits.json');
-        $this->_loadFixture('Hotchkiss.records.json');
+        $this->_loadFixture('Hotchkiss.exhibits');
+        $this->_loadFixture('Hotchkiss.records');
+    }
+
+
+    public function testShips()
+    {
+        $this->_loadFixture('Ships.exhibits');
+        $this->_loadFixture('Ships.records');
+    }
+
+
+    public function testIbnjubayr()
+    {
+        $this->_loadFixture('Ibnjubayr.exhibits');
+        $this->_loadFixture('Ibnjubayr.records');
     }
 
 
