@@ -58,4 +58,18 @@ class Migrate200Test_MigrateAllRows extends Neatline_Case_Migrate200
     }
 
 
+    public function testLovecraft()
+    {
+        $this->_loadFixture('Lovecraft.exhibits');
+        $this->_loadFixture('Lovecraft.records');
+    }
+
+
+    public function testHenshaw()
+    {
+        $this->_loadFixture('Henshaw.exhibits');
+        $this->_loadFixture('Henshaw.records');
+    }
+
+
 }

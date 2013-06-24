@@ -17,7 +17,7 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
 
 
-    private static $_zoomIndex = array(
+    private static $zooms = array(
         array( 300, 'HOUR'),
         array( 200, 'HOUR'),
         array( 100, 'HOUR'),
@@ -49,6 +49,18 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
     );
 
 
+    private static $layers = array(
+        'OpenStreetMap',
+        'GooglePhysical',
+        'GoogleStreets',
+        'GoogleHybrid',
+        'GoogleSatellite',
+        'StamenWatercolor',
+        'StamenToner',
+        'StamenTerrain',
+    );
+
+
     /**
      * Migrate to `2.0.0`.
      */
@@ -71,7 +83,6 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
         try {
 
             $this->_moveExhibitsToNewTable();
-            $this->_setDefaultBaseLayers();
             $this->_moveRecordsToNewTable();
 
             $this->db->commit();
@@ -182,6 +193,7 @@ SQL;
             $new = new NeatlineExhibit;
 
             $this->__processExhbibitExtantFields($old, $new);
+            $this->__processExhibitDefaultBaseLayer($old, $new);
             $this->__processExhibitSimileDefaults($old, $new);
 
             $new->save();
@@ -212,29 +224,15 @@ SQL;
 
 
     /**
-     * Transfer all exhibit rows from the renamed migration table into the
-     * new `neatline_exhibits` table.
+     * Convert the old foreign key reference on `default_base_layer` to
+     * the corresponding layer slug.
+     *
+     * @param object $old The original `neatline_exhibits` row.
+     * @param NeatlineExhibit $new The new exhibit instance.
      */
-    private function _setDefaultBaseLayers()
+    private function __processExhibitDefaultBaseLayer($old, $new)
     {
-
-        $sql = <<<SQL
-        UPDATE {$this->db->prefix}neatline_exhibits
-
-        SET base_layer = CASE
-            WHEN base_layer = 1 THEN 'OpenStreetMap'
-            WHEN base_layer = 2 THEN 'GooglePhysical'
-            WHEN base_layer = 3 THEN 'GoogleStreets'
-            WHEN base_layer = 4 THEN 'GoogleHybrid'
-            WHEN base_layer = 5 THEN 'GoogleSatellite'
-            WHEN base_layer = 6 THEN 'StamenWatercolor'
-            WHEN base_layer = 7 THEN 'StamenToner'
-            WHEN base_layer = 8 THEN 'StamenTerrain'
-        END;
-SQL;
-
-        $this->db->query($sql);
-
+        $new->base_layer = self::$layers[$old->default_base_layer-1];
     }
 
 
@@ -251,7 +249,7 @@ SQL;
         $index = $old->default_timeline_zoom;
 
         if (!is_null($index)) {
-            $zoom   = self::$_zoomIndex[$index];
+            $zoom   = self::$zooms[$index];
             $pixels = $zoom[0];
             $unit   = $zoom[1];
         } else {

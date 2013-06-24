@@ -20,7 +20,7 @@ class Migrate200Test_SetDefaultBaseLayers extends Neatline_Case_Migrate200
     public function testSetDefaultBaseLayers()
     {
 
-        $this->_loadFixture('SetDefaultBaseLayers.exhibits');
+        $this->_loadFixture('ProcessExhibitDefaultBaseLayer.exhibits');
 
         $this->_upgrade();
         $this->_migrate();
