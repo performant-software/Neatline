@@ -195,6 +195,7 @@ SQL;
             $this->__processExhbibitExtantFields($old, $new);
             $this->__processExhibitDefaultBaseLayer($old, $new);
             $this->__processExhibitSimileDefaults($old, $new);
+            $this->__processExhibitWidgets($old, $new);
 
             $new->save();
 
@@ -283,6 +284,26 @@ SQL;
 SQL;
 
         $this->db->query($sql);
+
+    }
+
+
+    /**
+     * Convert the old `is_items` and `is_timeline` fields to the new
+     * `Waypoints` and `Simile` slugs.
+     *
+     * @param object $old The original `neatline_exhibits` row.
+     * @param NeatlineExhibit $new The new exhibit instance.
+     */
+    private function __processExhibitWidgets($old, $new)
+    {
+
+        $widgets = array();
+
+        if ($old->is_items)     $widgets[] = 'Waypoints';
+        if ($old->is_timeline)  $widgets[] = 'Simile';
+
+        $new->widgets = implode(',', $widgets);
 
     }
 
@@ -424,7 +445,7 @@ SQL;
 
     /**
      * Convert the old `items_active` and `timeline_active` fields to the
-     * new `Wapoints` and `Simile` slugs.
+     * new `Waypoints` and `Simile` slugs.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
