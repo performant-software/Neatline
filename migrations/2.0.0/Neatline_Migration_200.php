@@ -170,40 +170,75 @@ SQL;
     private function _moveExhibitsToNewTable()
     {
 
+//         $sql = <<<SQL
+
+//         INSERT INTO {$this->db->prefix}neatline_exhibits (
+
+//             id,
+//             title,
+//             slug,
+//             public,
+//             narrative,
+//             modified,
+//             query,
+//             map_focus,
+//             map_zoom,
+//             base_layer
+
+//         ) SELECT
+
+//             id,
+//             name,
+//             slug,
+//             public,
+//             description,
+//             modified,
+//             query,
+//             default_map_bounds,
+//             default_map_zoom,
+//             default_base_layer
+
+//         FROM {$this->db->prefix}neatline_exhibits_migrate;
+
+// SQL;
+
+//         $this->db->query($sql);
+
         $sql = <<<SQL
-
-        INSERT INTO {$this->db->prefix}neatline_exhibits (
-
-            id,
-            title,
-            slug,
-            public,
-            narrative,
-            modified,
-            query,
-            map_focus,
-            map_zoom,
-            base_layer
-
-        ) SELECT
-
-            id,
-            name,
-            slug,
-            public,
-            description,
-            modified,
-            query,
-            default_map_bounds,
-            default_map_zoom,
-            default_base_layer
-
-        FROM {$this->db->prefix}neatline_exhibits_migrate;
-
+        SELECT * FROM {$this->db->prefix}neatline_exhibits_migrate;
 SQL;
 
-        $this->db->query($sql);
+        $q = $this->db->query($sql);
+        $q->setFetchMode(Zend_Db::FETCH_OBJ);
+        $oldExhibits = $q->fetchAll();
 
+        foreach ($oldExhibits as $old) {
+            $new = new NeatlineExhibit;
+            $this->__processExhbibitExtantFields($old, $new);
+            $new->save();
+        }
+
+    }
+
+
+    /**
+     * Set all exhibit fields that have direct analogs in the new schema.
+     *
+     * @param object $old The original `neatline_exhibits` row.
+     * @param NeatlineExhibit $new The new exhibit instance.
+     */
+    private function __processExhbibitExtantFields($old, $new)
+    {
+        $new->id            = $old->id;
+        $new->title         = $old->name;
+        $new->slug          = $old->slug;
+        $new->public        = $old->public;
+        $new->narrative     = $old->description;
+        $new->modified      = $old->modified;
+        $new->query         = $old->query;
+        $new->map_focus     = $old->default_map_bounds;
+        $new->map_zoom      = $old->default_map_zoom;
+        $new->base_layer    = $old->default_base_layer;
     }
 
 
@@ -337,7 +372,7 @@ SQL;
 
 
     /**
-     * Set all fields that have direct equivalents in the new schema.
+     * Set all record fields that have direct analogs in the new schema.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.

@@ -18,7 +18,7 @@ class Migrate200Test_ProcessRecordPresenter
     {
 
         parent::setUp();
-        $this->_loadFixture('ProcessPresenter.records');
+        $this->_loadFixture('ProcessRecordPresenter.records');
 
         $this->_upgrade();
         $this->_migrate();
