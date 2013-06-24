@@ -436,7 +436,7 @@ SQL;
         $sql = <<<SQL
         SELECT COUNT(*) FROM {$this->db->prefix}$table
 SQL;
-        return $this->db->query($sql)->fetch();
+        return $this->db->query($sql)->fetchColumn(0);
     }
 
 
