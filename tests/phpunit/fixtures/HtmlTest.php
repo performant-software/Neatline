@@ -28,9 +28,6 @@ class FixturesTest_Html extends Neatline_Case_Default
         $this->_mockRecordWidgets();
         $this->_mockPresenters();
 
-        // Inject real layer definition files.
-        Zend_Registry::set('layers', NL_DIR . '/layers');
-
         // Create exhibit.
         $exhibit = $this->_exhibit();
         $exhibit->base_layer = 'OpenStreetMap';

@@ -27,12 +27,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     public function tearDown()
     {
-        $this->db->query("DELETE FROM
-            `{$this->_exhibits->getTableName()}` WHERE 1=1"
-        );
-        $this->db->query("DELETE FROM
-            `{$this->_records->getTableName()}` WHERE 1=1"
-        );
+        $p = $this->db->prefix;
+        $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
+        $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
         parent::tearDown();
     }
 
