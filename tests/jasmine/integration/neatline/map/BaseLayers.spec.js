@@ -46,9 +46,9 @@ describe('Map | Base Layers', function() {
     NL.startApplication();
     NL.aliasNeatline();
 
-    expect(NL.vw.MAP.map.layers[0].name).toEqual('Layer1');
+    expect(NL.vw.MAP.map.layers[0].name).toEqual('Layer3');
     expect(NL.vw.MAP.map.layers[1].name).toEqual('Layer2');
-    expect(NL.vw.MAP.map.layers[2].name).toEqual('Layer3');
+    expect(NL.vw.MAP.map.layers[2].name).toEqual('Layer1');
 
   });
 

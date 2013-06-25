@@ -98,8 +98,11 @@ Neatline.module('Map', function(
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
 
-      // Add the layers.
-      this.map.addLayers(_.values(this.baseLayers));
+      // Add the layers, set indices to 0.
+      _.each(_.values(this.baseLayers), _.bind(function(layer) {
+        this.map.addLayer(layer);
+        this.map.setLayerIndex(layer, 0);
+      }, this));
 
       // Set default layer.
       this.map.setBaseLayer(
@@ -429,7 +432,7 @@ Neatline.module('Map', function(
       this.map.addLayer(layer);
 
       // Set z-index.
-      this.map.setLayerIndex(layer, record.get('zindex'));
+      this.setZIndex(layer, record.get('zindex'));
 
       return layer;
 
@@ -464,7 +467,7 @@ Neatline.module('Map', function(
       this.map.addLayer(layer);
 
       // Set z-index.
-      this.map.setLayerIndex(layer, record.get('zindex'));
+      this.setZIndex(layer, record.get('zindex'));
 
       return layer;
 
@@ -828,6 +831,19 @@ Neatline.module('Map', function(
 
     // HELPERS
     // --------------------------------------------------------------------
+
+
+    /**
+     * Set the z-index on a layer. Add 1 to the user-provided value to
+     * ensure that the layers always stack on top of the base layer, which
+     * is always has a z-index of 0.
+     *
+     * @param {Object} layer: A WMS / vector layer.
+     * @param {Number} zindex: The z-index value.
+     */
+    setZIndex: function(layer, zindex) {
+      this.map.setLayerIndex(layer, 1+zindex);
+    },
 
 
     /**

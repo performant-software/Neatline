@@ -31,12 +31,16 @@ describe('Map | WMS Zindex', function() {
     NL.respondMap200(fx.records);
 
     // Get the two vector layers.
-    var layer1 = NL.getWmsLayer('title1');
-    var layer2 = NL.getWmsLayer('title2');
+    var layer1 = NL.getVectorLayer('title1');
+    var layer2 = NL.getVectorLayer('title2');
 
-    // Map should set layer indices.
-    expect(NL.vw.MAP.map.getLayerIndex(layer1)).toEqual(1);
-    expect(NL.vw.MAP.map.getLayerIndex(layer2)).toEqual(2);
+    // Get the indexes for the layers.
+    var index1 = NL.vw.MAP.map.getLayerIndex(layer1);
+    var index2 = NL.vw.MAP.map.getLayerIndex(layer2);
+
+    // The map should apply the same _relative_ difference between layer
+    // indexes as the difference between the record `zindex` values.
+    expect(index2).toEqual(index1+1);
 
   });
 
