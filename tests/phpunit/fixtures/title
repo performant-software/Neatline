@@ -1,0 +1,434 @@
+editor/map/EditLayerManagementTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/map/EditLayerManagementTest.php:20:        $record1 = $this->_record($this->exhibit);
+editor/map/EditLayerManagementTest.php:21:        $record2 = $this->_record($this->exhibit);
+editor/map/EditLayerManagementTest.php:22:        $record3 = $this->_record($this->exhibit);
+editor/map/EditLayerManagementTest.php:24:        $record1->title     = 'title1';
+editor/map/EditLayerManagementTest.php:25:        $record2->title     = 'title2';
+editor/map/EditLayerManagementTest.php:26:        $record3->title     = 'title3';
+editor/map/EditLayerManagementTest.php:27:        $record1->coverage  = 'POINT(1 2)';
+editor/map/EditLayerManagementTest.php:28:        $record2->coverage  = 'POINT(3 4)';
+editor/map/EditLayerManagementTest.php:29:        $record3->coverage  = 'POINT(5 6)';
+editor/map/EditLayerManagementTest.php:30:        $record1->added     = '2003-01-01';
+editor/map/EditLayerManagementTest.php:31:        $record2->added     = '2002-01-01';
+editor/map/EditLayerManagementTest.php:32:        $record3->added     = '2001-01-01';
+editor/map/EditLayerManagementTest.php:34:        $record1->save();
+editor/map/EditLayerManagementTest.php:35:        $record2->save();
+editor/map/EditLayerManagementTest.php:36:        $record3->save();
+editor/map/EditLayerManagementTest.php:38:        $this->_writeFixtureFromRoute('neatline/records',
+editor/map/EditLayerManagementTest.php:42:        $record3->delete();
+editor/map/EditLayerManagementTest.php:44:        $this->_writeFixtureFromRoute('neatline/records',
+editor/record/CloseFormTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/record/CloseFormTest.php:19:        $record = $this->_record($this->exhibit);
+editor/record/CloseFormTest.php:20:        $record->coverage = 'POINT(1 2)';
+editor/record/CloseFormTest.php:21:        $record->point_radius = 10;
+editor/record/CloseFormTest.php:22:        $record->save();
+editor/record/CloseFormTest.php:24:        $this->_writeFixtureFromRoute('neatline/records',
+editor/record/CloseFormTest.php:28:        $this->resetRequest();
+editor/record/CloseFormTest.php:29:        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+editor/record/CreateRecordTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/record/CreateRecordTest.php:19:        $record = $this->_record($this->exhibit);
+editor/record/CreateRecordTest.php:20:        $record->coverage = 'POINT(1 2)';
+editor/record/CreateRecordTest.php:21:        $record->save();
+editor/record/CreateRecordTest.php:23:        $this->_writeFixtureFromRoute('neatline/records',
+editor/record/CreateRecordTest.php:27:        $this->resetRequest();
+editor/record/CreateRecordTest.php:28:        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+editor/record/ItemSearchTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/record/ItemSearchTest.php:19:        $item1 = $this->_item('Item 1');
+editor/record/ItemSearchTest.php:20:        $item2 = $this->_item('Item 2');
+editor/record/ItemSearchTest.php:21:        $item3 = $this->_item('Item 3');
+editor/record/ItemSearchTest.php:23:        $item1->added = '2021-01-01';
+editor/record/ItemSearchTest.php:24:        $item2->added = '2022-01-01';
+editor/record/ItemSearchTest.php:25:        $item3->added = '2023-01-01';
+editor/record/ItemSearchTest.php:27:        $item1->save();
+editor/record/ItemSearchTest.php:28:        $item2->save();
+editor/record/ItemSearchTest.php:29:        $item3->save();
+editor/record/ItemSearchTest.php:31:        $this->request->setQuery(array('output' => 'omeka-xml'));
+editor/record/ItemSearchTest.php:33:        $this->_writeFixtureFromRoute('items/browse',
+editor/record/OpenFormTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/record/OpenFormTest.php:19:        $record1 = $this->_record($this->exhibit);
+editor/record/OpenFormTest.php:20:        $record2 = $this->_record($this->exhibit);
+editor/record/OpenFormTest.php:21:        $record3 = $this->_record($this->exhibit);
+editor/record/OpenFormTest.php:23:        $record1->title     = 'title1';
+editor/record/OpenFormTest.php:24:        $record2->title     = 'title2';
+editor/record/OpenFormTest.php:25:        $record3->title     = 'title3';
+editor/record/OpenFormTest.php:26:        $record1->coverage  = 'POINT(1 2)';
+editor/record/OpenFormTest.php:27:        $record2->coverage  = 'POINT(3 4)';
+editor/record/OpenFormTest.php:28:        $record3->coverage  = 'POINT(5 6)';
+editor/record/OpenFormTest.php:29:        $record1->map_focus = '100,200';
+editor/record/OpenFormTest.php:30:        $record2->map_focus = '100,200';
+editor/record/OpenFormTest.php:31:        $record3->map_focus = '100,200';
+editor/record/OpenFormTest.php:32:        $record1->map_zoom  = 10;
+editor/record/OpenFormTest.php:33:        $record2->map_zoom  = 10;
+editor/record/OpenFormTest.php:34:        $record3->map_zoom  = 10;
+editor/record/OpenFormTest.php:35:        $record1->added     = '2003-01-01';
+editor/record/OpenFormTest.php:36:        $record2->added     = '2002-01-01';
+editor/record/OpenFormTest.php:37:        $record3->added     = '2001-01-01';
+editor/record/OpenFormTest.php:39:        $record1->save();
+editor/record/OpenFormTest.php:40:        $record2->save();
+editor/record/OpenFormTest.php:41:        $record3->save();
+editor/record/OpenFormTest.php:43:        $this->_writeFixtureFromRoute('neatline/records',
+editor/record/RecordTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/record/RecordTest.php:19:        $this->_mockRecordWidgets();
+editor/record/RecordTest.php:20:        $this->_mockPresenters();
+editor/record/RecordTest.php:27:        $record = $this->_record($this->exhibit);
+editor/record/RecordTest.php:29:        $record->setArray(array(
+editor/record/RecordTest.php:63:        $record->__save();
+editor/record/RecordTest.php:65:        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+editor/record/RecordTest.php:75:        $record1 = $this->_record($this->exhibit);
+editor/record/RecordTest.php:76:        $record2 = $this->_record($this->exhibit);
+editor/record/RecordTest.php:77:        $record3 = $this->_record($this->exhibit);
+editor/record/RecordTest.php:79:        $record1->title = 'title1';
+editor/record/RecordTest.php:80:        $record2->title = 'title2';
+editor/record/RecordTest.php:81:        $record3->title = 'title3';
+editor/record/RecordTest.php:82:        $record1->added = '2003-01-01';
+editor/record/RecordTest.php:83:        $record2->added = '2002-01-01';
+editor/record/RecordTest.php:84:        $record3->added = '2001-01-01';
+editor/record/RecordTest.php:86:        $record1->save();
+editor/record/RecordTest.php:87:        $record2->save();
+editor/record/RecordTest.php:88:        $record3->save();
+editor/record/RecordTest.php:90:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/PaginationTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/records/PaginationTest.php:20:            $record = new NeatlineRecord($this->exhibit);
+editor/records/PaginationTest.php:21:            $record->added = '200'.$i.'-01-01';
+editor/records/PaginationTest.php:22:            $record->title = 'Record'.$i;
+editor/records/PaginationTest.php:23:            $record->save();
+editor/records/PaginationTest.php:26:        // Records 1-2.
+editor/records/PaginationTest.php:27:        $this->request->setQuery(array('limit' => 2, 'offset' => 0));
+editor/records/PaginationTest.php:28:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/PaginationTest.php:32:        // Records 2-3.
+editor/records/PaginationTest.php:33:        $this->request->setQuery(array('limit' => 2, 'offset' => 1));
+editor/records/PaginationTest.php:34:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/PaginationTest.php:38:        // Records 3-4.
+editor/records/PaginationTest.php:39:        $this->request->setQuery(array('limit' => 2, 'offset' => 2));
+editor/records/PaginationTest.php:40:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/PaginationTest.php:44:        // Records 5-6.
+editor/records/PaginationTest.php:45:        $this->request->setQuery(array('limit' => 2, 'offset' => 4));
+editor/records/PaginationTest.php:46:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/PaginationTest.php:51:        $this->request->setQuery(array('limit' => 2, 'offset' => 5));
+editor/records/PaginationTest.php:52:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/PublicationsTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/records/PublicationsTest.php:20:        $record = $this->_record($this->exhibit);
+editor/records/PublicationsTest.php:22:        $record->title = 'title';
+editor/records/PublicationsTest.php:23:        $record->body  = 'body';
+editor/records/PublicationsTest.php:25:        $record->save();
+editor/records/PublicationsTest.php:27:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/TemplatingTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/records/TemplatingTest.php:19:        $record1 = $this->_record($this->exhibit);
+editor/records/TemplatingTest.php:20:        $record2 = $this->_record($this->exhibit);
+editor/records/TemplatingTest.php:21:        $record3 = $this->_record($this->exhibit);
+editor/records/TemplatingTest.php:23:        $record1->title = 'title1';
+editor/records/TemplatingTest.php:24:        $record2->title = 'title2';
+editor/records/TemplatingTest.php:25:        $record3->title = 'title3';
+editor/records/TemplatingTest.php:26:        $record1->body  = 'body1';
+editor/records/TemplatingTest.php:27:        $record2->body  = 'body2';
+editor/records/TemplatingTest.php:28:        $record3->body  = 'body3';
+editor/records/TemplatingTest.php:29:        $record1->added = '2003-01-01';
+editor/records/TemplatingTest.php:30:        $record2->added = '2002-01-01';
+editor/records/TemplatingTest.php:31:        $record3->added = '2001-01-01';
+editor/records/TemplatingTest.php:33:        $record1->save();
+editor/records/TemplatingTest.php:34:        $record2->save();
+editor/records/TemplatingTest.php:35:        $record3->save();
+editor/records/TemplatingTest.php:37:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/TemplatingTest.php:41:        $record1->title = '<tag>title</tag>';
+editor/records/TemplatingTest.php:42:        $record1->save();
+editor/records/TemplatingTest.php:44:        $this->_writeFixtureFromRoute('neatline/records',
+editor/records/TemplatingTest.php:48:        $record1->title = null;
+editor/records/TemplatingTest.php:49:        $record1->save();
+editor/records/TemplatingTest.php:51:        $this->_writeFixtureFromRoute('neatline/records',
+editor/search/InitializationTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/search/InitializationTest.php:20:        $record = $this->_record($this->exhibit);
+editor/search/InitializationTest.php:21:        $record->title = 'title';
+editor/search/InitializationTest.php:22:        $record->save();
+editor/search/InitializationTest.php:24:        $this->_writeFixtureFromRoute('neatline/records',
+editor/search/MapMirroringTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/search/MapMirroringTest.php:19:        $record1 = $this->_record($this->exhibit);
+editor/search/MapMirroringTest.php:20:        $record2 = $this->_record($this->exhibit);
+editor/search/MapMirroringTest.php:21:        $record3 = $this->_record($this->exhibit);
+editor/search/MapMirroringTest.php:23:        $record1->title = 'list1';
+editor/search/MapMirroringTest.php:24:        $record2->title = 'list2';
+editor/search/MapMirroringTest.php:25:        $record3->title = 'list3';
+editor/search/MapMirroringTest.php:26:        $record1->added = '2003-01-01';
+editor/search/MapMirroringTest.php:27:        $record2->added = '2002-01-01';
+editor/search/MapMirroringTest.php:28:        $record3->added = '2001-01-01';
+editor/search/MapMirroringTest.php:30:        $record1->save();
+editor/search/MapMirroringTest.php:31:        $record2->save();
+editor/search/MapMirroringTest.php:32:        $record3->save();
+editor/search/MapMirroringTest.php:34:        $this->_writeFixtureFromRoute('neatline/records',
+editor/search/MapMirroringTest.php:44:        $record1 = $this->_record($this->exhibit);
+editor/search/MapMirroringTest.php:45:        $record2 = $this->_record($this->exhibit);
+editor/search/MapMirroringTest.php:46:        $record3 = $this->_record($this->exhibit);
+editor/search/MapMirroringTest.php:48:        $record1->title = 'map1';
+editor/search/MapMirroringTest.php:49:        $record2->title = 'map2';
+editor/search/MapMirroringTest.php:50:        $record3->title = 'map3';
+editor/search/MapMirroringTest.php:51:        $record1->added = '2003-01-01';
+editor/search/MapMirroringTest.php:52:        $record2->added = '2002-01-01';
+editor/search/MapMirroringTest.php:53:        $record3->added = '2001-01-01';
+editor/search/MapMirroringTest.php:55:        $record1->save();
+editor/search/MapMirroringTest.php:56:        $record2->save();
+editor/search/MapMirroringTest.php:57:        $record3->save();
+editor/search/MapMirroringTest.php:59:        $this->_writeFixtureFromRoute('neatline/records',
+editor/search/QueryExecutionTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/search/QueryExecutionTest.php:20:        $record1 = $this->_record($this->exhibit);
+editor/search/QueryExecutionTest.php:21:        $record2 = $this->_record($this->exhibit);
+editor/search/QueryExecutionTest.php:22:        $record3 = $this->_record($this->exhibit);
+editor/search/QueryExecutionTest.php:24:        $record1->title = 'result1';
+editor/search/QueryExecutionTest.php:25:        $record2->title = 'result2';
+editor/search/QueryExecutionTest.php:26:        $record3->title = 'result3';
+editor/search/QueryExecutionTest.php:27:        $record1->added = '2003-01-01';
+editor/search/QueryExecutionTest.php:28:        $record2->added = '2002-01-01';
+editor/search/QueryExecutionTest.php:29:        $record3->added = '2001-01-01';
+editor/search/QueryExecutionTest.php:31:        $record1->save();
+editor/search/QueryExecutionTest.php:32:        $record2->save();
+editor/search/QueryExecutionTest.php:33:        $record3->save();
+editor/search/QueryExecutionTest.php:35:        $this->_writeFixtureFromRoute('neatline/records',
+editor/styles/StylesTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+editor/styles/StylesTest.php:19:        $exhibit = $this->_exhibit();
+editor/styles/StylesTest.php:20:        $exhibit->styles    = '1';
+editor/styles/StylesTest.php:21:        $exhibit->map_focus = '2';
+editor/styles/StylesTest.php:22:        $exhibit->map_zoom  = '3';
+editor/styles/StylesTest.php:23:        $exhibit->save();
+editor/styles/StylesTest.php:25:        $this->_writeFixtureFromRoute('neatline/exhibits/'.$exhibit->id,
+HtmlTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+HtmlTest.php:28:        $this->_mockRecordWidgets();
+HtmlTest.php:29:        $this->_mockPresenters();
+HtmlTest.php:32:        $exhibit = $this->_exhibit();
+HtmlTest.php:33:        $exhibit->base_layer = 'OpenStreetMap';
+HtmlTest.php:34:        $exhibit->save();
+HtmlTest.php:37:        get_view()->neatline_exhibit = $exhibit;
+HtmlTest.php:44:        $this->_writeFixture(
+HtmlTest.php:45:            get_view()->partial('exhibits/partials/exhibit.php'),
+HtmlTest.php:46:            'neatline-partial.html'
+HtmlTest.php:53:        $this->_writeFixture(
+HtmlTest.php:54:            get_view()->partial('exhibits/partials/editor_core.php'),
+HtmlTest.php:55:            'editor-partial.html'
+neatline/map/LayerRefreshingTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/LayerRefreshingTest.php:20:        $record1 = $this->_record($this->exhibit);
+neatline/map/LayerRefreshingTest.php:21:        $record2 = $this->_record($this->exhibit);
+neatline/map/LayerRefreshingTest.php:22:        $record3 = $this->_record($this->exhibit);
+neatline/map/LayerRefreshingTest.php:24:        $record1->title     = 'title1';
+neatline/map/LayerRefreshingTest.php:25:        $record2->title     = 'title2';
+neatline/map/LayerRefreshingTest.php:26:        $record3->title     = 'title3';
+neatline/map/LayerRefreshingTest.php:27:        $record1->coverage  = 'POINT(1 2)';
+neatline/map/LayerRefreshingTest.php:28:        $record2->coverage  = 'POINT(3 4)';
+neatline/map/LayerRefreshingTest.php:29:        $record3->coverage  = 'POINT(5 6)';
+neatline/map/LayerRefreshingTest.php:30:        $record1->added     = '2003-01-01';
+neatline/map/LayerRefreshingTest.php:31:        $record2->added     = '2002-01-01';
+neatline/map/LayerRefreshingTest.php:32:        $record3->added     = '2001-01-01';
+neatline/map/LayerRefreshingTest.php:34:        $record1->save();
+neatline/map/LayerRefreshingTest.php:35:        $record2->save();
+neatline/map/LayerRefreshingTest.php:36:        $record3->save();
+neatline/map/LayerRefreshingTest.php:38:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/LayerRefreshingTest.php:42:        $record1->coverage  = 'POINT(7 8)';
+neatline/map/LayerRefreshingTest.php:43:        $record2->coverage  = 'POINT(9 10)';
+neatline/map/LayerRefreshingTest.php:44:        $record3->coverage  = 'POINT(11 12)';
+neatline/map/LayerRefreshingTest.php:46:        $record1->save();
+neatline/map/LayerRefreshingTest.php:47:        $record2->save();
+neatline/map/LayerRefreshingTest.php:48:        $record3->save();
+neatline/map/LayerRefreshingTest.php:50:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/LayerRefreshingTest.php:60:        $record1 = $this->_record($this->exhibit);
+neatline/map/LayerRefreshingTest.php:61:        $record2 = $this->_record($this->exhibit);
+neatline/map/LayerRefreshingTest.php:62:        $record3 = $this->_record($this->exhibit);
+neatline/map/LayerRefreshingTest.php:64:        $record1->title         = 'title1';
+neatline/map/LayerRefreshingTest.php:65:        $record2->title         = 'title2';
+neatline/map/LayerRefreshingTest.php:66:        $record3->title         = 'title3';
+neatline/map/LayerRefreshingTest.php:67:        $record1->wms_address   = 'address1';
+neatline/map/LayerRefreshingTest.php:68:        $record2->wms_address   = 'address2';
+neatline/map/LayerRefreshingTest.php:69:        $record3->wms_address   = 'address3';
+neatline/map/LayerRefreshingTest.php:70:        $record1->wms_layers    = 'layers1';
+neatline/map/LayerRefreshingTest.php:71:        $record2->wms_layers    = 'layers2';
+neatline/map/LayerRefreshingTest.php:72:        $record3->wms_layers    = 'layers3';
+neatline/map/LayerRefreshingTest.php:73:        $record1->added         = '2003-01-01';
+neatline/map/LayerRefreshingTest.php:74:        $record2->added         = '2002-01-01';
+neatline/map/LayerRefreshingTest.php:75:        $record3->added         = '2001-01-01';
+neatline/map/LayerRefreshingTest.php:77:        $record1->save();
+neatline/map/LayerRefreshingTest.php:78:        $record2->save();
+neatline/map/LayerRefreshingTest.php:79:        $record3->save();
+neatline/map/LayerRefreshingTest.php:81:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/LayerRefreshingTest.php:85:        $record1->wms_address   = 'address4';
+neatline/map/LayerRefreshingTest.php:86:        $record2->wms_address   = 'address5';
+neatline/map/LayerRefreshingTest.php:87:        $record3->wms_address   = 'address6';
+neatline/map/LayerRefreshingTest.php:88:        $record1->wms_layers    = 'layers4';
+neatline/map/LayerRefreshingTest.php:89:        $record2->wms_layers    = 'layers5';
+neatline/map/LayerRefreshingTest.php:90:        $record3->wms_layers    = 'layers6';
+neatline/map/LayerRefreshingTest.php:92:        $record1->save();
+neatline/map/LayerRefreshingTest.php:93:        $record2->save();
+neatline/map/LayerRefreshingTest.php:94:        $record3->save();
+neatline/map/LayerRefreshingTest.php:96:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/PublicationsTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/PublicationsTest.php:19:        $record  = $this->_record($this->exhibit);
+neatline/map/PublicationsTest.php:20:        $record->coverage = 'POINT(1 2)';
+neatline/map/PublicationsTest.php:21:        $record->save();
+neatline/map/PublicationsTest.php:23:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/RecordLoadingTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/RecordLoadingTest.php:19:        $record1 = $this->_record($this->exhibit);
+neatline/map/RecordLoadingTest.php:20:        $record2 = $this->_record($this->exhibit);
+neatline/map/RecordLoadingTest.php:22:        $record1->coverage = 'POINT(1 2)';
+neatline/map/RecordLoadingTest.php:23:        $record2->coverage = 'POINT(3 4)';
+neatline/map/RecordLoadingTest.php:25:        $record1->save();
+neatline/map/RecordLoadingTest.php:26:        $record2->save();
+neatline/map/RecordLoadingTest.php:28:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/RecordLoadingTest.php:32:        $record2->delete();
+neatline/map/RecordLoadingTest.php:34:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/SubscribeRemoveFilterTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/SubscribeRemoveFilterTest.php:20:        $record1 = $this->_record($this->exhibit);
+neatline/map/SubscribeRemoveFilterTest.php:21:        $record2 = $this->_record($this->exhibit);
+neatline/map/SubscribeRemoveFilterTest.php:22:        $record3 = $this->_record($this->exhibit);
+neatline/map/SubscribeRemoveFilterTest.php:24:        $record1->title         = 'title1';
+neatline/map/SubscribeRemoveFilterTest.php:25:        $record2->title         = 'title2';
+neatline/map/SubscribeRemoveFilterTest.php:26:        $record3->title         = 'title3';
+neatline/map/SubscribeRemoveFilterTest.php:27:        $record1->coverage      = 'POINT(1 2)';
+neatline/map/SubscribeRemoveFilterTest.php:28:        $record2->coverage      = 'POINT(3 4)';
+neatline/map/SubscribeRemoveFilterTest.php:29:        $record3->coverage      = 'POINT(5 6)';
+neatline/map/SubscribeRemoveFilterTest.php:30:        $record1->wms_address   = 'address1';
+neatline/map/SubscribeRemoveFilterTest.php:31:        $record2->wms_address   = 'address2';
+neatline/map/SubscribeRemoveFilterTest.php:32:        $record3->wms_address   = 'address3';
+neatline/map/SubscribeRemoveFilterTest.php:33:        $record1->wms_layers    = 'layers1';
+neatline/map/SubscribeRemoveFilterTest.php:34:        $record2->wms_layers    = 'layers2';
+neatline/map/SubscribeRemoveFilterTest.php:35:        $record3->wms_layers    = 'layers3';
+neatline/map/SubscribeRemoveFilterTest.php:36:        $record1->added         = '2003-01-01';
+neatline/map/SubscribeRemoveFilterTest.php:37:        $record2->added         = '2002-01-01';
+neatline/map/SubscribeRemoveFilterTest.php:38:        $record3->added         = '2001-01-01';
+neatline/map/SubscribeRemoveFilterTest.php:40:        $record1->save();
+neatline/map/SubscribeRemoveFilterTest.php:41:        $record2->save();
+neatline/map/SubscribeRemoveFilterTest.php:42:        $record3->save();
+neatline/map/SubscribeRemoveFilterTest.php:44:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/SubscribeSelectWmsTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/SubscribeSelectWmsTest.php:22:        $record->setArray(array(
+neatline/map/SubscribeSelectWmsTest.php:27:        $record->save();
+neatline/map/SubscribeSelectWmsTest.php:29:        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+neatline/map/SubscribeSelectWmsTest.php:33:        $record->setArray(array(
+neatline/map/SubscribeSelectWmsTest.php:38:        $record->save();
+neatline/map/SubscribeSelectWmsTest.php:40:        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+neatline/map/SubscribeSetFilterTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/SubscribeSetFilterTest.php:20:        $record1 = $this->_record($this->exhibit);
+neatline/map/SubscribeSetFilterTest.php:21:        $record2 = $this->_record($this->exhibit);
+neatline/map/SubscribeSetFilterTest.php:22:        $record3 = $this->_record($this->exhibit);
+neatline/map/SubscribeSetFilterTest.php:24:        $record1->title         = 'title1';
+neatline/map/SubscribeSetFilterTest.php:25:        $record2->title         = 'title2';
+neatline/map/SubscribeSetFilterTest.php:26:        $record3->title         = 'title3';
+neatline/map/SubscribeSetFilterTest.php:27:        $record1->coverage      = 'POINT(1 2)';
+neatline/map/SubscribeSetFilterTest.php:28:        $record2->coverage      = 'POINT(3 4)';
+neatline/map/SubscribeSetFilterTest.php:29:        $record3->coverage      = 'POINT(5 6)';
+neatline/map/SubscribeSetFilterTest.php:30:        $record1->wms_address   = 'address1';
+neatline/map/SubscribeSetFilterTest.php:31:        $record2->wms_address   = 'address2';
+neatline/map/SubscribeSetFilterTest.php:32:        $record3->wms_address   = 'address3';
+neatline/map/SubscribeSetFilterTest.php:33:        $record1->wms_layers    = 'layers1';
+neatline/map/SubscribeSetFilterTest.php:34:        $record2->wms_layers    = 'layers2';
+neatline/map/SubscribeSetFilterTest.php:35:        $record3->wms_layers    = 'layers3';
+neatline/map/SubscribeSetFilterTest.php:36:        $record1->added         = '2003-01-01';
+neatline/map/SubscribeSetFilterTest.php:37:        $record2->added         = '2002-01-01';
+neatline/map/SubscribeSetFilterTest.php:38:        $record3->added         = '2001-01-01';
+neatline/map/SubscribeSetFilterTest.php:40:        $record1->save();
+neatline/map/SubscribeSetFilterTest.php:41:        $record2->save();
+neatline/map/SubscribeSetFilterTest.php:42:        $record3->save();
+neatline/map/SubscribeSetFilterTest.php:44:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/SubscribeSetFilterTest.php:48:        $record3->delete();
+neatline/map/SubscribeSetFilterTest.php:50:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/SubscriptionsTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/SubscriptionsTest.php:20:        $record = $this->_record($this->exhibit);
+neatline/map/SubscriptionsTest.php:22:        $record->setArray(array(
+neatline/map/SubscriptionsTest.php:29:        $record->save();
+neatline/map/SubscriptionsTest.php:31:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/SubscriptionsTest.php:35:        $this->resetRequest();
+neatline/map/SubscriptionsTest.php:36:        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+neatline/map/VectorLayerManagementTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/VectorLayerManagementTest.php:20:        $record1 = $this->_record($this->exhibit);
+neatline/map/VectorLayerManagementTest.php:21:        $record2 = $this->_record($this->exhibit);
+neatline/map/VectorLayerManagementTest.php:22:        $record3 = $this->_record($this->exhibit);
+neatline/map/VectorLayerManagementTest.php:24:        $record1->title     = 'title1';
+neatline/map/VectorLayerManagementTest.php:25:        $record2->title     = 'title2';
+neatline/map/VectorLayerManagementTest.php:26:        $record3->title     = 'title3';
+neatline/map/VectorLayerManagementTest.php:27:        $record1->coverage  = 'POINT(1 2)';
+neatline/map/VectorLayerManagementTest.php:28:        $record2->coverage  = 'POINT(3 4)';
+neatline/map/VectorLayerManagementTest.php:29:        $record3->coverage  = 'POINT(5 6)';
+neatline/map/VectorLayerManagementTest.php:30:        $record1->added     = '2003-01-01';
+neatline/map/VectorLayerManagementTest.php:31:        $record2->added     = '2002-01-01';
+neatline/map/VectorLayerManagementTest.php:32:        $record3->added     = '2001-01-01';
+neatline/map/VectorLayerManagementTest.php:34:        $record1->save();
+neatline/map/VectorLayerManagementTest.php:35:        $record2->save();
+neatline/map/VectorLayerManagementTest.php:36:        $record3->save();
+neatline/map/VectorLayerManagementTest.php:38:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/VectorLayerManagementTest.php:42:        $record3->delete();
+neatline/map/VectorLayerManagementTest.php:44:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/VectorStylestTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/VectorStylestTest.php:19:        $record1 = $this->_record($this->exhibit);
+neatline/map/VectorStylestTest.php:20:        $record2 = $this->_record($this->exhibit);
+neatline/map/VectorStylestTest.php:22:        $record1->coverage = 'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))';
+neatline/map/VectorStylestTest.php:23:        $record2->coverage = 'GEOMETRYCOLLECTION(POINT(5 6),POINT(7 8))';
+neatline/map/VectorStylestTest.php:25:        $record1->setArray(array(
+neatline/map/VectorStylestTest.php:39:        $record1->save();
+neatline/map/VectorStylestTest.php:40:        $record2->save();
+neatline/map/VectorStylestTest.php:42:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/VectorZindexTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/VectorZindexTest.php:19:        $record1 = $this->_record($this->exhibit);
+neatline/map/VectorZindexTest.php:20:        $record2 = $this->_record($this->exhibit);
+neatline/map/VectorZindexTest.php:22:        $record1->title     = 'title1';
+neatline/map/VectorZindexTest.php:23:        $record2->title     = 'title2';
+neatline/map/VectorZindexTest.php:24:        $record1->coverage  = 'POINT(1 2)';
+neatline/map/VectorZindexTest.php:25:        $record2->coverage  = 'POINT(3 4)';
+neatline/map/VectorZindexTest.php:26:        $record1->zindex    = 1;
+neatline/map/VectorZindexTest.php:27:        $record2->zindex    = 2;
+neatline/map/VectorZindexTest.php:29:        $record1->save();
+neatline/map/VectorZindexTest.php:30:        $record2->save();
+neatline/map/VectorZindexTest.php:32:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/WmsLayerManagementTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/WmsLayerManagementTest.php:20:        $record1 = $this->_record($this->exhibit);
+neatline/map/WmsLayerManagementTest.php:21:        $record2 = $this->_record($this->exhibit);
+neatline/map/WmsLayerManagementTest.php:22:        $record3 = $this->_record($this->exhibit);
+neatline/map/WmsLayerManagementTest.php:23:        $record4 = $this->_record($this->exhibit);
+neatline/map/WmsLayerManagementTest.php:25:        $record1->title         = 'title1';
+neatline/map/WmsLayerManagementTest.php:26:        $record2->title         = 'title2';
+neatline/map/WmsLayerManagementTest.php:27:        $record3->title         = 'title3';
+neatline/map/WmsLayerManagementTest.php:28:        $record4->title         = 'title4';
+neatline/map/WmsLayerManagementTest.php:29:        $record1->wms_address   = 'address1';
+neatline/map/WmsLayerManagementTest.php:30:        $record2->wms_address   = 'address2';
+neatline/map/WmsLayerManagementTest.php:31:        $record3->wms_address   = 'address3';
+neatline/map/WmsLayerManagementTest.php:32:        $record1->wms_layers    = 'layers1';
+neatline/map/WmsLayerManagementTest.php:33:        $record2->wms_layers    = 'layers2';
+neatline/map/WmsLayerManagementTest.php:34:        $record3->wms_layers    = 'layers3';
+neatline/map/WmsLayerManagementTest.php:35:        $record1->added         = '2004-01-01';
+neatline/map/WmsLayerManagementTest.php:36:        $record2->added         = '2003-01-01';
+neatline/map/WmsLayerManagementTest.php:37:        $record3->added         = '2002-01-01';
+neatline/map/WmsLayerManagementTest.php:38:        $record4->added         = '2001-01-01';
+neatline/map/WmsLayerManagementTest.php:40:        $record1->save();
+neatline/map/WmsLayerManagementTest.php:41:        $record2->save();
+neatline/map/WmsLayerManagementTest.php:42:        $record3->save();
+neatline/map/WmsLayerManagementTest.php:43:        $record4->save();
+neatline/map/WmsLayerManagementTest.php:45:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/WmsLayerManagementTest.php:49:        $record3->delete();
+neatline/map/WmsLayerManagementTest.php:51:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/WmsOpacityTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/WmsOpacityTest.php:19:        $record = $this->_record($this->exhibit);
+neatline/map/WmsOpacityTest.php:21:        $record->setArray(array(
+neatline/map/WmsOpacityTest.php:27:        $record->save();
+neatline/map/WmsOpacityTest.php:29:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/map/WmsZindexTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/map/WmsZindexTest.php:19:        $record1 = $this->_record($this->exhibit);
+neatline/map/WmsZindexTest.php:20:        $record2 = $this->_record($this->exhibit);
+neatline/map/WmsZindexTest.php:22:        $record1->title         = 'title1';
+neatline/map/WmsZindexTest.php:23:        $record2->title         = 'title2';
+neatline/map/WmsZindexTest.php:24:        $record1->wms_address   = 'address1';
+neatline/map/WmsZindexTest.php:25:        $record2->wms_address   = 'address2';
+neatline/map/WmsZindexTest.php:26:        $record1->wms_layers    = 'layers1';
+neatline/map/WmsZindexTest.php:27:        $record2->wms_layers    = 'layers2';
+neatline/map/WmsZindexTest.php:28:        $record1->zindex        = 1;
+neatline/map/WmsZindexTest.php:29:        $record2->zindex        = 2;
+neatline/map/WmsZindexTest.php:31:        $record1->save();
+neatline/map/WmsZindexTest.php:32:        $record2->save();
+neatline/map/WmsZindexTest.php:34:        $this->_writeFixtureFromRoute('neatline/records',
+neatline/presenters/StaticBubbleTest.php:9: * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+neatline/presenters/StaticBubbleTest.php:20:        $record1 = $this->_record($this->exhibit);
+neatline/presenters/StaticBubbleTest.php:21:        $record2 = $this->_record($this->exhibit);
+neatline/presenters/StaticBubbleTest.php:23:        $record1->title     = 'title1';
+neatline/presenters/StaticBubbleTest.php:24:        $record2->title     = 'title2';
+neatline/presenters/StaticBubbleTest.php:25:        $record1->body      = 'body1';
+neatline/presenters/StaticBubbleTest.php:26:        $record2->body      = 'body2';
+neatline/presenters/StaticBubbleTest.php:27:        $record1->presenter = 'StaticBubble';
+neatline/presenters/StaticBubbleTest.php:28:        $record2->presenter = 'StaticBubble';
+neatline/presenters/StaticBubbleTest.php:29:        $record1->coverage  = 'POINT(1 2)';
+neatline/presenters/StaticBubbleTest.php:30:        $record2->coverage  = 'POINT(3 4)';
+neatline/presenters/StaticBubbleTest.php:31:        $record1->added     = '2003-01-01';
+neatline/presenters/StaticBubbleTest.php:32:        $record2->added     = '2002-01-01';
+neatline/presenters/StaticBubbleTest.php:34:        $record1->save();
+neatline/presenters/StaticBubbleTest.php:35:        $record2->save();
+neatline/presenters/StaticBubbleTest.php:37:        $this->_writeFixtureFromRoute('neatline/records',

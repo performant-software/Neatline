@@ -57,7 +57,7 @@ describe('Map | Subscribe `setFilter`', function() {
 
     // Filter out records with `title2`.
     Neatline.vent.trigger('setFilter', {
-      key: 'title2', 
+      key: 'title2',
       evaluator: function(record) {
         return record.get('title') != 'title2';
       }

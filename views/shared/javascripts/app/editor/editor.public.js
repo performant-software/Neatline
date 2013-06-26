@@ -13,13 +13,13 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Display a list of views inthe E container.
+   * Display a list of views in the editor container.
    *
    * @param {Array} views: A list of views.
    */
   var display = function(views) {
 
-    // Clear the E container.
+    // Clear the editor container.
     Editor.__view.__ui.editor.children().detach();
 
     // Show each of the views.
@@ -54,7 +54,7 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Return the E container div.
+   * Return the editor container div.
    *
    * @return {Object}: The container.
    */
