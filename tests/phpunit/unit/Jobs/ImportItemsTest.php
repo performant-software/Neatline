@@ -124,7 +124,7 @@ class ImportItemsTest extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
 
         insert_files_for_item($item, 'Filesystem', array(
-            NL_TEST_DIR . '/mocks/file.txt'
+            NL_TEST_DIR.'/mocks/file.txt'
         ));
 
         Zend_Registry::get('bootstrap')->getResource('jobs')->

@@ -137,8 +137,16 @@ function nl_appendScript($script)
  */
 function nl_getExhibitThemeDir($exhibit)
 {
+    return nl_getPublicThemeDir()."/exhibits/themes/$exhibit->slug";
+}
 
-    return WEB_PUBLIC_THEME.'/'.get_option('public_theme').
-        "/neatline/exhibits/themes/$exhibit->slug";
 
+/**
+ * Get the path to the `neatline` directory in the active Omeka theme.
+ *
+ * @return string The theme path.
+ */
+function nl_getPublicThemeDir()
+{
+    return WEB_PUBLIC_THEME.'/'.get_option('public_theme').'/neatline';
 }

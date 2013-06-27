@@ -32,7 +32,7 @@ function nl_mockWidgets($widgets)
  * @param array $presenters Presenters, NAME => ID.
  * @return array The array, with mock presenters.
  */
-function nl__mockPresenters($presenters)
+function nl_mockPresenters($presenters)
 {
     return array_merge($presenters, array(
         'Presenter1 Label' => 'Presenter1',

@@ -31,10 +31,10 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
         $this->helper->setUp('Neatline');
 
         // If a `plugins.ini` file is provided.
-        if (file_exists(NL_TEST_DIR . '/plugins.ini')) {
+        if (file_exists(NL_TEST_DIR.'/plugins.ini')) {
 
             // Parse `plugins.ini`.
-            $config = new Zend_Config_Ini(NL_TEST_DIR . '/plugins.ini');
+            $config = new Zend_Config_Ini(NL_TEST_DIR.'/plugins.ini');
 
             // Install each of the siblings.
             foreach ($config->plugins as $plugin) {
@@ -57,7 +57,7 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
      */
     protected function _getFixturesPath()
     {
-        return NL_DIR . '/tests/jasmine/fixtures/';
+        return NL_DIR.'/tests/jasmine/fixtures/';
     }
 
 

@@ -194,7 +194,7 @@ SQL;
      */
     public function hookInitialize()
     {
-        add_translation_source(dirname(__FILE__) . '/languages');
+        add_translation_source(dirname(__FILE__).'/languages');
     }
 
 
@@ -206,7 +206,7 @@ SQL;
     public function hookDefineRoutes($args)
     {
         $args['router']->addConfig(new Zend_Config_Ini(
-            NL_DIR . '/routes.ini'
+            NL_DIR.'/routes.ini'
         ));
     }
 

@@ -169,7 +169,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     {
 
         // Open the file.
-        $mockPath = NL_TEST_DIR . '/mocks/put.txt';
+        $mockPath = NL_TEST_DIR.'/mocks/put.txt';
         $fileIn = fopen($mockPath, 'w');
 
         // Write data.
@@ -240,7 +240,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     protected function _mockPresenters()
     {
-        add_filter('neatline_presenters', 'nl__mockPresenters');
+        add_filter('neatline_presenters', 'nl_mockPresenters');
     }
 
 
@@ -249,7 +249,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     protected function _mockLayers()
     {
-        Zend_Registry::set('layers', NL_TEST_DIR . '/mocks/layers');
+        Zend_Registry::set('layers', array(NL_TEST_DIR.'/mocks/layers'));
     }
 
 
@@ -258,7 +258,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     protected function _mockTheme()
     {
-        get_view()->addScriptPath(NL_TEST_DIR . '/mocks/theme/neatline');
+        get_view()->addScriptPath(NL_TEST_DIR.'/mocks/theme/neatline');
     }
 
 
