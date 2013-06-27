@@ -20,10 +20,12 @@ function nl_getLayers()
 
     $layers = array();
 
-    // Read and merge all of the layer definition files.
-    foreach (glob(Zend_Registry::get('layers').'/*.json') as $file) {
-        $group = Zend_Json::decode(file_get_contents($file));
-        $layers = array_merge($layers, $group);
+    // Gather all of the layer definitions.
+    foreach (Zend_Registry::get('layers') as $dir) {
+        foreach (glob($dir.'/*.json') as $file) {
+            $group = Zend_Json::decode(file_get_contents($file));
+            $layers = array_merge($layers, $group);
+        }
     }
 
     return $layers;
