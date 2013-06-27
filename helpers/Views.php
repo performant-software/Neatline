@@ -96,17 +96,6 @@ function nl_getExhibitRecordCount($exhibit=null)
 
 
 /**
- * Have any exhibits been created?
- *
- * @return boolean
- */
-function nl_exhibitsHaveBeenCreated()
-{
-    return count(get_view()->neatline_exhibits);
-}
-
-
-/**
  * Render and return the exhibit partial.
  *
  * @return string The exhibit markup.
@@ -139,6 +128,31 @@ function nl_getExhibitField($fieldname, $exhibit=null)
 {
     $exhibit = $exhibit ? $exhibit : nl_getExhibit();
     return $exhibit->$fieldname;
+}
+
+
+/**
+ * Get a list space-delimited of exhibit widget tags for use as the value
+ * of a `class` attribute on an element.
+ *
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return string The space-delimited attribute value.
+ */
+function nl_getExhibitWidgetClasses($exhibit=null)
+{
+    $exhibit = $exhibit ? $exhibit : nl_getExhibit();
+    return implode(' ', nl_explode($exhibit->widgets));
+}
+
+
+/**
+ * Have any exhibits been created?
+ *
+ * @return boolean
+ */
+function nl_exhibitsHaveBeenCreated()
+{
+    return count(get_view()->neatline_exhibits);
 }
 
 

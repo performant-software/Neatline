@@ -132,12 +132,13 @@ function nl_appendScript($script)
 /**
  * Form the path to an exhibit's custom theme assets.
  *
- * @param string The theme path.
+ * @param NeatlineExhibit $exhibit The exhibit.
+ * @return string The theme path.
  */
 function nl_getExhibitThemeDir($exhibit)
 {
 
-    return PUBLIC_THEME_DIR.'/'.get_option('public_theme').
+    return WEB_PUBLIC_THEME.'/'.get_option('public_theme').
         "/neatline/exhibits/themes/$exhibit->slug";
 
 }

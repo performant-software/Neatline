@@ -61,7 +61,7 @@ function nl_getLayersForSelect()
 
 
 /**
- * Get an cropped array of layer definitions for an exhibit.
+ * Get a cropped array of layer definitions for an exhibit.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The layers.

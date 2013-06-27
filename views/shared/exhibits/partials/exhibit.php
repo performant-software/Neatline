@@ -11,7 +11,7 @@
 
 ?>
 
-<div id="neatline">
+<div id="neatline" class="<?php echo nl_getExhibitWidgetClasses(); ?>">
   <div id="neatline-map" class="neatline-block"></div>
 </div>
 

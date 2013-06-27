@@ -12,8 +12,8 @@
 ?>
 
 <?php echo head(array(
-  'title' => nl_getExhibitField('title'))
-); ?>
+  'title' => nl_getExhibitField('title')
+)); ?>
 
 <!-- Title. -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
