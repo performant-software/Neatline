@@ -48,8 +48,8 @@ require_once NL_DIR.'/helpers/Plugins.php';
 require_once NL_DIR.'/helpers/Styles.php';
 require_once NL_DIR.'/helpers/Views.php';
 
-Zend_Registry::set('layers', array(NL_DIR.'/layers'));
 Zend_Registry::set('fileIn', 'php://input');
+nl_setLayerSources();
 
 $neatline = new NeatlinePlugin();
 $neatline->setUp();

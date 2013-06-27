@@ -148,5 +148,5 @@ function nl_getExhibitThemeDir($exhibit)
  */
 function nl_getPublicThemeDir()
 {
-    return WEB_PUBLIC_THEME.'/'.get_option('public_theme').'/neatline';
+    return PUBLIC_THEME_DIR.'/'.get_option('public_theme').'/neatline';
 }

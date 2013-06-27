@@ -11,6 +11,18 @@
 
 
 /**
+ * Set the directories in which to look for layer definition files.
+ */
+function nl_setLayerSources()
+{
+    Zend_Registry::set('layers', array(
+        nl_getPublicThemeDir().'/layers',   // In the public theme.
+        NL_DIR.'/layers'                    // In the plugin.
+    ));
+}
+
+
+/**
  * Read and merge all layer definition files.
  *
  * @return array The layers.
