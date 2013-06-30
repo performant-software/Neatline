@@ -258,8 +258,8 @@ SQL;
     public function filterNeatlinePresenters($presenters)
     {
         return array_merge($presenters, array(
-            'None' => 'None',
-            'Static Bubble' => 'StaticBubble'
+            'None'              => 'None',
+            'Static Bubble'     => 'StaticBubble'
         ));
     }
 

@@ -7,7 +7,7 @@ Welcome to Neatline! Neatline does x, y, z, etc.
 Neatline is a plugin for Omeka. Omeka is like Wordpress/Drupal, etc.
 
 ## Before you Start
-You'll need a LAMP stack to run Neatline.
+You'll need a LAMP stack to run Neatline. This could be a purchased web hosting account, an institutaionally-provided service, or a local development environment like MAMP.
 
 ## Installing Omeka
 Read the docs at omeka.org.
