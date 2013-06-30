@@ -15,6 +15,8 @@ Read the docs at omeka.org.
 ## Installing Neatline
 Download the plugin, put in `/plugins`, install via admin.
 
+## Upgrading to Neatline 2.0
+
 # Working with Exhbits
 
 ## Exhibits Overview
