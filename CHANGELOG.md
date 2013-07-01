@@ -1,3 +1,5 @@
+# v2.0.0 (pending)
+
 # v2.0-rc1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha2...2.0-rc1)) ~ June 30, 2013
 
 #### Added Features
