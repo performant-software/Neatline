@@ -45,7 +45,7 @@ Click "New Record", etc.
 ## Editing Visual Styles
 "Style" tab - Change colors, opacities, etc.
 
-## Browsing Records
+## Searching Records
 Run fulltext searches by typing in the "Search" box, use pagination, etc.
 
 ## Bulk-Updating with Stylesheets

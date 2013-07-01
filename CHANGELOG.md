@@ -1,4 +1,4 @@
-# v2.0-rc1 (pending)
+# v2.0-rc1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha2...2.0-rc1)) ~ June 30, 2013
 
 #### Added Features
 
@@ -26,7 +26,7 @@
 
 #### Bug Fixes
 
-  - Fixes bug found by [Mark Olson](mailto:mark.olson@duke.edu) in the SVG-to-WKT conversion library that was causing SVG documents with complex polygonal elements (eg ```<polygon>```, ```<polyline>```) to fail to parse when pasted into the Neatline editor. 
+  - Fixes bug found by [Mark Olson](mailto:mark.olson@duke.edu) in the SVG-to-WKT conversion library that was causing SVG documents with complex polygonal elements (eg ```<polygon>```, ```<polyline>```) to fail to parse when pasted into the Neatline editor.
 
   - Previously, exhibits marked public were not getting filtered out of the public browse listings, and were visible to all users. This is fixed.
 
