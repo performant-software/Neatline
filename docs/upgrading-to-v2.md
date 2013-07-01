@@ -18,19 +18,7 @@ Neatline 2.0, which was released on July 2, 2013, is a major update to the proje
 
   - **A new programming API and “sub-plugin” system** that makes it possible for developers to add custom functionality – everything from simple user-interface widgets (sliders, legends, scrollers, forward-and-backward buttons, etc.) up to really extensive modifications that expand the core data model and add totally new interactions.
 
-### For the Impatient
-
-Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin: 
-
-  1. Always start by **backing up your database** in the unlikely event that something goes wrong during the upgrade. As an extra precaution, since the migration to 2.0 makes some pretty significant changes to the underlying data, Neatline actually spawns off archived copies of the original Neatline tables, in case you want to revert back to a previous version.
-
-  2. Delete the old `/Neatline` directory under `/plugins` in your Omeka installation.
-
-  3. Download the the most recent version of Neatline, unpack the .zip archive, and move it into `/plugins`.
-
-  4. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline. With the code for the new version in place, you should see a 
-
-### Upgrading from Neatline 1.x
+### Before Your Upgrade
 
 Some of these changes and additions called for some pretty dramatic reengineering of the core codebase. Almost all of the features from the 1.x releases are preserved in 2.0, and almost all exhibits will behave almost exactly the same after upgrading to 2.0. In a handful of very carefully-chosen places, though, we made changes that will alter the behavior of certain types of exhibits. In each case, these changes were made because we felt that the new approach was significantly more maintainable, performant, standards-compliant, or theoretically sound. In all cases where a feature was removed, we've added an alternate method to accomplish the same effect.
 
@@ -40,4 +28,18 @@ Here are the important changes:
 
   - The "Layout Editor" feature from the first version - which made it possible to interactively toggle and position the three viewports - has been removed in favor of a much more flexible theming system that gives theme designers complete control over the layout of each exhibit on an individual basis. The old approach was visually appealing and pleasant to work with, but it depended on a brittle, JavaScript-powered approach to positioning the elements that made it extremely difficult for theme designers to customize the exhibits. In the new version, we provide sensible defaults for all exhibits, and provide an extremely simple theming system that makes it easy to customize the layout and sizing of the viewports with a few lines of CSS.
 
-  - We've removed the feature that made it possible to use a static image from the Omeka collection as the base layer for an exhibit. This feature was problematic 
+### Upgrading to 2.0
+
+Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin: 
+
+  1. Always start by **backing up your database** in the unlikely event that something goes wrong during the upgrade. As an extra precaution, since the migration to 2.0 makes some pretty significant changes to the underlying data, Neatline actually spawns off archived copies of the original Neatline tables, in case you want to revert back to a previous version.
+
+  2. Delete the old `/Neatline` directory under `/plugins` in your Omeka installation.
+
+  3. Download the the most recent version of Neatline, unpack the .zip archive, and move it into `/plugins`.
+
+  4. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline. With the code for the new version in place, you should see a notification saying "You have a new version of Neatline. Please Upgrade!".
+
+  5. Click the green "Upgrade" button.
+
+**Important**: After starting the upgrade, you'll immediately see a success message saying that "The Neatline plugin was successfully upgraded!". At this point, Neatline 2.0 is fully installed and ready for use, but it may take up to 20-30 seconds before the old exhibits are visible under the "Neatline" tab. Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple of seconds seconds up to around a minute.
