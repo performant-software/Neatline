@@ -30,7 +30,7 @@ Some of these changes entailed some pretty significant changes to the core codeb
 
   - The feature in the original version that made it possible to use a static image from the Omeka collection as the exhibit base layer has been removed, but replaced by a better solution to the same problem. The old feature was problematic for a couple of reasons - the main issue was that the entire static image had to be loaded as a single tile into the mapping library that controls the map, which means that the performance of the page would rapidly decrease as the size of the image grew. In the long run, this isn't sustainable. In the new version, we've made it possible to add new base layers to an exhibit, which makes it possible create completely custom layers out of any imagery at all - paintings, photographs, documents, diagrams, etc. - that can be consumed by Neatline just like ordinary spatial tiles.
 
-### Upgrading to 2.0
+### Upgrading
 
 Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin: 
 
