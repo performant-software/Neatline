@@ -1,5 +1,7 @@
 ## Upgrading to Neatline 2.0
 
+### What's New
+
 Neatline 2.0, which was released on July 2, 2013, is a major update to the project that includes a large number of improvements to the existing feature-set and adds a number of new features designed to make it easier to create larger and more complex exhibits. Some of the highlights in the new version:
 
   - **[A high-performance, real-time spatial querying system](http://dclure.org/logs/neatline-one-million-records/)** (the map loads just the subset of information that it needs to fill in the viewport at any given moment) that makes it possible to work with really large collections of records – as many as about 1,000,000 in a single exhibit;
@@ -18,7 +20,7 @@ Neatline 2.0, which was released on July 2, 2013, is a major update to the proje
 
   - **A new programming API and “sub-plugin” system** that makes it possible for developers to add custom functionality – everything from simple user-interface widgets (sliders, legends, scrollers, forward-and-backward buttons, etc.) up to really extensive modifications that expand the core data model and add totally new interactions.
 
-### Before Your Upgrade
+### What's Different
 
 Some of these changes entailed some pretty significant changes to the core codebase. Almost all of the features from the 1.x releases are preserved in 2.0, and almost all exhibits will behave almost exactly the same after upgrading to 2.0. In a handful of very carefully-chosen places, though, we made changes that will alter the behavior of certain types of exhibits. In each case, these changes were made because we felt that the new approach would make Neatline projects more maintainable, efficient, or standards-compliant and boost the overall sustainability of the project. In all cases where a feature was removed, we've added an alternate method to accomplish the same effect. Here are the important changes:
 
