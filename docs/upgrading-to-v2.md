@@ -42,4 +42,6 @@ Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin:
 
   5. Click the green "Upgrade" button.
 
-**Important**: After starting the upgrade, you'll immediately see a success message saying that "The Neatline plugin was successfully upgraded!". At this point, Neatline 2.0 is fully installed and ready for use, but it may take up to 20-30 seconds before the old exhibits are visible under the "Neatline" tab. Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple of seconds seconds up to around a minute.
+**Important**: After starting the upgrade, you'll immediately see a success message saying that "The Neatline plugin was successfully upgraded!". At this point, Neatline 2.0 is fully installed and ready for use, **but it may take up to 20-30 seconds before the old exhibits are visible under the "Neatline" tab**.
+
+Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple seconds seconds up to around a minute.
