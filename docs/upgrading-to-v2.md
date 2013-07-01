@@ -20,13 +20,17 @@ Neatline 2.0, which was released on July 2, 2013, is a major update to the proje
 
 ### Before Your Upgrade
 
-Some of these changes and additions called for some pretty dramatic reengineering of the core codebase. Almost all of the features from the 1.x releases are preserved in 2.0, and almost all exhibits will behave almost exactly the same after upgrading to 2.0. In a handful of very carefully-chosen places, though, we made changes that will alter the behavior of certain types of exhibits. In each case, these changes were made because we felt that the new approach was significantly more maintainable, performant, standards-compliant, or theoretically sound. In all cases where a feature was removed, we've added an alternate method to accomplish the same effect.
+Some of these changes and additions called for some pretty dramatic reengineering of the core codebase. Almost all of the features from the 1.x releases are preserved in 2.0, and almost all exhibits will behave almost exactly the same after upgrading to 2.0.
 
-Here are the important changes:
+In a handful of very carefully-chosen places, though, we made changes that will alter the behavior of certain types of exhibits. In each case, these changes were made because we felt that the new approach was significantly more maintainable, performant, standards-compliant, or theoretically sound. In all cases where a feature was removed, we've added an alternate method to accomplish the same effect. Here are the important changes:
 
   - In the new version, the "Timeline" and "Items" panels (which could be enabled via the "Layout Options" drop-down menu in the editor) have been broken out into separate plugins - NeatlineSimile and NeatlineWaypoints - that extend the Neatline plugin, which houses the core content management system. These two "sub-plugins" integrate seamlessly with Neatline - after upgrading from 1.x to 2.0, just install the two widget plugins, and the timeline and item-browser panels will be automatically restored to their original states in all of your exhibits.
 
   - The "Layout Editor" feature from the first version - which made it possible to interactively toggle and position the three viewports - has been removed in favor of a much more flexible theming system that gives theme designers complete control over the layout of each exhibit on an individual basis. The old approach was visually appealing and pleasant to work with, but it depended on a brittle, JavaScript-powered approach to positioning the elements that made it extremely difficult for theme designers to customize the exhibits. In the new version, we provide sensible defaults for all exhibits, and provide an extremely simple theming system that makes it easy to customize the layout and sizing of the viewports with a few lines of CSS.
+
+  - The feature in the original version that made it possible to use a static image from the Omeka collection as the exhibit base layer has been removed, but replaced by a better solution to the same problem. The old feature was problematic for a couple of reasons - the main issue was that the entire static image had to be loaded as a single tile into the mapping library that controls the map, which means that the performance of the page would rapidly decrease as the size of the image grew. In the long run, this isn't sustainable. In the new version, we've made it possible to add new base layers to an exhibit, which makes it possible create completely custom layers out of any imagery at all - paintings, photographs, documents, diagrams, etc. - that can be consumed by Neatline just like ordinary spatial tiles.
+
+we've made it possible to build exhibits on top of non-spatial imagery 
 
 ### Upgrading to 2.0
 
@@ -42,4 +46,4 @@ Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin:
 
   5. Click the green "Upgrade" button. **Important**: After starting the upgrade, you'll immediately see a success message saying that "The Neatline plugin was successfully upgraded!". At this point, Neatline 2.0 is fully installed and ready for use, **but it may take up to 20-30 seconds before the old exhibits are visible under the "Neatline" tab**.
 
-  Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple seconds seconds up to around a minute.
+Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple seconds seconds up to around a minute.
