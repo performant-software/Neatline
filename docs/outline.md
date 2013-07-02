@@ -4,9 +4,9 @@
 **DONE**
 
 ## Neatline from 10,000 Meters
-Neatline is a plugin for Omeka. Omeka is like Wordpress/Drupal, etc.
+**DONE**
 
-## Before you Start
+## Preparing the Install
 You'll need a LAMP stack to run Neatline. This could be a purchased web hosting account, an institutaionally-provided service, or a local development environment like MAMP.
 
 ## Installing Neatline
