@@ -8,7 +8,7 @@ In the broadest sense, Neatline is an annotation framework  that makes it possib
 
 ### What Makes it Different?
 
-How does Neatline fit into the existing ecosystem of geospatial and annotation tools? Neatline sits somewhere in the space between consumer-grade mapping applications like the Google custom map-maker and heavyweight, analytical GIS tools like ArcGIS. It's designed to be simple enough that college undergradutes can easily use it for class assignments, but also sufficiently flexible, scalable, and feature-rich that it can be used for professional scholarship, journalism, and art. Neatline keeps things simple and provides sensible defaults, but it's careful never to make aesthetic or intellectual decisions on your behalf.
+How does Neatline fit into the existing ecosystem of geospatial and annotation tools? Neatline sits in the space between consumer-grade mapping applications like the Google custom map-maker and heavyweight, analytical GIS tools like ArcGIS. It's designed to be simple enough that college undergradutes can easily use it for class assignments, but also sufficiently flexible, scalable, and feature-rich that it can be used for professional scholarship, journalism, and art. Neatline keeps things simple and provides sensible defaults, but it's careful never to make aesthetic or intellectual decisions on your behalf.
 
 ### Help Us Improve the Guide
 

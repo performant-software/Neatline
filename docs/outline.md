@@ -1,8 +1,7 @@
 # Getting Started
 
 ## Welcome
-** DONE **
-Welcome to Neatline! Neatline does x, y, z, etc.
+**DONE**
 
 ## Neatline from 10,000 Meters
 Neatline is a plugin for Omeka. Omeka is like Wordpress/Drupal, etc.
@@ -10,11 +9,8 @@ Neatline is a plugin for Omeka. Omeka is like Wordpress/Drupal, etc.
 ## Before you Start
 You'll need a LAMP stack to run Neatline. This could be a purchased web hosting account, an institutaionally-provided service, or a local development environment like MAMP.
 
-## Installing Omeka
-Read the docs at omeka.org.
-
 ## Installing Neatline
-Download the plugin, put in `/plugins`, install via admin.
+Install Omeka. Download Neatline, put in `/plugins`, install via admin.
 
 ## Upgrading to Neatline 2.0
 ** DONE **
