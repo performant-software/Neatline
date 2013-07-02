@@ -4,7 +4,7 @@ This guide is designed to be a comprehensive introduction to the Neatline projec
 
 ### What is Neatline?
 
-In the broadest sense, Neatline is an annotation framework  that makes it possible to create rich, interactive editions of visual objects. In the past, the project has focused on geospatial materials (maps, essentially), but Neatline can also be used to annotate anything that has some sort of two-dimensional, visual instantiation. The same set of vector-drawing and content management tools can also be used to create interpretive views of paintings, drawings, photographs, documents, diagrams, and anything else that can be captured as an image.
+In the broadest sense, Neatline is an annotation framework  that makes it possible to create rich, interactive editions of visual objects. In the past, the project has focused on maps, but Neatline can also be used to annotate anything that has some sort of two-dimensional, visual instantiation. The same set of vector-drawing and content management tools can also be used to create interpretive views of paintings, drawings, photographs, documents, diagrams, and anything else that can be captured as an image.
 
 ### What Makes it Different?
 
