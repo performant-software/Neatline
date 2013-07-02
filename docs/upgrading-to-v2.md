@@ -32,18 +32,30 @@ Some of these changes entailed some pretty significant changes to the core codeb
 
 ### Upgrading
 
+#### Upgrade Neatline to 2.0
+
 Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin: 
 
   1. Always start by **backing up your database** in the unlikely event that something goes wrong during the upgrade. As an extra precaution, since the migration to 2.0 makes some pretty significant changes to the underlying data, Neatline actually spawns off archived copies of the original Neatline tables, in case you want to revert back to a previous version.
 
   2. Delete the old `/Neatline` directory under `/plugins` in your Omeka installation.
 
-  3. Download the the most recent version of Neatline, unpack the .zip archive, and move it into `/plugins`.
+  3. Download the the most recent version of Neatline, unpack the `.zip` archive, and move it into `/plugins`.
 
   4. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline. With the code for the new version in place, you should see a notification saying "You have a new version of Neatline. Please Upgrade!".
 
-  5. Click the green "Upgrade" button.
+  5. Click the **Upgrade** button.
 
   6. **Important**: After starting the upgrade, you'll immediately see a success message saying that "The Neatline plugin was successfully upgraded!". At this point, Neatline 2.0 is fully installed and ready for use, **but it may take up to 20-30 seconds before the old exhibits are visible under the "Neatline" tab**.
 
   Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple seconds up to around a minute.
+
+#### Install NeatlineWaypoints and NeatlineSimile
+
+Once the core Neatline plugin is upgraded to 2.0, you'll have access to everything except the timeline and item-browser viewports, which are now broken away into two new "sub-plugins" called NeatlineSimile and NeatlineWaypoints that are installed alongside Neatline and extend the core feature set. Install them just like any other Omeka plugin:
+
+  1. Download the most recent verisons of NeatlineWaypoints and NeatlineSimile, unpack the `.zip` archives, and move the `NeatlineWaypoints` and `NeatlineSimile` folders into `/plugins`.
+
+  2. Go to the **Plugins** pane in the Omeka administrative interface and find the listings for the two new plugins. Click the **Install** button for each.
+
+  3. Once the sub-plugins are installed, the old "activation" settings for each of the old exhibits (eg, which exhibits have the timeline enabled, which have the item browser, which don't, etc.) will automatically be re-applied.
