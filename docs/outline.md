@@ -1,6 +1,7 @@
 # Getting Started
 
 ## Welcome
+** DONE **
 Welcome to Neatline! Neatline does x, y, z, etc.
 
 ## Neatline from 10,000 Meters
@@ -16,6 +17,7 @@ Read the docs at omeka.org.
 Download the plugin, put in `/plugins`, install via admin.
 
 ## Upgrading to Neatline 2.0
+** DONE **
 
 # Working with Exhbits
 
