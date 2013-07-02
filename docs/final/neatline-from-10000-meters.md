@@ -10,17 +10,21 @@
 
 ## Omeka
 
-Unlike regular, standalone web applications that can be installed in isolation, Neatline is built as a suite of modular plugins for Omeka, a powerful collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. In many ways, Omeka is similar to a lot like other popular management systems like [Wordpress][wordpress] or [Drupal][drupal], but it's designed specifically around the needs of scholars and archivists - Omeka makes it possible to create, curate, and publish a collection of "items" (the rough equivalent of a Wordpress "post" or a Drupal "node"), each of which is a fully-qualified Dublin Core metadata record.
+Neatline is built as a suite of modular plugins for Omeka, a powerful collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. In many ways, Omeka is similar to a lot like other popular management systems like [Wordpress][wordpress] or [Drupal][drupal], but it's designed specifically around the needs of scholars and archivists - Omeka makes it possible to create, curate, and publish a collection of "items" (the rough equivalent of a Wordpress "post" or a Drupal "node"), each of which is a fully-qualified Dublin Core metadata record.
 
-Once you've built out a collection of items using the Omeka administrative interface, the collection is automatically published as a public-facing website, which can be completely tailored to a specific project with custom themes, which change the apperance of the site, and custom plugins, which add new functionality to the site.
+Once you've created some items using the Omeka administrative interface, the collection is automatically published as a public-facing website, which can be completely tailored to the needs of specific projects with custom themes and plugins.
 
 ## Neatline
 
-Building on top of the content management foundation provided by Omeka, Neatline is a plugin that extends the core Omeka feature-set - again, similar to a Wordpress plugin or a Drupal module. Neatline adds an interactive map-making environment and geospatial content management system that makes it possible to create a collection of Neatline "exhibits," each of which is populated with its own collection of Neatline "records."
+Neatline is a plugin that extends the core Omeka feature-set, similar to a Wordpress "plugin" or a Drupal "module." Neatline adds an interactive map-making environment and geospatial content management system that makes it possible to create a collection of Neatline "exhibits," each of which is populated with its own collection of Neatline "records."
 
-Exhibits can either be a collection of completely separate, self-contained projects, or a series of interconnected sub-projects (or any combination thereof). Think of exhibits as the "environment" or "canvas" for a project - the starting base layer and focus location, the combination of UI widgets that are enabled for the project, and, optionally, a long-format piece of text to describe or narrate the exhibit.
+Exhibits can be a collection of completely separate, self-contained projects, or a series of interconnected sub-projects (or any combination of the two). Think of exhibits as the "environment" or "canvas" for a project - the starting base layer and focus location, the combination of UI widgets that are enabled for the project, and, optionally, a long-format piece of text to describe or narrate the exhibit.
 
-Inside an exhibit, the actual content is formalized as a collection of "records," each of which represents some kind of object or entity in the environment - vector and text annotations on the map, overlayed historical maps, events plotted on the timeline, clickable waypoints, or custom objects added for individual projects. Neatline adds an interactive map-making environment that makes it easy to create and curate these collections of records, and provides deep integration with the Dublin Core records in the underlying Omeka collection.
+Inside an exhibit, the actual content is formalized as a collection of "records," each of which represents some kind of visual or textual entity in the environment - vector annotations on the map, events on the timeline, overlayed historical maps, or ordered sets of waypoints.
+
+## Geoserver
+
+TODO
 
 
 [omeka]: http://omeka.org/
@@ -31,3 +35,6 @@ Inside an exhibit, the actual content is formalized as a collection of "records,
 [xampp]: http://www.apachefriends.org/en/xampp.html
 [chnm]: http://chnm.gmu.edu/
 [geoserver]: http://geoserver.org/
+[osm]: http://www.openstreetmap.org/
+[google]: https://developers.google.com/maps/
+[stamen]: http://maps.stamen.com/
