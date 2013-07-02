@@ -13,6 +13,9 @@
  * Backbone model adapter for Rivets.
  */
 rivets.configure({
+  
+  prefix: 'rv',
+
   adapter: {
     subscribe: function(obj, keypath, callback) {
       obj.on('change:' + keypath, callback);
@@ -27,4 +30,5 @@ rivets.configure({
       obj.set(keypath, value);
     }
   }
+
 });

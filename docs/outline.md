@@ -13,7 +13,7 @@ You'll need a LAMP stack to run Neatline. This could be a purchased web hosting 
 Install Omeka. Download Neatline, put in `/plugins`, install via admin.
 
 ## Upgrading to Neatline 2.0
-** DONE **
+**DONE**
 
 # Working with Exhbits
 

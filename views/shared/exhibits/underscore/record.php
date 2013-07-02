@@ -20,8 +20,8 @@
 
   <!-- Header. -->
   <p class="lead">
-    <span class="id" data-text="record.id | recordId"></span>
-    <span class="title" data-text="record.title | recordTitle"></span>
+    <span class="id" data-rv-text="record.id | recordId"></span>
+    <span class="title" data-rv-text="record.title | recordTitle"></span>
   </p>
 
   <!-- Tabs. -->

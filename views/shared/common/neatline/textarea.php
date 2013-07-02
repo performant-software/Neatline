@@ -29,6 +29,6 @@
     <?php if (isset($id)) echo "id='$id'"; ?>
     <?php if (isset($name)) echo "name='$name'"; ?>
     <?php if (isset($class)) echo "class='$class'"; ?>
-    <?php if (isset($bind)) echo "data-value='$bind'"; ?>
+    <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
   ></textarea>
 </div>

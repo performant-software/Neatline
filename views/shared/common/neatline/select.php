@@ -19,7 +19,7 @@
       <?php if (isset($name)) echo "name='$name'"; ?>
       <?php if (isset($multi) && $multi) echo "multiple='multiple'"; ?>
       <?php if (isset($class)) echo "class='$class'"; ?>
-      <?php if (isset($bind)) echo "data-value='$bind'"; ?>
+      <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
     >
       <?php foreach ($options as $label => $val): ?>
         <option value="<?php echo $val; ?>">
