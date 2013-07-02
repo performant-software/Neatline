@@ -12,7 +12,7 @@
 
 Neatline is built as a suite of modular plugins for Omeka, a digital collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. In many ways, Omeka is similar to a lot like other popular content management systems like [Wordpress][wordpress] or [Drupal][drupal], but it's designed specifically around the needs of scholars and archivists - Omeka makes it possible to create, curate, and publish a collection of "items" (the rough equivalent of a Wordpress "post" or a Drupal "node"), each of which is a fully-qualified Dublin Core metadata record. Once you've created some items using the Omeka administrative interface, the collection is automatically published as a public-facing website, which can be completely tailored to the needs of specific projects with custom themes and plugins.
 
-Omeka is a web application written with PHP and MySQL that runs on the "LAMP stack" (**L**inux, **A**pache, **M**ySQL, and **P**HP), a ubiquitous set of technologies supported by almost any commercial or institutional hosting provider. Alternatively, if you just want to experiment with Neatline in an offline setting, your can also install Omeka on a local, sandbox server environment running on your own computer, with the option of migrating the content to a public-facing web host at some point in the future.
+Omeka is a web application written with PHP and MySQL that runs on the "[LAMP stack][lamp]" (Linux, Apache, MySQL, and PHP), a ubiquitous set of technologies supported by almost any commercial or institutional hosting provider. Alternatively, if you just want to experiment with Neatline in an offline setting, your can also install Omeka on a local, sandbox server environment running on your own computer, with the option of migrating the content to a public-facing web host at some point in the future.
 
 ## Neatline
 
@@ -39,3 +39,4 @@ If you want to use Neatline with georectified historical maps or custom base lay
 [google]: https://developers.google.com/maps/
 [stamen-maps]: http://maps.stamen.com/
 [stamen]: http://stamen.com/
+[lamp]: http://en.wikipedia.org/wiki/LAMP_(software_bundle)
