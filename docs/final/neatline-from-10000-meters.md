@@ -6,13 +6,21 @@
   - [Omeka][omeka] is a web publishing framework that makes it easy to create collections of standards-compliant metadata records - sort of like [Wordpress][wordpress] or [Drupal][drupal], but designed for scholars and archivists.
   - Omeka is a web application that can be installed either on a public-facing web server or on a local development environment like [MAMP][mamp], [WampServer][wamp], or [XAMPP][xampp] on your own computer.
   - Neatline can be used out-of-the-box with modern-geography base layers (eg, OpenStreetMap or Google layers).
-  - If you want to use georectified historical maps or custom base layers, you'll need to host the layers using a separate piece of software called Geoserver.
+  - If you want to use georectified historical maps or custom base layers, you'll need to host the layers using a separate piece of software called [Geoserver][geoserver].
 
-## Neatline Architecture
+## Omeka
 
-Unlike regular, standalone web applications that can be installed in isolation, Neatline is built as a suite of modular plugins for Omeka, a powerful collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. In many ways, Omeka is similar to a lot like other open-source management systems like Wordpress or Drupal, but it's designed specifically around the needs of scholars and archivists - Omeka makes it possible to create, curate, and publish a collection of "items" (the rough equivalent of a Wordpress "post" or a Drupal "node"), each of which is a fully-qualified Dublin Core metadata record.
+Unlike regular, standalone web applications that can be installed in isolation, Neatline is built as a suite of modular plugins for Omeka, a powerful collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. In many ways, Omeka is similar to a lot like other popular management systems like [Wordpress][wordpress] or [Drupal][drupal], but it's designed specifically around the needs of scholars and archivists - Omeka makes it possible to create, curate, and publish a collection of "items" (the rough equivalent of a Wordpress "post" or a Drupal "node"), each of which is a fully-qualified Dublin Core metadata record.
 
-Neatline is installed as a plugin that extends the core Omeka feature-set by adding an geospatial content management system and interactive map-making environment.
+Once you've built out a collection of items using the Omeka administrative interface, the collection is automatically published as a public-facing website, which can be completely tailored to a specific project with custom themes, which change the apperance of the site, and custom plugins, which add new functionality to the site.
+
+## Neatline
+
+Building on top of the content management foundation provided by Omeka, Neatline is a plugin that extends the core Omeka feature-set - again, similar to a Wordpress plugin or a Drupal module. Neatline adds an interactive map-making environment and geospatial content management system that makes it possible to create a collection of Neatline "exhibits," each of which is populated with its own collection of Neatline "records."
+
+Exhibits can either be a collection of completely separate, self-contained projects, or a series of interconnected sub-projects (or any combination thereof). Think of exhibits as the "environment" or "canvas" for a project - the starting base layer and focus location, the combination of UI widgets that are enabled for the project, and, optionally, a long-format piece of text to describe or narrate the exhibit.
+
+Inside an exhibit, the actual content is formalized as a collection of "records," each of which represents some kind of object or entity in the environment - vector and text annotations on the map, overlayed historical maps, events plotted on the timeline, clickable waypoints, or custom objects added for individual projects. Neatline adds an interactive map-making environment that makes it easy to create and curate these collections of records, and provides deep integration with the Dublin Core records in the underlying Omeka collection.
 
 
 [omeka]: http://omeka.org/
@@ -22,3 +30,4 @@ Neatline is installed as a plugin that extends the core Omeka feature-set by add
 [wamp]: http://www.wampserver.com/en/
 [xampp]: http://www.apachefriends.org/en/xampp.html
 [chnm]: http://chnm.gmu.edu/
+[geoserver]: http://geoserver.org/
