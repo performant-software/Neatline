@@ -2,7 +2,7 @@
 
 **At a glance:**
 
-  - Neatline 2.0 is a major update that improves many of the core workflows and adds lots of new features.
+  - Neatline 2.0 is a major evolution of the project that improves many of the core workflows and adds lots of new features.
   - Almost all exhibits created with Neatline 1.x will behave exactly the same when migrated to Neatline 2.0.
   - In cases where features have been changed, Neatline 2.0 provides alternative methods to achieve the same functionalities.
 
