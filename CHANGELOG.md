@@ -1,8 +1,8 @@
 # v2.0-rc2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc1...2.0-rc2)) ~ July 2, 2013
 
-  - Fixes a problem introduced by a change in the Rivets library that was causing the twitter `data-X` element attributes to get sucked up by the Rivets view, which caused Rivets to try to bind the nonexistent model attributes.
-
 #### Bug Fixes
+
+  - Fixes a problem introduced by a change in the Rivets library that was causing the twitter `data-X` element attributes to get sucked up by the Rivets view, which caused Rivets to try to bind the nonexistent model attributes.
 
 # v2.0-rc1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha2...2.0-rc1)) ~ June 30, 2013
 
