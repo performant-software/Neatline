@@ -16,11 +16,9 @@ Once you've created some items using the Omeka administrative interface, the col
 
 ## Neatline
 
-Neatline is a plugin that extends the core Omeka feature-set, similar to a Wordpress "plugin" or a Drupal "module." Neatline adds an interactive map-making environment and geospatial content management system that makes it possible to create a collection of Neatline "exhibits," each of which is populated with its own collection of Neatline "records."
+Neatline is a plugin that extends the core Omeka feature-set, similar to a Wordpress "plugin" or a Drupal "module." Neatline adds an interactive map-making environment that makes it possible to create a collection of Neatline "exhibits," each of which is populated with its own collection of Neatline "records."
 
-Exhibits can be a collection of completely separate, self-contained projects, or a series of interconnected sub-projects (or any combination of the two). Think of exhibits as the "environment" or "canvas" for a project - the starting base layer and focus location, the combination of UI widgets that are enabled for the project, and, optionally, a long-format piece of text to describe or narrate the exhibit.
-
-Inside an exhibit, the actual content is formalized as a collection of "records," each of which represents some kind of visual or textual entity in the environment - vector annotations on the map, events on the timeline, overlayed historical maps, or ordered sets of waypoints.
+Think of exhibits as the "environment" or "canvas" for a project - the starting base layer and focus location, the combination of UI widgets that are enabled for the project, and, optionally, a long-format piece of text to describe or narrate the exhibit. Inside an exhibit, the actual content is represented as a collection of "records," each of which corresponds to some kind of visual or textual entity in the environment - vector annotations on the map, events on the timeline, overlayed historical maps, textual annotations in the exhibit narrative, or ordered sets of waypoints.
 
 ## Geoserver
 
