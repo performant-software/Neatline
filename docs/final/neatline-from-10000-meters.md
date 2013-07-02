@@ -22,7 +22,9 @@ Think of exhibits as the "environment" or "canvas" for a project - the starting 
 
 ## Geoserver
 
-TODO
+Out of the box, Neatline can be used to build exhibits on top of a collection of modern-geography base layers - the [OpenStreetMap][osm] tile set, the [Google Maps][google] API, and a [collection of stylized layers][stamen-maps] created by a design firm in San Francisco called [Stamen Design][stamen].
+
+If you want to use Neatline with georectified historical maps or custom base layers, though, you'll need to host the layers on a separate piece of software called Geoserver, an open-source geospatial server that does the computationally-intensive work of piping the georeferenced image tiles into the Neatline exhibits. We'll discuss the process of setting up Geoserver hosting in more detail in the "Preparing to Install" guide.
 
 
 [omeka]: http://omeka.org/
@@ -35,4 +37,5 @@ TODO
 [geoserver]: http://geoserver.org/
 [osm]: http://www.openstreetmap.org/
 [google]: https://developers.google.com/maps/
-[stamen]: http://maps.stamen.com/
+[stamen-maps]: http://maps.stamen.com/
+[stamen]: http://stamen.com/

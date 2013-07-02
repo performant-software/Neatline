@@ -56,7 +56,7 @@ Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin:
 
   Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple seconds up to around a minute.
 
-### Install NeatlineWaypoints and NeatlineSimile
+### Install NeatlineWaypoints and NeatlineSimile (Optional)
 
 Once the core Neatline plugin is upgraded to 2.0, you'll have access to everything except the timeline and item-browser viewports, which are now broken away into two new "sub-plugins" called NeatlineSimile and NeatlineWaypoints that are installed alongside Neatline and extend the core feature set. Install them just like any other Omeka plugin:
 
