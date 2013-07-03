@@ -28,7 +28,7 @@
       <div class="two columns alpha">
         <?php
           echo $this->formLabel(
-            'range', __('Search by a range of ID#s (eg: 1-4, 156, 79)')
+            'range', __('Search by a Range of ID#s (eg: 1-4, 156, 79)')
           );
         ?>
       </div>

@@ -26,10 +26,10 @@ The browse view lists existing exhibits. Click the title to open the Neatline ed
 # Working with Records
 
 ## Records Overview
-Records are the content inside of an exhibit, the paint on the canvas. There are two kinds of records - records that are associated with Omeka items, and exhibit-specifc records that just exist in the context of one exhibit.
+**DONE**
 
 ## Creating new Records
-Click "New Record", etc.
+**DONE**
 
 ## Adding Text Content
 "Text" tab - "Title" does X, "Body" does Y, "Slug" does Z, etc.
@@ -45,6 +45,3 @@ Run fulltext searches by typing in the "Search" box, use pagination, etc.
 
 ## Bulk-Updating with Stylesheets
 Perform bulk-updates with Neatline-flavored CSS.
-
-## Importing Items from Omeka
-Can associate individual record with Omeka item, or bulk-import large numbers of items at once.
