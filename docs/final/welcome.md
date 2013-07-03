@@ -1,10 +1,10 @@
 # Welcome to Neatline!
 
-This guide is designed to be a comprehensive introduction to the Neatline project. We'll walk through the basic steps of installing and configuring Neatline, creating exhibits and records, importing items from your Omeka collection, and publishing your projects to the web. Towards the end, we'll also discuss some more advanced workflows and techniques that can be used to modify Neatline's build-in feature set - adding custom base layers, creating custom themes for individual exhibits, and using a Neatline-flavored dialect of CSS to manage large collections of geospatial information.
+This guide is designed to be a comprehensive introduction to the Neatline project. We'll walk through the basic steps of installing and configuring Neatline, creating exhibits and records, importing items from your Omeka collection, and publishing your projects to the web. Toward the end, we'll also discuss some more advanced and techniques that can be used to modify Neatline's build-in feature set - adding custom base layers, creating custom themes for individual exhibits, and using a Neatline-flavored dialect of CSS to manage large collections of geospatial information.
 
 ## What is Neatline?
 
-In the broadest sense, Neatline is an annotation framework that makes it possible to create rich, interactive editions of visual objects. In the past, the project has focused on maps, but Neatline can also be used to annotate anything that has some sort of two-dimensional, visual instantiation. The same set of vector-drawing and content management tools can also be used to create interpretive views of paintings, drawings, photographs, documents, diagrams, and anything else that can be captured as an image.
+In the broadest sense, Neatline is an annotation framework that makes it possible to create rich, interactive editions of visual objects. In the past, the project has focused on maps, but Neatline can also be used to annotate anything that has some sort of visual instantiation - the same set of vector-drawing and content management tools can be used to create interpretive views of paintings, drawings, photographs, documents, diagrams, and anything else that can be captured as an image.
 
 Here are some examples of the kinds of projects that could be built (or have been built!) with Neatline:
 

@@ -18,9 +18,9 @@ Omeka is a web application written with PHP and MySQL that runs on the "[LAMP st
 
 Building on the excellent foundation provided by Omeka, Neatline is a plugin (just like plugins for Wordpress or modules for Drupal) that grafts new functionality onto the core Omeka feature set. Neatline adds an interactive map-making environment that makes it possible to create Neatline _exhibits_, each of which is populated with its own collection of _records_, which can optionally be synchronized with Dublin Core records in the underlying Omeka collection.
 
-Think of exhibits as the "canvas" for a project, records as the "paint strokes." Exhibit settings control the default base layer and focus location of the map, specify the combination of user-interface widgets that are enabled in the interactive environment, and supply a piece of long-format prose to introduce or narrate the project. Meanwhile, the actual content inside the exhibits is represented as a collection of records, each of which corresponds to some kind of visual or textual entity - vector annotations on the map, events on the timeline, overlayed historical maps, textual annotations in the exhibit narrative, or ordered waypoints.
+Think of exhibits as the "canvas" for a project, records as the "paint strokes." Exhibit settings control basic, high-level defaults like the starting base layer, the focus location of the map, and which of the mix-and-match user interface widgets are available in the interactive environment. Meanwhile, content inside the exhibits is represented as a collection of records, each of which corresponds to some kind of visual or textual entity - vector annotations on the map, events on the timeline, overlayed historical maps, textual annotations in the exhibit narrative, or ordered waypoints.
 
-## Geoserver
+## Geoserver (Optional)
 
 Out of the box, Neatline can be used to build exhibits on top of a collection of modern-geography base layers - the [OpenStreetMap][osm] tile set, the [Google Maps][google] API, and a [collection of stylized layers][stamen-maps] created by a design firm in San Francisco called [Stamen Design][stamen].
 
