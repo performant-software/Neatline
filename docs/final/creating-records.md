@@ -44,13 +44,13 @@ So far, we've manually created individual Neatline records and associated them w
 
   3. This takes you to the item import form. Think of this as essentially a "search" form - you can use any of the available inputs to define a "query" on the Omeka archive that determines which items will be imported into the exhibit. For example, if you have a large archive with multiple collections, you might just be interested in working with one individual collection, and don't want to clutter up the Neatline exhibit with all of the other unrelated items. The fields here work just like the corresponding options in the Omeka advanced search form:
 
-        - Use **Search by a range of ID#s** to specify an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is a good way to import the entire collection all at once - just enter in an indiscriminate query like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import all the items on the site. This is fine for experimentation, but in the long run, we generally recommend slicing and dicing the items in to groups with collections or tags, which often prevents content management problems down the road.
+- Use **Search by a range of ID#s** to specify an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is a good way to import the entire collection all at once - just enter in an indiscriminate query like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import all the items on the site. This is fine for experimentation, but in the long run, we generally recommend slicing and dicing the items in to groups with collections or tags, which often prevents content management problems down the road.
 
-        - Use **Search By Collection** to import to items in a given collection.
+- Use **Search By Collection** to import to items in a given collection.
 
-        - Use **Search By Type** to import items of a given type
+- Use **Search By Type** to import items of a given type
 
-        - Use **Search By Tags** to constrain the import to items that are tagged with **all** of the listed tags. 
+- Use **Search By Tags** to constrain the import to items that are tagged with **all** of the listed tags. 
 
   Keep in mind that the fields are `AND`'ed together, not `OR`'ed - so, if you select a collection and enter a tag, the import will only match items that are _both_ in the collection _and_ have the tag.
 
