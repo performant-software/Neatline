@@ -23,7 +23,7 @@ Exhibits are like the "canvas" for a project.
 ## Creating New Exhibits
 Click "Create an Exhibit". Field A does B, field X does Y, etc.
 
-## Editing Existing Exhibits
+## Managing Exhibits
 The browse view lists existing exhibits. Click the title to open the Neatline editor, "Exhibit Settings" to global settings, etc.
 
 # Working with Records
