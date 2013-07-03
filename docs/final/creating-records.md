@@ -46,7 +46,7 @@ So far, we've manually created individual Neatline records and associated them w
 
   The fields here work just like the corresponding options in the Omeka advanced search form. Use **Search by a range of ID#s** to specify an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is a good way to import the entire collection all at once - just enter in an indiscriminate query like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import all the items on the site. Use **Search By Collection** to import to items in a given collection, **Search By Type** to import items of a given item type, and **Search By Tags** to import items with a given set of tags.
 
-  Keep in mind that the fields are `AND`'ed together, not `OR`'ed - so, if you select a collection _and_ enter a tag, the import will only match items that are _both_ in the collection _and_ have the tag.
+  Keep in mind that the fields are `AND`'ed together, not `OR`'ed - so, if you select a collection and enter a tag, the import will only match items that are _both_ in the collection _and_ have the tag.
 
   4. Once you've defined a search query, click "Import Items" to kick off the import. You'll be taken back to the exhibits browse page, and you'll see a success notification saying that "The item import was successfully started!"
 
