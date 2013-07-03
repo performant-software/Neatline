@@ -4,7 +4,7 @@
 
   - Neatline is built as a set of plugins for Omeka.
   - [Omeka][omeka] is a web publishing framework - similar to [Wordpress][wordpress] or [Drupal][drupal], but designed for scholars and archivists.
-  - Omeka can be installed either on a public web server or a local sandbox environment on your own computer.
+  - Neatline adds an interactive map-making environment that makes it possible to 
   - Neatline can be used out-of-the-box with modern geography base layers like [OpenStreetMap][osm] or the [Google][google] API layers.
   - If you want to add custom base layers or overlays, you'll need to host them using a piece of software called [Geoserver][geoserver].
 
