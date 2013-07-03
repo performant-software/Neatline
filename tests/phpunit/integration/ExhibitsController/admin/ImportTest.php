@@ -36,7 +36,6 @@ class ExhibitsControllerTest_AdminImport extends Neatline_Case_Default
 
         // Query:
         $this->query = array(
-            'search'        => 'Keywords',
             'range'         => '1-10',
             'collection'    => $this->collection->id,
             'type'          => $this->type->id,
@@ -65,7 +64,6 @@ class ExhibitsControllerTest_AdminImport extends Neatline_Case_Default
         $this->dispatch('neatline/import/'.$this->exhibit->id);
 
         // Should populate keywords, range, and tags:
-        $this->assertXpath('//input[@name="search"][@value="Keywords"]');
         $this->assertXpath('//input[@name="range"][@value="1-10"]');
         $this->assertXpath('//input[@name="tags"][@value="tag1,tag2"]');
 
