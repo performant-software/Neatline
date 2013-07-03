@@ -9,11 +9,9 @@
   - Geoserver is a Java application that has different hosting requirements.
   - You can either run your own installation of Geoserver or purchase hosting from a commercial provider.
 
-Neatline is a plugin for [Omeka][omeka], an open-source web publishing platform that makes is possible to create, curate, and publish archival collections based on Dublin Core metadata. The [Neatline Plugin][nlplugin] is installed within the Omeka framework in a similar way that Wordpress plugin or Drupal module.
+## Before You Start
 
-Neatline and Omeka will work out-of-the-box on most commercial hosting providers that support PHP and MySQL. Many hosting providers also provide a "one-click" installer for Omeka. See [Hosting Suggestions][hosting] for a list of providers that work with Omeka.
-
-If you are providing your own hosting environment, you will need to make sure you have the following in place:
+Omeka and Neatline will work out-of-the-box on most commercial hosting providers that support PHP and MySQL. Many hosting providers also provide a "one-click" installer for Omeka. See [Hosting Suggestions][hosting] for a list of providers that work with Omeka. If you're providing your own hosting environment, you'll need the following:
 
   * A hosting environment that supports [PHP][php] (5.2.11 or greater)
   * Access to a [MySQL][mysql] server (5.0 or greater)
@@ -25,7 +23,7 @@ For more detailed system requirements, see [Preparing to Install][preparing] in 
 
 For the most up-to-date instructions on install Omeka, refer to Omeka's [Installation][install] documentation.
 
-## Install the Neatline Plugin
+## Install Neatline
 
   1. Upload [Neatline][nlplugin] to the `plugin` directory for your Omeka installation. See [Installing a Plugin][plugin_install] for more detailed instructions on this process.
   2. Activate the *Neatline* plugin by navigating your browser to _your-omeka-site.org/admin_, entering your credentials, and clicking
@@ -34,7 +32,7 @@ on the *Plugins* link at the top of the page.
 
 Once installed, you will see a new tab on the left in the administrative interface labeled **Neatline** that will take you to the editing interface for Neatline.
 
-## Advanced Configuration
+## Working with Geoserver
 
 Neatline is designed for progressive enhancement. The biggest enhancement is the ability to leverage advanced geospatial technologies to integrate historic (or other custom) maps in to your exhibits.  Through its use of web standards, Neatline is able to integrate maps through [WMS][wms] so you can change the map you are using to something other than the modern maps provided through the default Google mapping services.
 
