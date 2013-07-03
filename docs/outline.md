@@ -6,12 +6,6 @@
 ## Neatline from 10,000 Meters
 **DONE**
 
-## Preparing the Install
-**DONE**
-
-## Preparing to Install
-**DONE**
-
 ## Installing Neatline
 **DONE**
 
