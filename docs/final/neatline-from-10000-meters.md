@@ -14,15 +14,15 @@ Neatline is built as a suite of modular plugins for [Omeka][omeka], a digital co
 
 ## Neatline
 
-Building on the foundation provided by Omeka, Neatline is a plugin (just like plugins for Wordpress or modules for Drupal) that grafts new functionality onto the core Omeka feature set. Neatline adds an interactive map-making environment that makes it possible to create Neatline _exhibits_, each of which is populated with its own collection of _records_, which can optionally be synchronized with Dublin Core records in the underlying Omeka collection.
+Building on the foundation provided by Omeka, Neatline is a plugin that grafts new functionality onto the core Omeka feature set. Neatline adds an interactive map-making environment that makes it possible to create Neatline _exhibits_, each of which is populated with its own collection of _records_, which can optionally be synchronized with Dublin Core records in the underlying Omeka collection.
 
-Think of exhibits as the "canvas" for a project, records as the "paint strokes." Exhibit settings control basic, high-level defaults like the starting base layer, the focus location of the map, and which of the mix-and-match UI widgets are enabled for the exhibit. Meanwhile, content inside the exhibits is represented as a collection of records, each of which corresponds to some kind of visual or textual entity in the environment - vector annotations on the map, events on the timeline, overlayed historical maps, textual annotations in the exhibit narrative, or ordered waypoints.
+Think of exhibits as the "canvas" for a project, records as the "paint strokes." Exhibit-level settings control basic defaults like the starting base layer, the focus location of the map, and which of the mix-and-match UI widgets are enabled for the exhibit. Meanwhile, content inside the exhibits is represented as a collection of records, each of which corresponds to some kind of visual or textual entity in the environment - vector annotations on the map, events on the timeline, overlayed historical maps, textual annotations in the exhibit narrative, or clickable waypoints.
 
 ## Geoserver
 
 Out of the box, Neatline can be used to build exhibits on top of a collection of modern-geography base layers - the [OpenStreetMap][osm] tile set, the [Google Maps][google] API, and a [collection of stylized layers][stamen-maps] created by a design firm in San Francisco called [Stamen Design][stamen].
 
-If you want to use Neatline with georectified historical maps or custom base layers, though, you'll need to publish the layers to the web using a separate piece of software called [Geoserver][geoserver], an open-source geospatial server that does the computationally-intensive work of piping the georeferenced image tiles into the Neatline exhibits. We'll discuss the process of setting up Geoserver hosting in more detail in the "Preparing to Install" guide.
+If you want to use Neatline with georectified historical maps or custom base layers, though, you'll need to publish the layers to the web using a separate piece of software called [Geoserver][geoserver], an open-source geospatial server that does the computationally-intensive work of piping the georeferenced image tiles into the Neatline exhibits.
 
 
 [omeka]: http://omeka.org/

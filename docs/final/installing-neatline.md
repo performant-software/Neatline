@@ -21,15 +21,15 @@ To get started, you'll need the following:
 
 For more detailed system requirements, see [Preparing to Install][preparing] in the Omeka documentation.
 
-## Install Omeka
+## Installing Omeka
 
-First, install Omeka by following the instructions in the "[Installation][install]" guide.
+First, install Omeka by following the instructions in the [Installation][install] guide.
 
-## Install Neatline
+## Installing Neatline
 
 Once Omeka is up and running, install the Neatline plugin:
 
-  1. Download the most recent version of Neatline, unpack the `.zip` archive, and move it into `/plugins`.
+  1. Download the most recent version of Neatline, unpack the `.zip` archive, and move the `Neatline` folder into `/plugins`.
 
   2. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline.
 
@@ -37,13 +37,15 @@ Once Omeka is up and running, install the Neatline plugin:
 
 You should get redirected back to the list of plugins and see a success notification saying that "The Neatline plugin was successfully installed." Over in the main vertical navigation on the left side of the screen, you'll see a new listing for **Neatline** - click there to get started.
 
-## Working with Geoserver
+## Installing Geoserver
 
-Neatline is designed for progressive enhancement. The biggest enhancement is the ability to leverage advanced geospatial technologies to integrate historic (or other custom) maps in to your exhibits.  Through its use of web standards, Neatline is able to integrate maps through [WMS][wms] so you can change the map you are using to something other than the modern maps provided through the default Google mapping services.
+With Omeka and Neatline installed, you can get started building exhibits on top of modern-geography base layers (OpenStreetMap, Google Maps, and Stamen Maps). For many use-cases, the default layers are more than sufficient, and no other action is necessary. For projects that need to incorporate custom imagery, though - for example, historical projects that want to overlay georeferenced maps on top of the default layers, or art history projects that need to use scans of paintings as base layers in exhibits - a third piece of software called [Geosever][geoserver] is necessary.
 
-Neatline is optimized to make use of [GeoServer][geoserver], an open-source server for sharing georeferenced data. GeoServer runs in a Java Servlet Container like [Tomcat][tomcat], [Jetty][jetty], or [JBoss][jboss]. The [OpenGeo Suite][suite] (community edition) maintains packages for several of the more popular operating systems to ease the management of upgrading and configuring GeoServer.
+Geoserver is a high-performance, open-source geospatial server that runs in a Java Servlet Container like [Tomcat][tomcat], [Jetty][jetty], or [JBoss][jboss]. Basically, Geoserver is responsible for taking high-resolution GeoTIFF's - images that are keyed onto spatial coordinates - and selectively doling out just the section of the image that's necessary to fill the viewport as a user pans and zooms the map in Neatline. This is such a computationally-intensive task that it requires a separate, standalone piece of software.
 
-Installing and maintaining a Java server environment is several orders of magnitude more difficult than what is needed for web applications based on PHP and MySQL. If you do not have the resources for managing your own infrastructure (either through an institutional central IT group or you and your team), a great alternative is a hosting company like [AcuGIS][acugis] (there are discounts for academic users) which provide both Omeka and Neatline hosting. AcuGIS has an exclusive **Neatline Installer** which makes installation just a button-click! Be sure to look at their [FAQ][acuneatlinefaq] for more information about this hosting solution.
+The [OpenGeo Suite][suite] (community edition) maintains packages for several of the more popular operating systems to ease the management of upgrading and configuring GeoServer. That said, the process of installing and maintaining a Java server environment generally requires quite a bit more technical expertise than what's needed to get up and running with Omeka and Neatline. Geoserver is built on top of a more complicated suite of technologies, and tends to need a higher level of ongoing maintenance.
+
+If you don't have the resources to manage your own installation, there are a couple of options. First, if you're associated with a a college or university, check to see if your institution could provide assistance - managing complex software like Geoserver is often the sort of thing that falls under the purview of central IT services. Second, you can always purchase Geoserver hosting from a commercial provider - we've had good experiences with [AcuGIS][acugis], which can actually provide integrated Geoserver, Omeka, and Neatline hosting (they have a one-click Neatline installer, and offer discounts for academic users). Check out the [FAQ][acuneatlinefaq] for more information.
 
 [suite]: http://opengeo.org/products/suite/community/
 [acugis]: http://www.acugis.com/neatline-hosting.htm
@@ -63,3 +65,7 @@ Installing and maintaining a Java server environment is several orders of magnit
 [jetty]: http://www.eclipse.org/jetty/
 [jboss]: https://www.jboss.org/overview/
 [opengeo]: http://opengeo.org/products/suite/community/
+[mamp]: http://www.mamp.info/en/index.html
+[wamp]: http://www.wampserver.com/en/
+[xampp]: http://www.apachefriends.org/en/xampp.html
+[lamp]: http://en.wikipedia.org/wiki/LAMP_(software_bundle)
