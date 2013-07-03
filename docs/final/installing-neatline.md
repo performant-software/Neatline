@@ -13,13 +13,13 @@
 
 Omeka is a web application written with PHP and MySQL that runs on the "[LAMP stack][lamp]" (Linux, Apache, MySQL, and PHP), a ubiquitous set of technologies supported by almost any commercial or institutional hosting provider - many web hosts even provide an automatic "one-click" installer.  See the "Hosting Suggestions" guide in the Omeka documentation for a list of recommended providers. Alternatively, if you just want to experiment with Neatline in an offline setting, your can also install Omeka on a sandbox server environment running on your own computer using software packages like [MAMP][mamp], [WampServer][wamp], or [XAMPP][xampp], with the option of migrating the site to a public-facing web host at any point in the future.
 
-To get started, you'll need the following:
+Either way, you'll need the following:
 
   - A server environment with [PHP][php] (5.2.11 or greater), [MySQL][mysql] (5.0 or greater), and Apache.
   - Permission to add and edit files to the server.
   - Credentials for a MySQL user and the name of a database for the Omeka installation.
 
-For more detailed system requirements, see [Preparing to Install][preparing] in the Omeka documentation.
+For more detailed system requirements, see the [Preparing to Install][preparing] guide in the Omeka documentation.
 
 ## Installing Omeka
 
@@ -35,7 +35,7 @@ Once Omeka is up and running, install the Neatline plugin:
 
   3. Click the **Install** button.
 
-You should get redirected back to the list of plugins and see a success notification saying that "The Neatline plugin was successfully installed." Over in the main vertical navigation on the left side of the screen, you'll see a new listing for **Neatline** - click there to get started.
+You'll be redirected back to the list of plugins and see a notification saying that "The Neatline plugin was successfully installed." Over in the main vertical navigation on the left side of the screen, you'll see a new listing for **Neatline** - click there to get started.
 
 ## Installing Geoserver
 
