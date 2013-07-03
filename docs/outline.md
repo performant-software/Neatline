@@ -6,7 +6,7 @@
 ## Neatline from 10,000 Meters
 **DONE**
 
-## Preparing the Install
+## Preparing to Install
 You'll need a LAMP stack to run Neatline. This could be a purchased web hosting account, an institutaionally-provided service, or a local development environment like MAMP.
 
 ## Installing Neatline
