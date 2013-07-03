@@ -10,7 +10,7 @@
 
 Records are the fundamental unit of content in Neatline exhibits. In Neatline, _everything_ is a record - vector annotations on the map, plottings on the timeline, listings in the waypoints tray, WMS overlay layers, text annotations in the exhibit narrative, and any other content displayed by sub-plugins. Depending on the type of information that's entered into the record metadata, the same record could be displayed in more than one place in the exhibit. For example, a record could be represented by a point on the map and a span on the timeline. Neatline will always automatically "interlink" instantiations of the same record - when the user clicks on the span on the timeline, the map will zoom to the corresponding location, and vice versa.
 
-## Exhibit-Specific vs. Item-Backed Records
+## Netaline Records vs. Omeka Items
 
 There are two basic types of records - _exhibit-specific_ records that exist just inside of a single exhibit, and _item-backed_ records that link back to items in the Omeka collection. The two types behave exactly the same, with one exception - if a Neatline record is associted with an Omeka item, the record's "Title" and "Body" fields will be automatically compiled from the content in the Omeka item. The title will be filled in with the item's Dublin Core "Title" field, and the "Body" will be populated with the compiled metadata output of the entire item. Once the association is established, the content in the Neatline record will be automatically updated whenever the Omeka record is changed.
 
