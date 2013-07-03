@@ -46,9 +46,9 @@ So far, we've manually created individual Neatline records and associated them w
 
     1. **Search by a range of ID#s (eg: 1-4, 156, 79)**: Enter an individual ID (not so useful) or a range of id's (more useful), and all items that fall within the supplied range will be imported. This is useful if you want to just import _all_ of the collection at once - you can enter in "firehose" queries like "1-1000," which, as long as you have fewer than 1,000 items in your collection will import everything.
 
-    2. **Search By Collection**: Select one of the collections from the dropdown menu to constrain the import to an individual collection.
+    2. **Search By Collection**: Select one of the collections from the dropdown to constrain the import to a collection.
 
-    3. **Search By Type**: Similarly, select one of the item types from the dropdown to limit the import to a particular type.
+    3. **Search By Type**: Similarly, select one of the item types from the dropdown to limit the import to a type.
 
     4. **Search By Tags**: Enter a comma-delimited list of tags. Like with the regular Omeka search, this will constrain the import to items that are tagged with **all** of the listed tags.
 
