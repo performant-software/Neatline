@@ -46,7 +46,7 @@ Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin:
 
   2. Delete the old `/Neatline` directory under `/plugins` in your Omeka installation.
 
-  3. Download the the most recent version of Neatline, unpack the `.zip` archive, and move it into `/plugins`.
+  3. Download the most recent version of Neatline, unpack the `.zip` archive, and move it into `/plugins`.
 
   4. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline. With the code for the new version in place, you should see a notification saying "You have a new version of Neatline. Please Upgrade!".
 
