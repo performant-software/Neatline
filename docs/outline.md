@@ -51,14 +51,3 @@ Perform bulk-updates with Neatline-flavored CSS.
 
 ## Importing Items from Omeka
 Can associate individual record with Omeka item, or bulk-import large numbers of items at once.
-
-# Customizing Neatline
-
-## Architecture Overview
-Neatline can be extended by developers in lots of ways - custom layers, widgets, presenters, etc.
-
-## Adding Custom Base Layers
-Create WMS service, add layer properties to `layers.json`.
-
-## Creating Exhibit-Specific Themes
-Exhibits can be themed on an individual basis.
