@@ -14,8 +14,8 @@ way that Wordpress plugin or Drupal module.
 
 Neatline and Omeka will work out-of-the-box on most commercial hosting
 providers that support PHP and MySQL. Many hosting providers also
-provide a "one-click" installer for Omeka. See [Hosting
-Suggestions][hosting] for a list of providers that work with Omeka.
+provide a "one-click" installer for Omeka. See [Hosting Suggestions][hosting] 
+for a list of providers that work with Omeka.
 
 If you are providing your own hosting environment, you will need to make
 sure you have the following in place:
@@ -25,7 +25,7 @@ greater)
   * Access to a [MySQL][mysql] server (5.0 or greater)
   * Ability to write files to the server
 
-For more detailed system requirements, see [Preparing to Install][http://omeka.org/codex/Preparing_to_Install] in the Omeka
+For more detailed system requirements, see [Preparing to Install][preparing] in the Omeka
 documentation.
 
 ## Install Omeka
@@ -36,15 +36,15 @@ For the most up-to-date instructions on install Omeka, refer to Omeka's
 ## Install the Neatline Plugin
 
 1. Upload [Neatline][nlplugin] to the `plugin` directory for your
-   Omeka installation. See [Installing a Plugin][http://omeka.org/codex/Installing_a_Plugin] 
+   Omeka installation. See [Installing a Plugin][plugin_install] 
     for more detailed instructions on this process.
 2. Activate the *Neatline* plugin by navigating your browser to
    _your-omeka-site.org/admin_, entering your credentials, and clicking
 on the *Plugins* link at the top of the page.
-3. Click the "*Install*" button for the Neatline plugin.
+3. Click the **Install** button for the Neatline plugin.
 
 Once installed, you will see a new tab on the left in the administrative
-interface labeled "*Neatline*" that will take you to the editing
+interface labeled **Neatline** that will take you to the editing
 interface for Neatline.
 
 ## Advanced Configuration
@@ -60,7 +60,7 @@ services.
 Neatline is optimized to make use of [GeoServer][geoserver], an
 open-source server for sharing georeferenced data. GeoServer runs in a
 Java Servlet Container like [Tomcat][tomcat], [Jetty][jetty], or
-[JBoss][jboss]. The [OpenGeo Suite][http://opengeo.org/products/suite/community/]
+[JBoss][jboss]. The [OpenGeo Suite][suite]
 (community edition) maintains packages for several of the more popular
 operating systems to ease the management of upgrading and configuring
 GeoServer. 
@@ -70,28 +70,26 @@ of magnitude more difficult than what is needed for web applications
 based on PHP and MySQL. If you do not have the resources for managing
 your own infrastructure (either through an institutional central IT
 group or you and your team), a great alternative is a hosting company
-like [AcuGIS}[acugis] (there are discounts for academic users) which
+like [AcuGIS][acugis] (there are discounts for academic users) which
 provide both Omeka and Neatline hosting. AcuGIS has an exclusive
-*Neatline Installer* which makes installation just a button-click! Be
+**Neatline Installer** which makes installation just a button-click! Be
 sure to look at their [FAQ][acuneatlinefaq] for more information about
 this hosting solution.
 
-
+[suite]: http://opengeo.org/products/suite/community/
 [acugis]: http://www.acugis.com/neatline-hosting.htm
 [acuneatlinefaq]: http://www.acugis.com/neatline-faq.html
 [geoserver]: http://geoserver.org/ "GeoServer"
-[hosting]: http://omeka.org/codex/Hosting_Suggestions "Omeka Hosting
-Suggestions"
+[hosting]: http://omeka.org/codex/Hosting_Suggestions "Omeka Hosting Suggestions"
 [install]: http://omeka.org/codex/Installation "Install Omeka"
 [plugin_install]: http://omeka.org/codex/Installing_a_Plugin
 [omeka]: http://omeka.org/ "Omeka"
 [nlplugin]: http://omeka.org/addons/neatline "Neatline Plugin"
-[systemreqs]: http://omeka.org/codex/Preparing_to_Install "Omeka System
-Requirements"
+[systemreqs]: http://omeka.org/codex/Preparing_to_Install "Omeka System Requirements"
 [mysql]: https://www.mysql.com/
 [php]: http://us.php.net/
 [wms]: https://en.wikipedia.org/wiki/Web_Map_Service
-
+[preparing]: http://omeka.org/codex/Preparing_to_Install
 [tomcat]: https://tomcat.apache.org/
 [jetty]: http://www.eclipse.org/jetty/
 [jboss]: https://www.jboss.org/overview/
