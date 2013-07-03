@@ -42,17 +42,11 @@ So far, we've manually created individual Neatline records and associated them w
 
   2. Click the "Import Omeka Items" link under the exhibit title.
 
-  3. This takes you to the import query page. Think of a "search" page - you can use any of the available inputs to define a "query" on the Omeka archive that defines which group of items you want to import into the exhibit. For example, if you have a large archive with multiple collections, you might just be interested in working with one individual collection, and don't want to clutter up the Neatline exhibit with all of the other unrelated items. These fields work just like the corresponding inputs in the default advanced search form in the items interface:
+  3. This takes you to the item import form. Think of this as essentially a "search" form - you can use any of the available inputs to define a "query" on the Omeka archive that determines which items will be imported into the exhibit. For example, if you have a large archive with multiple collections, you might just be interested in working with one individual collection, and don't want to clutter up the Neatline exhibit with all of the other unrelated items.
 
-    **Search by a range of ID#s**: Enter an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is useful if you want to import _all_ of the collection at once - you can enter in general queries like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import everything.
+  The fields here work just like the options in the default advanced search form. Use **Search by a range of ID#s** to specify an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is useful if you want to import _all_ of the collection at once - you can enter in general queries like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import everything.
 
-    **Search By Collection**: Select one of the collections from the dropdown to constrain the import to a collection.
-
-    **Search By Type**: Similarly, select one of the item types from the dropdown to limit the import to a type.
-
-    **Search By Tags**: Enter a comma-delimited list of tags. Similar to the regular Omeka search, this will constrain the import to items that are tagged with **all** of the listed tags.
-
-  Keep in mind that the fields are `AND`'ed together, not `OR`'ed - so, if you select both a collection and an item type, the import will only match items that are _both_ in the collection _and_ of the selected item type, as opposed to _either_ in the collection _or_ of the type.
+  Use **Search By Collection** to constrain the import to items in a given collection, **Search By Type** to limit the query to items of a given item type, and **Search By Tags** to constrain the import to items that are tagged with **all** of the listed tags. Keep in mind that the fields are `AND`'ed together, not `OR`'ed - so, if you select both a collection and an item type, the import will only match items that are _both_ in the collection _and_ of the selected item type, as opposed to _either_ in the collection _or_ of the type.
 
   4. Once you've defined a search query, click "Import Items" to kick off the import. You'll be taken back to the exhibits browse page, and you'll see a success notification saying that "The item import was successfully started!"
 
