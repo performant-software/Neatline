@@ -11,26 +11,31 @@
 
 ## Before You Start
 
-Omeka and Neatline will work out-of-the-box on most commercial hosting providers that support PHP and MySQL. Many hosting providers also provide a "one-click" installer for Omeka. See [Hosting Suggestions][hosting] for a list of providers that work with Omeka. If you're providing your own hosting environment, you'll need the following:
+Omeka is a web application written with PHP and MySQL that runs on the "[LAMP stack][lamp]" (Linux, Apache, MySQL, and PHP), a ubiquitous set of technologies supported by almost any commercial or institutional hosting provider - many web hosts even provide an automatic "one-click" installer.  See the "Hosting Suggestions" guide in the Omeka documentation for a list of recommended providers. Alternatively, if you just want to experiment with Neatline in an offline setting, your can also install Omeka on a sandbox server environment running on your own computer using software packages like [MAMP][mamp], [WampServer][wamp], or [XAMPP][xampp], with the option of migrating the site to a public-facing web host at any point in the future.
 
-  * A hosting environment that supports [PHP][php] (5.2.11 or greater)
-  * Access to a [MySQL][mysql] server (5.0 or greater)
-  * Ability to write files to the server
+To get started, you'll need the following:
+
+  - A server environment with [PHP][php] (5.2.11 or greater), [MySQL][mysql] (5.0 or greater), and Apache.
+  - Permission to add and edit files to the server.
+  - Credentials for a MySQL user and the name of a database for the Omeka installation.
 
 For more detailed system requirements, see [Preparing to Install][preparing] in the Omeka documentation.
 
 ## Install Omeka
 
-For the most up-to-date instructions on install Omeka, refer to Omeka's [Installation][install] documentation.
+First, install Omeka by following the instructions in the "[Installation][install]" guide.
 
 ## Install Neatline
 
-  1. Upload [Neatline][nlplugin] to the `plugin` directory for your Omeka installation. See [Installing a Plugin][plugin_install] for more detailed instructions on this process.
-  2. Activate the *Neatline* plugin by navigating your browser to _your-omeka-site.org/admin_, entering your credentials, and clicking
-on the *Plugins* link at the top of the page.
-  3. Click the **Install** button for the Neatline plugin.
+Once Omeka is up and running, install the Neatline plugin:
 
-Once installed, you will see a new tab on the left in the administrative interface labeled **Neatline** that will take you to the editing interface for Neatline.
+  1. Download the most recent version of Neatline, unpack the `.zip` archive, and move it into `/plugins`.
+
+  2. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline.
+
+  3. Click the **Install** button.
+
+You should get redirected back to the list of plugins and see a success notification saying that "The Neatline plugin was successfully installed." Over in the main vertical navigation on the left side of the screen, you'll see a new listing for **Neatline** - click there to get started.
 
 ## Working with Geoserver
 
