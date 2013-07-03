@@ -6,11 +6,8 @@
 ## Neatline from 10,000 Meters
 **DONE**
 
-## Preparing to Install
-You'll need a LAMP stack to run Neatline. This could be a purchased web hosting account, an institutaionally-provided service, or a local development environment like MAMP.
-
 ## Installing Neatline
-Install Omeka. Download Neatline, put in `/plugins`, install via admin.
+**DONE**
 
 ## Upgrading to Neatline 2.0
 **DONE**
