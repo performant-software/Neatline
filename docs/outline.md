@@ -7,16 +7,16 @@
 **DONE**
 
 ## Preparing the Install
-*DONE*
+**DONE**
 
 ## Preparing to Install
-*DONE*
+**DONE**
 
 ## Installing Neatline
-*DONE*
+**DONE**
 
 ## Upgrading to Neatline 2.0
-*DONE*
+**DONE**
 
 # Working with Exhbits
 
