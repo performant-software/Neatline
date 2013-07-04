@@ -10,13 +10,13 @@
 
 When there are just a handful of records in an exhibit, it's easy to keep track of everything. But what if there are 1,000 records, or 100,000? In Neatline 2.0, it's possible to work with _really_ large collections of records - as many as about 1,000,000 in a single exhibit. If the ehxibit can display that quantity of information, though, there need to be tools to effectively manage information at that scale. To help with this, Neatline provides some useful searching and filtering tools:
 
-**Tip**: As you use the paginatoni and searching tools, you'll notice that the URL is dynamically udpated to reflect the current "query" on the collection. For example, you'll see URL's like:
+**Tip**: As you use the pagination and searching tools, you'll notice that the URL is dynamically updated to represent the current "query" on the collection. For example, you'll see URL's like:
 
-`/neatline/editor/1#records/search/start=100`
-`/neatline/editor/1#records/search/query=keywords`
-`/neatline/editor/1#records/search/query=keywords/start=100`
+  - `/neatline/editor/1#records/search/start=100`
+  - `/neatline/editor/1#records/search/query=keywords`
+  - `/neatline/editor/1#records/search/query=keywords/start=100`
 
-All of these are "durable" links, meaning that they can be copied and pasted into a completely new browser window, and you'd be taken back to the exact same set of results.
+These are "durable" links, meaning that they'll point back to the same set of results if copied and pasted into a different browser window.
 
 ## Pagination Buttons
 
