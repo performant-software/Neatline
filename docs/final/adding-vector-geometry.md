@@ -31,13 +31,11 @@ Just like the "Draw Point" tool, except that the points are connected by a line.
 
   1. Move your cursor to the place on the map where you want the line to start and click down once. Now, when you move the mouse, a line will connect the cursor to the location of the first point.
 
-  2. Click again to lay a second point. Keep on clicking until to put down points until you're ready to place the final point.
-
-  3. You can also draw a smooth line that automatically follows the movement of the cursor. Hold down the Shift key and then click and drag on the map. This lays down a new point for each individual pixel movement registered by the browser.
+  2. Click again to lay a second point. Keep on clicking to add multiple points. You can also draw a smooth line that automatically follows the movement of the cursor. Hold down the Shift key and then click and drag on the map. This lays down a new point for each individual pixel movement registered by the browser.
 
   **Tip**: Try not to use this feature. It seems interesting at first, but it has the effect of creating _extremely_ dense geometry, which is impossible to maintain (eg, if you decide later on that you want to change something about the shape of the line). If you find yourself needing smooth, curvy shapes, always see if you can use the "Draw SVG" feature, which makes it possible to import vector graphics created in programs like Adobe Illustrator and Inkscape.
 
-  4. Move your cursor to the place where you want the line to end and _double click_. This "completes" the line.
+  4. When you're ready to lay down the final point, move your cursor to the place where you want the line to end and _double click_. This "completes" the line.
 
 ## Draw Polygon
 
@@ -45,6 +43,6 @@ Just like "Draw Line," except that the shape defined by the points is "closed" i
 
   1. Move your cursor to the place on the map where you want to place the starting "corner" of the polygon and click down once.
 
-  2. Click again to lay a second point. Keep on clicking until to put down points until you're ready to place the final point. Like with the point tool, you can draw smooth shapes by holding down Shift, clicking down on the map, and dragging the cursor.
+  2. Click again to lay a second point. Keep on clicking until to add multiple points. Like with the point tool, you can draw smooth shapes by holding down Shift, clicking down on the map, and dragging the cursor.
 
-  4. Move your cursor to the place where you want the last point and double click. This "closes" the polygon.
+  4. When you're ready to lay down the final point, move your cursor to the place where you want the last corner of the shapee and double click. This "closes" the polygon.
