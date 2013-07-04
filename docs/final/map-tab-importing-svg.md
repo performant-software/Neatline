@@ -2,7 +2,8 @@
 
 ## At a Glance
 
-  - Complex shapes can be designed in vector editors and imported with the "Drag SVG" tool.
+  - The basic drawing controls (points, lines, polygons) aren't suitable for really complex illustrations.
+  - Instead, it's better to create complex graphics in specialized vector editors and import them into Neatline.
 
 ## Draw SVG
 

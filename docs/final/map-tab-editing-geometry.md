@@ -2,8 +2,7 @@
 
 ## At a Glance
 
-  - Existing annotations can be moved, scaled, and reshaped using the modification tools.
-  - Delete all annotations for a record by clicking "Clear all Geoemtry."
+  - Once a vector annotation has been added to the map, it can be reshaped, dragged, rotated or deleted.
 
 ## Modify Shape
 

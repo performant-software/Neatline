@@ -2,9 +2,9 @@
 
 ## At a Glance
 
-  - The geometry drawing controls are located under the "Map" tab.
-  - Change the drawing "mode" by selecting different options in the list of radio buttons.
-  - Simple shapes (points, lines, polygons) can be drawn directly onto the map.
+  - The drawing controls under the "Map" tab make it possible to overlay vector annotations on the map.
+  - There are three basic types of geometry - points, lines, and polygons.
+  - The built-in drawing tools are best suited for simple shapes that don't require large numbers of points.
 
 ## Navigate
 
@@ -20,7 +20,7 @@ Use this control to lay down individual points on the map.
 
   2. To add multiple points, just click multiple times in different places.
 
-Points are displayed as circles on the map, but, in the underlying data, they're actually represented as dimensionless pairs of lat/lon coordinates. Since they're infinitely small and have no absolute "size" that can be correlated to the scale of the map, the points will always stay the same size, regardless of the zoom level of the map (the size of the circles can be controlled by the "Point Radius" field in the "Style" tab).
+**Important**: Points are displayed as circles on the map, but, in the underlying data, they're actually represented as dimensionless pairs of lat/lon coordinates. Since they're infinitely small and have no absolute "size" that can be correlated to the scale of the map, the points will always stay the same size, regardless of the zoom level of the map (the size of the circles can be controlled by the "Point Radius" field in the "Style" tab).
 
 Depending on the situation, this can be good or bad. For example, if you're using points in conjunction with the "Point Image" feature to plot thumbnails of photographs onto the map, you might want the points to stay the same size at different zoom levels so that the preview images never become too big or too small. If you want a real geometric circle that changes size with the zoom level, use the "Draw Regular Polygon" tool.
 
