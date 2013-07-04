@@ -1,1 +1,1 @@
-# Working with Record Dimensions
+# Editing Record Dimensions

@@ -1,1 +1,1 @@
-# Working with Record Visibility Settings
+# Editing Visibility Settings
