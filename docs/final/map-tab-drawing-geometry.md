@@ -2,9 +2,11 @@
 
 ## At a Glance
 
-  - The drawing controls under the "Map" tab make it possible to overlay vector annotations on the map.
+  - The drawing controls under the "Map" tab make it possible to add vector annotations to the map.
   - There are three basic types of geometry - points, lines, and polygons.
-  - The built-in drawing tools are best suited for simple shapes that don't require large numbers of points.
+  - The built-in tools are best suited for simple shapes that don't require large numbers of points.
+  - Activate the different drawing modes by selecting the corresponding radio buttons.
+  - When you're done drawing, switch back to the "Navigate" mode to avoid accidentally drawing more shapes.
 
 ## Navigate
 

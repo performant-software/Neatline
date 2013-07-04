@@ -2,7 +2,9 @@
 
 ## At a Glance
 
-  - Once a vector annotation has been added to the map, it can be reshaped, dragged, rotated or deleted.
+  - The editing controls under the "Map" tab make it possible to modify existing geometries on the map.
+  - Annotations can be reshaped, rotated, resized, dragged, and deleted.
+  - Use the "Clear all Geometry" button to delete all of the geometries for the record. 
 
 ## Modify Shape
 
