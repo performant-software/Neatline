@@ -75,7 +75,9 @@ The standard "Draw Point/Line/Polygon" tools are good for simple, diagrammatic s
 
 To address this problem, Neatline 2.0 introduced the "Draw SVG" tool, which makes it possible to create high-fidelity, easily-maintained illustrations in specialized vector editing programs like [Adobe Illustrator][illustrator] or [Inkscape][inkscape] (and even in-browser tools like [SVG-Edit][svg-edit]) and import them directly into the Neatline editor. This way, you can do the difficult work of vector illustration in tools that are specifically designed for that task, and then drop the final products into Neatline exhibits. Later in, if you want to change something about the drawing, you can just go back to the original source file, make the change, and then update the Neatline exhibit with the new content.
 
-Neatline reads a commonly-used serialization format called SVG (Scalable Vector Graphics), a form of XML that encodes geometric information. To start, you'll need to save off your vector file as an SVG document:
+Neatline reads a commonly-used serialization format called SVG (Scalable Vector Graphics), a form of XML that encodes geometric information. To start, you'll need to save off your vector file as an SVG document.
+
+### Generating the SVG Document
 
 Using **[Adobe Illustrator][illustrator]**: 
 
@@ -97,6 +99,8 @@ Using **[Inkscape][inkscape]**:
 
   4. Click **Save**.
 
+### Importing the SVG into Neatline
+
 Once the SVG document is saved off, we can import it into Neatline:
 
   1. Find the `.svg` file that was created in the previous step. Open it with a plain text editor or a code editor by right clicking on the file and choosing a program from the list of options in "Open With." It doesn't matter what you use - as long as you can get at the raw SVG output.
@@ -107,7 +111,7 @@ Once the SVG document is saved off, we can import it into Neatline:
 
   4. Paste the SVG markup into the "SVG" box.
 
-  5. Optionally, set a custom "Density" value. This field controls the number of points that Neatline will generate when converting SVG `<path>` elements to hard-coded spatial coordinates - lower numbers produce "blockier" shapes, higher numbers produce "smoother" shapes.
+  5. Optionally, set a custom "Density" value. This field controls the number of points that Neatline will generate when converting SVG `<path>` elements to hard-coded spatial coordinates - low numbers produce "blocky" shapes, high numbers produce "smooth" shapes.
 
   6. Click **Parse**. Behind the scenes, Neatline converts the SVG markup into geospatial coordinates.
 

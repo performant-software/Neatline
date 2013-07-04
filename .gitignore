@@ -2,6 +2,7 @@
 node_modules
 components
 .grunt
+.dev
 pkg
 
 _SpecRunner.html
