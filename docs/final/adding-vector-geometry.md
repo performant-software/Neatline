@@ -121,7 +121,7 @@ Once the SVG document is saved off, we can import it into Neatline:
 
 Use this mode to change the shape of lines or polygons created with any of the drawing modes. It can also be used to change the position of stand-alone points.
 
-  1. Select the "Modify Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a set of circular drag handles appear on top of each of the vertices in the shape.
+  1. Select the "Modify Shape" radio button and click on the shape that you want to modify. Once the shape is selected, you should see a set of circular drag handles appear on top of each of the vertices in the shape.
 
   2. To change the position of an existing vertex, just click down on the point's drag handle, move the cursor to a different location, and release the mouse button to lock in the new location.
 
@@ -131,7 +131,7 @@ Use this mode to change the shape of lines or polygons created with any of the d
 
 Rotate an existing line or polygon.
 
-  1. Select the "Rotate Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a new "control point" appear to the bottom right of the shape.
+  1. Select the "Rotate Shape" radio button and click on the shape that you want to resize. Once the shape is selected, you should see a new "control point" appear to the bottom right of the shape.
 
   2. Click and drag on the control point to rotate the shape.
 
@@ -139,7 +139,7 @@ Rotate an existing line or polygon.
 
 Expand or shrink an existing line or polygon.
 
-  1. Select the "Resize Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a new "control point" appear to the bottom right of the shape.
+  1. Select the "Resize Shape" radio button and click on the shape that you want to resize. Once the shape is selected, you should see a new "control point" appear to the bottom right of the shape.
 
   2. Click and drag on the control point to scale the shape.
 
@@ -149,7 +149,7 @@ Expand or shrink an existing line or polygon.
 
 Change the location of an existing point, line, or polygon.
 
-  1. Select the "Drag Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a new "control point" appear in the center of the shape. If you're dragging an individual point, the point will just change color to indicate that it has been highlighted.
+  1. Select the "Drag Shape" radio button and click on the shape that you want to drag. You should see a new "control point" appear right in the middle of the shape. If you're dragging an individual point, the point will just change color to indicate that it has been highlighted.
 
   2. Click and drag on the control point to change the center position of the shape.
 
@@ -163,7 +163,7 @@ Delete an existing point, line, or polygon.
 
 ## Clear all Geometry
 
-This button is similar to "Delete Shape," but it delete _all_ vector annotations for the record. This can be useful when you've made a mistake of some sort and want to just completely clear out your work.
+This button is similar to "Delete Shape," but it delete _all_ vector annotations for the record. This can be useful when you've made a mistake of some sort (for example, when experimenting with different ways of positioning an imported SVG document) and want to just completely clear out your work.
 
 
 [illustrator]: http://www.adobe.com/products/illustrator.html
