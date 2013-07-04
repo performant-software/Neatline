@@ -63,8 +63,10 @@ There are a couple of configuration options for the regular polygon tool:
 
   - **Snap Angle**: As you drag the cursor away from the center point, the rotation of the polygon will "snap" into a series of fixed angles. This makes it possible to create a series of shapes with the exact same orientation on the map (eg, a series of rectangles with sides that are all perfectly aligned with the cardinal directions). This field controls the size of the angle between each of the consecutive rotations.
 
-  For example, if you set a snap angle of `30` degrees, it will only be possible to orient the shape in a couple of different ways; as you drop the angle, the rotation becomes and more granular, and at `0` the snapping is completely disabled.
+  For example, if you set a snap angle of `30` degrees, it will only be possible to orient the shape in a couple of different ways; as you decrease the angle, the rotation becomes and more granular, and at `0` the snapping is completely disabled.
 
   - **Irregular**: By default, all of the sides of the polygon are equal in length (eg, a 3-sided shape is always an equilateral triangle, a 4-sided shape is always a square, etc). Check this box to make it possible to create "skewed" shapes with sides of different lengths - rectangles instead of squares, ellipses instead of circles.
 
   **Tip**: This setting can have strange interactions with certain "Snap Angle" values - if you need to create an irregular shape, it's generally easiest to set the snap angle to 0, drag out the shape, and then rotate it as needed with the "Rotate Shape" tool.
+
+## Draw SVG
