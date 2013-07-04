@@ -19,7 +19,7 @@ The slug is a plain-text identifier for the record - think of it as a human-read
 
 If you had a record in your Neatline exhibit with a slug of `paris`, the word "Paris" document would be interactively linked with the location on the map. The slug isn't actually displayed anywhere in the public-facing version of the exhibit - if you're not using the Narratives plugin, it fine to just leave it blank.
 
-## Title (Optional, but strongly recommended)
+## Title (Optional, recommended)
 
 The title is the top-level snippet of text used to label the record in pop-up bubbles, on timelines, and in vertical listings of waypoints. Try to keep it short and simple, and avoid using complex formatting. A title isn't strictly required, but if you leave it blank you'll likely end up with some odd visual artifacts in your exhibit (empty preview bubbles, unlabelled points and spans on the timeline, etc).
 

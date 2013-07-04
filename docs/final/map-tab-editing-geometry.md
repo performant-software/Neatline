@@ -4,6 +4,8 @@
 
   - The editing controls under the "Map" tab make it possible to modify existing geometries on the map.
   - Annotations can be reshaped, rotated, resized, dragged, and deleted.
+  - Activate the different editing modes by selecting the corresponding radio buttons.
+  - When you're done editing, switch back to the "Navigate" mode to avoid accidentally editing other shapes.
   - Use the "Clear all Geometry" button to delete all of the geometries for the record. 
 
 ## Modify Shape
