@@ -16,7 +16,7 @@ When there are just a handful of records in an exhibit, it's easy to keep track 
   - `/neatline/editor/1#records/search/query=keywords`
   - `/neatline/editor/1#records/search/query=keywords/start=100`
 
-These are "durable" links, meaning that they'll point back to the same set of results if copied and pasted into a different browser window.
+These are all "durable" links, meaning that they'll point back to the same set of results if you copied and pasted into a different browser window.
 
 ## Pagination Buttons
 
@@ -40,10 +40,10 @@ To search for records with multiple tags, just enter a comma-delimited list:
 
 ## Search by Location
 
-Sometimes, the map itself is the best mechanism for finding records - if you know _where_ the records are that you're interested in, you can enter a special query that will cause the list of records to automatically synchronize with the collection of records that's visible on the map at any given moment. Just enter:
+Sometimes, the map itself is the best mechanism for finding records - if you know _where_ the records are that you're interested in, you can enter a special query that will cause the records in the left panel to automatically synchronize with the collection of records that's currently visible on the map. Just enter:
 
 `map:`
 
-As soon as you enter this query, the previous list of records will be replaced by _just the records that are currently visible on the map_. When you pan or zoom the viewport on the map and a fresh batch of records is loaded, the list of records in the editing pane will automatically update to display the new collection from the map.
+As soon as you enter this query, the previous list of records will be replaced by the exact set of records that are currently visible on the map. When you pan or zoom the viewport on the map and a fresh batch of records is loaded, the list of records in the editing pane will automatically update to display the new collection from the map.
 
-To disable the map-mirroring mode, just clear out the search box.
+To disable the search-by-location mode, just clear out the search box.
