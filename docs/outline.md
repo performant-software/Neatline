@@ -32,10 +32,10 @@ The browse view lists existing exhibits. Click the title to open the Neatline ed
 **DONE**
 
 ## Adding Text Content
-"Text" tab - "Title" does X, "Body" does Y, "Slug" does Z, etc.
+**DONE**
 
 ## Adding Vector Geometry
-"Map" tab - Draw points, lines, polygons by doing X, Y, Z, etc.
+**DONE**
 
 ## Editing Visual Styles
 "Style" tab - Change colors, opacities, etc.
