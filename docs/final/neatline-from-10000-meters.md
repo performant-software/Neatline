@@ -10,7 +10,7 @@
 
 ## Omeka - Standards-Compliant Metadata
 
-Neatline is built as a suite of modular plugins for [Omeka][omeka], a digital collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. In many ways, Omeka is similar to other popular content management systems like [Wordpress][wordpress] or [Drupal][drupal], but it's designed specifically around the needs of scholars and archivists.
+Neatline is built as a suite of modular plugins for [Omeka][omeka], a digital collection-management and web-publishing framework developed by the [Roy Rosenzweig Center for History and New Media][chnm] at George Mason University. Omeka is similar to other popular content management systems like [Wordpress][wordpress] or [Drupal][drupal], but it's designed specifically around the needs of scholars and archivists.
 
 Omeka makes it posible to create and curate a collection of "items" (the rough equivalent of a Wordpress "post" or a Drupal "node"), each of which is a fully-qualified Dublin Core metadata record. Once you've built out a collection items using the Omeka administrative interface, the collection is automatically published as a public-facing website, which can be tailored to the needs of specific projects with custom themes and plugins.
 
