@@ -113,7 +113,7 @@ SQL;
 
         PRIMARY KEY             (id),
         INDEX                   (item_id, exhibit_id),
-        FULLTEXT KEY            (title, body, slug, tags, widgets),
+        FULLTEXT INDEX          (title, body, slug, tags, widgets),
         SPATIAL INDEX           (coverage)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

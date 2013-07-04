@@ -22,9 +22,13 @@ When you're finished searching, just empty the search box to go back to complete
 
 ## Search for Tags
 
-If you've added tags to your records (for more information about Neatline's tagging system, see the "Working with Tags" guide), there's a special search syntax you can use to search for records that have a given tag. For example, if you want to find all records that are tagged with `tag1` and `tag2`, search for:
+If you've added tags to your records (for more information about Neatline's tagging system, see the "Working with Tags" guide), there's a special search syntax you can use to search for records that have a given tag. For example, if you want to find all records that are tagged with `tag1`, enter:
 
-`tags: tag1, tag2`
+`tags: tag1`
+
+To search for records with multiple tags, just enter a comma-delimited list:
+
+`tags: tag1, tag2, tag3, ...`
 
 ## Search by Location
 
@@ -32,6 +36,6 @@ Sometimes, the map itself is the best mechanism for finding records - if you kno
 
 `map:`
 
-As soon as you enter this query, the previous list of records will be replaced by _just the records that are currently visible on the map_. When you change the viewport on the map and a new batch of records is loaded, the list of records will automatically update to display the updated collection.
+As soon as you enter this query, the previous list of records will be replaced by _just the records that are currently visible on the map_. When you pan or zoom the viewport on the map and a fresh batch of records is loaded, the list of records in the editing pane will automatically update to display the new collection from the map.
 
 To disable the map-mirroring mode, just clear out the search box.
