@@ -21,7 +21,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'define_acl',
         'initialize',
         'define_routes',
-        'after_save_item'
+        'after_save_item',
+        'html_purifier_form_submission'
     );
 
 
@@ -222,6 +223,39 @@ SQL;
         $records->syncItem($args['record']);
     }
 
+    /**
+     * Purify POST data for Neatline exhibits and records.
+     *
+     * @param array $args Contains `purifier` (Omeka_Controller_Plugin_HtmlPurifier)
+     */
+    public function hookHtmlPurifierFormSubmission($args)
+    {
+        $purifier = $args['purifier'];
+
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+
+        if ($request->getModuleName() == 'neatline') {
+
+            $post = $request->getPost();
+
+            switch ($request->getActionName()) {
+                case 'add':
+                case 'edit':
+                    if (isset($post['narrative'])) {
+                        $post['narrative'] = $purifier->purify($post['narrative']);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            $request->setPost($post);
+
+        }
+
+        return;
+    }
 
     /**
      * Add link to main admin menu bar.

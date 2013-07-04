@@ -86,6 +86,10 @@ class NeatlineRecord extends Neatline_Row_Expandable
      */
     public function saveForm($values)
     {
+        // Purify the the `title` and `body` fields for each record
+        $htmlPurifierFilter = new Omeka_Filter_HtmlPurifier();
+        $values['title'] = $htmlPurifierFilter->filter($values['title']);
+        $values['body'] = $htmlPurifierFilter->filter($values['body']);
 
         // Cache the original tags string.
         $oldTags = nl_explode($this->tags);
