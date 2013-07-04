@@ -11,25 +11,25 @@
 
 ## Navigate
 
-"Navigate" enables the default "panning" mode of interaction with the map - click and drag to move the map in one direction or another, and use the scroll wheel on your mouse to zoom in and out.
+Select the "Navigate" radio button to enable the default panning interaction with the map - click and drag to move the map in one direction or another, and use the scroll wheel on your mouse to zoom in and out.
 
 **Tip**: Think of Navigate as your "home base" - after sketching in new geometry with one of the drawing tools, it's usually easiest to reactivate "Navigate" mode, which has the effect of turning off any of the drawing or modification tools. This means that you don't accidentally add unwanted geometry the next time you click on the map.
 
 ## Draw Point
 
-Activate this mode to lay down individual points on the map. Once "Draw Point" is enabled, a little piont graphic will follow the cursor when you move the mouse over the map. To put down a point, click down once. To add multiple points, just click multiple times in different places.
+Use this control to lay down individual points on the map.
 
-A couple of things to remember about points:
+  1. Select the "Draw Point" radio button, move the cursor to the location on the map where you want to place the point, and click down once to drop the point.
 
-  - Once you've added the first point, you'll still be in "Draw Point" mode, which makes it easy to put down another point by accident the next time you click on the map. When you're done with the tool, go ahead and switch back to "Navigate" mode just peace of mind.
+  2. To add multiple points, just click multiple times in different places.
 
-  - Points are displayed as little circles on the map, but, at the level of the data, they're actually just dimensionless X/Y coordinates. This means that there's no way for the map to know how to "scale" the circles that are used to represent them, so the circles always stay the same size, no matter what the zoom level. Depending on the content you're trying to represent, this can be good or bad. If you want a "real" circle that changes size with the zoom level, head down to the "Draw Regular Polygon" tool.
+Points are displayed as circles on the map, but, in the underlying data, they're actually just dimensionless X/Y coordinates. Since the circles have no diameter that can be correlated to the scale the map, they can't be expanded and contracted to match the current zoom level, meaning that the points will always stay the same size, regardless of the zoom level. Depending on the content you're trying to represent, this can be good or bad. If you want a "real" circle that changes size with the zoom level, use the "Draw Regular Polygon" tool.
 
 ## Draw Line
 
-Just like the "Draw Point" tool, except that the points are connected by a line. To draw a line:
+Just like the "Draw Point" radio button, except that the points are connected by a line. To draw a line:
 
-  1. Move your cursor to the place on the map where you want the line to start and click down once. Now, when you move the mouse, a line will connect the cursor to the location of the first point.
+  1. Select the "Draw Line" tool, move your cursor to the place on the map where you want the line to start, and click down once. Now, when you move the mouse, a line will connect the cursor to the location of the first point.
 
   2. Click again to lay a second point. Keep on clicking to add multiple points. You can also draw a smooth line that automatically follows the movement of the cursor. Hold down the Shift key and then click and drag on the map. This lays down a new point for each individual pixel movement registered by the browser.
 
@@ -41,7 +41,7 @@ Just like the "Draw Point" tool, except that the points are connected by a line.
 
 Just like "Draw Line," except that the shape defined by the points is "closed" into a polygon as soon as you put down more than two points. To draw a polygon:
 
-  1. Move your cursor to the place on the map where you want to place the starting "corner" of the polygon and click down once.
+  1. Select the "Draw Polygon" radio button, move your cursor to the place on the map where you want to place the starting "corner" of the polygon, and click down once.
 
   2. Click again to lay a second point. Keep on clicking until to add multiple points. Like with the point tool, you can draw smooth shapes by holding down Shift, clicking down on the map, and dragging the cursor.
 
@@ -51,7 +51,7 @@ Just like "Draw Line," except that the shape defined by the points is "closed" i
 
 "Draw Regular Polygon" creates closed shapes just like the regular "Draw Polygon" tools, but it doesn't let you manually position the individual pionts - instead, it automatically creates a polygon with a given number of sides. This is useful if you want to create consistently-shaped geometric primitives (triangles, squares, circles, etc.), and it can also be a good way to sketch in basic components of more complex shapes:
 
-  1. Move your cursor to the place on the map where you want the _center_ of the polygon to be positioned.
+  1. Select the "Draw Polygon" radio button and move your cursor to the place on the map where you want to position the _center_ of the polygon.
 
   2. Click down and, while still holding down on the mouse button, move the cursor in any direction away from the center point. As you drag the mouse, a polygon will be dynamically rendered on the map with a radius equal to the distance between the cursor and the center point. Rotate the cursor around the center point to change the orientation of the polygon.
 
@@ -116,6 +116,54 @@ Once the SVG document is saved off, we can import it into Neatline:
   7. When the illustration is positioned correctly, release the mouse button to lock the geometry into place.
 
   **Tip**: It's easy to make mistakes when doing this, and it often takes a couple tries to get things right. If you mess up, it's easiest just to totally wipe out the previous attempt by clicking the "Clear all Geometry" button at the bottom of the form.
+
+## Modify Shape
+
+Use this mode to change the shape of lines or polygons created with any of the drawing modes. It can also be used to change the position of stand-alone points.
+
+  1. Select the "Modify Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a set of circular drag handles appear on top of each of the vertices in the shape.
+
+  2. To change the position of an existing vertex, just click down on the point's drag handle, move the cursor to a different location, and release the mouse button to lock in the new location.
+
+  3. To add new vertices to the shape, click and drag on any of the translucent points that are displayed in the middle of each of the sides of the shape. This has the effect of bisecting the vertex - as soon as you release the mouse button, the drag handle will be converted into a regular point, and you can then continue to progressively add detail to the shape by re-bisecting the new edges.
+
+## Rotate Shape
+
+Rotate an existing line or polygon.
+
+  1. Select the "Rotate Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a new "control point" appear to the bottom right of the shape.
+
+  2. Click and drag on the control point to rotate the shape.
+
+## Resize Shape
+
+Expand or shrink an existing line or polygon.
+
+  1. Select the "Resize Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a new "control point" appear to the bottom right of the shape.
+
+  2. Click and drag on the control point to scale the shape.
+
+**Tip**: If you want to change the size of the circle used to represent an individual point, head over to the "Style" tab and change the "Point Radius" option.
+
+## Drag Shape
+
+Change the location of an existing point, line, or polygon.
+
+  1. Select the "Drag Shape" radio button and click on any of the vector annotations that belong to the record that's being edited. Once the shape is selected, you should see a new "control point" appear in the center of the shape. If you're dragging an individual point, the point will just change color to indicate that it has been highlighted.
+
+  2. Click and drag on the control point to change the center position of the shape.
+
+## Delete Shape
+
+Delete an existing point, line, or polygon.
+
+  1. Select the "Delete Shape" radio button.
+
+  2. To delete a shape, just click once on the shape, and it will be removed from the map.
+
+## Clear all Geometry
+
+This button is similar to "Delete Shape," but it delete _all_ vector annotations for the record. This can be useful when you've made a mistake of some sort and want to just completely clear out your work.
 
 
 [illustrator]: http://www.adobe.com/products/illustrator.html
