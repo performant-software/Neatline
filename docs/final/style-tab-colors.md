@@ -2,7 +2,7 @@
 
 ## Fill Color
 
-The color used to fill the "body" a polygon - the area inside of the lines, not including the lines themselves. The fill color also functions as the default color for the record in other contexts. For example, if the record is plotted on the timeline widget, the fill color is used to set the color of the point or span that represents the record on the timeline.
+The color used to fill the "body" a polygon - the area inside of the lines, not including the lines themselves. The "Fill Color" is also used as a default color for the record in other contexts. For example, if the record is plotted on the timeline widget, the fill color is used to set the color of the point or span that represents the record on the timeline.
 
 ## Fill Color (Selected)
 
