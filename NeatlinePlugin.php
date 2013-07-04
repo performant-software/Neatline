@@ -167,8 +167,8 @@ SQL;
             new Neatline_Migration_200($this, $this->_db);
         }
 
-        // If the previous version was one of the 2.0 alpha releases, run
-        // the the alpha2 and/or alpha3 migrations.
+        // If the previous version was one of the 2.0 alpha/rc releases,
+        // run the the pre-release migrations.
 
         else if ($old < '2.0.0') {
             if ($old < '2.0-alpha2') {
