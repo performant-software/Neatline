@@ -112,9 +112,13 @@ SQL;
         map_focus               VARCHAR(100) NULL,
 
         PRIMARY KEY             (id),
+
         INDEX                   (item_id, exhibit_id),
-        FULLTEXT INDEX          (title, body, slug, tags, widgets),
-        SPATIAL INDEX           (coverage)
+        SPATIAL INDEX           (coverage),
+
+        FULLTEXT INDEX          (title, body, slug),
+        FULLTEXT INDEX          (tags),
+        FULLTEXT INDEX          (widgets)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
