@@ -69,4 +69,15 @@ There are a couple of configuration options for the regular polygon tool:
 
   **Tip**: This setting can have strange interactions with certain "Snap Angle" values - if you need to create an irregular shape, it's generally easiest to set the snap angle to 0, drag out the shape, and then rotate it as needed with the "Rotate Shape" tool.
 
-## Draw SVG
+# Draw SVG
+
+The standard "Draw Point/Line/Polygon" tools are good for simple, diagrammatic shapes - dots, rectangles, circles, simple arrows, etc. The problem, though, is that they don't really scale well - what if you want to create a really smooth, intricate shape? Neatline exhibits are always exercises in information design, and there's a class of "illustrative" annotation that doesn't fit well into the blocky aesthetic supported by the standard-issue GIS tools. You could painstakingly sketch out complex illustrations using the line and polygon tools, but the resulting geometry is brittle and difficult to maintain. What if you decide later on that you want to change the drawing? You'd have to manually reposition hundreds or thousands of points.
+
+To address this problem, Neatline 2.0 introduced the "Draw SVG" tool, which makes it possible to create high-fidelity illustrations in specialized vector editing programs like [Adobe Illustrator][illustrator] or [Inkscape][inkscape] (and even in-browser tools like [svg-edit][svg-edit]) and import them directly into the Neatline editor.
+
+Neatline reads a format called SVG (**S**calable **V**ector **G**raphics), a form of XML that encodes the geometric information.
+
+
+[illustrator]: http://www.adobe.com/products/illustrator.html
+[inkscape]: http://inkscape.org/
+[svg-edit]: http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html
