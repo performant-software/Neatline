@@ -1,4 +1,4 @@
-# Adding Vector Geometry
+# Creating Vector Geometry
 
 ## At a Glance
 
