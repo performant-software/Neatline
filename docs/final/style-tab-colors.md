@@ -1,17 +1,32 @@
 # Editing Record Colors
 
+## At a Glance
+
+  - These fields set the colors used to represent records on the map and timeline.
+  - To change a color field, click anywhere on the input and use the interactive color picker widget.
+  - As you change the color, new value will be automatically previewed on the map.
+  - If you want to use a specific value, just paste the value into the text input below the color picker.
+  - All color values are stored as hexadecimal values.
+
+Examples:
+
+`#ffffff`
+`#000000`
+`#c4d243`
+`#08c`
+
 ## Fill Color
 
-The color used to fill the "body" a polygon - the area inside of the lines, not including the lines themselves. The "Fill Color" is also used as a default color for the record in other contexts. For example, if the record is plotted on the timeline widget, the fill color is used to set the color of the point or span that represents the record on the timeline.
+The hexadecimal color value of the "body" or "area" of points and polygons on the map (the area inside the lines, not including the lines themselves). Also used as a default color for the record in other contexts. For example, if the record has date information, the fill color is used to render the plotting that represents the record on the timeline.
 
 ## Fill Color (Selected)
 
-The color used to fill the "body" of a polygon when the record is highlighted or selected (for example, when the cursor hovers or clicks on the record). In many cases, it looks nice to set the "Fill Color" and the "Selected Fill Color" to the same value, and use the opacity settings to distinguish between the regular and selected states of the record. In other cases, though, when you want a more pronounced distinction, it can make sense to set a separate color for the selected state.
+The hexadecimal color value of the "body" or "area" of points and polygons on the map _when the record is highlighted or selected_ (eg, when the cursor hovers or clicks on the shape).
 
 ## Stroke Color
 
-The color of the lines that run around the edges of a shape.
+The hexadecimal color value of the lines that run around the edges of a shape.
 
 ## Stroke Color (Selected)
 
-The color of the lines that run around the edges of a shape when the record is highlighted or selected (for example, when the cursor hovers or clicks on the record).
+The hexadecimal color value of the lines that run around the edges of a shape _when the record is highlighted or selected_ (eg, when the cursor hovers or clicks on the shape).
