@@ -12,28 +12,10 @@ But, as you can see, they shouldn't share _all_ of their attributes - all 2004 p
 
 We can map this out schematically. Here's a list of all the "categories" in the exhibit, and the fields that should be shared for each of the categories:
 
-- **Democratic**:
-  - Fill Color
-
-- **Republican**:
-  - Fill Color
-
-- **2000**:
-  - After Date
-  - Before Date
-
-- **2004**:
-  - After Date
-  - Before Date
-
-- **2008**:
-  - After Date
-  - Before Date
-
-- **2012**:
-  - After Date
-  - Before Date
-
-- **All Precincts**:
-  - Fill Opacity
-  - Stroke Width
+- **All Precincts**: Fill Opacity, Stroke Width
+- **Democratic**: Fill Color
+- **Republican**: Fill Color
+- **2000**: After Date, Before Date
+- **2004**: After Date, Before Date
+- **2008**: After Date, Before Date 
+- **2012**: After Date, Before Date
