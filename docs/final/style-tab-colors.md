@@ -8,7 +8,7 @@
   - As you change the color, new value will be automatically previewed on the map.
   - If you want to use a specific value, just paste the value into the text input below the color picker.
 
-Examples:
+### Examples:
 
   - `#ffffff`
   - `#000000`
