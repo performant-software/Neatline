@@ -12,7 +12,7 @@ Records are the fundamental unit of content in Neatline exhibits. In Neatline, _
 
 ## The Record Data Model
 
-All records share a common data model:
+All records share a common data model. Similar to elements on Omeka items, all fields are optional.
 
   - **Title**: A top-level, human-readable identifier. Used as a label for the record. Eg: "War and Peace"
   - **Slug**: A plain-text ID for the record, used to reference the record from TEI or HTML. Eg: `war-and-peace`
@@ -20,7 +20,7 @@ All records share a common data model:
   - **Coverage**: A [WKT][wkt] string that defines a geometric annotation on the map (point, line, polygon, etc).
   - **Tags**: A string of comma-delimited tags used to slice and dice the collection into related subgroups.
   - **Presenter**: The mechanism by which the record content is displayed (static bubble, floating bubble, etc).
-  - **Widgets**: Which of the "viewports" the record is visible in (timeline, waypoints browser, etc.)
+  - **Widgets**: Which of the "viewports" the record is visible in (timeline, waypoints browser, etc).
   - **Fill Color**: The color of polygons on the map. Also used as the default color in other contexts.
   - **Fill Color (Selected)**: The color of map polygons when the record is highlighted or selected.
   - **Stroke Color**: The color of the lines running around the edges of polygons on the map.
@@ -32,7 +32,7 @@ All records share a common data model:
   - **Stroke Width**: The thickness, in pixels, of the lines around polygons.
   - **Point Radius**: The size of individual points on the map.
   - **Z-Index**: The "stacking" order of records when displayed on the map.
-  - **Order**: Used to determine the display order of records in the "waypoints" tray.
+  - **Order / Weight**: Used to determine the display order of a record in relation to other records.
   - **Start Date**: The beginning of the event that the record describes.
   - **End Date**: The end of the event that the record describes.
   - **After Date**: The date _after which_ the record should be displayed in the exhibit.
@@ -49,7 +49,7 @@ All records share a common data model:
 
 Even though all records share the same data model, they can be divided into two basic categories - _exhibit-specific_ records that exist just inside of a single exhibit, and _item-backed_ records that link back to items in the Omeka collection. The two types behave exactly the same, with one exception - if a Neatline record is associted with an Omeka item, the record's "Title" and "Body" fields will be automatically compiled from the content in the Omeka item. The title will be filled in with the item's Dublin Core "Title" field, and the "Body" will be populated with the compiled metadata output of the entire item. Once the association is established, the content in the Neatline record will be automatically updated whenever the Omeka record is changed.
 
-Why does Neatline make this distinction? Why aren't records just the same thing as items? In the early stages of development, there actually was a one-to-one correspondence between Omeka items and Neatline records - records were just the direct instantiations of Omeka items in a specific Neatline exhibit. The problem, though, is that Neatline exhibits often require a body of "annotative" or "supporting" information that doesn't really fit well in the context of an archival collection. For example, imagine you're working with a collection of correspondence - each letter in the collection is represented by a canonical Dublin Core record in Omeka. Then, when you pull the letters into a Neatline exhibit, you start to sketch in little arrows, flowcharts, and other "contextual" information that support the core archival objects.
+Why does Neatline make this distinction? Why aren't records just the same thing as items? In the early stages of development, there actually was a one-to-one correspondence between Omeka items and Neatline records - records were just the direct instantiations of Omeka items in a specific Neatline exhibit. The problem, though, is that Neatline exhibits often require a body of "annotative" or "supporting" information that doesn't really fit well in the context of an archival collection. For example, imagine you're working with a collection of correspondence - each letter in the collection is represented by a canonical Dublin Core record in Omeka. Then, when you pull the letters into a Neatline exhibit, you start to sketch in arrows, brackets, flowcharts, and other little bits of presentational information to support the core archival objects.
 
 This supporting information is essential _in the context of the exhibit_, but almost meaningless in isolation, and it often doesn't make sense to formalize all of these elements as first-class archival entities - it's not the best practice to have items like "Blue Arrow 4" or "Outline of New York" mixed heterogeneously into the the collection of letters. To get around this problem, Neatline makes it possible to create these exhibit-specific, "unafilliated" records can be used to formalize this type of annotative information, while also making it possible to create records that link back to the durable archival resources in the Omeka collection. This way, we get the best of both worlds - we can integrate seamlessly with the content in Omeka, and also choose _not_ to integrate with it when doing so would degrade the integrity of the collection.
 

@@ -25,8 +25,8 @@ The hexadecimal color value of the "body" or "area" of points and polygons on th
 
 ## Stroke Color
 
-The hexadecimal color value of the lines that run around the edges of a shape.
+The hexadecimal color value of the lines that run around the edges of a shape on the map.
 
 ## Stroke Color (Selected)
 
-The hexadecimal color value of the lines that run around the edges of a shape _when the record is highlighted or selected_ (eg, when the cursor hovers or clicks on the shape).
+The hexadecimal color value of the lines that run around the edges of a shape on the map _when the record is highlighted or selected_ (eg, when the cursor hovers or clicks on the shape).
