@@ -7,7 +7,7 @@ Neatline 2.0 makes it possible to use a simplified, Neatline-inflected dialect o
 All exhibits have a built-in stylesheet:
 
   1. Open the editing environment for an exhibit.
-  2. Click on the **Styles** tab. Right under the tab, you'll see a code editor labelled "Stylesheet," which is where you can enter in the styling rules for the exhibit.
+  2. Click on the **Styles** tab. Right under the tab, you'll see a code editor labelled "Stylesheet."
 
 Neatline CSS is syntactically identical to regular CSS, but semantically a bit different:
 
