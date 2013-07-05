@@ -2,7 +2,6 @@
 
 ## At a Glance
 
-  - These fields set the colors used to represent records on the map and timeline.
   - All color values are stored as hexadecimal values.
   - To change a color field, click anywhere on the input and use the interactive color picker widget.
   - As you change the color, new value will be automatically previewed on the map.

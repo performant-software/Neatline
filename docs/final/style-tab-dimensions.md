@@ -2,9 +2,9 @@
 
 ## At a Glance
 
-  - These fields control (a) the _sequence_ of a record in relation to other records.
-  - And (b) the _size_ of different aspects of the presentation of the record.
-  - Dimension valyes are stored as natural numbers (integers greater than 0).
+  - These fields control the _size_ of different aspects of the presentation of the record.
+  - And (a) the _sequence_ or _ordering_ of a record in relation to other records in the exhibit.
+  - Dimension values are stored as natural numbers (integers greater than 0).
   - To change a dimension, you can type directly into the field.
   - Or you can click on the field and drag up or down on the page, causing the value to change smoothly.
   - When the "Stroke Width" and "Point Radius" fields are changed, the new value will automatically preview on the map.

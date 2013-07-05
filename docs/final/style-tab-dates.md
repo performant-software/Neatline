@@ -2,10 +2,10 @@
 
 ## At a Glance
 
-  - If a record represents an event, these fields can be used to record when the event occurred.
-  - They can also be used to control when a record should be _visible_ in the exhibit.
+  - If a record represents an event, these fields store when the event occurred and how long it lasted.
+  - They can also be used to control when a record is be _visible_ in the exhibit.
   - **Important**: All dates must be entered in a portable, standards-compliant format called [ISO 8601][iso8601].
-  - To display temporal information, you'll need to install a sub-plugin like [NeatlineSimile][neatline-simile].
+  - To display temporal information, you'll need to install a widget like [NeatlineSimile][neatline-simile].
 
 ### Examples:
 

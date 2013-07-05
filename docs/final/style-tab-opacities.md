@@ -2,7 +2,6 @@
 
 ## At a Glance
 
-  - These fields set the opacity, or translucency, of vector annotations on the map.
   - Opacities are stored as 3-digit decimal values between 0.00 (completely translucent) and 1.00 (completely opaque).
   - To change an opacity value, you can type directly into the field.
   - Or you can click on the field and drag up or down on the page, causing the value to change smoothly.
