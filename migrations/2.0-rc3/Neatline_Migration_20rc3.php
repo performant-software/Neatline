@@ -23,10 +23,9 @@ class Neatline_Migration_20rc3 extends Neatline_Migration_Abstract
 
 
     /**
-     * Add correctly-formed fulltext indexes. This repairs old versions
-     * of the record table creation that indexed _all_ of the text fields 
-     * together, which caused natural language queries against just some
-     * of the fields to fail.
+     * Rebuilt fulltext indexes. This repairs old versions of the record
+     * table creation that indexed all of the text fields together, which
+     * caused queries against just _some_ of the fields to fail.
      */
     private function _addFulltextIndexes()
     {
