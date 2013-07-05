@@ -1,6 +1,61 @@
 # Styling Exhibits with Neatline-Flavored CSS
 
-## Why are stylesheets, and why should I use them?
+## Quick reference (for the impatient)
+
+Neatline 2.0 makes it possible to use a simplified, Neatline-inflected dialect of CSS - integrated directly into the editing environment - to perform bulk updates on large groups of related records clustered together by tags (see the "Editing Record Groups" guide for more information about tags).
+
+All exhibits have a built-in stylesheet:
+
+  1. Open the editing environment for an exhibit.
+  2. Click on the **Styles** tab. Right under the tab, you'll see a code editor labelled "Stylesheet," which is where you can enter in the styling rules for the exhibit.
+
+Neatline CSS is syntactically identical to regular CSS, but semantically a bit different:
+
+  - Instead of using DOM selectors, Neatline CSS just treats tags on records as "classes." So, if you have a group of records that are tagged with `democrat`, you would select them with the regular class syntax:
+
+  ```css
+  .democrat {
+    // rules
+  }
+  ```
+
+  - For now (as of v2.0.0), you can't select multiple tags at once. Eg, this won't work:
+
+  ```css
+  .democrat, .republican {
+    // rules
+  }
+  ```
+
+  - Instead of using regular CSS rules (`font-family`, `float`, `color`, etc.), you can use a special set of rules that map onto properties in the Neatline data model:
+
+    - `widgets`
+    - `presenter`
+    - `fill-color`
+    - `fill-color-select`
+    - `stroke-color`
+    - `stroke-color-select`
+    - `fill-opacity`
+    - `fill-opacity-select`
+    - `stroke-opacity`
+    - `stroke-opacity-select`
+    - `stroke-width`
+    - `point-radius`
+    - `zindex`
+    - `weight`
+    - `start-date`
+    - `end-date`
+    - `after-date`
+    - `before-date`
+    - `point-image`
+    - `wms-address`
+    - `wms-layers`
+    - `min-zoom`
+    - `max-zoom`
+    - `map-focus`
+    - `map-zoom`
+
+## Rationale: Why should I use stylesheets?
 
 Neatline 2.0 makes it possible to work with _really_ large collections of records - as many as about 1,000,000 in a single exhibit. That level of scalability is liberating, but it also introduces some interesting new content management challenges. If the map can _display_ that many records, there also need to be new tools that make it possible to effectively update and maintain content at that scale.
 
@@ -31,11 +86,6 @@ In Neatline, the stylesheet system is closely tied to the tagging system. Tags a
 
 ## Getting started with stylesheets
 
-Let's see how this works in practice. All exhibits have a built-in stylesheet (which can always be left empty, if you don't want to use the feature):
-
-  1. Open the editing environment for an exhibit.
-  2. Click on the **Styles** tab. Right under the tab, you'll see a code editor labelled "Stylesheet," which is where you can enter in the styling rules for the exhibit.
-
 Let's start by defining some basic, generic styles for the each of the precincts, which are all represented as dots on the map:
 
 ```css
@@ -48,11 +98,6 @@ Let's start by defining some basic, generic styles for the each of the precincts
 Now, when I click "Save" at the bottom of the form, Neatline will update the "Fill Opacity" and "Stroke Width" of all 800,000 records tagged as `precinct`s with `0.5` and `0`. Next, let's add the date visibility settings for each of the three election-season tags:
 
 ```css
-.precinct {
-  fill-opacity: 0.5;
-  stroke-width: 0;
-}
-
 .2000 {
   after-date: 2000;
   before-date: 2004;
@@ -85,6 +130,28 @@ You could always just open one of the individual record forms, use the built-in 
 We do this with the special `auto` value:
 
 ```css
+.democrat {
+  fill-color: auto;
+}
+
+.republican {
+  fill-color: auto;
+}
+```
+
+Once this is in place, I can just open up any of the individual republican precinct records and pick a shade of red for that specific record. When I click "Save," Neatline recognizes that the "Fill Color" style has been enabled for the `republican` tag, and that the record being saved is tagged as `republican`. When this happens, Neatline does two things. First, it _update the stylesheet with the new value_:
+
+```css
+.republican {
+  fill-color: #9d0000;
+}
+```
+
+And, second, it immediately propagates the new value to all of the other `republican` records, just as if the stylesheet had been directly saved. This actually works for all styles, even ones that already have concrete values in the stylesheet (as opposed to `auto`). For example, if I opened up one of the precinct records and changed the value of "Fill Opacity" to `0.7`, and then saved that individual record, the `fill-opacity` rule under the precinct tag in the stylesheet would be updated with the new value and all of the precincts would be updated with the new value of `0.7`. Effectively, this means that it's _impossible for the records and the stylesheet to get out of sync_ - changes made to the stylesheet are immediately propagated out to the records, and changes made to individual records are immediately pushed back into the stylesheet.
+
+Here's the complete stylesheet:
+
+```css
 .precinct {
   fill-opacity: 0.5;
   stroke-width: 0;
@@ -111,23 +178,13 @@ We do this with the special `auto` value:
 }
 
 .democrat {
-  fill-color: auto;
+  fill-color: #206bbf;
 }
 
-.republican {
-  fill-color: auto;
-}
-```
-
-Once this is in place, I can just open up any of the individual republican precinct records and pick a shade of red for that specific record. When I click "Save," Neatline recognizes that the "Fill Color" style has been enabled for the `republican` tag, and that the record being saved is tagged as `republican`. When this happens, Neatline does two things. First, it _update the stylesheet with the new value_:
-
-```css
 .republican {
   fill-color: #9d0000;
 }
 ```
-
-And, second, it immediately propagates the new value to all of the other `republican` records, just as if the stylesheet had been directly saved. This actually works for all styles, even ones that already have concrete values in the stylesheet (as opposed to `auto`). For example, if I opened up one of the precinct records and changed the value of "Fill Opacity" to `0.7`, and then saved that individual record, the `fill-opacity` rule under the precinct tag in the stylesheet would be updated with the new value and all of the precincts would be updated with the new value of `0.7`. Effectively, this means that it's _impossible for the records and the stylesheet to get out of sync_ - changes made to the stylesheet are immediately propagated out to the records, and changes made to individual records are immediately pushed back into the stylesheet.
 
 
 [css]: https://en.wikipedia.org/wiki/Cascading_Style_Sheets
