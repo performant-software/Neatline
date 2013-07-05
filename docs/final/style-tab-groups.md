@@ -18,7 +18,7 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
 
   ```css
   .virginia {
-    fill-color: #08c;
+      fill-color: #08c;
   }
   ```
 
