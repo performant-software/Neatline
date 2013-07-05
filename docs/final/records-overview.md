@@ -38,7 +38,7 @@ All records, regradless of how they're displayed in the final exhibit, share a c
   - **After Date**: The date _after which_ the record should be displayed in the exhibit.
   - **Before Date**: The date _before which_ the record should be displayed in the exhibit.
   - **Point Image**: A web-accessible image used to display individual points on the map.
-  - **WMS Address**: The location of a WMS (Web Map Service) server (eg, an installation of Geoserver).
+  - **WMS Address**: The location of a [WMS][wms] server (eg, an installation of [Geoserver][geoserver]).
   - **WMS Layers**: A comma-delimited collection of layers (hosted on the WMS server) to be overlayed on the map.
   - **Min Zoom**: The map zoom level _above which_ the record is visible (where zooming "in" is "higher").
   - **Max Zoom**: The map zoom level _below which_ the record is visible.
@@ -55,3 +55,5 @@ This supporting information is essential _in the context of the exhibit_, but al
 
 
 [wkt]: http://en.wikipedia.org/wiki/Well-known_text
+[wms]: http://en.wikipedia.org/wiki/Web_Map_Service
+[geoserver]: http://geoserver.org/
