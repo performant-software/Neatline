@@ -40,6 +40,16 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
   Neatline.execute('MAP:load', { tags: ['2004', 'democrat'] });
   ```
 
+### Tag Requirements
+
+In order for the tags to work correctly, there are a couple important requirements:
+
+  1. Tags **can contain letters, numbers, and underscores (`\_`), but no spaces or hyphens (`-`)**. Technically, it's actually possible to use spaces and hyphens in tags, but it's strongly discouraged, because it effectively results in multiple taggings. For example, if you had a tag called `democrat-2013`, Neatline would consider the record to be tagged with `democrat`, `2013`, and `democrat-2013`. So, if you were to start using a more generalized tag called just `democrat`, queries for `democrat` would match the record, even though it's tagged with the more specific `democrat-2013`.
+
+  2. Tags **must be at least 4 characters in length**. This is actually a requirement that's built in to the fulltext searching system in MySQL that we use to implement the tagging feature. Really, though, this is a healthy constraint - tag names should be semantic and descriptive, so most tags should be longer than three letters anyway.
+
+  3. Tags **must be separated by commas**, or else Neatline won't know where one tag stops and another starts.
+
 ## Presenter
 
 Each record is assigned to a "presenter," which determines the mechanism by which the record's content is displayed (the "Title" and "Body" fields). Out of the box, Neatline comes with two simple presenters - the "Static Bubble," which displays the pop-up bubbles that appear when the cursor hovers or clicks on a record, and the "None" presenter, which, as you might guess, does nothing (this is useful for purely-visual annotations that don't need any kind of text content - arrows, brackets, etc).

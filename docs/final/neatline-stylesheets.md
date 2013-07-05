@@ -1,6 +1,6 @@
 # Styling Exhibits with Neatline-Flavored CSS
 
-## The Rationale - Why Should You Use Stylesheets?
+## Why are stylesheets, and why should I use them?
 
 Neatline 2.0 makes it possible to work with _really_ large collections of records - as many as about 1,000,000 in a single exhibit. That level of scalability is liberating, but it also introduces some interesting new content management challenges. If the map can _display_ that many records, there also need to be new tools that make it possible to effectively update and maintain content at that scale.
 
@@ -20,4 +20,21 @@ We can map this out schematically. Here's a list of all the "categories" in the 
 - **2008**: After Date, Before Date 
 - **2012**: After Date, Before Date
 
-How do we keep the groups synchronized? Really, this is a familiar problem - it's almost exactly the same task as styling web pages with CSS (Cascading Style Sheets), a simple styling language that makes it possible to "select" specific parts of a page and apply a set of rules to those elements.
+How do we keep the groups synchronized? Really, this is a familiar problem - it's almost exactly the same task as styling web pages with [CSS][css] (Cascading Style Sheets), a simple styling language that makes it possible to "select" specific parts of a page and apply a set of rules to those elements. In Neatline 2.0, it's possible to use a simplified dialect of CSS - integrated directly into the editing environment - to model these kinds of relationships among records and keep them in sync.
+
+In Neatline, the stylesheet system is closely tied to the tagging system. Tags are just comma-delimited lists of identifiers that can be added to each individual record under the "Style" tab in the record edit form. In this example, individual records in the collection might have tag strings that look like this:
+
+  - `precinct, democrat, 2000`
+  - `precinct, republican, 2000`
+  - `precinct, democrat, 2012`
+  - `county, republican, 2008`
+
+## Getting started with stylesheets
+
+Let's see how this works in practice. All exhibits have a built-in stylesheet (which can always be left empty, if you don't want to use the feature):
+
+  1. Open the editing environment for an exhibit.
+  2. Click on the **Styles** tab. Under the tab, you'll see a code editor labelled "Stylesheet," which is where you can enter in the styling rules for the exhibit.
+
+
+[css]: https://en.wikipedia.org/wiki/Cascading_Style_Sheets
