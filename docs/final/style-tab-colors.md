@@ -3,17 +3,17 @@
 ## At a Glance
 
   - These fields set the colors used to represent records on the map and timeline.
+  - All color values are stored as hexadecimal values.
   - To change a color field, click anywhere on the input and use the interactive color picker widget.
   - As you change the color, new value will be automatically previewed on the map.
   - If you want to use a specific value, just paste the value into the text input below the color picker.
-  - All color values are stored as hexadecimal values.
 
 Examples:
 
-`#ffffff`
-`#000000`
-`#c4d243`
-`#08c`
+  - `#ffffff`
+  - `#000000`
+  - `#c4d243`
+  - `#08c`
 
 ## Fill Color
 
