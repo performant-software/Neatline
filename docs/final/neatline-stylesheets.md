@@ -45,7 +45,7 @@ Let's start by defining some basic, generic styles for the each of the precincts
 }
 ```
 
-Now, when I click "Save" at the bottom of the form, Neatline will update the "Fill Opacity" and "Stroke Width" of all 800,000 records tagged as `precinct`s with the values provided in the stylesheet. Next, let's add the date visibility settings for each of the three election-season tags:
+Now, when I click "Save" at the bottom of the form, Neatline will update the "Fill Opacity" and "Stroke Width" of all 800,000 records tagged as `precinct`s with `0.5` and `0`. Next, let's add the date visibility settings for each of the three election-season tags:
 
 ```css
 .precinct {
@@ -127,9 +127,7 @@ Once this is in place, I can just open up any of the individual republican preci
 }
 ```
 
-And, second, it immediately propagates the new value to all of the other `republican` records, just as if the stylesheet had been directly saved. This actually works for all styles, even ones that already have concrete values in the stylesheet (as opposed to `auto`). For example, if I opened up one of the precinct records and changed the value of "Fill Opacity" to `0.7`, and then saved that individual record, the `fill-opacity` rule under the precinct tag in the stylesheet would be updated with the new value and all of the precincts would be updated with the new value of `0.7`.
-
-Effectively, this means that it's impossible for the records and the stylesheet to get out of sync - changes made to the stylesheet are immediately propagated out to the records, and changes made to individual records are immediately pushed back into the stylesheet.
+And, second, it immediately propagates the new value to all of the other `republican` records, just as if the stylesheet had been directly saved. This actually works for all styles, even ones that already have concrete values in the stylesheet (as opposed to `auto`). For example, if I opened up one of the precinct records and changed the value of "Fill Opacity" to `0.7`, and then saved that individual record, the `fill-opacity` rule under the precinct tag in the stylesheet would be updated with the new value and all of the precincts would be updated with the new value of `0.7`. Effectively, this means that it's _impossible for the records and the stylesheet to get out of sync_ - changes made to the stylesheet are immediately propagated out to the records, and changes made to individual records are immediately pushed back into the stylesheet.
 
 
 [css]: https://en.wikipedia.org/wiki/Cascading_Style_Sheets
