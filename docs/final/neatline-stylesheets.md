@@ -19,3 +19,5 @@ We can map this out schematically. Here's a list of all the "categories" in the 
 - **2004**: After Date, Before Date
 - **2008**: After Date, Before Date 
 - **2012**: After Date, Before Date
+
+How do we keep the groups synchronized? Really, this is a familiar problem - it's almost exactly the same task as styling web pages with CSS (Cascading Style Sheets), a simple styling language that makes it possible to "select" specific parts of a page and apply a set of rules to those elements.
