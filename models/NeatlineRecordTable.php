@@ -230,7 +230,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     public function filterByKeywords($select, $query)
     {
         $select->where(
-            "MATCH (title, body, slug) AGAINST (? IN BOOLEAN MODE)",
+            "MATCH (title, body, slug) AGAINST (?)",
             $query
         );
     }

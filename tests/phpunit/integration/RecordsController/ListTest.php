@@ -283,11 +283,14 @@ class RecordsControllerTest_List extends Neatline_Case_Default
 
         $record1 = new NeatlineRecord($this->exhibit);
         $record2 = new NeatlineRecord($this->exhibit);
+        $record3 = new NeatlineRecord($this->exhibit);
         $record1->title = 'neatline';
         $record2->title = 'omeka';
+        $record3->title = 'geoserver';
 
         $record1->save();
         $record2->save();
+        $record3->save();
 
         $this->request->setQuery(array(
             'query' => 'neatline'

@@ -24,30 +24,11 @@
 
   <form method="POST" action="#">
 
-    <div id="search-keywords" class="field">
-      <div class="two columns alpha">
-        <?php
-          echo $this->formLabel(
-            'keyword-search', __('Search by Keywords')
-          );
-        ?>
-      </div>
-      <div class="five columns omega inputs">
-      <?php
-        echo $this->formText(
-          'search',
-          @$_REQUEST['search'],
-          array('id' => 'keyword-search', 'size' => '40')
-        );
-      ?>
-      </div>
-    </div>
-
     <div id="search-range" class="field">
       <div class="two columns alpha">
         <?php
           echo $this->formLabel(
-            'range', __('Search by a range of ID#s (eg: 1-4, 156, 79)')
+            'range', __('Search by a Range of ID#s (eg: 1-4, 156, 79)')
           );
         ?>
       </div>
