@@ -12,7 +12,7 @@ Records are the fundamental unit of content in Neatline exhibits. In Neatline, _
 
 ## The Record Data Model
 
-All records, regradless of how they're displayed in the final exhibit, share a common data model:
+All records share a common data model:
 
   - **Title**: A top-level, human-readable identifier. Used as a label for the record. Eg: "War and Peace"
   - **Slug**: A plain-text ID for the record, used to reference the record from TEI or HTML. Eg: `war-and-peace`
