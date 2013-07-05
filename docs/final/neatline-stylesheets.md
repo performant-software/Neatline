@@ -12,38 +12,28 @@ But, as you can see, they shouldn't share _all_ of their attributes - all 2004 p
 
 We can map this out schematically. Here's a list of all the "categories" in the exhibit, and the fields that should be shared for each of the categories:
 
-```yaml
-
-# Colors controlled by party categories:
-
-Democratic precincts:
+- **Democratic**:
   - Fill Color
 
-Republican precincts:
+- **Republican**:
   - Fill Color
 
-# Visibility dates controlled by election cycle categories:
-
-2000 precincts:
+- **2000**:
   - After Date
   - Before Date
 
-2004 precincts:
+- **2004**:
   - After Date
   - Before Date
 
-2008 precincts:
+- **2008**:
   - After Date
   - Before Date
 
-2012 precincts:
+- **2012**:
   - After Date
   - Before Date
 
-# Basic styling options that should apply to all precincts:
-
-All precinct records:
+- **All Precincts**:
   - Fill Opacity
-  - Fill Opacity (Selected)
   - Stroke Width
-```
