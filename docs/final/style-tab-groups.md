@@ -2,6 +2,10 @@
 
 ## At a Glance
 
+  - Use tags to slice and dice large collections into subsets of related records.
+  - Tags can be used as the "selectors" for Neatline's stylesheet system, which uses a simplified dialect of CSS.
+  - Each record is assigned to a presenter, which determines how the record's "Title" and "Body" content are displayed
+
 ## Tags
 
 The tags field takes a comma-delimited list of one or more tags. For example:
