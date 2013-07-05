@@ -33,7 +33,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
   }
   ```
 
-  - Instead of using regular CSS rules (`font-family`, `float`, `color`, etc.), you can use a special set of rules that map onto properties in the Neatline data model:
+  - Instead of using regular CSS rules, use a special set of rules that maps onto properties in the Neatline data model (and, by extension, to the fields in the "Style" tab in the record edit form):
 
     - `widgets`
     - `presenter`
