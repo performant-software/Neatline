@@ -4,7 +4,7 @@
 
   - Use tags to slice and dice large collections into subsets of related records.
   - Tags can be used as the "selectors" for Neatline's stylesheet system, which uses a simplified dialect of CSS.
-  - Each record is assigned to a presenter, which determines how the record's "Title" and "Body" content are displayed
+  - Each record is assigned to a "Presenter," which controls how the record's content is displayed.
 
 ## Tags
 
@@ -42,6 +42,6 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
 
 ## Presenter
 
-Each record is assigned to a "presenter," which determines the mechanism by which the record's content is displayed. Out of the box, Neatline comes with two simple presenters - the "Static Bubble," which displays the fixed pop-up bubbles that appear when the cursor hovers or clicks on a record, and the "None" presenter, which, as you might guess, does nothing (this is useful for purely-visual annotations that don't need any kind of descriptive content - arrows, brackets, etc).
+Each record is assigned to a "presenter," which determines the mechanism by which the record's content is displayed (the "Title" and "Body" fields). Out of the box, Neatline comes with two simple presenters - the "Static Bubble," which displays the pop-up bubbles that appear when the cursor hovers or clicks on a record, and the "None" presenter, which, as you might guess, does nothing (this is useful for purely-visual annotations that don't need any kind of text content - arrows, brackets, etc).
 
 The Neatline plugin API makes it easy for developers to implement completely new presenters, which would then be available for selection in this field. For example, it would be easy to write a presenter that would add a "floating" bubble that would track the location of the cursor on the page, or a presenter that would open up a full-screen modal view. See the developer documentation for more information about creating new presenters.
