@@ -27,14 +27,109 @@ In Neatline, the stylesheet system is closely tied to the tagging system. Tags a
   - `precinct, democrat, 2000`
   - `precinct, republican, 2000`
   - `precinct, democrat, 2012`
-  - `county, republican, 2008`
+  - `state, republican, 2008`
 
 ## Getting started with stylesheets
 
 Let's see how this works in practice. All exhibits have a built-in stylesheet (which can always be left empty, if you don't want to use the feature):
 
   1. Open the editing environment for an exhibit.
-  2. Click on the **Styles** tab. Under the tab, you'll see a code editor labelled "Stylesheet," which is where you can enter in the styling rules for the exhibit.
+  2. Click on the **Styles** tab. Right under the tab, you'll see a code editor labelled "Stylesheet," which is where you can enter in the styling rules for the exhibit.
+
+Let's start by defining some basic, generic styles for the each of the precincts, which are all represented as dots on the map:
+
+```css
+.precinct {
+  fill-opacity: 0.5;
+  stroke-width: 0;
+}
+```
+
+Now, when I click "Save" at the bottom of the form, Neatline will update the "Fill Opacity" and "Stroke Width" of all 800,000 records tagged as `precinct`s with the values provided in the stylesheet. Next, let's add the date visibility settings for each of the three election-season tags:
+
+```css
+.precinct {
+  fill-opacity: 0.5;
+  stroke-width: 0;
+}
+
+.2000 {
+  after-date: 2000;
+  before-date: 2004;
+}
+ 
+.2004 {
+  after-date: 2004;
+  before-date: 2008;
+}
+ 
+.2008 {
+  after-date: 2008;
+  before-date: 2012;
+}
+ 
+.2012 {
+  after-date: 2012;
+  before-date: 2016;
+}
+```
+
+Likewise, when I click "Save," Neatline will update the "After Date" and "Before Date" fields on each record depending on which of the election-season is assigned to it.
+
+## Auto-Updating Stylesheet Values
+
+This is all fine and well, but what if we don't actually know what value we want to use? In each of these cases, we're working with fields that have fairly "semantic" values that we can reason about in the abstract (eg, `2004` just means what it means). This isn't always true, though, notably in the case of colors, where it's impossible to reason in the abstract about which specific hexadecimal value you want to use. For example, I know that I want the democratic precincts to be "blue" and the republican precints to be "red," but I don't know that I want to use the `#206bbf` and `#9d0000`.
+
+You could always just open one of the individual record forms, use the built-in color pickers to find a color that works well, and copy and paste it back into the stylesheet. This is sort of awkward, though. To fix this, Neatline makes it possible to just "activate" a set of styles for a tag in the stylesheet _without providing a concrete value_, and then set the value for the entire group of tagged records by making a change to an individual record.
+
+We do this with the special `auto` value:
+
+```css
+.precinct {
+  fill-opacity: 0.5;
+  stroke-width: 0;
+}
+
+.2000 {
+  after-date: 2000;
+  before-date: 2004;
+}
+ 
+.2004 {
+  after-date: 2004;
+  before-date: 2008;
+}
+ 
+.2008 {
+  after-date: 2008;
+  before-date: 2012;
+}
+ 
+.2012 {
+  after-date: 2012;
+  before-date: 2016;
+}
+
+.democrat {
+  fill-color: auto;
+}
+
+.republican {
+  fill-color: auto;
+}
+```
+
+Once this is in place, I can just open up any of the individual republican precinct records and pick a shade of red for that specific record. When I click "Save," Neatline recognizes that the "Fill Color" style has been enabled for the `republican` tag, and that the record being saved is tagged as `republican`. When this happens, Neatline does two things. First, it _update the stylesheet with the new value_:
+
+```css
+.republican {
+  fill-color: #9d0000;
+}
+```
+
+And, second, it immediately propagates the new value to all of the other `republican` records, just as if the stylesheet had been directly saved. This actually works for all styles, even ones that already have concrete values in the stylesheet (as opposed to `auto`). For example, if I opened up one of the precinct records and changed the value of "Fill Opacity" to `0.7`, and then saved that individual record, the `fill-opacity` rule under the precinct tag in the stylesheet would be updated with the new value and all of the precincts would be updated with the new value of `0.7`.
+
+Effectively, this means that it's impossible for the records and the stylesheet to get out of sync - changes made to the stylesheet are immediately propagated out to the records, and changes made to individual records are immediately pushed back into the stylesheet.
 
 
 [css]: https://en.wikipedia.org/wiki/Cascading_Style_Sheets
