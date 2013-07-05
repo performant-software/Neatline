@@ -6,11 +6,11 @@
 
 The tags field takes a comma-delimited list of one or more tags. For example:
 
-`virginia`
-`precinct, democrat, 2004`
-`precinct, republican, 2012`
-`confederate, may_3`
-`union, may_4`
+  - `virginia`
+  - `precinct, democrat, 2004`
+  - `precinct, republican, 2012`
+  - `confederate, may_3`
+  - `union, may_4`
 
 Neatline's tagging system provides a powerful and flexible way to slice and dice records into groups of related subsets. This can be useful for a number of reasons:
 
@@ -38,4 +38,6 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
 
 ## Presenter
 
-## Widgets
+Each record is assigned to a "presenter," which determines the mechanism by which the record's content is displayed. Out of the box, Neatline comes with two simple presenters - the "Static Bubble," which displays the fixed pop-up bubbles that appear when the cursor hovers or clicks on a record, and the "None" presenter, which, as you might guess, does nothing (this is useful for purely-visual annotations that don't need any kind of descriptive content - arrows, brackets, etc).
+
+The Neatline plugin API makes it easy for developers to implement completely new presenters, which would then be available for selection in this field. For example, it would be easy to write a presenter that would add a "floating" bubble that would track the location of the cursor on the page, or a presenter that would open up a full-screen modal view. See the developer documentation for more information about creating new presenters.
