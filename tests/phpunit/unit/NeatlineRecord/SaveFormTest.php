@@ -141,6 +141,29 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
 
     /**
+     * `saveForm` pass `title` and `body` through an HTML purifier.
+     */
+    public function testSanitizeNarrative()
+    {
+
+        $record = $this->_record();
+
+        // Set blacklisted HTML.
+        $record->saveForm(array(
+            'title' => 'X<script></script>Y',
+            'body'  => 'Y<script></script>Z',
+        ));
+
+        $record = $this->_reload($record);
+
+        // Should purify the HTML before saving.
+        $this->assertEquals($record->title, 'XY');
+        $this->assertEquals($record->body, 'YZ');
+
+    }
+
+
+    /**
      * CSS rule-sets on the parent exhibit with selectors that are tagged
      * on the record should be updated with the new record values.
      */

@@ -236,6 +236,17 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
+     * Before saving, run `narrative` through an HTML purifier.
+     *
+     * @return array.
+     */
+    public function getPurifiedFields()
+    {
+        return array('narrative');
+    }
+
+
+    /**
      * Associate the model with an ACL resource id.
      *
      * @return string The resource id..

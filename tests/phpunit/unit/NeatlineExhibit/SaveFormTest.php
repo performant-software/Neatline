@@ -34,7 +34,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
             'map_zoom'      => '12'
         ));
 
-        $exhibit = $this->_exhibits->find($exhibit->id);
+        $exhibit = $this->_reload($exhibit);
 
         $this->assertEquals($exhibit->base_layers,  '1,2');
         $this->assertEquals($exhibit->base_layer,   '3');
@@ -90,6 +90,27 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
         $exhibit->published = '2000-01-01';
         $exhibit->saveForm(array('public' => 1));
         $this->assertEquals($exhibit->published, '2000-01-01');
+
+    }
+
+
+    /**
+     * `saveForm` pass `narrative` through an HTML purifier.
+     */
+    public function testSanitizeNarrative()
+    {
+
+        $exhibit = $this->_exhibit();
+
+        // Set blacklisted HTML.
+        $exhibit->saveForm(array(
+            'narrative' => 'X<script></script>Y'
+        ));
+
+        $exhibit = $this->_reload($exhibit);
+
+        // Should purify the HTML before saving.
+        $this->assertEquals($exhibit->narrative, 'XY');
 
     }
 

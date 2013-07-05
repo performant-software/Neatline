@@ -336,14 +336,10 @@ SQL;
         $rows2 = $this->db->query($sql2)->fetchAll();
 
         $values1 = array();
-        foreach ($rows1 as $row) {
-            $values1[$row['id']] = $row[$f1];
-        }
+        foreach ($rows1 as $row) $values1[$row['id']] = $row[$f1];
 
         $values2 = array();
-        foreach ($rows2 as $row) {
-            $values2[$row['id']] = $row[$f2];
-        }
+        foreach ($rows2 as $row) $values2[$row['id']] = $row[$f2];
 
         $this->assertEquals($values1, $values2);
 

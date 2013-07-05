@@ -44,7 +44,7 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
      * Set a field if the passed value is not whitespace.
      *
      * @param string $key The name of the field.
-     * @param boolean $val The value to set.
+     * @param boolean $value The value to set.
      */
     public function setNotEmpty($key, $val)
     {
@@ -55,13 +55,41 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Mass-assign an associative array to the record.
+     * Return an array of fields on the row that should filtered through
+     * an HTML purifier before being saved to the database.
+     *
+     * @return array By default, filter nothing.
+     */
+    public function getPurifiedFields()
+    {
+        return array();
+    }
+
+
+    /**
+     * Pass any fields returned by `getPurifiedFields` that have non-null
+     * values on the row through an HTML sanitizer.
+     *
+     * @return array The array representation of the row.
+     */
+    public function purifyFields()
+    {
+        $purifier = new Omeka_Filter_HtmlPurifier;
+        foreach ($this->getPurifiedFields() as $f) {
+            if ($this->$f) $this->$f = $purifier->filter($this->$f);
+        }
+    }
+
+
+    /**
+     * Mass-assign an associative array to the row and sanitize fields.
      *
      * @param array $values The array of values.
      */
     public function setArray($values)
     {
-        foreach ($values as $k => $v) $this->setNotEmpty($k, $v);
+        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+        $this->purifyFields();
     }
 
 
