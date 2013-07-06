@@ -2,15 +2,11 @@
 
 ## At a glance
 
-  - Use the "Create an Exhibit" form to define basic, high-level information about a project.
-  - Once you've added an exhibit, you can always go back and edit any of the default settings.
+  - Click "Create an Exhibit" to add a new exhibit.
+  - Use the form to define basic, high-level information about a project.
+  - You can always go back and edit any of the default settings.
 
-To get started with a new project, head over to the "Create an Exhibit" page:
-
-  1. Go to the main "Browse Exhibits" view by clicking on the "Neatline" tab in the vertical navigation on the left.
-  2. Click the "Create an Exhibit" button at the top of the page.
-
-You'll be taken to a form that makes it possible to define a set of basic, high-level defaults for the exhibit:
+To get started with a new project, click on the "Create an Exhibit" button at the top of the main "Browse Exhibits" page:
 
 ## Title
 
