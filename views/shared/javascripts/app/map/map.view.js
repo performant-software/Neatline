@@ -169,14 +169,9 @@ Neatline.module('Map', function(
 
       // Create the WMS layer.
       var layer = new OpenLayers.Layer.WMS(
-        this.exhibit.title,
-        this.exhibit.wms_address,
-        {
-          layers: this.exhibit.wms_layers
-        },
-        {
-          maxZoomLevel: 20
-        }
+        this.exhibit.title, this.exhibit.wms_address,
+        { layers: this.exhibit.wms_layers },
+        { maxZoomLevel: 20 }
       );
 
       // Add layer to map.
@@ -203,7 +198,7 @@ Neatline.module('Map', function(
         var layer = new OpenLayers.Layer.Image(
           this.exhibit.title, img.src,
           new OpenLayers.Bounds(-w, -h, w, h),
-          new OpenLayers.Size(w/3, h/3)
+          new OpenLayers.Size(w/4, h/4)
         );
 
         // Add layer to map.

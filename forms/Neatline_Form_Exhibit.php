@@ -43,7 +43,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
     private function _registerElements()
     {
 
-        // Title.
+        // Title:
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
             'description'   => __('A title for the exhibit, displayed in the page header in the public view for the exhibit.'),
@@ -61,7 +61,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             )
         ));
 
-        // Slug.
+        // Slug:
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
             'description'   => __('A unique string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
@@ -99,7 +99,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             )
         ));
 
-        // Narrative.
+        // Narrative:
         $this->addElement('textarea', 'narrative', array(
             'label'         => __('Narrative'),
             'description'   => __('A long-format prose narrative to accompany exhibit.'),
@@ -107,7 +107,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'attribs'       => array('rows' => '10')
         ));
 
-        // Widgets.
+        // Widgets:
         $this->addElement('multiselect', 'widgets', array(
             'label'         => __('Widgets'),
             'description'   => __('Select the sub-plugin widgets available in the exhibit.'),
@@ -116,7 +116,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => nl_explode($this->exhibit->widgets),
         ));
 
-        // API Layers.
+        // API Layers:
         $this->addElement('multiselect', 'api_layers', array(
             'label'         => __('API Layers'),
             'description'   => __('Select the API layers available in the exhibit.'),
@@ -125,7 +125,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => nl_explode($this->exhibit->api_layers)
         ));
 
-        // Default API Layer.
+        // API Layer:
         $this->addElement('select', 'api_layer', array(
             'label'         => __('API Layer'),
             'description'   => __('Select the API layer visible by default when the exhibit starts.'),
@@ -144,7 +144,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             )
         ));
 
-        // Image Layer.
+        // Image Layer:
         $this->addElement('text', 'image_layer', array(
             'label'         => __('Image Layer'),
             'description'   => __('The address of a static image to use as the exhibit base layer.'),
@@ -152,15 +152,15 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->image_layer
         ));
 
-        // WMS Address.
+        // WMS Address:
         $this->addElement('text', 'wms_address', array(
             'label'         => __('WMS Address'),
-            'description'   => __('The address of a WMS layer store.'),
+            'description'   => __('The web-accessible location of a WMS server.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_address
         ));
 
-        // WMS Layers.
+        // WMS Layers:
         $this->addElement('text', 'wms_layers', array(
             'label'         => __('WMS Layers'),
             'description'   => __('A comma-delimited list of WMS layers.'),
@@ -168,19 +168,18 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->wms_layers
         ));
 
-        // Public.
+        // Public:
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
             'description'   => __('By default, exhibits are visible only to site administrators. Check here to publish the exhibit to the public site.'),
             'value'         => $this->exhibit->public
         ));
 
-        // Submit.
+        // Submit:
         $this->addElement('submit', 'submit', array(
             'label' => __('Save Exhibit')
         ));
 
-        // Group the metadata fields.
         $this->addDisplayGroup(array(
             'title',
             'slug',
@@ -192,11 +191,10 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'wms_address',
             'wms_layers',
             'public'
-        ), 'exhibit_info');
+        ), 'fields');
 
-        // Group the submit button sparately.
         $this->addDisplayGroup(array(
-            'submit'
+          'submit'
         ), 'submit_button');
 
     }
