@@ -2,7 +2,7 @@
 
 # Neatline
 
-**Neatline is a lightweight, extensible framework for building and publishing interactive maps.**
+**Neatline is a lightweight, extensible framework for creating interactive, web-based editions of visual materials - maps, paintings, photographs, drawings, and anything else that can be captured as an image.**
 
 Built as a plugin for [Omeka](http://omeka.org/), a collection-management framework developed by the [Roy Rosenzweig Center for History and New Media](http://chnm.gmu.edu/), Neatline adds a digital map-making environment that makes it easy to represent geospatial information as a collection of "records" plotted on a map, which can be bound together into interactive exhibits that tell stories and make arguments.
 
