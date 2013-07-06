@@ -50,7 +50,6 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'size'          => 40,
             'value'         => $this->exhibit->title,
             'required'      => true,
-            'class'         => 'title',
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
@@ -67,8 +66,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'label'         => __('URL Slug'),
             'description'   => __('A unique string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
             'size'          => 40,
-            'required'      => true,
             'value'         => $this->exhibit->slug,
+            'required'      => true,
             'filters'       => array('StringTrim'),
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -119,8 +118,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
 
         // API Layers.
         $this->addElement('multiselect', 'api_layers', array(
-            'label'         => __('Base Layers'),
-            'description'   => __('Select the base layers available in the exhibit.'),
+            'label'         => __('API Layers'),
+            'description'   => __('Select the API layers available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->api_layers)
@@ -128,8 +127,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
 
         // Default API Layer.
         $this->addElement('select', 'api_layer', array(
-            'label'         => __('Default Layer'),
-            'description'   => __('Select which layer is visible by default when the exhibit starts.'),
+            'label'         => __('API Layer'),
+            'description'   => __('Select the API layer visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->api_layer),
@@ -143,6 +142,14 @@ class Neatline_Form_Exhibit extends Omeka_Form
                     )
                 )
             )
+        ));
+
+        // Image Layer.
+        $this->addElement('text', 'image_layer', array(
+            'label'         => __('Image Layer'),
+            'description'   => __('The address of a static image to use as the exhibit base layer.'),
+            'size'          => 40,
+            'value'         => $this->exhibit->image_layer
         ));
 
         // Public.
@@ -165,6 +172,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'widgets',
             'api_layers',
             'api_layer',
+            'image_layer',
             'public'
         ), 'exhibit_info');
 

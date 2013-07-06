@@ -18,6 +18,7 @@ Neatline.module('Map', function(
   Map.addInitializer(function() {
     Map.__collection = new Neatline.Shared.Record.Collection();
     Map.__view = new Neatline.Map.View();
+    Map.__view.publishPosition();
   });
 
 

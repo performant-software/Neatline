@@ -26,10 +26,23 @@ Neatline.module('Map', function(
     // --------------------------------------------------------------------
 
 
-    /**
-     * Initialize the map and publish initial request for data.
-     */
     initialize: function() {
+      this.__initGlobals();
+      this.__initOpenLayers();
+      this.__initBaseLayers();
+      this.__initControls();
+      this.__initViewport();
+      this.__initEvents();
+    },
+
+
+    /**
+     * Initialize tracker containers and helpers.
+     */
+    __initGlobals: function() {
+
+      // WKT reader/writer.
+      this.formatWkt = new OpenLayers.Format.WKT();
 
       // An nested object that contains references to all vector and WMS
       // layers currently on the map, keyed by record id.
@@ -39,21 +52,11 @@ Neatline.module('Map', function(
       // the map, keyed by filter slug.
       this.filters = {};
 
-      // WKT reader/writer.
-      this.formatWkt = new OpenLayers.Format.WKT();
+      // Alias the global exhibit object.
+      this.exhibit = Neatline.g.neatline.exhibit;
 
       // The currently-selected record model.
       this.selectedModel = null;
-
-      // Startup routines.
-      this.__initOpenLayers();
-      this.__initBaseLayers();
-      this.__initControls();
-      this.__initViewport();
-      this.__initEvents();
-
-      // Get starting data.
-      this.publishPosition();
 
     },
 
@@ -86,11 +89,50 @@ Neatline.module('Map', function(
 
 
     /**
-     * Construct the base layers and set the default.
+     * Create the base layer(s) for the exhibit:
+     *
+     * - If the `wms_address` and `wms_layers` fields are defined on the
+     *   exhibit, create a single WMS layer.
+     *
+     * - Otherwise, if the `image_layer` field is defined on the exhibit,
+     *   create a single image layer.
+     *
+     * - If no wms/image layers are defined, add the regular API layers.
      */
     __initBaseLayers: function() {
 
       this.baseLayers = {};
+
+      var isWms = this.exhibit.wms_address && this.exhibit.wms_layers;
+      var isImg = this.exhibit.image_layer;
+
+      if (isWms) this.__initWmsLayer();
+      else if (isImg) this.__initImgLayer();
+      else this.__initApiLayers();
+
+    },
+
+
+    /**
+     * Instantiate a WMS layer from the exhibit defaults.
+     */
+    __initWmsLayer: function() {
+      // TODO
+    },
+
+
+    /**
+     * Instantiate an image layer from the exhibit defaults.
+     */
+    __initImgLayer: function() {
+      // TODO
+    },
+
+
+    /**
+     * Construct regular API base layers.
+     */
+    __initApiLayers: function() {
 
       // Build array of base layer instances.
       _.each(Neatline.g.neatline.api_layers, _.bind(function(json) {

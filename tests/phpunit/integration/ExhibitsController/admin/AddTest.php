@@ -45,7 +45,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/option[@value="Widget2"]');
         $this->assertXpath($root.'/option[@value="Widget3"]');
 
-        // Base Layers:
+        // API Layers:
         $root = '//select[@name="api_layers[]"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
@@ -57,7 +57,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
 
-        // Default Base Layer:
+        // API Layer:
         $root = '//select[@name="api_layer"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
@@ -68,6 +68,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/optgroup[@label="Group3"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
+
+        // Image Layer:
+        $this->assertXpath('//input[@name="image_layer"]');
 
         // Public:
         $this->assertXpath('//input[@name="public"]');
@@ -266,6 +269,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'widgets'       => array('Widget1', 'Widget2'),
             'api_layers'    => array('Layer1', 'Layer2'),
             'api_layer'     => 'Layer2',
+            'image_layer'   => 'img.org',
             'public'        => 1
         ));
 
@@ -284,6 +288,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->api_layers,   'Layer1,Layer2');
         $this->assertEquals($exhibit->api_layer,    'Layer2');
+        $this->assertEquals($exhibit->image_layer,  'img.org');
         $this->assertEquals($exhibit->public,       1);
 
     }

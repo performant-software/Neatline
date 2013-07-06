@@ -36,6 +36,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'widgets'       => 'Widget1,Widget2',
             'api_layers'    => 'Layer1,Layer3',
             'api_layer'     => 'Layer3',
+            'image_layer'   => 'img.org',
             'public'        => 1
         ));
 
@@ -64,7 +65,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             '//select[@name="widgets[]"]/
             option[@selected="selected"][@value="Widget2"]');
 
-        // Base Layers:
+        // API Layers:
         $this->assertXpath(
             '//select[@name="api_layers[]"]/optgroup/
             option[@selected="selected"][@value="Layer1"]');
@@ -72,10 +73,14 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             '//select[@name="api_layers[]"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
 
-        // Default Base Layer:
+        // API Layer:
         $this->assertXpath(
             '//select[@name="api_layer"]/optgroup/
             option[@selected="selected"][@value="Layer3"]');
+
+        // Image Layer:
+        $this->assertXpath(
+            '//input[@name="image_layer"][@value="img.org"]');
 
         // Public.
         $this->assertXpath(
@@ -299,6 +304,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'widgets'       => array('Widget1', 'Widget2'),
             'api_layers'    => array('Layer1', 'Layer2'),
             'api_layer'     => 'Layer2',
+            'image_layer'   => 'img2.org',
             'public'        => 1
         ));
 
@@ -313,6 +319,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
         $this->assertEquals($exhibit->api_layers,   'Layer1,Layer2');
         $this->assertEquals($exhibit->api_layer,    'Layer2');
+        $this->assertEquals($exhibit->image_layer,  'img2.org');
         $this->assertEquals($exhibit->public,       1);
 
     }
