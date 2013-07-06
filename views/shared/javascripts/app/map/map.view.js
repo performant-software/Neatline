@@ -27,19 +27,18 @@ Neatline.module('Map', function(
 
 
     initialize: function() {
-      this.__initGlobals();
-      this.__initOpenLayers();
-      this.__initBaseLayers();
-      this.__initControls();
-      this.__initViewport();
-      this.__initEvents();
+      this._initGlobals();
+      this._initOpenLayers();
+      this._initControls();
+      this._initEvents();
+      this._initBaseLayers();
     },
 
 
     /**
      * Initialize tracker containers and helpers.
      */
-    __initGlobals: function() {
+    _initGlobals: function() {
 
       // WKT reader/writer.
       this.formatWkt = new OpenLayers.Format.WKT();
@@ -66,7 +65,7 @@ Neatline.module('Map', function(
      * and call component start-up routines that add cursor controls, set
      * the default focus/zoom, and listen for movement events.
      */
-    __initOpenLayers: function() {
+    _initOpenLayers: function() {
 
       this.map = new OpenLayers.Map(this.el, {
 
@@ -89,75 +88,9 @@ Neatline.module('Map', function(
 
 
     /**
-     * Create the base layer(s) for the exhibit:
-     *
-     * - If the `wms_address` and `wms_layers` fields are defined on the
-     *   exhibit, create a single WMS layer.
-     *
-     * - Otherwise, if the `image_layer` field is defined on the exhibit,
-     *   create a single image layer.
-     *
-     * - If no wms/image layers are defined, add the regular API layers.
-     */
-    __initBaseLayers: function() {
-
-      this.baseLayers = {};
-
-      var isWms = this.exhibit.wms_address && this.exhibit.wms_layers;
-      var isImg = this.exhibit.image_layer;
-
-      if (isWms) this.__initWmsLayer();
-      else if (isImg) this.__initImgLayer();
-      else this.__initApiLayers();
-
-    },
-
-
-    /**
-     * Instantiate a WMS layer from the exhibit defaults.
-     */
-    __initWmsLayer: function() {
-      // TODO
-    },
-
-
-    /**
-     * Instantiate an image layer from the exhibit defaults.
-     */
-    __initImgLayer: function() {
-      // TODO
-    },
-
-
-    /**
-     * Construct regular API base layers.
-     */
-    __initApiLayers: function() {
-
-      // Build array of base layer instances.
-      _.each(Neatline.g.neatline.api_layers, _.bind(function(json) {
-        var layer = Neatline.request('MAP:LAYERS:getLayer', json);
-        if (_.isObject(layer)) this.baseLayers[json.id] = layer;
-      }, this));
-
-      // Add the layers, set indices to 0.
-      _.each(_.values(this.baseLayers), _.bind(function(layer) {
-        this.map.addLayer(layer);
-        this.map.setLayerIndex(layer, 0);
-      }, this));
-
-      // Set default layer.
-      this.map.setBaseLayer(
-        this.baseLayers[Neatline.g.neatline.exhibit.api_layer]
-      );
-
-    },
-
-
-    /**
      * Construct, add, and activate hover and click controls to the map.
      */
-    __initControls: function() {
+    _initControls: function() {
 
       // Build the hover control, bind callbacks.
       this.highlightControl = new OpenLayers.Control.SelectFeature(
@@ -195,9 +128,117 @@ Neatline.module('Map', function(
 
 
     /**
+     * When a move completes, issue a request for new layers that fall
+     * within the updated viewport extent.
+     */
+    _initEvents: function() {
+      this.map.events.register('moveend', this.map, _.bind(function() {
+        this.publishPosition();
+      }, this));
+    },
+
+
+    /**
+     * Create the base layer(s) for the exhibit:
+     *
+     * - If the `wms_address` and `wms_layers` fields are defined on the
+     *   exhibit, create a single WMS layer.
+     *
+     * - Otherwise, if the `image_layer` field is defined on the exhibit,
+     *   create a single image layer.
+     *
+     * - If no wms/image layers are defined, add the regular API layers.
+     */
+    _initBaseLayers: function() {
+
+      var isWms = this.exhibit.wms_address && this.exhibit.wms_layers;
+      var isImg = this.exhibit.image_layer;
+
+      if (isWms) this.__initWmsLayer();
+      else if (isImg) this.__initImgLayer();
+      else this.__initApiLayers();
+
+    },
+
+
+    /**
+     * Instantiate a WMS layer from the exhibit defaults.
+     */
+    __initWmsLayer: function() {
+      // TODO
+      this._initViewport();
+    },
+
+
+    /**
+     * Instantiate an image layer from the exhibit defaults.
+     */
+    __initImgLayer: function() {
+
+      var img = new Image();
+      img.onload = _.bind(function () {
+
+        // Get dimensions.
+        var h = img.height;
+        var w = img.width;
+
+        // Create the image layer.
+        var layer = new OpenLayers.Layer.Image(
+          this.exhibit.title,
+          this.exhibit.image_layer,
+          new OpenLayers.Bounds(0, 0, w, h),
+          new OpenLayers.Size(w/3, h/3)
+        );
+
+        // Focus on image center.
+        this.map.addLayer(layer);
+        this.map.setCenter([w/2, h/2]);
+
+        // TODO|dev
+        this._initViewport();
+
+      }, this);
+
+      // Load the image.
+      img.src = this.exhibit.image_layer;
+
+    },
+
+
+    /**
+     * Construct regular API base layers.
+     */
+    __initApiLayers: function() {
+
+      this.baseLayers = {};
+
+      // Build array of base layer instances.
+      _.each(Neatline.g.neatline.api_layers, _.bind(function(json) {
+        var layer = Neatline.request('MAP:LAYERS:getLayer', json);
+        if (_.isObject(layer)) this.baseLayers[json.id] = layer;
+      }, this));
+
+      // Add the layers, set indices to 0.
+      _.each(_.values(this.baseLayers), _.bind(function(layer) {
+        this.map.addLayer(layer);
+        this.map.setLayerIndex(layer, 0);
+      }, this));
+
+      // Set default layer.
+      this.map.setBaseLayer(
+        this.baseLayers[Neatline.g.neatline.exhibit.api_layer]
+      );
+
+      // TODO|dev
+      this._initViewport();
+
+    },
+
+
+    /**
      * Set the starting focus and zoom.
      */
-    __initViewport: function() {
+    _initViewport: function() {
 
       var focus = Neatline.g.neatline.exhibit.map_focus;
       var zoom  = Neatline.g.neatline.exhibit.map_zoom;
@@ -213,17 +254,9 @@ Neatline.module('Map', function(
         this.geolocate();
       }
 
-    },
+      // TODO|dev
+      this.publishPosition();
 
-
-    /**
-     * When a move completes, issue a request for new layers that fall
-     * within the updated viewport extent.
-     */
-    __initEvents: function() {
-      this.map.events.register('moveend', this.map, _.bind(function() {
-        this.publishPosition();
-      }, this));
     },
 
 
