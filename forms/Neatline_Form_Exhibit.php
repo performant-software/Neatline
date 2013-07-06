@@ -152,6 +152,22 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->image_layer
         ));
 
+        // WMS Address.
+        $this->addElement('text', 'wms_address', array(
+            'label'         => __('WMS Address'),
+            'description'   => __('The address of a WMS layer store.'),
+            'size'          => 40,
+            'value'         => $this->exhibit->wms_address
+        ));
+
+        // WMS Layers.
+        $this->addElement('text', 'wms_layers', array(
+            'label'         => __('WMS Layers'),
+            'description'   => __('A comma-delimited list of WMS layers.'),
+            'size'          => 40,
+            'value'         => $this->exhibit->wms_layers
+        ));
+
         // Public.
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
@@ -173,6 +189,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'api_layers',
             'api_layer',
             'image_layer',
+            'wms_address',
+            'wms_layers',
             'public'
         ), 'exhibit_info');
 

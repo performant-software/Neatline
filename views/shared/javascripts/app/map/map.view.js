@@ -163,15 +163,17 @@ Neatline.module('Map', function(
 
     /**
      * Instantiate a WMS layer from the exhibit defaults.
+     * TODO|dev
      */
     __initWmsLayer: function() {
-      // TODO
+      // TODO|dev
       this._initViewport();
     },
 
 
     /**
      * Instantiate an image layer from the exhibit defaults.
+     * TODO|dev
      */
     __initImgLayer: function() {
 
@@ -183,16 +185,11 @@ Neatline.module('Map', function(
         var w = img.width;
 
         // Create the image layer.
-        var layer = new OpenLayers.Layer.Image(
-          this.exhibit.title,
-          this.exhibit.image_layer,
-          new OpenLayers.Bounds(0, 0, w, h),
+        this.map.addLayer(new OpenLayers.Layer.Image(
+          this.exhibit.title, img.src,
+          new OpenLayers.Bounds(-w, -h, w, h),
           new OpenLayers.Size(w/3, h/3)
-        );
-
-        // Focus on image center.
-        this.map.addLayer(layer);
-        this.map.setCenter([w/2, h/2]);
+        ));
 
         // TODO|dev
         this._initViewport();
@@ -207,6 +204,7 @@ Neatline.module('Map', function(
 
     /**
      * Construct regular API base layers.
+     * TODO|dev
      */
     __initApiLayers: function() {
 
