@@ -1,3 +1,13 @@
+# v2.0-rc3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc2...2.0-rc3)) ~ July 6, 2013
+
+#### Added Features
+
+  - Adds expanded and completely rewritten project documentation.
+
+#### Bug Fixes
+
+  - Adds correctly-formed fulltext indexes to the records table for each of the combinations of fields that the application queries against - `title`/`body`/`slug`, `tags`, and `widgets`. This repairs previous versions of the table that just created a single index for _all_ of the fields, which caused queries against just _some_ of the fields to fail.
+
 # v2.0-rc2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc1...2.0-rc2)) ~ July 2, 2013
 
 #### Bug Fixes
