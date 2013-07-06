@@ -28,4 +28,4 @@ Click here to open the form that makes it possible to populate the exhibit with 
 
 ## Delete
 
-Click here to permanently delete the exhibit. You'll get a confirmation message asking if you're sure that you want to remove the exhibit. When an exhibit is deleted, it is completely removed from the database (along with all the records that belonged to it), and cannot be recovered.
+Click here to permanently delete the exhibit. You'll get a pop-up message asking for confirmation. **Important**: When an exhibit is deleted, it is _completely_ removed from the database - along with all the records that belonged to it - and cannot be recovered.
