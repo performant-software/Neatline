@@ -45,8 +45,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $after_date;             // VARCHAR(100) NULL
     public $before_date;            // VARCHAR(100) NULL
     public $point_image;            // VARCHAR(100) NULL
-    public $wms_address;            // VARCHAR(100) NULL
-    public $wms_layers;             // VARCHAR(100) NULL
+    public $wms_address;            // TEXT NULL
+    public $wms_layers;             // TEXT NULL
     public $min_zoom;               // INT(10) UNSIGNED NULL
     public $max_zoom;               // INT(10) UNSIGNED NULL
     public $map_zoom;               // INT(10) UNSIGNED NULL

@@ -20,7 +20,10 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $published;      // TIMESTAMP NULL
     public $query;          // TEXT NULL
     public $api_layers;     // TEXT NULL
-    public $api_layer;      // VARCHAR(100) NULL
+    public $api_layer;      // TEXT NULL
+    public $image_layer;    // TEXT NULL
+    public $wms_address;    // TEXT NULL
+    public $wms_layers;     // TEXT NULL
     public $widgets;        // TEXT NULL
     public $title;          // TEXT NULL
     public $slug;           // VARCHAR(100) NOT NULL
