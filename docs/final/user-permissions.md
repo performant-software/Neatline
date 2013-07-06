@@ -24,7 +24,7 @@ To accomplish this, Neatline makes use of the built-in ACL (Access Control List)
 
 User roles can only be assigned to individual users - Omeka has no notion of a "group" of users. This is problematic if you want to make it possible for teams of users to work collaboratively on the same exhibit. It doesn't work to just create separate "Contributor" accounts for each of the users, which would make it possible for each individual user to create her _own_ exhibits, but not for the entire group to make edits to the same exhibit. You could always just make all of the users "Admin" users, but that defeats the point of the permissions system altogether - everyone would be able to edit _everyone_ else's content, not just the exhibits that are "owned" by the group.
 
-For now, the easiest way to deal with this is just to create a single "Contributor" account for each group. So, if you have 10 groups, each comprised of 4 students, create 10 "Contributor" accounts and give the same set of login credentials to all 4 students in each of the 10 groups.
+For now, the easiest way to deal with this is just to create a single "Contributor" account for each group. So, if you have 10 groups, each comprised of 4 students, create 10 "Contributor" accounts and give the same set of login credentials to all 4 students in each of the 10 groups. This way, users can edit exhibits and records created by anyone else in their own group, but not exhibits created by anyone in a different group.
 
 
 [omeka-acl]: http://omeka.org/codex/Managing_Users_2.0
