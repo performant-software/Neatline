@@ -256,11 +256,8 @@ Neatline.module('Map', function(
         this.setViewport(focus, zoom);
       }
 
-      else {
-        // Otherwise, geolocate.
-        this.map.zoomTo(this.options.defaultZoom);
-        this.geolocate();
-      }
+      // Otherwise, apply default zoom.
+      else this.map.zoomTo(this.options.defaultZoom);
 
       // Load records.
       this.publishPosition();
@@ -369,23 +366,6 @@ Neatline.module('Map', function(
      */
     setViewport: function(focus, zoom) {
       this.map.setCenter(focus.split(','), zoom);
-    },
-
-
-    /**
-     * Focus the map on the user's location.
-     */
-    geolocate: function() {
-
-      // Construct the control.
-      var geolocate = new OpenLayers.Control.Geolocate({
-        bind: true, watch: false
-      });
-
-      // Geolocate.
-      this.map.addControl(geolocate);
-      geolocate.activate();
-
     },
 
 
