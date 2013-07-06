@@ -240,6 +240,9 @@ Neatline.module('Map', function(
 
       this._initViewport();
 
+      // If no default focus, geolocate.
+      if (!this.defaultFocusIsSet()) this.geolocate();
+
     },
 
 
@@ -248,13 +251,8 @@ Neatline.module('Map', function(
      */
     _initViewport: function() {
 
-      var focus = Neatline.g.neatline.exhibit.map_focus;
-      var zoom  = Neatline.g.neatline.exhibit.map_zoom;
-
       // Apply defaults if they exist.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
-      }
+      if (this.defaultFocusIsSet()) this.setViewport(focus, zoom);
 
       // Otherwise, apply default zoom.
       else this.map.zoomTo(this.options.defaultZoom);
@@ -366,6 +364,23 @@ Neatline.module('Map', function(
      */
     setViewport: function(focus, zoom) {
       this.map.setCenter(focus.split(','), zoom);
+    },
+
+
+    /**
+     * Focus the map on the user's location.
+     */
+    geolocate: function() {
+
+      // Construct the control.
+      var geolocate = new OpenLayers.Control.Geolocate({
+        bind: true, watch: false
+      });
+
+      // Geolocate.
+      this.map.addControl(geolocate);
+      geolocate.activate();
+
     },
 
 
@@ -949,6 +964,18 @@ Neatline.module('Map', function(
     getWmsLayers: function() {
       return _.values(this.layers.wms);
     },
+
+
+    /**
+     * Are a default map focus location and zoom level defined?
+     *
+     * @return {Boolean}: True if a focus is defined.
+     */
+    defaultFocusIsSet: function() {
+      var focus = Neatline.g.neatline.exhibit.map_focus;
+      var zoom  = Neatline.g.neatline.exhibit.map_zoom;
+      return _.isString(focus) && _.isNumber(zoom);
+    }
 
 
     /**

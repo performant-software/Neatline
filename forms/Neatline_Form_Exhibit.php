@@ -46,7 +46,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Title:
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
-            'description'   => __('A title for the exhibit, displayed in the page header in the public view for the exhibit.'),
+            'description'   => __('A top-level heading for the exhibit, displayed in the page header in the public view for the exhibit.'),
             'size'          => 40,
             'value'         => $this->exhibit->title,
             'required'      => true,
@@ -119,16 +119,16 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // API Layers:
         $this->addElement('multiselect', 'spatial_layers', array(
             'label'         => __('Spatial Layers'),
-            'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
+            'description'   => __('Choose the collection spatial layers should be available in the layer picker widget in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->spatial_layers)
         ));
 
-        // Spatial Layer:
+        // Default Spatial Layer:
         $this->addElement('select', 'spatial_layer', array(
             'label'         => __('Default Spatial Layer'),
-            'description'   => __('Select a spatial layer for the exhibit starts.'),
+            'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->spatial_layer),
@@ -163,7 +163,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // WMS Layers:
         $this->addElement('text', 'wms_layers', array(
             'label'         => __('WMS Layers'),
-            'description'   => __('A comma-delimited list of WMS layers.'),
+            'description'   => __('A comma-delimited list of WMS layers to be used as the exhibit\'s base layer.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_layers
         ));
