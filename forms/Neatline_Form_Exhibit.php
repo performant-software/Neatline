@@ -110,7 +110,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Widgets:
         $this->addElement('multiselect', 'widgets', array(
             'label'         => __('Widgets'),
-            'description'   => __('Select the sub-plugin widgets available in the exhibit.'),
+            'description'   => __('Select the user-interface widgets available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
             'multiOptions'  => array_flip(nl_getExhibitWidgets()),
             'value'         => nl_explode($this->exhibit->widgets),
@@ -155,7 +155,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // WMS Address:
         $this->addElement('text', 'wms_address', array(
             'label'         => __('WMS Server'),
-            'description'   => __('The web-accessible location of a WMS server.'),
+            'description'   => __('To use a WMS layer as the base layer of the exhibit, enter the address of the WMS server.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_address
         ));
@@ -163,7 +163,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // WMS Layers:
         $this->addElement('text', 'wms_layers', array(
             'label'         => __('WMS Layers'),
-            'description'   => __('A comma-delimited list of WMS layers to be used as the exhibit\'s base layer.'),
+            'description'   => __('Enter the comma-delimited list of WMS layers to be used as the exhibit\'s base layer.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_layers
         ));
