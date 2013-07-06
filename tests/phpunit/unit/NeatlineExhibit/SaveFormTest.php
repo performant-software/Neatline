@@ -22,8 +22,8 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
 
         $exhibit->saveForm(array(
-            'base_layers'   => array('1','2'),
-            'base_layer'    => '3',
+            'api_layers'    => array('1','2'),
+            'api_layer'     => '3',
             'widgets'       => array('4','5'),
             'title'         => '6',
             'slug'          => '7',
@@ -36,8 +36,8 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
 
         $exhibit = $this->_reload($exhibit);
 
-        $this->assertEquals($exhibit->base_layers,  '1,2');
-        $this->assertEquals($exhibit->base_layer,   '3');
+        $this->assertEquals($exhibit->api_layers,   '1,2');
+        $this->assertEquals($exhibit->api_layer,    '3');
         $this->assertEquals($exhibit->widgets,      '4,5');
         $this->assertEquals($exhibit->title,        '6');
         $this->assertEquals($exhibit->slug,         '7');

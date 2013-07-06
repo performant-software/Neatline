@@ -24,8 +24,8 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
         $exhibit->setArray(array(
             'public'        => 1,
             'query'         => '2',
-            'base_layers'   => '3',
-            'base_layer'    => '4',
+            'api_layers'    => '3',
+            'api_layer'     => '4',
             'widgets'       => '5',
             'title'         => '6',
             'slug'          => '7',
@@ -42,8 +42,8 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
 
         $this->assertEquals($response->public,          1);
         $this->assertEquals($response->query,           '2');
-        $this->assertEquals($response->base_layers,     '3');
-        $this->assertEquals($response->base_layer,      '4');
+        $this->assertEquals($response->api_layers,      '3');
+        $this->assertEquals($response->api_layer,       '4');
         $this->assertEquals($response->widgets,         '5');
         $this->assertEquals($response->title,           '6');
         $this->assertEquals($response->slug,            '7');

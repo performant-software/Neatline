@@ -22,14 +22,14 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
 
     /**
      * `nl_getLayersForExhibit` should return layer definitions for the
-     * layers included in the `base_layers` field.
+     * layers included in the `api_layers` field.
      */
     public function testDefaultLayerIsIncluded()
     {
 
         $exhibit = $this->_exhibit();
-        $exhibit->base_layers   = 'Layer1,Layer2';
-        $exhibit->base_layer    = 'Layer2';
+        $exhibit->api_layers    = 'Layer1,Layer2';
+        $exhibit->api_layer     = 'Layer2';
 
         $this->assertEquals(nl_getLayersForExhibit($exhibit), array(
             array(
@@ -55,8 +55,8 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
     {
 
         $exhibit = $this->_exhibit();
-        $exhibit->base_layers   = 'Layer1,Layer2';
-        $exhibit->base_layer    = 'Layer3';
+        $exhibit->api_layers    = 'Layer1,Layer2';
+        $exhibit->api_layer     = 'Layer3';
 
         $this->assertEquals(nl_getLayersForExhibit($exhibit), array(
             array(

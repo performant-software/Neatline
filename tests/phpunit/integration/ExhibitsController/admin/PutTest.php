@@ -24,8 +24,8 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         $exhibit->setArray(array(
             'public'        => 0,
             'query'         => '1',
-            'base_layers'   => '2',
-            'base_layer'    => '3',
+            'api_layers'    => '2',
+            'api_layer'     => '3',
             'widgets'       => '4',
             'title'         => '5',
             'slug'          => '6',
@@ -40,8 +40,8 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         $this->_setPut(array(
             'public'        => '1',
             'query'         => '2',
-            'base_layers'   => '3',
-            'base_layer'    => '4',
+            'api_layers'   => '3',
+            'api_layer'    => '4',
             'widgets'       => '5',
             'title'         => '6',
             'slug'          => '7',
@@ -56,8 +56,8 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
         $this->assertEquals($exhibit->public,       1);
         $this->assertEquals($exhibit->query,        '2');
-        $this->assertEquals($exhibit->base_layers,  '3');
-        $this->assertEquals($exhibit->base_layer,   '4');
+        $this->assertEquals($exhibit->api_layers,   '3');
+        $this->assertEquals($exhibit->api_layer,    '4');
         $this->assertEquals($exhibit->widgets,      '5');
         $this->assertEquals($exhibit->title,        '6');
         $this->assertEquals($exhibit->slug,         '7');

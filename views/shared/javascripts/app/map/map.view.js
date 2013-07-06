@@ -93,7 +93,7 @@ Neatline.module('Map', function(
       this.baseLayers = {};
 
       // Build array of base layer instances.
-      _.each(Neatline.g.neatline.base_layers, _.bind(function(json) {
+      _.each(Neatline.g.neatline.api_layers, _.bind(function(json) {
         var layer = Neatline.request('MAP:LAYERS:getLayer', json);
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
@@ -106,7 +106,7 @@ Neatline.module('Map', function(
 
       // Set default layer.
       this.map.setBaseLayer(
-        this.baseLayers[Neatline.g.neatline.exhibit.base_layer]
+        this.baseLayers[Neatline.g.neatline.exhibit.api_layer]
       );
 
     },

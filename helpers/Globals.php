@@ -36,7 +36,7 @@ function nl_globals($exhibit)
 
         // Layers.
         // ----------------------------------------------------------------
-        'base_layers'   => nl_getLayersForExhibit($exhibit)
+        'api_layers'    => nl_getLayersForExhibit($exhibit)
 
     ));
 }

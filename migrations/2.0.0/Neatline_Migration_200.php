@@ -220,7 +220,6 @@ SQL;
         $new->query         = $old->query;
         $new->map_focus     = $old->default_map_bounds;
         $new->map_zoom      = $old->default_map_zoom;
-        $new->base_layer    = $old->default_base_layer;
     }
 
 
@@ -233,7 +232,7 @@ SQL;
      */
     private function __processExhibitDefaultBaseLayer($old, $new)
     {
-        $new->base_layer = self::$layers[$old->default_base_layer-1];
+        $new->api_layer = self::$layers[$old->default_base_layer-1];
     }
 
 

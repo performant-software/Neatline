@@ -46,7 +46,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/option[@value="Widget3"]');
 
         // Base Layers:
-        $root = '//select[@name="base_layers[]"]';
+        $root = '//select[@name="api_layers[]"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer2"]');
@@ -58,7 +58,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
 
         // Default Base Layer:
-        $root = '//select[@name="base_layer"]';
+        $root = '//select[@name="api_layer"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer2"]');
@@ -236,7 +236,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
 
         // Missing slug.
         $this->request->setMethod('POST')->setPost(array(
-            'base_layer'
+            'api_layer'
         ));
 
         // Submit the form, check for no new exhibits.
@@ -246,7 +246,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//select[@name="base_layer"]/
+        $this->assertXpath('//select[@name="api_layer"]/
             following-sibling::ul[@class="error"]'
         );
 
@@ -264,8 +264,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'slug'          => 'slug',
             'narrative'     => 'Narrative.',
             'widgets'       => array('Widget1', 'Widget2'),
-            'base_layers'   => array('Layer1', 'Layer2'),
-            'base_layer'    => 'Layer2',
+            'api_layers'    => array('Layer1', 'Layer2'),
+            'api_layer'     => 'Layer2',
             'public'        => 1
         ));
 
@@ -282,8 +282,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertEquals($exhibit->slug,         'slug');
         $this->assertEquals($exhibit->narrative,    'Narrative.');
         $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->base_layers,  'Layer1,Layer2');
-        $this->assertEquals($exhibit->base_layer,   'Layer2');
+        $this->assertEquals($exhibit->api_layers,   'Layer1,Layer2');
+        $this->assertEquals($exhibit->api_layer,    'Layer2');
         $this->assertEquals($exhibit->public,       1);
 
     }

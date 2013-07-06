@@ -86,12 +86,12 @@ function nl_getLayersForExhibit($exhibit)
     $groups = nl_getLayers();
     $subset = array();
 
-    // Explode the list of ids in `base_layers` and merge the `base_layer`
+    // Explode the list of ids in `api_layers` and merge the `api_layer`
     // id into the array, which ensures that at least 1 layer is included
-    // in the case that `base_layers` is empty.
+    // in the case that `api_layers` is empty.
 
-    $ids = nl_explode($exhibit->base_layers);
-    $ids = array_merge($ids, array($exhibit->base_layer));
+    $ids = nl_explode($exhibit->api_layers);
+    $ids = array_merge($ids, array($exhibit->api_layer));
 
     // Walk the layer groups.
     foreach ($groups as $group => $layers) {

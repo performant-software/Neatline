@@ -16,7 +16,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
 
     /**
      * The old `default_base_layer` foreign key references should be moved
-     * to the corresponding layer slugs in the new `base_layers` field.
+     * to the corresponding layer slugs in the new `api_layers` field.
      */
     public function setUp()
     {
@@ -33,7 +33,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testOpenStreetMap()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('OpenStreetMap')->base_layer,
+            $this->_getExhibitByTitle('OpenStreetMap')->api_layer,
             'OpenStreetMap'
         );
     }
@@ -42,7 +42,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGooglePhysical()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GooglePhysical')->base_layer,
+            $this->_getExhibitByTitle('GooglePhysical')->api_layer,
             'GooglePhysical'
         );
     }
@@ -51,7 +51,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGoogleStreets()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GoogleStreets')->base_layer,
+            $this->_getExhibitByTitle('GoogleStreets')->api_layer,
             'GoogleStreets'
         );
     }
@@ -60,7 +60,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGoogleHybrid()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GoogleHybrid')->base_layer,
+            $this->_getExhibitByTitle('GoogleHybrid')->api_layer,
             'GoogleHybrid'
         );
     }
@@ -69,7 +69,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGoogleSatellite()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GoogleSatellite')->base_layer,
+            $this->_getExhibitByTitle('GoogleSatellite')->api_layer,
             'GoogleSatellite'
         );
     }
@@ -78,7 +78,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testStamenWatercolor()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('StamenWatercolor')->base_layer,
+            $this->_getExhibitByTitle('StamenWatercolor')->api_layer,
             'StamenWatercolor'
         );
     }
@@ -87,7 +87,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testStamenToner()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('StamenToner')->base_layer,
+            $this->_getExhibitByTitle('StamenToner')->api_layer,
             'StamenToner'
         );
     }
@@ -96,7 +96,7 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testStamenTerrain()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('StamenTerrain')->base_layer,
+            $this->_getExhibitByTitle('StamenTerrain')->api_layer,
             'StamenTerrain'
         );
     }

@@ -117,22 +117,22 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => nl_explode($this->exhibit->widgets),
         ));
 
-        // Base Layers.
-        $this->addElement('multiselect', 'base_layers', array(
+        // API Layers.
+        $this->addElement('multiselect', 'api_layers', array(
             'label'         => __('Base Layers'),
             'description'   => __('Select the base layers available in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
-            'value'         => nl_explode($this->exhibit->base_layers)
+            'value'         => nl_explode($this->exhibit->api_layers)
         ));
 
-        // Default Layer.
-        $this->addElement('select', 'base_layer', array(
+        // Default API Layer.
+        $this->addElement('select', 'api_layer', array(
             'label'         => __('Default Layer'),
             'description'   => __('Select which layer is visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
-            'value'         => nl_explode($this->exhibit->base_layer),
+            'value'         => nl_explode($this->exhibit->api_layer),
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -163,8 +163,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'slug',
             'narrative',
             'widgets',
-            'base_layers',
-            'base_layer',
+            'api_layers',
+            'api_layer',
             'public'
         ), 'exhibit_info');
 
