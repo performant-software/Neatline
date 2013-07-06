@@ -166,8 +166,23 @@ Neatline.module('Map', function(
      * TODO|dev
      */
     __initWmsLayer: function() {
-      // TODO|dev
+
+      // Create the WMS layer.
+      var layer = new OpenLayers.Layer.WMS(
+        this.exhibit.title,
+        this.exhibit.wms_address,
+        {
+          layers: this.exhibit.wms_layers
+        },
+        {
+          maxZoomLevel: 20
+        }
+      );
+
+      // Add layer to map.
+      this.map.addLayer(layer);
       this._initViewport();
+
     },
 
 
@@ -185,13 +200,14 @@ Neatline.module('Map', function(
         var w = img.width;
 
         // Create the image layer.
-        this.map.addLayer(new OpenLayers.Layer.Image(
+        var layer = new OpenLayers.Layer.Image(
           this.exhibit.title, img.src,
           new OpenLayers.Bounds(-w, -h, w, h),
           new OpenLayers.Size(w/3, h/3)
-        ));
+        );
 
-        // TODO|dev
+        // Add layer to map.
+        this.map.addLayer(layer);
         this._initViewport();
 
       }, this);
@@ -227,7 +243,6 @@ Neatline.module('Map', function(
         this.baseLayers[Neatline.g.neatline.exhibit.api_layer]
       );
 
-      // TODO|dev
       this._initViewport();
 
     },
@@ -252,7 +267,7 @@ Neatline.module('Map', function(
         this.geolocate();
       }
 
-      // TODO|dev
+      // Load records.
       this.publishPosition();
 
     },
