@@ -22,17 +22,17 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
 
         $exhibit->setArray(array(
-            'public'        => 1,
-            'query'         => '2',
-            'api_layers'    => '3',
-            'api_layer'     => '4',
-            'widgets'       => '5',
-            'title'         => '6',
-            'slug'          => '7',
-            'narrative'     => '8',
-            'styles'        => '9',
-            'map_focus'     => '10',
-            'map_zoom'      => 11
+            'public'            => 1,
+            'query'             => '2',
+            'spatial_layers'    => '3',
+            'spatial_layer'     => '4',
+            'widgets'           => '5',
+            'title'             => '6',
+            'slug'              => '7',
+            'narrative'         => '8',
+            'styles'            => '9',
+            'map_focus'         => '10',
+            'map_zoom'          => 11
         ));
 
         $exhibit->save();
@@ -42,8 +42,8 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
 
         $this->assertEquals($response->public,          1);
         $this->assertEquals($response->query,           '2');
-        $this->assertEquals($response->api_layers,      '3');
-        $this->assertEquals($response->api_layer,       '4');
+        $this->assertEquals($response->spatial_layers,  '3');
+        $this->assertEquals($response->spatial_layer,   '4');
         $this->assertEquals($response->widgets,         '5');
         $this->assertEquals($response->title,           '6');
         $this->assertEquals($response->slug,            '7');

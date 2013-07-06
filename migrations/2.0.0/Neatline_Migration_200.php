@@ -232,7 +232,7 @@ SQL;
      */
     private function __processExhibitDefaultBaseLayer($old, $new)
     {
-        $new->api_layer = self::$layers[$old->default_base_layer-1];
+        $new->spatial_layer = self::$layers[$old->default_base_layer-1];
     }
 
 

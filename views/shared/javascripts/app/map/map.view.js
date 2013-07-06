@@ -147,7 +147,7 @@ Neatline.module('Map', function(
      * - Otherwise, if the `image_layer` field is defined on the exhibit,
      *   create a single image layer.
      *
-     * - If no wms/image layers are defined, add the regular API layers.
+     * - If no wms/image layers are defined, create the spatial layers.
      */
     _initBaseLayers: function() {
 
@@ -156,7 +156,7 @@ Neatline.module('Map', function(
 
       if (isWms) this.__initWmsLayer();
       else if (isImg) this.__initImgLayer();
-      else this.__initApiLayers();
+      else this.__initSpatialLayers();
 
     },
 
@@ -217,12 +217,12 @@ Neatline.module('Map', function(
      * Construct regular API base layers.
      * TODO|dev
      */
-    __initApiLayers: function() {
+    __initSpatialLayers: function() {
 
       this.baseLayers = {};
 
       // Build array of base layer instances.
-      _.each(Neatline.g.neatline.api_layers, _.bind(function(json) {
+      _.each(Neatline.g.neatline.spatial_layers, _.bind(function(json) {
         var layer = Neatline.request('MAP:LAYERS:getLayer', json);
         if (_.isObject(layer)) this.baseLayers[json.id] = layer;
       }, this));
@@ -235,7 +235,7 @@ Neatline.module('Map', function(
 
       // Set default layer.
       this.map.setBaseLayer(
-        this.baseLayers[Neatline.g.neatline.exhibit.api_layer]
+        this.baseLayers[this.exhibit.spatial_layer]
       );
 
       this._initViewport();

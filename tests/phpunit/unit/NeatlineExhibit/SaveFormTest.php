@@ -22,30 +22,30 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
 
         $exhibit->saveForm(array(
-            'api_layers'    => array('1','2'),
-            'api_layer'     => '3',
-            'widgets'       => array('4','5'),
-            'title'         => '6',
-            'slug'          => '7',
-            'narrative'     => '8',
-            'public'        => '9',
-            'styles'        => '10',
-            'map_focus'     => '11',
-            'map_zoom'      => '12'
+            'spatial_layers'    => array('1','2'),
+            'spatial_layer'     => '3',
+            'widgets'           => array('4','5'),
+            'title'             => '6',
+            'slug'              => '7',
+            'narrative'         => '8',
+            'public'            => '9',
+            'styles'            => '10',
+            'map_focus'         => '11',
+            'map_zoom'          => '12'
         ));
 
         $exhibit = $this->_reload($exhibit);
 
-        $this->assertEquals($exhibit->api_layers,   '1,2');
-        $this->assertEquals($exhibit->api_layer,    '3');
-        $this->assertEquals($exhibit->widgets,      '4,5');
-        $this->assertEquals($exhibit->title,        '6');
-        $this->assertEquals($exhibit->slug,         '7');
-        $this->assertEquals($exhibit->narrative,    '8');
-        $this->assertEquals($exhibit->public,       9);
-        $this->assertEquals($exhibit->styles,       10);
-        $this->assertEquals($exhibit->map_focus,    11);
-        $this->assertEquals($exhibit->map_zoom,     12);
+        $this->assertEquals($exhibit->spatial_layers,   '1,2');
+        $this->assertEquals($exhibit->spatial_layer,    '3');
+        $this->assertEquals($exhibit->widgets,          '4,5');
+        $this->assertEquals($exhibit->title,            '6');
+        $this->assertEquals($exhibit->slug,             '7');
+        $this->assertEquals($exhibit->narrative,        '8');
+        $this->assertEquals($exhibit->public,           9);
+        $this->assertEquals($exhibit->styles,           10);
+        $this->assertEquals($exhibit->map_focus,        11);
+        $this->assertEquals($exhibit->map_zoom,         12);
 
     }
 

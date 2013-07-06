@@ -15,7 +15,7 @@ describe('Map | Base Layers', function() {
 
     loadFixtures('neatline-partial.html');
 
-    Neatline.g.neatline.api_layers = [
+    Neatline.g.neatline.spatial_layers = [
       {
         title:  'Layer1',
         id:     'Layer1',
@@ -40,7 +40,7 @@ describe('Map | Base Layers', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit starts, the map should construct all of the base
-    // layers defined in the `api_layers` global.
+    // layers defined in the `spatial_layers` global.
     // --------------------------------------------------------------------
 
     NL.startApplication();
@@ -57,10 +57,10 @@ describe('Map | Base Layers', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit starts, the map should set the defalt base layer
-    // to the layer with the `id` defined by the `api_layer` global.
+    // to the layer with the `id` defined by the `spatial_layer` global.
     // --------------------------------------------------------------------
 
-    Neatline.g.neatline.exhibit.api_layer = 'Layer2';
+    Neatline.g.neatline.exhibit.spatial_layer = 'Layer2';
 
     NL.startApplication();
     NL.aliasNeatline();

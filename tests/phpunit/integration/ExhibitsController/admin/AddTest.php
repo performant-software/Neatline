@@ -45,8 +45,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/option[@value="Widget2"]');
         $this->assertXpath($root.'/option[@value="Widget3"]');
 
-        // API Layers:
-        $root = '//select[@name="api_layers[]"]';
+        // Spatial Layers:
+        $root = '//select[@name="spatial_layers[]"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer2"]');
@@ -57,8 +57,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertXpath($root.'/optgroup/option[@value="Layer5"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer6"]');
 
-        // API Layer:
-        $root = '//select[@name="api_layer"]';
+        // Spatial Layer:
+        $root = '//select[@name="spatial_layer"]';
         $this->assertXpath($root.'/optgroup[@label="Group1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer1"]');
         $this->assertXpath($root.'/optgroup/option[@value="Layer2"]');
@@ -245,7 +245,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
 
         // Missing slug.
         $this->request->setMethod('POST')->setPost(array(
-            'api_layer'
+            'spatial_layer'
         ));
 
         // Submit the form, check for no new exhibits.
@@ -255,7 +255,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath('//select[@name="api_layer"]/
+        $this->assertXpath('//select[@name="spatial_layer"]/
             following-sibling::ul[@class="error"]'
         );
 
@@ -269,16 +269,16 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
     {
 
         $this->request->setMethod('POST')->setPost(array(
-            'title'         => 'Title',
-            'slug'          => 'slug',
-            'narrative'     => 'Narrative.',
-            'widgets'       => array('Widget1', 'Widget2'),
-            'api_layers'    => array('Layer1', 'Layer2'),
-            'api_layer'     => 'Layer2',
-            'image_layer'   => 'img.org',
-            'wms_address'   => 'wms.org',
-            'wms_layers'    => 'wms:layer',
-            'public'        => 1
+            'title'           => 'Title',
+            'slug'            => 'slug',
+            'narrative'       => 'Narrative.',
+            'widgets'         => array('Widget1', 'Widget2'),
+            'spatial_layers'  => array('Layer1', 'Layer2'),
+            'spatial_layer'   => 'Layer2',
+            'image_layer'     => 'img.org',
+            'wms_address'     => 'wms.org',
+            'wms_layers'      => 'wms:layer',
+            'public'          => 1
         ));
 
         // Should create new exhibit.
@@ -290,16 +290,16 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $exhibit = $this->_getLastRow($this->_exhibits);
 
         // Should set fields.
-        $this->assertEquals($exhibit->title,        'Title');
-        $this->assertEquals($exhibit->slug,         'slug');
-        $this->assertEquals($exhibit->narrative,    'Narrative.');
-        $this->assertEquals($exhibit->widgets,      'Widget1,Widget2');
-        $this->assertEquals($exhibit->api_layers,   'Layer1,Layer2');
-        $this->assertEquals($exhibit->api_layer,    'Layer2');
-        $this->assertEquals($exhibit->image_layer,  'img.org');
-        $this->assertEquals($exhibit->wms_address,  'wms.org');
-        $this->assertEquals($exhibit->wms_layers,   'wms:layer');
-        $this->assertEquals($exhibit->public,       1);
+        $this->assertEquals($exhibit->title,          'Title');
+        $this->assertEquals($exhibit->slug,           'slug');
+        $this->assertEquals($exhibit->narrative,      'Narrative.');
+        $this->assertEquals($exhibit->widgets,        'Widget1,Widget2');
+        $this->assertEquals($exhibit->spatial_layers, 'Layer1,Layer2');
+        $this->assertEquals($exhibit->spatial_layer,  'Layer2');
+        $this->assertEquals($exhibit->image_layer,    'img.org');
+        $this->assertEquals($exhibit->wms_address,    'wms.org');
+        $this->assertEquals($exhibit->wms_layers,     'wms:layer');
+        $this->assertEquals($exhibit->public,         1);
 
     }
 

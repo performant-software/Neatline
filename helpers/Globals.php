@@ -22,7 +22,7 @@ function nl_globals($exhibit)
 
         // Exhibit.
         // ----------------------------------------------------------------
-        'exhibit'       => $exhibit->toArray(),
+        'exhibit' => $exhibit->toArray(),
 
         // API routes.
         // ----------------------------------------------------------------
@@ -32,11 +32,11 @@ function nl_globals($exhibit)
 
         // Constants.
         // ----------------------------------------------------------------
-        'per_page'      => (int) get_plugin_ini('Neatline', 'per_page'),
+        'per_page' => (int) get_plugin_ini('Neatline', 'per_page'),
 
         // Layers.
         // ----------------------------------------------------------------
-        'api_layers'    => nl_getLayersForExhibit($exhibit)
+        'spatial_layers' => nl_getLayersForExhibit($exhibit)
 
     ));
 }

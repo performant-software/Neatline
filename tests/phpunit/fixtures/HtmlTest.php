@@ -30,7 +30,7 @@ class FixturesTest_Html extends Neatline_Case_Default
 
         // Create exhibit.
         $exhibit = $this->_exhibit();
-        $exhibit->api_layer = 'OpenStreetMap';
+        $exhibit->spatial_layer = 'OpenStreetMap';
         $exhibit->save();
 
         // Set exhibit on view.

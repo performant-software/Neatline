@@ -19,8 +19,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $modified;       // TIMESTAMP NULL
     public $published;      // TIMESTAMP NULL
     public $query;          // TEXT NULL
-    public $api_layers;     // TEXT NULL
-    public $api_layer;      // TEXT NULL
+    public $spatial_layers; // TEXT NULL
+    public $spatial_layer;  // TEXT NULL
     public $image_layer;    // TEXT NULL
     public $wms_address;    // TEXT NULL
     public $wms_layers;     // TEXT NULL

@@ -117,21 +117,21 @@ class Neatline_Form_Exhibit extends Omeka_Form
         ));
 
         // API Layers:
-        $this->addElement('multiselect', 'api_layers', array(
-            'label'         => __('API Layers'),
-            'description'   => __('Select the API layers available in the exhibit.'),
+        $this->addElement('multiselect', 'spatial_layers', array(
+            'label'         => __('Spatial Layers'),
+            'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
-            'value'         => nl_explode($this->exhibit->api_layers)
+            'value'         => nl_explode($this->exhibit->spatial_layers)
         ));
 
-        // API Layer:
-        $this->addElement('select', 'api_layer', array(
-            'label'         => __('API Layer'),
-            'description'   => __('Select the API layer visible by default when the exhibit starts.'),
+        // Spatial Layer:
+        $this->addElement('select', 'spatial_layer', array(
+            'label'         => __('Default Spatial Layer'),
+            'description'   => __('Select a spatial layer for the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
-            'value'         => nl_explode($this->exhibit->api_layer),
+            'value'         => nl_explode($this->exhibit->spatial_layer),
             'required'      => true,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -154,7 +154,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
 
         // WMS Address:
         $this->addElement('text', 'wms_address', array(
-            'label'         => __('WMS Address'),
+            'label'         => __('WMS Server'),
             'description'   => __('The web-accessible location of a WMS server.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_address
@@ -185,8 +185,8 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'slug',
             'narrative',
             'widgets',
-            'api_layers',
-            'api_layer',
+            'spatial_layers',
+            'spatial_layer',
             'image_layer',
             'wms_address',
             'wms_layers',
