@@ -19,7 +19,3 @@ Here are some examples of the kinds of projects that could be built (or have bee
 ## What makes it different?
 
 How does Neatline fit into the existing ecosystem of geospatial and annotation tools? Neatline sits in the space between consumer-grade mapping applications like the Google custom map-maker and heavyweight, analytical GIS tools like ArcGIS. It's designed to be simple enough that college undergradutes can easily use it for class assignments, but also sufficiently flexible, scalable, and feature-rich that it can be used for professional scholarship, journalism, and art. Neatline keeps things simple and provides sensible defaults, but it's careful never to make aesthetic or intellectual decisions on your behalf.
-
-## Help us improve this guide
-
-As you read through the documentation, if you find anything that's unclear, incomplete, or incorrect be sure to file a support ticket on the project's [issue tracker](https://github.com/scholarslab/Neatline/issues) on GitHub, and we'll do our best to fix the problem!
