@@ -2,7 +2,11 @@
 
 #### Added Features
 
-  - Adds expanded and completely rewritten project documentation.
+  - Adds expanded and completely rewritten documentation.
+
+  - Makes it possible to use any regular, web-accessible static image as the base layer for an exhibit.
+
+  - Makes it possible to use a WMS address/layers combination as the base layer for an exhibit, similar to how a WMS layer can be added to an individual record inside an exhibit. This makes it possible to use custom WMS layers without having to manually registed the layer in a JSON definition file.
 
 #### Bug Fixes
 
