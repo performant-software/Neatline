@@ -1,12 +1,12 @@
 # Creating Records
 
-## At a Glance
+## At a glance
 
   - Records can be created directly inside of a Neatline exhibit.
   - Existing Neatline records can be individually linked to (and unlinked from) Omeka items at any point.
   - Omeka items can be bulk-imported into Neatline exhibits.
 
-## Manually Creating Records inside of Exhibits
+## Manually creating records inside of exhibits
 
 The simplest way to add a new record is just to create one directly inside of the Neatline editor.
 
@@ -16,7 +16,7 @@ The simplest way to add a new record is just to create one directly inside of th
 
 This will open up an empty editing form for the new record. **Important**: Keep in mind that the record won't actually be saved to the database until you click the "Save" button at the bottom of the form.
 
-## Connecting a Neatline Record with an Omeka Item
+## Connecting a Neatline record with an Omeka item
 
 Once a record has been created in an exhibit, it can be "linked" back to an item in the Omeka collection:
 
@@ -34,7 +34,7 @@ Once the association is established, the Neatline record will update automatical
 
 That said, it's quite possible that you might want to change the structure or layout of the compiled metadata output in the "Body" field. For example, imagine that you're working with items that represent photographs - in the Neatline exhibit, you might want to hide some of the more nitty-gritty element texts on the items (eg, "Date" or "Published"), and just show the title, thumbnail, and description. To address this, Neatline makes it possible to completly customize the structure of the compiled "Body" fields at the level of the theme in the same way that you create a custom `show.php` template for the regular item pages. Head over to the "Theming Exhibits" guide for detailed instructions about how to do this.
 
-## Bulk-Importing Omeka Items
+## Bulk-importing Omeka items
 
 So far, we've manually created individual Neatline records and associated them with items in the Omeka collection. But what if you already have an existing collection of hundreds or thousands of items? Instead of manually creating Neatline records for each of the items individually, you can just bulk-import part or all of the collection into a Neatline exhibit:
 
@@ -42,7 +42,7 @@ So far, we've manually created individual Neatline records and associated them w
 
   2. Click the "Import Omeka Items" link under the exhibit title.
 
-### Defining an Item Query
+### Defining an item query
 
 This takes you to the item import form. Think of this as a "search" form - you can use any of the available inputs to define a "query" on the Omeka archive that determines which items will be imported into the exhibit. For example, if you have a large archive with multiple collections, you might just be interested in working with one individual collection, and don't want to clutter up the Neatline exhibit with all of the other unrelated items. The fields here work just like the corresponding options in the Omeka advanced search form:
 
@@ -60,7 +60,7 @@ Once you've defined a search query, click "Import Items" to kick off the import.
 
 **Important**: Behind the scenes, this actually kicks off a "background process" that does the heavy lifting of importing the items. This is necessary because it can sometimes take up to 30-40 seconds to import really large collections of items (many thousands), and the process can fail if the web request times out (smaller imports, up to about 1,000 items, will generally finish in just a couple of seconds). When you're first redirected to the exhibits browse view, though, the "# Items" counter for the exhibit will probably still be the same as it was before, since the import was started at the same moment that you were redirected. Rrefresh the page, though, and you'll see the effect of the background process as it fills in the items.
 
-### What Happens if You Add New Items?
+### What happens if you add new items?
 
 When the import is finished, open the editor for the exhibit. You'll see new listings for all of the records that were matched by the import. When you open the edit form for one of the records, you'll see that the "Omeka ID" field is populated with the ID of a corresponding Omeka item and that the "Title" and "Body" fields are populated with the item title and metadata output. Just as if the records had been manually linked to their parent items, any change to the items will be propagated to the imported records.
 

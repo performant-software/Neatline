@@ -1,6 +1,6 @@
 # Styling Exhibits with Neatline-Flavored CSS
 
-## At a Glance
+## At a glance
 
   - Neatline 2.0 makes it possible to use a dialect of CSS to perform bulk updates on large groups of records. 
   - Neatline-infected CSS uses a custom set of rules that correspond to the properties on the record data model.
@@ -127,7 +127,7 @@ Now, when I click "Save" at the bottom of the form, Neatline will update the "Fi
 
 Likewise, when I click "Save," Neatline will update the "After Date" and "Before Date" fields on each record depending on which of the election-season is assigned to it.
 
-## Auto-Updating Stylesheet Values
+## Auto-updating stylesheet values
 
 This is all fine and well, but what if we don't actually know what value we want to use? In each of these cases, we're working with fields that have fairly "semantic" values that we can reason about in the abstract (eg, `2004` just means what it means). This isn't always true, though, notably in the case of colors, where it's impossible to reason in the abstract about which specific hexadecimal value you want to use. For example, I know that I want the democratic precincts to be "blue" and the republican precints to be "red," but I don't know that I want to use the `#206bbf` and `#9d0000`.
 

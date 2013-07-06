@@ -1,6 +1,6 @@
 # Importing SVG Documents
 
-## At a Glance
+## At a glance
 
   - The basic drawing controls (points, lines, polygons) aren't suitable for really complex illustrations.
   - Instead, it's better to create the graphics in specialized vector editors and import them into Neatline.
@@ -15,7 +15,7 @@ To address this problem, Neatline 2.0 introduced the "Draw SVG" tool, which make
 
 Neatline reads a commonly-used serialization format called SVG (Scalable Vector Graphics), a form of XML that encodes geometric information. To start, you'll need to save off your vector file as an SVG document.
 
-### Generating the SVG Document
+### Generating the SVG document
 
 Using **[Adobe Illustrator][illustrator]**: 
 
@@ -64,4 +64,3 @@ Once the SVG document is saved off, we can import it into Neatline:
 [inkscape]: http://inkscape.org/
 [inkscape-docs]: http://wiki.inkscape.org/wiki/index.php/Inkscape_for_Adobe_Illustrator_users
 [svg-edit]: http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html
-

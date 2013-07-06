@@ -1,6 +1,6 @@
 # Editing Record Dates
 
-## At a Glance
+## At a glance
 
   - If a record represents an event, these fields store when the event occurred and how long it lasted.
   - They can also be used to control when a record is be _visible_ in the exhibit.

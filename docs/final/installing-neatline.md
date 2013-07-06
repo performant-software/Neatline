@@ -1,6 +1,6 @@
 # Installing Neatline
 
-## At a Glance
+## At a glance
 
   - Installing Neatline is a two-step process - first install Omeka, then install Neatline as a plugin for Omeka.
   - To run Omeka and Neatline, you'll need a "LAMP stack" server - **L**inux, **A**pache, **M**ySQL, and **P**HP.
@@ -9,7 +9,7 @@
   - Geoserver is a Java application that has different hosting requirements.
   - You can either run your own installation of Geoserver or purchase hosting from a commercial provider.
 
-## Before You Start
+## Before you start
 
 Omeka is a web application written with PHP and MySQL that runs on the "[LAMP stack][lamp]" (Linux, Apache, MySQL, and PHP), a ubiquitous set of technologies supported by almost any commercial or institutional hosting provider - many web hosts even provide an automatic "one-click" installer.  See the "Hosting Suggestions" guide in the Omeka documentation for a list of recommended providers. Alternatively, if you just want to experiment with Neatline in an offline setting, your can also install Omeka on a sandbox server environment running on your own computer using software packages like [MAMP][mamp], [WampServer][wamp], or [XAMPP][xampp], with the option of migrating the site to a public-facing web host at any point in the future.
 

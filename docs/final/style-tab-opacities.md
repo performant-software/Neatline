@@ -1,13 +1,13 @@
 # Editing Record Opacities
 
-## At a Glance
+## At a glance
 
   - Opacities are stored as 3-digit decimal values between 0.00 (completely translucent) and 1.00 (completely opaque).
   - To change an opacity value, you can type directly into the field.
   - Or you can click on the field and drag up or down on the page, causing the value to change smoothly.
   - As an opacity is changed, the new value will be automatically previewed on the map.
 
-Examples:
+### Examples:
 
   - `0.00`
   - `1.00`

@@ -1,6 +1,6 @@
 # Editing Record Imagery
 
-## At a Glance
+## At a glance
 
   - These fields make it possible to layer images on top of the map base layer - thumbnails, historical maps, etc.
   - The "Point Image" field replaces the default circular graphic for points with any web-accessible image.

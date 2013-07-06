@@ -1,6 +1,6 @@
 # Drawing Geometry on the Map
 
-## At a Glance
+## At a glance
 
   - The drawing controls under the "Map" tab make it possible to add vector annotations to the map.
   - There are three basic types of geometry - points, lines, and polygons.

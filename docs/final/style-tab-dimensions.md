@@ -1,6 +1,6 @@
 # Editing Record Dimensions
 
-## At a Glance
+## At a glance
 
   - These fields control the _size_ of different aspects of the presentation of the record.
   - And (a) the _sequence_ or _ordering_ of a record in relation to other records in the exhibit.

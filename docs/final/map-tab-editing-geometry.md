@@ -1,6 +1,6 @@
 # Editing Vector Geometry
 
-## At a Glance
+## At a glance
 
   - The editing controls under the "Map" tab make it possible to modify existing geometries on the map.
   - Annotations can be reshaped, rotated, resized, dragged, and deleted.

@@ -1,6 +1,6 @@
 # Editing Record Groups
 
-## At a Glance
+## At a glance
 
   - Use tags to slice and dice large collections into subsets of related records.
   - Tags can be used as the "selectors" for Neatline's stylesheet system, which uses a simplified dialect of CSS.
@@ -40,7 +40,7 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
   Neatline.execute('MAP:load', { tags: ['2004', 'democrat'] });
   ```
 
-### Tag Requirements
+### Tag requirements
 
 In order for the tags to work correctly, there are a couple important requirements:
 

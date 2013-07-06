@@ -1,16 +1,16 @@
-# Records Overview
+# Neatline Records: An Overview
 
-## At a Glance
+## At a glance
 
   - All pieces of content in a Neatline exhibit are records.
   - Records can appear in multiple contexts (map, timeline, etc).
   - Optionally, records can be associated with Omeka items.
 
-## Everything is a Record
+## Everything is a record
 
 Records are the fundamental unit of content in Neatline exhibits. In Neatline, _everything_ is a record - vector annotations on the map, plottings on the timeline, listings in the waypoints tray, WMS overlay layers, text annotations in the exhibit narrative, and any other content displayed by sub-plugins. Depending on the type of information that's entered into the record metadata, the same record could be displayed more than once in the same exhibit. For example, if a record has both a geometric annotation value in the `coverage` field and a defined value for the `start_date`, it will be displayed both as a shape on the map and a point on the timeline. When this is the case, Neatline will automatically link all instantiations of the record - when the user clicks on the span on the timeline, the map will zoom to the corresponding location, and vice versa.
 
-## The Record Data Model
+## The record data model
 
 All records share a common data model. Similar to elements on Omeka items, all fields are optional.
 
@@ -45,7 +45,7 @@ All records share a common data model. Similar to elements on Omeka items, all f
   - **Default Focus**: The lat/lon coordinates that the map zooms to when the record is selected.
   - **Default Zoom**: The zoom level that the map zooms to when the record is selected.
 
-## Neatline Records vs. Omeka Items
+## Neatline records vs. Omeka items
 
 Even though all records share the same data model, they can be divided into two basic categories - _exhibit-specific_ records that exist just inside of a single exhibit, and _item-backed_ records that link back to items in the Omeka collection. The two types behave exactly the same, with one exception - if a Neatline record is associted with an Omeka item, the record's "Title" and "Body" fields will be automatically compiled from the content in the Omeka item. The title will be filled in with the item's Dublin Core "Title" field, and the "Body" will be populated with the compiled metadata output of the entire item. Once the association is established, the content in the Neatline record will be automatically updated whenever the Omeka record is changed.
 

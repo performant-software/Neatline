@@ -1,6 +1,6 @@
 # Editing Record Visibility Settings
 
-## At a Glance
+## At a glance
 
   - Use "Min Zoom" and "Max Zoom" to hide or display the record depending on the zoom level of the map.
   - Use the "Use Current" buttons to insert the current zoom level as the value for "Min/Max Zoom."

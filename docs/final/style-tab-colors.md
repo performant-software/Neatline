@@ -1,6 +1,6 @@
 # Editing Record Colors
 
-## At a Glance
+## At a glance
 
   - Color values are stored as hexadecimal values.
   - To change a color field, click anywhere on the input and use the interactive color picker widget.

@@ -16,10 +16,10 @@ Here are some examples of the kinds of projects that could be built (or have bee
 
   - **The Chelyabinsk Meteor**: On Febuary 15, 2013, a 10,000-ton meteor streaked over the city of Chelyabinsk in the Ural Mountains, producing a massive airbust that shattered windows and collapsed buildings. The explosion occurred during the morning rush hour, and the event was captured by dozens of commuters with dashboard-mounted video cameras. You want to create an exhibit that traces out the trajectory of the meteor as it enters the atmosphere and traverses the airspace over the city, and plot out the exact position and orientation of each of the recordings relative to the location of the airburst.
 
-## What Makes it Different?
+## What makes it different?
 
 How does Neatline fit into the existing ecosystem of geospatial and annotation tools? Neatline sits in the space between consumer-grade mapping applications like the Google custom map-maker and heavyweight, analytical GIS tools like ArcGIS. It's designed to be simple enough that college undergradutes can easily use it for class assignments, but also sufficiently flexible, scalable, and feature-rich that it can be used for professional scholarship, journalism, and art. Neatline keeps things simple and provides sensible defaults, but it's careful never to make aesthetic or intellectual decisions on your behalf.
 
-## Help Us Improve the Guide
+## Help us improve this guide
 
 As you read through the documentation, if you find anything that's unclear, incomplete, or incorrect be sure to file a support ticket on the project's [issue tracker](https://github.com/scholarslab/Neatline/issues) on GitHub, and we'll do our best to fix the problem!

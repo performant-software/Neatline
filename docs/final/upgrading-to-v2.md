@@ -1,12 +1,12 @@
 # Upgrading to Neatline 2.0
 
-## At a Glance
+## At a glance
 
   - Neatline 2.0 is a major evolution of the project that improves many of the core workflows and adds lots of new features.
   - Almost all exhibits created with Neatline 1.x will behave exactly the same when migrated to Neatline 2.0.
   - In cases where features have been changed, Neatline 2.0 provides alternative methods to achieve the same functionalities.
 
-## What's New
+## What's new
 
 Neatline 2.0, which was released on July 2, 2013, is a major update to the project that includes a large number of improvements to the existing feature-set and adds a number of new features designed to make it easier to create larger and more complex exhibits. Some of the highlights in the new version:
 
@@ -26,7 +26,7 @@ Neatline 2.0, which was released on July 2, 2013, is a major update to the proje
 
   - **A new programming API and “sub-plugin” system** that makes it possible for developers to add custom functionality – everything from simple user-interface widgets (sliders, legends, scrollers, forward-and-backward buttons, etc.) up to really extensive modifications that expand the core data model and add totally new interactions.
 
-## What's Different
+## What's different
 
 Some of these changes entailed some pretty significant changes to the core codebase. Almost all of the features from the 1.x releases are preserved in 2.0, and almost all exhibits will behave almost exactly the same after upgrading to 2.0. In a handful of very carefully-chosen places, though, we made changes that will alter the behavior of certain types of exhibits. In each case, these changes were made because we felt that the new approach would make Neatline projects more maintainable, efficient, or standards-compliant and boost the overall sustainability of the project. In all cases where a feature was removed, we've added an alternate method to accomplish the same effect. Here are the important changes:
 
@@ -56,7 +56,7 @@ Upgrading to Neatline 2.0 is just the same as upgrading any other Omeka plugin:
 
   Behind the scenes, Neatline actually spins up a "background process" - a special, long-running program that does the work of actually converting all of the old content to the new, 2.0 format - that can take a bit longer than the average web request. Depending on the how many exhibits and records you had in the old installation, this could take anywhere from just a couple seconds up to around a minute.
 
-### Install NeatlineWaypoints and NeatlineSimile (Optional)
+### Install NeatlineWaypoints and NeatlineSimile (optional)
 
 Once the core Neatline plugin is upgraded to 2.0, you'll have access to everything except the timeline and item-browser viewports, which are now broken away into two new "sub-plugins" called NeatlineSimile and NeatlineWaypoints that are installed alongside Neatline and extend the core feature set. Install them just like any other Omeka plugin:
 
