@@ -2,8 +2,8 @@
 
 ## At a glance
 
-- A group of items to be displayed together by Neatline are gathered into an **Exhibit**.
-- An exhibit allows you to filter items, group them, and display how and when they'll be displayed.
+  - A group of items to be displayed together by Neatline are gathered into an **Exhibit**.
+  - An exhibit allows you to filter items, group them, and display how and when they'll be displayed.
 
 ## What is a Neatline exhibit?
 
