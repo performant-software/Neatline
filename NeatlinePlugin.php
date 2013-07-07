@@ -53,6 +53,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         spatial_layers          TEXT NULL,
         spatial_layer           TEXT NULL,
         image_layer             TEXT NULL,
+        image_height            SMALLINT UNSIGNED NULL,
+        image_width             SMALLINT UNSIGNED NULL,
         wms_address             TEXT NULL,
         wms_layers              TEXT NULL,
         widgets                 TEXT NULL,

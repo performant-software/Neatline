@@ -22,6 +22,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $spatial_layers; // TEXT NULL
     public $spatial_layer;  // TEXT NULL
     public $image_layer;    // TEXT NULL
+    public $image_height;   // SMALLINT UNSIGNED NULL
+    public $image_width;    // SMALLINT UNSIGNED NULL
     public $wms_address;    // TEXT NULL
     public $wms_layers;     // TEXT NULL
     public $widgets;        // TEXT NULL
