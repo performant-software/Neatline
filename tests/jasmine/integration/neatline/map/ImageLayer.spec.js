@@ -23,7 +23,15 @@ describe('Map | Image Layer', function() {
     // a layer from the image and set it as the base layer.
     // --------------------------------------------------------------------
 
-    console.log(NL.vw.MAP.map.layers[0]);
+    var layers  = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
+    var layer   = NL.vw.MAP.map.baseLayer;
+
+    // Base layer should be an image with the correct URL.
+    expect(layer.CLASS_NAME).toEqual('OpenLayers.Layer.Image');
+    expect(layer.url).toEqual(Neatline.g.neatline.exhibit.image_layer);
+
+    // Should be just one layer.
+    expect(layers.length).toEqual(1);
 
   });
 

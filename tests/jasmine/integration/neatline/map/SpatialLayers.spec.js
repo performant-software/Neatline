@@ -23,10 +23,14 @@ describe('Map | Spatial Layers', function() {
     // layers defined in the `spatial_layers` global.
     // --------------------------------------------------------------------
 
-    expect(NL.vw.MAP.map.layers[3].name).toEqual('OpenStreetMap');
-    expect(NL.vw.MAP.map.layers[2].name).toEqual('Stamen Toner');
-    expect(NL.vw.MAP.map.layers[1].name).toEqual('Stamen Watercolor');
-    expect(NL.vw.MAP.map.layers[0].name).toEqual('Stamen Terrain');
+    var layers = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
+
+    expect(layers[3].name).toEqual('OpenStreetMap');
+    expect(layers[2].name).toEqual('Stamen Toner');
+    expect(layers[1].name).toEqual('Stamen Watercolor');
+    expect(layers[0].name).toEqual('Stamen Terrain');
+
+    expect(layers.length).toEqual(4);
 
   });
 

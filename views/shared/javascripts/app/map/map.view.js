@@ -168,8 +168,18 @@ Neatline.module('Map', function(
      * Construct a static image base layer.
      */
     _initImageLayer: function() {
-      console.log('initImageLayer');
-      // TODO
+
+      var h = this.exhibit.image_height;
+      var w = this.exhibit.image_width;
+
+      var image = new OpenLayers.Layer.Image(
+        this.exhibit.title, this.exhibit.image_layer,
+        new OpenLayers.Bounds(0, 0, w, h),
+        new OpenLayers.Size(w/5, h/5)
+      );
+
+      this.map.addLayer(image);
+
     },
 
 
