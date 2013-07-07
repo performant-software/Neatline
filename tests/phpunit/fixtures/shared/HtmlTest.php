@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_Html extends Neatline_Case_Default
+class FixturesTest_SharedHtml extends Neatline_Case_Default
 {
 
 
@@ -17,7 +17,7 @@ class FixturesTest_Html extends Neatline_Case_Default
 
 
     /**
-     * Inject the real `layers.json` and mock the exhibit.
+     * Set a mock exhibit object on the view.
      */
     public function setUp()
     {
@@ -41,19 +41,13 @@ class FixturesTest_Html extends Neatline_Case_Default
 
     public function testNeatlinePartial()
     {
-        $this->_writeFixture(
-            get_view()->partial('exhibits/partials/exhibit.php'),
-            'neatline-partial.html'
-        );
+        $this->_writeExhibitMarkupFixture('neatline-partial.html');
     }
 
 
     public function testEditorPartial()
     {
-        $this->_writeFixture(
-            get_view()->partial('exhibits/partials/editor_core.php'),
-            'editor-partial.html'
-        );
+        $this->_writeEditorMarkupFixture('editor-partial.html');
     }
 
 
