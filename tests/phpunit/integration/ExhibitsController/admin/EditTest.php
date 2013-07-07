@@ -29,6 +29,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     {
 
         $exhibit = $this->_exhibit('slug');
+        $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
 
         $exhibit->setArray(array(
             'title'           => 'Title',
@@ -36,7 +37,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'widgets'         => 'Widget1,Widget2',
             'spatial_layers'  => 'Layer1,Layer3',
             'spatial_layer'   => 'Layer3',
-            'image_layer'     => 'img.org',
+            'image_layer'     => $imagePath,
             'wms_address'     => 'wms.org',
             'wms_layers'      => 'wms:layer',
             'public'          => 1
@@ -82,7 +83,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         // Image Layer:
         $this->assertXpath(
-            '//input[@name="image_layer"][@value="img.org"]');
+            "//input[@name='image_layer'][@value='$imagePath']");
 
         // WMS Address:
         $this->assertXpath(
@@ -306,17 +307,18 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     {
 
         $exhibit = $this->_exhibit();
+        $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
 
         $this->request->setMethod('POST')->setPost(array(
-            'title'           => 'Title 2',
-            'slug'            => 'slug-2',
-            'narrative'       => 'Narrative 2.',
+            'title'           => 'Title',
+            'slug'            => 'slug',
+            'narrative'       => 'Narrative.',
             'widgets'         => array('Widget1', 'Widget2'),
             'spatial_layers'  => array('Layer1', 'Layer2'),
-            'spatial_layer'   => 'Layer2',
-            'image_layer'     => 'img2.org',
-            'wms_address'     => 'wms2.org',
-            'wms_layers'      => 'wms2:layer',
+            'spatial_layer'   => 'Layer1',
+            'image_layer'     => $imagePath,
+            'wms_address'     => 'wms.org',
+            'wms_layers'      => 'wms:layer',
             'public'          => 1
         ));
 
@@ -325,15 +327,15 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $exhibit = $this->_reload($exhibit);
 
         // Should set fields.
-        $this->assertEquals($exhibit->title,          'Title 2');
-        $this->assertEquals($exhibit->slug,           'slug-2');
-        $this->assertEquals($exhibit->narrative,      'Narrative 2.');
+        $this->assertEquals($exhibit->title,          'Title');
+        $this->assertEquals($exhibit->slug,           'slug');
+        $this->assertEquals($exhibit->narrative,      'Narrative.');
         $this->assertEquals($exhibit->widgets,        'Widget1,Widget2');
         $this->assertEquals($exhibit->spatial_layers, 'Layer1,Layer2');
-        $this->assertEquals($exhibit->spatial_layer,  'Layer2');
-        $this->assertEquals($exhibit->image_layer,    'img2.org');
-        $this->assertEquals($exhibit->wms_address,    'wms2.org');
-        $this->assertEquals($exhibit->wms_layers,     'wms2:layer');
+        $this->assertEquals($exhibit->spatial_layer,  'Layer1');
+        $this->assertEquals($exhibit->image_layer,    $imagePath);
+        $this->assertEquals($exhibit->wms_address,    'wms.org');
+        $this->assertEquals($exhibit->wms_layers,     'wms:layer');
         $this->assertEquals($exhibit->public,         1);
 
     }

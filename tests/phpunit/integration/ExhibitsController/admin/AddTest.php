@@ -268,6 +268,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
     public function testSuccess()
     {
 
+        $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
+
         $this->request->setMethod('POST')->setPost(array(
             'title'           => 'Title',
             'slug'            => 'slug',
@@ -275,7 +277,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'widgets'         => array('Widget1', 'Widget2'),
             'spatial_layers'  => array('Layer1', 'Layer2'),
             'spatial_layer'   => 'Layer2',
-            'image_layer'     => 'img.org',
+            'image_layer'     => $imagePath,
             'wms_address'     => 'wms.org',
             'wms_layers'      => 'wms:layer',
             'public'          => 1
@@ -296,7 +298,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertEquals($exhibit->widgets,        'Widget1,Widget2');
         $this->assertEquals($exhibit->spatial_layers, 'Layer1,Layer2');
         $this->assertEquals($exhibit->spatial_layer,  'Layer2');
-        $this->assertEquals($exhibit->image_layer,    'img.org');
+        $this->assertEquals($exhibit->image_layer,    $imagePath);
         $this->assertEquals($exhibit->wms_address,    'wms.org');
         $this->assertEquals($exhibit->wms_layers,     'wms:layer');
         $this->assertEquals($exhibit->public,         1);
