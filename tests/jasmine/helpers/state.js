@@ -16,6 +16,7 @@ var NL = (function(NL) {
    * Load neatline application.
    */
   NL.loadNeatline = function(fixture) {
+    if (this.server) this.server.restore();
     loadFixtures(fixture || 'SharedHtml.exhibit.html');
     loadStyleFixtures('neatline-public.css');
     this.__initNeatline();
@@ -26,6 +27,7 @@ var NL = (function(NL) {
    * Load editor application.
    */
   NL.loadEditor = function(fixture) {
+    if (this.server) this.server.restore();
     loadFixtures(fixture || 'SharedHtml.editor.html');
     loadStyleFixtures('neatline-editor.css');
     this.__initEditor();

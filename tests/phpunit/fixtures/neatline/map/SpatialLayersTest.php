@@ -21,12 +21,9 @@ class FixturesTest_NeatlineMapSpatialLayers extends Neatline_Case_Default
 
         $exhibit = $this->_exhibit();
 
-        $exhibit->spatial_layer = 'OpenStreetMap';
+        $exhibit->spatial_layer = 'StamenToner';
         $exhibit->spatial_layers = implode(',', array(
             'OpenStreetMap',
-            'GoogleStreets',
-            'GoogleHybrid',
-            'GoogleSatellite',
             'StamenToner',
             'StamenWatercolor',
             'StamenTerrain'
