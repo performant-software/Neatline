@@ -11,7 +11,7 @@
 
 ?>
 
-<script id="exhibit-menu-template" type="text/templates">
+<script id="exhibit-menu-template" type="text/template">
 
   <!-- Back to Omeka. -->
   <a class="back" href="<?php echo url('neatline');?>">

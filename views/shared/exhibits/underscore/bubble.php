@@ -12,7 +12,7 @@
 ?>
 
 
-<script id="static-bubble-template" type="text/templates">
+<script id="static-bubble-template" type="text/template">
   <a name="close" class="close">&times;</a>
   <div class="title"><%= record.get('title') %></div>
   <div class="body"><%= record.get('body') %></div>

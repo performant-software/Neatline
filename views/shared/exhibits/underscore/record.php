@@ -11,7 +11,7 @@
 
 ?>
 
-<script id="record-form-template" type="text/templates">
+<script id="record-form-template" type="text/template">
 
   <!-- Close button. -->
   <?php echo $this->partial(

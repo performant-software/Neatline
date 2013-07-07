@@ -11,6 +11,6 @@
 
 ?>
 
-<script id="search-template" type="text/templates">
+<script id="search-template" type="text/template">
   <input type="text" placeholder="Search" />
 </script>

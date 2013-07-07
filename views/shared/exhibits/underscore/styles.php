@@ -11,7 +11,7 @@
 
 ?>
 
-<script id="exhibit-styles-template" type="text/templates">
+<script id="exhibit-styles-template" type="text/template">
 
   <div class="control-group">
 

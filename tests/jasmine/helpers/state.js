@@ -14,8 +14,6 @@ var NL = (function(NL) {
 
   /**
    * Load neatline application.
-   *
-   * @param {String} fixture: An HTML fixture file.
    */
   NL.loadNeatline = function(fixture) {
     loadFixtures(fixture || 'SharedHtml.exhibit.html');
@@ -26,8 +24,6 @@ var NL = (function(NL) {
 
   /**
    * Load editor application.
-   *
-   * @param {String} fixture: An HTML fixture file.
    */
   NL.loadEditor = function(fixture) {
     loadFixtures(fixture || 'SharedHtml.editor.html');

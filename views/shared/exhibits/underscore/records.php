@@ -11,7 +11,7 @@
 
 ?>
 
-<script id="record-list-template" type="text/templates">
+<script id="record-list-template" type="text/template">
 
   <!-- Top pagination. -->
   <?php echo $this->partial(

@@ -1,0 +1,19 @@
+
+<div id="neatline" class="">
+  <div id="neatline-map" class="neatline-block"></div>
+</div>
+
+<!-- Globals constants. -->
+<script type="text/javascript">
+  Neatline.g = {"neatline":{"exhibit":{"owner_id":1,"added":null,"modified":"2013-07-07 11:57:25","published":null,"query":null,"spatial_layers":null,"spatial_layer":"OpenStreetMap","image_layer":null,"image_height":null,"image_width":null,"wms_address":null,"wms_layers":null,"widgets":null,"title":null,"slug":"test-slug","narrative":null,"public":1,"styles":null,"map_focus":null,"map_zoom":null,"id":"190"},"records_api":"\/neatline\/records","exhibits_api":"\/neatline\/exhibits\/190","items_api":"\/items\/browse","per_page":50,"spatial_layers":[{"title":"OpenStreetMap","id":"OpenStreetMap","type":"OpenStreetMap"}]},"narrative":{"records":[]},"waypoints":{"order_api":"\/neatline-waypoints"}}</script>
+
+<!-- Underscore templates. -->
+
+
+<script id="static-bubble-template" type="text/template">
+  <a name="close" class="close">&times;</a>
+  <div class="title"><%= record.get('title') %></div>
+  <div class="body"><%= record.get('body') %></div>
+</script>
+
+<!-- Plugin templates. -->

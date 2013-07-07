@@ -8,31 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Base Layers', function() {
+describe('Map | Spatial Layers', function() {
 
 
   beforeEach(function() {
-
-    loadFixtures('SharedHtml.exhibit.html');
-
-    Neatline.g.neatline.spatial_layers = [
-      {
-        title:  'Layer1',
-        id:     'Layer1',
-        type:   'OpenStreetMap'
-      },
-      {
-        title:  'Layer2',
-        id:     'Layer2',
-        type:   'OpenStreetMap'
-      },
-      {
-        title:  'Layer3',
-        id:     'Layer3',
-        type:   'OpenStreetMap'
-      }
-    ];
-
+    NL.loadNeatline('NeatlineMapSpatialLayers.exhibit.html');
   });
 
 
@@ -43,12 +23,14 @@ describe('Map | Base Layers', function() {
     // layers defined in the `spatial_layers` global.
     // --------------------------------------------------------------------
 
-    NL.startApplication();
-    NL.aliasNeatline();
-
-    expect(NL.vw.MAP.map.layers[0].name).toEqual('Layer3');
-    expect(NL.vw.MAP.map.layers[1].name).toEqual('Layer2');
-    expect(NL.vw.MAP.map.layers[2].name).toEqual('Layer1');
+    expect(NL.vw.MAP.map.layers[0].name).toEqual('OpenStreetMap');
+    expect(NL.vw.MAP.map.layers[1].name).toEqual('Google Physical');
+    expect(NL.vw.MAP.map.layers[2].name).toEqual('Google Streets');
+    expect(NL.vw.MAP.map.layers[3].name).toEqual('Google Hybrid');
+    expect(NL.vw.MAP.map.layers[4].name).toEqual('Google Satellite');
+    expect(NL.vw.MAP.map.layers[5].name).toEqual('Stamen Toner');
+    expect(NL.vw.MAP.map.layers[6].name).toEqual('Stamen Watercolor');
+    expect(NL.vw.MAP.map.layers[7].name).toEqual('Stamen Terrain');
 
   });
 
@@ -60,12 +42,7 @@ describe('Map | Base Layers', function() {
     // to the layer with the `id` defined by the `spatial_layer` global.
     // --------------------------------------------------------------------
 
-    Neatline.g.neatline.exhibit.spatial_layer = 'Layer2';
-
-    NL.startApplication();
-    NL.aliasNeatline();
-
-    expect(NL.vw.MAP.map.baseLayer.name).toEqual('Layer2');
+    expect(NL.vw.MAP.map.baseLayer.name).toEqual('OpenStreetMap');
 
   });
 

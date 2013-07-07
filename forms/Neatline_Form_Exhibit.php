@@ -119,7 +119,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Available Map Layers:
         $this->addElement('multiselect', 'spatial_layers', array(
             'label'         => __('Active Map Layers'),
-            'description'   => __('Choose the collection spatial layers should be available in the layer picker widget in the exhibit.'),
+            'description'   => __('Choose the collection of spatial layers that should be available in the layer picker widget.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->spatial_layers)
@@ -163,7 +163,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // WMS Layers:
         $this->addElement('text', 'wms_layers', array(
             'label'         => __('WMS Layers'),
-            'description'   => __('And (b) the comma-delimited list of WMS layers.'),
+            'description'   => __('And (b) the comma-delimited list of layers.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_layers
         ));

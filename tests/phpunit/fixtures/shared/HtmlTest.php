@@ -17,7 +17,7 @@ class FixturesTest_SharedHtml extends Neatline_Case_Default
 
 
     /**
-     * Set a mock exhibit object on the view.
+     * Mock the widgets, presenters, and exhibit.
      */
     public function setUp()
     {
