@@ -210,12 +210,19 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Delete all child data records when an exhibit is deleted.
+     * Measure the size of the image defined by `image_layer`.
      */
-    protected function beforeDelete()
-    {
+    // public function compileImageSize()
+    // {
+    //     // TODO
+    // }
 
-        parent::beforeDelete();
+
+    /**
+     * Delete all records that belong to the exhibit.
+     */
+    public function deleteChildRecords()
+    {
 
         // Get records table and name.
         $records = $this->getTable('NeatlineRecord');
@@ -237,6 +244,25 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         // Delete child records.
         $records->delete($rName, array('exhibit_id=?' => $this->id));
 
+    }
+
+
+    /**
+     * Measure the image layer when the exhibit is * saved.
+     */
+    // protected function beforeSave()
+    // {
+    //     $this->compileImageSize();
+    // }
+
+
+    /**
+     * Delete all child records when the exhibit is deleted.
+     */
+    protected function beforeDelete()
+    {
+        parent::beforeDelete();
+        $this->deleteChildRecords();
     }
 
 

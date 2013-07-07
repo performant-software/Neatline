@@ -257,7 +257,9 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Compile the item reference and WMS coverage.
+     * Compile the item reference and WMS coverage. Override the `save`
+     * method instead of using the built-in `beforeSave` hook so that the
+     * test suite can have access to the original, unmodified method.
      */
     public function save()
     {
