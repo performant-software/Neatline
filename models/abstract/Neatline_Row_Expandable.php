@@ -93,7 +93,7 @@ abstract class Neatline_Row_Expandable extends Neatline_Row_Abstract
     /**
      * Delete all expansions before when the row is deleted.
      */
-    protected function beforeDelete()
+    public function delete()
     {
 
         // Gather expansion tables.
@@ -104,6 +104,8 @@ abstract class Neatline_Row_Expandable extends Neatline_Row_Abstract
         foreach ($tables as $table) {
             $table->deleteByParent($this);
         }
+
+        parent::delete();
 
     }
 

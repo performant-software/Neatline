@@ -212,10 +212,13 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     /**
      * Measure the size of the image defined by `image_layer`.
      */
-    // public function compileImageSize()
-    // {
-    //     // TODO
-    // }
+    public function compileImageSize()
+    {
+        if (!is_null($this->image_layer)) {
+            print_r(getimagesize($this->image_layer));
+            exit;
+        }
+    }
 
 
     /**
@@ -261,7 +264,6 @@ class NeatlineExhibit extends Neatline_Row_Expandable
      */
     protected function beforeDelete()
     {
-        parent::beforeDelete();
         $this->deleteChildRecords();
     }
 
