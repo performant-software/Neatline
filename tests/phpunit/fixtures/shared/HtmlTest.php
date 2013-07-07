@@ -23,31 +23,29 @@ class FixturesTest_SharedHtml extends Neatline_Case_Default
     {
 
         parent::setUp();
-
-        nl_mockView();
         $this->_mockRecordWidgets();
         $this->_mockPresenters();
 
-        // Create exhibit.
-        $exhibit = $this->_exhibit();
-        $exhibit->spatial_layer = 'OpenStreetMap';
-        $exhibit->save();
-
-        // Set exhibit on view.
-        get_view()->neatline_exhibit = $exhibit;
+        $this->exhibit = $this->_exhibit();
+        $this->exhibit->spatial_layer = 'OpenStreetMap';
+        $this->exhibit->save();
 
     }
 
 
     public function testNeatlinePartial()
     {
-        $this->_writeExhibitMarkupFixture('neatline-partial.html');
+        $this->_writeExhibitMarkupFixture(
+            $this->exhibit, 'SharedHtml.exhibit.html'
+        );
     }
 
 
     public function testEditorPartial()
     {
-        $this->_writeEditorMarkupFixture('editor-partial.html');
+        $this->_writeEditorMarkupFixture(
+            $this->exhibit, 'SharedHtml.editor.html'
+        );
     }
 
 

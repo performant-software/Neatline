@@ -163,28 +163,39 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     /**
      * Render an exhibit HTML fixture.
      *
+     * @param NeatlineExhibit $exhibit The current exhibit.
      * @param string $file The name of the fixture file.
      */
-    protected function _writeExhibitMarkupFixture($file)
+    protected function _writeExhibitMarkupFixture($exhibit, $file)
     {
+
+        nl_mockView()->neatline_exhibit = $exhibit;;
+
         $this->_writeFixture(
             get_view()->partial('exhibits/partials/exhibit.php'),
             $file
         );
+
+
     }
 
 
     /**
      * Render an editor HTML fixture.
      *
+     * @param NeatlineExhibit $exhibit The current exhibit.
      * @param string $file The name of the fixture file.
      */
-    protected function _writeEditorMarkupFixture($file)
+    protected function _writeEditorMarkupFixture($exhibit, $file)
     {
+
+        nl_mockView()->neatline_exhibit = $exhibit;;
+
         $this->_writeFixture(
             get_view()->partial('exhibits/partials/editor_core.php'),
             $file
         );
+
     }
 
 

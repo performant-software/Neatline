@@ -12,6 +12,8 @@
 
 /**
  * Register the template paths necessary for the item compilations.
+ *
+ * @return Omeka_View $view The new view.
  */
 function nl_mockView()
 {
@@ -30,13 +32,18 @@ function nl_mockView()
     // -----------------------
     $view->addScriptPath(nl_getPublicThemeDir());
 
+    // Inject new view.
     Zend_Registry::set('view', $view);
+
+    return $view;
 
 }
 
 
 /**
  * Get the `webDir` attribute on the filesystem adapter.
+ *
+ * @return string The current web directory.
  */
 function nl_getWebDir()
 {

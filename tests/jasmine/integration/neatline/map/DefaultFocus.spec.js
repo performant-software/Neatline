@@ -12,7 +12,7 @@ describe('Map | Default Focus', function() {
 
 
   beforeEach(function() {
-    loadFixtures('neatline-partial.html');
+    loadFixtures('SharedHtml.exhibit.html');
   });
 
 

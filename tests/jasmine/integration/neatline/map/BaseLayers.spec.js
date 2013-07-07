@@ -13,7 +13,7 @@ describe('Map | Base Layers', function() {
 
   beforeEach(function() {
 
-    loadFixtures('neatline-partial.html');
+    loadFixtures('SharedHtml.exhibit.html');
 
     Neatline.g.neatline.spatial_layers = [
       {
