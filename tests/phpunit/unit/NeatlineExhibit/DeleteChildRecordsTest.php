@@ -9,14 +9,14 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineExhibitTest_BeforeDelete extends Neatline_Case_Default
+class NeatlineExhibitTest_DeleteChildRecords extends Neatline_Case_Default
 {
 
 
     /**
      * `beforeDelete` should delete all child records.
      */
-    public function testDeleteRecords()
+    public function testDeleteChildRecords()
     {
 
         $exhibit1   = $this->_exhibit();
