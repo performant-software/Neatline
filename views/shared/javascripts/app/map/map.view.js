@@ -32,6 +32,7 @@ Neatline.module('Map', function(
       this._initControls();
       this._initEvents();
       this._initBaseLayers();
+      this._initViewport();
     },
 
 
@@ -139,85 +140,9 @@ Neatline.module('Map', function(
 
 
     /**
-     * Create the base layer(s) for the exhibit:
-     *
-     * - If the `wms_address` and `wms_layers` fields are defined on the
-     *   exhibit, create a single WMS layer.
-     *
-     * - Otherwise, if the `image_layer` field is defined on the exhibit,
-     *   create a single image layer.
-     *
-     * - If no wms/image layers are defined, create the spatial layers.
+     * Construct spatial base layers.
      */
     _initBaseLayers: function() {
-
-      var isWms = this.exhibit.wms_address && this.exhibit.wms_layers;
-      var isImg = this.exhibit.image_layer;
-
-      if (isWms) this.__initWmsLayer();
-      else if (isImg) this.__initImgLayer();
-      else this.__initSpatialLayers();
-
-    },
-
-
-    /**
-     * Instantiate a WMS layer from the exhibit defaults.
-     * TODO|dev
-     */
-    __initWmsLayer: function() {
-
-      // Create the WMS layer.
-      var layer = new OpenLayers.Layer.WMS(
-        this.exhibit.title, this.exhibit.wms_address,
-        { layers: this.exhibit.wms_layers },
-        { maxZoomLevel: 20 }
-      );
-
-      // Add layer to map.
-      this.map.addLayer(layer);
-      this._initViewport();
-
-    },
-
-
-    /**
-     * Instantiate an image layer from the exhibit defaults.
-     * TODO|dev
-     */
-    __initImgLayer: function() {
-
-      var img = new Image();
-      img.onload = _.bind(function () {
-
-        // Get dimensions.
-        var h = img.height;
-        var w = img.width;
-
-        // Create the image layer.
-        var layer = new OpenLayers.Layer.Image(
-          this.exhibit.title, img.src,
-          new OpenLayers.Bounds(-w, -h, w, h),
-          new OpenLayers.Size(w/4, h/4)
-        );
-
-        // Add layer to map.
-        this.map.addLayer(layer);
-        this._initViewport();
-
-      }, this);
-
-      // Load the image.
-      img.src = this.exhibit.image_layer;
-
-    },
-
-
-    /**
-     * Construct regular API base layers.
-     * TODO|dev
-     */
-    __initSpatialLayers: function() {
 
       var layers = {};
 
@@ -235,7 +160,6 @@ Neatline.module('Map', function(
 
       // Set default layer, set default focus.
       this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
-      this._initViewport();
 
     },
 
@@ -248,16 +172,16 @@ Neatline.module('Map', function(
       var focus = Neatline.g.neatline.exhibit.map_focus;
       var zoom  = Neatline.g.neatline.exhibit.map_zoom;
 
-      // Apply defaults if they exist.
+      // Apply default focus, if one exists.
       if (_.isString(focus) && _.isNumber(zoom)) {
         this.setViewport(focus, zoom);
       }
 
-      // Otherwise, apply default zoom.
-      else this.map.zoomTo(this.options.defaultZoom);
-
-      // Load records.
-      this.publishPosition();
+      else {
+        // Otherwise, geolocate.
+        this.map.zoomTo(this.options.defaultZoom);
+        this.geolocate();
+      }
 
     },
 
@@ -363,6 +287,23 @@ Neatline.module('Map', function(
      */
     setViewport: function(focus, zoom) {
       this.map.setCenter(focus.split(','), zoom);
+    },
+
+
+    /**
+     * Focus the map on the user's location.
+     */
+    geolocate: function() {
+
+      // Construct the control.
+      var geolocate = new OpenLayers.Control.Geolocate({
+        bind: true, watch: false
+      });
+
+      // Geolocate.
+      this.map.addControl(geolocate);
+      geolocate.activate();
+
     },
 
 
