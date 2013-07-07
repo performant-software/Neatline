@@ -158,7 +158,7 @@ Neatline.module('Map', function(
         this.map.setLayerIndex(layer, 0);
       }, this));
 
-      // Set default layer, set default focus.
+      // Set default base layer.
       this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
 
     },

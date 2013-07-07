@@ -216,8 +216,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     {
         if (!is_null($this->image_layer)) {
             $size = getimagesize($this->image_layer);
-            $this->image_height = $size['height'];
-            $this->image_width  = $size['width'];
+            $this->image_height = $size[1];
+            $this->image_width  = $size[0];
         }
     }
 
@@ -256,7 +256,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
      */
     protected function beforeSave()
     {
-        // $this->compileImageSize();
+        $this->compileImageSize();
     }
 
 

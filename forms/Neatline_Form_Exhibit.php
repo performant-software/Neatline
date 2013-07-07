@@ -118,7 +118,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
 
         // Available Map Layers:
         $this->addElement('multiselect', 'spatial_layers', array(
-            'label'         => __('Available Map Layers'),
+            'label'         => __('Active Map Layers'),
             'description'   => __('Choose the collection spatial layers should be available in the layer picker widget in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
@@ -155,7 +155,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // WMS Address:
         $this->addElement('text', 'wms_address', array(
             'label'         => __('WMS Address'),
-            'description'   => __('To use a custom WMS layer as the base layer of the exhibit, enter the address of the WMS server.'),
+            'description'   => __('To use a custom WMS layer as the base layer of the exhibit, enter (a) the address of the WMS server.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_address
         ));
@@ -163,7 +163,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // WMS Layers:
         $this->addElement('text', 'wms_layers', array(
             'label'         => __('WMS Layers'),
-            'description'   => __('Enter the comma-delimited list of WMS layers to be used as the exhibit\'s base layer.'),
+            'description'   => __('And (b) the comma-delimited list of WMS layers.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_layers
         ));
