@@ -210,14 +210,17 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Measure the size of the image defined by `image_layer`.
+     * Measure the size of the image defined by `image_layer`. Wrapped in
+     * a try/catch so that it's possible to work with exhibits offline.
      */
     public function compileImageSize()
     {
         if (!is_null($this->image_layer)) {
-            $size = getimagesize($this->image_layer);
-            $this->image_height = $size[1];
-            $this->image_width  = $size[0];
+            try {
+                $size = getimagesize($this->image_layer);
+                $this->image_height = $size[1];
+                $this->image_width  = $size[0];
+            } catch (Exception $e) {}
         }
     }
 

@@ -309,6 +309,20 @@ SQL;
             }
         }
 
+        // Items
+        if (strpos($path, 'items')) {
+            foreach ($rows as $row) {
+                $this->db->insert('Item', $row);
+            }
+        }
+
+        // Files
+        if (strpos($path, 'files')) {
+            foreach ($rows as $row) {
+                $this->db->insert('File', $row);
+            }
+        }
+
     }
 
 

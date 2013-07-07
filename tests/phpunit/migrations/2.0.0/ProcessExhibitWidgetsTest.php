@@ -14,10 +14,6 @@ class Migrate200Test_ProcessExhibitWidgets
 {
 
 
-    /**
-     * The old `is_items` and `is_timeline` flags should be converted to
-     * the new `Waypoints` and `Simile` slugs on the new exhibits.
-     */
     public function setUp()
     {
 

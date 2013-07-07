@@ -195,6 +195,7 @@ SQL;
             $this->__processExhbibitExtantFields($old, $new);
             $this->__processExhibitDefaultBaseLayer($old, $new);
             $this->__processExhibitSimileDefaults($old, $new);
+            $this->__processExhibitStaticImage($old, $new);
             $this->__processExhibitWidgets($old, $new);
 
             $new->save();
@@ -284,6 +285,21 @@ SQL;
 
         $this->db->query($sql);
 
+    }
+
+
+    /**
+     * Convert the old `image_id` key to the new `image_layer` URL.
+     *
+     * @param object $old The original `neatline_exhibits` row.
+     * @param NeatlineExhibit $new The new exhibit instance.
+     */
+    private function __processExhibitStaticImage($old, $new)
+    {
+        if ($old->image_id) {
+            $file = $this->db->getTable('File')->find($old->image_id);
+            if ($file) $new->image_layer = $file->getWebPath();
+        }
     }
 
 
