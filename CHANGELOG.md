@@ -2,9 +2,9 @@
 
 #### Added Features
 
-  - Makes it possible to use any regular, web-accessible static image as the base layer for an exhibit.
+  - Makes it possible to use any web-accessible static image as the base layer for an exhibit.
 
-  - Makes it possible to use a WMS address/layers combination as the base layer for an exhibit, similar to how a WMS layer can be added to an individual record inside an exhibit. This makes it possible to use custom WMS layers without having to manually registed the layer in a JSON definition file.
+  - Makes it possible to directly enter a WMS address/layers combination to be used as the base layer for an exhibit. This makes it possible to use custom WMS layers without having to manually registed the layer in a JSON definition file.
 
 # v2.0-rc3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc2...2.0-rc3)) ~ July 6, 2013
 
