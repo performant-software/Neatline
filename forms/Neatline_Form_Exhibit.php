@@ -116,18 +116,18 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => nl_explode($this->exhibit->widgets),
         ));
 
-        // API Layers:
+        // Available Map Layers:
         $this->addElement('multiselect', 'spatial_layers', array(
-            'label'         => __('Spatial Layers'),
+            'label'         => __('Available Map Layers'),
             'description'   => __('Choose the collection spatial layers should be available in the layer picker widget in the exhibit.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->spatial_layers)
         ));
 
-        // Default Spatial Layer:
+        // Default Map Layer:
         $this->addElement('select', 'spatial_layer', array(
-            'label'         => __('Default Spatial Layer'),
+            'label'         => __('Default Map Layer'),
             'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
@@ -147,15 +147,15 @@ class Neatline_Form_Exhibit extends Omeka_Form
         // Image Layer:
         $this->addElement('text', 'image_layer', array(
             'label'         => __('Image Layer'),
-            'description'   => __('The address of a static image to use as the exhibit base layer.'),
+            'description'   => __('To use a static image as the base layer of the exhibit, enter the web-accessible location of the image.'),
             'size'          => 40,
             'value'         => $this->exhibit->image_layer
         ));
 
         // WMS Address:
         $this->addElement('text', 'wms_address', array(
-            'label'         => __('WMS Server'),
-            'description'   => __('To use a WMS layer as the base layer of the exhibit, enter the address of the WMS server.'),
+            'label'         => __('WMS Address'),
+            'description'   => __('To use a custom WMS layer as the base layer of the exhibit, enter the address of the WMS server.'),
             'size'          => 40,
             'value'         => $this->exhibit->wms_address
         ));

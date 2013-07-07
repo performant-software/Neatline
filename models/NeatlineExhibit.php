@@ -214,10 +214,10 @@ class NeatlineExhibit extends Neatline_Row_Expandable
      */
     public function compileImageSize()
     {
-        // TODO|dev
         if (!is_null($this->image_layer)) {
-            print_r(getimagesize($this->image_layer));
-            exit;
+            $size = getimagesize($this->image_layer);
+            $this->image_height = $size['height'];
+            $this->image_width  = $size['width'];
         }
     }
 
