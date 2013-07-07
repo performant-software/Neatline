@@ -14,9 +14,11 @@ var NL = (function(NL) {
 
   /**
    * Load neatline application.
+   *
+   * @param {String} fixture: An HTML fixture file.
    */
-  NL.loadNeatline = function() {
-    loadFixtures('SharedHtml.exhibit.html');
+  NL.loadNeatline = function(fixture) {
+    loadFixtures(fixture || 'SharedHtml.exhibit.html');
     loadStyleFixtures('neatline-public.css');
     this.__initNeatline();
   };
@@ -24,9 +26,11 @@ var NL = (function(NL) {
 
   /**
    * Load editor application.
+   *
+   * @param {String} fixture: An HTML fixture file.
    */
-  NL.loadEditor = function() {
-    loadFixtures('SharedHtml.editor.html');
+  NL.loadEditor = function(fixture) {
+    loadFixtures(fixture || 'SharedHtml.editor.html');
     loadStyleFixtures('neatline-editor.css');
     this.__initEditor();
   };

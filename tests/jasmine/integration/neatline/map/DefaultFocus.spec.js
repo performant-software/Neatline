@@ -12,7 +12,7 @@ describe('Map | Default Focus', function() {
 
 
   beforeEach(function() {
-    loadFixtures('SharedHtml.exhibit.html');
+    NL.loadNeatline('NeatlineMapDefaultFocus.exhibit.html');
   });
 
 
@@ -22,12 +22,6 @@ describe('Map | Default Focus', function() {
     // When the exhibit starts, the viewport defined by the `map_focus`
     // and `map_zoom` should be manifested on the map.
     // --------------------------------------------------------------------
-
-    Neatline.g.neatline.exhibit.map_focus = '1,2';
-    Neatline.g.neatline.exhibit.map_zoom = 10;
-
-    NL.startApplication();
-    NL.aliasNeatline();
 
     NL.assertMapViewport(1, 2, 10);
 
