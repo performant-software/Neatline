@@ -102,7 +102,7 @@ var wp, len;
 
 // Create exhibit.
 var sql = 'INSERT INTO omeka_neatline_exhibits ' +
-  '(title, slug, spatial_layer) VALUES ("Dev," "dev", "OpenStreetMap")';
+  '(title, slug, base_layer) VALUES ("Dev," "dev", "OpenStreetMap")';
 
 client.query(sql, function(err, res) {
 
