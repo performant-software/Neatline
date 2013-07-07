@@ -187,8 +187,15 @@ Neatline.module('Map', function(
      * Construct an individual WMS base layer.
      */
     _initWmsLayer: function() {
-      console.log('initWmsLayer');
-      // TODO
+
+      var wms = new OpenLayers.Layer.WMS(
+        this.exhibit.title, this.exhibit.wms_address,
+        { layers: this.exhibit.wms_layers },
+        { maxZoomLevel: 20 }
+      );
+
+      this.map.addLayer(wms);
+
     },
 
 

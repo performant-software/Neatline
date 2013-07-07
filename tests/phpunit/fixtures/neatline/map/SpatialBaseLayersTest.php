@@ -9,7 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapImageLayer extends Neatline_Case_Default
+class FixturesTest_NeatlineMapSpatialBaseLayers
+    extends Neatline_Case_Default
 {
 
 
@@ -20,11 +21,19 @@ class FixturesTest_NeatlineMapImageLayer extends Neatline_Case_Default
     {
 
         $exhibit = $this->_exhibit();
-        $exhibit->image_layer = NL_TEST_DIR.'/mocks/image.jpg';
+
+        $exhibit->spatial_layer = 'StamenToner';
+        $exhibit->spatial_layers = implode(',', array(
+            'OpenStreetMap',
+            'StamenToner',
+            'StamenWatercolor',
+            'StamenTerrain'
+        ));
+
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapImageLayer.exhibit.html'
+            $exhibit, 'NeatlineMapSpatialBaseLayers.html'
         );
 
     }

@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Spatial Layers', function() {
+describe('Map | Spatial Base Layers', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapSpatialLayers.exhibit.html');
+    NL.loadNeatline('NeatlineMapSpatialBaseLayers.html');
   });
 
 

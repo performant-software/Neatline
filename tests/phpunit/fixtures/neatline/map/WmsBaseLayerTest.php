@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapSpatialLayers extends Neatline_Case_Default
+class FixturesTest_NeatlineMapWmsBaseLayer extends Neatline_Case_Default
 {
 
 
@@ -20,19 +20,12 @@ class FixturesTest_NeatlineMapSpatialLayers extends Neatline_Case_Default
     {
 
         $exhibit = $this->_exhibit();
-
-        $exhibit->spatial_layer = 'StamenToner';
-        $exhibit->spatial_layers = implode(',', array(
-            'OpenStreetMap',
-            'StamenToner',
-            'StamenWatercolor',
-            'StamenTerrain'
-        ));
-
+        $exhibit->wms_address = 'address';
+        $exhibit->wms_layers  = 'layers';
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapSpatialLayers.exhibit.html'
+            $exhibit, 'NeatlineMapWmsBaseLayer.html'
         );
 
     }

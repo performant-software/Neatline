@@ -8,27 +8,28 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Image Layer', function() {
+describe('Map | WMS Base Layer', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapImageLayer.exhibit.html');
+    NL.loadNeatline('NeatlineMapWmsBaseLayer.html');
   });
 
 
-  it('should construct image layer', function() {
+  it('should construct WMS base layer', function() {
 
     // --------------------------------------------------------------------
-    // When an image URL is defined on the exhibit, the map should create
-    // a layer from the image and set it as the base layer.
+    // When the WMS address/layers fields are defined on the exhibit, the
+    // map should create a single WMS layer and set it as the base layer.
     // --------------------------------------------------------------------
 
     var layers  = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
     var layer   = NL.vw.MAP.map.baseLayer;
 
-    // Base layer should be an image with the correct URL.
-    expect(layer.CLASS_NAME).toEqual('OpenLayers.Layer.Image');
-    expect(layer.url).toEqual(Neatline.g.neatline.exhibit.image_layer);
+    // Should create a WMS layer from the address/layers.
+    expect(layer.CLASS_NAME).toEqual('OpenLayers.Layer.WMS');
+    expect(layer.params.LAYERS).toEqual('layers');
+    expect(layer.url).toEqual('address');
 
     // Should be just one layer.
     expect(layers.length).toEqual(1);
