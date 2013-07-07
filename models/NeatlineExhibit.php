@@ -214,6 +214,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
      */
     public function compileImageSize()
     {
+        // TODO|dev
         if (!is_null($this->image_layer)) {
             print_r(getimagesize($this->image_layer));
             exit;
@@ -253,10 +254,10 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     /**
      * Measure the image layer when the exhibit is * saved.
      */
-    // protected function beforeSave()
-    // {
-    //     $this->compileImageSize();
-    // }
+    protected function beforeSave()
+    {
+        // $this->compileImageSize();
+    }
 
 
     /**

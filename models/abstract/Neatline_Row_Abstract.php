@@ -111,23 +111,15 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Update the `modified` timestamp when the row is saved.
-     *
-     * @param array $arg Contains `post` and `insert`.
-     */
-    public function beforeSave($args)
-    {
-        $this->modified = date(self::DATE_FORMAT);
-    }
-
-
-    /**
      * Insert or update the record.
      *
      * @param boolean $throwIfInvalid
      */
     public function save($throwIfInvalid = true)
     {
+
+        // Update the `modified` timestamp.
+        $this->modified = date(self::DATE_FORMAT);
 
         $args = array(
             'post'    => $this->_postData ? $this->_postData : false,
