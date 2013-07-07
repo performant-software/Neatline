@@ -186,7 +186,7 @@ SQL;
                 new Neatline_Migration_20rc3($this, $this->_db);
             }
             if ($old < '2.0-rc4') {
-                new Neatline_Migration_20rc3($this, $this->_db);
+                new Neatline_Migration_20rc4($this, $this->_db);
             }
         }
 
