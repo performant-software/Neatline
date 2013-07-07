@@ -140,9 +140,52 @@ Neatline.module('Map', function(
 
 
     /**
-     * Construct spatial base layers.
+     * Dispatch to one of the base layer constructor methods, depending on
+     * what fields are defined on the exhibit object:
+     *
+     * - If `image_layer` is defined, create a static image layer.
+     *
+     * - If both `wms_address` and `wms_layers` are defined, create an
+     *   individual WMS layer.
+     *
+     * - If no exhibit-specific layers are defined, add the the regular
+     *   spatial layers.
      */
     _initBaseLayers: function() {
+
+      var isImg = _.isString(this.exhibit.image_layer);
+      var isWms = _.isString(this.exhibit.wms_address) &&
+                  _.isString(this.exhibit.wms_layers);
+
+      if (isImg) this._initImageLayer();
+      else if (isWms) this._initWmsLayer();
+      else this._initSpatialLayers();
+
+    },
+
+
+    /**
+     * Construct a static image base layer.
+     */
+    _initImageLayer: function() {
+      console.log('initImageLayer');
+      // TODO
+    },
+
+
+    /**
+     * Construct an individual WMS base layer.
+     */
+    _initWmsLayer: function() {
+      console.log('initWmsLayer');
+      // TODO
+    },
+
+
+    /**
+     * Construct spatial base layers.
+     */
+    _initSpatialLayers: function() {
 
       var layers = {};
 
