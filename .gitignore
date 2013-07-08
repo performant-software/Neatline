@@ -9,12 +9,5 @@ _SpecRunner.html
 layers
 !layers/default.json
 
-views/admin/javascripts/payloads
-views/shared/javascripts/payloads
-
-views/admin/css/payloads
-views/shared/css/payloads
-views/shared/css/img
-
 tests/phpunit/migrations.ini
 tests/phpunit/plugins.ini
