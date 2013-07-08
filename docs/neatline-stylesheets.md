@@ -21,6 +21,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
 
   ```css
   .democrat {
+      fill-color: #08c;
       stroke-width: 5;
   }
   ```
@@ -29,6 +30,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
 
   ```css
   .all {
+      fill-color: #08c;
       stroke-width: 5;
   }
   ```
@@ -37,6 +39,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
 
   ```css
   .democrat, .republican {
+      fill-color: #08c;
       stroke-width: 5;
   }
   ```
