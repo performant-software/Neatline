@@ -39,6 +39,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
   .all{
       stroke-width: 5;
   }
+  ```
 
   - Instead of using regular CSS rules, use a special set of rules that map onto properties in the Neatline data model (and, by extension, to the fields in the "Style" tab in the record edit form):
 
