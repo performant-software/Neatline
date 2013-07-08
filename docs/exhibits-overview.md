@@ -12,15 +12,9 @@
 
 Each Neatline project has its own exhibit, which can be thought of as the "canvas" or "environment" for the project - the set of base maps or images on top of which the content is displayed, the text narrative that introduces or describes the project, and the combination of user-interface widgets and components that are enabled for the project (timelines, lists of waypoints, etc).
 
-These high-level configuration options are defined using the "Exhibit Settings" form, which is used to both create new exhibits and edit existing exhibits:
+These high-level configuration options are defined using the "Exhibit Settings" form, which is used to both create new exhibits and edit existing exhibits. Once an exhibit has been created and configured, you can add content to the exhibit by opening the editing environment for the exhibit (generally just called "the editor"), a specialized, interactive map-making application that makes it possible to create and manipulate a collection of records, which make up the actual content of the exhibit.
 
-[SCREENSHOT]
-
-Once an exhibit has been created and configured, you can add content to the exhibit by opening the editing environment for the exhibit (generally just called "the editor"), a specialized, interactive map-making application that makes it possible to create and manipulate a collection of records, which make up the actual content of the exhibit:
-
-[SCREENSHOT]
-
-Almost all of the real work happens in the editor. You might spend just a couple mintutes in the "Exhibit Settings" form, and a couple months building out the content in the editing environment.
+Most of the work happens in the editor. You might spend just a couple mintutes in the "Exhibit Settings" form, and a couple months building out the content in the editing environment.
 
 ## Map exhibits vs. image exhibits
 
