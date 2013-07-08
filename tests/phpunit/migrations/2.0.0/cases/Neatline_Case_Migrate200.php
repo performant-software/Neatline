@@ -316,6 +316,13 @@ SQL;
             }
         }
 
+        // Texts
+        if (strpos($path, 'texts')) {
+            foreach ($rows as $row) {
+                $this->db->insert('ElementText', $row);
+            }
+        }
+
         // Files
         if (strpos($path, 'files')) {
             foreach ($rows as $row) {

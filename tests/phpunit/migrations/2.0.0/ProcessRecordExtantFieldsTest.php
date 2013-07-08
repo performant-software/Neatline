@@ -28,7 +28,6 @@ class Migrate200Test_ProcessRecordExtantFields
 
         $this->_recordMigration('id',               'id');
         $this->_recordMigration('exhibit_id',       'exhibit_id');
-        $this->_recordMigration('title',            'title');
         $this->_recordMigration('slug',             'slug');
         $this->_recordMigration('start_date',       'start_date');
         $this->_recordMigration('end_date',         'end_date');

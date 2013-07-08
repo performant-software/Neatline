@@ -17,6 +17,8 @@ class Migrate200Test_ProcessRecordTitle extends Neatline_Case_Migrate200
     {
 
         parent::setUp();
+        $this->_loadFixture('ProcessRecordTitle.items');
+        $this->_loadFixture('ProcessRecordTitle.texts');
         $this->_loadFixture('ProcessRecordTitle.records');
 
         $this->_upgrade();
