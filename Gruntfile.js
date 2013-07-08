@@ -66,6 +66,15 @@ module.exports = function(grunt) {
         }
       },
 
+      build_chosen: {
+        command: 'npm install && grunt build',
+        options: {
+          execOptions: {
+            cwd: paths.build.chosen
+          }
+        }
+      },
+
       build_sinon: {
         command: './build',
         options: {
@@ -106,7 +115,7 @@ module.exports = function(grunt) {
 
       chosen: {
         files: [{
-          src: paths.build.chosen+'/chosen-sprite.png',
+          src: paths.build.chosen+'/public/chosen-sprite.png',
           dest: paths.payloads.admin.css,
           expand: true,
           flatten: true
@@ -407,6 +416,7 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_ckeditor',
     'shell:build_jquery_ui',
+    'shell:build_chosen',
     'shell:build_sinon',
     'compile',
     'copy'
