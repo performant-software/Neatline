@@ -25,13 +25,20 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
   }
   ```
 
-  - For now (as of v2.0.0), you can't select multiple tags at once. Eg, this won't work:
+  - For now, you can't select multiple tags at once. Eg, this won't work:
 
   ```css
   .democrat, .republican {
       stroke-width: 5;
   }
   ```
+
+  - To match _all_ records in the exhibit, use the special `.all` tag:
+
+  ```css
+  .all{
+      stroke-width: 5;
+  }
 
   - Instead of using regular CSS rules, use a special set of rules that map onto properties in the Neatline data model (and, by extension, to the fields in the "Style" tab in the record edit form):
 
@@ -61,7 +68,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
     - `map-focus`
     - `map-zoom`
 
-## Rationale: Why should I use stylesheets?
+## Rationale: Why use stylesheets?
 
 Neatline 2.0 makes it possible to work with _really_ large collections of records - as many as about 1,000,000 in a single exhibit. That level of scalability is liberating, but it also introduces some interesting new content management challenges. If the map can _display_ that many records, there also need to be new tools that make it possible to effectively update and maintain content at that scale.
 
