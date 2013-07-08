@@ -17,7 +17,7 @@ All exhibits have a built-in stylesheet:
 
 Neatline CSS is syntactically identical to regular CSS, but semantically a bit different:
 
-  - Instead of using DOM selectors, Neatline CSS just treats tags on records as "classes." So, if you have a group of records that are tagged with `democrat`, you would select them with the regular class syntax:
+  - Instead of using DOM selectors, Neatline CSS just treats tags on records as "classes." So, if you have a group of records that are tagged with `democrat`, you can select them as if "democrat" were a class on an HTML element:
 
   ```css
   .democrat {
@@ -25,18 +25,18 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
   }
   ```
 
-  - For now, you can't select multiple tags at once. Eg, this won't work:
+  - To match _all_ records in the exhibit, use the special `.all` tag:
 
   ```css
-  .democrat, .republican {
+  .all {
       stroke-width: 5;
   }
   ```
 
-  - To match _all_ records in the exhibit, use the special `.all` tag:
+  - You can't match multiple tags with the same selector (we're hoping to add this soon). For now, **this won't work**:
 
   ```css
-  .all{
+  .democrat, .republican {
       stroke-width: 5;
   }
   ```
