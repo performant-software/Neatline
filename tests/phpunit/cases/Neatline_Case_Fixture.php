@@ -22,9 +22,12 @@ class Neatline_Case_Fixture extends Neatline_Case_Default
      */
     public function setUp()
     {
+
         parent::setUp();
+
         $this->exhibit = $this->_exhibit();
         $this->request->setQuery('exhibit_id', $this->exhibit->id);
+
     }
 
 

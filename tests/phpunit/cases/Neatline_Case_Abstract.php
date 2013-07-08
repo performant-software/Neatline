@@ -149,7 +149,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     protected function _writeFixtureFromRoute($route, $file)
     {
 
-        // Load the page.
+        // Hit the route.
         $this->resetResponse();
         $this->dispatch($route);
 
@@ -168,15 +168,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     protected function _writeExhibitMarkupFixture($exhibit, $file)
     {
-
-        nl_mockView()->neatline_exhibit = $exhibit;;
-
-        $this->_writeFixture(
-            get_view()->partial('exhibits/partials/exhibit.php'),
-            $file
-        );
-
-
+        get_view()->neatline_exhibit = $exhibit;
+        $html = get_view()->partial('exhibits/partials/exhibit.php');
+        $this->_writeFixture($html, $file);
     }
 
 
@@ -188,14 +182,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     protected function _writeEditorMarkupFixture($exhibit, $file)
     {
-
-        nl_mockView()->neatline_exhibit = $exhibit;;
-
-        $this->_writeFixture(
-            get_view()->partial('exhibits/partials/editor_core.php'),
-            $file
-        );
-
+        get_view()->neatline_exhibit = $exhibit;
+        $html = get_view()->partial('exhibits/partials/editor_core.php');
+        $this->_writeFixture($html, $file);
     }
 
 
