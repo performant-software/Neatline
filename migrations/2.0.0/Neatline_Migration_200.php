@@ -192,11 +192,11 @@ SQL;
 
             $new = new NeatlineExhibit;
 
-            $this->__processExhbibitExtantFields($old, $new);
-            $this->__processExhibitDefaultBaseLayer($old, $new);
-            $this->__processExhibitSimileDefaults($old, $new);
-            $this->__processExhibitStaticImage($old, $new);
-            $this->__processExhibitWidgets($old, $new);
+            $this->__processExhbibitExtantFields    ($old, $new);
+            $this->__processExhibitDefaultBaseLayer ($old, $new);
+            $this->__processExhibitSimileDefaults   ($old, $new);
+            $this->__processExhibitStaticImage      ($old, $new);
+            $this->__processExhibitWidgets          ($old, $new);
 
             $new->save();
 
@@ -344,6 +344,7 @@ SQL;
 
             $this->__processRecordExtantFields      ($old, $new);
             $this->__processRecordInheritedFields   ($old, $new);
+            $this->__processRecordTitle             ($old, $new);
             $this->__processRecordBody              ($old, $new);
             $this->__processRecordPresenter         ($old, $new);
             $this->__processRecordWidgets           ($old, $new);
@@ -367,7 +368,6 @@ SQL;
     {
         $new->id            = $old->id;
         $new->exhibit_id    = $old->exhibit_id;
-        $new->title         = $old->title;
         $new->slug          = $old->slug;
         $new->start_date    = $old->start_date;
         $new->end_date      = $old->end_date;
@@ -413,6 +413,37 @@ SQL;
         $new->point_radius              = $pRadius;
         $new->after_date                = $aDate;
         $new->before_date               = $bDate;
+
+    }
+
+
+    /**
+     * If the record does not have a parent item, migrate the `title`
+     * field directly. If it does have a parent but there is a locally-
+     * set value on the record, migrate the extant value; if `title` is 
+     * null, use the Dublin Core "Title" field on the parent item.
+     *
+     * @param object $old The original `neatline_data_records` row.
+     * @param NeatlineRecord $new The new record instance.
+     */
+    private function __processRecordTitle($old, $new)
+    {
+
+        // If a local value exists, migrate it directly.
+        if (is_null($old->item_id) || !is_null($old->title)) {
+            $new->title = $old->title;
+        }
+
+        else if (!is_null($old->item_id)) {
+
+            $item = get_record_by_id('Item', $old->item_id);
+
+            // Else, try to set the parent item "Title".
+            if ($item) $new->title = metadata($item, array(
+                'Dublin Core', 'Title'
+            ));
+
+        }
 
     }
 
