@@ -1,0 +1,9 @@
+# standard jekyll configuration
+
+permalink: /:year/:month/:day/:title/
+pygments:  true
+markdown: rdiscount
+exclude: ['Gemfile', 'Gemfile.lock']
+
+title: Neatline Documentation
+domain: http://docs.neatline.org

@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>    
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    {% endif %}
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/png" href="http://neatline.org/wp-content/themes/neatline-wp-theme/images/favicon.png">
+
+    <!-- Style Sheets -->
+    <link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,600,400italic,600italic|Cabin:400,600,400italic" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://neatline.org/wp-content/themes/neatline-wp-theme/style.css">
+</head>
+<body>
+    <header role="banner" class="container">
+        <h1 id="logo">
+            <a href="http://neatline.org/" title="Home"><img src="http://neatline.org/wp-content/themes/neatline-wp-theme/images/neatline-logo-rgb.png" alt="Neatline.org" /></a>
+        </h1>
+        <nav id="sitenav">
+            <ul id="menu-main-menu" class="menu">
+                <li><a href="http://neatline.org/about/">About</a></li>
+                <li><a href="http://docs.neatline.org/">Documentation</a></li>
+                <li><a href="http://neatline.org/neatline-in-action/">Demos</a></li>
+                <li><a href="http://neatline.org/news/">News</a></li>
+                <li><a href="http://neatline.org/about/credits-and-history/">Credits</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="content" role="main" class="container">
+        <div id="primary">
+        {{ content }}
+        </div>
+        <div id="secondary">
+          <h2>Getting Started</h2>
+          <ul>
+            <li><a href="what-is-neatline.html">What is Neatline?</a></li>
+            <li><a href="neatline-from-10000-meters.html">Neatline Architecture</a></li>
+            <li><a href="installing-neatline.html">Installing Neatline</a></li>
+            <li><a href="upgrading-to-v2.html">Upgrading Neatline to 2.0</a></li>
+          </ul>
+          <h2>Working with Exhibits</h2>
+          <ul>
+            <li><a href="exhibits-overview.html">Exhibits Overview</a></li>
+            <li><a href="creating-exhibits.html">Creating New Exhibits</a></li>
+            <li><a href="managing-exhibits.html">Managing Exhibits</a></li>
+            <li><a href="user-permissions.html">Managing User Permissions</a></li>
+          </ul>
+          <h2>Working with Records</h2>
+          <ul>
+            <li><a href="records-overview.html">Records Overview</a></li>
+            <li><a href="creating-records.html">Creating New Records</a></li>
+            <li><a href="text-tab.html">Adding Text Content</a></li>
+            <li><a href="map-tab-drawing-geometery.html">Drawing Vector Annotations</a></li>
+            <li><a href="map-tab-editing-geometery.html">Editing Vector Annotations</a></li>
+            <li><a href="map-tab-importing-svg.html">Importing SVG Documents</a></li>
+            <li><a href="style-tab-groups.html">Editing Groups</a></li>
+            <li><a href="style-tab-colors.html">Editing Colors</a></li>
+            <li><a href="style-tab-opacities.html">Editing Opacities</a></li>
+            <li><a href="style-tab-dimensions.html">Editing Dimensions</a></li>
+            <li><a href="style-tab-dates.html">Editing Dates</a></li>
+            <li><a href="style-tab-imagery.html">Editing Imagery</a></li>
+            <li><a href="style-tab-visibility.html">Editing Visibility</a></li>
+            <li><a href="searching-records.html">Searching Records</a></li>
+            <li><a href="neatline-stylesheets.html">Editing Groups</a></li>
+
+          </ul>
+
+        </div>
+    </div>
+
+    <footer role="contentinfo" class="container">
+        <div class="attribution">
+            <div class="widget_text widget clearfloat">
+              <div class="textwidget">Neatline is a project of the <a href="http://www.scholarslab.org/">Scholars' Lab</a> at the University of Virginia Library. It has benefited from the generous support of the <a href="http://lib.virginia.edu">UVa Library</a>, the <a href="http://neh.gov">National Endowment for the Humanities</a>, the <a href="http://imls.gov">Institute of Museum and Library Services</a>, and the <a href="http://loc.gov">Library of Congress</a>.
+    <p>&nbsp;</p>
+              </div>
+            </div>
+        </div>
+        <div id="slab-info">
+          <ul>
+            <li><a rel="license" class="license" href="http://creativecommons.org/licenses/by/3.0/">CC-BY 3.0</a></li>
+            <li><a href="http://neatline.org/feed/atom/" class="feed">Atom</a> · <a href="http://neatline.org/feed/">RSS</a></li>
+            <li><a class=email href="mailto:&#110;%65&#97;%74%6c%69n&#101;&#64;%63&#111;%6cla%62%2eit&#99;%2e&#118;&#105;%72%67&#105;&#110;ia.e%64u">Contact Us</a></li>
+          </ul>
+          <a id="slab-logo" href="http://www.scholarslab.org/"><img src="http://static.scholarslab.org/images/logos/slab/slab-logo-black-200px.png" title="Scholars' Lab" alt="Scholars' Lab"/></a>
+        </div>
+    </footer>
+
+</body>
+</html>
