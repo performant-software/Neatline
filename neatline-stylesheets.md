@@ -22,30 +22,30 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
 
   - Instead of using DOM selectors, Neatline CSS just treats tags on records as "classes." So, if you have a group of records that are tagged with `democrat`, you can select them as if "democrat" were a class on an HTML element:
 
-  ```css
+  {% highlight css %}
   .democrat {
       fill-color: #08c;
       stroke-width: 5;
   }
-  ```
+  {% endhighlight %}
 
   - To match _all_ records in the exhibit, use the special `.all` tag:
 
-  ```css
+  {% highlight css %}
   .all {
       fill-color: #08c;
       stroke-width: 5;
   }
-  ```
+  {% endhighlight %}
 
   - You can't match multiple tags with the same selector (we're hoping to add this soon). For now, **this won't work**:
 
-  ```css
+  {% highlight css %}
   .democrat, .republican {
       fill-color: #08c;
       stroke-width: 5;
   }
-  ```
+  {% endhighlight %}
 
   - Instead of using regular CSS rules, use a special set of rules that map onto properties in the Neatline data model (and, by extension, to the fields in the "Style" tab in the record edit form):
 
@@ -108,16 +108,16 @@ In Neatline, the stylesheet system is closely tied to the tagging system. Tags a
 
 Let's start by defining some basic, generic styles for the each of the precincts, which are all represented as dots on the map:
 
-```css
+{% highlight css %}
 .precinct {
   fill-opacity: 0.5;
   stroke-width: 0;
 }
-```
+{% endhighlight %}
 
 Now, when I click "Save" at the bottom of the form, Neatline will update the "Fill Opacity" and "Stroke Width" of all 800,000 records tagged as `precinct`s with `0.5` and `0`. Next, let's add the date visibility settings for each of the three election-season tags:
 
-```css
+{% highlight css %}
 .2000 {
   after-date: 2000;
   before-date: 2004;
@@ -137,7 +137,7 @@ Now, when I click "Save" at the bottom of the form, Neatline will update the "Fi
   after-date: 2012;
   before-date: 2016;
 }
-```
+{% endhighlight %}
 
 Likewise, when I click "Save," Neatline will update the "After Date" and "Before Date" fields on each record depending on which of the election-season is assigned to it.
 
@@ -149,7 +149,7 @@ You could always just open one of the individual record forms, use the built-in 
 
 We do this with the special `auto` value:
 
-```css
+{% highlight css %}
 .democrat {
   fill-color: auto;
 }
@@ -157,21 +157,21 @@ We do this with the special `auto` value:
 .republican {
   fill-color: auto;
 }
-```
+{% endhighlight %}
 
 Once this is in place, I can just open up any of the individual republican precinct records and pick a shade of red for that specific record. When I click "Save," Neatline recognizes that the "Fill Color" style has been enabled for the `republican` tag, and that the record being saved is tagged as `republican`. When this happens, Neatline does two things. First, it _update the stylesheet with the new value_:
 
-```css
+{% highlight css %}
 .republican {
   fill-color: #9d0000;
 }
-```
+{% endhighlight %}
 
 And, second, it immediately propagates the new value to all of the other `republican` records, just as if the stylesheet had been directly saved. This actually works for all styles, even ones that already have concrete values in the stylesheet (as opposed to `auto`). For example, if I opened up one of the precinct records and changed the value of "Fill Opacity" to `0.7`, and then saved that individual record, the `fill-opacity` rule under the precinct tag in the stylesheet would be updated with the new value and all of the precincts would be updated with the new value of `0.7`. Effectively, this means that it's _impossible for the records and the stylesheet to get out of sync_ - changes made to the stylesheet are immediately propagated out to the records, and changes made to individual records are immediately pushed back into the stylesheet.
 
 Here's the complete stylesheet:
 
-```css
+{% highlight css %}
 .precinct {
   fill-opacity: 0.5;
   stroke-width: 0;
@@ -204,7 +204,7 @@ Here's the complete stylesheet:
 .republican {
   fill-color: #9d0000;
 }
-```
+{% endhighlight %}
 
 
 [css]: https://en.wikipedia.org/wiki/Cascading_Style_Sheets
