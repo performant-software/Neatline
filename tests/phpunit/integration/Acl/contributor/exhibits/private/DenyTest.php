@@ -49,6 +49,7 @@ class AclTest_ContributorExhibitsPrivateDeny extends Neatline_Case_Default
         $this->assertNotXpath('//a[@class="neatline"][@href="'.
             public_url('neatline/show/slug').'"]'
         );
+
     }
 
 
