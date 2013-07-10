@@ -1,4 +1,14 @@
+# v2.0.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 10, 2013
+
+#### Bug Fixes
+
+  - Fixes bug that was causing record deletions to fail when Neatline was installed independently without any of sub-plugins.
+
 # v2.0.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 8, 2013
+
+#### Bug Fixes
+
+  - Fixes problem with 1.x -> 2.0 migration that was causing Omeka-backed records with titles that were inherited from the items to be migrated with empty titles.
 
 # v2.0-rc4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc3...2.0-rc4)) ~ July 7, 2013
 
