@@ -260,9 +260,17 @@ SQL;
      */
     protected function _upgrade()
     {
+
+        // Create plugin manager class.
         $this->helper->pluginBroker->setCurrentPluginDirName('Neatline');
         $this->plugin = new NeatlinePlugin();
-        $this->plugin->hookUpgrade('1.1.3', '2.0.0');
+
+        // Upgrade from 1.1.3 -> 2.0.0.
+        $this->plugin->hookUpgrade(array(
+            'old_version' => '1.1.3',
+            'new_version' => '2.0.0'
+        ));
+
     }
 
 
