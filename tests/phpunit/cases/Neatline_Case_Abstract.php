@@ -347,7 +347,8 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
      */
     protected function _getLastRow($table)
     {
-        return end($table->findAll());
+        $records = $table->findAll();
+        return array_pop($records);
     }
 
 
