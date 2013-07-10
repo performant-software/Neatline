@@ -104,14 +104,4 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
     }
 
 
-    /**
-     * TODO|dev.
-     * @REST
-     */
-    public function debugAction()
-    {
-        echo $this->_helper->acl->getResourceName();
-    }
-
-
 }

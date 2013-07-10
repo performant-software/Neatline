@@ -96,12 +96,8 @@ abstract class Neatline_Row_Expandable extends Neatline_Row_Abstract
     public function delete()
     {
 
-        // Gather expansion tables.
-        $tables = $this->getTable()->getExpansionTables();
-        if (!$tables) return;
-
-        // Delete expansion rows.
-        foreach ($tables as $table) {
+        // Delete child rows in all expansion tables.
+        foreach ($this->getTable()->getExpansionTables() as $table) {
             $table->deleteByParent($this);
         }
 
