@@ -1,16 +1,16 @@
-# v2.0.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 10, 2013
+## v2.0.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 10, 2013
 
 #### Bug Fixes
 
   - Fixes bug that was causing record deletions to fail when Neatline was installed independently without any of sub-plugins.
 
-# v2.0.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 8, 2013
+## v2.0.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 8, 2013
 
 #### Bug Fixes
 
   - Fixes problem with 1.x -> 2.0 migration that was causing Omeka-backed records with titles that were inherited from the items to be migrated with empty titles.
 
-# v2.0-rc4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc3...2.0-rc4)) ~ July 7, 2013
+## v2.0-rc4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc3...2.0-rc4)) ~ July 7, 2013
 
 #### Added Features
 
@@ -18,7 +18,7 @@
 
   - Makes it possible to directly enter a WMS address/layers combination to be used as the base layer for an exhibit. This makes it possible to use custom WMS layers without having to manually registed the layer in a JSON definition file.
 
-# v2.0-rc3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc2...2.0-rc3)) ~ July 6, 2013
+## v2.0-rc3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc2...2.0-rc3)) ~ July 6, 2013
 
 #### Added Features
 
@@ -28,13 +28,13 @@
 
   - Adds correctly-formed fulltext indexes to the records table for each of the combinations of fields that the application queries against - `title`/`body`/`slug`, `tags`, and `widgets`. This repairs previous versions of the table that just created a single index for _all_ of the fields, which caused queries against just _some_ of the fields to fail.
 
-# v2.0-rc2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc1...2.0-rc2)) ~ July 2, 2013
+## v2.0-rc2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc1...2.0-rc2)) ~ July 2, 2013
 
 #### Bug Fixes
 
   - Fixes a problem introduced by a change in the Rivets library that was causing the twitter `data-X` element attributes to get sucked up by the Rivets view, which caused Rivets to try to bind the nonexistent model attributes.
 
-# v2.0-rc1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha2...2.0-rc1)) ~ June 30, 2013
+## v2.0-rc1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha2...2.0-rc1)) ~ June 30, 2013
 
 #### Added Features
 
@@ -74,7 +74,7 @@
 
   - When a vector layer has been selected from without, it is now possible to unselect the layer as usual by clicking on the map's base layer.
 
-# v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
+## v2.0-alpha2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-alpha1...2.0-alpha2)) ~ May 28, 2013
 
 #### New Features
 
@@ -110,7 +110,7 @@
 
   - Fixes bugs in public exhibit browse view - changes the listings to point to the slug-based exhibit links and got rid of PHP warnings caused by malformed helper calls.
 
-# v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1)) ~ May 13, 2013
+## v2.0-alpha1 ([commits](https://github.com/scholarslab/Neatline/compare/1.1.2...2.0-alpha1)) ~ May 13, 2013
 
 #### Architectural Changes
 
@@ -164,7 +164,7 @@
 
   - Makes the geometry add/edit/delete controls more semantic: Gets rid of the icon-bar, replaces with text-labelled radio buttons.
 
-### API Changes
+#### API Changes
 
   - Rewrites the front-end (editing environment and public-facing exhibit application) using [Backbone.js](https://github.com/documentcloud/backbone) and [Marionette](https://github.com/marionettejs/backbone.marionette).
 
