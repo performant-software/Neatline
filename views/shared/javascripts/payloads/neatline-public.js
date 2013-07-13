@@ -19566,7 +19566,6 @@ rivets.configure({
  */
 
 Neatline = new Backbone.Marionette.Application();
-console.log('test');
 
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
