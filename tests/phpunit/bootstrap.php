@@ -30,3 +30,11 @@ require_once 'migrations/2.0.0/cases/Neatline_Case_Migrate200.php';
 
 // Mock filter callbacks.
 require_once 'mocks/filters.php';
+
+
+// Manually load `Zend_Test_PHPUnit_Constraint_DomQuery`, which triggers
+// a false-negative error in the suite when first loaded by Zend's PHPUnit
+// subclasses, which don't work with PHPUnit 3.6+.
+//
+// TODO: Other than downgrading PHPUnit, how to fix this?
+@require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';
