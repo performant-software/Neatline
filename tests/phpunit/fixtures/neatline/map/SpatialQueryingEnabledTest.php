@@ -14,6 +14,24 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
 {
 
 
+    protected $_isAdminTest = false;
+
+
+    public function testExhibit()
+    {
+
+        $exhibit = $this->_exhibit();
+        $exhibit->spatial_layer = 'OpenStreetMap';
+        $exhibit->spatial_querying = 1;
+        $exhibit->save();
+
+        $this->_writeExhibitMarkupFixture(
+            $exhibit, 'NeatlineMapSpatialQueryingEnabled.exhibit'
+        );
+
+    }
+
+
     public function testRecords()
     {
 

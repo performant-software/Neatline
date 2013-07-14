@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapDefaultFocus extends Neatline_Case_Default
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapDefaultFocus.exhibit.html'
+            $exhibit, 'NeatlineMapDefaultFocus.html'
         );
 
     }

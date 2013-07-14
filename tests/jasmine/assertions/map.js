@@ -29,7 +29,7 @@ var NL = (function(NL) {
   /**
    * Assert that the last query was a map extent query.
    */
-  NL.assertMapExtentQuery = function() {
+  NL.assertMapDynamicQuery = function() {
 
     // Should trigger GET request to /records.
     this.assertLastRequestRoute(Neatline.g.neatline.records_api);

@@ -90,6 +90,7 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
     {
 
         $exhibit = new NeatlineExhibit;
+
         $exhibit->setArray(array(
             'slug' => $slug, 'public' => $public
         ));

@@ -18,18 +18,18 @@ describe('Map | Spatial Querying Enabled', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline();
+    NL.loadNeatline('NeatlineMapSpatialQueryingEnabled.exhibit');
   });
 
 
-  it('should query for records when the exhibit starts', function() {
+  it('should query by extent/zoom when the exhibit starts', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit starts, the map should query for records that fall
-    // within the default extent of the map.
+    // within the default extent/zoom of the map.
     // --------------------------------------------------------------------
 
-    NL.assertMapExtentQuery();
+    NL.assertMapDynamicQuery();
 
   });
 
@@ -42,7 +42,7 @@ describe('Map | Spatial Querying Enabled', function() {
     // --------------------------------------------------------------------
 
     NL.triggerMapMoveEnd();
-    NL.assertMapExtentQuery();
+    NL.assertMapDynamicQuery();
 
   });
 
