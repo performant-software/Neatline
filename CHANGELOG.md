@@ -2,9 +2,9 @@
 
 #### Changed Features
 
-  - Increased up the size of the "SVG" input textarea to make it easier to see the SVG markup after it's been pasted in.
+  - Increases up the size of the "SVG" input textarea to make it easier to see the SVG markup after it's been pasted in.
 
-  - Got rid of HTML sanitization on exhibit "Narrative" and record "Title" and "Body" fields that was making it impossible to use `data-neatline-slug` attributes in the markup.
+  - Gets rid of HTML sanitization on exhibit and record models that was scrubbing out `data-neatline-slug` attributes in the markup.
 
 #### Bug Fixes
 
