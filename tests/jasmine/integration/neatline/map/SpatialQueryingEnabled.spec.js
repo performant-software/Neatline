@@ -18,7 +18,7 @@ describe('Map | Spatial Querying Enabled', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapSpatialQueryingEnabled.exhibit');
+    NL.loadNeatline('NeatlineMapSpatialQueryingEnabled.html');
   });
 
 

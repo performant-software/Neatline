@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapSpatialQueryingEnabled.exhibit'
+            $exhibit, 'NeatlineMapSpatialQueryingEnabled.html'
         );
 
     }
