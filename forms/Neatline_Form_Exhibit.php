@@ -168,6 +168,13 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->wms_layers
         ));
 
+        // Spatial Querying:
+        $this->addElement('checkbox', 'spatial_querying', array(
+            'label'         => __('Spatial Querying'),
+            'description'   => __('If checked, the map will dynamically load just the set of records that falls inside the current viewport.'),
+            'value'         => $this->exhibit->spatial_querying
+        ));
+
         // Public:
         $this->addElement('checkbox', 'public', array(
             'label'         => __('Public'),
@@ -190,6 +197,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'image_layer',
             'wms_address',
             'wms_layers',
+            'spatial_querying',
             'public'
         ), 'fields');
 
