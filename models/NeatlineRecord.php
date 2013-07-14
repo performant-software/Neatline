@@ -279,17 +279,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Before saving, run `title` and `body` through an HTML purifier.
-     *
-     * @return array.
-     */
-    public function getPurifiedFields()
-    {
-        return array('title', 'body');
-    }
-
-
-    /**
      * Associate the model with an ACL resource id.
      *
      * @return string The resource id..

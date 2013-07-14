@@ -4,6 +4,8 @@
 
   - Increased up the size of the "SVG" input textarea to make it easier to see the SVG markup after it's been pasted in.
 
+  - Got rid of HTML sanitization on exhibit "Narrative" and record "Title" and "Body" fields that was making it impossible to use `data-neatline-slug` attributes in the markup.
+
 #### Bug Fixes
 
   - Fixes bug that was making it impossible to paste values from the clipboard into the hex value input boxes for the color fields in the "Style" tab.

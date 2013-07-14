@@ -94,25 +94,4 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
     }
 
 
-    /**
-     * `saveForm` pass `narrative` through an HTML purifier.
-     */
-    public function testSanitizeNarrative()
-    {
-
-        $exhibit = $this->_exhibit();
-
-        // Set blacklisted HTML.
-        $exhibit->saveForm(array(
-            'narrative' => 'X<script></script>Y'
-        ));
-
-        $exhibit = $this->_reload($exhibit);
-
-        // Should purify the HTML before saving.
-        $this->assertEquals($exhibit->narrative, 'XY');
-
-    }
-
-
 }
