@@ -191,6 +191,14 @@ SQL;
             }
         }
 
+        // Otherwise, run 2.0+ migrations normally.
+
+        else {
+            if ($old < '2.0.2') {
+                new Neatline_Migration_202($this, $this->_db);
+            }
+        }
+
     }
 
 

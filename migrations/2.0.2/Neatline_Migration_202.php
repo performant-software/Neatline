@@ -19,7 +19,7 @@ class Neatline_Migration_202 extends Neatline_Migration_Abstract
     public function migrate()
     {
         $this->_renameExhibitQueryColumn();
-        $this->_addRecordSpatialQueryingColumn();
+        $this->_addExhibitSpatialQueryingColumn();
         $this->_addRecordNotNullConstraints();
     }
 
@@ -38,12 +38,12 @@ SQL;
 
 
     /**
-     * On records, add `spatial_querying`.
+     * On exhibits, add `spatial_querying`.
      */
-    private function _addRecordSpatialQueryingColumn()
+    private function _addExhibitSpatialQueryingColumn()
     {
         $sql = <<<SQL
-        ALTER TABLE {$this->db->prefix}neatline_records
+        ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN spatial_querying TINYINT(1) NOT NULL DEFAULT 1;
 SQL;
         $this->db->query($sql);
