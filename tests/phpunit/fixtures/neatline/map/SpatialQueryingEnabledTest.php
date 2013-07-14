@@ -9,7 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapRecordLoading extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapSpatialQueryingEnabled
+    extends Neatline_Case_Fixture
 {
 
 
@@ -26,13 +27,13 @@ class FixturesTest_NeatlineMapRecordLoading extends Neatline_Case_Fixture
         $record2->save();
 
         $this->_writeFixtureFromRoute('neatline/records',
-            'NeatlineMapRecordLoading.two.json'
+            'NeatlineMapSpatialQueryingEnabled.two.json'
         );
 
         $record2->delete();
 
         $this->_writeFixtureFromRoute('neatline/records',
-            'NeatlineMapRecordLoading.one.json'
+            'NeatlineMapSpatialQueryingEnabled.one.json'
         );
 
     }

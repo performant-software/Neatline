@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Record Loading', function() {
+describe('Map | Spatial Querying Enabled', function() {
 
 
   var fx = {
-    one: readFixtures('NeatlineMapRecordLoading.one.json'),
-    two: readFixtures('NeatlineMapRecordLoading.two.json')
+    one: readFixtures('NeatlineMapSpatialQueryingEnabled.one.json'),
+    two: readFixtures('NeatlineMapSpatialQueryingEnabled.two.json')
   };
 
 
