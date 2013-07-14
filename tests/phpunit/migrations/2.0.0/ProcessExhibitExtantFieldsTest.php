@@ -31,7 +31,7 @@ class Migrate200Test_ProcessExhibitExtantFields
         $this->_exhibitMigration('description',         'narrative');
         $this->_exhibitMigration('slug',                'slug');
         $this->_exhibitMigration('public',              'public');
-        $this->_exhibitMigration('query',               'query');
+        $this->_exhibitMigration('query',               'item_query');
         $this->_exhibitMigration('default_map_bounds',  'map_focus');
         $this->_exhibitMigration('default_map_zoom',    'map_zoom');
 

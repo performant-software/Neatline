@@ -18,7 +18,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $added;          // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;       // TIMESTAMP NULL
     public $published;      // TIMESTAMP NULL
-    public $query;          // TEXT NULL
+    public $item_query;     // TEXT NULL
     public $spatial_layers; // TEXT NULL
     public $spatial_layer;  // TEXT NULL
     public $image_layer;    // TEXT NULL

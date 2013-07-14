@@ -218,7 +218,7 @@ SQL;
         $new->slug          = $old->slug;
         $new->public        = $old->public;
         $new->narrative     = $old->description;
-        $new->query         = $old->query;
+        $new->item_query    = $old->query;
         $new->map_focus     = $old->default_map_bounds;
         $new->map_zoom      = $old->default_map_zoom;
     }

@@ -38,7 +38,7 @@ PackageTask.new('Neatline') do |p|
   p.need_tar_gz = true
   p.need_zip    = true
 
-  # Configuration --
+  ## Configuration --
   p.package_files.include('plugin.php')
   p.package_files.include('plugin.ini')
   p.package_files.include('routes.ini')

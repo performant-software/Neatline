@@ -49,7 +49,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         modified                TIMESTAMP NULL,
         published               TIMESTAMP NULL,
-        query                   TEXT NULL,
+        item_query              TEXT NULL,
         spatial_layers          TEXT NULL,
         spatial_layer           TEXT NULL,
         image_layer             TEXT NULL,
