@@ -23,7 +23,7 @@ class Neatline_Migration_20rc3 extends Neatline_Migration_Abstract
 
 
     /**
-     * Rebuilt fulltext indexes. This repairs old versions of the record
+     * Rebuild fulltext indexes. This repairs old versions of the record
      * table creation that indexed all of the text fields together, which
      * caused queries against just _some_ of the fields to fail.
      */

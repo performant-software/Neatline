@@ -45,7 +45,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         {$this->_db->prefix}neatline_exhibits (
 
         id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        owner_id                INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        owner_id                INT(10) UNSIGNED NOT NULL,
         added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         modified                TIMESTAMP NULL,
         published               TIMESTAMP NULL,
@@ -61,6 +61,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         title                   TEXT NULL,
         slug                    VARCHAR(100) NOT NULL,
         narrative               LONGTEXT NULL,
+        spatial_querying        TINYINT(1) NOT NULL,
         public                  TINYINT(1) NOT NULL,
         styles                  TEXT NULL,
         map_focus               VARCHAR(100) NULL,
@@ -78,13 +79,13 @@ SQL;
         {$this->_db->prefix}neatline_records (
 
         id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        owner_id                INT(10) UNSIGNED NOT NULL DEFAULT 0,
+        owner_id                INT(10) UNSIGNED NOT NULL,
         item_id                 INT(10) UNSIGNED NULL,
         exhibit_id              INT(10) UNSIGNED NULL,
         added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         modified                TIMESTAMP NULL,
-        is_coverage             TINYINT(1) NULL,
-        is_wms                  TINYINT(1) NULL,
+        is_coverage             TINYINT(1) NOT NULL,
+        is_wms                  TINYINT(1) NOT NULL,
         slug                    VARCHAR(100) NULL,
         title                   MEDIUMTEXT NULL,
         body                    MEDIUMTEXT NULL,
