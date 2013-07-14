@@ -1,4 +1,14 @@
-## v2.0.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ July 10, 2013
+## v2.0.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ Pending
+
+#### Changed Features
+
+  - Increased up the size of the "SVG" input textarea to make it easier to see the SVG markup after it's been pasted in.
+
+#### Bug Fixes
+
+  - Fixes bug that was making it impossible to paste values from the clipboard into the hex value input boxes for the color fields in the "Style" tab.
+
+## v2.0.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.0...2.0.1)) ~ July 10, 2013
 
 #### Bug Fixes
 
