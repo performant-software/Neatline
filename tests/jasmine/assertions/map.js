@@ -43,6 +43,22 @@ var NL = (function(NL) {
 
 
   /**
+   * Assert that the last query was a static map query.
+   */
+  NL.assertMapStaticQuery = function() {
+
+    // Should trigger GET request to /records.
+    this.assertLastRequestRoute(Neatline.g.neatline.records_api);
+    this.assertLastRequestMethod('GET');
+
+    // Should _not_ filter on extent and zoom.
+    this.assertNotLastRequestHasGetParameter('extent');
+    this.assertNotLastRequestHasGetParameter('zoom');
+
+  };
+
+
+  /**
    * Assert the number of vector layers.
    *
    * @param {Number} count: The number.

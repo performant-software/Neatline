@@ -129,13 +129,15 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a move completes, issue a request for new layers that fall
-     * within the updated viewport extent.
+     * If spatial querying is enabled, issue a request for new layers that
+     * fall within the updated viewport extent when the map is moved.
      */
     _initEvents: function() {
-      this.map.events.register('moveend', this.map, _.bind(function() {
-        this.publishPosition();
-      }, this));
+      if (this.exhibit.spatial_querying) {
+        this.map.events.register('moveend', this.map, _.bind(function() {
+          this.requestRecords();
+        }, this));
+      }
     },
 
 
@@ -325,17 +327,6 @@ Neatline.module('Map', function(
 
       Neatline.vent.trigger('MAP:focused');
 
-    },
-
-
-    /**
-     * Publish the current focus and zoom of the map via `MAP:move`.
-     */
-    publishPosition: function() {
-      Neatline.execute('MAP:load', {
-        extent: this.getExtentAsWKT(),
-        zoom:   this.getZoom()
-      });
     },
 
 
@@ -886,6 +877,24 @@ Neatline.module('Map', function(
         model:  feature.layer.nModel,
         source: Map.ID
       });
+
+    },
+
+
+    /**
+     * Publish a request for new records. If spatial querying is enabled,
+     * filter on the current focus and zoom of the map.
+     */
+    requestRecords: function() {
+
+      var params = {};
+
+      if (this.exhibit.spatial_querying) {
+        params.extent = this.getExtentAsWKT();
+        params.zoom   = this.getZoom();
+      }
+
+      Neatline.execute('MAP:load', params);
 
     },
 

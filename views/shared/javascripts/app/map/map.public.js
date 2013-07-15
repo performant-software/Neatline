@@ -30,7 +30,7 @@ Neatline.module('Map', function(
    */
   var refresh = function() {
     Map.__view.removeAllLayers();
-    Map.__view.publishPosition();
+    Map.__view.requestRecords();
   };
   Neatline.commands.setHandler(Map.ID+':refresh', refresh);
   Neatline.vent.on('refresh', refresh);
