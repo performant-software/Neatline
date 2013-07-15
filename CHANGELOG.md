@@ -1,5 +1,9 @@
 ## v2.0.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0-rc4...2.0.0)) ~ Pending
 
+#### Added Features
+
+  - Makes it possible to turn spatial querying on and off on a per-exhibit basis. This makes it possible to avoid the added load on the server incurred by real-time querying for exhibits that don't need it (eg, when there are just a handful of records).
+
 #### Changed Features
 
   - Increases up the size of the "SVG" input textarea to make it easier to see the SVG markup after it's been pasted in.
