@@ -18,6 +18,12 @@ abstract class Neatline_Migration_Abstract
 
 
     /**
+     * Perform the migration.
+     */
+    abstract public function migrate();
+
+
+    /**
      * Store plugin and database, call `migrate`.
      *
      * @param NeatlinePlugin $plugin The plugin manager class.
@@ -36,9 +42,39 @@ abstract class Neatline_Migration_Abstract
 
 
     /**
-     * Perform the migration.
+     * Change an existing column's type.
+     *
+     * @param string $name The name of the column to be changed.
+     * @param string $type The new type for the column.
      */
-    abstract public function migrate();
+    private function _changeColumnType($name, $type)
+    {
+        // TODO
+    }
+
+
+    /**
+     * Change an existing column's name.
+     *
+     * @param string $oldName The name of the column to be changed.
+     * @param string $newName The new name for the column.
+     */
+    private function _changeColumnName($oldName, $newName)
+    {
+        // TODO
+    }
+
+
+    /**
+     * Add a new column.
+     *
+     * @param string $name The column name.
+     * @param string $type The column type.
+     */
+    private function _addColumn($name, $type)
+    {
+        // TODO
+    }
 
 
 }
