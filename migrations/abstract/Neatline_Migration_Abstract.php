@@ -42,38 +42,37 @@ abstract class Neatline_Migration_Abstract
 
 
     /**
-     * Change an existing column's type.
-     *
-     * @param string $name The name of the column to be changed.
-     * @param string $type The new type for the column.
-     */
-    private function _changeColumnType($name, $type)
-    {
-        // TODO
-    }
-
-
-    /**
      * Change an existing column's name.
      *
+     * @param string $table The name of the table.
      * @param string $oldName The name of the column to be changed.
      * @param string $newName The new name for the column.
+     * @param string $type The new type for the column
      */
-    private function _changeColumnName($oldName, $newName)
+    private function _changeColumn($table, $oldName, $newName, $type)
     {
-        // TODO
+        $sql = <<<SQL
+        ALTER TABLE {$this->db->prefix}$table
+        CHANGE COLUMN $oldName $newName $type;
+SQL;
+        $this->db->query($sql);
     }
 
 
     /**
      * Add a new column.
      *
-     * @param string $name The column name.
-     * @param string $type The column type.
+     * @param string $table The name of the table.
+     * @param string $name The new column name.
+     * @param string $type The new column type.
      */
-    private function _addColumn($name, $type)
+    private function _addColumn($table, $name, $type)
     {
-        // TODO
+        $sql = <<<SQL
+        ALTER TABLE {$this->db->prefix}$table
+        ADD COLUMN $name $type;
+SQL;
+        $this->db->query($sql);
     }
 
 
