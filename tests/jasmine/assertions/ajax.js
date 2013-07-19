@@ -47,6 +47,19 @@ var NL = (function(NL) {
   };
 
 
+  /**
+   * Assert that the last request does not have a GET key/value.
+   *
+   * @param {String} key: The key.
+   * @param {String} val: The value.
+   */
+  NL.assertNotLastRequestHasGetParameter = function(key, val) {
+    var request = this.getLastRequest();
+    if (val) expect(request.url).not.toContain(key+'='+val);
+    else expect(request.url).not.toContain(key);
+  };
+
+
   return NL;
 
 

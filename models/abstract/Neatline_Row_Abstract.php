@@ -55,33 +55,6 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Return an array of fields on the row that should filtered through
-     * an HTML purifier before being saved to the database.
-     *
-     * @return array By default, filter nothing.
-     */
-    public function getPurifiedFields()
-    {
-        return array();
-    }
-
-
-    /**
-     * Pass any fields returned by `getPurifiedFields` that have non-null
-     * values on the row through an HTML sanitizer.
-     *
-     * @return array The array representation of the row.
-     */
-    public function purifyFields()
-    {
-        $purifier = new Omeka_Filter_HtmlPurifier;
-        foreach ($this->getPurifiedFields() as $f) {
-            if ($this->$f) $this->$f = $purifier->filter($this->$f);
-        }
-    }
-
-
-    /**
      * Mass-assign an associative array to the row and sanitize fields.
      *
      * @param array $values The array of values.
@@ -89,7 +62,6 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
     public function setArray($values)
     {
         foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
-        $this->purifyFields();
     }
 
 

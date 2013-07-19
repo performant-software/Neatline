@@ -79,7 +79,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
             // Save the query.
             $post = $this->_request->getPost();
-            $exhibit->query = serialize($post);
+            $exhibit->item_query = serialize($post);
             $exhibit->save();
 
             // Import items.
@@ -102,7 +102,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         }
 
         // Populate query.
-        $query = unserialize($exhibit->query);
+        $query = unserialize($exhibit->item_query);
         $_REQUEST = $query; $_GET = $query;
 
     }

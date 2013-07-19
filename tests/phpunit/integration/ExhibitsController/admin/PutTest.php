@@ -23,7 +23,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
         $exhibit->setArray(array(
             'public'            => 0,
-            'query'             => '1',
+            'item_query'        => '1',
             'spatial_layers'    => '2',
             'spatial_layer'     => '3',
             'widgets'           => '4',
@@ -39,7 +39,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
         $this->_setPut(array(
             'public'            => '1',
-            'query'             => '2',
+            'item_query'        => '2',
             'spatial_layers'    => '3',
             'spatial_layer'     => '4',
             'widgets'           => '5',
@@ -55,7 +55,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         $exhibit = $this->_reload($exhibit);
 
         $this->assertEquals($exhibit->public,           1);
-        $this->assertEquals($exhibit->query,            '2');
+        $this->assertEquals($exhibit->item_query,       '2');
         $this->assertEquals($exhibit->spatial_layers,   '3');
         $this->assertEquals($exhibit->spatial_layer,    '4');
         $this->assertEquals($exhibit->widgets,          '5');

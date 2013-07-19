@@ -14,13 +14,13 @@ class NeatlineRecord extends Neatline_Row_Expandable
 {
 
 
-    public $owner_id = 0;           // INT(10) UNSIGNED NOT NULL DEFAULT 0
+    public $owner_id = 0;           // INT(10) UNSIGNED NOT NULL
     public $item_id;                // INT(10) UNSIGNED NULL
     public $exhibit_id;             // INT(10) UNSIGNED NULL
     public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     public $modified;               // TIMESTAMP NULL
-    public $is_coverage;            // TINYINT(1) NULL
-    public $is_wms;                 // TINYINT(1) NULL
+    public $is_coverage = 0;        // TINYINT(1) NOT NULL
+    public $is_wms = 0;             // TINYINT(1) NOT NULL
     public $slug;                   // VARCHAR(100) NULL
     public $title;                  // MEDIUMTEXT NULL
     public $body;                   // MEDIUMTEXT NULL
@@ -275,17 +275,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function __save()
     {
         parent::__save();
-    }
-
-
-    /**
-     * Before saving, run `title` and `body` through an HTML purifier.
-     *
-     * @return array.
-     */
-    public function getPurifiedFields()
-    {
-        return array('title', 'body');
     }
 
 

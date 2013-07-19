@@ -9,7 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapDefaultFocus extends Neatline_Case_Default
+class FixturesTest_NeatlineMapSpatialQueryingDisabled
+    extends Neatline_Case_Fixture
 {
 
 
@@ -21,12 +22,11 @@ class FixturesTest_NeatlineMapDefaultFocus extends Neatline_Case_Default
 
         $exhibit = $this->_exhibit();
         $exhibit->spatial_layer = 'OpenStreetMap';
-        $exhibit->map_focus = '1,2';
-        $exhibit->map_zoom = 10;
+        $exhibit->spatial_querying = 0;
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapDefaultFocus.html'
+            $exhibit, 'NeatlineMapSpatialQueryingDisabled.html'
         );
 
     }

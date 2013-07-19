@@ -29,7 +29,7 @@ var NL = (function(NL) {
   /**
    * Assert that the last query was a map extent query.
    */
-  NL.assertMapExtentQuery = function() {
+  NL.assertMapDynamicQuery = function() {
 
     // Should trigger GET request to /records.
     this.assertLastRequestRoute(Neatline.g.neatline.records_api);
@@ -38,6 +38,22 @@ var NL = (function(NL) {
     // Should filter on extent and zoom.
     this.assertLastRequestHasGetParameter('extent');
     this.assertLastRequestHasGetParameter('zoom');
+
+  };
+
+
+  /**
+   * Assert that the last query was a static map query.
+   */
+  NL.assertMapStaticQuery = function() {
+
+    // Should trigger GET request to /records.
+    this.assertLastRequestRoute(Neatline.g.neatline.records_api);
+    this.assertLastRequestMethod('GET');
+
+    // Should _not_ filter on extent and zoom.
+    this.assertNotLastRequestHasGetParameter('extent');
+    this.assertNotLastRequestHasGetParameter('zoom');
 
   };
 

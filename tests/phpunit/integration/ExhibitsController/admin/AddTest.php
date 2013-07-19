@@ -78,6 +78,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         // WMS Layers:
         $this->assertXpath('//input[@name="wms_layers"]');
 
+        // Spatial Querying:
+        $this->assertXpath('//input[@name="spatial_querying"]');
+
         // Public:
         $this->assertXpath('//input[@name="public"]');
 
@@ -271,16 +274,17 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
 
         $this->request->setMethod('POST')->setPost(array(
-            'title'           => 'Title',
-            'slug'            => 'slug',
-            'narrative'       => 'Narrative.',
-            'widgets'         => array('Widget1', 'Widget2'),
-            'spatial_layers'  => array('Layer1', 'Layer2'),
-            'spatial_layer'   => 'Layer2',
-            'image_layer'     => $imagePath,
-            'wms_address'     => 'wms.org',
-            'wms_layers'      => 'wms:layer',
-            'public'          => 1
+            'title'             => 'Title',
+            'slug'              => 'slug',
+            'narrative'         => 'Narrative.',
+            'widgets'           => array('Widget1', 'Widget2'),
+            'spatial_layers'    => array('Layer1', 'Layer2'),
+            'spatial_layer'     => 'Layer2',
+            'image_layer'       => $imagePath,
+            'wms_address'       => 'wms.org',
+            'wms_layers'        => 'wms:layer',
+            'spatial_querying'  => 0,
+            'public'            => 1
         ));
 
         // Should create new exhibit.
@@ -289,19 +293,20 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertEquals($this->_exhibits->count(), 1);
 
         // Get the new exhibit.
-        $exhibit = $this->_getLastRow($this->_exhibits);
+        $e = $this->_getLastRow($this->_exhibits);
 
         // Should set fields.
-        $this->assertEquals($exhibit->title,          'Title');
-        $this->assertEquals($exhibit->slug,           'slug');
-        $this->assertEquals($exhibit->narrative,      'Narrative.');
-        $this->assertEquals($exhibit->widgets,        'Widget1,Widget2');
-        $this->assertEquals($exhibit->spatial_layers, 'Layer1,Layer2');
-        $this->assertEquals($exhibit->spatial_layer,  'Layer2');
-        $this->assertEquals($exhibit->image_layer,    $imagePath);
-        $this->assertEquals($exhibit->wms_address,    'wms.org');
-        $this->assertEquals($exhibit->wms_layers,     'wms:layer');
-        $this->assertEquals($exhibit->public,         1);
+        $this->assertEquals($e->title,              'Title');
+        $this->assertEquals($e->slug,               'slug');
+        $this->assertEquals($e->narrative,          'Narrative.');
+        $this->assertEquals($e->widgets,            'Widget1,Widget2');
+        $this->assertEquals($e->spatial_layers,     'Layer1,Layer2');
+        $this->assertEquals($e->spatial_layer,      'Layer2');
+        $this->assertEquals($e->image_layer,        $imagePath);
+        $this->assertEquals($e->wms_address,        'wms.org');
+        $this->assertEquals($e->wms_layers,         'wms:layer');
+        $this->assertEquals($e->spatial_querying,   0);
+        $this->assertEquals($e->public,             1);
 
     }
 

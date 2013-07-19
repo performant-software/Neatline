@@ -8,28 +8,28 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Record Loading', function() {
+describe('Map | Spatial Querying Enabled', function() {
 
 
   var fx = {
-    one: readFixtures('NeatlineMapRecordLoading.one.json'),
-    two: readFixtures('NeatlineMapRecordLoading.two.json')
+    one: readFixtures('NeatlineMapSpatialQueryingEnabled.one.json'),
+    two: readFixtures('NeatlineMapSpatialQueryingEnabled.two.json')
   };
 
 
   beforeEach(function() {
-    NL.loadNeatline();
+    NL.loadNeatline('NeatlineMapSpatialQueryingEnabled.html');
   });
 
 
-  it('should query for records when the exhibit starts', function() {
+  it('should query by extent/zoom when the exhibit starts', function() {
 
     // --------------------------------------------------------------------
     // When the exhibit starts, the map should query for records that fall
-    // within the default extent of the map.
+    // within the default extent/zoom of the map.
     // --------------------------------------------------------------------
 
-    NL.assertMapExtentQuery();
+    NL.assertMapDynamicQuery();
 
   });
 
@@ -42,7 +42,7 @@ describe('Map | Record Loading', function() {
     // --------------------------------------------------------------------
 
     NL.triggerMapMoveEnd();
-    NL.assertMapExtentQuery();
+    NL.assertMapDynamicQuery();
 
   });
 
