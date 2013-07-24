@@ -115,7 +115,7 @@ module.exports = function(grunt) {
 
       chosen: {
         files: [{
-          src: paths.build.chosen+'/public/chosen-sprite.png',
+          src: paths.build.chosen+'/public/*.png',
           dest: paths.payloads.admin.css,
           expand: true,
           flatten: true
