@@ -94,7 +94,7 @@
         echo $this->formText(
           'tags',
           @$_REQUEST['tags'],
-          array('size' => '40', 'id' => 'item-type-search')
+          array('size' => '40', 'id' => 'tag-search')
         );
       ?>
       </div>
