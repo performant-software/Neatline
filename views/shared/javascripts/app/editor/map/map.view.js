@@ -28,18 +28,29 @@ _.extend(Neatline.Map.View.prototype, {
    */
   startEdit: function(model) {
 
+
+    // Acquire and prepare the editing layer:
+    // --------------------------------------------------------------------
+
     // If a vector layer already exists for the record, use it as the edit
-    // layer. Otherwise, create a new layer from the model.
+    // layer; otherwise, create a new layer from the model:
 
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
 
-    // Flip on the `nFrozen` flag on the edit layer to exempt it from the
-    // regular garbage collection process and ensure that the layer stays
-    // at the top of the stack by setting an arbitrarily high z-index.
+    // Set an arbitrarily high z-index value on the edit layer to ensure
+    // that it can always be manipulated by the editing controls:
 
     this.map.setLayerIndex(this.editLayer, 9999);
+
+    // Flip on the `nFrozen` flag on the edit layer to exempt it from the
+    // regular garbage collection process:
+
     this.editLayer.nFrozen = true;
+
+
+    // Create the editing controls:
+    // --------------------------------------------------------------------
 
     this.controls = {
 
@@ -94,8 +105,8 @@ _.extend(Neatline.Map.View.prototype, {
 
     };
 
-    // Add the controls.
     this.map.addControls(_.values(this.controls));
+
 
   },
 
@@ -128,14 +139,16 @@ _.extend(Neatline.Map.View.prototype, {
    */
   updateEdit: function(settings) {
 
-    // Reset the controls.
-    // -------------------
+
+    // Reset the controls editing and cursor controls.
+    // --------------------------------------------------------------------
 
     this.deactivateEditorControls();
     this.activatePublicControls();
 
-    // Set the active editing mode.
-    // ----------------------------
+
+    // Set the active current editing mode.
+    // --------------------------------------------------------------------
 
     var modes = OpenLayers.Control.ModifyFeature;
 
@@ -162,26 +175,22 @@ _.extend(Neatline.Map.View.prototype, {
         break;
 
       case 'modify':
-        this.controls.edit.mode =
-          OpenLayers.Control.ModifyFeature.RESHAPE;
+        this.controls.edit.mode = modes.RESHAPE;
         this.activateModifying();
         break;
 
       case 'rotate':
-        this.controls.edit.mode =
-          OpenLayers.Control.ModifyFeature.ROTATE;
+        this.controls.edit.mode = modes.ROTATE;
         this.activateModifying();
         break;
 
       case 'resize':
-        this.controls.edit.mode =
-          OpenLayers.Control.ModifyFeature.RESIZE;
+        this.controls.edit.mode = modes.RESIZE;
         this.activateModifying();
         break;
 
       case 'drag':
-        this.controls.edit.mode =
-          OpenLayers.Control.ModifyFeature.DRAG;
+        this.controls.edit.mode = modes.DRAG;
         this.activateModifying();
         break;
 
@@ -191,8 +200,9 @@ _.extend(Neatline.Map.View.prototype, {
 
     }
 
+
     // Update the regular polygon settings.
-    // ------------------------------------
+    // --------------------------------------------------------------------
 
     // SNAP ANGLE
     var snap = parseFloat(settings.poly.snap) || 0;
@@ -204,6 +214,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // IRREGULAR
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
+
 
   },
 
