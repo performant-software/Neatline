@@ -22,7 +22,7 @@ function nl_mockView()
 
     // Default Omeka templates:
     // ------------------------
-    $view->setScriptPath(VIEW_SCRIPTS_DIR);
+    $view->addScriptPath(VIEW_SCRIPTS_DIR);
 
     // Neatline plugin templates:
     // --------------------------
