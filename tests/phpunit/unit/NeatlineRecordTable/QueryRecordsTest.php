@@ -343,32 +343,6 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * `queryRecords` should filter on a slug query.
-     */
-    public function testSlugFilter()
-    {
-
-        $exhibit = $this->_exhibit();
-        $record1 = new NeatlineRecord($exhibit);
-        $record2 = new NeatlineRecord($exhibit);
-        $record1->slug = 'slug-1';
-        $record2->slug = 'slug-2';
-
-        $record1->save();
-        $record2->save();
-
-        // Query for `slug1`.
-        $result = $this->_records->queryRecords($exhibit,
-            array('slug' => 'slug-1')
-        );
-
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertCount(1, $result['records']);
-
-    }
-
-
-    /**
      * `queryRecords` should sort records on the order column.
      */
     public function testOrderFilter()

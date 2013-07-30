@@ -363,34 +363,6 @@ class RecordsControllerTest_List extends Neatline_Case_Default
 
 
     /**
-     * The `slug` parameter should be passed to the query.
-     */
-    public function testSlugFilter()
-    {
-
-        $record1 = new NeatlineRecord($this->exhibit);
-        $record2 = new NeatlineRecord($this->exhibit);
-        $record1->slug = 'slug-1';
-        $record2->slug = 'slug-2';
-
-        $record1->save();
-        $record2->save();
-
-        $this->request->setQuery(array(
-            'slug' => 'slug-1'
-        ));
-
-        $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
-
-        // Should apply slug filter.
-        $this->assertEquals($response->records[0]->id, $record1->id);
-        $this->assertCount(1, $response->records);
-
-    }
-
-
-    /**
      * The `order` parameter should be passed to the query.
      */
     public function testOrderFilter()
