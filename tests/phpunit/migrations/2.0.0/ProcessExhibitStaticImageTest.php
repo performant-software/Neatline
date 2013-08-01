@@ -30,7 +30,7 @@ class Migrate200Test_ProcessExhibitStaticImage
 
         // Should populate the `image_layer` field.
         $exhibit = $this->_getExhibitByTitle('Static Image');
-        $this->assertEquals($exhibit->image_layer, '/original/image.jpg');
+        $this->assertRegExp("/image.jpg/", $exhibit->image_layer);
 
     }
 

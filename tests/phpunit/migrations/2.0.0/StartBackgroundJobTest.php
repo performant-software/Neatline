@@ -20,17 +20,16 @@ class Migrate200Test_StartBackgroundJob extends Neatline_Case_Migrate200
     public function testStartBackgroundJob()
     {
 
+        $jobs = $this->_mockJobDispatcher();
+
+        // Should dispatch `Neatline_Job_UpgradeFrom1x`.
+        $jobs->expects($this->once())->method('sendLongRunning')->with(
+            'Neatline_Job_UpgradeFrom1x', array(
+                'web_dir' => nl_getWebDir()
+            )
+        );
+
         $this->_upgrade();
-
-        $jobs = $this->db->select()
-            ->from("{$this->db->prefix}processes")
-            ->where("class='Omeka_Job_Process_Wrapper'")
-            ->where("args LIKE '%Neatline_Job_UpgradeFrom1x%'")
-            ->where("status='starting'")
-            ->where("PID IS NULL")
-            ->query()->fetchAll();
-
-        $this->assertNotEmpty($jobs);
 
     }
 

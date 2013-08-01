@@ -12,13 +12,11 @@
 
 /**
  * Register the template paths necessary for the item compilations.
- *
- * @return Omeka_View $view The new view.
  */
 function nl_mockView()
 {
 
-    $view = new Omeka_View();
+    $view = Zend_Registry::get('view');
 
     // Default Omeka templates:
     // ------------------------
@@ -31,11 +29,6 @@ function nl_mockView()
     // Public theme templates:
     // -----------------------
     $view->addScriptPath(nl_getPublicThemeDir());
-
-    // Inject new view.
-    Zend_Registry::set('view', $view);
-
-    return $view;
 
 }
 
