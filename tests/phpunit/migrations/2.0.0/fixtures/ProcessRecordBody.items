@@ -1,0 +1,4 @@
+$rows = array(
+  array('id' => '5','item_type_id' => '0','collection_id' => NULL,'featured' => '0','public' => '0','modified' => '2013-06-22 19:39:09','added' => '2013-06-22 13:38:41'),
+  array('id' => '6','item_type_id' => '0','collection_id' => NULL,'featured' => '0','public' => '0','modified' => '2013-06-22 19:39:00','added' => '2013-06-22 13:38:47')
+);

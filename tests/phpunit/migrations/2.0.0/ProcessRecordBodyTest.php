@@ -17,6 +17,7 @@ class Migrate200Test_ProcessRecordBody extends Neatline_Case_Migrate200
     {
 
         parent::setUp();
+        $this->_loadFixture('ProcessRecordBody.items');
         $this->_loadFixture('ProcessRecordBody.records');
 
         $this->_upgrade();
