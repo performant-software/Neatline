@@ -58,9 +58,9 @@ class Migrate200Test_ProcessRecordBody extends Neatline_Case_Migrate200
      */
     public function testParentItemUseDcMetadataEnabled()
     {
-        $this->assertRegExp(
-            '/item\n/',
-            $this->_getRecordByTitle('DC Enabled')->body
+        $this->assertEquals(
+            $this->_getRecordByTitle('DC Enabled')->body,
+            '6' // The `id` of the fixture item.
         );
     }
 

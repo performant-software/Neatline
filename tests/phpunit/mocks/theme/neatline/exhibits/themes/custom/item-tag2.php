@@ -1,1 +1,1 @@
-custom-item-tag2
+custom-<?php echo get_current_record('item')->id; ?>-tag2
