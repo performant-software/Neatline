@@ -70,12 +70,22 @@ class NeatlineRecord extends Neatline_Row_Expandable
     /**
      * Get the parent exhibit record.
      *
-     * @return Omeka_record The parent exhibit.
+     * @return NeatlineExhibit The parent exhibit.
      */
     public function getExhibit()
     {
-        $exhibits = $this->getTable('NeatlineExhibit');
-        return $exhibits->find($this->exhibit_id);
+        return get_record_by_id('NeatlineExhibit', $this->exhibit_id);
+    }
+
+
+    /**
+     * Get the parent item record.
+     *
+     * @return Item The parent item.
+     */
+    public function getItem()
+    {
+        return get_record_by_id('Item', $this->item_id);
     }
 
 
@@ -185,6 +195,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
                 // Walk valid CSS rules.
                 foreach ($rules as $prop => $val) {
+
                     if (in_array($prop, $valid)) {
 
                         // Set value if not `auto` or `none`.
@@ -198,6 +209,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
                         }
 
                     }
+
                 }
 
             }
