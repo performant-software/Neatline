@@ -59,7 +59,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
      * @param NeatlineExhibit $exhibit The exhibit record.
      * @param Item $item The item record.
      */
-    public function __construct($exhibit = null, $item = null)
+    public function __construct($exhibit=null, $item=null)
     {
         parent::__construct();
         if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
@@ -196,6 +196,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
                 // Walk valid CSS rules.
                 foreach ($rules as $prop => $val) {
 
+                    // Is the property valid?
                     if (in_array($prop, $valid)) {
 
                         // Set value if not `auto` or `none`.

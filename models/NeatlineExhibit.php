@@ -118,7 +118,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
             // If selector is `all`, update all records in the exhibit;
             // otherwise, just match records with the tag.
             if ($tag != 'all') {
-                $where['MATCH (tags) AGAINST (? IN BOOLEAN MODE)']= $tag;
+                $where['MATCH (tags) AGAINST (? IN BOOLEAN MODE)'] = $tag;
             }
 
             // Walk valid CSS rules.
@@ -188,6 +188,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
                 // Scan valid rule definitions.
                 foreach ($rules as $prop => $val) {
+
+                    // Is the property valid?
                     if (in_array($prop, $valid)) {
 
                         // Get the record value.
@@ -198,6 +200,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
                         $css[$selector][$prop] = $value;
 
                     }
+
                 }
 
             }

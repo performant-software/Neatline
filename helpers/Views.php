@@ -19,16 +19,19 @@
 function nl_getItemMarkup($record)
 {
 
-    // Get exhibit, explode tags.
-    $exhibit = $record->getExhibit();
+    // Get exhibit slug and tags.
+    $slug = $record->getExhibit()->slug;
     $tags = nl_explode($record->tags);
+
+    // Set the parent item on the view.
+    get_view()->item = $record->getItem();
 
     // First, try to render a `item-[tag].php` template in the exhibit-
     // specific theme for the exhibit:
 
     foreach ($tags as $tag) { try {
         return get_view()->partial(
-            'exhibits/themes/'.$exhibit->slug.'/item-'.$tag.'.php'
+            'exhibits/themes/'.$slug.'/item-'.$tag.'.php'
         );
     } catch (Exception $e) {}}
 
@@ -37,7 +40,7 @@ function nl_getItemMarkup($record)
 
     try {
         return get_view()->partial(
-            'exhibits/themes/'.$exhibit->slug.'/item.php'
+            'exhibits/themes/'.$slug.'/item.php'
         );
     } catch (Exception $e) {}
 
@@ -132,7 +135,7 @@ function nl_getExhibitField($fieldname, $exhibit=null)
 
 
 /**
- * Get a list space-delimited of exhibit widget tags for use as the value
+ * Get a list of space-delimited exhibit widget tags for use as the value
  * of a `class` attribute on an element.
  *
  * @param NeatlineExhibit $exhibit The exhibit.
