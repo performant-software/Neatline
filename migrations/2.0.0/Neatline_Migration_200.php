@@ -437,11 +437,10 @@ SQL;
         else if (!is_null($old->item_id)) {
 
             $item = get_record_by_id('Item', $old->item_id);
+            if (!$item) return;
 
             // Else, try to set the parent item "Title".
-            if ($item) $new->title = metadata($item, array(
-                'Dublin Core', 'Title'
-            ));
+            $new->title = metadata($item, array('Dublin Core', 'Title'));
 
         }
 
@@ -460,14 +459,17 @@ SQL;
     private function __processRecordBody($old, $new)
     {
 
+        // If a local value exists, migrate it directly
         if (is_null($old->item_id) || $old->use_dc_metadata !== 1) {
             $new->body = $old->description;
         }
 
         else if (!is_null($old->item_id) && $old->use_dc_metadata == 1) {
 
-            // Get the parent item, set on view.
             $item = get_record_by_id('Item', $old->item_id);
+            if (!$item) return;
+
+            // Set item on the view.
             get_view()->item = $item;
 
             // Migrate the compiled metadata output.
