@@ -17,8 +17,3 @@
 <!-- Files. -->
 <h3><?php echo __('Files'); ?></h3>
 <?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
-
-<!-- Pulgins. -->
-<?php fire_plugin_hook('public_items_show', array(
-    'view' => $this, 'item' => get_current_record('item')
-)); ?>
