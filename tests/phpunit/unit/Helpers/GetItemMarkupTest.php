@@ -29,16 +29,19 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function testTagTemplate()
     {
 
-        $exhibit = $this->_exhibit('custom');
-        $r = $this->_record($exhibit);
+        $exhibit    = $this->_exhibit('custom');
+        $item       = $this->_item();
+        $record     = $this->_record($exhibit, $item);
 
         // `tag1` first.
-        $r->tags = 'tag1,tag2';
-        $this->assertRegExp('/custom-item-tag1\n/', nl_getItemMarkup($r));
+        $record->tags = 'tag1,tag2';
+        $markup = nl_getItemMarkup($record);
+        $this->assertRegExp("/custom-{$item->id}-tag1/", $markup);
 
         // `tag2` first.
-        $r->tags = 'tag2,tag1';
-        $this->assertRegExp('/custom-item-tag2\n/', nl_getItemMarkup($r));
+        $record->tags = 'tag2,tag1';
+        $markup = nl_getItemMarkup($record);
+        $this->assertRegExp("/custom-{$item->id}-tag2/", $markup);
 
     }
 
@@ -50,15 +53,18 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function testSlugTemplate()
     {
 
-        $exhibit = $this->_exhibit('custom');
-        $r = $this->_record($exhibit);
+        $exhibit    = $this->_exhibit('custom');
+        $item       = $this->_item();
+        $record     = $this->_record($exhibit, $item);
 
         // No tags.
-        $this->assertRegExp('/custom-item\n/', nl_getItemMarkup($r));
+        $markup = nl_getItemMarkup($record);
+        $this->assertRegExp("/custom-{$item->id}/", $markup);
 
         // No matching tags.
-        $r->tags = 'tag3';
-        $this->assertRegExp('/custom-item\n/', nl_getItemMarkup($r));
+        $record->tags = 'tag3';
+        $markup = nl_getItemMarkup($record);
+        $this->assertRegExp("/custom-{$item->id}/", $markup);
 
     }
 
@@ -71,11 +77,13 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
     public function testDefaultTemplate()
     {
 
-        $exhibit = $this->_exhibit('no-custom-theme');
-        $r = $this->_record($exhibit);
+        $exhibit    = $this->_exhibit('no-custom-theme');
+        $item       = $this->_item();
+        $record     = $this->_record($exhibit, $item);
 
         // No custom templates.
-        $this->assertRegExp('/item\n/', nl_getItemMarkup($r));
+        $markup = nl_getItemMarkup($record);
+        $this->assertRegExp("/{$item->id}/", $markup);
 
     }
 

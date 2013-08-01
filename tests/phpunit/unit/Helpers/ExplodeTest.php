@@ -18,12 +18,9 @@ class HelpersTest_Explode extends Neatline_Case_Default
      */
     public function testExplode()
     {
-        $this->assertEquals(nl_explode('1,2,3'),
-            array('1', '2', '3'));
-        $this->assertEquals(nl_explode(' 1,2,3 '),
-            array('1','2','3'));
-        $this->assertEquals(nl_explode(' 1, 2, 3 '),
-            array('1','2','3'));
+        $this->assertEquals(nl_explode('1,2,3'), array('1', '2', '3'));
+        $this->assertEquals(nl_explode(' 1,2,3 '), array('1','2','3'));
+        $this->assertEquals(nl_explode(' 1, 2, 3 '), array('1','2','3'));
     }
 
 

@@ -21,15 +21,10 @@ class NeatlineRecordTest_Save extends Neatline_Case_Default
 
         nl_mockView();
 
-        $item = insert_item(array(), array(
-            'Dublin Core' => array (
-                'Title' => array(
-                    array('text' => 'title', 'html' => false)
-                )
-            )
-        ));
+        $exhibit    = $this->_exhibit();
+        $item       = $this->_item();
 
-        $record = new NeatlineRecord(null, $item);
+        $record = new NeatlineRecord($exhibit, $item);
         $record->save();
 
         // Should compile `title` and `body`.
@@ -46,11 +41,8 @@ class NeatlineRecordTest_Save extends Neatline_Case_Default
     {
 
         $record = new NeatlineRecord();
-        $record->setArray(array(
-            'wms_address'   => 'address',
-            'wms_layers'    => 'layers'
-        ));
-
+        $record->wms_address = 'address';
+        $record->wms_layers  = 'layers';
         $record->save();
 
         // Should flip `is_coverage` and `is_wms`.

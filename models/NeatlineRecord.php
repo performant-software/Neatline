@@ -255,16 +255,13 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function compileItem()
     {
 
-        // Break if no parent item.
-        if (is_null($this->item_id)) return;
+        // Get parent item.
+        $item = $this->getItem();
+        if (!$item) return;
 
-        // Get the item, set on view.
-        $item = get_record_by_id('Item', $this->item_id);
-        get_view()->item = $item;
-
-        // Pull title and body.
+        // Set title and body.
         $this->title = metadata($item, array('Dublin Core', 'Title'));
-        $this->body = nl_getItemMarkup($this);
+        $this->body  = nl_getItemMarkup($this);
 
     }
 

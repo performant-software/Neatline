@@ -27,8 +27,8 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
     public function testCompileItem()
     {
 
-        $exhibit = $this->_exhibit();
-        $item = $this->_item('title');
+        $exhibit    = $this->_exhibit();
+        $item       = $this->_item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->compileItem();
