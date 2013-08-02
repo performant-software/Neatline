@@ -9,7 +9,7 @@
     , "backbone":               ">= 0.9.10"
     , "marionette":             ">= 1.0.0-rc6"
     , "chosen":                 ">= 0.9.11"
-    , "bootstrap":              ">= 2.3.1"
+    , "bootstrap":              "~  2.3"
     , "ace-builds":             ">= 1.0.0"
     , "rivets":                 ">= 0.4.5"
     , "spectrum":               ">= 1.1.0"
