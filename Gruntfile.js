@@ -164,7 +164,7 @@ module.exports = function(grunt) {
         paths.jasmine+'/fixtures/*.xml'
       ],
       images: './views/shared/css/img',
-      bower: './components'
+      bower: './bower_components'
     },
 
     concat: {

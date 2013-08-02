@@ -24,50 +24,50 @@
   },
 
   "build": {
-    "openlayers":         "./components/openlayers/build",
-    "bootstrap":          "./components/bootstrap",
-    "chosen":             "./components/chosen",
-    "ckeditor":           "./components/ckeditor/dev/builder",
-    "sinon":              "./components/sinon",
-    "jquery_ui":          "./components/jquery-ui"
+    "openlayers":         "./bower_components/openlayers/build",
+    "bootstrap":          "./bower_components/bootstrap",
+    "chosen":             "./bower_components/chosen",
+    "ckeditor":           "./bower_components/ckeditor/dev/builder",
+    "sinon":              "./bower_components/sinon",
+    "jquery_ui":          "./bower_components/jquery-ui"
   },
 
   "vendor": {
 
     "js": {
-      "jquery":           "./components/jquery/jquery.js",
-      "jquery_ui":        "./components/jquery-ui/dist/jquery-ui.js",
-      "underscore":       "./components/underscore/underscore.js",
-      "underscore_s":     "./components/underscore.string/lib/underscore.string.js",
-      "backbone":         "./components/backbone/backbone.js",
-      "marionette":       "./components/marionette/lib/backbone.marionette.js",
-      "neatline":         "./components/backbone.neatline/lib/backbone.neatline.js",
-      "safesync":         "./components/backbone-safesync/backbone-safesync.js",
-      "openlayers":       "./components/openlayers/build/OpenLayers.js",
-      "bootstrap":        "./components/bootstrap/docs/assets/js/bootstrap.js",
-      "stamen":           "./components/stamen-neatline/stamen.neatline.js",
-      "svgtowkt":         "./components/svg-to-wkt/svg-to-wkt.js",
-      "routefilter":      "./components/backbone.routefilter/dist/backbone.routefilter.js",
-      "draggable":        "./components/jquery-draggable-input/jquery-draggable-input.js",
-      "toastr":           "./components/toastr/toastr.js",
-      "spectrum":         "./components/spectrum/spectrum.js",
-      "chosen":           "./components/chosen/public/chosen.jquery.js",
-      "ace":              "./components/ace-builds/src-noconflict/ace.js",
-      "ace_theme":        "./components/ace-builds/src-noconflict/theme-clouds.js",
-      "ace_mode":         "./components/ace-builds/src-noconflict/mode-css.js",
-      "rivets":           "./components/rivets/dist/rivets.js",
-      "jasmine_jquery":   "./components/jasmine-jquery/lib/jasmine-jquery.js",
-      "jasmine_async":    "./components/jasmine.async/src/jasmine.async.js",
-      "sinon":            "./components/sinon/pkg/sinon.js"
+      "jquery":           "./bower_components/jquery/jquery.js",
+      "jquery_ui":        "./bower_components/jquery-ui/dist/jquery-ui.js",
+      "underscore":       "./bower_components/underscore/underscore.js",
+      "underscore_s":     "./bower_components/underscore.string/lib/underscore.string.js",
+      "backbone":         "./bower_components/backbone/backbone.js",
+      "marionette":       "./bower_components/marionette/lib/backbone.marionette.js",
+      "neatline":         "./bower_components/backbone.neatline/lib/backbone.neatline.js",
+      "safesync":         "./bower_components/backbone-safesync/backbone-safesync.js",
+      "openlayers":       "./bower_components/openlayers/build/OpenLayers.js",
+      "bootstrap":        "./bower_components/bootstrap/docs/assets/js/bootstrap.js",
+      "stamen":           "./bower_components/stamen-neatline/stamen.neatline.js",
+      "svgtowkt":         "./bower_components/svg-to-wkt/svg-to-wkt.js",
+      "routefilter":      "./bower_components/backbone.routefilter/dist/backbone.routefilter.js",
+      "draggable":        "./bower_components/jquery-draggable-input/jquery-draggable-input.js",
+      "toastr":           "./bower_components/toastr/toastr.js",
+      "spectrum":         "./bower_components/spectrum/spectrum.js",
+      "chosen":           "./bower_components/chosen/public/chosen.jquery.js",
+      "ace":              "./bower_components/ace-builds/src-noconflict/ace.js",
+      "ace_theme":        "./bower_components/ace-builds/src-noconflict/theme-clouds.js",
+      "ace_mode":         "./bower_components/ace-builds/src-noconflict/mode-css.js",
+      "rivets":           "./bower_components/rivets/dist/rivets.js",
+      "jasmine_jquery":   "./bower_components/jasmine-jquery/lib/jasmine-jquery.js",
+      "jasmine_async":    "./bower_components/jasmine.async/src/jasmine.async.js",
+      "sinon":            "./bower_components/sinon/pkg/sinon.js"
     },
 
     "css": {
-      "jquery_ui":        "./components/jquery-ui/dist/jquery-ui.min.css",
-      "openlayers":       "./components/openlayers/theme/default/style.css",
-      "bootstrap":        "./components/bootstrap/docs/assets/css/bootstrap.css",
-      "toastr":           "./components/toastr/toastr.css",
-      "spectrum":         "./components/spectrum/spectrum.css",
-      "chosen":           "./components/chosen/public/chosen.css"
+      "jquery_ui":        "./bower_components/jquery-ui/dist/jquery-ui.min.css",
+      "openlayers":       "./bower_components/openlayers/theme/default/style.css",
+      "bootstrap":        "./bower_components/bootstrap/docs/assets/css/bootstrap.css",
+      "toastr":           "./bower_components/toastr/toastr.css",
+      "spectrum":         "./bower_components/spectrum/spectrum.css",
+      "chosen":           "./bower_components/chosen/public/chosen.css"
     }
 
   }
