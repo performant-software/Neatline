@@ -181,6 +181,9 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
         $this->dispatch('neatline/records/'.$record->id);
         $response = $this->_getResponseArray();
 
+        // Should emit correct record.
+        $this->assertEquals($response->id, $record->id);
+
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {
             $this->assertObjectHasAttribute($k, $response);

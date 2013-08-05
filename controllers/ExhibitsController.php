@@ -24,6 +24,41 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
 
     /**
+     * Fetch exhibit via GET.
+     * @REST
+     */
+    public function getAction()
+    {
+        $this->_helper->viewRenderer->setNoRender(true);
+        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
+    }
+
+
+    /**
+     * Update exhibit via PUT.
+     * @REST
+     */
+    public function putAction()
+    {
+
+        $this->_helper->viewRenderer->setNoRender(true);
+
+        // Update the exhibit.
+        $exhibit = $this->_helper->db->findById();
+        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
+            Zend_Registry::get('fileIn')), true
+        ));
+
+        // Propagate CSS.
+        $exhibit->pushStyles();
+
+        // Respond with exhibit data.
+        echo Zend_Json::encode($exhibit->toArray());
+
+    }
+
+
+    /**
      * Create a new exhibit.
      */
     public function addAction()
@@ -109,27 +144,6 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
 
     /**
-     * Update exhibit via PUT.
-     * @REST
-     */
-    public function putAction()
-    {
-
-        $this->_helper->viewRenderer->setNoRender(true);
-
-        // Update the exhibit.
-        $exhibit = $this->_helper->db->findById();
-        $exhibit->saveForm(Zend_Json::decode(file_get_contents(
-            Zend_Registry::get('fileIn')), true
-        ));
-
-        // Propagate CSS.
-        $exhibit->pushStyles();
-
-    }
-
-
-    /**
      * Browse exhibits.
      */
     public function browseAction()
@@ -143,17 +157,6 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
         parent::browseAction();
 
-    }
-
-
-    /**
-     * Fetch exhibit via GET.
-     * @REST
-     */
-    public function getAction()
-    {
-        $this->_helper->viewRenderer->setNoRender(true);
-        echo Zend_Json::encode($this->_helper->db->findById()->toArray());
     }
 
 

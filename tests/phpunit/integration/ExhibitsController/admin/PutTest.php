@@ -70,7 +70,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
 
     /**
-     * The styles should be propagated.
+     * PUT should propagate the exhibit stylesheet.
      */
     public function testUpdateStyles()
     {
@@ -87,11 +87,34 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         ");
 
         $this->_setPut($values);
-        $this->dispatch('neatline/put/'.$exhibit->id);
+        $this->dispatch('neatline/exhibits/'.$exhibit->id);
         $record = $this->_reload($record);
 
         // `styles` should be updated.
         $this->assertEquals($record->fill_color, 'color');
+
+    }
+
+
+    /**
+     * PUT should respond with all exhibit attributes.
+     */
+    public function testResponse()
+    {
+
+        $exhibit = $this->_exhibit();
+
+        $this->_setPut();
+        $this->dispatch('neatline/exhibits/'.$exhibit->id);
+        $response = $this->_getResponseArray();
+
+        // Should emit correct record.
+        $this->assertEquals($response->id, $exhibit->id);
+
+        // Should emit all attributes.
+        foreach (array_keys($exhibit->toArray()) as $k) {
+            $this->assertObjectHasAttribute($k, $response);
+        }
 
     }
 

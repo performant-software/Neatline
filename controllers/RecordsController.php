@@ -65,9 +65,8 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
         $post = Zend_Json::decode($this->_request->getRawBody());
         $record->saveForm($post);
 
-        // Forward to GET.
-        $this->_request->setParam('id', $record->id);
-        $this->getAction();
+        // Respond with record data.
+        echo Zend_Json::encode($record->toArray());
 
     }
 
@@ -87,8 +86,8 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
             Zend_Registry::get('fileIn')), true
         ));
 
-        // Forward to GET.
-        $this->getAction();
+        // Respond with record data.
+        echo Zend_Json::encode($record->toArray());
 
     }
 
