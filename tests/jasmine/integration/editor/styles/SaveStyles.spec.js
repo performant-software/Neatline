@@ -81,7 +81,7 @@ describe('Styles | Save Styles', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.exhibit);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -124,7 +124,7 @@ describe('Styles | Save Styles', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.exhibit);
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {

@@ -12,7 +12,8 @@ describe('Record | Delete Record', function() {
 
 
   var el, fx = {
-    record: read('EditorRecord.record.json')
+    record: read('EditorRecord.record.json'),
+    empty:  read('EditorRecordDeleteRecord.json')
   };
 
 
@@ -99,7 +100,7 @@ describe('Record | Delete Record', function() {
 
     // Click on "Save".
     el.delete2.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.empty);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -142,7 +143,7 @@ describe('Record | Delete Record', function() {
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.empty);
 
     // Modal should be hidden.
     expect(el.modal).not.toHaveClass('in');
@@ -169,7 +170,7 @@ describe('Record | Delete Record', function() {
     // Delete, confirm.
     el.delete1.trigger('click');
     el.delete2.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.empty);
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {

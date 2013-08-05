@@ -129,7 +129,7 @@ describe('Record | Save Record', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.record);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -172,7 +172,7 @@ describe('Record | Save Record', function() {
 
     // Click on "Save".
     el.save.trigger('click');
-    NL.respondLast200('');
+    NL.respondLast200(fx.record);
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {

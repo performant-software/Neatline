@@ -14,7 +14,7 @@ class RecordsControllerTest_Delete extends Neatline_Case_Default
 
 
     /**
-     * DELETE should remove a record.
+     * DELETE should remove a record and return an empty JSON response.
      */
     public function testDelete()
     {
