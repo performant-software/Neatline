@@ -13,15 +13,16 @@
  * Show load spinner during ajax requests.
  */
 $(function() {
-  $('#loader').hide().
 
+  var loader = $('#loader');
+
+  $(document).
     ajaxStart(function() {
-      $(this).show();
+      loader.show();
     }).
-
     ajaxStop(function() {
-      $(this).hide();
+      loader.hide();
     })
-
   ;
+
 });
