@@ -2,7 +2,9 @@
 
 #### Bug Fixes
 
-  - Fixes a problem that was causing Omeka item-imports to fail when certain other plugins are installed alongside Neatline (eg, Coins).
+  - Fixes a problem that was causing item imports to fail when other plugins were installed that made use of the `public_show_items` hook (eg, Coins).
+
+  - Fixes performance problems in Chrome related to hardware-acceleration styles on OpenLayers tile images.
 
 #### API Changes
 
