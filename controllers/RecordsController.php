@@ -99,8 +99,14 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
      */
     public function deleteAction()
     {
+
+        // Find and delete the record.
         $record = $this->records->find($this->_request->id);
         $record->delete();
+
+        // Return an empty JSON object.
+        echo Zend_JSON::encode(array());
+
     }
 
 

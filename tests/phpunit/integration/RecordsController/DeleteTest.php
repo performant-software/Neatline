@@ -36,6 +36,9 @@ class RecordsControllerTest_Delete extends Neatline_Case_Default
         $this->assertNotNull($this->_records->find($record1->id));
         $this->assertNull($this->_records->find($record2->id));
 
+        // Should return empty JSON.
+        $this->assertEquals($this->_getResponseArray(), array());
+
     }
 
 
