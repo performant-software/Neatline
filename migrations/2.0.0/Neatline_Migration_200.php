@@ -116,9 +116,11 @@ SQL;
         RENAME TO {$this->db->prefix}neatline_base_layers_migrate;
 SQL;
 
-        $this->db->query($sql1);
-        $this->db->query($sql2);
-        $this->db->query($sql3);
+        try {
+            $this->db->query($sql1);
+            $this->db->query($sql2);
+            $this->db->query($sql3);
+        } catch (Exception $e) {}
 
     }
 
@@ -129,16 +131,18 @@ SQL;
     private function _installNewTables()
     {
 
-        // Install the default Neatline tables.
+        // (Re)install the up-to-date Neatline tables.
 
         $this->plugin->hookInstall();
 
         // Install the SIMILE exhibit expansion table.
 
+        $prefix = $this->db->prefix;
+
         $sql = <<<SQL
 
         CREATE TABLE IF NOT EXISTS
-        {$this->db->prefix}neatline_simile_exhibit_expansions (
+        {$prefix}neatline_simile_exhibit_expansions (
 
             id          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             parent_id   INT(10) UNSIGNED NULL,

@@ -41,8 +41,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         $exhibits = <<<SQL
 
-        CREATE TABLE IF NOT EXISTS
-        {$this->_db->prefix}neatline_exhibits (
+        CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_exhibits (
 
         id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
         owner_id                INT(10) UNSIGNED NOT NULL,
@@ -75,8 +74,7 @@ SQL;
 
         $records = <<<SQL
 
-        CREATE TABLE IF NOT EXISTS
-        {$this->_db->prefix}neatline_records (
+        CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_records (
 
         id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
         owner_id                INT(10) UNSIGNED NOT NULL,
