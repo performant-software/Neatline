@@ -6,6 +6,5 @@
         <directory>unit</directory>
         <directory>integration</directory>
         <directory>fixtures</directory>
-        <directory>migrations</directory>
     </testsuite>
 </phpunit>

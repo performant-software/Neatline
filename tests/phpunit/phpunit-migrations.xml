@@ -1,0 +1,8 @@
+<phpunit bootstrap="bootstrap.php"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="true">
+    <testsuite name="Neatline Migration Tests">
+        <directory>migrations</directory>
+    </testsuite>
+</phpunit>
