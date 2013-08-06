@@ -33,6 +33,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     );
 
 
+    // HOOKS
+    // --------------------------------------------------------------------
+
+
     /**
      * Create exhibit and record tables.
      */
@@ -243,6 +247,10 @@ SQL;
         $records = $this->_db->getTable('NeatlineRecord');
         $records->syncItem($args['record']);
     }
+
+
+    // FILTERS
+    // --------------------------------------------------------------------
 
 
     /**
