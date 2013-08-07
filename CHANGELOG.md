@@ -1,18 +1,4 @@
-## v2.0.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.2...2.0.3)) ~ August 6, 2013
-
-#### Bug Fixes
-
-  - Fixes a problem that was causing item imports to fail when other plugins were installed that made use of the `public_show_items` hook (eg, Coins).
-
-  - Fixes performance problems in Chrome related to hardware-acceleration styles on OpenLayers tile images.
-
-#### API Changes
-
-  - Upgrades OpenLayers to v2.13.1.
-
-  - Upgrades jQuery to v2.0.3.
-
-## v2.0.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.1...2.0.2)) ~ July 14, 2013
+## v2.0.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.1...2.0.2)) ~ August 7, 2013
 
 #### Added Features
 
@@ -27,6 +13,16 @@
 #### Bug Fixes
 
   - Fixes bug that was making it impossible to paste values from the clipboard into the hex value input boxes for the color fields in the "Style" tab.
+
+  - Fixes a problem that was causing item imports to fail when other plugins were installed that made use of the `public_show_items` hook (eg, Coins).
+
+  - Fixes performance problems in Chrome related to hardware-acceleration styles on OpenLayers tile images.
+
+#### API Changes
+
+  - Upgrades OpenLayers to v2.13.1.
+
+  - Upgrades jQuery to v2.0.3.
 
 ## v2.0.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.0...2.0.1)) ~ July 10, 2013
 
