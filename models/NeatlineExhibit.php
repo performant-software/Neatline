@@ -286,5 +286,13 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         return 'Neatline_Exhibits';
     }
 
-
+    /**
+     * Get the routing parameters or the URL string to this record.
+     */
+    public function getRecordUrl($action = 'show')
+    {
+        $urlHelper = new Omeka_View_Helper_Url;
+        $params = array('action' => $action, 'id' => $this->id);
+        return $urlHelper->url($params, 'neatlineActionId');
+    }
 }
