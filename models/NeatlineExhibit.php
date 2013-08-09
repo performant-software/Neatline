@@ -259,6 +259,19 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
+     * Get the routing parameters or the URL string for the exhibit.
+     *
+     * @param string $action The controller action.
+     */
+    public function getRecordUrl($action = 'show')
+    {
+        $urlHelper = new Omeka_View_Helper_Url;
+        $params = array('action' => $action, 'id' => $this->id);
+        return $urlHelper->url($params, 'neatlineActionId');
+    }
+
+
+    /**
      * Measure the image layer when the exhibit is * saved.
      */
     protected function beforeSave()
@@ -286,13 +299,5 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         return 'Neatline_Exhibits';
     }
 
-    /**
-     * Get the routing parameters or the URL string to this record.
-     */
-    public function getRecordUrl($action = 'show')
-    {
-        $urlHelper = new Omeka_View_Helper_Url;
-        $params = array('action' => $action, 'id' => $this->id);
-        return $urlHelper->url($params, 'neatlineActionId');
-    }
+
 }
