@@ -16,7 +16,9 @@
 function nl_mockView()
 {
 
-    $view = Zend_Registry::get('view');
+    // Get or create a view.
+    $view = Zend_Registry::isRegistered('view') ?
+            Zend_Registry::get('view') : new Omeka_View();
 
     // Default Omeka templates:
     // ------------------------
@@ -29,6 +31,11 @@ function nl_mockView()
     // Public theme templates:
     // -----------------------
     $view->addScriptPath(nl_getPublicThemeDir());
+
+    // Inject new view.
+    Zend_Registry::set('view', $view);
+
+    return $view;
 
 }
 
