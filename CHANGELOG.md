@@ -1,3 +1,9 @@
+## v2.0.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.2...2.0.3)) ~ August 9, 2013
+
+#### Bug Fixes
+
+  - Resolves issue that was causing item-import queries to fail when the asynchronous background process adapter was set in the `config.ini`.
+
 ## v2.0.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.1...2.0.2)) ~ August 7, 2013
 
 #### Added Features
