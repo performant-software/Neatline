@@ -18,7 +18,8 @@ function nl_mockView()
 
     // Get or create a view.
     $view = Zend_Registry::isRegistered('view') ?
-            Zend_Registry::get('view') : new Omeka_View();
+            Zend_Registry::get('view') :
+            new Omeka_View();
 
     // Default Omeka templates:
     // ------------------------
