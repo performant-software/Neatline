@@ -104,7 +104,7 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
         $record->delete();
 
         // Return an empty JSON object.
-        echo Zend_JSON::encode(array());
+        echo Zend_Json::encode(array());
 
     }
 
