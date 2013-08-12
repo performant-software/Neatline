@@ -11,14 +11,6 @@ require 'rake/packagetask'
 require 'fileutils'
 
 
-desc 'Build the development environment'
-task :default do
-  sh %{npm install}
-  sh %{composer install}
-  sh %{bower install}
-end
-
-
 class PackageTask < Rake::PackageTask
 
   def package_name
