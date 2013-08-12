@@ -19,9 +19,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-shell');
 
   var paths = grunt.file.readJSON('./paths.json');
+  var pkg   = grunt.file.readJSON('./package.json')
 
   grunt.initConfig({
 
@@ -67,7 +69,7 @@ module.exports = function(grunt) {
       },
 
       build_chosen: {
-        command: 'npm install && grunt build',
+        command: 'npm install && bundle install && grunt build',
         options: {
           execOptions: {
             cwd: paths.build.chosen
@@ -172,8 +174,9 @@ module.exports = function(grunt) {
         paths.jasmine+'/fixtures/*.html',
         paths.jasmine+'/fixtures/*.xml'
       ],
-      images: './views/shared/css/img',
-      bower: './bower_components'
+      images:   './views/shared/css/img',
+      bower:    './bower_components',
+      packages: './pkg'
     },
 
     concat: {
@@ -365,6 +368,55 @@ module.exports = function(grunt) {
 
     },
 
+    compress: {
+
+      dist: {
+        options: {
+          archive: 'pkg/Neatline-'+pkg.version+'.zip'
+        },
+        dest: 'Neatline/',
+        src: [
+
+          '**',
+
+          // GIT
+          '!.git/**',
+
+          // BOWER
+          '!bower.json',
+          '!bower_components/**',
+
+          // NPM
+          '!package.json',
+          '!node_modules/**',
+
+          // COMPOSER
+          '!composer.json',
+          '!composer.lock',
+          '!vendor/**',
+
+          // RUBY
+          '!Gemfile',
+          '!Gemfile.lock',
+          '!Rakefile',
+
+          // GRUNT
+          '!.grunt/**',
+          '!Gruntfile.js',
+          '!paths.json',
+
+          // DIST
+          '!version',
+          '!pkg/**',
+
+          // TESTS
+          '!tests/**'
+
+        ]
+      }
+
+    },
+
     jasmine: {
 
       options: {
@@ -482,6 +534,12 @@ module.exports = function(grunt) {
     'clean:fixtures',
     'phpunit:all',
     'jasmine'
+  ]);
+
+  // Spawn release package.
+  grunt.registerTask('package', [
+    'clean:packages',
+    'compress'
   ]);
 
 };
