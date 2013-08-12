@@ -19,7 +19,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-shell');
 
   var paths = grunt.file.readJSON('./paths.json');
@@ -68,7 +67,7 @@ module.exports = function(grunt) {
       },
 
       build_chosen: {
-        command: 'npm install && bundle install && grunt build',
+        command: 'npm install && grunt build',
         options: {
           execOptions: {
             cwd: paths.build.chosen
@@ -173,9 +172,8 @@ module.exports = function(grunt) {
         paths.jasmine+'/fixtures/*.html',
         paths.jasmine+'/fixtures/*.xml'
       ],
-      images:   './views/shared/css/img',
-      bower:    './bower_components',
-      packages: './pkg'
+      images: './views/shared/css/img',
+      bower: './bower_components'
     },
 
     concat: {
@@ -362,55 +360,6 @@ module.exports = function(grunt) {
         ],
         tasks: [
           'compile:concat'
-        ]
-      }
-
-    },
-
-    compress: {
-
-      dist: {
-        options: {
-          archive: 'pkg/Neatline.zip'
-        },
-        dest: 'Neatline/',
-        src: [
-
-          '**',
-
-          // GIT
-          '!.git/**',
-
-          // BOWER
-          '!bower.json',
-          '!bower_components/**',
-
-          // NPM
-          '!package.json',
-          '!node_modules/**',
-
-          // COMPOSER
-          '!composer.json',
-          '!composer.lock',
-          '!vendor/**',
-
-          // RUBY
-          '!Gemfile',
-          '!Gemfile.lock',
-          '!Rakefile',
-
-          // GRUNT
-          '!.grunt/**',
-          '!Gruntfile.js',
-          '!paths.json',
-
-          // DIST
-          '!version',
-          '!pkg/**',
-
-          // TESTS
-          '!tests/**'
-
         ]
       }
 

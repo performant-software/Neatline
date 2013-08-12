@@ -3,6 +3,7 @@ node_modules
 bower_components
 vendor
 .grunt
+.data
 pkg
 
 _SpecRunner.html

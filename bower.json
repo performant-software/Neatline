@@ -14,7 +14,7 @@
     , "rivets":                 ">= 0.4.5"
     , "spectrum":               ">= 1.1.0"
     , "jasmine-jquery":         ">= 1.4.2"
-    , "sinon":                  ">= 1.7.3"
+    , "sinon":                  ">= 1.6.0"
 
     , "jquery-ui":              "https://github.com/jquery/jquery-ui.git"
     , "backbone.neatline":      "https://github.com/davidmcclure/backbone.neatline.git"
