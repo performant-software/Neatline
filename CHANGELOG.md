@@ -1,3 +1,9 @@
+## v2.0.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.0.4)) ~ August 14, 2013
+
+#### Bug Fixes
+
+  - Fixes a class capitalization typo that was causing failure notices to be erroneously displayed afted deleting records under some versions of PHP.
+
 ## v2.0.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.2...2.0.3)) ~ August 9, 2013
 
 #### Bug Fixes
