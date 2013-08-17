@@ -44,7 +44,7 @@
       "neatline":         "./bower_components/backbone.neatline/lib/backbone.neatline.js",
       "safesync":         "./bower_components/backbone-safesync/backbone-safesync.js",
       "openlayers":       "./bower_components/openlayers/build/OpenLayers.js",
-      "bootstrap":        "./bower_components/bootstrap/docs/assets/js/bootstrap.js",
+      "bootstrap":        "./bower_components/bootstrap/dist/js/bootstrap.js",
       "stamen":           "./bower_components/stamen-neatline/stamen.neatline.js",
       "svgtowkt":         "./bower_components/svg-to-wkt/svg-to-wkt.js",
       "routefilter":      "./bower_components/backbone.routefilter/dist/backbone.routefilter.js",
@@ -64,7 +64,7 @@
     "css": {
       "jquery_ui":        "./bower_components/jquery-ui/dist/jquery-ui.min.css",
       "openlayers":       "./bower_components/openlayers/theme/default/style.css",
-      "bootstrap":        "./bower_components/bootstrap/docs/assets/css/bootstrap.css",
+      "bootstrap":        "./bower_components/bootstrap/dist/css/bootstrap.css",
       "toastr":           "./bower_components/toastr/toastr.css",
       "spectrum":         "./bower_components/spectrum/spectrum.css",
       "chosen":           "./bower_components/chosen/public/chosen.css"

@@ -11,38 +11,42 @@
 
 ?>
 
-<div id="svg-modal" class="modal hide">
+<div id="svg-modal" class="modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-  <div class="modal-header">
-    <h4>Enter SVG</h4>
+      <div class="modal-header">
+        <h4><?php echo __('Enter SVG'); ?></h4>
+      </div>
+
+      <div class="modal-body">
+
+        <?php echo common('neatline/textarea', array(
+            'name'  => 'svg',
+            'label' => 'SVG',
+            'class' => 'code'
+        )); ?>
+
+        <?php echo common('neatline/input', array(
+            'name'  => 'density',
+            'label' => 'Density',
+            'value' => '1.0'
+        )); ?>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <a name="cancel" class="btn btn-default" data-dismiss="modal">
+          <?php echo __('Cancel'); ?>
+        </a>
+
+        <a name="parse" class="btn btn-primary">
+          <?php echo __('Parse'); ?>
+        </a>
+
+      </div>
+
+    </div>
   </div>
-
-  <div class="modal-body">
-
-    <?php echo common('neatline/textarea', array(
-        'name'  => 'svg',
-        'label' => 'SVG',
-        'class' => 'code'
-    )); ?>
-
-    <?php echo common('neatline/input', array(
-        'name'  => 'density',
-        'label' => 'Density',
-        'value' => '1.0'
-    )); ?>
-
-  </div>
-
-  <div class="modal-footer">
-
-    <a name="cancel" class="btn" data-dismiss="modal">
-      <i class="icon-ban-circle"></i> Cancel
-    </a>
-
-    <a name="parse" class="btn btn-primary">
-      <i class="icon-ok icon-white"></i> Parse
-    </a>
-
-  </div>
-
 </div>

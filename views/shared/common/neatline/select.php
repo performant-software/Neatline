@@ -11,21 +11,23 @@
 
 ?>
 
-<label><?php echo __($label); ?></label>
+<div class="form-group">
 
-<div class="controls">
-  <div class="inline-inputs">
+  <label><?php echo __($label); ?></label>
+
     <select
+      class="form-control <?php if (isset($class)) echo $class; ?>"
       <?php if (isset($name)) echo "name='$name'"; ?>
       <?php if (isset($multi) && $multi) echo "multiple='multiple'"; ?>
-      <?php if (isset($class)) echo "class='$class'"; ?>
       <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
     >
+
       <?php foreach ($options as $label => $val): ?>
         <option value="<?php echo $val; ?>">
           <?php echo $label; ?>
         </option>
       <?php endforeach; ?>
+
     </select>
-  </div>
+
 </div>

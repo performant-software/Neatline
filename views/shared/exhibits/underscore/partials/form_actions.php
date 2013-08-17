@@ -13,42 +13,45 @@
 
 <div class="actions">
 
-  <a name="save" class="btn btn-primary btn-large" \>
-    <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
+  <a name="save" class="btn btn-primary btn-large">
+    <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" class="btn btn-inverse btn-large"
-    data-toggle="modal"><i class="icon-trash icon-white"></i>
-    <?php echo __('Delete'); ?>
+  <a href="#delete-modal" class="btn btn-default btn-large"
+    data-toggle="modal"> <?php echo __('Delete'); ?>
   </a>
 
 </div>
 
-<div id="delete-modal" class="modal hide">
+<div id="delete-modal" class="modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-  <div class="modal-header">
-    <h4>Are you sure?</h4>
+      <div class="modal-header">
+        <h4><?php echo __('Are you sure?'); ?></h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          <?php echo __(
+            'This will delete the record from the database and remove all
+            associated metadata. This action cannot be undone.'
+          );?>
+        </p>
+      </div>
+
+      <div class="modal-footer">
+
+        <a name="cancel" class="btn btn-default" data-dismiss="modal">
+          <?php echo __('Cancel'); ?>
+        </a>
+
+        <a name="delete" class="btn btn-danger">
+          <?php echo __('Yes, delete'); ?>
+        </a>
+
+      </div>
+
+    </div>
   </div>
-
-  <div class="modal-body">
-    <p>
-      <?php echo __(
-        'This will delete the record from the database and remove all
-        associated metadata. This action cannot be undone.'
-      );?>
-    </p>
-  </div>
-
-  <div class="modal-footer">
-
-    <a name="cancel" class="btn" data-dismiss="modal">
-      <i class="icon-ban-circle"></i> Cancel
-    </a>
-
-    <a name="delete" class="btn btn-danger">
-      <i class="icon-trash icon-white"></i> Yes, delete
-    </a>
-
-  </div>
-
 </div>

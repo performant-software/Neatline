@@ -13,23 +13,25 @@
 
 
 form.record
-  margin-top $editorMargin
 
   span.id
     font-weight bold
 
   a.label-link
     font-size 12px
+    font-weight normal
     cursor pointer
+
+  .tab-content
+    margin-bottom 5em
 
   #record-text
 
-    textarea[name="title"]
-      height 100px
-    textarea[name="body"]
-      height 290px
+    textarea
+      height 160px
 
   #record-map
+    margin 0 1px
 
     label.radio
     label.checkbox
@@ -39,23 +41,16 @@ form.record
     label.radio
       margin-left 0.5em
 
-    div.control-group.indent
-      margin 0 2em
+    div.regular-polygon
+      margin-left 1em
 
-      label,
-      .inline-inputs
-        font-weight 300
-        font-size 0.9em
+      .form-group
+        margin-bottom 8px
 
-      &.regular-polygon
-
-        .inline-inputs
-          margin-bottom 10px
-
-        input[type="text"]
-          display inline
-          margin 0 4px 0 0
-          width 30px
+      input[type="text"]
+        display inline
+        margin 0 4px 0 0
+        width 40px
 
     a[name="clear"]
       margin 0.5em 0
@@ -75,4 +70,6 @@ form.record
       margin 5px 0 10px
 
   div.actions
-    margin-top 1em
+    position fixed
+    bottom 2em
+    left 1.6em

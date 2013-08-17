@@ -11,24 +11,26 @@
 
 ?>
 
-<label>
+<div class="form-group">
 
-  <?php echo __($label); ?>
+  <label>
 
-  <!-- ( Edit HTML ). -->
-  <?php if (isset($editHtml)): ?>
-    ( <a class="label-link" data-textarea="<?php echo $editHtml; ?>">
-        Edit HTML
-      </a> )
-  <?php endif; ?>
+    <?php echo __($label); ?>
 
-</label>
+    <!-- ( Edit HTML ). -->
+    <?php if (isset($editHtml)): ?>
+      ( <a class="label-link" data-textarea="<?php echo $editHtml; ?>">
+          Edit HTML
+        </a> )
+    <?php endif; ?>
 
-<div class="controls <?php if (isset($class)) echo $class; ?>">
+  </label>
+
   <textarea
+    class="form-control <?php if (isset($class)) echo $class; ?>"
     <?php if (isset($id)) echo "id='$id'"; ?>
     <?php if (isset($name)) echo "name='$name'"; ?>
-    <?php if (isset($class)) echo "class='$class'"; ?>
     <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
   ></textarea>
+
 </div>

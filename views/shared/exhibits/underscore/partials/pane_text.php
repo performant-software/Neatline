@@ -11,35 +11,31 @@
 
 ?>
 
-<div class="control-group">
+<?php echo common('neatline/input', array(
+    'name'  => 'item-id',
+    'label' => 'Omeka ID',
+    'bind'  => 'record.item_id',
+    'placeholder' => 'Search Omeka Items'
+)); ?>
 
-  <?php echo common('neatline/input', array(
-      'name'  => 'item-id',
-      'label' => 'Omeka ID',
-      'bind'  => 'record.item_id',
-      'placeholder' => 'Search Omeka Items'
-  )); ?>
+<?php echo common('neatline/input', array(
+    'name'  => 'slug',
+    'label' => 'Slug',
+    'bind'  => 'record.slug'
+)); ?>
 
-  <?php echo common('neatline/input', array(
-      'name'  => 'slug',
-      'label' => 'Slug',
-      'bind'  => 'record.slug'
-  )); ?>
+<?php echo common('neatline/textarea', array(
+    'id'    => 'title',
+    'name'  => 'title',
+    'label' => 'Title',
+    'bind'  => 'record.title',
+    'editHtml' => 'title'
+)); ?>
 
-  <?php echo common('neatline/textarea', array(
-      'id'    => 'title',
-      'name'  => 'title',
-      'label' => 'Title',
-      'bind'  => 'record.title',
-      'editHtml' => 'title'
-  )); ?>
-
-  <?php echo common('neatline/textarea', array(
-      'id'    => 'body',
-      'name'  => 'body',
-      'label' => 'Body',
-      'bind'  => 'record.body',
-      'editHtml' => 'body'
-  )); ?>
-
-</div>
+<?php echo common('neatline/textarea', array(
+    'id'    => 'body',
+    'name'  => 'body',
+    'label' => 'Body',
+    'bind'  => 'record.body',
+    'editHtml' => 'body'
+)); ?>

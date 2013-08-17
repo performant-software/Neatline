@@ -11,12 +11,7 @@
 
 ?>
 
-<div class="controls">
-  <div class="inline-inputs">
-    <a class="btn btn-small"
-      <?php if (isset($name)) echo "name='$name'"; ?>>
-      <i <?php if (isset($icon)) echo "class='$icon'"; ?>></i>
-      <?php echo $text; ?>
-    </a>
-  </div>
-</div>
+<a class="btn btn-default btn-small"
+  <?php if (isset($name)) echo "name='$name'"; ?>>
+  <?php echo $text; ?>
+</a>

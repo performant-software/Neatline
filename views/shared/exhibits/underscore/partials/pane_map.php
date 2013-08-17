@@ -11,65 +11,76 @@
 
 ?>
 
-<div class="control-group map">
-
-
-  <label class="radio">
+<div class="radio">
+  <label>
     <input type="radio" name="mode" value="pan" checked>
-    Navigate
+    <?php echo __('Navigate'); ?>
   </label>
+</div>
 
 
-  <label class="radio">
+<div class="radio">
+  <label>
     <input type="radio" name="mode" value="point">
-    Draw Point
+    <?php echo __('Draw Point'); ?>
   </label>
+</div>
 
 
-  <label class="radio">
+<div class="radio">
+  <label>
     <input type="radio" name="mode" value="line">
-    Draw Line
+    <?php echo __('Draw Line'); ?>
   </label>
+</div>
 
 
-  <label class="radio">
+<div class="radio">
+  <label>
     <input type="radio" name="mode" value="poly">
-    Draw Polygon
+    <?php echo __('Draw Polygon'); ?>
   </label>
+</div>
 
 
-  <label class="radio">
+<div class="radio">
+  <label>
     <input type="radio" name="mode" value="regPoly">
-    Draw Regular Polygon
+    <?php echo __('Draw Regular Polygon'); ?>
   </label>
+</div>
 
 
-  <div class="control-group indent regular-polygon">
+<div class="regular-polygon">
 
-    <div class="inline-inputs">
-      <input type="text" name="sides" value="3" />
-      Sides
-    </div>
-
-    <div class="inline-inputs">
-      <input type="text" name="snap" value="15" />
-      Snap Angle
-    </div>
-
-    <label class="checkbox">
-      <input type="checkbox" name="irreg">
-      Irregular?
-    </label>
-
+  <div class="form-group">
+    <input type="text" class="form-control" name="sides" value="3" />
+    <?php echo __('Sides'); ?>
   </div>
 
+  <div class="form-group">
+    <input type="text" class="form-control" name="snap" value="15" />
+    <?php echo __('Snap Angle'); ?>
+  </div>
 
-  <label class="radio">
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="irreg">
+      <?php echo __('Irregular?'); ?>
+    </label>
+  </div>
+
+</div>
+
+
+<div class="radio">
+  <label>
 
     <input type="radio" name="mode" value="svg">
-    Draw SVG ( <a href="#svg-modal" data-toggle="modal"
-      class="label-link">Enter Markup</a>
-    )
+    <?php echo __('Draw SVG'); ?>
+    ( <a href="#svg-modal" data-toggle="modal" class="label-link">
+      <?php echo __('Enter Markup'); ?>
+    </a> )
 
     <!-- SVG modal. -->
     <?php echo $this->partial(
@@ -77,54 +88,60 @@
     ); ?>
 
   </label>
-
-
-  <label class="radio">
-    <input type="radio" name="mode" value="modify">
-    Modify Shape
-  </label>
-
-
-  <label class="radio">
-    <input type="radio" name="mode" value="rotate">
-    Rotate Shape
-  </label>
-
-
-  <label class="radio">
-    <input type="radio" name="mode" value="resize">
-    Resize Shape
-  </label>
-
-
-  <label class="radio">
-    <input type="radio" name="mode" value="drag">
-    Drag Shape
-  </label>
-
-
-  <label class="radio">
-    <input type="radio" name="mode" value="remove">
-    Delete Shape
-  </label>
-
-
-  <div class="control-group">
-    <a name="clear" class="btn btn-primary btn-small">
-      <i class="icon-refresh icon-white"></i> Clear all Geometry
-    </a>
-  </div>
-
-
-  <hr>
-
-
-  <?php echo common('neatline/textarea', array(
-      'name'  => 'coverage',
-      'label' => 'Geometry (Well-Known Text)',
-      'bind'  => 'record.coverage',
-      'class' => 'code'
-  )); ?>
-
-
 </div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="modify">
+    <?php echo __('Modify Shape'); ?>
+  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="rotate">
+    <?php echo __('Rotate Shape'); ?>
+  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="resize">
+    <?php echo __('Resize Shape'); ?>
+  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="drag">
+    <?php echo __('Drag Shape'); ?>
+  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="remove">
+    <?php echo __('Delete Shape'); ?>
+  </label>
+</div>
+
+
+<a name="clear" class="btn btn-primary btn-small">
+  <?php echo __('Clear all Geometry'); ?>
+</a>
+
+
+<hr>
+
+
+<?php echo common('neatline/textarea', array(
+    'name'  => 'coverage',
+    'label' => 'Geometry (Well-Known Text)',
+    'bind'  => 'record.coverage',
+    'class' => 'code'
+)); ?>

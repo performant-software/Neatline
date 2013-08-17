@@ -1,3 +1,7 @@
+## v2.1.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.1.0)) ~ Pending
+
+#### Added Features
+
 ## v2.0.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.0.4)) ~ August 14, 2013
 
 #### Bug Fixes

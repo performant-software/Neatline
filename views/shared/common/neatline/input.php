@@ -11,29 +11,29 @@
 
 ?>
 
-<label>
+<div class="form-group">
 
-  <!-- Label text. -->
-  <?php echo __($label); ?>
+  <label>
 
-  <!-- ( Use Current ). -->
-  <?php if (isset($useCurrent) && $useCurrent): ?>
-    ( <a class="label-link" name="set-<?php echo $name; ?>">
-        Use Current
-      </a> )
-  <?php endif; ?>
+    <!-- Label text. -->
+    <?php echo __($label); ?>
 
-</label>
+    <!-- ( Use Current ). -->
+    <?php if (isset($useCurrent) && $useCurrent): ?>
+      ( <a class="label-link" name="set-<?php echo $name; ?>">
+        <?php echo __('Use Current'); ?>
+        </a> )
+    <?php endif; ?>
 
-<div class="controls">
-  <div class="inline-inputs">
-    <input
-      type="<?php echo isset($type) ? $type : 'text'; ?>"
-      <?php if (isset($placeholder)) echo "placeholder='$placeholder'"; ?>
-      <?php if (isset($name)) echo "name='$name'"; ?>
-      <?php if (isset($class)) echo "class='$class'"; ?>
-      <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
-      <?php if (isset($value)) echo "value='$value'"; ?>
-    />
-  </div>
+  </label>
+
+  <input
+    type="<?php echo isset($type) ? $type : 'text'; ?>"
+    class="form-control <?php if (isset($class)) echo $class; ?>"
+    <?php if (isset($placeholder)) echo "placeholder='$placeholder'"; ?>
+    <?php if (isset($name)) echo "name='$name'"; ?>
+    <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
+    <?php if (isset($value)) echo "value='$value'"; ?>
+  />
+
 </div>

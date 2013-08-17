@@ -12,19 +12,27 @@
 @import 'var'
 
 
-textarea
-input[type="text"]
-  box-shadow none
+.btn,
+.nav-pills > li > a,
+.form-control,
+.modal-content
   border-radius 2px
-  border-color $borderColor
+
+.form-control
+  box-shadow none
+  border-color #dbdbdb
+  height 34px
+  padding 8px
 
   &:focus
     box-shadow none
-    border-color $accentColor
 
-.nav-pills li a
-  border-radius 2px
-  padding 5px 6px
+.radio,
+.checkbox
+  margin-top 0
+
+label
+  font-weight 500
 
 .modal-backdrop
   opacity 0.3
