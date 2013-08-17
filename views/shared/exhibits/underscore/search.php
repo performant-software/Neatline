@@ -12,5 +12,7 @@
 ?>
 
 <script id="search-template" type="text/template">
-  <input type="text" placeholder="Search" />
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search" />
+  </div>
 </script>

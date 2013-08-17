@@ -115,15 +115,6 @@ module.exports = function(grunt) {
         }]
       },
 
-      bootstrap: {
-        files: [{
-          src: paths.build.bootstrap+'/img/*',
-          dest: './views/shared/css/img/',
-          expand: true,
-          flatten: true
-        }]
-      },
-
       chosen: {
         files: [{
           src: paths.build.chosen+'/public/*.png',

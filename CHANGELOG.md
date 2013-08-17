@@ -2,6 +2,12 @@
 
 #### Added Features
 
+  - In the record edit form, the "Save" and "Delete" buttons are now fixed at the bottom of the screenm, making it possible to save the record without first having to scroll to the bottom of the form.
+
+#### API Changes
+
+  - Upgrates Bootstrap to v3.0.0-rc2.
+
 ## v2.0.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.0.4)) ~ August 14, 2013
 
 #### Bug Fixes
