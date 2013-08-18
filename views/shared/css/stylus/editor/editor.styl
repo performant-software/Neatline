@@ -12,9 +12,20 @@
 @import 'var'
 
 
-header
-  margin $editorMargin
+body
+  margin 0
+  text-rendering optimizeLegibility
 
-  a.back
-    font-size 12px
-    font-weight 300
+#editor
+#neatline
+  position absolute
+  box-sizing border-box
+
+#neatline
+  -webkit-user-select none
+  -moz-user-select none
+
+#editor
+  width $editorWidth
+  overflow-y scroll
+  overflow-x hidden
