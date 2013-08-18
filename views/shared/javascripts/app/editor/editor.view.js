@@ -28,7 +28,7 @@ Neatline.module('Editor', { startWithParent: false,
     init: function() {
 
       // Cache starting width.
-      this.width = this.__ui.editor.width();
+      this.width = this.__ui.editor.outerWidth();
 
       // Listen for resize.
       this.window = $(window);
