@@ -43,7 +43,9 @@
 
             <!-- Body. -->
             <span class="body">
-              <%= _.string.stripTags(r.get('body')) %>
+              <%= _.string.prune(
+                _.string.stripTags(r.get('body')), 100
+              ) %>
             </span>
 
           </a>

@@ -53,16 +53,14 @@
   records.count > Neatline.g.neatline.per_page
 ) { %>
 
-  <div class="pagination">
+  <ul class="pagination">
 
-    <ul class="pagination">
-      <li <% if (!prevActive) {
-        %><%='class="disabled"'%><%
-      } %>><a class="prev" href="<%= prev %>">«</a></li>
-      <li <% if (!nextActive) {
-        %><%='class="disabled"'%><%
-      } %>><a class="next" href="<%= next %>">»</a></li>
-    </ul>
+    <li <% if (!prevActive) {
+      %><%='class="disabled"'%><%
+    } %>><a class="prev" href="<%= prev %>">«</a></li>
+    <li <% if (!nextActive) {
+      %><%='class="disabled"'%><%
+    } %>><a class="next" href="<%= next %>">»</a></li>
 
     <div class="offset">
       <span class="start"><%= records.offset+1 %></span> -
@@ -70,6 +68,6 @@
       <span class="total"><%= records.count %></span>
     </div>
 
-  </div>
+  </ul>
 
 <% } %>

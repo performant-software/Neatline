@@ -12,18 +12,14 @@
 @import 'var'
 
 
-table.list
-  margin $editorPadding 0
+ul.pagination
+  margin $editorPadding 0 0
 
-  td
-    padding 0
+  div.offset
+    display inline
+    position relative
+    left 10px
+    top 7px
 
-    a
-      display block
-      padding 5px
-      overflow hidden
-      height 100%
-      width 100%
-
-      .body
-        font-size 12px
+    .start, .end, .total
+      font-weight bold
