@@ -13,40 +13,46 @@
 
 <script id="record-list-template" type="text/template">
 
+  <!-- Add record link. -->
+  <a href="#record/add" class="btn btn-primary add">
+    <?php echo __('New Record'); ?>
+  </a>
+
   <!-- Top pagination. -->
   <?php echo $this->partial(
     'exhibits/underscore/partials/pagination.php'
   ); ?>
 
-  <ul class="list">
-
-    <!-- Add record link. -->
-    <a href="#record/add"><?php echo __('New Record'); ?></a>
+  <table class="table table-striped table-condensed list">
 
     <% records.each(function(r) { %>
+      <tr>
+        <td>
 
-      <!-- Record listing. -->
-      <a href="#record/<%= r.id %>" data-id="<%= r.id %>">
+          <!-- Record listing. -->
+          <a href="#record/<%= r.id %>" data-id="<%= r.id %>">
 
-        <!-- Title. -->
-        <span class="title">
-          <% if (!_.isEmpty(r.get('title'))) { %>
-            <%= _.string.stripTags(r.get('title')) %>
-          <% } else { %>
-            <%= STRINGS.record.placeholders.title %>
-          <% } %>
-        </span>
+            <!-- Title. -->
+            <span class="title">
+              <% if (!_.isEmpty(r.get('title'))) { %>
+                <%= _.string.stripTags(r.get('title')) %>
+              <% } else { %>
+                <%= STRINGS.record.placeholders.title %>
+              <% } %>
+            </span>
 
-        <!-- Body. -->
-        <span class="body">
-          <%= _.string.stripTags(r.get('body')) %>
-        </span>
+            <!-- Body. -->
+            <span class="body">
+              <%= _.string.stripTags(r.get('body')) %>
+            </span>
 
-      </a>
+          </a>
 
+        </td>
+      </tr>
     <% }); %>
 
-  </ul>
+  </table>
 
   <!-- Bottom pagination. -->
   <?php echo $this->partial(

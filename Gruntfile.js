@@ -173,6 +173,7 @@ module.exports = function(grunt) {
 
           // Vendor:
           paths.vendor.js.jquery,
+          paths.vendor.js.jquery_ui,
           paths.vendor.js.underscore,
           paths.vendor.js.underscore_s,
           paths.vendor.js.backbone,

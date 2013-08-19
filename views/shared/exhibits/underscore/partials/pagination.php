@@ -54,7 +54,8 @@
 ) { %>
 
   <div class="pagination">
-    <ul class="prev-next">
+
+    <ul class="pagination">
       <li <% if (!prevActive) {
         %><%='class="disabled"'%><%
       } %>><a class="prev" href="<%= prev %>">«</a></li>
@@ -62,11 +63,13 @@
         %><%='class="disabled"'%><%
       } %>><a class="next" href="<%= next %>">»</a></li>
     </ul>
-    <div class="pagination-details">
+
+    <div class="offset">
       <span class="start"><%= records.offset+1 %></span> -
       <span class="end"><%= records.offset+records.length %></span> of
       <span class="total"><%= records.count %></span>
     </div>
+
   </div>
 
 <% } %>

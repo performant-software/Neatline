@@ -131,7 +131,7 @@
 </div>
 
 
-<a name="clear" class="btn btn-primary btn-small">
+<a name="clear" class="btn btn-primary btn-xs">
   <?php echo __('Clear all Geometry'); ?>
 </a>
 

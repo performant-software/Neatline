@@ -12,24 +12,18 @@
 @import 'var'
 
 
-ul.list
-  padding 0
-  margin 0
+table.list
+  margin $editorPadding 0
 
-  a
-    display list-item
-    font-weight 300
-    white-space nowrap
-    color $textColor
+  td
+    padding 0
 
-    &:hover
-      background $accentColor
-      text-decoration none
-      color white
+    a
+      display block
+      padding 5px
+      overflow hidden
+      height 100%
+      width 100%
 
-    .title
-      font-weight 500
-      font-size 14px
-
-    .body
-      font-size 12px
+      .body
+        font-size 12px

@@ -11,7 +11,7 @@
 
 ?>
 
-<a class="btn btn-default btn-small"
+<a class="btn btn-default btn-xs"
   <?php if (isset($name)) echo "name='$name'"; ?>>
   <?php echo $text; ?>
 </a>

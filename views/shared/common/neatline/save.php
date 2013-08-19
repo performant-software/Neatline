@@ -12,7 +12,7 @@
 ?>
 
 <div class="actions">
-  <a name="save" class="btn btn-large btn-primary" \>
+  <a name="save" class="btn btn-primary btn-lg" \>
     <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
   </a>
 </div>
