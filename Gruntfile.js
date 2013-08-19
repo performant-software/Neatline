@@ -108,13 +108,6 @@ module.exports = function(grunt) {
 
     copy: {
 
-      layers: {
-        files: [{
-          src: 'layers.json.changeme',
-          dest: 'layers.json'
-        }]
-      },
-
       chosen: {
         files: [{
           src: paths.build.chosen+'/public/*.png',
@@ -140,34 +133,28 @@ module.exports = function(grunt) {
           dest: paths.payloads.shared.js+'/ckeditor/',
           expand: true
         }]
-      },
-
-      colorpicker: {
-        files: [{
-          src: paths.build.colorpicker+'/images/*',
-          dest: paths.payloads.shared.css+'/images',
-          expand: true,
-          flatten: true
-        }]
       }
 
     },
 
     clean: {
+
       payloads: [
         paths.payloads.shared.js,
         paths.payloads.shared.css,
         paths.payloads.admin.js,
         paths.payloads.admin.css
       ],
+
       fixtures: [
         paths.jasmine+'/fixtures/*.json',
         paths.jasmine+'/fixtures/*.html',
         paths.jasmine+'/fixtures/*.xml'
       ],
-      images:   './views/shared/css/img',
-      bower:    './bower_components',
-      packages: './pkg'
+
+      bower:  './bower_components',
+      pkg:    './pkg'
+
     },
 
     concat: {

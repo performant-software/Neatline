@@ -25,7 +25,7 @@
 
   "build": {
     "openlayers":         "./bower_components/openlayers/build",
-    "bootstrap":          "./bower_components/bootstrap",
+    "bootstrap":          "./bower_components/bootstrap/dist",
     "chosen":             "./bower_components/chosen",
     "ckeditor":           "./bower_components/ckeditor/dev/builder",
     "sinon":              "./bower_components/sinon",

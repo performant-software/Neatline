@@ -13,11 +13,11 @@
 
 <div class="actions">
 
-  <a name="save" class="btn btn-primary btn-large">
+  <a name="save" class="btn btn-primary btn-lg">
     <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" class="btn btn-default btn-large"
+  <a href="#delete-modal" class="btn btn-default btn-lg"
     data-toggle="modal"> <?php echo __('Delete'); ?>
   </a>
 
