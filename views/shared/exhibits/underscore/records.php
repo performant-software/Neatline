@@ -14,7 +14,7 @@
 <script id="record-list-template" type="text/template">
 
   <!-- Add record link. -->
-  <a href="#record/add" class="btn btn-primary add">
+  <a href="#record/add" class="btn btn-primary btn-lg add">
     <?php echo __('New Record'); ?>
   </a>
 
