@@ -17,7 +17,7 @@
     <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" class="btn btn-default btn-lg"
+  <a href="#delete-modal" class="btn btn-danger btn-lg"
     data-toggle="modal"> <?php echo __('Delete'); ?>
   </a>
 
