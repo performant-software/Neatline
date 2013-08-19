@@ -104,9 +104,9 @@ describe('Search | Query Execution', function() {
     var rows = NL.getRecordListRows();
 
     // Record list should be updated.
-    expect($(rows[1]).find('.title')).toHaveText('result1');
-    expect($(rows[2]).find('.title')).toHaveText('result2');
-    expect($(rows[3]).find('.title')).toHaveText('result3');
+    expect($(rows[0]).find('.title')).toHaveText('result1');
+    expect($(rows[1]).find('.title')).toHaveText('result2');
+    expect($(rows[2]).find('.title')).toHaveText('result3');
 
   });
 
@@ -139,9 +139,9 @@ describe('Search | Query Execution', function() {
     var rows = NL.getRecordListRows();
 
     // Record list should be updated.
-    expect($(rows[1]).find('.title')).toHaveText('result1');
-    expect($(rows[2]).find('.title')).toHaveText('result2');
-    expect($(rows[3]).find('.title')).toHaveText('result3');
+    expect($(rows[0]).find('.title')).toHaveText('result1');
+    expect($(rows[1]).find('.title')).toHaveText('result2');
+    expect($(rows[2]).find('.title')).toHaveText('result3');
 
   });
 

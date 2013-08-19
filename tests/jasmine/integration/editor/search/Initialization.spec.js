@@ -79,7 +79,7 @@ describe('Search | Initialization', function() {
     afterEach(function() {
 
       NL.respondLast200(fx.records);
-      var row = NL.getRecordListRows()[1];
+      var row = NL.getRecordListRows()[0];
 
       // Record list should be updated.
       expect($(row).find('.title')).toHaveText('title');

@@ -57,7 +57,7 @@ describe('Record | Open Form', function() {
       model = recordModels[0];
 
       // Click on a record listing.
-      NL.click($(NL.getRecordListRows()[1]));
+      NL.click($(NL.getRecordListRows()[0]));
 
     });
 

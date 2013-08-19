@@ -80,7 +80,7 @@ describe('Record | Create Record', function() {
     // --------------------------------------------------------------------
 
     // Open form.
-    NL.click($(NL.getRecordListRows()[1]));
+    NL.click($(NL.getRecordListRows()[0]));
 
     // Click "Style" tab.
     el.styleTab.tab('show');

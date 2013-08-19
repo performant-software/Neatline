@@ -61,10 +61,10 @@ describe('Search | Map Mirroring', function() {
 
     // List should synchronize with map.
     var recordRows = NL.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('map1');
-    expect($(recordRows[2]).find('.title')).toHaveText('map2');
-    expect($(recordRows[3]).find('.title')).toHaveText('map3');
-    expect(recordRows.length).toEqual(4);
+    expect($(recordRows[0]).find('.title')).toHaveText('map1');
+    expect($(recordRows[1]).find('.title')).toHaveText('map2');
+    expect($(recordRows[2]).find('.title')).toHaveText('map3');
+    expect(recordRows.length).toEqual(3);
 
   });
 
@@ -83,10 +83,10 @@ describe('Search | Map Mirroring', function() {
 
     // List should synchronize with map.
     var recordRows = NL.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('map1');
-    expect($(recordRows[2]).find('.title')).toHaveText('map2');
-    expect($(recordRows[3]).find('.title')).toHaveText('map3');
-    expect(recordRows.length).toEqual(4);
+    expect($(recordRows[0]).find('.title')).toHaveText('map1');
+    expect($(recordRows[1]).find('.title')).toHaveText('map2');
+    expect($(recordRows[2]).find('.title')).toHaveText('map3');
+    expect(recordRows.length).toEqual(3);
 
   });
 
@@ -106,10 +106,10 @@ describe('Search | Map Mirroring', function() {
 
     // List should synchronize with map.
     var recordRows = NL.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('map1');
-    expect($(recordRows[2]).find('.title')).toHaveText('map2');
-    expect($(recordRows[3]).find('.title')).toHaveText('map3');
-    expect(recordRows.length).toEqual(4);
+    expect($(recordRows[0]).find('.title')).toHaveText('map1');
+    expect($(recordRows[1]).find('.title')).toHaveText('map2');
+    expect($(recordRows[2]).find('.title')).toHaveText('map3');
+    expect(recordRows.length).toEqual(3);
 
   });
 
@@ -157,10 +157,10 @@ describe('Search | Map Mirroring', function() {
 
     // List should not synchronize with map.
     var recordRows = NL.getRecordListRows();
-    expect($(recordRows[1]).find('.title')).toHaveText('list1');
-    expect($(recordRows[2]).find('.title')).toHaveText('list2');
-    expect($(recordRows[3]).find('.title')).toHaveText('list3');
-    expect(recordRows.length).toEqual(4);
+    expect($(recordRows[0]).find('.title')).toHaveText('list1');
+    expect($(recordRows[1]).find('.title')).toHaveText('list2');
+    expect($(recordRows[2]).find('.title')).toHaveText('list3');
+    expect(recordRows.length).toEqual(3);
 
   });
 

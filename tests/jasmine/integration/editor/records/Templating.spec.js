@@ -34,21 +34,19 @@ describe('Records | Templating', function() {
     var rows = NL.getRecordListRows();
 
     // Should show titles and bodies.
-    expect($(rows[0])).toHaveText('New Record');
-    expect($(rows[1]).find('.title')).toHaveText('title1');
-    expect($(rows[1]).find('.body')).toHaveText('body1');
-    expect($(rows[2]).find('.title')).toHaveText('title2');
-    expect($(rows[2]).find('.body')).toHaveText('body2');
-    expect($(rows[3]).find('.title')).toHaveText('title3');
-    expect($(rows[3]).find('.body')).toHaveText('body3');
+    expect($(rows[0]).find('.title')).toHaveText('title1');
+    expect($(rows[0]).find('.body')).toHaveText('body1');
+    expect($(rows[1]).find('.title')).toHaveText('title2');
+    expect($(rows[1]).find('.body')).toHaveText('body2');
+    expect($(rows[2]).find('.title')).toHaveText('title3');
+    expect($(rows[2]).find('.body')).toHaveText('body3');
 
     var models = NL.getRecordListModels();
 
     // Should link to edit forms.
-    expect($(rows[0]).attr('href')).toEqual('#record/add');
-    expect($(rows[1]).attr('href')).toEqual('#record/'+models[0].id);
-    expect($(rows[2]).attr('href')).toEqual('#record/'+models[1].id);
-    expect($(rows[3]).attr('href')).toEqual('#record/'+models[2].id);
+    expect($(rows[0]).attr('href')).toEqual('#record/'+models[0].id);
+    expect($(rows[1]).attr('href')).toEqual('#record/'+models[1].id);
+    expect($(rows[2]).attr('href')).toEqual('#record/'+models[2].id);
 
   });
 
@@ -63,7 +61,7 @@ describe('Records | Templating', function() {
     var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.
-    expect($(rows[1]).find('.title')).toHaveText('title');
+    expect($(rows[0]).find('.title')).toHaveText('title');
 
   });
 
@@ -78,7 +76,7 @@ describe('Records | Templating', function() {
     var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.
-    expect($(rows[1]).find('.title')).toHaveText(
+    expect($(rows[0]).find('.title')).toHaveText(
       STRINGS.record.placeholders.title
     );
 

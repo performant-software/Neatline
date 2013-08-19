@@ -4,6 +4,10 @@
 
   - In the record edit form, the "Save" and "Delete" buttons are now fixed at the bottom of the screenm, making it possible to save the record without first having to scroll to the bottom of the form.
 
+#### Changed Features
+
+  - Assorted UX tweaks in the editor associated with the move to Bootstrap 3 - makes the "New Record" button larger, displays more of the record body content in the browse view, makes the close "X" button larger on the record edit forms.
+
 #### API Changes
 
   - Upgrates Bootstrap to v3.0.0-rc2.
