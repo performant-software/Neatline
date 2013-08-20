@@ -41,22 +41,37 @@ Neatline.module('Map', function(
      */
     _initGlobals: function() {
 
-      // WKT reader/writer.
-      this.formatWkt = new OpenLayers.Format.WKT();
-
-      // An nested object that contains references to all vector and WMS
-      // layers currently on the map, keyed by record id.
-      this.layers = { vector: {}, wms: {} };
-
-      // An object that contains references to all filters registered on
-      // the map, keyed by filter slug.
-      this.filters = {};
-
-      // Alias the global exhibit object.
+      /**
+       * Alias the global exhibit object.
+       */
       this.exhibit = Neatline.g.neatline.exhibit;
 
-      // The currently-selected record model.
+      /**
+       * WKT reader/writer.
+       */
+      this.formatWkt = new OpenLayers.Format.WKT();
+
+      /**
+       * A nested object that contains references to all vector and WMS
+       * layers currently on the map, keyed by record id.
+       */
+      this.layers = { vector: {}, wms: {} };
+
+      /**
+       * An object that contains references to all filters registered on
+       * the map, keyed by filter slug.
+       */
+      this.filters = {};
+
+      /**
+       * The model representing the currently-selected record.
+       */
       this.selectedModel = null;
+
+      /**
+       * True when records are being loaded from the server.
+       */
+      this.loading = false;
 
     },
 
@@ -93,6 +108,10 @@ Neatline.module('Map', function(
      */
     _initControls: function() {
 
+      // Bind highlight/select callbacks to the view.
+      _.bindAll(this, 'onBeforeHighlight', 'onHighlight', 'onUnhighlight',
+        'onSelect', 'onUnselect');
+
       // Build the hover control, bind callbacks.
       this.highlightControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
@@ -102,8 +121,9 @@ Neatline.module('Map', function(
           highlightOnly: true,
 
           eventListeners: {
-            featurehighlighted:   _.bind(this.onFeatureHighlight, this),
-            featureunhighlighted: _.bind(this.onFeatureUnhighlight, this)
+            beforefeaturehighlighted: this.onBeforeHighlight,
+            featurehighlighted:       this.onHighlight,
+            featureunhighlighted:     this.onUnhighlight
           }
 
         }
@@ -112,8 +132,8 @@ Neatline.module('Map', function(
       // Build the click control, bind callbacks.
       this.selectControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
-          onSelect:   _.bind(this.onFeatureSelect, this),
-          onUnselect: _.bind(this.onFeatureUnselect, this)
+          onSelect:   this.onSelect,
+          onUnselect: this.onUnselect
         }
       );
 
@@ -382,6 +402,7 @@ Neatline.module('Map', function(
 
       // Store collection.
       this.records = records;
+      this.loading = false;
 
     },
 
@@ -710,14 +731,14 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
 
-      this.ISOLATED = true;
+      this.stopPropagation = true;
 
       // Highlight features.
       _.each(layer.features, _.bind(function(feature) {
         this.highlightControl.highlight(feature);
       }, this));
 
-      this.ISOLATED = false;
+      this.stopPropagation = false;
 
     },
 
@@ -732,14 +753,14 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
 
-      this.ISOLATED = true;
+      this.stopPropagation = true;
 
       // Unhighlight features.
       _.each(layer.features, _.bind(function(feature) {
         this.highlightControl.unhighlight(feature);
       }, this));
 
-      this.ISOLATED = false;
+      this.stopPropagation = false;
 
     },
 
@@ -754,14 +775,16 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer) return;
 
-      this.ISOLATED = true;
+      this.stopPropagation = true;
 
       // Select features.
       _.each(layer.features, _.bind(function(feature) {
         this.selectControl.select(feature);
       }, this));
 
-      this.ISOLATED = false;
+      this.stopPropagation = false;
+
+      // Track selected model.
       this.selectedModel = model;
 
     },
@@ -777,14 +800,16 @@ Neatline.module('Map', function(
       var layer = this.layers.vector[model.id];
       if (!layer) return;
 
-      this.ISOLATED = true;
+      this.stopPropagation = true;
 
       // Unselect features.
       _.each(layer.features, _.bind(function(feature) {
         this.selectControl.unselect(feature);
       }, this));
 
-      this.ISOLATED = false;
+      this.stopPropagation = false;
+
+      // Clear selected model.
       this.selectedModel = null;
 
     },
@@ -795,14 +820,24 @@ Neatline.module('Map', function(
 
 
     /**
+     * Block a feature highlight if the map is being dragged.
+     *
+     * @param {Object} evt: The highlight event.
+     */
+    onBeforeHighlight: function(evt) {
+      return !this.map.dragging && !this.loading;
+    },
+
+
+    /**
      * When a feature is highlighted, trigger the `highlight` event with
      * the model associated with the feature.
      *
      * @param {Object} evt: The highlight event.
      */
-    onFeatureHighlight: function(evt) {
+    onHighlight: function(evt) {
 
-      if (this.ISOLATED) return;
+      if (this.stopPropagation) return;
 
       // Highlight sibling features.
       this.highlightByModel(evt.feature.layer.nModel);
@@ -822,9 +857,9 @@ Neatline.module('Map', function(
      *
      * @param {Object} evt: The unhighlight event.
      */
-    onFeatureUnhighlight: function(evt) {
+    onUnhighlight: function(evt) {
 
-      if (this.ISOLATED) return;
+      if (this.stopPropagation) return;
 
       // Unhighlight sibling features.
       this.unhighlightByModel(evt.feature.layer.nModel);
@@ -844,9 +879,9 @@ Neatline.module('Map', function(
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
-    onFeatureSelect: function(feature) {
+    onSelect: function(feature) {
 
-      if (this.ISOLATED) return;
+      if (this.stopPropagation) return;
 
       // Select sibling features.
       this.selectByModel(feature.layer.nModel);
@@ -865,9 +900,9 @@ Neatline.module('Map', function(
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
-    onFeatureUnselect: function(feature) {
+    onUnselect: function(feature) {
 
-      if (this.ISOLATED) return;
+      if (this.stopPropagation) return;
 
       // Unselect sibling features.
       this.unselectByModel(feature.layer.nModel);
@@ -894,6 +929,7 @@ Neatline.module('Map', function(
         params.zoom   = this.getZoom();
       }
 
+      this.loading = true;
       Neatline.execute('MAP:load', params);
 
     },
