@@ -24,35 +24,32 @@
     'exhibits/underscore/partials/pagination.php'
   ); ?>
 
-  <table class="table table-striped table-condensed list">
+  <div class="list-group">
 
     <% records.each(function(r) { %>
-      <tr>
-        <td>
 
-          <!-- Record listing. -->
-          <a href="#record/<%= r.id %>" data-id="<%= r.id %>">
+      <!-- Record listing. -->
+      <a href="#record/<%= r.id %>" data-id="<%= r.id %>"
+        class="list-group-item">
 
-            <!-- Title. -->
-            <span class="title">
-              <% if (!_.isEmpty(r.get('title'))) { %>
-                <%= _.string.stripTags(r.get('title')) %>
-              <% } else { %>
-                <%= STRINGS.record.placeholders.title %>
-              <% } %>
-            </span>
+        <!-- Title. -->
+        <span class="title">
+          <% if (!_.isEmpty(r.get('title'))) { %>
+            <%= _.string.stripTags(r.get('title')) %>
+          <% } else { %>
+            <%= STRINGS.record.placeholders.title %>
+          <% } %>
+        </span>
 
-            <!-- Body. -->
-            <span class="body">
-              <%= _.string.prune(
-                _.string.stripTags(r.get('body')), 100
-              ) %>
-            </span>
+        <!-- Body. -->
+        <span class="body">
+          <%= _.string.prune(
+            _.string.stripTags(r.get('body')), 100
+          ) %>
+        </span>
 
-          </a>
+      </a>
 
-        </td>
-      </tr>
     <% }); %>
 
   </table>
