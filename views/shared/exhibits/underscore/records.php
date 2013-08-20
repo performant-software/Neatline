@@ -15,6 +15,7 @@
 
   <!-- Add record link. -->
   <a href="#record/add" class="btn btn-primary btn-lg add">
+    <span class="glyphicon glyphicon-file"></span>
     <?php echo __('New Record'); ?>
   </a>
 

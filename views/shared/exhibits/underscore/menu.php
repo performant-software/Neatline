@@ -25,10 +25,16 @@
   <ul class="nav nav-pills">
 
     <li class="tab" data-slug="records">
-      <a href="#records">Records</a>
+      <a href="#records">
+        <span class="glyphicon glyphicon-list"></span>
+        Records
+      </a>
     </li>
     <li class="tab" data-slug="styles">
-      <a href="#styles">Styles</a>
+      <a href="#styles">
+        <span class="glyphicon glyphicon-cog"></span>
+        Styles
+      </a>
     </li>
 
     <!-- Widget tabs. -->

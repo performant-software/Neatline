@@ -8,6 +8,10 @@
 
   - Assorted UX tweaks in the editor associated with the move to Bootstrap 3 - makes the "New Record" button larger, displays more of the record body content in the browse view, makes the close "X" button larger on the record edit forms.
 
+#### Bug Fixes
+
+  - Fixes problem that was causing features not to unhighlight on mouseleave under certain circumstances.
+
 #### API Changes
 
   - Upgrates Bootstrap to v3.0.0-rc2.

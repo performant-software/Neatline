@@ -13,6 +13,7 @@
 
 <div class="actions">
   <a name="save" class="btn btn-primary btn-lg" \>
-    <i class="icon-ok icon-white"></i> <?php echo __('Save'); ?>
+    <span class="glyphicon glyphicon-floppy-saved"></span>
+    <?php echo __('Save'); ?>
   </a>
 </div>

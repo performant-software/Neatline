@@ -27,16 +27,19 @@
   <!-- Tabs. -->
   <ul class="nav nav-pills">
     <li class="tab">
-      <a href="#record-text" data-toggle="tab"
-        data-slug="text">Text</a>
+      <a href="#record-text" data-toggle="tab" data-slug="text">
+        <span class="glyphicon glyphicon-font"></span> Text
+      </a>
     </li>
     <li class="tab">
-      <a href="#record-map" data-toggle="tab"
-        data-slug="map">Map</a>
+      <a href="#record-map" data-toggle="tab" data-slug="map">
+        <span class="glyphicon glyphicon-globe"></span> Map
+      </a>
     </li>
     <li class="tab">
-      <a href="#record-style" data-toggle="tab"
-        data-slug="style">Style</a>
+      <a href="#record-style" data-toggle="tab" data-slug="style">
+        <span class="glyphicon glyphicon-cog"></span> Style
+      </a>
     </li>
   </ul>
 

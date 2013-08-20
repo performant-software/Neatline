@@ -108,6 +108,15 @@ module.exports = function(grunt) {
 
     copy: {
 
+      bootstrap: {
+        files: [{
+          src: paths.build.bootstrap+'/fonts/*',
+          dest: './views/shared/css/fonts/',
+          expand: true,
+          flatten: true
+        }]
+      },
+
       chosen: {
         files: [{
           src: paths.build.chosen+'/public/*.png',
@@ -153,6 +162,7 @@ module.exports = function(grunt) {
       ],
 
       bower:  './bower_components',
+      fonts:  './views/shared/css/fonts',
       pkg:    './pkg'
 
     },
