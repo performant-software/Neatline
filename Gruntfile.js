@@ -395,7 +395,6 @@ module.exports = function(grunt) {
           '!paths.json',
 
           // DIST
-          '!version',
           '!pkg/**',
 
           // TESTS
@@ -527,7 +526,7 @@ module.exports = function(grunt) {
 
   // Spawn release package.
   grunt.registerTask('package', [
-    'clean:packages',
+    'clean:pkg',
     'compress'
   ]);
 
