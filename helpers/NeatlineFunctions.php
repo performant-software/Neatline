@@ -157,7 +157,7 @@ function neatline_queueNeatlineAssets($exhibit)
 
     // Vendor.
     neatline_queueSimileApi();
-    queue_js('libraries/openlayers/OpenLayers.min', 'javascripts');
+    queue_js('libraries/openlayers/OpenLayers-2.13.1', 'javascripts');
     queue_js('libraries/tile.stamen', 'javascripts');
     queue_js('libraries/taffy-min', 'javascripts');
     queue_js('libraries/underscore-min', 'javascripts');
