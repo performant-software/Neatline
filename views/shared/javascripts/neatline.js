@@ -225,11 +225,6 @@
                 this.map.mapeditor('refresh', this.positions.map);
             }
 
-            // // Reposition the scroller.
-            // var scrollerPos = (this.majorBlockId === 'map') ?
-            //     this.positions.map : this.positions.timeline;
-            // this.element.scroller('position', scrollerPos);
-
         },
 
         /*
@@ -267,15 +262,18 @@
                         self._trigger('mapfeatureenter', {}, obj);
 
                         // Render bubble.
-                        if (self.options.isPublic &&
-                            obj.record.data.show_bubble == 1 &&
+                        if (self.options.isPublic && obj.record.data.show_bubble == 1 &&
                             (!obj.record.selected || self.items.length === 0)
                         ) {
+
                             self.freezeOut(obj.record.data);
+
+                            // Show the bubble.
                             self.element.bubbles('show',
                                  obj.record.data.title,
                                  obj.record.data.description
                             );
+
                         }
 
                     },
@@ -335,12 +333,8 @@
                     this.map.mapeditor(callbacks);
                 }
 
-                var nlmap = this.map.data('neatlinemap');
-                nlmap.map.events.register('mouseout', {}, function(ev, obj) {
-                    if (nlmap._hoveredFeature != null) {
-                        // nlmap.highlightControl.outFeature(nlmap._hoveredFeature);
-                    }
-                });
+                // Alias the OpenLayers instance.
+                this.openlayers = this.map.data('neatlinemap').map;
 
                 // Register the presence of the map instantiation.
                 this.instantiated_map = true;
@@ -466,19 +460,6 @@
                 // Register the presence of the udi instantiation.
                 this.instantiated_undated = true;
 
-                // // Instantiate the scroller.
-                // this.element.scroller({
-
-                //     'left': function() {
-                //         self.items.neatlineitems('scrollLeft');
-                //     },
-
-                //     'right': function() {
-                //         self.items.neatlineitems('scrollRight');
-                //     }
-
-                // });
-
             }
 
         },
@@ -491,6 +472,8 @@
         instantiateBubbles: function() {
 
             this.element.bubbles({
+
+                'openlayers': this.openlayers,
 
                 // When the cursor leaves the exhibit container.
                 'cursorleave': _.bind(function() {

@@ -119,20 +119,23 @@
             // Instantiate MousePosition separately.
             this.mousePosition = new OpenLayers.Control.MousePosition();
 
-            // Starting options.
-            var options = {
-                controls: [
-                  this.mousePosition,
-                  new OpenLayers.Control.PanZoomBar(),
-                  new OpenLayers.Control.Navigation({documentDrag: true}),
-                  new OpenLayers.Control.LayerSwitcher()
-                ],
-                maxResolution: 'auto',
-                units: 'm'
-            };
-
             // Instantiate the map.
-            this.map = new OpenLayers.Map('map', options);
+            this.map = new OpenLayers.Map('map', {
+
+              theme: null,
+              zoomMethod: null,
+              panMethod:  null,
+
+              controls: [
+                new OpenLayers.Control.PanZoomBar(),
+                new OpenLayers.Control.LayerSwitcher(),
+                new OpenLayers.Control.Navigation({
+                  dragPanOptions: { enableKinetic: false },
+                  documentDrag: true
+                })
+              ]
+
+            });
 
             // Construct the base layers.
             var layers = this._getBaseLayers();

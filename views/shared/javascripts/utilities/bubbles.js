@@ -47,16 +47,8 @@
             this.bubble = null;
             this.title = null;
             this.body = null;
-            this.background = null;
-            this.opacity = null;
             this.frozen = false;
-            // this.connector = false;
             this.onBubble = false;
-
-            // When the cursor leaves the window, hide.
-            this._window.bind('mouseleave', _.bind(function() {
-                this.hide();
-            }, this));
 
         },
 
@@ -109,15 +101,14 @@
 
             // Inject, get styles.
             this.element.append(this.bubble);
-            this.background = this.bubble.css('background-color');
-            this.opacity = this.bubble.css('opacity');
+
+            // Create referenced mousemove.
+            this.onMouseMove = _.bind(this.position, this);
 
             // Listen for mousemove.
-            this._window.bind({
-                'mousemove.bubbles': _.bind(function(e) {
-                    this.position(e);
-                }, this)
-            });
+            this.options.openlayers.events.register(
+                'mousemove', null, this.onMouseMove
+            );
 
         },
 
@@ -142,13 +133,14 @@
             // If bubble is frozen, break.
             if (this.frozen || _.isNull(this.bubble)) return;
 
-            // Remove bubble.
+            // Clear bubble.
             this.bubble.remove();
-            // this.connector.remove();
             this.bubble = null;
 
-            // Strip move listener, trigger out.
-            this._window.unbind('mousemove.bubbles mousedown.bubbles');
+            // Strip mousemove listener.
+            this.options.openlayers.events.unregister(
+                'mousemove', null, this.onMouseMove
+            );
 
         },
 
@@ -162,12 +154,9 @@
             // If no bubble, break.
             if (_.isNull(this.bubble)) return;
 
-            // Set tracker.
-            this.frozen = true;
-
-            // Strip mousemove listener.
-            this._window.unbind('mousemove.bubbles');
+            // Set frozen.
             this.bubble.addClass('frozen');
+            this.frozen = true;
 
             // Get bubble opacity.
             this.opacity = this.bubble.css('opacity');
@@ -185,6 +174,11 @@
                     this.onBubble = false;
                 }, this)
             });
+
+            // Strip mousemove listener.
+            this.options.openlayers.events.unregister(
+                'mousemove', null, this.onMouseMove
+            );
 
             // Listen for close.
             this._window.bind('mousedown.bubbles', _.bind(function() {
@@ -224,8 +218,7 @@
             offset.left += borderLeft;
 
             var containerX = event.clientX - offset.left;
-            var containerY = event.clientY - offset.top +
-              this._window.scrollTop();
+            var containerY = event.clientY - offset.top + this._window.scrollTop();
 
             // If the cursor leaves the container, hide.
             if (event.clientX < offset.left ||
@@ -269,62 +262,6 @@
                 left: bubbleX,
                 top: bubbleY
             });
-
-            // // Remove existing connector.
-            // if (this.connector) this.connector.remove();
-
-            // // If the bubble is on the right.
-            // if (bubbleX > containerX) {
-
-            //     // Build connector paper.
-            //     var offsetX = event.clientX+20;
-            //     var offsetY = offset.top+bubbleY;
-            //     var width = bubbleX-containerX-20;
-            //     this.connector = Raphael(
-            //         offsetX, offsetY, width, this.bubbleHeight
-            //     );
-
-            //     // Get connector coordinates.
-            //     var cursorY = containerY - bubbleY;
-            //     var bubbleY1 = this.bubbleHeight*0.2;
-            //     var bubbleY2 = this.bubbleHeight*0.6;
-
-            //     // Render coordinates.
-            //     this.triangle = this.connector.path(
-            //         'M1,'+cursorY+'L99,'+bubbleY1+' 99,'+bubbleY2+'Z'
-            //     );
-
-            // }
-
-            // // If the bubble is on the left.
-            // else {
-
-            //     // Build connector.
-            //     var offsetX = bubbleX+this.bubbleWidth+offset.left;
-            //     var offsetY = offset.top+bubbleY;
-            //     var width = containerX-(bubbleX+this.bubbleWidth)-20;
-            //     this.connector = Raphael(
-            //         offsetX, offsetY, width, this.bubbleHeight
-            //     );
-
-            //     // Get connector coordinates.
-            //     var cursorY = containerY - bubbleY;
-            //     var bubbleY1 = this.bubbleHeight*0.2;
-            //     var bubbleY2 = this.bubbleHeight*0.6;
-
-            //     // Render coordinates.
-            //     this.triangle = this.connector.path(
-            //         'M0,'+bubbleY1+'L'+width+','+cursorY+' 0,'+bubbleY2+'Z'
-            //     );
-
-            // }
-
-            // // Set connector styles.
-            // this.triangle.attr({
-            //     fill: this.background,
-            //     stroke: this.background,
-            //     opacity: this.opacity
-            // });
 
         },
 
