@@ -121,7 +121,10 @@ SQL;
 
         PRIMARY KEY             (id),
 
-        INDEX                   (item_id, exhibit_id),
+        INDEX                   (item_id),
+        INDEX                   (exhibit_id),
+        INDEX                   (min_zoom),
+        INDEX                   (max_zoom),
         SPATIAL INDEX           (coverage),
 
         FULLTEXT INDEX          (title, body, slug),
