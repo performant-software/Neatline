@@ -44,11 +44,21 @@
             );
 
             // Trackers.
-            this.bubble = null;
-            this.title = null;
-            this.body = null;
-            this.frozen = false;
-            this.onBubble = false;
+            this.bubble     = null;
+            this.title      = null;
+            this.body       = null;
+            this.frozen     = false;
+            this.onBubble   = false;
+
+            // Position on mousemove.
+            this.options.openlayers.events.register(
+                'mousemove', null, _.bind(this.position, this)
+            );
+
+            // Hide on mousemove.
+            this.options.openlayers.events.register(
+                'mouseout', null, _.bind(this.hide, this)
+            );
 
         },
 
@@ -102,14 +112,6 @@
             // Inject, get styles.
             this.element.append(this.bubble);
 
-            // Create referenced mousemove.
-            this.onMouseMove = _.bind(this.position, this);
-
-            // Listen for mousemove.
-            this.options.openlayers.events.register(
-                'mousemove', null, this.onMouseMove
-            );
-
         },
 
         /*
@@ -137,11 +139,6 @@
             this.bubble.remove();
             this.bubble = null;
 
-            // Strip mousemove listener.
-            this.options.openlayers.events.unregister(
-                'mousemove', null, this.onMouseMove
-            );
-
         },
 
         /*
@@ -154,16 +151,13 @@
             // If no bubble, break.
             if (_.isNull(this.bubble)) return;
 
-            // Set frozen.
+            // Get frozen dimensions, reposition.
             this.bubble.addClass('frozen');
-            this.frozen = true;
-
-            // Get bubble opacity.
-            this.opacity = this.bubble.css('opacity');
-
-            // Get native dimensions, position.
             this._measureBubble();
             this.position(this.event);
+
+            // Set frozen.
+            this.frozen = true;
 
             // Track cursor on bubble.
             this.bubble.bind({
@@ -206,6 +200,9 @@
             // Store last event.
             this.event = event;
 
+            // If bubble is frozen, break.
+            if (this.frozen || _.isNull(this.bubble)) return;
+
             // Get container size.
             var containerWidth = this.element.outerWidth();
             var containerHeight = this.element.outerHeight();
@@ -232,11 +229,11 @@
 
             // Build starting bubble offsets.
             var bubbleY = containerY - (this.bubbleHeight/3);
-            var bubbleX = containerX + 20;
+            var bubbleX = containerX + 40;
 
             // If necessary, switch to left side.
             if (bubbleX + this.bubbleWidth > containerWidth) {
-                bubbleX = containerX - this.bubbleWidth - 20;
+                bubbleX = containerX - this.bubbleWidth - 40;
             }
 
             // Block top cropping.

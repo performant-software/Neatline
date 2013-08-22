@@ -536,7 +536,6 @@
                     this.frozenOut.data.title,
                     this.frozenOut.data.description
                 );
-                el.bubbles('position', this.frozenOut.event);
                 this.thawOut(true);
             }
         },
