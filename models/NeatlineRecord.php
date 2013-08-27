@@ -32,12 +32,12 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $fill_color_select = '#00aeff';    // VARCHAR(100) NULL
     public $stroke_color = '#000000';         // VARCHAR(100) NULL
     public $stroke_color_select = '#000000';  // VARCHAR(100) NULL
-    public $fill_opacity = '0.3';             // DECIMAL(3,2) NULL
-    public $fill_opacity_select = '0.4';      // DECIMAL(3,2) NULL
-    public $stroke_opacity = '0.9';           // DECIMAL(3,2) NULL
-    public $stroke_opacity_select = '1.0';    // DECIMAL(3,2) NULL
-    public $stroke_width = '2';               // INT(10) UNSIGNED NULL
-    public $point_radius = '10';              // INT(10) UNSIGNED NULL
+    public $fill_opacity = 0.3;               // DECIMAL(3,2) NULL
+    public $fill_opacity_select = 0.4;        // DECIMAL(3,2) NULL
+    public $stroke_opacity = 0.9;             // DECIMAL(3,2) NULL
+    public $stroke_opacity_select = 1.0;      // DECIMAL(3,2) NULL
+    public $stroke_width = 2;                 // INT(10) UNSIGNED NULL
+    public $point_radius = 10;                // INT(10) UNSIGNED NULL
     public $zindex;                           // INT(10) UNSIGNED NULL
     public $weight;                           // INT(10) UNSIGNED NULL
     public $start_date;                       // VARCHAR(100) NULL
