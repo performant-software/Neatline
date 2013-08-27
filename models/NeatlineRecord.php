@@ -14,43 +14,43 @@ class NeatlineRecord extends Neatline_Row_Expandable
 {
 
 
-    public $owner_id = 0;           // INT(10) UNSIGNED NOT NULL
-    public $item_id;                // INT(10) UNSIGNED NULL
-    public $exhibit_id;             // INT(10) UNSIGNED NULL
-    public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    public $modified;               // TIMESTAMP NULL
-    public $is_coverage = 0;        // TINYINT(1) NOT NULL
-    public $is_wms = 0;             // TINYINT(1) NOT NULL
-    public $slug;                   // VARCHAR(100) NULL
-    public $title;                  // MEDIUMTEXT NULL
-    public $body;                   // MEDIUMTEXT NULL
-    public $coverage;               // GEOMETRY NOT NULL
-    public $tags;                   // TEXT NULL
-    public $widgets;                // TEXT NULL
-    public $presenter;              // VARCHAR(100) NULL
-    public $fill_color;             // VARCHAR(100) NULL
-    public $fill_color_select;      // VARCHAR(100) NULL
-    public $stroke_color;           // VARCHAR(100) NULL
-    public $stroke_color_select;    // VARCHAR(100) NULL
-    public $fill_opacity;           // DECIMAL(3,2) NULL
-    public $fill_opacity_select;    // DECIMAL(3,2) NULL
-    public $stroke_opacity;         // DECIMAL(3,2) NULL
-    public $stroke_opacity_select;  // DECIMAL(3,2) NULL
-    public $stroke_width;           // INT(10) UNSIGNED NULL
-    public $point_radius;           // INT(10) UNSIGNED NULL
-    public $zindex;                 // INT(10) UNSIGNED NULL
-    public $weight;                 // INT(10) UNSIGNED NULL
-    public $start_date;             // VARCHAR(100) NULL
-    public $end_date;               // VARCHAR(100) NULL
-    public $after_date;             // VARCHAR(100) NULL
-    public $before_date;            // VARCHAR(100) NULL
-    public $point_image;            // VARCHAR(100) NULL
-    public $wms_address;            // TEXT NULL
-    public $wms_layers;             // TEXT NULL
-    public $min_zoom;               // INT(10) UNSIGNED NULL
-    public $max_zoom;               // INT(10) UNSIGNED NULL
-    public $map_zoom;               // INT(10) UNSIGNED NULL
-    public $map_focus;              // VARCHAR(100) NULL
+    public $owner_id = 0;                     // INT(10) UNSIGNED NOT NULL
+    public $item_id;                          // INT(10) UNSIGNED NULL
+    public $exhibit_id;                       // INT(10) UNSIGNED NULL
+    public $added;                            // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    public $modified;                         // TIMESTAMP NULL
+    public $is_coverage = 0;                  // TINYINT(1) NOT NULL
+    public $is_wms = 0;                       // TINYINT(1) NOT NULL
+    public $slug;                             // VARCHAR(100) NULL
+    public $title;                            // MEDIUMTEXT NULL
+    public $body;                             // MEDIUMTEXT NULL
+    public $coverage;                         // GEOMETRY NOT NULL
+    public $tags;                             // TEXT NULL
+    public $widgets;                          // TEXT NULL
+    public $presenter = 'StaticBubble';       // VARCHAR(100) NULL
+    public $fill_color = '#00aeff';           // VARCHAR(100) NULL
+    public $fill_color_select = '#00aeff';    // VARCHAR(100) NULL
+    public $stroke_color = '#000000';         // VARCHAR(100) NULL
+    public $stroke_color_select = '#000000';  // VARCHAR(100) NULL
+    public $fill_opacity = '0.3';             // DECIMAL(3,2) NULL
+    public $fill_opacity_select = '0.4';      // DECIMAL(3,2) NULL
+    public $stroke_opacity = '0.9';           // DECIMAL(3,2) NULL
+    public $stroke_opacity_select = '1.0';    // DECIMAL(3,2) NULL
+    public $stroke_width = '2';               // INT(10) UNSIGNED NULL
+    public $point_radius = '10';              // INT(10) UNSIGNED NULL
+    public $zindex;                           // INT(10) UNSIGNED NULL
+    public $weight;                           // INT(10) UNSIGNED NULL
+    public $start_date;                       // VARCHAR(100) NULL
+    public $end_date;                         // VARCHAR(100) NULL
+    public $after_date;                       // VARCHAR(100) NULL
+    public $before_date;                      // VARCHAR(100) NULL
+    public $point_image;                      // VARCHAR(100) NULL
+    public $wms_address;                      // TEXT NULL
+    public $wms_layers;                       // TEXT NULL
+    public $min_zoom;                         // INT(10) UNSIGNED NULL
+    public $max_zoom;                         // INT(10) UNSIGNED NULL
+    public $map_zoom;                         // INT(10) UNSIGNED NULL
+    public $map_focus;                        // VARCHAR(100) NULL
 
 
     /**
