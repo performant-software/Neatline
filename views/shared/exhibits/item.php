@@ -14,6 +14,8 @@
 <!-- Elements. -->
 <?php echo all_element_texts('item'); ?>
 
+<?php if (metadata('item', 'has files')): ?>
 <!-- Files. -->
 <h3><?php echo __('Files'); ?></h3>
 <?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
+<?php endif; ?>
