@@ -168,3 +168,59 @@ function nl_getExhibit()
 {
     return get_view()->neatline_exhibit;
 }
+
+/**
+ * Returns coverage data from the NeatlineFeatures plugin, if it's
+ * installed.
+ *
+ * @param $record NeatlineRecord The record to get the feature for.
+ *
+ * @return string|null
+ */
+function nl_getNeatlineFeatures($record) {
+    $db    = get_db();
+
+    // Get the table name from an option, if it's been set (DI for testing).
+    $table = get_option('neatline_feature_table');
+    if (is_null($table)) {
+        $table = $db->getTable('NeatlineFeature')->getTableName();
+    }
+
+    $found = false;
+    foreach ($db->listTables() as $t) {
+        if ($t === $table) {
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        return;
+    }
+
+    $sql = <<<SQL
+SELECT geo
+FROM {$table}
+WHERE is_map=1 AND item_id=?;
+SQL;
+    try {
+        $result = $db->fetchOne($sql, $record->item_id);
+
+        if (!is_null($result)) {
+            if (strpos($result, '<kml') === 0) {
+                $result = nl_convertKml($result);
+            } else {
+                $result = 'GEOMETRYCOLLECTION(' .
+                    implode(',', explode('|', $result)) .
+                    ')';
+            }
+        }
+    } catch (Exception $e) {
+        $result = null;
+    }
+
+    return $result;
+}
+
+function nl_convertKml($kml) {
+    return geoPHP::load($kml)->out('wkt');
+}
