@@ -10,9 +10,6 @@
  */
 
 
-require_once dirname(__FILE__) . '/libraries/geoPHP/geoPHP.inc';
-
-
 class Neatline_Migration_200 extends Neatline_Migration_Abstract
 {
 
