@@ -108,8 +108,8 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         $record->save();
         $record = $this->_reload($record);
 
-        // `auto` value should be ignored.
-        $this->assertNull($record->fill_color);
+        // `auto` value should be ignored and maintain the default color.
+        $this->assertEquals('#00aeff', $record->fill_color);
 
     }
 
