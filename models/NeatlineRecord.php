@@ -265,6 +265,23 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
     }
 
+    /**
+     * This imports any data from NeatlineFeatures, if it's installed.
+     *
+     * @return void
+     * @author Eric Rochester
+     **/
+    public function importNeatlineFeatures()
+    {
+        if (!$this->coverage) {
+            $geo = nl_getNeatlineFeatures($this);
+            if (!is_null($geo)) {
+                $this->is_coverage = 1;
+                $this->coverage    = $geo;
+            }
+        }
+    }
+
 
     /**
      * Compile the item reference and WMS coverage. Override the `save`
@@ -275,6 +292,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     {
         $this->compileWms();
         $this->compileItem();
+        $this->importNeatlineFeatures();
         parent::save();
     }
 
