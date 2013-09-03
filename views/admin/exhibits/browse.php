@@ -52,10 +52,16 @@
         <td class="title">
 
           <!-- Title. -->
-          <?php echo nl_getExhibitLink(
-            $e, 'editor', null,
-            array('class' => 'editor'), false
-          );?>
+          <?php
+          if (is_allowed($e, 'editor')) {
+            echo nl_getExhibitLink(
+              $e, 'editor', null,
+              array('class' => 'editor'), false
+            );
+          } else {
+            echo nl_getExhibitField('title');
+          }
+          ?>
 
           <ul class="action-links group">
 
@@ -66,7 +72,7 @@
                 array('class' => 'public'), true
               );?>
             </li>
-
+            <?php if (is_allowed($e, 'edit')): ?>
             <!-- Exhibit Settings. -->
             <li>
               <?php echo nl_getExhibitLink(
@@ -74,7 +80,8 @@
                 array('class' => 'edit'), false
               );?>
             </li>
-
+            <?php endif; ?>
+            <?php if (is_allowed($e, 'import')): ?>
             <!-- Import Omeka Items. -->
             <li>
               <?php echo nl_getExhibitLink(
@@ -82,7 +89,8 @@
                 array('class' => 'import'), false
               );?>
             </li>
-
+            <?php endif; ?>
+            <?php if (is_allowed($e, 'delete')): ?>
             <!-- Delete. -->
             <li>
               <?php echo nl_getExhibitLink(
@@ -90,6 +98,7 @@
                 array('class' => 'delete-confirm'), false
               );?>
             </li>
+            <?php endif; ?>
           </ul>
         </td>
 
