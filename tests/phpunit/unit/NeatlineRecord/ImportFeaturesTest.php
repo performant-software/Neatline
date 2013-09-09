@@ -12,11 +12,15 @@
 class NeatlineRecordTest_ImportFeaturesTest extends Neatline_Case_Default
 {
 
+
     public function setUp() {
+
         parent::setUp();
 
         $this->ftable = uniqid("omeka_test_nlfeatures_");
-        $sql    = <<<SQL
+
+        $sql = <<<SQL
+
 CREATE TABLE `{$this->ftable}` (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   item_id INT(10) UNSIGNED NOT NULL,
@@ -25,9 +29,12 @@ CREATE TABLE `{$this->ftable}` (
   CONSTRAINT PRIMARY KEY (id)
 ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 SQL;
+
         $this->db->query($sql)->fetchAll();
         set_option('neatline_feature_table', $this->ftable);
+
     }
+
 
     public function tearDown() {
         try {
@@ -56,6 +63,7 @@ SQL;
         );
     }
 
+
     private function _dumpFeatures() {
         echo "\n!!! dumpFeatures '{$this->ftable}'\n";
         $results = $this->db->fetchAll(
@@ -66,6 +74,7 @@ SQL;
         }
     }
 
+
     private function _removeTemporaryTable() {
         if (!is_null($this->ftable)) {
             $this->db->query("DROP TABLE IF EXISTS `{$this->ftable}`;");
@@ -73,6 +82,7 @@ SQL;
             delete_option('neatline_feature_table');
         }
     }
+
 
     /**
      * `save` should pass silently on importing data from NeatlineFeatures if 
@@ -107,7 +117,7 @@ SQL;
         $item     = $this->_item();
         $this->_addFeature(
             $item,
-            'POINT(-8739244.5646307 4584569.1500973)'
+            'POINT(1 2)'
         );
 
         $record = new NeatlineRecord($exhibit, $item);
@@ -115,10 +125,11 @@ SQL;
 
         $this->assertEquals(1, $record->is_coverage);
         $this->assertEquals(
-            'GEOMETRYCOLLECTION(POINT(-8739244.5646307 4584569.1500973))',
+            'GEOMETRYCOLLECTION(POINT(1 2))',
             $record->coverage
         );
     }
+
 
     /**
      * `save` should import KML data from NeatlineFeatures.
@@ -133,7 +144,7 @@ SQL;
 <Placemark>
 <name>OpenLayers.Feature.Vector_145</name>
 <description>No description available</description>
-<Point><coordinates>-8739204.9736768,4584584.9922932</coordinates></Point>
+<Point><coordinates>1,2</coordinates></Point>
 </Placemark>
 </Folder>
 </kml>
@@ -151,10 +162,11 @@ KML;
 
         $this->assertEquals(1, $record->is_coverage);
         $this->assertEquals(
-            'GEOMETRYCOLLECTION (POINT (-8739204.9736768 4584584.9922932))',
+            'GEOMETRYCOLLECTION (POINT (1 2))',
             $record->coverage
         );
     }
+
 
     /**
      * Importing neatline features shouldn't clobber existing coverages.
@@ -168,20 +180,20 @@ KML;
         $item     = $this->_item();
         $this->_addFeature(
             $item,
-            'POINT(-8739244.5646307 4584569.1500973)'
+            'POINT(1 2)'
         );
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->is_coverage = 1;
-        $record->coverage = 'GEOMETRYCOLLECTION (POINT (-8739204.9736768 4584584.9922932))';
+        $record->coverage = 'GEOMETRYCOLLECTION (POINT (3 4))';
         $record->save();
 
         $this->assertEquals(1, $record->is_coverage);
         $this->assertEquals(
-            'GEOMETRYCOLLECTION (POINT (-8739204.9736768 4584584.9922932))',
+            'GEOMETRYCOLLECTION (POINT (3 4))',
             $record->coverage
         );
     }
 
-}
 
+}
