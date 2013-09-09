@@ -13,45 +13,28 @@ class NeatlineRecordTest_ImportFeaturesTest extends Neatline_Case_Default
 {
 
 
-    public function setUp() {
-
+    public function setUp()
+    {
         parent::setUp();
-
-        $this->ftable = uniqid("omeka_test_nlfeatures_");
-
-        $sql = <<<SQL
-
-CREATE TABLE `{$this->ftable}` (
-  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  item_id INT(10) UNSIGNED NOT NULL,
-  is_map TINYINT(1) NOT NULL DEFAULT 0,
-  geo TEXT,
-  CONSTRAINT PRIMARY KEY (id)
-) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-SQL;
-
-        $this->db->query($sql)->fetchAll();
-        set_option('neatline_feature_table', $this->ftable);
-
+        $this->_insertFeaturesTable();
     }
 
 
-    public function tearDown() {
-        try {
-            if (!is_null($this->ex)) {
-                $this->ex->delete();
-            }
-
-            $this->_removeTemporaryTable();
-        } catch (Exception $e) {
-            parent::tearDown();
-            throw $e;
-        }
-
+    public function tearDown()
+    {
+        $this->_dropFeaturesTable();
         parent::tearDown();
     }
 
-    private function _addFeature($item, $geo) {
+
+    /**
+     * Insert a Neatline Features feature for an item.
+     *
+     * @param Item $item The parent item.
+     * @param string $geo The coverage.
+     */
+    private function _addFeature($item, $geo)
+    {
         $this->db->query(
             "INSERT INTO `{$this->ftable}` " .
             " (item_id, is_map, geo) VALUES (?, ?, ?);",
@@ -64,38 +47,54 @@ SQL;
     }
 
 
-    private function _dumpFeatures() {
-        echo "\n!!! dumpFeatures '{$this->ftable}'\n";
-        $results = $this->db->fetchAll(
-            "SELECT id, item_id, is_map, geo FROM `{$this->ftable}`;"
-        );
-        foreach ($results as $r) {
-            echo "{$r['id']}\t{$r['item_id']}\t{$r['is_map']}\t{$r['geo']}\n";
-        }
+    /**
+     * Insert the testing features table.
+     */
+    private function _insertFeaturesTable()
+    {
+
+        $this->ftable = uniqid("omeka_test_nlfeatures_");
+
+        $sql = <<<SQL
+CREATE TABLE `{$this->ftable}` (
+    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    item_id INT(10) UNSIGNED NOT NULL,
+    is_map TINYINT(1) NOT NULL DEFAULT 0,
+    geo TEXT,
+    CONSTRAINT PRIMARY KEY (id)
+) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+SQL;
+
+        $this->db->query($sql);
+        set_option('neatline_feature_table', $this->ftable);
+
     }
 
 
-    private function _removeTemporaryTable() {
+    /**
+     * Remove the testing features table.
+     */
+    private function _dropFeaturesTable()
+    {
         if (!is_null($this->ftable)) {
             $this->db->query("DROP TABLE IF EXISTS `{$this->ftable}`;");
-            $this->ftable = null;
             delete_option('neatline_feature_table');
         }
     }
 
 
     /**
-     * `save` should pass silently on importing data from NeatlineFeatures if 
-     * it's not available.
+     * `save` should pass silently on importing data from NeatlineFeatures
+     * if it's not available.
      */
     public function testImportNeatlineFeaturesUninstalled()
     {
-        $this->_removeTemporaryTable();
+
+        $this->_dropFeaturesTable();
 
         nl_mockView();
 
         $exhibit  = $this->_exhibit('nlf-uninstalled');
-        $this->ex = $exhibit;
         $item     = $this->_item();
 
         $record = new NeatlineRecord($exhibit, $item);
@@ -103,22 +102,22 @@ SQL;
 
         $this->assertEquals(0, $record->is_coverage);
         $this->assertNull($record->coverage);
+
     }
+
 
     /**
      * `save` should import WKT data from NeatlineFeatures.
      */
     public function testImportNeatlineFeaturesWkt()
     {
+
         nl_mockView();
 
         $exhibit  = $this->_exhibit('nlf-wkt');
-        $this->ex = $exhibit;
         $item     = $this->_item();
-        $this->_addFeature(
-            $item,
-            'POINT(1 2)'
-        );
+
+        $this->_addFeature($item, 'POINT(1 2)');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
@@ -128,6 +127,7 @@ SQL;
             'GEOMETRYCOLLECTION(POINT(1 2))',
             $record->coverage
         );
+
     }
 
 
@@ -136,6 +136,7 @@ SQL;
      */
     public function testImportNeatlineFeaturesKml()
     {
+
         $kml = <<<KML
 <kml xmlns="http://earth.google.com/kml/2.0">
 <Folder>
@@ -153,7 +154,6 @@ KML;
         nl_mockView();
 
         $exhibit  = $this->_exhibit('nlf-kml');
-        $this->ex = $exhibit;
         $item     = $this->_item();
         $this->_addFeature($item, $kml);
 
@@ -165,6 +165,7 @@ KML;
             'GEOMETRYCOLLECTION (POINT (1 2))',
             $record->coverage
         );
+
     }
 
 
@@ -173,15 +174,13 @@ KML;
      */
     public function testImportNeatlineFeaturesExisting()
     {
+
         nl_mockView();
 
         $exhibit  = $this->_exhibit('nlf-wkt');
-        $this->ex = $exhibit;
         $item     = $this->_item();
-        $this->_addFeature(
-            $item,
-            'POINT(1 2)'
-        );
+
+        $this->_addFeature($item, 'POINT(1 2)');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->is_coverage = 1;
@@ -193,6 +192,7 @@ KML;
             'GEOMETRYCOLLECTION (POINT (3 4))',
             $record->coverage
         );
+
     }
 
 
