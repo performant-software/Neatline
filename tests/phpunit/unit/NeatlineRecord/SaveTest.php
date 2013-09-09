@@ -19,7 +19,7 @@ class NeatlineRecordTest_Save extends Neatline_Case_Default
     public function testCompileItem()
     {
 
-        nl_mockView();
+        //nl_mountView();
 
         $exhibit    = $this->_exhibit();
         $item       = $this->_item();

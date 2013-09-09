@@ -28,7 +28,7 @@ abstract class Neatline_Job_MockView extends Omeka_Job_AbstractJob
         // where the view should search for template files - first in the
         // theme, then in the Neatline plugin, then in the Omeka core.
 
-        nl_mockView();
+        nl_mountView();
 
         // Manually set the base web directory passed from the controller
         // action. This ensures that links to file attachments will point

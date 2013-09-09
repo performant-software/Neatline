@@ -13,7 +13,7 @@
 /**
  * Register the template paths necessary for the item compilations.
  */
-function nl_mockView()
+function nl_mountView()
 {
 
     // Get or create a view.
@@ -33,7 +33,7 @@ function nl_mockView()
     // -----------------------
     $view->addScriptPath(nl_getPublicThemeDir());
 
-    // Inject new view.
+    // (Re)set the view.
     Zend_Registry::set('view', $view);
 
     return $view;

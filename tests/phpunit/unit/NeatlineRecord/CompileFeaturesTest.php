@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTest_ImportFeaturesTest extends Neatline_Case_Default
+class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
 {
 
 
@@ -17,14 +17,7 @@ class NeatlineRecordTest_ImportFeaturesTest extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_createFeaturesTable();
-        nl_mockView();
-    }
-
-
-    public function tearDown()
-    {
-        $this->_dropFeaturesTable();
-        parent::tearDown();
+        //nl_mountView();
     }
 
 
@@ -45,7 +38,7 @@ class NeatlineRecordTest_ImportFeaturesTest extends Neatline_Case_Default
 
 
     /**
-     * Insert the testing features table.
+     * Create the mock features table.
      */
     private function _createFeaturesTable()
     {
@@ -75,8 +68,11 @@ SQL;
      */
     private function _dropFeaturesTable()
     {
-        $this->db->query("DROP TABLE IF EXISTS `{$this->ftable}`;");
-        delete_option('neatline_feature_table');
+        if (!is_null($this->ftable)) {
+            $this->db->query("DROP TABLE IF EXISTS `{$this->ftable}`;");
+            delete_option('neatline_feature_table');
+            $this->ftable = null;
+        }
     }
 
 
@@ -97,9 +93,6 @@ SQL;
 
         // Should not set coverage.
         $this->assertNull($record->coverage);
-
-        // TODO|dev
-        $exhibit->delete();
 
     }
 
@@ -124,9 +117,6 @@ SQL;
             $record->coverage
         );
 
-        // TODO|dev
-        $exhibit->delete();
-
     }
 
 
@@ -138,15 +128,15 @@ SQL;
 
         $kml = <<<KML
 <kml xmlns="http://earth.google.com/kml/2.0">
-<Folder>
-<name>OpenLayers export</name>
-<description>Exported on Thu Aug 15 2013 15:03:22 GMT-0400 (EDT)</description>
-<Placemark>
-<name>OpenLayers.Feature.Vector_145</name>
-<description>No description available</description>
-<Point><coordinates>1,2</coordinates></Point>
-</Placemark>
-</Folder>
+    <Folder>
+        <name>OpenLayers export</name>
+        <description>Exported on Thu Aug 15 2013 15:03:22 GMT-0400 (EDT)</description>
+        <Placemark>
+            <name>OpenLayers.Feature.Vector_145</name>
+            <description>No description available</description>
+            <Point><coordinates>1,2</coordinates></Point>
+        </Placemark>
+    </Folder>
 </kml>
 KML;
 
@@ -163,9 +153,6 @@ KML;
             'GEOMETRYCOLLECTION (POINT (1 2))',
             $record->coverage
         );
-
-        // TODO|dev
-        $exhibit->delete();
 
     }
 
@@ -190,9 +177,6 @@ KML;
             'GEOMETRYCOLLECTION(POINT(3 4))',
             $record->coverage
         );
-
-        // TODO|dev
-        $exhibit->delete();
 
     }
 

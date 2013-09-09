@@ -13,6 +13,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     implements Zend_Acl_Resource_Interface
 {
 
+
     public $owner_id = 0;
     public $item_id;
     public $exhibit_id;
@@ -249,6 +250,20 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
+     * This imports any data from NeatlineFeatures, if it's installed.
+     *
+     * @author Eric Rochester
+     **/
+    public function compileFeatures()
+    {
+        if (!$this->coverage) {
+            $geo = nl_getNeatlineFeatures($this);
+            if (!is_null($geo)) $this->coverage = $geo;
+        }
+    }
+
+
+    /**
      * Compile the Omeka item reference, if one exists.
      */
     public function compileItem()
@@ -264,19 +279,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
     }
 
-    /**
-     * This imports any data from NeatlineFeatures, if it's installed.
-     *
-     * @author Eric Rochester
-     **/
-    public function importNeatlineFeatures()
-    {
-        if (!$this->coverage) {
-            $geo = nl_getNeatlineFeatures($this);
-            if (!is_null($geo)) $this->coverage = $geo;
-        }
-    }
-
 
     /**
      * Compile the item reference and WMS coverage. Override the `save`
@@ -286,8 +288,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function save()
     {
         $this->compileWms();
+        $this->compileFeatures();
         $this->compileItem();
-        $this->importNeatlineFeatures();
         parent::save();
     }
 
