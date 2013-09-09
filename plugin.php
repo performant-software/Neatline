@@ -44,6 +44,7 @@ require_once NL_DIR.'/forms/Neatline_Form_Exhibit.php';
 // HELPERS
 require_once NL_DIR.'/helpers/Acl.php';
 require_once NL_DIR.'/helpers/Assets.php';
+require_once NL_DIR.'/helpers/Features.php';
 require_once NL_DIR.'/helpers/Globals.php';
 require_once NL_DIR.'/helpers/Jobs.php';
 require_once NL_DIR.'/helpers/Layers.php';
