@@ -58,7 +58,8 @@ function nl_defineAcl($acl)
 
     // Contributors can add and delete-confirm exhibits.
     $acl->allow('contributor', 'Neatline_Exhibits', array(
-        'add', 'delete-confirm'
+        'add',
+        'delete-confirm'
     ));
 
     // Contributors can edit their own exhibits.

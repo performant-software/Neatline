@@ -47,77 +47,82 @@
     <tbody>
 
       <?php foreach (loop('NeatlineExhibit') as $e): ?>
-      <tr>
+        <tr>
 
-        <td class="title">
+          <td class="title">
 
-          <!-- Title. -->
-          <?php
-          if (is_allowed($e, 'editor')) {
-            echo nl_getExhibitLink(
-              $e, 'editor', null,
-              array('class' => 'editor'), false
-            );
-          } else {
-            echo nl_getExhibitField('title');
-          }
-          ?>
+            <!-- Title. -->
+            <?php
+            if (is_allowed($e, 'editor')) {
+              echo nl_getExhibitLink(
+                $e, 'editor', null,
+                array('class' => 'editor'), false
+              );
+            } else {
+              echo nl_getExhibitField('title');
+            }
+            ?>
 
-          <ul class="action-links group">
+            <ul class="action-links group">
 
-            <!-- Public View. -->
-            <li>
-              <?php echo nl_getExhibitLink(
-                $e, 'show', __('Public View'),
-                array('class' => 'public'), true
-              );?>
-            </li>
-            <?php if (is_allowed($e, 'edit')): ?>
-            <!-- Exhibit Settings. -->
-            <li>
-              <?php echo nl_getExhibitLink(
-                $e, 'edit', __('Exhibit Settings'),
-                array('class' => 'edit'), false
-              );?>
-            </li>
-            <?php endif; ?>
-            <?php if (is_allowed($e, 'import')): ?>
-            <!-- Import Omeka Items. -->
-            <li>
-              <?php echo nl_getExhibitLink(
-                $e, 'import', __('Import Omeka Items'),
-                array('class' => 'import'), false
-              );?>
-            </li>
-            <?php endif; ?>
-            <?php if (is_allowed($e, 'delete')): ?>
-            <!-- Delete. -->
-            <li>
-              <?php echo nl_getExhibitLink(
-                $e, 'delete-confirm', __('Delete'),
-                array('class' => 'delete-confirm'), false
-              );?>
-            </li>
-            <?php endif; ?>
-          </ul>
-        </td>
+              <!-- Public View. -->
+              <li>
+                <?php echo nl_getExhibitLink(
+                  $e, 'show', __('Public View'),
+                  array('class' => 'public'), true
+                );?>
+              </li>
 
-        <!-- Created -->
-        <td>
-          <?php echo format_date(nl_getExhibitField('added')); ?>
-        </td>
+              <!-- Exhibit Settings. -->
+              <?php if (is_allowed($e, 'edit')): ?>
+                <li>
+                  <?php echo nl_getExhibitLink(
+                    $e, 'edit', __('Exhibit Settings'),
+                    array('class' => 'edit'), false
+                  );?>
+                </li>
+              <?php endif; ?>
 
-        <!-- # Items -->
-        <td>
-          <?php echo nl_getExhibitRecordCount(); ?>
-        </td>
+              <!-- Import Omeka Items. -->
+              <?php if (is_allowed($e, 'import')): ?>
+                <li>
+                  <?php echo nl_getExhibitLink(
+                    $e, 'import', __('Import Omeka Items'),
+                    array('class' => 'import'), false
+                  );?>
+                </li>
+              <?php endif; ?>
 
-        <!-- Public -->
-        <td>
-          <?php echo nl_getExhibitField('public')?__('Yes'):__('No'); ?>
-        </td>
+              <!-- Delete. -->
+              <?php if (is_allowed($e, 'delete')): ?>
+                <li>
+                  <?php echo nl_getExhibitLink(
+                    $e, 'delete-confirm', __('Delete'),
+                    array('class' => 'delete-confirm'), false
+                  );?>
+                </li>
+              <?php endif; ?>
 
-      </tr>
+            </ul>
+          </td>
+
+          <!-- Created -->
+          <td>
+            <?php echo format_date(nl_getExhibitField('added')); ?>
+          </td>
+
+          <!-- # Items -->
+          <td>
+            <?php echo nl_getExhibitRecordCount(); ?>
+          </td>
+
+          <!-- Public -->
+          <td>
+            <?php echo nl_getExhibitField('public') ?
+              __('Yes') : __('No'); ?>
+          </td>
+
+        </tr>
       <?php endforeach; ?>
 
     </tbody>
