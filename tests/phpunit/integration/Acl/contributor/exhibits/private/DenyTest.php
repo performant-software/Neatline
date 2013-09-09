@@ -31,26 +31,18 @@ class AclTest_ContributorExhibitsPrivateDeny extends Neatline_Case_Default
      */
     public function testCannotViewOtherUsersPrivateExhibits()
     {
-        $this->_expect404();
-        $this->dispatch('neatline/show/slug');
+      $actions = array(
+          'editor',
+          'edit',
+          'delete',
+          'import'
+      );
+
+      foreach ($actions as $action) {
+          $this->dispatch('neatline/'.$action.'/'.$this->exhibit->id);
+          $this->assertController('error');
+          $this->assertAction('forbidden');
+      }
     }
-
-
-    /**
-     * Contributors should not be able to browse private exhibits owned by
-     * other users.
-     */
-    public function testCannotBrowseOtherUsersPrivateExhibits()
-    {
-
-        $this->dispatch('neatline');
-
-        // Should not list private exhibit.
-        $this->assertNotXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug').'"]'
-        );
-
-    }
-
 
 }
