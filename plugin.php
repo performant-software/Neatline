@@ -51,7 +51,7 @@ require_once NL_DIR.'/helpers/Plugins.php';
 require_once NL_DIR.'/helpers/Styles.php';
 require_once NL_DIR.'/helpers/Views.php';
 
-// EXTERNAL LIBRARIES
+// LIBRARIES
 require_once(NL_DIR . '/lib/geoPHP/geoPHP.inc');
 
 Zend_Registry::set('fileIn', 'php://input');

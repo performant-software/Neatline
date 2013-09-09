@@ -267,17 +267,13 @@ class NeatlineRecord extends Neatline_Row_Expandable
     /**
      * This imports any data from NeatlineFeatures, if it's installed.
      *
-     * @return void
      * @author Eric Rochester
      **/
     public function importNeatlineFeatures()
     {
         if (!$this->coverage) {
             $geo = nl_getNeatlineFeatures($this);
-            if (!is_null($geo)) {
-                $this->is_coverage = 1;
-                $this->coverage    = $geo;
-            }
+            if (!is_null($geo)) $this->coverage = $geo;
         }
     }
 
@@ -308,7 +304,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     /**
      * Associate the model with an ACL resource id.
      *
-     * @return string The resource id..
+     * @return string The resource id.
      */
     public function getResourceId()
     {

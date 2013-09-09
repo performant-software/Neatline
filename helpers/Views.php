@@ -169,18 +169,18 @@ function nl_getExhibit()
     return get_view()->neatline_exhibit;
 }
 
+
 /**
- * Returns coverage data from the NeatlineFeatures plugin, if it's
- * installed.
+ * Returns record coverage data from the NeatlineFeatures plugin.
  *
  * @param $record NeatlineRecord The record to get the feature for.
- *
  * @return string|null
  */
 function nl_getNeatlineFeatures($record) {
-    $db    = get_db();
 
-    // Get the table name from an option, if it's been set (DI for testing).
+    $db = get_db();
+
+    // Get table name from an option, if it's been set (DI for testing).
     $table = get_option('neatline_feature_table');
     if (is_null($table)) {
         $table = $db->getTable('NeatlineFeature')->getTableName();
@@ -207,7 +207,7 @@ SQL;
 
         if (!is_null($result)) {
             if (strpos($result, '<kml') === 0) {
-                $result = nl_convertKml($result);
+                $result = nl_kmlToWkt($result);
             } else {
                 $result = 'GEOMETRYCOLLECTION(' .
                     implode(',', explode('|', $result)) .
@@ -221,6 +221,13 @@ SQL;
     return $result;
 }
 
-function nl_convertKml($kml) {
+
+/**
+ * Convert a KML document to a WKT string.
+ *
+ * @param string $kml The KML document.
+ * @return string The WKT.
+ */
+function nl_kmlToWkt($kml) {
     return geoPHP::load($kml)->out('wkt');
 }
