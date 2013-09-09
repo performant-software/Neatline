@@ -14,27 +14,6 @@ class NeatlineRecordTest_Save extends Neatline_Case_Default
 
 
     /**
-     * `save` should compile an Omeka item reference.
-     */
-    public function testCompileItem()
-    {
-
-        //nl_mountView();
-
-        $exhibit    = $this->_exhibit();
-        $item       = $this->_item();
-
-        $record = new NeatlineRecord($exhibit, $item);
-        $record->save();
-
-        // Should compile `title` and `body`.
-        $this->assertNotNull($record->title);
-        $this->assertNotNull($record->body);
-
-    }
-
-
-    /**
      * `save` should compile the coverage when a WMS layer is defined.
      */
     public function testCompileWms()
@@ -51,6 +30,34 @@ class NeatlineRecordTest_Save extends Neatline_Case_Default
 
         // Should compile `coverage`.
         $this->assertNotNull($record->coverage);
+
+    }
+
+
+    /**
+     * `save` should import Neatline Features coverages when they exist.
+     */
+    public function testCompileFeatures()
+    {
+        // TODO
+    }
+
+
+    /**
+     * `save` should compile an Omeka item reference.
+     */
+    public function testCompileItem()
+    {
+
+        $exhibit    = $this->_exhibit();
+        $item       = $this->_item();
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should compile `title` and `body`.
+        $this->assertNotNull($record->title);
+        $this->assertNotNull($record->body);
 
     }
 

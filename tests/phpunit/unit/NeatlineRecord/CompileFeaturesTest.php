@@ -17,12 +17,11 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
     {
         parent::setUp();
         $this->_createFeaturesTable();
-        //nl_mountView();
     }
 
 
     /**
-     * Insert a Neatline Features geometry feature for an item.
+     * Adds a Neatline Features geometry for an item.
      *
      * @param Item $item The parent item.
      * @param string $geo The coverage.
@@ -30,8 +29,8 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
     private function _addFeature($item, $geo)
     {
         $this->db->query(
-            "INSERT INTO `{$this->ftable}` " .
-            "(item_id, is_map, geo) VALUES (?, ?, ?);",
+            "INSERT INTO `{$this->ftable}`
+            (item_id, is_map, geo) VALUES (?, ?, ?);",
             array($item->id, 1, $geo)
         );
     }
@@ -47,13 +46,16 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
 
         $sql = <<<SQL
 
-CREATE TABLE `{$this->ftable}` (
-    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-    item_id INT(10) UNSIGNED NOT NULL,
-    is_map TINYINT(1) NOT NULL DEFAULT 0,
-    geo TEXT,
-    CONSTRAINT PRIMARY KEY (id)
-) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+        CREATE TABLE `{$this->ftable}` (
+
+            id          INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            item_id     INT(10) UNSIGNED NOT NULL,
+            is_map      TINYINT(1) NOT NULL DEFAULT 0,
+            geo         TEXT,
+
+            CONSTRAINT PRIMARY KEY (id)
+
+        ) ENGINE=innodb DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 SQL;
 
@@ -89,7 +91,7 @@ SQL;
         $item     = $this->_item();
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->save();
+        $record->compileFeatures();
 
         // Should not set coverage.
         $this->assertNull($record->coverage);
@@ -109,7 +111,7 @@ SQL;
         $this->_addFeature($item, 'POINT(1 2)');
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->save();
+        $record->compileFeatures();
 
         // Should import WKT.
         $this->assertEquals(
@@ -130,7 +132,6 @@ SQL;
 <kml xmlns="http://earth.google.com/kml/2.0">
     <Folder>
         <name>OpenLayers export</name>
-        <description>Exported on Thu Aug 15 2013 15:03:22 GMT-0400 (EDT)</description>
         <Placemark>
             <name>OpenLayers.Feature.Vector_145</name>
             <description>No description available</description>
@@ -146,7 +147,7 @@ KML;
         $this->_addFeature($item, $kml);
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->save();
+        $record->compileFeatures();
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
@@ -170,7 +171,7 @@ KML;
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->coverage = 'GEOMETRYCOLLECTION(POINT(3 4))';
-        $record->save();
+        $record->compileFeatures();
 
         // Shouldn't modify existing coverage.
         $this->assertEquals(

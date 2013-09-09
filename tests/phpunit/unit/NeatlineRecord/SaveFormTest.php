@@ -90,8 +90,6 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testAssignItemId()
     {
 
-        //nl_mountView();
-
         $record = $this->_record();
         $record->saveForm(array('item_id' => '1'));
 

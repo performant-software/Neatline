@@ -64,7 +64,7 @@ function nl_getNeatlineFeatures($record) {
         if (!is_null($result)) {
 
             // If KML, convert to WKT.
-            if (strpos($result, '<kml') === 0) {
+            if (strpos($result, '<kml') !== false) {
                 $result = nl_kmlToWkt($result);
             }
 
