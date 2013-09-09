@@ -14,27 +14,27 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 {
 
 
-    public $owner_id = 0;           // INT(10) UNSIGNED NOT NULL
-    public $added;                  // TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    public $modified;               // TIMESTAMP NULL
-    public $published;              // TIMESTAMP NULL
-    public $item_query;             // TEXT NULL
-    public $spatial_layers;         // TEXT NULL
-    public $spatial_layer;          // TEXT NULL
-    public $image_layer;            // TEXT NULL
-    public $image_height;           // SMALLINT UNSIGNED NULL
-    public $image_width;            // SMALLINT UNSIGNED NULL
-    public $wms_address;            // TEXT NULL
-    public $wms_layers;             // TEXT NULL
-    public $widgets;                // TEXT NULL
-    public $title;                  // TEXT NULL
-    public $slug;                   // VARCHAR(100) NOT NULL
-    public $narrative;              // LONGTEXT NULL
-    public $spatial_querying = 1;   // TINYINT(1) NOT NULL
-    public $public = 0;             // TINYINT(1) NOT NULL
-    public $styles;                 // TEXT NULL
-    public $map_focus;              // VARCHAR(100) NULL
-    public $map_zoom;               // INT(10) UNSIGNED NULL
+    public $owner_id = 0;
+    public $added;
+    public $modified;
+    public $published;
+    public $item_query;
+    public $spatial_layers;
+    public $spatial_layer;
+    public $image_layer;
+    public $image_height;
+    public $image_width;
+    public $wms_address;
+    public $wms_layers;
+    public $widgets;
+    public $title;
+    public $slug;
+    public $narrative;
+    public $spatial_querying = 1;
+    public $public = 0;
+    public $styles;
+    public $map_focus;
+    public $map_zoom;
 
 
     /**
