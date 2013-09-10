@@ -31,6 +31,7 @@ function nl_getNeatlineFeatures($record) {
 
     // Halt if Features is not present.
     if (!plugin_is_active('NeatlineFeatures')) return;
+    echo 'test';
 
     try {
 
