@@ -33,7 +33,7 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
         $item     = $this->_item();
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->compileFeatures();
+        $record->save();
 
         // Should not set coverage.
         $this->assertNull($record->coverage);
@@ -51,7 +51,7 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
         $item     = $this->_item();
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->compileFeatures();
+        $record->save();
 
         // Should not set coverage.
         $this->assertNull($record->coverage);
@@ -71,7 +71,7 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
         $this->_addNeatlineFeature($item, 'POINT(1 2)');
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->compileFeatures();
+        $record->save();
 
         // Should import WKT.
         $this->assertEquals(
@@ -104,7 +104,7 @@ KML;
         $this->_addNeatlineFeature($item, $kml);
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->compileFeatures();
+        $record->save();
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
@@ -128,7 +128,7 @@ KML;
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->coverage = 'GEOMETRYCOLLECTION(POINT(3 4))';
-        $record->compileFeatures();
+        $record->save();
 
         // Shouldn't modify existing coverage.
         $this->assertEquals(

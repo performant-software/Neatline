@@ -48,7 +48,7 @@ function nl_getNeatlineFeatures($record) {
             $result = nl_kmlToWkt(trim($result));
         }
 
-        // If WKT, implode and wrap in `GEOMETRYCOLLECTION`.
+        // If WKT, implode and wrap as `GEOMETRYCOLLECTION`.
         else {
             $result = 'GEOMETRYCOLLECTION(' .
                 implode(',', explode('|', $result)) .

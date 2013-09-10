@@ -31,7 +31,7 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
         $item       = $this->_item('title');
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->compileItem();
+        $record->save();
 
         // `title` and `body` should be set.
         $this->assertEquals(nl_getItemMarkup($record), $item->id);

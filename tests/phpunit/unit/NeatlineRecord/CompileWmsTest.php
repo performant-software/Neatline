@@ -27,7 +27,7 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
             'wms_layers'    => 'layers'
         ));
 
-        $record->compileWms();
+        $record->save();
 
         // Should flip on `is_coverage`, `is_wms`.
         $this->assertEquals($record->is_coverage, 1);
@@ -55,7 +55,7 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
 
         // No address or layers.
         $record = new NeatlineRecord();
-        $record->compileWms();
+        $record->save();
 
         $this->assertNull($record->coverage);
         $this->assertEquals($record->is_coverage, 0);
