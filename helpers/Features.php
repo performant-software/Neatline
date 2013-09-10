@@ -32,34 +32,28 @@ function nl_getNeatlineFeatures($record) {
     // Halt if Features is not present.
     if (!plugin_is_active('NeatlineFeatures')) return;
 
-    try {
+    $db = get_db();
 
-        $db = get_db();
+    // Get raw coverage.
+    $result = $db->fetchOne(
+        "SELECT geo FROM `{$db->prefix}neatline_features`
+        WHERE is_map=1 AND item_id=?;",
+        $record->item_id
+    );
 
-        // Get raw coverage.
-        $result = $db->fetchOne(
-            "SELECT geo FROM `{$db->prefix}neatline_features`
-            WHERE is_map=1 AND item_id=?;",
-            $record->item_id
-        );
+    if ($result) {
 
-        if (!is_null($result)) {
-
-            // If KML, convert to WKT.
-            if (strpos($result, '<kml') !== false) {
-                $result = nl_kmlToWkt(trim($result));
-            }
-
-            // If WKT, implode and wrap in `GEOMETRYCOLLECTION`.
-            else {
-                $result = 'GEOMETRYCOLLECTION(' .
-                    implode(',', explode('|', $result)) .
-                ')';
-            }
+        // If KML, convert to WKT.
+        if (strpos($result, '<kml') !== false) {
+            $result = nl_kmlToWkt(trim($result));
         }
 
-    } catch (Exception $e) {
-        $result = null;
+        // If WKT, implode and wrap in `GEOMETRYCOLLECTION`.
+        else {
+            $result = 'GEOMETRYCOLLECTION(' .
+                implode(',', explode('|', $result)) .
+            ')';
+        }
     }
 
     return $result;

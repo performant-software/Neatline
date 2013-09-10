@@ -23,39 +23,48 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 
 
     /**
-     * Clear the exhibits and records tables.
+     * Clear testing records. This needs to be done manually since the
+     * records table is MyISAM (for indexes), and thus doesn't get cleared
+     * with the rest of the tables when the transaction is rolled back.
      */
     public function tearDown()
     {
-
-        $exhibits = <<<SQL
-        DELETE FROM {$this->db->prefix}neatline_exhibits WHERE 1=1
-SQL;
-
         $records = <<<SQL
         DELETE FROM {$this->db->prefix}neatline_records WHERE 1=1
 SQL;
-
-        $this->db->query($exhibits);
         $this->db->query($records);
         parent::tearDown();
-
     }
 
 
     /**
-     * Install a plugin. If the plugin cannot be installed (eg, if the
-     * source is not present), skip the current test 
+     * If the passed plugin is not installed/active, skip the test.
      *
-     * @param string $plugin The plugin name.
+     * @param string $pluginName The plugin name.
      */
-    protected function _installPluginOrSkip($plugin)
+    protected function _skipIfNotPlugin($pluginName)
     {
-        try {
-            $this->helper->setUp($plugin);
-        } catch(Exception $e) {
-            $this->markTestSkipped();
-        }
+        if (!plugin_is_active($pluginName)) $this->markTestSkipped();
+    }
+
+
+    /**
+     * Deactivate a plugin.
+     *
+     * @param string $pluginName The plugin name.
+     * @param bool $active If true, set the plugin active.
+     */
+    protected function _setPluginActive($pluginName, $active)
+    {
+
+        // Get the plugin record.
+        $plugin = $this->db->getTable('Plugin')
+            ->findByDirectoryName($pluginName);
+
+        // (De)activate.
+        $plugin->setActive($active);
+        $plugin->save();
+
     }
 
 

@@ -37,8 +37,10 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
             $config = new Zend_Config_Ini(NL_TEST_DIR.'/plugins.ini');
 
             // Install each of the siblings.
-            foreach ($config->plugins as $plugin) {
-                $this->helper->setUp($plugin);
+            if (!is_null($config->plugins)) {
+                foreach ($config->plugins as $plugin) {
+                    $this->helper->setUp($plugin);
+                }
             }
 
         }

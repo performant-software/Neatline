@@ -258,7 +258,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     {
         if (!$this->coverage) {
             $geo = nl_getNeatlineFeatures($this);
-            if (!is_null($geo)) $this->coverage = $geo;
+            if (is_string($geo)) $this->coverage = $geo;
         }
     }
 

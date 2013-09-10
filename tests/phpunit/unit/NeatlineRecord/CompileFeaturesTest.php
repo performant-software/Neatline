@@ -13,11 +13,38 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->_skipIfNotPlugin('NeatlineFeatures');
+    }
+
+
     /**
-     * `save` should pass silently on importing data from NeatlineFeatures
-     * if it's not available.
+     * `save` should pass silently when NeatlineFeatures is not active.
      */
     public function testNeatlineFeaturesNotInstalled()
+    {
+
+        // Deactivate features.
+        $this->_setPluginActive('NeatlineFeatures', false);
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->compileFeatures();
+
+        // Should not set coverage.
+        $this->assertNull($record->coverage);
+
+    }
+
+
+    /**
+     * `save` should pass silently when no NeatlineFeatures data exists.
+     */
+    public function testNoFeatureData()
     {
 
         $exhibit  = $this->_exhibit();
@@ -37,8 +64,6 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
      */
     public function testImportWkt()
     {
-
-        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -62,8 +87,6 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
      */
     public function testImportKml()
     {
-
-        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $kml = <<<KML
         <kml xmlns="http://earth.google.com/kml/2.0">
@@ -97,8 +120,6 @@ KML;
      */
     public function testPreserveExistingCoverages()
     {
-
-        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
