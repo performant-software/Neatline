@@ -66,18 +66,13 @@ class NeatlineRecordTest_CompileFeaturesTest extends Neatline_Case_Default
         $this->_installPluginOrSkip('NeatlineFeatures');
 
         $kml = <<<KML
-
         <kml xmlns="http://earth.google.com/kml/2.0">
             <Folder>
-                <name>OpenLayers export</name>
                 <Placemark>
-                    <name>OpenLayers.Feature.Vector_145</name>
-                    <description>No description available</description>
                     <Point><coordinates>1,2</coordinates></Point>
                 </Placemark>
             </Folder>
         </kml>
-
 KML;
 
         $exhibit  = $this->_exhibit();

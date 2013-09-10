@@ -31,7 +31,6 @@ function nl_getNeatlineFeatures($record) {
 
     // Halt if Features is not present.
     if (!plugin_is_active('NeatlineFeatures')) return;
-    echo 'test';
 
     try {
 
@@ -39,7 +38,8 @@ function nl_getNeatlineFeatures($record) {
 
         // Get raw coverage.
         $result = $db->fetchOne(
-            "SELECT geo FROM {$table} WHERE is_map=1 AND item_id=?;",
+            "SELECT geo FROM `{$db->prefix}neatline_features`
+            WHERE is_map=1 AND item_id=?;",
             $record->item_id
         );
 
@@ -47,7 +47,7 @@ function nl_getNeatlineFeatures($record) {
 
             // If KML, convert to WKT.
             if (strpos($result, '<kml') !== false) {
-                $result = nl_kmlToWkt($result);
+                $result = nl_kmlToWkt(trim($result));
             }
 
             // If WKT, implode and wrap in `GEOMETRYCOLLECTION`.
