@@ -22,38 +22,19 @@ function nl_kmlToWkt($kml) {
 
 
 /**
- * Returns record coverage data from the NeatlineFeatures plugin.
+ * Return record coverage data from the NeatlineFeatures plugin.
  *
  * @param $record NeatlineRecord The record to get the feature for.
  * @return string|null
  */
 function nl_getNeatlineFeatures($record) {
 
-    $db = get_db();
-
-    // Get the name of the Neatline Features table name from an option,
-    // if it's been set (DI for testing).
-
-    $table = get_option('neatline_feature_table');
-    if (is_null($table)) {
-        $table = $db->getTable('NeatlineFeature')->getTableName();
-    }
-
-    // Check to see if the features table is present.
-
-    $found = false;
-    foreach ($db->listTables() as $t) {
-        if ($t === $table) {
-            $found = true;
-            break;
-        }
-    }
-
-    // Halt if the table is not present.
-
-    if (!$found) return;
+    // Halt if Features is not present.
+    if (!plugin_is_active('NeatlineFeatures')) return;
 
     try {
+
+        $db = get_db();
 
         // Get raw coverage.
         $result = $db->fetchOne(

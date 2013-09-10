@@ -23,14 +23,39 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 
 
     /**
-     * Clear the database.
+     * Clear the exhibits and records tables.
      */
     public function tearDown()
     {
-        $p = $this->db->prefix;
-        $this->db->query("DELETE FROM `{$p}neatline_records` WHERE 1=1");
-        $this->db->query("DELETE FROM `{$p}neatline_exhibits` WHERE 1=1");
+
+        $exhibits = <<<SQL
+        DELETE FROM {$this->db->prefix}neatline_exhibits WHERE 1=1
+SQL;
+
+        $records = <<<SQL
+        DELETE FROM {$this->db->prefix}neatline_records WHERE 1=1
+SQL;
+
+        $this->db->query($exhibits);
+        $this->db->query($records);
         parent::tearDown();
+
+    }
+
+
+    /**
+     * Install a plugin. If the plugin cannot be installed (eg, if the
+     * source is not present), skip the current test 
+     *
+     * @param string $plugin The plugin name.
+     */
+    protected function _installPluginOrSkip($plugin)
+    {
+        try {
+            $this->helper->setUp($plugin);
+        } catch(Exception $e) {
+            $this->markTestSkipped();
+        }
     }
 
 
@@ -119,6 +144,22 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
         $record->__save();
         return $record;
 
+    }
+
+
+    /**
+     * Add a Neatline Features feature for an item.
+     *
+     * @param Item $item The parent item.
+     * @param string $coverage The feature coverage.
+     */
+    protected function _addNeatlineFeature($item, $coverage)
+    {
+        $this->db->query(
+            "INSERT INTO `{$this->db->prefix}neatline_features`
+            (item_id, element_text_id, is_map, geo) VALUES (?, ?, ?, ?);",
+            array($item->id, 0, 1, $coverage)
+        );
     }
 
 
