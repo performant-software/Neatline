@@ -20,8 +20,10 @@ class AclTest_ContributorExhibitsPrivateAllow
     public function setUp()
     {
         parent::setUp();
-        $this->_loginAsContributor();
-        $this->exhibit = $this->_exhibit('slug', false);
+        $this->_loginAsContributor('user1');
+        $this->_exhibit('slug1', false);
+        $this->_loginAsContributor('user2');
+        $this->_exhibit('slug2', false);
     }
 
 
@@ -30,23 +32,36 @@ class AclTest_ContributorExhibitsPrivateAllow
      */
     public function testCanViewOwnPrivateExhibits()
     {
-        $this->dispatch('neatline/show/slug');
+        $this->dispatch('neatline/show/slug2');
         $this->assertNotAction('forbidden');
     }
 
 
     /**
-     * Contributors should be able to browse their own private exhibits.
+     * Contributors should be able to view other users' private exhibits.
      */
-    public function testCanBrowseOwnPrivateExhibits()
+    public function testCanViewOtherUsersPrivateExhibits()
+    {
+        $this->dispatch('neatline/show/slug1');
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Contributors should be able to browse private exhibits.
+     */
+    public function testCanBrowsePrivateExhibits()
     {
 
         $this->dispatch('neatline');
         $this->assertNotAction('forbidden');
 
-        // Should list private exhibit.
+        // Should list private exhibits.
         $this->assertXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug').'"]'
+            public_url('neatline/show/slug1').'"]'
+        );
+        $this->assertXpath('//a[@class="neatline"][@href="'.
+            public_url('neatline/show/slug2').'"]'
         );
 
     }
