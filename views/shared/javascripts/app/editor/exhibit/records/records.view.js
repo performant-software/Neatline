@@ -63,7 +63,7 @@ Neatline.module('Editor.Exhibit.Records', function(
      */
     getModelByEvent: function(e) {
       return this.records.get(
-        parseInt($(e.currentTarget).attr('data-id'), 10)
+        Number($(e.currentTarget).attr('data-id'))
       );
     },
 

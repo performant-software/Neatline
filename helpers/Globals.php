@@ -18,6 +18,10 @@
  */
 function nl_globals($exhibit)
 {
+
+    // Read style defaults from `styles.ini`.
+    $styles = new Zend_Config_Ini(NL_DIR.'/styles.ini');
+
     return array('neatline' => array(
 
         // Exhibit.
@@ -32,7 +36,8 @@ function nl_globals($exhibit)
 
         // Constants.
         // ----------------------------------------------------------------
-        'per_page' => (int) get_plugin_ini('Neatline', 'per_page'),
+        'per_page'  => (int) get_plugin_ini('Neatline', 'per_page'),
+        'styles'    => $styles->toArray(),
 
         // Layers.
         // ----------------------------------------------------------------

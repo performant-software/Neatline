@@ -52,8 +52,8 @@ Neatline.module('Shared.Record', function(
      * @return {Array}: The records collection.
      */
     parse: function(response) {
-      this.offset = parseInt(response.offset, 10);
-      this.count  = parseInt(response.count, 10);
+      this.offset = Number(response.offset);
+      this.count  = Number(response.count);
       return response.records;
     }
 

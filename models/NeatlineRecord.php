@@ -27,17 +27,17 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $coverage;
     public $tags;
     public $widgets;
-    public $presenter = 'StaticBubble';
-    public $fill_color = '#00aeff';
-    public $fill_color_select = '#00aeff';
-    public $stroke_color = '#000000';
-    public $stroke_color_select = '#000000';
-    public $fill_opacity = 0.3;
-    public $fill_opacity_select = 0.4;
-    public $stroke_opacity = 0.9;
-    public $stroke_opacity_select = 1.0;
-    public $stroke_width = 2;
-    public $point_radius = 10;
+    public $presenter;
+    public $fill_color;
+    public $fill_color_select;
+    public $stroke_color;
+    public $stroke_color_select;
+    public $fill_opacity;
+    public $fill_opacity_select;
+    public $stroke_opacity;
+    public $stroke_opacity_select;
+    public $stroke_width;
+    public $point_radius;
     public $zindex;
     public $weight;
     public $start_date;
@@ -54,6 +54,24 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
+     * Required style attributes set in `styles.ini`.
+     */
+    protected static $preset = array(
+        'presenter',
+        'fill_color',
+        'fill_color_select',
+        'stroke_color',
+        'stroke_color_select',
+        'fill_opacity',
+        'fill_opacity_select',
+        'stroke_opacity',
+        'stroke_opacity_select',
+        'stroke_width',
+        'point_radius'
+    );
+
+
+    /**
      * Set exhibit and item references.
      *
      * @param NeatlineExhibit $exhibit The exhibit record.
@@ -61,9 +79,21 @@ class NeatlineRecord extends Neatline_Row_Expandable
      */
     public function __construct($exhibit=null, $item=null)
     {
+
         parent::__construct();
+
+        // Set exhibit and item foreign keys.
         if (!is_null($exhibit)) $this->exhibit_id = $exhibit->id;
         if (!is_null($item)) $this->item_id = $item->id;
+
+        // Read style defaults from `styles.ini`.
+        $styles = new Zend_Config_Ini(NL_DIR.'/styles.ini');
+
+        // Set default styles.
+        foreach (self::$preset as $prop) {
+            if (is_null($this->$prop)) $this->$prop = $styles->$prop;
+        }
+
     }
 
 

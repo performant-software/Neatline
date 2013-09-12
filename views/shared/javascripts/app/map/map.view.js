@@ -432,7 +432,7 @@ Neatline.module('Map', function(
       _.each(this.layers.vector, _.bind(function(layer, id) {
 
         // Delete if model is absent and layer is unfrozen.
-        if (!_.contains(newIds, parseInt(id, 10)) && !layer.nFrozen) {
+        if (!_.contains(newIds, Number(id)) && !layer.nFrozen) {
           this.removeVectorLayer(layer);
         }
 
@@ -468,7 +468,7 @@ Neatline.module('Map', function(
       _.each(this.layers.wms, _.bind(function(layer, id) {
 
         // Delete if model is absent.
-        if (!_.contains(newIds, parseInt(id, 10))) {
+        if (!_.contains(newIds, Number(id))) {
           this.removeWmsLayer(layer);
         }
 
@@ -674,8 +674,8 @@ Neatline.module('Map', function(
       fillOpacitySelect       = parseFloat(fillOpacitySelect);
       strokeOpacity           = parseFloat(strokeOpacity);
       strokeOpacitySelect     = parseFloat(strokeOpacitySelect);
-      strokeWidth             = parseInt(strokeWidth);
-      pointRadius             = parseInt(pointRadius);
+      strokeWidth             = Number(strokeWidth);
+      pointRadius             = Number(pointRadius);
 
       return new OpenLayers.StyleMap({
 

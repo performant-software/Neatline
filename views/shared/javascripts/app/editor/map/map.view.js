@@ -205,11 +205,11 @@ _.extend(Neatline.Map.View.prototype, {
     // --------------------------------------------------------------------
 
     // SNAP ANGLE
-    var snap = parseFloat(settings.poly.snap) || 0;
+    var snap = Number(settings.poly.snap) || 0;
     this.controls.regPoly.handler.snapAngle = Math.max(0, snap);
 
     // SIDES
-    var sides = parseInt(settings.poly.sides, 10) || 0;
+    var sides = Number(settings.poly.sides) || 0;
     this.controls.regPoly.handler.sides = Math.max(3, sides);
 
     // IRREGULAR

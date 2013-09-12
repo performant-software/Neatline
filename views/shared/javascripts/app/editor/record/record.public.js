@@ -31,10 +31,8 @@ Neatline.module('Editor.Record', function(
    */
   var bindId = function(id, tab) {
 
-    id = parseInt(id, 10);
-
     // Get or fetch the model.
-    Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', id,
+    Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
       function(record) {
         Record.__view.bind(record);
         Record.__view.activateTab(tab);
