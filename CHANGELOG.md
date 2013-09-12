@@ -4,13 +4,17 @@
 
   - In the record edit form, the "Save" and "Delete" buttons are now fixed at the bottom of the screenm, making it possible to save the record without first having to scroll to the bottom of the form.
 
+  - When items are imported from Omeka, coverage data created with the Neatline Features plugin is now automatically be populated in the Neatline records that correspond to the items.
+
 #### Changed Features
 
   - Assorted UX tweaks in the editor associated with the move to Bootstrap 3 - makes the "New Record" button larger, displays more of the record body content in the browse view, makes the close "X" button larger on the record edit forms.
 
+  - Contributor users are now able to view other users' non-public exhibits, which follows the general pattern for other resource types (eg, items).
+
 #### Bug Fixes
 
-  - Fixes problem that was causing features not to unhighlight on mouseleave under certain circumstances.
+  - Fixes a set of minor problems that was causing features not to unhighlight on mouseleave under certain circumstances (eg, when a new batch of records is rendered on the map while the cursor is hovering on a feature).
 
 #### API Changes
 
