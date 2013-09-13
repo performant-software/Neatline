@@ -15,13 +15,13 @@
   'title' => nl_getExhibitField('title')
 )); ?>
 
-<!-- Title. -->
+<!-- Title -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
 
-<!-- Exhibit. -->
+<!-- Exhibit -->
 <?php echo nl_getExhibitMarkup(); ?>
 
-<!-- Narrative. -->
+<!-- Narrative -->
 <?php echo nl_getNarrativeMarkup(); ?>
 
 <?php echo foot(); ?>

@@ -187,11 +187,38 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
 
     /**
+     * Show fullscreen exhibit.
+     */
+    public function fullscreenAction()
+    {
+
+        // Try to find an exhibit with the requested slug.
+        $exhibit = $this->exhibits->findBySlug($this->_request->slug);
+        if (!$exhibit) throw new Omeka_Controller_Exception_404;
+
+        // Assign exhibit to view.
+        $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlinePublic($exhibit);
+        nl_queueExhibitTheme($exhibit);
+
+    }
+
+
+    /**
      * Edit exhibit.
      */
     public function editorAction()
     {
-        $this->view->neatline_exhibit = $this->_helper->db->findById();
+
+        // Assign exhibit to view.
+        $exhibit = $this->_helper->db->findById();
+        $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlineEditor($exhibit);
+
     }
 
 
