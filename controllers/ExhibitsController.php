@@ -191,18 +191,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
      */
     public function fullscreenAction()
     {
-
-        // Try to find an exhibit with the requested slug.
-        $exhibit = $this->exhibits->findBySlug($this->_request->slug);
-        if (!$exhibit) throw new Omeka_Controller_Exception_404;
-
-        // Assign exhibit to view.
-        $this->view->neatline_exhibit = $exhibit;
-
-        // Queue static assets.
-        nl_queueNeatlinePublic($exhibit);
-        nl_queueExhibitTheme($exhibit);
-
+        // TODO
     }
 
 
