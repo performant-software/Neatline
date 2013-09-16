@@ -37,9 +37,9 @@ class Migrate200Test_ProcessExhibitSimileDefaults
             $this->_getExhibitByTitle('Timeline Zoom')
         );
 
-        $this->assertEquals($expansion->simile_default_date,    '2000');
-        $this->assertEquals($expansion->simile_tape_height,     10);
-        $this->assertEquals($expansion->simile_track_height,    30);
+        $this->assertEquals('2000', $expansion->simile_default_date);
+        $this->assertEquals(10,     $expansion->simile_tape_height);
+        $this->assertEquals(30,     $expansion->simile_track_height);
 
     }
 
@@ -56,8 +56,8 @@ class Migrate200Test_ProcessExhibitSimileDefaults
             $this->_getExhibitByTitle('Timeline Zoom')
         );
 
-        $this->assertEquals($expansion->simile_interval_unit,   'HOUR');
-        $this->assertEquals($expansion->simile_interval_pixels, 300);
+        $this->assertEquals('HOUR', $expansion->simile_interval_unit);
+        $this->assertEquals(300,    $expansion->simile_interval_pixels);
 
     }
 
@@ -73,8 +73,8 @@ class Migrate200Test_ProcessExhibitSimileDefaults
             $this->_getExhibitByTitle('Timeline No Zoom')
         );
 
-        $this->assertEquals($expansion->simile_interval_unit,   'YEAR');
-        $this->assertEquals($expansion->simile_interval_pixels, 100);
+        $this->assertEquals('YEAR', $expansion->simile_interval_unit);
+        $this->assertEquals(100,    $expansion->simile_interval_pixels);
 
     }
 

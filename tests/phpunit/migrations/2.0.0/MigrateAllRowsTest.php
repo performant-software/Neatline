@@ -25,12 +25,12 @@ class Migrate200Test_MigrateAllRows extends Neatline_Case_Migrate200
         // EXHIBIT
         $c1 = $this->_countRows('neatline_exhibits_migrate');
         $c2 = $this->_countRows('neatline_exhibits');
-        $this->assertEquals($c1, $c2);
+        $this->assertEquals($c2, $c1);
 
         // RECORDS
         $c1 = $this->_countRows('neatline_data_records_migrate');
         $c2 = $this->_countRows('neatline_records');
-        $this->assertEquals($c1, $c2);
+        $this->assertEquals($c2, $c1);
 
         parent::tearDown();
 

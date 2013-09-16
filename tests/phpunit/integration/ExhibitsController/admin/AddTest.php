@@ -99,9 +99,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -124,9 +124,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -149,9 +149,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -174,9 +174,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -199,9 +199,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -227,9 +227,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 1);
+        $this->assertEquals(1, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 1);
+        $this->assertEquals(1, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -252,9 +252,9 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Submit the form, check for no new exhibits.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->assertAction('add');
 
         // Should flash error.
@@ -288,25 +288,25 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         ));
 
         // Should create new exhibit.
-        $this->assertEquals($this->_exhibits->count(), 0);
+        $this->assertEquals(0, $this->_exhibits->count());
         $this->dispatch('neatline/add');
-        $this->assertEquals($this->_exhibits->count(), 1);
+        $this->assertEquals(1, $this->_exhibits->count());
 
         // Get the new exhibit.
         $e = $this->_getLastRow($this->_exhibits);
 
         // Should set fields.
-        $this->assertEquals($e->title,              'Title');
-        $this->assertEquals($e->slug,               'slug');
-        $this->assertEquals($e->narrative,          'Narrative.');
-        $this->assertEquals($e->widgets,            'Widget1,Widget2');
-        $this->assertEquals($e->spatial_layers,     'Layer1,Layer2');
-        $this->assertEquals($e->spatial_layer,      'Layer2');
-        $this->assertEquals($e->image_layer,        $imagePath);
-        $this->assertEquals($e->wms_address,        'wms.org');
-        $this->assertEquals($e->wms_layers,         'wms:layer');
-        $this->assertEquals($e->spatial_querying,   0);
-        $this->assertEquals($e->public,             1);
+        $this->assertEquals('Title',                $e->title);
+        $this->assertEquals('slug',                 $e->slug);
+        $this->assertEquals('Narrative.',           $e->narrative);
+        $this->assertEquals('Widget1,Widget2',      $e->widgets);
+        $this->assertEquals('Layer1,Layer2',        $e->spatial_layers);
+        $this->assertEquals('Layer2',               $e->spatial_layer);
+        $this->assertEquals($imagePath,             $e->image_layer);
+        $this->assertEquals('wms.org',              $e->wms_address);
+        $this->assertEquals('wms:layer',            $e->wms_layers);
+        $this->assertEquals(0,                      $e->spatial_querying);
+        $this->assertEquals(1,                      $e->public);
 
     }
 

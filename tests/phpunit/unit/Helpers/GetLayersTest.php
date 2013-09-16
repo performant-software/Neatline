@@ -25,7 +25,7 @@ class HelpersTest_GetLayers extends Neatline_Case_Default
      */
     public function testGetLayers()
     {
-        $this->assertEquals(nl_getLayers(), array(
+        $this->assertEquals(array(
             'Group1' => array(
                 array(
                     'title' => 'Layer 1',
@@ -62,7 +62,7 @@ class HelpersTest_GetLayers extends Neatline_Case_Default
                     'type'  => 'Type6'
                 )
             )
-        ));
+        ), nl_getLayers());
     }
 
 

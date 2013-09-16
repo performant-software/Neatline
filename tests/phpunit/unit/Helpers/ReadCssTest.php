@@ -18,16 +18,7 @@ class HelpersTest_ReadCss extends Neatline_Case_Default
      */
     public function testReadCSS()
     {
-        $this->assertEquals(nl_readCSS("
-            .tag1 {
-                prop-1: val1;
-                prop-2: val2;
-            }
-            .tag2 {
-                prop-3: val3;
-                prop-4: val4;
-            }
-        "), array(
+        $this->assertEquals(array(
             'tag1' => array(
                 'prop_1' => 'val1',
                 'prop_2' => 'val2'
@@ -36,7 +27,16 @@ class HelpersTest_ReadCss extends Neatline_Case_Default
                 'prop_3' => 'val3',
                 'prop_4' => 'val4'
             )
-        ));
+        ), nl_readCSS("
+            .tag1 {
+                prop-1: val1;
+                prop-2: val2;
+            }
+            .tag2 {
+                prop-3: val3;
+                prop-4: val4;
+            }
+        "));
     }
 
 

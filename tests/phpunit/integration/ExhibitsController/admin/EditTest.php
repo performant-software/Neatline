@@ -275,7 +275,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->dispatch('neatline/edit/'.$exhibit->id);
 
         // Should save exhibit.
-        $this->assertEquals($this->_reload($exhibit)->title, 'title');
+        $this->assertEquals('title', $this->_reload($exhibit)->title);
 
     }
 
@@ -333,17 +333,17 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $e = $this->_reload($exhibit);
 
         // Should set fields.
-        $this->assertEquals($e->title,              'Title');
-        $this->assertEquals($e->slug,               'slug');
-        $this->assertEquals($e->narrative,          'Narrative.');
-        $this->assertEquals($e->widgets,            'Widget1,Widget2');
-        $this->assertEquals($e->spatial_layers,     'Layer1,Layer2');
-        $this->assertEquals($e->spatial_layer,      'Layer1');
-        $this->assertEquals($e->image_layer,        $imagePath);
-        $this->assertEquals($e->wms_address,        'wms.org');
-        $this->assertEquals($e->wms_layers,         'wms:layer');
-        $this->assertEquals($e->spatial_querying,   0);
-        $this->assertEquals($e->public,             1);
+        $this->assertEquals('Title',                $e->title);
+        $this->assertEquals('slug',                 $e->slug);
+        $this->assertEquals('Narrative.',           $e->narrative);
+        $this->assertEquals('Widget1,Widget2',      $e->widgets);
+        $this->assertEquals('Layer1,Layer2',        $e->spatial_layers);
+        $this->assertEquals('Layer1',               $e->spatial_layer);
+        $this->assertEquals($imagePath,             $e->image_layer);
+        $this->assertEquals('wms.org',              $e->wms_address);
+        $this->assertEquals('wms:layer',            $e->wms_layers);
+        $this->assertEquals(0,                      $e->spatial_querying);
+        $this->assertEquals(1,                      $e->public);
 
     }
 

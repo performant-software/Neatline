@@ -36,8 +36,8 @@ class Migrate200Test_ProcessRecordWmsLayers
     public function testActive()
     {
         $active = $this->_getRecordByTitle('Active');
-        $this->assertEquals($active->wms_address, 'active address');
-        $this->assertEquals($active->wms_layers, 'active layers');
+        $this->assertEquals('active address',   $active->wms_address);
+        $this->assertEquals('active layers',    $active->wms_layers);
     }
 
 

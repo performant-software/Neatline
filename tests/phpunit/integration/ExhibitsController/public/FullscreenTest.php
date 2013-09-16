@@ -31,7 +31,7 @@ class ExhibitsControllerTest_PublicFullscreen
     {
         $exhibit = $this->_exhibit('slug');
         $this->dispatch('neatline/fullscreen/slug');
-        $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
+        $this->assertEquals($exhibit->id, nl_getExhibitField('id'));
     }
 
 

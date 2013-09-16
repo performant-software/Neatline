@@ -370,7 +370,7 @@ SQL;
         $values2 = array();
         foreach ($rows2 as $row) $values2[$row['id']] = $row[$f2];
 
-        $this->assertEquals($values1, $values2);
+        $this->assertEquals($values2, $values1);
 
     }
 

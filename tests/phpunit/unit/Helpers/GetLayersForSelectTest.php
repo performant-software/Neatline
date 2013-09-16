@@ -26,7 +26,7 @@ class HelpersTest_GetLayersForSelect extends Neatline_Case_Default
      */
     public function testGetLayersForSelect()
     {
-        $this->assertEquals(nl_getLayersForSelect(), array(
+        $this->assertEquals(array(
             'Group1' => array(
                 'Layer1' => 'Layer 1',
                 'Layer2' => 'Layer 2'
@@ -39,7 +39,7 @@ class HelpersTest_GetLayersForSelect extends Neatline_Case_Default
                 'Layer5' => 'Layer 5',
                 'Layer6' => 'Layer 6'
             )
-        ));
+        ), nl_getLayersForSelect());
     }
 
 

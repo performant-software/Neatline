@@ -34,7 +34,7 @@ class Migrate200Test_ProcessRecordTitle extends Neatline_Case_Migrate200
     public function testNoParentItem()
     {
         $this->assertEquals(
-            $this->_records->find(32)->title, 'No Parent'
+            'No Parent', $this->_records->find(32)->title
         );
     }
 
@@ -46,7 +46,7 @@ class Migrate200Test_ProcessRecordTitle extends Neatline_Case_Migrate200
     public function testParentItemLocalValue()
     {
         $this->assertEquals(
-            $this->_records->find(33)->title, 'Overridden Item Title'
+            'Overridden Item Title', $this->_records->find(33)->title
         );
     }
 
@@ -58,7 +58,7 @@ class Migrate200Test_ProcessRecordTitle extends Neatline_Case_Migrate200
     public function testParentItemNoLocalValue()
     {
         $this->assertEquals(
-            $this->_records->find(34)->title, 'Inherited Item Title'
+            'Inherited Item Title', $this->_records->find(34)->title
         );
     }
 

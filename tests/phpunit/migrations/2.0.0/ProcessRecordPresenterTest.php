@@ -33,8 +33,8 @@ class Migrate200Test_ProcessRecordPresenter
     public function testBubble()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Bubble')->presenter,
-            'StaticBubble'
+            'StaticBubble',
+            $this->_getRecordByTitle('Bubble')->presenter
         );
     }
 
@@ -46,8 +46,8 @@ class Migrate200Test_ProcessRecordPresenter
     public function testNoBubble()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('No Bubble')->presenter,
-            'None'
+            'None',
+            $this->_getRecordByTitle('No Bubble')->presenter
         );
     }
 

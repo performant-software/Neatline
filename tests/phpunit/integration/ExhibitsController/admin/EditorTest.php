@@ -20,7 +20,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
     {
         $exhibit = $this->_exhibit();
         $this->dispatch('neatline/editor/'.$exhibit->id);
-        $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
+        $this->assertEquals($exhibit->id, nl_getExhibitField('id'));
     }
 
 

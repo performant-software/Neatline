@@ -54,17 +54,17 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
         $exhibit = $this->_reload($exhibit);
 
-        $this->assertEquals($exhibit->public,           1);
-        $this->assertEquals($exhibit->item_query,       '2');
-        $this->assertEquals($exhibit->spatial_layers,   '3');
-        $this->assertEquals($exhibit->spatial_layer,    '4');
-        $this->assertEquals($exhibit->widgets,          '5');
-        $this->assertEquals($exhibit->title,            '6');
-        $this->assertEquals($exhibit->slug,             '7');
-        $this->assertEquals($exhibit->narrative,        '8');
-        $this->assertEquals($exhibit->styles,           '9');
-        $this->assertEquals($exhibit->map_focus,        '10');
-        $this->assertEquals($exhibit->map_zoom,         11);
+        $this->assertEquals(1,      $exhibit->public);
+        $this->assertEquals('2',    $exhibit->item_query);
+        $this->assertEquals('3',    $exhibit->spatial_layers);
+        $this->assertEquals('4',    $exhibit->spatial_layer);
+        $this->assertEquals('5',    $exhibit->widgets);
+        $this->assertEquals('6',    $exhibit->title);
+        $this->assertEquals('7',    $exhibit->slug);
+        $this->assertEquals('8',    $exhibit->narrative);
+        $this->assertEquals('9',    $exhibit->styles);
+        $this->assertEquals('10',   $exhibit->map_focus);
+        $this->assertEquals(11,     $exhibit->map_zoom);
 
     }
 
@@ -91,7 +91,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // `styles` should be updated.
-        $this->assertEquals($record->fill_color, 'color');
+        $this->assertEquals('color', $record->fill_color);
 
     }
 
@@ -109,7 +109,7 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
         $response = $this->_getResponseArray();
 
         // Should emit correct record.
-        $this->assertEquals($response->id, $exhibit->id);
+        $this->assertEquals($exhibit->id, $response->id);
 
         // Should emit all attributes.
         foreach (array_keys($exhibit->toArray()) as $k) {

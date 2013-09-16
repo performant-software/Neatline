@@ -41,8 +41,8 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_Case_Default
 
         // Record should be compiled.
         $record = $this->_reload($record);
-        $this->assertEquals(nl_getItemMarkup($record), $item->id);
-        $this->assertEquals($record->title, 'title');
+        $this->assertEquals($item->id, nl_getItemMarkup($record));
+        $this->assertEquals('title', $record->title);
 
     }
 

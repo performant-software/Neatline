@@ -33,8 +33,8 @@ class Migrate200Test_ProcessRecordBody extends Neatline_Case_Migrate200
     public function testNoParentItem()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('No Parent')->body,
-            'No parent body.'
+            'No parent body.',
+            $this->_getRecordByTitle('No Parent')->body
         );
     }
 
@@ -46,8 +46,8 @@ class Migrate200Test_ProcessRecordBody extends Neatline_Case_Migrate200
     public function testParentItemUseDcMetadataDisabled()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('DC Disabled')->body,
-            'DC disabled body.'
+            'DC disabled body.',
+            $this->_getRecordByTitle('DC Disabled')->body
         );
     }
 
@@ -59,8 +59,8 @@ class Migrate200Test_ProcessRecordBody extends Neatline_Case_Migrate200
     public function testParentItemUseDcMetadataEnabled()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('DC Enabled')->body,
-            '6' // The `id` of the fixture item.
+            '6', // The `id` of the fixture item.
+            $this->_getRecordByTitle('DC Enabled')->body
         );
     }
 

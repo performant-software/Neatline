@@ -31,7 +31,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
         $exhibit->spatial_layers = 'Layer1,Layer2';
         $exhibit->spatial_layer  = 'Layer2';
 
-        $this->assertEquals(nl_getLayersForExhibit($exhibit), array(
+        $this->assertEquals(array(
             array(
                 'title' => 'Layer 1',
                 'id'    => 'Layer1',
@@ -42,7 +42,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
                 'id'    => 'Layer2',
                 'type'  => 'Type2'
             )
-        ));
+        ), nl_getLayersForExhibit($exhibit));
 
     }
 
@@ -58,7 +58,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
         $exhibit->spatial_layers = 'Layer1,Layer2';
         $exhibit->spatial_layer  = 'Layer3';
 
-        $this->assertEquals(nl_getLayersForExhibit($exhibit), array(
+        $this->assertEquals(array(
             array(
                 'title' => 'Layer 1',
                 'id'    => 'Layer1',
@@ -74,7 +74,7 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
                 'id'    => 'Layer3',
                 'type'  => 'Type3'
             )
-        ));
+        ), nl_getLayersForExhibit($exhibit));
 
     }
 

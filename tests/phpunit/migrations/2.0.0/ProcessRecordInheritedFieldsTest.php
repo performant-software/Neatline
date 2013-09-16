@@ -40,8 +40,8 @@ class Migrate200Test_ProcessRecordInheritedFields
         $this->_assertFlattenedStyles($record);
 
         // VISIBILITY
-        $this->assertEquals($record->after_date,    '2000');
-        $this->assertEquals($record->before_date,   '2010');
+        $this->assertEquals('2000', $record->after_date);
+        $this->assertEquals('2010', $record->before_date);
 
     }
 
@@ -58,8 +58,8 @@ class Migrate200Test_ProcessRecordInheritedFields
         $this->_assertFlattenedStyles($record);
 
         // VISIBILITY
-        $this->assertEquals($record->after_date,    '2000');
-        $this->assertEquals($record->before_date,   '2010');
+        $this->assertEquals('2000', $record->after_date);
+        $this->assertEquals('2010', $record->before_date);
 
     }
 
@@ -85,20 +85,20 @@ class Migrate200Test_ProcessRecordInheritedFields
     {
 
         // COLORS
-        $this->assertEquals($record->fill_color,            '#111111');
-        $this->assertEquals($record->fill_color_select,     '#333333');
-        $this->assertEquals($record->stroke_color,          '#222222');
-        $this->assertEquals($record->stroke_color_select,   '#333333');
+        $this->assertEquals('#111111', $record->fill_color);
+        $this->assertEquals('#333333', $record->fill_color_select);
+        $this->assertEquals('#222222', $record->stroke_color);
+        $this->assertEquals('#333333', $record->stroke_color_select);
 
         // OPACITIES
-        $this->assertEquals($record->fill_opacity,          0.04);
-        $this->assertEquals($record->fill_opacity_select,   0.05);
-        $this->assertEquals($record->stroke_opacity,        0.06);
-        $this->assertEquals($record->stroke_opacity_select, 0.05);
+        $this->assertEquals(0.04, $record->fill_opacity);
+        $this->assertEquals(0.05, $record->fill_opacity_select);
+        $this->assertEquals(0.06, $record->stroke_opacity);
+        $this->assertEquals(0.05, $record->stroke_opacity_select);
 
         // DIMENSIONS
-        $this->assertEquals($record->stroke_width,          8);
-        $this->assertEquals($record->point_radius,          9);
+        $this->assertEquals(8, $record->stroke_width);
+        $this->assertEquals(9, $record->point_radius);
 
     }
 
@@ -114,48 +114,48 @@ class Migrate200Test_ProcessRecordInheritedFields
 
         // COLORS
         $this->assertEquals(
-            $record->fill_color,
-            get_option('vector_color')
+            get_option('vector_color'),
+            $record->fill_color
         );
         $this->assertEquals(
-            $record->fill_color_select,
-            get_option('highlight_color')
+            get_option('highlight_color'),
+            $record->fill_color_select
         );
         $this->assertEquals(
-            $record->stroke_color,
-            get_option('stroke_color')
+            get_option('stroke_color'),
+            $record->stroke_color
         );
         $this->assertEquals(
-            $record->stroke_color_select,
-            get_option('highlight_color')
+            get_option('highlight_color'),
+            $record->stroke_color_select
         );
 
         // OPACITIES
         $this->assertEquals(
-            $record->fill_opacity,
-            get_option('vector_opacity') / 100
+            get_option('vector_opacity') / 100,
+            $record->fill_opacity
         );
         $this->assertEquals(
-            $record->fill_opacity_select,
-            get_option('select_opacity') / 100
+            get_option('select_opacity') / 100,
+            $record->fill_opacity_select
         );
         $this->assertEquals(
-            $record->stroke_opacity,
-            get_option('stroke_opacity') / 100
+            get_option('stroke_opacity') / 100,
+            $record->stroke_opacity
         );
         $this->assertEquals(
-            $record->stroke_opacity_select,
-            get_option('select_opacity') / 100
+            get_option('select_opacity') / 100,
+            $record->stroke_opacity_select
         );
 
         // DIMENSIONS
         $this->assertEquals(
-            $record->stroke_width,
-            get_option('stroke_width')
+            get_option('stroke_width'),
+            $record->stroke_width
         );
         $this->assertEquals(
-            $record->point_radius,
-            get_option('point_radius')
+            get_option('point_radius'),
+            $record->point_radius
         );
 
     }

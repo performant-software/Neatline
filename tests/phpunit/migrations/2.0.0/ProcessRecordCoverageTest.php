@@ -33,8 +33,8 @@ class Migrate200Test_ProcessRecordCoverage
     public function testSingleFeatureWKT()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Single Feature WKT')->coverage,
-            'GEOMETRYCOLLECTION(POINT(1 1))'
+            'GEOMETRYCOLLECTION(POINT(1 1))',
+            $this->_getRecordByTitle('Single Feature WKT')->coverage
         );
     }
 
@@ -46,8 +46,8 @@ class Migrate200Test_ProcessRecordCoverage
     public function testMultiFeatureWKT()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Multi Feature WKT')->coverage,
-            'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))'
+            'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))',
+            $this->_getRecordByTitle('Multi Feature WKT')->coverage
         );
     }
 
@@ -58,8 +58,8 @@ class Migrate200Test_ProcessRecordCoverage
     public function testRegularKML()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Regular KML')->coverage,
-            'GEOMETRYCOLLECTION(POINT(1 1))'
+            'GEOMETRYCOLLECTION(POINT(1 1))',
+            $this->_getRecordByTitle('Regular KML')->coverage
         );
     }
 
@@ -72,8 +72,8 @@ class Migrate200Test_ProcessRecordCoverage
     public function testMultiFeatureKML()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Multi Feature KML')->coverage,
-            'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))'
+            'GEOMETRYCOLLECTION(POINT(1 1),POINT(2 2))',
+            $this->_getRecordByTitle('Multi Feature KML')->coverage
         );
     }
 

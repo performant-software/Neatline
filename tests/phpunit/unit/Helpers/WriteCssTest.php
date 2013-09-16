@@ -18,16 +18,8 @@ class HelpersTest_WriteCss extends Neatline_Case_Default
      */
     public function testwriteCSS()
     {
-        $this->assertEquals(nl_writeCSS(array(
-            'tag1' => array(
-                'prop_1' => 'val1',
-                'prop_2' => 'val2'
-            ),
-            'tag2' => array(
-                'prop_3' => 'val3',
-                'prop_4' => 'val4'
-            )
-        )), <<<CSS
+
+        $css = <<<CSS
 .tag1 {
   prop-1: val1;
   prop-2: val2;
@@ -37,8 +29,19 @@ class HelpersTest_WriteCss extends Neatline_Case_Default
   prop-3: val3;
   prop-4: val4;
 }
-CSS
-        );
+CSS;
+
+        $this->assertEquals($css, nl_writeCSS(array(
+            'tag1' => array(
+                'prop_1' => 'val1',
+                'prop_2' => 'val2'
+            ),
+            'tag2' => array(
+                'prop_3' => 'val3',
+                'prop_4' => 'val4'
+            )
+        )));
+
     }
 
 
@@ -47,14 +50,8 @@ CSS
      */
     public function testBreaks()
     {
-        $this->assertEquals(nl_writeCSS(array(
-            'tag1' => array(
-                'prop_1' => 'val1'
-            ),
-            'tag2' => array(
-                'prop_2' => 'val2',
-            )
-        ), 2), <<<CSS
+
+        $css = <<<CSS
 .tag1 {
   prop-1: val1;
 }
@@ -63,8 +60,17 @@ CSS
 .tag2 {
   prop-2: val2;
 }
-CSS
-        );
+CSS;
+
+        $this->assertEquals($css, nl_writeCSS(array(
+            'tag1' => array(
+                'prop_1' => 'val1'
+            ),
+            'tag2' => array(
+                'prop_2' => 'val2',
+            )
+        ), 2));
+
     }
 
 
@@ -73,14 +79,17 @@ CSS
      */
     public function testIndent()
     {
-        $this->assertEquals(nl_writeCSS(array(
-            'tag' => array('prop' => 'val')
-        ), null, 4), <<<CSS
+
+        $css = <<<CSS
 .tag {
     prop: val;
 }
-CSS
-        );
+CSS;
+
+        $this->assertEquals($css, nl_writeCSS(array(
+            'tag' => array('prop' => 'val')
+        ), null, 4));
+
     }
 
 

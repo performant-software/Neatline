@@ -30,14 +30,14 @@ class RecordsControllerTest_Delete extends Neatline_Case_Default
         $c2 = $this->_records->count();
 
         // Should delete a record.
-        $this->assertEquals($c2, $c1-1);
+        $this->assertEquals($c1-1, $c2);
 
         // Should delete the correct record.
         $this->assertNotNull($this->_records->find($record1->id));
         $this->assertNull($this->_records->find($record2->id));
 
         // Should return empty JSON.
-        $this->assertEquals($this->_getResponseArray(), array());
+        $this->assertEquals(array(), $this->_getResponseArray());
 
     }
 

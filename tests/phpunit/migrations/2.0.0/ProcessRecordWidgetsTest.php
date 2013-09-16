@@ -45,8 +45,8 @@ class Migrate200Test_ProcessRecordWidgets
     public function testItems()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Items')->widgets,
-            'Waypoints'
+            'Waypoints',
+            $this->_getRecordByTitle('Items')->widgets
         );
     }
 
@@ -58,8 +58,8 @@ class Migrate200Test_ProcessRecordWidgets
     public function testTimeline()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Timeline')->widgets,
-            'Simile'
+            'Simile',
+            $this->_getRecordByTitle('Timeline')->widgets
         );
     }
 
@@ -71,8 +71,8 @@ class Migrate200Test_ProcessRecordWidgets
     public function testBoth()
     {
         $this->assertEquals(
-            $this->_getRecordByTitle('Both')->widgets,
-            'Waypoints,Simile'
+            'Waypoints,Simile',
+            $this->_getRecordByTitle('Both')->widgets
         );
     }
 

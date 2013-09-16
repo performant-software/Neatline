@@ -33,8 +33,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testOpenStreetMap()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('OpenStreetMap')->spatial_layer,
-            'OpenStreetMap'
+            'OpenStreetMap',
+            $this->_getExhibitByTitle('OpenStreetMap')->spatial_layer
         );
     }
 
@@ -42,8 +42,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGooglePhysical()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GooglePhysical')->spatial_layer,
-            'GooglePhysical'
+            'GooglePhysical',
+            $this->_getExhibitByTitle('GooglePhysical')->spatial_layer
         );
     }
 
@@ -51,8 +51,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGoogleStreets()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GoogleStreets')->spatial_layer,
-            'GoogleStreets'
+            'GoogleStreets',
+            $this->_getExhibitByTitle('GoogleStreets')->spatial_layer
         );
     }
 
@@ -60,8 +60,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGoogleHybrid()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GoogleHybrid')->spatial_layer,
-            'GoogleHybrid'
+            'GoogleHybrid',
+            $this->_getExhibitByTitle('GoogleHybrid')->spatial_layer
         );
     }
 
@@ -69,8 +69,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testGoogleSatellite()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('GoogleSatellite')->spatial_layer,
-            'GoogleSatellite'
+            'GoogleSatellite',
+            $this->_getExhibitByTitle('GoogleSatellite')->spatial_layer
         );
     }
 
@@ -78,8 +78,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testStamenWatercolor()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('StamenWatercolor')->spatial_layer,
-            'StamenWatercolor'
+            'StamenWatercolor',
+            $this->_getExhibitByTitle('StamenWatercolor')->spatial_layer
         );
     }
 
@@ -87,8 +87,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testStamenToner()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('StamenToner')->spatial_layer,
-            'StamenToner'
+            'StamenToner',
+            $this->_getExhibitByTitle('StamenToner')->spatial_layer
         );
     }
 
@@ -96,8 +96,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
     public function testStamenTerrain()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('StamenTerrain')->spatial_layer,
-            'StamenTerrain'
+            'StamenTerrain',
+            $this->_getExhibitByTitle('StamenTerrain')->spatial_layer
         );
     }
 

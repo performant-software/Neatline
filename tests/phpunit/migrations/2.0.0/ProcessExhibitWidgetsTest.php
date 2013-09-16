@@ -43,8 +43,8 @@ class Migrate200Test_ProcessExhibitWidgets
     public function testMapTimeline()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('Map, Timeline')->widgets,
-            'Simile'
+            'Simile',
+            $this->_getExhibitByTitle('Map, Timeline')->widgets
         );
     }
 
@@ -55,8 +55,8 @@ class Migrate200Test_ProcessExhibitWidgets
     public function testMapItems()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('Map, Items')->widgets,
-            'Waypoints'
+            'Waypoints',
+            $this->_getExhibitByTitle('Map, Items')->widgets
         );
     }
 
@@ -68,8 +68,8 @@ class Migrate200Test_ProcessExhibitWidgets
     public function testMapTimelineItems()
     {
         $this->assertEquals(
-            $this->_getExhibitByTitle('Map, Timeline, Items')->widgets,
-            'Waypoints,Simile'
+            'Waypoints,Simile',
+            $this->_getExhibitByTitle('Map, Timeline, Items')->widgets
         );
     }
 

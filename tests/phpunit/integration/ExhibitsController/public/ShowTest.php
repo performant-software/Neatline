@@ -30,7 +30,7 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
     {
         $exhibit = $this->_exhibit('slug');
         $this->dispatch('neatline/show/slug');
-        $this->assertEquals(nl_getExhibitField('id'), $exhibit->id);
+        $this->assertEquals($exhibit->id, nl_getExhibitField('id'));
     }
 
 

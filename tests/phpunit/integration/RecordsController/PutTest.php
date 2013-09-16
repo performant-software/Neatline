@@ -86,36 +86,36 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records/'.$record->id);
-        $record = $this->_reload($record);
+        $r = $this->_reload($record);
 
-        $this->assertEquals($record->slug,                  '2');
-        $this->assertEquals($record->title,                 '3');
-        $this->assertEquals($record->body,                  '4');
-        $this->assertEquals($record->coverage,              'POINT(5 5)');
-        $this->assertEquals($record->tags,                  '6');
-        $this->assertEquals($record->widgets,               '7,8');
-        $this->assertEquals($record->presenter,             '9');
-        $this->assertEquals($record->fill_color,            '10');
-        $this->assertEquals($record->fill_color_select,     '11');
-        $this->assertEquals($record->stroke_color,          '12');
-        $this->assertEquals($record->stroke_color_select,   '13');
-        $this->assertEquals($record->fill_opacity,          0.14);
-        $this->assertEquals($record->fill_opacity_select,   0.15);
-        $this->assertEquals($record->stroke_opacity,        0.16);
-        $this->assertEquals($record->stroke_opacity_select, 0.17);
-        $this->assertEquals($record->stroke_width,          18);
-        $this->assertEquals($record->point_radius,          19);
-        $this->assertEquals($record->zindex,                20);
-        $this->assertEquals($record->weight,                21);
-        $this->assertEquals($record->start_date,            '22');
-        $this->assertEquals($record->end_date,              '23');
-        $this->assertEquals($record->after_date,            '24');
-        $this->assertEquals($record->before_date,           '25');
-        $this->assertEquals($record->point_image,           '26');
-        $this->assertEquals($record->min_zoom,              27);
-        $this->assertEquals($record->max_zoom,              28);
-        $this->assertEquals($record->map_zoom,              29);
-        $this->assertEquals($record->map_focus,             '30');
+        $this->assertEquals('2',            $r->slug);
+        $this->assertEquals('3',            $r->title);
+        $this->assertEquals('4',            $r->body);
+        $this->assertEquals('POINT(5 5)',   $r->coverage);
+        $this->assertEquals('6',            $r->tags);
+        $this->assertEquals('7,8',          $r->widgets);
+        $this->assertEquals('9',            $r->presenter);
+        $this->assertEquals('10',           $r->fill_color);
+        $this->assertEquals('11',           $r->fill_color_select);
+        $this->assertEquals('12',           $r->stroke_color);
+        $this->assertEquals('13',           $r->stroke_color_select);
+        $this->assertEquals(0.14,           $r->fill_opacity);
+        $this->assertEquals(0.15,           $r->fill_opacity_select);
+        $this->assertEquals(0.16,           $r->stroke_opacity);
+        $this->assertEquals(0.17,           $r->stroke_opacity_select);
+        $this->assertEquals(18,             $r->stroke_width);
+        $this->assertEquals(19,             $r->point_radius);
+        $this->assertEquals(20,             $r->zindex);
+        $this->assertEquals(21,             $r->weight);
+        $this->assertEquals('22',           $r->start_date);
+        $this->assertEquals('23',           $r->end_date);
+        $this->assertEquals('24',           $r->after_date);
+        $this->assertEquals('25',           $r->before_date);
+        $this->assertEquals('26',           $r->point_image);
+        $this->assertEquals(27,             $r->min_zoom);
+        $this->assertEquals(28,             $r->max_zoom);
+        $this->assertEquals(29,             $r->map_zoom);
+        $this->assertEquals('30',           $r->map_focus);
 
     }
 
@@ -134,7 +134,7 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // Should update `item_id`.
-        $this->assertEquals($record->item_id, $item->id);
+        $this->assertEquals($item->id, $record->item_id);
 
     }
 
@@ -163,8 +163,8 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // Should update WMS address/layers.
-        $this->assertEquals($record->wms_address, '3');
-        $this->assertEquals($record->wms_layers, '4');
+        $this->assertEquals('3', $record->wms_address);
+        $this->assertEquals('4', $record->wms_layers);
 
     }
 
@@ -182,7 +182,7 @@ class RecordsControllerTest_Put extends Neatline_Case_Default
         $response = $this->_getResponseArray();
 
         // Should emit correct record.
-        $this->assertEquals($response->id, $record->id);
+        $this->assertEquals($record->id, $response->id);
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {
