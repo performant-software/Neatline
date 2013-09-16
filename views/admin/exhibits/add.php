@@ -11,7 +11,7 @@
 
 ?>
 
-<?php nl_queueExhibitForm(); ?>
+<?php nl_queueAddForm(); ?>
 
 <?php
   echo head(array(

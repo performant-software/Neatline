@@ -169,13 +169,21 @@ module.exports = function(grunt) {
 
     concat: {
 
-      exhibit_form: {
+      add_form: {
         src: [
           paths.vendor.js.chosen,
           paths.vendor.js.underscore_s,
-          paths.src.admin+'/exhibit.form.js'
+          paths.src.admin+'/add.js'
         ],
-        dest: paths.payloads.admin.js+'/exhibit-form.js'
+        dest: paths.payloads.admin.js+'/add-form.js'
+      },
+
+      edit_form: {
+        src: [
+          paths.vendor.js.chosen,
+          paths.src.admin+'/edit.js'
+        ],
+        dest: paths.payloads.admin.js+'/edit-form.js'
       },
 
       neatline_public: {
@@ -287,9 +295,14 @@ module.exports = function(grunt) {
 
     uglify: {
 
-      exhibit_form: {
-        src: '<%= concat.exhibit_form.dest %>',
-        dest: '<%= concat.exhibit_form.dest %>'
+      add_form: {
+        src: '<%= concat.add_form.dest %>',
+        dest: '<%= concat.add_form.dest %>'
+      },
+
+      edit_form: {
+        src: '<%= concat.edit_form.dest %>',
+        dest: '<%= concat.edit_form.dest %>'
       },
 
       neatline_public: {
@@ -344,15 +357,14 @@ module.exports = function(grunt) {
 
       payload: {
         files: [
-          '<%= concat.exhibit_form.src %>',
+          '<%= concat.add_form.src %>',
+          '<%= concat.edit_form.src %>',
           '<%= concat.neatline_public.src %>',
           '<%= concat.neatline_editor.src %>',
           paths.stylus.admin+'/**/*.styl',
           paths.stylus.shared+'/**/*.styl'
         ],
-        tasks: [
-          'compile:concat'
-        ]
+        tasks: 'compile:concat'
       }
 
     },
@@ -473,7 +485,8 @@ module.exports = function(grunt) {
 
   // Concat static assets.
   grunt.registerTask('compile', [
-    'concat:exhibit_form',
+    'concat:add_form',
+    'concat:edit_form',
     'concat:neatline_public',
     'concat:neatline_editor',
     'stylus',
