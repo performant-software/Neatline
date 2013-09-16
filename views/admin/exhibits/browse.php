@@ -73,6 +73,14 @@
                 );?>
               </li>
 
+              <!-- Fullscreen View. -->
+              <li>
+                <?php echo nl_getExhibitLink(
+                  $e, 'fullscreen', __('Fullscreen View'),
+                  array('class' => 'fullscreen'), true
+                );?>
+              </li>
+
               <!-- Exhibit Settings. -->
               <?php if (is_allowed($e, 'edit')): ?>
                 <li>
@@ -87,7 +95,7 @@
               <?php if (is_allowed($e, 'import')): ?>
                 <li>
                   <?php echo nl_getExhibitLink(
-                    $e, 'import', __('Import Omeka Items'),
+                    $e, 'import', __('Import Items'),
                     array('class' => 'import'), false
                   );?>
                 </li>
@@ -106,17 +114,17 @@
             </ul>
           </td>
 
-          <!-- Created -->
+          <!-- Created. -->
           <td>
             <?php echo format_date(nl_getExhibitField('added')); ?>
           </td>
 
-          <!-- # Items -->
+          <!-- # Items. -->
           <td>
             <?php echo nl_getExhibitRecordCount(); ?>
           </td>
 
-          <!-- Public -->
+          <!-- Public. -->
           <td>
             <?php echo nl_getExhibitField('public') ?
               __('Yes') : __('No'); ?>

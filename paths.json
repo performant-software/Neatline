@@ -13,13 +13,17 @@
   },
 
   "payloads": {
+    "admin": {
+      "js":               "./views/admin/javascripts/payloads",
+      "css":              "./views/admin/css/payloads"
+    },
     "shared": {
       "js":               "./views/shared/javascripts/payloads",
       "css":              "./views/shared/css/payloads"
     },
-    "admin": {
-      "js":               "./views/admin/javascripts/payloads",
-      "css":              "./views/admin/css/payloads"
+    "public": {
+      "js":               "./views/public/javascripts/payloads",
+      "css":              "./views/public/css/payloads"
     }
   },
 

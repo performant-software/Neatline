@@ -14,15 +14,14 @@ jQuery(function($) {
 
   var title = $('input[name="title"]');
   var slug  = $('input[name="slug"]');
-
-  var hasTyped = false;
+  var typed = false;
 
   slug.change(function() {
-    hasTyped = true;
+    typed = true;
   });
 
   title.keyup(function() {
-    if (!hasTyped) slug.val(_.string.slugify(title.val()));
+    if (!typed) slug.val(_.string.slugify(title.val()));
   });
 
 });

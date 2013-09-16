@@ -11,4 +11,6 @@
 
 ?>
 
-fullscreen
+<?php echo head(array('title' => nl_getExhibitField('title'))); ?>
+<?php echo nl_getExhibitMarkup(); ?>
+<?php echo foot(); ?>

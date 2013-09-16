@@ -67,6 +67,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         $exhibit = new NeatlineExhibit;
         $form = $this->_getExhibitForm($exhibit);
 
+        // Process form submission.
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $exhibit->saveForm($form->getValues());
@@ -74,7 +75,11 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
             }
         }
 
+        // Push form to view.
         $this->view->form = $form;
+
+        // Queue JS/CSS.
+        nl_queueAddForm();
 
     }
 
@@ -85,10 +90,10 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     public function editAction()
     {
 
-
         $exhibit = $this->_helper->db->findById();
         $form = $this->_getExhibitForm($exhibit);
 
+        // Process form submission.
         if ($this->_request->isPost()) {
             if ($form->isValid($this->_request->getPost())) {
                 $exhibit->saveForm($form->getValues());
@@ -96,8 +101,12 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
             }
         }
 
+        // Push exhibit and form to view.
         $this->view->neatline_exhibit = $exhibit;
         $this->view->form = $form;
+
+        // Queue JS/CSS.
+        nl_queueEditForm();
 
     }
 
@@ -191,7 +200,19 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
      */
     public function fullscreenAction()
     {
-        // TODO
+
+        // Try to find an exhibit with the requested slug.
+        $exhibit = $this->exhibits->findBySlug($this->_request->slug);
+        if (!$exhibit) throw new Omeka_Controller_Exception_404;
+
+        // Assign exhibit to view.
+        $this->view->neatline_exhibit = $exhibit;
+
+        // Queue static assets.
+        nl_queueNeatlinePublic($exhibit);
+        nl_queueExhibitTheme($exhibit);
+        nl_queueFullscreen($exhibit);
+
     }
 
 
@@ -222,6 +243,17 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
 
     /**
+     * Construct the details form.
+     *
+     * @param NeatlineExhibit $exhibit
+     */
+    protected function _getExhibitForm($exhibit)
+    {
+        return new Neatline_Form_Exhibit(array('exhibit' => $exhibit));
+    }
+
+
+    /**
      * Set the delete success message.
      *
      * @param NeatlineExhibit $exhibit
@@ -241,9 +273,9 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
      */
     protected function _getDeleteConfirmMessage($exhibit)
     {
-      return __('This will delete "%s" and its associated metadata.',
-          $exhibit->title
-      );
+        return __('This will delete "%s" and its associated metadata.',
+            $exhibit->title
+        );
     }
 
 
@@ -253,17 +285,6 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     protected function _getImportStartedMessage()
     {
         return __('The item import was successfully started!');
-    }
-
-
-    /**
-     * Construct the details form.
-     *
-     * @param NeatlineExhibit $exhibit
-     */
-    private function _getExhibitForm($exhibit)
-    {
-        return new Neatline_Form_Exhibit(array('exhibit' => $exhibit));
     }
 
 

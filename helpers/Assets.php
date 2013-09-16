@@ -74,6 +74,15 @@ function nl_queueNeatlineEditor($exhibit)
 
 
 /**
+ * Include static files for the exhibit fullscreen view.
+ */
+function nl_queueFullscreen()
+{
+    queue_js_file('fullscreen');
+}
+
+
+/**
  * Include exhibit-specific theme assets.
  *
  * @param NeatlineExhibit $exhibit The exhibit.

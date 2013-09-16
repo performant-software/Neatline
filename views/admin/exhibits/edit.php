@@ -11,8 +11,6 @@
 
 ?>
 
-<?php nl_queueEditForm(); ?>
-
 <?php
   echo head(array(
     'title' => __('Neatline | Edit "%s"', nl_getExhibitField('title')),

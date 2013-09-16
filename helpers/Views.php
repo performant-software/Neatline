@@ -77,8 +77,9 @@ function nl_getExhibitLink(
     $text = $text ? $text : nl_getExhibitField('title');
 
     // Get the exhibit identifier.
-    if ($action == 'show') $identifier = $exhibit->slug;
-    else $identifier = $exhibit->id;
+    if (in_array($action, array('show', 'fullscreen'))) {
+        $identifier = $exhibit->slug;
+    } else $identifier = $exhibit->id;
 
     // Construct the exhibit route.
     $route = 'neatline/' . $action . '/' . $identifier;
