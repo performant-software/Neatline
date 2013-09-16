@@ -30,7 +30,7 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         );
 
         // Coverage should be selected as plaintext.
-        $this->assertEquals($record->coverage, 'POINT(1 1)');
+        $this->assertEquals('POINT(1 1)', $record->coverage);
 
     }
 
@@ -80,9 +80,9 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         );
 
         // Should be in reverse chronological order.
-        $this->assertEquals($records[0]->id, $record3->id);
-        $this->assertEquals($records[1]->id, $record2->id);
-        $this->assertEquals($records[2]->id, $record1->id);
+        $this->assertEquals($record3->id, $records[0]->id);
+        $this->assertEquals($record2->id, $records[1]->id);
+        $this->assertEquals($record1->id, $records[2]->id);
 
     }
 

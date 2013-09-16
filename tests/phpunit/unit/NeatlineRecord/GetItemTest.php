@@ -23,7 +23,7 @@ class NeatlineRecordTest_GetItem extends Neatline_Case_Default
         $record = new NeatlineRecord(null, $item);
 
         $retrieved = $record->getItem();
-        $this->assertEquals($retrieved->id, $item->id);
+        $this->assertEquals($item->id, $retrieved->id);
 
     }
 

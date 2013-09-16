@@ -19,9 +19,9 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
     public function testAssignFields()
     {
 
-        $record = $this->_record();
+        $r = $this->_record();
 
-        $record->saveForm(array(
+        $r->saveForm(array(
             'slug'                  => '1',
             'title'                 => '2',
             'body'                  => '3',
@@ -52,34 +52,34 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
             'map_focus'             => '28'
         ));
 
-        $this->assertEquals($record->slug,                  '1');
-        $this->assertEquals($record->title,                 '2');
-        $this->assertEquals($record->body,                  '3');
-        $this->assertEquals($record->coverage,              'POINT(4 4)');
-        $this->assertEquals($record->tags,                  '5');
-        $this->assertEquals($record->widgets,               '6');
-        $this->assertEquals($record->presenter,             '7');
-        $this->assertEquals($record->fill_color,            '8');
-        $this->assertEquals($record->fill_color_select,     '9');
-        $this->assertEquals($record->stroke_color,          '10');
-        $this->assertEquals($record->stroke_color_select,   '11');
-        $this->assertEquals($record->fill_opacity,          0.12);
-        $this->assertEquals($record->fill_opacity_select,   0.13);
-        $this->assertEquals($record->stroke_opacity,        0.14);
-        $this->assertEquals($record->stroke_opacity_select, 0.15);
-        $this->assertEquals($record->stroke_width,          16);
-        $this->assertEquals($record->point_radius,          17);
-        $this->assertEquals($record->zindex,                18);
-        $this->assertEquals($record->weight,                19);
-        $this->assertEquals($record->start_date,            '20');
-        $this->assertEquals($record->end_date,              '21');
-        $this->assertEquals($record->after_date,            '22');
-        $this->assertEquals($record->before_date,           '23');
-        $this->assertEquals($record->point_image,           '24');
-        $this->assertEquals($record->min_zoom,              25);
-        $this->assertEquals($record->max_zoom,              26);
-        $this->assertEquals($record->map_zoom,              27);
-        $this->assertEquals($record->map_focus,             '28');
+        $this->assertEquals('1',            $r->slug);
+        $this->assertEquals('2',            $r->title);
+        $this->assertEquals('3',            $r->body);
+        $this->assertEquals('POINT(4 4)',   $r->coverage);
+        $this->assertEquals('5',            $r->tags);
+        $this->assertEquals('6',            $r->widgets);
+        $this->assertEquals('7',            $r->presenter);
+        $this->assertEquals('8',            $r->fill_color);
+        $this->assertEquals('9',            $r->fill_color_select);
+        $this->assertEquals('10',           $r->stroke_color);
+        $this->assertEquals('11',           $r->stroke_color_select);
+        $this->assertEquals(0.12,           $r->fill_opacity);
+        $this->assertEquals(0.13,           $r->fill_opacity_select);
+        $this->assertEquals(0.14,           $r->stroke_opacity);
+        $this->assertEquals(0.15,           $r->stroke_opacity_select);
+        $this->assertEquals(16,             $r->stroke_width);
+        $this->assertEquals(17,             $r->point_radius);
+        $this->assertEquals(18,             $r->zindex);
+        $this->assertEquals(19,             $r->weight);
+        $this->assertEquals('20',           $r->start_date);
+        $this->assertEquals('21',           $r->end_date);
+        $this->assertEquals('22',           $r->after_date);
+        $this->assertEquals('23',           $r->before_date);
+        $this->assertEquals('24',           $r->point_image);
+        $this->assertEquals(25,             $r->min_zoom);
+        $this->assertEquals(26,             $r->max_zoom);
+        $this->assertEquals(27,             $r->map_zoom);
+        $this->assertEquals('28',           $r->map_focus);
 
     }
 
@@ -94,7 +94,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $record->saveForm(array('item_id' => '1'));
 
         // Should assign `item_id`.
-        $this->assertEquals($record->item_id, 1);
+        $this->assertEquals(1, $record->item_id);
 
     }
 
@@ -109,8 +109,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $record->saveForm(array('wms_address'=>'1', 'wms_layers'=>'2'));
 
         // Should assign WMS fields.
-        $this->assertEquals($record->wms_address, '1');
-        $this->assertEquals($record->wms_layers, '2');
+        $this->assertEquals('1', $record->wms_address);
+        $this->assertEquals('2', $record->wms_layers);
 
     }
 
@@ -160,11 +160,10 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $exhibit = $this->_reload($exhibit);
 
         // Should update CSS.
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
-            'tag1' => array(
-                'fill_color' => '2'
-            )
-        ));
+        $this->assertEquals(
+            array('tag1' => array( 'fill_color' => '2')),
+            nl_readCSS($exhibit->styles)
+        );
 
     }
 
@@ -195,7 +194,7 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $record2 = $this->_reload($record2);
 
         // Should update record 2.
-        $this->assertEquals($record2->fill_color, '2');
+        $this->assertEquals('2', $record2->fill_color);
 
     }
 
@@ -234,10 +233,10 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $record2 = $this->_reload($record2);
 
         // Record 1 should be unchanged.
-        $this->assertEquals($record1->fill_color, '1');
+        $this->assertEquals('1', $record1->fill_color);
 
         // Record 2 should pull `tag` styles.
-        $this->assertEquals($record2->fill_color, '1');
+        $this->assertEquals('1', $record2->fill_color);
 
     }
 
@@ -263,14 +262,13 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $record->saveForm(array('fill_color' => '2'));
 
         // Should pull CSS value.
-        $this->assertEquals($record->fill_color, '1');
+        $this->assertEquals('1', $record->fill_color);
 
         // CSS should be unchanged.
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
-            'all' => array(
-                'fill_color' => '1'
-            )
-        ));
+        $this->assertEquals(
+            array('all' => array( 'fill_color' => '1')),
+            nl_readCSS($exhibit->styles)
+        );
 
     }
 
@@ -299,14 +297,13 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
         $exhibit = $this->_reload($exhibit);
 
         // Should not pull CSS value.
-        $this->assertEquals($record->fill_color, '2');
+        $this->assertEquals('2', $record->fill_color);
 
         // CSS should be changed.
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
-            'all' => array(
-                'fill_color' => '2'
-            )
-        ));
+        $this->assertEquals(
+            array( 'all' => array( 'fill_color' => '2')),
+            nl_readCSS($exhibit->styles)
+        );
 
     }
 

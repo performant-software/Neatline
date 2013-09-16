@@ -24,8 +24,8 @@ class NeatlineRecordTest_Construct extends Neatline_Case_Default
         $record     = new NeatlineRecord($exhibit, $item);
 
         // Item and exhibit keys should be set.
-        $this->assertEquals($record->exhibit_id, $exhibit->id);
-        $this->assertEquals($record->item_id, $item->id);
+        $this->assertEquals($exhibit->id, $record->exhibit_id);
+        $this->assertEquals($item->id, $record->item_id);
 
     }
 
@@ -40,7 +40,7 @@ class NeatlineRecordTest_Construct extends Neatline_Case_Default
         $record     = new NeatlineRecord($exhibit);
 
         // Exhibit key should be set.
-        $this->assertEquals($record->exhibit_id, $exhibit->id);
+        $this->assertEquals($exhibit->id, $record->exhibit_id);
         $this->assertNull($record->item_id);
 
     }

@@ -36,16 +36,16 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
 
         $exhibit = $this->_reload($exhibit);
 
-        $this->assertEquals($exhibit->spatial_layers,   '1,2');
-        $this->assertEquals($exhibit->spatial_layer,    '3');
-        $this->assertEquals($exhibit->widgets,          '4,5');
-        $this->assertEquals($exhibit->title,            '6');
-        $this->assertEquals($exhibit->slug,             '7');
-        $this->assertEquals($exhibit->narrative,        '8');
-        $this->assertEquals($exhibit->public,           9);
-        $this->assertEquals($exhibit->styles,           10);
-        $this->assertEquals($exhibit->map_focus,        11);
-        $this->assertEquals($exhibit->map_zoom,         12);
+        $this->assertEquals('1,2',  $exhibit->spatial_layers);
+        $this->assertEquals('3',    $exhibit->spatial_layer);
+        $this->assertEquals('4,5',  $exhibit->widgets);
+        $this->assertEquals('6',    $exhibit->title);
+        $this->assertEquals('7',    $exhibit->slug);
+        $this->assertEquals('8',    $exhibit->narrative);
+        $this->assertEquals(9,      $exhibit->public);
+        $this->assertEquals(10,     $exhibit->styles);
+        $this->assertEquals(11,     $exhibit->map_focus);
+        $this->assertEquals(12,     $exhibit->map_zoom);
 
     }
 
@@ -89,7 +89,7 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
         // Should not update when the exhibit is re-saved as "Public".
         $exhibit->published = '2000-01-01';
         $exhibit->saveForm(array('public' => 1));
-        $this->assertEquals($exhibit->published, '2000-01-01');
+        $this->assertEquals('2000-01-01', $exhibit->published);
 
     }
 

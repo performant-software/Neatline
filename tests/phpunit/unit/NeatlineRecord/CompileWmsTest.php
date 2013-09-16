@@ -30,17 +30,17 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
         $record->save();
 
         // Should flip on `is_coverage`, `is_wms`.
-        $this->assertEquals($record->is_coverage, 1);
-        $this->assertEquals($record->is_wms, 1);
+        $this->assertEquals(1, $record->is_coverage);
+        $this->assertEquals(1, $record->is_wms);
 
         // Should set generic coverage.
-        $this->assertEquals($record->coverage,
+        $this->assertEquals(
             'GEOMETRYCOLLECTION(
                 POINT( 9999999  9999999),
                 POINT(-9999999  9999999),
                 POINT(-9999999 -9999999),
                 POINT( 9999999 -9999999)
-            )'
+            )', $record->coverage
         );
 
     }
@@ -58,8 +58,8 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
         $record->save();
 
         $this->assertNull($record->coverage);
-        $this->assertEquals($record->is_coverage, 0);
-        $this->assertEquals($record->is_wms, 0);
+        $this->assertEquals(0, $record->is_coverage);
+        $this->assertEquals(0, $record->is_wms);
 
         // Address, no layers.
         $record->wms_address = 'address';
@@ -67,8 +67,8 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
         $record->compileWms();
 
         $this->assertNull($record->coverage);
-        $this->assertEquals($record->is_coverage, 0);
-        $this->assertEquals($record->is_wms, 0);
+        $this->assertEquals(0, $record->is_coverage);
+        $this->assertEquals(0, $record->is_wms);
 
         // Layers, no address.
         $record->wms_address = null;
@@ -76,8 +76,8 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
         $record->compileWms();
 
         $this->assertNull($record->coverage);
-        $this->assertEquals($record->is_coverage, 0);
-        $this->assertEquals($record->is_wms, 0);
+        $this->assertEquals(0, $record->is_coverage);
+        $this->assertEquals(0, $record->is_wms);
 
     }
 

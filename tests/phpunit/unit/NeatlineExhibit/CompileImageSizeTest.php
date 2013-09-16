@@ -26,8 +26,8 @@ class NeatlineExhibitTest_CompileImageSize extends Neatline_Case_Default
         $exhibit = $this->_reload($exhibit);
 
         // Should set `image_width` and `image_height`.
-        $this->assertEquals($exhibit->image_width,  100);
-        $this->assertEquals($exhibit->image_height, 200);
+        $this->assertEquals(100, $exhibit->image_width);
+        $this->assertEquals(200, $exhibit->image_height);
 
     }
 

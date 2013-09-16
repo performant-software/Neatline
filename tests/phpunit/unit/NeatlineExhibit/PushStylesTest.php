@@ -43,8 +43,8 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record2 = $this->_reload($record2);
 
         // Record 1 should have `tag1` styles.
-        $this->assertEquals($record1->fill_color, '1');
-        $this->assertEquals($record1->fill_color_select, '2');
+        $this->assertEquals('1', $record1->fill_color);
+        $this->assertEquals('2', $record1->fill_color_select);
         $this->assertEquals('#000000', $record1->stroke_color);
         $this->assertEquals('#000000', $record1->stroke_color_select);
 
@@ -78,7 +78,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // Should ignore rules with `auto` value.
-        $this->assertEquals($record->fill_color, 'color');
+        $this->assertEquals('color', $record->fill_color);
         $this->assertEquals('#000000', $record->stroke_color);
 
     }
@@ -131,7 +131,7 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // Should ignore rules with non-style properties.
-        $this->assertEquals($record->fill_color, 'color');
+        $this->assertEquals('color', $record->fill_color);
 
     }
 
@@ -156,8 +156,8 @@ class NeatlineExhibitTest_PushStyles extends Neatline_Case_Default
         $record2 = $this->_reload($record2);
 
         // Both records should be updated.
-        $this->assertEquals($record1->fill_color, 'color');
-        $this->assertEquals($record2->fill_color, 'color');
+        $this->assertEquals('color', $record1->fill_color);
+        $this->assertEquals('color', $record2->fill_color);
 
     }
 

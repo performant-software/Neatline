@@ -37,8 +37,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $result = $this->_records->queryRecords($exhibit1);
 
         // Exhibit2 records should be absent.
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
     }
@@ -84,10 +84,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         // Zoom = null
         $result = $this->_records->queryRecords($exhibit);
 
-        $this->assertEquals($result['records'][0]['id'], $record4->id);
-        $this->assertEquals($result['records'][1]['id'], $record3->id);
-        $this->assertEquals($result['records'][2]['id'], $record2->id);
-        $this->assertEquals($result['records'][3]['id'], $record1->id);
+        $this->assertEquals($record4->id, $result['records'][0]['id']);
+        $this->assertEquals($record3->id, $result['records'][1]['id']);
+        $this->assertEquals($record2->id, $result['records'][2]['id']);
+        $this->assertEquals($record1->id, $result['records'][3]['id']);
         $this->assertCount(4, $result['records']);
 
         // Zoom < min_zoom.
@@ -95,8 +95,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('zoom' => 9)
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record3->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
+        $this->assertEquals($record3->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Zoom > min_zoom.
@@ -104,8 +104,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('zoom' => 16)
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // min_zoom < Zoom < max_zoom.
@@ -113,9 +113,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('zoom' => 25)
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record4->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
-        $this->assertEquals($result['records'][2]['id'], $record1->id);
+        $this->assertEquals($record4->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
     }
@@ -141,8 +141,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         // Extent=null, get all records.
         $result = $this->_records->queryRecords($exhibit);
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Record 1 intersection.
@@ -150,7 +150,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('extent' => 'POLYGON((1 1,1 3,3 3,3 1,1 1))')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
         // Record 2 intersection.
@@ -158,7 +158,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('extent' => 'POLYGON((5 5,5 7,7 7,7 5,5 5))')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
         // Record 1 and record 2 intersection.
@@ -166,8 +166,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('extent' => 'POLYGON((1 1,1 5,5 5,5 1,1 1))')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
     }
@@ -195,7 +195,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
     }
@@ -220,7 +220,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record->id);
+        $this->assertEquals($record->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
     }
@@ -258,7 +258,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('query' => 'title1')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
         // Should search in `body` field.
@@ -266,7 +266,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('query' => 'body1')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
         // Should search in `slug` field.
@@ -274,7 +274,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('query' => 'slug1')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
     }
@@ -303,7 +303,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('tags' => array('tag1', 'tag2'))
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
     }
@@ -335,8 +335,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('widget' => 'Widget1')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record2->id);
-        $this->assertEquals($result['records'][1]['id'], $record1->id);
+        $this->assertEquals($record2->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
     }
@@ -368,9 +368,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('order' => 'weight')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
-        $this->assertEquals($result['records'][2]['id'], $record3->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
+        $this->assertEquals($record3->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
         // Order on `weight ASC`.
@@ -378,9 +378,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('order' => 'weight ASC')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
-        $this->assertEquals($result['records'][2]['id'], $record3->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
+        $this->assertEquals($record3->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
         // Order on `weight DESC`.
@@ -388,9 +388,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('order' => 'weight DESC')
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record3->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
-        $this->assertEquals($result['records'][2]['id'], $record1->id);
+        $this->assertEquals($record3->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
     }
@@ -427,8 +427,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('limit' => 2, 'offset' => 0)
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record5->id);
-        $this->assertEquals($result['records'][1]['id'], $record4->id);
+        $this->assertEquals($record5->id, $result['records'][0]['id']);
+        $this->assertEquals($record4->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Records 3-4.
@@ -436,8 +436,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('limit' => 2, 'offset' => 2)
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record3->id);
-        $this->assertEquals($result['records'][1]['id'], $record2->id);
+        $this->assertEquals($record3->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Record 5.
@@ -445,7 +445,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('limit' => 2, 'offset' => 4)
         );
 
-        $this->assertEquals($result['records'][0]['id'], $record1->id);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
     }
@@ -469,7 +469,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('limit' => 2, 'offset' => 0)
         );
 
-        $this->assertEquals($result['count'], 3);
+        $this->assertEquals(3, $result['count']);
 
     }
 
@@ -486,7 +486,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         // When no offset defined, should default to 0.
         $result = $this->_records->queryRecords($exhibit);
-        $this->assertEquals($result['offset'], 0);
+        $this->assertEquals(0, $result['offset']);
 
     }
 
@@ -507,7 +507,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
             array('limit' => 1, 'offset' => 1)
         );
 
-        $this->assertEquals($result['offset'], 1);
+        $this->assertEquals(1, $result['offset']);
 
     }
 

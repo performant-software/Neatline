@@ -45,7 +45,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
         ));
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(array(
 
             // `tag1` and `tag2` styles should be updated.
 
@@ -65,7 +65,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
                 'weight' => '6'
             )
 
-        ));
+        ), nl_readCSS($exhibit->styles));
 
     }
 
@@ -89,7 +89,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
         $record->tags = 'tag';
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(array(
 
             // Invalid property should be ignored.
 
@@ -98,7 +98,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
                 'invalid' => 'value'
             )
 
-        ));
+        ), nl_readCSS($exhibit->styles));
 
     }
 
@@ -120,7 +120,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
         $record->fill_color = '2';
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(array(
 
             // `all` selector should be updated.
 
@@ -128,7 +128,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
                 'fill_color' => '2'
             )
 
-        ));
+        ), nl_readCSS($exhibit->styles));
 
     }
 
@@ -150,7 +150,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
         $record->point_image = null;
 
         $exhibit->pullStyles($record);
-        $this->assertEquals(nl_readCSS($exhibit->styles), array(
+        $this->assertEquals(array(
 
             // `point-image` should pull `none`.
 
@@ -158,7 +158,7 @@ class NeatlineExhibitTest_PullStyles extends Neatline_Case_Default
                 'point_image' => 'none'
             )
 
-        ));
+        ), nl_readCSS($exhibit->styles));
 
     }
 

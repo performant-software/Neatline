@@ -20,7 +20,7 @@ class NeatlineExhibitTableTest_FindBySlug extends Neatline_Case_Default
     {
         $exhibit = $this->_exhibit('test-slug');
         $retrieved = $this->_exhibits->findBySlug('test-slug');
-        $this->assertEquals($retrieved->id, $exhibit->id);
+        $this->assertEquals($exhibit->id, $retrieved->id);
     }
 
 

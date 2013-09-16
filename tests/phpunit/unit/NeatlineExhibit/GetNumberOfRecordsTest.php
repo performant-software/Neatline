@@ -20,11 +20,9 @@ class NeatlineExhibitTest_GetNumberOfRecords extends Neatline_Case_Default
     {
         $exhibit = $this->_exhibit();
         $record1 = $this->_record($exhibit);
-        $this->assertEquals($exhibit->getNumberOfRecords(), 1);
+        $this->assertEquals(1, $exhibit->getNumberOfRecords());
         $record2 = $this->_record($exhibit);
-        $this->assertEquals($exhibit->getNumberOfRecords(), 2);
-        $record3 = $this->_record($exhibit);
-        $this->assertEquals($exhibit->getNumberOfRecords(), 3);
+        $this->assertEquals(2, $exhibit->getNumberOfRecords());
     }
 
 

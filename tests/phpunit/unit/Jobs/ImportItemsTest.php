@@ -37,7 +37,7 @@ class ImportItemsTest extends Neatline_Case_Default
 
         // Should match item 1, not item 2.
         $records = $this->_getRecordsByExhibit($exhibit);
-        $this->assertEquals($records[0]['item_id'], $item1->id);
+        $this->assertEquals($item1->id, $records[0]['item_id']);
         $this->assertCount(1, $records);
 
     }
@@ -106,7 +106,7 @@ class ImportItemsTest extends Neatline_Case_Default
 
         // Should set `added` to match item.
         $record = $this->_getRecordsByExhibit($exhibit, true);
-        $this->assertEquals($record->added, '2000-01-01 00:00:00');
+        $this->assertEquals('2000-01-01 00:00:00', $record->added);
 
     }
 
@@ -150,8 +150,8 @@ class ImportItemsTest extends Neatline_Case_Default
 
         // Link should start with 'webDir/'
         $this->assertEquals(
-            substr($anchor->getAttribute('href'), 0, 7),
-            'webDir/'
+            'webDir/',
+            substr($anchor->getAttribute('href'), 0, 7)
         );
 
     }

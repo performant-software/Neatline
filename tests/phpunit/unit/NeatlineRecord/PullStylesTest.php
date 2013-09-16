@@ -44,10 +44,10 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // Should pull `tag1` and `tag2`.
-        $this->assertEquals($record->fill_color, '1');
-        $this->assertEquals($record->fill_color_select, '2');
-        $this->assertEquals($record->stroke_color, '3');
-        $this->assertEquals($record->stroke_color_select, '4');
+        $this->assertEquals('1', $record->fill_color);
+        $this->assertEquals('2', $record->fill_color_select);
+        $this->assertEquals('3', $record->stroke_color);
+        $this->assertEquals('4', $record->stroke_color_select);
 
         // Should not pull `tag3`.
         $this->assertNull($record->zindex);
@@ -81,8 +81,8 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         $record = $this->_reload($record);
 
         // Should pull `tag` and `all`.
-        $this->assertEquals($record->fill_color, '1');
-        $this->assertEquals($record->stroke_color, '2');
+        $this->assertEquals('1', $record->fill_color);
+        $this->assertEquals('2', $record->stroke_color);
 
     }
 
@@ -108,7 +108,7 @@ class NeatlineRecordTest_PullStyles extends Neatline_Case_Default
         $record->save();
         $record = $this->_reload($record);
 
-        // `auto` value should be ignored and maintain the default color.
+        // `auto` value should be ignored.
         $this->assertEquals('#00aeff', $record->fill_color);
 
     }
