@@ -11,16 +11,6 @@
 
 ?>
 
-<?php
-  echo head(array(
-    'title' => __('Neatline | Edit "%s"', nl_getExhibitField('title')),
-    'bodyclass' => 'edit'
-  ));
-?>
-
-<div id="primary">
-  <?php echo flash(); ?>
-  <?php echo $form; ?>
-</div>
-
+<?php echo head(array('title' => nl_getExhibitField('title'))); ?>
+<?php echo nl_getExhibitMarkup(); ?>
 <?php echo foot(); ?>

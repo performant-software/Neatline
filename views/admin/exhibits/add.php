@@ -11,8 +11,6 @@
 
 ?>
 
-<?php nl_queueExhibitForm(); ?>
-
 <?php
   echo head(array(
     'title' => __('Neatline | Create an Exhibit'),

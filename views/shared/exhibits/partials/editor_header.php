@@ -21,7 +21,6 @@
   ); ?></title>
 
   <?php
-    nl_queueNeatlineEditor(nl_getExhibit());
     echo head_js(false);
     echo head_css();
   ?>

@@ -11,12 +11,22 @@
 
 
 /**
- * Include static files for the exhibit form.
+ * Include static files for the exhibit add form.
  */
-function nl_queueExhibitForm()
+function nl_queueAddForm()
 {
     queue_css_file('payloads/exhibit-form');
-    queue_js_file('payloads/exhibit-form');
+    queue_js_file('payloads/add-form');
+}
+
+
+/**
+ * Include static files for the exhibit edit form.
+ */
+function nl_queueEditForm()
+{
+    queue_css_file('payloads/exhibit-form');
+    queue_js_file('payloads/edit-form');
 }
 
 
@@ -60,6 +70,15 @@ function nl_queueNeatlineEditor($exhibit)
         'exhibit' => $exhibit
     ));
 
+}
+
+
+/**
+ * Include static files for the exhibit fullscreen view.
+ */
+function nl_queueFullscreen()
+{
+    queue_js_file('fullscreen');
 }
 
 
