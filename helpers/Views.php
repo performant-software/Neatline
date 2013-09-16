@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -19,8 +19,8 @@
 function nl_getItemMarkup($record)
 {
 
-    // Ensure that all of the template directories are registered on the
-    // view, in case we're working inside a background process.
+    // Ensure that all of the template directories are registered on the view,
+    // in case we're working inside a background process.
 
     nl_mountView();
 
@@ -31,8 +31,7 @@ function nl_getItemMarkup($record)
     // Set the parent item on the view.
     get_view()->item = $record->getItem();
 
-    // First, try to render a `item-[tag].php` template in the exhibit-
-    // specific theme for the exhibit:
+    // First, try to render a `item-[tag].php` template in the exhibit theme.
 
     foreach ($tags as $tag) { try {
         return get_view()->partial(
@@ -40,8 +39,7 @@ function nl_getItemMarkup($record)
         );
     } catch (Exception $e) {}}
 
-    // Next, try to render a generic `item.php` template in the exhibit-
-    // specific theme for the exhibit:
+    // Next, try to render a generic `item.php` template in the exhibit theme.
 
     try {
         return get_view()->partial(
@@ -50,9 +48,9 @@ function nl_getItemMarkup($record)
     } catch (Exception $e) {}
 
 
-    // If no exhibit-specific templates can be found, fall back to the
-    // global `item.php` template, which is included in the core plugin
-    // and can also be overridden in the public theme:
+    // If no exhibit-specific templates can be found, fall back to the global
+    // `item.php` template, which is included in the core plugin and can also
+    // be overridden in the public theme:
 
     return get_view()->partial('exhibits/item.php');
 

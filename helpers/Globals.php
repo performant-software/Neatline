@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -13,35 +13,36 @@
 /**
  * Construct exhibit globals array.
  *
- * @param NeatlineExhibit The exhibit.
+ * @param NeatlineExhibit $exhibit The exhibit.
  * @return array The array of globals.
  */
 function nl_globals($exhibit)
 {
 
-    // Read style defaults from `styles.ini`.
+    // Get style defaults from `styles.ini`.
     $styles = new Zend_Config_Ini(NL_DIR.'/styles.ini');
 
     return array('neatline' => array(
 
         // Exhibit.
-        // ----------------------------------------------------------------
-        'exhibit' => $exhibit->toArray(),
+        // --------------------------------------------------------------------
+        'exhibit'           => $exhibit->toArray(),
 
         // API routes.
-        // ----------------------------------------------------------------
-        'records_api'   => public_url('neatline/records'),
-        'exhibits_api'  => url('neatline/exhibits/'.$exhibit->id),
-        'items_api'     => url('items/browse'),
+        // --------------------------------------------------------------------
+        'records_api'       => public_url('neatline/records'),
+        'exhibits_api'      => url('neatline/exhibits/'.$exhibit->id),
+        'items_api'         => url('items/browse'),
 
         // Constants.
-        // ----------------------------------------------------------------
-        'per_page'  => (int) get_plugin_ini('Neatline', 'per_page'),
-        'styles'    => $styles->toArray(),
+        // --------------------------------------------------------------------
+        'per_page'          => (int) get_plugin_ini('Neatline', 'per_page'),
+        'styles'            => $styles->toArray(),
 
         // Layers.
-        // ----------------------------------------------------------------
-        'spatial_layers' => nl_getLayersForExhibit($exhibit)
+        // --------------------------------------------------------------------
+        'spatial_layers'    => nl_getLayersForExhibit($exhibit)
 
     ));
+
 }

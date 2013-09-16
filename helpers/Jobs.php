@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -21,16 +21,13 @@ function nl_mountView()
             Zend_Registry::get('view') :
             new Omeka_View();
 
-    // Default Omeka templates:
-    // ------------------------
+    // (1) Default Omeka templates:
     $view->addScriptPath(VIEW_SCRIPTS_DIR);
 
-    // Neatline plugin templates:
-    // --------------------------
+    // (2) Neatline plugin templates:
     $view->addScriptPath(NL_DIR.'/views/shared');
 
-    // Public theme templates:
-    // -----------------------
+    // (3) Public theme templates:
     $view->addScriptPath(nl_getPublicThemeDir());
 
     // (Re)set the view.

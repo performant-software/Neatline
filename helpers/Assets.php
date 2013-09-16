@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -129,9 +129,7 @@ function nl_queueExhibitJs($exhibit)
  */
 function nl_queueGoogleMapsApi()
 {
-    nl_appendScript(
-        'http://maps.google.com/maps/api/js?sensor=false'
-    );
+    nl_appendScript('http://maps.google.com/maps/api/js?sensor=false');
 }
 
 

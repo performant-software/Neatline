@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -11,15 +11,16 @@
 
 
 /**
- * Define a two-tiered ACL:
- *
- *  - Contributors can create/update/delete their own exhibits and records
- *  inside their own exhibits. They can also update and delete records in
- *  their own exhibits that were created by other users.
+ * Define a three-tiered ACL:
  *
  *  - Supers and Admins can do everything.
  *
- * @param string $list A comma-delimited list.
+ *  - Contributors can add/update/delete their own exhibits and records, but
+ *  not exhibits or records that belong to other users.
+ *
+ *  - Researchers can't access any Neatline content.
+ *
+ * @param Zend_Acl $acl
  */
 function nl_defineAcl($acl)
 {
@@ -35,7 +36,7 @@ function nl_defineAcl($acl)
 
 
     // Public:
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Anyone can view exhibits.
     $acl->allow(null, 'Neatline_Exhibits', array(
@@ -54,7 +55,7 @@ function nl_defineAcl($acl)
 
 
     // Contributor:
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Contributors can add and delete-confirm exhibits.
     $acl->allow('contributor', 'Neatline_Exhibits', array(
@@ -94,7 +95,7 @@ function nl_defineAcl($acl)
 
 
     // Super and Admin:
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Supers and admins can do everything.
     $acl->allow(array('super', 'admin'), 'Neatline_Exhibits');

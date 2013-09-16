@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -87,7 +87,7 @@ function nl_getLayersForExhibit($exhibit)
     $subset = array();
 
     // Explode the list of layer IDs in `spatial_layers` and merge the
-    // `spatial_layer` ID into the array, which ensures that at least one
+    // `spatial_layer` slug into the array, which ensures that at least one
     // layer is included if `spatial_layers` is empty.
 
     $ids = nl_explode($exhibit->spatial_layers);
