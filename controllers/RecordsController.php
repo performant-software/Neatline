@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -19,8 +19,8 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
     public function init()
     {
         $this->_helper->db->setDefaultModelName('NeatlineRecord');
-        $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
-        $this->records  = $this->_helper->db->getTable('NeatlineRecord');
+        $this->_exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->_records  = $this->_helper->db->getTable('NeatlineRecord');
         parent::init();
     }
 
@@ -33,10 +33,10 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
     {
 
         // Load exhibit.
-        $exhibit = $this->exhibits->find($this->_request->exhibit_id);
+        $exhibit = $this->_exhibits->find($this->_request->exhibit_id);
 
         // Query records.
-        echo Zend_Json::encode($this->records->queryRecords(
+        echo Zend_Json::encode($this->_records->queryRecords(
             $exhibit, $this->_request->getParams()
         ));
 
@@ -79,7 +79,7 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
     {
 
         // Find the record.
-        $record = $this->records->find($this->_request->id);
+        $record = $this->_records->find($this->_request->id);
 
         // Decode and save PUT body.
         $record->saveForm(Zend_Json::decode(file_get_contents(
@@ -100,7 +100,7 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
     {
 
         // Find and delete the record.
-        $record = $this->records->find($this->_request->id);
+        $record = $this->_records->find($this->_request->id);
         $record->delete();
 
         // Return an empty JSON object.

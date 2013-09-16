@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -19,7 +19,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     public function init()
     {
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
-        $this->exhibits = $this->_helper->db->getTable('NeatlineExhibit');
+        $this->_exhibits = $this->_helper->db->getTable('NeatlineExhibit');
     }
 
 
@@ -178,7 +178,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         $this->_helper->viewRenderer->setNoRender(true);
 
         // Try to find an exhibit with the requested slug.
-        $exhibit = $this->exhibits->findBySlug($this->_request->slug);
+        $exhibit = $this->_exhibits->findBySlug($this->_request->slug);
         if (!$exhibit) throw new Omeka_Controller_Exception_404;
 
         // Assign exhibit to view.
@@ -202,7 +202,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     {
 
         // Try to find an exhibit with the requested slug.
-        $exhibit = $this->exhibits->findBySlug($this->_request->slug);
+        $exhibit = $this->_exhibits->findBySlug($this->_request->slug);
         if (!$exhibit) throw new Omeka_Controller_Exception_404;
 
         // Assign exhibit to view.
