@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -34,7 +34,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     // HOOKS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -47,30 +47,30 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_exhibits (
 
-        id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        owner_id                INT(10) UNSIGNED NOT NULL,
-        added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        modified                TIMESTAMP NULL,
-        published               TIMESTAMP NULL,
-        item_query              TEXT NULL,
-        spatial_layers          TEXT NULL,
-        spatial_layer           TEXT NULL,
-        image_layer             TEXT NULL,
-        image_height            SMALLINT UNSIGNED NULL,
-        image_width             SMALLINT UNSIGNED NULL,
-        wms_address             TEXT NULL,
-        wms_layers              TEXT NULL,
-        widgets                 TEXT NULL,
-        title                   TEXT NULL,
-        slug                    VARCHAR(100) NOT NULL,
-        narrative               LONGTEXT NULL,
-        spatial_querying        TINYINT(1) NOT NULL,
-        public                  TINYINT(1) NOT NULL,
-        styles                  TEXT NULL,
-        map_focus               VARCHAR(100) NULL,
-        map_zoom                INT(10) UNSIGNED NULL,
+            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            owner_id                INT(10) UNSIGNED NOT NULL,
+            added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            modified                TIMESTAMP NULL,
+            published               TIMESTAMP NULL,
+            item_query              TEXT NULL,
+            spatial_layers          TEXT NULL,
+            spatial_layer           TEXT NULL,
+            image_layer             TEXT NULL,
+            image_height            SMALLINT UNSIGNED NULL,
+            image_width             SMALLINT UNSIGNED NULL,
+            wms_address             TEXT NULL,
+            wms_layers              TEXT NULL,
+            widgets                 TEXT NULL,
+            title                   TEXT NULL,
+            slug                    VARCHAR(100) NOT NULL,
+            narrative               LONGTEXT NULL,
+            spatial_querying        TINYINT(1) NOT NULL,
+            public                  TINYINT(1) NOT NULL,
+            styles                  TEXT NULL,
+            map_focus               VARCHAR(100) NULL,
+            map_zoom                INT(10) UNSIGNED NULL,
 
-        PRIMARY KEY            (id)
+            PRIMARY KEY            (id)
 
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -80,55 +80,55 @@ SQL;
 
         CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_records (
 
-        id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-        owner_id                INT(10) UNSIGNED NOT NULL,
-        item_id                 INT(10) UNSIGNED NULL,
-        exhibit_id              INT(10) UNSIGNED NULL,
-        added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        modified                TIMESTAMP NULL,
-        is_coverage             TINYINT(1) NOT NULL,
-        is_wms                  TINYINT(1) NOT NULL,
-        slug                    VARCHAR(100) NULL,
-        title                   MEDIUMTEXT NULL,
-        body                    MEDIUMTEXT NULL,
-        coverage                GEOMETRY NOT NULL,
-        tags                    TEXT NULL,
-        widgets                 TEXT NULL,
-        presenter               VARCHAR(100) NULL,
-        fill_color              VARCHAR(100) NULL,
-        fill_color_select       VARCHAR(100) NULL,
-        stroke_color            VARCHAR(100) NULL,
-        stroke_color_select     VARCHAR(100) NULL,
-        fill_opacity            DECIMAL(3,2) NULL,
-        fill_opacity_select     DECIMAL(3,2) NULL,
-        stroke_opacity          DECIMAL(3,2) NULL,
-        stroke_opacity_select   DECIMAL(3,2) NULL,
-        stroke_width            INT(10) UNSIGNED NULL,
-        point_radius            INT(10) UNSIGNED NULL,
-        zindex                  INT(10) UNSIGNED NULL,
-        weight                  INT(10) UNSIGNED NULL,
-        start_date              VARCHAR(100) NULL,
-        end_date                VARCHAR(100) NULL,
-        after_date              VARCHAR(100) NULL,
-        before_date             VARCHAR(100) NULL,
-        point_image             VARCHAR(100) NULL,
-        wms_address             TEXT NULL,
-        wms_layers              TEXT NULL,
-        min_zoom                INT(10) UNSIGNED NULL,
-        max_zoom                INT(10) UNSIGNED NULL,
-        map_zoom                INT(10) UNSIGNED NULL,
-        map_focus               VARCHAR(100) NULL,
+            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            owner_id                INT(10) UNSIGNED NOT NULL,
+            item_id                 INT(10) UNSIGNED NULL,
+            exhibit_id              INT(10) UNSIGNED NULL,
+            added                   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            modified                TIMESTAMP NULL,
+            is_coverage             TINYINT(1) NOT NULL,
+            is_wms                  TINYINT(1) NOT NULL,
+            slug                    VARCHAR(100) NULL,
+            title                   MEDIUMTEXT NULL,
+            body                    MEDIUMTEXT NULL,
+            coverage                GEOMETRY NOT NULL,
+            tags                    TEXT NULL,
+            widgets                 TEXT NULL,
+            presenter               VARCHAR(100) NULL,
+            fill_color              VARCHAR(100) NULL,
+            fill_color_select       VARCHAR(100) NULL,
+            stroke_color            VARCHAR(100) NULL,
+            stroke_color_select     VARCHAR(100) NULL,
+            fill_opacity            DECIMAL(3,2) NULL,
+            fill_opacity_select     DECIMAL(3,2) NULL,
+            stroke_opacity          DECIMAL(3,2) NULL,
+            stroke_opacity_select   DECIMAL(3,2) NULL,
+            stroke_width            INT(10) UNSIGNED NULL,
+            point_radius            INT(10) UNSIGNED NULL,
+            zindex                  INT(10) UNSIGNED NULL,
+            weight                  INT(10) UNSIGNED NULL,
+            start_date              VARCHAR(100) NULL,
+            end_date                VARCHAR(100) NULL,
+            after_date              VARCHAR(100) NULL,
+            before_date             VARCHAR(100) NULL,
+            point_image             VARCHAR(100) NULL,
+            wms_address             TEXT NULL,
+            wms_layers              TEXT NULL,
+            min_zoom                INT(10) UNSIGNED NULL,
+            max_zoom                INT(10) UNSIGNED NULL,
+            map_zoom                INT(10) UNSIGNED NULL,
+            map_focus               VARCHAR(100) NULL,
 
-        PRIMARY KEY             (id),
+            PRIMARY KEY             (id),
 
-        INDEX                   (added),
-        INDEX                   (exhibit_id, item_id),
-        INDEX                   (min_zoom, max_zoom),
-        SPATIAL INDEX           (coverage),
+            INDEX                   (added),
+            INDEX                   (exhibit_id, item_id),
+            INDEX                   (min_zoom, max_zoom),
+            SPATIAL INDEX           (coverage),
 
-        FULLTEXT INDEX          (title, body, slug),
-        FULLTEXT INDEX          (tags),
-        FULLTEXT INDEX          (widgets)
+            FULLTEXT INDEX          (title, body, slug),
+            FULLTEXT INDEX          (tags),
+            FULLTEXT INDEX          (widgets)
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -170,15 +170,15 @@ SQL;
 
         $old = $args['old_version'];
 
-        // If the plugin is being upgraded from the 1.x series, just run
-        // the 2.0.0 migration, which encompasses the alpha migrations.
+        // If the plugin is being upgraded from the 1.x series, just run the
+        // 2.0.0 migration, which encompasses the alpha migrations.
 
         if ($old <= '1.1.3') {
             new Neatline_Migration_200($this, $this->_db);
         }
 
-        // If the previous version was one of the 2.0 alpha/rc releases,
-        // run the the pre-release migrations.
+        // If the previous version was one of the 2.0 alpha/rc releases, run
+        // the the pre-release migrations.
 
         else if ($old < '2.0.0') {
             if ($old < '2.0-alpha2') {
@@ -252,7 +252,7 @@ SQL;
 
 
     // FILTERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
