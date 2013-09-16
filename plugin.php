@@ -15,15 +15,6 @@ if (!defined('NL_DIR')) define('NL_DIR', dirname(__FILE__));
 // PLUGIN
 require_once NL_DIR.'/NeatlinePlugin.php';
 
-// MIGRATIONS
-require_once NL_DIR.'/migrations/abstract/Neatline_Migration_Abstract.php';
-require_once NL_DIR.'/migrations/2.0-alpha2/Neatline_Migration_20alpha2.php';
-require_once NL_DIR.'/migrations/2.0-rc1/Neatline_Migration_20rc1.php';
-require_once NL_DIR.'/migrations/2.0-rc3/Neatline_Migration_20rc3.php';
-require_once NL_DIR.'/migrations/2.0-rc4/Neatline_Migration_20rc4.php';
-require_once NL_DIR.'/migrations/2.0.0/Neatline_Migration_200.php';
-require_once NL_DIR.'/migrations/2.0.2/Neatline_Migration_202.php';
-
 // MODELS
 require_once NL_DIR.'/models/abstract/Neatline_Row_Abstract.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Expandable.php';
@@ -40,6 +31,15 @@ require_once NL_DIR.'/jobs/Neatline_Job_UpgradeFrom1x.php';
 require_once NL_DIR.'/controllers/abstract/Neatline_Controller_Rest.php';
 require_once NL_DIR.'/assertions/Neatline_Acl_Assert_RecordOwnership.php';
 require_once NL_DIR.'/forms/Neatline_Form_Exhibit.php';
+
+// MIGRATIONS
+require_once NL_DIR.'/migrations/abstract/Neatline_Migration_Abstract.php';
+require_once NL_DIR.'/migrations/2.0-alpha2/Neatline_Migration_20alpha2.php';
+require_once NL_DIR.'/migrations/2.0-rc1/Neatline_Migration_20rc1.php';
+require_once NL_DIR.'/migrations/2.0-rc3/Neatline_Migration_20rc3.php';
+require_once NL_DIR.'/migrations/2.0-rc4/Neatline_Migration_20rc4.php';
+require_once NL_DIR.'/migrations/2.0.0/Neatline_Migration_200.php';
+require_once NL_DIR.'/migrations/2.0.2/Neatline_Migration_202.php';
 
 // HELPERS
 require_once NL_DIR.'/helpers/Acl.php';
