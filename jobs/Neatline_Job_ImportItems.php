@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -33,8 +33,7 @@ class Neatline_Job_ImportItems extends Neatline_Job_MockView
             foreach ($items as $item) {
 
                 // Try to find an existing record.
-                $record = $__records->findBySql(
-                    'exhibit_id=? && item_id=?',
+                $record = $__records->findBySql('exhibit_id=? && item_id=?',
                     array($exhibit->id, $item->id), true
                 );
 
