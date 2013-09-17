@@ -22,6 +22,10 @@
 
   - Upgrates Bootstrap to v3.0.0-rc2.
 
+#### Repository Changes
+
+  - Changes default column width in all source files from 76 -> 80 characters.
+
 ## v2.0.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.0.4)) ~ August 14, 2013
 
 #### Bug Fixes
