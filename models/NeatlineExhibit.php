@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -39,7 +39,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
     /**
      * If the exhibit is being published to the public site for the first
-     * time, update the `published` timestamp.
+     * time, set the `published` timestamp.
      *
      * @param array $values The POST/PUT data.
      */
@@ -49,8 +49,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         // Assign the values.
         $this->setArray($values);
 
-        // If the exhibit is being set "public" for the first time, set
-        // the `published` timestamp to the current date.
+        // If the exhibit is being set "public" for the first time, set the
+        // `published` timestamp to the current date.
 
         if (is_null($this->published) && $this->public == 1) {
             $this->published = date(self::DATE_FORMAT);
@@ -87,17 +87,17 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Update records in an exhibit according to the value-defined style
-     * definitions in the `styles` CSS. For example, if `styles` is:
+     * Update records in an exhibit according to the style definitions in the
+     * `styles` CSS. For example, if `styles` is:
      *
      * .tag {
      *   fill-color: #ffffff;
      *   stroke-color: auto;
      * }
      *
-     * The fill color on records tagged with `tag` will be updated to
-     * `#ffffff`, but the stroke color will be unchanged since no explicit
-     * value is set in the CSS.
+     * The `fill_color` on records tagged with `tag` will be set to `#ffffff`,
+     * but the stroke color will be left as-is since no explicit value is set
+     * in the CSS.
      */
     public function pushStyles()
     {
@@ -150,17 +150,16 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Update the exhibit stylesheet with values from a specific record.
-     * For example, if `styles` is:
+     * Update the exhibit stylesheet with values from a specific record. For
+     * example, if `styles` is:
      *
      * .tag {
      *   fill-color: #111111;
      *   stroke-color: #222222;
      * }
      *
-     * And the passed record is tagged with `tag` has a `fill_color` of
-     * `#333333` and a `stroke_color` of `#444444`, the stylesheet should
-     * be updated to:
+     * And the record is tagged with `tag` has a `fill_color` of `#333333` and
+     * a `stroke_color` of `#444444`, the stylesheet would be updated to:
      *
      * .tag {
      *   fill-color: #333333;
@@ -214,8 +213,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Measure the size of the image defined by `image_layer`. Wrapped in
-     * a try/catch so that it's possible to work with exhibits offline.
+     * Measure the size of the image defined by `image_layer`. Wrapped in a
+     * try/catch so that it's possible to work with exhibits offline.
      */
     public function compileImageSize()
     {

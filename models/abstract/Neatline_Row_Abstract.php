@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -26,11 +26,10 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Return true if the passed user owns the row (if the id of the user
-     * matches the `owner_id` on the row). Also return true if `owner_id`
-     * is 0, which is used as a de-factor NULL value for records/exhibits
-     * that have been migrated from earlier versions of Neatline that did
-     * not track user ownerhsip.
+     * Return true if the passed user owns the row (if the `id` of the user
+     * matches the `owner_id` on the row). Also return true if `owner_id` is
+     * 0, which is used as a de-facto NULL value for records/exhibits that
+     * have been migrated from Neatline 1.x, which didn't record ownership.
      *
      * @param Omeka_User $user A user record.
      */
@@ -66,13 +65,12 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
 
 
     /**
-     * Cast the row to an array of data to be inserted into the database.
-     * By default, just alias the regular `toArray` method. This is broken
-     * out and used by `insertOrUpdate` in order to make it possible for
-     * concrete row classes to modify or wrap field values before saving,
-     * without changing the publicly-accessible values on the object (for
-     * example, WKT strings need to be wrapped in `GeomFromText` database
-     * expressions before being inserted).
+     * Cast the row to an array to be inserted into the database. By default,
+     * just delegate to the regular `toArray` method. This is broken out and
+     * used by `insertOrUpdate` in order to make it possible for row classes
+     * to modify row values before saving, without also changing the publicly-
+     * accessible values on the object (eg, WKT strings need to be wrapped in
+     * `GeomFromText` database expressions before being inserted).
      *
      * @return array The array representation of the record fields.
      */

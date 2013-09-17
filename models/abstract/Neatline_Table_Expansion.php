@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -39,8 +39,7 @@ abstract class Neatline_Table_Expansion extends Omeka_Db_Table
 
 
     /**
-     * Try to get an existing expansion row for a parent record. If one
-     * doesn't exist, create a new one.
+     * Try to get an expansion row for a record. If none exists, create one.
      *
      * @param Neatline_Row_Expandable $parent The parent record.
      * @return Neatline_Row_Expansion $parent The expansion.

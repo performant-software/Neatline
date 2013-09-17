@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -133,38 +133,29 @@ class NeatlineRecord extends Neatline_Row_Expandable
         // Mass-assign the form.
         $this->setArray($values);
 
-        // If 1 or more tags have been added to the record since the last
-        // time it was saved, pull in the _existing_ CSS rules for those
-        // tags onto the record before using the record to update the CSS.
-        // Otherwise, the existing styles set for the tag(s) in the CSS
-        // and on other records with the tag(s) would be clobbered in the
-        // next step by the current values on the record being saved.
-        // The intuition here is that act of adding a new tag to a record
-        // should have the effect of making the record _conform_ to the
-        // already-established styling of other records with that tag -
-        // instead of changing the other records to look like this record.
+        // (1) Pull styles for new tags from the exhibit stylesheet.
+
         $newTags = nl_explode($this->tags);
         $this->pullStyles(array_diff($newTags, $oldTags));
         $this->save();
 
-        // For each of the tags defined on the record, update the rule-set
-        // for that tag in the exhibit CSS (if one exists) with the values
-        // defined on the record.
+        // (2) Update the exhibit stylesheet with the record values.
+
         $exhibit = $this->getExhibit();
         $exhibit->pullStyles($this);
         $exhibit->save();
 
-        // Once the exhibit CSS has been updated with the record values,
-        // propagate the new rules to all other records in the exhibit.
+        // (3) Propagate the updated styles to sibling records.
+
         $exhibit->pushStyles();
 
     }
 
 
     /**
-     * Before saving, replace the raw value of `coverage` with the MySQL
-     * expression to set the `GEOMETRY` value. If `coverage` is undefined,
-     * use `POINT(0 0)` as a de facto "null" value (ignored in queries).
+     * Before saving, replace the string raw value the `coverage` field with
+     * the MySQL expression to populate the `GEOMETRY` value. If `coverage` is
+     * null, use `POINT(0 0)` as a de facto NULL value (ignored in queries).
      *
      * @return array An array representation of the record.
      */
@@ -188,8 +179,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Update record styles to match exhibit CSS. For example, if `styles`
-     * on the parent exhibit is:
+     * Update record styles to match exhibit CSS. For example, if `styles` on
+     * the parent exhibit is:
      *
      * .tag1 {
      *   fill-color: #111111;
@@ -198,8 +189,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
      *   stroke-color: #222222;
      * }
      *
-     * And `array('tag1', 'tag2')` is passed, `fill_color` should be set
-     * to '#111111' and `stroke_color` to '#222222'.
+     * And `array('tag1', 'tag2')` is passed, `fill_color` should be set to
+     * '#111111' and `stroke_color` to '#222222'.
      *
      * @param array $tags An array of tags to pull.
      */
@@ -251,11 +242,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * If the record has a defined WMS address and layer, ensure that the
-     * record will always be matched by viewport queries by overriding the
-     * coverage with a special geometry that will _always_ intersect the
-     * viewport - four points, one in each quadrant, with arbitrarily high
-     * values, effectively outlining a rectangle over the entire map.
+     * If the record has a WMS layer, set a special coverage that ensures that
+     * the record will always get matched by the real-time querying system.
      */
     public function compileWms()
     {
@@ -280,9 +268,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * This imports any data from NeatlineFeatures, if it's installed.
-     *
-     * @author Eric Rochester
+     * Import coverage data from NeatlineFeatures, if it's installed.
      **/
     public function compileFeatures()
     {
@@ -311,9 +297,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Compile the item reference and WMS coverage. Override the `save`
-     * method instead of using the built-in `beforeSave` hook so that the
-     * test suite can have access to the original, unmodified method.
+     * Before saving, compile the coverage and item reference.
      */
     public function save()
     {
