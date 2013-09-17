@@ -22,8 +22,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-shell');
 
+  var pkg = grunt.file.readJSON('./package.json');
   var paths = grunt.file.readJSON('./paths.json');
-  var pkg   = grunt.file.readJSON('./package.json')
 
   grunt.initConfig({
 
@@ -539,6 +539,7 @@ module.exports = function(grunt) {
 
   // Spawn release package.
   grunt.registerTask('package', [
+    'compile:min',
     'clean:pkg',
     'compress'
   ]);
