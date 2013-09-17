@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -65,38 +65,38 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
         $this->assertNotNull($response->id);
 
         // Load the new record.
-        $r = $this->_records->find($response->id);
+        $record = $this->_records->find($response->id);
 
         // Should update fields.
-        $this->assertEquals($exhibit->id,   $r->exhibit_id);
-        $this->assertEquals('1',            $r->slug);
-        $this->assertEquals('2',            $r->title);
-        $this->assertEquals('3',            $r->body);
-        $this->assertEquals('POINT(4 4)',   $r->coverage);
-        $this->assertEquals('5',            $r->tags);
-        $this->assertEquals('6,7',          $r->widgets);
-        $this->assertEquals('8',            $r->presenter);
-        $this->assertEquals('9',            $r->fill_color);
-        $this->assertEquals('10',           $r->fill_color_select);
-        $this->assertEquals('11',           $r->stroke_color);
-        $this->assertEquals('12',           $r->stroke_color_select);
-        $this->assertEquals(0.13,           $r->fill_opacity);
-        $this->assertEquals(0.14,           $r->fill_opacity_select);
-        $this->assertEquals(0.15,           $r->stroke_opacity);
-        $this->assertEquals(0.16,           $r->stroke_opacity_select);
-        $this->assertEquals(17,             $r->stroke_width);
-        $this->assertEquals(18,             $r->point_radius);
-        $this->assertEquals(19,             $r->zindex);
-        $this->assertEquals(20,             $r->weight);
-        $this->assertEquals('21',           $r->start_date);
-        $this->assertEquals('22',           $r->end_date);
-        $this->assertEquals('23',           $r->after_date);
-        $this->assertEquals('24',           $r->before_date);
-        $this->assertEquals('25',           $r->point_image);
-        $this->assertEquals(26,             $r->min_zoom);
-        $this->assertEquals(27,             $r->max_zoom);
-        $this->assertEquals(28,             $r->map_zoom);
-        $this->assertEquals('29',           $r->map_focus);
+        $this->assertEquals($exhibit->id,   $record->exhibit_id);
+        $this->assertEquals('1',            $record->slug);
+        $this->assertEquals('2',            $record->title);
+        $this->assertEquals('3',            $record->body);
+        $this->assertEquals('POINT(4 4)',   $record->coverage);
+        $this->assertEquals('5',            $record->tags);
+        $this->assertEquals('6,7',          $record->widgets);
+        $this->assertEquals('8',            $record->presenter);
+        $this->assertEquals('9',            $record->fill_color);
+        $this->assertEquals('10',           $record->fill_color_select);
+        $this->assertEquals('11',           $record->stroke_color);
+        $this->assertEquals('12',           $record->stroke_color_select);
+        $this->assertEquals(0.13,           $record->fill_opacity);
+        $this->assertEquals(0.14,           $record->fill_opacity_select);
+        $this->assertEquals(0.15,           $record->stroke_opacity);
+        $this->assertEquals(0.16,           $record->stroke_opacity_select);
+        $this->assertEquals(17,             $record->stroke_width);
+        $this->assertEquals(18,             $record->point_radius);
+        $this->assertEquals(19,             $record->zindex);
+        $this->assertEquals(20,             $record->weight);
+        $this->assertEquals('21',           $record->start_date);
+        $this->assertEquals('22',           $record->end_date);
+        $this->assertEquals('23',           $record->after_date);
+        $this->assertEquals('24',           $record->before_date);
+        $this->assertEquals('25',           $record->point_image);
+        $this->assertEquals(26,             $record->min_zoom);
+        $this->assertEquals(27,             $record->max_zoom);
+        $this->assertEquals(28,             $record->map_zoom);
+        $this->assertEquals('29',           $record->map_focus);
 
     }
 

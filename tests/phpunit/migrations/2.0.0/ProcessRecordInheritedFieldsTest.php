@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -29,8 +29,8 @@ class Migrate200Test_ProcessRecordInheritedFields
 
 
     /**
-     * When local values are defined for inherited fields, migrate the
-     * values directly to the new record.
+     * When local values are defined for inherited fields, migrate the values
+     * directly to the new record.
      */
     public function testUseLocalValuesWhenPresent()
     {
@@ -104,8 +104,8 @@ class Migrate200Test_ProcessRecordInheritedFields
 
 
     /**
-     * When no exhibit default exists, values should be pulled from the
-     * global values in the site options.
+     * When no exhibit default exists, values should be pulled from the global
+     * values in the site options.
      */
     public function testFlattenGlobalInheritance()
     {

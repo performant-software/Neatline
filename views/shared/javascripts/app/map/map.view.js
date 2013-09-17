@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,7 +23,7 @@ Neatline.module('Map', function(
 
 
     // INITIALIZERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     initialize: function() {
@@ -52,8 +52,8 @@ Neatline.module('Map', function(
       this.formatWkt = new OpenLayers.Format.WKT();
 
       /**
-       * A nested object that contains references to all vector and WMS
-       * layers currently on the map, keyed by record id.
+       * A nested object that contains references to all vector and WMS layers
+       * currently on the map, keyed by record id.
        */
       this.layers = { vector: {}, wms: {} };
 
@@ -77,9 +77,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * Construct the OpenLayers Map instance, set the default base layer
-     * and call component start-up routines that add cursor controls, set
-     * the default focus/zoom, and listen for movement events.
+     * Construct the OpenLayers Map instance, set the default base layer, and
+     * call component start-up routines.
      */
     _initOpenLayers: function() {
 
@@ -269,7 +268,7 @@ Neatline.module('Map', function(
 
 
     // CONTROLS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -291,9 +290,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * Update the layer collections operated on by the hover and click
-     * controls. Called after new data arrives and the layer set has been
-     * rebuild by the `ingest` flow.
+     * Update the layers operated on by the hover and click controls. Called
+     * after new data arrives and the layer have been rebuilt by `ingest`.
      */
     updateControls: function() {
 
@@ -311,7 +309,7 @@ Neatline.module('Map', function(
 
 
     // VIEWPORT
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -320,8 +318,8 @@ Neatline.module('Map', function(
      * - If the model has a non-null `map_focus` and `map_zoom`, set the
      *   viewport using these values.
      *
-     * - Otherwise, automatically fit the viewport around the extent of
-     *   the model's geometries, except when coverage is `POINT(0 0)`.
+     * - Otherwise, automatically fit the viewport around the extent of the
+     *   model's geometries, except when coverage is `POINT(0 0)`.
      *
      * @param {Object} model: The record model.
      */
@@ -379,12 +377,12 @@ Neatline.module('Map', function(
 
 
     // LAYERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
-     * The top-level point of entry when a new record collection arrives.
-     * Updates the map layers to mirror the new records collection.
+     * The point of entry when a new record collection arrives. Updates the
+     * map layers to mirror the new records collection.
      *
      * @param {Object} records: The records collection.
      */
@@ -590,7 +588,7 @@ Neatline.module('Map', function(
 
 
     // FILTERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -648,7 +646,7 @@ Neatline.module('Map', function(
 
 
     // STYLES
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -718,7 +716,7 @@ Neatline.module('Map', function(
 
 
     // RENDERERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -816,7 +814,7 @@ Neatline.module('Map', function(
 
 
     // PUBLISHERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -830,8 +828,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is highlighted, trigger the `highlight` event with
-     * the model associated with the feature.
+     * When a feature is highlighted, trigger the `highlight` event with the
+     * model associated with the feature.
      *
      * @param {Object} evt: The highlight event.
      */
@@ -852,8 +850,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is unhighlighted, trigger the `unhighlight` event
-     * with the model associated with the feature.
+     * When a feature is unhighlighted, trigger the `unhighlight` event with
+     * the model associated with the feature.
      *
      * @param {Object} evt: The unhighlight event.
      */
@@ -874,8 +872,8 @@ Neatline.module('Map', function(
 
 
     /**
-     * When a feature is selected, trigger the `select` event with the
-     * model associated with the feature.
+     * When a feature is selected, trigger the `select` event with the model
+     * associated with the feature.
      *
      * @param {Object|OpenLayers.Feature} feature: The feature.
      */
@@ -936,13 +934,13 @@ Neatline.module('Map', function(
 
 
     // HELPERS
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     /**
-     * Set the z-index on a layer. Add 1 to the user-provided value to
-     * ensure that the layers always stack on top of the base layer, which
-     * is always has a z-index of 0.
+     * Set the z-index on a layer. Add 1 to the user-provided value to ensure
+     * that the layers always stack on top of the base layer, which is always
+     * has a z-index of 0.
      *
      * @param {Object} layer: A WMS / vector layer.
      * @param {Number} zindex: The z-index value.

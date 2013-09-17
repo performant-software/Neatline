@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -15,13 +15,6 @@ class ExhibitsControllerTest_PublicFullscreen
 
 
     protected $_isAdminTest = false;
-
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->_mockTheme();
-    }
 
 
     /**

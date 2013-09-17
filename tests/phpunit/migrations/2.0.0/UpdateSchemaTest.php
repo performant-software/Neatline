@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,8 +14,8 @@ class Migrate200Test_UpdateSchema extends Neatline_Case_Migrate200
 
 
     /**
-     * The original exhibits, records, and base layers tables should be
-     * preserved with `_migrate` extensions.
+     * The original exhibits, records, and layers tables should be preserved
+     * with `_migrate` extensions.
      */
     public function testBackupOldTables()
     {
@@ -33,8 +33,8 @@ class Migrate200Test_UpdateSchema extends Neatline_Case_Migrate200
 
 
     /**
-     * The new `neatline_exhibits` and `neatline_records` tables with the
-     * 2.x schema should be installed.
+     * The new `neatline_exhibits` and `neatline_records` tables with the 2.x
+     * schema should be installed.
      */
     public function testInstallNewTables()
     {

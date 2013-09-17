@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,8 +14,8 @@ class Migrate200Test_StartBackgroundJob extends Neatline_Case_Migrate200
 
 
     /**
-     * When the plugin is upgraded, the background process to migrate the
-     * data should be added to the queue.
+     * When the plugin is upgraded, the background process to migrate the data
+     * should be added to the queue.
      */
     public function testStartBackgroundJob()
     {

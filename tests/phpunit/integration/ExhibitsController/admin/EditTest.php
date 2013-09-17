@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -330,20 +330,20 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         // Submit the form, _reload exhibit.
         $this->dispatch('neatline/edit/'.$exhibit->id);
-        $e = $this->_reload($exhibit);
+        $exhibit = $this->_reload($exhibit);
 
         // Should set fields.
-        $this->assertEquals('Title',                $e->title);
-        $this->assertEquals('slug',                 $e->slug);
-        $this->assertEquals('Narrative.',           $e->narrative);
-        $this->assertEquals('Widget1,Widget2',      $e->widgets);
-        $this->assertEquals('Layer1,Layer2',        $e->spatial_layers);
-        $this->assertEquals('Layer1',               $e->spatial_layer);
-        $this->assertEquals($imagePath,             $e->image_layer);
-        $this->assertEquals('wms.org',              $e->wms_address);
-        $this->assertEquals('wms:layer',            $e->wms_layers);
-        $this->assertEquals(0,                      $e->spatial_querying);
-        $this->assertEquals(1,                      $e->public);
+        $this->assertEquals('Title',            $exhibit->title);
+        $this->assertEquals('slug',             $exhibit->slug);
+        $this->assertEquals('Narrative.',       $exhibit->narrative);
+        $this->assertEquals('Widget1,Widget2',  $exhibit->widgets);
+        $this->assertEquals('Layer1,Layer2',    $exhibit->spatial_layers);
+        $this->assertEquals('Layer1',           $exhibit->spatial_layer);
+        $this->assertEquals($imagePath,         $exhibit->image_layer);
+        $this->assertEquals('wms.org',          $exhibit->wms_address);
+        $this->assertEquals('wms:layer',        $exhibit->wms_layers);
+        $this->assertEquals(0,                  $exhibit->spatial_querying);
+        $this->assertEquals(1,                  $exhibit->public);
 
     }
 

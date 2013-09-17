@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -16,8 +16,8 @@ Neatline.module('Map.Layers', function(
 
 
   /**
-   * Dispatch a layer request to the appropriate handler. If no handler
-   * exists for the passed type and the request fails, return null.
+   * Dispatch a layer request to the appropriate handler. If no handler exists
+  * for the passed type and the request fails, return null.
    *
    * @param {Object} json: The layer definition.
    * @return {OpenLayers.Layer|null}: The layer.

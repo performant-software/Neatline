@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -24,8 +24,8 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
 
 
     /**
-     * BROWSE should display a list of exhibits with links to the public
-     * show views and editor views.
+     * BROWSE should display a list of exhibits with links to the public show
+     * views and editor views.
      */
     public function testExhibitList()
     {
@@ -93,9 +93,8 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
 
 
     /**
-     * When the number of exhibits is greater than the page length, the
-     * maximum number of exhibits that can fit on a page should be listed
-     * and pagination links should be displayed.
+     * When the number of exhibits exceeds the page length, the maximum number
+     * of exhibits should be listed and pagination links should be displayed.
      */
     public function testPagination()
     {

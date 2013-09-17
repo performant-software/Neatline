@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -59,40 +59,40 @@ class RecordsControllerTest_Get extends Neatline_Case_Default
         $record->__save();
 
         $this->dispatch('neatline/records/'.$record->id);
-        $r = $this->_getResponseArray();
+        $response = $this->_getResponseArray();
 
-        $this->assertEquals($record->id,    $r->id);
-        $this->assertEquals($item->id,      $r->item_id);
-        $this->assertEquals('1',            $r->slug);
-        $this->assertEquals('2',            $r->title);
-        $this->assertEquals('3',            $r->body);
-        $this->assertEquals('POINT(4 4)',   $r->coverage);
-        $this->assertEquals('5',            $r->tags);
-        $this->assertEquals('6',            $r->widgets);
-        $this->assertEquals('7',            $r->presenter);
-        $this->assertEquals('8',            $r->fill_color);
-        $this->assertEquals('9',            $r->fill_color_select);
-        $this->assertEquals('10',           $r->stroke_color);
-        $this->assertEquals('11',           $r->stroke_color_select);
-        $this->assertEquals(0.12,           $r->fill_opacity);
-        $this->assertEquals(0.13,           $r->fill_opacity_select);
-        $this->assertEquals(0.14,           $r->stroke_opacity);
-        $this->assertEquals(0.15,           $r->stroke_opacity_select);
-        $this->assertEquals(16,             $r->stroke_width);
-        $this->assertEquals(17,             $r->point_radius);
-        $this->assertEquals(18,             $r->zindex);
-        $this->assertEquals(19,             $r->weight);
-        $this->assertEquals('20',           $r->start_date);
-        $this->assertEquals('21',           $r->end_date);
-        $this->assertEquals('22',           $r->after_date);
-        $this->assertEquals('23',           $r->before_date);
-        $this->assertEquals('24',           $r->point_image);
-        $this->assertEquals('25',           $r->wms_address);
-        $this->assertEquals('26',           $r->wms_layers);
-        $this->assertEquals(27,             $r->min_zoom);
-        $this->assertEquals(28,             $r->max_zoom);
-        $this->assertEquals(29,             $r->map_zoom);
-        $this->assertEquals('30',           $r->map_focus);
+        $this->assertEquals($record->id,    $response->id);
+        $this->assertEquals($item->id,      $response->item_id);
+        $this->assertEquals('1',            $response->slug);
+        $this->assertEquals('2',            $response->title);
+        $this->assertEquals('3',            $response->body);
+        $this->assertEquals('POINT(4 4)',   $response->coverage);
+        $this->assertEquals('5',            $response->tags);
+        $this->assertEquals('6',            $response->widgets);
+        $this->assertEquals('7',            $response->presenter);
+        $this->assertEquals('8',            $response->fill_color);
+        $this->assertEquals('9',            $response->fill_color_select);
+        $this->assertEquals('10',           $response->stroke_color);
+        $this->assertEquals('11',           $response->stroke_color_select);
+        $this->assertEquals(0.12,           $response->fill_opacity);
+        $this->assertEquals(0.13,           $response->fill_opacity_select);
+        $this->assertEquals(0.14,           $response->stroke_opacity);
+        $this->assertEquals(0.15,           $response->stroke_opacity_select);
+        $this->assertEquals(16,             $response->stroke_width);
+        $this->assertEquals(17,             $response->point_radius);
+        $this->assertEquals(18,             $response->zindex);
+        $this->assertEquals(19,             $response->weight);
+        $this->assertEquals('20',           $response->start_date);
+        $this->assertEquals('21',           $response->end_date);
+        $this->assertEquals('22',           $response->after_date);
+        $this->assertEquals('23',           $response->before_date);
+        $this->assertEquals('24',           $response->point_image);
+        $this->assertEquals('25',           $response->wms_address);
+        $this->assertEquals('26',           $response->wms_layers);
+        $this->assertEquals(27,             $response->min_zoom);
+        $this->assertEquals(28,             $response->max_zoom);
+        $this->assertEquals(29,             $response->map_zoom);
+        $this->assertEquals('30',           $response->map_focus);
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -30,8 +30,8 @@ class Migrate200Test_ProcessRecordWmsLayers
 
 
     /**
-     * If a record has a WMS service and is active on the map, the WMS
-     * address and layers fields should be populated.
+     * If a record has a WMS service and is active on the map, the WMS address
+     * and layers fields should be populated.
      */
     public function testActive()
     {
@@ -42,8 +42,8 @@ class Migrate200Test_ProcessRecordWmsLayers
 
 
     /**
-     * If the record has a WMS service but was _not_ active on the map,
-     * the WMS fields should be left empty.
+     * If the record has a WMS service but was _not_ active on the map, the
+     * WMS fields should be left empty.
      */
     public function testInactive()
     {

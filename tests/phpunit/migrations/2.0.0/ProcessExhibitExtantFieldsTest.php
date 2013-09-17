@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -15,8 +15,8 @@ class Migrate200Test_ProcessExhibitExtantFields
 
 
     /**
-     * All values on the old exhibits table that have a direct equivalent
-     * on the new table should be migrated directly.
+     * All values on the old exhibits table that have a direct equivalent on
+     * the new table should be migrated directly.
      */
     public function testProcessExhibitExtantFields()
     {

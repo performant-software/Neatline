@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -15,8 +15,8 @@ class Migrate200Test_ProcessExhibitDefaultBaseLayer
 
 
     /**
-     * The old `default_base_layer` foreign key references should be moved
-     * to the corresponding layer slugs in the new `spatial_layers` field.
+     * The old `default_base_layer` foreign key references should be moved to
+     * the corresponding layer slugs in the new `spatial_layers` field.
      */
     public function setUp()
     {

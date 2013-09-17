@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -37,8 +37,8 @@ Neatline.module('Map', function(
 
 
   /**
-   * Unhighlight the layer that corresponds to the passed model and then
-   * focus on its extent (unless the event was triggered by the map).
+   * Unhighlight the layer that corresponds to the passed model and then focus
+  * on its extent (unless the event was triggered by the map).
    *
    * @param {Object} args: Event arguments.
    */

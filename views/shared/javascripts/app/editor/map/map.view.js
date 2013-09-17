@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * Monkey patch editing methods into the public map view.
@@ -30,16 +30,16 @@ _.extend(Neatline.Map.View.prototype, {
 
 
     // Acquire and prepare the editing layer:
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
-    // If a vector layer already exists for the record, use it as the edit
-    // layer; otherwise, create a new layer from the model:
+    // If a vector layer already exists, use it as the edit layer; otherwise,
+    // create a new layer from the model:
 
     this.editLayer = this.layers.vector[model.id]
     if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
 
-    // Set an arbitrarily high z-index value on the edit layer to ensure
-    // that it can always be manipulated by the editing controls:
+    // Set an arbitrarily high z-index value on the edit layer to ensure that
+    // it can always be manipulated by the editing controls:
 
     this.map.setLayerIndex(this.editLayer, 9999);
 
@@ -50,7 +50,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
     // Create the editing controls:
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     this.controls = {
 
@@ -141,14 +141,14 @@ _.extend(Neatline.Map.View.prototype, {
 
 
     // Reset the controls editing and cursor controls.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     this.deactivateEditorControls();
     this.activatePublicControls();
 
 
     // Set the active current editing mode.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     var modes = OpenLayers.Control.ModifyFeature;
 
@@ -202,7 +202,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
     // Update the regular polygon settings.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // SNAP ANGLE
     var snap = Number(settings.poly.snap) || 0;
@@ -220,8 +220,7 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Deactivate the default cursor controls on the map and switch on the
-   * `edit` `modifyFeatures` control.
+   * Deactivate the default cursor controls and switch on the `edit` control.
    */
   activateModifying: function() {
     this.deactivatePublicControls();
@@ -241,18 +240,17 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Update the model on the edit layer, update the edit layer's id key
-   * in the id-to-layer tracker object.
+   * Update the model on the edit layer, update the edit layer's id key in the
+   * id-to-layer tracker object.
    *
    * @param {Object} model: The updated model.
    */
   updateModel: function(model) {
 
-    // If the `id` of the model associated with the form has changed since
-    // the last `change` event, update the key used to identify the edit
-    // layer in the `layers.vector` hash. This is the case when the model
-    // has been saved for the first time, and the original `undefined` id
-    // is replaced by the new `id` of the resource on the server.
+    // If the `id` of the form model has changed since the last `change` event
+    // (eg, when the model is saved for the first time, and the concrete id
+    // is returned from the server), update the key used to identify the layer
+    // in the `layers.vector` hash.
 
     if (model.hasChanged('id')) {
       delete this.layers.vector[model.previous('id')];
@@ -280,16 +278,12 @@ _.extend(Neatline.Map.View.prototype, {
     // Get features from the edit layer.
     _.each(this.editLayer.features, function(f) {
 
-      // Don't save temporary editing geometry added by the modify feature
-      // control (eg, the drag-handle points added on vertices).
+      if (!f._sketch) { // Don't save editing drag handles.
 
-      if (!f._sketch) {
-
-        // If the feature is a collection, flatten it into an array of
-        // regular, non-collection features by creating new features from
-        // each of the component geometries. This prevents layers with
-        // multiple features from being serialized as nested collections,
-        // which can't be indexed by MySQL.
+        // If the feature is a collection, flatten it to an array of regular,
+        // non-collection features. This prevents layers with multiple
+        // features from being serialized as nested collections, which can't
+        // be stored in MySQL `GEOMETRY` columns.
 
         if (f.geometry.CLASS_NAME == 'OpenLayers.Geometry.Collection') {
           _.each(f.geometry.components, function(geo) {

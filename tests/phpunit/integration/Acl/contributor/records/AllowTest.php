@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -34,8 +34,8 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to create their own records in their
-     * own exhibits.
+     * Contributors should be able to create their own records in their own
+     * exhibits.
      */
     public function testCanCreateOwnRecordsInOwnExhibits()
     {
@@ -46,8 +46,8 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to update their own records in their
-     * own exhibits.
+     * Contributors should be able to update their own records in their own
+     * exhibits.
      */
     public function testCanUpdateOwnRecordsInOwnExhibits()
     {
@@ -58,8 +58,8 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to delete their own records in their
-     * own exhibits.
+     * Contributors should be able to delete their own records in their own
+     * exhibits.
      */
     public function testCanDeleteOwnRecordsInOwnExhibits()
     {
@@ -70,8 +70,8 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to update other users' records in their
-     * own exhibits.
+     * Contributors should be able to update other users' records in their own
+     * exhibits.
      */
     public function testCanUpdateOtherUsersRecordsInOwnExhibits()
     {
@@ -82,8 +82,8 @@ class AclTest_ContributorRecordsAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to delete other users' records in their
-     * own exhibits.
+     * Contributors should be able to delete other users' records in their own
+     * exhibits.
      */
     public function testCanDeleteOtherUsersRecordsInOwnExhibits()
     {

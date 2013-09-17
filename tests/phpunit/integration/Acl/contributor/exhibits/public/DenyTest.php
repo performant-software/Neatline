@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -23,8 +23,7 @@ class AclTest_ContributorExhibitsPublicDeny extends Neatline_Case_Default
 
 
     /**
-     * Contributors should not be able edit details for other users'
-     * exhibits.
+     * Contributors should not be able edit details for other users' exhibits.
      */
     public function testCannotEditOtherUsersExhibits()
     {

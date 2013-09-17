@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -27,8 +27,8 @@ class Migrate200Test_ProcessExhibitSimileDefaults
 
 
     /**
-     * The `default_focus_date` field should be migrated directly, and
-     * default values should be set for the tape and track heights.
+     * The `default_focus_date` field should be migrated directly, and default
+     * values should be set for the tape and track heights.
      */
     public function testSetExtantFields()
     {
@@ -46,8 +46,8 @@ class Migrate200Test_ProcessExhibitSimileDefaults
 
     /**
      * If the old `default_timeline_zoom` field is non-null, the new
-     * `simile_interval_unit` and `simile_interval_pixels` fields should
-     * be set with the values that correspond to the old zoom index.
+     * `simile_interval_unit` and `simile_interval_pixels` fields should be
+     * set with the values that correspond to the old zoom index.
      */
     public function testSetExistingZoom()
     {
@@ -63,8 +63,8 @@ class Migrate200Test_ProcessExhibitSimileDefaults
 
 
     /**
-     * If `default_timeline_zoom` field is null, the default values should
-     * be set on the new expansion row.
+     * If `default_timeline_zoom` field is null, the default values should be
+     * set on the new expansion row.
      */
     public function testSetDefaultZoom()
     {

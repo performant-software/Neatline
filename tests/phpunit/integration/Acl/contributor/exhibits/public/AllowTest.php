@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -54,8 +54,7 @@ class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to import items into their own
-     * exhibits.
+     * Contributors should be able to import items into their own exhibits.
      */
     public function testCanImportItemsIntoOwnExhibits()
     {
@@ -82,8 +81,7 @@ class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to open the editor for their own
-     * exhibits.
+     * Contributors should be able to open the editor for their own exhibits.
      */
     public function testCanOpenEditorForOwnExhibits()
     {
@@ -93,8 +91,8 @@ class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
 
 
     /**
-     * Contributors should be able to open the delete confirmation modal
-     * for their own exhibits.
+     * Contributors should be able to open the delete confirmation modal for
+     * their own exhibits.
      */
     public function testCanOpenDeleteModalForOwnExhibits()
     {

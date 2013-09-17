@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -27,8 +27,8 @@ class Migrate200Test_ProcessRecordWidgets
 
 
     /**
-     * If the old record was not activated on any of the viewports, the
-     * new `widgets` field should be empty.
+     * If the old record was not activated on any of the viewports, the new
+     * `widgets` field should be empty.
      */
     public function testNone()
     {
@@ -39,8 +39,8 @@ class Migrate200Test_ProcessRecordWidgets
 
 
     /**
-     * If the old record was activated on the item panel, the `Waypoints`
-     * tag should be applied to `widgets`.
+     * If the old record was activated on the item panel, the `Waypoints` tag
+     * should be applied to `widgets`.
      */
     public function testItems()
     {

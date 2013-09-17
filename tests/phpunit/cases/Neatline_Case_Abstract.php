@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -23,8 +23,8 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 
 
     /**
-     * Clear testing records. This needs to be done manually since the
-     * records table is MyISAM (for indexes), and thus doesn't get cleared
+     * Clear testing records. This needs to be done manually since the records
+     * table is MyISAM (for spatial/fulltext indexes), and doesn't get cleared
      * with the rest of the tables when the transaction is rolled back.
      */
     public function tearDown()

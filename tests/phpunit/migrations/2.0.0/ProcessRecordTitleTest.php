@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -40,8 +40,8 @@ class Migrate200Test_ProcessRecordTitle extends Neatline_Case_Migrate200
 
 
     /**
-     * If the record has a parent item and the `title` field is defined on
-     * the record, the existing value should be migrated directly.
+     * If the record has a parent item and the `title` field is defined on the
+     * record, the existing value should be migrated directly.
      */
     public function testParentItemLocalValue()
     {

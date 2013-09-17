@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -27,8 +27,8 @@ class Migrate200Test_ProcessRecordCoverage
 
 
     /**
-     * If `geocoverage` is a single-feature WKT string, wrap it inside of
-     * a `GEOMETRYCOLLECTION` and set it directly.
+     * If `geocoverage` is a single-feature WKT string, wrap it inside of a
+     * `GEOMETRYCOLLECTION` and set it directly.
      */
     public function testSingleFeatureWKT()
     {
@@ -66,8 +66,8 @@ class Migrate200Test_ProcessRecordCoverage
 
     /**
      * If `geocoverage` is a collection of points/lines/polygons, geoPHP
-     * should convert to `GEOMETRYCOLLECTION`, not `MULTI`-XX, which can't
-     * be indexed in MySQL.
+     * should convert to `GEOMETRYCOLLECTION`, not `MULTI`-XX, which can't be
+     * indexed in MySQL.
      */
     public function testMultiFeatureKML()
     {

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -27,8 +27,8 @@ class Migrate200Test_ProcessRecordPresenter
 
 
     /**
-     * If `show_bubble` on the old record is true, the `presenter` field
-     * on the new record should be set to `StaticBubble`.
+     * If `show_bubble` on the old record is true, the `presenter` field on
+     * the new record should be set to `StaticBubble`.
      */
     public function testBubble()
     {
@@ -40,8 +40,8 @@ class Migrate200Test_ProcessRecordPresenter
 
 
     /**
-     * If `show_bubble` on the old record is false, the `presenter` field
-     * on the new record should be set to `None`.
+     * If `show_bubble` on the old record is false, the `presenter` field on
+     * the new record should be set to `None`.
      */
     public function testNoBubble()
     {
