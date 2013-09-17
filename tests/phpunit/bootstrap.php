@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * PHPUnit runner.
@@ -34,8 +34,8 @@ require_once 'mocks/filters.php';
 
 // TODO: Is there really no better way?
 //
-// Manually load `Zend_Test_PHPUnit_Constraint_DomQuery`, which triggers
-// a false-negative error in the suite when first loaded by Zend's PHPUnit
+// Manually load `Zend_Test_PHPUnit_Constraint_DomQuery`, which triggers a
+// false-negative error in the suite when first required by Zend's PHPUnit
 // subclasses, which don't work with PHPUnit 3.6+.
 
 @require_once 'Zend/Test/PHPUnit/Constraint/DomQuery.php';

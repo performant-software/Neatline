@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,8 +14,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
 
 
     /**
-     * `getSelect` should select the plain-text value of `coverage` when
-     * the field is defined.
+     * `getSelect` should select the plain-text value of `coverage` when the
+     * field is defined.
      */
     public function testSelectCoverageAsText()
     {
@@ -36,8 +36,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
 
 
     /**
-     * `getSelect` should select NULL for `coverage` when the plain-text
-     * value of the field is `POINT(0 0)`.
+     * `getSelect` should select NULL for `coverage` when the plain-text value
+     * of the field is `POINT(0 0)`.
      */
     public function testSelectEmptyCoverageAsNull()
     {

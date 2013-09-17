@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -21,8 +21,8 @@ class HelpersTest_GetLayersForSelect extends Neatline_Case_Default
 
 
     /**
-     * `nl_getLayersForSelect` should convert the layers JSON to an array
-     * of `id` => `name` pairs.
+     * `nl_getLayersForSelect` should convert the layers JSON to an array of
+     * `id` => `name` pairs.
      */
     public function testGetLayersForSelect()
     {

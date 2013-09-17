@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,8 +14,8 @@ class ImportItemsTest extends Neatline_Case_Default
 
 
     /**
-     * `Neatline_Job_ImportItems` should create Neatline records for all
-     * items that match the search query.
+     * `Neatline_Job_ImportItems` should create Neatline records for all items
+     * that match the search query.
      */
     public function testCreateRecords()
     {
@@ -44,9 +44,9 @@ class ImportItemsTest extends Neatline_Case_Default
 
 
     /**
-     * For any given Omeka item, `Neatline_Job_ImportItems` should check
-     * to see if a record already exists in the exhibit for the item; if
-     * so, the record should be re-compiled, but not duplicated.
+     * For any given Omeka item, `Neatline_Job_ImportItems` should check to
+     * see if a record already exists in the exhibit for the item; if so, the
+     * record should be re-compiled, but not duplicated.
      */
     public function testRecompileRecords()
     {
@@ -80,10 +80,10 @@ class ImportItemsTest extends Neatline_Case_Default
 
 
     /**
-     * When a new record is created for an item, the `added` field on the
-     * record should be set to match the `added` field on the parent item.
-     * This ensures that the records will be listed in the Neatline editor
-     * in the same order as the parent items in the Omeka admin.
+     * When a record is created for an item, the `added` field on the record
+     * should match the `added` field on the parent item. This ensures that
+     * the records will be listed in the Neatline editor in the same order as
+     * the parent items in the Omeka admin.
      */
     public function testSetRecordAdded()
     {
@@ -113,8 +113,8 @@ class ImportItemsTest extends Neatline_Case_Default
 
     /**
      * The import job should manually update the `webDir` property on the
-     * filesystem adapter. This ensures that file links will point to the
-     * web-accessible URLs of the files, not the local filesystem.
+     * filesystem adapter. This ensures that file links will point to the web-
+     * accessible URLs of the files, not the local filesystem.
      */
     public function testSetWebDirectory()
     {

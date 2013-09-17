@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,8 +14,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * `queryRecords` should retrieve records that belong to the passed
-     * exhibit. Records in other exhibits should be excluded.
+     * `queryRecords` should get records that belong to the passed exhibit.
+     * Records in other exhibits should be excluded.
      */
     public function testExhibitFilter()
     {
@@ -174,10 +174,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * When an `extent` polygon is passed to `queryRecords`, records that
-     * have been saved with empty coverages (which is represented with the
-     * de-facto null `POINT(0 0)` WKT string) should never be returned in
-     * the result set, even when the `extent` includes the 0,0 point.
+     * When an `extent` polygon is passed to `queryRecords`, records that have
+     * been saved with empty coverages (represented with the de-facto NULL
+     * `POINT(0 0)` WKT string) should not be returned in the result set, even
+     * when the `extent` includes the 0,0 point.
      */
     public function testExtentFilterNoCoverageOmission()
     {
@@ -202,8 +202,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * When a WMS address and layer(s) are defined on a record, the record
-     * should always be matched by extent queries.
+     * When a WMS layer is defined on a record, the record should always be
+     * matched by extent queries.
      */
     public function testExtentFilterWmsLayerInclusion()
     {
@@ -227,8 +227,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * `queryRecords` should search for keywords in the `title`, `body`,
-     * and `slug` fields.
+     * `queryRecords` should search for keywords in the `title`, `body`, and
+     * `slug` fields.
      */
     public function testKeywordsFilter()
     {
@@ -397,9 +397,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * When a `limit` and `offset` values are passed to `queryRecords`,
-     * the result set should be truncated to the `limit` length, starting
-     * from the `offset` value.
+     * When a `limit` and `offset` values are passed to `queryRecords`, the
+     * result set should be truncated to the `limit` length, starting from the
+     * `offset` value.
      */
     public function testLimitFilter()
     {
@@ -452,9 +452,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * When a `limit` and `offset` values are passed to `queryRecords`,
-     * the result set should include a `count` key with the original size
-     * of the result set before the limit was applied.
+     * When a `limit` and `offset` values are passed to `queryRecords`, the
+     * result set should include a `count` key with the original size of the
+     * result set before the limit was applied.
      */
     public function testTotalRecordCount()
     {
@@ -475,8 +475,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * When an `offset` key is not included in the parameters array, the
-     * result array should include an `offset` key that defaults to 0.
+     * When an `offset` is not included in the parameters array, the result
+     * array should include an `offset` key that defaults to 0.
      */
     public function testOffsetWhenNoValueIsPassed()
     {
@@ -492,8 +492,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * When an `offset` key is included in the parameters array, it should
-     * be echoed back in the`offset` key on the results array.
+     * When an `offset` key is included in the parameters array, it should be
+     * echoed back in the`offset` key on the results array.
      */
     public function testOffsetWhenValueIsPassed()
     {

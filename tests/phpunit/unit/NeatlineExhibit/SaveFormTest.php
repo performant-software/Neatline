@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -74,8 +74,8 @@ class NeatlineExhibitTest_SaveForm extends Neatline_Case_Default
 
 
     /**
-     * `saveForm` set the `published` timestamp when the exhibit is marked
-     * as "Public" for the first time.
+     * `saveForm` set the `published` timestamp when the exhibit is marked as
+     * "Public" for the first time.
      */
     public function testSetPublishedTimestamp()
     {

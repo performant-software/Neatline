@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -139,8 +139,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
 
     /**
-     * CSS rule-sets on the parent exhibit with selectors that are tagged
-     * on the record should be updated with the new record values.
+     * CSS rule-sets on the parent exhibit with selectors that are tagged on
+     * the record should be updated with the new record values.
      */
     public function testUpdateExhibitStyles()
     {
@@ -200,10 +200,10 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
 
     /**
-     * When a record is saved with _new_ tags - eg., when the tags string
-     * used to be `tag1`, and is changed to `tag1,tag2` - the existing CSS
-     * rules for the `tag2` should be applied to the record before it is
-     * used to update the exhibit CSS.
+     * When a record is saved with new tags - eg, when the tags string used to
+     * be `tag1`, and is changed to `tag1,tag2` - the existing CSS rules for
+     * the `tag2` should be applied to the record before it is used to update
+     * the exhibit CSS.
      */
     public function testPullStyles()
     {
@@ -243,8 +243,8 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
     /**
      * When data is saved to a new, unsaved record, values from the `all`
-     * selector should be pulled to the record before it is used to update
-     * the exhibit CSS.
+     * selector should be pulled to the record before it is used to update the
+     * exhibit CSS.
      */
     public function testPullAllTagWhenUnsaved()
     {
@@ -274,11 +274,11 @@ class NeatlineRecordTest_SaveForm extends Neatline_Case_Default
 
 
     /**
-     * When data is saved to an existing record, values from the `all`
-     * selector should _not_ be pulled to the record before it is used to
-     * update the exhibit CSS. Otherwise, existing values on the exhibit
-     * stylesheet would always clobber new values from the form, making it
-     * impossible to change any of the fields controlled by `all`.
+     * When data is saved to an existing record, rules from the `all` selector
+     * should _not_ be pulled to the record before it is used to update the
+     * exhibit CSS. Otherwise, existing values on the exhibit stylesheet would
+     * always clobber new values from the form, making it impossible to change
+     * any of the fields controlled by `all`.
      */
     public function testNotPullAllTagWhenSaved()
     {

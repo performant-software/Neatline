@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -21,8 +21,8 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
 
 
     /**
-     * `compileItem` should write the "Title" element on the parent item
-     * to `title` and the full metadata output to `body`.
+     * `compileItem` should write the "Title" element on the parent item to
+     * `title` and the full metadata output to `body`.
      */
     public function testCompileItem()
     {

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -21,10 +21,10 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
 
     /**
-     * `nl_getItemMarkup` should first try to match `item-[tag]` templates
-     * in the exhibit-specific theme; if more than one tag on the record
-     * has a corresponding template, the template for the leftmost tag in
-     * the list should take precedence.
+     * `nl_getItemMarkup` should first try to match `item-[tag]` templates in
+     * the exhibit-specific theme; if more than one tag on the record has a
+     * corresponding template, the template for the leftmost tag in the list
+     * should take precedence.
      */
     public function testTagTemplate()
     {
@@ -47,8 +47,8 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
 
     /**
-     * When none of the `item-[tag]` templates matches the record, try to
-     * render an `item` template in the exhibit-specific theme.
+     * If none of the `item-[tag]` templates matche the record, try to render
+     * an `item` template in the exhibit-specific theme.
      */
     public function testSlugTemplate()
     {
@@ -70,9 +70,9 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
 
     /**
-     * When none of the templates in the exhibit-specific theme matches 
-     * the record, revert to the global `item` template, which is provided
-     * by the core plugin and can also be overridden in the theme.
+     * When none of the templates in the exhibit-specific theme matches the
+     * record, revert to the global `item` template, which is provided by the
+     * core plugin and can also be overridden in the theme.
      */
     public function testDefaultTemplate()
     {

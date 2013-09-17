@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,8 +14,8 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_Case_Default
 
 
     /**
-     * When a coverage is defined, `toArrayForSave` should set the value
-     * and flip `is_coverage` to 1.
+     * When a coverage is defined, `toArrayForSave` should set the value and
+     * flip `is_coverage` to 1.
      */
     public function testDefinedCoverage()
     {
@@ -37,8 +37,8 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_Case_Default
 
 
     /**
-     * When a coverage is _not_ defined, `toArrayForSave` should set the
-     * de-facto null `POINT(0 0)` value and flip `is_coverage` to 0.
+     * When a coverage is _not_ defined, `toArrayForSave` should set the de-
+     * facto null `POINT(0 0)` value and flip `is_coverage` to 0.
      */
     public function testUndefinedCoverage()
     {

@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -21,8 +21,8 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
 
 
     /**
-     * `nl_getLayersForExhibit` should return layer definitions for the
-     * layers included in the `spatial_layers` field.
+     * `nl_getLayersForExhibit` should return layer definitions for the layers
+     * included in the `spatial_layers` field.
      */
     public function testDefaultLayerIsIncluded()
     {
@@ -48,8 +48,8 @@ class HelpersTest_GetLayersForExhibit extends Neatline_Case_Default
 
 
     /**
-     * When the default layer is not enabled for the exhibit, the default
-     * layer should be merged into the array of definitions.
+     * When the default layer is not explicitly enabled for the exhibit, the
+     * default layer should be merged into the array of definitions.
      */
     public function testDefaultLayerIsExcluded()
     {

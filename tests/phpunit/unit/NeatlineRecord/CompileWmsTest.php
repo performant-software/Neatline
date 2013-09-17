@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -14,9 +14,9 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
 
 
     /**
-     * When a WMS address and layer are defined, `compileWms` should set
-     * the generic coverage that will always be matched by extent queries
-     * and flip the `is_coverage` and `is_wms` trackers to 1.
+     * When a WMS address and layer are defined, `compileWms` should set the
+     * generic coverage that will always be matched by extent queries and flip
+     * the `is_coverage` and `is_wms` trackers to 1.
      */
     public function testWmsLayerDefined()
     {
@@ -47,8 +47,8 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
 
 
     /**
-     * When a WMS address and layer are _not_ defined, `compileWms` should
-     * not make any changes to the record.
+     * When a WMS address and layer are _not_ defined, `compileWms` should not
+     * make any changes to the record.
      */
     public function testWmsLayerNotDefined()
     {
