@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -33,10 +33,10 @@ describe('Map | Publications', function() {
 
   it('should publish `highlight` on feature highlight', function() {
 
-    // --------------------------------------------------------------------
-    // When the cursor hovers on a feature, the `highlight` event should
-    // be published with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the cursor hovers on a feature, the `highlight` event should be
+    // published with the feature's model.
+    // ------------------------------------------------------------------------
 
     NL.hoverOnMapFeature(feature);
 
@@ -50,10 +50,10 @@ describe('Map | Publications', function() {
 
   it('should publish `unhighlight` on feature unhighlight', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the cursor leaves a feature, the `unhighlight` event should be
     // published with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.hoverOnMapFeature(feature);
     NL.unHoverOnMapFeature();
@@ -68,10 +68,10 @@ describe('Map | Publications', function() {
 
   it('should publish `select` on feature select', function() {
 
-    // --------------------------------------------------------------------
-    // When a feature is clicked, the `select` event should be published
-    // with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a feature is clicked, the `select` event should be published with
+    // the feature's model.
+    // ------------------------------------------------------------------------
 
     NL.clickOnMapFeature(feature);
 
@@ -85,10 +85,10 @@ describe('Map | Publications', function() {
 
   it('should publish `unselect` on feature unselect', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When a feature is unselected by a click elsewhere on the map, the
     // `unselect` event should be published with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.clickOnMapFeature(feature);
     NL.clickOffMapFeature();

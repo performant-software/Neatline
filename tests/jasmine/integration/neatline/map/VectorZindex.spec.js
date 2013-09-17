@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,10 +23,10 @@ describe('Map | Vector Zindex', function() {
 
   it('should apply `zindex` values', function() {
 
-    // --------------------------------------------------------------------
-    // The layer indices for vector layers should be set according to the
-    // value of the `zindex` fields on the record models.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The layer indexes for vector layers should be set from the value of the
+    // `zindex` fields on the record models.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
 

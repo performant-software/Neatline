@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Map | WMS Layer Management', function() {
 
   it('should load layers when exhibit starts', function() {
 
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the map should construct WMS layers for
-    // records with WMS data that arrive in the initial query. 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the map should create WMS layers for records
+    // with WMS data that arrive in the initial query. 
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.regular);
     var layers = NL.vw.MAP.getWmsLayers();
@@ -46,9 +46,9 @@ describe('Map | WMS Layer Management', function() {
 
   it('should load layers when map is moved', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // New WMS layers should be loaded when the map is moved.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.triggerMapMoveEnd();
 
@@ -69,10 +69,10 @@ describe('Map | WMS Layer Management', function() {
 
   it('should add new layers', function() {
 
-    // --------------------------------------------------------------------
-    // When the map is refreshed, new WMS layers should be created for
-    // records with WMS data that were absent from the last collection.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map is refreshed, new WMS layers should be created for records
+    // with WMS data that were absent from the last collection.
+    // ------------------------------------------------------------------------
 
     // Load collection without record 3.
     NL.refreshMap(fx.deleted);
@@ -89,10 +89,10 @@ describe('Map | WMS Layer Management', function() {
 
   it('should not rebuild existing layers', function() {
 
-    // --------------------------------------------------------------------
-    // When records are ingested that are already represented with WMS
-    // layers, the existing layers should not be rebuilt.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When records are ingested that are already represented with WMS layers,
+    // the existing layers should not be rebuilt.
+    // ------------------------------------------------------------------------
 
     NL.refreshMap(fx.regular);
 
@@ -116,10 +116,10 @@ describe('Map | WMS Layer Management', function() {
 
   it('should garbage collect stale layers', function() {
 
-    // --------------------------------------------------------------------
-    // When the map is refreshed, WMS layers for with records that are no
-    // longer present in the collection should be removed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map is refreshed, WMS layers for with records that are absent
+    // from the new collection should be removed.
+    // ------------------------------------------------------------------------
 
     // Load collection with record 3.
     NL.refreshMap(fx.regular);

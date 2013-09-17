@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -30,10 +30,10 @@ describe('Styles | Set Focus', function() {
 
   it('should populate default focus and zoom', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Use Current Viewport as Default" button is clicked, the
-    // default focus and zoom inputs should be populated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Use Current Viewport as Default" button is clicked, the map
+    // focus and zoom inputs should be populated.
+    // ------------------------------------------------------------------------
 
     NL.setMapCenter(1, 2, 3);
     el.setFocus.trigger('click');

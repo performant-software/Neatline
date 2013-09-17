@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -18,10 +18,10 @@ describe('Map | Image Base Layer', function() {
 
   it('should construct image base layer', function() {
 
-    // --------------------------------------------------------------------
-    // When an image URL is defined on the exhibit, the map should create
-    // a layer from the image and set it as the base layer.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When an image URL is defined on the exhibit, the map should create a
+    // layer from the image and set it as the base layer.
+    // ------------------------------------------------------------------------
 
     var layers  = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
     var layer   = NL.vw.MAP.map.baseLayer;

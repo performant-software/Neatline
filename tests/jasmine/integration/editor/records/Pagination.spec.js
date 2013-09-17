@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -28,10 +28,10 @@ describe('Records | Pagination', function() {
 
   it('should hide pagination when all records fit', function() {
 
-    // --------------------------------------------------------------------
-    // The paginators should not be displayed when the entire record list
-    // can fit into a single screen.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The paginators should not be displayed when the entire record list can
+    // fit into a single screen.
+    // ------------------------------------------------------------------------
 
     Neatline.g.neatline.per_page = 10;
 
@@ -46,9 +46,9 @@ describe('Records | Pagination', function() {
 
   describe('|xx|xxxx', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // << (disabled, 1st page), >> (enabled, next page).
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     it('with search query', function() {
 
@@ -86,9 +86,9 @@ describe('Records | Pagination', function() {
 
   describe('x|xx|xxx', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // << (enabled, 1st page), >> (enabled, next page).
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     it('with search query', function() {
 
@@ -126,9 +126,9 @@ describe('Records | Pagination', function() {
 
   describe('xx|xx|xx', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // << (enabled, 1st page), >> (enabled, next page).
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     it('with search query', function() {
 
@@ -166,9 +166,9 @@ describe('Records | Pagination', function() {
 
   describe('xxxx|xx|', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // << (enabled, previous page), >> (disabled, current page).
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     it('with search query', function() {
 
@@ -206,9 +206,9 @@ describe('Records | Pagination', function() {
 
   describe('xxxxx|x|', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // << (enabled, previous page), >> (disabled, current page).
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     it('with search query', function() {
 

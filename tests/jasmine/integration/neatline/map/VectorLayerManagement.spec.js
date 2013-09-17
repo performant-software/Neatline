@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Map | Vector Layer Management', function() {
 
   it('should load layers when exhibit starts', function() {
 
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the map should construct vector layers for
-    // records that arrive in the initial query.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the map should add vector layers for records
+    // that arrive in the initial query.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.regular);
     var layers = NL.vw.MAP.getVectorLayers();
@@ -46,9 +46,9 @@ describe('Map | Vector Layer Management', function() {
 
   it('should load layers when map is moved', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // New vector layers should be loaded when the map is moved.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.triggerMapMoveEnd();
 
@@ -69,10 +69,10 @@ describe('Map | Vector Layer Management', function() {
 
   it('should add new layers', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the map is refreshed, new vector layers should be created for
     // records that were not present in the last collection.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Load collection without record 3.
     NL.refreshMap(fx.deleted);
@@ -89,10 +89,10 @@ describe('Map | Vector Layer Management', function() {
 
   it('should not rebuild existing layers', function() {
 
-    // --------------------------------------------------------------------
-    // When records are ingested that already have vector layers on the
-    // map, the existing layers should not be rebuilt.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When records are ingested that already have vector layers on the map,
+    // the existing layers should not be rebuilt.
+    // ------------------------------------------------------------------------
 
     NL.refreshMap(fx.regular);
 
@@ -116,10 +116,10 @@ describe('Map | Vector Layer Management', function() {
 
   it('should garbage collect stale layers', function() {
 
-    // --------------------------------------------------------------------
-    // When the map is refreshed, vector layers associated with records
-    // that are no longer present in the collection should be removed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map is refreshed, vector layers associated with records that
+    // are no longer present in the collection should be removed.
+    // ------------------------------------------------------------------------
 
     // Load collection with record 3.
     NL.refreshMap(fx.regular);
@@ -136,11 +136,11 @@ describe('Map | Vector Layer Management', function() {
 
   it('should not garbage collect frozen layers', function() {
 
-    // --------------------------------------------------------------------
-    // When the map is refreshed, vector layers associated with records
-    // that are absent from the new collection should _not_ be removed if
-    // the `nFrozen` property is true.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map is refreshed, vector layers associated with records that
+    // are not present in the new collection should _not_ be garbage collected
+    // if the `nFrozen` property is true.
+    // ------------------------------------------------------------------------
 
     // Load collection with record 3.
     NL.refreshMap(fx.regular);

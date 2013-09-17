@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -33,10 +33,10 @@ describe('Records | Publications', function() {
 
   it('should publish `highlight` on row mouseenter', function() {
 
-    // --------------------------------------------------------------------
-    // When the cursor hovers on a record listing, the `highlight` event
-    // should be published with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the cursor hovers on a record row, the `highlight` event should be
+    // published with the row's model.
+    // ------------------------------------------------------------------------
 
     $(row).trigger('mouseenter');
 
@@ -50,10 +50,10 @@ describe('Records | Publications', function() {
 
   it('should publish `unhighlight` on row mouseleave', function() {
 
-    // --------------------------------------------------------------------
-    // When the cursor leaves a record listing, the `unhighlight` event
-    // should be published with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the cursor leaves a record row, the `unhighlight` event should be
+    // published with the row's model.
+    // ------------------------------------------------------------------------
 
     $(row).trigger('mouseenter');
     $(row).trigger('mouseleave');
@@ -68,10 +68,10 @@ describe('Records | Publications', function() {
 
   it('should publish `select` on row click', function() {
 
-    // --------------------------------------------------------------------
-    // When a record listing is clicked, the `unhighlight` event should be
-    // published with the feature's model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a record row is clicked, the `select` event should be published
+    // with the row's model.
+    // ------------------------------------------------------------------------
 
     $(row).trigger('click');
 

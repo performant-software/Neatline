@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -25,10 +25,10 @@ describe('Search | Map Mirroring', function() {
 
   it('should not load records when `map:` is entered', function() {
 
-    // --------------------------------------------------------------------
-    // When `map:` is typed into the search box, the regular GET request
-    // for records should not be issued.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `map:` is typed into the search box, the regular GET request for
+    // records should not be issued.
+    // ------------------------------------------------------------------------
 
     // Keyup with `map:`.
     var c1 = NL.server.requests.length;
@@ -49,10 +49,10 @@ describe('Search | Map Mirroring', function() {
 
   it('should start mirroring when query pattern entered', function() {
 
-    // --------------------------------------------------------------------
-    // When `map:` is typed into the search box, the record list should
-    // immediately synchronize with the collection on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `map:` is typed into the search box, the record list should sync
+    // with the collection on the map.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.map);
 
@@ -71,10 +71,10 @@ describe('Search | Map Mirroring', function() {
 
   it('should start mirroring on route request', function() {
 
-    // --------------------------------------------------------------------
-    // When a route is requested with `map:` as the search query, the
-    // record list shold synchronize with the collection on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a route is requested with `map:` as the search query, the record
+    // list shold synchronize with the collection on the map.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.map);
 
@@ -93,10 +93,10 @@ describe('Search | Map Mirroring', function() {
 
   it('should mirror when map is updated', function() {
 
-    // --------------------------------------------------------------------
-    // When map mirroring is active, the record list should display the
-    // same set of records that is currently visible on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When map mirroring is active, the record list should display the same
+    // set of records that is currently visible on the map.
+    // ------------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
     NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
@@ -116,10 +116,10 @@ describe('Search | Map Mirroring', function() {
 
   it('should not show pagination when mirroring', function() {
 
-    // --------------------------------------------------------------------
-    // When map mirroring is active, the record pagination should not be
-    // displayed, even when the number of records exceeds the page limit.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When map mirroring is active, the pagination should not be displayed,
+    // even when the number of records exceeds the page limit.
+    // ------------------------------------------------------------------------
 
     // Set page length to 1.
     Neatline.g.neatline.per_page = 1;
@@ -138,10 +138,10 @@ describe('Search | Map Mirroring', function() {
 
   it('should stop mirroring when query pattern broken', function() {
 
-    // --------------------------------------------------------------------
-    // When the `map:` query pattern is broken, the record list should
-    // stop mirroring the map and start loading regular search results.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the `map:` query pattern is broken, the record list should stop
+    // mirroring the map and start loading regular search results.
+    // ------------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
     NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');

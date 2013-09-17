@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -30,10 +30,10 @@ describe('Map | Layer Refreshing', function() {
 
   it('should clear and rebuild vector layers', function() {
 
-    // --------------------------------------------------------------------
-    // The `MAP:refresh` command should completely wipe out all existing
-    // vector layers and reload records for the current viewport focus.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The `MAP:refresh` command should completely clear all existing vector
+    // layers and reload records for the current viewport focus.
+    // ------------------------------------------------------------------------
 
     // Load default layers.
     NL.refreshMap(fx.vector.original);
@@ -69,10 +69,10 @@ describe('Map | Layer Refreshing', function() {
 
   it('should clear and rebuild WMS layers', function() {
 
-    // --------------------------------------------------------------------
-    // The `MAP:refresh` command should completely wipe out all existing
-    // WMS layers and reload records for the current viewport focus.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The `MAP:refresh` command should completely clear all existing WMS
+    // layers and reload records for the current viewport focus.
+    // ------------------------------------------------------------------------
 
     // Load default layers.
     NL.refreshMap(fx.wms.original);
@@ -108,9 +108,9 @@ describe('Map | Layer Refreshing', function() {
 
   it('should not rebuild frozen vector layers', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // `MAP:refresh` should exclude frozen vector layers from refresh.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Load default layers, freeze layer 2.
     NL.refreshMap(fx.vector.original);

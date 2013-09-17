@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -29,10 +29,10 @@ describe('Map | Vector Styles', function() {
 
   it('should construct style maps from record fields', function() {
 
-    // --------------------------------------------------------------------
-    // When vector layers are ingested, the style maps should be created
-    // from record values.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When vector layers are ingested, the style maps should be created from
+    // record values.
+    // ------------------------------------------------------------------------
 
     var def = layer1.styleMap.styles['default'].defaultStyle;
     var tmp = layer1.styleMap.styles.temporary.defaultStyle;
@@ -81,10 +81,10 @@ describe('Map | Vector Styles', function() {
 
     it('should highlight all the features on the layer', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor hovers on a feature, all features on the layer
-      // should be redrawn with the `temporary` render intent.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the cursor hovers on a feature, all features on the layer should
+      // be redrawn with the `temporary` render intent.
+      // ----------------------------------------------------------------------
 
       // Hover on a feature.
       NL.hoverOnMapFeature(layer1.features[0]);
@@ -96,18 +96,17 @@ describe('Map | Vector Styles', function() {
 
     it('should not highlight when map is being panned', function() {
 
-      // ------------------------------------------------------------------
-      // When the map is being panned, features should not be highlighted
-      // on mouseenter. This prevents a strange interaction that can cause
-      // features to become "stuck" in highlight mode - when the map is
-      // dragged quickly, a space can open up between the actual position
-      // of the cursor on the screen and the position of the underlying
-      // tiles, making it possible for the cursor to drift onto a feature.
-      // When the mouse button is released, the cursor can back out of
-      // the feature as the tiles catch up with the position of the cursor
-      // without triggering mouseleave, leaving the feature highlighted
-      // until the user manually hovers and un-hovers on it.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the map is being panned, features should not be highlighted on
+      // mouseenter. This prevents an interaction that can cause features to
+      // become "stuck" in highlight mode - when the map is dragged quickly, a
+      // gap can open up between the position of the cursor on the screen and
+      // the position of the underlying tiles, which makes it possible for the
+      // cursor to drift onto a feature. When the drag ends, the cursor can
+      // then snap back outside of the feature as the tiles catch up with the
+      // positionof the cursor, but without triggering `mouseleave`, leaving
+      // the feature highlighted until the user manually hovers/un-hovers.
+      // ----------------------------------------------------------------------
 
       // Start panning the map.
       NL.triggerMapMoveStart();
@@ -122,13 +121,13 @@ describe('Map | Vector Styles', function() {
 
     it('should not highlight when map is being loaded', function() {
 
-      // ------------------------------------------------------------------
-      // When records are bein loaded from the server, features should not
-      // be highlighted on mouseenter. This prevents features from getting
-      // "stuck" in highlight mode when the highlight control is reset in
-      // response to the arrival of a new set of records between the time
-      // when the curosr enters and exits a feature.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When records are being loaded from the server, features should not be
+      // highlighted on mouseenter. This prevents features from getting stuck
+      // in highlight mode when the highlight control is reset in response to
+      // the arrival of a new set of records between the time when the cursor
+      // enters and exits a feature.
+      // ----------------------------------------------------------------------
 
       // Pan the map, triggering an extent query.
       NL.triggerMapMoveStart(); NL.triggerMapMoveEnd();
@@ -152,10 +151,10 @@ describe('Map | Vector Styles', function() {
 
     it('should unhighlight all the features on the layer', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor leaves a feature, all features should be redrawn
-      // with the `default` render intent.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the cursor leaves a feature, all sibling features should be
+      // redrawn with the `default` render intent.
+      // ----------------------------------------------------------------------
 
       // Hover on a feature.
       NL.hoverOnMapFeature(layer1.features[0]);
@@ -170,10 +169,10 @@ describe('Map | Vector Styles', function() {
 
     it('should select all the features on the layer', function() {
 
-      // ------------------------------------------------------------------
-      // When a feature is clicked, all features on the layer should be
-      // redrawn with the `select` render intent.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a feature is clicked, all sibling features on the layer should
+      // be redrawn with the `select` render intent.
+      // ----------------------------------------------------------------------
 
       // Click on a feature.
       NL.clickOnMapFeature(layer1.features[0]);
@@ -185,10 +184,10 @@ describe('Map | Vector Styles', function() {
 
     it('should unselect all the features on the layer', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor clicks off a feature, all features on the layer
-      // should be redrawn with the `default` render intent.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the cursor clicks off a feature, all sibling features on the
+      // layer should be redrawn with the `default` render intent.
+      // ----------------------------------------------------------------------
 
       // Click on a feature, then click off.
       NL.clickOnMapFeature(layer1.features[0]);

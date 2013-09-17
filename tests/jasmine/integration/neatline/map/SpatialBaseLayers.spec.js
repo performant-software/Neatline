@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -18,10 +18,10 @@ describe('Map | Spatial Base Layers', function() {
 
   it('should construct base layers', function() {
 
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the map should construct all of the base
-    // layers defined in the `spatial_layers` global.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the map should build all of the base layers
+    // defined in the `spatial_layers` global.
+    // ------------------------------------------------------------------------
 
     var layers = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
 
@@ -37,10 +37,10 @@ describe('Map | Spatial Base Layers', function() {
 
   it('should set default base layer', function() {
 
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the map should set the defalt base layer
-    // to the layer with the `id` defined by the `spatial_layer` global.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the map should set the defalt base layer to
+    // the layer with the `id` defined by the `spatial_layer` global.
+    // ------------------------------------------------------------------------
 
     expect(NL.vw.MAP.map.baseLayer.name).toEqual('Stamen Toner');
 

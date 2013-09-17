@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,9 +23,9 @@ describe('Styles | Open Form', function() {
 
   it('should populate form with exhibit data', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Styles" is displayed, the form should load exhibit data.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.navigate('styles');
     NL.respondLast200(fx.exhibit);

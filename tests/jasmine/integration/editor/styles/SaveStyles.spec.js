@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -31,10 +31,10 @@ describe('Styles | Save Styles', function() {
 
   it('should synchronize model with stylesheet editor', function() {
 
-    // --------------------------------------------------------------------
-    // When the stylesheet is changed, the model should be updated with a
-    // JSON representation of the CSS.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the stylesheet is changed, the model should be updated with a JSON
+    // representation of the CSS.
+    // ------------------------------------------------------------------------
 
     NL.vw.STYLES.styles.getSession().setValue('val');
     expect(NL.vw.STYLES.model.get('styles')).toEqual('val');
@@ -44,10 +44,10 @@ describe('Styles | Save Styles', function() {
 
   it('should issue PUT request when "Save" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked, a well-formed PUT request should
-    // be issued to the exhibit API with the new data.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Save" button is clicked, a well-formed PUT request should be
+    // issued to the exhibit API with the new data.
+    // ------------------------------------------------------------------------
 
     NL.vw.STYLES.styles.getSession().setValue('1');
     NL.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
@@ -71,10 +71,10 @@ describe('Styles | Save Styles', function() {
 
   it('should flash a notification when the save succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request is successful, a
-    // success notification should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Save" button is clicked and the request succeeds, a success
+    // notification should be displayed.
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'info');
@@ -93,10 +93,10 @@ describe('Styles | Save Styles', function() {
 
   it('should flash a notification when the save fails', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Save" button is clicked and the request fails, a failure
     // notification should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'error');
@@ -115,10 +115,10 @@ describe('Styles | Save Styles', function() {
 
   it('should refresh the exhibit when save succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request succeeds, the
-    // exhibit should be refreshed to manifest the new styles on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Save" button is clicked and the request succeeds, the exhibit
+    // should be refreshed to manifest the new styles on the map.
+    // ------------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 

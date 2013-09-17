@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -18,10 +18,10 @@ describe('Layers | API', function() {
 
   it('should return `null` when a handler does not exist', function() {
 
-    // --------------------------------------------------------------------
-    // When a layer is requested with a type that is not supported by any
-    // of the handlers, the request should return `null`.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a layer is requested with a type that is not supported by any of
+    // the handlers, the request should return `null`.
+    // ------------------------------------------------------------------------
 
     var layer = Neatline.request('MAP:LAYERS:getLayer', {
       type: 'LayerType'
@@ -34,10 +34,10 @@ describe('Layers | API', function() {
 
   it('should return a layer when a handler exists', function() {
 
-    // --------------------------------------------------------------------
-    // When a layer is requested with a type that is supported by any of
-    // the handlers, the request should return the layer.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a layer is requested with a type that is supported by any of the
+    // handlers, the request should return the layer.
+    // ------------------------------------------------------------------------
 
     Neatline.reqres.setHandler('MAP:LAYERS:LayerType', function() {
       return true;

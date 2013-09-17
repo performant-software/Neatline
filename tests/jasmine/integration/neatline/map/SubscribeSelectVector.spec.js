@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
   it('should focus when a layer already exists', function() {
 
-    // --------------------------------------------------------------------
-    // When `select` is triggered with a record that has a vector layer
-    // on the map, the map should focus on the existing layer.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `select` is triggered with a record that has a vector layer on the
+    // map, the map should focus on the existing layer.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
 
@@ -48,11 +48,11 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
   it('should create layer and focus when no layer exists', function() {
 
-    // --------------------------------------------------------------------
-    // When `select` is triggered with a record that does _not_ have a
-    // vector layer on the map, the map should create a new layer for the
-    // record and focus on it.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `select` is triggered with a record that does _not_ have a vector
+    // layer on the map, the map should create a new layer for the record and
+    // focus on it.
+    // ------------------------------------------------------------------------
 
     // Create model with no vector layer.
     var model = NL.recordFromJson(fx.record);
@@ -76,12 +76,12 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
   it('should reselect currently selected layer after ingest', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When a layer is selected and the map is refreshed, the previously-
-    // selected layer should be re-selected after the new layers are added
-    // to the map (it will be automatically unselected when the highlight
-    // and select controls are updated with the new set of layers).
-    // --------------------------------------------------------------------
+    // selected layer should be re-selected after the new layers are added (it
+    // will be automatically unselected when the highlight and select controls
+    // are updated with the new set of layers).
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
 
@@ -100,12 +100,12 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
   it('should not focus when feature is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When a map feature is clicked, the map should _not_ focus on the
-    // record that corresponds to the clicked feature. This prevents
-    // disorienting leaps that can occur when the record's zoom level is
-    // much higher is much higher or lower the current map zoom.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a map feature is clicked, the map should _not_ focus on the record
+    // that corresponds to the feature. This prevents disorienting leaps that
+    // can occur when the record's zoom level is much higher is much higher or
+    // lower the current map zoom.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
     var feature = NL.vw.MAP.getVectorLayers()[0].features[0];

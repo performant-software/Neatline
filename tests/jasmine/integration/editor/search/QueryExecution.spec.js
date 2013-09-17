@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Search | Query Execution', function() {
 
   it('should bold the input when a tags query is entered', function() {
 
-    // --------------------------------------------------------------------
-    // When a search query that starts with `tags:` is entered, the input
-    // should be bolded to indicate that the tags string is being parsed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a query that starts with `tags:` is entered, the input should be
+    // bolded to indicate that the tags string is being parsed.
+    // ------------------------------------------------------------------------
 
     // Keyup with tag string in the box.
     NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
@@ -40,10 +40,10 @@ describe('Search | Query Execution', function() {
 
   it('should bold the input when map mirroring is enabled', function() {
 
-    // --------------------------------------------------------------------
-    // When `map:` is entered, the input should be bolded to indicate that
-    // the map mirroring has been activated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `map:` is entered, the input should be bolded to indicate that the
+    // map mirroring has been activated.
+    // ------------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
     NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
@@ -56,11 +56,11 @@ describe('Search | Query Execution', function() {
 
   it('should unbold the input for regular keyword query', function() {
 
-    // --------------------------------------------------------------------
-    // When the input has been bolded in response to a structured query
-    // (tags or map mirroring) and then the value is changed to a regular
-    // keyword, the input should be un-bolded.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the input has been bolded in response to a structured query (tags
+    // or map mirroring) and then the recognized pattern is broken, the input
+    // should be un-bolded.
+    // ------------------------------------------------------------------------
 
     // Exiting tags query.
     NL.vw.SEARCH.__ui.search.val('tags:').trigger('keyup');
@@ -81,11 +81,11 @@ describe('Search | Query Execution', function() {
 
   it('should execute keyword search on keyup', function() {
 
-    // --------------------------------------------------------------------
-    // When a character is typed in the search box and the query value is
-    // a regular keyword query, a GET request should be generated and the
-    // record list should updated with the results.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a character is typed in the search box and the query value is a
+    // regular keyword query, a GET request should be generated and the record
+    // list should updated with the results.
+    // ------------------------------------------------------------------------
 
     // Keyup with 'keyword' in the box.
     NL.vw.SEARCH.__ui.search.val('word1 word2').trigger('keyup');
@@ -113,11 +113,11 @@ describe('Search | Query Execution', function() {
 
   it('should execute tags search on keyup', function() {
 
-    // --------------------------------------------------------------------
-    // When a character is typed in the search box and the query value is
-    // a tag string, a GET request should be generated and the record list
-    // should updated with the results.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a character is typed in the search box and the query value is a
+    // tag string, a GET request should be issued and the record list should
+    // update with the results.
+    // ------------------------------------------------------------------------
 
     // Keyup with tag string in the box.
     NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
@@ -148,10 +148,10 @@ describe('Search | Query Execution', function() {
 
   describe('should update the route on keystroke', function() {
 
-    // --------------------------------------------------------------------
-    // When characters are typed in the search box, the route should be
-    // updated in real-time to match the current query value.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the search query is changed, the route should be updated in real-
+    // time to match the current query value.
+    // ------------------------------------------------------------------------
 
     it('one word', function() {
 

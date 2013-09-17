@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -18,10 +18,10 @@ describe('Map | Spatial Querying Disabled', function() {
 
   it('should query for records when the exhibit starts', function() {
 
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the map should query for all records that
-    // are plotted on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the map should query for all records that are
+    // plotted on the map.
+    // ------------------------------------------------------------------------
 
     NL.assertMapStaticQuery();
 
@@ -30,9 +30,9 @@ describe('Map | Spatial Querying Disabled', function() {
 
   it('should not query for records when the map is moved', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the map is moved, the map should not query for new records.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     var c1 = NL.server.requests.length;
     NL.triggerMapMoveEnd();

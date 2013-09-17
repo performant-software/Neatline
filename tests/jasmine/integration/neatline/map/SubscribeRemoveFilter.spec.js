@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,10 +23,10 @@ describe('Map | Subscribe `removeFilter`', function() {
 
   it('should remove filters', function() {
 
-    // --------------------------------------------------------------------
-    // `removeFilter` should remove evaluator function identified by the
+    // ------------------------------------------------------------------------
+    // `removeFilter` should remove the evaluator function identified by the
     // passed key and re-filter all vector and WMS layers on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
 

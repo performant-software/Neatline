@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -36,10 +36,10 @@ describe('Record | Create Record', function() {
 
   it('should show the form when "New Record" is clicked', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "New Record" button is clicked, the record form should be
     // displayed with a new model with defined style values.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Add record.
     NL.click(el.addButton);
@@ -57,27 +57,27 @@ describe('Record | Create Record', function() {
     var record = NL.vw.RECORD.model;
 
     // Model should have defined styles.
-    expect(_.isString(record.get('presenter'))).            toBeTruthy();
-    expect(_.isString(record.get('fill_color'))).           toBeTruthy();
-    expect(_.isString(record.get('fill_color_select'))).    toBeTruthy();
-    expect(_.isString(record.get('stroke_color'))).         toBeTruthy();
-    expect(_.isString(record.get('stroke_color_select'))).  toBeTruthy();
-    expect(_.isNumber(record.get('fill_opacity'))).         toBeTruthy();
-    expect(_.isNumber(record.get('fill_opacity_select'))).  toBeTruthy();
-    expect(_.isNumber(record.get('stroke_opacity'))).       toBeTruthy();
-    expect(_.isNumber(record.get('stroke_opacity_select'))).toBeTruthy();
-    expect(_.isNumber(record.get('point_radius'))).         toBeTruthy();
-    expect(_.isNumber(record.get('stroke_width'))).         toBeTruthy();
+    expect(_.isString(record.get('presenter'))).              toBeTruthy();
+    expect(_.isString(record.get('fill_color'))).             toBeTruthy();
+    expect(_.isString(record.get('fill_color_select'))).      toBeTruthy();
+    expect(_.isString(record.get('stroke_color'))).           toBeTruthy();
+    expect(_.isString(record.get('stroke_color_select'))).    toBeTruthy();
+    expect(_.isNumber(record.get('fill_opacity'))).           toBeTruthy();
+    expect(_.isNumber(record.get('fill_opacity_select'))).    toBeTruthy();
+    expect(_.isNumber(record.get('stroke_opacity'))).         toBeTruthy();
+    expect(_.isNumber(record.get('stroke_opacity_select'))).  toBeTruthy();
+    expect(_.isNumber(record.get('point_radius'))).           toBeTruthy();
+    expect(_.isNumber(record.get('stroke_width'))).           toBeTruthy();
 
   });
 
 
   it('should activate the "Text" tab', function() {
 
-    // --------------------------------------------------------------------
-    // When a new record is created, the "Text" tab should be activated,
-    // even if a different tab was active when the form was last closed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new record is created, the "Text" tab should be activated, even
+    // if a different tab was active when the form was last closed.
+    // ------------------------------------------------------------------------
 
     // Open form.
     NL.click($(NL.getRecordListRows()[0]));
@@ -96,12 +96,13 @@ describe('Record | Create Record', function() {
 
   });
 
+
   it('should issue POST request when "Save" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is saved for the first time, the form should issue a
-    // POST request with the exhibit id.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a record is saved for the first time, the form should issue a POST
+    // request with the exhibit id.
+    // ------------------------------------------------------------------------
 
     // Add record.
     NL.click(el.addButton);
@@ -121,13 +122,13 @@ describe('Record | Create Record', function() {
 
   it('should not double-load layer for newly-saved record', function() {
 
-    // --------------------------------------------------------------------
-    // Once the new record is saved on the server, it will start arriving
-    // in result sets for viewport queries, including the one kicked off
-    // immediately after the first save succeeds. Since the new record is
-    // already represented on the map by the edit layer, a new layer for
-    // the saved record should not be built in addition to the edit layer.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // Once the new record is saved on the server, it will start arriving in
+    // result sets for viewport queries, including the one triggered after the
+    // first save succeeds. Since the new record is already represented on the
+    // map by the edit layer, a new layer for the saved record should not be
+    // built in addition to the edit layer.
+    // ------------------------------------------------------------------------
 
     // Add record, save.
     NL.click(el.addButton);
@@ -147,10 +148,10 @@ describe('Record | Create Record', function() {
 
   it('should update the route after save', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is saved, the URL hash should be updated to point to
-    // the id-specific resource for the record. For example, if the "Text"
-    // tab is active, the route should change from `#record/add/text` to:
+    // ------------------------------------------------------------------------
+    // When a record is saved, the URL hash should be updated to point to the
+    // id-specific resource for the record. For example, if the "Text" tab is
+    // active, the route should change from `#record/add/text` to:
     //
     // `#record/<id>/text`
     //
@@ -159,7 +160,7 @@ describe('Record | Create Record', function() {
     // `#record/<id>/map`
     //
     // etc.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     _.each(NL.getTabSlugs(), function(slug) {
 

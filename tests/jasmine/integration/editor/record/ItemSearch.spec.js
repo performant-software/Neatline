@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -31,10 +31,10 @@ describe('Record | Item Search', function() {
 
   it('should autocomplete Omeka items under search box', function() {
 
-    // --------------------------------------------------------------------
-    // When text is typed into the "Omneka ID" box, a list of Omeka items
-    // that match the query should be autocompleted below the box.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When text is typed into the "Omneka ID" box, a list of Omeka items that
+    // match the query should be autocompleted below the box.
+    // ------------------------------------------------------------------------
 
     // Enter item search query.
     NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
@@ -63,11 +63,11 @@ describe('Record | Item Search', function() {
 
   it('should populate id and title on item select', function() {
 
-    // --------------------------------------------------------------------
-    // When an autocomplete result is chosen, the "Omeka ID" and "Title"
-    // inputs should be populated and the `item_id` and `title` fields on
-    // the record model should be synchronized with the inputs.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When an autocomplete result is selected, the "Omeka ID" and "Title"
+    // inputs should be populated and the `item_id` and `title` fields on the
+    // record model should be synchronized with the inputs.
+    // ------------------------------------------------------------------------
 
     // Get the id of the autocomplete result.
     var items = $(fx.items);

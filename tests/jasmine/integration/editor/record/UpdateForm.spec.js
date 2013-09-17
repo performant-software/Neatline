@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,10 +23,10 @@ describe('Record | Update Form', function() {
 
   it('should update edit layer model', function() {
 
-    // --------------------------------------------------------------------
-    // When the record form model changes, the `nModel` attribute on the
-    // map edit layer should be updated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the record form model changes, the `nModel` attribute on the map
+    // edit layer should be updated.
+    // ------------------------------------------------------------------------
 
     NL.showRecordForm(fx.record);
 

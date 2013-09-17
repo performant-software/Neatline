@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -44,9 +44,9 @@ describe('Record | Geometry Controls', function() {
 
   it('should set draw point mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // The "Draw Point" radio should enable point-drawing on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Check "Draw Point".
     el.pan.removeAttr('checked');
@@ -60,9 +60,9 @@ describe('Record | Geometry Controls', function() {
 
   it('should set draw line mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // The "Draw Line" radio should enable line-drawing on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Check "Draw Line".
     el.pan.removeAttr('checked');
@@ -76,9 +76,9 @@ describe('Record | Geometry Controls', function() {
 
   it('should set draw polygon mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // The "Draw Polygon" radio should enable polygon-drawing on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Check "Draw Polygon".
     el.pan.removeAttr('checked');
@@ -92,9 +92,9 @@ describe('Record | Geometry Controls', function() {
 
   it('should set draw SVG mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // The "Draw SVG" radio should enable SVG-drawing on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Check "Draw SVG".
     el.pan.removeAttr('checked');
@@ -108,10 +108,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set draw regular polygon mode', function() {
 
-    // --------------------------------------------------------------------
-    // The "Draw Regular Polygon" radio should enable regular-polygon-
-    // drawing on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The "Draw Regular Polygon" radio should enable regular polygon drawing
+    // on the map.
+    // ------------------------------------------------------------------------
 
     // Check "Draw Regular Polygon".
     el.pan.removeAttr('checked');
@@ -125,10 +125,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set sides', function() {
 
-    // --------------------------------------------------------------------
-    // When the value in "Sides" input is changed, the `sides` property on
-    // the modifyFeature control should be updated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the value in "Sides" input is changed, the `sides` property on the
+    // `modifyFeature` control should be updated.
+    // ------------------------------------------------------------------------
 
     // Set sides.
     NL.vw.SPATIAL.__ui.sides.val('10').trigger('change');
@@ -141,10 +141,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should block invalid sides', function() {
 
-    // --------------------------------------------------------------------
-    // When a value below 3 or a string is entered into the "Sides" input,
-    // the `sides` property should default to 3.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a value below 3 or a string is entered into the "Sides" input, the
+    // `sides` property should default to 3.
+    // ------------------------------------------------------------------------
 
     // Numbers below 3:
     _.each(_.range(-1, 2), function(v) {
@@ -161,10 +161,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set snap angle', function() {
 
-    // --------------------------------------------------------------------
-    // When the value in "Snap Angle" is changed, the `snapAngle` property
-    // on the modifyFeature control should be updated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the value in "Snap Angle" is changed, the `snapAngle` property on
+    // the modifyFeature control should be updated.
+    // ------------------------------------------------------------------------
 
     // Set snap angle.
     NL.vw.SPATIAL.__ui.snap.val('45').trigger('change');
@@ -177,10 +177,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should block invalid snap angle', function() {
 
-    // --------------------------------------------------------------------
-    // When a negative value or a string is entered into the "Snap Angle"
+    // ------------------------------------------------------------------------
+    // When a negative value or a non-number is entered into the "Snap Angle"
     // input, the `snapAngle` property should default to 0.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Negative number:
     NL.vw.SPATIAL.__ui.snap.val('-1').trigger('change');
@@ -195,10 +195,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set irregular', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Irregular" checkbox is changed, the `irregular` property
-    // on the modifyFeature control should be updated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Irregular" checkbox is changed, the `irregular` property on
+    // the `modifyFeature` control should be updated.
+    // ------------------------------------------------------------------------
 
     // Set irregular.
     NL.vw.SPATIAL.__ui.irreg.attr('checked', 'checked').trigger('change');
@@ -217,10 +217,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set modify shape mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Modify Shape" radio button is selected, the corresponding
-    // modifyFeature control should be activated on the map.
-    // --------------------------------------------------------------------
+    // `modifyFeature` control should be activated on the map.
+    // ------------------------------------------------------------------------
 
     // Check "Modify Shape".
     el.pan.removeAttr('checked');
@@ -239,10 +239,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set rotate shape mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Rotate Shape" radio button is selected, the corresponding
-    // modifyFeature control should be activated on the map.
-    // --------------------------------------------------------------------
+    // `modifyFeature` control should be activated on the map.
+    // ------------------------------------------------------------------------
 
     // Check "Rotate Shape".
     el.pan.removeAttr('checked');
@@ -261,10 +261,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set resize shape mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Resize Shape" radio button is selected, the corresponding
-    // modifyFeature control should be activated on the map.
-    // --------------------------------------------------------------------
+    // `modifyFeature` control should be activated on the map.
+    // ------------------------------------------------------------------------
 
     // Check "Resize Shape".
     el.pan.removeAttr('checked');
@@ -283,10 +283,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set drag shape mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Drag Shape" radio button is selected, the corresponding
-    // modifyFeature control should be activated on the map.
-    // --------------------------------------------------------------------
+    // `modifyFeature` control should be activated on the map.
+    // ------------------------------------------------------------------------
 
     // Check "Drag Shape".
     el.pan.removeAttr('checked');
@@ -305,10 +305,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should set delete shape mode', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Delete Shape" radio button is selected, the corresponding
-    // modifyFeature control should be activated on the map.
-    // --------------------------------------------------------------------
+    // `modifyFeature` control should be activated on the map.
+    // ------------------------------------------------------------------------
 
     // Check "Delete Shape".
     el.pan.removeAttr('checked');
@@ -322,10 +322,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on point add', function() {
 
-    // --------------------------------------------------------------------
-    // When a new point is added to the map, the coverage text area should
-    // be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new point is added to the map, the coverage text area should be
+    // updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Add a point.
     var pt = new OpenLayers.Geometry.Point(3,4);
@@ -341,10 +341,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on line add', function() {
 
-    // --------------------------------------------------------------------
-    // When a new line is added to the map, the coverage text area should
-    // be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new line is added to the map, the coverage text area should be
+    // updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Add line.
     var pt1   = new OpenLayers.Geometry.Point(3,4);
@@ -362,10 +362,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on polygon add', function() {
 
-    // --------------------------------------------------------------------
-    // When a new polygon is added to the map, the coverage text area
-    // should be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new polygon is added to the map, the coverage text area should
+    // be updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Add a polygon.
     var pt1   = new OpenLayers.Geometry.Point(3,4);
@@ -385,10 +385,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on svg add', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When a new SVG-backed geometry collection is added to the map, the
     // coverage text area should be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Add a geometry collection.
     var pt1 = new OpenLayers.Geometry.Point(3,4);
@@ -406,10 +406,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on svg polygon add', function() {
 
-    // --------------------------------------------------------------------
-    // When a new SVG-backed polygon is added to the map, the coverage
-    // text area should be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new SVG-backed polygon is added to the map, the coverage text
+    // area should be updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Add a polygon.
     var pt1   = new OpenLayers.Geometry.Point(1,2);
@@ -429,10 +429,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on regular polygon add', function() {
 
-    // --------------------------------------------------------------------
-    // When a new regular polygon is added to the map, the coverage text
-    // area should be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new regular polygon is added to the map, the coverage text area
+    // should be updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Add a polygon.
     var pt1   = new OpenLayers.Geometry.Point(1,2);
@@ -452,10 +452,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on feature edit', function() {
 
-    // --------------------------------------------------------------------
-    // When an existing geometry is edited, the coverage text area should
-    // be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When an existing geometry is edited, the coverage text area should be
+    // updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Edit feature, set new point coords.
     var feature = NL.vw.MAP.editLayer.features[0];
@@ -476,10 +476,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should update coverage on feature delete', function() {
 
-    // --------------------------------------------------------------------
-    // When an existing geometry is deleted, the coverage text area should
-    // be updated with the new WKT string.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When an existing geometry is deleted, the coverage text area should be
+    // updated with the new WKT string.
+    // ------------------------------------------------------------------------
 
     // Edit feature, set new point coords.
     var feature = NL.vw.MAP.editLayer.features[0];
@@ -495,10 +495,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should not save sketch geometry', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When geometry modified, the drag handle points added to the feature
     // should not be saved as part of the coverage.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Add a new line.
     var pt1   = new OpenLayers.Geometry.Point(3,4);
@@ -521,10 +521,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should remove all features on reset', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Clear all Geometry" button is clicked, all features on
-    // the edit layer should be deleted.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Clear all Geometry" button is clicked, all features on the
+    // edit layer should be deleted.
+    // ------------------------------------------------------------------------
 
     // Click "Clear all Geometry".
     el.clear.trigger('click');
@@ -540,10 +540,10 @@ describe('Record | Geometry Controls', function() {
 
   it('should revert to "Navigate" mode when tab is closed', function() {
 
-    // --------------------------------------------------------------------
-    // The geometry editing controls should revert to "Navigate" mode when
-    // the spatial tab is deactivated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The geometry editing controls should revert to "Navigate" mode when the
+    // spatial tab is deactivated.
+    // ------------------------------------------------------------------------
 
     // Activate "Draw Polygon".
     el.pan[0].checked = false; el.poly[0].checked = true;

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -30,31 +30,11 @@ describe('Record | Presenter Interactions', function() {
   });
 
 
-  it('should deactivate when form opened with map tab', function() {
-
-    // --------------------------------------------------------------------
-    // When the record form is opened and the map tab is selected, the
-    // presenter should be deactivated.
-    // --------------------------------------------------------------------
-
-    // Spy on trigger.
-    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
-
-    // Request record map tab.
-    NL.navigate('record/add/map');
-
-    // Presenter should deactivate.
-    expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
-
-  });
-
-
   it('should deactivate when map tab is selected', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is being edited and the map tab is selected, the
-    // presenter should be deactivated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map tab is selected, the presenter should be deactivated.
+    // ------------------------------------------------------------------------
 
     // Spy on trigger.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
@@ -70,10 +50,9 @@ describe('Record | Presenter Interactions', function() {
 
   it('should activate when map tab is unselected', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is being edited and the map tab is unselected, the
-    // presenter should be activated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map tab is unselected, the presenter should be activated.
+    // ------------------------------------------------------------------------
 
     // Spy on trigger.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
@@ -90,11 +69,30 @@ describe('Record | Presenter Interactions', function() {
   });
 
 
+  it('should deactivate when form opened with map tab', function() {
+
+    // ------------------------------------------------------------------------
+    // When the record form is opened with the map tab selected, the presenter
+    // should be deactivated.
+    // ------------------------------------------------------------------------
+
+    // Spy on trigger.
+    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+
+    // Request record map tab.
+    NL.navigate('record/add/map');
+
+    // Presenter should deactivate.
+    expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
+
+  });
+
+
   it('should activate when the form is closed', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the record form is closed, the presenter should be activated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Select "Map".
     el.map.tab('show');

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,11 +24,11 @@ describe('Map | Edit Layer Management', function() {
 
   it('should create edit layer for existing record', function() {
 
-    // --------------------------------------------------------------------
-    // When the edit form is opened for an existing record that is not
-    // currently loaded on the map, a new layer should be created for the
-    // record and set as the edit layer.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the edit form is opened for an existing record that is not loaded
+    // on the map, a new layer should be created for the record and set as the
+    // edit layer.
+    // ------------------------------------------------------------------------
 
     // Load record list with record 3.
     NL.respondRecordList200(fx.record3);
@@ -54,9 +54,9 @@ describe('Map | Edit Layer Management', function() {
 
   it('should create edit layer for new record', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When a new record is added, a new edit layer should be created.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.respondAll200(fx.record3);
 
@@ -75,10 +75,10 @@ describe('Map | Edit Layer Management', function() {
 
   it('should not remove edit layer for existing record', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is being edited, the edit layer should not be removed
-    // if new data is ingested that does not include the record.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a record is being edited, the edit layer should not be removed if
+    // new data is ingested that does not include the record.
+    // ------------------------------------------------------------------------
 
     NL.respondAll200(fx.record3);
     var record3 = NL.getRecordListModels()[2];
@@ -98,10 +98,10 @@ describe('Map | Edit Layer Management', function() {
 
   it('should not remove edit layer for new record', function() {
 
-    // --------------------------------------------------------------------
-    // When a new record is created, the edit layer should not be removed
-    // when new data is ingested.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new record is created, the edit layer should not be removed when
+    // new data is ingested.
+    // ------------------------------------------------------------------------
 
     NL.respondAll200(fx.record3);
 
@@ -120,10 +120,10 @@ describe('Map | Edit Layer Management', function() {
 
   it('should resume updating the edit layer when edit ends', function() {
 
-    // --------------------------------------------------------------------
-    // When a record edit form is closed, the layer that was previouly the
-    // edit layer should start updating again in response to map moves.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the record form is closed, the layer that was previouly the edit
+    // layer should start updating again in response to map moves.
+    // ------------------------------------------------------------------------
 
     NL.respondAll200(fx.record3);
     var record3 = NL.getRecordListModels()[2];
@@ -145,11 +145,11 @@ describe('Map | Edit Layer Management', function() {
 
   it('should clear unsaved edit layer when edit ends', function() {
 
-    // --------------------------------------------------------------------
-    // When a new record is added, but then the form is closed without
-    // being saved, the edit layer that was created for the model should
-    // be garbage collected by the next data ingest.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a new record is added, but then the form is closed without being
+    // saved, the edit layer that was created for the model should be garbage
+    // collected by the next data ingest.
+    // ------------------------------------------------------------------------
 
     NL.respondAll200(fx.record3);
 

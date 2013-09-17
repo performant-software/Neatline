@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,12 +24,12 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
 
   it('should not focus for model with WMS but no focus', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is selected that has a WMS layer but no defined focus
-    // or zoom, the map should _not_ focus, since the record will have the
-    // generic coverage that covers the whole map, which, when focused on,
-    // has the effect of zooming out to the highest level.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a record is selected that has a WMS layer but no default focus or
+    // zoom, the map should not focus on the record since the record will have
+    // the generic coverage that covers the whole map, which, when focused on,
+    // zooms the map out to the highest level.
+    // ------------------------------------------------------------------------
 
     var model = NL.recordFromJson(fx.noFocus);
 
@@ -47,10 +47,10 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
 
   it('should focus for model with WMS and focus', function() {
 
-    // --------------------------------------------------------------------
-    // When a record is selected that has a WMS layer and defined focus
-    // and zoom values, the map should apply the defaults as usual.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a record is selected that has a WMS layer and default focus / zoom
+    // values, the map should apply the defaults as usual.
+    // ------------------------------------------------------------------------
 
     var model = NL.recordFromJson(fx.focus);
 

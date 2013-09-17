@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,10 +23,10 @@ describe('Map | Subscribe `unselect`', function() {
 
   it('should unselect features', function() {
 
-    // --------------------------------------------------------------------
-    // When `unselect` is triggered with a record that has a vector layer
-    // on the map, the map should unhighlight the features.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `unselect` is triggered with a record that has a vector layer on
+    // the map, the map should unhighlight the features.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];

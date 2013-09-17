@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -30,10 +30,10 @@ describe('Presenters | Static Bubble', function() {
 
   it('should hide the bubble by default', function() {
 
-    // --------------------------------------------------------------------
-    // By default, when a record is not bound to the bubble, the bubble
-    // container should be appended to the map container and invisible.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // By default, when the bubble is not displayed, the container should be
+    // appended to the map container and invisible.
+    // ------------------------------------------------------------------------
 
     expect(NL.vw.MAP.$el).toContain(NL.vw.BUBBLE.$el);
     expect(NL.vw.BUBBLE.$el).not.toBeVisible();
@@ -44,11 +44,11 @@ describe('Presenters | Static Bubble', function() {
 
     it('should show the title, not the body or close "X"', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor hovers on a feature, the the record should be
-      // bound to the bubble and the title should be displayed in the map
-      // container. The body and close "X" should stay hidden.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the cursor hovers on a feature, the the record should be bound
+      // to the bubble and the title should be displayed in the map container.
+      // The body and close "X" should stay hidden.
+      // ----------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
 
@@ -67,10 +67,10 @@ describe('Presenters | Static Bubble', function() {
 
     it('should not override a selected record', function() {
 
-      // ------------------------------------------------------------------
-      // When a record is selected and the cursor hovers on a feature for
-      // a different record, the new record should not be highlighted.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a record is selected and the cursor hovers on a feature for a
+      // different record, the new record should not be highlighted.
+      // ----------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
       NL.clickOnMapFeature(feature1);
@@ -88,10 +88,10 @@ describe('Presenters | Static Bubble', function() {
 
     it('should hide the bubble if it is not selected', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor leaves a feature and a record is not selected,
-      // the bubble should be hidden.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the cursor leaves a feature and a record is not selected, the
+      // bubble should be hidden.
+      // ----------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
       NL.unHoverOnMapFeature();
@@ -103,10 +103,10 @@ describe('Presenters | Static Bubble', function() {
 
     it('should not hide the bubble if it is selected', function() {
 
-      // ------------------------------------------------------------------
-      // When the cursor leaves a feature and a record is selected, the
-      // bubble should be hidden.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the cursor leaves a feature and a record is selected, the bubble
+      // should be hidden.
+      // ----------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
       NL.clickOnMapFeature(feature1);
@@ -119,9 +119,9 @@ describe('Presenters | Static Bubble', function() {
 
     it('should hide the bubble when cursor leaves exhibit', function() {
 
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
       // When the cursor leaves the exhibit, the bubble should be hidden.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
       NL.triggerMapMouseout();
@@ -137,10 +137,10 @@ describe('Presenters | Static Bubble', function() {
 
     it('should show close "X" and body if body is non-null', function() {
 
-      // ------------------------------------------------------------------
-      // When a feature is selected and the record body content is non-
-      // null, the body and close "X" should be displayed.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a feature is selected and the record body content is non-null,
+      // the body and close "X" should be displayed.
+      // ----------------------------------------------------------------------
 
       // Set non-null body.
       layers[0].nModel.set('body', 'content');
@@ -156,10 +156,10 @@ describe('Presenters | Static Bubble', function() {
 
     it('should show close "X" but not body if body is null', function() {
 
-      // ------------------------------------------------------------------
-      // When a feature is selected and the record body content is null,
-      // the close "X" should be displayed but the body should be hidden.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a feature is selected and the record body content is null, the
+      // close "X" should be displayed but the body should be hidden.
+      // ----------------------------------------------------------------------
 
       // Set null body.
       layers[0].nModel.set('body', null);
@@ -177,10 +177,10 @@ describe('Presenters | Static Bubble', function() {
 
     it('should override a selected record', function() {
 
-      // ------------------------------------------------------------------
-      // When a feature is selected, the model for the feature should be
-      // bound to the bubble even if another record is already selected.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a feature is selected, the model for the feature should be bound
+      // to the bubble even if another record is already selected.
+      // ----------------------------------------------------------------------
 
       NL.hoverOnMapFeature(feature1);
       NL.clickOnMapFeature(feature1);
@@ -196,11 +196,10 @@ describe('Presenters | Static Bubble', function() {
 
   describe('when a feature is unselected', function() {
 
-    // --------------------------------------------------------------------
-    // When the bubble is closed by clicking the close "X" or unselecting
-    // a map feature, the bubble should be hidden and start responding to
-    // highlight events.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the bubble is closed by clicking the "X" or unselecting a feature,
+    // the bubble should be hidden and start responding to highlight events.
+    // ------------------------------------------------------------------------
 
     beforeEach(function() {
       NL.hoverOnMapFeature(feature1);

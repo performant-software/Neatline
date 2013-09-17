@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -18,10 +18,10 @@ describe('Map | Default Focus', function() {
 
   it('should set exhibit default focus and zoom', function() {
 
-    // --------------------------------------------------------------------
-    // When the exhibit starts, the viewport defined by the `map_focus`
-    // and `map_zoom` should be manifested on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the viewport defined by the `map_focus` and
+    // `map_zoom` should be manifested on the map.
+    // ------------------------------------------------------------------------
 
     NL.assertMapViewport(1, 2, 10);
 

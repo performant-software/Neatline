@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -35,10 +35,10 @@ describe('Record | SVG Import', function() {
 
   it('should show modal when "Enter Markup" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Enter Markup" link is clicked, the SVG input modal should
-    // be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Enter Markup" link is clicked, the SVG input modal should be
+    // displayed.
+    // ------------------------------------------------------------------------
 
     // Click "Enter Markup".
     el.link.trigger('click');
@@ -52,10 +52,10 @@ describe('Record | SVG Import', function() {
 
   it('should close modal when "Cancel" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Cancel" button is clicked, the modal should disappear and
-    // the form should return to its normal state.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Cancel" button is clicked, the modal should disappear and the
+    // form should return to its normal state.
+    // ------------------------------------------------------------------------
 
     // Click "Enter Markup".
     el.link.trigger('click');
@@ -71,10 +71,10 @@ describe('Record | SVG Import', function() {
 
   it('should set SVG geometry when "Parse" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Parse SVG" button is clicked, the markup in the textarea
-    // should be parsed and the map handler geometry should be updated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Parse SVG" button is clicked, the markup should be parsed and
+    // the map handler geometry should be updated.
+    // ------------------------------------------------------------------------
 
     var formatWKT = new OpenLayers.Format.WKT();
     var svg = '<svg><polygon points="1,2 3,4 5,6" /></svg>';
@@ -93,10 +93,10 @@ describe('Record | SVG Import', function() {
 
   it('should react to different density values', function() {
 
-    // --------------------------------------------------------------------
-    // The value of the "Density" input should be applied as the `DENSITY`
-    // ratio in the SVG-to-WKT conversion.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The value of the "Density" input should be used as the `DENSITY` ratio
+    // in the SVG-to-WKT conversion.
+    // ------------------------------------------------------------------------
 
     // Set SVG.
     el.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
@@ -121,12 +121,11 @@ describe('Record | SVG Import', function() {
   });
 
 
-  it('should flash notification when the parse succeeds', function() {
+  it('should show notification when the parse succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When new SVG is successfully parsed, a success notification should
-    // be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the SVG parses, a success notification should be displayed.
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'info');
@@ -145,9 +144,9 @@ describe('Record | SVG Import', function() {
 
   it('should close the modal when the parse succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When new SVG is successfully parsed, the modal should be closed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the SVG is successfully parsed, the modal should be closed.
+    // ------------------------------------------------------------------------
 
     // Parse valid SVG.
     el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
@@ -161,10 +160,9 @@ describe('Record | SVG Import', function() {
 
   it('should flash notification when the parse fails', function() {
 
-    // --------------------------------------------------------------------
-    // When new SVG is not parsed successfully, a failure notification
-    // should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the SVG doesn't parse, a failure notification should be displayed.
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'error');
@@ -183,9 +181,9 @@ describe('Record | SVG Import', function() {
 
   it('should not close the modal when the parse fails', function() {
 
-    // --------------------------------------------------------------------
-    // When new SVG is not parsed successfully, the modal stay open.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the SVG doesn't parse, the modal stay open.
+    // ------------------------------------------------------------------------
 
     // Click "Enter Markup".
     el.link.trigger('click');

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Search | Initialization', function() {
 
   describe('should populate search box with query', function() {
 
-    // --------------------------------------------------------------------
-    // When a route that defines a search query is requested, the search
-    // query should be populated in the input and parsed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a route that defines a search query is requested, the search query
+    // should be populated in the input and parsed.
+    // ------------------------------------------------------------------------
 
     it('single-word query', function() {
       NL.navigate('records/search/query=word');
@@ -56,11 +56,11 @@ describe('Search | Initialization', function() {
 
   it('should not load records when map mirroring is active', function() {
 
-    // --------------------------------------------------------------------
-    // When a route is requested with the map-mirroring search query, the
-    // regular GET request for records should not be issued. This prevents
-    // the map-synced record list from being overwritten by new records.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a route is requested with the map-mirror search query, the regular
+    // GET request should not be issued (otherwise the records synced from the
+    // the map would be overwritten when the query completes).
+    // ------------------------------------------------------------------------
 
     // Initialize with `map:` query.
     var c1 = NL.server.requests.length;

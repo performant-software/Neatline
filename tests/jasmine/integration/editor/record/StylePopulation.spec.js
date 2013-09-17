@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -32,10 +32,10 @@ describe('Record Form | Style Population', function() {
 
   it('should populate min zoom', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Use Current" link for "Min Zoom" is clicked, the input
-    // should be populated with the current zoom.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Use Current" link for "Min Zoom" is clicked, the input should
+    // be populated with the current zoom.
+    // ------------------------------------------------------------------------
 
     NL.setMapZoom(10);
     el.setMinZoom.trigger('click');
@@ -51,10 +51,10 @@ describe('Record Form | Style Population', function() {
 
   it('should populate max zoom', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Use Current" link for "Max Zoom" is clicked, the input
-    // should be populated with the current zoom.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Use Current" link for "Max Zoom" is clicked, the input should
+    // be populated with the current zoom.
+    // ------------------------------------------------------------------------
 
     NL.setMapZoom(10);
     el.setMaxZoom.trigger('click');
@@ -70,10 +70,10 @@ describe('Record Form | Style Population', function() {
 
   it('should populate default focus and zoom', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Use Current Viewport as Default" button is clicked, the
-    // default focus and zoom inputs should be populated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Use Current Viewport as Default" button is clicked, the map
+    // focus and zoom inputs should be populated.
+    // ------------------------------------------------------------------------
 
     NL.setMapCenter(1, 2, 3);
     el.setFocus.trigger('click');

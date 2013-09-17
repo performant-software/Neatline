@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -49,10 +49,10 @@ describe('Record | Open Form', function() {
 
     it('when a record row is clicked', function() {
 
-      // ------------------------------------------------------------------
-      // When one of the listings in the record browser is clicked, the
-      // existing model should be bound to the form immediately.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a row in the records list is clicked, the existing model should
+      // be bound to the form immediately.
+      // ----------------------------------------------------------------------
 
       model = recordModels[0];
 
@@ -63,11 +63,10 @@ describe('Record | Open Form', function() {
 
     it('when a loaded record is requested by a route', function() {
 
-      // ------------------------------------------------------------------
-      // When a record that has already been loaded into the browser is
-      // requested by a route, the existing model should be bound to the
-      // form immediately.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a record loaded into the browser list is requested by a route,
+      // the existing model should be bound to the form immediately.
+      // ----------------------------------------------------------------------
 
       model = recordModels[0];
 
@@ -78,10 +77,10 @@ describe('Record | Open Form', function() {
 
     it('when an unloaded record is requested by a route', function() {
 
-      // ------------------------------------------------------------------
-      // When a record that has _not_ already been loaded into the browser
-      // is requested by a route, the record should be loaded.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a record that has _not_ already been loaded into the browser is
+      // requested by a route, the record should be loaded from the server.
+      // ----------------------------------------------------------------------
 
       model = NL.recordFromJson(fx.record);
 
@@ -95,10 +94,10 @@ describe('Record | Open Form', function() {
 
     it('when a map feature is clicked', function() {
 
-      // ------------------------------------------------------------------
-      // When a map feature is clicked, the feature's parent model should
-      // be bound to the form immediately.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When a map feature is clicked, the feature's parent model should be
+      // bound to the form immediately.
+      // ----------------------------------------------------------------------
 
       model = NL.vw.MAP.getVectorLayers()[0].nModel;
 
@@ -109,10 +108,10 @@ describe('Record | Open Form', function() {
 
     it('when a record is selected', function() {
 
-      // ------------------------------------------------------------------
-      // When the `select` event is triggered (for example, but a click on
-      // a map feature), the model should be bound to the form.
-      // ------------------------------------------------------------------
+      // ----------------------------------------------------------------------
+      // When the `select` event is triggered (for example, but a click on a
+      // map feature), the model should be bound to the form.
+      // ----------------------------------------------------------------------
 
       model = NL.vw.MAP.getVectorLayers()[0].nModel;
 
@@ -126,10 +125,10 @@ describe('Record | Open Form', function() {
 
   it('should populate form values', function() {
 
-    // --------------------------------------------------------------------
-    // When a record edit form is opened, the inputs should be populated
-    // with data from the record model.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When a record edit form is opened, the inputs should be populated with
+    // data from the record model.
+    // ------------------------------------------------------------------------
 
     NL.showRecordForm(fx.record);
 
@@ -173,12 +172,12 @@ describe('Record | Open Form', function() {
   });
 
 
-  it('should populate null `widgets` value', function() {
+  it('should populate empty `widgets` value', function() {
 
-    // --------------------------------------------------------------------
-    // When a record with a null `widgets` value is bound to the form, all
+    // ------------------------------------------------------------------------
+    // When a record with a NULL `widgets` value is bound to the form, all
     // options in the "Widgets" select should be toggled off.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Open first record.
     NL.navigate('record/'+recordModels[0].id);
@@ -198,14 +197,13 @@ describe('Record | Open Form', function() {
 
   it('should not change form model in response to map click', function() {
 
-    // --------------------------------------------------------------------
-    // When an edit form is already open, clicking on a map feature that
-    // corresponds to a different model from the one bound to the form
-    // should _not_ open the new form. This makes it impossible to
-    // accidentally switch to another edit form by clicking on a feature
-    // that belongs to a different record while drawing shapes in close
-    // proximity to other vectors.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When an edit form is already open, clicking on a feature that belongs
+    // to a different model from the one bound to the form should not open the
+    // new form. This makes it impossible to accidentally switch to another
+    // edit form by clicking on a feature that belongs to a different record
+    // while drawing shapes in close proximity to other vectors.
+    // ------------------------------------------------------------------------
 
     // Trigger click on Record 1 feature.
     NL.clickOnMapFeature(feature1);
@@ -225,10 +223,10 @@ describe('Record | Open Form', function() {
 
   it('should focus map when the form is opened via editor', function() {
 
-    // --------------------------------------------------------------------
-    // When the edit form is opened in response to a click on one of the
-    // listings in the record browser, the map should focus on the record.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the edit form is opened in response to a click on a listing in the
+    // record browser, the map should focus on the record.
+    // ------------------------------------------------------------------------
 
     // Set center and zoom.
     NL.setMapCenter(200, 300, 15);

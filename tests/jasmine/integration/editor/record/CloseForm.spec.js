@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -33,10 +33,10 @@ describe('Record | Close Form', function() {
 
   it('should close the form when "Close" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "X" button at the top of the record edit form is clicked,
-    // the form should disappear and the record list should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "X" button at the top of the record edit form is clicked, the
+    // form should disappear and the record list should be displayed.
+    // ------------------------------------------------------------------------
 
     // Click "X".
     el.close.trigger('click');
@@ -50,9 +50,9 @@ describe('Record | Close Form', function() {
 
   it('should unselect the record', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the form is closed, the bound model should be unselected.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
@@ -70,9 +70,9 @@ describe('Record | Close Form', function() {
 
   it('should refresh the exhibit', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the form is closed, the exhibit should be refreshed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
@@ -89,10 +89,10 @@ describe('Record | Close Form', function() {
 
   it('should clear unsaved geometry changes', function() {
 
-    // --------------------------------------------------------------------
-    // When the form is closed, unsaved changes to the record' geometry
-    // that were made during the edit session should be cleared.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the form is closed, unsaved changes to the record' geometry that
+    // were made during the edit session should be cleared.
+    // ------------------------------------------------------------------------
 
     // Drag the point to a different location.
     var feature = NL.vw.MAP.editLayer.features[0];
@@ -119,10 +119,10 @@ describe('Record | Close Form', function() {
 
   it('should deactivate edit control', function() {
 
-    // --------------------------------------------------------------------
-    // When the form is closed, the map editing control that is currently
-    // active should be deactivated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the form is closed, the editing control that is currently active
+    // on the map should be deactivated.
+    // ------------------------------------------------------------------------
 
     // Activate "Draw Polygon".
     el.pan.removeAttr('checked');

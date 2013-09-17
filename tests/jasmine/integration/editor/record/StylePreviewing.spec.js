@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -11,11 +11,11 @@
 describe('Record | Style Previewing', function() {
 
 
-  // ----------------------------------------------------------------------
-  // When the form model changes - either by a direct update to the model
-  // or by a change/keyup event on the form inputs - the style map on the
-  // edit layer should be rebuilt with the updated value.
-  // ----------------------------------------------------------------------
+  // --------------------------------------------------------------------------
+  // When the form model changes - either by a direct update to the model or
+  // by a change or event on the form inputs - the style map on the edit layer
+  // should be rebuilt with the updated value.
+  // --------------------------------------------------------------------------
 
 
   var el, def, tmp, sel, fx = {

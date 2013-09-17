@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Map | Spatial Querying Enabled', function() {
 
   it('should query by extent/zoom when the exhibit starts', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the exhibit starts, the map should query for records that fall
     // within the default extent/zoom of the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.assertMapDynamicQuery();
 
@@ -36,10 +36,10 @@ describe('Map | Spatial Querying Enabled', function() {
 
   it('should query for records when the map is moved', function() {
 
-    // --------------------------------------------------------------------
-    // When the map is panned or zoomed, the map should query for records
-    // that fall within the current extent of the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map is panned or zoomed, the map should query for records that
+    // fall within the current extent of the map.
+    // ------------------------------------------------------------------------
 
     NL.triggerMapMoveEnd();
     NL.assertMapDynamicQuery();
@@ -49,13 +49,12 @@ describe('Map | Spatial Querying Enabled', function() {
 
   it('should not ingest records when the map is being moved', function() {
 
-    // --------------------------------------------------------------------
-    // If a record collection arrives in response to a previous map move
-    // end event _while the map is being moved again_, the new collection
-    // should not be ingested on the map. This is necessary in order to
-    // prevent a distracting "jumping" visual effect in which vectors are
-    // displaced from their proper locations.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // If a record collection arrives in response to a map move event while
+    // the map is being moved again, the new collection should not be ingested
+    // on the map. This prevents a unsightly "jumping" effect in which vectors
+    // are displaced from their proper locations.
+    // ------------------------------------------------------------------------
 
     // Load collection with one record.
     NL.refreshMap(fx.one);

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -28,10 +28,10 @@ describe('Record | Router', function() {
 
   it('#record/:id', function() {
 
-    // --------------------------------------------------------------------
-    // When `#record/:id` route is requested, the record form should be
-    // displayed and the "Text" tab should be activated by default.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `#record/:id` is requested, the record form should be displayed
+    // and the "Text" tab should be activated by default.
+    // ------------------------------------------------------------------------
 
     NL.navigate(href);
 
@@ -44,10 +44,10 @@ describe('Record | Router', function() {
 
   it('#record/:id/:tab', function() {
 
-    // --------------------------------------------------------------------
-    // When `#record/:id/:tab` route is requested, the record form should
-    // be displayed and the requested tab should be activated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `#record/:id/:tab` is requested, the record form should be
+    // displayed and the requested tab should be activated.
+    // ------------------------------------------------------------------------
 
     // Walk tabs.
     _.each(NL.getTabSlugs(), function(slug) {
@@ -65,10 +65,10 @@ describe('Record | Router', function() {
 
   it('#record/add', function() {
 
-    // --------------------------------------------------------------------
-    // When `#record/add` route is requested, the record form should be
-    // displayed and the "Text' tab should be activated by default.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `#record/add` is requested, the record form should be displayed
+    // and the "Text' tab should be activated by default.
+    // ------------------------------------------------------------------------
 
     NL.navigate('record/add');
 
@@ -81,10 +81,10 @@ describe('Record | Router', function() {
 
   it('#record/add/:tab', function() {
 
-    // --------------------------------------------------------------------
-    // When `#record/add/:tab` route is requested, the record form should
-    // be displayed and the requested tab should be activated.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `#record/add/:tab` route is requested, the record form should be
+    // displayed and the requested tab should be activated.
+    // ------------------------------------------------------------------------
 
     // Walk tabs.
     _.each(NL.getTabSlugs(), function(slug) {

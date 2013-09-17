@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,10 +23,10 @@ describe('Map | Subscribe `highlight`', function() {
 
   it('should highlight features', function() {
 
-    // --------------------------------------------------------------------
-    // When `highlight` is triggered with a record that has a vector layer
-    // on the map, the map should highlight the features.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When `highlight` is triggered with a record that has a vector layer on
+    // the map, the map should highlight the features.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];
@@ -39,10 +39,10 @@ describe('Map | Subscribe `highlight`', function() {
 
   it('should not highlight features for selected layer', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When `highlight` is triggered with a record that is selected on the
     // map, the features should not be highlighted.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];

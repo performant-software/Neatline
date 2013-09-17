@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -24,10 +24,10 @@ describe('Map | Subscribe `setFilter`', function() {
 
   it('should set filters', function() {
 
-    // --------------------------------------------------------------------
-    // `setFilter` should register the passed evaluator function and re-
-    // filter all vector and WMS layers on the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // `setFilter` should register the passed evaluator function and re-filter
+    // all vector and WMS layers on the map.
+    // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.regular);
 
@@ -92,10 +92,10 @@ describe('Map | Subscribe `setFilter`', function() {
 
   it('should filter new layers', function() {
 
-    // --------------------------------------------------------------------
-    // When new vector and WMS layers are created, they should be passed
-    // through the filtering system before being added to the map.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When new vector and WMS layers are created, they should be run through
+    // the filtering system before being added to the map.
+    // ------------------------------------------------------------------------
 
     // Load collection without record 3.
     NL.respondMap200(fx.deleted);

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -30,10 +30,10 @@ describe('Record | Save Record', function() {
 
   it('should issue PUT request when "Save" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked, a well-formed PUT request should
-    // be issued to the record API with the new data.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Save" button is clicked, a well-formed PUT request should be
+    // issued to the record API with the new data.
+    // ------------------------------------------------------------------------
 
     var id = NL.vw.RECORD.model.id;
     var inputs = NL.getRecordFormElements();
@@ -119,10 +119,10 @@ describe('Record | Save Record', function() {
 
   it('should flash a notification when the save succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request is successful, a
-    // success notification should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Save" button is clicked and the request succeeds, a success
+    // notification should be displayed.
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'info');
@@ -141,10 +141,10 @@ describe('Record | Save Record', function() {
 
   it('should flash a notification when the save fails', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Save" button is clicked and the request fails, a failure
     // notification should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'error');
@@ -163,10 +163,10 @@ describe('Record | Save Record', function() {
 
   it('should refresh the exhibit when save succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Save" button is clicked and the request succeeds, the
-    // exhibit should be refreshed to manifest synchronized styles.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Save" button is clicked and the request succeeds, the exhibit
+    // should be refreshed to manifest synchronized styles.
+    // ------------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -23,10 +23,10 @@ describe('Record | Route Updating', function() {
 
   it('should update route for unsaved record', function() {
 
-    // --------------------------------------------------------------------
-    // When the tabs are toggled in the edit form for an unsaved record,
-    // the route should update to provide a hard link to the current tab.
-    // For example, when the "Text" tab is active, the route should be:
+    // ------------------------------------------------------------------------
+    // When the tabs are changed in the edit form for an unsaved record, the
+    // route should update to provide a link to the current tab. For example,
+    // when the "Text" tab is active, the route should be:
     //
     // `#record/add/text`
     //
@@ -35,7 +35,7 @@ describe('Record | Route Updating', function() {
     // `#record/add/map`
     //
     // etc.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.navigate('record/add');
 
@@ -55,10 +55,10 @@ describe('Record | Route Updating', function() {
 
   it('should update route for saved record', function() {
 
-    // --------------------------------------------------------------------
-    // When the tabs are toggled in the edit form for a saved record, the
-    // route should update to provide a hard link to the current tab. For
-    // example, when the "Text" tab is active, the route should be:
+    // ------------------------------------------------------------------------
+    // When the tabs are changed in the edit form for a saved record, the
+    // route should update to provide a link to the current tab. For example,
+    // when the "Text" tab is active, the route should be:
     //
     // `#record/<id>/text`
     //
@@ -67,7 +67,7 @@ describe('Record | Route Updating', function() {
     // `#record/<id>/map`
     //
     // etc.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.showRecordForm(fx.record);
     var id = NL.vw.RECORD.model.id;

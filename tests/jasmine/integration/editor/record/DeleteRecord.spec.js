@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -34,10 +34,10 @@ describe('Record | Delete Record', function() {
 
   it('should show modal when "Delete" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Delete" button is clicked, the confirmation modal should
-    // be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Delete" button is clicked, the confirmation modal should be
+    // displayed.
+    // ------------------------------------------------------------------------
 
     // Click on "Delete".
     el.delete1.trigger('click');
@@ -51,10 +51,10 @@ describe('Record | Delete Record', function() {
 
   it('should close modal when "Cancel" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Cancel" button is clicked, the modal should disappear and
-    // the form should return to its normal state.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Cancel" button is clicked, the modal should disappear and the
+    // form should return to its normal state.
+    // ------------------------------------------------------------------------
 
     // Click on "Delete".
     el.delete1.trigger('click');
@@ -70,10 +70,10 @@ describe('Record | Delete Record', function() {
 
   it('should issue DELETE request when "Delete" is clicked', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Yes, delete" button is clicked, a well-formed DELETE
-    // request should be issued to the records API.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked, a well-formed DELETE request
+    // should be issued to the records API.
+    // ------------------------------------------------------------------------
 
     var id = NL.vw.RECORD.model.id;
 
@@ -90,10 +90,10 @@ describe('Record | Delete Record', function() {
 
   it('should flash notification when the delete succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Yes, Delete" button is clicked and the request succeeds,
-    // a success notification should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Yes, Delete" button is clicked and the request succeeds, a
+    // success notification should be displayed.
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'info');
@@ -112,10 +112,10 @@ describe('Record | Delete Record', function() {
 
   it('should flash notification when the delete fails', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // When the "Yes, Delete" button is clicked and the request fails, a
     // failure notification should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Spy on toaster.
     spyOn(toastr, 'error');
@@ -134,11 +134,10 @@ describe('Record | Delete Record', function() {
 
   it('should close modal and form when delete succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Yes, delete" button is clicked and the request succeeds,
-    // the modal should disappear, the form should close, and the records
-    // list should be displayed.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked and the request succeeds, the
+    // modal should disappear and the form should close.
+    // ------------------------------------------------------------------------
 
     // Delete, confirm.
     el.delete1.trigger('click');
@@ -160,10 +159,10 @@ describe('Record | Delete Record', function() {
 
   it('should refresh the exhibit when delete succeeds', function() {
 
-    // --------------------------------------------------------------------
-    // When the "Yes, delete" button is clicked and the request succeeds,
-    // the exhibit should be refreshed to manifest the deletion.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked and the request succeeds, the
+    // exhibit should be refreshed to manifest the deletion.
+    // ------------------------------------------------------------------------
 
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 

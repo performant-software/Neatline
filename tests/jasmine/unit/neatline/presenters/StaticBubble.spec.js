@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -31,11 +31,6 @@ describe('Presenters | Static Bubble', function() {
 
   describe('highlight', function() {
 
-    // --------------------------------------------------------------------
-    // When the presenter is highlighted, the bubble should be populated
-    // with the title and body fields of the passed model.
-    // --------------------------------------------------------------------
-
     beforeEach(function() {
       Neatline.vent.trigger('highlight', { model: model1 });
     });
@@ -49,11 +44,6 @@ describe('Presenters | Static Bubble', function() {
 
 
   describe('unhighlight', function() {
-
-    // --------------------------------------------------------------------
-    // When the presenter is unhighlighted, the bubble should be emptied
-    // of content and the `bound` class should be removed.
-    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('highlight', { model: model1 });
@@ -72,13 +62,6 @@ describe('Presenters | Static Bubble', function() {
 
 
   describe('select', function() {
-
-    // --------------------------------------------------------------------
-    // When the presenter is selected, `bound` and `selected` classes
-    // should be added to the bubble. While selected, the bubble should
-    // not respond to `select` events for different records, but not to
-    // `highlight` or `unhighlight` events.
-    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('select', { model: model1 });
@@ -111,11 +94,6 @@ describe('Presenters | Static Bubble', function() {
 
   describe('unselect', function() {
 
-    // --------------------------------------------------------------------
-    // When the presenter is unselected, the bubble should be emptied of
-    // content and the `bound` and `selected` classes should be removed.
-    // --------------------------------------------------------------------
-
     beforeEach(function() {
       Neatline.vent.trigger('select', { model: model1 });
       Neatline.vent.trigger('unselect', { model: model1 });
@@ -134,12 +112,6 @@ describe('Presenters | Static Bubble', function() {
 
 
   describe('close', function() {
-
-    // --------------------------------------------------------------------
-    // When the close "X" button is clicked, the bubble container should
-    // be emptied, the `bound` and `selected` classes should be removed,
-    // and `unselect` event should be published.
-    // --------------------------------------------------------------------
 
     var vent;
 
@@ -170,11 +142,6 @@ describe('Presenters | Static Bubble', function() {
 
   describe('deactivate', function() {
 
-    // --------------------------------------------------------------------
-    // When the presenter is deactivated, the bubble should not respond to
-    // `highlight` or `select` events.
-    // --------------------------------------------------------------------
-
     beforeEach(function() {
       Neatline.vent.trigger('PRESENTER:deactivate');
     });
@@ -193,11 +160,6 @@ describe('Presenters | Static Bubble', function() {
 
 
   describe('activate', function() {
-
-    // --------------------------------------------------------------------
-    // When the presenter is activated after being deactivated, the bubble
-    // should start responding to `highlight` and `select` events.
-    // --------------------------------------------------------------------
 
     beforeEach(function() {
       Neatline.vent.trigger('PRESENTER:deactivate');

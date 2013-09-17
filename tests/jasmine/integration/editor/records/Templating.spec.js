@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=76; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
 
 /**
  * @package     omeka
@@ -25,9 +25,9 @@ describe('Records | Templating', function() {
 
   it('should load records when exhibit starts', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // The record browser pane should show a list of records.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.respondRecordList200(fx.defaultList);
 
@@ -53,9 +53,9 @@ describe('Records | Templating', function() {
 
   it('should strip tags in titles', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // HTML tags in record titles should be stripped out.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.respondRecordList200(fx.titleTags);
     var rows = NL.getRecordListRows();
@@ -68,9 +68,9 @@ describe('Records | Templating', function() {
 
   it('should show placeholders for empty titles', function() {
 
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Empty titles should be replaced as placeholders.
-    // --------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     NL.respondRecordList200(fx.emptyTitle);
     var rows = NL.getRecordListRows();
