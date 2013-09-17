@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -226,8 +226,8 @@ SQL;
 
 
     /**
-     * Convert the old foreign key reference on `default_base_layer` to
-     * the corresponding layer slug.
+     * Convert the old foreign key reference on `default_base_layer` to the
+     * corresponding layer slug.
      *
      * @param object $old The original `neatline_exhibits` row.
      * @param NeatlineExhibit $new The new exhibit instance.
@@ -239,8 +239,8 @@ SQL;
 
 
     /**
-     * Migrate the old `default_focus_date` and `default_timeline_zoom`
-     * fields to the new SIMILE exhibit expansions table.
+     * Migrate the old `default_focus_date` and `default_timeline_zoom` fields
+     * to the new SIMILE exhibit expansions table.
      *
      * @param object $old The original `neatline_exhibits` row.
      * @param NeatlineExhibit $new The new exhibit instance.
@@ -305,8 +305,8 @@ SQL;
 
 
     /**
-     * Convert the old `is_items` and `is_timeline` fields to the new
-     * `Waypoints` and `Simile` slugs.
+     * Convert the old `is_items` and `is_timeline` fields to the new widget
+     * slugs: `Waypoints` and `Simile`.
      *
      * @param object $old The original `neatline_exhibits` row.
      * @param NeatlineExhibit $new The new exhibit instance.
@@ -380,8 +380,8 @@ SQL;
 
 
     /**
-     * Flatten out the old style inheritance system by directly setting
-     * the inherited values on the new record.
+     * Flatten out the old style inheritance system by directly setting the
+     * inherited values on the new record.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -419,10 +419,10 @@ SQL;
 
 
     /**
-     * If the record does not have a parent item, migrate the `title`
-     * field directly. If it does have a parent but there is a locally-
-     * set value on the record, migrate the extant value; if `title` is 
-     * null, use the Dublin Core "Title" field on the parent item.
+     * If the record does not have a parent item, migrate the `title` field
+     * directly. If it does have a parent but there is a locally-set value on
+     * the record, migrate the extant value; or if `title` is null, use the
+     * Dublin Core "Title" field on the parent item.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -450,9 +450,9 @@ SQL;
 
     /**
      * If the record does not have a parent item - or if it does, and the
-     * `use_dc_metadata` flag is flipped off - migrate the `description`
-     * field directly to the new `body` field. Otherwise, use the compiled
-     * metadata output from the parent item.
+     * `use_dc_metadata` flag is flipped off - migrate the `description` field
+     * directly to the new `body` field. Otherwise, use the compiled metadata
+     * output from the parent item.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -482,8 +482,8 @@ SQL;
 
 
     /**
-     * If `show_bubble` on the old record is flipped on, set `presenter`
-     * on the new record to `StaticBubble`; otherwise, `None`.
+     * If `show_bubble` on the old record is flipped on, set `presenter` on
+     * the new record to `StaticBubble`; otherwise, `None`.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -495,8 +495,8 @@ SQL;
 
 
     /**
-     * Convert the old `items_active` and `timeline_active` fields to the
-     * new `Waypoints` and `Simile` slugs.
+     * Convert the old `items_active` and `timeline_active` fields to the new
+     * `Waypoints` and `Simile` slugs.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -515,9 +515,9 @@ SQL;
 
 
     /**
-     * If the old `geocoverage` is a KML value, convert to WKT. If it is
-     * WKT, replace the `|` delimiter with `,` and wrap the pieces inside
-     * of a `GEOMETRYCOLLECTION`.
+     * If the old `geocoverage` is a KML value, convert to WKT. If it is WKT,
+     * replace the `|` delimiter with `,` and wrap the components inside of a
+     * `GEOMETRYCOLLECTION`.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -546,8 +546,8 @@ SQL;
 
 
     /**
-     * If a record has WMS service record, populate the new `wms_address`
-     * and `wms_layers` fields if the old record was active on the map.
+     * If a record has WMS service record, populate the new `wms_address` and
+     * `wms_layers` fields if the old record was active on the map.
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
@@ -555,8 +555,8 @@ SQL;
     private function __processRecordWmsLayer($old, $new)
     {
 
-        // Only try to migrate a WMS layer if the record both (a) has a
-        // parent item and (b) was active on the map.
+        // Only try to migrate a WMS layer if the record was (a) associated
+        // with an Omeka item and (b) active on the map.
 
         if (is_null($old->item_id) || !$old->space_active) return;
 
@@ -565,8 +565,8 @@ SQL;
         WHERE item_id={$old->item_id};
 SQL;
 
-        // Wrap the query in a try/catch, since NeatlineMaps may not be
-        // installed, in which case the services table would be absent.
+        // Wrap the query in a try/catch - NeatlineMaps may not be installed,
+        // in which case the services table would be absent.
 
         try {
 
@@ -587,6 +587,7 @@ SQL;
      *
      * @param object $old The original `neatline_data_records` row.
      * @param NeatlineRecord $new The new record instance.
+     * @return string|int|null
      */
     private function __getStyle($record, $field)
     {
@@ -595,8 +596,7 @@ SQL;
 
         if (!is_null($record->$field)) return $record->$field;
 
-        // Otherwise, if the record has a parent reference, load the
-        // parent and recurse.
+        // Otherwise, if the record has a parent, load it and recurse.
 
         else if (!is_null($record->parent_record_id)) {
 
@@ -615,8 +615,8 @@ SQL;
 
         else {
 
-            // If there is no parent record, load the exhibit and try to
-            // find a default value for the field.
+            // If there is no parent record, load the exhibit and try to find
+            // a default value for the field.
 
             if (is_null($record->exhibit_id)) return;
 
@@ -628,18 +628,17 @@ SQL;
             $exhibit = $this->db->query($sql)->fetch();
             $key = 'default_' . $field;
 
-            // If the old exhibit does have have a `default_`-prefixed
-            // attribute for the field, return NULL.
+            // If the old exhibit does have have a `default_`-prefixed column
+            // for the field, return NULL.
 
             if (!$exhibit || !array_key_exists($key, $exhibit)) return;
 
-            // If the exhibit has a default attribute with a non-null
-            // value, return the exhibit default.
+            // If the exhibit has a default attribute with a non-null value,
+            // return the exhibit default.
 
             else if (!is_null($exhibit[$key])) return $exhibit[$key];
 
-            // If exhibit-default field is empty, fall back to the global
-            // default stored in the site options.
+            // If exhibit default field is empty, use the global default.
 
             else return get_option($field);
 

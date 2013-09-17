@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=76; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
 
 /**
  * @package     omeka
@@ -23,9 +23,9 @@ class Neatline_Migration_20rc3 extends Neatline_Migration_Abstract
 
 
     /**
-     * Rebuild fulltext indexes. This repairs old versions of the record
-     * table creation that indexed all of the text fields together, which
-     * caused queries against just _some_ of the fields to fail.
+     * Rebuild fulltext indexes. This repairs old versions of the record table
+     * installation that indexed all of the text fields together, which caused
+     * queries against just _some_ of the fields to fail.
      */
     private function _addFulltextIndexes()
     {
