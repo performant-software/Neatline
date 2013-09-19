@@ -18,6 +18,8 @@
 
   - Fixes a set of minor problems that was causing features not to unhighlight on mouseleave under certain circumstances (eg, when a new batch of records is rendered on the map while the cursor is hovering on a feature).
 
+  - Fixes a bug that caused post-2.0 migrations not to run when upgrading from a 2.0 pre-release version (eg, 2.0-alpha2, 2.0-rc3, etc).
+
 #### API Changes
 
   - Upgrates Bootstrap to v3.0.0-rc2.
