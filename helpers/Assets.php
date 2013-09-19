@@ -16,6 +16,7 @@
 function nl_queueAddForm()
 {
     queue_css_file('payloads/exhibit-form');
+    queue_js_file('payloads/ckeditor/ckeditor');
     queue_js_file('payloads/add-form');
 }
 
@@ -26,6 +27,7 @@ function nl_queueAddForm()
 function nl_queueEditForm()
 {
     queue_css_file('payloads/exhibit-form');
+    queue_js_file('payloads/ckeditor/ckeditor');
     queue_js_file('payloads/edit-form');
 }
 

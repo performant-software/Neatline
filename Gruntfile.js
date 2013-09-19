@@ -173,7 +173,8 @@ module.exports = function(grunt) {
         src: [
           paths.vendor.js.chosen,
           paths.vendor.js.underscore_s,
-          paths.src.admin+'/add.js'
+          paths.src.admin+'/exhibit-form.js',
+          paths.src.admin+'/slug-autogen.js'
         ],
         dest: paths.payloads.admin.js+'/add-form.js'
       },
@@ -181,7 +182,7 @@ module.exports = function(grunt) {
       edit_form: {
         src: [
           paths.vendor.js.chosen,
-          paths.src.admin+'/edit.js'
+          paths.src.admin+'/exhibit-form.js'
         ],
         dest: paths.payloads.admin.js+'/edit-form.js'
       },
