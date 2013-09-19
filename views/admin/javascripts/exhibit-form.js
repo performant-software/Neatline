@@ -17,6 +17,7 @@ jQuery(function($) {
   // Instantiate CKEditor on the "Narrative" field.
 
   CKEDITOR.replace('narrative', {
+    allowedContent: true,
     toolbar: [
       ['Maximize', 'Source'],
       ['Bold', 'Italic', 'Underline', 'RemoveFormat'],
@@ -26,7 +27,7 @@ jQuery(function($) {
       ['NumberedList', 'BulletedList'],
       ['Outdent', 'Indent'],
       ['Blockquote', 'CreateDiv'],
-    ],
+    ]
   });
 
 });
