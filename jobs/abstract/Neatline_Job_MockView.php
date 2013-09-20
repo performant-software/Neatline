@@ -20,7 +20,7 @@ abstract class Neatline_Job_MockView extends Omeka_Job_AbstractJob
     public function perform()
     {
         nl_mountView(); // Mount the view script hierarchy.
-        nl_setWebDir($this->_options['web_dir']); // Inject the web-root.
+        //nl_setWebDir($this->_options['web_dir']); // Inject the web-root.
         $this->execute();
     }
 
