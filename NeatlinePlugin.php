@@ -133,60 +133,6 @@ SQL
 SQL
 );
 
-        $this->_db->query(<<<SQL
-        CREATE TABLE IF NOT EXISTS
-            {$this->_db->prefix}neatline_exhibit_widgets (
-
-            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            widget                  VARCHAR(100) NULL,
-
-            PRIMARY KEY             (id)
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-SQL
-);
-
-        $this->_db->query(<<<SQL
-        CREATE TABLE IF NOT EXISTS
-            {$this->_db->prefix}neatline_record_widgets (
-
-            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            widget                  VARCHAR(100) NULL,
-
-            PRIMARY KEY             (id)
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-SQL
-);
-
-        $this->_db->query(<<<SQL
-        CREATE TABLE IF NOT EXISTS
-            {$this->_db->prefix}neatline_exhibit_widget_activations (
-
-            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            exhibit_id              INT(10) UNSIGNED NOT NULL,
-            widget_id               INT(10) UNSIGNED NOT NULL,
-
-            PRIMARY KEY             (id)
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-SQL
-);
-
-        $this->_db->query(<<<SQL
-        CREATE TABLE IF NOT EXISTS
-            {$this->_db->prefix}neatline_record_widget_activations (
-
-            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            record_id               INT(10) UNSIGNED NOT NULL,
-            widget_id               INT(10) UNSIGNED NOT NULL,
-
-            PRIMARY KEY             (id)
-
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-SQL
-);
-
     }
 
 
