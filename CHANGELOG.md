@@ -2,11 +2,11 @@
 
 #### Added Features
 
-  - Adds a "fullscreen" exhibit mode, which displays _just_ the Neatline exhibit, and none of the regular theme markup.
+  - Re-adds a "fullscreen" exhibit mode from 1.x, which fills the entire screen with the Neatline exhibit and hides the regular theme markup.
 
-  - In the record edit form, the "Save" and "Delete" buttons are now fixed at the bottom of the screenm, making it possible to save the record without first having to scroll to the bottom of the form.
+  - In the record edit form, the "Save" and "Delete" buttons are now fixed at the bottom of the screen, making it possible to save the record without first having to scroll to the bottom of the form.
 
-  - When items are imported from Omeka, coverage data created with the Neatline Features plugin is now automatically be populated in the Neatline records that correspond to the items.
+  - When items are imported from Omeka, coverage data created with Neatline Features is now automatically inserted into the corresponding Neatline records.
 
 #### Changed Features
 
