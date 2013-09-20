@@ -43,7 +43,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
-        $exhibits = <<<SQL
+        $this->_db->query(<<<SQL
 
         CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_exhibits (
 
@@ -74,9 +74,10 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SQL;
+SQL
+);
 
-        $records = <<<SQL
+        $this->_db->query(<<<SQL
 
         CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_records (
 
@@ -132,10 +133,8 @@ SQL;
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SQL;
-
-        $this->_db->query($exhibits);
-        $this->_db->query($records);
+SQL
+);
 
     }
 
