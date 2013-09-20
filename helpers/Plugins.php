@@ -44,17 +44,6 @@ function nl_getPresenters()
 
 
 /**
- * Gather style columns via the `neatline_styles` filter.
- *
- * @return array An array of column names.
- */
-function nl_getStyles()
-{
-    return apply_filters('neatline_styles', array());
-}
-
-
-/**
  * Gather exhibit expansion tables.
  *
  * @return array An array of `Neatline_Table_Expansion`.

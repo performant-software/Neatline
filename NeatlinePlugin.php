@@ -28,8 +28,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     protected $_filters = array(
         'admin_navigation_main',
         'neatline_globals',
-        'neatline_presenters',
-        'neatline_styles'
+        'neatline_presenters'
     );
 
 
@@ -136,7 +135,20 @@ SQL
 
         $this->_db->query(<<<SQL
         CREATE TABLE IF NOT EXISTS
-            {$this->_db->prefix}neatline_widgets (
+            {$this->_db->prefix}neatline_exhibit_widgets (
+
+            id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+            widget                  VARCHAR(100) NULL,
+
+            PRIMARY KEY             (id)
+
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+SQL
+);
+
+        $this->_db->query(<<<SQL
+        CREATE TABLE IF NOT EXISTS
+            {$this->_db->prefix}neatline_record_widgets (
 
             id                      INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             widget                  VARCHAR(100) NULL,
@@ -183,18 +195,14 @@ SQL
      */
     public function hookUninstall()
     {
-
-        $exhibits = <<<SQL
+        $this->_db->query(<<<SQL
         DROP TABLE {$this->_db->prefix}neatline_exhibits
-SQL;
-
-        $records = <<<SQL
+SQL
+);
+        $this->_db->query(<<<SQL
         DROP TABLE {$this->_db->prefix}neatline_records
-SQL;
-
-        $this->_db->query($exhibits);
-        $this->_db->query($records);
-
+SQL
+);
     }
 
 
@@ -324,59 +332,6 @@ SQL;
         return array_merge($presenters, array(
             'None'              => 'None',
             'Static Bubble'     => 'StaticBubble'
-        ));
-    }
-
-
-    /**
-     * Register the taggable styles.
-     *
-     * @param array $styles Array of column names.
-     * @return array The modified array.
-     */
-    public function filterNeatlineStyles($styles)
-    {
-        return array_merge($styles, array(
-
-            // GROUPS
-            'widgets',
-            'presenter',
-
-            // COLORS
-            'fill_color',
-            'fill_color_select',
-            'stroke_color',
-            'stroke_color_select',
-
-            // OPACITIES
-            'fill_opacity',
-            'fill_opacity_select',
-            'stroke_opacity',
-            'stroke_opacity_select',
-
-            // DIMENSIONS
-            'stroke_width',
-            'point_radius',
-            'zindex',
-            'weight',
-
-            // DATES
-            'start_date',
-            'end_date',
-            'after_date',
-            'before_date',
-
-            // IMAGERY
-            'point_image',
-            'wms_address',
-            'wms_layers',
-
-            // VISIBILITY
-            'min_zoom',
-            'max_zoom',
-            'map_focus',
-            'map_zoom'
-
         ));
     }
 

@@ -56,7 +56,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     /**
      * Required style attributes set in `styles.ini`.
      */
-    protected static $preset = array(
+    protected static $requiredStyles = array(
         'presenter',
         'fill_color',
         'fill_color_select',
@@ -90,7 +90,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
         $styles = new Zend_Config_Ini(NL_DIR.'/styles.ini');
 
         // Set default styles.
-        foreach (self::$preset as $prop) {
+        foreach (self::$requiredStyles as $prop) {
             if (is_null($this->$prop)) $this->$prop = $styles->$prop;
         }
 

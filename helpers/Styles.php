@@ -108,3 +108,55 @@ function nl_writeCSS($styles, $breaks=1, $indent=2)
     return $css;
 
 }
+
+
+/**
+ * Get array of shared style columns.
+ *
+ * @return array An array of column names.
+ */
+function nl_getStyles()
+{
+    return array(
+
+        // GROUPS
+        'widgets',
+        'presenter',
+
+        // COLORS
+        'fill_color',
+        'fill_color_select',
+        'stroke_color',
+        'stroke_color_select',
+
+        // OPACITIES
+        'fill_opacity',
+        'fill_opacity_select',
+        'stroke_opacity',
+        'stroke_opacity_select',
+
+        // DIMENSIONS
+        'stroke_width',
+        'point_radius',
+        'zindex',
+        'weight',
+
+        // DATES
+        'start_date',
+        'end_date',
+        'after_date',
+        'before_date',
+
+        // IMAGERY
+        'point_image',
+        'wms_address',
+        'wms_layers',
+
+        // VISIBILITY
+        'min_zoom',
+        'max_zoom',
+        'map_focus',
+        'map_zoom'
+
+    );
+}
