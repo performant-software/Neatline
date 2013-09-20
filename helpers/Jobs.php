@@ -21,13 +21,13 @@ function nl_mountView()
             Zend_Registry::get('view') :
             new Omeka_View();
 
-    // (1) Default Omeka templates:
+    // (1) Omeka templates:
     $view->addScriptPath(VIEW_SCRIPTS_DIR);
 
-    // (2) Neatline plugin templates:
+    // (2) Neatline templates:
     $view->addScriptPath(NL_DIR.'/views/shared');
 
-    // (3) Public theme templates:
+    // (3) Theme templates:
     $view->addScriptPath(nl_getPublicThemeDir());
 
     // (Re)set the view.
@@ -45,8 +45,13 @@ function nl_mountView()
  */
 function nl_getWebDir()
 {
+
+    if (nl_isUsingS3()) return;
+
+    // Get the current value of `webDir`.
     $options = Zend_Registry::get('storage')->getAdapter()->getOptions();
     return $options['webDir'];
+
 }
 
 
@@ -58,6 +63,8 @@ function nl_getWebDir()
 function nl_setWebDir($dir)
 {
 
+    if (nl_isUsingS3()) return;
+
     // Create a new adapter with the path.
     $adapter = new Omeka_Storage_Adapter_Filesystem(array(
         'webDir' => $dir
@@ -66,4 +73,16 @@ function nl_setWebDir($dir)
     // Set the adapter on the storage.
     Zend_Registry::get('storage')->setAdapter($adapter);
 
+}
+
+
+/**
+ * Is Omeka using the S3 storage adapter?
+ *
+ * @return boolean
+ */
+function nl_isUsingS3()
+{
+    $adapter = Zend_Registry::get('storage')->getAdapter();
+    return get_class($adapter) == 'Omeka_Storage_Adapter_ZendS3';
 }
