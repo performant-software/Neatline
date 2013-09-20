@@ -43,7 +43,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
     public function hookInstall()
     {
 
-        $exhibits = <<<SQL
+        $this->_db->query(<<<SQL
 
         CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_exhibits (
 
@@ -70,13 +70,14 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
             map_focus               VARCHAR(100) NULL,
             map_zoom                INT(10) UNSIGNED NULL,
 
-            PRIMARY KEY            (id)
+            PRIMARY KEY             (id)
 
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SQL;
+SQL
+);
 
-        $records = <<<SQL
+        $this->_db->query(<<<SQL
 
         CREATE TABLE IF NOT EXISTS {$this->_db->prefix}neatline_records (
 
@@ -132,10 +133,8 @@ SQL;
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SQL;
-
-        $this->_db->query($exhibits);
-        $this->_db->query($records);
+SQL
+);
 
     }
 
@@ -146,16 +145,15 @@ SQL;
     public function hookUninstall()
     {
 
-        $exhibits = <<<SQL
+        $this->_db->query(<<<SQL
         DROP TABLE {$this->_db->prefix}neatline_exhibits
-SQL;
+SQL
+);
 
-        $records = <<<SQL
+        $this->_db->query(<<<SQL
         DROP TABLE {$this->_db->prefix}neatline_records
-SQL;
-
-        $this->_db->query($exhibits);
-        $this->_db->query($records);
+SQL
+);
 
     }
 
