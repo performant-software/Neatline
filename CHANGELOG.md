@@ -20,6 +20,8 @@
 
   - Fixes a bug that caused post-2.0 migrations not to run when upgrading from a 2.0 pre-release version (eg, 2.0-alpha2, 2.0-rc3, etc).
 
+  - Fixes a bug that caused Omeka item imports to fail when using the Amazon S3 storage adapter.
+
 #### API Changes
 
   - Upgrates Bootstrap to v3.0.0-rc2.
