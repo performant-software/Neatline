@@ -18,6 +18,7 @@ $(function() {
 
   var position = function() {
     map.css('height', $(window).height());
+    Neatline.execute('MAP:updateSize');
   }
 
   // Fill window height.
