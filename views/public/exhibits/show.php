@@ -16,13 +16,8 @@
   'bodyclass' => 'neatline show'
 )); ?>
 
-<!-- Title -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
-
-<!-- Exhibit -->
 <?php echo nl_getExhibitMarkup(); ?>
-
-<!-- Text -->
 <?php echo nl_getNarrativeMarkup(); ?>
 
 <?php echo foot(); ?>
