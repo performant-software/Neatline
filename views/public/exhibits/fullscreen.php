@@ -11,6 +11,11 @@
 
 ?>
 
-<?php echo head(array('title' => nl_getExhibitField('title'))); ?>
+<?php echo head(array(
+  'title' => nl_getExhibitField('title'),
+  'bodyclass' => 'neatline fullscreen'
+)); ?>
+
 <?php echo nl_getExhibitMarkup(); ?>
+
 <?php echo foot(); ?>

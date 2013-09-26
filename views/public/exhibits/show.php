@@ -12,16 +12,17 @@
 ?>
 
 <?php echo head(array(
-  'title' => nl_getExhibitField('title')
+  'title' => nl_getExhibitField('title'),
+  'bodyclass' => 'neatline show'
 )); ?>
 
-<!-- Title. -->
+<!-- Title -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
 
-<!-- Exhibit. -->
+<!-- Exhibit -->
 <?php echo nl_getExhibitMarkup(); ?>
 
-<!-- Narrative. -->
+<!-- Text -->
 <?php echo nl_getNarrativeMarkup(); ?>
 
 <?php echo foot(); ?>
