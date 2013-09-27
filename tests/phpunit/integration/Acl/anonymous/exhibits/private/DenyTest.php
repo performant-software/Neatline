@@ -35,6 +35,17 @@ class AclTest_AnonymousExhibitsPrivateDeny extends Neatline_Case_Default
 
 
     /**
+     * Anonymous users should not be able to view the fullscreen display for
+     * private exhibits.
+     */
+    public function testCannotViewFullscreenPrivateExhibits()
+    {
+        $this->_expect404();
+        $this->dispatch('neatline/fullscreen/slug');
+    }
+
+
+    /**
      * Anonymous users should not be able to browse private exhibits.
      */
     public function testCannotBrowsePrivateExhibits()

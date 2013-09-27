@@ -42,6 +42,7 @@ function nl_defineAcl($acl)
     $acl->allow(null, 'Neatline_Exhibits', array(
         'index',
         'show',
+        'fullscreen',
         'browse',
         'get'
     ));

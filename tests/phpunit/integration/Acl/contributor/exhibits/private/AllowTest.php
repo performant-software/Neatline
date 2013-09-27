@@ -48,20 +48,56 @@ class AclTest_ContributorExhibitsPrivateAllow
 
 
     /**
-     * Contributors should be able to browse private exhibits.
+     * Contributors should be able to view the fullscreen display for their
+     * own private exhibits.
      */
-    public function testCanBrowsePrivateExhibits()
+    public function testCanViewFullscreenOwnPrivateExhibits()
+    {
+        $this->dispatch('neatline/fullscreen/slug2');
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Contributors should be able to view the fullscreen display for other
+     * users' private exhibits.
+     */
+    public function testCanViewFullscreenOtherUsersPrivateExhibits()
+    {
+        $this->dispatch('neatline/fullscreen/slug1');
+        $this->assertNotAction('forbidden');
+    }
+
+
+    /**
+     * Contributors should be able to browse their own private exhibits.
+     */
+    public function testCanBrowseOwnPrivateExhibits()
     {
 
         $this->dispatch('neatline');
         $this->assertNotAction('forbidden');
 
-        // Should list private exhibits.
-        $this->assertXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug1').'"]'
-        );
+        // Should list own private exhibit.
         $this->assertXpath('//a[@class="neatline"][@href="'.
             public_url('neatline/show/slug2').'"]'
+        );
+
+    }
+
+
+    /**
+     * Contributors should be able to browse other users' private exhibits.
+     */
+    public function testCanBrowseOtherUsersPrivateExhibits()
+    {
+
+        $this->dispatch('neatline');
+        $this->assertNotAction('forbidden');
+
+        // Should list other user's private exhibit.
+        $this->assertXpath('//a[@class="neatline"][@href="'.
+            public_url('neatline/show/slug1').'"]'
         );
 
     }
