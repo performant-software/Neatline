@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_AnonymousExhibitsPublicAllow extends Neatline_Case_Default
+class AclTest_AnonymousExhibitsAllow extends Neatline_Case_Default
 {
 
 
@@ -27,7 +27,7 @@ class AclTest_AnonymousExhibitsPublicAllow extends Neatline_Case_Default
     /**
      * Anonymous users should be able to view public exhibits.
      */
-    public function testCanViewExhibits()
+    public function testCanViewPublicExhibits()
     {
         $this->dispatch('neatline/show/slug');
         $this->assertNotAction('login');
@@ -35,9 +35,20 @@ class AclTest_AnonymousExhibitsPublicAllow extends Neatline_Case_Default
 
 
     /**
+     * Anonymous users should be able to view the fullscreen display for
+     * public exhibits.
+     */
+    public function testCanViewFullscreenPublicExhibits()
+    {
+        $this->dispatch('neatline/fullscreen/slug');
+        $this->assertNotAction('login');
+    }
+
+
+    /**
      * Anonymous users should be able to GET individual public exhibits.
      */
-    public function testCanGetExhibits()
+    public function testCanGetPublicExhibits()
     {
         $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
         $this->assertNotAction('login');
@@ -47,7 +58,7 @@ class AclTest_AnonymousExhibitsPublicAllow extends Neatline_Case_Default
     /**
      * Anonymous users should be able to browse public exhibits.
      */
-    public function testCanBrowseExhibits()
+    public function testCanBrowsePublicExhibits()
     {
 
         $this->dispatch('neatline');

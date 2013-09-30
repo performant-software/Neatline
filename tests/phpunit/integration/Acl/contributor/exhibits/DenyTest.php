@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class AclTest_ContributorExhibitsPublicDeny extends Neatline_Case_Default
+class AclTest_ContributorExhibitsDeny extends Neatline_Case_Default
 {
 
 
@@ -19,6 +19,17 @@ class AclTest_ContributorExhibitsPublicDeny extends Neatline_Case_Default
         $this->_loginAsContributor('user1');
         $this->exhibit = $this->_exhibit();
         $this->_loginAsContributor('user2');
+    }
+
+
+    /**
+     * Contributors should not be able to update other users' exhibits.
+     */
+    public function testCannotPutOtherUsersExhibits()
+    {
+        $this->_setPut(array());
+        $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
+        $this->assertAction('forbidden');
     }
 
 
@@ -52,17 +63,6 @@ class AclTest_ContributorExhibitsPublicDeny extends Neatline_Case_Default
         $this->dispatch('neatline/import/'.$this->exhibit->id);
         $this->assertAction('forbidden');
 
-    }
-
-
-    /**
-     * Contributors should not be able to update other users' exhibits.
-     */
-    public function testCannotUpdateOtherUsersExhibits()
-    {
-        $this->_setPut(array());
-        $this->dispatch('neatline/exhibits/'.$this->exhibit->id);
-        $this->assertAction('forbidden');
     }
 
 
