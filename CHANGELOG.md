@@ -1,4 +1,4 @@
-## v2.1.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.0...2.1.1)) ~ Pending
+## v2.1.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.0...2.1.1)) ~ September 30, 2013
 
 #### Bug Fixes
 
@@ -6,7 +6,7 @@
 
   - Fixes a bug that made the "fullscreen" view inaccessible to public users.
 
-## v2.1.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.1.0)) ~ Pending
+## v2.1.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.0.4...2.1.0)) ~ September 25, 2013
 
 #### Added Features
 
