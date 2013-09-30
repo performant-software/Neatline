@@ -92,11 +92,11 @@
               <?php endif; ?>
 
               <!-- Import Omeka Items. -->
-              <?php if (is_allowed($e, 'import')): ?>
+              <?php if (is_allowed($e, 'importItems')): ?>
                 <li>
                   <?php echo nl_getExhibitLink(
-                    $e, 'import', __('Import Items'),
-                    array('class' => 'import'), false
+                    $e, 'import-items', __('Import Items'),
+                    array('class' => 'import-items'), false
                   );?>
                 </li>
               <?php endif; ?>

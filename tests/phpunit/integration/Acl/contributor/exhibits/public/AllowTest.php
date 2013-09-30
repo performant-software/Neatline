@@ -59,11 +59,11 @@ class AclTest_ContributorExhibitsPublicAllow extends Neatline_Case_Default
     public function testCanImportItemsIntoOwnExhibits()
     {
 
-        $this->dispatch('neatline/import/'.$this->exhibit->id);
+        $this->dispatch('neatline/import-items/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
 
         $this->request->setMethod('POST');
-        $this->dispatch('neatline/import/'.$this->exhibit->id);
+        $this->dispatch('neatline/import-items/'.$this->exhibit->id);
         $this->assertNotAction('forbidden');
 
     }
