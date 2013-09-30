@@ -13,7 +13,8 @@ $(function() {
   var exhibit = $('#neatline');
   var map = $('#neatline-map');
 
-  // Clear theme markup.
+  // Clear the theme markup.
+  exhibit.detach();
   $('body').empty().append(exhibit);
 
   var position = function() {
