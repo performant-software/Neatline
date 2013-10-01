@@ -24,6 +24,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $image_layer;
     public $image_height;
     public $image_width;
+    public $zoom_levels;
     public $wms_address;
     public $wms_layers;
     public $widgets;

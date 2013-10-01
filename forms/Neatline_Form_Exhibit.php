@@ -168,6 +168,14 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->wms_layers
         ));
 
+        // Zoom Levels:
+        $this->addElement('text', 'zoom_levels', array(
+            'label'         => __('Zoom Levels'),
+            'description'   => __('The number of zoom levels available on the map.'),
+            'size'          => 40,
+            'value'         => $this->exhibit->zoom_levels
+        ));
+
         // Spatial Querying:
         $this->addElement('checkbox', 'spatial_querying', array(
             'label'         => __('Spatial Querying'),
@@ -197,6 +205,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'image_layer',
             'wms_address',
             'wms_layers',
+            'zoom_levels',
             'spatial_querying',
             'public'
         ), 'fields');

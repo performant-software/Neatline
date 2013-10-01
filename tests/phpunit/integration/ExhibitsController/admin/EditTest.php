@@ -40,6 +40,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'image_layer'       => $imagePath,
             'wms_address'       => 'wms.org',
             'wms_layers'        => 'wms:layer',
+            'zoom_levels'       => 10,
             'spatial_querying'  => 1,
             'public'            => 1
         ));
@@ -50,57 +51,75 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         // Title:
         $this->assertXpath(
-            '//input[@name="title"][@value="Title"]');
+            '//input[@name="title"][@value="Title"]'
+        );
 
         // Slug:
         $this->assertXpath(
-            '//input[@name="slug"][@value="slug"]');
+            '//input[@name="slug"][@value="slug"]'
+        );
 
         // Narrative:
         $this->assertXpathContentContains(
             '//textarea[@name="narrative"]',
-            'Narrative.');
+            'Narrative.'
+        );
 
         // Widgets:
         $this->assertXpath(
             '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget1"]');
+            option[@selected="selected"][@value="Widget1"]'
+        );
         $this->assertXpath(
             '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget2"]');
+            option[@selected="selected"][@value="Widget2"]'
+        );
 
         // Spatial Layers:
         $this->assertXpath(
             '//select[@name="spatial_layers[]"]/optgroup/
-            option[@selected="selected"][@value="Layer1"]');
+            option[@selected="selected"][@value="Layer1"]'
+        );
         $this->assertXpath(
             '//select[@name="spatial_layers[]"]/optgroup/
-            option[@selected="selected"][@value="Layer3"]');
+            option[@selected="selected"][@value="Layer3"]'
+        );
 
         // Spatial Layer:
         $this->assertXpath(
             '//select[@name="spatial_layer"]/optgroup/
-            option[@selected="selected"][@value="Layer3"]');
+            option[@selected="selected"][@value="Layer3"]'
+        );
 
         // Image Layer:
         $this->assertXpath(
-            "//input[@name='image_layer'][@value='$imagePath']");
+            "//input[@name='image_layer'][@value='$imagePath']"
+        );
 
         // WMS Address:
         $this->assertXpath(
-            '//input[@name="wms_address"][@value="wms.org"]');
+            '//input[@name="wms_address"][@value="wms.org"]'
+        );
 
         // WMS Layer:
         $this->assertXpath(
-            '//input[@name="wms_layers"][@value="wms:layer"]');
+            '//input[@name="wms_layers"][@value="wms:layer"]'
+        );
+
+        // Zoom Levels:
+        $this->assertXpath(
+            '//input[@name="zoom_levels"][@value="10"]'
+        );
 
         // Spatial Querying:
         $this->assertXpath(
-            '//input[@name="spatial_querying"][@checked="checked"]');
+            '//input[@name="spatial_querying"][@checked="checked"]'
+        );
 
         // Public:
         $this->assertXpath(
-            '//input[@name="public"][@checked="checked"]');
+            '//input[@name="public"][@checked="checked"]'
+        );
 
     }
 
@@ -324,6 +343,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'image_layer'       => $imagePath,
             'wms_address'       => 'wms.org',
             'wms_layers'        => 'wms:layer',
+            'zoom_levels'       => '50',
             'spatial_querying'  => 0,
             'public'            => 1
         ));
@@ -342,6 +362,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->assertEquals($imagePath,         $exhibit->image_layer);
         $this->assertEquals('wms.org',          $exhibit->wms_address);
         $this->assertEquals('wms:layer',        $exhibit->wms_layers);
+        $this->assertEquals(50,                 $exhibit->zoom_levels);
         $this->assertEquals(0,                  $exhibit->spatial_querying);
         $this->assertEquals(1,                  $exhibit->public);
 
