@@ -4,6 +4,8 @@
 
   - Gets rid of the auto-expanding zoom level bar on the map, which makes it possible to use extremely high numbers of zoom levels (eg, 50-100) without the bar extending down below the bottom of the screen.
 
+  - Only display the layer switcher widget when the map is using a spatial layer, since it's useless in exhibits using static-image layers (of which there can never be more than one).
+
 ## v2.1.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.0...2.1.1)) ~ September 30, 2013
 
 #### Bug Fixes

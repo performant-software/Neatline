@@ -34706,7 +34706,6 @@ Neatline.module('Map', function(
 
         controls: [
           new OpenLayers.Control.PanZoom(),
-          new OpenLayers.Control.LayerSwitcher(),
           new OpenLayers.Control.Navigation({
             dragPanOptions: { enableKinetic: false },
             documentDrag: true
@@ -34857,6 +34856,9 @@ Neatline.module('Map', function(
 
       // Set default base layer.
       this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
+
+      // Add layer switcher.
+      this.map.addControl(new OpenLayers.Control.LayerSwitcher());
 
     },
 
