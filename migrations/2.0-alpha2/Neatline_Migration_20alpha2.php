@@ -29,7 +29,7 @@ class Neatline_Migration_20alpha2 extends Neatline_Migration_Abstract
     private function _changeExhibitsTableEngine()
     {
         $this->db->query(<<<SQL
-        ALTER TABLE {$this->db->prefix}neatline_exhibits ENGINE=InnoDB
+        ALTER TABLE {$this->db->prefix}neatline_exhibits ENGINE=InnoDB;
 SQL
 );
     }
@@ -43,13 +43,13 @@ SQL
 
         $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
-        ADD COLUMN user_id INT(10) UNSIGNED NOT NULL DEFAULT 0
+        ADD COLUMN user_id INT(10) UNSIGNED NOT NULL DEFAULT 0;
 SQL
 );
 
         $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
-        ADD COLUMN user_id INT(10) UNSIGNED NOT NULL DEFAULT 0
+        ADD COLUMN user_id INT(10) UNSIGNED NOT NULL DEFAULT 0;
 SQL
 );
 
