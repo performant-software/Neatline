@@ -68,11 +68,9 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         $form = $this->_getExhibitForm($exhibit);
 
         // Process form submission.
-        if ($this->_request->isPost()) {
-            if ($form->isValid($this->_request->getPost())) {
-                $exhibit->saveForm($form->getValues());
-                $this->_helper->redirector('browse');
-            }
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
+            $exhibit->saveForm($form->getValues());
+            $this->_helper->redirector('browse');
         }
 
         // Push form to view.
@@ -94,11 +92,9 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         $form = $this->_getExhibitForm($exhibit);
 
         // Process form submission.
-        if ($this->_request->isPost()) {
-            if ($form->isValid($this->_request->getPost())) {
-                $exhibit->saveForm($form->getValues());
-                $this->_helper->redirector('browse');
-            }
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
+            $exhibit->saveForm($form->getValues());
+            $this->_helper->redirector('browse');
         }
 
         // Push exhibit and form to view.

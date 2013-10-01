@@ -23,6 +23,24 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
 
 
     /**
+     * Submit the form, confirm that a new exhibit was not added.
+     */
+    protected function _assertFormError()
+    {
+
+        // Submit the form.
+        $c1 = $this->_exhibits->count();
+        $this->dispatch('neatline/add');
+        $c2 = $this->_exhibits->count();
+
+        // Should not add exhibit.
+        $this->assertEquals($c1, $c2);
+        $this->assertAction('add');
+
+    }
+
+
+    /**
      * ADD should display the add exhibit form.
      */
     public function testBaseMarkup()
@@ -101,11 +119,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'title'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//input[@name="title"]/
@@ -126,11 +140,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'slug'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//input[@name="slug"]/
@@ -151,11 +161,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'slug' => 'slug with spaces'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//input[@name="slug"]/
@@ -176,11 +182,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'slug' => 'Slug-With-Capitals'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//input[@name="slug"]/
@@ -201,11 +203,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'slug' => 'slug-with-non-alphas!'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//input[@name="slug"]/
@@ -229,11 +227,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'slug' => 'test-exhibit'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(1, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(1, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//input[@name="slug"]/
@@ -254,14 +248,73 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'spatial_layer'
         ));
 
-        // Submit the form, check for no new exhibits.
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->dispatch('neatline/add');
-        $this->assertEquals(0, $this->_exhibits->count());
-        $this->assertAction('add');
+        $this->_assertFormError();
 
         // Should flash error.
         $this->assertXpath('//select[@name="spatial_layer"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * A zoom level count must be provided.
+     */
+    public function testNoZoomLevelsError()
+    {
+
+        // Missing zoom level count.
+        $this->request->setMethod('POST')->setPost(array(
+            'zoom_levels'
+        ));
+
+        $this->_assertFormError();
+
+        // Should flash error.
+        $this->assertXpath('//input[@name="zoom_levels"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * The zoom level count can't contain non-digits.
+     */
+    public function testAlphaZoomLevelsError()
+    {
+
+        // Missing zoom level count.
+        $this->request->setMethod('POST')->setPost(array(
+            'zoom_levels' => 'alpha'
+        ));
+
+        $this->_assertFormError();
+
+        // Should flash error.
+        $this->assertXpath('//input[@name="zoom_levels"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * The zoom level count can't contain decimals.
+     */
+    public function testDecimalZoomLevelsError()
+    {
+
+        // Missing zoom level count.
+        $this->request->setMethod('POST')->setPost(array(
+            'zoom_levels' => '50.5'
+        ));
+
+        $this->_assertFormError();
+
+        // Should flash error.
+        $this->assertXpath('//input[@name="zoom_levels"]/
             following-sibling::ul[@class="error"]'
         );
 

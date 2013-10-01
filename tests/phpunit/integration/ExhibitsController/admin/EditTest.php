@@ -288,6 +288,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'spatial_layers'  => array('Layer1', 'Layer2'),
             'spatial_layer'   => 'Layer2',
             'widgets'         => array('Widget1', 'Widget2'),
+            'zoom_levels'     => '50',
         ));
 
         // Submit the form.
@@ -318,6 +319,81 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         // Should flash error.
         $this->assertXpath('//select[@name="spatial_layer"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * A zoom level count must be provided.
+     */
+    public function testNoZoomLevelsError()
+    {
+
+        $exhibit = $this->_exhibit();
+
+        // Missing zoom level count.
+        $this->request->setMethod('POST')->setPost(array(
+            'zoom_levels'
+        ));
+
+        // Submit the form.
+        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->assertAction('edit');
+
+        // Should flash error.
+        $this->assertXpath('//input[@name="zoom_levels"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * The zoom level count can't contain non-digits.
+     */
+    public function testAlphaZoomLevelsError()
+    {
+
+        $exhibit = $this->_exhibit();
+
+        // Missing zoom level count.
+        $this->request->setMethod('POST')->setPost(array(
+            'zoom_levels' => 'alpha'
+        ));
+
+        // Submit the form.
+        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->assertAction('edit');
+
+        // Should flash error.
+        $this->assertXpath('//input[@name="zoom_levels"]/
+            following-sibling::ul[@class="error"]'
+        );
+
+    }
+
+
+    /**
+     * The zoom level count can't contain decimals.
+     */
+    public function testDecimalZoomLevelsError()
+    {
+
+        $exhibit = $this->_exhibit();
+
+        // Missing zoom level count.
+        $this->request->setMethod('POST')->setPost(array(
+            'zoom_levels' => '50.5'
+        ));
+
+        // Submit the form.
+        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->assertAction('edit');
+
+        // Should flash error.
+        $this->assertXpath('//input[@name="zoom_levels"]/
             following-sibling::ul[@class="error"]'
         );
 

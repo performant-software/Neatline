@@ -173,7 +173,24 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'label'         => __('Zoom Levels'),
             'description'   => __('The number of zoom levels available on the map.'),
             'size'          => 40,
-            'value'         => $this->exhibit->zoom_levels
+            'value'         => $this->exhibit->zoom_levels,
+            'required'      => true,
+            'validators'    => array(
+                array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_NotEmpty::IS_EMPTY => __('Enter a zoom level count.')
+                        )
+                    )
+                ),
+                array('validator' => 'Int', 'breakChainOnFailure' => true, 'options' =>
+                    array(
+                        'messages' => array(
+                            Zend_Validate_Int::NOT_INT => __('Must be an integer.')
+                        )
+                    )
+                )
+            )
         ));
 
         // Spatial Querying:
