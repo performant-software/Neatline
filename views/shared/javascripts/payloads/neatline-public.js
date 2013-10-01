@@ -34811,7 +34811,9 @@ Neatline.module('Map', function(
       var image = new OpenLayers.Layer.Image(
         this.exhibit.title, this.exhibit.image_layer,
         new OpenLayers.Bounds(0, 0, w, h),
-        new OpenLayers.Size(w/5, h/5)
+        new OpenLayers.Size(w/5, h/5), {
+          numZoomLevels: this.exhibit.zoom_levels
+        }
       );
 
       this.map.addLayer(image);

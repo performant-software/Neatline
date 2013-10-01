@@ -21,6 +21,7 @@ class FixturesTest_NeatlineMapImageBaseLayer extends Neatline_Case_Default
 
         $exhibit = $this->_exhibit();
         $exhibit->image_layer = NL_TEST_DIR.'/mocks/image.jpg';
+        $exhibit->zoom_levels = 50;
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture(

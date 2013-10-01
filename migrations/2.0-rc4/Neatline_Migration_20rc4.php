@@ -31,17 +31,17 @@ class Neatline_Migration_20rc4 extends Neatline_Migration_Abstract
     private function _renameExhibitBaseLayerColumns()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         CHANGE COLUMN base_layers spatial_layers TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         CHANGE COLUMN base_layer spatial_layer TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 
@@ -52,23 +52,23 @@ SQL;
     private function _addExhibitImageBaseLayerColumns()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN image_layer TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN image_height SMALLINT UNSIGNED NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN image_width SMALLINT UNSIGNED NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 
@@ -79,17 +79,17 @@ SQL;
     private function _addExhibitWmsBaseLayerColumns()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN wms_address TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN wms_layers TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 
@@ -100,17 +100,17 @@ SQL;
     private function _changeRecordWmsLayerColumnTypes()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         CHANGE wms_address wms_address TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         CHANGE wms_layers wms_layers TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 

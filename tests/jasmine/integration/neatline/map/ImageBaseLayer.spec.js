@@ -36,4 +36,18 @@ describe('Map | Image Base Layer', function() {
   });
 
 
+  it('should set the number of zoom levels', function() {
+
+    // ------------------------------------------------------------------------
+    // When an image base layer is provided, the number of zoom levels on the
+    // layer should be set from the `zoom_levels` exhibit field.
+    // ------------------------------------------------------------------------
+
+    expect(NL.vw.MAP.map.baseLayer.numZoomLevels).toEqual(
+      Neatline.g.neatline.exhibit.zoom_levels
+    );
+
+  });
+
+
 });

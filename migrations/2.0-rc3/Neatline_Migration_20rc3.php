@@ -30,23 +30,23 @@ class Neatline_Migration_20rc3 extends Neatline_Migration_Abstract
     private function _addFulltextIndexes()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         ADD FULLTEXT(title, body, slug);
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         ADD FULLTEXT(tags);
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         ADD FULLTEXT(widgets);
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 

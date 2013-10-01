@@ -98,25 +98,25 @@ class Neatline_Migration_200 extends Neatline_Migration_Abstract
     private function _backupOldTables()
     {
 
-        $sql1 = <<<SQL
+        $exhibits = <<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         RENAME TO {$this->db->prefix}neatline_exhibits_migrate;
 SQL;
 
-        $sql2 = <<<SQL
+        $records = <<<SQL
         ALTER TABLE {$this->db->prefix}neatline_data_records
         RENAME TO {$this->db->prefix}neatline_data_records_migrate;
 SQL;
 
-        $sql3 = <<<SQL
+        $layers = <<<SQL
         ALTER TABLE {$this->db->prefix}neatline_base_layers
         RENAME TO {$this->db->prefix}neatline_base_layers_migrate;
 SQL;
 
         try {
-            $this->db->query($sql1);
-            $this->db->query($sql2);
-            $this->db->query($sql3);
+            $this->db->query($exhibits);
+            $this->db->query($records);
+            $this->db->query($layers);
         } catch (Exception $e) {}
 
     }
@@ -136,7 +136,7 @@ SQL;
 
         $prefix = $this->db->prefix;
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
 
         CREATE TABLE IF NOT EXISTS
         {$prefix}neatline_simile_exhibit_expansions (
@@ -154,9 +154,8 @@ SQL;
 
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-SQL;
-
-        $this->db->query($sql);
+SQL
+);
 
     }
 
@@ -259,7 +258,7 @@ SQL;
             $unit   = 'YEAR';
         }
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
 
         INSERT INTO
         {$this->db->prefix}neatline_simile_exhibit_expansions (
@@ -282,9 +281,8 @@ SQL;
 
         );
 
-SQL;
-
-        $this->db->query($sql);
+SQL
+);
 
     }
 

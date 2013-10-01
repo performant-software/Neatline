@@ -29,11 +29,11 @@ class Neatline_Migration_202 extends Neatline_Migration_Abstract
      */
     private function _renameExhibitQueryColumn()
     {
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         CHANGE COLUMN query item_query TEXT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
     }
 
 
@@ -42,11 +42,11 @@ SQL;
      */
     private function _addExhibitSpatialQueryingColumn()
     {
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN spatial_querying TINYINT(1) NOT NULL DEFAULT 1;
-SQL;
-        $this->db->query($sql);
+SQL
+);
     }
 
 
@@ -56,17 +56,17 @@ SQL;
     private function _addRecordNotNullConstraints()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         CHANGE is_wms is_wms TINYINT(1) NOT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         CHANGE is_coverage is_coverage TINYINT(1) NOT NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 

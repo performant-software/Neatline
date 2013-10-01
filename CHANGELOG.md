@@ -1,5 +1,9 @@
 ## v2.1.2
 
+#### Added Features
+
+  - Makes it possible to set the number of zoom levels available on the map when an exhibit is using a static image base layer.
+
 #### Changed Features
 
   - Gets rid of the auto-expanding zoom level bar on the map, which makes it possible to use extremely high numbers of zoom levels (eg, 50-100) without the bar extending down below the bottom of the screen.

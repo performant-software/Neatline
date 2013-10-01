@@ -29,11 +29,11 @@ class Neatline_Migration_20rc1 extends Neatline_Migration_Abstract
      */
     private function _addPublishedColumn()
     {
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         ADD COLUMN published TIMESTAMP NULL;
-SQL;
-        $this->db->query($sql);
+SQL
+);
     }
 
 
@@ -43,19 +43,19 @@ SQL;
     private function _renameUserIdColumns()
     {
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
         CHANGE COLUMN user_id owner_id
         INT(10) UNSIGNED NOT NULL DEFAULT 0;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         CHANGE COLUMN user_id owner_id
         INT(10) UNSIGNED NOT NULL DEFAULT 0;
-SQL;
-        $this->db->query($sql);
+SQL
+);
 
     }
 
@@ -65,11 +65,11 @@ SQL;
      */
     private function _addFulltextIndexes()
     {
-        $sql = <<<SQL
+        $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_records
         ADD FULLTEXT(slug, tags, widgets);
-SQL;
-        $this->db->query($sql);
+SQL
+);
     }
 
 
