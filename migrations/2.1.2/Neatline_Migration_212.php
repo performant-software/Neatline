@@ -29,7 +29,7 @@ class Neatline_Migration_212 extends Neatline_Migration_Abstract
     {
         $this->db->query(<<<SQL
         ALTER TABLE {$this->db->prefix}neatline_exhibits
-        ADD COLUMN zoom_levels SMALLINT UNSIGNED NULL;
+        ADD COLUMN zoom_levels SMALLINT UNSIGNED NULL DEFAULT 20;
 SQL
 );
     }
