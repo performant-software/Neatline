@@ -1,3 +1,9 @@
+## v2.1.2
+
+#### Changed Features
+
+  - Gets rid of the auto-expanding zoom level bar on the map, which makes it possible to use extremely high numbers of zoom levels (eg, 50-100) without the bar extending down below the bottom of the screen.
+
 ## v2.1.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.0...2.1.1)) ~ September 30, 2013
 
 #### Bug Fixes

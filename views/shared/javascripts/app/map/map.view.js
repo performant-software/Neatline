@@ -89,7 +89,7 @@ Neatline.module('Map', function(
         panMethod:  null,
 
         controls: [
-          new OpenLayers.Control.PanZoomBar(),
+          new OpenLayers.Control.PanZoom(),
           new OpenLayers.Control.LayerSwitcher(),
           new OpenLayers.Control.Navigation({
             dragPanOptions: { enableKinetic: false },
