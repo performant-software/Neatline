@@ -38,7 +38,7 @@ Neatline.module('Map', function(
 
   /**
    * Unhighlight the layer that corresponds to the passed model and then focus
-  * on its extent (unless the event was triggered by the map).
+   * on its extent (unless the event was triggered by the map).
    *
    * @param {Object} args: Event arguments.
    */

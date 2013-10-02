@@ -91,38 +91,10 @@ function nl_queueFullscreen()
  */
 function nl_queueExhibitTheme($exhibit)
 {
-    nl_queueExhibitCss($exhibit);
-    nl_queueExhibitJs($exhibit);
-}
-
-
-/**
- * Include exhibit-specific CSS assets.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- */
-function nl_queueExhibitCss($exhibit)
-{
-    foreach (glob(nl_getExhibitThemeDir($exhibit).'/*.css') as $file) {
-        queue_css_file(basename($file, '.css'), null, false,
-            "exhibits/themes/$exhibit->slug"
-        );
-    }
-}
-
-
-/**
- * Include exhibit-specific JS assets.
- *
- * @param NeatlineExhibit $exhibit The exhibit.
- */
-function nl_queueExhibitJs($exhibit)
-{
-    foreach (glob(nl_getExhibitThemeDir($exhibit).'/*.js') as $file) {
-        queue_js_file(basename($file, '.js'),
-            "exhibits/themes/$exhibit->slug"
-        );
-    }
+    try {
+        queue_css_file('style', null, false,"exhibits/themes/$exhibit->slug");
+        queue_js_file('script', "exhibits/themes/$exhibit->slug");
+    } catch (Exception $e) {}
 }
 
 
