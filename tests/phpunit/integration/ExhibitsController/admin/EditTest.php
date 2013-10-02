@@ -417,9 +417,9 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'spatial_layers'    => array('Layer1', 'Layer2'),
             'spatial_layer'     => 'Layer1',
             'image_layer'       => $imagePath,
+            'zoom_levels'       => '50',
             'wms_address'       => 'wms.org',
             'wms_layers'        => 'wms:layer',
-            'zoom_levels'       => '50',
             'spatial_querying'  => 0,
             'public'            => 1
         ));
@@ -436,9 +436,9 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->assertEquals('Layer1,Layer2',    $exhibit->spatial_layers);
         $this->assertEquals('Layer1',           $exhibit->spatial_layer);
         $this->assertEquals($imagePath,         $exhibit->image_layer);
+        $this->assertEquals(50,                 $exhibit->zoom_levels);
         $this->assertEquals('wms.org',          $exhibit->wms_address);
         $this->assertEquals('wms:layer',        $exhibit->wms_layers);
-        $this->assertEquals(50,                 $exhibit->zoom_levels);
         $this->assertEquals(0,                  $exhibit->spatial_querying);
         $this->assertEquals(1,                  $exhibit->public);
 
