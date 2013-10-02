@@ -90,14 +90,14 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         // Image Layer:
         $this->assertXpath('//input[@name="image_layer"]');
 
+        // Zoom Levels (with default):
+        $this->assertXpath('//input[@name="zoom_levels"][@value="20"]');
+
         // WMS Address:
         $this->assertXpath('//input[@name="wms_address"]');
 
         // WMS Layers:
         $this->assertXpath('//input[@name="wms_layers"]');
-
-        // Zoom Levels (with default):
-        $this->assertXpath('//input[@name="zoom_levels"][@value="20"]');
 
         // Spatial Querying:
         $this->assertXpath('//input[@name="spatial_querying"]');

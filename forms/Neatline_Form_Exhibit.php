@@ -152,26 +152,10 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->image_layer
         ));
 
-        // WMS Address:
-        $this->addElement('text', 'wms_address', array(
-            'label'         => __('WMS Address'),
-            'description'   => __('To use a custom WMS layer as the base layer of the exhibit, enter (a) the address of the WMS server.'),
-            'size'          => 40,
-            'value'         => $this->exhibit->wms_address
-        ));
-
-        // WMS Layers:
-        $this->addElement('text', 'wms_layers', array(
-            'label'         => __('WMS Layers'),
-            'description'   => __('And (b) the comma-delimited list of layers.'),
-            'size'          => 40,
-            'value'         => $this->exhibit->wms_layers
-        ));
-
         // Zoom Levels:
         $this->addElement('text', 'zoom_levels', array(
             'label'         => __('Zoom Levels'),
-            'description'   => __('The number of zoom levels available on the map.'),
+            'description'   => __('Enter the number of zoom levels available for the static image.'),
             'size'          => 40,
             'value'         => $this->exhibit->zoom_levels,
             'required'      => true,
@@ -193,10 +177,26 @@ class Neatline_Form_Exhibit extends Omeka_Form
             )
         ));
 
+        // WMS Address:
+        $this->addElement('text', 'wms_address', array(
+            'label'         => __('WMS Address'),
+            'description'   => __('To use a custom WMS layer as the base layer of the exhibit, enter (a) the address of the WMS server.'),
+            'size'          => 40,
+            'value'         => $this->exhibit->wms_address
+        ));
+
+        // WMS Layers:
+        $this->addElement('text', 'wms_layers', array(
+            'label'         => __('WMS Layers'),
+            'description'   => __('And (b) the comma-delimited list of layers.'),
+            'size'          => 40,
+            'value'         => $this->exhibit->wms_layers
+        ));
+
         // Spatial Querying:
         $this->addElement('checkbox', 'spatial_querying', array(
             'label'         => __('Spatial Querying'),
-            'description'   => __('If checked, the map will dynamically load just the set of records that falls inside the current viewport.'),
+            'description'   => __('If checked, the map will continously update to display just the records that fall inside the current viewport.'),
             'value'         => $this->exhibit->spatial_querying
         ));
 
@@ -220,15 +220,15 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'spatial_layers',
             'spatial_layer',
             'image_layer',
+            'zoom_levels',
             'wms_address',
             'wms_layers',
-            'zoom_levels',
             'spatial_querying',
             'public'
         ), 'fields');
 
         $this->addDisplayGroup(array(
-          'submit'
+            'submit'
         ), 'submit_button');
 
     }

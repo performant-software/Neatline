@@ -96,6 +96,11 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             "//input[@name='image_layer'][@value='$imagePath']"
         );
 
+        // Zoom Levels:
+        $this->assertXpath(
+            '//input[@name="zoom_levels"][@value="10"]'
+        );
+
         // WMS Address:
         $this->assertXpath(
             '//input[@name="wms_address"][@value="wms.org"]'
@@ -104,11 +109,6 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         // WMS Layer:
         $this->assertXpath(
             '//input[@name="wms_layers"][@value="wms:layer"]'
-        );
-
-        // Zoom Levels:
-        $this->assertXpath(
-            '//input[@name="zoom_levels"][@value="10"]'
         );
 
         // Spatial Querying:
