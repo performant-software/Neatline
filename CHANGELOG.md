@@ -1,4 +1,4 @@
-## v2.1.2
+## v2.1.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.1...2.1.2)) ~ October 1, 2013
 
 #### Added Features
 
