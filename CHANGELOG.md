@@ -1,3 +1,9 @@
+## v2.1.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.2...2.1.3)) ~ October 1, 2013
+
+#### Added Features
+
+  - Neatline now adds a link to the exhibits browse page to the public navigation.
+
 ## v2.1.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.1...2.1.2)) ~ October 1, 2013
 
 #### Added Features

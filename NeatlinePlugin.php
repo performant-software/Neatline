@@ -26,6 +26,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
 
 
     protected $_filters = array(
+        'public_navigation_main',
         'admin_navigation_main',
         'neatline_globals',
         'neatline_presenters'
@@ -243,6 +244,19 @@ SQL
 
     // FILTERS
     // ------------------------------------------------------------------------
+
+
+    /**
+     * Add link to main public menu bar.
+     *
+     * @param array $tabs Tabs, <LABEL> => <URI> pairs.
+     * @return array The tab array with the "Neatline" tab.
+     */
+    public function filterPublicNavigationMain($tabs)
+    {
+        $tabs[] = array('label' => 'Neatline', 'uri' => url('neatline'));
+        return $tabs;
+    }
 
 
     /**
