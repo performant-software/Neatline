@@ -422,6 +422,7 @@ module.exports = function(grunt) {
     jasmine: {
 
       options: {
+        template: paths.jasmine+'/runner.tmpl',
         helpers: [
           paths.vendor.js.jasmine_jquery,
           paths.vendor.js.jasmine_async,
