@@ -475,7 +475,7 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'bower:install',
+    'bower',
     'shell:build_openlayers',
     'shell:build_ckeditor',
     'shell:build_jquery_ui',
