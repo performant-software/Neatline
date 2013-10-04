@@ -20,6 +20,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-shell');
 
   var pkg = grunt.file.readJSON('./package.json');
@@ -27,18 +28,18 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    bower: {
+      install: {
+        options: {
+          copy: false
+        }
+      }
+    },
+
     shell: {
 
       options: {
         stdout: true
-      },
-
-      bower_clean: {
-        command: 'rm -rf ~/.bower && bower cache-clean'
-      },
-
-      bower_install: {
-        command: 'bower install'
       },
 
       build_openlayers: {
@@ -473,8 +474,7 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'shell:bower_clean',
-    'shell:bower_install',
+    'bower:install',
     'shell:build_openlayers',
     'shell:build_ckeditor',
     'shell:build_jquery_ui',
