@@ -23,8 +23,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-shell');
 
-  var pkg = grunt.file.readJSON('./package.json');
-  var paths = grunt.file.readJSON('./paths.json');
+  var pkg = grunt.file.readJSON('package.json');
+  var paths = grunt.file.readJSON('paths.json');
 
   grunt.initConfig({
 
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       },
 
       build_ckeditor: {
-        command: './build.sh',
+        command: 'build.sh',
         options: {
           execOptions: {
             cwd: paths.build.ckeditor
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
       },
 
       build_sinon: {
-        command: './build',
+        command: 'build',
         options: {
           execOptions: {
             cwd: paths.build.sinon
@@ -91,7 +91,7 @@ module.exports = function(grunt) {
         command: '../../vendor/bin/phpunit -c phpunit-application.xml',
         options: {
           execOptions: {
-            cwd: './tests/phpunit'
+            cwd: 'tests/phpunit'
           }
         }
       },
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         command: '../../vendor/bin/phpunit -c phpunit-migrations.xml',
         options: {
           execOptions: {
-            cwd: './tests/phpunit'
+            cwd: 'tests/phpunit'
           }
         }
       }
@@ -112,7 +112,7 @@ module.exports = function(grunt) {
       bootstrap: {
         files: [{
           src: paths.build.bootstrap+'/fonts/*',
-          dest: './views/shared/css/fonts/',
+          dest: 'views/shared/css/fonts/',
           expand: true,
           flatten: true
         }]
@@ -162,9 +162,9 @@ module.exports = function(grunt) {
         paths.jasmine+'/fixtures/*.xml'
       ],
 
-      bower:  './bower_components',
-      fonts:  './views/shared/css/fonts',
-      pkg:    './pkg'
+      bower: '/bower_components',
+      fonts: '/views/shared/css/fonts',
+      pkg: '/pkg'
 
     },
 
@@ -344,11 +344,11 @@ module.exports = function(grunt) {
           paths: [paths.stylus.shared]
         },
         files: {
-          './views/shared/css/payloads/neatline-public.css':
+          'views/shared/css/payloads/neatline-public.css':
             paths.stylus.shared+'/public/**/*.styl',
-          './views/shared/css/payloads/neatline-editor.css':
+          'views/shared/css/payloads/neatline-editor.css':
             paths.stylus.shared+'/editor/**/*.styl',
-          './views/admin/css/payloads/exhibit-form.css':
+          'views/admin/css/payloads/exhibit-form.css':
             paths.stylus.admin+'/exhibit-form.styl'
         }
       }
