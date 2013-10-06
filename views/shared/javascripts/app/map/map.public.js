@@ -135,6 +135,7 @@ Neatline.module('Map', function(
   /**
    * Get or create a vector layer for a model.
    *
+   * @param {Object} model: A record model.
    * @return {Object}: The record model.
    */
   var getVectorLayer = function(model) {

@@ -34571,6 +34571,7 @@ Neatline.module('Map', function(
   /**
    * Get or create a vector layer for a model.
    *
+   * @param {Object} model: A record model.
    * @return {Object}: The record model.
    */
   var getVectorLayer = function(model) {
@@ -34778,11 +34779,13 @@ Neatline.module('Map', function(
      * fall within the updated viewport extent when the map is moved.
      */
     _initEvents: function() {
-      if (this.exhibit.spatial_querying) {
-        this.map.events.register('moveend', this.map, _.bind(function() {
-          this.requestRecords();
-        }, this));
-      }
+
+      // When the map is panned or zoomed.
+      this.map.events.register('moveend', this.map, _.bind(function() {
+        if (this.exhibit.spatial_querying) this.requestRecords();
+        Neatline.vent.trigger('MAP:move');
+      }, this));
+
     },
 
 
