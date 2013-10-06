@@ -133,6 +133,17 @@ Neatline.module('Map', function(
 
 
   /**
+   * Get or create a vector layer for a model.
+   *
+   * @return {Object}: The record model.
+   */
+  var getVectorLayer = function(model) {
+    return Map.__view.getOrCreateVectorLayer(model);
+  };
+  Neatline.reqres.setHandler(Map.ID+':getVectorLayer', getVectorLayer);
+
+
+  /**
    * Emit the OpenLayers map instance.
    *
    * @return {Object}: The map.

@@ -35,8 +35,7 @@ _.extend(Neatline.Map.View.prototype, {
     // If a vector layer already exists, use it as the edit layer; otherwise,
     // create a new layer from the model:
 
-    this.editLayer = this.layers.vector[model.id]
-    if (!this.editLayer) this.editLayer = this.buildVectorLayer(model);
+    this.editLayer = this.getOrCreateVectorLayer(model);
 
     // Set an arbitrarily high z-index value on the edit layer to ensure that
     // it can always be manipulated by the editing controls:

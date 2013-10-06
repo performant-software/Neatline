@@ -330,8 +330,7 @@ Neatline.module('Map', function(
     focusByModel: function(model) {
 
       // Get a layer for the model.
-      var layer = this.layers.vector[model.id];
-      if (!layer) layer = this.buildVectorLayer(model);
+      var layer = this.getOrCreateVectorLayer(model);
 
       // Try to get a custom focus.
       var focus = model.get('map_focus');
@@ -546,6 +545,18 @@ Neatline.module('Map', function(
 
       return layer;
 
+    },
+
+
+    /**
+     * Get or create the vector layer for a model.
+     *
+     * @param {Object}: A record model.
+     */
+    getOrCreateVectorLayer: function(model) {
+      var layer = this.layers.vector[model.id];
+      if (!layer) layer = this.buildVectorLayer(model);
+      return layer;
     },
 
 
