@@ -39,6 +39,7 @@ class Neatline_Acl_Assert_RecordOwnership
 
     }
 
+
     /**
      * Does the user own the record or the exhibit?
      */
