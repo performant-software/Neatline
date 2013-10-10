@@ -30,7 +30,7 @@ describe('Map | Subscribe `highlight`', function() {
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];
-    
+
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     NL.assertTemporaryIntent(layer);
 
@@ -46,7 +46,7 @@ describe('Map | Subscribe `highlight`', function() {
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];
-    
+
     Neatline.vent.trigger('select', { model: layer.nModel });
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     NL.assertSelectIntent(layer);

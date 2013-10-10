@@ -26,7 +26,7 @@ describe('Map | Publications', function() {
     feature = layer.features[0];
 
     // Spy on the event aggregator.
-    vent = spyOn(Neatline.vent, 'trigger');
+    //vent = spyOn(Neatline.vent, 'trigger');
 
   });
 
