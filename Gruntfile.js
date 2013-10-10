@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       },
 
       build_ckeditor: {
-        command: 'build.sh',
+        command: './build.sh',
         options: {
           execOptions: {
             cwd: paths.build.ckeditor
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
       },
 
       build_sinon: {
-        command: 'build',
+        command: './build',
         options: {
           execOptions: {
             cwd: paths.build.sinon
@@ -162,9 +162,9 @@ module.exports = function(grunt) {
         paths.jasmine+'/fixtures/*.xml'
       ],
 
-      bower: '/bower_components',
-      fonts: '/views/shared/css/fonts',
-      pkg: '/pkg'
+      bower: 'bower_components',
+      fonts: 'views/shared/css/fonts',
+      pkg: 'pkg'
 
     },
 
