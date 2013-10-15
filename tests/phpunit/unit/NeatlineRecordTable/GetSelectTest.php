@@ -21,8 +21,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
     {
 
         $record = new NeatlineRecord();
-        $record->coverage = 'POINT(1 1)';
-        $record->item_coverage = 'POINT(1 1)';
+        $record->coverage       = 'POINT(1 1)';
+        $record->item_coverage  = 'POINT(1 1)';
         $record->save();
 
         // Query for the record.

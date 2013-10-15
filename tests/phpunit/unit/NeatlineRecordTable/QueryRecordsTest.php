@@ -130,8 +130,8 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
-        $record1->coverage = 'POLYGON((0 0,0 2,2 2,2 0,0 0))';
-        $record2->coverage = 'POLYGON((4 4,4 6,6 6,6 4,4 4))';
+        $record1->coverage = 'POINT(1 1)';
+        $record2->coverage = 'POINT(3 3)';
         $record1->added = '2001-01-01';
         $record2->added = '2002-01-01';
 
@@ -147,7 +147,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         // Record 1 intersection.
         $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((1 1,1 3,3 3,3 1,1 1))')
+            array('extent' => 'POLYGON((0 0,0 2,2 2,2 0,0 0))')
         );
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
@@ -155,7 +155,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         // Record 2 intersection.
         $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((5 5,5 7,7 7,7 5,5 5))')
+            array('extent' => 'POLYGON((2 2,2 4,4 4,4 2,2 2))')
         );
 
         $this->assertEquals($record2->id, $result['records'][0]['id']);
@@ -163,7 +163,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         // Record 1 and record 2 intersection.
         $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((1 1,1 5,5 5,5 1,1 1))')
+            array('extent' => 'POLYGON((0 0,0 4,4 4,4 0,0 0))')
         );
 
         $this->assertEquals($record2->id, $result['records'][0]['id']);
