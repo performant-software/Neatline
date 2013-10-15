@@ -18,7 +18,7 @@ define('NL_TEST_DIR', NL_DIR.'/tests/phpunit');
 
 // Bootstrap Omeka, load Neatline plugin.
 require_once OMEKA_DIR.'/application/tests/bootstrap.php';
-require_once NL_DIR.'/NeatlinePlugin.php';
+//require_once NL_DIR.'/NeatlinePlugin.php';
 
 // Generic test cases.
 require_once 'cases/Neatline_Case_Abstract.php';

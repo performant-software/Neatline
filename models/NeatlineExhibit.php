@@ -31,7 +31,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $title;
     public $slug;
     public $narrative;
-    public $spatial_querying = 0;
+    public $spatial_querying = 1;
     public $public = 0;
     public $styles;
     public $map_focus;
