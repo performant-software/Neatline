@@ -16,11 +16,10 @@ define('NL_DIR', dirname(dirname(dirname(__FILE__))));
 define('OMEKA_DIR', dirname(dirname(NL_DIR)));
 define('NL_TEST_DIR', NL_DIR.'/tests/phpunit');
 
-// Bootstrap Omeka, load Neatline plugin.
+// Bootstrap Omeka.
 require_once OMEKA_DIR.'/application/tests/bootstrap.php';
-//require_once NL_DIR.'/NeatlinePlugin.php';
 
-// Generic test cases.
+// Gneric test cases.
 require_once 'cases/Neatline_Case_Abstract.php';
 require_once 'cases/Neatline_Case_Default.php';
 require_once 'cases/Neatline_Case_Fixture.php';
