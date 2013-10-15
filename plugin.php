@@ -49,6 +49,7 @@ require_once NL_DIR.'/helpers/Features.php';
 require_once NL_DIR.'/helpers/Globals.php';
 require_once NL_DIR.'/helpers/Jobs.php';
 require_once NL_DIR.'/helpers/Layers.php';
+require_once NL_DIR.'/helpers/Mysql.php';
 require_once NL_DIR.'/helpers/Plugins.php';
 require_once NL_DIR.'/helpers/Styles.php';
 require_once NL_DIR.'/helpers/Views.php';

@@ -154,7 +154,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Before saving, replace the string raw value the `coverage` field with
+     * Before saving, replace the string raw values the coverage fields with
      * the MySQL expression to populate the `GEOMETRY` value. If `coverage` is
      * null, use `POINT(0 0)` as a de facto NULL value (ignored in queries).
      *
@@ -164,24 +164,15 @@ class NeatlineRecord extends Neatline_Row_Expandable
     {
 
         $fields = parent::toArrayForSave();
+        $rCoverage = $fields['coverage'];
+        $iCoverage = $fields['item_coverage'];
 
-        // Set the `is_coverage` tracker.
-        $fields['is_coverage'] =
-            !is_null($fields['coverage']) ||
-            !is_null($fields['item_coverage']) ?
-            1 : 0;
+        // Set `is_coverage`.
+        $fields['is_coverage'] = $rCoverage || $iCoverage ?  1 : 0;
 
-        // Set the record coverage.
-        $fields['coverage'] = new Zend_Db_Expr("COALESCE(
-            GeomFromText('{$fields['coverage']}'),
-            GeomFromText('POINT(0 0)')
-        )");
-
-        // Set the item coverage.
-        $fields['item_coverage'] = new Zend_Db_Expr("COALESCE(
-            GeomFromText('{$fields['item_coverage']}'),
-            GeomFromText('POINT(0 0)')
-        )");
+        // Set the string -> GEOMETRY database expressions.
+        $fields['coverage']      = nl_setGeometry($rCoverage);
+        $fields['item_coverage'] = nl_setGeometry($iCoverage);
 
         return $fields;
 
@@ -284,8 +275,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function compileCoverage()
     {
         if (!$this->coverage) {
-            $featuresWKT = nl_getNeatlineFeatures($this);
-            if (is_string($featuresWKT)) $this->coverage = $featuresWKT;
+            $wkt = nl_getNeatlineFeatures($this);
+            if (is_string($wkt)) $this->coverage = $wkt;
         }
     }
 

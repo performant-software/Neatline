@@ -93,7 +93,7 @@ SQL
             title                   MEDIUMTEXT NULL,
             body                    MEDIUMTEXT NULL,
             coverage                GEOMETRY NOT NULL,
-            item_coverage                GEOMETRY NOT NULL,
+            item_coverage           GEOMETRY NOT NULL,
             tags                    TEXT NULL,
             widgets                 TEXT NULL,
             presenter               VARCHAR(100) NULL,
