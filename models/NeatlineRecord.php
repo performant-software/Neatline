@@ -268,13 +268,14 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Import coverage data from NeatlineFeatures, if it's installed.
-     **/
-    public function compileFeatures()
+     * Import coverage from Neatline Features, if it's installed, or from the
+     * Dublin Core "Coverage" field.
+     */
+    public function compileCoverage()
     {
         if (!$this->coverage) {
-            $geo = nl_getNeatlineFeatures($this);
-            if (is_string($geo)) $this->coverage = $geo;
+            $featuresWKT = nl_getNeatlineFeatures($this);
+            if (is_string($featuresWKT)) $this->coverage = $featuresWKT;
         }
     }
 
@@ -302,7 +303,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function save()
     {
         $this->compileWms();
-        $this->compileFeatures();
+        $this->compileCoverage();
         $this->compileItem();
         parent::save();
     }
