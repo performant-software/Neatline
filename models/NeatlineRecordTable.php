@@ -34,10 +34,11 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
         $select = parent::getSelect();
 
-        // Select raw `coverage`.
-        $select->columns(array('coverage' => new Zend_Db_Expr(
-            'NULLIF(AsText(coverage), "POINT(0 0)")'
-        )));
+        // Select raw coverages.
+        $select->columns(array(
+            'coverage'      => nl_selectGeometry('coverage'),
+            'item_coverage' => nl_selectGeometry('item_coverage')
+        ));
 
         // Select raw `item_coverage`.
         $select->columns(array('item_coverage' => new Zend_Db_Expr(
