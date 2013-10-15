@@ -25,6 +25,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $title;
     public $body;
     public $coverage;
+    public $item_coverage;
     public $tags;
     public $widgets;
     public $presenter;
@@ -165,11 +166,20 @@ class NeatlineRecord extends Neatline_Row_Expandable
         $fields = parent::toArrayForSave();
 
         // Set the `is_coverage` tracker.
-        $fields['is_coverage'] = !is_null($fields['coverage']) ? 1 : 0;
+        $fields['is_coverage'] =
+            !is_null($fields['coverage']) ||
+            !is_null($fields['item_coverage']) ?
+            1 : 0;
 
-        // Add the coverage.
+        // Set the record coverage.
         $fields['coverage'] = new Zend_Db_Expr("COALESCE(
             GeomFromText('{$fields['coverage']}'),
+            GeomFromText('POINT(0 0)')
+        )");
+
+        // Set the item coverage.
+        $fields['item_coverage'] = new Zend_Db_Expr("COALESCE(
+            GeomFromText('{$fields['item_coverage']}'),
             GeomFromText('POINT(0 0)')
         )");
 

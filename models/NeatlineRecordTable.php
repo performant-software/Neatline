@@ -39,6 +39,11 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             'NULLIF(AsText(coverage), "POINT(0 0)")'
         )));
 
+        // Select raw `item_coverage`.
+        $select->columns(array('item_coverage' => new Zend_Db_Expr(
+            'NULLIF(AsText(item_coverage), "POINT(0 0)")'
+        )));
+
         // Order chronologically.
         $select->order('added DESC');
 
