@@ -25,7 +25,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $title;
     public $body;
     public $coverage;
-    public $item_coverage;
     public $tags;
     public $widgets;
     public $presenter;
@@ -164,15 +163,12 @@ class NeatlineRecord extends Neatline_Row_Expandable
     {
 
         $fields = parent::toArrayForSave();
-        $rCoverage = $fields['coverage'];
-        $iCoverage = $fields['item_coverage'];
 
         // Set `is_coverage`.
-        $fields['is_coverage'] = $rCoverage || $iCoverage ?  1 : 0;
+        $fields['is_coverage'] = $fields['coverage'] ? 1 : 0;
 
-        // Set the string -> GEOMETRY database expressions.
-        $fields['coverage']      = nl_setGeometry($rCoverage);
-        $fields['item_coverage'] = nl_setGeometry($iCoverage);
+        // Set the `coverage` column.
+        $fields['coverage'] = nl_setGeometry($fields['coverage']);
 
         return $fields;
 

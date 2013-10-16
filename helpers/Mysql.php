@@ -31,7 +31,7 @@ function nl_setGeometry($coverage)
  * @param string $column The table column.
  * @return Zend_Db_Expr The expression.
  */
-function nl_selectGeometry($column)
+function nl_getGeometry($column)
 {
     return new Zend_Db_Expr('NULLIF(AsText(coverage), "POINT(0 0)")');
 }

@@ -14,30 +14,28 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
 
 
     /**
-     * `getSelect` should select the plain-text WKT values of `coverage` and
-     * `item_coverage` when the field is defined.
+     * `getSelect` should select the plain-text WKT value of `coverage` when
+     * a non-null value is defined.
      */
     public function testSelectCoveragesAsText()
     {
 
         $record = new NeatlineRecord();
-        $record->coverage       = 'POINT(1 1)';
-        $record->item_coverage  = 'POINT(1 1)';
+        $record->coverage = 'POINT(1 1)';
         $record->save();
 
         // Query for the record.
         $record = $this->_records->fetchObject($this->_records->getSelect());
 
-        // Coverages should be selected as plaintext.
+        // `coverage` should be selected as WKT.
         $this->assertEquals('POINT(1 1)', $record->coverage);
-        $this->assertEquals('POINT(1 1)', $record->item_coverage);
 
     }
 
 
     /**
-     * `getSelect` should select NULL for `coverage` and `item_coverage` when
-     * the plain-text values of the fields are `POINT(0 0)`.
+     * `getSelect` should select NULL for `coverage` when the plain-text value
+     * of the field is `POINT(0 0)`.
      */
     public function testSelectEmptyCoveragesAsNull()
     {
@@ -50,9 +48,8 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
             $this->_records->getSelect()
         );
 
-        // Coverages should be null.
+        // `coverage` should be NULL.
         $this->assertNull($record->coverage);
-        $this->assertNull($record->item_coverage);
 
     }
 

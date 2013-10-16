@@ -34,16 +34,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
         $select = parent::getSelect();
 
-        // Select raw coverages.
-        $select->columns(array(
-            'coverage'      => nl_selectGeometry('coverage'),
-            'item_coverage' => nl_selectGeometry('item_coverage')
-        ));
-
-        // Select raw `item_coverage`.
-        $select->columns(array('item_coverage' => new Zend_Db_Expr(
-            'NULLIF(AsText(item_coverage), "POINT(0 0)")'
-        )));
+        // Select `coverage` as plaintext.
+        $select->columns(array('coverage' => nl_getGeometry('coverage')));
 
         // Order chronologically.
         $select->order('added DESC');
@@ -185,9 +177,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
 
         // Match viewport intersection.
-        $select->where(new Zend_Db_Expr(
-            "MBRIntersects(coverage, GeomFromText('$extent'))"
-        ));
+        $select->where("MBRIntersects(coverage, GeomFromText('$extent'))");
 
         // Omit empty coverages.
         $select->where("is_coverage = 1");

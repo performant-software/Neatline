@@ -25,6 +25,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record1 = new NeatlineRecord($exhibit1);
         $record2 = new NeatlineRecord($exhibit1);
         $record3 = new NeatlineRecord($exhibit2);
+
         $record1->added = '2001-01-01';
         $record2->added = '2002-01-01';
         $record3->added = '2003-01-01';
@@ -55,6 +56,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
         $record4 = new NeatlineRecord($exhibit);
+
         $record1->added = '2001-01-01';
         $record2->added = '2002-01-01';
         $record3->added = '2003-01-01';
@@ -122,7 +124,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
 
     /**
-     * `queryRecords` should filter on extent.
+     * `queryRecords` should filter on record coverages by extent.
      */
     public function testExtentFilter()
     {
@@ -130,42 +132,46 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
-        $record1->coverage = 'POINT(1 1)';
-        $record2->coverage = 'POINT(3 3)';
-        $record1->added = '2001-01-01';
-        $record2->added = '2002-01-01';
+
+        $record1->coverage  = 'POINT(0 1)';
+        $record2->coverage  = 'POINT(0 2)';
+        $record1->added     = '2001-01-01';
+        $record2->added     = '2002-01-01';
 
         $record1->save();
         $record2->save();
 
-        // Extent=null, get all records.
+        // No extent should match all records.
+        // --------------------------------------------------------------------
         $result = $this->_records->queryRecords($exhibit);
-
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
-        // Record 1 intersection.
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((0 0,0 2,2 2,2 0,0 0))')
-        );
 
+        // Intersection with Record 1 should match Record 1.
+        // --------------------------------------------------------------------
+        $result = $this->_records->queryRecords($exhibit,
+            array('extent' => 'POINT(0 1)')
+        );
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
-        // Record 2 intersection.
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((2 2,2 4,4 4,4 2,2 2))')
-        );
 
+        // Intersection with Record 2 should match Record 2.
+        // --------------------------------------------------------------------
+        $result = $this->_records->queryRecords($exhibit,
+            array('extent' => 'POINT(0 2)')
+        );
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
-        // Record 1 and record 2 intersection.
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((0 0,0 4,4 4,4 0,0 0))')
-        );
 
+        // Intersection with Record 1 and Record 2 should match both records.
+        // --------------------------------------------------------------------
+        $result = $this->_records->queryRecords($exhibit,
+            array('extent' => 'LINESTRING(0 1,0 2)')
+        );
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
@@ -185,6 +191,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
+
         $record1->coverage = 'POINT(1 1)';
 
         $record1->save();
@@ -210,6 +217,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         $exhibit = $this->_exhibit();
         $record = $this->_record($exhibit);
+
         $record->wms_address = 'address';
         $record->wms_layers = 'layers';
 
@@ -290,6 +298,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
+
         $record1->tags = 'tag1';
         $record2->tags = 'tag1,tag2';
         $record3->tags = 'tag3';
@@ -319,6 +328,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
+
         $record1->widgets = 'Widget1';
         $record2->widgets = 'Widget1,Widget2';
         $record3->widgets = 'Widget3';
@@ -352,6 +362,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
+
         $record1->weight = 1;
         $record2->weight = 2;
         $record3->weight = 3;
@@ -410,6 +421,7 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3 = new NeatlineRecord($exhibit);
         $record4 = new NeatlineRecord($exhibit);
         $record5 = new NeatlineRecord($exhibit);
+
         $record1->added = '2001-01-01';
         $record2->added = '2002-01-01';
         $record3->added = '2003-01-01';
