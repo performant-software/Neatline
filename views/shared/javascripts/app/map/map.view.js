@@ -64,7 +64,7 @@ Neatline.module('Map', function(
       this.filters = {};
 
       /**
-       * The model representing the currently-selected record.
+       * The currently-selected record.
        */
       this.selectedModel = null;
 

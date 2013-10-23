@@ -30,11 +30,11 @@ describe('Map | Subscribe `unhighlight`', function() {
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];
-    
+
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     Neatline.vent.trigger('unhighlight', { model: layer.nModel });
     NL.assertDefaultIntent(layer);
-    
+
   });
 
 
@@ -47,7 +47,7 @@ describe('Map | Subscribe `unhighlight`', function() {
 
     NL.respondMap200(fx.records);
     var layer = NL.vw.MAP.getVectorLayers()[0];
-    
+
     Neatline.vent.trigger('select', { model: layer.nModel });
     Neatline.vent.trigger('unhighlight', { model: layer.nModel });
     NL.assertSelectIntent(layer);
