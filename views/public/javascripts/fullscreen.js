@@ -10,10 +10,12 @@
 
 $(function() {
 
-  var exhibit = $('#neatline');
   var map = $('#neatline-map');
+  var exhibit = $('#neatline');
+  var body = $('body');
 
-  // Clear the theme markup.
+  body.css('margin', 0);
+
   exhibit.detach();
   $('body').empty().append(exhibit);
 
@@ -22,7 +24,6 @@ $(function() {
     Neatline.execute('MAP:updateSize');
   }
 
-  // Fill window height.
   $(window).resize(position);
   position();
 
