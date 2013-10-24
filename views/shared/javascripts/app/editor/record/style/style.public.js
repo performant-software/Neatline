@@ -12,14 +12,20 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Instantiate color pickers and integer draggers.
-   */
-  var activate = function() {
-    Style.__view.buildWidgets();
-  };
-  Neatline.commands.setHandler(Style.ID+':activate', activate);
-  Neatline.vent.on('EDITOR:RECORD:#style', activate);
+  Style.addInitializer(function() {
+
+
+    /**
+     * Instantiate color pickers and integer draggers.
+     */
+    var activate = function() {
+      Style.__view.buildWidgets();
+    };
+    Neatline.commands.setHandler(Style.ID+':activate', activate);
+    Neatline.vent.on('EDITOR:RECORD:#style', activate);
+
+
+  });
 
 
 }});

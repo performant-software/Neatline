@@ -12,18 +12,24 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Display the form, load fresh exhibit data.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Styles.__view.showIn(container);
-    Styles.__view.model.fetch({ success: function() {
-      Styles.__view.buildEditor();
-    }})
-  };
-  Neatline.commands.setHandler(Styles.ID+':display', display);
+  Styles.addInitializer(function() {
+
+
+    /**
+     * Display the form, load fresh exhibit data.
+     *
+     * @param {Object} container: The container element.
+     */
+    var display = function(container) {
+      Styles.__view.showIn(container);
+      Styles.__view.model.fetch({ success: function() {
+        Styles.__view.buildEditor();
+      }})
+    };
+    Neatline.commands.setHandler(Styles.ID+':display', display);
+
+
+  });
 
 
 });

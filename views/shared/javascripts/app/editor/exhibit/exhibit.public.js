@@ -12,26 +12,32 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Append the exhibit menu to a container.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Exhibit.__view.showIn(container);
-  };
-  Neatline.commands.setHandler(Exhibit.ID+':display', display);
+  Exhibit.addInitializer(function() {
 
 
-  /**
-   * Set the active tab.
-   *
-   * @param {String} tab: The tab to activate.
-   */
-  var tab = function(tab) {
-    Exhibit.__view.activateTab(tab);
-  };
-  Neatline.commands.setHandler(Exhibit.ID+':activateTab', tab);
+    /**
+     * Append the exhibit menu to a container.
+     *
+     * @param {Object} container: The container element.
+     */
+    var display = function(container) {
+      Exhibit.__view.showIn(container);
+    };
+    Neatline.commands.setHandler(Exhibit.ID+':display', display);
+
+
+    /**
+     * Set the active tab.
+     *
+     * @param {String} tab: The tab to activate.
+     */
+    var tab = function(tab) {
+      Exhibit.__view.activateTab(tab);
+    };
+    Neatline.commands.setHandler(Exhibit.ID+':activateTab', tab);
+
+
+  });
 
 
 });

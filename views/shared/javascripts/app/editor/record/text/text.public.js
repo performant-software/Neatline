@@ -12,14 +12,20 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Instantiate autocomplete and CKEditor.
-   */
-  var activate = function() {
-    Text.__view.buildWidgets();
-  };
-  Neatline.commands.setHandler(Text.ID+':activate', activate);
-  Neatline.vent.on('EDITOR:RECORD:#text', activate);
+  Text.addInitializer(function() {
+
+
+    /**
+     * Instantiate autocomplete and CKEditor.
+     */
+    var activate = function() {
+      Text.__view.buildWidgets();
+    };
+    Neatline.commands.setHandler(Text.ID+':activate', activate);
+    Neatline.vent.on('EDITOR:RECORD:#text', activate);
+
+
+  });
 
 
 }});
