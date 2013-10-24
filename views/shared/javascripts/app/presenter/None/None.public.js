@@ -15,17 +15,13 @@ Neatline.module('Presenter.None', function(
   None.ID = 'PRESENTER:None';
 
 
-  None.addInitializer(function() {
-
-
-    var none = function() {};
-    Neatline.commands.setHandler(None.ID+':highlight',    none);
-    Neatline.commands.setHandler(None.ID+':unhighlight',  none);
-    Neatline.commands.setHandler(None.ID+':select',       none);
-    Neatline.commands.setHandler(None.ID+':unselect',     none);
-
-
-  });
+  var none = function() {};
+  Neatline.commands.setHandler(None.ID+':highlight',    none);
+  Neatline.commands.setHandler(None.ID+':unhighlight',  none);
+  Neatline.commands.setHandler(None.ID+':select',       none);
+  Neatline.commands.setHandler(None.ID+':unselect',     none);
+  Neatline.vent.on('PRESENTER:activate',                none);
+  Neatline.vent.on('PRESENTER:deactivate',              none);
 
 
 });

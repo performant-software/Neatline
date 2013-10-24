@@ -15,28 +15,22 @@ Neatline.module('Map.Layers.WMS', function(
   WMS.ID = 'MAP:LAYERS:WMS';
 
 
-  WMS.addInitializer(function() {
-
-
-    /**
-     * Construct a WMS layer.
-     *
-     * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer.WMS}: The WMS layer.
-     */
-    var layer = function(json) {
-      return new OpenLayers.Layer.WMS(
-        json.title,
-        json.properties.address,
-        {
-          layers: json.properties.layers
-        }
-      );
-    };
-    Neatline.reqres.setHandler(WMS.ID, layer);
-
-
-  });
+  /**
+   * Construct a WMS layer.
+   *
+   * @param {Object} json: The layer definition.
+   * @return {OpenLayers.Layer.WMS}: The WMS layer.
+   */
+  var layer = function(json) {
+    return new OpenLayers.Layer.WMS(
+      json.title,
+      json.properties.address,
+      {
+        layers: json.properties.layers
+      }
+    );
+  };
+  Neatline.reqres.setHandler(WMS.ID, layer);
 
 
 });

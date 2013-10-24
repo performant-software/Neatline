@@ -15,22 +15,16 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';
 
 
-  OpenStreetMap.addInitializer(function() {
-
-
-    /**
-     * Construct an OpenStreetMap layer.
-     *
-     * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer.OSM}: The OSM layer.
-     */
-    var layer = function(json) {
-      return new OpenLayers.Layer.OSM(json.title);
-    };
-    Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
-
-
-  });
+  /**
+   * Construct an OpenStreetMap layer.
+   *
+   * @param {Object} json: The layer definition.
+   * @return {OpenLayers.Layer.OSM}: The OSM layer.
+   */
+  var layer = function(json) {
+    return new OpenLayers.Layer.OSM(json.title);
+  };
+  Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
 
 
 });
