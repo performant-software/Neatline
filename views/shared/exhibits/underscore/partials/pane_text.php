@@ -14,21 +14,21 @@
 <?php echo common('neatline/input', array(
     'name'  => 'item-id',
     'label' => 'Omeka ID',
-    'bind'  => 'record.item_id',
+    'bind'  => 'record:item_id',
     'placeholder' => 'Search Omeka Items'
 )); ?>
 
 <?php echo common('neatline/input', array(
     'name'  => 'slug',
     'label' => 'Slug',
-    'bind'  => 'record.slug'
+    'bind'  => 'record:slug'
 )); ?>
 
 <?php echo common('neatline/textarea', array(
     'id'    => 'title',
     'name'  => 'title',
     'label' => 'Title',
-    'bind'  => 'record.title',
+    'bind'  => 'record:title',
     'editHtml' => 'title'
 )); ?>
 
@@ -36,6 +36,6 @@
     'id'    => 'body',
     'name'  => 'body',
     'label' => 'Body',
-    'bind'  => 'record.body',
+    'bind'  => 'record:body',
     'editHtml' => 'body'
 )); ?>

@@ -13,12 +13,12 @@
 
 <div class="actions">
 
-  <a name="save" class="btn btn-primary btn-lg">
+  <a name="save" class="btn btn-primary">
     <span class="glyphicon glyphicon-floppy-saved"></span>
     <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" class="btn btn-default btn-lg"
+  <a href="#delete-modal" class="btn btn-default"
     data-toggle="modal"> <span class="glyphicon glyphicon-trash"></span>
     <?php echo __('Delete'); ?>
   </a>

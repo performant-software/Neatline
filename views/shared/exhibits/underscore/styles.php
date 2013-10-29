@@ -21,13 +21,13 @@
   <?php echo common('neatline/input', array(
       'name'  => 'map-focus',
       'label' => 'Default Map Focus',
-      'bind'  => 'exhibit.map_focus'
+      'bind'  => 'exhibit:map_focus'
   )); ?>
 
   <?php echo common('neatline/input', array(
       'name'  => 'map-zoom',
       'label' => 'Default Map Zoom',
-      'bind'  => 'exhibit.map_zoom'
+      'bind'  => 'exhibit:map_zoom'
   )); ?>
 
   <?php echo common('neatline/button', array(

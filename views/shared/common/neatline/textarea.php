@@ -30,7 +30,7 @@
     class="form-control <?php if (isset($class)) echo $class; ?>"
     <?php if (isset($id)) echo "id='$id'"; ?>
     <?php if (isset($name)) echo "name='$name'"; ?>
-    <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
+    <?php if (isset($bind)) echo "rv-value='$bind'"; ?>
   ></textarea>
 
 </div>

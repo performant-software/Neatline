@@ -19,7 +19,7 @@
       class="form-control <?php if (isset($class)) echo $class; ?>"
       <?php if (isset($name)) echo "name='$name'"; ?>
       <?php if (isset($multi) && $multi) echo "multiple='multiple'"; ?>
-      <?php if (isset($bind)) echo "data-rv-value='$bind'"; ?>
+      <?php if (isset($bind)) echo "rv-value='$bind'"; ?>
     >
 
       <?php foreach ($options as $label => $val): ?>
