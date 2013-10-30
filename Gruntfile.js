@@ -201,6 +201,7 @@ module.exports = function(grunt) {
           paths.vendor.js.neatline,
           paths.vendor.js.safesync,
           paths.vendor.js.openlayers,
+          paths.vendor.js.openlayers_geo,
           paths.vendor.js.stamen,
           paths.vendor.js.rivets,
 
@@ -231,6 +232,7 @@ module.exports = function(grunt) {
           paths.vendor.js.marionette,
           paths.vendor.js.neatline,
           paths.vendor.js.openlayers,
+          paths.vendor.js.openlayers_geo,
           paths.vendor.js.stamen,
           paths.vendor.js.svgtowkt,
           paths.vendor.js.routefilter,

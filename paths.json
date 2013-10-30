@@ -44,6 +44,7 @@
       "neatline":         "bower_components/backbone.neatline/lib/backbone.neatline.js",
       "safesync":         "bower_components/backbone-safesync/backbone-safesync.js",
       "openlayers":       "bower_components/openlayers/build/OpenLayers.js",
+      "openlayers_geo":   "bower_components/openlayers-geometry/Geometry.js",
       "bootstrap":        "bower_components/bootstrap/dist/js/bootstrap.js",
       "stamen":           "bower_components/stamen-neatline/stamen.neatline.js",
       "svgtowkt":         "bower_components/svg-to-wkt/svg-to-wkt.js",
