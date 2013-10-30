@@ -58000,10 +58000,9 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Start the map editor after Neatline.
+   * Start recording history once Neatline is running.
    */
   Neatline.on('initialize:after', function() {
-    Editor.Map.start();
     Backbone.history.start();
   });
 
@@ -60010,6 +60009,14 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
   Map.ID = 'EDITOR:MAP';
+
+
+  /**
+   * Start the map editor after Neatline.
+   */
+  Neatline.on('initialize:after', function() {
+    Map.start();
+  });
 
 
   Map.addInitializer(function() {

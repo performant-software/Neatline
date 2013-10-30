@@ -24,10 +24,9 @@ Neatline.module('Editor', { startWithParent: false,
 
 
   /**
-   * Start the map editor after Neatline.
+   * Start recording history once Neatline is running.
    */
   Neatline.on('initialize:after', function() {
-    Editor.Map.start();
     Backbone.history.start();
   });
 
