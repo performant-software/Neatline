@@ -3,7 +3,7 @@ layout: default
 ---
 # Welcome to Neatline!
 
-This guide is designed to be a comprehensive introduction to the Neatline project. We'll walk through the basic steps of installing and configuring Neatline, creating exhibits and records, importing items from your Omeka collection, and publishing your projects to the web.
+This guide is designed to be a comprehensive introduction to the Neatline project. We'll walk through the basic steps of installing and configuring Neatline, creating exhibits and records, importing items from your [Omeka](http://omeka.org) collection, and publishing your projects to the web.
 
 ## Help us improve this guide
 
