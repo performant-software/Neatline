@@ -12,7 +12,7 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor) {
 
 
-  Editor.View = Backbone.Neatline.View.extend({
+  Editor.View = Neatline.Shared.View.extend({
 
 
     ui: {

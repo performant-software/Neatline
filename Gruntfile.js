@@ -207,6 +207,7 @@ module.exports = function(grunt) {
 
           // Neatline:
           paths.src.shared+'/*.js',
+          paths.src.shared+'/shared/*.js',
           paths.src.shared+'/shared/exhibit/exhibit.model.js',
           paths.src.shared+'/shared/record/record.model.js',
           paths.src.shared+'/shared/record/record.collection.js',
@@ -234,6 +235,7 @@ module.exports = function(grunt) {
           paths.vendor.js.openlayers,
           paths.vendor.js.openlayers_geo,
           paths.vendor.js.stamen,
+          paths.vendor.js.rivets,
           paths.vendor.js.svgtowkt,
           paths.vendor.js.routefilter,
           paths.vendor.js.draggable,
@@ -243,10 +245,10 @@ module.exports = function(grunt) {
           paths.vendor.js.ace,
           paths.vendor.js.ace_theme,
           paths.vendor.js.ace_mode,
-          paths.vendor.js.rivets,
 
           // Neatline:
           paths.src.shared+'/*.js',
+          paths.src.shared+'/shared/*.js',
           paths.src.shared+'/shared/exhibit/exhibit.model.js',
           paths.src.shared+'/shared/record/record.model.js',
           paths.src.shared+'/shared/record/record.collection.js',

@@ -12,7 +12,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map) {
 
 
-  Map.View = Backbone.Neatline.View.extend({
+  Map.View = Neatline.Shared.View.extend({
 
 
     events: {

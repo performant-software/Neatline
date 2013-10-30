@@ -11,7 +11,7 @@
 Neatline.module('Editor.Record', function(Record) {
 
 
-  Record.View = Backbone.Neatline.View.extend({
+  Record.View = Neatline.Shared.View.extend({
 
 
     template:   '#record-form-template',

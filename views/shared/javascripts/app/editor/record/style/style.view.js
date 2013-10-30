@@ -12,7 +12,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style) {
 
 
-  Style.View = Backbone.Neatline.View.extend({
+  Style.View = Neatline.Shared.View.extend({
 
 
     events: {

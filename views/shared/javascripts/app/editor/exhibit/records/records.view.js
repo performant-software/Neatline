@@ -11,7 +11,7 @@
 Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
-  Records.View = Backbone.Neatline.View.extend({
+  Records.View = Neatline.Shared.View.extend({
 
 
     className: 'records',
