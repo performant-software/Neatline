@@ -19,7 +19,7 @@ Neatline.module('Shared', function(Shared) {
      */
     initialize: function() {
       this._initTemplate();
-      this._initUi();
+      this._initSelections();
       this.init();
     },
 
@@ -46,23 +46,20 @@ Neatline.module('Shared', function(Shared) {
     /**
      * Perform the selections defined on the `ui` hash.
      */
-    _initUi: function() {
+    _initSelections: function() {
 
-      this.__ui = $.extend(true, {}, this.ui);
+      // Copy `ui` -> `__ui`.
+      this.__ui = _.extend({}, this.ui);
 
-      // Walk `ui`:
-      _.bind(function select(o) {
-        _.each(o, _.bind(function(v,k) {
+      // Select the values recursively.
+      _.bind(function select(obj) {
+        _.each(obj, _.bind(function(v,k) {
 
           // If string, select.
-          if (typeof v == 'string') {
-            o[k] = this.$el.find(v);
-          }
+          if (_.isString(v)) obj[k] = this.$el.find(v);
 
           // If object, recurse.
-          else if (typeof v == 'object') {
-            _.bind(select, this)(v);
-          }
+          else if (_.isObject(v)) _.bind(select, this)(v);
 
         }, this));
       }, this)(this.__ui);
