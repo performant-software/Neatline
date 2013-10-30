@@ -28,12 +28,26 @@
   </label>
 
   <input
+
     type="<?php echo isset($type) ? $type : 'text'; ?>"
-    class="form-control <?php if (isset($class)) echo $class; ?>"
-    <?php if (isset($placeholder)) echo "placeholder='$placeholder'"; ?>
-    <?php if (isset($name)) echo "name='$name'"; ?>
-    <?php if (isset($bind)) echo "rv-value='$bind'"; ?>
-    <?php if (isset($value)) echo "value='$value'"; ?>
+    class="form-control <?php echo @$class; ?>"
+
+    <?php if (isset($placeholder)): ?>
+      placeholder="<?php echo $placeholder; ?>"
+    <?php endif; ?>
+
+    <?php if (isset($name)): ?>
+      name="<?php echo $name; ?>"
+    <?php endif; ?>
+
+    <?php if (isset($bind)): ?>
+      rv-value="<?php echo $bind; ?>"
+    <?php endif; ?>
+
+    <?php if (isset($value)): ?>
+      value="<?php echo $value; ?>"
+    <?php endif; ?>
+
   />
 
 </div>

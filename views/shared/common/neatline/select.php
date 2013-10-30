@@ -16,10 +16,22 @@
   <label><?php echo __($label); ?></label>
 
     <select
-      class="form-control <?php if (isset($class)) echo $class; ?>"
-      <?php if (isset($name)) echo "name='$name'"; ?>
-      <?php if (isset($multi) && $multi) echo "multiple='multiple'"; ?>
-      <?php if (isset($bind)) echo "rv-value='$bind'"; ?>
+
+      class="form-control <?php echo @$class; ?>"
+
+      <?php if (isset($name)): ?>
+        name="<?php echo $name; ?>"
+      <?php endif; ?>
+
+      <?php if (isset($multi) && $multi): ?>
+        multiple="multiple"
+      <?php endif; ?>
+
+      <?php if (isset($bind)): ?>
+        rv-value="<?php echo $bind; ?>"
+      <?php endif; ?>
+
+
     >
 
       <?php foreach ($options as $label => $val): ?>

@@ -12,6 +12,9 @@
 ?>
 
 <a class="btn btn-default btn-xs"
-  <?php if (isset($name)) echo "name='$name'"; ?>>
+  <?php if (isset($name)): ?>
+    name="<?php echo $name; ?>"
+  <?php endif; ?>
+>
   <?php echo $text; ?>
 </a>
