@@ -20,8 +20,6 @@ Neatline.module('Presenter.None', function(
   Neatline.commands.setHandler(None.ID+':unhighlight',  none);
   Neatline.commands.setHandler(None.ID+':select',       none);
   Neatline.commands.setHandler(None.ID+':unselect',     none);
-  Neatline.vent.on('PRESENTER:activate',                none);
-  Neatline.vent.on('PRESENTER:deactivate',              none);
 
 
 });

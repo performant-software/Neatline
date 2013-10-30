@@ -23,8 +23,7 @@ Neatline.module('Presenter', function(
   var highlight = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':highlight',
-        args.model
+        'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
       );
     } catch (e) {}
   };
@@ -40,8 +39,7 @@ Neatline.module('Presenter', function(
   var unhighlight = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unhighlight',
-        args.model
+        'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
       );
     } catch(e) {}
   };
@@ -57,8 +55,7 @@ Neatline.module('Presenter', function(
   var select = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':select',
-        args.model
+        'PRESENTER:'+args.model.get('presenter')+':select', args.model
       );
     } catch (e) {}
   };
@@ -74,8 +71,7 @@ Neatline.module('Presenter', function(
   var unselect = function(args) {
     try {
       Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unselect',
-        args.model
+        'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
       );
     } catch (e) {}
   };

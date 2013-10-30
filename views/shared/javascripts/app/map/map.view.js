@@ -33,6 +33,7 @@ Neatline.module('Map', function(
       this._initEvents();
       this._initBaseLayers();
       this._initViewport();
+      this.requestRecords();
     },
 
 
