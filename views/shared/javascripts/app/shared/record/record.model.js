@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Record', function(
-  Record, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Shared.Record', function(Record) {
 
 
   Record.Model = Backbone.Model.extend({

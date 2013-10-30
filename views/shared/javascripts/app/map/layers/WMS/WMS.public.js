@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.WMS', function(
-  WMS, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.WMS', function(WMS) {
 
 
   WMS.ID = 'MAP:LAYERS:WMS';

@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map', function(
-  Map, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map', function(Map) {
 
 
   Map.View = Backbone.View.extend({

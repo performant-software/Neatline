@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers', function(
-  Layers, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers', function(Layers) {
 
 
   Layers.ID = 'MAP:LAYERS';

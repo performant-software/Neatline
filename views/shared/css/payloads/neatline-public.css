@@ -531,7 +531,7 @@ img.olTileImage {
 
 #neatline-map{position:relative;height:800px}
 
-@media only screen and (min--moz-device-pixel-ratio: 2),only screen and (-o-min-device-pixel-ratio: 2/1),only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2){.olTileImage{-webkit-transform:none;-webkit-transition:none;-webkit-backface-visibility:visible;-webkit-perspective:none}
+@media only screen and (min--moz-device-pixel-ratio: 2),only screen and (-o-min-device-pixel-ratio: 2/1),only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-device-pixel-ratio: 2){.olTileImage{-webkit-transform:none !important;-webkit-transition:none !important;-webkit-backface-visibility:visible !important;-webkit-perspective:none !important}
 }.olControlLayerSwitcher{font-size:12px;}
 .olControlLayerSwitcher .layersDiv{background-color:#4b4b4b;border-radius:3px 0 0 3px;}
 .olControlLayerSwitcher .layersDiv .baseLayersDiv{padding:0 0 5px 5px;}

@@ -9,7 +9,7 @@
  */
 
 Neatline.module('Editor.Record.Map', { startWithParent: false,
-  define: function(Map, Neatline, Backbone, Marionette, $, _) {
+  define: function(Map) {
 
 
   Map.View = Backbone.Neatline.View.extend({

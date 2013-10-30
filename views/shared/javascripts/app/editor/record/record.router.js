@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record', function(
-  Record, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Record', function(Record) {
 
 
   Record.Router = Neatline.Editor.Router.extend({

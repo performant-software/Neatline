@@ -34667,8 +34667,7 @@ Neatline = new Backbone.Marionette.Application();
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Exhibit', function(
-  Exhibit, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Shared.Exhibit', function(Exhibit) {
 
 
   Exhibit.Model = Backbone.Model.extend({
@@ -34704,8 +34703,7 @@ Neatline.module('Shared.Exhibit', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Record', function(
-  Record, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Shared.Record', function(Record) {
 
 
   Record.Model = Backbone.Model.extend({
@@ -34761,8 +34759,7 @@ Neatline.module('Shared.Record', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Record', function(
-  Record, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Shared.Record', function(Record) {
 
 
   Record.Collection = Backbone.Neatline.Collection.extend({
@@ -34826,8 +34823,7 @@ Neatline.module('Shared.Record', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Widget', function(
-  Widget, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Shared.Widget', function(Widget) {
 
 
   Widget.View = Backbone.Neatline.View.extend({
@@ -34863,8 +34859,7 @@ Neatline.module('Shared.Widget', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.Google', function(
-  Google, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.Google', function(Google) {
 
 
   Google.ID = 'MAP:LAYERS:Google';
@@ -34918,8 +34913,7 @@ Neatline.module('Map.Layers.Google', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.OpenStreetMap', function(
-  OpenStreetMap, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.OpenStreetMap', function(OpenStreetMap) {
 
 
   OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';
@@ -34953,8 +34947,7 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.Stamen', function(
-  Stamen, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.Stamen', function(Stamen) {
 
 
   Stamen.ID = 'MAP:LAYERS:Stamen';
@@ -34990,8 +34983,7 @@ Neatline.module('Map.Layers.Stamen', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.WMS', function(
-  WMS, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.WMS', function(WMS) {
 
 
   WMS.ID = 'MAP:LAYERS:WMS';
@@ -35031,8 +35023,7 @@ Neatline.module('Map.Layers.WMS', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers', function(
-  Layers, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers', function(Layers) {
 
 
   Layers.ID = 'MAP:LAYERS';
@@ -35071,8 +35062,7 @@ Neatline.module('Map.Layers', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map', function(
-  Map, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map', function(Map) {
 
 
   Map.ID = 'MAP';
@@ -35276,8 +35266,7 @@ Neatline.module('Map', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map', function(
-  Map, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map', function(Map) {
 
 
   Map.View = Backbone.View.extend({
@@ -36304,8 +36293,7 @@ Neatline.module('Map', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter', function(
-  Presenter, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter', function(Presenter) {
 
 
   Presenter.ID = 'PRESENTER';
@@ -36393,8 +36381,7 @@ Neatline.module('Presenter', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.None', function(
-  None, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.None', function(None) {
 
 
   None.ID = 'PRESENTER:None';
@@ -36419,8 +36406,7 @@ Neatline.module('Presenter.None', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.StaticBubble', function(
-  StaticBubble, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
   StaticBubble.ID = 'PRESENTER:StaticBubble';
@@ -36518,8 +36504,7 @@ Neatline.module('Presenter.StaticBubble', function(
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.StaticBubble', function(
-  StaticBubble, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
   StaticBubble.View = Neatline.Shared.Widget.View.extend({

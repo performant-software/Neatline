@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit', function(
-  Exhibit, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit', function(Exhibit) {
 
 
   Exhibit.ID = 'EDITOR:EXHIBIT';

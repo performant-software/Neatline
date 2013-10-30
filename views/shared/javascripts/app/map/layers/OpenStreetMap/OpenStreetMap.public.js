@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.OpenStreetMap', function(
-  OpenStreetMap, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.OpenStreetMap', function(OpenStreetMap) {
 
 
   OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';

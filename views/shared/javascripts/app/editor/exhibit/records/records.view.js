@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
   Records.View = Backbone.Neatline.View.extend({

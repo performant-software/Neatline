@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Exhibit.Search', function(
-  Search, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Editor.Exhibit.Search', function(Search) {
 
 
   Search.ID = 'EDITOR:EXHIBIT:SEARCH';

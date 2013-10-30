@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.StaticBubble', function(
-  StaticBubble, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
   StaticBubble.View = Neatline.Shared.Widget.View.extend({

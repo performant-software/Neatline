@@ -9,7 +9,7 @@
  */
 
 Neatline.module('Editor', { startWithParent: false,
-  define: function(Editor, Neatline, Backbone, Marionette, $, _) {
+  define: function(Editor) {
 
 
   Editor.ID = 'EDITOR';

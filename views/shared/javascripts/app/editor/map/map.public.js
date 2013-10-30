@@ -9,7 +9,7 @@
  */
 
 Neatline.module('Editor.Map', { startWithParent: false,
-  define: function(Map, Editor, Backbone, Marionette, $, _) {
+  define: function(Map) {
 
 
   Map.ID = 'EDITOR:MAP';

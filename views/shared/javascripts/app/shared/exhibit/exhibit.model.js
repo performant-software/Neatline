@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Shared.Exhibit', function(
-  Exhibit, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Shared.Exhibit', function(Exhibit) {
 
 
   Exhibit.Model = Backbone.Model.extend({

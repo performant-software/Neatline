@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.Stamen', function(
-  Stamen, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Map.Layers.Stamen', function(Stamen) {
 
 
   Stamen.ID = 'MAP:LAYERS:Stamen';

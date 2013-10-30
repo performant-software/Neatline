@@ -8,8 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.None', function(
-  None, Neatline, Backbone, Marionette, $, _) {
+Neatline.module('Presenter.None', function(None) {
 
 
   None.ID = 'PRESENTER:None';

@@ -9,7 +9,7 @@
  */
 
 Neatline.module('Editor.Record.Text', { startWithParent: false,
-  define: function(Text, Neatline, Backbone, Marionette, $, _) {
+  define: function(Text) {
 
 
   Text.View = Backbone.Neatline.View.extend({
