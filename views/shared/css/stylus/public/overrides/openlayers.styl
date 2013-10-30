@@ -9,13 +9,15 @@
  */
 
 
-/*
-.olLayerGrid .olTileImage
-  -webkit-transform none
-  -webkit-transition none
-  -webkit-backface-visibility visible
-  -webkit-perspective none
-*/
+@media only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-device-pixel-ratio: 2)
+  .olLayerGrid .olTileImage
+    -webkit-transform none
+    -webkit-transition none
+    -webkit-backface-visibility visible
+    -webkit-perspective none
 
 .olControlLayerSwitcher
   font-size 12px
