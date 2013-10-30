@@ -14,14 +14,6 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Initialize editor-specific state trackers.
-   */
-  __initEditor: function() {
-    this.editLayer = null;
-  },
-
-
-  /**
    * Construct edit layer and controls for a record.
    *
    * @param {Object} model: The record model.

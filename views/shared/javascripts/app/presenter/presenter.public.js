@@ -15,68 +15,74 @@ Neatline.module('Presenter', function(
   Presenter.ID = 'PRESENTER';
 
 
-  /**
-   * Highlight the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var highlight = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:highlight', highlight);
-  Neatline.vent.on('highlight', highlight);
+  Presenter.addInitializer(function() {
 
 
-  /**
-   * Unhighlight the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unhighlight = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
-      );
-    } catch(e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
-  Neatline.vent.on('unhighlight', unhighlight);
+    /**
+     * Highlight the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var highlight = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:highlight', highlight);
+    Neatline.vent.on('highlight', highlight);
 
 
-  /**
-   * Freeze the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':select', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:select', select);
-  Neatline.vent.on('select', select);
+    /**
+     * Unhighlight the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unhighlight = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
+        );
+      } catch(e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
+    Neatline.vent.on('unhighlight', unhighlight);
 
 
-  /**
-   * Unfreeze and hide the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unselect = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:unselect', unselect);
-  Neatline.vent.on('unselect', unselect);
+    /**
+     * Freeze the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var select = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':select', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:select', select);
+    Neatline.vent.on('select', select);
+
+
+    /**
+     * Unfreeze and hide the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unselect = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:unselect', unselect);
+    Neatline.vent.on('unselect', unselect);
+
+
+  });
 
 
 });

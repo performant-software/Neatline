@@ -12,12 +12,12 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.ID = 'EDITOR:EXHIBIT';
+  //Exhibit.ID = 'EDITOR:EXHIBIT';
 
 
-  Exhibit.addInitializer(function() {
-    Exhibit.__view = new Exhibit.View();
-  });
+  //Exhibit.addInitializer(function() {
+    //Exhibit.__view = new Exhibit.View();
+  //});
 
 
 });

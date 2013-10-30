@@ -56039,36 +56039,40 @@ Neatline.module('Map.Layers.Google', function(
   Google.ID = 'MAP:LAYERS:Google';
 
 
-  /**
-   * Construct a Google layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Google}: The Google layer.
-   */
-  var layer = function(json) {
-    switch (json.properties.provider) {
-      case 'physical':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.TERRAIN
-        });
-      case 'streets':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.ROADMAP,
-          numZoomLevels: 25
-        });
-      case 'satellite':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.SATELLITE,
-          numZoomLevels: 25
-        });
-      case 'hybrid':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.HYBRID,
-          numZoomLevels: 25
-        });
-    }
-  };
-  Neatline.reqres.setHandler(Google.ID, layer);
+  Google.addInitializer(function() {
+
+    /**
+     * Construct a Google layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.Google}: The Google layer.
+     */
+    var layer = function(json) {
+      switch (json.properties.provider) {
+        case 'physical':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.TERRAIN
+          });
+        case 'streets':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.ROADMAP,
+            numZoomLevels: 25
+          });
+        case 'satellite':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.SATELLITE,
+            numZoomLevels: 25
+          });
+        case 'hybrid':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.HYBRID,
+            numZoomLevels: 25
+          });
+      }
+    };
+    Neatline.reqres.setHandler(Google.ID, layer);
+
+  });
 
 
 });
@@ -56090,16 +56094,20 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';
 
 
-  /**
-   * Construct an OpenStreetMap layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.OSM}: The OSM layer.
-   */
-  var layer = function(json) {
-    return new OpenLayers.Layer.OSM(json.title);
-  };
-  Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
+  OpenStreetMap.addInitializer(function() {
+
+    /**
+     * Construct an OpenStreetMap layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.OSM}: The OSM layer.
+     */
+    var layer = function(json) {
+      return new OpenLayers.Layer.OSM(json.title);
+    };
+    Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
+
+  });
 
 
 });
@@ -56121,18 +56129,22 @@ Neatline.module('Map.Layers.Stamen', function(
   Stamen.ID = 'MAP:LAYERS:Stamen';
 
 
-  /**
-   * Construct a Stamen layer - http://maps.stamen.com/.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
-   */
-  var layer = function(json) {
-    var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
-    layer.name = json.title;
-    return layer;
-  };
-  Neatline.reqres.setHandler(Stamen.ID, layer);
+  Stamen.addInitializer(function() {
+
+    /**
+     * Construct a Stamen layer - http://maps.stamen.com/.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
+     */
+    var layer = function(json) {
+      var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
+      layer.name = json.title;
+      return layer;
+    };
+    Neatline.reqres.setHandler(Stamen.ID, layer);
+
+  });
 
 
 });
@@ -56154,22 +56166,26 @@ Neatline.module('Map.Layers.WMS', function(
   WMS.ID = 'MAP:LAYERS:WMS';
 
 
-  /**
-   * Construct a WMS layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.WMS}: The WMS layer.
-   */
-  var layer = function(json) {
-    return new OpenLayers.Layer.WMS(
-      json.title,
-      json.properties.address,
-      {
-        layers: json.properties.layers
-      }
-    );
-  };
-  Neatline.reqres.setHandler(WMS.ID, layer);
+  WMS.addInitializer(function() {
+
+    /**
+     * Construct a WMS layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.WMS}: The WMS layer.
+     */
+    var layer = function(json) {
+      return new OpenLayers.Layer.WMS(
+        json.title,
+        json.properties.address,
+        {
+          layers: json.properties.layers
+        }
+      );
+    };
+    Neatline.reqres.setHandler(WMS.ID, layer);
+
+  });
 
 
 });
@@ -56191,21 +56207,50 @@ Neatline.module('Map.Layers', function(
   Layers.ID = 'MAP:LAYERS';
 
 
-  /**
-   * Dispatch a layer request to the appropriate handler. If no handler exists
-  * for the passed type and the request fails, return null.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer|null}: The layer.
-   */
-  var getLayer = function(json) {
-    try {
-      return Neatline.request('MAP:LAYERS:'+json.type, json);
-    } catch (e) {
-      return null;
-    }
-  };
-  Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
+  Layers.addInitializer(function() {
+
+    /**
+     * Dispatch a layer request to the appropriate handler. If no handler
+     * exists for the passed type and the request fails, return null.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer|null}: The layer.
+     */
+    var getLayer = function(json) {
+      try {
+        return Neatline.request('MAP:LAYERS:'+json.type, json);
+      } catch (e) {
+        return null;
+      }
+    };
+    Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
+
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map', function(
+  Map, Neatline, Backbone, Marionette, $, _) {
+
+
+  //Map.ID = 'MAP';
+
+
+  //Map.addInitializer(function() {
+    //Map.__collection = new Neatline.Shared.Record.Collection();
+    //Map.__view = new Neatline.Map.View();
+  //});
 
 
 });
@@ -56228,201 +56273,189 @@ Neatline.module('Map', function(
 
 
   Map.addInitializer(function() {
-    Map.__collection = new Neatline.Shared.Record.Collection();
-    Map.__view = new Neatline.Map.View();
+
+
+    Map.__collection  = new Neatline.Shared.Record.Collection();
+    Map.__view        = new Neatline.Map.View();
+
+
+    /**
+     * Load map layers.
+     *
+     * @param {Object} params: Hash with `extent` and `zoom`.
+     */
+    var load = function(params) {
+      Map.__collection.update(params, function(records) {
+        Map.__view.ingest(records);
+      });
+    };
+    Neatline.commands.setHandler(Map.ID+':load', load);
+
+
+    /**
+     * Reload map data for current focus/zoom.
+     */
+    var refresh = function() {
+      Map.__view.removeAllLayers();
+      Map.__view.requestRecords();
+    };
+    Neatline.commands.setHandler(Map.ID+':refresh', refresh);
+    Neatline.vent.on('refresh', refresh);
+
+
+    /**
+     * Unhighlight the layer that corresponds to the passed model and then
+     * focus on its extent (unless the event was triggered by the map).
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var select = function(args) {
+      if (args.source !== Map.ID) {
+        focusByModel(args.model);
+        Map.__view.selectByModel(args.model);
+      }
+    };
+    Neatline.commands.setHandler(Map.ID+':select', select);
+    Neatline.vent.on('select', select);
+
+
+    /**
+     * Highlight by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var highlight = function(args) {
+      Map.__view.highlightByModel(args.model);
+    };
+    Neatline.commands.setHandler(Map.ID+':highlight', highlight);
+    Neatline.vent.on('highlight', highlight);
+
+
+    /**
+     * Unhighlight by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unhighlight = function(args) {
+      Map.__view.unhighlightByModel(args.model);
+    };
+    Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
+    Neatline.vent.on('unhighlight', unhighlight);
+
+
+    /**
+     * Unselect by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unselect = function(args) {
+      Map.__view.unselectByModel(args.model);
+    };
+    Neatline.commands.setHandler(Map.ID+':unselect', unselect);
+    Neatline.vent.on('unselect', unselect);
+
+
+    /**
+     * Focus the map on the data extent for a record, identified by model.
+     *
+     * @param {Object} model: A record model.
+     */
+    var focusByModel = function(model) {
+      Map.__view.focusByModel(model);
+    };
+    Neatline.commands.setHandler(Map.ID+':focusByModel', focusByModel);
+
+
+    /**
+     * Set a layer filter.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var setFilter = function(args) {
+      Map.__view.setFilter(args.key, args.evaluator);
+    };
+    Neatline.commands.setHandler(Map.ID+':setFilter', setFilter);
+    Neatline.vent.on('setFilter', setFilter);
+
+
+    /**
+     * Remove a layer filter.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var removeFilter = function(args) {
+      Map.__view.removeFilter(args.key);
+    };
+    Neatline.commands.setHandler(Map.ID+':removeFilter', removeFilter);
+    Neatline.vent.on('removeFilter', removeFilter);
+
+
+    /**
+     * Refresh the map after it is resized.
+     */
+    var updateSize = function() {
+      Map.__view.map.updateSize();
+    };
+    Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
+
+
+    /**
+     * Get or create a vector layer for a model.
+     *
+     * @param {Object} model: A record model.
+     * @return {Object}: The record model.
+     */
+    var getVectorLayer = function(model) {
+      return Map.__view.getOrCreateVectorLayer(model);
+    };
+    Neatline.reqres.setHandler(Map.ID+':getVectorLayer', getVectorLayer);
+
+
+    /**
+     * Emit the OpenLayers map instance.
+     *
+     * @return {Object}: The map.
+     */
+    var getMap = function() {
+      return Map.__view.map;
+    };
+    Neatline.reqres.setHandler(Map.ID+':getMap', getMap);
+
+
+    /**
+     * Emit the current records collection.
+     *
+     * @return {Object}: The collection.
+     */
+    var getRecords = function() {
+      return Map.__collection;
+    };
+    Neatline.reqres.setHandler(Map.ID+':getRecords', getRecords);
+
+
+    /**
+     * Emit the current viewport focus coordinates.
+     *
+     * @return {Object}: OpenLayers.LonLat.
+     */
+    var getCenter = function() {
+      return Map.__view.map.getCenter();
+    };
+    Neatline.reqres.setHandler(Map.ID+':getCenter', getCenter);
+
+
+    /**
+     * Emit the current zoom level.
+     *
+     * @return {Number}: The zoom level.
+     */
+    var getZoom = function() {
+      return Map.__view.map.getZoom();
+    };
+    Neatline.reqres.setHandler(Map.ID+':getZoom', getZoom);
+
+
   });
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Map', function(
-  Map, Neatline, Backbone, Marionette, $, _) {
-
-
-  /**
-   * Load map layers.
-   *
-   * @param {Object} params: Hash with `extent` and `zoom`.
-   */
-  var load = function(params) {
-    Map.__collection.update(params, function(records) {
-      Map.__view.ingest(records);
-    });
-  };
-  Neatline.commands.setHandler(Map.ID+':load', load);
-
-
-  /**
-   * Reload map data for current focus/zoom.
-   */
-  var refresh = function() {
-    Map.__view.removeAllLayers();
-    Map.__view.requestRecords();
-  };
-  Neatline.commands.setHandler(Map.ID+':refresh', refresh);
-  Neatline.vent.on('refresh', refresh);
-
-
-  /**
-   * Unhighlight the layer that corresponds to the passed model and then focus
-   * on its extent (unless the event was triggered by the map).
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    if (args.source !== Map.ID) {
-      focusByModel(args.model);
-      Map.__view.selectByModel(args.model);
-    }
-  };
-  Neatline.commands.setHandler(Map.ID+':select', select);
-  Neatline.vent.on('select', select);
-
-
-  /**
-   * Highlight by model.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var highlight = function(args) {
-    Map.__view.highlightByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':highlight', highlight);
-  Neatline.vent.on('highlight', highlight);
-
-
-  /**
-   * Unhighlight by model.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unhighlight = function(args) {
-    Map.__view.unhighlightByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
-  Neatline.vent.on('unhighlight', unhighlight);
-
-
-  /**
-   * Unselect by model.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unselect = function(args) {
-    Map.__view.unselectByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':unselect', unselect);
-  Neatline.vent.on('unselect', unselect);
-
-
-  /**
-   * Focus the map on the data extent for a record, identified by model.
-   *
-   * @param {Object} model: A record model.
-   */
-  var focusByModel = function(model) {
-    Map.__view.focusByModel(model);
-  };
-  Neatline.commands.setHandler(Map.ID+':focusByModel', focusByModel);
-
-
-  /**
-   * Set a layer filter.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var setFilter = function(args) {
-    Map.__view.setFilter(args.key, args.evaluator);
-  };
-  Neatline.commands.setHandler(Map.ID+':setFilter', setFilter);
-  Neatline.vent.on('setFilter', setFilter);
-
-
-  /**
-   * Remove a layer filter.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var removeFilter = function(args) {
-    Map.__view.removeFilter(args.key);
-  };
-  Neatline.commands.setHandler(Map.ID+':removeFilter', removeFilter);
-  Neatline.vent.on('removeFilter', removeFilter);
-
-
-  /**
-   * Refresh the map after it is resized.
-   */
-  var updateSize = function() {
-    Map.__view.map.updateSize();
-  };
-  Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
-
-
-  /**
-   * Get or create a vector layer for a model.
-   *
-   * @param {Object} model: A record model.
-   * @return {Object}: The record model.
-   */
-  var getVectorLayer = function(model) {
-    return Map.__view.getOrCreateVectorLayer(model);
-  };
-  Neatline.reqres.setHandler(Map.ID+':getVectorLayer', getVectorLayer);
-
-
-  /**
-   * Emit the OpenLayers map instance.
-   *
-   * @return {Object}: The map.
-   */
-  var getMap = function() {
-    return Map.__view.map;
-  };
-  Neatline.reqres.setHandler(Map.ID+':getMap', getMap);
-
-
-  /**
-   * Emit the current records collection.
-   *
-   * @return {Object}: The collection.
-   */
-  var getRecords = function() {
-    return Map.__collection;
-  };
-  Neatline.reqres.setHandler(Map.ID+':getRecords', getRecords);
-
-
-  /**
-   * Emit the current viewport focus coordinates.
-   *
-   * @return {Object}: OpenLayers.LonLat.
-   */
-  var getCenter = function() {
-    return Map.__view.map.getCenter();
-  };
-  Neatline.reqres.setHandler(Map.ID+':getCenter', getCenter);
-
-
-  /**
-   * Emit the current zoom level.
-   *
-   * @return {Number}: The zoom level.
-   */
-  var getZoom = function() {
-    return Map.__view.map.getZoom();
-  };
-  Neatline.reqres.setHandler(Map.ID+':getZoom', getZoom);
 
 
 });
@@ -57472,68 +57505,74 @@ Neatline.module('Presenter', function(
   Presenter.ID = 'PRESENTER';
 
 
-  /**
-   * Highlight the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var highlight = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:highlight', highlight);
-  Neatline.vent.on('highlight', highlight);
+  Presenter.addInitializer(function() {
 
 
-  /**
-   * Unhighlight the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unhighlight = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
-      );
-    } catch(e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
-  Neatline.vent.on('unhighlight', unhighlight);
+    /**
+     * Highlight the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var highlight = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:highlight', highlight);
+    Neatline.vent.on('highlight', highlight);
 
 
-  /**
-   * Freeze the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':select', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:select', select);
-  Neatline.vent.on('select', select);
+    /**
+     * Unhighlight the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unhighlight = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
+        );
+      } catch(e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
+    Neatline.vent.on('unhighlight', unhighlight);
 
 
-  /**
-   * Unfreeze and hide the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unselect = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:unselect', unselect);
-  Neatline.vent.on('unselect', unselect);
+    /**
+     * Freeze the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var select = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':select', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:select', select);
+    Neatline.vent.on('select', select);
+
+
+    /**
+     * Unfreeze and hide the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unselect = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:unselect', unselect);
+    Neatline.vent.on('unselect', unselect);
+
+
+  });
 
 
 });
@@ -57578,12 +57617,12 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  StaticBubble.ID = 'PRESENTER:StaticBubble';
+  //StaticBubble.ID = 'PRESENTER:StaticBubble';
 
 
-  StaticBubble.addInitializer(function() {
-    StaticBubble.__view = new StaticBubble.View();
-  });
+  //StaticBubble.addInitializer(function() {
+    //StaticBubble.__view = new StaticBubble.View();
+  //});
 
 
 });
@@ -57602,75 +57641,87 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Highlight the bubble.
-   *
-   * @param {Object} model: The record model.
-   */
-  var highlight = function(model) {
-    StaticBubble.__view.highlight(model);
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':highlight', highlight
-  );
+  StaticBubble.ID = 'PRESENTER:StaticBubble';
 
 
-  /**
-   * Unhighlight the bubble.
-   */
-  var unhighlight = function() {
-    StaticBubble.__view.unhighlight();
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':unhighlight', unhighlight
-  );
+  StaticBubble.addInitializer(function() {
 
 
-  /**
-   * Select the bubble.
-   *
-   * @param {Object} model: The record model.
-   */
-  var select = function(model) {
-    StaticBubble.__view.select(model);
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':select', select
-  );
+    StaticBubble.__view = new StaticBubble.View();
 
 
-  /**
-   * Unselect the bubble.
-   */
-  var unselect = function() {
-    StaticBubble.__view.unselect();
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':unselect', unselect
-  );
+    /**
+     * Highlight the bubble.
+     *
+     * @param {Object} model: The record model.
+     */
+    var highlight = function(model) {
+      StaticBubble.__view.highlight(model);
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':highlight', highlight
+    );
 
 
-  /**
-   * Activate the bubble.
-   */
-  var activate = function() {
-    StaticBubble.__view.activate();
-  };
-  Neatline.vent.on(
-    'PRESENTER:activate', activate
-  );
+    /**
+     * Unhighlight the bubble.
+     */
+    var unhighlight = function() {
+      StaticBubble.__view.unhighlight();
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':unhighlight', unhighlight
+    );
 
 
-  /**
-   * Deactivate and close the bubble.
-   */
-  var deactivate = function() {
-    StaticBubble.__view.deactivate();
-    StaticBubble.__view.unselect();
-  };
-  Neatline.vent.on(
-    'PRESENTER:deactivate', deactivate
-  );
+    /**
+     * Select the bubble.
+     *
+     * @param {Object} model: The record model.
+     */
+    var select = function(model) {
+      StaticBubble.__view.select(model);
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':select', select
+    );
+
+
+    /**
+     * Unselect the bubble.
+     */
+    var unselect = function() {
+      StaticBubble.__view.unselect();
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':unselect', unselect
+    );
+
+
+    /**
+     * Activate the bubble.
+     */
+    var activate = function() {
+      StaticBubble.__view.activate();
+    };
+    Neatline.vent.on(
+      'PRESENTER:activate', activate
+    );
+
+
+    /**
+     * Deactivate and close the bubble.
+     */
+    var deactivate = function() {
+      StaticBubble.__view.deactivate();
+      StaticBubble.__view.unselect();
+    };
+    Neatline.vent.on(
+      'PRESENTER:deactivate', deactivate
+    );
+
+
+  });
 
 
 });
@@ -57986,6 +58037,50 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
+  //Editor.ID = 'EDITOR';
+
+
+  /**
+   * Start the editor before Neatline.
+   */
+  //Neatline.on('initialize:before', function() {
+    //Editor.start();
+  //});
+
+
+  /**
+   * Start the map editor after Neatline.
+   */
+  //Neatline.on('initialize:after', function() {
+    //Editor.Map.start();
+    //Backbone.history.start();
+  //});
+
+
+  /**
+   * Initialize the layout view.
+   */
+  //Editor.addInitializer(function() {
+    //Editor.__view = new Editor.View({ el: 'body' });
+  //});
+
+
+}});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor', { startWithParent: false,
+  define: function(Editor, Neatline, Backbone, Marionette, $, _) {
+
+
   Editor.ID = 'EDITOR';
 
 
@@ -58006,91 +58101,76 @@ Neatline.module('Editor', { startWithParent: false,
   });
 
 
-  /**
-   * Initialize the layout view.
-   */
   Editor.addInitializer(function() {
+
+
     Editor.__view = new Editor.View({ el: 'body' });
+
+
+    /**
+     * Display a list of views in the editor container.
+     *
+     * @param {Array} views: The views, in display order.
+     */
+    var display = function(views) {
+
+      // Clear the editor container.
+      Editor.__view.__ui.editor.children().detach();
+
+      // Show each of the views.
+      _.each(views, function(v) {
+        Neatline.execute(v+':display', Editor.__view.__ui.editor);
+      });
+
+    };
+    Neatline.commands.setHandler(Editor.ID+':display', display);
+
+
+    /**
+     * Flash a success notification.
+     *
+     * @param {String} message: The message.
+     */
+    var notifySuccess = function(message) {
+      Editor.__view.notifySuccess(message);
+    };
+    Neatline.commands.setHandler(Editor.ID+':notifySuccess', notifySuccess);
+
+
+    /**
+     * Flash an error notification.
+     *
+     * @param {String} message: The message.
+     */
+    var notifyError = function(message) {
+      Editor.__view.notifyError(message);
+    };
+    Neatline.commands.setHandler(Editor.ID+':notifyError', notifyError);
+
+
+    /**
+     * Return the editor container div.
+     *
+     * @return {Object}: The container.
+     */
+    var getContainer = function() {
+      return Editor.__view.__ui.editor;
+    };
+    Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
+
+
+    /**
+     * Update the route hash without adding to the history.
+     *
+     * @param {String} route: The new route.
+     */
+    var setRoute = function(route) {
+      Backbone.history.navigate(route, { replace: true });
+    };
+    Neatline.commands.setHandler(Editor.ID+':setRoute', setRoute);
+
+
   });
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor', { startWithParent: false,
-  define: function(Editor, Neatline, Backbone, Marionette, $, _) {
-
-
-  /**
-   * Display a list of views in the editor container.
-   *
-   * @param {Array} views: A list of views.
-   */
-  var display = function(views) {
-
-    // Clear the editor container.
-    Editor.__view.__ui.editor.children().detach();
-
-    // Show each of the views.
-    _.each(views, function(v) {
-      Neatline.execute(v+':display', Editor.__view.__ui.editor);
-    });
-
-  };
-  Neatline.commands.setHandler(Editor.ID+':display', display);
-
-
-  /**
-   * Flash a success notification.
-   *
-   * @param {String} message: The message.
-   */
-  var notifySuccess = function(message) {
-    Editor.__view.notifySuccess(message);
-  };
-  Neatline.commands.setHandler(Editor.ID+':notifySuccess', notifySuccess);
-
-
-  /**
-   * Flash an error notification.
-   *
-   * @param {String} message: The message.
-   */
-  var notifyError = function(message) {
-    Editor.__view.notifyError(message);
-  };
-  Neatline.commands.setHandler(Editor.ID+':notifyError', notifyError);
-
-
-  /**
-   * Return the editor container div.
-   *
-   * @return {Object}: The container.
-   */
-  var getContainer = function() {
-    return Editor.__view.__ui.editor;
-  };
-  Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
-
-
-  /**
-   * Update the route hash without adding to the history.
-   *
-   * @param {String} route: The new route.
-   */
-  var setRoute = function(route) {
-    Backbone.history.navigate(route, { replace: true });
-  };
-  Neatline.commands.setHandler(Editor.ID+':setRoute', setRoute);
 
 
 }});
@@ -58213,12 +58293,12 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  Exhibit.ID = 'EDITOR:EXHIBIT';
+  //Exhibit.ID = 'EDITOR:EXHIBIT';
 
 
-  Exhibit.addInitializer(function() {
-    Exhibit.__view = new Exhibit.View();
-  });
+  //Exhibit.addInitializer(function() {
+    //Exhibit.__view = new Exhibit.View();
+  //});
 
 
 });
@@ -58237,26 +58317,38 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Append the exhibit menu to a container.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Exhibit.__view.showIn(container);
-  };
-  Neatline.commands.setHandler(Exhibit.ID+':display', display);
+  Exhibit.ID = 'EDITOR:EXHIBIT';
 
 
-  /**
-   * Set the active tab.
-   *
-   * @param {String} tab: The tab to activate.
-   */
-  var tab = function(tab) {
-    Exhibit.__view.activateTab(tab);
-  };
-  Neatline.commands.setHandler(Exhibit.ID+':activateTab', tab);
+  Exhibit.addInitializer(function() {
+
+
+    Exhibit.__view = new Exhibit.View();
+
+
+    /**
+     * Append the exhibit menu to a container.
+     *
+     * @param {Object} container: The container element.
+     */
+    var display = function(container) {
+      Exhibit.__view.showIn(container);
+    };
+    Neatline.commands.setHandler(Exhibit.ID+':display', display);
+
+
+    /**
+     * Set the active tab.
+     *
+     * @param {String} tab: The tab to activate.
+     */
+    var tab = function(tab) {
+      Exhibit.__view.activateTab(tab);
+    };
+    Neatline.commands.setHandler(Exhibit.ID+':activateTab', tab);
+
+
+  });
 
 
 });
@@ -58327,14 +58419,14 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.ID = 'EDITOR:EXHIBIT:RECORDS';
+  //Records.ID = 'EDITOR:EXHIBIT:RECORDS';
 
 
-  Records.addInitializer(function() {
-    Records.__router =      new Records.Router();
-    Records.__collection =  new Neatline.Shared.Record.Collection();
-    Records.__view =        new Records.View();
-  });
+  //Records.addInitializer(function() {
+    //Records.__router =      new Records.Router();
+    //Records.__collection =  new Neatline.Shared.Record.Collection();
+    //Records.__view =        new Records.View();
+  //});
 
 
 });
@@ -58353,60 +58445,74 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Append the list to the editor container.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Records.__view.showIn(container);
-  };
-  Neatline.commands.setHandler(Records.ID+':display', display);
+  Records.ID = 'EDITOR:EXHIBIT:RECORDS';
 
 
-  /**
-   * Query for new records.
-   *
-   * @param {Object} params: The query parameters.
-   */
-  var load = function(params) {
-    Records.__collection.update(params, function(records) {
-      ingest(records);
-    });
-  };
-  Neatline.commands.setHandler(Records.ID+':load', load);
+  Records.addInitializer(function() {
 
 
-  /**
-   * Render a records collection in the list.
-   *
-   * @param {Object} records: The collection of records.
-   */
-  var ingest = function(records) {
-    Records.__view.ingest(records);
-  };
-  Neatline.commands.setHandler(Records.ID+':ingest', ingest);
+    Records.__router =      new Records.Router();
+    Records.__collection =  new Neatline.Shared.Record.Collection();
+    Records.__view =        new Records.View();
 
 
-  /**
-   * Navigate to the record list.
-   */
-  var navToList = function() {
-    Records.__router.navigate('records', true);
-  };
-  Neatline.commands.setHandler(Records.ID+':navToList', navToList);
+    /**
+     * Append the list to the editor container.
+     *
+     * @param {Object} container: The container element.
+     */
+    var display = function(container) {
+      Records.__view.showIn(container);
+    };
+    Neatline.commands.setHandler(Records.ID+':display', display);
 
 
-  /**
-   * Get a record model from the collection.
-   *
-   * @param {Number} id: The record id.
-   * @param {Function} cb: A callback, called with the model.
-   */
-  var getModel = function(id, cb) {
-    Records.__collection.getOrFetch(id, cb);
-  };
-  Neatline.reqres.setHandler(Records.ID+':getModel', getModel);
+    /**
+     * Query for new records.
+     *
+     * @param {Object} params: The query parameters.
+     */
+    var load = function(params) {
+      Records.__collection.update(params, function(records) {
+        ingest(records);
+      });
+    };
+    Neatline.commands.setHandler(Records.ID+':load', load);
+
+
+    /**
+     * Render a records collection in the list.
+     *
+     * @param {Object} records: The collection of records.
+     */
+    var ingest = function(records) {
+      Records.__view.ingest(records);
+    };
+    Neatline.commands.setHandler(Records.ID+':ingest', ingest);
+
+
+    /**
+     * Navigate to the record list.
+     */
+    var navToList = function() {
+      Records.__router.navigate('records', true);
+    };
+    Neatline.commands.setHandler(Records.ID+':navToList', navToList);
+
+
+    /**
+     * Get a record model from the collection.
+     *
+     * @param {Number} id: The record id.
+     * @param {Function} cb: A callback, called with the model.
+     */
+    var getModel = function(id, cb) {
+      Records.__collection.getOrFetch(id, cb);
+    };
+    Neatline.reqres.setHandler(Records.ID+':getModel', getModel);
+
+
+  });
 
 
 });
@@ -58592,12 +58698,12 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  Search.ID = 'EDITOR:EXHIBIT:SEARCH';
+  //Search.ID = 'EDITOR:EXHIBIT:SEARCH';
 
 
-  Search.addInitializer(function() {
-    Search.__view = new Search.View();
-  });
+  //Search.addInitializer(function() {
+    //Search.__view = new Search.View();
+  //});
 
 
 });
@@ -58616,78 +58722,90 @@ Neatline.module('Editor.Exhibit.Search', function(
   Search, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Append the form to the editor container.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Search.__view.showIn(container);
-  };
-  Neatline.commands.setHandler(Search.ID+':display', display);
+  Search.ID = 'EDITOR:EXHIBIT:SEARCH';
 
 
-  /**
-   * Initialize the record list from route parameters.
-   *
-   * @param {String} query: The search query.
-   * @param {Number} start: The paging offset.
-   */
-  var init = function(query, start) {
-
-    query = query || null;
-    start = start || 0;
-
-    // Set the search query.
-    Search.__view.setQueryFromUrl(query);
-
-    // Break if map mirroring.
-    if (!Search.__view.mirroring) {
-
-      // Merge route parameters into query.
-      var params = _.extend(Search.__view.query, {
-        limit:  Neatline.g.neatline.per_page,
-        offset: start
-      });
-
-      // Query for records.
-      Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
-
-    }
-
-  };
-  Neatline.commands.setHandler(Search.ID+':initialize', init);
+  Search.addInitializer(function() {
 
 
-  /**
-   * If mirroring is enabled, show map records in the browser.
-   *
-   * @param {Object} records: The records on the map.
-   */
-  var mirror = function(records) {
-
-    // Get the record collection on the map.
-    records = records || Neatline.request('MAP:getRecords');
-
-    // Render in the record browser.
-    if (records && Search.__view.mirroring) {
-      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
-    }
-
-  };
-  Neatline.commands.setHandler(Search.ID+':mirrorMap', mirror);
-  Neatline.vent.on('MAP:ingest', mirror);
+    Search.__view = new Search.View();
 
 
-  /**
-   * Get the current query as a route parameter.
-   *
-   * @return {String}: The query.
-   */
-  var query = function() {
-    return Search.__view.getQueryForUrl();
-  };
-  Neatline.reqres.setHandler(Search.ID+':getQueryForUrl', query);
+    /**
+     * Append the form to the editor container.
+     *
+     * @param {Object} container: The container element.
+     */
+    var display = function(container) {
+      Search.__view.showIn(container);
+    };
+    Neatline.commands.setHandler(Search.ID+':display', display);
+
+
+    /**
+     * Initialize the record list from route parameters.
+     *
+     * @param {String} query: The search query.
+     * @param {Number} start: The paging offset.
+     */
+    var init = function(query, start) {
+
+      query = query || null;
+      start = start || 0;
+
+      // Set the search query.
+      Search.__view.setQueryFromUrl(query);
+
+      // Break if map mirroring.
+      if (!Search.__view.mirroring) {
+
+        // Merge route parameters into query.
+        var params = _.extend(Search.__view.query, {
+          limit:  Neatline.g.neatline.per_page,
+          offset: start
+        });
+
+        // Query for records.
+        Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
+
+      }
+
+    };
+    Neatline.commands.setHandler(Search.ID+':initialize', init);
+
+
+    /**
+     * If mirroring is enabled, show map records in the browser.
+     *
+     * @param {Object} records: The records on the map.
+     */
+    var mirror = function(records) {
+
+      // Get the record collection on the map.
+      records = records || Neatline.request('MAP:getRecords');
+
+      // Render in the record browser.
+      if (records && Search.__view.mirroring) {
+        Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
+      }
+
+    };
+    Neatline.commands.setHandler(Search.ID+':mirrorMap', mirror);
+    Neatline.vent.on('MAP:ingest', mirror);
+
+
+    /**
+     * Get the current query as a route parameter.
+     *
+     * @return {String}: The query.
+     */
+    var query = function() {
+      return Search.__view.getQueryForUrl();
+    };
+    Neatline.reqres.setHandler(Search.ID+':getQueryForUrl', query);
+
+
+  });
 
 
 });
@@ -59114,25 +59232,25 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.ID = 'EDITOR:RECORD:MAP';
+  //Map.ID = 'EDITOR:RECORD:MAP';
 
 
   /**
    * Start the tab after the form.
    */
-  Neatline.Editor.Record.on('start', function() {
-    Map.start();
-  });
+  //Neatline.Editor.Record.on('start', function() {
+    //Map.start();
+  //});
 
 
   /**
    * Instantiate the tab view.
    */
-  Map.addInitializer(function() {
-    Map.__view = new Map.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-  });
+  //Map.addInitializer(function() {
+    //Map.__view = new Map.View({
+      //el: Neatline.request('EDITOR:RECORD:getElement')
+    //});
+  //});
 
 
 }});
@@ -59362,13 +59480,13 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.ID = 'EDITOR:RECORD';
+  //Record.ID = 'EDITOR:RECORD';
 
 
-  Record.addInitializer(function() {
-    Record.__view   = new Record.View();
-    Record.__router = new Record.Router();
-  });
+  //Record.addInitializer(function() {
+    //Record.__view   = new Record.View();
+    //Record.__router = new Record.Router();
+  //});
 
 
 });
@@ -59387,106 +59505,119 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Append the form to the editor container.
-   *
-   * @param {Object} container: The container element.
-   */
-  var display = function(container) {
-    Record.__view.showIn(container);
-  };
-  Neatline.commands.setHandler(Record.ID+':display', display);
+  Record.ID = 'EDITOR:RECORD';
 
 
-  /**
-   * Show form for an existing record.
-   *
-   * @param {Number|String} id: The record id.
-   * @param {String} tab: The active tab slug.
-   */
-  var bindId = function(id, tab) {
+  Record.addInitializer(function() {
 
-    // Get or fetch the model.
-    Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
-      function(record) {
-        Record.__view.bind(record);
-        Record.__view.activateTab(tab);
+
+    Record.__router = new Record.Router();
+    Record.__view   = new Record.View();
+
+
+    /**
+     * Append the form to the editor container.
+     *
+     * @param {Object} container: The container element.
+     */
+    var display = function(container) {
+      Record.__view.showIn(container);
+    };
+    Neatline.commands.setHandler(Record.ID+':display', display);
+
+
+    /**
+     * Show form for an existing record.
+     *
+     * @param {Number|String} id: The record id.
+     * @param {String} tab: The active tab slug.
+     */
+    var bindId = function(id, tab) {
+
+      // Get or fetch the model.
+      Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
+        function(record) {
+          Record.__view.bind(record);
+          Record.__view.activateTab(tab);
+        }
+      );
+
+    };
+    Neatline.commands.setHandler(Record.ID+':bindId', bindId);
+
+
+    /**
+     * Show form for a new record.
+     *
+     * @param {String} tab: The active tab slug.
+     */
+    var bindNew = function(tab) {
+
+      // Create a new model.
+      var record = new Neatline.Shared.Record.Model();
+
+      // Bind model to form.
+      Record.__view.bind(record);
+      Record.__view.activateTab(tab);
+
+    };
+    Neatline.commands.setHandler(Record.ID+':bindNew', bindNew);
+
+
+    /**
+     * Unbind the form.
+     */
+    var unbind = function() {
+      if (Record.__view.open) Record.__view.unbind();
+    };
+    Neatline.commands.setHandler(Record.ID+':unbind', unbind);
+    Neatline.vent.on('ROUTER:before', unbind);
+
+
+    /**
+     * Open a record edit form if one is not already open.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var navToForm = function(args) {
+      if (!Record.__view.open) {
+        Record.__router.navigate('record/'+args.model.id, true);
       }
-    );
-
-  };
-  Neatline.commands.setHandler(Record.ID+':bindId', bindId);
-
-
-  /**
-   * Show form for a new record.
-   *
-   * @param {String} tab: The active tab slug.
-   */
-  var bindNew = function(tab) {
-
-    // Create a new model.
-    var record = new Neatline.Shared.Record.Model();
-
-    // Bind model to form.
-    Record.__view.bind(record);
-    Record.__view.activateTab(tab);
-
-  };
-  Neatline.commands.setHandler(Record.ID+':bindNew', bindNew);
+    };
+    Neatline.commands.setHandler(Record.ID+':navToForm', navToForm);
+    Neatline.vent.on('select', navToForm);
 
 
-  /**
-   * Unbind the form.
-   */
-  var unbind = function() {
-    if (Record.__view.open) Record.__view.unbind();
-  };
-  Neatline.commands.setHandler(Record.ID+':unbind', unbind);
-  Neatline.vent.on('ROUTER:before', unbind);
+    /**
+     * Update coverage textarea.
+     *
+     * @param {String} coverage: The new WKT.
+     */
+    var setCoverage = function(coverage) {
+      Record.__view.model.set('coverage', coverage);
+    };
+    Neatline.commands.setHandler(Record.ID+':setCoverage', setCoverage);
 
 
-  /**
-   * Open a record edit form if one is not already open.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var navToForm = function(args) {
-    if (!Record.__view.open) {
-      Record.__router.navigate('record/'+args.model.id, true);
-    }
-  };
-  Neatline.commands.setHandler(Record.ID+':navToForm', navToForm);
-  Neatline.vent.on('select', navToForm);
+    /**
+     * Return the form element.
+     */
+    var getElement = function() {
+      return Record.__view.$el;
+    };
+    Neatline.reqres.setHandler(Record.ID+':getElement', getElement);
 
 
-  /**
-   * Update coverage textarea.
-   *
-   * @param {String} coverage: The new WKT.
-   */
-  var setCoverage = function(coverage) {
-    Record.__view.model.set('coverage', coverage);
-  };
-  Neatline.commands.setHandler(Record.ID+':setCoverage', setCoverage);
+    /**
+     * Return the form model.
+     */
+    var getModel = function() {
+      return Record.__view.model;
+    };
+    Neatline.reqres.setHandler(Record.ID+':getModel', getModel);
 
 
-  /**
-   * Return the form element.
-   */
-  var getElement = function() {
-    return Record.__view.$el;
-  };
-  Neatline.reqres.setHandler(Record.ID+':getElement', getElement);
-
-
-  /**
-   * Return the form model.
-   */
-  var getModel = function() {
-    return Record.__view.model;
-  };
-  Neatline.reqres.setHandler(Record.ID+':getModel', getModel);
+  });
 
 
 });
@@ -59793,25 +59924,25 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
-  Style.ID = 'EDITOR:RECORD:STYLE';
+  //Style.ID = 'EDITOR:RECORD:STYLE';
 
 
   /**
    * Start the tab after the form.
    */
-  Neatline.Editor.Record.on('start', function() {
-    Style.start();
-  });
+  //Neatline.Editor.Record.on('start', function() {
+    //Style.start();
+  //});
 
 
   /**
    * Instantiate the tab view.
    */
-  Style.addInitializer(function() {
-    Style.__view = new Style.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-  });
+  //Style.addInitializer(function() {
+    //Style.__view = new Style.View({
+      //el: Neatline.request('EDITOR:RECORD:getElement')
+    //});
+  //});
 
 
 }});
@@ -59830,14 +59961,36 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
+  Style.ID = 'EDITOR:RECORD:STYLE';
+
+
   /**
-   * Instantiate color pickers and integer draggers.
+   * Start the tab after the form.
    */
-  var activate = function() {
-    Style.__view.buildWidgets();
-  };
-  Neatline.commands.setHandler(Style.ID+':activate', activate);
-  Neatline.vent.on('EDITOR:RECORD:#style', activate);
+  Neatline.Editor.Record.on('start', function() {
+    Style.start();
+  });
+
+
+  Style.addInitializer(function() {
+
+
+    Style.__view = new Style.View({
+      el: Neatline.request('EDITOR:RECORD:getElement')
+    });
+
+
+    /**
+     * Instantiate color pickers and integer draggers.
+     */
+    var activate = function() {
+      Style.__view.buildWidgets();
+    };
+    Neatline.commands.setHandler(Style.ID+':activate', activate);
+    Neatline.vent.on('EDITOR:RECORD:#style', activate);
+
+
+  });
 
 
 }});
@@ -59968,25 +60121,25 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text, Neatline, Backbone, Marionette, $, _) {
 
 
-  Text.ID = 'EDITOR:RECORD:TEXT';
+  //Text.ID = 'EDITOR:RECORD:TEXT';
 
 
   /**
    * Start the tab after the form.
    */
-  Neatline.Editor.Record.on('start', function() {
-    Text.start();
-  });
+  //Neatline.Editor.Record.on('start', function() {
+    //Text.start();
+  //});
 
 
   /**
    * Instantiate the tab view.
    */
-  Text.addInitializer(function() {
-    Text.__view = new Text.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-  });
+  //Text.addInitializer(function() {
+    //Text.__view = new Text.View({
+      //el: Neatline.request('EDITOR:RECORD:getElement')
+    //});
+  //});
 
 
 }});
@@ -60005,14 +60158,36 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text, Neatline, Backbone, Marionette, $, _) {
 
 
+  Text.ID = 'EDITOR:RECORD:TEXT';
+
+
   /**
-   * Instantiate autocomplete and CKEditor.
+   * Start the tab after the form.
    */
-  var activate = function() {
-    Text.__view.buildWidgets();
-  };
-  Neatline.commands.setHandler(Text.ID+':activate', activate);
-  Neatline.vent.on('EDITOR:RECORD:#text', activate);
+  Neatline.Editor.Record.on('start', function() {
+    Text.start();
+  });
+
+
+  Text.addInitializer(function() {
+
+
+    Text.__view = new Text.View({
+      el: Neatline.request('EDITOR:RECORD:getElement')
+    });
+
+
+    /**
+     * Instantiate autocomplete and CKEditor.
+     */
+    var activate = function() {
+      Text.__view.buildWidgets();
+    };
+    Neatline.commands.setHandler(Text.ID+':activate', activate);
+    Neatline.vent.on('EDITOR:RECORD:#text', activate);
+
+
+  });
 
 
 }});
@@ -60149,14 +60324,14 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
-  Map.ID = 'EDITOR:MAP';
+  //Map.ID = 'EDITOR:MAP';
 
 
-  Map.addInitializer(function() {
-    Map.__collection = Neatline.Map.__collection;
-    Map.__view = Neatline.Map.__view;
-    Map.__view.__initEditor();
-  });
+  //Map.addInitializer(function() {
+    //Map.__collection = Neatline.Map.__collection;
+    //Map.__view = Neatline.Map.__view;
+    //Map.__view.__initEditor();
+  //});
 
 
 }});
@@ -60175,68 +60350,81 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map, Editor, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Start map edit when a record form is opened.
-   *
-   * @param {Object} model: The record model.
-   */
-  var startEdit = function(model) {
-    Map.__view.startEdit(model);
-  };
-  Neatline.commands.setHandler(Map.ID+':startEdit', startEdit);
+  Map.ID = 'EDITOR:MAP';
 
 
-  /**
-   * End map edit when a record form is closed.
-   *
-   * @param {Object} model: The record model.
-   */
-  var endEdit = function(model) {
-    Map.__view.endEdit();
-  };
-  Neatline.commands.setHandler(Map.ID+':endEdit', endEdit);
+  Map.addInitializer(function() {
 
 
-  /**
-   * Update the map edit controls.
-   *
-   * @param {Object} settings: The new form settings.
-   */
-  var updateEdit = function(settings) {
-    Map.__view.updateEdit(settings);
-  };
-  Neatline.commands.setHandler(Map.ID+':updateEdit', updateEdit);
+    Map.__collection  = Neatline.Map.__collection;
+    Map.__view        = Neatline.Map.__view;
 
 
-  /**
-   * Update the WKT on the geometry handler.
-   *
-   * @param {String} wkt: The WKT.
-   */
-  var updateWKT = function(wkt) {
-    Map.__view.updateWKT(wkt);
-  };
-  Neatline.commands.setHandler(Map.ID+':updateWKT', updateWKT);
+    /**
+     * Start map edit when a record form is opened.
+     *
+     * @param {Object} model: The record model.
+     */
+    var startEdit = function(model) {
+      Map.__view.startEdit(model);
+    };
+    Neatline.commands.setHandler(Map.ID+':startEdit', startEdit);
 
 
-  /**
-   * Update edit layer model.
-   *
-   * @param {Object} model: The updated model.
-   */
-  var updateModel = function(model) {
-    Map.__view.updateModel(model);
-  };
-  Neatline.commands.setHandler(Map.ID+':updateModel', updateModel);
+    /**
+     * End map edit when a record form is closed.
+     *
+     * @param {Object} model: The record model.
+     */
+    var endEdit = function(model) {
+      Map.__view.endEdit();
+    };
+    Neatline.commands.setHandler(Map.ID+':endEdit', endEdit);
 
 
-  /**
-   * Empty the edit layer.
-   */
-  var clearLayer = function() {
-    Map.__view.clearEditLayer();
-  };
-  Neatline.commands.setHandler(Map.ID+':clearEditLayer', clearLayer);
+    /**
+     * Update the map edit controls.
+     *
+     * @param {Object} settings: The new form settings.
+     */
+    var updateEdit = function(settings) {
+      Map.__view.updateEdit(settings);
+    };
+    Neatline.commands.setHandler(Map.ID+':updateEdit', updateEdit);
+
+
+    /**
+     * Update the WKT on the geometry handler.
+     *
+     * @param {String} wkt: The WKT.
+     */
+    var updateWKT = function(wkt) {
+      Map.__view.updateWKT(wkt);
+    };
+    Neatline.commands.setHandler(Map.ID+':updateWKT', updateWKT);
+
+
+    /**
+     * Update edit layer model.
+     *
+     * @param {Object} model: The updated model.
+     */
+    var updateModel = function(model) {
+      Map.__view.updateModel(model);
+    };
+    Neatline.commands.setHandler(Map.ID+':updateModel', updateModel);
+
+
+    /**
+     * Empty the edit layer.
+     */
+    var clearLayer = function() {
+      Map.__view.clearEditLayer();
+    };
+    Neatline.commands.setHandler(Map.ID+':clearEditLayer', clearLayer);
+
+
+  });
 
 
 }});
@@ -60254,14 +60442,6 @@ Neatline.module('Editor.Map', { startWithParent: false,
  */
 
 _.extend(Neatline.Map.View.prototype, {
-
-
-  /**
-   * Initialize editor-specific state trackers.
-   */
-  __initEditor: function() {
-    this.editLayer = null;
-  },
 
 
   /**

@@ -12,13 +12,13 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  Map.ID = 'MAP';
+  //Map.ID = 'MAP';
 
 
-  Map.addInitializer(function() {
-    Map.__collection = new Neatline.Shared.Record.Collection();
-    Map.__view = new Neatline.Map.View();
-  });
+  //Map.addInitializer(function() {
+    //Map.__collection = new Neatline.Shared.Record.Collection();
+    //Map.__view = new Neatline.Map.View();
+  //});
 
 
 });

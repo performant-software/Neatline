@@ -15,21 +15,25 @@ Neatline.module('Map.Layers', function(
   Layers.ID = 'MAP:LAYERS';
 
 
-  /**
-   * Dispatch a layer request to the appropriate handler. If no handler exists
-  * for the passed type and the request fails, return null.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer|null}: The layer.
-   */
-  var getLayer = function(json) {
-    try {
-      return Neatline.request('MAP:LAYERS:'+json.type, json);
-    } catch (e) {
-      return null;
-    }
-  };
-  Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
+  Layers.addInitializer(function() {
+
+    /**
+     * Dispatch a layer request to the appropriate handler. If no handler
+     * exists for the passed type and the request fails, return null.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer|null}: The layer.
+     */
+    var getLayer = function(json) {
+      try {
+        return Neatline.request('MAP:LAYERS:'+json.type, json);
+      } catch (e) {
+        return null;
+      }
+    };
+    Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
+
+  });
 
 
 });

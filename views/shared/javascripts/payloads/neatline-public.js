@@ -34870,36 +34870,40 @@ Neatline.module('Map.Layers.Google', function(
   Google.ID = 'MAP:LAYERS:Google';
 
 
-  /**
-   * Construct a Google layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Google}: The Google layer.
-   */
-  var layer = function(json) {
-    switch (json.properties.provider) {
-      case 'physical':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.TERRAIN
-        });
-      case 'streets':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.ROADMAP,
-          numZoomLevels: 25
-        });
-      case 'satellite':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.SATELLITE,
-          numZoomLevels: 25
-        });
-      case 'hybrid':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.HYBRID,
-          numZoomLevels: 25
-        });
-    }
-  };
-  Neatline.reqres.setHandler(Google.ID, layer);
+  Google.addInitializer(function() {
+
+    /**
+     * Construct a Google layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.Google}: The Google layer.
+     */
+    var layer = function(json) {
+      switch (json.properties.provider) {
+        case 'physical':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.TERRAIN
+          });
+        case 'streets':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.ROADMAP,
+            numZoomLevels: 25
+          });
+        case 'satellite':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.SATELLITE,
+            numZoomLevels: 25
+          });
+        case 'hybrid':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.HYBRID,
+            numZoomLevels: 25
+          });
+      }
+    };
+    Neatline.reqres.setHandler(Google.ID, layer);
+
+  });
 
 
 });
@@ -34921,16 +34925,20 @@ Neatline.module('Map.Layers.OpenStreetMap', function(
   OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';
 
 
-  /**
-   * Construct an OpenStreetMap layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.OSM}: The OSM layer.
-   */
-  var layer = function(json) {
-    return new OpenLayers.Layer.OSM(json.title);
-  };
-  Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
+  OpenStreetMap.addInitializer(function() {
+
+    /**
+     * Construct an OpenStreetMap layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.OSM}: The OSM layer.
+     */
+    var layer = function(json) {
+      return new OpenLayers.Layer.OSM(json.title);
+    };
+    Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
+
+  });
 
 
 });
@@ -34952,18 +34960,22 @@ Neatline.module('Map.Layers.Stamen', function(
   Stamen.ID = 'MAP:LAYERS:Stamen';
 
 
-  /**
-   * Construct a Stamen layer - http://maps.stamen.com/.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
-   */
-  var layer = function(json) {
-    var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
-    layer.name = json.title;
-    return layer;
-  };
-  Neatline.reqres.setHandler(Stamen.ID, layer);
+  Stamen.addInitializer(function() {
+
+    /**
+     * Construct a Stamen layer - http://maps.stamen.com/.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
+     */
+    var layer = function(json) {
+      var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
+      layer.name = json.title;
+      return layer;
+    };
+    Neatline.reqres.setHandler(Stamen.ID, layer);
+
+  });
 
 
 });
@@ -34985,22 +34997,26 @@ Neatline.module('Map.Layers.WMS', function(
   WMS.ID = 'MAP:LAYERS:WMS';
 
 
-  /**
-   * Construct a WMS layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.WMS}: The WMS layer.
-   */
-  var layer = function(json) {
-    return new OpenLayers.Layer.WMS(
-      json.title,
-      json.properties.address,
-      {
-        layers: json.properties.layers
-      }
-    );
-  };
-  Neatline.reqres.setHandler(WMS.ID, layer);
+  WMS.addInitializer(function() {
+
+    /**
+     * Construct a WMS layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.WMS}: The WMS layer.
+     */
+    var layer = function(json) {
+      return new OpenLayers.Layer.WMS(
+        json.title,
+        json.properties.address,
+        {
+          layers: json.properties.layers
+        }
+      );
+    };
+    Neatline.reqres.setHandler(WMS.ID, layer);
+
+  });
 
 
 });
@@ -35022,21 +35038,50 @@ Neatline.module('Map.Layers', function(
   Layers.ID = 'MAP:LAYERS';
 
 
-  /**
-   * Dispatch a layer request to the appropriate handler. If no handler exists
-  * for the passed type and the request fails, return null.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer|null}: The layer.
-   */
-  var getLayer = function(json) {
-    try {
-      return Neatline.request('MAP:LAYERS:'+json.type, json);
-    } catch (e) {
-      return null;
-    }
-  };
-  Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
+  Layers.addInitializer(function() {
+
+    /**
+     * Dispatch a layer request to the appropriate handler. If no handler
+     * exists for the passed type and the request fails, return null.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer|null}: The layer.
+     */
+    var getLayer = function(json) {
+      try {
+        return Neatline.request('MAP:LAYERS:'+json.type, json);
+      } catch (e) {
+        return null;
+      }
+    };
+    Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
+
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map', function(
+  Map, Neatline, Backbone, Marionette, $, _) {
+
+
+  //Map.ID = 'MAP';
+
+
+  //Map.addInitializer(function() {
+    //Map.__collection = new Neatline.Shared.Record.Collection();
+    //Map.__view = new Neatline.Map.View();
+  //});
 
 
 });
@@ -35059,201 +35104,189 @@ Neatline.module('Map', function(
 
 
   Map.addInitializer(function() {
-    Map.__collection = new Neatline.Shared.Record.Collection();
-    Map.__view = new Neatline.Map.View();
+
+
+    Map.__collection  = new Neatline.Shared.Record.Collection();
+    Map.__view        = new Neatline.Map.View();
+
+
+    /**
+     * Load map layers.
+     *
+     * @param {Object} params: Hash with `extent` and `zoom`.
+     */
+    var load = function(params) {
+      Map.__collection.update(params, function(records) {
+        Map.__view.ingest(records);
+      });
+    };
+    Neatline.commands.setHandler(Map.ID+':load', load);
+
+
+    /**
+     * Reload map data for current focus/zoom.
+     */
+    var refresh = function() {
+      Map.__view.removeAllLayers();
+      Map.__view.requestRecords();
+    };
+    Neatline.commands.setHandler(Map.ID+':refresh', refresh);
+    Neatline.vent.on('refresh', refresh);
+
+
+    /**
+     * Unhighlight the layer that corresponds to the passed model and then
+     * focus on its extent (unless the event was triggered by the map).
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var select = function(args) {
+      if (args.source !== Map.ID) {
+        focusByModel(args.model);
+        Map.__view.selectByModel(args.model);
+      }
+    };
+    Neatline.commands.setHandler(Map.ID+':select', select);
+    Neatline.vent.on('select', select);
+
+
+    /**
+     * Highlight by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var highlight = function(args) {
+      Map.__view.highlightByModel(args.model);
+    };
+    Neatline.commands.setHandler(Map.ID+':highlight', highlight);
+    Neatline.vent.on('highlight', highlight);
+
+
+    /**
+     * Unhighlight by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unhighlight = function(args) {
+      Map.__view.unhighlightByModel(args.model);
+    };
+    Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
+    Neatline.vent.on('unhighlight', unhighlight);
+
+
+    /**
+     * Unselect by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unselect = function(args) {
+      Map.__view.unselectByModel(args.model);
+    };
+    Neatline.commands.setHandler(Map.ID+':unselect', unselect);
+    Neatline.vent.on('unselect', unselect);
+
+
+    /**
+     * Focus the map on the data extent for a record, identified by model.
+     *
+     * @param {Object} model: A record model.
+     */
+    var focusByModel = function(model) {
+      Map.__view.focusByModel(model);
+    };
+    Neatline.commands.setHandler(Map.ID+':focusByModel', focusByModel);
+
+
+    /**
+     * Set a layer filter.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var setFilter = function(args) {
+      Map.__view.setFilter(args.key, args.evaluator);
+    };
+    Neatline.commands.setHandler(Map.ID+':setFilter', setFilter);
+    Neatline.vent.on('setFilter', setFilter);
+
+
+    /**
+     * Remove a layer filter.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var removeFilter = function(args) {
+      Map.__view.removeFilter(args.key);
+    };
+    Neatline.commands.setHandler(Map.ID+':removeFilter', removeFilter);
+    Neatline.vent.on('removeFilter', removeFilter);
+
+
+    /**
+     * Refresh the map after it is resized.
+     */
+    var updateSize = function() {
+      Map.__view.map.updateSize();
+    };
+    Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
+
+
+    /**
+     * Get or create a vector layer for a model.
+     *
+     * @param {Object} model: A record model.
+     * @return {Object}: The record model.
+     */
+    var getVectorLayer = function(model) {
+      return Map.__view.getOrCreateVectorLayer(model);
+    };
+    Neatline.reqres.setHandler(Map.ID+':getVectorLayer', getVectorLayer);
+
+
+    /**
+     * Emit the OpenLayers map instance.
+     *
+     * @return {Object}: The map.
+     */
+    var getMap = function() {
+      return Map.__view.map;
+    };
+    Neatline.reqres.setHandler(Map.ID+':getMap', getMap);
+
+
+    /**
+     * Emit the current records collection.
+     *
+     * @return {Object}: The collection.
+     */
+    var getRecords = function() {
+      return Map.__collection;
+    };
+    Neatline.reqres.setHandler(Map.ID+':getRecords', getRecords);
+
+
+    /**
+     * Emit the current viewport focus coordinates.
+     *
+     * @return {Object}: OpenLayers.LonLat.
+     */
+    var getCenter = function() {
+      return Map.__view.map.getCenter();
+    };
+    Neatline.reqres.setHandler(Map.ID+':getCenter', getCenter);
+
+
+    /**
+     * Emit the current zoom level.
+     *
+     * @return {Number}: The zoom level.
+     */
+    var getZoom = function() {
+      return Map.__view.map.getZoom();
+    };
+    Neatline.reqres.setHandler(Map.ID+':getZoom', getZoom);
+
+
   });
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Map', function(
-  Map, Neatline, Backbone, Marionette, $, _) {
-
-
-  /**
-   * Load map layers.
-   *
-   * @param {Object} params: Hash with `extent` and `zoom`.
-   */
-  var load = function(params) {
-    Map.__collection.update(params, function(records) {
-      Map.__view.ingest(records);
-    });
-  };
-  Neatline.commands.setHandler(Map.ID+':load', load);
-
-
-  /**
-   * Reload map data for current focus/zoom.
-   */
-  var refresh = function() {
-    Map.__view.removeAllLayers();
-    Map.__view.requestRecords();
-  };
-  Neatline.commands.setHandler(Map.ID+':refresh', refresh);
-  Neatline.vent.on('refresh', refresh);
-
-
-  /**
-   * Unhighlight the layer that corresponds to the passed model and then focus
-   * on its extent (unless the event was triggered by the map).
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    if (args.source !== Map.ID) {
-      focusByModel(args.model);
-      Map.__view.selectByModel(args.model);
-    }
-  };
-  Neatline.commands.setHandler(Map.ID+':select', select);
-  Neatline.vent.on('select', select);
-
-
-  /**
-   * Highlight by model.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var highlight = function(args) {
-    Map.__view.highlightByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':highlight', highlight);
-  Neatline.vent.on('highlight', highlight);
-
-
-  /**
-   * Unhighlight by model.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unhighlight = function(args) {
-    Map.__view.unhighlightByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
-  Neatline.vent.on('unhighlight', unhighlight);
-
-
-  /**
-   * Unselect by model.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unselect = function(args) {
-    Map.__view.unselectByModel(args.model);
-  };
-  Neatline.commands.setHandler(Map.ID+':unselect', unselect);
-  Neatline.vent.on('unselect', unselect);
-
-
-  /**
-   * Focus the map on the data extent for a record, identified by model.
-   *
-   * @param {Object} model: A record model.
-   */
-  var focusByModel = function(model) {
-    Map.__view.focusByModel(model);
-  };
-  Neatline.commands.setHandler(Map.ID+':focusByModel', focusByModel);
-
-
-  /**
-   * Set a layer filter.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var setFilter = function(args) {
-    Map.__view.setFilter(args.key, args.evaluator);
-  };
-  Neatline.commands.setHandler(Map.ID+':setFilter', setFilter);
-  Neatline.vent.on('setFilter', setFilter);
-
-
-  /**
-   * Remove a layer filter.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var removeFilter = function(args) {
-    Map.__view.removeFilter(args.key);
-  };
-  Neatline.commands.setHandler(Map.ID+':removeFilter', removeFilter);
-  Neatline.vent.on('removeFilter', removeFilter);
-
-
-  /**
-   * Refresh the map after it is resized.
-   */
-  var updateSize = function() {
-    Map.__view.map.updateSize();
-  };
-  Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
-
-
-  /**
-   * Get or create a vector layer for a model.
-   *
-   * @param {Object} model: A record model.
-   * @return {Object}: The record model.
-   */
-  var getVectorLayer = function(model) {
-    return Map.__view.getOrCreateVectorLayer(model);
-  };
-  Neatline.reqres.setHandler(Map.ID+':getVectorLayer', getVectorLayer);
-
-
-  /**
-   * Emit the OpenLayers map instance.
-   *
-   * @return {Object}: The map.
-   */
-  var getMap = function() {
-    return Map.__view.map;
-  };
-  Neatline.reqres.setHandler(Map.ID+':getMap', getMap);
-
-
-  /**
-   * Emit the current records collection.
-   *
-   * @return {Object}: The collection.
-   */
-  var getRecords = function() {
-    return Map.__collection;
-  };
-  Neatline.reqres.setHandler(Map.ID+':getRecords', getRecords);
-
-
-  /**
-   * Emit the current viewport focus coordinates.
-   *
-   * @return {Object}: OpenLayers.LonLat.
-   */
-  var getCenter = function() {
-    return Map.__view.map.getCenter();
-  };
-  Neatline.reqres.setHandler(Map.ID+':getCenter', getCenter);
-
-
-  /**
-   * Emit the current zoom level.
-   *
-   * @return {Number}: The zoom level.
-   */
-  var getZoom = function() {
-    return Map.__view.map.getZoom();
-  };
-  Neatline.reqres.setHandler(Map.ID+':getZoom', getZoom);
 
 
 });
@@ -36303,68 +36336,74 @@ Neatline.module('Presenter', function(
   Presenter.ID = 'PRESENTER';
 
 
-  /**
-   * Highlight the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var highlight = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:highlight', highlight);
-  Neatline.vent.on('highlight', highlight);
+  Presenter.addInitializer(function() {
 
 
-  /**
-   * Unhighlight the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unhighlight = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
-      );
-    } catch(e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
-  Neatline.vent.on('unhighlight', unhighlight);
+    /**
+     * Highlight the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var highlight = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:highlight', highlight);
+    Neatline.vent.on('highlight', highlight);
 
 
-  /**
-   * Freeze the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var select = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':select', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:select', select);
-  Neatline.vent.on('select', select);
+    /**
+     * Unhighlight the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unhighlight = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
+        );
+      } catch(e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
+    Neatline.vent.on('unhighlight', unhighlight);
 
 
-  /**
-   * Unfreeze and hide the record.
-   *
-   * @param {Object} args: Event arguments.
-   */
-  var unselect = function(args) {
-    try {
-      Neatline.execute(
-        'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
-      );
-    } catch (e) {}
-  };
-  Neatline.commands.setHandler('PRESENTER:unselect', unselect);
-  Neatline.vent.on('unselect', unselect);
+    /**
+     * Freeze the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var select = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':select', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:select', select);
+    Neatline.vent.on('select', select);
+
+
+    /**
+     * Unfreeze and hide the record.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    var unselect = function(args) {
+      try {
+        Neatline.execute(
+          'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
+        );
+      } catch (e) {}
+    };
+    Neatline.commands.setHandler('PRESENTER:unselect', unselect);
+    Neatline.vent.on('unselect', unselect);
+
+
+  });
 
 
 });
@@ -36409,12 +36448,12 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  StaticBubble.ID = 'PRESENTER:StaticBubble';
+  //StaticBubble.ID = 'PRESENTER:StaticBubble';
 
 
-  StaticBubble.addInitializer(function() {
-    StaticBubble.__view = new StaticBubble.View();
-  });
+  //StaticBubble.addInitializer(function() {
+    //StaticBubble.__view = new StaticBubble.View();
+  //});
 
 
 });
@@ -36433,75 +36472,87 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Highlight the bubble.
-   *
-   * @param {Object} model: The record model.
-   */
-  var highlight = function(model) {
-    StaticBubble.__view.highlight(model);
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':highlight', highlight
-  );
+  StaticBubble.ID = 'PRESENTER:StaticBubble';
 
 
-  /**
-   * Unhighlight the bubble.
-   */
-  var unhighlight = function() {
-    StaticBubble.__view.unhighlight();
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':unhighlight', unhighlight
-  );
+  StaticBubble.addInitializer(function() {
 
 
-  /**
-   * Select the bubble.
-   *
-   * @param {Object} model: The record model.
-   */
-  var select = function(model) {
-    StaticBubble.__view.select(model);
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':select', select
-  );
+    StaticBubble.__view = new StaticBubble.View();
 
 
-  /**
-   * Unselect the bubble.
-   */
-  var unselect = function() {
-    StaticBubble.__view.unselect();
-  };
-  Neatline.commands.setHandler(
-    StaticBubble.ID+':unselect', unselect
-  );
+    /**
+     * Highlight the bubble.
+     *
+     * @param {Object} model: The record model.
+     */
+    var highlight = function(model) {
+      StaticBubble.__view.highlight(model);
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':highlight', highlight
+    );
 
 
-  /**
-   * Activate the bubble.
-   */
-  var activate = function() {
-    StaticBubble.__view.activate();
-  };
-  Neatline.vent.on(
-    'PRESENTER:activate', activate
-  );
+    /**
+     * Unhighlight the bubble.
+     */
+    var unhighlight = function() {
+      StaticBubble.__view.unhighlight();
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':unhighlight', unhighlight
+    );
 
 
-  /**
-   * Deactivate and close the bubble.
-   */
-  var deactivate = function() {
-    StaticBubble.__view.deactivate();
-    StaticBubble.__view.unselect();
-  };
-  Neatline.vent.on(
-    'PRESENTER:deactivate', deactivate
-  );
+    /**
+     * Select the bubble.
+     *
+     * @param {Object} model: The record model.
+     */
+    var select = function(model) {
+      StaticBubble.__view.select(model);
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':select', select
+    );
+
+
+    /**
+     * Unselect the bubble.
+     */
+    var unselect = function() {
+      StaticBubble.__view.unselect();
+    };
+    Neatline.commands.setHandler(
+      StaticBubble.ID+':unselect', unselect
+    );
+
+
+    /**
+     * Activate the bubble.
+     */
+    var activate = function() {
+      StaticBubble.__view.activate();
+    };
+    Neatline.vent.on(
+      'PRESENTER:activate', activate
+    );
+
+
+    /**
+     * Deactivate and close the bubble.
+     */
+    var deactivate = function() {
+      StaticBubble.__view.deactivate();
+      StaticBubble.__view.unselect();
+    };
+    Neatline.vent.on(
+      'PRESENTER:deactivate', deactivate
+    );
+
+
+  });
 
 
 });

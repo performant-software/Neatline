@@ -15,18 +15,22 @@ Neatline.module('Map.Layers.Stamen', function(
   Stamen.ID = 'MAP:LAYERS:Stamen';
 
 
-  /**
-   * Construct a Stamen layer - http://maps.stamen.com/.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
-   */
-  var layer = function(json) {
-    var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
-    layer.name = json.title;
-    return layer;
-  };
-  Neatline.reqres.setHandler(Stamen.ID, layer);
+  Stamen.addInitializer(function() {
+
+    /**
+     * Construct a Stamen layer - http://maps.stamen.com/.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
+     */
+    var layer = function(json) {
+      var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
+      layer.name = json.title;
+      return layer;
+    };
+    Neatline.reqres.setHandler(Stamen.ID, layer);
+
+  });
 
 
 });

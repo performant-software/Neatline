@@ -12,13 +12,13 @@ Neatline.module('Editor.Record', function(
   Record, Neatline, Backbone, Marionette, $, _) {
 
 
-  Record.ID = 'EDITOR:RECORD';
+  //Record.ID = 'EDITOR:RECORD';
 
 
-  Record.addInitializer(function() {
-    Record.__view   = new Record.View();
-    Record.__router = new Record.Router();
-  });
+  //Record.addInitializer(function() {
+    //Record.__view   = new Record.View();
+    //Record.__router = new Record.Router();
+  //});
 
 
 });

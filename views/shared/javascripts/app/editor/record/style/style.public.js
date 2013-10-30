@@ -12,14 +12,36 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
+  Style.ID = 'EDITOR:RECORD:STYLE';
+
+
   /**
-   * Instantiate color pickers and integer draggers.
+   * Start the tab after the form.
    */
-  var activate = function() {
-    Style.__view.buildWidgets();
-  };
-  Neatline.commands.setHandler(Style.ID+':activate', activate);
-  Neatline.vent.on('EDITOR:RECORD:#style', activate);
+  Neatline.Editor.Record.on('start', function() {
+    Style.start();
+  });
+
+
+  Style.addInitializer(function() {
+
+
+    Style.__view = new Style.View({
+      el: Neatline.request('EDITOR:RECORD:getElement')
+    });
+
+
+    /**
+     * Instantiate color pickers and integer draggers.
+     */
+    var activate = function() {
+      Style.__view.buildWidgets();
+    };
+    Neatline.commands.setHandler(Style.ID+':activate', activate);
+    Neatline.vent.on('EDITOR:RECORD:#style', activate);
+
+
+  });
 
 
 }});

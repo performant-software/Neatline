@@ -12,14 +12,36 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text, Neatline, Backbone, Marionette, $, _) {
 
 
+  Text.ID = 'EDITOR:RECORD:TEXT';
+
+
   /**
-   * Instantiate autocomplete and CKEditor.
+   * Start the tab after the form.
    */
-  var activate = function() {
-    Text.__view.buildWidgets();
-  };
-  Neatline.commands.setHandler(Text.ID+':activate', activate);
-  Neatline.vent.on('EDITOR:RECORD:#text', activate);
+  Neatline.Editor.Record.on('start', function() {
+    Text.start();
+  });
+
+
+  Text.addInitializer(function() {
+
+
+    Text.__view = new Text.View({
+      el: Neatline.request('EDITOR:RECORD:getElement')
+    });
+
+
+    /**
+     * Instantiate autocomplete and CKEditor.
+     */
+    var activate = function() {
+      Text.__view.buildWidgets();
+    };
+    Neatline.commands.setHandler(Text.ID+':activate', activate);
+    Neatline.vent.on('EDITOR:RECORD:#text', activate);
+
+
+  });
 
 
 }});

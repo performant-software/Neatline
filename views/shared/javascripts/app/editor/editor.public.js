@@ -12,67 +12,96 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  /**
-   * Display a list of views in the editor container.
-   *
-   * @param {Array} views: A list of views.
-   */
-  var display = function(views) {
-
-    // Clear the editor container.
-    Editor.__view.__ui.editor.children().detach();
-
-    // Show each of the views.
-    _.each(views, function(v) {
-      Neatline.execute(v+':display', Editor.__view.__ui.editor);
-    });
-
-  };
-  Neatline.commands.setHandler(Editor.ID+':display', display);
+  Editor.ID = 'EDITOR';
 
 
   /**
-   * Flash a success notification.
-   *
-   * @param {String} message: The message.
+   * Start the editor before Neatline.
    */
-  var notifySuccess = function(message) {
-    Editor.__view.notifySuccess(message);
-  };
-  Neatline.commands.setHandler(Editor.ID+':notifySuccess', notifySuccess);
+  Neatline.on('initialize:before', function() {
+    Editor.start();
+  });
 
 
   /**
-   * Flash an error notification.
-   *
-   * @param {String} message: The message.
+   * Start the map editor after Neatline.
    */
-  var notifyError = function(message) {
-    Editor.__view.notifyError(message);
-  };
-  Neatline.commands.setHandler(Editor.ID+':notifyError', notifyError);
+  Neatline.on('initialize:after', function() {
+    Editor.Map.start();
+    Backbone.history.start();
+  });
 
 
-  /**
-   * Return the editor container div.
-   *
-   * @return {Object}: The container.
-   */
-  var getContainer = function() {
-    return Editor.__view.__ui.editor;
-  };
-  Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
+  Editor.addInitializer(function() {
 
 
-  /**
-   * Update the route hash without adding to the history.
-   *
-   * @param {String} route: The new route.
-   */
-  var setRoute = function(route) {
-    Backbone.history.navigate(route, { replace: true });
-  };
-  Neatline.commands.setHandler(Editor.ID+':setRoute', setRoute);
+    Editor.__view = new Editor.View({ el: 'body' });
+
+
+    /**
+     * Display a list of views in the editor container.
+     *
+     * @param {Array} views: The views, in display order.
+     */
+    var display = function(views) {
+
+      // Clear the editor container.
+      Editor.__view.__ui.editor.children().detach();
+
+      // Show each of the views.
+      _.each(views, function(v) {
+        Neatline.execute(v+':display', Editor.__view.__ui.editor);
+      });
+
+    };
+    Neatline.commands.setHandler(Editor.ID+':display', display);
+
+
+    /**
+     * Flash a success notification.
+     *
+     * @param {String} message: The message.
+     */
+    var notifySuccess = function(message) {
+      Editor.__view.notifySuccess(message);
+    };
+    Neatline.commands.setHandler(Editor.ID+':notifySuccess', notifySuccess);
+
+
+    /**
+     * Flash an error notification.
+     *
+     * @param {String} message: The message.
+     */
+    var notifyError = function(message) {
+      Editor.__view.notifyError(message);
+    };
+    Neatline.commands.setHandler(Editor.ID+':notifyError', notifyError);
+
+
+    /**
+     * Return the editor container div.
+     *
+     * @return {Object}: The container.
+     */
+    var getContainer = function() {
+      return Editor.__view.__ui.editor;
+    };
+    Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
+
+
+    /**
+     * Update the route hash without adding to the history.
+     *
+     * @param {String} route: The new route.
+     */
+    var setRoute = function(route) {
+      Backbone.history.navigate(route, { replace: true });
+    };
+    Neatline.commands.setHandler(Editor.ID+':setRoute', setRoute);
+
+
+  });
 
 
 }});

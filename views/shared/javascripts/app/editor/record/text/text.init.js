@@ -12,25 +12,25 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text, Neatline, Backbone, Marionette, $, _) {
 
 
-  Text.ID = 'EDITOR:RECORD:TEXT';
+  //Text.ID = 'EDITOR:RECORD:TEXT';
 
 
   /**
    * Start the tab after the form.
    */
-  Neatline.Editor.Record.on('start', function() {
-    Text.start();
-  });
+  //Neatline.Editor.Record.on('start', function() {
+    //Text.start();
+  //});
 
 
   /**
    * Instantiate the tab view.
    */
-  Text.addInitializer(function() {
-    Text.__view = new Text.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-  });
+  //Text.addInitializer(function() {
+    //Text.__view = new Text.View({
+      //el: Neatline.request('EDITOR:RECORD:getElement')
+    //});
+  //});
 
 
 }});

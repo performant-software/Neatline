@@ -12,14 +12,14 @@ Neatline.module('Editor.Exhibit.Records', function(
   Records, Neatline, Backbone, Marionette, $, _) {
 
 
-  Records.ID = 'EDITOR:EXHIBIT:RECORDS';
+  //Records.ID = 'EDITOR:EXHIBIT:RECORDS';
 
 
-  Records.addInitializer(function() {
-    Records.__router =      new Records.Router();
-    Records.__collection =  new Neatline.Shared.Record.Collection();
-    Records.__view =        new Records.View();
-  });
+  //Records.addInitializer(function() {
+    //Records.__router =      new Records.Router();
+    //Records.__collection =  new Neatline.Shared.Record.Collection();
+    //Records.__view =        new Records.View();
+  //});
 
 
 });

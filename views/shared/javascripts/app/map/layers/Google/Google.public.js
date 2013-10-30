@@ -15,36 +15,40 @@ Neatline.module('Map.Layers.Google', function(
   Google.ID = 'MAP:LAYERS:Google';
 
 
-  /**
-   * Construct a Google layer.
-   *
-   * @param {Object} json: The layer definition.
-   * @return {OpenLayers.Layer.Google}: The Google layer.
-   */
-  var layer = function(json) {
-    switch (json.properties.provider) {
-      case 'physical':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.TERRAIN
-        });
-      case 'streets':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.ROADMAP,
-          numZoomLevels: 25
-        });
-      case 'satellite':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.SATELLITE,
-          numZoomLevels: 25
-        });
-      case 'hybrid':
-        return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.HYBRID,
-          numZoomLevels: 25
-        });
-    }
-  };
-  Neatline.reqres.setHandler(Google.ID, layer);
+  Google.addInitializer(function() {
+
+    /**
+     * Construct a Google layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.Google}: The Google layer.
+     */
+    var layer = function(json) {
+      switch (json.properties.provider) {
+        case 'physical':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.TERRAIN
+          });
+        case 'streets':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.ROADMAP,
+            numZoomLevels: 25
+          });
+        case 'satellite':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.SATELLITE,
+            numZoomLevels: 25
+          });
+        case 'hybrid':
+          return new OpenLayers.Layer.Google(json.title, {
+            type: google.maps.MapTypeId.HYBRID,
+            numZoomLevels: 25
+          });
+      }
+    };
+    Neatline.reqres.setHandler(Google.ID, layer);
+
+  });
 
 
 });

@@ -12,32 +12,32 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  Editor.ID = 'EDITOR';
+  //Editor.ID = 'EDITOR';
 
 
   /**
    * Start the editor before Neatline.
    */
-  Neatline.on('initialize:before', function() {
-    Editor.start();
-  });
+  //Neatline.on('initialize:before', function() {
+    //Editor.start();
+  //});
 
 
   /**
    * Start the map editor after Neatline.
    */
-  Neatline.on('initialize:after', function() {
-    Editor.Map.start();
-    Backbone.history.start();
-  });
+  //Neatline.on('initialize:after', function() {
+    //Editor.Map.start();
+    //Backbone.history.start();
+  //});
 
 
   /**
    * Initialize the layout view.
    */
-  Editor.addInitializer(function() {
-    Editor.__view = new Editor.View({ el: 'body' });
-  });
+  //Editor.addInitializer(function() {
+    //Editor.__view = new Editor.View({ el: 'body' });
+  //});
 
 
 }});
