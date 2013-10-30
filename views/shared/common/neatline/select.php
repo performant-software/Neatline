@@ -31,7 +31,6 @@
         rv-value="<?php echo $bind; ?>"
       <?php endif; ?>
 
-
     >
 
       <?php foreach ($options as $label => $val): ?>
