@@ -131,7 +131,7 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Set sides.
-    NL.vw.SPATIAL.__ui.sides.val('10').trigger('change');
+    NL.vw.SPATIAL.ui.sides.val('10').trigger('change');
 
     // "Sides" should be updated.
     expect(NL.vw.MAP.controls.regPoly.handler.sides).toEqual(10);
@@ -148,12 +148,12 @@ describe('Record | Geometry Controls', function() {
 
     // Numbers below 3:
     _.each(_.range(-1, 2), function(v) {
-      NL.vw.SPATIAL.__ui.sides.val(v).trigger('change');
+      NL.vw.SPATIAL.ui.sides.val(v).trigger('change');
       expect(NL.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
     });
 
     // String:
-    NL.vw.SPATIAL.__ui.sides.val('invalid').trigger('change');
+    NL.vw.SPATIAL.ui.sides.val('invalid').trigger('change');
     expect(NL.vw.MAP.controls.regPoly.handler.sides).toEqual(3);
 
   });
@@ -167,7 +167,7 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Set snap angle.
-    NL.vw.SPATIAL.__ui.snap.val('45').trigger('change');
+    NL.vw.SPATIAL.ui.snap.val('45').trigger('change');
 
     // "Snap Angle" should be updated.
     expect(NL.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(45);
@@ -183,11 +183,11 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Negative number:
-    NL.vw.SPATIAL.__ui.snap.val('-1').trigger('change');
+    NL.vw.SPATIAL.ui.snap.val('-1').trigger('change');
     expect(NL.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
 
     // String:
-    NL.vw.SPATIAL.__ui.snap.val('invalid').trigger('change');
+    NL.vw.SPATIAL.ui.snap.val('invalid').trigger('change');
     expect(NL.vw.MAP.controls.regPoly.handler.snapAngle).toEqual(0);
 
   });
@@ -201,13 +201,13 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Set irregular.
-    NL.vw.SPATIAL.__ui.irreg.attr('checked', 'checked').trigger('change');
+    NL.vw.SPATIAL.ui.irreg.attr('checked', 'checked').trigger('change');
 
     // "Irregular" be active.
     expect(NL.vw.MAP.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    NL.vw.SPATIAL.__ui.irreg.removeAttr('checked').trigger('change');
+    NL.vw.SPATIAL.ui.irreg.removeAttr('checked').trigger('change');
 
     // "Irregular" should be inactive.
     expect(NL.vw.MAP.controls.regPoly.handler.irregular).toEqual(false);

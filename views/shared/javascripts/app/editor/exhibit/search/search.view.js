@@ -46,7 +46,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       if (_.isString(query)) query = query.replace(/\+/g, ' ');
 
       // Set the value and parse.
-      this.__ui.search.val(query);
+      this.ui.search.val(query);
       this.parse();
 
     },
@@ -58,7 +58,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * @return {String} query: The query, with ' ' replaced with '+'.
      */
     getQueryForUrl: function() {
-      return this.__ui.search.val().replace(/\s/g, '+');
+      return this.ui.search.val().replace(/\s/g, '+');
     },
 
 
@@ -81,7 +81,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       this.query = {};
 
       // Get raw query value.
-      var value = this.__ui.search.val();
+      var value = this.ui.search.val();
 
       // Reset mirroring.
       this.mirroring = false;
@@ -143,7 +143,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * Bold the search query.
      */
     bold: function() {
-      this.__ui.search.addClass('bold');
+      this.ui.search.addClass('bold');
     },
 
 
@@ -151,7 +151,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * Unbold the search query.
      */
     unbold: function() {
-      this.__ui.search.removeClass('bold');
+      this.ui.search.removeClass('bold');
     }
 
 

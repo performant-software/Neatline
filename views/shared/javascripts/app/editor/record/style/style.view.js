@@ -71,7 +71,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      */
     onSetMinZoom: function() {
       var zoom = Neatline.request('MAP:getZoom');
-      this.__ui.minZoom.val(zoom).change();
+      this.ui.minZoom.val(zoom).change();
     },
 
 
@@ -80,7 +80,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      */
     onSetMaxZoom: function() {
       var zoom = Neatline.request('MAP:getZoom');
-      this.__ui.maxZoom.val(zoom).change();
+      this.ui.maxZoom.val(zoom).change();
     },
 
 
@@ -90,8 +90,8 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     onSetFocus: function() {
       var center  = Neatline.request('MAP:getCenter');
       var zoom    = Neatline.request('MAP:getZoom');
-      this.__ui.mapFocus.val(center.lon+','+center.lat).change();
-      this.__ui.mapZoom.val(zoom).change();
+      this.ui.mapFocus.val(center.lon+','+center.lat).change();
+      this.ui.mapZoom.val(zoom).change();
     },
 
 

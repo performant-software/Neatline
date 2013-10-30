@@ -55847,7 +55847,7 @@ Neatline.module('Shared', function(Shared) {
      */
     initialize: function() {
       this._initTemplate();
-      this._initUi();
+      this._initSelections();
       this.init();
     },
 
@@ -55874,17 +55874,17 @@ Neatline.module('Shared', function(Shared) {
     /**
      * Perform the selections defined on the `ui` hash.
      */
-    _initUi: function() {
+    _initSelections: function() {
 
-      this.__ui = $.extend(true, {}, this.ui);
+      var ui = _.extend({}, this.ui);
 
       // Walk `ui`:
-      _.bind(function select(o) {
-        _.each(o, _.bind(function(v,k) {
+      _.bind(function select(obj) {
+        _.each(obj, _.bind(function(v,k) {
 
           // If string, select.
           if (typeof v == 'string') {
-            o[k] = this.$el.find(v);
+            obj[k] = this.$el.find(v);
           }
 
           // If object, recurse.
@@ -55893,7 +55893,9 @@ Neatline.module('Shared', function(Shared) {
           }
 
         }, this));
-      }, this)(this.__ui);
+      }, this)(ui);
+
+      this.ui = ui;
 
     },
 
@@ -58093,11 +58095,11 @@ Neatline.module('Editor', { startWithParent: false,
     var display = function(views) {
 
       // Clear the editor container.
-      Editor.__view.__ui.editor.children().detach();
+      Editor.__view.ui.editor.children().detach();
 
       // Show each of the views.
       _.each(views, function(v) {
-        Neatline.execute(v+':display', Editor.__view.__ui.editor);
+        Neatline.execute(v+':display', Editor.__view.ui.editor);
       });
 
     };
@@ -58132,7 +58134,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @return {Object}: The container.
      */
     var getContainer = function() {
-      return Editor.__view.__ui.editor;
+      return Editor.__view.ui.editor;
     };
     Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
 
@@ -58206,7 +58208,7 @@ Neatline.module('Editor', { startWithParent: false,
     init: function() {
 
       // Cache starting width.
-      this.width = this.__ui.editor.outerWidth();
+      this.width = this.ui.editor.outerWidth();
 
       // Listen for resize.
       this.window = $(window);
@@ -58225,9 +58227,9 @@ Neatline.module('Editor', { startWithParent: false,
       var h = this.window.height();
       var w = this.window.width();
 
-      this.__ui.editor.   css({ height: h, width: this.width });
-      this.__ui.map.      css({ height: h, width: w - this.width });
-      this.__ui.exhibit.  css({ left: this.width });
+      this.ui.editor.   css({ height: h, width: this.width });
+      this.ui.map.      css({ height: h, width: w - this.width });
+      this.ui.exhibit.  css({ left: this.width });
 
     },
 
@@ -58339,11 +58341,11 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
     activateTab: function(tab) {
 
       // Clear current activation.
-      this.__ui.dropdowns.removeClass('active');
-      this.__ui.tabs.removeClass('active');
+      this.ui.dropdowns.removeClass('active');
+      this.ui.tabs.removeClass('active');
 
       // Activate tab.
-      var tab = this.__ui.tabs.filter('[data-slug="'+tab+'"]');
+      var tab = this.ui.tabs.filter('[data-slug="'+tab+'"]');
       tab.addClass('active');
 
       // Activate dropdown.
@@ -58756,7 +58758,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       if (_.isString(query)) query = query.replace(/\+/g, ' ');
 
       // Set the value and parse.
-      this.__ui.search.val(query);
+      this.ui.search.val(query);
       this.parse();
 
     },
@@ -58768,7 +58770,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * @return {String} query: The query, with ' ' replaced with '+'.
      */
     getQueryForUrl: function() {
-      return this.__ui.search.val().replace(/\s/g, '+');
+      return this.ui.search.val().replace(/\s/g, '+');
     },
 
 
@@ -58791,7 +58793,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       this.query = {};
 
       // Get raw query value.
-      var value = this.__ui.search.val();
+      var value = this.ui.search.val();
 
       // Reset mirroring.
       this.mirroring = false;
@@ -58853,7 +58855,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * Bold the search query.
      */
     bold: function() {
-      this.__ui.search.addClass('bold');
+      this.ui.search.addClass('bold');
     },
 
 
@@ -58861,7 +58863,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * Unbold the search query.
      */
     unbold: function() {
-      this.__ui.search.removeClass('bold');
+      this.ui.search.removeClass('bold');
     }
 
 
@@ -59048,8 +59050,8 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
     onSetFocus: function() {
       var center  = Neatline.request('MAP:getCenter');
       var zoom    = Neatline.request('MAP:getZoom');
-      this.__ui.mapFocus.val(center.lon+','+center.lat).change();
-      this.__ui.mapZoom.val(zoom).change();
+      this.ui.mapFocus.val(center.lon+','+center.lat).change();
+      this.ui.mapZoom.val(zoom).change();
     },
 
 
@@ -59214,13 +59216,13 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     onParseClick: function() {
 
-      var val = this.__ui.svg.val();
+      var val = this.ui.svg.val();
 
       try {
 
         // Set density.
         SVGtoWKT.DENSITY = parseFloat(
-          this.__ui.density.val()
+          this.ui.density.val()
         );
 
         // Covnert SVG, update handler.
@@ -59233,7 +59235,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         );
 
         // Close the modal.
-        this.__ui.modal.modal('hide');
+        this.ui.modal.modal('hide');
 
       } catch (e) {
         Neatline.execute('EDITOR:notifyError',
@@ -59277,8 +59279,8 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Reset the map edit mode to "Navigate".
      */
     resetEditMode: function() {
-      this.__ui.pan[0].checked = true;
-      this.__ui.pan.trigger('change');
+      this.ui.pan[0].checked = true;
+      this.ui.pan.trigger('change');
     },
 
 
@@ -59299,9 +59301,9 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     getPolyOptions: function() {
       return {
-        sides:  this.__ui.sides.val(),
-        snap:   this.__ui.snap.val(),
-        irreg:  this.__ui.irreg.is(':checked')
+        sides:  this.ui.sides.val(),
+        snap:   this.ui.snap.val(),
+        irreg:  this.ui.irreg.is(':checked')
       };
     }
 
@@ -59607,7 +59609,7 @@ Neatline.module('Editor.Record', function(Record) {
      * @param {String} tab: The tab to activate.
      */
     activateTab: function(tab) {
-      this.__ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
+      this.ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
     },
 
 
@@ -59703,7 +59705,7 @@ Neatline.module('Editor.Record', function(Record) {
       );
 
       // Hide modal, close form.
-      this.__ui.modal.modal('hide');
+      this.ui.modal.modal('hide');
       this.onCloseClick();
 
       // Refresh the exhibit.
@@ -59848,7 +59850,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      */
     onSetMinZoom: function() {
       var zoom = Neatline.request('MAP:getZoom');
-      this.__ui.minZoom.val(zoom).change();
+      this.ui.minZoom.val(zoom).change();
     },
 
 
@@ -59857,7 +59859,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      */
     onSetMaxZoom: function() {
       var zoom = Neatline.request('MAP:getZoom');
-      this.__ui.maxZoom.val(zoom).change();
+      this.ui.maxZoom.val(zoom).change();
     },
 
 
@@ -59867,8 +59869,8 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     onSetFocus: function() {
       var center  = Neatline.request('MAP:getCenter');
       var zoom    = Neatline.request('MAP:getZoom');
-      this.__ui.mapFocus.val(center.lon+','+center.lat).change();
-      this.__ui.mapZoom.val(zoom).change();
+      this.ui.mapFocus.val(center.lon+','+center.lat).change();
+      this.ui.mapZoom.val(zoom).change();
     },
 
 
@@ -59969,7 +59971,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
     buildWidgets: function() {
 
       // AUTOCOMPLETE
-      this.__ui.item.autocomplete({
+      this.ui.item.autocomplete({
         source: _.bind(this.onSearch, this),
         select: _.bind(this.onSelect, this)
       });
@@ -60014,8 +60016,8 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
      * @param {Object} ui: The option.
      */
     onSelect: function(event, ui) {
-      this.__ui.title.val(ui.item.label).change();
-      this.__ui.item.val(ui.item.value).change();
+      this.ui.title.val(ui.item.label).change();
+      this.ui.item.val(ui.item.value).change();
     },
 
 

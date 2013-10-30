@@ -31,24 +31,24 @@ describe('Search | Initialization', function() {
 
     it('single-word query', function() {
       NL.navigate('records/search/query=word');
-      expect(NL.vw.SEARCH.__ui.search).toHaveValue('word');
+      expect(NL.vw.SEARCH.ui.search).toHaveValue('word');
     });
 
     it('multiple-word query', function() {
       NL.navigate('records/search/query=word1+word2');
-      expect(NL.vw.SEARCH.__ui.search).toHaveValue('word1 word2');
+      expect(NL.vw.SEARCH.ui.search).toHaveValue('word1 word2');
     });
 
     it('tags query', function() {
       NL.navigate('records/search/query=tags:+tag1,+tag2');
-      expect(NL.vw.SEARCH.__ui.search).toHaveValue('tags: tag1, tag2');
-      expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
+      expect(NL.vw.SEARCH.ui.search).toHaveValue('tags: tag1, tag2');
+      expect(NL.vw.SEARCH.ui.search).toHaveClass('bold');
     });
 
     it('map-mirror query', function() {
       NL.navigate('records/search/query=map:');
-      expect(NL.vw.SEARCH.__ui.search).toHaveValue('map:');
-      expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
+      expect(NL.vw.SEARCH.ui.search).toHaveValue('map:');
+      expect(NL.vw.SEARCH.ui.search).toHaveClass('bold');
     });
 
   });

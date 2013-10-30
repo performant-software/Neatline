@@ -33,8 +33,8 @@ describe('Styles | Router', function() {
     NL.respondLast200(fx.exhibit);
 
     // Tabs, styles form should be visible.
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.STYLES.$el);
+    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.EXHIBIT.$el);
+    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.STYLES.$el);
 
     // "Styles" tab should be active.
     expect(el.styles).toHaveClass('active');

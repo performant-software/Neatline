@@ -30,10 +30,10 @@ describe('Search | Query Execution', function() {
     // ------------------------------------------------------------------------
 
     // Keyup with tag string in the box.
-    NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('tags: tag1, tag2').trigger('keyup');
 
     // Input should be bold.
-    expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
+    expect(NL.vw.SEARCH.ui.search).toHaveClass('bold');
 
   });
 
@@ -46,10 +46,10 @@ describe('Search | Query Execution', function() {
     // ------------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('map:').trigger('keyup');
 
     // Input should be bold.
-    expect(NL.vw.SEARCH.__ui.search).toHaveClass('bold');
+    expect(NL.vw.SEARCH.ui.search).toHaveClass('bold');
 
   });
 
@@ -63,18 +63,18 @@ describe('Search | Query Execution', function() {
     // ------------------------------------------------------------------------
 
     // Exiting tags query.
-    NL.vw.SEARCH.__ui.search.val('tags:').trigger('keyup');
-    NL.vw.SEARCH.__ui.search.val('tags').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('tags:').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('tags').trigger('keyup');
 
     // Input should not be bold.
-    expect(NL.vw.SEARCH.__ui.search).not.toHaveClass('bold');
+    expect(NL.vw.SEARCH.ui.search).not.toHaveClass('bold');
 
     // Exiting map mirroring.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
-    NL.vw.SEARCH.__ui.search.val('map').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('map:').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('map').trigger('keyup');
 
     // Input should not be bold.
-    expect(NL.vw.SEARCH.__ui.search).not.toHaveClass('bold');
+    expect(NL.vw.SEARCH.ui.search).not.toHaveClass('bold');
 
   });
 
@@ -88,7 +88,7 @@ describe('Search | Query Execution', function() {
     // ------------------------------------------------------------------------
 
     // Keyup with 'keyword' in the box.
-    NL.vw.SEARCH.__ui.search.val('word1 word2').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('word1 word2').trigger('keyup');
 
     // Should produce GET request to /records.
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
@@ -120,7 +120,7 @@ describe('Search | Query Execution', function() {
     // ------------------------------------------------------------------------
 
     // Keyup with tag string in the box.
-    NL.vw.SEARCH.__ui.search.val('tags: tag1, tag2').trigger('keyup');
+    NL.vw.SEARCH.ui.search.val('tags: tag1, tag2').trigger('keyup');
 
     // Should produce GET request to /records.
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
@@ -155,7 +155,7 @@ describe('Search | Query Execution', function() {
 
     it('one word', function() {
 
-      NL.vw.SEARCH.__ui.search.val('word1').trigger('keyup');
+      NL.vw.SEARCH.ui.search.val('word1').trigger('keyup');
 
       expect(Backbone.history.fragment).toEqual(
         'records/search/query=word1'
@@ -165,7 +165,7 @@ describe('Search | Query Execution', function() {
 
     it('multiple words', function() {
 
-      NL.vw.SEARCH.__ui.search.val('word1 word2 word3').trigger('keyup');
+      NL.vw.SEARCH.ui.search.val('word1 word2 word3').trigger('keyup');
 
       // Spaces replaced with `+`.
       expect(Backbone.history.fragment).toEqual(
@@ -176,7 +176,7 @@ describe('Search | Query Execution', function() {
 
     it('multiple words', function() {
 
-      NL.vw.SEARCH.__ui.search.val('').trigger('keyup');
+      NL.vw.SEARCH.ui.search.val('').trigger('keyup');
 
       // Search parameters stripped away.
       expect(Backbone.history.fragment).toEqual('records');

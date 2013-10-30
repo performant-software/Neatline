@@ -32,7 +32,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
     buildWidgets: function() {
 
       // AUTOCOMPLETE
-      this.__ui.item.autocomplete({
+      this.ui.item.autocomplete({
         source: _.bind(this.onSearch, this),
         select: _.bind(this.onSelect, this)
       });
@@ -77,8 +77,8 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
      * @param {Object} ui: The option.
      */
     onSelect: function(event, ui) {
-      this.__ui.title.val(ui.item.label).change();
-      this.__ui.item.val(ui.item.value).change();
+      this.ui.title.val(ui.item.label).change();
+      this.ui.item.val(ui.item.value).change();
     },
 
 

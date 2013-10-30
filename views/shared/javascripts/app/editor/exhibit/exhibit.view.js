@@ -31,11 +31,11 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
     activateTab: function(tab) {
 
       // Clear current activation.
-      this.__ui.dropdowns.removeClass('active');
-      this.__ui.tabs.removeClass('active');
+      this.ui.dropdowns.removeClass('active');
+      this.ui.tabs.removeClass('active');
 
       // Activate tab.
-      var tab = this.__ui.tabs.filter('[data-slug="'+tab+'"]');
+      var tab = this.ui.tabs.filter('[data-slug="'+tab+'"]');
       tab.addClass('active');
 
       // Activate dropdown.

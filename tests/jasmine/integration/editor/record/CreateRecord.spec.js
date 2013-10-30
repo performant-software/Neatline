@@ -45,7 +45,7 @@ describe('Record | Create Record', function() {
     NL.click(el.addButton);
 
     // Record form should be visible.
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
 
     // Form id should be empty.
     expect(el.leadId).toBeEmpty();
