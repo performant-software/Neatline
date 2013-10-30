@@ -15,10 +15,8 @@
 
   <label>
 
-    <!-- Label text. -->
     <?php echo __($label); ?>
 
-    <!-- ( Use Current ). -->
     <?php if (isset($useCurrent) && $useCurrent): ?>
       ( <a class="label-link" name="set-<?php echo $name; ?>">
         <?php echo __('Use Current'); ?>
@@ -32,12 +30,12 @@
     type="<?php echo isset($type) ? $type : 'text'; ?>"
     class="form-control <?php echo @$class; ?>"
 
-    <?php if (isset($placeholder)): ?>
-      placeholder="<?php echo $placeholder; ?>"
-    <?php endif; ?>
-
     <?php if (isset($name)): ?>
       name="<?php echo $name; ?>"
+    <?php endif; ?>
+
+    <?php if (isset($placeholder)): ?>
+      placeholder="<?php echo $placeholder; ?>"
     <?php endif; ?>
 
     <?php if (isset($bind)): ?>
