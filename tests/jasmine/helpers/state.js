@@ -67,11 +67,19 @@ var NL = (function(NL) {
 
 
   /**
-   * Recursively stop all modules.
+   * Recursively stop all modules and remove all event bindings.
    */
   NL.stopApplication = function() {
+
+    // Stop the modules.
     _.each(Neatline.submodules, function(m) { m.stop(); });
     Neatline._initCallbacks.reset();
+
+    // Clear the event channels.
+    Neatline.commands.removeAllHandlers();
+    Neatline.reqres.removeAllHandlers();
+    Neatline.vent._events = {};
+
   };
 
 

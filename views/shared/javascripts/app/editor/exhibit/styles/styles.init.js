@@ -12,13 +12,13 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  Styles.ID = 'EDITOR:EXHIBIT:STYLES';
+  //Styles.ID = 'EDITOR:EXHIBIT:STYLES';
 
 
-  Styles.addInitializer(function() {
-    Styles.__router = new Styles.Router();
-    Styles.__view   = new Styles.View();
-  });
+  //Styles.addInitializer(function() {
+    //Styles.__router = new Styles.Router();
+    //Styles.__view   = new Styles.View();
+  //});
 
 
 });
