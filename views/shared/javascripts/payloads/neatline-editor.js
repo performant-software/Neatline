@@ -56244,31 +56244,6 @@ Neatline.module('Map', function(
   Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  //Map.ID = 'MAP';
-
-
-  //Map.addInitializer(function() {
-    //Map.__collection = new Neatline.Shared.Record.Collection();
-    //Map.__view = new Neatline.Map.View();
-  //});
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Map', function(
-  Map, Neatline, Backbone, Marionette, $, _) {
-
-
   Map.ID = 'MAP';
 
 
@@ -57617,30 +57592,6 @@ Neatline.module('Presenter.StaticBubble', function(
   StaticBubble, Neatline, Backbone, Marionette, $, _) {
 
 
-  //StaticBubble.ID = 'PRESENTER:StaticBubble';
-
-
-  //StaticBubble.addInitializer(function() {
-    //StaticBubble.__view = new StaticBubble.View();
-  //});
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Presenter.StaticBubble', function(
-  StaticBubble, Neatline, Backbone, Marionette, $, _) {
-
-
   StaticBubble.ID = 'PRESENTER:StaticBubble';
 
 
@@ -58037,50 +57988,6 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor, Neatline, Backbone, Marionette, $, _) {
 
 
-  //Editor.ID = 'EDITOR';
-
-
-  /**
-   * Start the editor before Neatline.
-   */
-  //Neatline.on('initialize:before', function() {
-    //Editor.start();
-  //});
-
-
-  /**
-   * Start the map editor after Neatline.
-   */
-  //Neatline.on('initialize:after', function() {
-    //Editor.Map.start();
-    //Backbone.history.start();
-  //});
-
-
-  /**
-   * Initialize the layout view.
-   */
-  //Editor.addInitializer(function() {
-    //Editor.__view = new Editor.View({ el: 'body' });
-  //});
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor', { startWithParent: false,
-  define: function(Editor, Neatline, Backbone, Marionette, $, _) {
-
-
   Editor.ID = 'EDITOR';
 
 
@@ -58293,30 +58200,6 @@ Neatline.module('Editor.Exhibit', function(
   Exhibit, Neatline, Backbone, Marionette, $, _) {
 
 
-  //Exhibit.ID = 'EDITOR:EXHIBIT';
-
-
-  //Exhibit.addInitializer(function() {
-    //Exhibit.__view = new Exhibit.View();
-  //});
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Exhibit', function(
-  Exhibit, Neatline, Backbone, Marionette, $, _) {
-
-
   Exhibit.ID = 'EDITOR:EXHIBIT';
 
 
@@ -58401,32 +58284,6 @@ Neatline.module('Editor.Exhibit', function(
 
 
   });
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Exhibit.Records', function(
-  Records, Neatline, Backbone, Marionette, $, _) {
-
-
-  //Records.ID = 'EDITOR:EXHIBIT:RECORDS';
-
-
-  //Records.addInitializer(function() {
-    //Records.__router =      new Records.Router();
-    //Records.__collection =  new Neatline.Shared.Record.Collection();
-    //Records.__view =        new Records.View();
-  //});
 
 
 });
@@ -58680,30 +58537,6 @@ Neatline.module('Editor.Exhibit.Records', function(
 
 
   });
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Exhibit.Search', function(
-  Search, Neatline, Backbone, Marionette, $, _) {
-
-
-  //Search.ID = 'EDITOR:EXHIBIT:SEARCH';
-
-
-  //Search.addInitializer(function() {
-    //Search.__view = new Search.View();
-  //});
 
 
 });
@@ -58987,31 +58820,6 @@ Neatline.module('Editor.Exhibit.Styles', function(
   Styles, Neatline, Backbone, Marionette, $, _) {
 
 
-  //Styles.ID = 'EDITOR:EXHIBIT:STYLES';
-
-
-  //Styles.addInitializer(function() {
-    //Styles.__router = new Styles.Router();
-    //Styles.__view   = new Styles.View();
-  //});
-
-
-});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Exhibit.Styles', function(
-  Styles, Neatline, Backbone, Marionette, $, _) {
-
-
   Styles.ID = 'EDITOR:EXHIBIT:STYLES';
 
 
@@ -59245,43 +59053,6 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map, Neatline, Backbone, Marionette, $, _) {
 
 
-  //Map.ID = 'EDITOR:RECORD:MAP';
-
-
-  /**
-   * Start the tab after the form.
-   */
-  //Neatline.Editor.Record.on('start', function() {
-    //Map.start();
-  //});
-
-
-  /**
-   * Instantiate the tab view.
-   */
-  //Map.addInitializer(function() {
-    //Map.__view = new Map.View({
-      //el: Neatline.request('EDITOR:RECORD:getElement')
-    //});
-  //});
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Record.Map', { startWithParent: false,
-  define: function(Map, Neatline, Backbone, Marionette, $, _) {
-
-
   Map.ID = 'EDITOR:RECORD:MAP';
 
 
@@ -59478,31 +59249,6 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
 
 }});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Record', function(
-  Record, Neatline, Backbone, Marionette, $, _) {
-
-
-  //Record.ID = 'EDITOR:RECORD';
-
-
-  //Record.addInitializer(function() {
-    //Record.__view   = new Record.View();
-    //Record.__router = new Record.Router();
-  //});
-
-
-});
 
 
 /* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
@@ -59937,43 +59683,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style, Neatline, Backbone, Marionette, $, _) {
 
 
-  //Style.ID = 'EDITOR:RECORD:STYLE';
-
-
-  /**
-   * Start the tab after the form.
-   */
-  //Neatline.Editor.Record.on('start', function() {
-    //Style.start();
-  //});
-
-
-  /**
-   * Instantiate the tab view.
-   */
-  //Style.addInitializer(function() {
-    //Style.__view = new Style.View({
-      //el: Neatline.request('EDITOR:RECORD:getElement')
-    //});
-  //});
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Record.Style', { startWithParent: false,
-  define: function(Style, Neatline, Backbone, Marionette, $, _) {
-
-
   Style.ID = 'EDITOR:RECORD:STYLE';
 
 
@@ -60116,43 +59825,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
 
   });
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Record.Text', { startWithParent: false,
-  define: function(Text, Neatline, Backbone, Marionette, $, _) {
-
-
-  //Text.ID = 'EDITOR:RECORD:TEXT';
-
-
-  /**
-   * Start the tab after the form.
-   */
-  //Neatline.Editor.Record.on('start', function() {
-    //Text.start();
-  //});
-
-
-  /**
-   * Instantiate the tab view.
-   */
-  //Text.addInitializer(function() {
-    //Text.__view = new Text.View({
-      //el: Neatline.request('EDITOR:RECORD:getElement')
-    //});
-  //});
 
 
 }});
@@ -60319,32 +59991,6 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
 
   });
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor.Map', { startWithParent: false,
-  define: function(Map, Editor, Backbone, Marionette, $, _) {
-
-
-  //Map.ID = 'EDITOR:MAP';
-
-
-  //Map.addInitializer(function() {
-    //Map.__collection = Neatline.Map.__collection;
-    //Map.__view = Neatline.Map.__view;
-    //Map.__view.__initEditor();
-  //});
 
 
 }});
