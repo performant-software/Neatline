@@ -30,9 +30,9 @@ describe('Records | Router', function() {
     afterEach(function() {
 
       // Tabs, search, records should be visible.
-      expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.EXHIBIT.$el);
-      expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.SEARCH.$el);
-      expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORDS.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.SEARCH.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
 
       // "Records" tab should be active.
       expect(el.records).toHaveClass('active');

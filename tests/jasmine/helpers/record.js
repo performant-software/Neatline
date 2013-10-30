@@ -74,7 +74,7 @@ var NL = (function(NL) {
    * @return {Array}: The slugs.
    */
   NL.getTabSlugs = function() {
-    return _.map(this.vw.RECORD.ui.tabs, function(tab) {
+    return _.map(this.vw.RECORD.__ui.tabs, function(tab) {
       return $(tab).attr('data-slug');
     });
   };

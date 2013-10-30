@@ -36,7 +36,7 @@ describe('Record | Router', function() {
     NL.navigate(href);
 
     // Record form should be visible, "Text" tab active.
-    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
     NL.assertActiveTab('text');
 
   });
@@ -55,7 +55,7 @@ describe('Record | Router', function() {
       NL.navigate(href+'/'+slug);
 
       // Record form should be visible, requested tab active.
-      expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
       NL.assertActiveTab(slug);
 
     });
@@ -73,7 +73,7 @@ describe('Record | Router', function() {
     NL.navigate('record/add');
 
     // Record form should be visible, "Text" tab active.
-    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
     NL.assertActiveTab('text');
 
   });
@@ -92,7 +92,7 @@ describe('Record | Router', function() {
       NL.navigate('record/add/'+slug);
 
       // Record form should be visible, requested tab active.
-      expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
       NL.assertActiveTab(slug);
 
     });

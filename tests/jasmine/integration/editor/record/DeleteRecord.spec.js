@@ -148,8 +148,8 @@ describe('Record | Delete Record', function() {
     expect(el.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(NL.vw.EDITOR.ui.editor).not.toContain(NL.vw.RECORD.$el);
-    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORDS.$el);
+    expect(NL.vw.EDITOR.__ui.editor).not.toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');

@@ -75,7 +75,7 @@ describe('Record | Text Editors', function() {
 
   it('title', function() {
 
-    input = NL.vw.TEXT.ui.title;
+    input = NL.vw.TEXT.__ui.title;
     input.val('<p>1</p>');
 
     el.editTitleHtml.click();
@@ -86,7 +86,7 @@ describe('Record | Text Editors', function() {
 
   it('body', function() {
 
-    input = NL.vw.TEXT.ui.body;
+    input = NL.vw.TEXT.__ui.body;
     input.val('<p>1</p>');
 
     el.editBodyHtml.click();

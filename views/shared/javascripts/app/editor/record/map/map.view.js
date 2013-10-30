@@ -75,13 +75,13 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     onParseClick: function() {
 
-      var val = this.ui.svg.val();
+      var val = this.__ui.svg.val();
 
       try {
 
         // Set density.
         SVGtoWKT.DENSITY = parseFloat(
-          this.ui.density.val()
+          this.__ui.density.val()
         );
 
         // Covnert SVG, update handler.
@@ -94,7 +94,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         );
 
         // Close the modal.
-        this.ui.modal.modal('hide');
+        this.__ui.modal.modal('hide');
 
       } catch (e) {
         Neatline.execute('EDITOR:notifyError',
@@ -138,8 +138,8 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Reset the map edit mode to "Navigate".
      */
     resetEditMode: function() {
-      this.ui.pan[0].checked = true;
-      this.ui.pan.trigger('change');
+      this.__ui.pan[0].checked = true;
+      this.__ui.pan.trigger('change');
     },
 
 
@@ -160,9 +160,9 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     getPolyOptions: function() {
       return {
-        sides:  this.ui.sides.val(),
-        snap:   this.ui.snap.val(),
-        irreg:  this.ui.irreg.is(':checked')
+        sides:  this.__ui.sides.val(),
+        snap:   this.__ui.snap.val(),
+        irreg:  this.__ui.irreg.is(':checked')
       };
     }
 

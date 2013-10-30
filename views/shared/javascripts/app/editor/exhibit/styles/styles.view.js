@@ -91,8 +91,8 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
     onSetFocus: function() {
       var center  = Neatline.request('MAP:getCenter');
       var zoom    = Neatline.request('MAP:getZoom');
-      this.ui.mapFocus.val(center.lon+','+center.lat).change();
-      this.ui.mapZoom.val(zoom).change();
+      this.__ui.mapFocus.val(center.lon+','+center.lat).change();
+      this.__ui.mapZoom.val(zoom).change();
     },
 
 

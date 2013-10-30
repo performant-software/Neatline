@@ -39,8 +39,8 @@ describe('Styles | Set Focus', function() {
     el.setFocus.trigger('click');
 
     // Inputs should be updated.
-    expect(NL.vw.STYLES.ui.mapFocus).toHaveValue('1,2');
-    expect(NL.vw.STYLES.ui.mapZoom).toHaveValue('3');
+    expect(NL.vw.STYLES.__ui.mapFocus).toHaveValue('1,2');
+    expect(NL.vw.STYLES.__ui.mapZoom).toHaveValue('3');
 
     // Model should be updated.
     expect(NL.vw.STYLES.model.get('map_focus')).toEqual('1,2');

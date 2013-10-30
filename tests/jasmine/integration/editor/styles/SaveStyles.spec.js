@@ -50,8 +50,8 @@ describe('Styles | Save Styles', function() {
     // ------------------------------------------------------------------------
 
     NL.vw.STYLES.styles.getSession().setValue('1');
-    NL.vw.STYLES.ui.mapFocus.val('2').trigger('change');
-    NL.vw.STYLES.ui.mapZoom.val('3').trigger('change');
+    NL.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
+    NL.vw.STYLES.__ui.mapZoom.val('3').trigger('change');
 
     // Click "Save" button.
     el.save.trigger('click');

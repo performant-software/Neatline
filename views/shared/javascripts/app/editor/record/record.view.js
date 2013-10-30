@@ -92,7 +92,7 @@ Neatline.module('Editor.Record', function(Record) {
      * @param {String} tab: The tab to activate.
      */
     activateTab: function(tab) {
-      this.ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
+      this.__ui.tabs.filter('[data-slug="'+tab+'"]').tab('show');
     },
 
 
@@ -188,7 +188,7 @@ Neatline.module('Editor.Record', function(Record) {
       );
 
       // Hide modal, close form.
-      this.ui.modal.modal('hide');
+      this.__ui.modal.modal('hide');
       this.onCloseClick();
 
       // Refresh the exhibit.

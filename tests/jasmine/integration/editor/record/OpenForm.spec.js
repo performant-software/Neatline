@@ -42,7 +42,7 @@ describe('Record | Open Form', function() {
     afterEach(function() {
 
       // The form should be displayed and populated with data.
-      expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
+      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
       expect(NL.vw.RECORD.model.id).toEqual(model.id);
 
     });
@@ -209,7 +209,7 @@ describe('Record | Open Form', function() {
     NL.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(NL.vw.EDITOR.ui.editor).toContain(NL.vw.RECORD.$el);
+    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
     expect(NL.vw.RECORD.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.

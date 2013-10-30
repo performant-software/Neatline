@@ -45,11 +45,11 @@ Neatline.module('Editor', { startWithParent: false,
     var display = function(views) {
 
       // Clear the editor container.
-      Editor.__view.ui.editor.children().detach();
+      Editor.__view.__ui.editor.children().detach();
 
       // Show each of the views.
       _.each(views, function(v) {
-        Neatline.execute(v+':display', Editor.__view.ui.editor);
+        Neatline.execute(v+':display', Editor.__view.__ui.editor);
       });
 
     };
@@ -84,7 +84,7 @@ Neatline.module('Editor', { startWithParent: false,
      * @return {Object}: The container.
      */
     var getContainer = function() {
-      return Editor.__view.ui.editor;
+      return Editor.__view.__ui.editor;
     };
     Neatline.reqres.setHandler(Editor.ID+':getContainer', getContainer);
 
