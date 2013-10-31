@@ -34529,7 +34529,7 @@ Neatline.module('Shared', function(Shared) {
   Shared.Controller = Marionette.Controller.extend({
 
 
-    slug: ''
+    slug: '',
 
     events: [], commands: [], requests: [],
 
@@ -34558,9 +34558,9 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `events` hash to the event aggregator.
      */
     _initEvents: function() {
-      _.each(this.events, _.bind(function(event) {
-        Neatline.vent.on(event, _.bind(this[event], this));
-      }, this);
+      _.each(this.events, _.bind(function(e) {
+        Neatline.vent.on(this.slug+':'+e, _.bind(this[e], this));
+      }, this));
     },
 
 
@@ -34568,9 +34568,9 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `commands` hash to the command broker.
      */
     _initCommands: function() {
-      _.each(this.commands, _.bind(function(command) {
-        Neatline.commands.setHandler(command, _.bind(this[command], this));
-      }, this);
+      _.each(this.commands, _.bind(function(c) {
+        Neatline.commands.setHandler(this.slug+':'+c, _.bind(this[c], this));
+      }, this));
     },
 
 
@@ -34578,9 +34578,9 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `requests` hash to the reqres broker.
      */
     _initRequests: function() {
-      _.each(this.requests, _.bind(function(request) {
-        Neatline.reqres.setHandler(request, _.bind(this[request], this));
-      }, this);
+      _.each(this.requests, _.bind(function(r) {
+        Neatline.reqres.setHandler(this.slug+':'+r, _.bind(this[r], this));
+      }, this));
     }
 
 
