@@ -14,7 +14,8 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
   StaticBubble.View = Neatline.Shared.Widget.View.extend({
 
 
-    id: 'static-bubble',
+    template:   '#static-bubble-template',
+    className:  'bubble static',
 
     events: {
       'click .close': 'onClose'
@@ -34,9 +35,6 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
     init: function(options) {
 
       this.slug = options.slug;
-
-      // Compile the content template.
-      this.template = _.template($('#static-bubble-template').html());
 
       this.selected = false;  // True when bubble is frozen after a click.
       this.active = true;     // True when bubble should be displayed.
@@ -65,7 +63,7 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
     /**
-     * Populate title and body.
+     * Bind a model to the bubble.
      *
      * @param {Object} model: The record model.
      */
@@ -73,22 +71,22 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
       this.model = model;
 
-      // Store reference to mouseout callback.
+      // Store reference to unhighlight callback.
       this.onMouseOut = _.bind(this.unhighlight, this);
 
-      // Bind to mousemove and mouseout.
+      // Unhighlight when the cursor leave the map.
       var map = Neatline.request('MAP:getMap');
       map.events.register('mouseout', null, this.onMouseOut);
 
       // Render template, add `bound` class.
-      this.$el.html(this.template({ record: this.model }));
+      rivets.bind(this.$el, { record: this.model })
       this.$el.addClass('bound');
 
     },
 
 
     /**
-     * Clear title and body.
+     * Unbind the current model.
      */
     unbind: function() {
 
@@ -96,8 +94,7 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
       var map = Neatline.request('MAP:getMap');
       map.events.unregister('mouseout', null, this.onMouseOut);
 
-      // Empty bubble.
-      this.$el.empty();
+      // Clear the bubble.
       this.$el.removeClass('bound');
 
     },

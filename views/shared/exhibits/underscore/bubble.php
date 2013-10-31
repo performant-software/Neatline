@@ -11,9 +11,8 @@
 
 ?>
 
-
 <script id="static-bubble-template" type="text/template">
   <a name="close" class="close">&times;</a>
-  <div class="title"><%= record.get('title') %></div>
-  <div class="body"><%= record.get('body') %></div>
+  <div class="title" rv-text="record:title"></div>
+  <div class="body" rv-text="record:body"></div>
 </script>

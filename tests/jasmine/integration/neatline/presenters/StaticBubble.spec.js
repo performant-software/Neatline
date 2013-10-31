@@ -11,19 +11,20 @@
 describe('Presenters | Static Bubble', function() {
 
 
-  var el, layers, feature1, feature2, fx = {
-    records: read('NeatlinePresentersStaticBubble.json')
-  };
+  var model1, model2;
 
 
   beforeEach(function() {
 
     NL.loadNeatline();
-    NL.respondMap200(fx.records);
 
-    layers = NL.vw.MAP.getVectorLayers();
-    feature1 = layers[0].features[0];
-    feature2 = layers[1].features[0];
+    model1 = new Neatline.Shared.Record.Model({
+      presenter: 'StaticBubble', title: 'title1', body: 'body1'
+    });
+
+    model2 = new Neatline.Shared.Record.Model({
+      presenter: 'StaticBubble', title: 'title2', body: 'body2'
+    });
 
   });
 
@@ -40,17 +41,17 @@ describe('Presenters | Static Bubble', function() {
 
   });
 
-  describe('when cursor hovers on a feature', function() {
+  describe('highlight', function() {
 
-    it('should show the title, not the body or close "X"', function() {
+    it('should show the title, but not the body or close "X"', function() {
 
       // ----------------------------------------------------------------------
-      // When the cursor hovers on a feature, the the record should be bound
-      // to the bubble and the title should be displayed in the map container.
-      // The body and close "X" should stay hidden.
+      // When a record is highlighted, the the record should be bound to the
+      // bubble and the title should be displayed in the map container.  The
+      // body and close "X" should stay hidden.
       // ----------------------------------------------------------------------
 
-      NL.hoverOnMapFeature(feature1);
+      Neatline.vent.trigger('highlight', { model: model1 });
 
       // Title and body should be populated.
       expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
@@ -68,13 +69,12 @@ describe('Presenters | Static Bubble', function() {
     it('should not override a selected record', function() {
 
       // ----------------------------------------------------------------------
-      // When a record is selected and the cursor hovers on a feature for a
-      // different record, the new record should not be highlighted.
+      // When a record is selected and another reocrd is highlighted, the new
+      // highlighted record should not be rendered in the bubble.
       // ----------------------------------------------------------------------
 
-      NL.hoverOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature1);
-      NL.hoverOnMapFeature(feature2);
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('highlight', { model: model2 });
 
       // Title and body should not change.
       expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
@@ -84,17 +84,17 @@ describe('Presenters | Static Bubble', function() {
 
   });
 
-  describe('when cursor leaves a feature', function() {
+  describe('unhighlight', function() {
 
     it('should hide the bubble if it is not selected', function() {
 
       // ----------------------------------------------------------------------
-      // When the cursor leaves a feature and a record is not selected, the
+      // When a highlighted (and not selected) record is unhighlighted, the
       // bubble should be hidden.
       // ----------------------------------------------------------------------
 
-      NL.hoverOnMapFeature(feature1);
-      NL.unHoverOnMapFeature();
+      Neatline.vent.trigger('highlight', { model: model1 });
+      Neatline.vent.trigger('unhighlight', { model: model1 });
 
       // Bubble should be hidden.
       expect(NL.vw.BUBBLE.$el).not.toBeVisible();
@@ -104,26 +104,25 @@ describe('Presenters | Static Bubble', function() {
     it('should not hide the bubble if it is selected', function() {
 
       // ----------------------------------------------------------------------
-      // When the cursor leaves a feature and a record is selected, the bubble
-      // should be hidden.
+      // If the record has been selected, the bubble should not be hidden when
+      // `unhighlight` is called with the same record.
       // ----------------------------------------------------------------------
 
-      NL.hoverOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature1);
-      NL.unHoverOnMapFeature();
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('unhighlight', { model: model1 });
 
       // Bubble should not be hidden.
       expect(NL.vw.BUBBLE.$el).toBeVisible();
 
     });
 
-    it('should hide the bubble when cursor leaves exhibit', function() {
+    it('should hide the bubble when cursor leaves the map', function() {
 
       // ----------------------------------------------------------------------
-      // When the cursor leaves the exhibit, the bubble should be hidden.
+      // When the cursor leaves the map, the bubble should be hidden.
       // ----------------------------------------------------------------------
 
-      NL.hoverOnMapFeature(feature1);
+      Neatline.vent.trigger('highlight', { model: model1 });
       NL.triggerMapMouseout();
 
       // Bubble should be hidden.
@@ -133,20 +132,16 @@ describe('Presenters | Static Bubble', function() {
 
   });
 
-  describe('when a feature is clicked', function() {
+  describe('select', function() {
 
     it('should show close "X" and body if body is non-null', function() {
 
       // ----------------------------------------------------------------------
-      // When a feature is selected and the record body content is non-null,
+      // When a record is selected and the record body content is non-null,
       // the body and close "X" should be displayed.
       // ----------------------------------------------------------------------
 
-      // Set non-null body.
-      layers[0].nModel.set('body', 'content');
-
-      NL.hoverOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature1);
+      Neatline.vent.trigger('select', { model: model1 });
 
       // Body and close "X" should be visible.
       expect(NL.vw.BUBBLE.$('.body')).toBeVisible();
@@ -157,15 +152,12 @@ describe('Presenters | Static Bubble', function() {
     it('should show close "X" but not body if body is null', function() {
 
       // ----------------------------------------------------------------------
-      // When a feature is selected and the record body content is null, the
-      // close "X" should be displayed but the body should be hidden.
+      // When a record is selected and the record body content is null, the
+      // close "X" should be displayed but the body should stay hidden.
       // ----------------------------------------------------------------------
 
-      // Set null body.
-      layers[0].nModel.set('body', null);
-
-      NL.hoverOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature1);
+      model1.set('body', null);
+      Neatline.vent.trigger('select', { model: model1 });
 
       // Close "X" should be visible.
       expect(NL.vw.BUBBLE.$('.close')).toBeVisible();
@@ -178,13 +170,12 @@ describe('Presenters | Static Bubble', function() {
     it('should override a selected record', function() {
 
       // ----------------------------------------------------------------------
-      // When a feature is selected, the model for the feature should be bound
-      // to the bubble even if another record is already selected.
+      // When a record is selected, it should be rendered in the bubble even
+      // if another record is currently selected.
       // ----------------------------------------------------------------------
 
-      NL.hoverOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature2);
+      Neatline.vent.trigger('select', { model: model1 });
+      Neatline.vent.trigger('select', { model: model2 });
 
       // Title and body should change.
       expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
@@ -194,16 +185,15 @@ describe('Presenters | Static Bubble', function() {
 
   });
 
-  describe('when a feature is unselected', function() {
+  describe('unselect', function() {
 
     // ------------------------------------------------------------------------
-    // When the bubble is closed by clicking the "X" or unselecting a feature,
-    // the bubble should be hidden and start responding to highlight events.
+    // When the bubble is unselected or manually closed, the bubble should be
+    // hidden and start responding to highlight events.
     // ------------------------------------------------------------------------
 
     beforeEach(function() {
-      NL.hoverOnMapFeature(feature1);
-      NL.clickOnMapFeature(feature1);
+      Neatline.vent.trigger('select', { model: model1 });
     });
 
     afterEach(function() {
@@ -211,7 +201,7 @@ describe('Presenters | Static Bubble', function() {
       // Bubble should be hidden.
       expect(NL.vw.BUBBLE.$el).not.toBeVisible();
 
-      NL.hoverOnMapFeature(feature2);
+      Neatline.vent.trigger('highlight', { model: model2 });
 
       // Should start responding to highlight events.
       expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
@@ -219,12 +209,12 @@ describe('Presenters | Static Bubble', function() {
 
     });
 
-    it('should close when "X" is clicked', function() {
-      NL.vw.BUBBLE.$('.close').trigger('click');
+    it('should close on unselect', function() {
+      Neatline.vent.trigger('unselect', { model: model1 });
     });
 
-    it('should close when a feature is unselected', function() {
-      NL.clickOffMapFeature();
+    it('should close when "X" is clicked', function() {
+      NL.vw.BUBBLE.$('.close').trigger('click');
     });
 
   });
