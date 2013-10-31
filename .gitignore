@@ -10,5 +10,4 @@ _SpecRunner.html
 
 /layers
 !/layers/default.json
-
 /tests/phpunit/plugins.ini
