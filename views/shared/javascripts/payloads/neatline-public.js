@@ -34908,10 +34908,13 @@ Neatline.module('Shared.Widget', function(Widget) {
 Neatline.module('Map.Layers.Google', function(Google) {
 
 
-  Google.ID = 'MAP:LAYERS:Google';
+  Google.Controller = Neatline.Shared.Controller.extend({
 
 
-  Google.addInitializer(function() {
+    slug: 'MAP:LAYERS',
+
+    requests: ['Google'],
+
 
     /**
      * Construct a Google layer.
@@ -34919,30 +34922,87 @@ Neatline.module('Map.Layers.Google', function(Google) {
      * @param {Object} json: The layer definition.
      * @return {OpenLayers.Layer.Google}: The Google layer.
      */
-    var layer = function(json) {
+    Google: function(json) {
       switch (json.properties.provider) {
-        case 'physical':
-          return new OpenLayers.Layer.Google(json.title, {
-            type: google.maps.MapTypeId.TERRAIN
-          });
-        case 'streets':
-          return new OpenLayers.Layer.Google(json.title, {
-            type: google.maps.MapTypeId.ROADMAP,
-            numZoomLevels: 25
-          });
-        case 'satellite':
-          return new OpenLayers.Layer.Google(json.title, {
-            type: google.maps.MapTypeId.SATELLITE,
-            numZoomLevels: 25
-          });
-        case 'hybrid':
-          return new OpenLayers.Layer.Google(json.title, {
-            type: google.maps.MapTypeId.HYBRID,
-            numZoomLevels: 25
-          });
+      case 'physical':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.TERRAIN
+        });
+      case 'streets':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.ROADMAP,
+          numZoomLevels: 25
+        });
+      case 'satellite':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.SATELLITE,
+          numZoomLevels: 25
+        });
+      case 'hybrid':
+        return new OpenLayers.Layer.Google(json.title, {
+          type: google.maps.MapTypeId.HYBRID,
+          numZoomLevels: 25
+        });
       }
-    };
-    Neatline.reqres.setHandler(Google.ID, layer);
+    }
+
+
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map.Layers.Google', function(Google) {
+
+
+  Google.addInitializer(function() {
+    Google.__controller = new Google.Controller();
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map.Layers.OpenStreetMap', function(OpenStreetMap) {
+
+
+  OpenStreetMap.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'MAP:LAYERS',
+
+    requests: ['OpenStreetMap'],
+
+
+    /**
+     * Construct an OpenStreetMap layer.
+     *
+     * @param {Object} json: The layer definition.
+     * @return {OpenLayers.Layer.OSM}: The OSM layer.
+     */
+    OpenStreetMap: function(json) {
+      return new OpenLayers.Layer.OSM(json.title);
+    }
+
 
   });
 
@@ -34962,21 +35022,46 @@ Neatline.module('Map.Layers.Google', function(Google) {
 Neatline.module('Map.Layers.OpenStreetMap', function(OpenStreetMap) {
 
 
-  OpenStreetMap.ID = 'MAP:LAYERS:OpenStreetMap';
-
-
   OpenStreetMap.addInitializer(function() {
+    OpenStreetMap.__controller = new OpenStreetMap.Controller();
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map.Layers.Stamen', function(Stamen) {
+
+
+  Stamen.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'MAP:LAYERS',
+
+    requests: ['Stamen'],
+
 
     /**
-     * Construct an OpenStreetMap layer.
+     * Construct a Stamen layer - http://maps.stamen.com/.
      *
      * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer.OSM}: The OSM layer.
+     * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
      */
-    var layer = function(json) {
-      return new OpenLayers.Layer.OSM(json.title);
-    };
-    Neatline.reqres.setHandler(OpenStreetMap.ID, layer);
+    Stamen: function(json) {
+      var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
+      layer.name = json.title;
+      return layer;
+    }
+
 
   });
 
@@ -34996,23 +35081,50 @@ Neatline.module('Map.Layers.OpenStreetMap', function(OpenStreetMap) {
 Neatline.module('Map.Layers.Stamen', function(Stamen) {
 
 
-  Stamen.ID = 'MAP:LAYERS:Stamen';
-
-
   Stamen.addInitializer(function() {
+    Stamen.__controller = new Stamen.Controller();
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map.Layers.WMS', function(WMS) {
+
+
+  WMS.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'MAP:LAYERS',
+
+    requests: ['WMS'],
+
 
     /**
-     * Construct a Stamen layer - http://maps.stamen.com/.
+     * Construct a WMS layer.
      *
      * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer.Stamen}: The Stamen layer.
+     * @return {OpenLayers.Layer.WMS}: The WMS layer.
      */
-    var layer = function(json) {
-      var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
-      layer.name = json.title;
-      return layer;
-    };
-    Neatline.reqres.setHandler(Stamen.ID, layer);
+    WMS: function(json) {
+      return new OpenLayers.Layer.WMS(
+        json.title,
+        json.properties.address,
+        {
+          layers: json.properties.layers
+        }
+      );
+    }
+
 
   });
 
@@ -35032,27 +35144,49 @@ Neatline.module('Map.Layers.Stamen', function(Stamen) {
 Neatline.module('Map.Layers.WMS', function(WMS) {
 
 
-  WMS.ID = 'MAP:LAYERS:WMS';
-
-
   WMS.addInitializer(function() {
+    WMS.__controller = new WMS.Controller();
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map.Layers', function(Layers) {
+
+
+  Layers.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'MAP:LAYERS',
+
+    requests: ['getLayer'],
+
 
     /**
-     * Construct a WMS layer.
+     * Dispatch a layer request to the appropriate handler. If no handler
+     * exists for the passed type and the request fails, return null.
      *
      * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer.WMS}: The WMS layer.
+     * @return {OpenLayers.Layer|null}: The layer.
      */
-    var layer = function(json) {
-      return new OpenLayers.Layer.WMS(
-        json.title,
-        json.properties.address,
-        {
-          layers: json.properties.layers
-        }
-      );
-    };
-    Neatline.reqres.setHandler(WMS.ID, layer);
+    getLayer: function(json) {
+      try {
+        return Neatline.request('MAP:LAYERS:'+json.type, json);
+      } catch (e) {
+        return null;
+      }
+    }
+
 
   });
 
@@ -35072,27 +35206,8 @@ Neatline.module('Map.Layers.WMS', function(WMS) {
 Neatline.module('Map.Layers', function(Layers) {
 
 
-  Layers.ID = 'MAP:LAYERS';
-
-
   Layers.addInitializer(function() {
-
-    /**
-     * Dispatch a layer request to the appropriate handler. If no handler
-     * exists for the passed type and the request fails, return null.
-     *
-     * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer|null}: The layer.
-     */
-    var getLayer = function(json) {
-      try {
-        return Neatline.request('MAP:LAYERS:'+json.type, json);
-      } catch (e) {
-        return null;
-      }
-    };
-    Neatline.reqres.setHandler(Layers.ID+':getLayer', getLayer);
-
+    Layers.__controller = new Layers.Controller();
   });
 
 
