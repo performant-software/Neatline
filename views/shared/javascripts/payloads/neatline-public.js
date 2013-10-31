@@ -36518,13 +36518,6 @@ Neatline.module('Presenter', function(Presenter) {
       'unselect'
     ],
 
-    commands: [
-      'highlight',
-      'unhighlight',
-      'select',
-      'unselect'
-    ],
-
 
     /**
      * Highlight the record.
@@ -36532,11 +36525,9 @@ Neatline.module('Presenter', function(Presenter) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
-      try {
-        Neatline.execute(
-          'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
-        );
-      } catch (e) {}
+      Neatline.execute(
+        'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
+      );
     },
 
 
@@ -36546,11 +36537,9 @@ Neatline.module('Presenter', function(Presenter) {
      * @param {Object} args: Event arguments.
      */
     unhighlight: function(args) {
-      try {
-        Neatline.execute(
-          'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
-        );
-      } catch(e) {}
+      Neatline.execute(
+        'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
+      );
     },
 
 
@@ -36560,11 +36549,9 @@ Neatline.module('Presenter', function(Presenter) {
      * @param {Object} args: Event arguments.
      */
     select: function(args) {
-      try {
-        Neatline.execute(
-          'PRESENTER:'+args.model.get('presenter')+':select', args.model
-        );
-      } catch (e) {}
+      Neatline.execute(
+        'PRESENTER:'+args.model.get('presenter')+':select', args.model
+      );
     },
 
 
@@ -36574,11 +36561,9 @@ Neatline.module('Presenter', function(Presenter) {
      * @param {Object} args: Event arguments.
      */
     unselect: function(args) {
-      try {
-        Neatline.execute(
-          'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
-        );
-      } catch (e) {}
+      Neatline.execute(
+        'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
+      );
     },
 
 

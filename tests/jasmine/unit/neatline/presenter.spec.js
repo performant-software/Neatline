@@ -11,82 +11,31 @@
 describe('Presenter', function() {
 
 
-  var model1, model2, exec;
+  var model, exec;
 
 
   beforeEach(function() {
 
     NL.loadNeatline();
 
-    model1 = new Neatline.Shared.Record.Model({
-      presenter: 'Presenter1'
-    });
-
-    model2 = new Neatline.Shared.Record.Model({
-      presenter: 'Presenter2'
-    });
-
+    model = new Neatline.Shared.Record.Model({ presenter: 'P' });
     exec = spyOn(Neatline, 'execute');
 
   });
 
 
-  it('highlight', function() {
+  it('should forward events to presenter-specific commands', function() {
 
-    Neatline.vent.trigger('highlight', { model: model1 });
+    // ------------------------------------------------------------------------
+    // When a record is (un)highlighted or (un)selected, the presenter should
+    // "forward" the event to the presenter-specific command for the presenter
+    // that the record is assigned to.
+    // ------------------------------------------------------------------------
 
-    expect(exec).toHaveBeenCalledWith(
-      'PRESENTER:Presenter1:highlight', model1
-    );
-
-    expect(exec).not.toHaveBeenCalledWith(
-      'PRESENTER:Presenter2:highlight', model2
-    );
-
-  });
-
-
-  it('unhighlight', function() {
-
-    Neatline.vent.trigger('unhighlight', { model: model1 });
-
-    expect(exec).toHaveBeenCalledWith(
-      'PRESENTER:Presenter1:unhighlight', model1
-    );
-
-    expect(exec).not.toHaveBeenCalledWith(
-      'PRESENTER:Presenter2:unhighlight', model2
-    );
-
-  });
-
-
-  it('select', function() {
-
-    Neatline.vent.trigger('select', { model: model1 });
-
-    expect(exec).toHaveBeenCalledWith(
-      'PRESENTER:Presenter1:select', model1
-    );
-
-    expect(exec).not.toHaveBeenCalledWith(
-      'PRESENTER:Presenter2:select', model2
-    );
-
-  });
-
-
-  it('unselect', function() {
-
-    Neatline.vent.trigger('unselect', { model: model1 });
-
-    expect(exec).toHaveBeenCalledWith(
-      'PRESENTER:Presenter1:unselect', model1
-    );
-
-    expect(exec).not.toHaveBeenCalledWith(
-      'PRESENTER:Presenter2:unselect', model2
-    );
+    _.each(['highlight', 'unhighlight', 'select', 'unselect'], function(e) {
+      Neatline.vent.trigger(e, { model: model });
+      expect(exec).toHaveBeenCalledWith('PRESENTER:P:'+e, model);
+    });
 
   });
 
