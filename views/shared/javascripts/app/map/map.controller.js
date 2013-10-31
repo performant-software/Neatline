@@ -17,25 +17,17 @@ Neatline.module('Map', function(Map) {
     slug: 'MAP',
 
     events: [
-      'refresh',
       'highlight',
       'unhighlight',
       'select',
       'unselect',
       'setFilter',
-      'removeFilter'
+      'removeFilter',
+      'refresh'
     ],
 
     commands: [
       'load',
-      'refresh',
-      'highlight',
-      'unhighlight',
-      'select',
-      'unselect',
-      'focusByModel',
-      'setFilter',
-      'removeFilter',
       'updateSize'
     ],
 
@@ -54,27 +46,6 @@ Neatline.module('Map', function(Map) {
     init: function() {
       this.collection = new Neatline.Shared.Record.Collection();
       this.view = new Neatline.Map.View({ slug: this.slug });
-    },
-
-
-    /**
-     * Load map layers.
-     *
-     * @param {Object} params: Hash with `extent` and `zoom`.
-     */
-    load: function(params) {
-      this.collection.update(params, _.bind(function(records) {
-        this.view.ingest(records);
-      }, this));
-    },
-
-
-    /**
-     * Reload map data for current focus/zoom.
-     */
-    refresh: function() {
-      this.view.removeAllLayers();
-      this.view.requestRecords();
     },
 
 
@@ -106,7 +77,7 @@ Neatline.module('Map', function(Map) {
      */
     select: function(args) {
       if (args.source !== this.slug) {
-        this.focusByModel(args.model);
+        this.view.focusByModel(args.model);
         this.view.selectByModel(args.model);
       }
     },
@@ -119,16 +90,6 @@ Neatline.module('Map', function(Map) {
      */
     unselect: function(args) {
       this.view.unselectByModel(args.model);
-    },
-
-
-    /**
-     * Focus the map on the data extent for a record, identified by model.
-     *
-     * @param {Object} model: A record model.
-     */
-    focusByModel: function(model) {
-      this.view.focusByModel(model);
     },
 
 
@@ -149,6 +110,27 @@ Neatline.module('Map', function(Map) {
      */
     removeFilter: function(args) {
       this.view.removeFilter(args.key);
+    },
+
+
+    /**
+     * Reload map data for current focus/zoom.
+     */
+    refresh: function() {
+      this.view.removeAllLayers();
+      this.view.requestRecords();
+    },
+
+
+    /**
+     * Load map layers.
+     *
+     * @param {Object} params: Hash with `extent` and `zoom`.
+     */
+    load: function(params) {
+      this.collection.update(params, _.bind(function(records) {
+        this.view.ingest(records);
+      }, this));
     },
 
 
