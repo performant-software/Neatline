@@ -71,7 +71,7 @@ Neatline.module('Editor.Record', function(Record) {
       Neatline.execute('EDITOR:MAP:endEdit', this.model);
 
       // Activate and close the presenter.
-      Neatline.vent.trigger('PRESENTER:activate');
+      Neatline.vent.trigger('activatePresenter');
 
       // Unselect the record.
       Neatline.vent.trigger('unselect', {

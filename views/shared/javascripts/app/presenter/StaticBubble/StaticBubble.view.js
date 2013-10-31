@@ -27,16 +27,20 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
     /**
-     * Initialize state, compile template.
+     * Compile the interior template, initialize state.
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
 
       StaticBubble.View.__super__.init.apply(this);
 
+      // Compile the template, store the slug
+      this.template = _.template($('#static-bubble-template').html());
+      this.slug = options.slug;
+
       this.active   = true;   // True when bubble should be displayed.
       this.selected = false;  // True when bubble is frozen after a click.
-
-      this.template = _.template($('#static-bubble-template').html());
 
     },
 
@@ -51,7 +55,7 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
         model:  this.model,
-        source: StaticBubble.ID
+        source: this.slug
       });
 
     },

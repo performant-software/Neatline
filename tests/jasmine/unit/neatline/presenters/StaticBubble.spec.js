@@ -132,7 +132,7 @@ describe('Presenters | Static Bubble', function() {
 
     it('should publish `unselect`', function() {
       expect(vent).toHaveBeenCalledWith('unselect', {
-        source: Neatline.Presenter.StaticBubble.ID,
+        source: 'PRESENTER:StaticBubble',
         model:  model1
       });
     });
@@ -143,7 +143,7 @@ describe('Presenters | Static Bubble', function() {
   describe('deactivate', function() {
 
     beforeEach(function() {
-      Neatline.vent.trigger('PRESENTER:deactivate');
+      Neatline.vent.trigger('deactivatePresenter');
     });
 
     it('should not respond to `highlight` events', function() {
@@ -162,8 +162,8 @@ describe('Presenters | Static Bubble', function() {
   describe('activate', function() {
 
     beforeEach(function() {
-      Neatline.vent.trigger('PRESENTER:deactivate');
-      Neatline.vent.trigger('PRESENTER:activate');
+      Neatline.vent.trigger('deactivatePresenter');
+      Neatline.vent.trigger('activatePresenter');
     });
 
     afterEach(function() {

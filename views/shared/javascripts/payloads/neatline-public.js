@@ -34607,19 +34607,22 @@ Neatline.module('Shared', function(Shared) {
 
     /**
      * Get the template and UI selections, call the userland initializer.
+     *
+     * @param {Object} options
      */
-    initialize: function() {
+    initialize: function(options) {
       this._initTemplate();
       this._initSelections();
-      this.init();
+      this.init(options);
     },
 
 
     /**
      * Userland initializer.
-     * @abstract
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
       // NO-OP
     },
 
@@ -34883,10 +34886,12 @@ Neatline.module('Shared.Widget', function(Widget) {
      * (which is the case if an element with the view's `id` is directly
      * templated on the page). If not, append the view element to the core
      * `#neatline-map` container.
+     *
+     * @param {Object} options
      */
-    initialize: function() {
+    initialize: function(options) {
       if (!$('#'+this.id).length) this.$el.appendTo($('#neatline-map'));
-      Widget.View.__super__.initialize.apply(this);
+      Widget.View.__super__.initialize.call(this, options);
     },
 
 
@@ -35478,6 +35483,11 @@ Neatline.module('Map', function(Map) {
     // ------------------------------------------------------------------------
 
 
+    /**
+     * Start the map, request starting records.
+     *
+     * @param {Object} options
+     */
     initialize: function(options) {
 
       this.slug = options.slug;
@@ -35488,6 +35498,7 @@ Neatline.module('Map', function(Map) {
       this._initEvents();
       this._initBaseLayers();
       this._initViewport();
+
       this.requestRecords();
 
     },
@@ -36495,10 +36506,24 @@ Neatline.module('Map', function(Map) {
 Neatline.module('Presenter', function(Presenter) {
 
 
-  Presenter.ID = 'PRESENTER';
+  Presenter.Controller = Neatline.Shared.Controller.extend({
 
 
-  Presenter.addInitializer(function() {
+    slug: 'PRESENTER',
+
+    events: [
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect'
+    ],
+
+    commands: [
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect'
+    ],
 
 
     /**
@@ -36506,15 +36531,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var highlight = function(args) {
+    highlight: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
         );
       } catch (e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:highlight', highlight);
-    Neatline.vent.on('highlight', highlight);
+    },
 
 
     /**
@@ -36522,15 +36545,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var unhighlight = function(args) {
+    unhighlight: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
         );
       } catch(e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
-    Neatline.vent.on('unhighlight', unhighlight);
+    },
 
 
     /**
@@ -36538,15 +36559,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var select = function(args) {
+    select: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':select', args.model
         );
       } catch (e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:select', select);
-    Neatline.vent.on('select', select);
+    },
 
 
     /**
@@ -36554,15 +36573,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var unselect = function(args) {
+    unselect: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
         );
       } catch (e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:unselect', unselect);
-    Neatline.vent.on('unselect', unselect);
+    },
 
 
   });
@@ -36580,17 +36597,12 @@ Neatline.module('Presenter', function(Presenter) {
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Presenter.None', function(None) {
+Neatline.module('Presenter', function(Presenter) {
 
 
-  None.ID = 'PRESENTER:None';
-
-
-  var none = function() {};
-  Neatline.commands.setHandler(None.ID+':highlight',    none);
-  Neatline.commands.setHandler(None.ID+':unhighlight',  none);
-  Neatline.commands.setHandler(None.ID+':select',       none);
-  Neatline.commands.setHandler(None.ID+':unselect',     none);
+  Presenter.addInitializer(function() {
+    Presenter.__controller = new Presenter.Controller();
+  });
 
 
 });
@@ -36608,13 +36620,30 @@ Neatline.module('Presenter.None', function(None) {
 Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
-  StaticBubble.ID = 'PRESENTER:StaticBubble';
+  StaticBubble.Controller = Neatline.Shared.Controller.extend({
 
 
-  StaticBubble.addInitializer(function() {
+    slug: 'PRESENTER:StaticBubble',
+
+    events: [
+      'activatePresenter',
+      'deactivatePresenter'
+    ],
+
+    commands: [
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect'
+    ],
 
 
-    StaticBubble.__view = new StaticBubble.View();
+    /**
+     * Initialize the view.
+     */
+    init: function() {
+      this.view = new StaticBubble.View({ slug: this.slug });
+    },
 
 
     /**
@@ -36622,23 +36651,17 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
      *
      * @param {Object} model: The record model.
      */
-    var highlight = function(model) {
-      StaticBubble.__view.highlight(model);
-    };
-    Neatline.commands.setHandler(
-      StaticBubble.ID+':highlight', highlight
-    );
+    highlight: function(model) {
+      this.view.highlight(model);
+    },
 
 
     /**
      * Unhighlight the bubble.
      */
-    var unhighlight = function() {
-      StaticBubble.__view.unhighlight();
-    };
-    Neatline.commands.setHandler(
-      StaticBubble.ID+':unhighlight', unhighlight
-    );
+    unhighlight: function() {
+      this.view.unhighlight();
+    },
 
 
     /**
@@ -36646,48 +36669,56 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
      *
      * @param {Object} model: The record model.
      */
-    var select = function(model) {
-      StaticBubble.__view.select(model);
-    };
-    Neatline.commands.setHandler(
-      StaticBubble.ID+':select', select
-    );
+    select: function(model) {
+      this.view.select(model);
+    },
 
 
     /**
      * Unselect the bubble.
      */
-    var unselect = function() {
-      StaticBubble.__view.unselect();
-    };
-    Neatline.commands.setHandler(
-      StaticBubble.ID+':unselect', unselect
-    );
+    unselect: function() {
+      this.view.unselect();
+    },
 
 
     /**
      * Activate the bubble.
      */
-    var activate = function() {
-      StaticBubble.__view.activate();
-    };
-    Neatline.vent.on(
-      'PRESENTER:activate', activate
-    );
+    activatePresenter: function() {
+      this.view.activate();
+    },
 
 
     /**
      * Deactivate and close the bubble.
      */
-    var deactivate = function() {
-      StaticBubble.__view.deactivate();
-      StaticBubble.__view.unselect();
-    };
-    Neatline.vent.on(
-      'PRESENTER:deactivate', deactivate
-    );
+    deactivatePresenter: function() {
+      this.view.deactivate();
+      this.view.unselect();
+    }
 
 
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
+
+
+  StaticBubble.addInitializer(function() {
+    StaticBubble.__controller = new StaticBubble.Controller();
   });
 
 
@@ -36722,16 +36753,20 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
     /**
-     * Initialize state, compile template.
+     * Compile the interior template, initialize state.
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
 
       StaticBubble.View.__super__.init.apply(this);
 
+      // Compile the template, store the slug
+      this.template = _.template($('#static-bubble-template').html());
+      this.slug = options.slug;
+
       this.active   = true;   // True when bubble should be displayed.
       this.selected = false;  // True when bubble is frozen after a click.
-
-      this.template = _.template($('#static-bubble-template').html());
 
     },
 
@@ -36746,7 +36781,7 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
         model:  this.model,
-        source: StaticBubble.ID
+        source: this.slug
       });
 
     },

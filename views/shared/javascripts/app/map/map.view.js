@@ -25,6 +25,11 @@ Neatline.module('Map', function(Map) {
     // ------------------------------------------------------------------------
 
 
+    /**
+     * Start the map, request starting records.
+     *
+     * @param {Object} options
+     */
     initialize: function(options) {
 
       this.slug = options.slug;
@@ -35,6 +40,7 @@ Neatline.module('Map', function(Map) {
       this._initEvents();
       this._initBaseLayers();
       this._initViewport();
+
       this.requestRecords();
 
     },

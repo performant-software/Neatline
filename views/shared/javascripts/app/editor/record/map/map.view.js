@@ -118,8 +118,8 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     setPresenterStatus: function() {
       Neatline.vent.trigger(this.mapTabActive() ?
-        'PRESENTER:deactivate' :
-        'PRESENTER:activate'
+        'deactivatePresenter' :
+        'activatePresenter'
       );
     },
 

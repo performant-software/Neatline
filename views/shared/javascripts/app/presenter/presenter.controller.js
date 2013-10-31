@@ -11,10 +11,24 @@
 Neatline.module('Presenter', function(Presenter) {
 
 
-  Presenter.ID = 'PRESENTER';
+  Presenter.Controller = Neatline.Shared.Controller.extend({
 
 
-  Presenter.addInitializer(function() {
+    slug: 'PRESENTER',
+
+    events: [
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect'
+    ],
+
+    commands: [
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect'
+    ],
 
 
     /**
@@ -22,15 +36,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var highlight = function(args) {
+    highlight: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':highlight', args.model
         );
       } catch (e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:highlight', highlight);
-    Neatline.vent.on('highlight', highlight);
+    },
 
 
     /**
@@ -38,15 +50,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var unhighlight = function(args) {
+    unhighlight: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':unhighlight', args.model
         );
       } catch(e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:unhighlight', unhighlight);
-    Neatline.vent.on('unhighlight', unhighlight);
+    },
 
 
     /**
@@ -54,15 +64,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var select = function(args) {
+    select: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':select', args.model
         );
       } catch (e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:select', select);
-    Neatline.vent.on('select', select);
+    },
 
 
     /**
@@ -70,15 +78,13 @@ Neatline.module('Presenter', function(Presenter) {
      *
      * @param {Object} args: Event arguments.
      */
-    var unselect = function(args) {
+    unselect: function(args) {
       try {
         Neatline.execute(
           'PRESENTER:'+args.model.get('presenter')+':unselect', args.model
         );
       } catch (e) {}
-    };
-    Neatline.commands.setHandler('PRESENTER:unselect', unselect);
-    Neatline.vent.on('unselect', unselect);
+    },
 
 
   });

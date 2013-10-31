@@ -16,19 +16,22 @@ Neatline.module('Shared', function(Shared) {
 
     /**
      * Get the template and UI selections, call the userland initializer.
+     *
+     * @param {Object} options
      */
-    initialize: function() {
+    initialize: function(options) {
       this._initTemplate();
       this._initSelections();
-      this.init();
+      this.init(options);
     },
 
 
     /**
      * Userland initializer.
-     * @abstract
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
       // NO-OP
     },
 

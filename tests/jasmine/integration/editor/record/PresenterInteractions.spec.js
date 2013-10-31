@@ -43,7 +43,7 @@ describe('Record | Presenter Interactions', function() {
     el.map.tab('show');
 
     // Presenter should deactivate.
-    expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
+    expect(vent).toHaveBeenCalledWith('deactivatePresenter');
 
   });
 
@@ -64,7 +64,7 @@ describe('Record | Presenter Interactions', function() {
     el.text.tab('show');
 
     // Presenter should activate.
-    expect(vent).toHaveBeenCalledWith('PRESENTER:activate');
+    expect(vent).toHaveBeenCalledWith('activatePresenter');
 
   });
 
@@ -83,7 +83,7 @@ describe('Record | Presenter Interactions', function() {
     NL.navigate('record/add/map');
 
     // Presenter should deactivate.
-    expect(vent).toHaveBeenCalledWith('PRESENTER:deactivate');
+    expect(vent).toHaveBeenCalledWith('deactivatePresenter');
 
   });
 
@@ -108,7 +108,7 @@ describe('Record | Presenter Interactions', function() {
     el.close.trigger('click');
 
     // Presenter should activate.
-    expect(vent).toHaveBeenCalledWith('PRESENTER:activate');
+    expect(vent).toHaveBeenCalledWith('activatePresenter');
 
   });
 

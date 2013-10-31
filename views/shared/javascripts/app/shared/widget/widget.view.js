@@ -22,10 +22,12 @@ Neatline.module('Shared.Widget', function(Widget) {
      * (which is the case if an element with the view's `id` is directly
      * templated on the page). If not, append the view element to the core
      * `#neatline-map` container.
+     *
+     * @param {Object} options
      */
-    initialize: function() {
+    initialize: function(options) {
       if (!$('#'+this.id).length) this.$el.appendTo($('#neatline-map'));
-      Widget.View.__super__.initialize.apply(this);
+      Widget.View.__super__.initialize.call(this, options);
     },
 
 
