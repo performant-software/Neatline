@@ -44,7 +44,7 @@ Neatline.module('Shared', function(Shared) {
      */
     _initEvents: function() {
       _.each(this.events, _.bind(function(e) {
-        Neatline.vent.on(this.slug+':'+e, _.bind(this[e], this));
+        Neatline.vent.on(e, _.bind(this[e], this));
       }, this));
     },
 

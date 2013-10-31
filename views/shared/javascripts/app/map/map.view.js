@@ -25,7 +25,10 @@ Neatline.module('Map', function(Map) {
     // ------------------------------------------------------------------------
 
 
-    initialize: function() {
+    initialize: function(options) {
+
+      this.slug = options.slug;
+
       this._initGlobals();
       this._initOpenLayers();
       this._initControls();
@@ -33,6 +36,7 @@ Neatline.module('Map', function(Map) {
       this._initBaseLayers();
       this._initViewport();
       this.requestRecords();
+
     },
 
 
@@ -58,8 +62,8 @@ Neatline.module('Map', function(Map) {
       this.layers = { vector: {}, wms: {} };
 
       /**
-       * An object that contains references to all filters registered on
-       * the map, keyed by filter slug.
+       * An object that contains references to all filters registered on the
+      * map, keyed by filter slug.
        */
       this.filters = {};
 
@@ -860,7 +864,7 @@ Neatline.module('Map', function(Map) {
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
         model:  evt.feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -882,7 +886,7 @@ Neatline.module('Map', function(Map) {
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
         model:  evt.feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -904,7 +908,7 @@ Neatline.module('Map', function(Map) {
       // Publish `select` event.
       Neatline.vent.trigger('select', {
         model:  feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -925,7 +929,7 @@ Neatline.module('Map', function(Map) {
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
         model:  feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },

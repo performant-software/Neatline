@@ -55728,7 +55728,7 @@ Neatline.module('Shared', function(Shared) {
      */
     _initEvents: function() {
       _.each(this.events, _.bind(function(e) {
-        Neatline.vent.on(this.slug+':'+e, _.bind(this[e], this));
+        Neatline.vent.on(e, _.bind(this[e], this));
       }, this));
     },
 
@@ -56280,14 +56280,50 @@ Neatline.module('Map.Layers', function(Layers) {
 Neatline.module('Map', function(Map) {
 
 
-  Map.ID = 'MAP';
+  Map.Controller = Neatline.Shared.Controller.extend({
 
 
-  Map.addInitializer(function() {
+    slug: 'MAP',
+
+    events: [
+      'refresh',
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect',
+      'setFilter',
+      'removeFilter'
+    ],
+
+    commands: [
+      'load',
+      'refresh',
+      'highlight',
+      'unhighlight',
+      'select',
+      'unselect',
+      'focusByModel',
+      'setFilter',
+      'removeFilter',
+      'updateSize'
+    ],
+
+    requests: [
+      'getMap',
+      'getVectorLayer',
+      'getRecords',
+      'getCenter',
+      'getZoom'
+    ],
 
 
-    Map.__collection  = new Neatline.Shared.Record.Collection();
-    Map.__view        = new Neatline.Map.View();
+    /**
+     * Create collection and view.
+     */
+    init: function() {
+      this.collection = new Neatline.Shared.Record.Collection();
+      this.view = new Neatline.Map.View({ slug: this.slug });
+    },
 
 
     /**
@@ -56295,23 +56331,40 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} params: Hash with `extent` and `zoom`.
      */
-    var load = function(params) {
-      Map.__collection.update(params, function(records) {
-        Map.__view.ingest(records);
-      });
-    };
-    Neatline.commands.setHandler(Map.ID+':load', load);
+    load: function(params) {
+      this.collection.update(params, _.bind(function(records) {
+        this.view.ingest(records);
+      }, this));
+    },
 
 
     /**
      * Reload map data for current focus/zoom.
      */
-    var refresh = function() {
-      Map.__view.removeAllLayers();
-      Map.__view.requestRecords();
-    };
-    Neatline.commands.setHandler(Map.ID+':refresh', refresh);
-    Neatline.vent.on('refresh', refresh);
+    refresh: function() {
+      this.view.removeAllLayers();
+      this.view.requestRecords();
+    },
+
+
+    /**
+     * Highlight by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    highlight: function(args) {
+      this.view.highlightByModel(args.model);
+    },
+
+
+    /**
+     * Unhighlight by model.
+     *
+     * @param {Object} args: Event arguments.
+     */
+    unhighlight: function(args) {
+      this.view.unhighlightByModel(args.model);
+    },
 
 
     /**
@@ -56320,38 +56373,12 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} args: Event arguments.
      */
-    var select = function(args) {
-      if (args.source !== Map.ID) {
-        focusByModel(args.model);
-        Map.__view.selectByModel(args.model);
+    select: function(args) {
+      if (args.source !== this.slug) {
+        this.focusByModel(args.model);
+        this.view.selectByModel(args.model);
       }
-    };
-    Neatline.commands.setHandler(Map.ID+':select', select);
-    Neatline.vent.on('select', select);
-
-
-    /**
-     * Highlight by model.
-     *
-     * @param {Object} args: Event arguments.
-     */
-    var highlight = function(args) {
-      Map.__view.highlightByModel(args.model);
-    };
-    Neatline.commands.setHandler(Map.ID+':highlight', highlight);
-    Neatline.vent.on('highlight', highlight);
-
-
-    /**
-     * Unhighlight by model.
-     *
-     * @param {Object} args: Event arguments.
-     */
-    var unhighlight = function(args) {
-      Map.__view.unhighlightByModel(args.model);
-    };
-    Neatline.commands.setHandler(Map.ID+':unhighlight', unhighlight);
-    Neatline.vent.on('unhighlight', unhighlight);
+    },
 
 
     /**
@@ -56359,11 +56386,9 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} args: Event arguments.
      */
-    var unselect = function(args) {
-      Map.__view.unselectByModel(args.model);
-    };
-    Neatline.commands.setHandler(Map.ID+':unselect', unselect);
-    Neatline.vent.on('unselect', unselect);
+    unselect: function(args) {
+      this.view.unselectByModel(args.model);
+    },
 
 
     /**
@@ -56371,10 +56396,9 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: A record model.
      */
-    var focusByModel = function(model) {
-      Map.__view.focusByModel(model);
-    };
-    Neatline.commands.setHandler(Map.ID+':focusByModel', focusByModel);
+    focusByModel: function(model) {
+      this.view.focusByModel(model);
+    },
 
 
     /**
@@ -56382,11 +56406,9 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} args: Event arguments.
      */
-    var setFilter = function(args) {
-      Map.__view.setFilter(args.key, args.evaluator);
-    };
-    Neatline.commands.setHandler(Map.ID+':setFilter', setFilter);
-    Neatline.vent.on('setFilter', setFilter);
+    setFilter: function(args) {
+      this.view.setFilter(args.key, args.evaluator);
+    },
 
 
     /**
@@ -56394,20 +56416,27 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} args: Event arguments.
      */
-    var removeFilter = function(args) {
-      Map.__view.removeFilter(args.key);
-    };
-    Neatline.commands.setHandler(Map.ID+':removeFilter', removeFilter);
-    Neatline.vent.on('removeFilter', removeFilter);
+    removeFilter: function(args) {
+      this.view.removeFilter(args.key);
+    },
 
 
     /**
      * Refresh the map after it is resized.
      */
-    var updateSize = function() {
-      Map.__view.map.updateSize();
-    };
-    Neatline.commands.setHandler(Map.ID+':updateSize', updateSize);
+    updateSize: function() {
+      this.view.map.updateSize();
+    },
+
+
+    /**
+     * Emit the OpenLayers map instance.
+     *
+     * @return {Object}: The map.
+     */
+    getMap: function() {
+      return this.view.map;
+    },
 
 
     /**
@@ -56416,21 +56445,9 @@ Neatline.module('Map', function(Map) {
      * @param {Object} model: A record model.
      * @return {Object}: The record model.
      */
-    var getVectorLayer = function(model) {
-      return Map.__view.getOrCreateVectorLayer(model);
-    };
-    Neatline.reqres.setHandler(Map.ID+':getVectorLayer', getVectorLayer);
-
-
-    /**
-     * Emit the OpenLayers map instance.
-     *
-     * @return {Object}: The map.
-     */
-    var getMap = function() {
-      return Map.__view.map;
-    };
-    Neatline.reqres.setHandler(Map.ID+':getMap', getMap);
+    getVectorLayer: function(model) {
+      return this.view.getOrCreateVectorLayer(model);
+    },
 
 
     /**
@@ -56438,10 +56455,9 @@ Neatline.module('Map', function(Map) {
      *
      * @return {Object}: The collection.
      */
-    var getRecords = function() {
-      return Map.__collection;
-    };
-    Neatline.reqres.setHandler(Map.ID+':getRecords', getRecords);
+    getRecords: function() {
+      return this.collection;
+    },
 
 
     /**
@@ -56449,10 +56465,9 @@ Neatline.module('Map', function(Map) {
      *
      * @return {Object}: OpenLayers.LonLat.
      */
-    var getCenter = function() {
-      return Map.__view.map.getCenter();
-    };
-    Neatline.reqres.setHandler(Map.ID+':getCenter', getCenter);
+    getCenter: function() {
+      return this.view.map.getCenter();
+    },
 
 
     /**
@@ -56460,12 +56475,31 @@ Neatline.module('Map', function(Map) {
      *
      * @return {Number}: The zoom level.
      */
-    var getZoom = function() {
-      return Map.__view.map.getZoom();
-    };
-    Neatline.reqres.setHandler(Map.ID+':getZoom', getZoom);
+    getZoom: function() {
+      return this.view.map.getZoom();
+    }
 
 
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Map', function(Map) {
+
+
+  Map.addInitializer(function() {
+    Map.__controller = new Map.Controller();
   });
 
 
@@ -56498,7 +56532,10 @@ Neatline.module('Map', function(Map) {
     // ------------------------------------------------------------------------
 
 
-    initialize: function() {
+    initialize: function(options) {
+
+      this.slug = options.slug;
+
       this._initGlobals();
       this._initOpenLayers();
       this._initControls();
@@ -56506,6 +56543,7 @@ Neatline.module('Map', function(Map) {
       this._initBaseLayers();
       this._initViewport();
       this.requestRecords();
+
     },
 
 
@@ -56531,8 +56569,8 @@ Neatline.module('Map', function(Map) {
       this.layers = { vector: {}, wms: {} };
 
       /**
-       * An object that contains references to all filters registered on
-       * the map, keyed by filter slug.
+       * An object that contains references to all filters registered on the
+      * map, keyed by filter slug.
        */
       this.filters = {};
 
@@ -57333,7 +57371,7 @@ Neatline.module('Map', function(Map) {
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
         model:  evt.feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -57355,7 +57393,7 @@ Neatline.module('Map', function(Map) {
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
         model:  evt.feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -57377,7 +57415,7 @@ Neatline.module('Map', function(Map) {
       // Publish `select` event.
       Neatline.vent.trigger('select', {
         model:  feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -57398,7 +57436,7 @@ Neatline.module('Map', function(Map) {
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
         model:  feature.layer.nModel,
-        source: Map.ID
+        source: this.slug
       });
 
     },
@@ -60040,8 +60078,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Map.addInitializer(function() {
 
 
-    Map.__collection  = Neatline.Map.__collection;
-    Map.__view        = Neatline.Map.__view;
+    Map.__view = Neatline.Map.__controller.view;
 
 
     /**

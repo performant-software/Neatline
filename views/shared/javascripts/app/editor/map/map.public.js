@@ -26,8 +26,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   Map.addInitializer(function() {
 
 
-    Map.__collection  = Neatline.Map.__collection;
-    Map.__view        = Neatline.Map.__view;
+    Map.__view = Neatline.Map.__controller.view;
 
 
     /**

@@ -17,7 +17,7 @@ var NL = (function(NL) {
    */
   NL.aliasNeatline = function() {
     this.vw = {
-      MAP:      Neatline.Map.__view,
+      MAP:      Neatline.Map.__controller.view,
       BUBBLE:   Neatline.Presenter.StaticBubble.__view
     };
   };
@@ -28,7 +28,7 @@ var NL = (function(NL) {
    */
   NL.aliasEditor = function() {
     this.vw = {
-      MAP:      Neatline.Map.__view,
+      MAP:      Neatline.Map.__controller.view,
       BUBBLE:   Neatline.Presenter.StaticBubble.__view,
       EDITOR:   Neatline.Editor.__view,
       EXHIBIT:  Neatline.Editor.Exhibit.__view,
