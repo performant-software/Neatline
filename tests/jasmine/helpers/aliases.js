@@ -30,7 +30,7 @@ var NL = (function(NL) {
     this.vw = {
       MAP:      Neatline.Map.__controller.view,
       BUBBLE:   Neatline.Presenter.StaticBubble.__controller.view,
-      EDITOR:   Neatline.Editor.__view,
+      EDITOR:   Neatline.Editor.__controller.view,
       EXHIBIT:  Neatline.Editor.Exhibit.__view,
       SEARCH:   Neatline.Editor.Exhibit.Search.__view,
       RECORDS:  Neatline.Editor.Exhibit.Records.__view,
