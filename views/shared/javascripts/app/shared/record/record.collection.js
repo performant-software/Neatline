@@ -11,28 +11,10 @@
 Neatline.module('Shared.Record', function(Record) {
 
 
-  Record.Collection = Backbone.Neatline.Collection.extend({
+  Record.Collection = Backbone.Collection.extend({
 
 
     model: Neatline.Shared.Record.Model,
-
-
-    /**
-     * Fetch a subset of the collection from the server.
-     *
-     * @param {Object} params: Query parameters.
-     * @param {Function} cb: Called when `fetch` completes.
-     */
-    update: function(params, cb) {
-
-      // Add the exhibit id to the request.
-      params = _.extend(params, {
-        exhibit_id: Neatline.g.neatline.exhibit.id
-      });
-
-      this.fetch({ reset: true, data: $.param(params), success: cb });
-
-    },
 
 
     /**
@@ -54,6 +36,54 @@ Neatline.module('Shared.Record', function(Record) {
       this.offset = Number(response.offset);
       this.count  = Number(response.count);
       return response.records;
+    },
+
+
+    /**
+     * Fetch a subset of the collection from the server.
+     *
+     * @param {Object} params: Query parameters.
+     * @param {Function} cb: Called when `fetch` completes.
+     */
+    update: function(params, cb) {
+
+      // Merge the exhibit id.
+      params = _.extend(params, {
+        exhibit_id: Neatline.g.neatline.exhibit.id
+      });
+
+      // Fetch the new records.
+      this.fetch({ reset: true, data: $.param(params), success: cb });
+
+    },
+
+
+    /**
+     * Get a model by id.
+     *
+     * - If the model is already present in the collection, pass it to the
+     *   callback immediately.
+     *
+     * - If the model is absent, create a new model on the fly, fetch data
+     *   from the server, and pass the populated model to the callback.
+     *
+     * @param {Number} id: The model id.
+     * @param {Function} cb: Callback, called with the model.
+     */
+    getOrFetch: function(id, cb) {
+
+      // Get existing model.
+      var model = this.get(id);
+      if (model) cb(model);
+
+      else {
+
+        // Or, fetch the model.
+        model = new this.model({ id: id });
+        model.fetch({ success: function() { cb(model); }});
+
+      }
+
     }
 
 

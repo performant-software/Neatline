@@ -17,7 +17,6 @@
     , "sinon":                  ">= 1.6.0"
 
     , "jquery-ui":              "jquery/jquery-ui"
-    , "backbone.neatline":      "davidmcclure/backbone.neatline"
     , "backbone-safesync":      "amccloud/backbone-safesync"
     , "openlayers":             "openlayers/openlayers#release-2.13.1"
     , "openlayers-geometry":    "davidmcclure/openlayers-geometry-handler"
