@@ -41,8 +41,8 @@ Neatline.module('Map', function(Map) {
 
     requests: [
       'getMap',
-      'getVectorLayer',
       'getRecords',
+      'getVectorLayer',
       'getCenter',
       'getZoom'
     ],
@@ -171,6 +171,16 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Emit the current records collection.
+     *
+     * @return {Object}: The collection.
+     */
+    getRecords: function() {
+      return this.collection;
+    },
+
+
+    /**
      * Get or create a vector layer for a model.
      *
      * @param {Object} model: A record model.
@@ -178,16 +188,6 @@ Neatline.module('Map', function(Map) {
      */
     getVectorLayer: function(model) {
       return this.view.getOrCreateVectorLayer(model);
-    },
-
-
-    /**
-     * Emit the current records collection.
-     *
-     * @return {Object}: The collection.
-     */
-    getRecords: function() {
-      return this.collection;
     },
 
 

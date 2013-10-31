@@ -35261,8 +35261,8 @@ Neatline.module('Map', function(Map) {
 
     requests: [
       'getMap',
-      'getVectorLayer',
       'getRecords',
+      'getVectorLayer',
       'getCenter',
       'getZoom'
     ],
@@ -35391,6 +35391,16 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Emit the current records collection.
+     *
+     * @return {Object}: The collection.
+     */
+    getRecords: function() {
+      return this.collection;
+    },
+
+
+    /**
      * Get or create a vector layer for a model.
      *
      * @param {Object} model: A record model.
@@ -35398,16 +35408,6 @@ Neatline.module('Map', function(Map) {
      */
     getVectorLayer: function(model) {
       return this.view.getOrCreateVectorLayer(model);
-    },
-
-
-    /**
-     * Emit the current records collection.
-     *
-     * @return {Object}: The collection.
-     */
-    getRecords: function() {
-      return this.collection;
     },
 
 
@@ -36759,14 +36759,13 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
      */
     init: function(options) {
 
-      StaticBubble.View.__super__.init.apply(this);
-
-      // Compile the template, store the slug
-      this.template = _.template($('#static-bubble-template').html());
       this.slug = options.slug;
 
-      this.active   = true;   // True when bubble should be displayed.
+      // Compile the content template.
+      this.template = _.template($('#static-bubble-template').html());
+
       this.selected = false;  // True when bubble is frozen after a click.
+      this.active = true;     // True when bubble should be displayed.
 
     },
 
@@ -36819,7 +36818,7 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
      */
     unbind: function() {
 
-      // Unbind map `mouseout` listener.
+      // Clear the map `mouseout` listener.
       var map = Neatline.request('MAP:getMap');
       map.events.unregister('mouseout', null, this.onMouseOut);
 
