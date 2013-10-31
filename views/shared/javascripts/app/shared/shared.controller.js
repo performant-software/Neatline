@@ -40,11 +40,40 @@ Neatline.module('Shared', function(Shared) {
 
 
     /**
+     * Pass each event identifier through a binding routine:
+     *
+     * - If the identifier is a string, bind the event directly to the method
+     *   on the controller with the same name.
+     *
+     * - If the identifier is an object, treat each of the keys as event names
+     *   and the values as the corresponding controller methods.
+     *
+     * @param {Array} map: A list of strings and/or objects.
+     * @param {Function} bind: Bind an event to a method.
+     */
+    _bind: function(map, bind) {
+      _.each(map, function(identifier) {
+
+        // If string, bind to method with same name.
+        if (_.isString(identifier)) bind(identifier, identifier);
+
+        else if (_.isObject(identifier)) {
+
+          // If object, bind each event-method pair.
+          _.each(identifier, function(v, k) { bind(k, v) });
+
+        }
+
+      });
+    },
+
+
+    /**
      * Bind methods listed in the `events` hash to the event aggregator.
      */
     _initEvents: function() {
-      _.each(this.events, _.bind(function(e) {
-        Neatline.vent.on(e, _.bind(this[e], this));
+      this._bind(this.events, _.bind(function(e, m) {
+        Neatline.vent.on(e, _.bind(this[m], this));
       }, this));
     },
 
@@ -53,8 +82,8 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `commands` hash to the command broker.
      */
     _initCommands: function() {
-      _.each(this.commands, _.bind(function(c) {
-        Neatline.commands.setHandler(this.slug+':'+c, _.bind(this[c], this));
+      this._bind(this.commands, _.bind(function(e, m) {
+        Neatline.commands.setHandler(this.slug+':'+e, _.bind(this[m], this));
       }, this));
     },
 
@@ -63,8 +92,8 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `requests` hash to the reqres broker.
      */
     _initRequests: function() {
-      _.each(this.requests, _.bind(function(r) {
-        Neatline.reqres.setHandler(this.slug+':'+r, _.bind(this[r], this));
+      this._bind(this.requests, _.bind(function(e, m) {
+        Neatline.reqres.setHandler(this.slug+':'+e, _.bind(this[m], this));
       }, this));
     }
 

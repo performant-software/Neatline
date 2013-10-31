@@ -25,8 +25,11 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
     /**
      * Compile pagination and row templates.
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
+      this.slug = options.slug;
       this.template = _.template($('#record-list-template').html());
     },
 
@@ -75,7 +78,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
     onMouseenter: function(e) {
       Neatline.vent.trigger('highlight', {
         model:  this.getModelByEvent(e),
-        source: Records.ID
+        source: this.slug
       });
     },
 
@@ -88,7 +91,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
     onMouseleave: function(e) {
       Neatline.vent.trigger('unhighlight', {
         model:  this.getModelByEvent(e),
-        source: Records.ID
+        source: this.slug
       });
     },
 
@@ -101,7 +104,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
     onClick: function(e) {
       Neatline.vent.trigger('select', {
         model:  this.getModelByEvent(e),
-        source: Records.ID
+        source: this.slug
       });
     }
 

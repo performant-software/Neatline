@@ -55724,11 +55724,40 @@ Neatline.module('Shared', function(Shared) {
 
 
     /**
+     * Pass each event identifier through a binding routine:
+     *
+     * - If the identifier is a string, bind the event directly to the method
+     *   on the controller with the same name.
+     *
+     * - If the identifier is an object, treat each of the keys as event names
+     *   and the values as the corresponding controller methods.
+     *
+     * @param {Array} map: A list of strings and/or objects.
+     * @param {Function} bind: Bind an event to a method.
+     */
+    _bind: function(map, bind) {
+      _.each(map, function(identifier) {
+
+        // If string, bind to method with same name.
+        if (_.isString(identifier)) bind(identifier, identifier);
+
+        else if (_.isObject(identifier)) {
+
+          // If object, bind each event-method pair.
+          _.each(identifier, function(v, k) { bind(k, v) });
+
+        }
+
+      });
+    },
+
+
+    /**
      * Bind methods listed in the `events` hash to the event aggregator.
      */
     _initEvents: function() {
-      _.each(this.events, _.bind(function(e) {
-        Neatline.vent.on(e, _.bind(this[e], this));
+      this._bind(this.events, _.bind(function(e, m) {
+        Neatline.vent.on(e, _.bind(this[m], this));
       }, this));
     },
 
@@ -55737,8 +55766,8 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `commands` hash to the command broker.
      */
     _initCommands: function() {
-      _.each(this.commands, _.bind(function(c) {
-        Neatline.commands.setHandler(this.slug+':'+c, _.bind(this[c], this));
+      this._bind(this.commands, _.bind(function(e, m) {
+        Neatline.commands.setHandler(this.slug+':'+e, _.bind(this[m], this));
       }, this));
     },
 
@@ -55747,8 +55776,8 @@ Neatline.module('Shared', function(Shared) {
      * Bind methods listed in the `requests` hash to the reqres broker.
      */
     _initRequests: function() {
-      _.each(this.requests, _.bind(function(r) {
-        Neatline.reqres.setHandler(this.slug+':'+r, _.bind(this[r], this));
+      this._bind(this.requests, _.bind(function(e, m) {
+        Neatline.reqres.setHandler(this.slug+':'+e, _.bind(this[m], this));
       }, this));
     }
 
@@ -58415,13 +58444,23 @@ Neatline.module('Editor', { startWithParent: false,
 Neatline.module('Editor.Exhibit', function(Exhibit) {
 
 
-  Exhibit.ID = 'EDITOR:EXHIBIT';
+  Exhibit.Controller = Neatline.Shared.Controller.extend({
 
 
-  Exhibit.addInitializer(function() {
+    slug: 'EDITOR:EXHIBIT',
+
+    commands: [
+      'display',
+      'activateTab'
+    ],
 
 
-    Exhibit.__view = new Exhibit.View();
+    /**
+     * Create the view.
+     */
+    init: function() {
+      this.view = new Exhibit.View();
+    },
 
 
     /**
@@ -58429,10 +58468,9 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
      *
      * @param {Object} container: The container element.
      */
-    var display = function(container) {
-      Exhibit.__view.showIn(container);
-    };
-    Neatline.commands.setHandler(Exhibit.ID+':display', display);
+    display: function(container) {
+      this.view.showIn(container);
+    },
 
 
     /**
@@ -58440,12 +58478,31 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
      *
      * @param {String} tab: The tab to activate.
      */
-    var tab = function(tab) {
-      Exhibit.__view.activateTab(tab);
-    };
-    Neatline.commands.setHandler(Exhibit.ID+':activateTab', tab);
+    activateTab: function(tab) {
+      this.view.activateTab(tab);
+    }
 
 
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Exhibit', function(Exhibit) {
+
+
+  Exhibit.addInitializer(function() {
+    Exhibit.__controller = new Exhibit.Controller();
   });
 
 
@@ -58515,15 +58572,31 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
 Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
-  Records.ID = 'EDITOR:EXHIBIT:RECORDS';
+  Records.Controller = Neatline.Shared.Controller.extend({
 
 
-  Records.addInitializer(function() {
+    slug: 'EDITOR:EXHIBIT:RECORDS',
+
+    commands: [
+      'display',
+      'load',
+      'ingest',
+      'navToList'
+    ],
+
+    requests: [
+      'getModel'
+    ],
 
 
-    Records.__router =      new Records.Router();
-    Records.__collection =  new Neatline.Shared.Record.Collection();
-    Records.__view =        new Records.View();
+    /**
+     * Create the router, collection, and view.
+     */
+    init: function() {
+      this.router = new Records.Router();
+      this.collection = new Neatline.Shared.Record.Collection();
+      this.view = new Records.View({ slug: this.slug });
+    },
 
 
     /**
@@ -58531,10 +58604,9 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      *
      * @param {Object} container: The container element.
      */
-    var display = function(container) {
-      Records.__view.showIn(container);
-    };
-    Neatline.commands.setHandler(Records.ID+':display', display);
+    display: function(container) {
+      this.view.showIn(container);
+    },
 
 
     /**
@@ -58542,12 +58614,11 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      *
      * @param {Object} params: The query parameters.
      */
-    var load = function(params) {
-      Records.__collection.update(params, function(records) {
-        ingest(records);
-      });
-    };
-    Neatline.commands.setHandler(Records.ID+':load', load);
+    load: function(params) {
+      this.collection.update(params, _.bind(function(records) {
+        this.ingest(records);
+      }, this));
+    },
 
 
     /**
@@ -58555,19 +58626,17 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      *
      * @param {Object} records: The collection of records.
      */
-    var ingest = function(records) {
-      Records.__view.ingest(records);
-    };
-    Neatline.commands.setHandler(Records.ID+':ingest', ingest);
+    ingest: function(records) {
+      this.view.ingest(records);
+    },
 
 
     /**
      * Navigate to the record list.
      */
-    var navToList = function() {
-      Records.__router.navigate('records', true);
-    };
-    Neatline.commands.setHandler(Records.ID+':navToList', navToList);
+    navToList: function() {
+      this.router.navigate('records', true);
+    },
 
 
     /**
@@ -58576,12 +58645,31 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Number} id: The record id.
      * @param {Function} cb: A callback, called with the model.
      */
-    var getModel = function(id, cb) {
-      Records.__collection.getOrFetch(id, cb);
-    };
-    Neatline.reqres.setHandler(Records.ID+':getModel', getModel);
+    getModel: function(id, cb) {
+      this.collection.getOrFetch(id, cb);
+    }
 
 
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Exhibit.Records', function(Records) {
+
+
+  Records.addInitializer(function() {
+    Records.__controller = new Records.Controller();
   });
 
 
@@ -58666,8 +58754,11 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
     /**
      * Compile pagination and row templates.
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
+      this.slug = options.slug;
       this.template = _.template($('#record-list-template').html());
     },
 
@@ -58716,7 +58807,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
     onMouseenter: function(e) {
       Neatline.vent.trigger('highlight', {
         model:  this.getModelByEvent(e),
-        source: Records.ID
+        source: this.slug
       });
     },
 
@@ -58729,7 +58820,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
     onMouseleave: function(e) {
       Neatline.vent.trigger('unhighlight', {
         model:  this.getModelByEvent(e),
-        source: Records.ID
+        source: this.slug
       });
     },
 
@@ -58742,7 +58833,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
     onClick: function(e) {
       Neatline.vent.trigger('select', {
         model:  this.getModelByEvent(e),
-        source: Records.ID
+        source: this.slug
       });
     }
 

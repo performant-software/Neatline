@@ -41,8 +41,7 @@ describe('Records | Publications', function() {
     $(row).trigger('mouseenter');
 
     expect(vent).toHaveBeenCalledWith('highlight', {
-      model:  model,
-      source: Neatline.Editor.Exhibit.Records.ID
+      model: model, source: 'EDITOR:EXHIBIT:RECORDS'
     });
 
   });
@@ -59,8 +58,7 @@ describe('Records | Publications', function() {
     $(row).trigger('mouseleave');
 
     expect(vent).toHaveBeenCalledWith('unhighlight', {
-      model:  model,
-      source: Neatline.Editor.Exhibit.Records.ID
+      model: model, source: 'EDITOR:EXHIBIT:RECORDS'
     });
 
   });
@@ -76,8 +74,7 @@ describe('Records | Publications', function() {
     $(row).trigger('click');
 
     expect(vent).toHaveBeenCalledWith('select', {
-      model:  model,
-      source: Neatline.Editor.Exhibit.Records.ID
+      model: model, source: 'EDITOR:EXHIBIT:RECORDS'
     });
 
   });

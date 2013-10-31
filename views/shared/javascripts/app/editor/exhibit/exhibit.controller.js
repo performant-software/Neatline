@@ -11,13 +11,23 @@
 Neatline.module('Editor.Exhibit', function(Exhibit) {
 
 
-  Exhibit.ID = 'EDITOR:EXHIBIT';
+  Exhibit.Controller = Neatline.Shared.Controller.extend({
 
 
-  Exhibit.addInitializer(function() {
+    slug: 'EDITOR:EXHIBIT',
+
+    commands: [
+      'display',
+      'activateTab'
+    ],
 
 
-    Exhibit.__view = new Exhibit.View();
+    /**
+     * Create the view.
+     */
+    init: function() {
+      this.view = new Exhibit.View();
+    },
 
 
     /**
@@ -25,10 +35,9 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
      *
      * @param {Object} container: The container element.
      */
-    var display = function(container) {
-      Exhibit.__view.showIn(container);
-    };
-    Neatline.commands.setHandler(Exhibit.ID+':display', display);
+    display: function(container) {
+      this.view.showIn(container);
+    },
 
 
     /**
@@ -36,10 +45,9 @@ Neatline.module('Editor.Exhibit', function(Exhibit) {
      *
      * @param {String} tab: The tab to activate.
      */
-    var tab = function(tab) {
-      Exhibit.__view.activateTab(tab);
-    };
-    Neatline.commands.setHandler(Exhibit.ID+':activateTab', tab);
+    activateTab: function(tab) {
+      this.view.activateTab(tab);
+    }
 
 
   });

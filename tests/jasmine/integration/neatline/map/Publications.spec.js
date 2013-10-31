@@ -41,8 +41,7 @@ describe('Map | Publications', function() {
     NL.hoverOnMapFeature(feature);
 
     expect(vent).toHaveBeenCalledWith('highlight', {
-      model:  layer.nModel,
-      source: 'MAP'
+      model: layer.nModel, source: 'MAP'
     });
 
   });
@@ -59,8 +58,7 @@ describe('Map | Publications', function() {
     NL.unHoverOnMapFeature();
 
     expect(vent).toHaveBeenCalledWith('unhighlight', {
-      model:  layer.nModel,
-      source: 'MAP'
+      model: layer.nModel, source: 'MAP'
     });
 
   });
@@ -76,8 +74,7 @@ describe('Map | Publications', function() {
     NL.clickOnMapFeature(feature);
 
     expect(vent).toHaveBeenCalledWith('select', {
-      model:  layer.nModel,
-      source: 'MAP'
+      model: layer.nModel, source: 'MAP'
     });
 
   });
@@ -94,8 +91,7 @@ describe('Map | Publications', function() {
     NL.clickOffMapFeature();
 
     expect(vent).toHaveBeenCalledWith('unselect', {
-      model:  layer.nModel,
-      source: 'MAP'
+      model: layer.nModel, source: 'MAP'
     });
 
   });
