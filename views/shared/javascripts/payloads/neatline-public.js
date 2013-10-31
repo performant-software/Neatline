@@ -34560,8 +34560,8 @@ Neatline.module('Shared', function(Shared) {
      * - If the identifier is a string, bind the event directly to the method
      *   on the controller with the same name.
      *
-     * - If the identifier is an object, treat each of the keys as event names
-     *   and the values as the corresponding controller methods.
+     * - If the identifier is an object, treat the keys as event names and the
+     *   values as the corresponding controller methods.
      *
      * @param {Array} map: A list of strings and/or objects.
      * @param {Function} bind: Bind an event to a method.
@@ -34584,7 +34584,7 @@ Neatline.module('Shared', function(Shared) {
 
 
     /**
-     * Bind methods listed in the `events` hash to the event aggregator.
+     * Bind the `events` hash to the event aggregator.
      */
     _initEvents: function() {
       this._bind(this.events, _.bind(function(e, m) {
@@ -34594,7 +34594,7 @@ Neatline.module('Shared', function(Shared) {
 
 
     /**
-     * Bind methods listed in the `commands` hash to the command broker.
+     * Bind the `commands` hash to the command broker.
      */
     _initCommands: function() {
       this._bind(this.commands, _.bind(function(e, m) {
@@ -34604,7 +34604,7 @@ Neatline.module('Shared', function(Shared) {
 
 
     /**
-     * Bind methods listed in the `requests` hash to the reqres broker.
+     * Bind the `requests` hash to the req/res broker.
      */
     _initRequests: function() {
       this._bind(this.requests, _.bind(function(e, m) {

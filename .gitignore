@@ -8,7 +8,7 @@ pkg
 
 _SpecRunner.html
 
-layers
-!layers/default.json
+/layers
+!/layers/default.json
 
-tests/phpunit/plugins.ini
+/tests/phpunit/plugins.ini
