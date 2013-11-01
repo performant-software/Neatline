@@ -68,8 +68,8 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * @return {String} url: The route.
      */
     getUrlFromQuery: function() {
-      var q = this.getQueryForUrl();
-      return (q != '') ? 'records/search/query='+q : 'records';
+      var query = this.getQueryForUrl();
+      return (query != '') ? 'records/search/query='+query : 'records';
     },
 
 
@@ -88,8 +88,8 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       // TAGS
       if (_.string.startsWith(value, 'tags:')) {
-        var raw = _.string.trim(_.string.strRight(value, 'tags:'));
-        this.query.tags = raw.replace(/\s/g, '').split(',');
+        var body = _.string.trim(_.string.strRight(value, 'tags:'));
+        this.query.tags = body.replace(/\s/g, '').split(',');
         this.bold();
       }
 

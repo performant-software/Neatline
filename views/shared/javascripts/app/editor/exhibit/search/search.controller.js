@@ -82,9 +82,10 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       // Break if not mirroring.
       if (!this.view.mirroring) return;
 
-      // Display the current map collection in the browser.
-      records = records || Neatline.request('MAP:getRecords');
-      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
+      // Display the map collection in the browser.
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest',
+        records || Neatline.request('MAP:getRecords')
+      );
 
     },
 

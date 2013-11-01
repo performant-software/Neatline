@@ -58774,32 +58774,16 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      */
     ingest: function(records) {
 
-      this.records = records;
-
-      // Get query as URL param.
-      var query = Neatline.request(
-        'EDITOR:EXHIBIT:SEARCH:getQueryForUrl'
-      );
+      // Get current query as URL parameter.
+      var query = Neatline.request('EDITOR:EXHIBIT:SEARCH:getQueryForUrl');
 
       // Render record list.
       this.$el.html(this.template({
-        records:  this.records,
-        limit:    Neatline.g.neatline.per_page,
-        query:    query
+        records: records, limit: Neatline.g.neatline.per_page, query: query
       }));
 
-    },
+      this.records = records;
 
-
-    /**
-     * Get the model that corresponds to a DOM event.
-     *
-     * @param {Object} e: A DOM event.
-     */
-    getModelByEvent: function(e) {
-      return this.records.get(
-        Number($(e.currentTarget).attr('data-id'))
-      );
     },
 
 
@@ -58809,10 +58793,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} e: The click event.
      */
     onMouseenter: function(e) {
-      Neatline.vent.trigger('highlight', {
-        model:  this.getModelByEvent(e),
-        source: this.slug
-      });
+      this.publish('highlight', this.getModelByEvent(e));
     },
 
 
@@ -58822,10 +58803,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} e: The click event.
      */
     onMouseleave: function(e) {
-      Neatline.vent.trigger('unhighlight', {
-        model:  this.getModelByEvent(e),
-        source: this.slug
-      });
+      this.publish('unhighlight', this.getModelByEvent(e));
     },
 
 
@@ -58835,9 +58813,29 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} e: The click event.
      */
     onClick: function(e) {
-      Neatline.vent.trigger('select', {
-        model:  this.getModelByEvent(e),
-        source: this.slug
+      this.publish('select', this.getModelByEvent(e));
+    },
+
+
+    /**
+     * Get the model that corresponds to a DOM event.
+     *
+     * @param {Object} e: A DOM event.
+     */
+    getModelByEvent: function(e) {
+      return this.records.get(Number($(e.currentTarget).attr('data-id')));
+    },
+
+
+    /**
+     * Publish an event with a model.
+     *
+     * @param {String} event: An event name.
+     * @param {Object} model: A record model.
+     */
+    publish: function(event, model) {
+      Neatline.vent.trigger(event, {
+        model: model, source: this.slug
       });
     }
 
@@ -58931,9 +58929,10 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       // Break if not mirroring.
       if (!this.view.mirroring) return;
 
-      // Display the current map collection in the browser.
-      records = records || Neatline.request('MAP:getRecords');
-      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
+      // Display the map collection in the browser.
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest',
+        records || Neatline.request('MAP:getRecords')
+      );
 
     },
 
@@ -59043,8 +59042,8 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * @return {String} url: The route.
      */
     getUrlFromQuery: function() {
-      var q = this.getQueryForUrl();
-      return (q != '') ? 'records/search/query='+q : 'records';
+      var query = this.getQueryForUrl();
+      return (query != '') ? 'records/search/query='+query : 'records';
     },
 
 
@@ -59063,8 +59062,8 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       // TAGS
       if (_.string.startsWith(value, 'tags:')) {
-        var raw = _.string.trim(_.string.strRight(value, 'tags:'));
-        this.query.tags = raw.replace(/\s/g, '').split(',');
+        var body = _.string.trim(_.string.strRight(value, 'tags:'));
+        this.query.tags = body.replace(/\s/g, '').split(',');
         this.bold();
       }
 

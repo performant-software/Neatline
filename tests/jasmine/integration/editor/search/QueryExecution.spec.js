@@ -54,7 +54,7 @@ describe('Search | Query Execution', function() {
   });
 
 
-  it('should unbold the input for regular keyword query', function() {
+  it('should unbold the input for keyword or empty query', function() {
 
     // ------------------------------------------------------------------------
     // When the input has been bolded in response to a structured query (tags
@@ -62,16 +62,16 @@ describe('Search | Query Execution', function() {
     // should be un-bolded.
     // ------------------------------------------------------------------------
 
-    // Exiting tags query.
+    // Structured query -> keyword query.
     NL.vw.SEARCH.__ui.search.val('tags:').trigger('keyup');
-    NL.vw.SEARCH.__ui.search.val('tags').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('').trigger('keyup');
 
     // Input should not be bold.
     expect(NL.vw.SEARCH.__ui.search).not.toHaveClass('bold');
 
-    // Exiting map mirroring.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
-    NL.vw.SEARCH.__ui.search.val('map').trigger('keyup');
+    // Structured query -> empty query.
+    NL.vw.SEARCH.__ui.search.val('tags:').trigger('keyup');
+    NL.vw.SEARCH.__ui.search.val('').trigger('keyup');
 
     // Input should not be bold.
     expect(NL.vw.SEARCH.__ui.search).not.toHaveClass('bold');
