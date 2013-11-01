@@ -60368,7 +60368,104 @@ Neatline.module('Editor.Map', { startWithParent: false,
   define: function(Map) {
 
 
-  Map.ID = 'EDITOR:MAP';
+  Map.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'EDITOR:MAP',
+
+    commands: [
+      'startEdit',
+      'endEdit',
+      'clearEditLayer',
+      'updateEdit',
+      'updateWKT',
+      'updateModel'
+    ],
+
+
+    /**
+     * Alias the public map view.
+     */
+    init: function() {
+      this.view = Neatline.Map.__controller.view;
+    },
+
+
+    /**
+     * Start map edit when a record form is opened.
+     *
+     * @param {Object} model: The record model.
+     */
+    startEdit: function(model) {
+      this.view.startEdit(model);
+    },
+
+
+    /**
+     * End map edit when a record form is closed.
+     *
+     * @param {Object} model: The record model.
+     */
+    endEdit: function(model) {
+      this.view.endEdit();
+    },
+
+
+    /**
+     * Empty the edit layer.
+     */
+    clearEditLayer: function() {
+      this.view.clearEditLayer();
+    },
+
+
+    /**
+     * Update the map edit controls.
+     *
+     * @param {Object} settings: The new form settings.
+     */
+    updateEdit: function(settings) {
+      this.view.updateEdit(settings);
+    },
+
+
+    /**
+     * Update the WKT on the geometry handler.
+     *
+     * @param {String} wkt: The WKT.
+     */
+    updateWKT: function(wkt) {
+      this.view.updateWKT(wkt);
+    },
+
+
+    /**
+     * Update edit layer model.
+     *
+     * @param {Object} model: The updated model.
+     */
+    updateModel: function(model) {
+      this.view.updateModel(model);
+    }
+
+
+  });
+
+
+}});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Map', { startWithParent: false,
+  define: function(Map) {
 
 
   /**
@@ -60379,76 +60476,11 @@ Neatline.module('Editor.Map', { startWithParent: false,
   });
 
 
+  /**
+   * Start the map controller.
+   */
   Map.addInitializer(function() {
-
-
-    Map.__view = Neatline.Map.__controller.view;
-
-
-    /**
-     * Start map edit when a record form is opened.
-     *
-     * @param {Object} model: The record model.
-     */
-    var startEdit = function(model) {
-      Map.__view.startEdit(model);
-    };
-    Neatline.commands.setHandler(Map.ID+':startEdit', startEdit);
-
-
-    /**
-     * End map edit when a record form is closed.
-     *
-     * @param {Object} model: The record model.
-     */
-    var endEdit = function(model) {
-      Map.__view.endEdit();
-    };
-    Neatline.commands.setHandler(Map.ID+':endEdit', endEdit);
-
-
-    /**
-     * Update the map edit controls.
-     *
-     * @param {Object} settings: The new form settings.
-     */
-    var updateEdit = function(settings) {
-      Map.__view.updateEdit(settings);
-    };
-    Neatline.commands.setHandler(Map.ID+':updateEdit', updateEdit);
-
-
-    /**
-     * Update the WKT on the geometry handler.
-     *
-     * @param {String} wkt: The WKT.
-     */
-    var updateWKT = function(wkt) {
-      Map.__view.updateWKT(wkt);
-    };
-    Neatline.commands.setHandler(Map.ID+':updateWKT', updateWKT);
-
-
-    /**
-     * Update edit layer model.
-     *
-     * @param {Object} model: The updated model.
-     */
-    var updateModel = function(model) {
-      Map.__view.updateModel(model);
-    };
-    Neatline.commands.setHandler(Map.ID+':updateModel', updateModel);
-
-
-    /**
-     * Empty the edit layer.
-     */
-    var clearLayer = function() {
-      Map.__view.clearEditLayer();
-    };
-    Neatline.commands.setHandler(Map.ID+':clearEditLayer', clearLayer);
-
-
+    Map.__controller = new Map.Controller();
   });
 
 
