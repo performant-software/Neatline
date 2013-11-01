@@ -59153,14 +59153,21 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 
 
-  Styles.ID = 'EDITOR:EXHIBIT:STYLES';
+  Styles.Controller = Neatline.Shared.Controller.extend({
 
 
-  Styles.addInitializer(function() {
+    slug: 'EDITOR:EXHIBIT:STYLES',
+
+    commands: ['display'],
 
 
-    Styles.__router = new Styles.Router();
-    Styles.__view   = new Styles.View();
+    /**
+     * Create the router and view.
+     */
+    init: function() {
+      this.router = new Styles.Router();
+      this.view = new Styles.View();
+    },
 
 
     /**
@@ -59168,15 +59175,39 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
      *
      * @param {Object} container: The container element.
      */
-    var display = function(container) {
-      Styles.__view.showIn(container);
-      Styles.__view.model.fetch({ success: function() {
-        Styles.__view.buildEditor();
-      }})
-    };
-    Neatline.commands.setHandler(Styles.ID+':display', display);
+    display: function(container) {
+
+      // Display the view.
+      this.view.showIn(container);
+
+      // Build the CSS editor.
+      this.view.model.fetch({ success: _.bind(function() {
+        this.view.buildEditor();
+      }, this)})
+
+    }
 
 
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Exhibit.Styles', function(Styles) {
+
+
+  Styles.addInitializer(function() {
+    Styles.__controller = new Styles.Controller();
   });
 
 
