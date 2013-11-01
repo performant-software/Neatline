@@ -39,7 +39,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
       );
 
       Neatline.execute(
-        'EDITOR:EXHIBIT:SEARCH:initialize', query, start
+        'EDITOR:EXHIBIT:SEARCH:search', query, start
       );
 
     }

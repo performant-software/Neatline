@@ -96,7 +96,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         this.mirroring = true;
-        Neatline.execute('EDITOR:EXHIBIT:SEARCH:mirrorMap');
+        Neatline.execute('EDITOR:EXHIBIT:SEARCH:mirror');
         this.bold();
       }
 

@@ -11,13 +11,32 @@
 Neatline.module('Editor.Exhibit.Search', function(Search) {
 
 
-  Search.ID = 'EDITOR:EXHIBIT:SEARCH';
+  Search.Controller = Neatline.Shared.Controller.extend({
 
 
-  Search.addInitializer(function() {
+    slug: 'EDITOR:EXHIBIT:SEARCH',
+
+    events: [
+      { 'MAP:ingest': 'mirror' }
+    ],
+
+    commands: [
+      'display',
+      'search',
+      'mirror'
+    ],
+
+    requests: [
+      'getQueryForUrl'
+    ],
 
 
-    Search.__view = new Search.View();
+    /**
+     * Create the view.
+     */
+    init: function() {
+      this.view = new Search.View();
+    },
 
 
     /**
@@ -25,31 +44,30 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      *
      * @param {Object} container: The container element.
      */
-    var display = function(container) {
-      Search.__view.showIn(container);
-    };
-    Neatline.commands.setHandler(Search.ID+':display', display);
+    display: function(container) {
+      this.view.showIn(container);
+    },
 
 
     /**
-     * Initialize the record list from route parameters.
+     * Populate the record list from route parameters.
      *
      * @param {String} query: The search query.
      * @param {Number} start: The paging offset.
      */
-    var init = function(query, start) {
+    search: function(query, start) {
 
       query = query || null;
       start = start || 0;
 
       // Set the search query.
-      Search.__view.setQueryFromUrl(query);
+      this.view.setQueryFromUrl(query);
 
       // Break if map mirroring.
-      if (!Search.__view.mirroring) {
+      if (!this.view.mirroring) {
 
         // Merge route parameters into query.
-        var params = _.extend(Search.__view.query, {
+        var params = _.extend(this.view.query, {
           limit:  Neatline.g.neatline.per_page,
           offset: start
         });
@@ -59,8 +77,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       }
 
-    };
-    Neatline.commands.setHandler(Search.ID+':initialize', init);
+    },
 
 
     /**
@@ -68,19 +85,17 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      *
      * @param {Object} records: The records on the map.
      */
-    var mirror = function(records) {
+    mirror: function(records) {
 
       // Get the record collection on the map.
       records = records || Neatline.request('MAP:getRecords');
 
       // Render in the record browser.
-      if (records && Search.__view.mirroring) {
+      if (records && this.view.mirroring) {
         Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
       }
 
-    };
-    Neatline.commands.setHandler(Search.ID+':mirrorMap', mirror);
-    Neatline.vent.on('MAP:ingest', mirror);
+    },
 
 
     /**
@@ -88,10 +103,9 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      *
      * @return {String}: The query.
      */
-    var query = function() {
-      return Search.__view.getQueryForUrl();
-    };
-    Neatline.reqres.setHandler(Search.ID+':getQueryForUrl', query);
+    getQueryForUrl: function() {
+      return this.view.getQueryForUrl();
+    }
 
 
   });

@@ -32,7 +32,7 @@ var NL = (function(NL) {
       BUBBLE:   Neatline.Presenter.StaticBubble.__controller.view,
       EDITOR:   Neatline.Editor.__controller.view,
       EXHIBIT:  Neatline.Editor.Exhibit.__controller.view,
-      SEARCH:   Neatline.Editor.Exhibit.Search.__view,
+      SEARCH:   Neatline.Editor.Exhibit.Search.__controller.view,
       RECORDS:  Neatline.Editor.Exhibit.Records.__controller.view,
       STYLES:   Neatline.Editor.Exhibit.Styles.__view,
       RECORD:   Neatline.Editor.Record.__view,
