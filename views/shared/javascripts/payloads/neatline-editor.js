@@ -55800,6 +55800,35 @@ Neatline.module('Shared', function(Shared) {
 Neatline.module('Shared', function(Shared) {
 
 
+  Shared.Router = Backbone.Router.extend({
+
+
+    /**
+     * Trigger a generic event before each route.
+     */
+    before: function() {
+      Neatline.vent.trigger('ROUTER:before');
+    }
+
+
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Shared', function(Shared) {
+
+
   Shared.View = Backbone.View.extend({
 
 
@@ -58341,29 +58370,6 @@ Neatline.module('Editor', { startWithParent: false,
   define: function(Editor) {
 
 
-  Editor.Router = Backbone.Router.extend({
-    before: function() {
-      Neatline.vent.trigger('ROUTER:before');
-    }
-  });
-
-
-}});
-
-
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
-/**
- * @package     omeka
- * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html
- */
-
-Neatline.module('Editor', { startWithParent: false,
-  define: function(Editor) {
-
-
   Editor.View = Neatline.Shared.View.extend({
 
 
@@ -58688,7 +58694,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
-  this.Router = Neatline.Editor.Router.extend({
+  Records.Router = Neatline.Shared.Router.extend({
 
 
     routes: {
@@ -59226,7 +59232,7 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 
 
-  Styles.Router = Neatline.Editor.Router.extend({
+  Styles.Router = Neatline.Shared.Router.extend({
 
 
     routes: {
@@ -59816,14 +59822,14 @@ Neatline.module('Editor.Record', function(Record) {
 Neatline.module('Editor.Record', function(Record) {
 
 
-  Record.Router = Neatline.Editor.Router.extend({
+  Record.Router = Neatline.Shared.Router.extend({
 
 
     routes: {
-      'record/add':      'record/add',
-      'record/add/:tab': 'record/add/:tab',
-      'record/:id':      'record/:id',
-      'record/:id/:tab': 'record/:id/:tab'
+      'record/add':       'record/add',
+      'record/add/:tab':  'record/add/:tab',
+      'record/:id':       'record/:id',
+      'record/:id/:tab':  'record/:id/:tab'
     },
 
 

@@ -11,7 +11,7 @@
 Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
-  this.Router = Neatline.Editor.Router.extend({
+  Records.Router = Neatline.Shared.Router.extend({
 
 
     routes: {

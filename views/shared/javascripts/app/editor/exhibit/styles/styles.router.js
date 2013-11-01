@@ -11,7 +11,7 @@
 Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 
 
-  Styles.Router = Neatline.Editor.Router.extend({
+  Styles.Router = Neatline.Shared.Router.extend({
 
 
     routes: {

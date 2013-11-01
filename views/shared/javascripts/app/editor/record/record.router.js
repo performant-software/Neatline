@@ -11,14 +11,14 @@
 Neatline.module('Editor.Record', function(Record) {
 
 
-  Record.Router = Neatline.Editor.Router.extend({
+  Record.Router = Neatline.Shared.Router.extend({
 
 
     routes: {
-      'record/add':      'record/add',
-      'record/add/:tab': 'record/add/:tab',
-      'record/:id':      'record/:id',
-      'record/:id/:tab': 'record/:id/:tab'
+      'record/add':       'record/add',
+      'record/add/:tab':  'record/add/:tab',
+      'record/:id':       'record/:id',
+      'record/:id/:tab':  'record/:id/:tab'
     },
 
 

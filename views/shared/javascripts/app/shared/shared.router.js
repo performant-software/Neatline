@@ -8,15 +8,21 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor', { startWithParent: false,
-  define: function(Editor) {
+Neatline.module('Shared', function(Shared) {
 
 
-  Editor.Router = Backbone.Router.extend({
+  Shared.Router = Backbone.Router.extend({
+
+
+    /**
+     * Trigger a generic event before each route.
+     */
     before: function() {
       Neatline.vent.trigger('ROUTER:before');
     }
+
+
   });
 
 
-}});
+});
