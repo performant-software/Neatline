@@ -49,7 +49,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     'record/:id': function(id) {
       Neatline.execute('EDITOR:display', ['EDITOR:RECORD']);
-      Neatline.execute('EDITOR:RECORD:bindId', id, 'text');
+      Neatline.execute('EDITOR:RECORD:bindSaved', id, 'text');
     },
 
 
@@ -61,7 +61,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     'record/:id/:tab': function(id, tab) {
       Neatline.execute('EDITOR:display', ['EDITOR:RECORD']);
-      Neatline.execute('EDITOR:RECORD:bindId', id, tab);
+      Neatline.execute('EDITOR:RECORD:bindSaved', id, tab);
     }
 
 

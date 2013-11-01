@@ -127,8 +127,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       // Build parameters object.
       var params = _.extend(this.query, {
-        limit: Neatline.g.neatline.per_page,
-        offset: 0
+        limit: Neatline.g.neatline.per_page, offset: 0
       });
 
       // Load records.

@@ -28,7 +28,6 @@ Neatline.module('Shared.Record', function(Record) {
 
     defaults: function() {
 
-      // Alias the style defaults.
       var styles = Neatline.g.neatline.styles;
 
       return {

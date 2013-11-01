@@ -34751,9 +34751,9 @@ Neatline.module('Shared.Exhibit', function(Exhibit) {
 
 
     /**
-     * Construct the API url.
+     * Construct the exhibit API endpoint.
      *
-     * @return {String}: The url.
+     * @return {String}: The exhibits API endpoint.
      */
     url: function() {
       return Neatline.g.neatline.exhibits_api;
@@ -34800,7 +34800,6 @@ Neatline.module('Shared.Record', function(Record) {
 
     defaults: function() {
 
-      // Alias the style defaults.
       var styles = Neatline.g.neatline.styles;
 
       return {
@@ -34846,7 +34845,7 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Construct the API url.
+     * Construct the record API endpoint.
      *
      * @return {String}: The url.
      */
@@ -34892,8 +34891,8 @@ Neatline.module('Shared.Record', function(Record) {
      * - If the model is already present in the collection, pass it to the
      *   callback immediately.
      *
-     * - If the model is absent, create a new model on the fly, fetch data
-     *   from the server, and pass the populated model to the callback.
+     * - If the model is absent, create a new model with the passed id, fetch
+     *   data from the server, and pass the populated model to the callback.
      *
      * @param {Number} id: The model id.
      * @param {Function} cb: Callback, called with the model.

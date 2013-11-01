@@ -55920,9 +55920,9 @@ Neatline.module('Shared.Exhibit', function(Exhibit) {
 
 
     /**
-     * Construct the API url.
+     * Construct the exhibit API endpoint.
      *
-     * @return {String}: The url.
+     * @return {String}: The exhibits API endpoint.
      */
     url: function() {
       return Neatline.g.neatline.exhibits_api;
@@ -55969,7 +55969,6 @@ Neatline.module('Shared.Record', function(Record) {
 
     defaults: function() {
 
-      // Alias the style defaults.
       var styles = Neatline.g.neatline.styles;
 
       return {
@@ -56015,7 +56014,7 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Construct the API url.
+     * Construct the record API endpoint.
      *
      * @return {String}: The url.
      */
@@ -56061,8 +56060,8 @@ Neatline.module('Shared.Record', function(Record) {
      * - If the model is already present in the collection, pass it to the
      *   callback immediately.
      *
-     * - If the model is absent, create a new model on the fly, fetch data
-     *   from the server, and pass the populated model to the callback.
+     * - If the model is absent, create a new model with the passed id, fetch
+     *   data from the server, and pass the populated model to the callback.
      *
      * @param {Number} id: The model id.
      * @param {Function} cb: Callback, called with the model.
@@ -59103,8 +59102,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       // Build parameters object.
       var params = _.extend(this.query, {
-        limit: Neatline.g.neatline.per_page,
-        offset: 0
+        limit: Neatline.g.neatline.per_page, offset: 0
       });
 
       // Load records.
@@ -59660,7 +59658,7 @@ Neatline.module('Editor.Record', function(Record) {
 
     commands: [
       'display',
-      'bindId',
+      'bindSaved',
       'bindNew',
       'unbind',
       'navToForm',
@@ -59693,43 +59691,42 @@ Neatline.module('Editor.Record', function(Record) {
 
 
     /**
-     * Show form for an existing record.
+     * Bind a record to the form and display a tab.
+     *
+     * @param {Object} record: A record model.
+     * @param {String} tab: The active tab slug.
+     */
+    bind: function(record, tab) {
+      this.view.bind(record);
+      this.view.activateTab(tab);
+    },
+
+
+    /**
+     * Bind an existing record to the form.
      *
      * @param {Number|String} id: The record id.
      * @param {String} tab: The active tab slug.
      */
-    bindId: function(id, tab) {
-
-      // Get or fetch the model.
+    bindSaved: function(id, tab) {
       Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
-        _.bind(function(record) {
-          this.view.bind(record);
-          this.view.activateTab(tab);
-        }, this)
+        _.bind(function(record) { this.bind(record, tab) }, this)
       );
-
     },
 
 
     /**
-     * Show form for a new record.
+     * Bind a new record to the form.
      *
      * @param {String} tab: The active tab slug.
      */
     bindNew: function(tab) {
-
-      // Create a new model.
-      var record = new Neatline.Shared.Record.Model();
-
-      // Bind model to form.
-      this.view.bind(record);
-      this.view.activateTab(tab);
-
+      this.bind(new Neatline.Shared.Record.Model(), tab);
     },
 
 
     /**
-     * Unbind the form.
+     * If the form is open, Unbind the current record.
      */
     unbind: function() {
       if (this.view.open) this.view.unbind();
@@ -59850,7 +59847,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     'record/:id': function(id) {
       Neatline.execute('EDITOR:display', ['EDITOR:RECORD']);
-      Neatline.execute('EDITOR:RECORD:bindId', id, 'text');
+      Neatline.execute('EDITOR:RECORD:bindSaved', id, 'text');
     },
 
 
@@ -59862,7 +59859,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     'record/:id/:tab': function(id, tab) {
       Neatline.execute('EDITOR:display', ['EDITOR:RECORD']);
-      Neatline.execute('EDITOR:RECORD:bindId', id, tab);
+      Neatline.execute('EDITOR:RECORD:bindSaved', id, tab);
     }
 
 

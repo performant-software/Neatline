@@ -15,9 +15,9 @@ Neatline.module('Shared.Exhibit', function(Exhibit) {
 
 
     /**
-     * Construct the API url.
+     * Construct the exhibit API endpoint.
      *
-     * @return {String}: The url.
+     * @return {String}: The exhibits API endpoint.
      */
     url: function() {
       return Neatline.g.neatline.exhibits_api;

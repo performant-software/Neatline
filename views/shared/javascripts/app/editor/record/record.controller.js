@@ -23,7 +23,7 @@ Neatline.module('Editor.Record', function(Record) {
 
     commands: [
       'display',
-      'bindId',
+      'bindSaved',
       'bindNew',
       'unbind',
       'navToForm',
@@ -56,43 +56,42 @@ Neatline.module('Editor.Record', function(Record) {
 
 
     /**
-     * Show form for an existing record.
+     * Bind a record to the form and display a tab.
+     *
+     * @param {Object} record: A record model.
+     * @param {String} tab: The active tab slug.
+     */
+    bind: function(record, tab) {
+      this.view.bind(record);
+      this.view.activateTab(tab);
+    },
+
+
+    /**
+     * Bind an existing record to the form.
      *
      * @param {Number|String} id: The record id.
      * @param {String} tab: The active tab slug.
      */
-    bindId: function(id, tab) {
-
-      // Get or fetch the model.
+    bindSaved: function(id, tab) {
       Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
-        _.bind(function(record) {
-          this.view.bind(record);
-          this.view.activateTab(tab);
-        }, this)
+        _.bind(function(record) { this.bind(record, tab) }, this)
       );
-
     },
 
 
     /**
-     * Show form for a new record.
+     * Bind a new record to the form.
      *
      * @param {String} tab: The active tab slug.
      */
     bindNew: function(tab) {
-
-      // Create a new model.
-      var record = new Neatline.Shared.Record.Model();
-
-      // Bind model to form.
-      this.view.bind(record);
-      this.view.activateTab(tab);
-
+      this.bind(new Neatline.Shared.Record.Model(), tab);
     },
 
 
     /**
-     * Unbind the form.
+     * If the form is open, Unbind the current record.
      */
     unbind: function() {
       if (this.view.open) this.view.unbind();
