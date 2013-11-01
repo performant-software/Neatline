@@ -11,7 +11,7 @@
 describe('Map | Layer Refreshing', function() {
 
 
-  var fx = {
+  var fixtures = {
     vector: {
       original: read('NeatlineMapLayerRefreshing.vector.original.json'),
       changed:  read('NeatlineMapLayerRefreshing.vector.changed.json')
@@ -36,7 +36,7 @@ describe('Map | Layer Refreshing', function() {
     // ------------------------------------------------------------------------
 
     // Load default layers.
-    NL.refreshMap(fx.vector.original);
+    NL.refreshMap(fixtures.vector.original);
 
     // Should manifest original vector data.
     var layers = NL.v.map.getVectorLayers();
@@ -51,7 +51,7 @@ describe('Map | Layer Refreshing', function() {
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(fx.vector.changed);
+    NL.respondLast200(fixtures.vector.changed);
     var layers = NL.v.map.getVectorLayers();
 
     // Should manifest changed vector data.
@@ -75,7 +75,7 @@ describe('Map | Layer Refreshing', function() {
     // ------------------------------------------------------------------------
 
     // Load default layers.
-    NL.refreshMap(fx.wms.original);
+    NL.refreshMap(fixtures.wms.original);
 
     // Should manifest original WMS data.
     var layers = NL.v.map.getWmsLayers();
@@ -90,7 +90,7 @@ describe('Map | Layer Refreshing', function() {
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(fx.wms.changed);
+    NL.respondLast200(fixtures.wms.changed);
     var layers = NL.v.map.getVectorLayers();
 
     // Should manifest changed WMS data.
@@ -113,13 +113,13 @@ describe('Map | Layer Refreshing', function() {
     // ------------------------------------------------------------------------
 
     // Load default layers, freeze layer 2.
-    NL.refreshMap(fx.vector.original);
+    NL.refreshMap(fixtures.vector.original);
     NL.getVectorLayer('title2').nFrozen = true;
 
     Neatline.vent.trigger('refresh');
 
     // Respond with changed coverage data.
-    NL.respondLast200(fx.vector.changed);
+    NL.respondLast200(fixtures.vector.changed);
     var layer = NL.getVectorLayer('title2');
 
     // Should not change layer 2 geometry.

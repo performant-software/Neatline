@@ -11,7 +11,7 @@
 describe('Map | WMS Layer Management', function() {
 
 
-  var fx = {
+  var fixtures = {
     regular: read('NeatlineMapWmsLayerManagement.regular.json'),
     deleted: read('NeatlineMapWmsLayerManagement.deleted.json')
   };
@@ -29,7 +29,7 @@ describe('Map | WMS Layer Management', function() {
     // with WMS data that arrive in the initial query. 
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.regular);
+    NL.respondMap200(fixtures.regular);
     var layers = NL.v.map.getWmsLayers();
 
     // Should create layers for records with WMS data.
@@ -52,7 +52,7 @@ describe('Map | WMS Layer Management', function() {
 
     NL.triggerMapMoveEnd();
 
-    NL.respondLast200(fx.regular);
+    NL.respondLast200(fixtures.regular);
     var layers = NL.v.map.getWmsLayers();
 
     // Should create layers for records with WMS data.
@@ -75,10 +75,10 @@ describe('Map | WMS Layer Management', function() {
     // ------------------------------------------------------------------------
 
     // Load collection without record 3.
-    NL.refreshMap(fx.deleted);
+    NL.refreshMap(fixtures.deleted);
 
     // Load collection with record 3.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Should create layer for record 3.
     expect(NL.getWmsLayer('title3')).toBeDefined();
@@ -94,7 +94,7 @@ describe('Map | WMS Layer Management', function() {
     // the existing layers should not be rebuilt.
     // ------------------------------------------------------------------------
 
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Store original OpenLayers id's.
     var olIds1 = _.map(_.values(NL.v.map.layers.wms), function(v) {
@@ -102,7 +102,7 @@ describe('Map | WMS Layer Management', function() {
     });
 
     // Reload the same collection.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Get new OpenLayers id's.
     var olIds2 = _.map(_.values(NL.v.map.layers.wms), function(v) {
@@ -122,10 +122,10 @@ describe('Map | WMS Layer Management', function() {
     // ------------------------------------------------------------------------
 
     // Load collection with record 3.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Load collection without record 3.
-    NL.refreshMap(fx.deleted);
+    NL.refreshMap(fixtures.deleted);
 
     // Should remove layer for record 3.
     expect(NL.getWmsLayer('title3')).toBeUndefined();

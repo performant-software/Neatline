@@ -11,7 +11,7 @@
 describe('Styles | Save Styles', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     exhibit: read('EditorStyles.json')
   };
 
@@ -19,9 +19,9 @@ describe('Styles | Save Styles', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showStyles(fx.exhibit);
+    NL.showStyles(fixtures.exhibit);
 
-    el = {
+    elements = {
       setFocus: NL.v.styles.$('a[name="set-focus"]'),
       save:     NL.v.styles.$('a[name="save"]')
     };
@@ -54,7 +54,7 @@ describe('Styles | Save Styles', function() {
     NL.v.styles.__ui.mapZoom.val('3').trigger('change');
 
     // Click "Save" button.
-    el.save.trigger('click');
+    elements.save.trigger('click');
 
     // Route should be /neatline/put/:id, method PUT.
     NL.assertLastRequestRoute(Neatline.g.neatline.exhibits_api);
@@ -80,8 +80,8 @@ describe('Styles | Save Styles', function() {
     spyOn(toastr, 'info');
 
     // Click on "Save".
-    el.save.trigger('click');
-    NL.respondLast200(fx.exhibit);
+    elements.save.trigger('click');
+    NL.respondLast200(fixtures.exhibit);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -102,7 +102,7 @@ describe('Styles | Save Styles', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    el.save.trigger('click');
+    elements.save.trigger('click');
     NL.respondLast500();
 
     // Should flash error.
@@ -123,8 +123,8 @@ describe('Styles | Save Styles', function() {
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Click on "Save".
-    el.save.trigger('click');
-    NL.respondLast200(fx.exhibit);
+    elements.save.trigger('click');
+    NL.respondLast200(fixtures.exhibit);
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {

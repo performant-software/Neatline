@@ -11,7 +11,7 @@
 describe('Styles | Open Form', function() {
 
 
-  var fx = {
+  var fixtures = {
     exhibit: read('EditorStyles.json')
   };
 
@@ -28,7 +28,7 @@ describe('Styles | Open Form', function() {
     // ------------------------------------------------------------------------
 
     NL.navigate('styles');
-    NL.respondLast200(fx.exhibit);
+    NL.respondLast200(fixtures.exhibit);
 
     // Form should be populated.
     expect(NL.v.styles.styles.getSession().getValue()).toEqual('1');

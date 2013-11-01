@@ -11,7 +11,7 @@
 describe('Map | Subscribe `highlight`', function() {
 
 
-  var fx = {
+  var fixtures = {
     records: readFixtures('NeatlineMapSubscriptions.records.json')
   };
 
@@ -28,7 +28,7 @@ describe('Map | Subscribe `highlight`', function() {
     // the map, the map should highlight the features.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
 
     Neatline.vent.trigger('highlight', { model: layer.nModel });
@@ -44,7 +44,7 @@ describe('Map | Subscribe `highlight`', function() {
     // map, the features should not be highlighted.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
 
     Neatline.vent.trigger('select', { model: layer.nModel });

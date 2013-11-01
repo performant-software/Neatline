@@ -11,7 +11,7 @@
 describe('Record | Router', function() {
 
 
-  var href, fx = {
+  var href, fixtures = {
     records: read('EditorRecord.records.json')
   };
 
@@ -19,7 +19,7 @@ describe('Record | Router', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondRecordList200(fx.records);
+    NL.respondRecordList200(fixtures.records);
 
     href = $(NL.getRecordListRows()[0]).attr('href');
 

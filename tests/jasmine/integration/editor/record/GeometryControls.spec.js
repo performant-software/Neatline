@@ -11,7 +11,7 @@
 describe('Record | Geometry Controls', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -19,10 +19,10 @@ describe('Record | Geometry Controls', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
     NL.v.record.activateTab('map');
 
-    el = {
+    elements = {
       pan:      NL.v.record.$('input[value="pan"]'),
       point:    NL.v.record.$('input[value="point"]'),
       line:     NL.v.record.$('input[value="line"]'),
@@ -49,8 +49,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Point".
-    el.pan.removeAttr('checked');
-    el.point.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.point.attr('checked', 'checked').trigger('change');
 
     // "Draw Point" should be active.
     expect(NL.v.map.controls.point.active).toBeTruthy();
@@ -65,8 +65,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Line".
-    el.pan.removeAttr('checked');
-    el.line.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.line.attr('checked', 'checked').trigger('change');
 
     // "Draw Line" should be active.
     expect(NL.v.map.controls.line.active).toBeTruthy();
@@ -81,8 +81,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Polygon".
-    el.pan.removeAttr('checked');
-    el.poly.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.poly.attr('checked', 'checked').trigger('change');
 
     // "Draw Polygon" should be active.
     expect(NL.v.map.controls.poly.active).toBeTruthy();
@@ -97,8 +97,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw SVG".
-    el.pan.removeAttr('checked');
-    el.svg.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.svg.attr('checked', 'checked').trigger('change');
 
     // "Draw SVG" should be active.
     expect(NL.v.map.controls.svg.active).toBeTruthy();
@@ -114,8 +114,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Regular Polygon".
-    el.pan.removeAttr('checked');
-    el.regPoly.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.regPoly.attr('checked', 'checked').trigger('change');
 
     // "Draw Regular Polygon" should be active.
     expect(NL.v.map.controls.regPoly.active).toBeTruthy();
@@ -223,8 +223,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Modify Shape".
-    el.pan.removeAttr('checked');
-    el.modify.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.modify.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -245,8 +245,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Rotate Shape".
-    el.pan.removeAttr('checked');
-    el.rotate.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.rotate.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -267,8 +267,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Resize Shape".
-    el.pan.removeAttr('checked');
-    el.resize.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.resize.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -289,8 +289,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Drag Shape".
-    el.pan.removeAttr('checked');
-    el.drag.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.drag.attr('checked', 'checked').trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -311,8 +311,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Check "Delete Shape".
-    el.pan.removeAttr('checked');
-    el.remove.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.remove.attr('checked', 'checked').trigger('change');
 
     // "Delete Shape" should be active.
     expect(NL.v.map.controls.remove.active).toBeTruthy();
@@ -332,7 +332,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.point.drawFeature(pt);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))'
     );
 
@@ -353,7 +353,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.line.drawFeature(line);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(3 4,5 6))'
     );
 
@@ -376,7 +376,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.poly.drawFeature(poly);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((3 4,5 6,7 8,3 4)))'
     );
 
@@ -397,7 +397,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.svg.drawFeature(collection);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4),POINT(5 6))'
     );
 
@@ -420,7 +420,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.svg.drawFeature(poly);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
@@ -443,7 +443,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.regPoly.drawFeature(poly);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),POLYGON((1 2,3 4,5 6,1 2)))'
     );
 
@@ -467,7 +467,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.edit.dragComplete();
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(2 3))'
     );
 
@@ -488,7 +488,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.remove.selectFeature(feature);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual('');
+    expect(elements.coverage.val()).toEqual('');
 
   });
 
@@ -512,7 +512,7 @@ describe('Record | Geometry Controls', function() {
     NL.v.map.controls.edit.dragComplete();
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual(
+    expect(elements.coverage.val()).toEqual(
       'GEOMETRYCOLLECTION(POINT(1 2),LINESTRING(3 4,5 6))'
     );
 
@@ -527,13 +527,13 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Click "Clear all Geometry".
-    el.clear.trigger('click');
+    elements.clear.trigger('click');
 
     // All features should be removed.
     expect(NL.v.map.editLayer.features.length).toEqual(0);
 
     // "Coverage" should be updated.
-    expect(el.coverage.val()).toEqual('');
+    expect(elements.coverage.val()).toEqual('');
 
   });
 
@@ -546,7 +546,8 @@ describe('Record | Geometry Controls', function() {
     // ------------------------------------------------------------------------
 
     // Activate "Draw Polygon".
-    el.pan[0].checked = false; el.poly[0].checked = true;
+    elements.pan[0].checked = false;
+    elements.poly[0].checked = true;
 
     // Activate "Text" tab.
     NL.v.record.activateTab('text');

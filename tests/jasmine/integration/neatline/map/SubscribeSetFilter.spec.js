@@ -11,7 +11,7 @@
 describe('Map | Subscribe `setFilter`', function() {
 
 
-  var fx = {
+  var fixtures = {
     regular: readFixtures('NeatlineMapSubscribeSetFilter.regular.json'),
     deleted: readFixtures('NeatlineMapSubscribeSetFilter.deleted.json')
   };
@@ -29,7 +29,7 @@ describe('Map | Subscribe `setFilter`', function() {
     // all vector and WMS layers on the map.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.regular);
+    NL.respondMap200(fixtures.regular);
 
     // By default, all layers visible.
     expect(NL.getVectorLayer('title1'). getVisibility()).toBeTruthy();
@@ -98,7 +98,7 @@ describe('Map | Subscribe `setFilter`', function() {
     // ------------------------------------------------------------------------
 
     // Load collection without record 3.
-    NL.respondMap200(fx.deleted);
+    NL.respondMap200(fixtures.deleted);
 
     // Filter out `title3`.
     Neatline.vent.trigger('setFilter', {
@@ -109,7 +109,7 @@ describe('Map | Subscribe `setFilter`', function() {
     });
 
     // Load collection with record 3.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Records 3 should be hidden.
     expect(NL.getVectorLayer('title3'). getVisibility()).toBeFalsy();

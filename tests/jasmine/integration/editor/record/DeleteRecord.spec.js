@@ -11,7 +11,7 @@
 describe('Record | Delete Record', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json'),
     empty:  read('EditorRecordDeleteRecord.json')
   };
@@ -20,9 +20,9 @@ describe('Record | Delete Record', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       delete1:  NL.v.record.$('a[href="#delete-modal"]'),
       delete2:  NL.v.record.$('a[name="delete"]'),
       cancel:   NL.v.record.$('a[name="cancel"]'),
@@ -40,11 +40,11 @@ describe('Record | Delete Record', function() {
     // ------------------------------------------------------------------------
 
     // Click on "Delete".
-    el.delete1.trigger('click');
+    elements.delete1.trigger('click');
 
     // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
-    expect(el.modal).toHaveClass('in');
+    expect(elements.modal).toHaveClass('in');
 
   });
 
@@ -57,13 +57,13 @@ describe('Record | Delete Record', function() {
     // ------------------------------------------------------------------------
 
     // Click on "Delete".
-    el.delete1.trigger('click');
+    elements.delete1.trigger('click');
 
     // Click on "Cancel".
-    el.cancel.trigger('click');
+    elements.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(el.modal).not.toHaveClass('in');
+    expect(elements.modal).not.toHaveClass('in');
 
   });
 
@@ -78,8 +78,8 @@ describe('Record | Delete Record', function() {
     var id = NL.v.record.model.id;
 
     // Delete, confirm.
-    el.delete1.trigger('click');
-    el.delete2.trigger('click');
+    elements.delete1.trigger('click');
+    elements.delete2.trigger('click');
 
     // Route should be /records/:id, method DELETE.
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api+'/'+id);
@@ -99,8 +99,8 @@ describe('Record | Delete Record', function() {
     spyOn(toastr, 'info');
 
     // Click on "Save".
-    el.delete2.trigger('click');
-    NL.respondLast200(fx.empty);
+    elements.delete2.trigger('click');
+    NL.respondLast200(fixtures.empty);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -121,7 +121,7 @@ describe('Record | Delete Record', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    el.delete2.trigger('click');
+    elements.delete2.trigger('click');
     NL.respondLast500();
 
     // Should flash error.
@@ -140,12 +140,12 @@ describe('Record | Delete Record', function() {
     // ------------------------------------------------------------------------
 
     // Delete, confirm.
-    el.delete1.trigger('click');
-    el.delete2.trigger('click');
-    NL.respondLast200(fx.empty);
+    elements.delete1.trigger('click');
+    elements.delete2.trigger('click');
+    NL.respondLast200(fixtures.empty);
 
     // Modal should be hidden.
-    expect(el.modal).not.toHaveClass('in');
+    expect(elements.modal).not.toHaveClass('in');
 
     // Form should be closed.
     expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);
@@ -167,9 +167,9 @@ describe('Record | Delete Record', function() {
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Delete, confirm.
-    el.delete1.trigger('click');
-    el.delete2.trigger('click');
-    NL.respondLast200(fx.empty);
+    elements.delete1.trigger('click');
+    elements.delete2.trigger('click');
+    NL.respondLast200(fixtures.empty);
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {

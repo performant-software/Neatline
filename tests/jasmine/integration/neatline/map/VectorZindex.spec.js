@@ -11,7 +11,7 @@
 describe('Map | Vector Zindex', function() {
 
 
-  var fx = {
+  var fixtures = {
     records: read('NeatlineMapVectorZindex.json')
   };
 
@@ -28,7 +28,7 @@ describe('Map | Vector Zindex', function() {
     // `zindex` fields on the record models.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Get the two vector layers.
     var layer1 = NL.getVectorLayer('title1');

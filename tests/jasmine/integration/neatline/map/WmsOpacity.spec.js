@@ -11,7 +11,7 @@
 describe('Map | WMS Opacity', function() {
 
 
-  var fx = {
+  var fixtures = {
     records: read('NeatlineMapWmsOpacity.json')
   };
 
@@ -27,7 +27,7 @@ describe('Map | WMS Opacity', function() {
     // WMS layer opacities should be set from the `fill_opacity` field.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Should set WMS layer opacity.
     expect(NL.v.map.getWmsLayers()[0].opacity).toEqual(0.5);

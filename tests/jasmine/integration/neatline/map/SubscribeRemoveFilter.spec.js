@@ -11,7 +11,7 @@
 describe('Map | Subscribe `removeFilter`', function() {
 
 
-  var fx = {
+  var fixtures = {
     records: readFixtures('NeatlineMapSubscribeRemoveFilter.json')
   };
 
@@ -28,7 +28,7 @@ describe('Map | Subscribe `removeFilter`', function() {
     // passed key and re-filter all vector and WMS layers on the map.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Filter out records with `title1`, `title2`, `title3`.
 

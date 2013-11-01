@@ -11,7 +11,7 @@
 describe('Record | Presenter Interactions', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -19,9 +19,9 @@ describe('Record | Presenter Interactions', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       text:   NL.v.record.$('a[href="#record-text"]'),
       map:    NL.v.record.$('a[href="#record-map"]'),
       close:  NL.v.record.$('a[name="close"]')
@@ -40,7 +40,7 @@ describe('Record | Presenter Interactions', function() {
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Select "Map".
-    el.map.tab('show');
+    elements.map.tab('show');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('deactivatePresenter');
@@ -58,10 +58,10 @@ describe('Record | Presenter Interactions', function() {
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Select "Map".
-    el.map.tab('show');
+    elements.map.tab('show');
 
     // Select "Text".
-    el.text.tab('show');
+    elements.text.tab('show');
 
     // Presenter should activate.
     expect(vent).toHaveBeenCalledWith('activatePresenter');
@@ -95,7 +95,7 @@ describe('Record | Presenter Interactions', function() {
     // ------------------------------------------------------------------------
 
     // Select "Map".
-    el.map.tab('show');
+    elements.map.tab('show');
 
     // Spy on trigger and execute.
     var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
@@ -105,7 +105,7 @@ describe('Record | Presenter Interactions', function() {
     var model = NL.v.record.model;
 
     // Close the form.
-    el.close.trigger('click');
+    elements.close.trigger('click');
 
     // Presenter should activate.
     expect(vent).toHaveBeenCalledWith('activatePresenter');

@@ -11,7 +11,7 @@
 describe('Record | Save Record', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -19,9 +19,9 @@ describe('Record | Save Record', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       save: NL.v.record.$('a[name="save"]')
     };
 
@@ -72,7 +72,7 @@ describe('Record | Save Record', function() {
     inputs.mapZoom.             val('28').          trigger('change');
 
     // Click "Save" button.
-    el.save.trigger('click');
+    elements.save.trigger('click');
 
     // Route should be /record/:id, method PUT.
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api+'/'+id);
@@ -128,8 +128,8 @@ describe('Record | Save Record', function() {
     spyOn(toastr, 'info');
 
     // Click on "Save".
-    el.save.trigger('click');
-    NL.respondLast200(fx.record);
+    elements.save.trigger('click');
+    NL.respondLast200(fixtures.record);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -150,7 +150,7 @@ describe('Record | Save Record', function() {
     spyOn(toastr, 'error');
 
     // Click on "Save".
-    el.save.trigger('click');
+    elements.save.trigger('click');
     NL.respondLast500();
 
     // Should flash error.
@@ -171,8 +171,8 @@ describe('Record | Save Record', function() {
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Click on "Save".
-    el.save.trigger('click');
-    NL.respondLast200(fx.record);
+    elements.save.trigger('click');
+    NL.respondLast200(fixtures.record);
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {

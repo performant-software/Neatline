@@ -11,7 +11,7 @@
 describe('Records | Publications', function() {
 
 
-  var model, row, vent, fx = {
+  var model, row, vent, fixtures = {
     records: read('EditorRecordsPublications.json')
   };
 
@@ -19,7 +19,7 @@ describe('Records | Publications', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondRecordList200(fx.records);
+    NL.respondRecordList200(fixtures.records);
 
     // Get model and row from list.
     model = NL.getRecordListModels()[0];

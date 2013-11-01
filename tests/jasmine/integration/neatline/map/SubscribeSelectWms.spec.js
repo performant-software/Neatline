@@ -11,7 +11,7 @@
 describe('Map | Subscribe `select` (WMS Layers)', function() {
 
 
-  var fx = {
+  var fixtures = {
     noFocus: readFixtures('NeatlineMapSubscribeSelectWms.noFocus.json'),
     focus:   readFixtures('NeatlineMapSubscribeSelectWms.focus.json')
   };
@@ -31,7 +31,7 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
     // zooms the map out to the highest level.
     // ------------------------------------------------------------------------
 
-    var model = NL.recordFromJson(fx.noFocus);
+    var model = NL.recordFromJson(fixtures.noFocus);
 
     // Set center and zoom.
     NL.setMapCenter(200, 300, 15);
@@ -52,7 +52,7 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
     // values, the map should apply the defaults as usual.
     // ------------------------------------------------------------------------
 
-    var model = NL.recordFromJson(fx.focus);
+    var model = NL.recordFromJson(fixtures.focus);
 
     // Set center and zoom.
     NL.setMapCenter(200, 300, 15);

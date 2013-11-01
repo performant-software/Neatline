@@ -11,7 +11,7 @@
 describe('Map | Publications', function() {
 
 
-  var layer, feature, vent, fx = {
+  var layer, feature, vent, fixtures = {
     records: readFixtures('NeatlineMapPublications.json')
   };
 
@@ -19,7 +19,7 @@ describe('Map | Publications', function() {
   beforeEach(function() {
 
     NL.loadNeatline();
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Get layer and feature.
     layer = NL.v.map.getVectorLayers()[0];

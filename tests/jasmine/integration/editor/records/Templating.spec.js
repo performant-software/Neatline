@@ -11,7 +11,7 @@
 describe('Records | Templating', function() {
 
 
-  var fx = {
+  var fixtures = {
     defaultList: read('EditorRecordsTemplating.defaultList.json'),
     titleTags:   read('EditorRecordsTemplating.titleTags.json'),
     emptyTitle:  read('EditorRecordsTemplating.emptyTitle.json')
@@ -29,7 +29,7 @@ describe('Records | Templating', function() {
     // The record browser pane should show a list of records.
     // ------------------------------------------------------------------------
 
-    NL.respondRecordList200(fx.defaultList);
+    NL.respondRecordList200(fixtures.defaultList);
 
     var rows = NL.getRecordListRows();
 
@@ -57,7 +57,7 @@ describe('Records | Templating', function() {
     // HTML tags in record titles should be stripped out.
     // ------------------------------------------------------------------------
 
-    NL.respondRecordList200(fx.titleTags);
+    NL.respondRecordList200(fixtures.titleTags);
     var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.
@@ -72,7 +72,7 @@ describe('Records | Templating', function() {
     // Empty titles should be replaced as placeholders.
     // ------------------------------------------------------------------------
 
-    NL.respondRecordList200(fx.emptyTitle);
+    NL.respondRecordList200(fixtures.emptyTitle);
     var rows = NL.getRecordListRows();
 
     // Should strip out HTML tags.

@@ -11,7 +11,7 @@
 describe('Record | Route Updating', function() {
 
 
-  var fx = {
+  var fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -69,7 +69,7 @@ describe('Record | Route Updating', function() {
     // etc.
     // ------------------------------------------------------------------------
 
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
     var id = NL.v.record.model.id;
 
     _.each(NL.getTabSlugs(), function(slug) {

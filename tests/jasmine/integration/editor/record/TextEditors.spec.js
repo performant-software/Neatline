@@ -22,7 +22,7 @@ describe('Record | Text Editors', function() {
   var async = new AsyncSpec(this);
 
 
-  var el, cke, input, fx = {
+  var elements, cke, input, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -30,9 +30,9 @@ describe('Record | Text Editors', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       editTitleHtml:  NL.v.textTab.$('a[data-textarea="title"]'),
       editBodyHtml:   NL.v.textTab.$('a[data-textarea="body"]')
     };
@@ -78,7 +78,7 @@ describe('Record | Text Editors', function() {
     input = NL.v.textTab.__ui.title;
     input.val('<p>1</p>');
 
-    el.editTitleHtml.click();
+    elements.editTitleHtml.click();
     cke = CKEDITOR.instances.title;
 
   });
@@ -89,7 +89,7 @@ describe('Record | Text Editors', function() {
     input = NL.v.textTab.__ui.body;
     input.val('<p>1</p>');
 
-    el.editBodyHtml.click();
+    elements.editBodyHtml.click();
     cke = CKEDITOR.instances.body;
 
   });

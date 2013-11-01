@@ -11,7 +11,7 @@
 describe('Record | Item Search', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json'),
     items:  read('EditorRecordItemSearch.items.xml')
   };
@@ -20,9 +20,9 @@ describe('Record | Item Search', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       autocomplete: $(NL.v.textTab.__ui.item.autocomplete('widget')[0])
     };
 
@@ -48,10 +48,10 @@ describe('Record | Item Search', function() {
     NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
 
     // Respond with items list.
-    NL.respondXmlLast200(fx.items);
+    NL.respondXmlLast200(fixtures.items);
 
     // Get widget container and items.
-    var items = el.autocomplete.find('a');
+    var items = elements.autocomplete.find('a');
 
     // Should list items.
     expect(items[0]).toHaveText('Item 3');
@@ -70,15 +70,15 @@ describe('Record | Item Search', function() {
     // ------------------------------------------------------------------------
 
     // Get the id of the autocomplete result.
-    var items = $(fx.items);
+    var items = $(fixtures.items);
     var id = items.find('item').first().attr('itemId');
 
     // Enter item search query.
     NL.v.textTab.__ui.item.autocomplete('search', 'item');
-    NL.respondXmlLast200(fx.items);
+    NL.respondXmlLast200(fixtures.items);
 
     // Click on the first option.
-    el.autocomplete.find('a').first().click();
+    elements.autocomplete.find('a').first().click();
 
     // Should populate id.
     expect(NL.v.textTab.__ui.item).toHaveValue(id);

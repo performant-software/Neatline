@@ -11,7 +11,7 @@
 describe('Map | Subscribe `select` (Vector Layers)', function() {
 
 
-  var model, fx = {
+  var model, fixtures = {
     records: readFixtures('NeatlineMapSubscriptions.records.json'),
     record:  readFixtures('NeatlineMapSubscriptions.record.json')
   };
@@ -29,7 +29,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // map, the map should focus on the existing layer.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Get layer, cache request count.
     var layer = NL.v.map.getVectorLayers()[0];
@@ -55,7 +55,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // ------------------------------------------------------------------------
 
     // Create model with no vector layer.
-    var model = NL.recordFromJson(fx.record);
+    var model = NL.recordFromJson(fixtures.record);
     var count = NL.server.requests.count;
 
     Neatline.vent.trigger('select', { model: model });
@@ -83,14 +83,14 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // are updated with the new set of layers).
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Select model for the vector layer.
     var layer = NL.v.map.getVectorLayers()[0];
     Neatline.vent.trigger('select', { model: layer.nModel });
 
     // Ingest fresh records.
-    NL.refreshMap(fx.records);
+    NL.refreshMap(fixtures.records);
 
     // Should re-select layer.
     NL.assertSelectIntent(layer);
@@ -107,7 +107,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // lower the current map zoom.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
     var feature = NL.v.map.getVectorLayers()[0].features[0];
 
     // Set center and zoom.

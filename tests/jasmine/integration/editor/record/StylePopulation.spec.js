@@ -11,7 +11,7 @@
 describe('Record Form | Style Population', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -19,9 +19,9 @@ describe('Record Form | Style Population', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = _.extend(NL.getRecordFormElements(), {
+    elements = _.extend(NL.getRecordFormElements(), {
       setMinZoom: NL.v.record.$('a[name="set-min-zoom"]'),
       setMaxZoom: NL.v.record.$('a[name="set-max-zoom"]'),
       setFocus:   NL.v.record.$('a[name="set-focus"]')
@@ -38,10 +38,10 @@ describe('Record Form | Style Population', function() {
     // ------------------------------------------------------------------------
 
     NL.setMapZoom(10);
-    el.setMinZoom.trigger('click');
+    elements.setMinZoom.trigger('click');
 
     // Input should be updated.
-    expect(el.minZoom).toHaveValue('10');
+    expect(elements.minZoom).toHaveValue('10');
 
     // Model should be updated.
     expect(NL.v.record.model.get('min_zoom')).toEqual('10');
@@ -57,10 +57,10 @@ describe('Record Form | Style Population', function() {
     // ------------------------------------------------------------------------
 
     NL.setMapZoom(10);
-    el.setMaxZoom.trigger('click');
+    elements.setMaxZoom.trigger('click');
 
     // Input should be updated.
-    expect(el.maxZoom).toHaveValue('10');
+    expect(elements.maxZoom).toHaveValue('10');
 
     // Model should be updated.
     expect(NL.v.record.model.get('max_zoom')).toEqual('10');
@@ -76,11 +76,11 @@ describe('Record Form | Style Population', function() {
     // ------------------------------------------------------------------------
 
     NL.setMapCenter(1, 2, 3);
-    el.setFocus.trigger('click');
+    elements.setFocus.trigger('click');
 
     // Inputs should be updated.
-    expect(el.mapFocus).toHaveValue('1,2');
-    expect(el.mapZoom).toHaveValue('3');
+    expect(elements.mapFocus).toHaveValue('1,2');
+    expect(elements.mapZoom).toHaveValue('3');
 
     // Model should be updated.
     expect(NL.v.record.model.get('map_focus')).toEqual('1,2');

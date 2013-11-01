@@ -11,7 +11,7 @@
 describe('Map | Vector Styles', function() {
 
 
-  var layer1, layer2, fx = {
+  var layer1, layer2, fixtures = {
     records: readFixtures('NeatlineMapVectorStyles.json')
   };
 
@@ -19,7 +19,7 @@ describe('Map | Vector Styles', function() {
   beforeEach(function() {
 
     NL.loadNeatline();
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     layer1 = NL.v.map.getVectorLayers()[0];
     layer2 = NL.v.map.getVectorLayers()[1];
@@ -139,7 +139,7 @@ describe('Map | Vector Styles', function() {
       NL.assertDefaultIntent(layer1);
 
       // Complete the query.
-      NL.respondMap200(fx.records);
+      NL.respondMap200(fixtures.records);
 
       // Hover on a feature again.
       NL.hoverOnMapFeature(layer1.features[0]);

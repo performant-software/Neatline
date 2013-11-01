@@ -11,7 +11,7 @@
 describe('Map | Spatial Querying Enabled', function() {
 
 
-  var fx = {
+  var fixtures = {
     one: readFixtures('NeatlineMapSpatialQueryingEnabled.one.json'),
     two: readFixtures('NeatlineMapSpatialQueryingEnabled.two.json')
   };
@@ -57,20 +57,20 @@ describe('Map | Spatial Querying Enabled', function() {
     // ------------------------------------------------------------------------
 
     // Load collection with one record.
-    NL.refreshMap(fx.one);
+    NL.refreshMap(fixtures.one);
     NL.assertVectorLayerCount(1);
 
     NL.triggerMapMoveEnd();
     NL.triggerMapMoveStart();
 
     // The new collection should _not_ be ingested.
-    NL.respondLast200(fx.two);
+    NL.respondLast200(fixtures.two);
     NL.assertVectorLayerCount(1);
 
     NL.triggerMapMoveEnd();
 
     // The new collection _should_ be ingested.
-    NL.respondLast200(fx.two);
+    NL.respondLast200(fixtures.two);
     NL.assertVectorLayerCount(2);
 
   });

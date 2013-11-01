@@ -11,7 +11,7 @@
 describe('Styles | Set Focus', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     exhibit: read('EditorStyles.json')
   };
 
@@ -19,9 +19,9 @@ describe('Styles | Set Focus', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showStyles(fx.exhibit);
+    NL.showStyles(fixtures.exhibit);
 
-    el = {
+    elements = {
       setFocus: NL.v.styles.$('a[name="set-focus"]')
     };
 
@@ -36,7 +36,7 @@ describe('Styles | Set Focus', function() {
     // ------------------------------------------------------------------------
 
     NL.setMapCenter(1, 2, 3);
-    el.setFocus.trigger('click');
+    elements.setFocus.trigger('click');
 
     // Inputs should be updated.
     expect(NL.v.styles.__ui.mapFocus).toHaveValue('1,2');

@@ -11,7 +11,7 @@
 describe('Record | Open Form', function() {
 
 
-  var el, recordModels, feature1, feature2, fx = {
+  var recordModels, feature1, feature2, fixtures = {
     records: read('EditorRecordOpenForm.records.json'),
     record:  read('EditorRecord.record.json')
   };
@@ -20,17 +20,11 @@ describe('Record | Open Form', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondAll200(fx.records);
+    NL.respondAll200(fixtures.records);
 
     recordModels = NL.getRecordListModels();
     feature1 = NL.v.map.getVectorLayers()[0].features[0];
     feature2 = NL.v.map.getVectorLayers()[1].features[0];
-
-    el = {
-      pan:    NL.v.record.$('input[value="pan"]'),
-      poly:   NL.v.record.$('input[value="poly"]'),
-      close:  NL.v.record.$('a[name="close"]')
-    };
 
   });
 
@@ -82,13 +76,13 @@ describe('Record | Open Form', function() {
       // requested by a route, the record should be loaded from the server.
       // ----------------------------------------------------------------------
 
-      model = NL.recordFromJson(fx.record);
+      model = NL.recordFromJson(fixtures.record);
 
       // Request unloaded record.
       NL.navigate('record/999');
 
       // Respond to the GET request.
-      NL.respondLast200(fx.record);
+      NL.respondLast200(fixtures.record);
 
     });
 
@@ -130,9 +124,9 @@ describe('Record | Open Form', function() {
     // data from the record model.
     // ------------------------------------------------------------------------
 
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    var id = JSON.parse(fx.record).id;
+    var id = JSON.parse(fixtures.record).id;
     var inputs = NL.getRecordFormElements();
 
     expect(inputs.id).                  toHaveText('#'+id+':'),

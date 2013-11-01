@@ -11,7 +11,7 @@
 describe('Record | SVG Import', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -19,9 +19,9 @@ describe('Record | SVG Import', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       link:     NL.v.record.$('a[href="#svg-modal"]'),
       svg:      NL.v.record.$('textarea[name="svg"]'),
       density:  NL.v.record.$('input[name="density"]'),
@@ -41,11 +41,11 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Click "Enter Markup".
-    el.link.trigger('click');
+    elements.link.trigger('click');
 
     // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
-    expect(el.modal).toHaveClass('in');
+    expect(elements.modal).toHaveClass('in');
 
   });
 
@@ -58,13 +58,13 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Click "Enter Markup".
-    el.link.trigger('click');
+    elements.link.trigger('click');
 
     // Click "Cancel".
-    el.cancel.trigger('click');
+    elements.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(el.modal).not.toHaveClass('in');
+    expect(elements.modal).not.toHaveClass('in');
 
   });
 
@@ -81,12 +81,11 @@ describe('Record | SVG Import', function() {
     var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
 
     // Update SVG.
-    el.svg.val(svg);
-    el.parse.trigger('click');
+    elements.svg.val(svg);
+    elements.parse.trigger('click');
 
     // `geometry` on handler should be set.
-    expect(NL.v.map.controls.svg.handler.geometry.equals(geo)).
-      toBeTruthy();
+    expect(NL.v.map.controls.svg.handler.geometry.equals(geo)).toBeTruthy();
 
   });
 
@@ -99,18 +98,18 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Set SVG.
-    el.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
+    elements.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
 
     // Set low density.
-    el.density.val('1.0');
-    el.parse.trigger('click');
+    elements.density.val('1.0');
+    elements.parse.trigger('click');
 
     // Capture the number of points in the geometry.
     var c1 = NL.v.map.controls.svg.handler.geometry.getVertices().length;
 
     // Set high density.
-    el.density.val('2.0');
-    el.parse.trigger('click');
+    elements.density.val('2.0');
+    elements.parse.trigger('click');
 
     // Capture the number of points in the geometry.
     var c2 = NL.v.map.controls.svg.handler.geometry.getVertices().length;
@@ -131,8 +130,8 @@ describe('Record | SVG Import', function() {
     spyOn(toastr, 'info');
 
     // Parse valid SVG.
-    el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
-    el.parse.trigger('click');
+    elements.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    elements.parse.trigger('click');
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -149,11 +148,11 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Parse valid SVG.
-    el.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
-    el.parse.trigger('click');
+    elements.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    elements.parse.trigger('click');
 
     // Modal should be hidden.
-    expect(el.modal).not.toHaveClass('in');
+    expect(elements.modal).not.toHaveClass('in');
 
   });
 
@@ -168,8 +167,8 @@ describe('Record | SVG Import', function() {
     spyOn(toastr, 'error');
 
     // Parse invalid SVG.
-    el.svg.val('invalid');
-    el.parse.trigger('click');
+    elements.svg.val('invalid');
+    elements.parse.trigger('click');
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
@@ -186,14 +185,14 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Click "Enter Markup".
-    el.link.trigger('click');
+    elements.link.trigger('click');
 
     // Parse invalid SVG.
-    el.svg.val('invalid');
-    el.parse.trigger('click');
+    elements.svg.val('invalid');
+    elements.parse.trigger('click');
 
     // Modal should be hidden.
-    expect(el.modal).toHaveClass('in');
+    expect(elements.modal).toHaveClass('in');
 
   });
 

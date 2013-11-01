@@ -11,14 +11,14 @@
 describe('Records | Router', function() {
 
 
-  var el;
+  var elements;
 
 
   beforeEach(function() {
 
     NL.loadEditor();
 
-    el = {
+    elements = {
       records: NL.v.exhibit.$('li[data-slug="records"]')
     };
 
@@ -35,7 +35,7 @@ describe('Records | Router', function() {
       expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
 
       // "Records" tab should be active.
-      expect(el.records).toHaveClass('active');
+      expect(elements.records).toHaveClass('active');
 
     });
 

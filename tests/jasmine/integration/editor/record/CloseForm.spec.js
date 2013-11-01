@@ -11,7 +11,7 @@
 describe('Record | Close Form', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     records: read('EditorRecordCloseForm.records.json'),
     record:  read('EditorRecordCloseForm.record.json')
   };
@@ -20,9 +20,9 @@ describe('Record | Close Form', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
-    el = {
+    elements = {
       pan:    NL.v.record.$('input[value="pan"]'),
       poly:   NL.v.record.$('input[value="poly"]'),
       close:  NL.v.record.$('a[name="close"]')
@@ -39,7 +39,7 @@ describe('Record | Close Form', function() {
     // ------------------------------------------------------------------------
 
     // Click "X".
-    el.close.trigger('click');
+    elements.close.trigger('click');
 
     // Records list should be visible.
     expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);
@@ -57,7 +57,7 @@ describe('Record | Close Form', function() {
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Click "X".
-    el.close.trigger('click');
+    elements.close.trigger('click');
 
     // Should unselect the record.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('unselect', {
@@ -77,7 +77,7 @@ describe('Record | Close Form', function() {
     spyOn(Neatline.vent, 'trigger').andCallThrough();
 
     // Click "X".
-    el.close.trigger('click');
+    elements.close.trigger('click');
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
@@ -104,10 +104,10 @@ describe('Record | Close Form', function() {
     NL.v.map.controls.edit.dragComplete();
 
     // Click "X".
-    el.close.trigger('click');
+    elements.close.trigger('click');
 
     // Respond with original geometry.
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
 
     // Should revert to the saved geometry.
     var layer = NL.v.map.getVectorLayers()[0];
@@ -125,11 +125,11 @@ describe('Record | Close Form', function() {
     // ------------------------------------------------------------------------
 
     // Activate "Draw Polygon".
-    el.pan.removeAttr('checked');
-    el.poly.attr('checked', 'checked').trigger('change');
+    elements.pan.removeAttr('checked');
+    elements.poly.attr('checked', 'checked').trigger('change');
 
     // Click "X".
-    el.close.trigger('click');
+    elements.close.trigger('click');
 
     // Should deactivate edit control.
     expect(NL.v.map.controls.poly.active).toBeFalsy();

@@ -11,7 +11,7 @@
 describe('Styles | Router', function() {
 
 
-  var el, fx = {
+  var elements, fixtures = {
     exhibit: read('EditorStyles.json')
   };
 
@@ -20,7 +20,7 @@ describe('Styles | Router', function() {
 
     NL.loadEditor();
 
-    el = {
+    elements = {
       styles: NL.v.exhibit.$('li[data-slug="styles"]')
     };
 
@@ -30,14 +30,14 @@ describe('Styles | Router', function() {
   it('#styles', function() {
 
     NL.navigate('styles');
-    NL.respondLast200(fx.exhibit);
+    NL.respondLast200(fixtures.exhibit);
 
     // Tabs, styles form should be visible.
     expect(NL.v.editor.__ui.editor).toContain(NL.v.exhibit.$el);
     expect(NL.v.editor.__ui.editor).toContain(NL.v.styles.$el);
 
     // "Styles" tab should be active.
-    expect(el.styles).toHaveClass('active');
+    expect(elements.styles).toHaveClass('active');
 
   });
 

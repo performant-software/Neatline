@@ -11,7 +11,7 @@
 describe('Search | Query Execution', function() {
 
 
-  var perPage, fx = {
+  var perPage, fixtures = {
     records: read('EditorSearchQueryExecution.json')
   };
 
@@ -100,7 +100,7 @@ describe('Search | Query Execution', function() {
     NL.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    NL.respondLast200(fx.records);
+    NL.respondLast200(fixtures.records);
     var rows = NL.getRecordListRows();
 
     // Record list should be updated.
@@ -135,7 +135,7 @@ describe('Search | Query Execution', function() {
     NL.assertLastRequestHasGetParameter('offset', '0');
 
     // Inject a new records collection.
-    NL.respondLast200(fx.records);
+    NL.respondLast200(fixtures.records);
     var rows = NL.getRecordListRows();
 
     // Record list should be updated.

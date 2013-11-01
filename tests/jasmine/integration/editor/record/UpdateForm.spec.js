@@ -11,7 +11,7 @@
 describe('Record | Update Form', function() {
 
 
-  var fx = {
+  var fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -28,7 +28,7 @@ describe('Record | Update Form', function() {
     // edit layer should be updated.
     // ------------------------------------------------------------------------
 
-    NL.showRecordForm(fx.record);
+    NL.showRecordForm(fixtures.record);
 
     // Update record form model.
     NL.v.record.model.set('id', 999);

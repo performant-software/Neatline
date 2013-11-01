@@ -11,7 +11,7 @@
 describe('Record | Create Record', function() {
 
 
-  var el, fx =  {
+  var el, fixtures =  {
     records: read('EditorRecordCreateRecord.records.json'),
     record:  read('EditorRecordCreateRecord.record.json')
   };
@@ -20,9 +20,9 @@ describe('Record | Create Record', function() {
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.respondRecordList200(fx.records);
+    NL.respondRecordList200(fixtures.records);
 
-    el = {
+    elements = {
       addButton:    NL.v.records.$('a[href="#record/add"]'),
       closeButton:  NL.v.record.$('a[name="close"]'),
       saveButton:   NL.v.record.$('a[name="save"]'),
@@ -42,16 +42,16 @@ describe('Record | Create Record', function() {
     // ------------------------------------------------------------------------
 
     // Add record.
-    NL.click(el.addButton);
+    NL.click(elements.addButton);
 
     // Record form should be visible.
     expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
 
     // Form id should be empty.
-    expect(el.leadId).toBeEmpty();
+    expect(elements.leadId).toBeEmpty();
 
     // Form title should display placeholder.
-    expect(el.leadTitle).toHaveText(STRINGS.record.placeholders.title);
+    expect(elements.leadTitle).toHaveText(STRINGS.record.placeholders.title);
 
     // Get the form model.
     var record = NL.v.record.model;
@@ -83,13 +83,13 @@ describe('Record | Create Record', function() {
     NL.click($(NL.getRecordListRows()[0]));
 
     // Click "Style" tab.
-    el.styleTab.tab('show');
+    elements.styleTab.tab('show');
 
     // Close the form.
-    el.closeButton.trigger('click');
+    elements.closeButton.trigger('click');
 
     // Add record.
-    NL.click(el.addButton);
+    NL.click(elements.addButton);
 
     // "Text" should be active.
     NL.assertActiveTab('text');
@@ -105,10 +105,10 @@ describe('Record | Create Record', function() {
     // ------------------------------------------------------------------------
 
     // Add record.
-    NL.click(el.addButton);
+    NL.click(elements.addButton);
 
     // Click "Save".
-    el.saveButton.trigger('click');
+    elements.saveButton.trigger('click');
 
     // Route should be /record, method POST.
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
@@ -131,14 +131,14 @@ describe('Record | Create Record', function() {
     // ------------------------------------------------------------------------
 
     // Add record, save.
-    NL.click(el.addButton);
-    el.saveButton.trigger('click');
+    NL.click(elements.addButton);
+    elements.saveButton.trigger('click');
 
     // Respond to save with new id.
-    NL.respondLast200(fx.record);
+    NL.respondLast200(fixtures.record);
 
     // Respond to map refresh with new collection.
-    NL.respondLast200(fx.records);
+    NL.respondLast200(fixtures.records);
 
     // Should not double-load the new record.
     NL.assertVectorLayerCount(1);
@@ -168,11 +168,11 @@ describe('Record | Create Record', function() {
       NL.navigate('record/add/'+slug);
 
       // Click "Save".
-      el.saveButton.trigger('click');
-      NL.respondLast200(fx.record);
+      elements.saveButton.trigger('click');
+      NL.respondLast200(fixtures.record);
 
       // Route should be updated.
-      var id = $.parseJSON(fx.record).id;
+      var id = $.parseJSON(fixtures.record).id;
       expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
 
     });

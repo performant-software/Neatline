@@ -11,7 +11,7 @@
 describe('Map | Vector Layer Management', function() {
 
 
-  var fx = {
+  var fixtures = {
     regular: read('NeatlineMapVectorLayerManagement.regular.json'),
     deleted: read('NeatlineMapVectorLayerManagement.deleted.json')
   };
@@ -29,7 +29,7 @@ describe('Map | Vector Layer Management', function() {
     // that arrive in the initial query.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.regular);
+    NL.respondMap200(fixtures.regular);
     var layers = NL.v.map.getVectorLayers();
 
     // Should create layers for records.
@@ -52,7 +52,7 @@ describe('Map | Vector Layer Management', function() {
 
     NL.triggerMapMoveEnd();
 
-    NL.respondLast200(fx.regular);
+    NL.respondLast200(fixtures.regular);
     var layers = NL.v.map.getVectorLayers();
 
     // Should create layers for records.
@@ -75,10 +75,10 @@ describe('Map | Vector Layer Management', function() {
     // ------------------------------------------------------------------------
 
     // Load collection without record 3.
-    NL.refreshMap(fx.deleted);
+    NL.refreshMap(fixtures.deleted);
 
     // Load collection with record 3.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Should create layer for record 3.
     expect(NL.getVectorLayer('title3')).toBeDefined();
@@ -94,7 +94,7 @@ describe('Map | Vector Layer Management', function() {
     // the existing layers should not be rebuilt.
     // ------------------------------------------------------------------------
 
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Store original OpenLayers id's.
     var olIds1 = _.map(_.values(NL.v.map.layers.vector), function(v) {
@@ -102,7 +102,7 @@ describe('Map | Vector Layer Management', function() {
     });
 
     // Reload the same collection.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Get new OpenLayers id's.
     var olIds2 = _.map(_.values(NL.v.map.layers.vector), function(v) {
@@ -122,10 +122,10 @@ describe('Map | Vector Layer Management', function() {
     // ------------------------------------------------------------------------
 
     // Load collection with record 3.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Load collection without record 3.
-    NL.refreshMap(fx.deleted);
+    NL.refreshMap(fixtures.deleted);
 
     // Should remove layer for record 3.
     expect(NL.getVectorLayer('title3')).toBeUndefined();
@@ -143,13 +143,13 @@ describe('Map | Vector Layer Management', function() {
     // ------------------------------------------------------------------------
 
     // Load collection with record 3.
-    NL.refreshMap(fx.regular);
+    NL.refreshMap(fixtures.regular);
 
     // Freeze layer for record 3.
     NL.getVectorLayer('title3').nFrozen = true;
 
     // Load collection without record 3.
-    NL.refreshMap(fx.deleted);
+    NL.refreshMap(fixtures.deleted);
 
     // Should not remove frozen layer.
     expect(NL.getVectorLayer('title3')).toBeDefined();

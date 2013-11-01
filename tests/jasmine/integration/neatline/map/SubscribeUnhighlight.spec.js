@@ -11,7 +11,7 @@
 describe('Map | Subscribe `unhighlight`', function() {
 
 
-  var fx = {
+  var fixtures = {
     records: readFixtures('NeatlineMapSubscriptions.records.json')
   };
 
@@ -28,7 +28,7 @@ describe('Map | Subscribe `unhighlight`', function() {
     // on the map, the map should unhighlight the features.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
 
     Neatline.vent.trigger('highlight', { model: layer.nModel });
@@ -45,7 +45,7 @@ describe('Map | Subscribe `unhighlight`', function() {
     // the map, the features should not be unhighlighted.
     // ------------------------------------------------------------------------
 
-    NL.respondMap200(fx.records);
+    NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
 
     Neatline.vent.trigger('select', { model: layer.nModel });
