@@ -28,17 +28,13 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      */
     records: function(query, start) {
 
-      // Display the search box and list.
       Neatline.execute('EDITOR:display', [
         'EDITOR:EXHIBIT',
         'EDITOR:EXHIBIT:SEARCH',
         'EDITOR:EXHIBIT:RECORDS'
       ]);
 
-      // Activate the "Records" tab.
       Neatline.execute('EDITOR:EXHIBIT:activateTab', 'records');
-
-      // (Re)hydrate the records list.
       Neatline.execute('EDITOR:EXHIBIT:SEARCH:hydrate', query, start);
 
     }

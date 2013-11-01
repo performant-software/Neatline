@@ -96,7 +96,6 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         this.mirroring = true;
-        Neatline.execute('EDITOR:EXHIBIT:SEARCH:mirror');
         this.bold();
       }
 
@@ -122,18 +121,9 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       this.parse();
 
-      // Update the route.
+      // Update the route, execute the query.
       Neatline.execute('EDITOR:setRoute', this.getUrlFromQuery());
-
-      // Build parameters object.
-      var params = _.extend(this.query, {
-        limit: Neatline.g.neatline.per_page, offset: 0
-      });
-
-      // Load records.
-      if (!this.mirroring) {
-        Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
-      }
+      Neatline.execute('EDITOR:EXHIBIT:SEARCH:execute');
 
     },
 

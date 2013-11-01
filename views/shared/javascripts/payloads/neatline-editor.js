@@ -58710,17 +58710,13 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      */
     records: function(query, start) {
 
-      // Display the search box and list.
       Neatline.execute('EDITOR:display', [
         'EDITOR:EXHIBIT',
         'EDITOR:EXHIBIT:SEARCH',
         'EDITOR:EXHIBIT:RECORDS'
       ]);
 
-      // Activate the "Records" tab.
       Neatline.execute('EDITOR:EXHIBIT:activateTab', 'records');
-
-      // (Re)hydrate the records list.
       Neatline.execute('EDITOR:EXHIBIT:SEARCH:hydrate', query, start);
 
     }
@@ -58870,6 +58866,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
     commands: [
       'display',
       'hydrate',
+      'execute',
       'mirror'
     ],
 
@@ -58903,18 +58900,32 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * @param {Number} start: The paging offset.
      */
     hydrate: function(query, start) {
-
-      // Apply the new search query.
       this.view.setQueryFromUrl(query);
-      if (this.view.mirroring) return;
+      this.execute(start);
+    },
 
-      // Merge route parameters into query.
-      var params = _.extend(this.view.query, {
-        limit: Neatline.g.neatline.per_page, offset: start || 0
-      });
 
-      // Load the list of records.
-      Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
+    /**
+     * Perform the query current search query.
+     *
+     * @param {Number} start: The paging offset.
+     */
+    execute: function(start) {
+
+      // Apply map mirroring.
+      if (this.view.mirroring) this.mirror();
+
+      else {
+
+        // Merge route parameters into query.
+        var params = _.extend(this.view.query, {
+          limit: Neatline.g.neatline.per_page, offset: start || 0
+        });
+
+        // Load the list of records.
+        Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
+
+      }
 
     },
 
@@ -58930,9 +58941,8 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       if (!this.view.mirroring) return;
 
       // Display the map collection in the browser.
-      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest',
-        records || Neatline.request('MAP:getRecords')
-      );
+      records = records || Neatline.request('MAP:getRecords')
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
 
     },
 
@@ -59070,7 +59080,6 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
       // MAP
       else if (_.string.startsWith(value, 'map:')) {
         this.mirroring = true;
-        Neatline.execute('EDITOR:EXHIBIT:SEARCH:mirror');
         this.bold();
       }
 
@@ -59096,18 +59105,9 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
       this.parse();
 
-      // Update the route.
+      // Update the route, execute the query.
       Neatline.execute('EDITOR:setRoute', this.getUrlFromQuery());
-
-      // Build parameters object.
-      var params = _.extend(this.query, {
-        limit: Neatline.g.neatline.per_page, offset: 0
-      });
-
-      // Load records.
-      if (!this.mirroring) {
-        Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
-      }
+      Neatline.execute('EDITOR:EXHIBIT:SEARCH:execute');
 
     },
 
