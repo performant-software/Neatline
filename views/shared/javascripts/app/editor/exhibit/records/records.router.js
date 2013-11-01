@@ -38,8 +38,8 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
       // Activate the "Records" tab.
       Neatline.execute('EDITOR:EXHIBIT:activateTab', 'records');
 
-      // Populate the record list.
-      Neatline.execute('EDITOR:EXHIBIT:SEARCH:search', query, start);
+      // (Re)hydrate the records list.
+      Neatline.execute('EDITOR:EXHIBIT:SEARCH:hydrate', query, start);
 
     }
 

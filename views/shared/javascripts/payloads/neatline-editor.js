@@ -58721,8 +58721,8 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
       // Activate the "Records" tab.
       Neatline.execute('EDITOR:EXHIBIT:activateTab', 'records');
 
-      // Populate the record list.
-      Neatline.execute('EDITOR:EXHIBIT:SEARCH:search', query, start);
+      // (Re)hydrate the records list.
+      Neatline.execute('EDITOR:EXHIBIT:SEARCH:hydrate', query, start);
 
     }
 
@@ -58872,7 +58872,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
     commands: [
       'display',
-      'search',
+      'hydrate',
       'mirror'
     ],
 
@@ -58905,27 +58905,19 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      * @param {String} query: The search query.
      * @param {Number} start: The paging offset.
      */
-    search: function(query, start) {
+    hydrate: function(query, start) {
 
-      query = query || null;
-      start = start || 0;
-
-      // Set the search query.
+      // Apply the new search query.
       this.view.setQueryFromUrl(query);
+      if (this.view.mirroring) return;
 
-      // Break if map mirroring.
-      if (!this.view.mirroring) {
+      // Merge route parameters into query.
+      var params = _.extend(this.view.query, {
+        limit: Neatline.g.neatline.per_page, offset: start || 0
+      });
 
-        // Merge route parameters into query.
-        var params = _.extend(this.view.query, {
-          limit:  Neatline.g.neatline.per_page,
-          offset: start
-        });
-
-        // Query for records.
-        Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
-
-      }
+      // Load the list of records.
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:load', params);
 
     },
 
@@ -58937,13 +58929,12 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      */
     mirror: function(records) {
 
-      // Get the record collection on the map.
-      records = records || Neatline.request('MAP:getRecords');
+      // Break if not mirroring.
+      if (!this.view.mirroring) return;
 
-      // Render in the record browser.
-      if (records && this.view.mirroring) {
-        Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
-      }
+      // Display the current map collection in the browser.
+      records = records || Neatline.request('MAP:getRecords');
+      Neatline.execute('EDITOR:EXHIBIT:RECORDS:ingest', records);
 
     },
 
