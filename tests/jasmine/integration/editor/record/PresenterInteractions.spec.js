@@ -22,9 +22,9 @@ describe('Record | Presenter Interactions', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      text:   NL.vw.RECORD.$('a[href="#record-text"]'),
-      map:    NL.vw.RECORD.$('a[href="#record-map"]'),
-      close:  NL.vw.RECORD.$('a[name="close"]')
+      text:   NL.v.record.$('a[href="#record-text"]'),
+      map:    NL.v.record.$('a[href="#record-map"]'),
+      close:  NL.v.record.$('a[name="close"]')
     };
 
   });
@@ -102,7 +102,7 @@ describe('Record | Presenter Interactions', function() {
     var exec = spyOn(Neatline, 'execute').andCallThrough();
 
     // Capture the form model.
-    var model = NL.vw.RECORD.model;
+    var model = NL.v.record.model;
 
     // Close the form.
     el.close.trigger('click');

@@ -23,10 +23,10 @@ describe('Record | Delete Record', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      delete1:  NL.vw.RECORD.$('a[href="#delete-modal"]'),
-      delete2:  NL.vw.RECORD.$('a[name="delete"]'),
-      cancel:   NL.vw.RECORD.$('a[name="cancel"]'),
-      modal:    NL.vw.RECORD.$('#delete-modal')
+      delete1:  NL.v.record.$('a[href="#delete-modal"]'),
+      delete2:  NL.v.record.$('a[name="delete"]'),
+      cancel:   NL.v.record.$('a[name="cancel"]'),
+      modal:    NL.v.record.$('#delete-modal')
     };
 
   });
@@ -75,7 +75,7 @@ describe('Record | Delete Record', function() {
     // should be issued to the records API.
     // ------------------------------------------------------------------------
 
-    var id = NL.vw.RECORD.model.id;
+    var id = NL.v.record.model.id;
 
     // Delete, confirm.
     el.delete1.trigger('click');
@@ -148,8 +148,8 @@ describe('Record | Delete Record', function() {
     expect(el.modal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(NL.vw.EDITOR.__ui.editor).not.toContain(NL.vw.RECORD.$el);
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
+    expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');

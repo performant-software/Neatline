@@ -32,7 +32,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     NL.respondMap200(fx.records);
 
     // Get layer, cache request count.
-    var layer = NL.vw.MAP.getVectorLayers()[0];
+    var layer = NL.v.map.getVectorLayers()[0];
     var count = NL.server.requests.count;
 
     Neatline.vent.trigger('select', { model: layer.nModel });
@@ -64,7 +64,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     expect(NL.server.requests.count).toEqual(count);
 
     // New layer should be created for model.
-    var layer = NL.vw.MAP.getVectorLayers()[0];
+    var layer = NL.v.map.getVectorLayers()[0];
     expect(layer.features[0].geometry.x).toEqual(1);
     expect(layer.features[0].geometry.y).toEqual(2);
 
@@ -86,7 +86,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     NL.respondMap200(fx.records);
 
     // Select model for the vector layer.
-    var layer = NL.vw.MAP.getVectorLayers()[0];
+    var layer = NL.v.map.getVectorLayers()[0];
     Neatline.vent.trigger('select', { model: layer.nModel });
 
     // Ingest fresh records.
@@ -108,7 +108,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
-    var feature = NL.vw.MAP.getVectorLayers()[0].features[0];
+    var feature = NL.v.map.getVectorLayers()[0].features[0];
 
     // Set center and zoom.
     NL.setMapCenter(200, 300, 15);

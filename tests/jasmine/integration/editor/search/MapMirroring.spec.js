@@ -32,15 +32,15 @@ describe('Search | Map Mirroring', function() {
 
     // Keyup with `map:`.
     var c1 = NL.server.requests.length;
-    NL.vw.SEARCH.__ui.search.val('map:');
-    NL.vw.SEARCH.__ui.search.trigger('keyup');
+    NL.v.search.__ui.search.val('map:');
+    NL.v.search.__ui.search.trigger('keyup');
     var c2 = NL.server.requests.length;
     expect(c2).toEqual(c1);
 
     // Keyup with `map:other`.
     var c1 = NL.server.requests.length;
-    NL.vw.SEARCH.__ui.search.val('map:other');
-    NL.vw.SEARCH.__ui.search.trigger('keyup');
+    NL.v.search.__ui.search.val('map:other');
+    NL.v.search.__ui.search.trigger('keyup');
     var c2 = NL.server.requests.length;
     expect(c2).toEqual(c1);
 
@@ -57,7 +57,7 @@ describe('Search | Map Mirroring', function() {
     NL.respondMap200(fx.map);
 
     // Keyup with `map:` in the box.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.v.search.__ui.search.val('map:').trigger('keyup');
 
     // List should synchronize with map.
     var recordRows = NL.getRecordListRows();
@@ -99,7 +99,7 @@ describe('Search | Map Mirroring', function() {
     // ------------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.v.search.__ui.search.val('map:').trigger('keyup');
 
     // Ingest new records on the map.
     NL.refreshMap(fx.map);
@@ -128,10 +128,10 @@ describe('Search | Map Mirroring', function() {
     NL.respondMap200(fx.map);
 
     // Activate mirroring.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.v.search.__ui.search.val('map:').trigger('keyup');
 
     // Pagination should not be visible.
-    expect(NL.vw.RECORDS.$el).not.toContain('.pagination');
+    expect(NL.v.records.$el).not.toContain('.pagination');
 
   });
 
@@ -144,10 +144,10 @@ describe('Search | Map Mirroring', function() {
     // ------------------------------------------------------------------------
 
     // Keyup with `map:` in the box.
-    NL.vw.SEARCH.__ui.search.val('map:').trigger('keyup');
+    NL.v.search.__ui.search.val('map:').trigger('keyup');
 
     // Backspace once.
-    NL.vw.SEARCH.__ui.search.val('map').trigger('keyup');
+    NL.v.search.__ui.search.val('map').trigger('keyup');
 
     // Respond with default record collection.
     NL.respondLast200(fx.list);

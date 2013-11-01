@@ -29,7 +29,7 @@ describe('Map | Subscribe `unhighlight`', function() {
     // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
-    var layer = NL.vw.MAP.getVectorLayers()[0];
+    var layer = NL.v.map.getVectorLayers()[0];
 
     Neatline.vent.trigger('highlight', { model: layer.nModel });
     Neatline.vent.trigger('unhighlight', { model: layer.nModel });
@@ -46,7 +46,7 @@ describe('Map | Subscribe `unhighlight`', function() {
     // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.records);
-    var layer = NL.vw.MAP.getVectorLayers()[0];
+    var layer = NL.v.map.getVectorLayers()[0];
 
     Neatline.vent.trigger('select', { model: layer.nModel });
     Neatline.vent.trigger('unhighlight', { model: layer.nModel });

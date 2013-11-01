@@ -21,8 +21,8 @@ describe('Map | Vector Styles', function() {
     NL.loadNeatline();
     NL.respondMap200(fx.records);
 
-    layer1 = NL.vw.MAP.getVectorLayers()[0];
-    layer2 = NL.vw.MAP.getVectorLayers()[1];
+    layer1 = NL.v.map.getVectorLayers()[0];
+    layer2 = NL.v.map.getVectorLayers()[1];
 
   });
 

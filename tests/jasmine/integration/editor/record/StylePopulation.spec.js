@@ -22,9 +22,9 @@ describe('Record Form | Style Population', function() {
     NL.showRecordForm(fx.record);
 
     el = _.extend(NL.getRecordFormElements(), {
-      setMinZoom: NL.vw.RECORD.$('a[name="set-min-zoom"]'),
-      setMaxZoom: NL.vw.RECORD.$('a[name="set-max-zoom"]'),
-      setFocus:   NL.vw.RECORD.$('a[name="set-focus"]')
+      setMinZoom: NL.v.record.$('a[name="set-min-zoom"]'),
+      setMaxZoom: NL.v.record.$('a[name="set-max-zoom"]'),
+      setFocus:   NL.v.record.$('a[name="set-focus"]')
     });
 
   });
@@ -44,7 +44,7 @@ describe('Record Form | Style Population', function() {
     expect(el.minZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(NL.vw.RECORD.model.get('min_zoom')).toEqual('10');
+    expect(NL.v.record.model.get('min_zoom')).toEqual('10');
 
   });
 
@@ -63,7 +63,7 @@ describe('Record Form | Style Population', function() {
     expect(el.maxZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(NL.vw.RECORD.model.get('max_zoom')).toEqual('10');
+    expect(NL.v.record.model.get('max_zoom')).toEqual('10');
 
   });
 
@@ -83,8 +83,8 @@ describe('Record Form | Style Population', function() {
     expect(el.mapZoom).toHaveValue('3');
 
     // Model should be updated.
-    expect(NL.vw.RECORD.model.get('map_focus')).toEqual('1,2');
-    expect(NL.vw.RECORD.model.get('map_zoom')).toEqual('3');
+    expect(NL.v.record.model.get('map_focus')).toEqual('1,2');
+    expect(NL.v.record.model.get('map_zoom')).toEqual('3');
 
   });
 

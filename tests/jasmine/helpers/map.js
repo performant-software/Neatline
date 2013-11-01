@@ -16,8 +16,8 @@ var NL = (function(NL) {
    * Trigger a `movestart` event on the map.
    */
   NL.triggerMapMoveStart = function() {
-    this.vw.MAP.map.events.triggerEvent('movestart');
-    this.vw.MAP.map.dragging = true;
+    this.v.map.map.events.triggerEvent('movestart');
+    this.v.map.map.dragging = true;
   };
 
 
@@ -25,8 +25,8 @@ var NL = (function(NL) {
    * Trigger a `moveend` event on the map.
    */
   NL.triggerMapMoveEnd = function() {
-    this.vw.MAP.map.events.triggerEvent('moveend');
-    this.vw.MAP.map.dragging = false;
+    this.v.map.map.events.triggerEvent('moveend');
+    this.v.map.map.dragging = false;
   };
 
 
@@ -34,7 +34,7 @@ var NL = (function(NL) {
    * Trigger a mouseout event on the map.
    */
   NL.triggerMapMouseout = function() {
-    this.vw.MAP.map.events.triggerEvent('mouseout');
+    this.v.map.map.events.triggerEvent('mouseout');
   };
 
 
@@ -57,7 +57,7 @@ var NL = (function(NL) {
   NL.clickOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.v.map.getVectorLayers(), function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return feature;
       };
@@ -70,7 +70,7 @@ var NL = (function(NL) {
     };
 
     // Trigger click.
-    this.vw.MAP.map.events.triggerEvent('click', evt);
+    this.v.map.map.events.triggerEvent('click', evt);
 
   };
 
@@ -81,14 +81,14 @@ var NL = (function(NL) {
   NL.clickOffMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.v.map.getVectorLayers(), function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return null;
       };
     });
 
     // Trigger click.
-    this.vw.MAP.map.events.triggerEvent('click', {
+    this.v.map.map.events.triggerEvent('click', {
       xy: new OpenLayers.Pixel(1,2)
     });
 
@@ -103,14 +103,14 @@ var NL = (function(NL) {
   NL.hoverOnMapFeature = function(feature) {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.v.map.getVectorLayers(), function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return feature;
       };
     });
 
     // Trigger click.
-    this.vw.MAP.map.events.triggerEvent('mousemove', {
+    this.v.map.map.events.triggerEvent('mousemove', {
       xy: new OpenLayers.Pixel(1,2)
     });
 
@@ -123,14 +123,14 @@ var NL = (function(NL) {
   NL.unHoverOnMapFeature = function() {
 
     // Mock getFeaturesFromEvent().
-    _.each(this.vw.MAP.getVectorLayers(), function(layer) {
+    _.each(this.v.map.getVectorLayers(), function(layer) {
       layer.getFeatureFromEvent = function(evt) {
         return null;
       };
     });
 
     // Trigger click.
-    this.vw.MAP.map.events.triggerEvent('mousemove', {
+    this.v.map.map.events.triggerEvent('mousemove', {
       xy: new OpenLayers.Pixel(1,2)
     });
 
@@ -145,7 +145,7 @@ var NL = (function(NL) {
    * @param {Number} zoom: The zoom level.
    */
   NL.setMapCenter = function(lon, lat, zoom) {
-    this.vw.MAP.map.setCenter([lon, lat], zoom);
+    this.v.map.map.setCenter([lon, lat], zoom);
   };
 
 
@@ -155,7 +155,7 @@ var NL = (function(NL) {
    * @param {Number} zoom: The zoom level.
    */
   NL.setMapZoom = function(zoom) {
-    this.vw.MAP.map.zoomTo(zoom);
+    this.v.map.map.zoomTo(zoom);
   };
 
 
@@ -166,7 +166,7 @@ var NL = (function(NL) {
    * @return {Object}: The layer.
    */
   NL.getVectorLayer = function(title) {
-    return _.find(this.vw.MAP.getVectorLayers(), function(layer) {
+    return _.find(this.v.map.getVectorLayers(), function(layer) {
       return layer.name == title;
     });
   };
@@ -179,7 +179,7 @@ var NL = (function(NL) {
    * @return {Object}: The layer.
    */
   NL.getWmsLayer = function(title) {
-    return _.find(this.vw.MAP.getWmsLayers(), function(layer) {
+    return _.find(this.v.map.getWmsLayers(), function(layer) {
       return layer.name == title;
     });
   };

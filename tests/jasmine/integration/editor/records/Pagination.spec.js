@@ -40,7 +40,7 @@ describe('Records | Pagination', function() {
     NL.respondLast200(fx.p12);
 
     // Paginators should be hidden.
-    expect(NL.vw.RECORDS.$el).not.toContain('.pagination');
+    expect(NL.v.records.$el).not.toContain('.pagination');
 
   });
 

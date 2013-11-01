@@ -23,9 +23,9 @@ describe('Record | Close Form', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      pan:    NL.vw.RECORD.$('input[value="pan"]'),
-      poly:   NL.vw.RECORD.$('input[value="poly"]'),
-      close:  NL.vw.RECORD.$('a[name="close"]')
+      pan:    NL.v.record.$('input[value="pan"]'),
+      poly:   NL.v.record.$('input[value="poly"]'),
+      close:  NL.v.record.$('a[name="close"]')
     };
 
   });
@@ -42,8 +42,8 @@ describe('Record | Close Form', function() {
     el.close.trigger('click');
 
     // Records list should be visible.
-    expect(NL.vw.EDITOR.__ui.editor).not.toContain(NL.vw.RECORD.$el);
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
+    expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
 
   });
 
@@ -61,7 +61,7 @@ describe('Record | Close Form', function() {
 
     // Should unselect the record.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('unselect', {
-      model:  NL.vw.RECORD.model,
+      model:  NL.v.record.model,
       source: Neatline.Editor.Record.ID
     });
 
@@ -95,13 +95,13 @@ describe('Record | Close Form', function() {
     // ------------------------------------------------------------------------
 
     // Drag the point to a different location.
-    var feature = NL.vw.MAP.editLayer.features[0];
-    NL.vw.MAP.controls.edit.feature = feature;
+    var feature = NL.v.map.editLayer.features[0];
+    NL.v.map.controls.edit.feature = feature;
     feature.geometry.x = 3;
     feature.geometry.y = 4;
 
     // Trigger modification.
-    NL.vw.MAP.controls.edit.dragComplete();
+    NL.v.map.controls.edit.dragComplete();
 
     // Click "X".
     el.close.trigger('click');
@@ -110,7 +110,7 @@ describe('Record | Close Form', function() {
     NL.respondMap200(fx.records);
 
     // Should revert to the saved geometry.
-    var layer = NL.vw.MAP.getVectorLayers()[0];
+    var layer = NL.v.map.getVectorLayers()[0];
     expect(layer.features[0].geometry.x).toEqual(1);
     expect(layer.features[0].geometry.y).toEqual(2);
 
@@ -132,7 +132,7 @@ describe('Record | Close Form', function() {
     el.close.trigger('click');
 
     // Should deactivate edit control.
-    expect(NL.vw.MAP.controls.poly.active).toBeFalsy();
+    expect(NL.v.map.controls.poly.active).toBeFalsy();
 
   });
 

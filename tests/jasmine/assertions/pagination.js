@@ -16,7 +16,7 @@ var NL = (function(NL) {
    * Assert that the pagination `<<` link is enabled.
    */
   NL.assertPaginationPrevEnabled = function() {
-    var prev = this.vw.RECORDS.$el.find('.pagination .prev');
+    var prev = this.v.records.$el.find('.pagination .prev');
     expect($(prev[0]).parent('li')).not.toHaveClass('disabled');
     expect($(prev[1]).parent('li')).not.toHaveClass('disabled');
   };
@@ -26,7 +26,7 @@ var NL = (function(NL) {
    * Assert that the pagination `<<` link is disabled.
    */
   NL.assertPaginationPrevDisabled = function() {
-    var prev = this.vw.RECORDS.$el.find('.pagination .prev');
+    var prev = this.v.records.$el.find('.pagination .prev');
     expect($(prev[0]).parent('li')).toHaveClass('disabled');
     expect($(prev[1]).parent('li')).toHaveClass('disabled');
   };
@@ -36,7 +36,7 @@ var NL = (function(NL) {
    * Assert that the pagination `>>` link is enabled.
    */
   NL.assertPaginationNextEnabled = function() {
-    var next = this.vw.RECORDS.$el.find('.pagination .next');
+    var next = this.v.records.$el.find('.pagination .next');
     expect($(next[0]).parent('li')).not.toHaveClass('disabled');
     expect($(next[1]).parent('li')).not.toHaveClass('disabled');
   };
@@ -46,7 +46,7 @@ var NL = (function(NL) {
    * Assert that the pagination `>>` link is disabled.
    */
   NL.assertPaginationNextDisabled = function() {
-    var next = this.vw.RECORDS.$el.find('.pagination .next');
+    var next = this.v.records.$el.find('.pagination .next');
     expect($(next[0]).parent('li')).toHaveClass('disabled');
     expect($(next[1]).parent('li')).toHaveClass('disabled');
   };
@@ -58,7 +58,7 @@ var NL = (function(NL) {
    * @param {String} route: The hash.
    */
   NL.assertPaginationPrevRoute = function(route) {
-    var prev = this.vw.RECORDS.$el.find('.pagination .prev');
+    var prev = this.v.records.$el.find('.pagination .prev');
     expect($(prev[0])).toHaveAttr('href', route);
     expect($(prev[1])).toHaveAttr('href', route);
   };
@@ -70,7 +70,7 @@ var NL = (function(NL) {
    * @param {String} route: The hash.
    */
   NL.assertPaginationNextRoute = function(route) {
-    var next = this.vw.RECORDS.$el.find('.pagination .next');
+    var next = this.v.records.$el.find('.pagination .next');
     expect($(next[0])).toHaveAttr('href', route);
     expect($(next[1])).toHaveAttr('href', route);
   };

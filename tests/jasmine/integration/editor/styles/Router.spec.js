@@ -21,7 +21,7 @@ describe('Styles | Router', function() {
     NL.loadEditor();
 
     el = {
-      styles: NL.vw.EXHIBIT.$('li[data-slug="styles"]')
+      styles: NL.v.exhibit.$('li[data-slug="styles"]')
     };
 
   });
@@ -33,8 +33,8 @@ describe('Styles | Router', function() {
     NL.respondLast200(fx.exhibit);
 
     // Tabs, styles form should be visible.
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.STYLES.$el);
+    expect(NL.v.editor.__ui.editor).toContain(NL.v.exhibit.$el);
+    expect(NL.v.editor.__ui.editor).toContain(NL.v.styles.$el);
 
     // "Styles" tab should be active.
     expect(el.styles).toHaveClass('active');

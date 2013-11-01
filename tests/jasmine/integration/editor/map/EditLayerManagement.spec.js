@@ -41,13 +41,13 @@ describe('Map | Edit Layer Management', function() {
     NL.navigate('record/'+record3.id);
 
     // Should create new layer for record 3.
-    var record3Layer = NL.vw.MAP.layers.vector[record3.id];
+    var record3Layer = NL.v.map.layers.vector[record3.id];
     expect(record3Layer.features[0].geometry.x).toEqual(5);
     expect(record3Layer.features[0].geometry.y).toEqual(6);
     NL.assertVectorLayerCount(3);
 
     // Record 3 layer should be edit layer.
-    expect(NL.vw.MAP.editLayer.id).toEqual(record3Layer.id);
+    expect(NL.v.map.editLayer.id).toEqual(record3Layer.id);
 
   });
 
@@ -64,11 +64,11 @@ describe('Map | Edit Layer Management', function() {
     NL.navigate('record/add');
 
     // Map should create new layer for unsaved record.
-    expect(NL.vw.MAP.layers.vector[undefined]).toBeDefined();
+    expect(NL.v.map.layers.vector[undefined]).toBeDefined();
     NL.assertVectorLayerCount(4);
 
     // Map should set new layer as the edit layer.
-    expect(NL.vw.MAP.editLayer.nModel.id).toBeUndefined();
+    expect(NL.v.map.editLayer.nModel.id).toBeUndefined();
 
   });
 
@@ -112,7 +112,7 @@ describe('Map | Edit Layer Management', function() {
     NL.refreshMap(fx.record3);
 
     // Edit layer still present.
-    expect(NL.vw.MAP.layers.vector[undefined]).toBeDefined();
+    expect(NL.v.map.layers.vector[undefined]).toBeDefined();
     NL.assertVectorLayerCount(4);
 
   });

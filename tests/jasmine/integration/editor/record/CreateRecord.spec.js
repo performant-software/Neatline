@@ -23,12 +23,12 @@ describe('Record | Create Record', function() {
     NL.respondRecordList200(fx.records);
 
     el = {
-      addButton:    NL.vw.RECORDS.$('a[href="#record/add"]'),
-      closeButton:  NL.vw.RECORD.$('a[name="close"]'),
-      saveButton:   NL.vw.RECORD.$('a[name="save"]'),
-      styleTab:     NL.vw.RECORD.$('a[href="#record-style"]'),
-      leadId:       NL.vw.RECORD.$('p.lead span.id'),
-      leadTitle:    NL.vw.RECORD.$('p.lead span.title')
+      addButton:    NL.v.records.$('a[href="#record/add"]'),
+      closeButton:  NL.v.record.$('a[name="close"]'),
+      saveButton:   NL.v.record.$('a[name="save"]'),
+      styleTab:     NL.v.record.$('a[href="#record-style"]'),
+      leadId:       NL.v.record.$('p.lead span.id'),
+      leadTitle:    NL.v.record.$('p.lead span.title')
     };
 
   });
@@ -45,7 +45,7 @@ describe('Record | Create Record', function() {
     NL.click(el.addButton);
 
     // Record form should be visible.
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
+    expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
 
     // Form id should be empty.
     expect(el.leadId).toBeEmpty();
@@ -54,7 +54,7 @@ describe('Record | Create Record', function() {
     expect(el.leadTitle).toHaveText(STRINGS.record.placeholders.title);
 
     // Get the form model.
-    var record = NL.vw.RECORD.model;
+    var record = NL.v.record.model;
 
     // Model should have defined styles.
     expect(_.isString(record.get('presenter'))).              toBeTruthy();

@@ -19,7 +19,7 @@ describe('Records | Router', function() {
     NL.loadEditor();
 
     el = {
-      records: NL.vw.EXHIBIT.$('li[data-slug="records"]')
+      records: NL.v.exhibit.$('li[data-slug="records"]')
     };
 
   });
@@ -30,9 +30,9 @@ describe('Records | Router', function() {
     afterEach(function() {
 
       // Tabs, search, records should be visible.
-      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.EXHIBIT.$el);
-      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.SEARCH.$el);
-      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORDS.$el);
+      expect(NL.v.editor.__ui.editor).toContain(NL.v.exhibit.$el);
+      expect(NL.v.editor.__ui.editor).toContain(NL.v.search.$el);
+      expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
 
       // "Records" tab should be active.
       expect(el.records).toHaveClass('active');

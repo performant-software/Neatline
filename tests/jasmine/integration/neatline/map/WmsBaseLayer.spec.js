@@ -23,8 +23,8 @@ describe('Map | WMS Base Layer', function() {
     // should create a single WMS layer and set it as the base layer.
     // ------------------------------------------------------------------------
 
-    var layers  = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
-    var layer   = NL.vw.MAP.map.baseLayer;
+    var layers  = NL.v.map.map.getLayersBy('isBaseLayer', true);
+    var layer   = NL.v.map.map.baseLayer;
 
     // Should create a WMS layer from the address/layers.
     expect(layer.CLASS_NAME).toEqual('OpenLayers.Layer.WMS');

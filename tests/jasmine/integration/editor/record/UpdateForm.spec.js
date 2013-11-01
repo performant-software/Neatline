@@ -31,10 +31,10 @@ describe('Record | Update Form', function() {
     NL.showRecordForm(fx.record);
 
     // Update record form model.
-    NL.vw.RECORD.model.set('id', 999);
+    NL.v.record.model.set('id', 999);
 
     // Edit layer `nModel` should be updated.
-    expect(NL.vw.MAP.editLayer.nModel.id).toEqual(999);
+    expect(NL.v.map.editLayer.nModel.id).toEqual(999);
 
   });
 

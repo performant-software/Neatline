@@ -29,7 +29,7 @@ var NL = (function(NL) {
    * @return {Object}: A hash of elements.
    */
   NL.getRecordFormElements = function() {
-    var form = this.vw.RECORD;
+    var form = this.v.record;
     return {
       id:                   form.$('p.lead span.id'),
       titleHeader:          form.$('p.lead span.title'),
@@ -74,7 +74,7 @@ var NL = (function(NL) {
    * @return {Array}: The slugs.
    */
   NL.getTabSlugs = function() {
-    return _.map(this.vw.RECORD.__ui.tabs, function(tab) {
+    return _.map(this.v.record.__ui.tabs, function(tab) {
       return $(tab).attr('data-slug');
     });
   };

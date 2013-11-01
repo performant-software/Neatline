@@ -20,9 +20,9 @@ var NL = (function(NL) {
    * @param {Number} zoom: The zoom.
    */
   NL.assertMapViewport = function(lon, lat, zoom) {
-    expect(this.vw.MAP.map.getCenter().lon).toEqual(lon);
-    expect(this.vw.MAP.map.getCenter().lat).toEqual(lat);
-    expect(this.vw.MAP.map.getZoom()).toEqual(zoom);
+    expect(this.v.map.map.getCenter().lon).toEqual(lon);
+    expect(this.v.map.map.getCenter().lat).toEqual(lat);
+    expect(this.v.map.map.getZoom()).toEqual(zoom);
   };
 
 
@@ -64,7 +64,7 @@ var NL = (function(NL) {
    * @param {Number} count: The number.
    */
   NL.assertVectorLayerCount = function(count) {
-    expect(this.vw.MAP.getVectorLayers().length).toEqual(count);
+    expect(this.v.map.getVectorLayers().length).toEqual(count);
   };
 
 
@@ -74,7 +74,7 @@ var NL = (function(NL) {
    * @param {Number} count: The number.
    */
   NL.assertWmsLayerCount = function(count) {
-    expect(this.vw.MAP.getWmsLayers().length).toEqual(count);
+    expect(this.v.map.getWmsLayers().length).toEqual(count);
   };
 
 

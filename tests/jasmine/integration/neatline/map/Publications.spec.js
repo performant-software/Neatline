@@ -22,7 +22,7 @@ describe('Map | Publications', function() {
     NL.respondMap200(fx.records);
 
     // Get layer and feature.
-    layer = NL.vw.MAP.getVectorLayers()[0];
+    layer = NL.v.map.getVectorLayers()[0];
     feature = layer.features[0];
 
     // Spy on the event aggregator.

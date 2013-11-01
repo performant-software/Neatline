@@ -30,7 +30,7 @@ describe('Map | WMS Layer Management', function() {
     // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.regular);
-    var layers = NL.vw.MAP.getWmsLayers();
+    var layers = NL.v.map.getWmsLayers();
 
     // Should create layers for records with WMS data.
     expect(layers[0].url).toEqual('address1');
@@ -53,7 +53,7 @@ describe('Map | WMS Layer Management', function() {
     NL.triggerMapMoveEnd();
 
     NL.respondLast200(fx.regular);
-    var layers = NL.vw.MAP.getWmsLayers();
+    var layers = NL.v.map.getWmsLayers();
 
     // Should create layers for records with WMS data.
     expect(layers[0].url).toEqual('address1');
@@ -97,7 +97,7 @@ describe('Map | WMS Layer Management', function() {
     NL.refreshMap(fx.regular);
 
     // Store original OpenLayers id's.
-    var olIds1 = _.map(_.values(NL.vw.MAP.layers.wms), function(v) {
+    var olIds1 = _.map(_.values(NL.v.map.layers.wms), function(v) {
       return v.id;
     });
 
@@ -105,7 +105,7 @@ describe('Map | WMS Layer Management', function() {
     NL.refreshMap(fx.regular);
 
     // Get new OpenLayers id's.
-    var olIds2 = _.map(_.values(NL.vw.MAP.layers.wms), function(v) {
+    var olIds2 = _.map(_.values(NL.v.map.layers.wms), function(v) {
       return v.id;
     });
 

@@ -22,7 +22,7 @@ describe('Styles | Set Focus', function() {
     NL.showStyles(fx.exhibit);
 
     el = {
-      setFocus: NL.vw.STYLES.$('a[name="set-focus"]')
+      setFocus: NL.v.styles.$('a[name="set-focus"]')
     };
 
   });
@@ -39,12 +39,12 @@ describe('Styles | Set Focus', function() {
     el.setFocus.trigger('click');
 
     // Inputs should be updated.
-    expect(NL.vw.STYLES.__ui.mapFocus).toHaveValue('1,2');
-    expect(NL.vw.STYLES.__ui.mapZoom).toHaveValue('3');
+    expect(NL.v.styles.__ui.mapFocus).toHaveValue('1,2');
+    expect(NL.v.styles.__ui.mapZoom).toHaveValue('3');
 
     // Model should be updated.
-    expect(NL.vw.STYLES.model.get('map_focus')).toEqual('1,2');
-    expect(NL.vw.STYLES.model.get('map_zoom')).toEqual('3');
+    expect(NL.v.styles.model.get('map_focus')).toEqual('1,2');
+    expect(NL.v.styles.model.get('map_zoom')).toEqual('3');
 
   });
 

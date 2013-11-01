@@ -36,8 +36,8 @@ describe('Presenters | Static Bubble', function() {
     // appended to the map container and invisible.
     // ------------------------------------------------------------------------
 
-    expect(NL.vw.MAP.$el).toContain(NL.vw.BUBBLE.$el);
-    expect(NL.vw.BUBBLE.$el).not.toBeVisible();
+    expect(NL.v.map.$el).toContain(NL.v.bubble.$el);
+    expect(NL.v.bubble.$el).not.toBeVisible();
 
   });
 
@@ -54,15 +54,15 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('highlight', { model: model1 });
 
       // Title and body should be populated.
-      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
-      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body1');
+      expect(NL.v.bubble.$('.title')).toHaveText('title1');
+      expect(NL.v.bubble.$('.body')).toHaveText('body1');
 
       // Title should be visible.
-      expect(NL.vw.BUBBLE.$('.title')).toBeVisible();
+      expect(NL.v.bubble.$('.title')).toBeVisible();
 
       // Close "X' and body should be hidden.
-      expect(NL.vw.BUBBLE.$('.close')).not.toBeVisible();
-      expect(NL.vw.BUBBLE.$('.body')).not.toBeVisible();
+      expect(NL.v.bubble.$('.close')).not.toBeVisible();
+      expect(NL.v.bubble.$('.body')).not.toBeVisible();
 
     });
 
@@ -77,8 +77,8 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('highlight', { model: model2 });
 
       // Title and body should not change.
-      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title1');
-      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body1');
+      expect(NL.v.bubble.$('.title')).toHaveText('title1');
+      expect(NL.v.bubble.$('.body')).toHaveText('body1');
 
     });
 
@@ -97,7 +97,7 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('unhighlight', { model: model1 });
 
       // Bubble should be hidden.
-      expect(NL.vw.BUBBLE.$el).not.toBeVisible();
+      expect(NL.v.bubble.$el).not.toBeVisible();
 
     });
 
@@ -112,7 +112,7 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('unhighlight', { model: model1 });
 
       // Bubble should not be hidden.
-      expect(NL.vw.BUBBLE.$el).toBeVisible();
+      expect(NL.v.bubble.$el).toBeVisible();
 
     });
 
@@ -126,7 +126,7 @@ describe('Presenters | Static Bubble', function() {
       NL.triggerMapMouseout();
 
       // Bubble should be hidden.
-      expect(NL.vw.BUBBLE.$el).not.toBeVisible();
+      expect(NL.v.bubble.$el).not.toBeVisible();
 
     });
 
@@ -144,8 +144,8 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('select', { model: model1 });
 
       // Body and close "X" should be visible.
-      expect(NL.vw.BUBBLE.$('.body')).toBeVisible();
-      expect(NL.vw.BUBBLE.$('.close')).toBeVisible();
+      expect(NL.v.bubble.$('.body')).toBeVisible();
+      expect(NL.v.bubble.$('.close')).toBeVisible();
 
     });
 
@@ -160,10 +160,10 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('select', { model: model1 });
 
       // Close "X" should be visible.
-      expect(NL.vw.BUBBLE.$('.close')).toBeVisible();
+      expect(NL.v.bubble.$('.close')).toBeVisible();
 
       // Body should not be visible.
-      expect(NL.vw.BUBBLE.$('.body')).not.toBeVisible();
+      expect(NL.v.bubble.$('.body')).not.toBeVisible();
 
     });
 
@@ -178,8 +178,8 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('select', { model: model2 });
 
       // Title and body should change.
-      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
-      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body2');
+      expect(NL.v.bubble.$('.title')).toHaveText('title2');
+      expect(NL.v.bubble.$('.body')).toHaveText('body2');
 
     });
 
@@ -199,13 +199,13 @@ describe('Presenters | Static Bubble', function() {
     afterEach(function() {
 
       // Bubble should be hidden.
-      expect(NL.vw.BUBBLE.$el).not.toBeVisible();
+      expect(NL.v.bubble.$el).not.toBeVisible();
 
       Neatline.vent.trigger('highlight', { model: model2 });
 
       // Should start responding to highlight events.
-      expect(NL.vw.BUBBLE.$('.title')).toHaveText('title2');
-      expect(NL.vw.BUBBLE.$('.body')).toHaveText('body2');
+      expect(NL.v.bubble.$('.title')).toHaveText('title2');
+      expect(NL.v.bubble.$('.body')).toHaveText('body2');
 
     });
 
@@ -214,7 +214,7 @@ describe('Presenters | Static Bubble', function() {
     });
 
     it('should close when "X" is clicked', function() {
-      NL.vw.BUBBLE.$('.close').trigger('click');
+      NL.v.bubble.$('.close').trigger('click');
     });
 
   });

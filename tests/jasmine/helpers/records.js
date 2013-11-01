@@ -18,7 +18,7 @@ var NL = (function(NL) {
    * @return {Array}: The DOM collection of <a> elements.
    */
   NL.getRecordListRows = function() {
-    return this.vw.RECORDS.$el.find('.list-group a');
+    return this.v.records.$el.find('.list-group a');
   };
 
 

@@ -33,8 +33,8 @@ describe('Record | Text Editors', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      editTitleHtml:  NL.vw.TEXT.$('a[data-textarea="title"]'),
-      editBodyHtml:   NL.vw.TEXT.$('a[data-textarea="body"]')
+      editTitleHtml:  NL.v.textTab.$('a[data-textarea="title"]'),
+      editBodyHtml:   NL.v.textTab.$('a[data-textarea="body"]')
     };
 
   });
@@ -61,7 +61,7 @@ describe('Record | Text Editors', function() {
     input.change(function() {
 
       // Should update the model.
-      var value = NL.vw.RECORD.model.get(cke.name).trim();
+      var value = NL.v.record.model.get(cke.name).trim();
       expect(value).toEqual('<p>2</p>');
 
       // Should update the textarea.
@@ -75,7 +75,7 @@ describe('Record | Text Editors', function() {
 
   it('title', function() {
 
-    input = NL.vw.TEXT.__ui.title;
+    input = NL.v.textTab.__ui.title;
     input.val('<p>1</p>');
 
     el.editTitleHtml.click();
@@ -86,7 +86,7 @@ describe('Record | Text Editors', function() {
 
   it('body', function() {
 
-    input = NL.vw.TEXT.__ui.body;
+    input = NL.v.textTab.__ui.body;
     input.val('<p>1</p>');
 
     el.editBodyHtml.click();

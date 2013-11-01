@@ -23,7 +23,7 @@ describe('Record | Item Search', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      autocomplete: $(NL.vw.TEXT.__ui.item.autocomplete('widget')[0])
+      autocomplete: $(NL.v.textTab.__ui.item.autocomplete('widget')[0])
     };
 
   });
@@ -37,7 +37,7 @@ describe('Record | Item Search', function() {
     // ------------------------------------------------------------------------
 
     // Enter item search query.
-    NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
+    NL.v.textTab.__ui.item.autocomplete('search', 'item');
 
     // Should produce GET request to /items/browse.
     NL.assertLastRequestRoute(Neatline.g.neatline.items_api);
@@ -74,19 +74,19 @@ describe('Record | Item Search', function() {
     var id = items.find('item').first().attr('itemId');
 
     // Enter item search query.
-    NL.vw.TEXT.__ui.item.autocomplete('search', 'item');
+    NL.v.textTab.__ui.item.autocomplete('search', 'item');
     NL.respondXmlLast200(fx.items);
 
     // Click on the first option.
     el.autocomplete.find('a').first().click();
 
     // Should populate id.
-    expect(NL.vw.TEXT.__ui.item).toHaveValue(id);
-    expect(NL.vw.RECORD.model.get('item_id')).toEqual(id);
+    expect(NL.v.textTab.__ui.item).toHaveValue(id);
+    expect(NL.v.record.model.get('item_id')).toEqual(id);
 
     // Should populate title.
-    expect(NL.vw.TEXT.__ui.title).toHaveValue('Item 3');
-    expect(NL.vw.RECORD.model.get('title')).toEqual('Item 3');
+    expect(NL.v.textTab.__ui.title).toHaveValue('Item 3');
+    expect(NL.v.record.model.get('title')).toEqual('Item 3');
 
   });
 

@@ -30,7 +30,7 @@ describe('Map | WMS Opacity', function() {
     NL.respondMap200(fx.records);
 
     // Should set WMS layer opacity.
-    expect(NL.vw.MAP.getWmsLayers()[0].opacity).toEqual(0.5);
+    expect(NL.v.map.getWmsLayers()[0].opacity).toEqual(0.5);
 
   });
 

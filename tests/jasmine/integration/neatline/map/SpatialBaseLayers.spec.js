@@ -23,7 +23,7 @@ describe('Map | Spatial Base Layers', function() {
     // defined in the `spatial_layers` global.
     // ------------------------------------------------------------------------
 
-    var layers = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
+    var layers = NL.v.map.map.getLayersBy('isBaseLayer', true);
 
     expect(layers[3].name).toEqual('OpenStreetMap');
     expect(layers[2].name).toEqual('Stamen Toner');
@@ -42,7 +42,7 @@ describe('Map | Spatial Base Layers', function() {
     // the layer with the `id` defined by the `spatial_layer` global.
     // ------------------------------------------------------------------------
 
-    expect(NL.vw.MAP.map.baseLayer.name).toEqual('Stamen Toner');
+    expect(NL.v.map.map.baseLayer.name).toEqual('Stamen Toner');
 
   });
 

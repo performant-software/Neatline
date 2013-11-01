@@ -35,8 +35,8 @@ describe('Map | Vector Zindex', function() {
     var layer2 = NL.getVectorLayer('title2');
 
     // Get the indexes for the layers.
-    var index1 = NL.vw.MAP.map.getLayerIndex(layer1);
-    var index2 = NL.vw.MAP.map.getLayerIndex(layer2);
+    var index1 = NL.v.map.map.getLayerIndex(layer1);
+    var index2 = NL.v.map.map.getLayerIndex(layer2);
 
     // The map should apply the same _relative_ difference between layer
     // indexes as the difference between the record `zindex` values.

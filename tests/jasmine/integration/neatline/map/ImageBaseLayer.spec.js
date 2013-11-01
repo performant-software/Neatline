@@ -23,8 +23,8 @@ describe('Map | Image Base Layer', function() {
     // layer from the image and set it as the base layer.
     // ------------------------------------------------------------------------
 
-    var layers  = NL.vw.MAP.map.getLayersBy('isBaseLayer', true);
-    var layer   = NL.vw.MAP.map.baseLayer;
+    var layers  = NL.v.map.map.getLayersBy('isBaseLayer', true);
+    var layer   = NL.v.map.map.baseLayer;
 
     // Should create an image with the correct URL.
     expect(layer.CLASS_NAME).toEqual('OpenLayers.Layer.Image');
@@ -43,7 +43,7 @@ describe('Map | Image Base Layer', function() {
     // layer should be set from the `zoom_levels` exhibit field.
     // ------------------------------------------------------------------------
 
-    expect(NL.vw.MAP.map.baseLayer.numZoomLevels).toEqual(
+    expect(NL.v.map.map.baseLayer.numZoomLevels).toEqual(
       Neatline.g.neatline.exhibit.zoom_levels
     );
 

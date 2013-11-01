@@ -16,9 +16,9 @@ var NL = (function(NL) {
    * Shortcut public views.
    */
   NL.aliasNeatline = function() {
-    this.vw = {
-      MAP:      Neatline.Map.__controller.view,
-      BUBBLE:   Neatline.Presenter.StaticBubble.__controller.view
+    this.v = {
+      map:      Neatline.Map.__controller.view,
+      bubble:   Neatline.Presenter.StaticBubble.__controller.view
     };
   };
 
@@ -27,17 +27,17 @@ var NL = (function(NL) {
    * Shortcut editor views.
    */
   NL.aliasEditor = function() {
-    this.vw = {
-      MAP:      Neatline.Map.__controller.view,
-      BUBBLE:   Neatline.Presenter.StaticBubble.__controller.view,
-      EDITOR:   Neatline.Editor.__controller.view,
-      EXHIBIT:  Neatline.Editor.Exhibit.__controller.view,
-      SEARCH:   Neatline.Editor.Exhibit.Search.__controller.view,
-      RECORDS:  Neatline.Editor.Exhibit.Records.__controller.view,
-      STYLES:   Neatline.Editor.Exhibit.Styles.__controller.view,
-      RECORD:   Neatline.Editor.Record.__controller.view,
-      SPATIAL:  Neatline.Editor.Record.Map.__controller.view,
-      TEXT:     Neatline.Editor.Record.Text.__controller.view
+    this.v = {
+      map:      Neatline.Map.__controller.view,
+      bubble:   Neatline.Presenter.StaticBubble.__controller.view,
+      editor:   Neatline.Editor.__controller.view,
+      exhibit:  Neatline.Editor.Exhibit.__controller.view,
+      search:   Neatline.Editor.Exhibit.Search.__controller.view,
+      records:  Neatline.Editor.Exhibit.Records.__controller.view,
+      styles:   Neatline.Editor.Exhibit.Styles.__controller.view,
+      record:   Neatline.Editor.Record.__controller.view,
+      mapTab:   Neatline.Editor.Record.Map.__controller.view,
+      textTab:  Neatline.Editor.Record.Text.__controller.view
     };
   };
 

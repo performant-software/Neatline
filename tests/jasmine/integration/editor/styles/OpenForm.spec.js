@@ -31,9 +31,9 @@ describe('Styles | Open Form', function() {
     NL.respondLast200(fx.exhibit);
 
     // Form should be populated.
-    expect(NL.vw.STYLES.styles.getSession().getValue()).toEqual('1');
-    expect(NL.vw.STYLES.$('input[name="map-focus"]').val()).toEqual('2');
-    expect(NL.vw.STYLES.$('input[name="map-zoom"]').val()).toEqual('3');
+    expect(NL.v.styles.styles.getSession().getValue()).toEqual('1');
+    expect(NL.v.styles.$('input[name="map-focus"]').val()).toEqual('2');
+    expect(NL.v.styles.$('input[name="map-zoom"]').val()).toEqual('3');
 
   });
 

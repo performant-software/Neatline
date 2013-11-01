@@ -22,12 +22,12 @@ describe('Record | SVG Import', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      link:     NL.vw.RECORD.$('a[href="#svg-modal"]'),
-      svg:      NL.vw.RECORD.$('textarea[name="svg"]'),
-      density:  NL.vw.RECORD.$('input[name="density"]'),
-      cancel:   NL.vw.RECORD.$('a[name="cancel"]'),
-      parse:    NL.vw.RECORD.$('a[name="parse"]'),
-      modal:    NL.vw.RECORD.$('#svg-modal')
+      link:     NL.v.record.$('a[href="#svg-modal"]'),
+      svg:      NL.v.record.$('textarea[name="svg"]'),
+      density:  NL.v.record.$('input[name="density"]'),
+      cancel:   NL.v.record.$('a[name="cancel"]'),
+      parse:    NL.v.record.$('a[name="parse"]'),
+      modal:    NL.v.record.$('#svg-modal')
     };
 
   });
@@ -85,7 +85,7 @@ describe('Record | SVG Import', function() {
     el.parse.trigger('click');
 
     // `geometry` on handler should be set.
-    expect(NL.vw.MAP.controls.svg.handler.geometry.equals(geo)).
+    expect(NL.v.map.controls.svg.handler.geometry.equals(geo)).
       toBeTruthy();
 
   });
@@ -106,14 +106,14 @@ describe('Record | SVG Import', function() {
     el.parse.trigger('click');
 
     // Capture the number of points in the geometry.
-    var c1 = NL.vw.MAP.controls.svg.handler.geometry.getVertices().length;
+    var c1 = NL.v.map.controls.svg.handler.geometry.getVertices().length;
 
     // Set high density.
     el.density.val('2.0');
     el.parse.trigger('click');
 
     // Capture the number of points in the geometry.
-    var c2 = NL.vw.MAP.controls.svg.handler.geometry.getVertices().length;
+    var c2 = NL.v.map.controls.svg.handler.geometry.getVertices().length;
 
     // Should be more points.
     expect(c2).toBeGreaterThan(c1);

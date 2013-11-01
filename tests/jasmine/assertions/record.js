@@ -19,8 +19,8 @@ var NL = (function(NL) {
    */
   NL.assertActiveTab = function(slug) {
 
-    var label = this.vw.RECORD.$('a[href="#record-'+slug+'"]');
-    var panel = this.vw.RECORD.$('#record-'+slug);
+    var label = this.v.record.$('a[href="#record-'+slug+'"]');
+    var panel = this.v.record.$('#record-'+slug);
 
     // Tab should be active, pane visible.
     expect(label.parent('li')).toHaveClass('active');

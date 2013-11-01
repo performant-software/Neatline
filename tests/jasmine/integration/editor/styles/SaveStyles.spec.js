@@ -22,8 +22,8 @@ describe('Styles | Save Styles', function() {
     NL.showStyles(fx.exhibit);
 
     el = {
-      setFocus: NL.vw.STYLES.$('a[name="set-focus"]'),
-      save:     NL.vw.STYLES.$('a[name="save"]')
+      setFocus: NL.v.styles.$('a[name="set-focus"]'),
+      save:     NL.v.styles.$('a[name="save"]')
     };
 
   });
@@ -36,8 +36,8 @@ describe('Styles | Save Styles', function() {
     // representation of the CSS.
     // ------------------------------------------------------------------------
 
-    NL.vw.STYLES.styles.getSession().setValue('val');
-    expect(NL.vw.STYLES.model.get('styles')).toEqual('val');
+    NL.v.styles.styles.getSession().setValue('val');
+    expect(NL.v.styles.model.get('styles')).toEqual('val');
 
   });
 
@@ -49,9 +49,9 @@ describe('Styles | Save Styles', function() {
     // issued to the exhibit API with the new data.
     // ------------------------------------------------------------------------
 
-    NL.vw.STYLES.styles.getSession().setValue('1');
-    NL.vw.STYLES.__ui.mapFocus.val('2').trigger('change');
-    NL.vw.STYLES.__ui.mapZoom.val('3').trigger('change');
+    NL.v.styles.styles.getSession().setValue('1');
+    NL.v.styles.__ui.mapFocus.val('2').trigger('change');
+    NL.v.styles.__ui.mapZoom.val('3').trigger('change');
 
     // Click "Save" button.
     el.save.trigger('click');

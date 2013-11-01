@@ -23,13 +23,13 @@ describe('Record | Open Form', function() {
     NL.respondAll200(fx.records);
 
     recordModels = NL.getRecordListModels();
-    feature1 = NL.vw.MAP.getVectorLayers()[0].features[0];
-    feature2 = NL.vw.MAP.getVectorLayers()[1].features[0];
+    feature1 = NL.v.map.getVectorLayers()[0].features[0];
+    feature2 = NL.v.map.getVectorLayers()[1].features[0];
 
     el = {
-      pan:    NL.vw.RECORD.$('input[value="pan"]'),
-      poly:   NL.vw.RECORD.$('input[value="poly"]'),
-      close:  NL.vw.RECORD.$('a[name="close"]')
+      pan:    NL.v.record.$('input[value="pan"]'),
+      poly:   NL.v.record.$('input[value="poly"]'),
+      close:  NL.v.record.$('a[name="close"]')
     };
 
   });
@@ -42,8 +42,8 @@ describe('Record | Open Form', function() {
     afterEach(function() {
 
       // The form should be displayed and populated with data.
-      expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
-      expect(NL.vw.RECORD.model.id).toEqual(model.id);
+      expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+      expect(NL.v.record.model.id).toEqual(model.id);
 
     });
 
@@ -99,7 +99,7 @@ describe('Record | Open Form', function() {
       // bound to the form immediately.
       // ----------------------------------------------------------------------
 
-      model = NL.vw.MAP.getVectorLayers()[0].nModel;
+      model = NL.v.map.getVectorLayers()[0].nModel;
 
       // Click on map feature.
       NL.clickOnMapFeature(feature1);
@@ -113,7 +113,7 @@ describe('Record | Open Form', function() {
       // map feature), the model should be bound to the form.
       // ----------------------------------------------------------------------
 
-      model = NL.vw.MAP.getVectorLayers()[0].nModel;
+      model = NL.v.map.getVectorLayers()[0].nModel;
 
       // Select the model.
       Neatline.vent.trigger('select', { model: model });
@@ -209,14 +209,14 @@ describe('Record | Open Form', function() {
     NL.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(NL.vw.EDITOR.__ui.editor).toContain(NL.vw.RECORD.$el);
-    expect(NL.vw.RECORD.model.get('title')).toEqual('title1');
+    expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+    expect(NL.v.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.
     NL.clickOnMapFeature(feature2);
 
     // Form should not display new model.
-    expect(NL.vw.RECORD.model.get('title')).toEqual('title1');
+    expect(NL.v.record.model.get('title')).toEqual('title1');
 
   });
 

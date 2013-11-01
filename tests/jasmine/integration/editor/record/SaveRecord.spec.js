@@ -22,7 +22,7 @@ describe('Record | Save Record', function() {
     NL.showRecordForm(fx.record);
 
     el = {
-      save: NL.vw.RECORD.$('a[name="save"]')
+      save: NL.v.record.$('a[name="save"]')
     };
 
   });
@@ -35,7 +35,7 @@ describe('Record | Save Record', function() {
     // issued to the record API with the new data.
     // ------------------------------------------------------------------------
 
-    var id = NL.vw.RECORD.model.id;
+    var id = NL.v.record.model.id;
     var inputs = NL.getRecordFormElements();
     var widgets = ['Widget2','Widget3'];
 

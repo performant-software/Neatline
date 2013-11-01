@@ -42,7 +42,7 @@ describe('Record | Route Updating', function() {
     _.each(NL.getTabSlugs(), function(slug) {
 
       // Click on the tab.
-      var tab = NL.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
       tab.trigger('click');
 
       // Route should update.
@@ -70,12 +70,12 @@ describe('Record | Route Updating', function() {
     // ------------------------------------------------------------------------
 
     NL.showRecordForm(fx.record);
-    var id = NL.vw.RECORD.model.id;
+    var id = NL.v.record.model.id;
 
     _.each(NL.getTabSlugs(), function(slug) {
 
       // Click on the tab.
-      var tab = NL.vw.RECORD.$('a[href="#record-'+slug+'"]')
+      var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
       tab.trigger('click');
 
       // Route should update.

@@ -39,7 +39,7 @@ describe('Map | Layer Refreshing', function() {
     NL.refreshMap(fx.vector.original);
 
     // Should manifest original vector data.
-    var layers = NL.vw.MAP.getVectorLayers();
+    var layers = NL.v.map.getVectorLayers();
     expect(layers[0].features[0].geometry.x).toEqual(1);
     expect(layers[0].features[0].geometry.y).toEqual(2);
     expect(layers[1].features[0].geometry.x).toEqual(3);
@@ -52,10 +52,10 @@ describe('Map | Layer Refreshing', function() {
 
     // Respond with changed coverage data.
     NL.respondLast200(fx.vector.changed);
-    var layers = NL.vw.MAP.getVectorLayers();
+    var layers = NL.v.map.getVectorLayers();
 
     // Should manifest changed vector data.
-    var layers = NL.vw.MAP.getVectorLayers();
+    var layers = NL.v.map.getVectorLayers();
     expect(layers[0].features[0].geometry.x).toEqual(7);
     expect(layers[0].features[0].geometry.y).toEqual(8);
     expect(layers[1].features[0].geometry.x).toEqual(9);
@@ -78,7 +78,7 @@ describe('Map | Layer Refreshing', function() {
     NL.refreshMap(fx.wms.original);
 
     // Should manifest original WMS data.
-    var layers = NL.vw.MAP.getWmsLayers();
+    var layers = NL.v.map.getWmsLayers();
     expect(layers[0].url).toEqual('address1');
     expect(layers[0].params.LAYERS).toEqual('layers1');
     expect(layers[1].url).toEqual('address2');
@@ -91,10 +91,10 @@ describe('Map | Layer Refreshing', function() {
 
     // Respond with changed coverage data.
     NL.respondLast200(fx.wms.changed);
-    var layers = NL.vw.MAP.getVectorLayers();
+    var layers = NL.v.map.getVectorLayers();
 
     // Should manifest changed WMS data.
-    var layers = NL.vw.MAP.getWmsLayers();
+    var layers = NL.v.map.getWmsLayers();
     expect(layers[0].url).toEqual('address4');
     expect(layers[0].params.LAYERS).toEqual('layers4');
     expect(layers[1].url).toEqual('address5');

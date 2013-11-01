@@ -24,9 +24,9 @@ describe('Record | Style Previewing', function() {
 
 
   var getStyles = function() {
-    def = NL.vw.MAP.editLayer.styleMap.styles['default'].defaultStyle;
-    tmp = NL.vw.MAP.editLayer.styleMap.styles.temporary.defaultStyle;
-    sel = NL.vw.MAP.editLayer.styleMap.styles.select.defaultStyle;
+    def = NL.v.map.editLayer.styleMap.styles['default'].defaultStyle;
+    tmp = NL.v.map.editLayer.styleMap.styles.temporary.defaultStyle;
+    sel = NL.v.map.editLayer.styleMap.styles.select.defaultStyle;
   };
 
 
@@ -41,7 +41,7 @@ describe('Record | Style Previewing', function() {
 
     it('input `change`', function() {
       el.presenter.val('None').trigger('change');
-      var presenter = NL.vw.MAP.editLayer.nModel.get('presenter');
+      var presenter = NL.v.map.editLayer.nModel.get('presenter');
       expect(presenter).toEqual('None');
     });
 
@@ -51,7 +51,7 @@ describe('Record | Style Previewing', function() {
   describe('Fill Color', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('fill_color', '#ffffff');
+      NL.v.record.model.set('fill_color', '#ffffff');
     });
 
     it('input `change`', function() {
@@ -73,7 +73,7 @@ describe('Record | Style Previewing', function() {
   describe('Fill Color (Selected)', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('fill_color_select', '#ffffff');
+      NL.v.record.model.set('fill_color_select', '#ffffff');
     });
 
     it('input `change`', function() {
@@ -96,7 +96,7 @@ describe('Record | Style Previewing', function() {
   describe('Stroke Color', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('stroke_color', '#ffffff');
+      NL.v.record.model.set('stroke_color', '#ffffff');
     });
 
     it('input `change`', function() {
@@ -118,7 +118,7 @@ describe('Record | Style Previewing', function() {
   describe('Stroke Color (Selected)', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('stroke_color_select', '#ffffff');
+      NL.v.record.model.set('stroke_color_select', '#ffffff');
     });
 
     it('input `change`', function() {
@@ -141,7 +141,7 @@ describe('Record | Style Previewing', function() {
   describe('Fill Opacity', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('fill_opacity', 0.5);
+      NL.v.record.model.set('fill_opacity', 0.5);
     });
 
     it('input `change`', function() {
@@ -164,7 +164,7 @@ describe('Record | Style Previewing', function() {
   describe('Fill Opacity (Selected)', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('fill_opacity_select', 0.5);
+      NL.v.record.model.set('fill_opacity_select', 0.5);
     });
 
     it('input `change`', function() {
@@ -189,7 +189,7 @@ describe('Record | Style Previewing', function() {
   describe('Stroke Opacity', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('stroke_opacity', 0.5);
+      NL.v.record.model.set('stroke_opacity', 0.5);
     });
 
     it('input `change`', function() {
@@ -211,7 +211,7 @@ describe('Record | Style Previewing', function() {
   describe('Stroke Opacity (Selected)', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('stroke_opacity_select', 0.5);
+      NL.v.record.model.set('stroke_opacity_select', 0.5);
     });
 
     it('input `change`', function() {
@@ -234,7 +234,7 @@ describe('Record | Style Previewing', function() {
   describe('Stroke Width', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('stroke_width', 50);
+      NL.v.record.model.set('stroke_width', 50);
     });
 
     it('input `change`', function() {
@@ -258,7 +258,7 @@ describe('Record | Style Previewing', function() {
   describe('Point Radius', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('point_radius', 50);
+      NL.v.record.model.set('point_radius', 50);
     });
 
     it('input `change`', function() {
@@ -282,7 +282,7 @@ describe('Record | Style Previewing', function() {
   describe('point image', function() {
 
     it('model `set`', function() {
-      NL.vw.RECORD.model.set('point_image', 'img.png');
+      NL.v.record.model.set('point_image', 'img.png');
     });
 
     it('input `change`', function() {

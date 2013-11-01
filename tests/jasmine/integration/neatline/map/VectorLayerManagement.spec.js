@@ -30,7 +30,7 @@ describe('Map | Vector Layer Management', function() {
     // ------------------------------------------------------------------------
 
     NL.respondMap200(fx.regular);
-    var layers = NL.vw.MAP.getVectorLayers();
+    var layers = NL.v.map.getVectorLayers();
 
     // Should create layers for records.
     expect(layers[0].features[0].geometry.x).toEqual(1);
@@ -53,7 +53,7 @@ describe('Map | Vector Layer Management', function() {
     NL.triggerMapMoveEnd();
 
     NL.respondLast200(fx.regular);
-    var layers = NL.vw.MAP.getVectorLayers();
+    var layers = NL.v.map.getVectorLayers();
 
     // Should create layers for records.
     expect(layers[0].features[0].geometry.x).toEqual(1);
@@ -97,7 +97,7 @@ describe('Map | Vector Layer Management', function() {
     NL.refreshMap(fx.regular);
 
     // Store original OpenLayers id's.
-    var olIds1 = _.map(_.values(NL.vw.MAP.layers.vector), function(v) {
+    var olIds1 = _.map(_.values(NL.v.map.layers.vector), function(v) {
       return v.id;
     });
 
@@ -105,7 +105,7 @@ describe('Map | Vector Layer Management', function() {
     NL.refreshMap(fx.regular);
 
     // Get new OpenLayers id's.
-    var olIds2 = _.map(_.values(NL.vw.MAP.layers.vector), function(v) {
+    var olIds2 = _.map(_.values(NL.v.map.layers.vector), function(v) {
       return v.id;
     });
 
