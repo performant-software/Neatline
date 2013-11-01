@@ -35,7 +35,7 @@ var NL = (function(NL) {
       SEARCH:   Neatline.Editor.Exhibit.Search.__controller.view,
       RECORDS:  Neatline.Editor.Exhibit.Records.__controller.view,
       STYLES:   Neatline.Editor.Exhibit.Styles.__controller.view,
-      RECORD:   Neatline.Editor.Record.__view,
+      RECORD:   Neatline.Editor.Record.__controller.view,
       SPATIAL:  Neatline.Editor.Record.Map.__view,
       TEXT:     Neatline.Editor.Record.Text.__view
     };

@@ -59625,14 +59625,38 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 Neatline.module('Editor.Record', function(Record) {
 
 
-  Record.ID = 'EDITOR:RECORD';
+  Record.Controller = Neatline.Shared.Controller.extend({
 
 
-  Record.addInitializer(function() {
+    slug: 'EDITOR:RECORD',
+
+    events: [
+      { 'ROUTER:before': 'unbind' },
+      { 'select': 'navToForm' }
+    ],
+
+    commands: [
+      'display',
+      'bindId',
+      'bindNew',
+      'unbind',
+      'navToForm',
+      'setWkt'
+    ],
+
+    requests: [
+      'getElement',
+      'getModel'
+    ],
 
 
-    Record.__router = new Record.Router();
-    Record.__view   = new Record.View();
+    /**
+     * Create the router and view.
+     */
+    init: function() {
+      this.router = new Record.Router();
+      this.view = new Record.View();
+    },
 
 
     /**
@@ -59640,10 +59664,9 @@ Neatline.module('Editor.Record', function(Record) {
      *
      * @param {Object} container: The container element.
      */
-    var display = function(container) {
-      Record.__view.showIn(container);
-    };
-    Neatline.commands.setHandler(Record.ID+':display', display);
+    display: function(container) {
+      this.view.showIn(container);
+    },
 
 
     /**
@@ -59652,18 +59675,17 @@ Neatline.module('Editor.Record', function(Record) {
      * @param {Number|String} id: The record id.
      * @param {String} tab: The active tab slug.
      */
-    var bindId = function(id, tab) {
+    bindId: function(id, tab) {
 
       // Get or fetch the model.
       Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
-        function(record) {
-          Record.__view.bind(record);
-          Record.__view.activateTab(tab);
-        }
+        _.bind(function(record) {
+          this.view.bind(record);
+          this.view.activateTab(tab);
+        }, this)
       );
 
-    };
-    Neatline.commands.setHandler(Record.ID+':bindId', bindId);
+    },
 
 
     /**
@@ -59671,27 +59693,24 @@ Neatline.module('Editor.Record', function(Record) {
      *
      * @param {String} tab: The active tab slug.
      */
-    var bindNew = function(tab) {
+    bindNew: function(tab) {
 
       // Create a new model.
       var record = new Neatline.Shared.Record.Model();
 
       // Bind model to form.
-      Record.__view.bind(record);
-      Record.__view.activateTab(tab);
+      this.view.bind(record);
+      this.view.activateTab(tab);
 
-    };
-    Neatline.commands.setHandler(Record.ID+':bindNew', bindNew);
+    },
 
 
     /**
      * Unbind the form.
      */
-    var unbind = function() {
-      if (Record.__view.open) Record.__view.unbind();
-    };
-    Neatline.commands.setHandler(Record.ID+':unbind', unbind);
-    Neatline.vent.on('ROUTER:before', unbind);
+    unbind: function() {
+      if (this.view.open) this.view.unbind();
+    },
 
 
     /**
@@ -59699,13 +59718,11 @@ Neatline.module('Editor.Record', function(Record) {
      *
      * @param {Object} args: Event arguments.
      */
-    var navToForm = function(args) {
-      if (!Record.__view.open) {
-        Record.__router.navigate('record/'+args.model.id, true);
+    navToForm: function(args) {
+      if (!this.view.open) {
+        this.router.navigate('record/'+args.model.id, true);
       }
-    };
-    Neatline.commands.setHandler(Record.ID+':navToForm', navToForm);
-    Neatline.vent.on('select', navToForm);
+    },
 
 
     /**
@@ -59713,30 +59730,47 @@ Neatline.module('Editor.Record', function(Record) {
      *
      * @param {String} coverage: The new WKT.
      */
-    var setCoverage = function(coverage) {
-      Record.__view.model.set('coverage', coverage);
-    };
-    Neatline.commands.setHandler(Record.ID+':setCoverage', setCoverage);
+    setWkt: function(coverage) {
+      this.view.model.set('coverage', coverage);
+    },
 
 
     /**
      * Return the form element.
      */
-    var getElement = function() {
-      return Record.__view.$el;
-    };
-    Neatline.reqres.setHandler(Record.ID+':getElement', getElement);
+    getElement: function() {
+      return this.view.$el;
+    },
 
 
     /**
      * Return the form model.
      */
-    var getModel = function() {
-      return Record.__view.model;
-    };
-    Neatline.reqres.setHandler(Record.ID+':getModel', getModel);
+    getModel: function() {
+      return this.view.model;
+    }
 
 
+  });
+
+
+});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Record', function(Record) {
+
+
+  Record.addInitializer(function() {
+    Record.__controller = new Record.Controller();
   });
 
 
@@ -60778,7 +60812,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Convert to WKT, update the form.
     if (!_.isEmpty(features)) wkt = this.formatWkt.write(features);
-    Neatline.execute('EDITOR:RECORD:setCoverage', wkt);
+    Neatline.execute('EDITOR:RECORD:setWkt', wkt);
 
   },
 
