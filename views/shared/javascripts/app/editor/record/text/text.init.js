@@ -12,9 +12,6 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text) {
 
 
-  Text.ID = 'EDITOR:RECORD:TEXT';
-
-
   /**
    * Start the tab after the form.
    */
@@ -23,24 +20,11 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   });
 
 
+  /**
+   * Instantiate the tab view.
+   */
   Text.addInitializer(function() {
-
-
-    Text.__view = new Text.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-
-
-    /**
-     * Instantiate autocomplete and CKEditor.
-     */
-    var activate = function() {
-      Text.__view.buildWidgets();
-    };
-    Neatline.commands.setHandler(Text.ID+':activate', activate);
-    Neatline.vent.on('EDITOR:RECORD:#text', activate);
-
-
+    Text.__controller = new Text.Controller();
   });
 
 

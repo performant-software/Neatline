@@ -12,24 +12,19 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map) {
 
 
-  Map.ID = 'EDITOR:RECORD:MAP';
+  Map.Controller = Neatline.Shared.Controller.extend({
 
 
-  /**
-   * Start the tab after the form.
-   */
-  Neatline.Editor.Record.on('start', function() {
-    Map.start();
-  });
+    /**
+     * Instantiate the view on the record form element.
+     */
+    init: function() {
+      this.view = new Map.View({
+        el: Neatline.request('EDITOR:RECORD:getElement')
+      });
+    }
 
 
-  /**
-   * Instantiate the tab view.
-   */
-  Map.addInitializer(function() {
-    Map.__view = new Map.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
   });
 
 

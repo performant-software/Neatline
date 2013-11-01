@@ -59415,7 +59415,36 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
   define: function(Map) {
 
 
-  Map.ID = 'EDITOR:RECORD:MAP';
+  Map.Controller = Neatline.Shared.Controller.extend({
+
+
+    /**
+     * Instantiate the view on the record form element.
+     */
+    init: function() {
+      this.view = new Map.View({
+        el: Neatline.request('EDITOR:RECORD:getElement')
+      });
+    }
+
+
+  });
+
+
+}});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Record.Map', { startWithParent: false,
+  define: function(Map) {
 
 
   /**
@@ -59430,9 +59459,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
    * Instantiate the tab view.
    */
   Map.addInitializer(function() {
-    Map.__view = new Map.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
+    Map.__controller = new Map.Controller();
   });
 
 
@@ -60076,7 +60103,49 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   define: function(Style) {
 
 
-  Style.ID = 'EDITOR:RECORD:STYLE';
+  Style.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'EDITOR:RECORD:STYLE',
+
+    events: [{ 'EDITOR:RECORD:#style': 'activate' }],
+
+
+    /**
+     * Instantiate the view on the record form element.
+     */
+    init: function() {
+      this.view = new Style.View({
+        el: Neatline.request('EDITOR:RECORD:getElement')
+      });
+    },
+
+
+    /**
+     * Instantiate color pickers and integer draggers.
+     */
+    activate: function() {
+      this.view.buildWidgets();
+    }
+
+
+  });
+
+
+}});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Record.Style', { startWithParent: false,
+  define: function(Style) {
 
 
   /**
@@ -60087,24 +60156,11 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
   });
 
 
+  /**
+   * Instantiate the tab view.
+   */
   Style.addInitializer(function() {
-
-
-    Style.__view = new Style.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-
-
-    /**
-     * Instantiate color pickers and integer draggers.
-     */
-    var activate = function() {
-      Style.__view.buildWidgets();
-    };
-    Neatline.commands.setHandler(Style.ID+':activate', activate);
-    Neatline.vent.on('EDITOR:RECORD:#style', activate);
-
-
+    Style.__controller = new Style.Controller();
   });
 
 
@@ -60236,7 +60292,49 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   define: function(Text) {
 
 
-  Text.ID = 'EDITOR:RECORD:TEXT';
+  Text.Controller = Neatline.Shared.Controller.extend({
+
+
+    slug: 'EDITOR:RECORD:TEXT',
+
+    events: [{ 'EDITOR:RECORD:#text': 'activate' }],
+
+
+    /**
+     * Instantiate the view on the record form element.
+     */
+    init: function() {
+      this.view = new Text.View({
+        el: Neatline.request('EDITOR:RECORD:getElement')
+      });
+    },
+
+
+    /**
+     * Instantiate autocomplete and CKEditor.
+     */
+    activate: function() {
+      this.view.buildWidgets();
+    }
+
+
+  });
+
+
+}});
+
+
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+Neatline.module('Editor.Record.Text', { startWithParent: false,
+  define: function(Text) {
 
 
   /**
@@ -60247,24 +60345,11 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
   });
 
 
+  /**
+   * Instantiate the tab view.
+   */
   Text.addInitializer(function() {
-
-
-    Text.__view = new Text.View({
-      el: Neatline.request('EDITOR:RECORD:getElement')
-    });
-
-
-    /**
-     * Instantiate autocomplete and CKEditor.
-     */
-    var activate = function() {
-      Text.__view.buildWidgets();
-    };
-    Neatline.commands.setHandler(Text.ID+':activate', activate);
-    Neatline.vent.on('EDITOR:RECORD:#text', activate);
-
-
+    Text.__controller = new Text.Controller();
   });
 
 
