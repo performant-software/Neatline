@@ -28,19 +28,18 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      */
     records: function(query, start) {
 
+      // Display the search box and list.
       Neatline.execute('EDITOR:display', [
         'EDITOR:EXHIBIT',
         'EDITOR:EXHIBIT:SEARCH',
         'EDITOR:EXHIBIT:RECORDS'
       ]);
 
-      Neatline.execute(
-        'EDITOR:EXHIBIT:activateTab', 'records'
-      );
+      // Activate the "Records" tab.
+      Neatline.execute('EDITOR:EXHIBIT:activateTab', 'records');
 
-      Neatline.execute(
-        'EDITOR:EXHIBIT:SEARCH:search', query, start
-      );
+      // Populate the record list.
+      Neatline.execute('EDITOR:EXHIBIT:SEARCH:search', query, start);
 
     }
 
