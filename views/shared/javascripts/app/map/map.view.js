@@ -396,6 +396,25 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Publish a request for new records. If spatial querying is enabled,
+     * filter on the current focus and zoom of the map.
+     */
+    requestRecords: function() {
+
+      var params = {};
+
+      if (this.exhibit.spatial_querying) {
+        params.extent = this.getExtentAsWKT();
+        params.zoom   = this.getZoom();
+      }
+
+      this.loading = true;
+      Neatline.execute('MAP:load', params);
+
+    },
+
+
+    /**
      * The point of entry when a new record collection arrives. Updates the
      * map layers to mirror the new records collection.
      *
@@ -937,25 +956,6 @@ Neatline.module('Map', function(Map) {
         model:  feature.layer.nModel,
         source: this.slug
       });
-
-    },
-
-
-    /**
-     * Publish a request for new records. If spatial querying is enabled,
-     * filter on the current focus and zoom of the map.
-     */
-    requestRecords: function() {
-
-      var params = {};
-
-      if (this.exhibit.spatial_querying) {
-        params.extent = this.getExtentAsWKT();
-        params.zoom   = this.getZoom();
-      }
-
-      this.loading = true;
-      Neatline.execute('MAP:load', params);
 
     },
 
