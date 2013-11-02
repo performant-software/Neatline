@@ -27,7 +27,6 @@ Neatline.module('Map', function(Map) {
     ],
 
     commands: [
-      'load',
       'updateSize'
     ],
 
@@ -44,7 +43,6 @@ Neatline.module('Map', function(Map) {
      * Create collection and view.
      */
     init: function() {
-      this.collection = new Neatline.Shared.Record.Collection();
       this.view = new Neatline.Map.View({ slug: this.slug });
     },
 
@@ -123,18 +121,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Load map layers.
-     *
-     * @param {Object} params: Hash with `extent` and `zoom`.
-     */
-    load: function(params) {
-      this.collection.update(params, _.bind(function(records) {
-        this.view.ingest(records);
-      }, this));
-    },
-
-
-    /**
      * Refresh the map after it is resized.
      */
     updateSize: function() {
@@ -158,7 +144,7 @@ Neatline.module('Map', function(Map) {
      * @return {Object}: The collection.
      */
     getRecords: function() {
-      return this.collection;
+      return this.view.records;
     },
 
 

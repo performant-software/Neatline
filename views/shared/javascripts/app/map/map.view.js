@@ -52,6 +52,11 @@ Neatline.module('Map', function(Map) {
     _initGlobals: function() {
 
       /**
+       * Create the collection of records.
+       */
+      this.records = new Neatline.Shared.Record.Collection();
+
+      /**
        * Alias the global exhibit object.
        */
       this.exhibit = Neatline.g.neatline.exhibit;
@@ -409,8 +414,20 @@ Neatline.module('Map', function(Map) {
       }
 
       this.loading = true;
-      Neatline.execute('MAP:load', params);
+      this.load(params);
 
+    },
+
+
+    /**
+     * Load map layers.
+     *
+     * @param {Object} params: Hash with `extent` and `zoom`.
+     */
+    load: function(params) {
+      this.records.update(params, _.bind(function(records) {
+        this.ingest(records);
+      }, this));
     },
 
 
@@ -432,8 +449,7 @@ Neatline.module('Map', function(Map) {
       Neatline.vent.trigger('MAP:ingest', records);
       this.updateControls();
 
-      // Store collection.
-      this.records = records;
+      // End the load.
       this.loading = false;
 
     },

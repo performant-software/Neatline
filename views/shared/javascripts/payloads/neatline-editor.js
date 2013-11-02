@@ -56473,7 +56473,6 @@ Neatline.module('Map', function(Map) {
     ],
 
     commands: [
-      'load',
       'updateSize'
     ],
 
@@ -56490,7 +56489,6 @@ Neatline.module('Map', function(Map) {
      * Create collection and view.
      */
     init: function() {
-      this.collection = new Neatline.Shared.Record.Collection();
       this.view = new Neatline.Map.View({ slug: this.slug });
     },
 
@@ -56569,18 +56567,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Load map layers.
-     *
-     * @param {Object} params: Hash with `extent` and `zoom`.
-     */
-    load: function(params) {
-      this.collection.update(params, _.bind(function(records) {
-        this.view.ingest(records);
-      }, this));
-    },
-
-
-    /**
      * Refresh the map after it is resized.
      */
     updateSize: function() {
@@ -56604,7 +56590,7 @@ Neatline.module('Map', function(Map) {
      * @return {Object}: The collection.
      */
     getRecords: function() {
-      return this.collection;
+      return this.view.records;
     },
 
 
@@ -56716,6 +56702,11 @@ Neatline.module('Map', function(Map) {
      * Initialize tracker containers and helpers.
      */
     _initGlobals: function() {
+
+      /**
+       * Create the collection of records.
+       */
+      this.records = new Neatline.Shared.Record.Collection();
 
       /**
        * Alias the global exhibit object.
@@ -57075,8 +57066,20 @@ Neatline.module('Map', function(Map) {
       }
 
       this.loading = true;
-      Neatline.execute('MAP:load', params);
+      this.load(params);
 
+    },
+
+
+    /**
+     * Load map layers.
+     *
+     * @param {Object} params: Hash with `extent` and `zoom`.
+     */
+    load: function(params) {
+      this.records.update(params, _.bind(function(records) {
+        this.ingest(records);
+      }, this));
     },
 
 
@@ -57098,8 +57101,7 @@ Neatline.module('Map', function(Map) {
       Neatline.vent.trigger('MAP:ingest', records);
       this.updateControls();
 
-      // Store collection.
-      this.records = records;
+      // End the load.
       this.loading = false;
 
     },
