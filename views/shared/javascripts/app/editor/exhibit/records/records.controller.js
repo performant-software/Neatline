@@ -33,7 +33,6 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      */
     init: function() {
       this.router = new Records.Router();
-      this.collection = new Neatline.Shared.Record.Collection();
       this.view = new Records.View({ slug: this.slug });
     },
 
@@ -54,9 +53,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} params: The query parameters.
      */
     load: function(params) {
-      this.collection.update(params, _.bind(function(records) {
-        this.ingest(records);
-      }, this));
+      this.view.load(params);
     },
 
 
@@ -85,7 +82,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Function} cb: A callback, called with the model.
      */
     getModel: function(id, cb) {
-      this.collection.getOrFetch(id, cb);
+      this.view.records.getOrFetch(id, cb);
     }
 
 

@@ -28,7 +28,7 @@ var NL = (function(NL) {
    * @return {Array}: The models.
    */
   NL.getRecordListModels = function() {
-    return Neatline.Editor.Exhibit.Records.__controller.collection.models;
+    return Neatline.Editor.Exhibit.Records.__controller.view.records.models;
   };
 
 

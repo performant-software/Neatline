@@ -24,13 +24,32 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
     /**
-     * Compile pagination and row templates.
+     * Compile pagination and row templates, create the collection.
      *
      * @param {Object} options
      */
     init: function(options) {
+
       this.slug = options.slug;
+
+      // Compile the list template.
       this.template = _.template($('#record-list-template').html());
+
+      // Create the records collection.
+      this.records = new Neatline.Shared.Record.Collection();
+
+    },
+
+
+    /**
+     * Query for new records.
+     *
+     * @param {Object} params: The query parameters.
+     */
+    load: function(params) {
+      this.records.update(params, _.bind(function(records) {
+        this.ingest(records);
+      }, this));
     },
 
 
@@ -101,9 +120,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} model: A record model.
      */
     publish: function(event, model) {
-      Neatline.vent.trigger(event, {
-        model: model, source: this.slug
-      });
+      Neatline.vent.trigger(event, { model: model, source: this.slug });
     }
 
 

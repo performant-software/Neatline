@@ -58601,7 +58601,6 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      */
     init: function() {
       this.router = new Records.Router();
-      this.collection = new Neatline.Shared.Record.Collection();
       this.view = new Records.View({ slug: this.slug });
     },
 
@@ -58622,9 +58621,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} params: The query parameters.
      */
     load: function(params) {
-      this.collection.update(params, _.bind(function(records) {
-        this.ingest(records);
-      }, this));
+      this.view.load(params);
     },
 
 
@@ -58653,7 +58650,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Function} cb: A callback, called with the model.
      */
     getModel: function(id, cb) {
-      this.collection.getOrFetch(id, cb);
+      this.view.records.getOrFetch(id, cb);
     }
 
 
@@ -58755,13 +58752,32 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
     /**
-     * Compile pagination and row templates.
+     * Compile pagination and row templates, create the collection.
      *
      * @param {Object} options
      */
     init: function(options) {
+
       this.slug = options.slug;
+
+      // Compile the list template.
       this.template = _.template($('#record-list-template').html());
+
+      // Create the records collection.
+      this.records = new Neatline.Shared.Record.Collection();
+
+    },
+
+
+    /**
+     * Query for new records.
+     *
+     * @param {Object} params: The query parameters.
+     */
+    load: function(params) {
+      this.records.update(params, _.bind(function(records) {
+        this.ingest(records);
+      }, this));
     },
 
 
@@ -58832,9 +58848,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} model: A record model.
      */
     publish: function(event, model) {
-      Neatline.vent.trigger(event, {
-        model: model, source: this.slug
-      });
+      Neatline.vent.trigger(event, { model: model, source: this.slug });
     }
 
 
