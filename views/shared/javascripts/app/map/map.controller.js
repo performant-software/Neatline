@@ -116,7 +116,7 @@ Neatline.module('Map', function(Map) {
      */
     refresh: function() {
       this.view.removeAllLayers();
-      this.view.requestRecords();
+      this.view.publishPosition();
     },
 
 

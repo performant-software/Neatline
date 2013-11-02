@@ -56562,7 +56562,7 @@ Neatline.module('Map', function(Map) {
      */
     refresh: function() {
       this.view.removeAllLayers();
-      this.view.requestRecords();
+      this.view.publishPosition();
     },
 
 
@@ -56693,7 +56693,7 @@ Neatline.module('Map', function(Map) {
       this._initBaseLayers();
       this._initViewport();
 
-      this.requestRecords();
+      this.publishPosition();
 
     },
 
@@ -56821,7 +56821,7 @@ Neatline.module('Map', function(Map) {
 
       // When the map is panned or zoomed.
       this.map.events.register('moveend', this.map, _.bind(function() {
-        if (this.exhibit.spatial_querying) this.requestRecords();
+        if (this.exhibit.spatial_querying) this.publishPosition();
         Neatline.vent.trigger('MAP:move');
       }, this));
 
@@ -57056,7 +57056,7 @@ Neatline.module('Map', function(Map) {
      * Publish a request for new records. If spatial querying is enabled,
      * filter on the current focus and zoom of the map.
      */
-    requestRecords: function() {
+    publishPosition: function() {
 
       var params = {};
 
@@ -57065,8 +57065,8 @@ Neatline.module('Map', function(Map) {
         params.zoom   = this.getZoom();
       }
 
+      this.loadRecords(params);
       this.loading = true;
-      this.load(params);
 
     },
 
@@ -57076,9 +57076,9 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} params: Hash with `extent` and `zoom`.
      */
-    load: function(params) {
+    loadRecords: function(params) {
       this.records.update(params, _.bind(function(records) {
-        this.ingest(records);
+        this.ingestRecords(records);
       }, this));
     },
 
@@ -57089,7 +57089,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} records: The records collection.
      */
-    ingest: function(records) {
+    ingestRecords: function(records) {
 
       if (this.map.dragging) return;
 
