@@ -8828,7 +8828,7 @@ if ( typeof window === "object" && typeof window.document === "object" ) {
 
 })( window );
 
-/*! jQuery UI - v1.10.3 - 2013-10-29
+/*! jQuery UI - v1.10.3 - 2013-11-03
 * http://jqueryui.com
 * Includes: jquery.ui.core.js, jquery.ui.widget.js, jquery.ui.mouse.js, jquery.ui.draggable.js, jquery.ui.droppable.js, jquery.ui.resizable.js, jquery.ui.selectable.js, jquery.ui.sortable.js, jquery.ui.effect.js, jquery.ui.accordion.js, jquery.ui.autocomplete.js, jquery.ui.button.js, jquery.ui.datepicker.js, jquery.ui.dialog.js, jquery.ui.effect-blind.js, jquery.ui.effect-bounce.js, jquery.ui.effect-clip.js, jquery.ui.effect-drop.js, jquery.ui.effect-explode.js, jquery.ui.effect-fade.js, jquery.ui.effect-fold.js, jquery.ui.effect-highlight.js, jquery.ui.effect-pulsate.js, jquery.ui.effect-scale.js, jquery.ui.effect-shake.js, jquery.ui.effect-slide.js, jquery.ui.effect-transfer.js, jquery.ui.menu.js, jquery.ui.position.js, jquery.ui.progressbar.js, jquery.ui.slider.js, jquery.ui.spinner.js, jquery.ui.tabs.js, jquery.ui.tooltip.js
 * Copyright 2013 jQuery Foundation and other contributors; Licensed MIT */
@@ -27367,7 +27367,7 @@ $.widget( "ui.tooltip", {
 
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
-// v1.2.0
+// v1.2.2
 //
 // Copyright (c)2013 Derick Bailey, Muted Solutions, LLC.
 // Distributed under MIT license
@@ -28573,8 +28573,13 @@ Marionette.View = Backbone.View.extend({
     _.bindAll(this, "render");
 
     var args = Array.prototype.slice.apply(arguments);
+
+    // this exposes view options to the view initializer
+    // this is a backfill since backbone removed the assignment
+    // of this.options
+    // at some point however this may be removed
+    this.options = options || {};
     Backbone.View.prototype.constructor.apply(this, args);
-    this.options = options;
 
     Marionette.MonitorDOMRefresh(this);
     this.listenTo(this, "show", this.onShowCalled, this);
@@ -28634,8 +28639,8 @@ Marionette.View = Backbone.View.extend({
           var shouldPrevent = hasOptions ? value.preventDefault : prevent;
           var shouldStop = hasOptions ? value.stopPropagation : stop;
 
-          if (shouldPrevent && prevent) { prevent(); }
-          if (shouldStop && stop) { stop(); }
+          if (shouldPrevent && prevent) { prevent.apply(e); }
+          if (shouldStop && stop) { stop.apply(e); }
         }
 
         // build the args for the event
@@ -33200,11 +33205,11 @@ if (typeof OpenLayers === "object") {
 })(typeof exports === "undefined" ? this : exports);
 
 // Rivets.js
-// version: 0.6.3
+// version: 0.6.4
 // author: Michael Richards
 // license: MIT
 (function() {
-  var KeypathObserver, Rivets,
+  var Rivets,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
     __slice = [].slice,
@@ -33590,7 +33595,7 @@ if (typeof OpenLayers === "object") {
 
     Binding.prototype.setObserver = function() {
       var _this = this;
-      this.observer = new KeypathObserver(this.view, this.view.models, this.keypath, function(obs) {
+      this.observer = new Rivets.KeypathObserver(this.view, this.view.models, this.keypath, function(obs) {
         if (_this.key) {
           _this.unbind(true);
         }
@@ -33676,7 +33681,7 @@ if (typeof OpenLayers === "object") {
         _results = [];
         for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
           dependency = _ref2[_i];
-          observer = new KeypathObserver(this.view, this.model, dependency, function(obs, prev) {
+          observer = new Rivets.KeypathObserver(this.view, this.model, dependency, function(obs, prev) {
             var key;
             key = obs.key;
             _this.view.adapters[key["interface"]].unsubscribe(prev, key.path, _this.sync);
@@ -33700,6 +33705,7 @@ if (typeof OpenLayers === "object") {
         if ((_ref = this.binder.unbind) != null) {
           _ref.call(this, this.el);
         }
+        this.observer.unobserve();
       }
       if (this.key) {
         this.view.adapters[this.key["interface"]].unsubscribe(this.model, this.key.path, this.sync);
@@ -33837,14 +33843,14 @@ if (typeof OpenLayers === "object") {
     function KeypathParser() {}
 
     KeypathParser.parse = function(keypath, interfaces, root) {
-      var char, current, index, tokens;
+      var char, current, tokens, _i, _len;
       tokens = [];
       current = {
         "interface": root,
         path: ''
       };
-      for (index in keypath) {
-        char = keypath[index];
+      for (_i = 0, _len = keypath.length; _i < _len; _i++) {
+        char = keypath[_i];
         if (__indexOf.call(interfaces, char) >= 0) {
           tokens.push(current);
           current = {
@@ -33922,12 +33928,13 @@ if (typeof OpenLayers === "object") {
 
   })();
 
-  KeypathObserver = (function() {
+  Rivets.KeypathObserver = (function() {
     function KeypathObserver(view, model, keypath, callback) {
       this.view = view;
       this.model = model;
       this.keypath = keypath;
       this.callback = callback;
+      this.unobserve = __bind(this.unobserve, this);
       this.realize = __bind(this.realize, this);
       this.update = __bind(this.update, this);
       this.parse = __bind(this.parse, this);
@@ -33989,9 +33996,44 @@ if (typeof OpenLayers === "object") {
       return current;
     };
 
+    KeypathObserver.prototype.unobserve = function() {
+      var index, obj, token, _i, _len, _ref, _results;
+      _ref = this.tokens;
+      _results = [];
+      for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+        token = _ref[index];
+        if (obj = this.objectPath[index]) {
+          _results.push(this.view.adapters[token["interface"]].unsubscribe(obj, token.path, this.update));
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
     return KeypathObserver;
 
   })();
+
+  Rivets.binders.text = function(el, value) {
+    if (el.textContent != null) {
+      return el.textContent = value != null ? value : '';
+    } else {
+      return el.innerText = value != null ? value : '';
+    }
+  };
+
+  Rivets.binders.html = function(el, value) {
+    return el.innerHTML = value != null ? value : '';
+  };
+
+  Rivets.binders.show = function(el, value) {
+    return el.style.display = value ? '' : 'none';
+  };
+
+  Rivets.binders.hide = function(el, value) {
+    return el.style.display = value ? 'none' : '';
+  };
 
   Rivets.binders.enabled = function(el, value) {
     return el.disabled = !value;
@@ -34037,18 +34079,6 @@ if (typeof OpenLayers === "object") {
     }
   };
 
-  Rivets.binders.show = function(el, value) {
-    return el.style.display = value ? '' : 'none';
-  };
-
-  Rivets.binders.hide = function(el, value) {
-    return el.style.display = value ? 'none' : '';
-  };
-
-  Rivets.binders.html = function(el, value) {
-    return el.innerHTML = value != null ? value : '';
-  };
-
   Rivets.binders.value = {
     publishes: true,
     bind: function(el) {
@@ -34078,14 +34108,6 @@ if (typeof OpenLayers === "object") {
           return el.value = value != null ? value : '';
         }
       }
-    }
-  };
-
-  Rivets.binders.text = function(el, value) {
-    if (el.textContent != null) {
-      return el.textContent = value != null ? value : '';
-    } else {
-      return el.innerText = value != null ? value : '';
     }
   };
 
@@ -37171,16 +37193,19 @@ $(function() {
 
 })(window, jQuery);
 
-/**
-* bootstrap.js v3.0.0 by @fat and @mdo
-* Copyright 2013 Twitter Inc.
-* http://www.apache.org/licenses/LICENSE-2.0
-*/
-if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
+/*!
+ * Bootstrap v3.0.1 by @fat and @mdo
+ * Copyright 2013 Twitter, Inc.
+ * Licensed under http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by @mdo and @fat.
+ */
+
+if (typeof jQuery === "undefined") { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: transition.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#transitions
+ * http://getbootstrap.com/javascript/#transitions
  * ========================================================================
  * Copyright 2013 Twitter, Inc.
  *
@@ -37237,7 +37262,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: alert.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#alerts
+ * http://getbootstrap.com/javascript/#alerts
  * ========================================================================
  * Copyright 2013 Twitter, Inc.
  *
@@ -37336,7 +37361,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: button.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#buttons
+ * http://getbootstrap.com/javascript/#buttons
  * ========================================================================
  * Copyright 2013 Twitter, Inc.
  *
@@ -37446,9 +37471,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: carousel.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#carousel
+ * http://getbootstrap.com/javascript/#carousel
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37664,9 +37689,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#collapse
+ * http://getbootstrap.com/javascript/#collapse
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37844,9 +37869,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: dropdown.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#dropdowns
+ * http://getbootstrap.com/javascript/#dropdowns
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37999,9 +38024,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: modal.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#modals
+ * http://getbootstrap.com/javascript/#modals
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38246,10 +38271,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#tooltip
+ * http://getbootstrap.com/javascript/#tooltip
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38633,9 +38658,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: popover.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#popovers
+ * http://getbootstrap.com/javascript/#popovers
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38751,9 +38776,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#scrollspy
+ * http://getbootstrap.com/javascript/#scrollspy
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38910,9 +38935,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: tab.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#tabs
+ * http://getbootstrap.com/javascript/#tabs
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38940,7 +38965,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   Tab.prototype.show = function () {
     var $this    = this.element
     var $ul      = $this.closest('ul:not(.dropdown-menu)')
-    var selector = $this.attr('data-target')
+    var selector = $this.data('target')
 
     if (!selector) {
       selector = $this.attr('href')
@@ -39046,9 +39071,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
 /* ========================================================================
  * Bootstrap: affix.js v3.0.0
- * http://twbs.github.com/bootstrap/javascript.html#affix
+ * http://getbootstrap.com/javascript/#affix
  * ========================================================================
- * Copyright 2012 Twitter, Inc.
+ * Copyright 2013 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
