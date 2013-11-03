@@ -56161,7 +56161,7 @@ Neatline.module('Shared.Widget', function(Widget) {
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Broker', function(Map) {
+Neatline.module('Broker', function(Broker) {
 
 
   Broker.Controller = Neatline.Shared.Controller.extend({
@@ -56190,11 +56190,17 @@ Neatline.module('Broker', function(Map) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
+
+      // Unhighlight current.
       if (!_.isNull(this.highlighted)) {
         Neatline.vent.trigger('unhighlight', {
           model: this.highlighted, source: args.source
         });
       }
+
+      // Set new current.
+      this.highlighted = args.model;
+
     },
 
 
@@ -56214,11 +56220,17 @@ Neatline.module('Broker', function(Map) {
      * @param {Object} args: Event arguments.
      */
     select: function(args) {
+
+      // Unselect current.
       if (!_.isNull(this.selected)) {
         Neatline.vent.trigger('unselect', {
           model: this.selected, source: args.source
         });
       }
+
+      // Set new current.
+      this.selected = args.model;
+
     },
 
 
@@ -56247,7 +56259,7 @@ Neatline.module('Broker', function(Map) {
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Broker', function(Map) {
+Neatline.module('Broker', function(Broker) {
 
 
   Broker.addInitializer(function() {

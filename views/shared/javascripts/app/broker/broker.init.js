@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Broker', function(Map) {
+Neatline.module('Broker', function(Broker) {
 
 
   Broker.addInitializer(function() {
