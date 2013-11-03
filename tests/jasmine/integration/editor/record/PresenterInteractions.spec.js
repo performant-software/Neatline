@@ -37,7 +37,7 @@ describe('Record | Presenter Interactions', function() {
     // ------------------------------------------------------------------------
 
     // Spy on trigger.
-    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    var vent = NL.getEventSpy();
 
     // Select "Map".
     elements.map.tab('show');
@@ -55,7 +55,7 @@ describe('Record | Presenter Interactions', function() {
     // ------------------------------------------------------------------------
 
     // Spy on trigger.
-    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    var vent = NL.getEventSpy();
 
     // Select "Map".
     elements.map.tab('show');
@@ -77,7 +77,7 @@ describe('Record | Presenter Interactions', function() {
     // ------------------------------------------------------------------------
 
     // Spy on trigger.
-    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
+    var vent = NL.getEventSpy();
 
     // Request record map tab.
     NL.navigate('record/add/map');
@@ -98,8 +98,8 @@ describe('Record | Presenter Interactions', function() {
     elements.map.tab('show');
 
     // Spy on trigger and execute.
-    var vent = spyOn(Neatline.vent, 'trigger').andCallThrough();
-    var exec = spyOn(Neatline, 'execute').andCallThrough();
+    var vent = NL.getEventSpy();
+    var exec = NL.getCommandSpy();
 
     // Capture the form model.
     var model = NL.v.record.model;

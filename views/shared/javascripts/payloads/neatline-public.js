@@ -34995,6 +34995,8 @@ Neatline.module('Broker', function(Broker) {
   Broker.Controller = Neatline.Shared.Controller.extend({
 
 
+    slug: 'BROKER',
+
     events: [
       'highlight',
       'unhighlight',
@@ -35022,7 +35024,7 @@ Neatline.module('Broker', function(Broker) {
       // Unhighlight current.
       if (!_.isNull(this.highlighted)) {
         Neatline.vent.trigger('unhighlight', {
-          model: this.highlighted, source: args.source
+          model: this.highlighted, source: this.slug
         });
       }
 
@@ -35052,7 +35054,7 @@ Neatline.module('Broker', function(Broker) {
       // Unselect current.
       if (!_.isNull(this.selected)) {
         Neatline.vent.trigger('unselect', {
-          model: this.selected, source: args.source
+          model: this.selected, source: this.slug
         });
       }
 

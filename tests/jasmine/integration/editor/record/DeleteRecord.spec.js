@@ -164,7 +164,7 @@ describe('Record | Delete Record', function() {
     // exhibit should be refreshed to manifest the deletion.
     // ------------------------------------------------------------------------
 
-    spyOn(Neatline.vent, 'trigger').andCallThrough();
+    var vent = NL.getEventSpy();
 
     // Delete, confirm.
     elements.delete1.trigger('click');
@@ -172,7 +172,7 @@ describe('Record | Delete Record', function() {
     NL.respondLast200(fixtures.empty);
 
     // Should refresh the exhibit.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
+    expect(vent).toHaveBeenCalledWith('refresh', {
       source: Neatline.Editor.Record.ID
     });
 

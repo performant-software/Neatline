@@ -25,8 +25,8 @@ describe('Records | Publications', function() {
     model = NL.getRecordListModels()[0];
     row = NL.getRecordListRows()[0];
 
-    // Spy on the event aggregator.
-    vent = spyOn(Neatline.vent, 'trigger');
+    // Spy on trigger.
+    vent = NL.getEventSpy();
 
   });
 

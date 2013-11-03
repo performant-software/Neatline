@@ -19,7 +19,7 @@ describe('Presenter', function() {
     NL.loadNeatline();
 
     model = new Neatline.Shared.Record.Model({ presenter: 'P' });
-    exec = spyOn(Neatline, 'execute');
+    exec = NL.getCommandSpy();
 
   });
 

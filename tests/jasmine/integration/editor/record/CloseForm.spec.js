@@ -54,13 +54,13 @@ describe('Record | Close Form', function() {
     // When the form is closed, the bound model should be unselected.
     // ------------------------------------------------------------------------
 
-    spyOn(Neatline.vent, 'trigger').andCallThrough();
+    var vent = NL.getEventSpy();
 
     // Click "X".
     elements.close.trigger('click');
 
     // Should unselect the record.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('unselect', {
+    expect(vent).toHaveBeenCalledWith('unselect', {
       model:  NL.v.record.model,
       source: Neatline.Editor.Record.ID
     });
@@ -74,13 +74,13 @@ describe('Record | Close Form', function() {
     // When the form is closed, the exhibit should be refreshed.
     // ------------------------------------------------------------------------
 
-    spyOn(Neatline.vent, 'trigger').andCallThrough();
+    var vent = NL.getEventSpy();
 
     // Click "X".
     elements.close.trigger('click');
 
     // Should refresh the exhibit.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
+    expect(vent).toHaveBeenCalledWith('refresh', {
       source: Neatline.Editor.Record.ID
     });
 

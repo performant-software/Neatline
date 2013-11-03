@@ -168,7 +168,8 @@ describe('Record | Save Record', function() {
     // should be refreshed to manifest synchronized styles.
     // ------------------------------------------------------------------------
 
-    spyOn(Neatline.vent, 'trigger').andCallThrough();
+    // Spy on trigger.
+    var vent = NL.getEventSpy();
 
     // Click on "Save".
     elements.save.trigger('click');
