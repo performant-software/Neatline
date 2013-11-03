@@ -11,7 +11,7 @@
 describe('Broker', function() {
 
 
-  var model1, model2, vent;
+  var model1, model2;
 
 
   beforeEach(function() {
@@ -20,8 +20,6 @@ describe('Broker', function() {
 
     model1 = new Neatline.Shared.Record.Model();
     model2 = new Neatline.Shared.Record.Model();
-
-    vent = NL.getEventSpy();
 
   });
 
@@ -35,7 +33,10 @@ describe('Broker', function() {
       // when a new record is highlighted.
       // ----------------------------------------------------------------------
 
-      // TODO
+      var vent = NL.getEventSpy();
+
+      Neatline.vent.trigger('highlight', { model: model1, source: 'SRC1' });
+      NL.assertEventNotCalled(vent, 'unhighlight');
 
     });
 
@@ -45,6 +46,8 @@ describe('Broker', function() {
       // When a record is highlighted and then another record is highlighted,
       // the broker should unhighlight the previously-highlighted record.
       // ----------------------------------------------------------------------
+
+      var vent = NL.getEventSpy();
 
       Neatline.vent.trigger('highlight', { model: model1, source: 'SRC1' });
       Neatline.vent.trigger('highlight', { model: model2, source: 'SRC2' });
@@ -59,7 +62,25 @@ describe('Broker', function() {
 
 
   describe('unhighlight', function() {
-    it('should unregister the record');
+
+    it('should unregister the record', function() {
+
+      // ----------------------------------------------------------------------
+      // When a record is unhighlighted by an application module, the broker
+      // should unregister it and not try to re-unhighlight it the next time
+      // a new record is highlighted.
+      // ----------------------------------------------------------------------
+
+      Neatline.vent.trigger('highlight', { model: model1, source: 'SRC1' });
+      Neatline.vent.trigger('unhighlight', { model: model1, source: 'SRC1' });
+
+      var vent = NL.getEventSpy();
+
+      Neatline.vent.trigger('highlight', { model: model2, source: 'SRC2' });
+      NL.assertEventNotCalled(vent, 'unhighlight');
+
+    });
+
   });
 
 
@@ -72,7 +93,10 @@ describe('Broker', function() {
       // when a new record is selected.
       // ----------------------------------------------------------------------
 
-      // TODO
+      var vent = NL.getEventSpy();
+
+      Neatline.vent.trigger('select', { model: model1, source: 'SRC1' });
+      NL.assertEventNotCalled(vent, 'unselect');
 
     });
 
@@ -82,6 +106,8 @@ describe('Broker', function() {
       // When a record is selected and then another record is selected, the
       // broker should unselect the previously-selected record.
       // ----------------------------------------------------------------------
+
+      var vent = NL.getEventSpy();
 
       Neatline.vent.trigger('select', { model: model1, source: 'SRC1' });
       Neatline.vent.trigger('select', { model: model2, source: 'SRC2' });
@@ -96,7 +122,25 @@ describe('Broker', function() {
 
 
   describe('unselect', function() {
-    it('should unregister the record');
+
+    it('should unregister the record', function() {
+
+      // ----------------------------------------------------------------------
+      // When a record is unselected by an application module, the broker
+      // should unregister it and not try to re-unselect it the next time a
+      // new record is highlighted.
+      // ----------------------------------------------------------------------
+
+      Neatline.vent.trigger('select', { model: model1, source: 'SRC1' });
+      Neatline.vent.trigger('unselect', { model: model1, source: 'SRC1' });
+
+      var vent = NL.getEventSpy();
+
+      Neatline.vent.trigger('select', { model: model2, source: 'SRC2' });
+      NL.assertEventNotCalled(vent, 'unselect');
+
+    });
+
   });
 
 
