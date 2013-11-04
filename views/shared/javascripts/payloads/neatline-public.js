@@ -36105,12 +36105,16 @@ Neatline.module('Map', function(Map) {
      */
     publishPosition: function() {
 
-      var params = {};
+      // TODO|dev
 
-      if (this.exhibit.spatial_querying) {
-        params.extent = this.getExtentAsWKT();
-        params.zoom   = this.getZoom();
-      }
+      var params = {
+        excluded: this.getVectorLayerIds()
+      };
+
+      if (this.exhibit.spatial_querying) _.extend(params, {
+        extent: this.getExtentAsWKT(),
+        zoom:   this.getZoom()
+      });
 
       this.loadRecords(params);
       this.loading = true;
@@ -36406,76 +36410,6 @@ Neatline.module('Map', function(Map) {
     },
 
 
-    // STYLES
-    // ------------------------------------------------------------------------
-
-
-    /**
-     * Construct a style map object for a vector.
-     *
-     * @param {Object} record: The record.
-     */
-    //getStyleMap: function(record) {
-
-      //var fillColor           = record.get('fill_color');
-      //var fillColorSelect     = record.get('fill_color_select');
-      //var strokeColor         = record.get('stroke_color');
-      //var strokeColorSelect   = record.get('stroke_color_select');
-      //var fillOpacity         = record.get('fill_opacity');
-      //var fillOpacitySelect   = record.get('fill_opacity_select');
-      //var strokeOpacity       = record.get('stroke_opacity');
-      //var strokeOpacitySelect = record.get('stroke_opacity_select');
-      //var externalGraphic     = record.get('point_image');
-      //var strokeWidth         = record.get('stroke_width');
-      //var pointRadius         = record.get('point_radius');
-
-      //fillOpacity             = parseFloat(fillOpacity);
-      //fillOpacitySelect       = parseFloat(fillOpacitySelect);
-      //strokeOpacity           = parseFloat(strokeOpacity);
-      //strokeOpacitySelect     = parseFloat(strokeOpacitySelect);
-      //strokeWidth             = Number(strokeWidth);
-      //pointRadius             = Number(pointRadius);
-
-      //return new OpenLayers.StyleMap({
-
-        //'default': new OpenLayers.Style({
-          //fillColor:        fillColor,
-          //strokeColor:      strokeColor,
-          //fillOpacity:      fillOpacity,
-          //graphicOpacity:   fillOpacity,
-          //strokeOpacity:    strokeOpacity,
-          //strokeWidth:      strokeWidth,
-          //pointRadius:      pointRadius,
-          //externalGraphic:  externalGraphic
-        //}),
-
-        //'select': new OpenLayers.Style({
-          //fillColor:        fillColorSelect,
-          //strokeColor:      strokeColorSelect,
-          //fillOpacity:      fillOpacitySelect,
-          //graphicOpacity:   fillOpacitySelect,
-          //strokeOpacity:    strokeOpacitySelect,
-          //strokeWidth:      strokeWidth,
-          //pointRadius:      pointRadius,
-          //externalGraphic:  externalGraphic
-        //}),
-
-        //'temporary': new OpenLayers.Style({
-          //fillColor:        fillColorSelect,
-          //strokeColor:      strokeColorSelect,
-          //fillOpacity:      fillOpacitySelect,
-          //graphicOpacity:   fillOpacitySelect,
-          //strokeOpacity:    strokeOpacitySelect,
-          //strokeWidth:      strokeWidth,
-          //pointRadius:      pointRadius,
-          //externalGraphic:  externalGraphic
-        //})
-
-      //});
-
-    //},
-
-
     // RENDERERS
     // ------------------------------------------------------------------------
 
@@ -36693,6 +36627,17 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Is the passed model the same as the currently-selected model?
+     *
+     * @return {Object}: A record model.
+     */
+    modelIsSelected: function(model) {
+      if (this.selectedModel) return this.selectedModel.id == model.id;
+      else return false;
+    },
+
+
+    /**
      * Get the current zoom level.
      *
      * @return {Number}: The zoom level.
@@ -36715,12 +36660,22 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Get an array of all vector layers.
+     * Get all current vector layers.
      *
      * @return {Array}: The array of layers.
      */
     getVectorLayers: function() {
       return _.values(this.layers.vector);
+    },
+
+
+    /**
+     * Get the ids of all current vector layers.
+     *
+     * @return {Array}: The array of ids.
+     */
+    getVectorLayerIds: function() {
+      return _.keys(this.layers.vector);
     },
 
 
@@ -36731,17 +36686,6 @@ Neatline.module('Map', function(Map) {
      */
     getWmsLayers: function() {
       return _.values(this.layers.wms);
-    },
-
-
-    /**
-     * Is the passed model the same as the currently-selected model?
-     *
-     * @return {Object}: A record model.
-     */
-    modelIsSelected: function(model) {
-      if (this.selectedModel) return this.selectedModel.id == model.id;
-      else return false;
     }
 
 
