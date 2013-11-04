@@ -252,7 +252,7 @@ _.extend(Neatline.Map.View.prototype, {
     this.editLayer.nModel = model;
 
     // Rebuild the style map.
-    this.editLayer.styleMap = this.getStyleMap(model);
+    this.editLayer.styleMap = model.getStyleMap();
     this.editLayer.redraw();
 
   },

@@ -24,6 +24,11 @@ Neatline.module('Shared.Exhibit', function(Exhibit) {
     },
 
 
+    /**
+     * Plug in the templated exhibit defaults.
+     *
+     * @return {Object}: The default attribute values.
+     */
     defaults: function() {
       return Neatline.g.neatline.exhibit;
     }

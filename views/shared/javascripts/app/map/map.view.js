@@ -535,7 +535,7 @@ Neatline.module('Map', function(Map) {
 
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(record.get('title'), {
-        styleMap: this.getStyleMap(record),
+        styleMap: record.getStyleMap(),
         displayInLayerSwitcher: false
       });
 
@@ -716,65 +716,65 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} record: The record.
      */
-    getStyleMap: function(record) {
+    //getStyleMap: function(record) {
 
-      var fillColor           = record.get('fill_color');
-      var fillColorSelect     = record.get('fill_color_select');
-      var strokeColor         = record.get('stroke_color');
-      var strokeColorSelect   = record.get('stroke_color_select');
-      var fillOpacity         = record.get('fill_opacity');
-      var fillOpacitySelect   = record.get('fill_opacity_select');
-      var strokeOpacity       = record.get('stroke_opacity');
-      var strokeOpacitySelect = record.get('stroke_opacity_select');
-      var externalGraphic     = record.get('point_image');
-      var strokeWidth         = record.get('stroke_width');
-      var pointRadius         = record.get('point_radius');
+      //var fillColor           = record.get('fill_color');
+      //var fillColorSelect     = record.get('fill_color_select');
+      //var strokeColor         = record.get('stroke_color');
+      //var strokeColorSelect   = record.get('stroke_color_select');
+      //var fillOpacity         = record.get('fill_opacity');
+      //var fillOpacitySelect   = record.get('fill_opacity_select');
+      //var strokeOpacity       = record.get('stroke_opacity');
+      //var strokeOpacitySelect = record.get('stroke_opacity_select');
+      //var externalGraphic     = record.get('point_image');
+      //var strokeWidth         = record.get('stroke_width');
+      //var pointRadius         = record.get('point_radius');
 
-      fillOpacity             = parseFloat(fillOpacity);
-      fillOpacitySelect       = parseFloat(fillOpacitySelect);
-      strokeOpacity           = parseFloat(strokeOpacity);
-      strokeOpacitySelect     = parseFloat(strokeOpacitySelect);
-      strokeWidth             = Number(strokeWidth);
-      pointRadius             = Number(pointRadius);
+      //fillOpacity             = parseFloat(fillOpacity);
+      //fillOpacitySelect       = parseFloat(fillOpacitySelect);
+      //strokeOpacity           = parseFloat(strokeOpacity);
+      //strokeOpacitySelect     = parseFloat(strokeOpacitySelect);
+      //strokeWidth             = Number(strokeWidth);
+      //pointRadius             = Number(pointRadius);
 
-      return new OpenLayers.StyleMap({
+      //return new OpenLayers.StyleMap({
 
-        'default': new OpenLayers.Style({
-          fillColor:        fillColor,
-          strokeColor:      strokeColor,
-          fillOpacity:      fillOpacity,
-          graphicOpacity:   fillOpacity,
-          strokeOpacity:    strokeOpacity,
-          strokeWidth:      strokeWidth,
-          pointRadius:      pointRadius,
-          externalGraphic:  externalGraphic
-        }),
+        //'default': new OpenLayers.Style({
+          //fillColor:        fillColor,
+          //strokeColor:      strokeColor,
+          //fillOpacity:      fillOpacity,
+          //graphicOpacity:   fillOpacity,
+          //strokeOpacity:    strokeOpacity,
+          //strokeWidth:      strokeWidth,
+          //pointRadius:      pointRadius,
+          //externalGraphic:  externalGraphic
+        //}),
 
-        'select': new OpenLayers.Style({
-          fillColor:        fillColorSelect,
-          strokeColor:      strokeColorSelect,
-          fillOpacity:      fillOpacitySelect,
-          graphicOpacity:   fillOpacitySelect,
-          strokeOpacity:    strokeOpacitySelect,
-          strokeWidth:      strokeWidth,
-          pointRadius:      pointRadius,
-          externalGraphic:  externalGraphic
-        }),
+        //'select': new OpenLayers.Style({
+          //fillColor:        fillColorSelect,
+          //strokeColor:      strokeColorSelect,
+          //fillOpacity:      fillOpacitySelect,
+          //graphicOpacity:   fillOpacitySelect,
+          //strokeOpacity:    strokeOpacitySelect,
+          //strokeWidth:      strokeWidth,
+          //pointRadius:      pointRadius,
+          //externalGraphic:  externalGraphic
+        //}),
 
-        'temporary': new OpenLayers.Style({
-          fillColor:        fillColorSelect,
-          strokeColor:      strokeColorSelect,
-          fillOpacity:      fillOpacitySelect,
-          graphicOpacity:   fillOpacitySelect,
-          strokeOpacity:    strokeOpacitySelect,
-          strokeWidth:      strokeWidth,
-          pointRadius:      pointRadius,
-          externalGraphic:  externalGraphic
-        })
+        //'temporary': new OpenLayers.Style({
+          //fillColor:        fillColorSelect,
+          //strokeColor:      strokeColorSelect,
+          //fillOpacity:      fillOpacitySelect,
+          //graphicOpacity:   fillOpacitySelect,
+          //strokeOpacity:    strokeOpacitySelect,
+          //strokeWidth:      strokeWidth,
+          //pointRadius:      pointRadius,
+          //externalGraphic:  externalGraphic
+        //})
 
-      });
+      //});
 
-    },
+    //},
 
 
     // RENDERERS

@@ -26,6 +26,75 @@ Neatline.module('Shared.Record', function(Record) {
     },
 
 
+    /**
+     * Construct an OpenLayers style map object.
+     */
+    getStyleMap: function() {
+
+      var fillColor           = this.get('fill_color');
+      var fillColorSelect     = this.get('fill_color_select');
+      var strokeColor         = this.get('stroke_color');
+      var strokeColorSelect   = this.get('stroke_color_select');
+      var fillOpacity         = this.get('fill_opacity');
+      var fillOpacitySelect   = this.get('fill_opacity_select');
+      var strokeOpacity       = this.get('stroke_opacity');
+      var strokeOpacitySelect = this.get('stroke_opacity_select');
+      var externalGraphic     = this.get('point_image');
+      var strokeWidth         = this.get('stroke_width');
+      var pointRadius         = this.get('point_radius');
+
+      fillOpacity             = parseFloat(fillOpacity);
+      fillOpacitySelect       = parseFloat(fillOpacitySelect);
+      strokeOpacity           = parseFloat(strokeOpacity);
+      strokeOpacitySelect     = parseFloat(strokeOpacitySelect);
+      strokeWidth             = Number(strokeWidth);
+      pointRadius             = Number(pointRadius);
+
+      return new OpenLayers.StyleMap({
+
+        'default': new OpenLayers.Style({
+          fillColor:        fillColor,
+          strokeColor:      strokeColor,
+          fillOpacity:      fillOpacity,
+          graphicOpacity:   fillOpacity,
+          strokeOpacity:    strokeOpacity,
+          strokeWidth:      strokeWidth,
+          pointRadius:      pointRadius,
+          externalGraphic:  externalGraphic
+        }),
+
+        'select': new OpenLayers.Style({
+          fillColor:        fillColorSelect,
+          strokeColor:      strokeColorSelect,
+          fillOpacity:      fillOpacitySelect,
+          graphicOpacity:   fillOpacitySelect,
+          strokeOpacity:    strokeOpacitySelect,
+          strokeWidth:      strokeWidth,
+          pointRadius:      pointRadius,
+          externalGraphic:  externalGraphic
+        }),
+
+        'temporary': new OpenLayers.Style({
+          fillColor:        fillColorSelect,
+          strokeColor:      strokeColorSelect,
+          fillOpacity:      fillOpacitySelect,
+          graphicOpacity:   fillOpacitySelect,
+          strokeOpacity:    strokeOpacitySelect,
+          strokeWidth:      strokeWidth,
+          pointRadius:      pointRadius,
+          externalGraphic:  externalGraphic
+        })
+
+      });
+
+    },
+
+
+    /**
+     * Plug in the templated style defaults.
+     *
+     * @return {Object}: The default attribute values.
+     */
     defaults: function() {
 
       var styles = Neatline.g.neatline.styles;
