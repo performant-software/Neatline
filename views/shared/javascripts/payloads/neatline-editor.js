@@ -57277,15 +57277,11 @@ Neatline.module('Map', function(Map) {
      */
     publishPosition: function() {
 
-      // TODO|dev
+      var params = {};
 
-      var params = {
-        excluded: this.getVectorLayerIds()
-      };
-
+      // Filter by extent and zoom.
       if (this.exhibit.spatial_querying) _.extend(params, {
-        extent: this.getExtentAsWKT(),
-        zoom:   this.getZoom()
+        extent: this.getExtentAsWKT(), zoom: this.getZoom()
       });
 
       this.loadRecords(params);

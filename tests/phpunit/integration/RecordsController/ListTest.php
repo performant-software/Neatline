@@ -278,7 +278,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
     /**
      * The `query` parameter should be passed to the query.
      */
-    public function testKeywordsFilter()
+    public function testQueryFilter()
     {
 
         $record1 = new NeatlineRecord($this->exhibit);

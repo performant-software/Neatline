@@ -95,7 +95,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
         // ** Query
         if (isset($params['query'])) {
-            $this->filterByKeywords($select, $params['query']);
+            $this->filterByQuery($select, $params['query']);
         }
 
         // ** Tags
@@ -147,7 +147,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param Omeka_Db_Select $select The starting select.
      * @param NeatlineExhibit $exhibit The exhibit.
      */
-    public function filterByExhibit($select, $exhibit)
+    protected function filterByExhibit($select, $exhibit)
     {
         $select->where("exhibit_id = ?", $exhibit->id);
     }
@@ -159,7 +159,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param Omeka_Db_Select $select The starting select.
      * @param integer $zoom The zoom level.
      */
-    public function filterByZoom($select, $zoom)
+    protected function filterByZoom($select, $zoom)
     {
         $select->where("min_zoom IS NULL OR min_zoom<=?", $zoom);
         $select->where("max_zoom IS NULL OR max_zoom>=?", $zoom);
@@ -167,33 +167,15 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Filter by extent.
+     * Filter by extent. Omit records with no coverage data.
      *
      * @param Omeka_Db_Select $select The starting select.
      * @param string $extent The extent, as a WKT polygon.
      */
-    public function filterByExtent($select, $extent)
+    protected function filterByExtent($select, $extent)
     {
-
-        // Match viewport intersection.
         $select->where("MBRIntersects(coverage, GeomFromText('$extent'))");
-
-        // Omit empty coverages.
         $select->where("is_coverage = 1");
-
-    }
-
-
-    /**
-     * Order the query.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param string $column The column to order on.
-     */
-    public function filterByOrder($select, $column)
-    {
-        $select->reset(Zend_Db_Select::ORDER);
-        $select->order($column);
     }
 
 
@@ -204,7 +186,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param int $offset The starting offset.
      * @param int $limit The number of records to select.
      */
-    public function filterByLimit($select, $limit, $offset)
+    protected function filterByLimit($select, $limit, $offset)
     {
         $select->limit($limit, $offset);
     }
@@ -216,7 +198,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param Omeka_Db_Select $select The starting select.
      * @param string $query The search query.
      */
-    public function filterByKeywords($select, $query)
+    protected function filterByQuery($select, $query)
     {
         $select->where(
             "MATCH (title, body, slug) AGAINST (?)",
@@ -231,7 +213,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param Omeka_Db_Select $select The starting select.
      * @param array $tags An array of tags.
      */
-    public function filterByTags($select, $tags)
+    protected function filterByTags($select, $tags)
     {
         foreach ($tags as $tag) {
             $select->where(
@@ -248,12 +230,25 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * @param Omeka_Db_Select $select The starting select.
      * @param string $widget A widget id.
      */
-    public function filterByWidget($select, $widget)
+    protected function filterByWidget($select, $widget)
     {
         $select->where(
             "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)",
             $widget
         );
+    }
+
+
+    /**
+     * Order the query.
+     *
+     * @param Omeka_Db_Select $select The starting select.
+     * @param string $column The column to order on.
+     */
+    protected function filterByOrder($select, $column)
+    {
+        $select->reset(Zend_Db_Select::ORDER);
+        $select->order($column);
     }
 
 
