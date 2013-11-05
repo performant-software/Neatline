@@ -31,15 +31,9 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
      */
     public function listAction()
     {
-
-        // Load exhibit.
-        $exhibit = $this->_exhibits->find($this->_request->exhibit_id);
-
-        // Query records.
         echo Zend_Json::encode($this->_records->queryRecords(
-            $exhibit, $this->_request->getParams()
+            $this->_request->getParams()
         ));
-
     }
 
 

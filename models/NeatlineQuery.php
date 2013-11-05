@@ -19,7 +19,7 @@ class NeatlineQuery
      * @param Omeka_Db_Select $select A NeatlineRecordTable select.
      * @param array $params Query parameters.
      */
-    public function __construct()
+    public function __construct($select, $params)
     {
         $this->select = $select;
         $this->params = $params;
@@ -34,7 +34,18 @@ class NeatlineQuery
      */
     public function execute()
     {
-        // TODO
+
+        // ** BEFORE
+        $this->applyFilters();
+
+        // Execute the query.
+        $this->result['records'] = $this->select->query()->fetchAll();
+
+        // ** AFTER
+        $this->countResultSet();
+
+        return $this->result;
+
     }
 
 
@@ -48,9 +59,8 @@ class NeatlineQuery
     protected function applyFilters()
     {
         foreach ($this->params as $param => $value) {
-            if (method_exists($this, "filter_$param")) {
-                $this->{"filter_param"}();
-            }
+            $method = "filter_$param";
+            if (method_exists($this, $method)) $this->$method();
         }
     }
 

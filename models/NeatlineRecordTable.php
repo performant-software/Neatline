@@ -60,7 +60,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     /**
      * Construct records array for exhibit and editor.
      *
-     * @param NeatlineExhibit $exhibit The exhibit record.
      * @param array $params Associative array of filter parameters:
      *
      *  - zoom:     The zoom level of the map.
@@ -74,69 +73,71 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      *
      * @return array The collection of records.
      */
-    public function queryRecords($exhibit, $params=array())
+    public function queryRecords($params=array())
     {
+        $query = new NeatlineQuery($this->getSelect(), $params);
+        return $query->execute();
 
-        $data = array('records' => array(), 'offset' => 0);
-        $select = $this->getSelect();
+        //$data = array('records' => array(), 'offset' => 0);
+        //$select = $this->getSelect();
 
-        // Filter by exhibit.
-        $this->filterByExhibit($select, $exhibit);
+        //// Filter by exhibit.
+        //$this->filterByExhibit($select, $exhibit);
 
-        // ** Zoom
-        if (isset($params['zoom'])) {
-            $this->filterByZoom($select, $params['zoom']);
-        }
+        //// ** Zoom
+        //if (isset($params['zoom'])) {
+            //$this->filterByZoom($select, $params['zoom']);
+        //}
 
-        // ** Extent
-        if (isset($params['extent'])) {
-            $this->filterByExtent($select, $params['extent']);
-        }
+        //// ** Extent
+        //if (isset($params['extent'])) {
+            //$this->filterByExtent($select, $params['extent']);
+        //}
 
-        // ** Query
-        if (isset($params['query'])) {
-            $this->filterByQuery($select, $params['query']);
-        }
+        //// ** Query
+        //if (isset($params['query'])) {
+            //$this->filterByQuery($select, $params['query']);
+        //}
 
-        // ** Tags
-        if (isset($params['tags'])) {
-            $this->filterByTags($select, $params['tags']);
-        }
+        //// ** Tags
+        //if (isset($params['tags'])) {
+            //$this->filterByTags($select, $params['tags']);
+        //}
 
-        // ** Widget
-        if (isset($params['widget'])) {
-            $this->filterByWidget($select, $params['widget']);
-        }
+        //// ** Widget
+        //if (isset($params['widget'])) {
+            //$this->filterByWidget($select, $params['widget']);
+        //}
 
-        // ** Order
-        if (isset($params['order'])) {
-            $this->filterByOrder($select, $params['order']);
-        }
+        //// ** Order
+        //if (isset($params['order'])) {
+            //$this->filterByOrder($select, $params['order']);
+        //}
 
-        // ** Limit
-        if (isset($params['limit'])) {
-            $offset = isset($params['offset']) ? $params['offset'] : 0;
-            $this->filterByLimit($select, $params['limit'], $offset);
-            $data['offset'] = $offset;
-        }
+        //// ** Limit
+        //if (isset($params['limit'])) {
+            //$offset = isset($params['offset']) ? $params['offset'] : 0;
+            //$this->filterByLimit($select, $params['limit'], $offset);
+            //$data['offset'] = $offset;
+        //}
 
-        // Pass select to plugins for modification.
-        $select = apply_filters('neatline_query_records', $select, array(
-            'params' => $params
-        ));
+        //// Pass select to plugins for modification.
+        //$select = apply_filters('neatline_query_records', $select, array(
+            //'params' => $params
+        //));
 
-        // Execute query.
-        $data['records'] = $select->query()->fetchAll();
+        //// Execute query.
+        //$data['records'] = $select->query()->fetchAll();
 
-        // Strip off limit and columns.
-        $select->reset(Zend_Db_Select::LIMIT_COUNT);
-        $select->reset(Zend_Db_Select::LIMIT_OFFSET);
-        $select->reset(Zend_Db_Select::COLUMNS);
+        //// Strip off limit and columns.
+        //$select->reset(Zend_Db_Select::LIMIT_COUNT);
+        //$select->reset(Zend_Db_Select::LIMIT_OFFSET);
+        //$select->reset(Zend_Db_Select::COLUMNS);
 
-        // Count the total result size.
-        $data['count'] = $select->columns('COUNT(*)')->query()->fetchColumn();
+        //// Count the total result size.
+        //$data['count'] = $select->columns('COUNT(*)')->query()->fetchColumn();
 
-        return $data;
+        //return $data;
 
     }
 
