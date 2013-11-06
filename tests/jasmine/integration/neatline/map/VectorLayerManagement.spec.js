@@ -12,8 +12,8 @@ describe('Map | Vector Layer Management', function() {
 
 
   var fixtures = {
-    regular: read('NeatlineMapVectorLayerManagement.regular.json'),
-    deleted: read('NeatlineMapVectorLayerManagement.deleted.json')
+    regular: read('NeatlineMapVectorLayerManagement.123.json'),
+    updated: read('NeatlineMapVectorLayerManagement.34.json')
   };
 
 
@@ -22,116 +22,97 @@ describe('Map | Vector Layer Management', function() {
   });
 
 
-  //it('should load layers when exhibit starts', function() {
+  it('should load layers when exhibit starts', function() {
 
-    //// ------------------------------------------------------------------------
-    //// When the exhibit starts, the map should add vector layers for records
-    //// that arrive in the initial query.
-    //// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the exhibit starts, the map should add vector layers for records
+    // that arrive in the initial query.
+    // ------------------------------------------------------------------------
 
-    //NL.respondMap200(fixtures.regular);
-    //var layers = NL.v.map.getVectorLayers();
+    // Load records 1-3.
+    NL.respondMap200(fixtures.regular);
 
-    //// Should create layers for records.
-    //expect(layers[0].features[0].geometry.x).toEqual(1);
-    //expect(layers[0].features[0].geometry.y).toEqual(2);
-    //expect(layers[1].features[0].geometry.x).toEqual(3);
-    //expect(layers[1].features[0].geometry.y).toEqual(4);
-    //expect(layers[2].features[0].geometry.x).toEqual(5);
-    //expect(layers[2].features[0].geometry.y).toEqual(6);
-    //NL.assertVectorLayerCount(3);
+    var layer1 = NL.getVectorLayer('title1');
+    var layer2 = NL.getVectorLayer('title2');
+    var layer3 = NL.getVectorLayer('title3');
 
-  //});
+    expect(layer1.features[0].geometry.x).toEqual(0);
+    expect(layer1.features[0].geometry.y).toEqual(1);
+    expect(layer2.features[0].geometry.x).toEqual(0);
+    expect(layer2.features[0].geometry.y).toEqual(2);
+    expect(layer3.features[0].geometry.x).toEqual(0);
+    expect(layer3.features[0].geometry.y).toEqual(3);
 
+    NL.assertVectorLayerCount(3);
 
-  //it('should load layers when map is moved', function() {
-
-    //// ------------------------------------------------------------------------
-    //// New vector layers should be loaded when the map is moved.
-    //// ------------------------------------------------------------------------
-
-    //NL.triggerMapMoveEnd();
-
-    //NL.respondLast200(fixtures.regular);
-    //var layers = NL.v.map.getVectorLayers();
-
-    //// Should create layers for records.
-    //expect(layers[0].features[0].geometry.x).toEqual(1);
-    //expect(layers[0].features[0].geometry.y).toEqual(2);
-    //expect(layers[1].features[0].geometry.x).toEqual(3);
-    //expect(layers[1].features[0].geometry.y).toEqual(4);
-    //expect(layers[2].features[0].geometry.x).toEqual(5);
-    //expect(layers[2].features[0].geometry.y).toEqual(6);
-    //NL.assertVectorLayerCount(3);
-
-  //});
+  });
 
 
-  //it('should add new layers', function() {
+  it('should load layers when map is moved', function() {
 
-    //// ------------------------------------------------------------------------
-    //// When the map is refreshed, new vector layers should be created for
-    //// records that were not present in the last collection.
-    //// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // New vector layers should be loaded when the map is moved.
+    // ------------------------------------------------------------------------
 
-    //// Load collection without record 3.
-    //NL.refreshMap(fixtures.deleted);
+    NL.triggerMapMoveEnd();
 
-    //// Load collection with record 3.
-    //NL.refreshMap(fixtures.regular);
+    // Load records 1-3.
+    NL.respondLast200(fixtures.regular);
 
-    //// Should create layer for record 3.
-    //expect(NL.getVectorLayer('title3')).toBeDefined();
-    //NL.assertVectorLayerCount(3);
+    var layer1 = NL.getVectorLayer('title1');
+    var layer2 = NL.getVectorLayer('title2');
+    var layer3 = NL.getVectorLayer('title3');
+    var layer4 = NL.getVectorLayer('title4');
 
-  //});
+    expect(layer1).not.toBeUndefined();
+    expect(layer2).not.toBeUndefined();
+    expect(layer3).not.toBeUndefined();
+    expect(layer4).toBeUndefined();
 
+    expect(layer1.features[0].geometry.x).toEqual(0);
+    expect(layer1.features[0].geometry.y).toEqual(1);
+    expect(layer2.features[0].geometry.x).toEqual(0);
+    expect(layer2.features[0].geometry.y).toEqual(2);
+    expect(layer3.features[0].geometry.x).toEqual(0);
+    expect(layer3.features[0].geometry.y).toEqual(3);
 
-  ////it('should not rebuild existing layers', function() {
+    NL.assertVectorLayerCount(3);
 
-    ////// ------------------------------------------------------------------------
-    ////// When records are ingested that already have vector layers on the map,
-    ////// the existing layers should not be rebuilt.
-    ////// ------------------------------------------------------------------------
-
-    ////NL.refreshMap(fixtures.regular);
-
-    ////// Store original OpenLayers id's.
-    ////var olIds1 = _.map(_.values(NL.v.map.layers.vector), function(v) {
-      ////return v.id;
-    ////});
-
-    ////// Reload the same collection.
-    ////NL.refreshMap(fixtures.regular);
-
-    ////// Get new OpenLayers id's.
-    ////var olIds2 = _.map(_.values(NL.v.map.layers.vector), function(v) {
-      ////return v.id;
-    ////});
-
-    ////expect(olIds2).toEqual(olIds1);
-
-  ////});
+  });
 
 
-  //it('should garbage stale layers', function() {
+  it('should add new layers / garbage collect stale layers', function() {
 
-    //// ------------------------------------------------------------------------
-    //// When the map is refreshed, vector layers associated with records that
-    //// are no longer present in the collection should be removed.
-    //// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // When the map is refreshed, new layers should be added for records that
+    // were not present in the previous collection and layers for records that
+    // are no longer in the collection should be removed.
+    // ------------------------------------------------------------------------
 
-    //// Load collection with record 3.
-    //NL.refreshMap(fixtures.regular);
+    // Load records 1-3.
+    NL.refreshMap(fixtures.regular);
 
-    //// Load collection without record 3.
-    //NL.refreshMap(fixtures.deleted);
+    // Load records 3-4.
+    NL.refreshMap(fixtures.updated);
 
-    //// Should remove layer for record 3.
-    //expect(NL.getVectorLayer('title3')).toBeUndefined();
-    //NL.assertVectorLayerCount(2);
+    var layer1 = NL.getVectorLayer('title1');
+    var layer2 = NL.getVectorLayer('title2');
+    var layer3 = NL.getVectorLayer('title3');
+    var layer4 = NL.getVectorLayer('title4');
 
-  //});
+    expect(layer1).toBeUndefined();     // Layer 1 garbage collected.
+    expect(layer2).toBeUndefined();     // Layer 2 garbage collected.
+    expect(layer3).not.toBeUndefined(); // Layer 3 unchanged.
+    expect(layer4).not.toBeUndefined(); // Layer 4 added.
+
+    expect(layer3.features[0].geometry.x).toEqual(0);
+    expect(layer3.features[0].geometry.y).toEqual(3);
+    expect(layer4.features[0].geometry.x).toEqual(0);
+    expect(layer4.features[0].geometry.y).toEqual(4);
+
+    NL.assertVectorLayerCount(2);
+
+  });
 
 
   //it('should not garbage collect frozen layers', function() {
