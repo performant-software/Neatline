@@ -24,22 +24,22 @@ function nl_globals($exhibit)
 
     return array('neatline' => array(
 
-        // Exhibit.
+        // EXHIBIT
         // --------------------------------------------------------------------
         'exhibit'           => $exhibit->toArray(),
 
-        // API routes.
+        // API ROUTES
         // --------------------------------------------------------------------
         'records_api'       => public_url('neatline/records'),
         'exhibits_api'      => url('neatline/exhibits/'.$exhibit->id),
         'items_api'         => url('items/browse'),
 
-        // Constants.
+        // CONSTANTS
         // --------------------------------------------------------------------
         'per_page'          => (int) get_plugin_ini('Neatline', 'per_page'),
         'styles'            => $styles->toArray(),
 
-        // Layers.
+        // LAYERS
         // --------------------------------------------------------------------
         'spatial_layers'    => nl_getLayersForExhibit($exhibit)
 

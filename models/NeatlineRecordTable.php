@@ -75,6 +75,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      */
     public function queryRecords($params=array())
     {
+
         $query = new NeatlineQuery($this->getSelect(), $params);
         return $query->execute();
 

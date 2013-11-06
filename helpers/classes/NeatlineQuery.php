@@ -28,7 +28,7 @@ class NeatlineQuery
 
 
     /**
-     * Filter the select, post-process and return the result.
+     * Filter the select, execute, post-process, and return the result.
      *
      * @return array The result.
      */
@@ -42,7 +42,7 @@ class NeatlineQuery
         $this->result['records'] = $this->select->query()->fetchAll();
 
         // ** AFTER
-        $this->countResultSet();
+        $this->countRecords();
 
         return $this->result;
 
@@ -93,10 +93,15 @@ class NeatlineQuery
      */
     protected function filter_extent()
     {
-        $this->select->where(
-            "MBRIntersects(coverage, GeomFromText('$this->params['extent']'))"
-        );
+
+        // Match intersection with the viewport.
+        $this->select->where("MBRIntersects(coverage, GeomFromText(
+            '{$this->params['extent']}'
+        ))");
+
+        // Omit records with empty coverages.
         $this->select->where("is_coverage = 1");
+
     }
 
 
@@ -167,9 +172,9 @@ class NeatlineQuery
 
 
     /**
-     * Count the total size of the result set.
+     * Count the total, un-paginated size of the result set.
      */
-    protected function countResultSet()
+    protected function countRecords()
     {
 
         // Strip off limit and columns.

@@ -21,7 +21,6 @@ require_once NL_DIR.'/models/abstract/Neatline_Row_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Row_Expansion.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
-require_once NL_DIR.'/models/NeatlineQuery.php';
 
 // JOBS
 require_once NL_DIR.'/jobs/abstract/Neatline_Job_MockView.php';
@@ -44,16 +43,17 @@ require_once NL_DIR.'/migrations/2.0.2/Neatline_Migration_202.php';
 require_once NL_DIR.'/migrations/2.1.2/Neatline_Migration_212.php';
 
 // HELPERS
-require_once NL_DIR.'/helpers/Acl.php';
-require_once NL_DIR.'/helpers/Assets.php';
-require_once NL_DIR.'/helpers/Features.php';
-require_once NL_DIR.'/helpers/Globals.php';
-require_once NL_DIR.'/helpers/Jobs.php';
-require_once NL_DIR.'/helpers/Layers.php';
-require_once NL_DIR.'/helpers/Mysql.php';
-require_once NL_DIR.'/helpers/Plugins.php';
-require_once NL_DIR.'/helpers/Styles.php';
-require_once NL_DIR.'/helpers/Views.php';
+require_once NL_DIR.'/helpers/classes/NeatlineQuery.php';
+require_once NL_DIR.'/helpers/functions/Acl.php';
+require_once NL_DIR.'/helpers/functions/Assets.php';
+require_once NL_DIR.'/helpers/functions/Features.php';
+require_once NL_DIR.'/helpers/functions/Globals.php';
+require_once NL_DIR.'/helpers/functions/Jobs.php';
+require_once NL_DIR.'/helpers/functions/Layers.php';
+require_once NL_DIR.'/helpers/functions/Mysql.php';
+require_once NL_DIR.'/helpers/functions/Plugins.php';
+require_once NL_DIR.'/helpers/functions/Styles.php';
+require_once NL_DIR.'/helpers/functions/Views.php';
 
 // LIBRARIES
 require_once(NL_DIR.'/lib/geoPHP/geoPHP.inc');
