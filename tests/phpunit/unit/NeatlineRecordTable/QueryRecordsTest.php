@@ -35,7 +35,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3->save();
 
         // Query for exhibit1 records.
-        $result = $this->_records->queryRecords($exhibit1);
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit1->id
+        ));
 
         // Exhibit2 records should be absent.
         $this->assertEquals($record2->id, $result['records'][0]['id']);
@@ -84,7 +86,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record4->save();
 
         // Zoom = null
-        $result = $this->_records->queryRecords($exhibit);
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id
+        ));
 
         $this->assertEquals($record4->id, $result['records'][0]['id']);
         $this->assertEquals($record3->id, $result['records'][1]['id']);
@@ -93,15 +97,18 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertCount(4, $result['records']);
 
         // Zoom < min_zoom.
-        $result = $this->_records->queryRecords($exhibit,
-            array('zoom' => 9)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'zoom' => 9
+        ));
 
         $this->assertEquals($record3->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Zoom > min_zoom.
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'zoom' => 16
+        ));
         $result = $this->_records->queryRecords($exhibit,
             array('zoom' => 16)
         );

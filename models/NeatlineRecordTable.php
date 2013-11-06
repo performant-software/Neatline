@@ -60,167 +60,121 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     /**
      * Construct records array for exhibit and editor.
      *
-     * @param array $params Associative array of filter parameters:
-     *
-     *  - zoom:     The zoom level of the map.
-     *  - extent:   The viewport extent of the map.
-     *  - query:    A full-text search query.
-     *  - tags:     An array of tags.
-     *  - widget:   A record widget activation.
-     *  - order:    A column to sort on.
-     *  - offset:   The number of records to skip.
-     *  - limit:    The number of records to get.
-     *
+     * @param array $params Associative array of filter parameters.
      * @return array The collection of records.
      */
     public function queryRecords($params=array())
     {
 
-        $query = new NeatlineQuery($this->getSelect(), $params);
-        return $query->execute();
+        $this->select = $this->getSelect();
+        $this->params = $params;
+        $this->result = array();
 
-        //$data = array('records' => array(), 'offset' => 0);
-        //$select = $this->getSelect();
+        // ** BEFORE
+        $this->applyFilters();
 
-        //// Filter by exhibit.
-        //$this->filterByExhibit($select, $exhibit);
+        // Execute the query.
+        $this->result['records'] = $this->select->query()->fetchAll();
 
-        //// ** Zoom
-        //if (isset($params['zoom'])) {
-            //$this->filterByZoom($select, $params['zoom']);
-        //}
+        // ** AFTER
+        $this->countRecords();
 
-        //// ** Extent
-        //if (isset($params['extent'])) {
-            //$this->filterByExtent($select, $params['extent']);
-        //}
+        return $this->result;
 
-        //// ** Query
-        //if (isset($params['query'])) {
-            //$this->filterByQuery($select, $params['query']);
-        //}
+    }
 
-        //// ** Tags
-        //if (isset($params['tags'])) {
-            //$this->filterByTags($select, $params['tags']);
-        //}
 
-        //// ** Widget
-        //if (isset($params['widget'])) {
-            //$this->filterByWidget($select, $params['widget']);
-        //}
+    // FILTERS
+    // ------------------------------------------------------------------------
 
-        //// ** Order
-        //if (isset($params['order'])) {
-            //$this->filterByOrder($select, $params['order']);
-        //}
 
-        //// ** Limit
-        //if (isset($params['limit'])) {
-            //$offset = isset($params['offset']) ? $params['offset'] : 0;
-            //$this->filterByLimit($select, $params['limit'], $offset);
-            //$data['offset'] = $offset;
-        //}
-
-        //// Pass select to plugins for modification.
-        //$select = apply_filters('neatline_query_records', $select, array(
-            //'params' => $params
-        //));
-
-        //// Execute query.
-        //$data['records'] = $select->query()->fetchAll();
-
-        //// Strip off limit and columns.
-        //$select->reset(Zend_Db_Select::LIMIT_COUNT);
-        //$select->reset(Zend_Db_Select::LIMIT_OFFSET);
-        //$select->reset(Zend_Db_Select::COLUMNS);
-
-        //// Count the total result size.
-        //$data['count'] = $select->columns('COUNT(*)')->query()->fetchColumn();
-
-        //return $data;
-
+    /**
+     * Filter on all supported query parameters.
+     */
+    protected function applyFilters()
+    {
+        foreach ($this->params as $param => $value) {
+            $method = "filter_$param";
+            if (method_exists($this, $method)) $this->$method();
+        }
     }
 
 
     /**
      * Filter by exhibit.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param NeatlineExhibit $exhibit The exhibit.
      */
-    protected function filterByExhibit($select, $exhibit)
+    protected function filter_exhibit_id()
     {
-        $select->where("exhibit_id = ?", $exhibit->id);
+        $this->select->where("exhibit_id = ?", $this->params['exhibit_id']);
     }
 
 
     /**
      * Filter by zoom.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param integer $zoom The zoom level.
      */
-    protected function filterByZoom($select, $zoom)
+    protected function filter_zoom()
     {
-        $select->where("min_zoom IS NULL OR min_zoom<=?", $zoom);
-        $select->where("max_zoom IS NULL OR max_zoom>=?", $zoom);
+        $this->select->where(
+            "min_zoom IS NULL OR min_zoom<=?", $this->params['zoom']
+        );
+        $this->select->where(
+            "max_zoom IS NULL OR max_zoom>=?", $this->params['zoom']
+        );
     }
 
 
     /**
      * Filter by extent. Omit records with no coverage data.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param string $extent The extent, as a WKT polygon.
      */
-    protected function filterByExtent($select, $extent)
+    protected function filter_extent()
     {
-        $select->where("MBRIntersects(coverage, GeomFromText('$extent'))");
-        $select->where("is_coverage = 1");
+
+        // Match intersection with the viewport.
+        $this->select->where("MBRIntersects(coverage, GeomFromText(
+            '{$this->params['extent']}'
+        ))");
+
+        // Omit records with empty coverages.
+        $this->select->where("is_coverage = 1");
+
     }
 
 
     /**
      * Paginate the query.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param int $offset The starting offset.
-     * @param int $limit The number of records to select.
      */
-    protected function filterByLimit($select, $limit, $offset)
+    protected function filter_limit()
     {
-        $select->limit($limit, $offset);
+
+        // Set the offset on the result envelope.
+        $this->result['offset'] = isset($this->params['offset']) ?
+            $this->params['offset'] : 0;
+
+        // Apply the limit and offset.
+        $this->select->limit($this->params['limit'], $this->result['offset']);
+
     }
 
 
     /**
      * Filter by keyword query.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param string $query The search query.
      */
-    protected function filterByQuery($select, $query)
+    protected function filter_query()
     {
-        $select->where(
-            "MATCH (title, body, slug) AGAINST (?)",
-            $query
+        $this->select->where(
+            "MATCH (title, body, slug) AGAINST (?)", $this->params['query']
         );
     }
 
 
     /**
      * Filter by tags query.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param array $tags An array of tags.
      */
-    protected function filterByTags($select, $tags)
+    protected function filter_tags()
     {
-        foreach ($tags as $tag) {
-            $select->where(
-                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)",
-                $tag
+        foreach ($this->params['tags'] as $tag) {
+            $this->select->where(
+                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)", $tag
             );
         }
     }
@@ -228,29 +182,45 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
     /**
      * Filter by widget query.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param string $widget A widget id.
      */
-    protected function filterByWidget($select, $widget)
+    protected function filter_widget()
     {
-        $select->where(
+        $this->select->where(
             "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)",
-            $widget
+            $this->params['widget']
         );
     }
 
 
     /**
      * Order the query.
-     *
-     * @param Omeka_Db_Select $select The starting select.
-     * @param string $column The column to order on.
      */
-    protected function filterByOrder($select, $column)
+    protected function filter_order()
     {
-        $select->reset(Zend_Db_Select::ORDER);
-        $select->order($column);
+        $this->select->reset(Zend_Db_Select::ORDER);
+        $this->select->order($this->params['column']);
+    }
+
+
+    // POST-PROCESSING
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Count the total, un-paginated size of the result set.
+     */
+    protected function countRecords()
+    {
+
+        // Strip off limit and columns.
+        $this->select->reset(Zend_Db_Select::LIMIT_COUNT);
+        $this->select->reset(Zend_Db_Select::LIMIT_OFFSET);
+        $this->select->reset(Zend_Db_Select::COLUMNS);
+
+        // Count the total result size.
+        $this->result['count'] = $this->select->columns('COUNT(*)')->
+            query()->fetchColumn();
+
     }
 
 
