@@ -57,6 +57,19 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     }
 
 
+    // ------------------------------------------------------------------------
+    // RECORDS API
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Default query parameters.
+     */
+    protected static $defaultParams = array(
+        'limit' => 50, 'offset' => 0
+    );
+
+
     /**
      * Construct records array for exhibit and editor.
      *
@@ -67,8 +80,10 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
 
         $this->select = $this->getSelect();
-        $this->params = $params;
         $this->result = array();
+
+        // Merge default parameters.
+        $this->params = array_merge($params, self::$defaultParams);
 
         // ** BEFORE
         $this->applyFilters();
