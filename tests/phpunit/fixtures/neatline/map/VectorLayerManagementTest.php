@@ -21,46 +21,55 @@ class FixturesTest_NeatlineMapVectorLayerManagement
         $record2 = $this->_record($this->exhibit);
         $record3 = $this->_record($this->exhibit);
         $record4 = $this->_record($this->exhibit);
+        $record5 = $this->_record($this->exhibit);
+        $record6 = $this->_record($this->exhibit);
 
         $record1->title     = 'title1';
         $record2->title     = 'title2';
         $record3->title     = 'title3';
         $record4->title     = 'title4';
+        $record5->title     = 'title5';
+        $record6->title     = 'title6';
         $record1->coverage  = 'POINT(0 1)';
         $record2->coverage  = 'POINT(0 2)';
         $record3->coverage  = 'POINT(0 3)';
         $record4->coverage  = 'POINT(0 4)';
-        $record1->added     = '2004-01-01';
-        $record2->added     = '2003-01-01';
-        $record3->added     = '2002-01-01';
-        $record4->added     = '2001-01-01';
+        $record5->coverage  = 'POINT(0 5)';
+        $record6->coverage  = 'POINT(0 6)';
 
         $record1->save();
         $record2->save();
         $record3->save();
         $record4->save();
+        $record5->save();
+        $record6->save();
 
-        // Match records 1-3.
+        // Match records 1-4.
         // --------------------------------------------------------------------
 
         $this->request->setQuery(array(
-            'extent' => 'LINESTRING(0 1,0 3)'
+            'extent' => 'LINESTRING(0 1,0 4)'
         ));
 
         $this->_writeFixtureFromRoute('neatline/records',
-            'NeatlineMapVectorLayerManagement.123.json'
+            'NeatlineMapVectorLayerManagement.1234.json'
         );
 
-        // Match records 3 and 4, with 1-3 already loaded.
+        // Match records 3-6, with 1-4 already loaded.
         // --------------------------------------------------------------------
 
         $this->request->setQuery(array(
-            'existing'  => array($record1->id, $record2->id, $record3->id),
-            'extent'    => 'LINESTRING(0 3,0 4)'
+            'extent'    => 'LINESTRING(0 3,0 6)',
+            'existing'  => array(
+                $record1->id,
+                $record2->id,
+                $record3->id,
+                $record4->id
+            )
         ));
 
         $this->_writeFixtureFromRoute('neatline/records',
-            'NeatlineMapVectorLayerManagement.34.json'
+            'NeatlineMapVectorLayerManagement.3456.json'
         );
 
     }
