@@ -29,11 +29,12 @@ class NeatlineRecordTableTest_QueryRecordsExcludeExisting
         $record1 = $this->_record($exhibit);
         $record2 = $this->_record($exhibit);
         $record3 = $this->_record($exhibit);
+        $record4 = $this->_record($exhibit);
 
         $record1->coverage  = 'POINT(0 1)';
         $record2->coverage  = 'POINT(0 2)';
         $record3->coverage  = 'POINT(0 3)';
-        $record3->coverage  = 'POINT(0 4)';
+        $record4->coverage  = 'POINT(0 4)';
         $record1->added     = '2001-01-01';
         $record2->added     = '2002-01-01';
         $record3->added     = '2003-01-01';
