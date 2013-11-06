@@ -418,6 +418,8 @@ Neatline.module('Map', function(Map) {
       this.loadRecords(params);
       this.loading = true;
 
+      console.log(_.contains(params.existing, '10'));
+
     },
 
 

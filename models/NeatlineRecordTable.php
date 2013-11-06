@@ -66,7 +66,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * Default query parameters.
      */
     protected static $defaultParams = array(
-        'limit' => 50, 'offset' => 0
+        'offset' => 0
     );
 
 
