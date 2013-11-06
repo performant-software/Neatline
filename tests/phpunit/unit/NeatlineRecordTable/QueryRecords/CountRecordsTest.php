@@ -9,7 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
+class NeatlineRecordTableTest_QueryRecordsCountRecords
+    extends Neatline_Case_Default
 {
 
 
