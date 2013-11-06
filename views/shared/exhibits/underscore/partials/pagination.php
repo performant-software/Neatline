@@ -24,8 +24,8 @@
   }
 
   // Compute back/forward offsets.
-  var prevStart = records.offset-limit;
-  var nextStart = records.offset+limit;
+  var prevStart = records.metadata.offset-limit;
+  var nextStart = records.metadata.offset+limit;
 
   var prevActive = true;
   var nextActive = true;
@@ -35,22 +35,22 @@
     prev += '/start='+prevStart;
   } else {
     if (_.isEmpty(query)) prev = '#records';
-    if (records.offset == 0) prevActive = false;
+    if (records.metadata.offset == 0) prevActive = false;
   }
 
   // Add next offset.
-  if (nextStart < records.count) {
+  if (nextStart < records.metadata.count) {
     next += '/start='+nextStart;
   } else {
-    next += '/start='+records.offset;
+    next += '/start='+records.metadata.offset;
     nextActive = false;
   }
 
 %>
 
 <% if (
-  !_.string.startsWith(query, 'map:') &&
-  records.count > Neatline.g.neatline.per_page
+  records.metadata.count > Neatline.g.neatline.per_page &&
+  !_.string.startsWith(query, 'map:')
 ) { %>
 
   <ul class="pagination">
@@ -63,9 +63,11 @@
     } %>><a class="next" href="<%= next %>">»</a></li>
 
     <div class="offset">
-      <span class="start"><%= records.offset+1 %></span> -
-      <span class="end"><%= records.offset+records.length %></span> of
-      <span class="total"><%= records.count %></span>
+      <span class="start"><%= records.metadata.offset+1 %></span>
+      <span class="separator">-</span>
+      <span class="end"><%= records.metadata.offset+records.length %></span>
+      <span class="separator">of</span>
+      <span class="total"><%= records.metadata.count %></span>
     </div>
 
   </ul>

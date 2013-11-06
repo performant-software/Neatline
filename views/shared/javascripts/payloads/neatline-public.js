@@ -34958,15 +34958,12 @@ Neatline.module('Shared.Record', function(Record) {
     parse: function(response) {
 
       // Get the response metadata.
-      var envelope = _.omit(response, 'records');
+      this.metadata = _.omit(response, 'records');
 
       // Cast number-y strings to numerics.
-      _.each(envelope, function(val, key) {
-        envelope[key] = !_.isNaN(Number(val))? Number(val) : val
-      });
-
-      // Add the envelope.
-      _.extend(this, envelope);
+      _.each(this.metadata, _.bind(function(val, key) {
+        this.metadata[key] = !_.isNaN(Number(val)) ? Number(val) : val
+      }, this));
 
       return response.records;
 
@@ -34986,7 +34983,7 @@ Neatline.module('Shared.Record', function(Record) {
         exhibit_id: Neatline.g.neatline.exhibit.id
       });
 
-      // Fetch the new records.
+      // Query for records, pass result to callback.
       this.fetch({ reset: true, data: $.param(params), success: cb });
 
     },

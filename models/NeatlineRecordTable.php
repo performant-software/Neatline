@@ -163,8 +163,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
 
         // Set the offset on the result envelope.
-        $this->result['offset'] = isset($this->params['offset']) ?
-            $this->params['offset'] : 0;
+        $this->result['offset'] = $this->params['offset'];
 
         // Apply the limit and offset.
         $this->select->limit($this->params['limit'], $this->result['offset']);
