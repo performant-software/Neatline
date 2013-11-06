@@ -83,7 +83,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $this->result = array();
 
         // Merge default parameters.
-        $this->params = array_merge($params, self::$defaultParams);
+        $this->params = array_merge(self::$defaultParams, $params);
 
         // ** BEFORE
         $this->applyFilters();
@@ -213,7 +213,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     protected function filter_order()
     {
         $this->select->reset(Zend_Db_Select::ORDER);
-        $this->select->order($this->params['column']);
+        $this->select->order($this->params['order']);
     }
 
 

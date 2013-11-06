@@ -109,18 +109,15 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $result = $this->_records->queryRecords(array(
             'exhibit_id' => $exhibit->id, 'zoom' => 16
         ));
-        $result = $this->_records->queryRecords($exhibit,
-            array('zoom' => 16)
-        );
 
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // min_zoom < Zoom < max_zoom.
-        $result = $this->_records->queryRecords($exhibit,
-            array('zoom' => 25)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'zoom' => 25
+        ));
 
         $this->assertEquals($record4->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
@@ -150,7 +147,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         // No extent should match all records.
         // --------------------------------------------------------------------
-        $result = $this->_records->queryRecords($exhibit);
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id
+        ));
+
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
@@ -158,27 +158,30 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
 
         // Intersection with Record 1 should match Record 1.
         // --------------------------------------------------------------------
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POINT(0 1)')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'extent' => 'POINT(0 1)'
+        ));
+
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
 
         // Intersection with Record 2 should match Record 2.
         // --------------------------------------------------------------------
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POINT(0 2)')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'extent' => 'POINT(0 2)'
+        ));
+
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
 
         // Intersection with Record 1 and Record 2 should match both records.
         // --------------------------------------------------------------------
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'LINESTRING(0 1,0 2)')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'extent' => 'LINESTRING(0 1,0 2)'
+        ));
+
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
@@ -204,10 +207,10 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record1->save();
         $record2->save();
 
-        // Record with `POINT(0 0`)` excluded.
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))')
-        );
+        // Record with `POINT(0 0)` excluded.
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'extent' => 'LINESTRING(0 0,1 1)'
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
@@ -231,9 +234,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record->save();
 
         // WMS layer should be included.
-        $result = $this->_records->queryRecords($exhibit,
-            array('extent' => 'POLYGON((-1 -1,-1 1,1 1,1 -1,-1 -1))')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'extent' => 'POINT(1 1)'
+        ));
 
         $this->assertEquals($record->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
@@ -269,25 +272,25 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3->save();
 
         // Should search in `title` field.
-        $result = $this->_records->queryRecords($exhibit,
-            array('query' => 'title1')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'query' => 'title1'
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
         // Should search in `body` field.
-        $result = $this->_records->queryRecords($exhibit,
-            array('query' => 'body1')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'query' => 'body1'
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
 
         // Should search in `slug` field.
-        $result = $this->_records->queryRecords($exhibit,
-            array('query' => 'slug1')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'query' => 'slug1'
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
@@ -315,9 +318,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3->save();
 
         // Query for tag1 and tag2.
-        $result = $this->_records->queryRecords($exhibit,
-            array('tags' => array('tag1', 'tag2'))
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'tags' => array('tag1', 'tag2')
+        ));
 
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
@@ -348,9 +351,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3->save();
 
         // Query for `tag1` and `tag2`.
-        $result = $this->_records->queryRecords($exhibit,
-            array('widget' => 'Widget1')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'widget' => 'Widget1'
+        ));
 
         $this->assertEquals($record2->id, $result['records'][0]['id']);
         $this->assertEquals($record1->id, $result['records'][1]['id']);
@@ -382,9 +385,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3->save();
 
         // Order on `weight`, by default ascending.
-        $result = $this->_records->queryRecords($exhibit,
-            array('order' => 'weight')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'order' => 'weight'
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
@@ -392,9 +395,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertCount(3, $result['records']);
 
         // Order on `weight ASC`.
-        $result = $this->_records->queryRecords($exhibit,
-            array('order' => 'weight ASC')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'order' => 'weight ASC'
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
@@ -402,9 +405,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $this->assertCount(3, $result['records']);
 
         // Order on `weight DESC`.
-        $result = $this->_records->queryRecords($exhibit,
-            array('order' => 'weight DESC')
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'order' => 'weight DESC'
+        ));
 
         $this->assertEquals($record3->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
@@ -442,27 +445,27 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record5->save();
 
         // Records 1-2.
-        $result = $this->_records->queryRecords($exhibit,
-            array('limit' => 2, 'offset' => 0)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 0
+        ));
 
         $this->assertEquals($record5->id, $result['records'][0]['id']);
         $this->assertEquals($record4->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Records 3-4.
-        $result = $this->_records->queryRecords($exhibit,
-            array('limit' => 2, 'offset' => 2)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 2
+        ));
 
         $this->assertEquals($record3->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Record 5.
-        $result = $this->_records->queryRecords($exhibit,
-            array('limit' => 2, 'offset' => 4)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 4
+        ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertCount(1, $result['records']);
@@ -484,9 +487,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record3 = $this->_record($exhibit);
 
         // Limit to 2 records.
-        $result = $this->_records->queryRecords($exhibit,
-            array('limit' => 2, 'offset' => 0)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 0
+        ));
 
         $this->assertEquals(3, $result['count']);
 
@@ -503,8 +506,11 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $exhibit = $this->_exhibit();
         $record = $this->_record($exhibit);
 
-        // When no offset defined, should default to 0.
-        $result = $this->_records->queryRecords($exhibit);
+        // When no offset set, should default to 0.
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id
+        ));
+
         $this->assertEquals(0, $result['offset']);
 
     }
@@ -522,9 +528,9 @@ class NeatlineRecordTableTest_QueryRecords extends Neatline_Case_Default
         $record2 = $this->_record($exhibit);
 
         // Limit to two records.
-        $result = $this->_records->queryRecords($exhibit,
-            array('limit' => 1, 'offset' => 1)
-        );
+        $result = $this->_records->queryRecords(array(
+            'exhibit_id' => $exhibit->id, 'limit' => 1, 'offset' => 1
+        ));
 
         $this->assertEquals(1, $result['offset']);
 
