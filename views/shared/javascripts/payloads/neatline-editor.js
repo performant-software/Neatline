@@ -56123,15 +56123,25 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Cache the total count and offset, return records array.
+     * Set the envelope metadata, return records array.
      *
      * @return {Array}: The records collection.
      */
     parse: function(response) {
-      _.extend(this, _.omit(response, 'records'));
-      //this.offset = Number(response.offset);
-      //this.count  = Number(response.count);
+
+      // Get the response metadata.
+      var envelope = _.omit(response, 'records');
+
+      // Cast number-y strings to numerics.
+      _.each(envelope, function(val, key) {
+        envelope[key] = !_.isNaN(Number(val))? Number(val) : val
+      });
+
+      // Add the envelope.
+      _.extend(this, envelope);
+
       return response.records;
+
     },
 
 
@@ -57289,8 +57299,6 @@ Neatline.module('Map', function(Map) {
 
       this.loadRecords(params);
       this.loading = true;
-
-      console.log(_.contains(params.existing, '10'));
 
     },
 
