@@ -253,27 +253,27 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
         if (isset($this->params['existing'])) {
 
-            $duplicatedIds  = array();
-            $newRecords     = array();
+            $omittedIds = array();
+            $newRecords = array();
 
             foreach ($this->result['records'] as $record) {
 
-                // If the record is "new," add it to the result set.
+                // If the record is new, add it to the result set.
                 if (!in_array($record['id'], $this->params['existing'])) {
                     $newRecords[] = $record;
                 }
 
-                // Otherwise, record the duplicate.
-                else $duplicatedIds[] = $record['id'];
+                // Otherwise, register duplicate.
+                else $omittedIds[] = $record['id'];
 
             }
 
+            // Return the list of removed ids.
+            $removed = array_diff($this->params['existing'], $omittedIds);
+            $this->result['removed'] = array_values($removed);
+
             // Just return the new records.
             $this->result['records'] = $newRecords;
-
-            // Return the list of removed ids.
-            $removed = array_diff($this->params['existing'], $duplicatedIds);
-            $this->result['removed'] = $removed;
 
         }
 

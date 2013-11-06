@@ -33,8 +33,9 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Array}: The records collection.
      */
     parse: function(response) {
-      this.offset = Number(response.offset);
-      this.count  = Number(response.count);
+      _.extend(this, _.omit(response, 'records'));
+      //this.offset = Number(response.offset);
+      //this.count  = Number(response.count);
       return response.records;
     },
 
