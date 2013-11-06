@@ -484,6 +484,7 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * TODO|dev
      * Rebuild the WMS layers to match the new collection.
      *
      * @param {Object} records: The records collection.
@@ -629,15 +630,13 @@ Neatline.module('Map', function(Map) {
     removeAllLayers: function() {
 
       // Vector:
-      _.each(_.keys(this.layers.vector), _.bind(function(id) {
-        if (!this.layers.vector[id].nFrozen) {
-          this.removeVectorLayer(this.layers.vector[id]);
-        }
+      _.each(this.getVectorLayers(), _.bind(function(layer) {
+        if (!layer.nFrozen) this.removeVectorLayer(layer);
       }, this));
 
       // WMS:
-      _.each(_.keys(this.layers.wms), _.bind(function(id) {
-        this.removeWmsLayer(this.layers.wms[id]);
+      _.each(this.getWmsLayers(), _.bind(function(layer) {
+        this.removeWmsLayer(layer);
       }, this));
 
     },

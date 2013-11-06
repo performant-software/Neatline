@@ -30,36 +30,50 @@ class NeatlineRecordTableTest_QueryRecordsExcludeExisting
         $record2 = $this->_record($exhibit);
         $record3 = $this->_record($exhibit);
         $record4 = $this->_record($exhibit);
+        $record5 = $this->_record($exhibit);
+        $record6 = $this->_record($exhibit);
 
         $record1->coverage  = 'POINT(0 1)';
         $record2->coverage  = 'POINT(0 2)';
         $record3->coverage  = 'POINT(0 3)';
         $record4->coverage  = 'POINT(0 4)';
+        $record5->coverage  = 'POINT(0 5)';
+        $record6->coverage  = 'POINT(0 6)';
         $record1->added     = '2001-01-01';
         $record2->added     = '2002-01-01';
         $record3->added     = '2003-01-01';
         $record4->added     = '2004-01-01';
+        $record5->added     = '2005-01-01';
+        $record6->added     = '2006-01-01';
 
         $record1->save();
         $record2->save();
         $record3->save();
         $record4->save();
+        $record5->save();
+        $record6->save();
 
         $result = $this->_records->queryRecords(array(
 
             'exhibit_id' => $exhibit->id,
 
-            // Records 1-3 already loaded.
-            'existing' => array($record1->id, $record2->id, $record3->id),
+            // Records 1-4 already loaded.
+            'existing' => array(
+                $record1->id,
+                $record2->id,
+                $record3->id,
+                $record4->id
+            ),
 
-            // Match records 3 and 4.
-            'extent' => 'LINESTRING(0 3,0 4)'
+            // Match records 3-6.
+            'extent' => 'LINESTRING(0 3,0 6)'
 
         ));
 
-        // Just the new record (#4) returned.
-        $this->assertEquals($record4->id, $result['records'][0]['id']);
-        $this->assertCount(1, $result['records']);
+        // Just the new records (5-6) returned.
+        $this->assertEquals($record6->id, $result['records'][0]['id']);
+        $this->assertEquals($record5->id, $result['records'][1]['id']);
+        $this->assertCount(2, $result['records']);
 
         // Records 1-2 flagged as removed.
         $this->assertEquals(array($record1->id, $record2->id),
