@@ -12,14 +12,18 @@
 @import 'var'
 
 
-ul.pagination
+div.pagination-container
   margin $editorPadding 0 0
 
+  ul.pagination
+    display inline-block
+    margin 0
+
   div.offset
-    display inline
+    display inline-block
     position relative
     left 10px
-    top 7px
+    top -11px
 
     .start, .end, .total
       font-weight bold

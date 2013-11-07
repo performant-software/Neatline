@@ -473,7 +473,7 @@ Neatline.module('Map', function(Map) {
       }, this));
 
       // Removed stale layers (unless frozen).
-      _.each(records.removed, _.bind(function(id) {
+      _.each(records.metadata.removed, _.bind(function(id) {
         var layer = this.layers.vector[id];
         if (_.isObject(layer) && !layer.nFrozen) {
           this.removeVectorLayer(layer);

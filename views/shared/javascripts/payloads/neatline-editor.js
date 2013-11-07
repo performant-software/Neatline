@@ -56133,9 +56133,9 @@ Neatline.module('Shared.Record', function(Record) {
       this.metadata = _.omit(response, 'records');
 
       // Cast number-y strings to numerics.
-      _.each(this.metadata, _.bind(function(val, key) {
-        this.metadata[key] = !_.isNaN(Number(val)) ? Number(val) : val
-      }, this));
+      _.each(this.metadata, function(val, key, obj) {
+        obj[key] = !_.isNaN(Number(val)) ? Number(val) : val
+      });
 
       return response.records;
 
@@ -57352,7 +57352,7 @@ Neatline.module('Map', function(Map) {
       }, this));
 
       // Removed stale layers (unless frozen).
-      _.each(records.removed, _.bind(function(id) {
+      _.each(records.metadata.removed, _.bind(function(id) {
         var layer = this.layers.vector[id];
         if (_.isObject(layer) && !layer.nFrozen) {
           this.removeVectorLayer(layer);

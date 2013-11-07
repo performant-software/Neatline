@@ -9227,9 +9227,10 @@ label{font-weight:500}
 .sp-replacer.sp-active{border-color:#ccc}
 .sp-container{border:1px solid #ccc;border-top:none;background:#f4f4f4}
 
-ul.pagination{margin:1.6em 0 0;}
-ul.pagination div.offset{display:inline;position:relative;left:10px;top:7px;}
-ul.pagination div.offset .start,ul.pagination div.offset .end,ul.pagination div.offset .total{font-weight:bold}
+div.pagination-container{margin:1.6em 0 0;}
+div.pagination-container ul.pagination{display:inline-block;margin:0}
+div.pagination-container div.offset{display:inline-block;position:relative;left:10px;top:-11px;}
+div.pagination-container div.offset .start,div.pagination-container div.offset .end,div.pagination-container div.offset .total{font-weight:bold}
 
 form.record{margin-top:0;}
 form.record span.id{font-weight:bold}
@@ -9250,7 +9251,7 @@ form.record #record-style{margin-bottom:1.4em;}
 form.record #record-style button[name="focus-map"]{margin:5px 0 10px}
 
 div.records a.add{width:100%}
-div.records div.list-group{margin:1.6em 0;}
+div.records div.list-group{margin:1.3em 0;}
 div.records div.list-group a{display:block;padding:5px 10px;}
 div.records div.list-group a .title{font-weight:bold}
 div.records div.list-group a .body{font-size:12px;color:#333}

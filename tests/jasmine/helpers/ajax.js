@@ -91,8 +91,8 @@ var NL = (function(NL) {
    */
   NL.respondMap200 = function(response) {
     _.each(this.server.requests, _.bind(function(request) {
-      var extent = _.str.include(request.url, 'extent');
-      var zoom   = _.str.include(request.url, 'zoom');
+      var extent = _.string.include(request.url, 'extent');
+      var zoom   = _.string.include(request.url, 'zoom');
       if (extent && zoom) this.respond200(request, response);
     }, this));
   };
@@ -105,8 +105,8 @@ var NL = (function(NL) {
    */
   NL.respondRecordList200 = function(response) {
     _.each(this.server.requests, _.bind(function(request) {
-      var offset = _.str.include(request.url, 'offset');
-      var limit  = _.str.include(request.url, 'limit');
+      var offset = _.string.include(request.url, 'offset');
+      var limit  = _.string.include(request.url, 'limit');
       if (offset && limit) this.respond200(request, response);
     }, this));
   };

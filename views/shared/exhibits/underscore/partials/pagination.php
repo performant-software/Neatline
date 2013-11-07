@@ -53,14 +53,19 @@
   !_.string.startsWith(query, 'map:')
 ) { %>
 
-  <ul class="pagination">
+  <div class="pagination-container">
 
-    <li <% if (!prevActive) {
-      %><%='class="disabled"'%><%
-    } %>><a class="prev" href="<%= prev %>">«</a></li>
-    <li <% if (!nextActive) {
-      %><%='class="disabled"'%><%
-    } %>><a class="next" href="<%= next %>">»</a></li>
+    <ul class="pagination">
+
+      <li <% if (!prevActive) { %><%='class="disabled"'%><% } %>>
+        <a class="prev" href="<%= prev %>">&laquo;</a>
+      </li>
+
+      <li <% if (!nextActive) { %><%='class="disabled"'%><% } %>>
+        <a class="next" href="<%= next %>">&raquo;</a>
+      </li>
+
+    </ul>
 
     <div class="offset">
       <span class="start"><%= records.metadata.offset+1 %></span>
@@ -70,6 +75,6 @@
       <span class="total"><%= records.metadata.count %></span>
     </div>
 
-  </ul>
+  </div>
 
 <% } %>
