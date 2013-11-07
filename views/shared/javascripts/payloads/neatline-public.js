@@ -34957,13 +34957,10 @@ Neatline.module('Shared.Record', function(Record) {
      */
     parse: function(response) {
 
-      // Get the response metadata.
-      this.metadata = _.omit(response, 'records');
-
-      // Cast number-y strings to numerics.
-      _.each(this.metadata, function(val, key, obj) {
-        obj[key] = !_.isNaN(Number(val)) ? Number(val) : val
-      });
+      this.metadata = {
+        offset: Number(response.offset),
+        count:  Number(response.count)
+      };
 
       return response.records;
 
@@ -36113,9 +36110,7 @@ Neatline.module('Map', function(Map) {
      */
     publishPosition: function() {
 
-      var params = {
-        existing: this.getVectorLayerIds()
-      };
+      var params = {};
 
       // Filter by extent and zoom.
       if (this.exhibit.spatial_querying) _.extend(params, {
@@ -36165,33 +36160,40 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * TODO|dev
      * Rebuild the vector layers to match the new collection.
      *
      * @param {Object} records: The records collection.
      */
     ingestVectorLayers: function(records) {
 
+      var newIds = [];
+
       // Build new layers.
       records.each(_.bind(function(record) {
+
+        newIds.push(record.id);
+
+        // Create layer, if one doesn't exist.
         if (!_.has(this.layers.vector, record.id)) {
           this.buildVectorLayer(record);
         }
+
       }, this));
 
-      // Removed stale layers (unless frozen).
-      _.each(records.metadata.removed, _.bind(function(id) {
-        var layer = this.layers.vector[id];
-        if (_.isObject(layer) && !layer.nFrozen) {
+      // Garbage-collect stale layers.
+      _.each(this.layers.vector, _.bind(function(layer, id) {
+
+        // Delete if model is absent and layer is unfrozen.
+        if (!_.contains(newIds, Number(id)) && !layer.nFrozen) {
           this.removeVectorLayer(layer);
         }
+
       }, this));
 
     },
 
 
     /**
-     * TODO|dev
      * Rebuild the WMS layers to match the new collection.
      *
      * @param {Object} records: The records collection.

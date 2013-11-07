@@ -80,7 +80,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
 
         $this->select = $this->getSelect();
-        $this->result = array();
+        $this->result = array('offset' => 0);
 
         // Merge default parameters.
         $this->params = array_merge(self::$defaultParams, $params);

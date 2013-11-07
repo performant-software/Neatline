@@ -34,13 +34,10 @@ Neatline.module('Shared.Record', function(Record) {
      */
     parse: function(response) {
 
-      // Get the response metadata.
-      this.metadata = _.omit(response, 'records');
-
-      // Cast number-y strings to numerics.
-      _.each(this.metadata, function(val, key, obj) {
-        obj[key] = !_.isNaN(Number(val)) ? Number(val) : val
-      });
+      this.metadata = {
+        offset: Number(response.offset),
+        count:  Number(response.count)
+      };
 
       return response.records;
 
