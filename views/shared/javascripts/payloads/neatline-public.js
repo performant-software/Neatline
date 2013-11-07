@@ -34941,6 +34941,14 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * Set default metadata attributes.
+     */
+    initialize: function() {
+      this.metadata = { offset: 0, count: 0 };
+    },
+
+
+    /**
      * Construct the record API endpoint.
      *
      * @return {String}: The url.
@@ -34956,14 +34964,9 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Array}: The records collection.
      */
     parse: function(response) {
-
-      this.metadata = {
-        offset: Number(response.offset),
-        count:  Number(response.count)
-      };
-
+      this.metadata.offset = Number(response.offset);
+      this.metadata.count  = Number(response.count);
       return response.records;
-
     },
 
 
