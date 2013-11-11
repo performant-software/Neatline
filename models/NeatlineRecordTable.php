@@ -37,7 +37,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         // Select `coverage` as plaintext.
         $select->columns(array('coverage' => nl_getGeometry('coverage')));
 
-        // Order chronologically.
+        // Order by date created.
         $select->order('added DESC');
 
         return $select;
@@ -57,7 +57,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     }
 
 
-    // ------------------------------------------------------------------------
     // RECORDS API
     // ------------------------------------------------------------------------
 
@@ -80,15 +79,13 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
 
         $this->select = $this->getSelect();
-        $this->result = array('offset' => 0);
-
-        // Merge default parameters.
         $this->params = array_merge(self::$defaultParams, $params);
+        $this->result = array('offset' => 0);
 
         // ** BEFORE
         $this->applyFilters();
 
-        // Execute the query.
+        // ** EXECUTE
         $this->result['records'] = $this->select->query()->fetchAll();
 
         // ** AFTER
@@ -157,17 +154,12 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Paginate the query.
+     * Paginate the query, set the offset on the result array.
      */
     protected function filter_limit()
     {
-
-        // Set the offset on the result envelope.
+        $this->select->limit($this->params['limit'], $this->params['offset']);
         $this->result['offset'] = $this->params['offset'];
-
-        // Apply the limit and offset.
-        $this->select->limit($this->params['limit'], $this->result['offset']);
-
     }
 
 
@@ -240,12 +232,13 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * If an array of `existing` record ids is passed:
+     * Don't re-transmit records that the client has already loaded. If an
+     * array of `existing` record ids is included in the query:
      *
-     *  (1) REMOVE any records in the result set with ids in `existing`.
+     *  (1) Remove any records in the result set with ids in `existing`.
      *
      *  (2) If there are any ids in `existing` that are absent from the new
-     *      result set, return those ids as an array under a `removed` key 
+     *      result set, return those ids as an array under a `removed` key.
      */
     protected function excludeExisting()
     {
