@@ -21,7 +21,7 @@ Neatline.module('Shared.Record', function(Record) {
      * Set default metadata attributes.
      */
     initialize: function() {
-      this.metadata = { offset: 0, count: 0 };
+      this.metadata = { offset: 0, numFound: 0 };
     },
 
 
@@ -42,7 +42,7 @@ Neatline.module('Shared.Record', function(Record) {
      */
     parse: function(response) {
       this.metadata.offset = Number(response.offset);
-      this.metadata.count  = Number(response.count);
+      this.metadata.numFound = Number(response.numFound);
       return response.records;
     },
 

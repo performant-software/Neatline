@@ -115,8 +115,8 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         $response = $this->_getResponseArray();
         $r = $response->records;
 
-        // `count` should equal result size.
-        $this->assertEquals(2, $response->count);
+        // `numFound` should equal result size.
+        $this->assertEquals(2, $response->numFound);
 
         // Record 2:
         $this->assertEquals($record2->id,   $r[0]->id);

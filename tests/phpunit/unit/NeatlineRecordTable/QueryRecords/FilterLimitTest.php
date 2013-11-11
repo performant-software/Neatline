@@ -15,9 +15,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterLimit
 
 
     /**
-     * When a `limit` and `offset` values are passed to `queryRecords`, the
-     * result set should be truncated to the `limit` length, starting from the
-     * `offset` value.
+     * When a `limit` and `offset` values are passed, the result set should be
+     * truncated to the `limit` length, starting from the `offset` value.
      */
     public function testFilterLimit()
     {

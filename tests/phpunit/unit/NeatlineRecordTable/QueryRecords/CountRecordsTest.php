@@ -15,8 +15,8 @@ class NeatlineRecordTableTest_QueryRecordsCountRecords
 
 
     /**
-     * The result set should include a `count` key with the original size of
-     * the result set before the limit was applied.
+     * The result set should include a `numFound` key with the original size
+     * of the result set before the limit was applied.
      */
     public function testCountRecords()
     {
@@ -31,7 +31,7 @@ class NeatlineRecordTableTest_QueryRecordsCountRecords
             'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 0
         ));
 
-        $this->assertEquals(3, $result['count']);
+        $this->assertEquals(3, $result['numFound']);
 
     }
 

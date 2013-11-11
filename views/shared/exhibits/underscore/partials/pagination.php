@@ -39,7 +39,7 @@
   }
 
   // Add next offset.
-  if (nextStart < records.metadata.count) {
+  if (nextStart < records.metadata.numFound) {
     next += '/start='+nextStart;
   } else {
     next += '/start='+records.metadata.offset;
@@ -49,7 +49,7 @@
 %>
 
 <% if (
-  records.metadata.count > Neatline.g.neatline.per_page &&
+  records.metadata.numFound > Neatline.g.neatline.per_page &&
   !_.string.startsWith(query, 'map:')
 ) { %>
 
@@ -72,7 +72,7 @@
       <span class="separator">-</span>
       <span class="end"><%= records.metadata.offset+records.length %></span>
       <span class="separator">of</span>
-      <span class="total"><%= records.metadata.count %></span>
+      <span class="total"><%= records.metadata.numFound %></span>
     </div>
 
   </div>

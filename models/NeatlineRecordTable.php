@@ -225,7 +225,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $this->select->reset(Zend_Db_Select::COLUMNS);
 
         // Count the total result size.
-        $this->result['count'] = $this->select->columns('COUNT(*)')->
+        $this->result['numFound'] = $this->select->columns('COUNT(*)')->
             query()->fetchColumn();
 
     }
