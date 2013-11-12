@@ -76,7 +76,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
         // Merge route parameters into query.
         var params = _.extend(this.view.query, {
-          limit: Neatline.g.neatline.per_page, offset: start || 0
+          limit: Neatline.g.neatline.per_page, start: start || 0
         });
 
         // Load the list of records.

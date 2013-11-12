@@ -14,35 +14,35 @@
 <%
 
   // Base fragment.
-  var prev = '#records/search';
-  var next = '#records/search';
+  var prevUrl = '#records/search';
+  var nextUrl = '#records/search';
 
   // Add existing query.
   if (!_.isEmpty(query)) {
-    prev += '/query='+query;
-    next += '/query='+query;
+    prevUrl += '/query=' + query;
+    nextUrl += '/query=' + query;
   }
 
-  // Compute back/forward offsets.
-  var prevStart = records.metadata.offset-limit;
-  var nextStart = records.metadata.offset+limit;
+  // Compute previous/next start offsets.
+  var prevStart = records.metadata.start - limit;
+  var nextStart = records.metadata.start + limit;
 
   var prevActive = true;
   var nextActive = true;
 
-  // Add prev offset.
+  // Add offset to previous URL.
   if (prevStart > 0) {
-    prev += '/start='+prevStart;
+    prevUrl += '/start=' + prevStart;
   } else {
-    if (_.isEmpty(query)) prev = '#records';
-    if (records.metadata.offset == 0) prevActive = false;
+    if (_.isEmpty(query)) prevUrl = '#records';
+    if (records.metadata.start == 0) prevActive = false;
   }
 
-  // Add next offset.
+  // Add offset to next URL.
   if (nextStart < records.metadata.numFound) {
-    next += '/start='+nextStart;
+    nextUrl += '/start=' + nextStart;
   } else {
-    next += '/start='+records.metadata.offset;
+    nextUrl += '/start=' + records.metadata.start;
     nextActive = false;
   }
 
@@ -58,19 +58,19 @@
     <ul class="pagination">
 
       <li <% if (!prevActive) { %><%='class="disabled"'%><% } %>>
-        <a class="prev" href="<%= prev %>">&laquo;</a>
+        <a class="prev" href="<%= prevUrl %>">&laquo;</a>
       </li>
 
       <li <% if (!nextActive) { %><%='class="disabled"'%><% } %>>
-        <a class="next" href="<%= next %>">&raquo;</a>
+        <a class="next" href="<%= nextUrl %>">&raquo;</a>
       </li>
 
     </ul>
 
     <div class="offset">
-      <span class="start"><%= records.metadata.offset+1 %></span>
+      <span class="start"><%= records.metadata.start + 1 %></span>
       <span class="separator">-</span>
-      <span class="end"><%= records.metadata.offset+records.length %></span>
+      <span class="end"><%= records.metadata.start+records.length %></span>
       <span class="separator">of</span>
       <span class="total"><%= records.metadata.numFound %></span>
     </div>

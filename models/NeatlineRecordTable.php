@@ -65,7 +65,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      * Default query parameters.
      */
     protected static $defaultParams = array(
-        'offset' => 0
+        'start' => 0
     );
 
 
@@ -80,7 +80,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
         $this->select = $this->getSelect();
         $this->params = array_merge(self::$defaultParams, $params);
-        $this->result = array('offset' => 0);
+        $this->result = array('start' => 0);
 
         // ** BEFORE
         $this->applyFilters();
@@ -154,12 +154,12 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Paginate the query, set the offset on the result array.
+     * Paginate the query, set the start offset on the result array.
      */
     protected function filter_limit()
     {
-        $this->select->limit($this->params['limit'], $this->params['offset']);
-        $this->result['offset'] = $this->params['offset'];
+        $this->select->limit($this->params['limit'], $this->params['start']);
+        $this->result['start'] = $this->params['start'];
     }
 
 

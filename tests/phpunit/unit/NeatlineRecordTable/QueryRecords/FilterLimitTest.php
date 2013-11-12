@@ -15,8 +15,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterLimit
 
 
     /**
-     * When a `limit` and `offset` values are passed, the result set should be
-     * truncated to the `limit` length, starting from the `offset` value.
+     * When a `limit` and `start` values are passed, the result set should be
+     * truncated to the `limit` length, starting from the `start` value.
      */
     public function testFilterLimit()
     {
@@ -40,43 +40,43 @@ class NeatlineRecordTableTest_QueryRecordsFilterLimit
         $record4->save();
         $record5->save();
 
-        // Records 1-2 (implicit offset=0).
+        // Records 1-2 (implicit start=0).
         $result = $this->_records->queryRecords(array(
             'exhibit_id' => $exhibit->id, 'limit' => 2
         ));
 
         $this->assertEquals($record5->id, $result['records'][0]['id']);
         $this->assertEquals($record4->id, $result['records'][1]['id']);
-        $this->assertEquals(0, $result['offset']);
+        $this->assertEquals(0, $result['start']);
         $this->assertCount(2, $result['records']);
 
-        // Records 1-2 (explicit offset=0).
+        // Records 1-2 (explicit start=0).
         $result = $this->_records->queryRecords(array(
-            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 0
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'start' => 0
         ));
 
         $this->assertEquals($record5->id, $result['records'][0]['id']);
         $this->assertEquals($record4->id, $result['records'][1]['id']);
-        $this->assertEquals(0, $result['offset']);
+        $this->assertEquals(0, $result['start']);
         $this->assertCount(2, $result['records']);
 
         // Records 3-4.
         $result = $this->_records->queryRecords(array(
-            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 2
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'start' => 2
         ));
 
         $this->assertEquals($record3->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
-        $this->assertEquals(2, $result['offset']);
+        $this->assertEquals(2, $result['start']);
         $this->assertCount(2, $result['records']);
 
         // Record 5.
         $result = $this->_records->queryRecords(array(
-            'exhibit_id' => $exhibit->id, 'limit' => 2, 'offset' => 4
+            'exhibit_id' => $exhibit->id, 'limit' => 2, 'start' => 4
         ));
 
         $this->assertEquals($record1->id, $result['records'][0]['id']);
-        $this->assertEquals(4, $result['offset']);
+        $this->assertEquals(4, $result['start']);
         $this->assertCount(1, $result['records']);
 
     }

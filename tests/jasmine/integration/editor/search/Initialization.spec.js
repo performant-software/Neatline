@@ -95,9 +95,9 @@ describe('Search | Initialization', function() {
       NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
-      // Default `limit` and `offset`.
+      // Default `limit` and `start`.
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('start', '0');
 
     });
 
@@ -110,9 +110,9 @@ describe('Search | Initialization', function() {
       NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
-      // Default `limit` and `offset`.
+      // Default `limit` and `start`.
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('start', '0');
 
     });
 
@@ -125,9 +125,9 @@ describe('Search | Initialization', function() {
       NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
-      // `offset`=10, default `limit`.
+      // `start`=10, default `limit`.
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '10');
+      NL.assertLastRequestHasGetParameter('start', '10');
 
     });
 
@@ -140,10 +140,10 @@ describe('Search | Initialization', function() {
       NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
-      // `query`=keywords, `offset`=0, default `limit`.
+      // `query`=keywords, `start`=0, default `limit`.
       NL.assertLastRequestHasGetParameter('query', 'keywords');
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('start', '0');
 
     });
 
@@ -160,9 +160,9 @@ describe('Search | Initialization', function() {
       var request = NL.getLastRequest();
       expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
-      // `offset`=0, default `limit`.
+      // `start`=0, default `limit`.
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '0');
+      NL.assertLastRequestHasGetParameter('start', '0');
 
     });
 
@@ -175,10 +175,10 @@ describe('Search | Initialization', function() {
       NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
       NL.assertLastRequestMethod('GET');
 
-      // `query`=keywords, `offset`=10.
+      // `query`=keywords, `start`=10.
       NL.assertLastRequestHasGetParameter('query', 'keywords');
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '10');
+      NL.assertLastRequestHasGetParameter('start', '10');
 
     });
 
@@ -195,9 +195,9 @@ describe('Search | Initialization', function() {
       var request = NL.getLastRequest();
       expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
-      // `offset`=0, default `limit`.
+      // `start`=0, default `limit`.
       NL.assertLastRequestHasGetParameter('limit', perPage);
-      NL.assertLastRequestHasGetParameter('offset', '10');
+      NL.assertLastRequestHasGetParameter('start', '10');
 
     });
 

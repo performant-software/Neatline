@@ -399,7 +399,7 @@ class RecordsControllerTest_List extends Neatline_Case_Default
 
 
     /**
-     * The `limit` and `offset` parameters should be passed to the query.
+     * The `limit` and `start` parameters should be passed to the query.
      */
     public function testLimitFilter()
     {
@@ -416,8 +416,8 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         $record3->save();
 
         $this->request->setQuery(array(
-            'limit'   => 1,
-            'offset'  => 1
+            'limit' => 1,
+            'start' => 1
         ));
 
         $this->dispatch('neatline/records');

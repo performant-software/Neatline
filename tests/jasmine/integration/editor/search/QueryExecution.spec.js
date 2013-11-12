@@ -94,10 +94,10 @@ describe('Search | Query Execution', function() {
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
     NL.assertLastRequestMethod('GET');
 
-    // `query`=word, default `limit` and `offset`.
+    // `query`=word, default `limit` and `start`.
     NL.assertLastRequestHasGetParameter('query', 'word1+word2');
     NL.assertLastRequestHasGetParameter('limit', perPage);
-    NL.assertLastRequestHasGetParameter('offset', '0');
+    NL.assertLastRequestHasGetParameter('start', '0');
 
     // Inject a new records collection.
     NL.respondLast200(fixtures.records);
@@ -130,9 +130,9 @@ describe('Search | Query Execution', function() {
     var request = NL.getLastRequest();
     expect(request.url).toContain($.param({tags: ['tag1', 'tag2']}));
 
-    // Default `limit` and `offset`.
+    // Default `limit` and `start`.
     NL.assertLastRequestHasGetParameter('limit', perPage);
-    NL.assertLastRequestHasGetParameter('offset', '0');
+    NL.assertLastRequestHasGetParameter('start', '0');
 
     // Inject a new records collection.
     NL.respondLast200(fixtures.records);

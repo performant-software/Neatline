@@ -24,31 +24,31 @@ class FixturesTest_RecordsPagination extends Neatline_Case_Fixture
         }
 
         // Records 1-2.
-        $this->request->setQuery(array('limit' => '2', 'offset' => '0'));
+        $this->request->setQuery(array('limit' => '2', 'start' => '0'));
         $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p12.json'
         );
 
         // Records 2-3.
-        $this->request->setQuery(array('limit' => '2', 'offset' => '1'));
+        $this->request->setQuery(array('limit' => '2', 'start' => '1'));
         $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p23.json'
         );
 
         // Records 3-4.
-        $this->request->setQuery(array('limit' => '2', 'offset' => '2'));
+        $this->request->setQuery(array('limit' => '2', 'start' => '2'));
         $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p34.json'
         );
 
         // Records 5-6.
-        $this->request->setQuery(array('limit' => '2', 'offset' => '4'));
+        $this->request->setQuery(array('limit' => '2', 'start' => '4'));
         $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p56.json'
         );
 
         // Record 6.
-        $this->request->setQuery(array('limit' => '2', 'offset' => '5'));
+        $this->request->setQuery(array('limit' => '2', 'start' => '5'));
         $this->_writeFixtureFromRoute('neatline/records',
             'EditorRecordsPagination.p6.json'
         );

@@ -56116,7 +56116,7 @@ Neatline.module('Shared.Record', function(Record) {
      * Set default metadata attributes.
      */
     initialize: function() {
-      this.metadata = { offset: 0, numFound: 0 };
+      this.metadata = { start: 0, numFound: 0 };
     },
 
 
@@ -56136,7 +56136,7 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Array}: The records collection.
      */
     parse: function(response) {
-      this.metadata.offset = Number(response.offset);
+      this.metadata.start = Number(response.start);
       this.metadata.numFound = Number(response.numFound);
       return response.records;
     },
@@ -59100,7 +59100,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
 
         // Merge route parameters into query.
         var params = _.extend(this.view.query, {
-          limit: Neatline.g.neatline.per_page, offset: start || 0
+          limit: Neatline.g.neatline.per_page, start: start || 0
         });
 
         // Load the list of records.

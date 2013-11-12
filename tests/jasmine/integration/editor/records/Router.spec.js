@@ -51,11 +51,11 @@ describe('Records | Router', function() {
       NL.navigate('records/search/query=test');
     });
 
-    it('offset', function() {
+    it('start', function() {
       NL.navigate('records/search/start=50');
     });
 
-    it('query and offset', function() {
+    it('query and start', function() {
       NL.navigate('records/search/query=test/start=50');
     });
 

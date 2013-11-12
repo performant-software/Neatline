@@ -105,9 +105,9 @@ var NL = (function(NL) {
    */
   NL.respondRecordList200 = function(response) {
     _.each(this.server.requests, _.bind(function(request) {
-      var offset = _.string.include(request.url, 'offset');
-      var limit  = _.string.include(request.url, 'limit');
-      if (offset && limit) this.respond200(request, response);
+      var start = _.string.include(request.url, 'start');
+      var limit = _.string.include(request.url, 'limit');
+      if (start && limit) this.respond200(request, response);
     }, this));
   };
 
