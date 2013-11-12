@@ -31,7 +31,7 @@ describe('Map | Subscribe `highlight`', function() {
     NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
 
-    Neatline.vent.trigger('highlight', { model: layer.nModel });
+    Neatline.vent.trigger('highlight', { model: layer.neatline.model });
     NL.assertTemporaryIntent(layer);
 
   });
@@ -47,8 +47,8 @@ describe('Map | Subscribe `highlight`', function() {
     NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
 
-    Neatline.vent.trigger('select', { model: layer.nModel });
-    Neatline.vent.trigger('highlight', { model: layer.nModel });
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    Neatline.vent.trigger('highlight', { model: layer.neatline.model });
     NL.assertSelectIntent(layer);
 
   });

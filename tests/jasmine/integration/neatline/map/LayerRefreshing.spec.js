@@ -72,43 +72,43 @@ describe('Map | Layer Refreshing', function() {
   });
 
 
-  //it('should clear and rebuild WMS layers', function() {
+  it('should clear and rebuild WMS layers', function() {
 
-    //// ------------------------------------------------------------------------
-    //// The `MAP:refresh` command should completely clear all existing WMS
-    //// layers and reload records for the current viewport focus.
-    //// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
+    // The `MAP:refresh` command should completely clear all existing WMS
+    // layers and reload records for the current viewport focus.
+    // ------------------------------------------------------------------------
 
-    //// Load default layers.
-    //NL.refreshMap(fixtures.wms.original);
+    // Load default layers.
+    NL.refreshMap(fixtures.wms.original);
 
-    //// Should manifest original WMS data.
-    //var layers = NL.v.map.getWmsLayers();
-    //expect(layers[0].url).toEqual('address1');
-    //expect(layers[0].params.LAYERS).toEqual('layers1');
-    //expect(layers[1].url).toEqual('address2');
-    //expect(layers[1].params.LAYERS).toEqual('layers2');
-    //expect(layers[2].url).toEqual('address3');
-    //expect(layers[2].params.LAYERS).toEqual('layers3');
-    //NL.assertWmsLayerCount(3);
+    // Should manifest original WMS data.
+    var layers = NL.v.map.getWmsLayers();
+    expect(layers[0].url).toEqual('address1');
+    expect(layers[0].params.LAYERS).toEqual('layers1');
+    expect(layers[1].url).toEqual('address2');
+    expect(layers[1].params.LAYERS).toEqual('layers2');
+    expect(layers[2].url).toEqual('address3');
+    expect(layers[2].params.LAYERS).toEqual('layers3');
+    NL.assertWmsLayerCount(3);
 
-    //Neatline.vent.trigger('refresh');
+    Neatline.vent.trigger('refresh');
 
-    //// Respond with changed coverage data.
-    //NL.respondLast200(fixtures.wms.changed);
-    //var layers = NL.v.map.getVectorLayers();
+    // Respond with changed coverage data.
+    NL.respondLast200(fixtures.wms.changed);
+    var layers = NL.v.map.getVectorLayers();
 
-    //// Should manifest changed WMS data.
-    //var layers = NL.v.map.getWmsLayers();
-    //expect(layers[0].url).toEqual('address4');
-    //expect(layers[0].params.LAYERS).toEqual('layers4');
-    //expect(layers[1].url).toEqual('address5');
-    //expect(layers[1].params.LAYERS).toEqual('layers5');
-    //expect(layers[2].url).toEqual('address6');
-    //expect(layers[2].params.LAYERS).toEqual('layers6');
-    //NL.assertWmsLayerCount(3);
+    // Should manifest changed WMS data.
+    var layers = NL.v.map.getWmsLayers();
+    expect(layers[0].url).toEqual('address4');
+    expect(layers[0].params.LAYERS).toEqual('layers4');
+    expect(layers[1].url).toEqual('address5');
+    expect(layers[1].params.LAYERS).toEqual('layers5');
+    expect(layers[2].url).toEqual('address6');
+    expect(layers[2].params.LAYERS).toEqual('layers6');
+    NL.assertWmsLayerCount(3);
 
-  //});
+  });
 
 
   it('should not rebuild frozen vector layers', function() {
@@ -119,7 +119,7 @@ describe('Map | Layer Refreshing', function() {
 
     // Load default layers, freeze layer 2.
     NL.refreshMap(fixtures.vector.original);
-    NL.getVectorLayer('title2').nFrozen = true;
+    NL.getVectorLayer('title2').neatline.frozen = true;
 
     Neatline.vent.trigger('refresh');
 

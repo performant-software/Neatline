@@ -68,7 +68,7 @@ describe('Map | Edit Layer Management', function() {
     NL.assertVectorLayerCount(4);
 
     // Map should set new layer as the edit layer.
-    expect(NL.v.map.editLayer.nModel.id).toBeUndefined();
+    expect(NL.v.map.editLayer.neatline.model.id).toBeUndefined();
 
   });
 

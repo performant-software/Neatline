@@ -35,7 +35,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     var layer = NL.v.map.getVectorLayers()[0];
     var count = NL.server.requests.count;
 
-    Neatline.vent.trigger('select', { model: layer.nModel });
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
 
     // Should not load record from server.
     expect(NL.server.requests.count).toEqual(count);
@@ -87,7 +87,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
     // Select model for the vector layer.
     var layer = NL.v.map.getVectorLayers()[0];
-    Neatline.vent.trigger('select', { model: layer.nModel });
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
 
     // Ingest fresh records.
     NL.refreshMap(fixtures.records);

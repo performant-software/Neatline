@@ -57358,8 +57358,8 @@ Neatline.module('Map', function(Map) {
       // Garbage-collect stale layers.
       _.each(this.layers.vector, _.bind(function(layer, id) {
 
-        // Delete if model is absent and layer is unfrozen.
-        if (!_.contains(newIds, Number(id)) && !layer.nFrozen) {
+        // Delete if model is absent and layer is uneatline.frozen.
+        if (!_.contains(newIds, Number(id)) && !layer.neatline.frozen) {
           this.removeVectorLayer(layer);
         }
 
@@ -57414,10 +57414,15 @@ Neatline.module('Map', function(Map) {
 
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(record.get('title'), {
-        styleMap: record.getStyleMap(),
+
         displayInLayerSwitcher: false,
-        nModel: record,
-        nFrozen: false
+        styleMap: record.getStyleMap(),
+
+        neatline: {
+          model: record,
+          frozen: false
+        }
+
       });
 
       // Add features.
@@ -57425,14 +57430,14 @@ Neatline.module('Map', function(Map) {
         layer.addFeatures(this.formatWkt.read(record.get('coverage')));
       }
 
-      // Filter visibility.
+      // (1) Apply filters.
       this.filterLayer(layer);
 
-      // Add to the map.
+      // (2) Add to the map.
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
-      // Apply the z-index.
+      // (3) Apply the z-index.
       this.setZIndex(layer, record.get('zindex'));
 
       return layer;
@@ -57454,21 +57459,26 @@ Neatline.module('Map', function(Map) {
           layers: record.get('wms_layers'),
           transparent: true
         }, {
+
           displayOutsideMaxExtent: true,
           opacity: parseFloat(record.get('fill_opacity')),
           isBaseLayer: false,
-          nModel: record
+
+          neatline: {
+            model: record
+          }
+
         }
       );
 
-      // Filter visibility.
+      // (1) Apply filters.
       this.filterLayer(layer);
 
-      // Add to the map.
+      // (2) Add to the map.
       this.layers.wms[record.id] = layer;
       this.map.addLayer(layer);
 
-      // Apply the z-index.
+      // (3) Apply the z-index.
       this.setZIndex(layer, record.get('zindex'));
 
       return layer;
@@ -57495,7 +57505,7 @@ Neatline.module('Map', function(Map) {
      */
     removeVectorLayer: function(layer) {
       this.map.removeLayer(layer);
-      delete this.layers.vector[layer.nModel.id];
+      delete this.layers.vector[layer.neatline.model.id];
     },
 
 
@@ -57506,7 +57516,7 @@ Neatline.module('Map', function(Map) {
      */
     removeWmsLayer: function(layer) {
       this.map.removeLayer(layer);
-      delete this.layers.wms[layer.nModel.id];
+      delete this.layers.wms[layer.neatline.model.id];
     },
 
 
@@ -57517,7 +57527,7 @@ Neatline.module('Map', function(Map) {
 
       // Vector:
       _.each(this.getVectorLayers(), _.bind(function(layer) {
-        if (!layer.nFrozen) this.removeVectorLayer(layer);
+        if (!layer.neatline.frozen) this.removeVectorLayer(layer);
       }, this));
 
       // WMS:
@@ -57566,7 +57576,7 @@ Neatline.module('Map', function(Map) {
 
       // Pass the layer through each of the filters.
       _.each(this.filters, _.bind(function(evaluator, key) {
-        visible = visible && evaluator(layer.nModel);
+        visible = visible && evaluator(layer.neatline.model);
       }, this));
 
       layer.setVisibility(visible);
@@ -57709,11 +57719,11 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Highlight sibling features.
-      this.highlightByModel(evt.feature.layer.nModel);
+      this.highlightByModel(evt.feature.layer.neatline.model);
 
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
-        model:  evt.feature.layer.nModel,
+        model:  evt.feature.layer.neatline.model,
         source: this.slug
       });
 
@@ -57731,11 +57741,11 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unhighlight sibling features.
-      this.unhighlightByModel(evt.feature.layer.nModel);
+      this.unhighlightByModel(evt.feature.layer.neatline.model);
 
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
-        model:  evt.feature.layer.nModel,
+        model:  evt.feature.layer.neatline.model,
         source: this.slug
       });
 
@@ -57753,11 +57763,11 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Select sibling features.
-      this.selectByModel(feature.layer.nModel);
+      this.selectByModel(feature.layer.neatline.model);
 
       // Publish `select` event.
       Neatline.vent.trigger('select', {
-        model:  feature.layer.nModel,
+        model:  feature.layer.neatline.model,
         source: this.slug
       });
 
@@ -57774,11 +57784,11 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unselect sibling features.
-      this.unselectByModel(feature.layer.nModel);
+      this.unselectByModel(feature.layer.neatline.model);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
-        model:  feature.layer.nModel,
+        model:  feature.layer.neatline.model,
         source: this.slug
       });
 
@@ -60816,10 +60826,10 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.map.setLayerIndex(this.editLayer, 9999);
 
-    // Flip on the `nFrozen` flag on the edit layer to exempt it from the
-    // regular garbage collection process:
+    // Flip on the `neatline.frozen` flag on the edit layer to exempt it from
+    // the regular garbage collection process:
 
-    this.editLayer.nFrozen = true;
+    this.editLayer.neatline.frozen = true;
 
 
     // Create the editing controls:
@@ -60896,7 +60906,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Release edit layer.
     if (this.editLayer) {
-      this.editLayer.nFrozen = false;
+      this.editLayer.neatline.frozen = false;
       this.editLayer = null;
     }
 
@@ -61031,7 +61041,7 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
     // Replace the model.
-    this.editLayer.nModel = model;
+    this.editLayer.neatline.model = model;
 
     // Rebuild the style map.
     this.editLayer.styleMap = model.getStyleMap();

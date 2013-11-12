@@ -93,7 +93,7 @@ describe('Record | Open Form', function() {
       // bound to the form immediately.
       // ----------------------------------------------------------------------
 
-      model = NL.v.map.getVectorLayers()[0].nModel;
+      model = NL.v.map.getVectorLayers()[0].neatline.model;
 
       // Click on map feature.
       NL.clickOnMapFeature(feature1);
@@ -107,7 +107,7 @@ describe('Record | Open Form', function() {
       // map feature), the model should be bound to the form.
       // ----------------------------------------------------------------------
 
-      model = NL.v.map.getVectorLayers()[0].nModel;
+      model = NL.v.map.getVectorLayers()[0].neatline.model;
 
       // Select the model.
       Neatline.vent.trigger('select', { model: model });

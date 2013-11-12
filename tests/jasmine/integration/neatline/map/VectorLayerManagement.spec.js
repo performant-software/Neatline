@@ -139,14 +139,14 @@ describe('Map | Vector Layer Management', function() {
     // ------------------------------------------------------------------------
     // When the map is refreshed, vector layers associated with records that
     // are not present in the new collection should _not_ be garbage collected
-    // if the `nFrozen` property is true.
+    // if the `neatline.frozen` property is true.
     // ------------------------------------------------------------------------
 
     // Load collection with record 3.
     NL.refreshMap(fixtures.regular);
 
     // Freeze layer for record 3.
-    NL.getVectorLayer('title3').nFrozen = true;
+    NL.getVectorLayer('title3').neatline.frozen = true;
 
     // Load collection without record 3.
     NL.refreshMap(fixtures.deleted);

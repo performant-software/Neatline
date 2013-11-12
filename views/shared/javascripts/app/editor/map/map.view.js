@@ -34,10 +34,10 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.map.setLayerIndex(this.editLayer, 9999);
 
-    // Flip on the `nFrozen` flag on the edit layer to exempt it from the
-    // regular garbage collection process:
+    // Flip on the `neatline.frozen` flag on the edit layer to exempt it from
+    // the regular garbage collection process:
 
-    this.editLayer.nFrozen = true;
+    this.editLayer.neatline.frozen = true;
 
 
     // Create the editing controls:
@@ -114,7 +114,7 @@ _.extend(Neatline.Map.View.prototype, {
 
     // Release edit layer.
     if (this.editLayer) {
-      this.editLayer.nFrozen = false;
+      this.editLayer.neatline.frozen = false;
       this.editLayer = null;
     }
 
@@ -249,7 +249,7 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
     // Replace the model.
-    this.editLayer.nModel = model;
+    this.editLayer.neatline.model = model;
 
     // Rebuild the style map.
     this.editLayer.styleMap = model.getStyleMap();

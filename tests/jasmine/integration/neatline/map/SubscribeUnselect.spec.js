@@ -30,11 +30,11 @@ describe('Map | Subscribe `unselect`', function() {
 
     NL.respondMap200(fixtures.records);
     var layer = NL.v.map.getVectorLayers()[0];
-    
-    Neatline.vent.trigger('select', { model: layer.nModel });
-    Neatline.vent.trigger('unselect', { model: layer.nModel });
+
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    Neatline.vent.trigger('unselect', { model: layer.neatline.model });
     NL.assertDefaultIntent(layer);
-    
+
   });
 
 

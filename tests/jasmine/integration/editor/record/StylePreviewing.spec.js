@@ -41,7 +41,7 @@ describe('Record | Style Previewing', function() {
 
     it('input `change`', function() {
       elements.presenter.val('None').trigger('change');
-      var presenter = NL.v.map.editLayer.nModel.get('presenter');
+      var presenter = NL.v.map.editLayer.neatline.model.get('presenter');
       expect(presenter).toEqual('None');
     });
 
