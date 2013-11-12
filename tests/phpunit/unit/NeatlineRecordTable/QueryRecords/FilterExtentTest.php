@@ -26,8 +26,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterExtent
 
         $record1->coverage  = 'POINT(0 1)';
         $record2->coverage  = 'POINT(0 2)';
-        $record1->added     = '2001-01-01';
-        $record2->added     = '2002-01-01';
+        $record1->added     = '2002-01-01';
+        $record2->added     = '2001-01-01';
 
         $record1->save();
         $record2->save();
@@ -38,8 +38,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterExtent
             'exhibit_id' => $exhibit->id
         ));
 
-        $this->assertEquals($record2->id, $result['records'][0]['id']);
-        $this->assertEquals($record1->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
 
@@ -69,8 +69,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterExtent
             'exhibit_id' => $exhibit->id, 'extent' => 'LINESTRING(0 1,0 2)'
         ));
 
-        $this->assertEquals($record2->id, $result['records'][0]['id']);
-        $this->assertEquals($record1->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
     }

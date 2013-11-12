@@ -26,10 +26,10 @@ class NeatlineRecordTableTest_QueryRecordsFilterZoom
         $record3 = new NeatlineRecord($exhibit);
         $record4 = new NeatlineRecord($exhibit);
 
-        $record1->added = '2001-01-01';
-        $record2->added = '2002-01-01';
-        $record3->added = '2003-01-01';
-        $record4->added = '2004-01-01';
+        $record1->added = '2004-01-01';
+        $record2->added = '2003-01-01';
+        $record3->added = '2002-01-01';
+        $record4->added = '2001-01-01';
 
         // Both null.
         $record1->min_zoom = null;
@@ -57,10 +57,10 @@ class NeatlineRecordTableTest_QueryRecordsFilterZoom
             'exhibit_id' => $exhibit->id
         ));
 
-        $this->assertEquals($record4->id, $result['records'][0]['id']);
-        $this->assertEquals($record3->id, $result['records'][1]['id']);
-        $this->assertEquals($record2->id, $result['records'][2]['id']);
-        $this->assertEquals($record1->id, $result['records'][3]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
+        $this->assertEquals($record3->id, $result['records'][2]['id']);
+        $this->assertEquals($record4->id, $result['records'][3]['id']);
         $this->assertCount(4, $result['records']);
 
         // Zoom < min_zoom.
@@ -68,8 +68,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterZoom
             'exhibit_id' => $exhibit->id, 'zoom' => 9
         ));
 
-        $this->assertEquals($record3->id, $result['records'][0]['id']);
-        $this->assertEquals($record1->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record3->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Zoom > min_zoom.
@@ -77,8 +77,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterZoom
             'exhibit_id' => $exhibit->id, 'zoom' => 16
         ));
 
-        $this->assertEquals($record2->id, $result['records'][0]['id']);
-        $this->assertEquals($record1->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // min_zoom < Zoom < max_zoom.
@@ -86,9 +86,9 @@ class NeatlineRecordTableTest_QueryRecordsFilterZoom
             'exhibit_id' => $exhibit->id, 'zoom' => 25
         ));
 
-        $this->assertEquals($record4->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
-        $this->assertEquals($record1->id, $result['records'][2]['id']);
+        $this->assertEquals($record4->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
     }

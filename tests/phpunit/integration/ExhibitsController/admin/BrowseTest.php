@@ -33,12 +33,13 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
         $exhibit1 = $this->_exhibit('slug1');
         $exhibit2 = $this->_exhibit('slug2');
         $exhibit3 = $this->_exhibit('slug3');
+
         $exhibit1->title = "Exhibit 1";
         $exhibit2->title = "Exhibit 2";
         $exhibit3->title = "Exhibit 3";
-        $exhibit1->added = '2001-01-01';
+        $exhibit1->added = '2003-01-01';
         $exhibit2->added = '2002-01-01';
-        $exhibit3->added = '2003-01-01';
+        $exhibit3->added = '2001-01-01';
 
         $exhibit1->save();
         $exhibit2->save();
@@ -51,11 +52,11 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
 
         // Should show editor links.
         $this->assertXpathContentContains('//a[@class="editor"][@href="'.
-            url('neatline/editor/'.$exhibit3->id).'"]', 'Exhibit 3');
+            url('neatline/editor/'.$exhibit1->id).'"]', 'Exhibit 1');
         $this->assertXpathContentContains('//a[@class="editor"][@href="'.
             url('neatline/editor/'.$exhibit2->id).'"]', 'Exhibit 2');
         $this->assertXpathContentContains('//a[@class="editor"][@href="'.
-            url('neatline/editor/'.$exhibit1->id).'"]', 'Exhibit 1');
+            url('neatline/editor/'.$exhibit3->id).'"]', 'Exhibit 3');
 
         // Should show public view links.
         $this->assertXpath('//a[@class="public"][@href="'.
@@ -107,10 +108,11 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
         $exhibit2 = $this->_exhibit('slug2');
         $exhibit3 = $this->_exhibit('slug3');
         $exhibit4 = $this->_exhibit('slug4');
-        $exhibit1->added = '2001-01-01';
-        $exhibit2->added = '2002-01-01';
-        $exhibit3->added = '2003-01-01';
-        $exhibit4->added = '2004-01-01';
+
+        $exhibit1->added = '2004-01-01';
+        $exhibit2->added = '2003-01-01';
+        $exhibit3->added = '2002-01-01';
+        $exhibit4->added = '2001-01-01';
 
         $exhibit1->save();
         $exhibit2->save();
@@ -123,9 +125,9 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
         // Should list first two exhibits.
         $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
         $this->assertXpath('//a[@class="public"][@href="'.
-            public_url('neatline/show/slug4').'"]');
+            public_url('neatline/show/slug1').'"]');
         $this->assertXpath('//a[@class="public"][@href="'.
-            public_url('neatline/show/slug3').'"]');
+            public_url('neatline/show/slug2').'"]');
 
         // Should show pagination.
         $this->assertXpath('//div[@class="pagination"]');
@@ -137,9 +139,9 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
         // Should show next two exhibits.
         $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
         $this->assertXpath('//a[@class="public"][@href="'.
-            public_url('neatline/show/slug2').'"]');
+            public_url('neatline/show/slug3').'"]');
         $this->assertXpath('//a[@class="public"][@href="'.
-            public_url('neatline/show/slug1').'"]');
+            public_url('neatline/show/slug4').'"]');
 
     }
 

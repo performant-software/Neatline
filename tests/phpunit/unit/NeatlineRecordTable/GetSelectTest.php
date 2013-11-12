@@ -44,9 +44,7 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         $record->save();
 
         // Query for the record.
-        $record = $this->_records->fetchObject(
-            $this->_records->getSelect()
-        );
+        $record = $this->_records->fetchObject($this->_records->getSelect());
 
         // `coverage` should be NULL.
         $this->assertNull($record->coverage);
@@ -63,9 +61,10 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
         $record1 = new NeatlineRecord();
         $record2 = new NeatlineRecord();
         $record3 = new NeatlineRecord();
-        $record1->added = '2001-01-01';
+
+        $record1->added = '2003-01-01';
         $record2->added = '2002-01-01';
-        $record3->added = '2003-01-01';
+        $record3->added = '2001-01-01';
 
         $record1->save();
         $record2->save();
@@ -73,13 +72,13 @@ class NeatlineRecordTableTest_GetSelect extends Neatline_Case_Default
 
         // Query for the records.
         $records = $this->_records->fetchObjects(
-            $this->_records->getSelect()
+          $this->_records->getSelect()
         );
 
         // Should be in reverse chronological order.
-        $this->assertEquals($record3->id, $records[0]->id);
+        $this->assertEquals($record1->id, $records[0]->id);
         $this->assertEquals($record2->id, $records[1]->id);
-        $this->assertEquals($record1->id, $records[2]->id);
+        $this->assertEquals($record3->id, $records[2]->id);
 
     }
 

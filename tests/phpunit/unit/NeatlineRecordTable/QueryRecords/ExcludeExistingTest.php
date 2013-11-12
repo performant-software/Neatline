@@ -39,12 +39,12 @@ class NeatlineRecordTableTest_QueryRecordsExcludeExisting
         $record4->coverage  = 'POINT(0 4)';
         $record5->coverage  = 'POINT(0 5)';
         $record6->coverage  = 'POINT(0 6)';
-        $record1->added     = '2001-01-01';
-        $record2->added     = '2002-01-01';
-        $record3->added     = '2003-01-01';
-        $record4->added     = '2004-01-01';
-        $record5->added     = '2005-01-01';
-        $record6->added     = '2006-01-01';
+        $record1->added     = '2006-01-01';
+        $record2->added     = '2005-01-01';
+        $record3->added     = '2004-01-01';
+        $record4->added     = '2003-01-01';
+        $record5->added     = '2002-01-01';
+        $record6->added     = '2001-01-01';
 
         $record1->save();
         $record2->save();
@@ -71,8 +71,8 @@ class NeatlineRecordTableTest_QueryRecordsExcludeExisting
         ));
 
         // Just the new records (5-6) returned.
-        $this->assertEquals($record6->id, $result['records'][0]['id']);
-        $this->assertEquals($record5->id, $result['records'][1]['id']);
+        $this->assertEquals($record5->id, $result['records'][0]['id']);
+        $this->assertEquals($record6->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
         // Records 1-2 flagged as removed.

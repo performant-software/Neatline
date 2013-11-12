@@ -27,9 +27,9 @@ class NeatlineRecordTableTest_QueryRecordsFilterExhibitId
         $record2 = new NeatlineRecord($exhibit1);
         $record3 = new NeatlineRecord($exhibit2);
 
-        $record1->added = '2001-01-01';
+        $record1->added = '2003-01-01';
         $record2->added = '2002-01-01';
-        $record3->added = '2003-01-01';
+        $record3->added = '2001-01-01';
 
         $record1->save();
         $record2->save();
@@ -41,8 +41,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterExhibitId
         ));
 
         // Exhibit2 records should be absent.
-        $this->assertEquals($record2->id, $result['records'][0]['id']);
-        $this->assertEquals($record1->id, $result['records'][1]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record2->id, $result['records'][1]['id']);
         $this->assertCount(2, $result['records']);
 
     }

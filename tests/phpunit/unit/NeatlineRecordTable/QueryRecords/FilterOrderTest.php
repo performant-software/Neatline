@@ -25,12 +25,12 @@ class NeatlineRecordTableTest_QueryRecordsFilterOrder
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
 
-        $record1->weight = 1;
+        $record1->weight = 3;
         $record2->weight = 2;
-        $record3->weight = 3;
-        $record1->added = '2001-01-01';
+        $record3->weight = 1;
+        $record1->added = '2003-01-01';
         $record2->added = '2002-01-01';
-        $record3->added = '2003-01-01';
+        $record3->added = '2001-01-01';
 
         $record1->save();
         $record2->save();
@@ -41,9 +41,9 @@ class NeatlineRecordTableTest_QueryRecordsFilterOrder
             'exhibit_id' => $exhibit->id, 'order' => 'weight'
         ));
 
-        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record3->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
-        $this->assertEquals($record3->id, $result['records'][2]['id']);
+        $this->assertEquals($record1->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
         // Order on `weight ASC`.
@@ -51,9 +51,9 @@ class NeatlineRecordTableTest_QueryRecordsFilterOrder
             'exhibit_id' => $exhibit->id, 'order' => 'weight ASC'
         ));
 
-        $this->assertEquals($record1->id, $result['records'][0]['id']);
+        $this->assertEquals($record3->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
-        $this->assertEquals($record3->id, $result['records'][2]['id']);
+        $this->assertEquals($record1->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
         // Order on `weight DESC`.
@@ -61,9 +61,9 @@ class NeatlineRecordTableTest_QueryRecordsFilterOrder
             'exhibit_id' => $exhibit->id, 'order' => 'weight DESC'
         ));
 
-        $this->assertEquals($record3->id, $result['records'][0]['id']);
+        $this->assertEquals($record1->id, $result['records'][0]['id']);
         $this->assertEquals($record2->id, $result['records'][1]['id']);
-        $this->assertEquals($record1->id, $result['records'][2]['id']);
+        $this->assertEquals($record3->id, $result['records'][2]['id']);
         $this->assertCount(3, $result['records']);
 
     }
