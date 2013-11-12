@@ -608,6 +608,17 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Set the z-index on a layer.
+     *
+     * @param {Object} layer: A WMS / vector layer.
+     * @param {Number} zindex: The z-index value.
+     */
+    setZIndex: function(layer, zindex) {
+      this.map.setLayerIndex(layer, zindex);
+    },
+
+
+    /**
      * Get or create the vector layer for a model.
      *
      * @param {Object}: A record model.
@@ -918,19 +929,6 @@ Neatline.module('Map', function(Map) {
 
     // HELPERS
     // ------------------------------------------------------------------------
-
-
-    /**
-     * Set the z-index on a layer. Add 1 to the user-provided value to ensure
-     * that the layers always stack on top of the base layer, which is always
-     * has a z-index of 0.
-     *
-     * @param {Object} layer: A WMS / vector layer.
-     * @param {Number} zindex: The z-index value.
-     */
-    setZIndex: function(layer, zindex) {
-      this.map.setLayerIndex(layer, zindex);
-    },
 
 
     /**
