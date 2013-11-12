@@ -57415,7 +57415,9 @@ Neatline.module('Map', function(Map) {
       // Build the layer.
       var layer = new OpenLayers.Layer.Vector(record.get('title'), {
         styleMap: record.getStyleMap(),
-        displayInLayerSwitcher: false
+        displayInLayerSwitcher: false,
+        nModel: record,
+        nFrozen: false
       });
 
       // Add features.
@@ -57423,15 +57425,14 @@ Neatline.module('Map', function(Map) {
         layer.addFeatures(this.formatWkt.read(record.get('coverage')));
       }
 
-      layer.nModel = record;
-      layer.nFrozen = false;
+      // Filter visibility.
       this.filterLayer(layer);
 
-      // Track, add to map.
+      // Add to the map.
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
-      // Set z-index.
+      // Apply the z-index.
       this.setZIndex(layer, record.get('zindex'));
 
       return layer;
@@ -57455,18 +57456,19 @@ Neatline.module('Map', function(Map) {
         }, {
           displayOutsideMaxExtent: true,
           opacity: parseFloat(record.get('fill_opacity')),
-          isBaseLayer: false
+          isBaseLayer: false,
+          nModel: record
         }
       );
 
-      layer.nModel = record;
+      // Filter visibility.
       this.filterLayer(layer);
 
-      // Track, add to map.
+      // Add to the map.
       this.layers.wms[record.id] = layer;
       this.map.addLayer(layer);
 
-      // Set z-index.
+      // Apply the z-index.
       this.setZIndex(layer, record.get('zindex'));
 
       return layer;
@@ -57796,7 +57798,7 @@ Neatline.module('Map', function(Map) {
      * @param {Number} zindex: The z-index value.
      */
     setZIndex: function(layer, zindex) {
-      this.map.setLayerIndex(layer, 1+zindex);
+      this.map.setLayerIndex(layer, zindex);
     },
 
 
