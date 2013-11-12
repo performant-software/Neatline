@@ -54,9 +54,9 @@ describe('Record | Item Search', function() {
     var items = elements.autocomplete.find('a');
 
     // Should list items.
-    expect(items[0]).toHaveText('Item 3');
+    expect(items[0]).toHaveText('Item 1');
     expect(items[1]).toHaveText('Item 2');
-    expect(items[2]).toHaveText('Item 1');
+    expect(items[2]).toHaveText('Item 3');
 
   });
 
@@ -85,8 +85,8 @@ describe('Record | Item Search', function() {
     expect(NL.v.record.model.get('item_id')).toEqual(id);
 
     // Should populate title.
-    expect(NL.v.textTab.__ui.title).toHaveValue('Item 3');
-    expect(NL.v.record.model.get('title')).toEqual('Item 3');
+    expect(NL.v.textTab.__ui.title).toHaveValue('Item 1');
+    expect(NL.v.record.model.get('title')).toEqual('Item 1');
 
   });
 

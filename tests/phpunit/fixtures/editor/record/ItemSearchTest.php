@@ -20,9 +20,9 @@ class FixturesTest_EditorRecordItemSearch extends Neatline_Case_Fixture
         $item2 = $this->_item('Item 2');
         $item3 = $this->_item('Item 3');
 
-        $item1->added = '2021-01-01';
+        $item1->added = '2023-01-01';
         $item2->added = '2022-01-01';
-        $item3->added = '2023-01-01';
+        $item3->added = '2021-01-01';
 
         $item1->save();
         $item2->save();
