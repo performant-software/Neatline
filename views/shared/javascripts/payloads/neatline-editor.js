@@ -57483,7 +57483,7 @@ Neatline.module('Map', function(Map) {
       _.each(records.metadata.removed, _.bind(function(id) {
 
         // Get a WMS layer with the id.
-        var layer = this.layers.vector[id];
+        var layer = this.layers.wms[id];
 
         // Remove the layer, if it exists.
         if (_.isObject(layer)) this.removeWmsLayer(layer);
