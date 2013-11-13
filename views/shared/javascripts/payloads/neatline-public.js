@@ -34944,7 +34944,7 @@ Neatline.module('Shared.Record', function(Record) {
      * Set default metadata attributes.
      */
     initialize: function() {
-      this.metadata = { start: 0, numFound: 0 };
+      this.metadata = { start: 0, numFound: 0, removed: [] };
     },
 
 
@@ -34964,9 +34964,16 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Array}: The records collection.
      */
     parse: function(response) {
+
+      // Paging offset.
       this.metadata.start = Number(response.start);
+
+      // Record count.
       this.metadata.numFound = Number(response.numFound);
+
+      // Store the records.
       return response.records;
+
     },
 
 
