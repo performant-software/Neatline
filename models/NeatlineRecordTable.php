@@ -70,22 +70,35 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     public function queryRecords($params=array())
     {
 
-        $this->select = $this->getSelect();
         $this->params = $params;
+        $this->select = $this->getSelect();
         $this->result = array();
 
-        // ** BEFORE
-        $this->applyFilters();
-
-        // ** EXECUTE
+        $this->beforeQuery();
         $this->result['records'] = $this->select->query()->fetchAll();
-
-        // ** AFTER
-        $this->excludeExisting();
-        $this->countRecords();
+        $this->afterQuery();
 
         return $this->result;
 
+    }
+
+
+    /**
+     * Prepare the select.
+     */
+    public function beforeQuery()
+    {
+        $this->applyFilters();
+    }
+
+
+    /**
+     * Post-process the result.
+     */
+    public function afterQuery()
+    {
+        $this->excludeExisting();
+        $this->countRecords();
     }
 
 
@@ -94,7 +107,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Filter on all supported query parameters.
+     * Apply all supported query parameters.
      */
     protected function applyFilters()
     {
@@ -119,12 +132,17 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      */
     protected function filter_zoom()
     {
+
+        // Min zoom:
         $this->select->where(
             "min_zoom IS NULL OR min_zoom<=?", $this->params['zoom']
         );
+
+        // Max zoom:
         $this->select->where(
             "max_zoom IS NULL OR max_zoom>=?", $this->params['zoom']
         );
+
     }
 
 
@@ -154,8 +172,10 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         // Get the paging offset.
         $start = isset($this->params['start']) ? $this->params['start'] : 0;
 
-        // Apply the filter, echo back the offset.
+        // Limit the select.
         $this->select->limit($this->params['limit'], $start);
+
+        // Echo back the offset.
         $this->result['start'] = $start;
 
     }
@@ -167,7 +187,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     protected function filter_query()
     {
         $this->select->where(
-            "MATCH (title, body, slug) AGAINST (?)", $this->params['query']
+            "MATCH (title, body, slug) AGAINST (?)",
+            $this->params['query']
         );
     }
 
@@ -179,7 +200,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
         foreach ($this->params['tags'] as $tag) {
             $this->select->where(
-                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)", $tag
+                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)",
+                $tag
             );
         }
     }
