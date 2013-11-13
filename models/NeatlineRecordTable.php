@@ -62,14 +62,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Default query parameters.
-     */
-    protected static $defaultParams = array(
-        'start' => 0
-    );
-
-
-    /**
      * Construct records array for exhibit and editor.
      *
      * @param array $params Associative array of filter parameters.
@@ -79,8 +71,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     {
 
         $this->select = $this->getSelect();
-        $this->params = array_merge(self::$defaultParams, $params);
-        $this->result = array('start' => 0);
+        $this->params = $params;
+        $this->result = array();
 
         // ** BEFORE
         $this->applyFilters();
@@ -158,8 +150,14 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      */
     protected function filter_limit()
     {
-        $this->select->limit($this->params['limit'], $this->params['start']);
-        $this->result['start'] = $this->params['start'];
+
+        // Get the paging offset.
+        $start = isset($this->params['start']) ? $this->params['start'] : 0;
+
+        // Apply the filter, echo back the offset.
+        $this->select->limit($this->params['limit'], $start);
+        $this->result['start'] = $start;
+
     }
 
 

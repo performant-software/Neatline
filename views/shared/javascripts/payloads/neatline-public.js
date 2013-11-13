@@ -36289,7 +36289,7 @@ Neatline.module('Map', function(Map) {
         }, {
 
           displayOutsideMaxExtent: true,
-          opacity: parseFloat(record.get('fill_opacity')),
+          opacity: Number(record.get('fill_opacity')),
           isBaseLayer: false,
 
           neatline: {
