@@ -34959,6 +34959,7 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * TODO|dev
      * Set the envelope metadata, return records array.
      *
      * @return {Array}: The records collection.
@@ -34966,10 +34967,20 @@ Neatline.module('Shared.Record', function(Record) {
     parse: function(response) {
 
       // Paging offset.
-      this.metadata.start = Number(response.start);
+      if (_.has(response, 'start')) {
+        this.metadata.start = Number(response.start);
+      }
 
       // Record count.
-      this.metadata.numFound = Number(response.numFound);
+      if (_.has(response, 'numFound')) {
+        this.metadata.numFound = Number(response.numFound);
+      }
+
+      // Removed records.
+      if (_.has(response, 'removed')) {
+        this.metadata.removed = _.isArray(response.removed) ?
+          response.removed : [response.removed];
+      }
 
       // Store the records.
       return response.records;
@@ -36120,7 +36131,9 @@ Neatline.module('Map', function(Map) {
      */
     publishPosition: function() {
 
-      var params = {};
+      var params = {
+        existing: this.getVectorLayerIds()
+      };
 
       // Filter by extent and zoom.
       if (this.exhibit.spatial_querying) _.extend(params, {
@@ -36174,16 +36187,47 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} records: The records collection.
      */
-    ingestVectorLayers: function(records) {
+    //ingestVectorLayers: function(records) {
 
-      var newIds = [];
+      //var newIds = [];
+
+      //// Build new layers.
+      //records.each(_.bind(function(record) {
+
+        //newIds.push(record.id);
+
+        //// Create layer, if one doesn't exist.
+        //if (!_.has(this.layers.vector, record.id)) {
+          //this.buildVectorLayer(record);
+        //}
+
+      //}, this));
+
+      //// Garbage-collect stale layers.
+      //_.each(this.layers.vector, _.bind(function(layer, id) {
+
+        //// Delete if model is absent and layer is uneatline.frozen.
+        //if (!_.contains(newIds, Number(id)) && !layer.neatline.frozen) {
+          //this.removeVectorLayer(layer);
+        //}
+
+      //}, this));
+
+    //},
+
+
+    /**
+     * TODO|dev
+     * Rebuild the vector layers to match the new collection.
+     *
+     * @param {Object} records: The records collection.
+     */
+    ingestVectorLayers: function(records) {
 
       // Build new layers.
       records.each(_.bind(function(record) {
 
-        newIds.push(record.id);
-
-        // Create layer, if one doesn't exist.
+        // Add layer if one doesn't exist.
         if (!_.has(this.layers.vector, record.id)) {
           this.buildVectorLayer(record);
         }
@@ -36191,10 +36235,13 @@ Neatline.module('Map', function(Map) {
       }, this));
 
       // Garbage-collect stale layers.
-      _.each(this.layers.vector, _.bind(function(layer, id) {
+      _.each(records.metadata.removed, _.bind(function(id) {
 
-        // Delete if model is absent and layer is uneatline.frozen.
-        if (!_.contains(newIds, Number(id)) && !layer.neatline.frozen) {
+        // Get a vector layer with the id.
+        var layer = this.layers.vector[id];
+
+        // Remove the layer if not frozen.
+        if (_.isObject(layer) && !layer.neatline.frozen) {
           this.removeVectorLayer(layer);
         }
 
@@ -36208,31 +36255,66 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} records: The records collection.
      */
-    ingestWmsLayers: function(records) {
+    //ingestWmsLayers: function(records) {
 
-      var newIds = [];
+      //var newIds = [];
+
+      //// Build new layers.
+      //records.each(_.bind(function(record) {
+
+        //// Does the layer have a defined address and layers?
+        //var wms = record.get('wms_address') && record.get('wms_layers');
+        //newIds.push(record.id);
+
+        //// Create layer, if one doesn't exist.
+        //if (!_.has(this.layers.wms, record.id) && wms) {
+          //this.buildWmsLayer(record);
+        //}
+
+      //}, this));
+
+      //// Garbage-collect stale layers.
+      //_.each(this.layers.wms, _.bind(function(layer, id) {
+
+        //// Delete if model is absent.
+        //if (!_.contains(newIds, Number(id))) {
+          //this.removeWmsLayer(layer);
+        //}
+
+      //}, this));
+
+    //},
+
+
+    /**
+     * TODO|dev
+     * Rebuild the WMS layers to match the new collection.
+     *
+     * @param {Object} records: The records collection.
+     */
+    ingestWmsLayers: function(records) {
 
       // Build new layers.
       records.each(_.bind(function(record) {
 
-        // Does the layer have a defined address and layers?
-        var wms = record.get('wms_address') && record.get('wms_layers');
-        newIds.push(record.id);
+        // Does the layer have a WMS address / layers?
+        var isWms = record.get('wms_address') && record.get('wms_layers');
 
-        // Create layer, if one doesn't exist.
-        if (!_.has(this.layers.wms, record.id) && wms) {
+        // Add layer if one doesn't exist.
+        if (isWms && !_.has(this.layers.wms, record.id)) {
           this.buildWmsLayer(record);
         }
 
       }, this));
 
       // Garbage-collect stale layers.
-      _.each(this.layers.wms, _.bind(function(layer, id) {
+      _.each(records.metadata.removed, _.bind(function(id) {
 
-        // Delete if model is absent.
-        if (!_.contains(newIds, Number(id))) {
-          this.removeWmsLayer(layer);
-        }
+        // Get a WMS layer with the id.
+        var layer = this.layers.vector[id];
+
+        // Remove the layer, if it exists.
+        if (_.isObject(layer)) this.removeWmsLayer(layer);
 
       }, this));
 

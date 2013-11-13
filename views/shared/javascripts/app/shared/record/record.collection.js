@@ -36,6 +36,7 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * TODO|dev
      * Set the envelope metadata, return records array.
      *
      * @return {Array}: The records collection.
@@ -43,10 +44,20 @@ Neatline.module('Shared.Record', function(Record) {
     parse: function(response) {
 
       // Paging offset.
-      this.metadata.start = Number(response.start);
+      if (_.has(response, 'start')) {
+        this.metadata.start = Number(response.start);
+      }
 
       // Record count.
-      this.metadata.numFound = Number(response.numFound);
+      if (_.has(response, 'numFound')) {
+        this.metadata.numFound = Number(response.numFound);
+      }
+
+      // Removed records.
+      if (_.has(response, 'removed')) {
+        this.metadata.removed = _.isArray(response.removed) ?
+          response.removed : [response.removed];
+      }
 
       // Store the records.
       return response.records;
