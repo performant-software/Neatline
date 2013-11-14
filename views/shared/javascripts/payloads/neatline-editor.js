@@ -56971,7 +56971,7 @@ Neatline.module('Map', function(Map) {
 
       /**
        * An object that contains references to all filters registered on the
-      * map, keyed by filter slug.
+       * map, keyed by filter slug.
        */
       this.filters = {};
 
