@@ -173,7 +173,7 @@ describe('Record | Delete Record', function() {
 
     // Should refresh the exhibit.
     expect(vent).toHaveBeenCalledWith('refresh', {
-      source: Neatline.Editor.Record.ID
+      source: 'EDITOR:RECORD'
     });
 
   });

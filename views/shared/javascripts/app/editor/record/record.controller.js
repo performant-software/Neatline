@@ -41,7 +41,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     init: function() {
       this.router = new Record.Router();
-      this.view = new Record.View();
+      this.view = new Record.View({ slug: this.slug });
     },
 
 

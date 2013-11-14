@@ -177,7 +177,7 @@ describe('Record | Save Record', function() {
 
     // Should refresh the exhibit.
     expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
-      source: Neatline.Editor.Record.ID
+      source: 'EDITOR:RECORD'
     });
 
   });

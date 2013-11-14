@@ -33,10 +33,16 @@ Neatline.module('Editor.Record', function(Record) {
 
     /**
      * Initialize state.
+     *
+     * @param {Object} options
      */
-    init: function() {
+    init: function(options) {
+
+      this.slug = options.slug;
+
       this.open = false;  // True if a record is bound to the form.
       this.tab = null;    // The hash of the active tab.
+
     },
 
 
@@ -67,16 +73,15 @@ Neatline.module('Editor.Record', function(Record) {
      */
     unbind: function() {
 
-      // Deactivate map editing.
+      // Switch off map editing.
       Neatline.execute('EDITOR:MAP:endEdit', this.model);
 
-      // Activate and close the presenter.
+      // Activate the presenter.
       Neatline.vent.trigger('activatePresenter');
 
       // Unselect the record.
       Neatline.vent.trigger('unselect', {
-        model: this.model,
-        source: Record.ID
+        model: this.model, source: this.slug
       });
 
       // Unbind model listeners.
@@ -119,8 +124,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onCloseClick: function() {
       Neatline.execute('EDITOR:EXHIBIT:RECORDS:navToList');
-      Neatline.vent.trigger('refresh', { source: Record.ID });
-      this.unbind();
+      Neatline.vent.trigger('refresh', { source: this.slug });
     },
 
 
@@ -162,7 +166,7 @@ Neatline.module('Editor.Record', function(Record) {
       );
 
       // Refresh the exhibit.
-      Neatline.vent.trigger('refresh', { source: Record.ID });
+      Neatline.vent.trigger('refresh', { source: this.slug });
 
     },
 
@@ -192,7 +196,7 @@ Neatline.module('Editor.Record', function(Record) {
       this.onCloseClick();
 
       // Refresh the exhibit.
-      Neatline.vent.trigger('refresh', { source: Record.ID });
+      Neatline.vent.trigger('refresh', { source: this.slug });
 
     },
 
