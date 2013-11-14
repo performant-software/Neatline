@@ -34941,22 +34941,6 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Set default metadata attributes.
-     */
-    initialize: function() {
-      this.resetMetadata();
-    },
-
-
-    /**
-     * Set default metadata attributes.
-     */
-    resetMetadata: function() {
-      this.metadata = { start: 0, numFound: 0, removed: [] };
-    },
-
-
-    /**
      * Construct the record API endpoint.
      *
      * @return {String}: The url.
@@ -34967,14 +34951,13 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * TODO|dev
      * Set the envelope metadata, return records array.
      *
      * @return {Array}: The records collection.
      */
     parse: function(response) {
 
-      this.resetMetadata();
+      this.metadata = { start: 0, numFound: 0, removed: [] };
 
       // Paging offset.
       if (_.has(response, 'start')) {

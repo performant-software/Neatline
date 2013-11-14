@@ -93,7 +93,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Post-process the result.
+     * Process the result.
      */
     public function afterQuery()
     {
@@ -169,14 +169,12 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     protected function filter_limit()
     {
 
-        // Get the paging offset.
+        // Set the paging offset.
         $start = isset($this->params['start']) ? $this->params['start'] : 0;
+        $this->result['start'] = $start;
 
         // Limit the select.
         $this->select->limit($this->params['limit'], $start);
-
-        // Echo back the offset.
-        $this->result['start'] = $start;
 
     }
 

@@ -13,6 +13,16 @@
 
 <%
 
+if (
+
+  // If we're not map-mirroring.
+  !_.string.startsWith(query, 'map:') &&
+
+  // And if the records don't fit on a single page.
+  records.metadata.numFound > Neatline.g.neatline.per_page
+
+) {
+
   // Base fragment.
   var prevUrl = '#records/search';
   var nextUrl = '#records/search';
@@ -48,23 +58,15 @@
 
 %>
 
-<% if (
-  records.metadata.numFound > Neatline.g.neatline.per_page &&
-  !_.string.startsWith(query, 'map:')
-) { %>
-
   <div class="pagination-container">
 
     <ul class="pagination">
-
       <li <% if (!prevActive) { %><%='class="disabled"'%><% } %>>
         <a class="prev" href="<%= prevUrl %>">&laquo;</a>
       </li>
-
       <li <% if (!nextActive) { %><%='class="disabled"'%><% } %>>
         <a class="next" href="<%= nextUrl %>">&raquo;</a>
       </li>
-
     </ul>
 
     <div class="offset">
