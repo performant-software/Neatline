@@ -84,6 +84,11 @@ Neatline.module('Editor.Record', function(Record) {
         model: this.model, source: this.slug
       });
 
+      // Refresh the map.
+      Neatline.vent.trigger('refresh', {
+        source: this.slug
+      });
+
       // Unbind model listeners.
       this.stopListening(this.model);
       this.open = false;
@@ -124,7 +129,6 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onCloseClick: function() {
       Neatline.execute('EDITOR:EXHIBIT:RECORDS:navToList');
-      Neatline.vent.trigger('refresh', { source: this.slug });
     },
 
 

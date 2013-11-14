@@ -23,25 +23,31 @@ class FixturesTest_EditorMapEditLayerManagement extends Neatline_Case_Fixture
         $record1->title     = 'title1';
         $record2->title     = 'title2';
         $record3->title     = 'title3';
-        $record1->coverage  = 'POINT(1 2)';
-        $record2->coverage  = 'POINT(3 4)';
-        $record3->coverage  = 'POINT(5 6)';
-        $record1->added     = '2003-01-01';
-        $record2->added     = '2002-01-01';
-        $record3->added     = '2001-01-01';
+        $record1->coverage  = 'POINT(0 1)';
+        $record2->coverage  = 'POINT(0 2)';
+        $record3->coverage  = 'POINT(0 3)';
 
         $record1->save();
         $record2->save();
         $record3->save();
 
+        // Match records 1-3.
+        // --------------------------------------------------------------------
+
         $this->_writeFixtureFromRoute('neatline/records',
-            'EditorMapEditLayerManagement.record3.json'
+            'EditorMapEditLayerManagement.123.json'
         );
 
-        $record3->delete();
+        // Match just records 1-2, with 1-3 already loaded.
+        // --------------------------------------------------------------------
+
+        $this->request->setQuery(array(
+            'extent'    => 'LINESTRING(0 1,0 2)',
+            'existing'  => array($record1->id, $record2->id, $record3->id)
+        ));
 
         $this->_writeFixtureFromRoute('neatline/records',
-            'EditorMapEditLayerManagement.noRecord3.json'
+            'EditorMapEditLayerManagement.12.json'
         );
 
     }

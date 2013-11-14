@@ -57395,6 +57395,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} records: The records collection.
      */
     ingestVectorLayers: function(records) {
+      console.log(records.metadata.removed);
 
       // Build new layers.
       records.each(_.bind(function(record) {
@@ -57523,6 +57524,7 @@ Neatline.module('Map', function(Map) {
       this.filterLayer(layer);
 
       // (2) Add to the map.
+      console.log(layer, record.id);
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
@@ -60233,6 +60235,11 @@ Neatline.module('Editor.Record', function(Record) {
         model: this.model, source: this.slug
       });
 
+      // Refresh the map.
+      Neatline.vent.trigger('refresh', {
+        source: this.slug
+      });
+
       // Unbind model listeners.
       this.stopListening(this.model);
       this.open = false;
@@ -60273,7 +60280,6 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onCloseClick: function() {
       Neatline.execute('EDITOR:EXHIBIT:RECORDS:navToList');
-      Neatline.vent.trigger('refresh', { source: this.slug });
     },
 
 
