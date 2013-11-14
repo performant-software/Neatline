@@ -41,12 +41,14 @@ describe('Records | Templating', function() {
     expect($(rows[2]).find('.title')).toHaveText('title3');
     expect($(rows[2]).find('.body')).toHaveText('body3');
 
-    var models = NL.getRecordListModels();
+    var record1 = NL.getRecordListModelByTitle('title1');
+    var record2 = NL.getRecordListModelByTitle('title2');
+    var record3 = NL.getRecordListModelByTitle('title3');
 
     // Should link to edit forms.
-    expect($(rows[0]).attr('href')).toEqual('#record/'+models[0].id);
-    expect($(rows[1]).attr('href')).toEqual('#record/'+models[1].id);
-    expect($(rows[2]).attr('href')).toEqual('#record/'+models[2].id);
+    expect($(rows[0]).attr('href')).toEqual('#record/'+record1.id);
+    expect($(rows[1]).attr('href')).toEqual('#record/'+record2.id);
+    expect($(rows[2]).attr('href')).toEqual('#record/'+record3.id);
 
   });
 

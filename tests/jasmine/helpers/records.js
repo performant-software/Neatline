@@ -23,12 +23,26 @@ var NL = (function(NL) {
 
 
   /**
-   * Get the array of models from the record list collection.
+   * Get a model from the record list collection by index.
    *
+   * @param {Number} index: The index.
    * @return {Array}: The models.
    */
-  NL.getRecordListModels = function() {
-    return Neatline.Editor.Exhibit.Records.__controller.view.records.models;
+  NL.getRecordListModelAtIndex = function(index) {
+    var records = Neatline.Editor.Exhibit.Records.__controller.view.records;
+    return records.at(index);
+  };
+
+
+  /**
+   * Get a model from the record list collection by title.
+   *
+   * @param {String} title: The record title.
+   * @return {Object}: The model.
+   */
+  NL.getRecordListModelByTitle = function(title) {
+    var records = Neatline.Editor.Exhibit.Records.__controller.view.records;
+    return records.findWhere({ title: title });
   };
 
 

@@ -21,8 +21,8 @@ describe('Records | Publications', function() {
     NL.loadEditor();
     NL.respondRecordList200(fixtures.records);
 
-    // Get model and row from list.
-    model = NL.getRecordListModels()[0];
+    // Get the first model and row.
+    model = NL.getRecordListModelAtIndex(0);
     row = NL.getRecordListRows()[0];
 
     // Spy on trigger.

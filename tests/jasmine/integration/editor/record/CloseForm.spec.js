@@ -89,7 +89,7 @@ describe('Record | Close Form', function() {
   it('should clear unsaved geometry changes', function() {
 
     // ------------------------------------------------------------------------
-    // When the form is closed, unsaved changes to the record' geometry that
+    // When the form is closed, unsaved changes to the record's geometry that
     // were made during the edit session should be cleared.
     // ------------------------------------------------------------------------
 

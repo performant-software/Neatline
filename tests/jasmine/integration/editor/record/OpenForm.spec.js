@@ -11,7 +11,7 @@
 describe('Record | Open Form', function() {
 
 
-  var recordModels, feature1, feature2, fixtures = {
+  var feature1, feature2, fixtures = {
     records: read('EditorRecordOpenForm.records.json'),
     record:  read('EditorRecord.record.json')
   };
@@ -22,7 +22,6 @@ describe('Record | Open Form', function() {
     NL.loadEditor();
     NL.respondAll200(fixtures.records);
 
-    recordModels = NL.getRecordListModels();
     feature1 = NL.v.map.getVectorLayers()[0].features[0];
     feature2 = NL.v.map.getVectorLayers()[1].features[0];
 
@@ -48,7 +47,7 @@ describe('Record | Open Form', function() {
       // be bound to the form immediately.
       // ----------------------------------------------------------------------
 
-      model = recordModels[0];
+      model = NL.getRecordListModelAtIndex(0);
 
       // Click on a record listing.
       NL.click($(NL.getRecordListRows()[0]));
@@ -62,10 +61,10 @@ describe('Record | Open Form', function() {
       // the existing model should be bound to the form immediately.
       // ----------------------------------------------------------------------
 
-      model = recordModels[0];
+      model = NL.getRecordListModelAtIndex(0);
 
       // Request an already-loaded record.
-      NL.navigate('record/'+recordModels[0].id);
+      NL.navigate('record/'+model.id);
 
     });
 
@@ -174,13 +173,13 @@ describe('Record | Open Form', function() {
     // ------------------------------------------------------------------------
 
     // Open first record.
-    NL.navigate('record/'+recordModels[0].id);
+    NL.navigate('record/'+NL.getRecordListModelAtIndex(0).id);
 
     // Null out `widgets` field.
-    recordModels[1].set('widgets', null);
+    NL.getRecordListModelAtIndex(1).set('widgets', null);
 
     // Open the form, get elements.
-    NL.navigate('record/'+recordModels[1].id);
+    NL.navigate('record/'+NL.getRecordListModelAtIndex(1).id);
     var inputs = NL.getRecordFormElements();
 
     // All widgets should be deselected.

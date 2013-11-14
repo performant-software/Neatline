@@ -57395,7 +57395,6 @@ Neatline.module('Map', function(Map) {
      * @param {Object} records: The records collection.
      */
     ingestVectorLayers: function(records) {
-      console.log(records.metadata.removed);
 
       // Build new layers.
       records.each(_.bind(function(record) {
@@ -57524,7 +57523,6 @@ Neatline.module('Map', function(Map) {
       this.filterLayer(layer);
 
       // (2) Add to the map.
-      console.log(layer, record.id);
       this.layers.vector[record.id] = layer;
       this.map.addLayer(layer);
 
