@@ -39,10 +39,10 @@ describe('Map | Vector Layer Management', function() {
     var layer5 = NL.getVectorLayer('title5');
     var layer6 = NL.getVectorLayer('title6');
 
-    expect(layer1).not.toBeUndefined();
-    expect(layer2).not.toBeUndefined();
-    expect(layer3).not.toBeUndefined();
-    expect(layer4).not.toBeUndefined();
+    expect(layer1).toBeDefined();
+    expect(layer2).toBeDefined();
+    expect(layer3).toBeDefined();
+    expect(layer4).toBeDefined();
     expect(layer5).toBeUndefined();
     expect(layer6).toBeUndefined();
 
@@ -84,12 +84,12 @@ describe('Map | Vector Layer Management', function() {
     var layer5 = NL.getVectorLayer('title5');
     var layer6 = NL.getVectorLayer('title6');
 
-    expect(layer1).toBeUndefined();     // Layer 1 garbage collected.
-    expect(layer2).toBeUndefined();     // Layer 2 garbage collected.
-    expect(layer3).not.toBeUndefined(); // Layer 3 unchanged.
-    expect(layer4).not.toBeUndefined(); // Layer 4 unchanged.
-    expect(layer5).not.toBeUndefined(); // Layer 5 added.
-    expect(layer6).not.toBeUndefined(); // Layer 6 added.
+    expect(layer1).toBeUndefined(); // Layer 1 garbage collected.
+    expect(layer2).toBeUndefined(); // Layer 2 garbage collected.
+    expect(layer3).toBeDefined();   // Layer 3 unchanged.
+    expect(layer4).toBeDefined();   // Layer 4 unchanged.
+    expect(layer5).toBeDefined();   // Layer 5 added.
+    expect(layer6).toBeDefined();   // Layer 6 added.
 
     expect(layer3.features[0].geometry.x).toEqual(0);
     expect(layer3.features[0].geometry.y).toEqual(3);
