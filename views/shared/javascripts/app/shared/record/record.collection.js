@@ -34,23 +34,18 @@ Neatline.module('Shared.Record', function(Record) {
      */
     parse: function(response) {
 
-      this.metadata = { start: 0, numFound: 0, removed: [] };
+      this.metadata = {
 
-      // Paging offset.
-      if (_.has(response, 'start')) {
-        this.metadata.start = Number(response.start);
-      }
+        // Paging offset.
+        start: Number(response.start),
 
-      // Record count.
-      if (_.has(response, 'numFound')) {
-        this.metadata.numFound = Number(response.numFound);
-      }
+        // Record count.
+        numFound: Number(response.numFound),
 
-      // Removed records.
-      if (_.has(response, 'removed')) {
-        this.metadata.removed = _.isArray(response.removed) ?
-          response.removed : [response.removed];
-      }
+        // Removed records.
+        removed: response.removed
+
+      };
 
       // Store the records.
       return response.records;

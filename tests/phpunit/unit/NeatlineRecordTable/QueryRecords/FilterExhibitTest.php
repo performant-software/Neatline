@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTableTest_QueryRecordsFilterExhibitId
+class NeatlineRecordTableTest_QueryRecordsFilterExhibit
     extends Neatline_Case_Default
 {
 
@@ -18,7 +18,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterExhibitId
      * `queryRecords` should get records that belong to the passed exhibit.
      * Records in other exhibits should be excluded.
      */
-    public function testFilterExhibitId()
+    public function testFilterExhibit()
     {
 
         $exhibit1 = $this->_exhibit();

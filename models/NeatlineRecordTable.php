@@ -88,7 +88,14 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      */
     public function beforeQuery()
     {
-        $this->applyFilters();
+        $this->filterExhibit();
+        $this->filterZoom();
+        $this->filterExtent();
+        $this->filterLimit();
+        $this->filterTags();
+        $this->filterQuery();
+        $this->filterWidget();
+        $this->filterOrder();
     }
 
 
@@ -107,100 +114,108 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Apply all supported query parameters.
-     */
-    protected function applyFilters()
-    {
-        foreach ($this->params as $param => $value) {
-            $method = "filter_$param";
-            if (method_exists($this, $method)) $this->$method();
-        }
-    }
-
-
-    /**
      * Filter by exhibit.
      */
-    protected function filter_exhibit_id()
+    protected function filterExhibit()
     {
-        $this->select->where("exhibit_id = ?", $this->params['exhibit_id']);
+        if (isset($this->params['exhibit_id'])) {
+
+            $this->select->where(
+                "exhibit_id = ?", $this->params['exhibit_id']
+            );
+
+        }
     }
 
 
     /**
      * Filter by zoom.
      */
-    protected function filter_zoom()
+    protected function filterZoom()
     {
+        if (isset($this->params['zoom'])) {
 
-        // Min zoom:
-        $this->select->where(
-            "min_zoom IS NULL OR min_zoom<=?", $this->params['zoom']
-        );
+            // Min zoom:
+            $this->select->where(
+                "min_zoom IS NULL OR min_zoom<=?", $this->params['zoom']
+            );
 
-        // Max zoom:
-        $this->select->where(
-            "max_zoom IS NULL OR max_zoom>=?", $this->params['zoom']
-        );
+            // Max zoom:
+            $this->select->where(
+                "max_zoom IS NULL OR max_zoom>=?", $this->params['zoom']
+            );
 
+        }
     }
 
 
     /**
      * Filter by extent. Omit records with no coverage data.
      */
-    protected function filter_extent()
+    protected function filterExtent()
     {
+        if (isset($this->params['extent'])) {
 
-        // Match intersection with the viewport.
-        $this->select->where("MBRIntersects(coverage, GeomFromText(
-            '{$this->params['extent']}'
-        ))");
+            // Match intersection with the viewport.
+            $this->select->where("MBRIntersects(coverage, GeomFromText(
+                '{$this->params['extent']}'
+            ))");
 
-        // Omit records with empty coverages.
-        $this->select->where("is_coverage = 1");
+            // Omit records with empty coverages.
+            $this->select->where("is_coverage = 1");
 
+        }
     }
 
 
     /**
      * Paginate the query, set the start offset on the result array.
      */
-    protected function filter_limit()
+    protected function filterLimit()
     {
 
-        // Set the paging offset.
+        // Set the paging offset on the result.
         $start = isset($this->params['start']) ? $this->params['start'] : 0;
         $this->result['start'] = $start;
 
-        // Limit the select.
-        $this->select->limit($this->params['limit'], $start);
+        // If passed, apply the limit.
+        if (isset($this->params['limit'])) {
+            $this->select->limit($this->params['limit'], $start);
+        }
 
-    }
-
-
-    /**
-     * Filter by keyword query.
-     */
-    protected function filter_query()
-    {
-        $this->select->where(
-            "MATCH (title, body, slug) AGAINST (?)",
-            $this->params['query']
-        );
     }
 
 
     /**
      * Filter by tags query.
      */
-    protected function filter_tags()
+    protected function filterTags()
     {
-        foreach ($this->params['tags'] as $tag) {
+        if (isset($this->params['tags'])) {
+
+            foreach ($this->params['tags'] as $tag) {
+                $this->select->where(
+                    "MATCH (tags) AGAINST (? IN BOOLEAN MODE)",
+                    $tag
+                );
+            }
+
+        }
+    }
+
+
+    /**
+     * Filter by keyword query.
+     */
+    protected function filterQuery()
+    {
+        if (isset($this->params['query'])) {
+
             $this->select->where(
-                "MATCH (tags) AGAINST (? IN BOOLEAN MODE)",
-                $tag
+                "MATCH (title, body, slug) AGAINST (?)",
+                $this->params['query']
             );
+
         }
     }
 
@@ -208,22 +223,30 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     /**
      * Filter by widget query.
      */
-    protected function filter_widget()
+    protected function filterWidget()
     {
-        $this->select->where(
-            "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)",
-            $this->params['widget']
-        );
+        if (isset($this->params['widget'])) {
+
+            $this->select->where(
+                "MATCH (widgets) AGAINST (? IN BOOLEAN MODE)",
+                $this->params['widget']
+            );
+
+        }
     }
 
 
     /**
      * Order the query.
      */
-    protected function filter_order()
+    protected function filterOrder()
     {
-        $this->select->reset(Zend_Db_Select::ORDER);
-        $this->select->order($this->params['order']);
+        if (isset($this->params['order'])) {
+
+            $this->select->reset(Zend_Db_Select::ORDER);
+            $this->select->order($this->params['order']);
+
+        }
     }
 
 
@@ -286,6 +309,9 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             $this->result['records'] = $newRecords;
 
         }
+
+        // By default, no records removed.
+        else $this->result['removed'] = array();
 
     }
 

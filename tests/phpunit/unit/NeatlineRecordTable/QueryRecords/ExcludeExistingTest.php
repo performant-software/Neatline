@@ -77,7 +77,8 @@ class NeatlineRecordTableTest_QueryRecordsExcludeExisting
 
         // Records 1-2 flagged as removed.
         $this->assertEquals(array($record1->id, $record2->id),
-            $result['removed']);
+            $result['removed']
+        );
 
     }
 
