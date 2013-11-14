@@ -21,6 +21,14 @@ Neatline.module('Shared.Record', function(Record) {
      * Set default metadata attributes.
      */
     initialize: function() {
+      this.resetMetadata();
+    },
+
+
+    /**
+     * Set default metadata attributes.
+     */
+    resetMetadata: function() {
       this.metadata = { start: 0, numFound: 0, removed: [] };
     },
 
@@ -42,6 +50,8 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Array}: The records collection.
      */
     parse: function(response) {
+
+      this.resetMetadata();
 
       // Paging offset.
       if (_.has(response, 'start')) {
