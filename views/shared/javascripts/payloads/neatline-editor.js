@@ -57343,7 +57343,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * TODO|dev
      * Rebuild the vector layers to match the new collection.
      *
      * @param {Object} records: The records collection.
@@ -57377,7 +57376,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * TODO|dev
      * Rebuild the WMS layers to match the new collection.
      *
      * @param {Object} records: The records collection.
@@ -57464,8 +57462,7 @@ Neatline.module('Map', function(Map) {
       var layer = new OpenLayers.Layer.WMS(
         record.get('title'), record.get('wms_address'), {
           layers: record.get('wms_layers'),
-          transparent: true,
-          tiled: true
+          transparent: true
         }, {
 
           displayOutsideMaxExtent: true,
