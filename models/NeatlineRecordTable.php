@@ -96,6 +96,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $this->filterQuery();
         $this->filterWidget();
         $this->filterOrder();
+        $this->filterPlugins();
     }
 
 
@@ -247,6 +248,17 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             $this->select->order($this->params['order']);
 
         }
+    }
+
+
+    /**
+     * Pass the select to plugins for modification.
+     */
+    protected function filterPlugins()
+    {
+        $this->select = apply_filters('neatline_query_records',
+            $this->select, array('params' => $this->params)
+        );
     }
 
 
