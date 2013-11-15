@@ -60675,18 +60675,25 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
       // Request items.
       $.get(Neatline.g.neatline.items_api, {
-        output: 'omeka-xml',
-        search: req.term
+        output: 'omeka-xml', search: req.term
       }, function(xml) {
 
         var items = [];
 
-        // Walk items.
+        // Walk each item in the result set.
         $(xml).find('item').each(function(i, item) {
-          items.push({
-            label: $(item).find('*[elementId="50"] text').first().text(),
-            value: $(item).attr('itemId')
-          });
+
+          // Query for the title.
+          var title = $(item).find(
+            'item > elementSetContainer element[elementId="50"] text'
+          ).first().text();
+
+          // Query for the item id.
+          var itemId = $(item).attr('itemId');
+
+          // Add the list item.
+          items.push({ label: title, value: itemId });
+
         });
 
         res(items);
