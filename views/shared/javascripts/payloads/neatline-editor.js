@@ -57343,40 +57343,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Rebuild the vector layers to match the new collection.
-     *
-     * @param {Object} records: The records collection.
-     */
-    //ingestVectorLayers: function(records) {
-
-      //var newIds = [];
-
-      //// Build new layers.
-      //records.each(_.bind(function(record) {
-
-        //newIds.push(record.id);
-
-        //// Create layer, if one doesn't exist.
-        //if (!_.has(this.layers.vector, record.id)) {
-          //this.buildVectorLayer(record);
-        //}
-
-      //}, this));
-
-      //// Garbage-collect stale layers.
-      //_.each(this.layers.vector, _.bind(function(layer, id) {
-
-        //// Delete if model is absent and layer is uneatline.frozen.
-        //if (!_.contains(newIds, Number(id)) && !layer.neatline.frozen) {
-          //this.removeVectorLayer(layer);
-        //}
-
-      //}, this));
-
-    //},
-
-
-    /**
      * TODO|dev
      * Rebuild the vector layers to match the new collection.
      *
@@ -57408,42 +57374,6 @@ Neatline.module('Map', function(Map) {
       }, this));
 
     },
-
-
-    /**
-     * Rebuild the WMS layers to match the new collection.
-     *
-     * @param {Object} records: The records collection.
-     */
-    //ingestWmsLayers: function(records) {
-
-      //var newIds = [];
-
-      //// Build new layers.
-      //records.each(_.bind(function(record) {
-
-        //// Does the layer have a defined address and layers?
-        //var wms = record.get('wms_address') && record.get('wms_layers');
-        //newIds.push(record.id);
-
-        //// Create layer, if one doesn't exist.
-        //if (!_.has(this.layers.wms, record.id) && wms) {
-          //this.buildWmsLayer(record);
-        //}
-
-      //}, this));
-
-      //// Garbage-collect stale layers.
-      //_.each(this.layers.wms, _.bind(function(layer, id) {
-
-        //// Delete if model is absent.
-        //if (!_.contains(newIds, Number(id))) {
-          //this.removeWmsLayer(layer);
-        //}
-
-      //}, this));
-
-    //},
 
 
     /**
@@ -57534,7 +57464,8 @@ Neatline.module('Map', function(Map) {
       var layer = new OpenLayers.Layer.WMS(
         record.get('title'), record.get('wms_address'), {
           layers: record.get('wms_layers'),
-          transparent: true
+          transparent: true,
+          tiled: true
         }, {
 
           displayOutsideMaxExtent: true,

@@ -13,6 +13,6 @@
 
 <script id="static-bubble-template" type="text/template">
   <a name="close" class="close">&times;</a>
-  <div class="title" rv-text="record:title"></div>
-  <div class="body" rv-text="record:body"></div>
+  <div class="title" rv-html="record:title"></div>
+  <div class="body" rv-html="record:body"></div>
 </script>
