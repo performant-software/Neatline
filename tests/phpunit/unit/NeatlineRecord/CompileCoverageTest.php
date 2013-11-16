@@ -13,10 +13,51 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
 {
 
 
-    public function setUp()
+    /**
+     * `save` should toggle the `is_coverage` flag depending on whether or not
+     * a coverage geometry is set.
+     */
+    public function testSetIsCoverage()
     {
-        parent::setUp();
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+
+        $record = new NeatlineRecord();
+        $record->save();
+
+        // Should be off by default.
+        $this->assertEquals(0, $record->is_coverage);
+
+        $record->coverage = 'POINT(1 1)';
+        $record->save();
+
+        // Should flip on for defined coverage.
+        $this->assertEquals(1, $record->is_coverage);
+
+        $record->coverage = null;
+        $record->save();
+
+        // Should flip off when no coverage.
+        $this->assertEquals(0, $record->is_coverage);
+
+    }
+
+
+    /**
+     * When a coverage was previously defined but then cleared, `save` should
+     * flip off `is_coverage`.
+     */
+    public function testDeactivateIsCoverage()
+    {
+
+        $record = new NeatlineRecord();
+        $record->coverage = 'POINT(1 1)';
+        $record->save();
+
+        $record->coverage = null;
+        $record->save();
+
+        // Should flip off `is_coverage`.
+        $this->assertEquals(0, $record->is_coverage);
+
     }
 
 
@@ -26,13 +67,12 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     public function testNeatlineFeaturesNotInstalled()
     {
 
+        $this->_skipIfNotPlugin('NeatlineFeatures');
+
         // Deactivate features.
         $this->_setPluginActive('NeatlineFeatures', false);
 
-        $exhibit  = $this->_exhibit();
-        $item     = $this->_item();
-
-        $record = new NeatlineRecord($exhibit, $item);
+        $record = new NeatlineRecord();
         $record->save();
 
         // Should not set coverage.
@@ -46,6 +86,8 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
      */
     public function testNoFeatureData()
     {
+
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -64,6 +106,8 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
      */
     public function testImportWkt()
     {
+
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -87,6 +131,8 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
      */
     public function testImportKml()
     {
+
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $kml = <<<KML
         <kml xmlns="http://earth.google.com/kml/2.0">
@@ -116,10 +162,12 @@ KML;
 
 
     /**
-     * Importing neatline features shouldn't clobber existing coverages.
+     * Data from Neatline Features shouldn't clobber existing coverages.
      */
     public function testPreserveExistingCoverages()
     {
+
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();

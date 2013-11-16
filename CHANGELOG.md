@@ -1,3 +1,13 @@
+## v2.2.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.3...2.2.0)) ~ Pending
+
+#### Added Features
+
+  - Makes it possible to add custom vector annotations to records that are associated with WMS layers.
+
+#### Performance Improvements
+
+  - Instead of always re-loading all records that fall into the current viewport when the map is moved, the records API now supports an `existing` parameter (an array of record ids that have already been loaded by the client) that causes the API to only push _new_ records across the wire. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points, etc.
+
 ## v2.1.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.2...2.1.3)) ~ October 1, 2013
 
 #### Added Features

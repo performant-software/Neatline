@@ -161,17 +161,9 @@ class NeatlineRecord extends Neatline_Row_Expandable
      */
     public function toArrayForSave()
     {
-
         $fields = parent::toArrayForSave();
-
-        // Set `is_coverage`.
-        $fields['is_coverage'] = $fields['coverage'] ? 1 : 0;
-
-        // Set the `coverage` column.
         $fields['coverage'] = nl_setGeometry($fields['coverage']);
-
         return $fields;
-
     }
 
 
@@ -249,15 +241,23 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Import coverage from Neatline Features, if it's installed, or from the
-     * Dublin Core "Coverage" field.
+     * Import coverage from Neatline Features, if it's installed, and set the
+     * `is_coverage` flag.
      */
     public function compileCoverage()
     {
+
         if (!$this->coverage) {
+
+            // Import from Neatline Features.
             $wkt = nl_getNeatlineFeatures($this);
             if (is_string($wkt)) $this->coverage = $wkt;
+
         }
+
+        // Track whether the record has a coverage.
+        $this->is_coverage = $this->coverage ? 1 : 0;
+
     }
 
 

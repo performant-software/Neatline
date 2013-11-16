@@ -14,46 +14,37 @@ class NeatlineRecordTest_ToArrayForSave extends Neatline_Case_Default
 
 
     /**
-     * When a coverage is defined, `toArrayForSave` should set the value and
-     * flip `is_coverage` to 1.
+     * When a coverage is _not_ defined, `toArrayForSave` should set the de-
+     * facto null `POINT(0 0)` value.
+     */
+    public function testUndefinedCoverage()
+    {
+
+        $record = new NeatlineRecord();
+        $record->save();
+
+        $record = $this->_reload($record);
+
+        // Should set null coverage.
+        $this->assertNull($record->coverage);
+
+    }
+
+
+    /**
+     * When a coverage is defined, `toArrayForSave` should set the value.
      */
     public function testDefinedCoverage()
     {
 
         $record = new NeatlineRecord();
         $record->coverage = 'POINT(1 1)';
-
-        // Should flip on `is_coverage`.
-        $array = $record->toArrayForSave();
-        $this->assertEquals(1, $array['is_coverage']);
-
         $record->save();
+
         $record = $this->_reload($record);
 
         // Should set coverage.
         $this->assertEquals('POINT(1 1)', $record->coverage);
-
-    }
-
-
-    /**
-     * When a coverage is _not_ defined, `toArrayForSave` should set the de-
-     * facto null `POINT(0 0)` value and flip `is_coverage` to 0.
-     */
-    public function testUndefinedCoverage()
-    {
-
-        $record = new NeatlineRecord();
-
-        // Should flip off `is_coverage`.
-        $array = $record->toArrayForSave();
-        $this->assertEquals(0, $array['is_coverage']);
-
-        $record->save();
-        $record = $this->_reload($record);
-
-        // Should set null coverage.
-        $this->assertNull($record->coverage);
 
     }
 
