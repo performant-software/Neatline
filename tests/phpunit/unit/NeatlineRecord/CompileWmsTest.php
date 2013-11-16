@@ -14,69 +14,133 @@ class NeatlineRecordTest_CompileWms extends Neatline_Case_Default
 
 
     /**
-     * When a WMS address and layer are defined, `compileWms` should set the
-     * generic coverage that will always be matched by extent queries and flip
-     * the `is_coverage` and `is_wms` trackers to 1.
+     * When an address is defined but the layer field is empty, `is_wms`
+     * should not be flipped on.
      */
-    public function testWmsLayerDefined()
+    public function testSetAddress()
     {
 
         $record = new NeatlineRecord();
-        $record->setArray(array(
-            'wms_address'   => 'address',
-            'wms_layers'    => 'layers'
-        ));
 
+        // Address, no layers.
+        $record->wms_address = 'address';
+        $record->wms_layers  = null;
         $record->save();
 
-        // Should flip on `is_coverage`, `is_wms`.
-        $this->assertEquals(1, $record->is_coverage);
-        $this->assertEquals(1, $record->is_wms);
-
-        // Should set generic coverage.
-        $this->assertEquals(
-            'GEOMETRYCOLLECTION(
-                POINT( 9999999  9999999),
-                POINT(-9999999  9999999),
-                POINT(-9999999 -9999999),
-                POINT( 9999999 -9999999)
-            )', $record->coverage
-        );
+        // Should not flip on `is_wms`.
+        $this->assertEquals(0, $record->is_wms);
 
     }
 
 
     /**
-     * When a WMS address and layer are _not_ defined, `compileWms` should not
-     * make any changes to the record.
+     * When a layer string is defined but the address field is empty, `is_wms`
+     * should not be flipped on.
      */
-    public function testWmsLayerNotDefined()
+    public function testSetLayers()
     {
 
-        // No address or layers.
         $record = new NeatlineRecord();
-        $record->save();
-
-        $this->assertNull($record->coverage);
-        $this->assertEquals(0, $record->is_coverage);
-        $this->assertEquals(0, $record->is_wms);
-
-        // Address, no layers.
-        $record->wms_address = 'address';
-        $record->wms_layers = null;
-        $record->compileWms();
-
-        $this->assertNull($record->coverage);
-        $this->assertEquals(0, $record->is_coverage);
-        $this->assertEquals(0, $record->is_wms);
 
         // Layers, no address.
         $record->wms_address = null;
-        $record->wms_layers = 'layers';
-        $record->compileWms();
+        $record->wms_layers  = 'layers';
+        $record->save();
 
-        $this->assertNull($record->coverage);
-        $this->assertEquals(0, $record->is_coverage);
+        // Should not flip on `is_wms`.
+        $this->assertEquals(0, $record->is_wms);
+
+    }
+
+
+    /**
+     * When both an address and layer string are provided, `is_wms` should be
+     * flipped on.
+     */
+    public function testSetAddressAndLayers()
+    {
+
+        $record = new NeatlineRecord();
+
+        // Address and layers.
+        $record->wms_address = 'address';
+        $record->wms_layers  = 'layers';
+        $record->save();
+
+        // Should flip on `is_wms`.
+        $this->assertEquals(1, $record->is_wms);
+
+    }
+
+
+    /**
+     * When an address and layer string were previously defined, and then the
+     * address is cleared, `is_wms` should be flipped off.
+     */
+    public function testUnsetAddress()
+    {
+
+        $record = new NeatlineRecord();
+
+        // Address and layers.
+        $record->wms_address = 'address';
+        $record->wms_layers  = 'layers';
+        $record->save();
+
+        // Unset the address.
+        $record->wms_address = null;
+        $record->save();
+
+        // Should flip off `is_wms`.
+        $this->assertEquals(0, $record->is_wms);
+
+    }
+
+
+    /**
+     * When an address and layer string were previously defined, and then the
+     * layer string is cleared, `is_wms` should be flipped off.
+     */
+    public function testUnsetLayers()
+    {
+
+        $record = new NeatlineRecord();
+
+        // Address and layers.
+        $record->wms_address = 'address';
+        $record->wms_layers  = 'layers';
+        $record->save();
+
+        // Unset the layers.
+        $record->wms_layers = null;
+        $record->save();
+
+        // Should flip off `is_wms`.
+        $this->assertEquals(0, $record->is_wms);
+
+    }
+
+
+    /**
+     * When an address and layer string were previously defined, and then the
+     * address and layer string are cleared, `is_wms` should be flipped off.
+     */
+    public function testUnsetAddressAndLayers()
+    {
+
+        $record = new NeatlineRecord();
+
+        // Address and layers.
+        $record->wms_address = 'address';
+        $record->wms_layers  = 'layers';
+        $record->save();
+
+        // Unset both.
+        $record->wms_address = null;
+        $record->wms_layers  = null;
+        $record->save();
+
+        // Should flip off `is_wms`.
         $this->assertEquals(0, $record->is_wms);
 
     }

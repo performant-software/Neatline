@@ -239,28 +239,12 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * If the record has a WMS layer, set a special coverage that ensures that
-     * the record will always get matched by the real-time querying system.
+     * If the record has a WMS layer, flip on the `is_wms` flag, which ensures
+     * that the record will always get matched by extent queries.
      */
     public function compileWms()
     {
-
-        // If a WMS address and layer are defined.
-        if ($this->wms_address && $this->wms_layers) {
-
-            // Set the special coverage.
-            $this->coverage = 'GEOMETRYCOLLECTION(
-                POINT( 9999999  9999999),
-                POINT(-9999999  9999999),
-                POINT(-9999999 -9999999),
-                POINT( 9999999 -9999999)
-            )';
-
-            $this->is_coverage = 1;
-            $this->is_wms = 1;
-
-        }
-
+        $this->is_wms = ($this->wms_address && $this->wms_layers) ? 1 : 0;
     }
 
 

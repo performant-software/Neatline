@@ -151,19 +151,25 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
-     * Filter by extent. Omit records with no coverage data.
+     * Filter by extent, ommitting records with the de-facto null `POINT(0 0)`
+     * coverage. Always match records with WMS addresses, though, even if they
+     * do not have coverages that intersect with the viewport, since the WMS
+     * layers always need to be displayed if the layer falls inside the zoom
+     * visibility interval of the record.
      */
     protected function filterExtent()
     {
         if (isset($this->params['extent'])) {
 
-            // Match intersection with the viewport.
-            $this->select->where("MBRIntersects(coverage, GeomFromText(
-                '{$this->params['extent']}'
-            ))");
+            $bb = $this->params['extent'];
+
+            $this->select->where(
+                "MBRIntersects(coverage, GeomFromText('$bb')) OR
+                is_wms = 1" // Always match WMS layers.
+            );
 
             // Omit records with empty coverages.
-            $this->select->where("is_coverage = 1");
+            $this->select->where("is_coverage = 1 OR is_wms = 1");
 
         }
     }

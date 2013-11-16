@@ -292,7 +292,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     /**
      * Associate the model with an ACL resource id.
      *
-     * @return string The resource id..
+     * @return string The resource id.
      */
     public function getResourceId()
     {
