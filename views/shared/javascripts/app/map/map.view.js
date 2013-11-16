@@ -403,11 +403,15 @@ Neatline.module('Map', function(Map) {
     /**
      * Publish a request for new records. If spatial querying is enabled,
      * filter on the current focus and zoom of the map.
+     *
+     * @param {Boolean} refresh: If true, pass back an empty `existing` list.
      */
-    publishPosition: function() {
+    publishPosition: function(refresh) {
+
+      refresh = refresh || false;
 
       var params = {
-        existing: this.getVectorLayerIds()
+        existing: refresh ? [] : this.getVectorLayerIds()
       };
 
       // Filter by extent and zoom.
@@ -576,10 +580,14 @@ Neatline.module('Map', function(Map) {
       // Build the layer.
       var layer = new OpenLayers.Layer.WMS(
         record.get('title'), record.get('wms_address'), {
+
+          // WMS request parameters.
           layers: record.get('wms_layers'),
           transparent: true
+
         }, {
 
+          // OpenLayers configuration.
           displayOutsideMaxExtent: true,
           opacity: Number(record.get('fill_opacity')),
           isBaseLayer: false,
