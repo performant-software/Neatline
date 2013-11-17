@@ -105,4 +105,39 @@ describe('Map | WMS Layer Management', function() {
   });
 
 
+  it('should not double-render models that already have layers', function() {
+
+    // ------------------------------------------------------------------------
+    // If a record included in the list of new records from the server already
+    // has a layer on the map, a second layer should not be created.
+    // ------------------------------------------------------------------------
+
+    // Load records 1-4 at start.
+    NL.respondMap200(fixtures._1234);
+
+    var layer1_1 = NL.getVectorLayer('title1');
+    var layer2_1 = NL.getVectorLayer('title2');
+    var layer3_1 = NL.getVectorLayer('title3');
+    var layer4_1 = NL.getVectorLayer('title4');
+
+    // Records 1-4 re-pushed.
+    NL.refreshMap(fixtures._1234);
+
+    var layer1_2 = NL.getVectorLayer('title1');
+    var layer2_2 = NL.getVectorLayer('title2');
+    var layer3_2 = NL.getVectorLayer('title3');
+    var layer4_2 = NL.getVectorLayer('title4');
+
+    // Still just 4 layers.
+    NL.assertVectorLayerCount(4);
+
+    // Layers should not be changed.
+    expect(layer1_1.id).toEqual(layer1_2.id);
+    expect(layer2_1.id).toEqual(layer2_2.id);
+    expect(layer3_1.id).toEqual(layer3_2.id);
+    expect(layer4_1.id).toEqual(layer4_2.id);
+
+  });
+
+
 });
