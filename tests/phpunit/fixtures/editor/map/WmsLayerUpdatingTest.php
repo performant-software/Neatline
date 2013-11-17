@@ -59,4 +59,60 @@ class FixturesTest_EditorMapWmsLayerUpdating extends Neatline_Case_Fixture
     }
 
 
+    public function testUpdate()
+    {
+
+        $record = $this->_record($this->exhibit);
+        $record->title        = 'title';
+        $record->wms_address  = 'address1';
+        $record->wms_layers   = 'layers1';
+        $record->save();
+
+        $this->_writeRecordsApiFixture($this->exhibit,
+            'EditorMapWmsLayerUpdating.update.records1.json'
+        );
+
+        $record->wms_address  = 'address2';
+        $record->wms_layers   = 'layers2';
+        $record->save();
+
+        $this->_writeRecordsApiFixture($this->exhibit,
+            'EditorMapWmsLayerUpdating.update.records2.json'
+        );
+
+        $this->_writeRecordApiFixture($record,
+            'EditorMapWmsLayerUpdating.update.record2.json'
+        );
+
+    }
+
+
+    public function testRemove()
+    {
+
+        $record = $this->_record($this->exhibit);
+        $record->title        = 'title';
+        $record->wms_address  = 'address';
+        $record->wms_layers   = 'layers';
+        $record->save();
+
+        $this->_writeRecordsApiFixture($this->exhibit,
+            'EditorMapWmsLayerUpdating.remove.records1.json'
+        );
+
+        $record->wms_address  = null;
+        $record->wms_layers   = null;
+        $record->save();
+
+        $this->_writeRecordsApiFixture($this->exhibit,
+            'EditorMapWmsLayerUpdating.remove.records2.json'
+        );
+
+        $this->_writeRecordApiFixture($record,
+            'EditorMapWmsLayerUpdating.remove.record2.json'
+        );
+
+    }
+
+
 }

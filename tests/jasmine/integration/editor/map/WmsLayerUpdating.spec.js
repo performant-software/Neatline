@@ -20,6 +20,16 @@ describe('Map | WMS Layer Updating', function() {
     reload: {
       record:       read('EditorMapWmsLayerUpdating.reload.record.json'),
       records:      read('EditorMapWmsLayerUpdating.reload.records.json')
+    },
+    update: {
+      records1:     read('EditorMapWmsLayerUpdating.update.records1.json'),
+      records2:     read('EditorMapWmsLayerUpdating.update.records2.json'),
+      record2:      read('EditorMapWmsLayerUpdating.update.record2.json')
+    },
+    remove: {
+      records1:     read('EditorMapWmsLayerUpdating.remove.records1.json'),
+      records2:     read('EditorMapWmsLayerUpdating.remove.records2.json'),
+      record2:      read('EditorMapWmsLayerUpdating.remove.record2.json')
     }
   };
 
@@ -118,6 +128,36 @@ describe('Map | WMS Layer Updating', function() {
     // loaded with the new values.
     // ------------------------------------------------------------------------
 
+    NL.respondRecordList200(fixtures.update.records1);
+    NL.respondMap200(fixtures.update.records1);
+
+    // Open edit form, get the edit layer.
+    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    var vectorLayer1 = NL.getVectorLayer('title');
+
+    // 1 vector layer, 1 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(1);
+
+    // Should render existing WMS layer.
+    var wmsLayer1 = NL.getWmsLayer('title');
+    expect(wmsLayer1.params.LAYERS).toEqual('layers1');
+    expect(wmsLayer1.url).toEqual('address1');
+
+    // Save the form, respond with changed layer.
+    NL.v.record.$('a[name="save"]').trigger('click');
+    NL.respondLast200(fixtures.update.record2);
+    NL.respondMap200(fixtures.update.records2);
+
+    // Should rebuild WMS layer.
+    var wmsLayer2 = NL.getWmsLayer('title');
+    expect(wmsLayer2.params.LAYERS).toEqual('layers2');
+    expect(wmsLayer2.url).toEqual('address2');
+
+    // Vector layer should be unchanged.
+    var vectorLayer2 = NL.getVectorLayer('title');
+    expect(vectorLayer2.id).toEqual(vectorLayer1.id);
+
   });
 
 
@@ -127,6 +167,35 @@ describe('Map | WMS Layer Updating', function() {
     // When the record being edited already has a WMS layer and the record is 
     // re-saved with empty WMS fields, the WMS layer should be removed.
     // ------------------------------------------------------------------------
+
+    NL.respondRecordList200(fixtures.remove.records1);
+    NL.respondMap200(fixtures.remove.records1);
+
+    // Open edit form, get the edit layer.
+    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    var vectorLayer1 = NL.getVectorLayer('title');
+
+    // 1 vector layer, 1 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(1);
+
+    // Should render existing WMS layer.
+    var wmsLayer1 = NL.getWmsLayer('title');
+    expect(wmsLayer1.params.LAYERS).toEqual('layers');
+    expect(wmsLayer1.url).toEqual('address');
+
+    // Save the form, respond with removed layer.
+    NL.v.record.$('a[name="save"]').trigger('click');
+    NL.respondLast200(fixtures.remove.record2);
+    NL.respondMap200(fixtures.remove.records2);
+
+    // 1 vector layer, 0 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(0);
+
+    // Vector layer should be unchanged.
+    var vectorLayer2 = NL.getVectorLayer('title');
+    expect(vectorLayer2.id).toEqual(vectorLayer1.id);
 
   });
 
