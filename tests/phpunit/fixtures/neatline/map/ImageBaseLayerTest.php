@@ -24,8 +24,8 @@ class FixturesTest_NeatlineMapImageBaseLayer extends Neatline_Case_Default
         $exhibit->zoom_levels = 50;
         $exhibit->save();
 
-        $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapImageBaseLayer.html'
+        $this->_writeExhibitMarkupFixture($exhibit,
+            'NeatlineMapImageBaseLayer.html'
         );
 
     }

@@ -25,8 +25,8 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
         $exhibit->spatial_querying = 1;
         $exhibit->save();
 
-        $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapSpatialQueryingEnabled.html'
+        $this->_writeExhibitMarkupFixture($exhibit,
+            'NeatlineMapSpatialQueryingEnabled.html'
         );
 
     }
@@ -43,14 +43,14 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
 
         $record1->save();
         $record2->save();
-
-        $this->_writeFixtureFromRoute('neatline/records',
+ 
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapSpatialQueryingEnabled.two.json'
         );
 
         $record2->delete();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapSpatialQueryingEnabled.one.json'
         );
 

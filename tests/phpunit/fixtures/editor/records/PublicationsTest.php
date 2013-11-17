@@ -17,13 +17,11 @@ class FixturesTest_EditorRecordsPublications extends Neatline_Case_Fixture
     {
 
         $record = $this->_record($this->exhibit);
-
         $record->title = 'title';
         $record->body  = 'body';
-
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecordsPublications.json'
         );
 

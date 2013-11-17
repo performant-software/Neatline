@@ -20,7 +20,7 @@ class FixturesTest_EditorSearchInitialization extends Neatline_Case_Fixture
         $record->title = 'title';
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorSearchInitialization.json'
         );
 

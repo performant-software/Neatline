@@ -25,8 +25,8 @@ class FixturesTest_NeatlineMapSpatialQueryingDisabled
         $exhibit->spatial_querying = 0;
         $exhibit->save();
 
-        $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapSpatialQueryingDisabled.html'
+        $this->_writeExhibitMarkupFixture($exhibit,
+            'NeatlineMapSpatialQueryingDisabled.html'
         );
 
     }

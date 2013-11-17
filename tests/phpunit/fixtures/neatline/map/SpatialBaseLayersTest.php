@@ -20,7 +20,6 @@ class FixturesTest_NeatlineMapSpatialBaseLayers extends Neatline_Case_Default
     {
 
         $exhibit = $this->_exhibit();
-
         $exhibit->spatial_layer = 'StamenToner';
         $exhibit->spatial_layers = implode(',', array(
             'OpenStreetMap',
@@ -31,8 +30,8 @@ class FixturesTest_NeatlineMapSpatialBaseLayers extends Neatline_Case_Default
 
         $exhibit->save();
 
-        $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapSpatialBaseLayers.html'
+        $this->_writeExhibitMarkupFixture($exhibit,
+            'NeatlineMapSpatialBaseLayers.html'
         );
 
     }

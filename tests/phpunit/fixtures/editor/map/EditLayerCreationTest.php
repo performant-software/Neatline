@@ -27,7 +27,7 @@ class FixturesTest_EditorMapStartEdit extends Neatline_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorMapEditLayerCreation.records12.json'
         );
 
@@ -36,12 +36,11 @@ class FixturesTest_EditorMapStartEdit extends Neatline_Case_Fixture
         $record3->coverage  = 'POINT(5 6)';
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorMapEditLayerCreation.records123.json'
         );
 
-        $this->resetRequest();
-        $this->_writeFixtureFromRoute('neatline/records/'.$record3->id,
+        $this->_writeRecordApiFixture($record3,
             'EditorMapEditLayerCreation.record3.json'
         );
 

@@ -39,7 +39,7 @@ class FixturesTest_NeatlineMapVectorStyles extends Neatline_Case_Fixture
         $record1->save();
         $record2->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapVectorStyles.json'
         );
 

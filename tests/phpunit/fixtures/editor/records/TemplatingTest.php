@@ -34,21 +34,21 @@ class FixturesTest_EditorRecordsTemplating extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecordsTemplating.defaultList.json'
         );
 
         $record1->title = '<tag>title</tag>';
         $record1->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecordsTemplating.titleTags.json'
         );
 
         $record1->title = null;
         $record1->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecordsTemplating.emptyTitle.json'
         );
 

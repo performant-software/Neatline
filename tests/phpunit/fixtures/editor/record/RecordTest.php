@@ -62,7 +62,7 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
 
         $record->__save();
 
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeRecordApiFixture($record,
             'EditorRecord.record.json'
         );
 
@@ -87,7 +87,7 @@ class FixturesTest_EditorRecord extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecord.records.json'
         );
 

@@ -36123,6 +36123,13 @@ Neatline.module('Map', function(Map) {
 
       refresh = refresh || false;
 
+      // If the map is being refreshed, always emit an empty list of existing
+      // record IDs. This causes the server to re-push all matching records,
+      // which ensures that any change in record data that would result in new
+      // or different layers will be manifested. (Eg, if the user adds a WMS
+      // layer in the editor, this causes edit layer to be re-pushed with the
+      // new WMS fields, and the new WMS layer to be mounted immediately.)
+
       var params = {
         existing: refresh ? [] : this.getVectorLayerIds()
       };

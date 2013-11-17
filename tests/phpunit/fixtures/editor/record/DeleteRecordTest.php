@@ -20,7 +20,7 @@ class FixturesTest_EditorRecordDeleteRecord extends Neatline_Case_Fixture
 
         $this->request->setMethod('DELETE');
 
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeRecordApiFixture($record,
             'EditorRecordDeleteRecord.json'
         );
 

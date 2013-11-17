@@ -27,12 +27,11 @@ class FixturesTest_NeatlineMapSubscriptions extends Neatline_Case_Fixture
 
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapSubscriptions.records.json'
         );
 
-        $this->resetRequest();
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeRecordApiFixture($record,
             'NeatlineMapSubscriptions.record.json'
         );
 

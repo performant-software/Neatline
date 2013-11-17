@@ -20,12 +20,11 @@ class FixturesTest_EditorRecordCreateRecord extends Neatline_Case_Fixture
         $record->coverage = 'POINT(1 2)';
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecordCreateRecord.records.json'
         );
 
-        $this->resetRequest();
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeRecordApiFixture($record,
             'EditorRecordCreateRecord.record.json'
         );
 

@@ -34,7 +34,7 @@ class FixturesTest_EditorMapEditLayerRemoval extends Neatline_Case_Fixture
         // Match records 1-3.
         // --------------------------------------------------------------------
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorMapEditLayerRemoval.records123.json'
         );
 
@@ -46,7 +46,7 @@ class FixturesTest_EditorMapEditLayerRemoval extends Neatline_Case_Fixture
             'existing'  => array($record1->id, $record2->id, $record3->id)
         ));
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorMapEditLayerRemoval.records12.json'
         );
 

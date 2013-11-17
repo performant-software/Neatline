@@ -59,7 +59,7 @@ class FixturesTest_NeatlineMapWmsLayerManagement extends Neatline_Case_Fixture
 
         $this->request->setQuery(array('zoom' => 10));
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapWmsLayerManagement.1234.json'
         );
 
@@ -73,7 +73,7 @@ class FixturesTest_NeatlineMapWmsLayerManagement extends Neatline_Case_Fixture
             $record4->id
         )));
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapWmsLayerManagement.3456.json'
         );
 

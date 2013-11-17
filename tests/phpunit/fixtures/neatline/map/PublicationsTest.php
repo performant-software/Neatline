@@ -20,7 +20,7 @@ class FixturesTest_NeatlineMapPublications extends Neatline_Case_Fixture
         $record->coverage = 'POINT(1 2)';
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapPublications.json'
         );
 

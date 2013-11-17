@@ -31,7 +31,7 @@ class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorSearchMapMirroring.list.json'
         );
 
@@ -56,7 +56,7 @@ class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorSearchMapMirroring.map.json'
         );
 

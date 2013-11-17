@@ -21,12 +21,11 @@ class FixturesTest_EditorRecordCloseForm extends Neatline_Case_Fixture
         $record->point_radius = 10;
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'EditorRecordCloseForm.records.json'
         );
 
-        $this->resetRequest();
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id,
+        $this->_writeRecordApiFixture($record,
             'EditorRecordCloseForm.record.json'
         );
 

@@ -31,7 +31,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapLayerRefreshing.vector.original.json'
         );
 
@@ -43,7 +43,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapLayerRefreshing.vector.changed.json'
         );
 
@@ -74,7 +74,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapLayerRefreshing.wms.original.json'
         );
 
@@ -89,7 +89,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record2->save();
         $record3->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapLayerRefreshing.wms.changed.json'
         );
 

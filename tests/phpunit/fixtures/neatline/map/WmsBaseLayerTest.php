@@ -24,8 +24,8 @@ class FixturesTest_NeatlineMapWmsBaseLayer extends Neatline_Case_Default
         $exhibit->wms_layers  = 'layers';
         $exhibit->save();
 
-        $this->_writeExhibitMarkupFixture(
-            $exhibit, 'NeatlineMapWmsBaseLayer.html'
+        $this->_writeExhibitMarkupFixture($exhibit,
+            'NeatlineMapWmsBaseLayer.html'
         );
 
     }

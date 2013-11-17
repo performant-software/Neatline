@@ -51,7 +51,7 @@ class FixturesTest_NeatlineMapVectorLayerManagement
             'extent' => 'LINESTRING(0 1,0 4)'
         ));
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapVectorLayerManagement.1234.json'
         );
 
@@ -68,7 +68,7 @@ class FixturesTest_NeatlineMapVectorLayerManagement
             )
         ));
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapVectorLayerManagement.3456.json'
         );
 

@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapWmsOpacity extends Neatline_Case_Fixture
 
         $record->save();
 
-        $this->_writeFixtureFromRoute('neatline/records',
+        $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapWmsOpacity.json'
         );
 
