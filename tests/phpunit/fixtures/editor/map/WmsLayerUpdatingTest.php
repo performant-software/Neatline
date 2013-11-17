@@ -21,7 +21,7 @@ class FixturesTest_EditorMapWmsLayerUpdating extends Neatline_Case_Fixture
         $record->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorMapWmsLayerUpdating.add.noWms.json'
+            'EditorMapWmsLayerUpdating.add.recordsNoWms.json'
         );
 
         $record->wms_address = 'address';
@@ -29,7 +29,31 @@ class FixturesTest_EditorMapWmsLayerUpdating extends Neatline_Case_Fixture
         $record->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorMapWmsLayerUpdating.add.wms.json'
+            'EditorMapWmsLayerUpdating.add.recordsWms.json'
+        );
+
+        $this->_writeRecordApiFixture($record,
+            'EditorMapWmsLayerUpdating.add.recordWms.json'
+        );
+
+    }
+
+
+    public function testReload()
+    {
+
+        $record = $this->_record($this->exhibit);
+        $record->title        = 'title';
+        $record->wms_address  = 'address';
+        $record->wms_layers   = 'layers';
+        $record->save();
+
+        $this->_writeRecordsApiFixture($this->exhibit,
+            'EditorMapWmsLayerUpdating.reload.records.json'
+        );
+
+        $this->_writeRecordApiFixture($record,
+            'EditorMapWmsLayerUpdating.reload.record.json'
         );
 
     }

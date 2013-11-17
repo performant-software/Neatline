@@ -13,8 +13,13 @@ describe('Map | WMS Layer Updating', function() {
 
   var fixtures = {
     add: {
-      noWms:  read('EditorMapWmsLayerUpdating.add.noWms.json'),
-      wms:    read('EditorMapWmsLayerUpdating.add.wms.json')
+      recordWms:    read('EditorMapWmsLayerUpdating.add.recordWms.json'),
+      recordsNoWms: read('EditorMapWmsLayerUpdating.add.recordsNoWms.json'),
+      recordsWms:   read('EditorMapWmsLayerUpdating.add.recordsWms.json')
+    },
+    reload: {
+      record:       read('EditorMapWmsLayerUpdating.reload.record.json'),
+      records:      read('EditorMapWmsLayerUpdating.reload.records.json')
     }
   };
 
@@ -32,33 +37,34 @@ describe('Map | WMS Layer Updating', function() {
     // map by the layer refresh.
     // ------------------------------------------------------------------------
 
-    //NL.respondRecordList200(fixtures.add.noWms);
-    //NL.respondMap200(fixtures.add.noWms);
+    NL.respondRecordList200(fixtures.add.recordsNoWms);
+    NL.respondMap200(fixtures.add.recordsNoWms);
 
-    //// Open edit form, get the edit layer.
-    //NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
-    //var vectorLayer1 = NL.getVectorLayer('title');
+    // Open edit form, get the edit layer.
+    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    var vectorLayer1 = NL.getVectorLayer('title');
 
-    //// 1 vector layer, 0 WMS.
-    //NL.assertVectorLayerCount(1);
-    //NL.assertWmsLayerCount(0);
+    // 1 vector layer, 0 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(0);
 
-    //// Save the form, respond with new WMS layer.
-    //NL.v.record.$('a[name="save"]').trigger('click');
-    //NL.respondMap200(fixtures.add.wms);
+    // Save the form, respond with new WMS layer.
+    NL.v.record.$('a[name="save"]').trigger('click');
+    NL.respondLast200(fixtures.add.recordWms);
+    NL.respondMap200(fixtures.add.recordsWms);
 
-    //// 1 vector layer, 1 WMS.
-    //NL.assertVectorLayerCount(1);
-    //NL.assertWmsLayerCount(1);
+    // 1 vector layer, 1 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(1);
 
-    //// Should render new WMS layer.
-    //var newWmsLayer = NL.getWmsLayer('title');
-    //expect(newWmsLayer.params.LAYERS).toEqual('layers');
-    //expect(newWmsLayer.url).toEqual('address');
+    // Should render new WMS layer.
+    var newWmsLayer = NL.getWmsLayer('title');
+    expect(newWmsLayer.params.LAYERS).toEqual('layers');
+    expect(newWmsLayer.url).toEqual('address');
 
-    //// Vector layer should be unchanged.
-    //var vectorLayer2 = NL.getVectorLayer('title');
-    //expect(vectorLayer2.id).toEqual(vectorLayer1.id);
+    // Vector layer should be unchanged.
+    var vectorLayer2 = NL.getVectorLayer('title');
+    expect(vectorLayer2.id).toEqual(vectorLayer1.id);
 
   });
 
@@ -70,6 +76,36 @@ describe('Map | WMS Layer Updating', function() {
     // re-saved without changes to the WMS fields, the WMS layer should be re-
     // loaded without modification.
     // ------------------------------------------------------------------------
+
+    NL.respondRecordList200(fixtures.reload.records);
+    NL.respondMap200(fixtures.reload.records);
+
+    // Open edit form, get the edit layer.
+    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    var vectorLayer1 = NL.getVectorLayer('title');
+
+    // 1 vector layer, 1 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(1);
+
+    // Should render existing WMS layer.
+    var wmsLayer1 = NL.getWmsLayer('title');
+    expect(wmsLayer1.params.LAYERS).toEqual('layers');
+    expect(wmsLayer1.url).toEqual('address');
+
+    // Save the form, respond with unchanged layer.
+    NL.v.record.$('a[name="save"]').trigger('click');
+    NL.respondLast200(fixtures.reload.record);
+    NL.respondMap200(fixtures.reload.records);
+
+    // Should re-render WMS layer.
+    var wmsLayer2 = NL.getWmsLayer('title');
+    expect(wmsLayer2.params.LAYERS).toEqual('layers');
+    expect(wmsLayer2.url).toEqual('address');
+
+    // Vector layer should be unchanged.
+    var vectorLayer2 = NL.getVectorLayer('title');
+    expect(vectorLayer2.id).toEqual(vectorLayer1.id);
 
   });
 
