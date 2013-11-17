@@ -11,6 +11,14 @@
 describe('Map | WMS Layer Updating', function() {
 
 
+  var fixtures = {
+    add: {
+      noWms:  read('EditorMapWmsLayerUpdating.add.noWms.json'),
+      wms:    read('EditorMapWmsLayerUpdating.add.wms.json')
+    }
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });
@@ -23,6 +31,34 @@ describe('Map | WMS Layer Updating', function() {
     // record is saved, the new WMS layer should immediately be added to the
     // map by the layer refresh.
     // ------------------------------------------------------------------------
+
+    NL.respondRecordList200(fixtures.add.noWms);
+    NL.respondMap200(fixtures.add.noWms);
+
+    // Open edit form, get the original vector layer.
+    NL.showRecordForm(NL.getRecordListModelByTitle('title'));
+    var vectorLayer1 = NL.getVectorLayer('title');
+
+    // 1 vector layer, 0 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(0);
+
+    // Save the form, respond with new WMS layer.
+    NL.v.record.$('a[name="save"]').trigger('click');
+    NL.respondMap200(fixtures.add.wms);
+
+    // 1 vector layer, 1 WMS.
+    NL.assertVectorLayerCount(1);
+    NL.assertWmsLayerCount(1);
+
+    // Should render new WMS layer.
+    var newWmsLayer = NL.getWmsLayer('title');
+    expect(newWmsLayer.params.LAYERS).toEqual('layers');
+    expect(newWmsLayer.url).toEqual('address');
+
+    // Vector layer should be unchanged.
+    var vectorLayer2 = NL.getVectorLayer('title');
+    expect(vectorLayer2.id).toEqual(vectorLayer1.id);
 
   });
 
