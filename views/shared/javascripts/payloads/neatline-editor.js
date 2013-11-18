@@ -60169,8 +60169,8 @@ Neatline.module('Editor.Record', function(Record) {
         source: this.slug
       });
 
-      // Unbind model listeners.
-      this.stopListening(this.model);
+      // Unbind listeners.
+      this.stopListening();
       this.open = false;
 
     },
