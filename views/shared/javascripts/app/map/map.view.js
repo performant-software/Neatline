@@ -314,7 +314,7 @@ Neatline.module('Map', function(Map) {
      * Update the layers operated on by the hover and click controls. Called
      * after new data arrives and the layer have been rebuilt by `ingest`.
      */
-    updateControls: function() {
+    updatePublicControls: function() {
 
       // Update the controls.
       var layers = this.getVectorLayers();
@@ -460,7 +460,7 @@ Neatline.module('Map', function(Map) {
 
       // Publish collection, update controls.
       Neatline.vent.trigger('MAP:ingest', records);
-      this.updateControls();
+      this.updatePublicControls();
 
       // End the load.
       this.loading = false;
@@ -650,8 +650,17 @@ Neatline.module('Map', function(Map) {
      * @param {OpenLayers.Layer.Vector}: The layer.
      */
     removeVectorLayer: function(layer) {
+
+      // Remove the layer from the map.
       this.map.removeLayer(layer);
       delete this.layers.vector[layer.neatline.model.id];
+
+      // Pluck the layer out of the cursor controls.
+      OpenLayers.Util.removeItem(this.highlightControl.layers, layer);
+      OpenLayers.Util.removeItem(this.selectControl.layers, layer);
+
+      layer.destroy();
+
     },
 
 
@@ -661,8 +670,13 @@ Neatline.module('Map', function(Map) {
      * @param {OpenLayers.Layer.WMS}: The layer.
      */
     removeWmsLayer: function(layer) {
+
+      // Remove the layer from the map.
       this.map.removeLayer(layer);
       delete this.layers.wms[layer.neatline.model.id];
+
+      layer.destroy();
+
     },
 
 
