@@ -17,15 +17,15 @@ Neatline.module('Editor.Record', function(Record) {
     slug: 'EDITOR:RECORD',
 
     events: [
-      { 'ROUTER:before': 'unbind' },
+      { 'ROUTER:before': 'unbindRecord' },
       { 'select': 'navToForm' }
     ],
 
     commands: [
       'display',
-      'bindSaved',
-      'bindNew',
-      'unbind',
+      'bindNewRecord',
+      'bindSavedRecord',
+      'unbindRecord',
       'navToForm',
       'setWkt'
     ],
@@ -61,9 +61,19 @@ Neatline.module('Editor.Record', function(Record) {
      * @param {Object} record: A record model.
      * @param {String} tab: The active tab slug.
      */
-    bind: function(record, tab) {
-      this.view.bind(record);
+    bindRecord: function(record, tab) {
+      this.view.bindRecord(record);
       this.view.activateTab(tab);
+    },
+
+
+    /**
+     * Bind a new record to the form.
+     *
+     * @param {String} tab: The active tab slug.
+     */
+    bindNewRecord: function(tab) {
+      this.bindRecord(new Neatline.Shared.Record.Model(), tab);
     },
 
 
@@ -73,28 +83,18 @@ Neatline.module('Editor.Record', function(Record) {
      * @param {Number|String} id: The record id.
      * @param {String} tab: The active tab slug.
      */
-    bindSaved: function(id, tab) {
+    bindSavedRecord: function(id, tab) {
       Neatline.request('EDITOR:EXHIBIT:RECORDS:getModel', Number(id),
-        _.bind(function(record) { this.bind(record, tab) }, this)
+        _.bind(function(record) { this.bindRecord(record, tab) }, this)
       );
-    },
-
-
-    /**
-     * Bind a new record to the form.
-     *
-     * @param {String} tab: The active tab slug.
-     */
-    bindNew: function(tab) {
-      this.bind(new Neatline.Shared.Record.Model(), tab);
     },
 
 
     /**
      * If the form is open, Unbind the current record.
      */
-    unbind: function() {
-      if (this.view.open) this.view.unbind();
+    unbindRecord: function() {
+      if (this.view.open) this.view.unbindRecord();
     },
 
 

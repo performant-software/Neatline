@@ -51,7 +51,7 @@ Neatline.module('Editor.Record', function(Record) {
      *
      * @param {Object} model: A record model.
      */
-    bind: function(model) {
+    bindRecord: function(model) {
 
       this.model = model;
       this.open  = true;
@@ -71,7 +71,7 @@ Neatline.module('Editor.Record', function(Record) {
     /**
      * End the map edit session, reset the presenter.
      */
-    unbind: function() {
+    unbindRecord: function() {
 
       // Switch off map editing.
       Neatline.execute('EDITOR:MAP:endEdit', this.model);
