@@ -18,42 +18,9 @@
     <?php echo __('Save'); ?>
   </a>
 
-  <a href="#delete-modal" class="btn btn-default btn-lg"
-    data-toggle="modal"> <span class="glyphicon glyphicon-trash"></span>
+  <a href="#delete-modal" class="btn btn-default btn-lg" data-toggle="modal">
+    <span class="glyphicon glyphicon-trash"></span>
     <?php echo __('Delete'); ?>
   </a>
 
-</div>
-
-<div id="delete-modal" class="modal" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4><?php echo __('Are you sure?'); ?></h4>
-      </div>
-
-      <div class="modal-body">
-        <p>
-          <?php echo __(
-            'This will delete the record from the database and remove all
-            associated metadata. This action cannot be undone.'
-          );?>
-        </p>
-      </div>
-
-      <div class="modal-footer">
-
-        <a name="cancel" class="btn btn-default" data-dismiss="modal">
-          <?php echo __('Cancel'); ?>
-        </a>
-
-        <a name="delete" class="btn btn-danger">
-          <?php echo __('Yes, delete'); ?>
-        </a>
-
-      </div>
-
-    </div>
-  </div>
 </div>

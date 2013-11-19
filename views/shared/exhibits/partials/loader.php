@@ -13,4 +13,4 @@
 
 <span id="loader" class="alert alert-info">
   <?php echo __('Loading'); ?>
-</div>
+</span>

@@ -82,11 +82,6 @@
       <?php echo __('Enter Markup'); ?>
     </a> )
 
-    <!-- SVG modal. -->
-    <?php echo $this->partial(
-      'exhibits/underscore/partials/svg_modal.php'
-    ); ?>
-
   </label>
 </div>
 
