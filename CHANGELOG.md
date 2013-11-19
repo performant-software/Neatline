@@ -6,9 +6,11 @@
 
 #### Performance Improvements
 
-  - Instead of always re-loading all records that fall into the current viewport when the map is moved, the records API now supports an `existing` parameter (an array of record ids that have already been loaded by the client) that causes the API to only push _new_ records across the wire. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points, etc.
+  - Further optimizes the records API so that it avoids re-transmitting records that have already been pushed to the client by previous queries. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points, etc.
 
   - Patches up a memory leak on the map view caused by marooned references to deleted layers on the cursor control instances.
+
+  - Fixes fullscreen, white "flashes" that occasionally occurred in the editor when using Chrome on Macbook Pros with retina displays, which were caused by a bug in Chrome related to CSS transitions on scrollable, fixed-position divs.
 
 #### Bug Fixes
 
