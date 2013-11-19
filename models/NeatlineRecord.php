@@ -271,9 +271,11 @@ class NeatlineRecord extends Neatline_Row_Expandable
         $item = $this->getItem();
         if (!$item) return;
 
-        // Set title and body.
+        // Compile the title:
         $this->title = metadata($item, array('Dublin Core', 'Title'));
-        $this->body  = nl_getItemMarkup($this);
+
+        // Compile the body:
+        $this->body = nl_getItemMarkup($this);
 
     }
 

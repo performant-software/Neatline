@@ -19,7 +19,7 @@ define('NL_TEST_DIR', NL_DIR.'/tests/phpunit');
 // Bootstrap Omeka.
 require_once OMEKA_DIR.'/application/tests/bootstrap.php';
 
-// Gneric test cases.
+// Generic test cases.
 require_once 'cases/Neatline_Case_Abstract.php';
 require_once 'cases/Neatline_Case_Default.php';
 require_once 'cases/Neatline_Case_Fixture.php';

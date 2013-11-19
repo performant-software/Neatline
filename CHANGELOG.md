@@ -8,6 +8,8 @@
 
   - Instead of always re-loading all records that fall into the current viewport when the map is moved, the records API now supports an `existing` parameter (an array of record ids that have already been loaded by the client) that causes the API to only push _new_ records across the wire. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points, etc.
 
+  - Patches up a memory leak on the map view caused by marooned references to deleted layers on the cursor control instances.
+
 #### Bug Fixes
 
   - Fixes a bug that caused the Omeka item search feature in the record form to display the the title of an item's parent _collection_, not the item itself, when the item belonged to a collection.
