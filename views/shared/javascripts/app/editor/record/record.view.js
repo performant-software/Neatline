@@ -21,13 +21,11 @@ Neatline.module('Editor.Record', function(Record) {
     events: {
       'shown.bs.tab ul.nav a':  'onTabChange',
       'click a[name="close"]':  'onCloseClick',
-      'click a[name="save"]':   'onSaveClick',
-      'click a[name="delete"]': 'onDeleteClick'
+      'click a[name="save"]':   'onSaveClick'
     },
 
     ui: {
-      tabs:   'li.tab a',
-      modal:  '#delete-modal'
+      tabs: 'li.tab a'
     },
 
 
@@ -39,9 +37,26 @@ Neatline.module('Editor.Record', function(Record) {
     init: function(options) {
 
       this.slug = options.slug;
+      this.hasRecord = false; // True if a record is bound to the form.
+      this.activeTab = null;  // The hash of the active tab.
 
-      this.open = false;  // True if a record is bound to the form.
-      this.tab = null;    // The hash of the active tab.
+      this._initDeleteModal();
+
+    },
+
+
+    /**
+     * Cache the delete modal, listen for delete confirmations.
+     */
+    _initDeleteModal: function() {
+
+      // Cache the element.
+      this.deleteModal = $('#delete-modal');
+
+      // Listen for "Yes, delete" clicks.
+      this.deleteModal.find('a[name="delete"]').click(
+        _.bind(this.onDeleteClick, this)
+      );
 
     },
 
@@ -53,8 +68,9 @@ Neatline.module('Editor.Record', function(Record) {
      */
     bindRecord: function(model) {
 
+      // Bind the model.
+      this.hasRecord = true;
       this.model = model;
-      this.open  = true;
 
       // Start map editing, bind model to form.
       Neatline.execute('EDITOR:MAP:startEdit', this.model);
@@ -89,9 +105,9 @@ Neatline.module('Editor.Record', function(Record) {
         source: this.slug
       });
 
-      // Strip listeners.
+      // Unbind the model.
+      this.hasRecord = false;
       this.stopListening();
-      this.open = false;
 
     },
 
@@ -114,12 +130,12 @@ Neatline.module('Editor.Record', function(Record) {
     onTabChange: function(event) {
 
       // Get the tab slug and id.
-      this.tab = $(event.target).attr('data-slug');
+      this.activeTab = $(event.target).attr('data-slug');
       var id = this.model.id || 'add';
 
       // Update the route, notify tab views.
-      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.tab);
-      Neatline.vent.trigger('EDITOR:RECORD:#'+this.tab);
+      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.activeTab);
+      Neatline.vent.trigger('EDITOR:RECORD:#'+this.activeTab);
 
     },
 
@@ -166,7 +182,7 @@ Neatline.module('Editor.Record', function(Record) {
 
       // Update the route.
       Neatline.execute('EDITOR:setRoute',
-        'record/'+this.model.id+'/'+this.tab
+        'record/'+this.model.id+'/'+this.activeTab
       );
 
       // Refresh the exhibit.
@@ -196,7 +212,7 @@ Neatline.module('Editor.Record', function(Record) {
       );
 
       // Hide modal, close form.
-      this.__ui.modal.modal('hide');
+      this.deleteModal.modal('hide');
       this.onCloseClick();
 
       // Refresh the exhibit.

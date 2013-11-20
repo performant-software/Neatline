@@ -94,7 +94,7 @@ Neatline.module('Editor.Record', function(Record) {
      * If the form is open, Unbind the current record.
      */
     unbindRecord: function() {
-      if (this.view.open) this.view.unbindRecord();
+      if (this.view.hasRecord) this.view.unbindRecord();
     },
 
 
@@ -104,7 +104,7 @@ Neatline.module('Editor.Record', function(Record) {
      * @param {Object} args: Event arguments.
      */
     navToForm: function(args) {
-      if (!this.view.open) {
+      if (!this.view.hasRecord) {
         this.router.navigate('record/'+args.model.id, true);
       }
     },

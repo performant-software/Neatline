@@ -24,9 +24,8 @@ describe('Record | Delete Record', function() {
 
     elements = {
       delete1:  NL.v.record.$('a[href="#delete-modal"]'),
-      delete2:  NL.v.record.$('a[name="delete"]'),
-      cancel:   NL.v.record.$('a[name="cancel"]'),
-      modal:    NL.v.record.$('#delete-modal')
+      delete2:  NL.v.record.deleteModal.find('a[name="delete"]'),
+      cancel:   NL.v.record.deleteModal.find('a[name="cancel"]')
     };
 
   });
@@ -44,7 +43,7 @@ describe('Record | Delete Record', function() {
 
     // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
-    expect(elements.modal).toHaveClass('in');
+    expect(NL.v.record.deleteModal).toHaveClass('in');
 
   });
 
@@ -63,7 +62,7 @@ describe('Record | Delete Record', function() {
     elements.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(elements.modal).not.toHaveClass('in');
+    expect(NL.v.record.deleteModal).not.toHaveClass('in');
 
   });
 
@@ -145,7 +144,7 @@ describe('Record | Delete Record', function() {
     NL.respondLast200(fixtures.empty);
 
     // Modal should be hidden.
-    expect(elements.modal).not.toHaveClass('in');
+    expect(NL.v.record.deleteModal).not.toHaveClass('in');
 
     // Form should be closed.
     expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);

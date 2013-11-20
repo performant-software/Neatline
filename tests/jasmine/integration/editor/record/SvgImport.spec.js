@@ -22,12 +22,9 @@ describe('Record | SVG Import', function() {
     NL.showRecordForm(fixtures.record);
 
     elements = {
-      link:     NL.v.record.$('a[href="#svg-modal"]'),
-      svg:      NL.v.record.$('textarea[name="svg"]'),
-      density:  NL.v.record.$('input[name="density"]'),
-      cancel:   NL.v.record.$('a[name="cancel"]'),
-      parse:    NL.v.record.$('a[name="parse"]'),
-      modal:    NL.v.record.$('#svg-modal')
+      link:   NL.v.mapTab.$('a[href="#svg-modal"]'),
+      cancel: NL.v.mapTab.svgModal.find('a[name="cancel"]'),
+      parse:  NL.v.mapTab.svgModal.find('a[name="parse"]')
     };
 
   });
@@ -45,7 +42,7 @@ describe('Record | SVG Import', function() {
 
     // Modal and overlay should be visible.
     expect($('body')).toContain('div.modal-backdrop.in');
-    expect(elements.modal).toHaveClass('in');
+    expect(NL.v.mapTab.svgModal).toHaveClass('in');
 
   });
 
@@ -64,7 +61,7 @@ describe('Record | SVG Import', function() {
     elements.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(elements.modal).not.toHaveClass('in');
+    expect(NL.v.mapTab.svgModal).not.toHaveClass('in');
 
   });
 
@@ -81,7 +78,7 @@ describe('Record | SVG Import', function() {
     var geo = OpenLayers.Geometry.fromWKT(SVGtoWKT.convert(svg));
 
     // Update SVG.
-    elements.svg.val(svg);
+    NL.v.mapTab.svgContent.val(svg);
     elements.parse.trigger('click');
 
     // `geometry` on handler should be set.
@@ -98,17 +95,17 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Set SVG.
-    elements.svg.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
+    NL.v.mapTab.svgContent.val('<svg><circle r="10" cx="0" cy="0" /></svg>');
 
     // Set low density.
-    elements.density.val('1.0');
+    NL.v.mapTab.svgDensity.val('1.0');
     elements.parse.trigger('click');
 
     // Capture the number of points in the geometry.
     var c1 = NL.v.map.controls.svg.handler.geometry.getVertices().length;
 
     // Set high density.
-    elements.density.val('2.0');
+    NL.v.mapTab.svgDensity.val('2.0');
     elements.parse.trigger('click');
 
     // Capture the number of points in the geometry.
@@ -130,7 +127,7 @@ describe('Record | SVG Import', function() {
     spyOn(toastr, 'info');
 
     // Parse valid SVG.
-    elements.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    NL.v.mapTab.svgContent.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
     elements.parse.trigger('click');
 
     // Should flash success.
@@ -148,11 +145,11 @@ describe('Record | SVG Import', function() {
     // ------------------------------------------------------------------------
 
     // Parse valid SVG.
-    elements.svg.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
+    NL.v.mapTab.svgContent.val('<svg><polygon points="1,2 3,4 5,6" /></svg>');
     elements.parse.trigger('click');
 
     // Modal should be hidden.
-    expect(elements.modal).not.toHaveClass('in');
+    expect(NL.v.mapTab.svgModal).not.toHaveClass('in');
 
   });
 
@@ -167,7 +164,7 @@ describe('Record | SVG Import', function() {
     spyOn(toastr, 'error');
 
     // Parse invalid SVG.
-    elements.svg.val('invalid');
+    NL.v.mapTab.svgContent.val('invalid');
     elements.parse.trigger('click');
 
     // Should flash error.
@@ -188,11 +185,11 @@ describe('Record | SVG Import', function() {
     elements.link.trigger('click');
 
     // Parse invalid SVG.
-    elements.svg.val('invalid');
+    NL.v.mapTab.svgContent.val('invalid');
     elements.parse.trigger('click');
 
     // Modal should be hidden.
-    expect(elements.modal).toHaveClass('in');
+    expect(NL.v.mapTab.svgModal).toHaveClass('in');
 
   });
 

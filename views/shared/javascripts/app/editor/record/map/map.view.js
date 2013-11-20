@@ -19,23 +19,19 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
       'shown.bs.tab ul.nav a':  'onTabChange',
       'change div.map input':   'onControlChange',
       'keyup div.map input':    'onControlChange',
-      'click a[name="parse"]':  'onParseClick',
       'click a[name="clear"]':  'onClearClick'
     },
 
     selectors: {
-      mode:       'input[name="mode"]',
-      modify:     'input[name="modify"]'
+      mode:   'input[name="mode"]',
+      modify: 'input[name="modify"]'
     },
 
     ui: {
-      pan:      'input[value="pan"]',
-      sides:    'input[name="sides"]',
-      snap:     'input[name="snap"]',
-      irreg:    'input[name="irreg"]',
-      svg:      'textarea[name="svg"]',
-      density:  'input[name="density"]',
-      modal:    '#svg-modal'
+      pan:    'input[value="pan"]',
+      sides:  'input[name="sides"]',
+      snap:   'input[name="snap"]',
+      irreg:  'input[name="irreg"]'
     },
 
 
@@ -43,7 +39,28 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      * Initialize state.
      */
     init: function() {
-      this.tab = null;  // The hash of the active tab.
+      this.tab = null; // The hash of the active tab.
+      this._initSvgModal();
+    },
+
+
+    /**
+     * Cache the SVG modal, listen for parse attempts.
+     */
+    _initSvgModal: function() {
+
+      // Cache the element.
+      this.svgModal = $('#svg-modal');
+
+      // Cache the SVG inputs.
+      this.svgContent = this.svgModal.find('textarea[name="svg"]');
+      this.svgDensity = this.svgModal.find('input[name="density"]');
+
+      // Listen for "Parse" clicks.
+      this.svgModal.find('a[name="parse"]').click(
+        _.bind(this.onParseClick, this)
+      );
+
     },
 
 
@@ -75,16 +92,16 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     onParseClick: function() {
 
-      var val = this.__ui.svg.val();
+      var val = this.svgContent.val();
 
       try {
 
         // Set density.
         SVGtoWKT.DENSITY = parseFloat(
-          this.__ui.density.val()
+          this.svgDensity.val()
         );
 
-        // Covnert SVG, update handler.
+        // Convert SVG, update handler.
         var wkt = SVGtoWKT.convert(val);
         Neatline.execute('EDITOR:MAP:updateWKT', wkt);
 
@@ -94,7 +111,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
         );
 
         // Close the modal.
-        this.__ui.modal.modal('hide');
+        this.svgModal.modal('hide');
 
       } catch (e) {
         Neatline.execute('EDITOR:notifyError',
