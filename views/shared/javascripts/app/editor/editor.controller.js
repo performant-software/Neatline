@@ -17,6 +17,10 @@ Neatline.module('Editor', { startWithParent: false,
 
     slug: 'EDITOR',
 
+    events: [
+      { 'ROUTER:before': 'closeModals' }
+    ],
+
     commands: [
       'display',
       'notifySuccess',
@@ -82,6 +86,14 @@ Neatline.module('Editor', { startWithParent: false,
      */
     setRoute: function(route) {
       Backbone.history.navigate(route, { replace: true });
+    },
+
+
+    /**
+     * Close all open modals.
+     */
+    closeModals: function() {
+      $('.modal').modal('hide');
     },
 
 

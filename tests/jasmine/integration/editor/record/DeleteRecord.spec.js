@@ -67,6 +67,25 @@ describe('Record | Delete Record', function() {
   });
 
 
+  it('should close modal when the route changes', function() {
+
+    // ------------------------------------------------------------------------
+    // If the modal is displayed and the user navigates to a different route
+    // (eg, click the back button), the modal should close.
+    // ------------------------------------------------------------------------
+
+    // Click on "Delete".
+    elements.delete1.trigger('click');
+
+    // Navigate back to browse.
+    NL.navigate('records');
+
+    // Modal should be hidden.
+    expect(NL.v.record.deleteModal).not.toHaveClass('in');
+
+  });
+
+
   it('should issue DELETE request when "Delete" is clicked', function() {
 
     // ------------------------------------------------------------------------

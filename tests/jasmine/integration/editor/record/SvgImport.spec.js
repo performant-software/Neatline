@@ -188,8 +188,27 @@ describe('Record | SVG Import', function() {
     NL.v.mapTab.svgContent.val('invalid');
     elements.parse.trigger('click');
 
-    // Modal should be hidden.
+    // Modal should be visible.
     expect(NL.v.mapTab.svgModal).toHaveClass('in');
+
+  });
+
+
+  it('should close the modal when the route changes', function() {
+
+    // ------------------------------------------------------------------------
+    // If the modal is displayed and the user navigates to a different route
+    // (eg, click the back button), the modal should close.
+    // ------------------------------------------------------------------------
+
+    // Click "Enter Markup".
+    elements.link.trigger('click');
+
+    // Navigate back to browse.
+    NL.navigate('records');
+
+    // Modal should be hidden.
+    expect(NL.v.mapTab.svgModal).not.toHaveClass('in');
 
   });
 
