@@ -30,7 +30,6 @@ require_once 'migrations/2.0.0/cases/Neatline_Case_Migrate200.php';
 // Mock filter callbacks.
 require_once 'mocks/filters.php';
 
-
 // TODO: Is there really no better way?
 //
 // Manually load `Zend_Test_PHPUnit_Constraint_DomQuery`, which triggers a

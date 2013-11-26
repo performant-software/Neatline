@@ -431,8 +431,8 @@ SQL;
     /**
      * Reload a record.
      *
-     * @param Omeka_Record_AbstractRecord $record A record to _reload.
-     * @return Omeka_Record_AbstractRecord The _reloaded record.
+     * @param Omeka_Record_AbstractRecord $record A record to reload.
+     * @return Omeka_Record_AbstractRecord The reloaded record.
      */
     protected function _reload($record)
     {
