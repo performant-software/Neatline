@@ -47,7 +47,12 @@ Neatline.module('Shared.Record', function(Record) {
 
       };
 
-      // Store the records.
+      // Prune removed records.
+      _.each(response.removed, _.bind(function(id) {
+        this.remove(id);
+      }, this));
+
+      // Return the records.
       return response.records;
 
     },
@@ -62,12 +67,19 @@ Neatline.module('Shared.Record', function(Record) {
     update: function(params, cb) {
 
       // Merge the exhibit id.
-      params = _.extend(params, {
-        exhibit_id: Neatline.g.neatline.exhibit.id
-      });
+      params.exhibit_id = Neatline.g.neatline.exhibit.id;
 
-      // Query for records, pass result to callback.
-      this.fetch({ reset: true, data: $.param(params), success: cb });
+      // Form the default query parameters.
+      var options = { data: $.param(params), success: cb };
+
+      // If we're telling the server not to re-transmit existing records (eg,
+      // the update is feeding the map), then we do NOT want to automatically
+      // remove all records that aren't present in the result- just the ones
+      // that the server explicitly flags as removed.
+
+      if (_.isArray(params.existing)) options.remove = false;
+
+      this.fetch(options);
 
     },
 
