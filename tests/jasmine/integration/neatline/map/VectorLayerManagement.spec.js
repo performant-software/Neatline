@@ -32,6 +32,13 @@ describe('Map | Vector Layer Management', function() {
     // Load records 1-4.
     NL.respondMap200(fixtures._1234);
 
+    var model1 = NL.v.map.records.findWhere({ title: 'title1' });
+    var model2 = NL.v.map.records.findWhere({ title: 'title2' });
+    var model3 = NL.v.map.records.findWhere({ title: 'title3' });
+    var model4 = NL.v.map.records.findWhere({ title: 'title4' });
+    var model5 = NL.v.map.records.findWhere({ title: 'title5' });
+    var model6 = NL.v.map.records.findWhere({ title: 'title6' });
+
     var layer1 = NL.getVectorLayer('title1');
     var layer2 = NL.getVectorLayer('title2');
     var layer3 = NL.getVectorLayer('title3');
@@ -39,6 +46,15 @@ describe('Map | Vector Layer Management', function() {
     var layer5 = NL.getVectorLayer('title5');
     var layer6 = NL.getVectorLayer('title6');
 
+    // Should populate models.
+    expect(model1).toBeDefined();
+    expect(model2).toBeDefined();
+    expect(model3).toBeDefined();
+    expect(model4).toBeDefined();
+    expect(model5).toBeUndefined();
+    expect(model6).toBeUndefined();
+
+    // Should render layers.
     expect(layer1).toBeDefined();
     expect(layer2).toBeDefined();
     expect(layer3).toBeDefined();
@@ -46,6 +62,7 @@ describe('Map | Vector Layer Management', function() {
     expect(layer5).toBeUndefined();
     expect(layer6).toBeUndefined();
 
+    // Should render features.
     expect(layer1.features[0].geometry.x).toEqual(0);
     expect(layer1.features[0].geometry.y).toEqual(1);
     expect(layer2.features[0].geometry.x).toEqual(0);
@@ -77,6 +94,13 @@ describe('Map | Vector Layer Management', function() {
     // Respond with records 3-6.
     NL.respondMap200(fixtures._3456);
 
+    var model1 = NL.v.map.records.findWhere({ title: 'title1' });
+    var model2 = NL.v.map.records.findWhere({ title: 'title2' });
+    var model3 = NL.v.map.records.findWhere({ title: 'title3' });
+    var model4 = NL.v.map.records.findWhere({ title: 'title4' });
+    var model5 = NL.v.map.records.findWhere({ title: 'title5' });
+    var model6 = NL.v.map.records.findWhere({ title: 'title6' });
+
     var layer1 = NL.getVectorLayer('title1');
     var layer2 = NL.getVectorLayer('title2');
     var layer3 = NL.getVectorLayer('title3');
@@ -84,13 +108,23 @@ describe('Map | Vector Layer Management', function() {
     var layer5 = NL.getVectorLayer('title5');
     var layer6 = NL.getVectorLayer('title6');
 
-    expect(layer1).toBeUndefined(); // Layer 1 garbage collected.
-    expect(layer2).toBeUndefined(); // Layer 2 garbage collected.
+    // Should update models.
+    expect(model1).toBeUndefined(); // Record 1 removed.
+    expect(model2).toBeUndefined(); // Record 2 removed
+    expect(model3).toBeDefined();   // Record 3 unchanged.
+    expect(model4).toBeDefined();   // Record 4 unchanged.
+    expect(model5).toBeDefined();   // Record 5 added.
+    expect(model6).toBeDefined();   // Reocrd 6 added.
+
+    // Should render layers.
+    expect(layer1).toBeUndefined(); // Layer 1 removed.
+    expect(layer2).toBeUndefined(); // Layer 2 removed.
     expect(layer3).toBeDefined();   // Layer 3 unchanged.
     expect(layer4).toBeDefined();   // Layer 4 unchanged.
     expect(layer5).toBeDefined();   // Layer 5 added.
     expect(layer6).toBeDefined();   // Layer 6 added.
 
+    // Should render features.
     expect(layer3.features[0].geometry.x).toEqual(0);
     expect(layer3.features[0].geometry.y).toEqual(3);
     expect(layer4.features[0].geometry.x).toEqual(0);

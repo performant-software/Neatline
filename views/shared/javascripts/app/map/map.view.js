@@ -440,7 +440,6 @@ Neatline.module('Map', function(Map) {
     loadRecords: function(params) {
       this.records.update(params, _.bind(function(records) {
         this.ingestRecords(records);
-        console.log(records.length);
       }, this));
     },
 
