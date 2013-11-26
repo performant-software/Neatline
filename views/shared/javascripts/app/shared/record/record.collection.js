@@ -74,9 +74,10 @@ Neatline.module('Shared.Record', function(Record) {
 
       // If we're telling the server not to re-transmit existing records (eg,
       // the update is feeding the map), then we do NOT want to automatically
-      // remove all records that aren't present in the result- just the ones
+      // remove all records that aren't present in the result - just the ones
       // that the server explicitly flags as removed.
 
+      // TODO|test
       if (_.isArray(params.existing)) options.remove = false;
 
       this.fetch(options);
