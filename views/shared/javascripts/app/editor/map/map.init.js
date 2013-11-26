@@ -15,7 +15,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
   /**
    * Start the map editor after Neatline.
    */
-  Neatline.on('initialize:after', function() {
+  Neatline.Map.on('start', function() {
     Map.start();
   });
 

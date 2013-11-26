@@ -77,7 +77,6 @@ Neatline.module('Shared.Record', function(Record) {
       // remove all records that aren't present in the result - just the ones
       // that the server explicitly flags as removed.
 
-      // TODO|test
       if (_.isArray(params.existing)) options.remove = false;
 
       this.fetch(options);
