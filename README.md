@@ -10,6 +10,6 @@ Designed for scholars, archivists, journalists, and students, Neatline provides 
 
   - For general information and demos, head over to **[neatline.org](http://neatline.org/)**.
 
-  - For documentation, head over to the project **[Wiki](https://github.com/scholarslab/Neatline/wiki)**.
+  - Read the docs at **[docs.neatline.org](http://docs.neatline.org/)**.
 
   - If you found a bug or thought of a new feature, file a ticket on the **[issue tracker](https://github.com/scholarslab/Neatline/issues)**.
