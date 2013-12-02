@@ -2,6 +2,8 @@
 
 #### Added Features
 
+  - Neatline now adds a link to the exhibits browse page to the public navigation.
+
   - Makes it possible to add custom vector annotations to records that are associated with WMS layers.
 
 #### Performance Improvements
@@ -17,12 +19,6 @@
   - Fixes a bug that caused the Omeka item search feature in the record form to display the the title of an item's parent _collection_, not the item itself, when the item belonged to a collection.
 
   - In the editor, when a modal window is open (eg, a record delete confirmation pop-up) and the route is changed, the modal is now automatically closed. 
-
-## v2.1.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.2...2.1.3)) ~ October 1, 2013
-
-#### Added Features
-
-  - Neatline now adds a link to the exhibits browse page to the public navigation.
 
 ## v2.1.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.1...2.1.2)) ~ October 1, 2013
 
