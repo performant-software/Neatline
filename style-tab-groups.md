@@ -23,11 +23,11 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
 
   - Tags provide the "selectors" that makes it possible for the Neatline styling system to apply bulk updates to large collections of records. For example, you could do something like:
 
-  ```css
+  {% highlight css %}
   .virginia {
       fill-color: #08c;
   }
-  ```
+  {% endhighlight %}
 
   This automatically updates the "Fill Color" of all records in the exhibit tagged with `virginia`, even if there are hundreds of thousands of them. For more infomation about this, head over to the "Styling Exhibits with Neatline CSS" guide.
 
@@ -39,9 +39,9 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
 
   - If you're developing a custom theme or sub-plugin for an exhibit, you can use tags to toggle on and off different portions of the exhibit. For example, imagine you're mapping presidential election results, and you want to add a little widget that makes it possible for the user to check on or off different batches of data from 2000, 2004, etc. If all the data points are tagged to one of the election cycles, you could just run simple API queries like:
 
-  ```javascript
+  {% highlight javascript %}
   Neatline.execute('MAP:load', { tags: ['2004', 'democrat'] });
-  ```
+  {% endhighlight %}
 
 ### Tag requirements
 

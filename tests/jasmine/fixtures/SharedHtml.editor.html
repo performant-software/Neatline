@@ -1,0 +1,1409 @@
+
+<!-- Editor. -->
+<div id="editor"></div>
+
+<!-- Exhibit. -->
+
+<div id="neatline" class="">
+  <div id="neatline-map" class="neatline-block"></div>
+</div>
+
+<!-- Globals constants. -->
+<script type="text/javascript">
+  Neatline.g = {"neatline":{"exhibit":{"owner_id":1,"added":null,"modified":"2013-12-01 02:59:58","published":null,"item_query":null,"spatial_layers":null,"spatial_layer":"OpenStreetMap","image_layer":null,"image_height":null,"image_width":null,"zoom_levels":20,"wms_address":null,"wms_layers":null,"widgets":null,"title":null,"slug":"test-slug","narrative":null,"spatial_querying":1,"public":1,"styles":null,"map_focus":null,"map_zoom":null,"id":"220"},"records_api":"\/neatline\/records","exhibits_api":"\/neatline\/exhibits\/220","items_api":"\/items\/browse","per_page":50,"styles":{"presenter":"StaticBubble","fill_color":"#00aeff","fill_color_select":"#00aeff","stroke_color":"#000000","stroke_color_select":"#000000","fill_opacity":"0.3","fill_opacity_select":"0.4","stroke_opacity":"0.9","stroke_opacity_select":"1.0","stroke_width":"2","point_radius":"10"},"spatial_layers":[{"title":"OpenStreetMap","id":"OpenStreetMap","type":"OpenStreetMap"}]}}</script>
+
+<!-- Underscore templates. -->
+
+<script id="static-bubble-template" type="text/template">
+  <a name="close" class="close">&times;</a>
+  <div class="title" rv-html="record:title"></div>
+  <div class="body" rv-html="record:body"></div>
+</script>
+
+<!-- Plugin templates. -->
+
+<script>
+  STRINGS = {
+    record: {
+      save: {
+        success:  'The record was saved successfully!',
+        error:    'There was an error; the record was not saved.'
+      },
+      remove: {
+        success:  'The record was deleted successfully!',
+        error:    'There was an error; the record was not deleted.'
+      },
+      add: {
+        success:  'New record created successfully!',
+        error:    'There was an error; a new record was not created.'
+      },
+      placeholders: {
+        title:    '[Untitled]'
+      }
+    },
+    exhibit: {
+      save: {
+        success:  'The exhibit was saved successfully!',
+        error:    'There was an error; the exhibit was not saved.'
+      }
+    },
+    styles: {
+      save: {
+        success:  'The styles were saved successfully!',
+        error:    'There was an error; the styles were not saved.'
+      }
+    },
+    svg: {
+      parse: {
+        success:  'SVG parsed successfully!',
+        error:    'There was an error; SVG could not be parsed.'
+      }
+    }
+  };
+</script>
+
+<span id="loader" class="alert alert-info">
+  Loading</span>
+
+<!-- Delete confirmation. -->
+<div id="delete-modal" class="modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4>Are you sure?</h4>
+      </div>
+
+      <div class="modal-body">
+        <p>
+          This will delete the record from the database and remove all
+            associated metadata. This action cannot be undone.        </p>
+      </div>
+
+      <div class="modal-footer">
+
+        <a name="cancel" class="btn btn-default" data-dismiss="modal">
+          Cancel        </a>
+
+        <a name="delete" class="btn btn-danger">
+          Yes, delete        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SVG import. -->
+<div id="svg-modal" class="modal" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4>Enter SVG</h4>
+      </div>
+
+      <div class="modal-body">
+
+        
+<div class="form-group">
+
+  <label>
+
+    SVG
+    
+  </label>
+
+  <textarea
+
+    class="form-control code"
+
+    
+    
+          name="svg"
+    
+  ></textarea>
+
+</div>
+
+        
+<div class="form-group">
+
+  <label>
+
+    Density
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="density"
+    
+    
+    
+          value="1.0"
+    
+  />
+
+</div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <a name="cancel" class="btn btn-default" data-dismiss="modal">
+          Cancel        </a>
+
+        <a name="parse" class="btn btn-primary">
+          Parse        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Underscore templates. -->
+
+<script id="exhibit-menu-template" type="text/template">
+
+  <!-- Back to Omeka. -->
+  <a class="back" href="/neatline">
+    &larr; Back to Omeka
+  </a>
+
+  <!-- Exhibit title. -->
+  <p class="lead"></p>
+
+  <!-- Main navigation. -->
+  <ul class="nav nav-pills">
+
+    <li class="tab" data-slug="records">
+      <a href="#records">
+        <span class="glyphicon glyphicon-list"></span>
+        Records
+      </a>
+    </li>
+    <li class="tab" data-slug="styles">
+      <a href="#styles">
+        <span class="glyphicon glyphicon-cog"></span>
+        Styles
+      </a>
+    </li>
+
+    <!-- Widget tabs. -->
+    
+
+  </ul>
+
+</script>
+
+<script id="exhibit-styles-template" type="text/template">
+
+  <div class="form-group">
+    <label>Stylesheet</label>
+    <div id="styles"></div>
+  </div>
+
+  
+<div class="form-group">
+
+  <label>
+
+    Default Map Focus
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="map-focus"
+    
+    
+          rv-value="exhibit:map_focus"
+    
+    
+  />
+
+</div>
+
+  
+<div class="form-group">
+
+  <label>
+
+    Default Map Zoom
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="map-zoom"
+    
+    
+          rv-value="exhibit:map_zoom"
+    
+    
+  />
+
+</div>
+
+  
+<a class="btn btn-default btn-xs"
+      name="set-focus"
+  >
+  Use Current Viewport as Default</a>
+
+  
+<div class="actions">
+  <a name="save" class="btn btn-primary btn-lg" \>
+    <span class="glyphicon glyphicon-floppy-saved"></span>
+    Save  </a>
+</div>
+
+</script>
+
+<script id="record-form-template" type="text/template">
+
+  <!-- Close button. -->
+  
+<a name="close" class="close">&times;</a>
+
+  <!-- Header. -->
+  <p class="lead">
+    <span class="id" rv-text="record:id | recordId"></span>
+    <span class="title" rv-text="record:title | recordTitle"></span>
+  </p>
+
+  <!-- Tabs. -->
+  <ul class="nav nav-pills">
+    <li class="tab">
+      <a href="#record-text" data-toggle="tab" data-slug="text">
+        <span class="glyphicon glyphicon-font"></span> Text
+      </a>
+    </li>
+    <li class="tab">
+      <a href="#record-map" data-toggle="tab" data-slug="map">
+        <span class="glyphicon glyphicon-globe"></span> Map
+      </a>
+    </li>
+    <li class="tab">
+      <a href="#record-style" data-toggle="tab" data-slug="style">
+        <span class="glyphicon glyphicon-cog"></span> Style
+      </a>
+    </li>
+  </ul>
+
+  <!-- Panels. -->
+  <div class="tab-content">
+    <div class="tab-pane text" id="record-text">
+      
+
+<div class="form-group">
+
+  <label>
+
+    Omeka ID
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="item-id"
+    
+          placeholder="Search Omeka Items"
+    
+          rv-value="record:item_id"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Slug
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="slug"
+    
+    
+          rv-value="record:slug"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Title
+          ( <a class="label-link" data-textarea="title">
+          Edit HTML
+        </a> )
+    
+  </label>
+
+  <textarea
+
+    class="form-control "
+
+          id="title"
+    
+          rv-value="record:title"
+    
+          name="title"
+    
+  ></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Body
+          ( <a class="label-link" data-textarea="body">
+          Edit HTML
+        </a> )
+    
+  </label>
+
+  <textarea
+
+    class="form-control "
+
+          id="body"
+    
+          rv-value="record:body"
+    
+          name="body"
+    
+  ></textarea>
+
+</div>
+    </div>
+    <div class="tab-pane map" id="record-map">
+      
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="pan" checked>
+    Navigate  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="point">
+    Draw Point  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="line">
+    Draw Line  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="poly">
+    Draw Polygon  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="regPoly">
+    Draw Regular Polygon  </label>
+</div>
+
+
+<div class="regular-polygon">
+
+  <div class="form-group">
+    <input type="text" class="form-control" name="sides" value="3" />
+    Sides  </div>
+
+  <div class="form-group">
+    <input type="text" class="form-control" name="snap" value="15" />
+    Snap Angle  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" name="irreg">
+      Irregular?    </label>
+  </div>
+
+</div>
+
+
+<div class="radio">
+  <label>
+
+    <input type="radio" name="mode" value="svg">
+    Draw SVG    ( <a href="#svg-modal" data-toggle="modal" class="label-link">
+      Enter Markup    </a> )
+
+  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="modify">
+    Modify Shape  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="rotate">
+    Rotate Shape  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="resize">
+    Resize Shape  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="drag">
+    Drag Shape  </label>
+</div>
+
+
+<div class="radio">
+  <label>
+    <input type="radio" name="mode" value="remove">
+    Delete Shape  </label>
+</div>
+
+
+<a name="clear" class="btn btn-primary btn-xs">
+  Clear all Geometry</a>
+
+
+<hr>
+
+
+
+<div class="form-group">
+
+  <label>
+
+    Geometry (Well-Known Text)
+    
+  </label>
+
+  <textarea
+
+    class="form-control code"
+
+    
+          rv-value="record:coverage"
+    
+          name="coverage"
+    
+  ></textarea>
+
+</div>
+    </div>
+    <div class="tab-pane style" id="record-style">
+      
+<legend>Groups</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Tags
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="tags"
+    
+    
+          rv-value="record:tags"
+    
+    
+  />
+
+</div>
+
+  
+<div class="form-group">
+
+  <label>Widgets</label>
+
+    <select
+
+      class="form-control "
+
+              name="widgets"
+      
+              multiple="multiple"
+      
+              rv-value="record:widgets | commaDelimited"
+      
+    >
+
+              <option value="Widget1">
+          Widget1 Label        </option>
+              <option value="Widget2">
+          Widget2 Label        </option>
+              <option value="Widget3">
+          Widget3 Label        </option>
+      
+    </select>
+
+</div>
+
+
+<div class="form-group">
+
+  <label>Presenter</label>
+
+    <select
+
+      class="form-control "
+
+              name="presenter"
+      
+      
+              rv-value="record:presenter"
+      
+    >
+
+              <option value="None">
+          None        </option>
+              <option value="StaticBubble">
+          Static Bubble        </option>
+              <option value="Presenter1">
+          Presenter1 Label        </option>
+              <option value="Presenter2">
+          Presenter2 Label        </option>
+              <option value="Presenter3">
+          Presenter3 Label        </option>
+      
+    </select>
+
+</div>
+
+<legend>Colors</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Fill Color
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview color"
+
+          name="fill-color"
+    
+    
+          rv-value="record:fill_color"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Fill Color (Selected)
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview color"
+
+          name="fill-color-select"
+    
+    
+          rv-value="record:fill_color_select"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Stroke Color
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview color"
+
+          name="stroke-color"
+    
+    
+          rv-value="record:stroke_color"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Stroke Color (Selected)
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview color"
+
+          name="stroke-color-select"
+    
+    
+          rv-value="record:stroke_color_select"
+    
+    
+  />
+
+</div>
+
+<legend>Opacities</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Fill Opacity
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview opacity"
+
+          name="fill-opacity"
+    
+    
+          rv-value="record:fill_opacity"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Fill Opacity (Selected)
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview opacity"
+
+          name="fill-opacity-select"
+    
+    
+          rv-value="record:fill_opacity_select"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Stroke Opacity
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview opacity"
+
+          name="stroke-opacity"
+    
+    
+          rv-value="record:stroke_opacity"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Stroke Opacity (Selected)
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview opacity"
+
+          name="stroke-opacity-select"
+    
+    
+          rv-value="record:stroke_opacity_select"
+    
+    
+  />
+
+</div>
+
+<legend>Dimensions</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Stroke Width
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview integer"
+
+          name="stroke-width"
+    
+    
+          rv-value="record:stroke_width"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Point Radius
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview integer"
+
+          name="point-radius"
+    
+    
+          rv-value="record:point_radius"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Z-Index
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="zindex"
+    
+    
+          rv-value="record:zindex"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Order / Weight
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="weight"
+    
+    
+          rv-value="record:weight"
+    
+    
+  />
+
+</div>
+
+<legend>Dates</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Start Date
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="start-date"
+    
+    
+          rv-value="record:start_date"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    End Date
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="end-date"
+    
+    
+          rv-value="record:end_date"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    After Date
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="after-date"
+    
+    
+          rv-value="record:after_date"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Before Date
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="before-date"
+    
+    
+          rv-value="record:before_date"
+    
+    
+  />
+
+</div>
+
+<legend>Imagery</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Point Image
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control preview"
+
+          name="point-image"
+    
+    
+          rv-value="record:point_image"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    WMS Address
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="wms-address"
+    
+    
+          rv-value="record:wms_address"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    WMS Layers
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="wms-layers"
+    
+    
+          rv-value="record:wms_layers"
+    
+    
+  />
+
+</div>
+
+<legend>Visibility</legend>
+
+
+<div class="form-group">
+
+  <label>
+
+    Min Zoom
+          ( <a class="label-link" name="set-min-zoom">
+        Use Current        </a> )
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="min-zoom"
+    
+    
+          rv-value="record:min_zoom"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Max Zoom
+          ( <a class="label-link" name="set-max-zoom">
+        Use Current        </a> )
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="max-zoom"
+    
+    
+          rv-value="record:max_zoom"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Default Focus
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="map-focus"
+    
+    
+          rv-value="record:map_focus"
+    
+    
+  />
+
+</div>
+
+
+<div class="form-group">
+
+  <label>
+
+    Default Zoom
+    
+  </label>
+
+  <input
+
+    type="text"
+    class="form-control "
+
+          name="map-zoom"
+    
+    
+          rv-value="record:map_zoom"
+    
+    
+  />
+
+</div>
+
+
+<a class="btn btn-default btn-xs"
+      name="set-focus"
+  >
+  Use Current Viewport as Default</a>
+    </div>
+  </div>
+
+  <!-- Save/Delete buttons. -->
+  
+<div class="actions">
+
+  <a name="save" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-floppy-saved"></span>
+    Save  </a>
+
+  <a href="#delete-modal" class="btn btn-default btn-lg" data-toggle="modal">
+    <span class="glyphicon glyphicon-trash"></span>
+    Delete  </a>
+
+</div>
+
+</script>
+
+<script id="record-list-template" type="text/template">
+
+  <!-- Add record link. -->
+  <a href="#record/add" class="btn btn-primary btn-lg add">
+    <span class="glyphicon glyphicon-file"></span>
+    New Record  </a>
+
+  <!-- Top pagination. -->
+  
+<%
+
+if (
+
+  // If we're not map-mirroring.
+  !_.string.startsWith(query, 'map:') &&
+
+  // And if the records don't fit on a single page.
+  records.metadata.numFound > Neatline.g.neatline.per_page
+
+) {
+
+  // Base fragment.
+  var prevUrl = '#records/search';
+  var nextUrl = '#records/search';
+
+  // Add existing query.
+  if (!_.isEmpty(query)) {
+    prevUrl += '/query=' + query;
+    nextUrl += '/query=' + query;
+  }
+
+  // Compute previous/next start offsets.
+  var prevStart = records.metadata.start - limit;
+  var nextStart = records.metadata.start + limit;
+
+  var prevActive = true;
+  var nextActive = true;
+
+  // Add offset to previous URL.
+  if (prevStart > 0) {
+    prevUrl += '/start=' + prevStart;
+  } else {
+    if (_.isEmpty(query)) prevUrl = '#records';
+    if (records.metadata.start == 0) prevActive = false;
+  }
+
+  // Add offset to next URL.
+  if (nextStart < records.metadata.numFound) {
+    nextUrl += '/start=' + nextStart;
+  } else {
+    nextUrl += '/start=' + records.metadata.start;
+    nextActive = false;
+  }
+
+%>
+
+  <div class="pagination-container">
+
+    <ul class="pagination">
+      <li <% if (!prevActive) { %><%='class="disabled"'%><% } %>>
+        <a class="prev" href="<%= prevUrl %>">&laquo;</a>
+      </li>
+      <li <% if (!nextActive) { %><%='class="disabled"'%><% } %>>
+        <a class="next" href="<%= nextUrl %>">&raquo;</a>
+      </li>
+    </ul>
+
+    <div class="offset">
+      <span class="start"><%= records.metadata.start + 1 %></span>
+      <span class="separator">-</span>
+      <span class="end"><%= records.metadata.start+records.length %></span>
+      <span class="separator">of</span>
+      <span class="total"><%= records.metadata.numFound %></span>
+    </div>
+
+  </div>
+
+<% } %>
+
+  <div class="list-group">
+
+    <% records.each(function(r) { %>
+
+      <!-- Record listing. -->
+      <a href="#record/<%= r.id %>" data-id="<%= r.id %>"
+        class="list-group-item">
+
+        <!-- Title. -->
+        <span class="title">
+          <% if (!_.isEmpty(r.get('title'))) { %>
+            <%= _.string.stripTags(r.get('title')) %>
+          <% } else { %>
+            <%= STRINGS.record.placeholders.title %>
+          <% } %>
+        </span>
+
+        <!-- Body. -->
+        <span class="body">
+          <%= _.string.prune(
+            _.string.stripTags(r.get('body')), 100
+          ) %>
+        </span>
+
+      </a>
+
+    <% }); %>
+
+  </table>
+
+  <!-- Bottom pagination. -->
+  
+<%
+
+if (
+
+  // If we're not map-mirroring.
+  !_.string.startsWith(query, 'map:') &&
+
+  // And if the records don't fit on a single page.
+  records.metadata.numFound > Neatline.g.neatline.per_page
+
+) {
+
+  // Base fragment.
+  var prevUrl = '#records/search';
+  var nextUrl = '#records/search';
+
+  // Add existing query.
+  if (!_.isEmpty(query)) {
+    prevUrl += '/query=' + query;
+    nextUrl += '/query=' + query;
+  }
+
+  // Compute previous/next start offsets.
+  var prevStart = records.metadata.start - limit;
+  var nextStart = records.metadata.start + limit;
+
+  var prevActive = true;
+  var nextActive = true;
+
+  // Add offset to previous URL.
+  if (prevStart > 0) {
+    prevUrl += '/start=' + prevStart;
+  } else {
+    if (_.isEmpty(query)) prevUrl = '#records';
+    if (records.metadata.start == 0) prevActive = false;
+  }
+
+  // Add offset to next URL.
+  if (nextStart < records.metadata.numFound) {
+    nextUrl += '/start=' + nextStart;
+  } else {
+    nextUrl += '/start=' + records.metadata.start;
+    nextActive = false;
+  }
+
+%>
+
+  <div class="pagination-container">
+
+    <ul class="pagination">
+      <li <% if (!prevActive) { %><%='class="disabled"'%><% } %>>
+        <a class="prev" href="<%= prevUrl %>">&laquo;</a>
+      </li>
+      <li <% if (!nextActive) { %><%='class="disabled"'%><% } %>>
+        <a class="next" href="<%= nextUrl %>">&raquo;</a>
+      </li>
+    </ul>
+
+    <div class="offset">
+      <span class="start"><%= records.metadata.start + 1 %></span>
+      <span class="separator">-</span>
+      <span class="end"><%= records.metadata.start+records.length %></span>
+      <span class="separator">of</span>
+      <span class="total"><%= records.metadata.numFound %></span>
+    </div>
+
+  </div>
+
+<% } %>
+
+</script>
+
+<script id="search-template" type="text/template">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search" />
+  </div>
+</script>
+
+<!-- Plugin templates. -->
