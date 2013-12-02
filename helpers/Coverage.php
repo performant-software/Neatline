@@ -11,13 +11,15 @@
 
 
 /**
- * Convert a KML document to a WKT string.
+ * Convert a coverage to WKT.
  *
- * @param string $kml The KML document.
+ * @param string $coverage The raw coverage.
  * @return string The WKT.
  */
-function nl_kmlToWkt($kml) {
-    return geoPHP::load($kml)->out('wkt');
+function nl_parseWkt($coverage) {
+    try {
+        return geoPHP::load($kml)->out('wkt');
+    } catch (Exception $e) {}
 }
 
 
@@ -27,7 +29,7 @@ function nl_kmlToWkt($kml) {
  * @param $record NeatlineRecord The record to get the feature for.
  * @return string|null
  */
-function nl_getNeatlineFeatures($record) {
+function nl_getNeatlineFeaturesWkt($record) {
 
     // Halt if Features is not present.
     if (!plugin_is_active('NeatlineFeatures')) return;
@@ -45,7 +47,7 @@ function nl_getNeatlineFeatures($record) {
 
         // If KML, convert to WKT.
         if (strpos($result, '<kml') !== false) {
-            $result = nl_kmlToWkt(trim($result));
+            $result = nl_parseWkt(trim($result));
         }
 
         // If WKT, implode and wrap as `GEOMETRYCOLLECTION`.

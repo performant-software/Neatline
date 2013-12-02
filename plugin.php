@@ -45,7 +45,7 @@ require_once NL_DIR.'/migrations/2.1.2/Neatline_Migration_212.php';
 // HELPERS
 require_once NL_DIR.'/helpers/Acl.php';
 require_once NL_DIR.'/helpers/Assets.php';
-require_once NL_DIR.'/helpers/Features.php';
+require_once NL_DIR.'/helpers/Coverage.php';
 require_once NL_DIR.'/helpers/Globals.php';
 require_once NL_DIR.'/helpers/Jobs.php';
 require_once NL_DIR.'/helpers/Layers.php';
