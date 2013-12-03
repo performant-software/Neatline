@@ -14,12 +14,11 @@
  * Convert a coverage to WKT.
  *
  * @param string $coverage The raw coverage.
- * @return string The WKT.
+ * @return string|null The WKT.
  */
 function nl_parseWkt($coverage) {
-    try {
-        return geoPHP::load($coverage)->out('wkt');
-    } catch (Exception $e) {}
+    $geometry = geoPHP::load($coverage);
+    return $geometry ? $geometry->out('wkt') : null;
 }
 
 

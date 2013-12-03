@@ -15,20 +15,12 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
 
 
     /**
-     * Bootstrap the plugin.
+     * Install plugins listed in `plugins.ini`, alias tables.
      */
     public function setUp()
     {
 
         parent::setUp();
-
-        // Authenticate and set the current user.
-        $this->user = $this->db->getTable('User')->find(1);
-        $this->_authenticateUser($this->user);
-
-        // Install the plugin.
-        $this->helper = new Omeka_Test_Helper_Plugin;
-        $this->helper->setUp('Neatline');
 
         // If a `plugins.ini` file is provided.
         if (file_exists(NL_TEST_DIR.'/plugins.ini')) {
@@ -39,7 +31,7 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
             // Install each of the siblings.
             if (!is_null($config->plugins)) {
                 foreach ($config->plugins as $plugin) {
-                    $this->helper->setUp($plugin);
+                    $this->_installPluginOrSkip($plugin);
                 }
             }
 

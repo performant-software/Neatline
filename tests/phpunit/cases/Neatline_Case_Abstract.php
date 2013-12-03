@@ -14,6 +14,25 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 {
 
 
+    /**
+     * Log in, install Neatline.
+     */
+    public function setUp()
+    {
+
+        parent::setUp();
+
+        // Authenticate and set the current user.
+        $this->user = $this->db->getTable('User')->find(1);
+        $this->_authenticateUser($this->user);
+
+        // Install Neatline.
+        $this->helper = new Omeka_Test_Helper_Plugin;
+        $this->helper->setUp('Neatline');
+
+    }
+
+
     // STATE MANAGEMENT
     // ------------------------------------------------------------------------
 
@@ -42,33 +61,17 @@ SQL;
 
 
     /**
-     * If the passed plugin is not installed/active, skip the test.
+     * Install the passed plugin. If the installation fails, skip the test.
      *
      * @param string $pluginName The plugin name.
      */
-    protected function _skipIfNotPlugin($pluginName)
+    protected function _installPluginOrSkip($pluginName)
     {
-        if (!plugin_is_active($pluginName)) $this->markTestSkipped();
-    }
-
-
-    /**
-     * Deactivate a plugin.
-     *
-     * @param string $pluginName The plugin name.
-     * @param bool $active If true, set the plugin active.
-     */
-    protected function _setPluginActive($pluginName, $active)
-    {
-
-        // Get the plugin record.
-        $plugin = $this->db->getTable('Plugin')
-            ->findByDirectoryName($pluginName);
-
-        // (De)activate.
-        $plugin->setActive($active);
-        $plugin->save();
-
+        try {
+            $this->helper->setUp($pluginName);
+        } catch (Exception $e) {
+            $this->markTestSkipped("Plugin $pluginName can't be installed.");
+        }
     }
 
 
@@ -177,6 +180,24 @@ SQL;
             (item_id, element_text_id, is_map, geo) VALUES (?, ?, ?, ?);",
             array($item->id, 0, 1, $coverage)
         );
+    }
+
+
+    /**
+     * Add a Dublin Core "Coverage" element to an item.
+     *
+     * @param Item $item The parent item.
+     * @param string $coverage The feature coverage.
+     */
+    protected function _addCoverageElement($item, $coverage)
+    {
+        update_item($item, array(), array(
+            'Dublin Core' => array (
+                'Coverage' => array(
+                    array('text' => $coverage, 'html' => false)
+                )
+            )
+        ));
     }
 
 

@@ -13,6 +13,10 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
 {
 
 
+    // `is_coverage` flag:
+    // ------------------------------------------------------------------------
+
+
     /**
      * `save` should toggle the `is_coverage` flag depending on whether or not
      * a coverage geometry is set.
@@ -45,7 +49,7 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
      * When a coverage was previously defined but then cleared, `save` should
      * flip off `is_coverage`.
      */
-    public function testDeactivateIsCoverage()
+    public function testUnsetIsCoverage()
     {
 
         $record = new NeatlineRecord();
@@ -61,16 +65,15 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     }
 
 
+    // Neatline Features coverage import:
+    // ------------------------------------------------------------------------
+
+
     /**
      * `save` should pass silently when NeatlineFeatures is not active.
      */
-    public function testNeatlineFeaturesNotInstalled()
+    public function testDoNothingWhenFeaturesNotInstalled()
     {
-
-        $this->_skipIfNotPlugin('NeatlineFeatures');
-
-        // Deactivate features.
-        $this->_setPluginActive('NeatlineFeatures', false);
 
         $record = new NeatlineRecord();
         $record->save();
@@ -82,12 +85,12 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
 
 
     /**
-     * `save` should pass silently when no NeatlineFeatures data exists.
+     * `save` should pass silently when no NeatlineFeatures coverage exists.
      */
-    public function testNoFeatureData()
+    public function testDoNothingWhenNoFeaturesCoverage()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -104,23 +107,22 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     /**
      * `save` should import WKT data from NeatlineFeatures when it exists.
      */
-    public function testImportWkt()
+    public function testImportFeaturesWkt()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
 
-        $this->_addNeatlineFeature($item, 'POINT(1 2)');
+        $this->_addNeatlineFeature($item, 'POINT(1 2)|POINT(3 4)');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
 
         // Should import WKT.
         $this->assertEquals(
-            'GEOMETRYCOLLECTION(POINT(1 2))',
-            $record->coverage
+            'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))', $record->coverage
         );
 
     }
@@ -129,10 +131,10 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     /**
      * `save` should import KML data from NeatlineFeatures.
      */
-    public function testImportKml()
+    public function testImportFeaturesKml()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $kml = <<<KML
         <kml xmlns="http://earth.google.com/kml/2.0">
@@ -154,8 +156,7 @@ KML;
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
-            'GEOMETRYCOLLECTION (POINT (1 2))',
-            $record->coverage
+            nl_parseWkt($kml), $record->coverage
         );
 
     }
@@ -164,10 +165,10 @@ KML;
     /**
      * Data from Neatline Features shouldn't clobber existing coverages.
      */
-    public function testPreserveExistingCoverages()
+    public function testImportFeaturesPreserveExistingCoverages()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -175,13 +176,12 @@ KML;
         $this->_addNeatlineFeature($item, 'POINT(1 2)');
 
         $record = new NeatlineRecord($exhibit, $item);
-        $record->coverage = 'GEOMETRYCOLLECTION(POINT(3 4))';
+        $record->coverage = 'POINT(3 4)';
         $record->save();
 
         // Shouldn't modify existing coverage.
         $this->assertEquals(
-            'GEOMETRYCOLLECTION(POINT(3 4))',
-            $record->coverage
+            'POINT(3 4)', $record->coverage
         );
 
     }
