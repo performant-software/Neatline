@@ -18,7 +18,7 @@
  */
 function nl_parseWkt($coverage) {
     try {
-        return geoPHP::load($kml)->out('wkt');
+        return geoPHP::load($coverage)->out('wkt');
     } catch (Exception $e) {}
 }
 

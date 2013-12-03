@@ -250,13 +250,19 @@ class NeatlineRecord extends Neatline_Row_Expandable
         // Get parent item.
         $item = $this->getItem();
 
+        // Only try to import coverage values if (a) a parent item is defined
+        // and (b) the local coverage value is currently empty (this prevents
+        // modified coverages from being overwritten on save).
+
         if ($item && !$this->coverage) {
 
-            // Import from Neatline Features.
-            $wkt = nl_getNeatlineFeaturesWkt($this);
-            if (is_string($wkt)) $this->coverage = $wkt;
+            if (plugin_is_active('NeatlineFeatures')) {
 
-            else {
+                // Import from Neatline Features.
+                $wkt = nl_getNeatlineFeaturesWkt($this);
+                if (is_string($wkt)) $this->coverage = $wkt;
+
+            } else {
 
                 // Import frome DC Coverage element.
                 $coverage = metadata($item, array('Dublin Core', 'Coverage'));
