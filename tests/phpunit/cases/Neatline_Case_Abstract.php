@@ -75,6 +75,19 @@ SQL;
     }
 
 
+    /**
+     * Deactivate the passed plugin.
+     *
+     * @param string $pluginName The plugin name.
+     */
+    protected function _deactivatePlugin($pluginName)
+    {
+        $plugin = $this->helper->pluginLoader->getPlugin($pluginName);
+        $plugin->setActive(false);
+        $plugin->save();
+    }
+
+
     // RECORD MOCKS
     // ------------------------------------------------------------------------
 

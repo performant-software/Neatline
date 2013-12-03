@@ -187,4 +187,60 @@ KML;
     }
 
 
+    // Dublin Core "Coverage" import:
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * `save` should not set a coverage when Dublin Core "Coverage" is empty.
+     * @group wkt
+     */
+    public function testDoNothingWhenNoDublinCoreCoverage()
+    {
+
+        $this->_deactivatePlugin('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should not set coverage.
+        $this->assertNull($record->coverage);
+
+    }
+
+
+    /**
+     * `save` should no set a coverage when Dublin Core "Coverage" cannot be
+     * parsed as a valid coverage.
+     * @group wkt
+     */
+    public function testDoNothingWhenInvalidDublinCoreCoverage()
+    {
+        $this->markTestSkipped();
+    }
+
+
+    /**
+     * `save` should import WKT from the Dublin Core "Coverage" element.
+     * @group wkt
+     */
+    public function testImportDublinCoreWkt()
+    {
+        $this->markTestSkipped();
+    }
+
+
+    /**
+     * `save` should import KML from the Dublin Core "Coverage" element.
+     * @group wkt
+     */
+    public function testImportDublinCoreKml()
+    {
+        $this->markTestSkipped();
+    }
+
+
 }
