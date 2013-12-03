@@ -2,7 +2,9 @@
 
 #### Added Features
 
-  - Neatline now adds a link to the exhibits browse page to the public navigation.
+  - Adds a link to the exhibits browse page to the public navigation.
+
+  - Adds a "View the item in Omeka" link to the default `item.php` template.
 
   - Makes it possible to add custom vector annotations to records that are associated with WMS layers.
 
