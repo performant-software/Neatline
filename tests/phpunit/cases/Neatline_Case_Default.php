@@ -15,7 +15,7 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
 
 
     /**
-     * Log in, install Neatline.
+     * Log in, create plugin helper.
      */
     public function setUp()
     {
@@ -26,7 +26,7 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Install Neatline.
+        // Create the plugin manager.
         $this->helper = new Omeka_Test_Helper_Plugin;
         $this->helper->setUp('Neatline');
 
@@ -410,6 +410,115 @@ SQL
     {
         $records = $table->findAll();
         return array_pop($records);
+    }
+
+
+    // FIXTURES
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Inject the Jasmine fixtures directory. Broken away so that sub-plugins
+     * can write fixtures into their own Jasmine suites.
+     *
+     * @return string The directory.
+     */
+    protected function _getFixturesPath()
+    {
+        return NL_DIR.'/tests/jasmine/fixtures/';
+    }
+
+
+    /**
+     * Write a fixture file.
+     *
+     * @param string $body The fixture body.
+     * @param string $file The name of the fixture file.
+     */
+    protected function _writeFixture($body, $file)
+    {
+
+        // Open the fixture file.
+        $fixture = fopen($this->_getFixturesPath().$file, 'w');
+
+        // Write fixture.
+        fwrite($fixture, $body);
+        fclose($fixture);
+
+    }
+
+
+    /**
+     * Write the response body from a route to a fixture file.
+     *
+     * @param string $route The resource location.
+     * @param string $file The name of the fixture file.
+     */
+    protected function _writeFixtureFromRoute($route, $file)
+    {
+
+        // Request the route.
+        $this->resetResponse();
+        $this->dispatch($route);
+
+        // Write the fixture.
+        $response = $this->_getResponseBody();
+        $this->_writeFixture($response, $file);
+
+    }
+
+
+    /**
+     * Write a record API fixture.
+     *
+     * @param NeatlineRecord $record The record to load.
+     * @param string $file The name of the fixture file.
+     */
+    public function _writeRecordApiFixture($record, $file)
+    {
+        $this->resetRequest();
+        $this->_writeFixtureFromRoute('neatline/records/'.$record->id, $file);
+    }
+
+
+    /**
+     * Write a records API fixture.
+     *
+     * @param NeatlineExhibit $exhibit The exhibit to query.
+     * @param string $file The name of the fixture file.
+     */
+    public function _writeRecordsApiFixture($exhibit, $file)
+    {
+        $this->request->setQuery('exhibit_id', $exhibit->id);
+        $this->_writeFixtureFromRoute('neatline/records', $file);
+    }
+
+
+    /**
+     * Render an exhibit HTML fixture.
+     *
+     * @param NeatlineExhibit $exhibit The current exhibit.
+     * @param string $file The name of the fixture file.
+     */
+    protected function _writeExhibitMarkupFixture($exhibit, $file)
+    {
+        get_view()->neatline_exhibit = $exhibit;
+        $html = get_view()->partial('exhibits/partials/exhibit.php');
+        $this->_writeFixture($html, $file);
+    }
+
+
+    /**
+     * Render an editor HTML fixture.
+     *
+     * @param NeatlineExhibit $exhibit The current exhibit.
+     * @param string $file The name of the fixture file.
+     */
+    protected function _writeEditorMarkupFixture($exhibit, $file)
+    {
+        get_view()->neatline_exhibit = $exhibit;
+        $html = get_view()->partial('exhibits/partials/editor_core.php');
+        $this->_writeFixture($html, $file);
     }
 
 
