@@ -81,21 +81,6 @@ KML;
 
 
     /**
-     * `save` should pass silently when NeatlineFeatures is not active.
-     */
-    public function testDoNothingWhenFeaturesNotInstalled()
-    {
-
-        $record = new NeatlineRecord();
-        $record->save();
-
-        // Should not set coverage.
-        $this->assertNull($record->coverage);
-
-    }
-
-
-    /**
      * `save` should pass silently when no NeatlineFeatures coverage exists.
      */
     public function testDoNothingWhenNoFeaturesCoverage()
