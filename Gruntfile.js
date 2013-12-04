@@ -88,7 +88,7 @@ module.exports = function(grunt) {
       },
 
       phpunit_application: {
-        command: '../../vendor/bin/phpunit -c phpunit-application.xml',
+        command: '../../vendor/bin/phpunit --testsuite application',
         options: {
           execOptions: {
             cwd: 'tests/phpunit'
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
       },
 
       phpunit_migrations: {
-        command: '../../vendor/bin/phpunit -c phpunit-migrations.xml',
+        command: '../../vendor/bin/phpunit --testsuite migrations',
         options: {
           execOptions: {
             cwd: 'tests/phpunit'

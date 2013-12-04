@@ -22,7 +22,6 @@ require_once OMEKA_DIR.'/application/tests/bootstrap.php';
 // Generic test cases.
 require_once 'cases/Neatline_Case_Abstract.php';
 require_once 'cases/Neatline_Case_Default.php';
-require_once 'cases/Neatline_Case_Features.php';
 require_once 'cases/Neatline_Case_Fixture.php';
 
 // Migration test cases.

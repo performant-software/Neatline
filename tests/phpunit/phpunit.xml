@@ -1,0 +1,20 @@
+<phpunit bootstrap="bootstrap.php"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="true">
+
+    <testsuites>
+
+        <testsuite name="application">
+            <directory>unit</directory>
+            <directory>integration</directory>
+            <directory>fixtures</directory>
+        </testsuite>
+
+        <testsuite name="migrations">
+            <directory>migrations</directory>
+        </testsuite>
+
+    </testsuites>
+
+</phpunit>
