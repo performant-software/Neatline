@@ -116,9 +116,33 @@ KML;
 
 
     /**
-     * `save` should import WKT data from NeatlineFeatures when it exists.
+     * `save` should import regular WKT data from NeatlineFeatures.
      */
-    public function testImportFeaturesWkt()
+    public function testImportFeaturesRegularWkt()
+    {
+
+        $this->_skipIfNotPlugin('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $this->_addNeatlineFeature($item, 'POINT(1 2)');
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should import WKT.
+        $this->assertEquals(
+            'GEOMETRYCOLLECTION(POINT(1 2))', $record->coverage
+        );
+
+    }
+
+
+    /**
+     * `save` should import pipe-delimited WKT data from NeatlineFeatures.
+     */
+    public function testImportFeaturesPipeDelimitedWkt()
     {
 
         $this->_skipIfNotPlugin('NeatlineFeatures');
