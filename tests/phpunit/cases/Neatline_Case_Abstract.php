@@ -34,6 +34,9 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
         $this->_records  = $this->db->getTable('NeatlineRecord');
 
+        // Register script path.
+        get_view()->addScriptPath(NL_DIR.'/views/shared');
+
     }
 
 

@@ -37,20 +37,6 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
 
         }
 
-        // Register script path.
-        get_view()->addScriptPath(NL_DIR.'/views/shared');
-
-    }
-
-
-    /**
-     * Get the Jasmine fixtures directory.
-     *
-     * @return string The directory.
-     */
-    protected function _getFixturesPath()
-    {
-        return NL_DIR.'/tests/jasmine/fixtures/';
     }
 
 
