@@ -26,24 +26,12 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
         $this->user = $this->db->getTable('User')->find(1);
         $this->_authenticateUser($this->user);
 
-        // Create the plugin manager.
+        // Install plugins.
         $this->helper = new Omeka_Test_Helper_Plugin;
         $this->helper->setUp('Neatline');
 
-        // Install sibling plugins listed in `plugins.ini`.
-        if (file_exists(NL_TEST_DIR.'/plugins.ini')) {
-
-            // Parse `plugins.ini`.
-            $config = new Zend_Config_Ini(NL_TEST_DIR.'/plugins.ini');
-
-            // Install each of the siblings.
-            if (!is_null($config->plugins)) {
-                foreach ($config->plugins as $plugin) {
-                    $this->_installPluginOrSkip($plugin);
-                }
-            }
-
-        }
+        // Install plugins in `plugin.ini`.
+        $this->_installSiblingPlugins();
 
         // Alias plugin tables.
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
@@ -71,6 +59,30 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
 SQL
 );
         parent::tearDown();
+    }
+
+
+    /**
+     * Install all plugins listed in the `plugins.ini` file.
+     */
+    protected function _installSiblingPlugins()
+    {
+
+        // If a `plugin.ini` file exists.
+        if (file_exists(NL_TEST_DIR.'/plugins.ini')) {
+
+            // Parse `plugins.ini`.
+            $config = new Zend_Config_Ini(NL_TEST_DIR.'/plugins.ini');
+
+            // Install each of the siblings.
+            if (!is_null($config->plugins)) {
+                foreach ($config->plugins as $plugin) {
+                    $this->_installPluginOrSkip($plugin);
+                }
+            }
+
+        }
+
     }
 
 
