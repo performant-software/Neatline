@@ -202,7 +202,7 @@ KML;
 
 
     /**
-     * `save` should not set a coverage when Dublin Core "Coverage" is empty.
+     * `save` should not set a coverage when "Coverage" is empty.
      */
     public function testDoNothingWhenNoDublinCoreCoverage()
     {
@@ -222,8 +222,7 @@ KML;
 
 
     /**
-     * `save` should no set a coverage when Dublin Core "Coverage" cannot be
-     * parsed as a valid coverage.
+     * `save` should no set a coverage when "Coverage" is not WKT or KML.
      */
     public function testDoNothingWhenInvalidDublinCoreCoverage()
     {
@@ -234,7 +233,7 @@ KML;
         $item     = $this->_item();
 
         // Set invalid "Coverage".
-        $this->_addCoverageElement($item, 'wtf');
+        $this->_addCoverageElement($item, 'invalid');
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
@@ -246,7 +245,7 @@ KML;
 
 
     /**
-     * `save` should import WKT from the Dublin Core "Coverage" element.
+     * `save` should import WKT from the "Coverage" element.
      */
     public function testImportDublinCoreWkt()
     {
@@ -270,7 +269,7 @@ KML;
 
 
     /**
-     * `save` should import KML from the Dublin Core "Coverage" element.
+     * `save` should import KML from the "Coverage" element.
      */
     public function testImportDublinCoreKml()
     {
@@ -288,6 +287,31 @@ KML;
         // Should import KML and convert to WKT.
         $this->assertEquals(
             nl_extractWkt(self::KML), $record->coverage
+        );
+
+    }
+
+
+    /**
+     * Data from the "Coverage" element shouldn't clobber existing coverages.
+     */
+    public function testImportDublinCorePreserveExistingCoverages()
+    {
+
+        $this->_skipIfPlugin('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $this->_addCoverageElement($item, 'POINT(1 2)');
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->coverage = 'POINT(3 4)';
+        $record->save();
+
+        // Shouldn't modify existing coverage.
+        $this->assertEquals(
+            'POINT(3 4)', $record->coverage
         );
 
     }
