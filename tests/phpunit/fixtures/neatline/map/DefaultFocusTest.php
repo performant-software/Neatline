@@ -9,23 +9,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapDefaultFocus extends Neatline_Case_Default
+class FixturesTest_NeatlineMapDefaultFocus extends Neatline_Case_Fixture
 {
-
-
-    protected $_isAdminTest = false;
 
 
     public function testExhibit()
     {
 
-        $exhibit = $this->_exhibit();
-        $exhibit->spatial_layer = 'OpenStreetMap';
-        $exhibit->map_focus = '1,2';
-        $exhibit->map_zoom = 10;
-        $exhibit->save();
+        $this->exhibit->spatial_layer = 'OpenStreetMap';
+        $this->exhibit->map_focus = '1,2';
+        $this->exhibit->map_zoom = 10;
+        $this->exhibit->save();
 
-        $this->_writeExhibitMarkupFixture($exhibit,
+        $this->_writeExhibitMarkupFixture($this->exhibit,
             'NeatlineMapDefaultFocus.html'
         );
 

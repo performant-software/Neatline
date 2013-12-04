@@ -9,22 +9,18 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapWmsBaseLayer extends Neatline_Case_Default
+class FixturesTest_NeatlineMapWmsBaseLayer extends Neatline_Case_Fixture
 {
-
-
-    protected $_isAdminTest = false;
 
 
     public function testExhibit()
     {
 
-        $exhibit = $this->_exhibit();
-        $exhibit->wms_address = 'address';
-        $exhibit->wms_layers  = 'layers';
-        $exhibit->save();
+        $this->exhibit->wms_address = 'address';
+        $this->exhibit->wms_layers  = 'layers';
+        $this->exhibit->save();
 
-        $this->_writeExhibitMarkupFixture($exhibit,
+        $this->_writeExhibitMarkupFixture($this->exhibit,
             'NeatlineMapWmsBaseLayer.html'
         );
 

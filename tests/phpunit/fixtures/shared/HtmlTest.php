@@ -9,11 +9,8 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_SharedHtml extends Neatline_Case_Default
+class FixturesTest_SharedHtml extends Neatline_Case_Fixture
 {
-
-
-    protected $_isAdminTest = false;
 
 
     /**
@@ -26,7 +23,6 @@ class FixturesTest_SharedHtml extends Neatline_Case_Default
         $this->_mockRecordWidgets();
         $this->_mockPresenters();
 
-        $this->exhibit = $this->_exhibit();
         $this->exhibit->spatial_layer = 'OpenStreetMap';
         $this->exhibit->save();
 

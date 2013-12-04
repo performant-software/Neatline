@@ -42,14 +42,6 @@ abstract class Neatline_Case_Abstract extends Omeka_Test_AppTestCase
 
 
     /**
-     * Get the Jasmine fixtures directory.
-     *
-     * @return string The directory.
-     */
-    abstract protected function _getFixturesPath();
-
-
-    /**
      * Clear testing records. This needs to be done manually since the records
      * table is MyISAM (for spatial/fulltext indexes), and doesn't get cleared
      * with the rest of the tables when the transaction is rolled back.
@@ -264,103 +256,6 @@ SQL
         $this->request->setMethod('POST')->setRawBody(
             Zend_Json::encode($data)
         );
-    }
-
-
-    // FIXTURES
-    // ------------------------------------------------------------------------
-
-
-    /**
-     * Write a fixture file.
-     *
-     * @param string $body The fixture body.
-     * @param string $file The name of the fixture file.
-     */
-    protected function _writeFixture($body, $file)
-    {
-
-        // Open the fixture file.
-        $fixture = fopen($this->_getFixturesPath() . $file, 'w');
-
-        // Write fixture.
-        fwrite($fixture, $body);
-        fclose($fixture);
-
-    }
-
-
-    /**
-     * Write the response body from a route to a fixture file.
-     *
-     * @param string $route The resource location.
-     * @param string $file The name of the fixture file.
-     */
-    protected function _writeFixtureFromRoute($route, $file)
-    {
-
-        // Request the route.
-        $this->resetResponse();
-        $this->dispatch($route);
-
-        // Write the fixture.
-        $response = $this->_getResponseBody();
-        $this->_writeFixture($response, $file);
-
-    }
-
-
-    /**
-     * Write a record API fixture.
-     *
-     * @param NeatlineRecord $record The record to load.
-     * @param string $file The name of the fixture file.
-     */
-    public function _writeRecordApiFixture($record, $file)
-    {
-        $this->resetRequest();
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id, $file);
-    }
-
-
-    /**
-     * Write a records API fixture.
-     *
-     * @param NeatlineExhibit $exhibit The exhibit to query.
-     * @param string $file The name of the fixture file.
-     */
-    public function _writeRecordsApiFixture($exhibit, $file)
-    {
-        $this->request->setQuery('exhibit_id', $exhibit->id);
-        $this->_writeFixtureFromRoute('neatline/records', $file);
-    }
-
-
-    /**
-     * Render an exhibit HTML fixture.
-     *
-     * @param NeatlineExhibit $exhibit The current exhibit.
-     * @param string $file The name of the fixture file.
-     */
-    protected function _writeExhibitMarkupFixture($exhibit, $file)
-    {
-        get_view()->neatline_exhibit = $exhibit;
-        $html = get_view()->partial('exhibits/partials/exhibit.php');
-        $this->_writeFixture($html, $file);
-    }
-
-
-    /**
-     * Render an editor HTML fixture.
-     *
-     * @param NeatlineExhibit $exhibit The current exhibit.
-     * @param string $file The name of the fixture file.
-     */
-    protected function _writeEditorMarkupFixture($exhibit, $file)
-    {
-        get_view()->neatline_exhibit = $exhibit;
-        $html = get_view()->partial('exhibits/partials/editor_core.php');
-        $this->_writeFixture($html, $file);
     }
 
 

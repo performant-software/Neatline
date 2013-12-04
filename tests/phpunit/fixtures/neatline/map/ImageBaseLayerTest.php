@@ -9,22 +9,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapImageBaseLayer extends Neatline_Case_Default
+class FixturesTest_NeatlineMapImageBaseLayer extends Neatline_Case_Fixture
 {
-
-
-    protected $_isAdminTest = false;
 
 
     public function testExhibit()
     {
 
-        $exhibit = $this->_exhibit();
-        $exhibit->image_layer = NL_TEST_DIR.'/mocks/image.jpg';
-        $exhibit->zoom_levels = 50;
-        $exhibit->save();
+        $this->exhibit = $this->_exhibit();
+        $this->exhibit->image_layer = NL_TEST_DIR.'/mocks/image.jpg';
+        $this->exhibit->zoom_levels = 50;
+        $this->exhibit->save();
 
-        $this->_writeExhibitMarkupFixture($exhibit,
+        $this->_writeExhibitMarkupFixture($this->exhibit,
             'NeatlineMapImageBaseLayer.html'
         );
 
