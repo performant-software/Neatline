@@ -15,6 +15,7 @@ class Neatline_Case_Fixture extends Neatline_Case_Abstract
 
 
     protected $_isAdminTest = false;
+    const FIXTURES_PATH = '/tests/jasmine/fixtures/';
 
 
     /**
@@ -41,7 +42,7 @@ class Neatline_Case_Fixture extends Neatline_Case_Abstract
     {
 
         // Open the fixture file.
-        $fixture = fopen(NL_DIR.'/tests/jasmine/fixtures/'.$file, 'w');
+        $fixture = fopen(NL_DIR . static::FIXTURES_PATH . $file, 'w');
 
         // Write fixture.
         fwrite($fixture, $body);
