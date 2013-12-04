@@ -34,7 +34,7 @@ function nl_getItemMarkup($record)
     // First, try to render a `item-[tag].php` template in the exhibit theme.
 
     foreach ($tags as $tag) { try {
-        return get_view()->partial(
+        return get_view()->render(
             'exhibits/themes/'.$slug.'/item-'.$tag.'.php'
         );
     } catch (Exception $e) {}}
@@ -42,7 +42,7 @@ function nl_getItemMarkup($record)
     // Next, try to render a generic `item.php` template in the exhibit theme.
 
     try {
-        return get_view()->partial(
+        return get_view()->render(
             'exhibits/themes/'.$slug.'/item.php'
         );
     } catch (Exception $e) {}
@@ -52,7 +52,7 @@ function nl_getItemMarkup($record)
     // `item.php` template, which is included in the core plugin and can also
     // be overridden in the public theme:
 
-    return get_view()->partial('exhibits/item.php');
+    return get_view()->render('exhibits/item.php');
 
 }
 

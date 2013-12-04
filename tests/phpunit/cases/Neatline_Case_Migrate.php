@@ -298,42 +298,42 @@ SQL;
         ));
 
         // Exhibits:
-        if (strpos($path, 'exhibits')) {
+        if (strpos($fixture, 'exhibits')) {
             foreach ($rows as $row) {
                 $this->db->insert('NeatlineExhibit', $row);
             }
         }
 
         // Records:
-        if (strpos($path, 'records')) {
+        if (strpos($fixture, 'records')) {
             foreach ($rows as $row) {
                 $this->db->insert('NeatlineDataRecord', $row);
             }
         }
 
         // Services
-        if (strpos($path, 'services')) {
+        if (strpos($fixture, 'services')) {
             foreach ($rows as $row) {
                 $this->db->insert('NeatlineMapsService', $row);
             }
         }
 
         // Items
-        if (strpos($path, 'items')) {
+        if (strpos($fixture, 'items')) {
             foreach ($rows as $row) {
                 $this->db->insert('Item', $row);
             }
         }
 
         // Texts
-        if (strpos($path, 'texts')) {
+        if (strpos($fixture, 'texts')) {
             foreach ($rows as $row) {
                 $this->db->insert('ElementText', $row);
             }
         }
 
         // Files
-        if (strpos($path, 'files')) {
+        if (strpos($fixture, 'files')) {
             foreach ($rows as $row) {
                 $this->db->insert('File', $row);
             }
