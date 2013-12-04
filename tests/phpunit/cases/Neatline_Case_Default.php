@@ -30,14 +30,14 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
         $this->helper = new Omeka_Test_Helper_Plugin;
         $this->helper->setUp('Neatline');
 
-        // Install plugins in `plugin.ini`.
+        // Install sibling plugins.
         $this->_installSiblingPlugins();
 
-        // Alias plugin tables.
+        // Alias Neatline tables.
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
         $this->_records  = $this->db->getTable('NeatlineRecord');
 
-        // Register Neatline templates.
+        // Register Neatline partials.
         get_view()->addScriptPath(NL_DIR.'/views/shared');
 
     }

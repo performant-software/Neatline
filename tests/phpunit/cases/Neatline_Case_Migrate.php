@@ -292,9 +292,10 @@ SQL;
     protected function _loadFixture($fixture)
     {
 
-        // Read the file.
-        $path = NL_TEST_DIR.'/migrations/2.0.0/fixtures/'.$fixture;
-        eval(file_get_contents($path));
+        // Load the `$rows`.
+        eval(file_get_contents(
+            NL_TEST_DIR.'/tests/migrations/2.0.0/fixtures/'.$fixture
+        ));
 
         // Exhibits:
         if (strpos($path, 'exhibits')) {
