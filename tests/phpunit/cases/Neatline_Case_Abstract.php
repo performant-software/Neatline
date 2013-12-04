@@ -76,15 +76,24 @@ SQL;
 
 
     /**
-     * Deactivate the passed plugin.
+     * If the passed plugin is installed/active, skip the test.
      *
      * @param string $pluginName The plugin name.
      */
-    protected function _deactivatePlugin($pluginName)
+    protected function _skipIfPlugin($pluginName)
     {
-        $plugin = $this->helper->pluginLoader->getPlugin($pluginName);
-        $plugin->setActive(false);
-        $plugin->save();
+        if (plugin_is_active($pluginName)) $this->markTestSkipped();
+    }
+
+
+    /**
+     * If the passed plugin is not installed/active, skip the test.
+     *
+     * @param string $pluginName The plugin name.
+     */
+    protected function _skipIfNotPlugin($pluginName)
+    {
+        if (!plugin_is_active($pluginName)) $this->markTestSkipped();
     }
 
 

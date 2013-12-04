@@ -13,6 +13,17 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
 {
 
 
+    const KML = <<<KML
+    <kml xmlns="http://earth.google.com/kml/2.0">
+        <Folder>
+            <Placemark>
+                <Point><coordinates>1,2</coordinates></Point>
+            </Placemark>
+        </Folder>
+    </kml>
+KML;
+
+
     // `is_coverage` flag:
     // ------------------------------------------------------------------------
 
@@ -90,7 +101,7 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     public function testDoNothingWhenNoFeaturesCoverage()
     {
 
-        $this->_installPluginOrSkip('NeatlineFeatures');
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -110,7 +121,7 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     public function testImportFeaturesWkt()
     {
 
-        $this->_installPluginOrSkip('NeatlineFeatures');
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -134,29 +145,19 @@ class NeatlineRecordTest_CompileCoverageTest extends Neatline_Case_Default
     public function testImportFeaturesKml()
     {
 
-        $this->_installPluginOrSkip('NeatlineFeatures');
-
-        $kml = <<<KML
-        <kml xmlns="http://earth.google.com/kml/2.0">
-            <Folder>
-                <Placemark>
-                    <Point><coordinates>1,2</coordinates></Point>
-                </Placemark>
-            </Folder>
-        </kml>
-KML;
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
 
-        $this->_addNeatlineFeature($item, $kml);
+        $this->_addNeatlineFeature($item, self::KML);
 
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
-            nl_parseWkt($kml), $record->coverage
+            nl_extractWkt(self::KML), $record->coverage
         );
 
     }
@@ -168,7 +169,7 @@ KML;
     public function testImportFeaturesPreserveExistingCoverages()
     {
 
-        $this->_installPluginOrSkip('NeatlineFeatures');
+        $this->_skipIfNotPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -193,12 +194,11 @@ KML;
 
     /**
      * `save` should not set a coverage when Dublin Core "Coverage" is empty.
-     * @group wkt
      */
     public function testDoNothingWhenNoDublinCoreCoverage()
     {
 
-        $this->_deactivatePlugin('NeatlineFeatures');
+        $this->_skipIfPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -215,31 +215,72 @@ KML;
     /**
      * `save` should no set a coverage when Dublin Core "Coverage" cannot be
      * parsed as a valid coverage.
-     * @group wkt
      */
     public function testDoNothingWhenInvalidDublinCoreCoverage()
     {
-        $this->markTestSkipped();
+
+        $this->_skipIfPlugin('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        // Set invalid "Coverage".
+        $this->_addCoverageElement($item, 'wtf');
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should not set coverage.
+        $this->assertNull($record->coverage);
+
     }
 
 
     /**
      * `save` should import WKT from the Dublin Core "Coverage" element.
-     * @group wkt
      */
     public function testImportDublinCoreWkt()
     {
-        $this->markTestSkipped();
+
+        $this->_skipIfPlugin('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $this->_addCoverageElement($item, 'POINT(1 2)');
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should import WKT.
+        $this->assertEquals(
+            nl_extractWkt('POINT(1 2)'), $record->coverage
+        );
+
     }
 
 
     /**
      * `save` should import KML from the Dublin Core "Coverage" element.
-     * @group wkt
      */
     public function testImportDublinCoreKml()
     {
-        $this->markTestSkipped();
+
+        $this->_skipIfPlugin('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $this->_addCoverageElement($item, self::KML);
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should import KML and convert to WKT.
+        $this->assertEquals(
+            nl_extractWkt(self::KML), $record->coverage
+        );
+
     }
 
 

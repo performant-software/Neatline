@@ -11,14 +11,25 @@
 
 
 /**
- * Convert a coverage to WKT.
+ * Convert a raw coverage value to WKT.
  *
  * @param string $coverage The raw coverage.
  * @return string|null The WKT.
  */
-function nl_parseWkt($coverage) {
-    $geometry = geoPHP::load($coverage);
-    return $geometry ? $geometry->out('wkt') : null;
+function nl_extractWkt($coverage) {
+
+    $wkt = null;
+
+    // Get coverage format.
+    $format = geoPHP::detectFormat($coverage);
+
+    // Convert / reduce to WKT.
+    if (in_array($format, array('wkt', 'kml'))) {
+        $wkt = geoPHP::load($coverage)->out('wkt');
+    }
+
+    return $wkt;
+
 }
 
 
@@ -46,7 +57,7 @@ function nl_getNeatlineFeaturesWkt($record) {
 
         // If KML, convert to WKT.
         if (strpos($result, '<kml') !== false) {
-            $result = nl_parseWkt(trim($result));
+            $result = nl_extractWkt(trim($result));
         }
 
         // If WKT, implode and wrap as `GEOMETRYCOLLECTION`.

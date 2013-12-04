@@ -256,15 +256,17 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
         if ($item && !$this->coverage) {
 
-            // Import from Neatline Features.
-            $wkt = nl_getNeatlineFeaturesWkt($this);
-            if (is_string($wkt)) $this->coverage = $wkt;
+            if (plugin_is_active('NeatlineFeatures')) {
 
-            else {
+                // Import from Neatline Features.
+                $wkt = nl_getNeatlineFeaturesWkt($this);
+                if (is_string($wkt)) $this->coverage = $wkt;
+
+            } else {
 
                 // Import frome DC Coverage element.
                 $coverage = metadata($item, array('Dublin Core', 'Coverage'));
-                $this->coverage = nl_parseWkt($coverage);
+                $this->coverage = nl_extractWkt($coverage);
 
             }
 
