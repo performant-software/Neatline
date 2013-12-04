@@ -86,7 +86,8 @@ KML;
     public function testDoNothingWhenNoFeaturesCoverage()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        //$this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -106,7 +107,8 @@ KML;
     public function testImportFeaturesRegularWkt()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        //$this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -130,7 +132,8 @@ KML;
     public function testImportFeaturesPipeDelimitedWkt()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        //$this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -154,7 +157,8 @@ KML;
     public function testImportFeaturesKml()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        //$this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -178,7 +182,8 @@ KML;
     public function testImportFeaturesPreserveExistingCoverages()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        //$this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -207,7 +212,7 @@ KML;
     public function testDoNothingWhenNoDublinCoreCoverage()
     {
 
-        $this->_skipIfPlugin('NeatlineFeatures');
+        //$this->_skipIfPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -227,7 +232,7 @@ KML;
     public function testDoNothingWhenInvalidDublinCoreCoverage()
     {
 
-        $this->_skipIfPlugin('NeatlineFeatures');
+        //$this->_skipIfPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -250,7 +255,7 @@ KML;
     public function testImportDublinCoreWkt()
     {
 
-        $this->_skipIfPlugin('NeatlineFeatures');
+        //$this->_skipIfPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -274,7 +279,7 @@ KML;
     public function testImportDublinCoreKml()
     {
 
-        $this->_skipIfPlugin('NeatlineFeatures');
+        //$this->_skipIfPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -298,7 +303,7 @@ KML;
     public function testImportDublinCorePreserveExistingCoverages()
     {
 
-        $this->_skipIfPlugin('NeatlineFeatures');
+        //$this->_skipIfPlugin('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
