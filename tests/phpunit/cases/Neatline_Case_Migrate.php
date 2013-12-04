@@ -10,7 +10,7 @@
  */
 
 
-class Neatline_Case_Migrate200 extends Neatline_Case_Default
+class Neatline_Case_Migrate extends Neatline_Case_Default
 {
 
 
@@ -293,7 +293,7 @@ SQL;
     {
 
         // Read the file.
-        $path = dirname(dirname(__FILE__)).'/fixtures/'.$fixture;
+        $path = NL_TEST_DIR.'/migrations/2.0.0/fixtures/'.$fixture;
         eval(file_get_contents($path));
 
         // Exhibits:

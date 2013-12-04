@@ -10,12 +10,11 @@
  */
 
 
-class Neatline_Case_Fixture extends Neatline_Case_Abstract
+class Neatline_Case_Fixture extends Neatline_Case_Default
 {
 
 
     protected $_isAdminTest = false;
-    const FIXTURES_PATH = '/tests/jasmine/fixtures/';
 
 
     /**
@@ -33,6 +32,18 @@ class Neatline_Case_Fixture extends Neatline_Case_Abstract
 
 
     /**
+     * Get the Jasmine fixtures directory. This method can be overridden by
+     * sub-plugins to write fixtures to different locations.
+     *
+     * @return string The directory.
+     */
+    protected function _getFixturesPath()
+    {
+        return NL_DIR.'/tests/jasmine/fixtures/';
+    }
+
+
+    /**
      * Write a fixture file.
      *
      * @param string $body The fixture body.
@@ -42,7 +53,7 @@ class Neatline_Case_Fixture extends Neatline_Case_Abstract
     {
 
         // Open the fixture file.
-        $fixture = fopen(NL_DIR . static::FIXTURES_PATH . $file, 'w');
+        $fixture = fopen($this->_getFixturesPath().$file, 'w');
 
         // Write fixture.
         fwrite($fixture, $body);

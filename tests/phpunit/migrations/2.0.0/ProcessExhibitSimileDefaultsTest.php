@@ -10,7 +10,7 @@
  */
 
 class Migrate200Test_ProcessExhibitSimileDefaults
-    extends Neatline_Case_Migrate200
+    extends Neatline_Case_Migrate
 {
 
 
