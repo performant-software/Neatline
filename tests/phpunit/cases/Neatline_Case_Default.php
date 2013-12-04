@@ -37,10 +37,6 @@ class Neatline_Case_Default extends Neatline_Case_Abstract
 
         }
 
-        // Get plugin tables.
-        $this->_exhibits = $this->db->getTable('NeatlineExhibit');
-        $this->_records  = $this->db->getTable('NeatlineRecord');
-
         // Register script path.
         get_view()->addScriptPath(NL_DIR.'/views/shared');
 
