@@ -404,22 +404,23 @@ Neatline.module('Map', function(Map) {
      * Publish a request for new records. If spatial querying is enabled,
      * filter on the current focus and zoom of the map.
      *
-     * @param {Boolean} refresh: If true, pass back an empty `existing` list.
+     * @param {Boolean} refresh: If true, don't pass back a list of `existing`
+     * record IDs, triggering a full re-push of all matching records.
      */
     publishPosition: function(refresh) {
 
       refresh = refresh || false;
+      var params = {};
 
-      // If the map is being refreshed, always emit an empty list of existing
-      // record IDs. This causes the server to re-push all matching records,
-      // which ensures that any change in record data that would result in new
-      // or different layers will be manifested. (Eg, if the user adds a WMS
-      // layer in the editor, this causes edit layer to be re-pushed with the
-      // new WMS fields, and the new WMS layer to be mounted immediately.)
+      // If the map is being refreshed, don't send a list of existing record
+      // IDs to the server. This causes the server to re-transmit all matching
+      // records, which guarantees that any changes in record data since the
+      // last push will be manifested immediately on the map. For example, if
+      // the user had just added a WMS layer to a record, this causes the edit
+      // layer record to be re-pushed with the new WMS fields, and the new WMS
+      // layer to be mounted immediately.
 
-      var params = {
-        existing: refresh ? [] : this.getVectorLayerIds()
-      };
+      if (!refresh) params.existing = this.getVectorLayerIds();
 
       // Filter by extent and zoom.
       if (this.exhibit.spatial_querying) _.extend(params, {
