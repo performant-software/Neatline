@@ -108,8 +108,8 @@ _.extend(Neatline.Map.View.prototype, {
   endEdit: function() {
 
     // Reset controls.
-    this.removeEditorControls();
     this.deactivateEditorControls();
+    this.removeEditorControls();
     this.activatePublicControls();
 
     // Release edit layer.
@@ -129,6 +129,9 @@ _.extend(Neatline.Map.View.prototype, {
    * @param {Object} settings: Settings for the controls.
    */
   updateEdit: function(settings) {
+
+
+    this.settings = settings;
 
 
     // Reset the controls editing and cursor controls.
@@ -247,6 +250,19 @@ _.extend(Neatline.Map.View.prototype, {
       delete this.layers.vector[model.previous('id')];
       this.layers.vector[model.id] = this.editLayer;
     }
+
+    // TODO|dev
+    //if (!this.controls.edit.active) {
+
+      //// Clear edit layer.
+      //this.editLayer.destroyFeatures();
+
+      //// Rebuild features.
+      //if (_.isString(model.get('coverage'))) {
+        //this.editLayer.addFeatures(this.formatWkt.read(model.get('coverage')));
+      //}
+
+    //}
 
     // Replace the model.
     this.editLayer.neatline.model = model;

@@ -95,14 +95,12 @@ Neatline.module('Editor.Record', function(Record) {
       // Activate the presenter.
       Neatline.vent.trigger('activatePresenter');
 
+      // Refresh the map.
+      Neatline.vent.trigger('refresh', { source: this.slug });
+
       // Unselect the record.
       Neatline.vent.trigger('unselect', {
         model: this.model, source: this.slug
-      });
-
-      // Refresh the map.
-      Neatline.vent.trigger('refresh', {
-        source: this.slug
       });
 
       // Unbind the model.
@@ -175,11 +173,6 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onSaveSuccess: function() {
 
-      // Flash success.
-      Neatline.execute('EDITOR:notifySuccess',
-        STRINGS.record.save.success
-      );
-
       // Update the route.
       Neatline.execute('EDITOR:setRoute',
         'record/'+this.model.id+'/'+this.activeTab
@@ -187,6 +180,11 @@ Neatline.module('Editor.Record', function(Record) {
 
       // Refresh the exhibit.
       Neatline.vent.trigger('refresh', { source: this.slug });
+
+      // Flash success.
+      Neatline.execute('EDITOR:notifySuccess',
+        STRINGS.record.save.success
+      );
 
     },
 
@@ -206,17 +204,17 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onDeleteSuccess: function() {
 
-      // FLash success.
-      Neatline.execute('EDITOR:notifySuccess',
-        STRINGS.record.remove.success
-      );
-
       // Hide modal, close form.
       this.deleteModal.modal('hide');
       this.onCloseClick();
 
       // Refresh the exhibit.
       Neatline.vent.trigger('refresh', { source: this.slug });
+
+      // FLash success.
+      Neatline.execute('EDITOR:notifySuccess',
+        STRINGS.record.remove.success
+      );
 
     },
 

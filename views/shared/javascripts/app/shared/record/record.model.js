@@ -100,7 +100,13 @@ Neatline.module('Shared.Record', function(Record) {
       var styles = Neatline.g.neatline.styles;
 
       return {
-        exhibit_id:             Neatline.g.neatline.exhibit.id,
+
+        // Assign the record to the current exhibit:
+
+        exhibit_id: Neatline.g.neatline.exhibit.id,
+
+        // Provide default values for the SVG style map:
+
         presenter:              styles.presenter,
         fill_color:             styles.fill_color,
         fill_color_select:      styles.fill_color_select,
@@ -111,7 +117,12 @@ Neatline.module('Shared.Record', function(Record) {
         stroke_opacity:         Number(styles.stroke_opacity),
         stroke_opacity_select:  Number(styles.stroke_opacity_select),
         point_radius:           Number(styles.point_radius),
-        stroke_width:           Number(styles.stroke_width)
+        stroke_width:           Number(styles.stroke_width),
+
+        // By default, register an empty coverage:
+
+        coverage: null
+
       };
 
     }
