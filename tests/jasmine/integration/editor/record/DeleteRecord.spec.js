@@ -12,15 +12,19 @@ describe('Record | Delete Record', function() {
 
 
   var elements, fixtures = {
-    record: read('EditorRecord.record.json'),
-    empty:  read('EditorRecordDeleteRecord.json')
+    records12:  read('EditorRecordDeleteRecord.records12.json'),
+    deleted:    read('EditorRecordDeleteRecord.deleted.json'),
+    records1:   read('EditorRecordDeleteRecord.records1.json')
   };
 
 
   beforeEach(function() {
 
     NL.loadEditor();
-    NL.showRecordForm(fixtures.record);
+    NL.respondAll200(fixtures.records12);
+
+    // Open form for record 2.
+    NL.navigate('record/'+NL.getRecordListModelByTitle('title2').id);
 
     elements = {
       delete1:  NL.v.record.$('a[href="#delete-modal"]'),
@@ -118,7 +122,7 @@ describe('Record | Delete Record', function() {
 
     // Click on "Save".
     elements.delete2.trigger('click');
-    NL.respondLast200(fixtures.empty);
+    NL.respondLast200(fixtures.deleted);
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
@@ -160,7 +164,7 @@ describe('Record | Delete Record', function() {
     // Delete, confirm.
     elements.delete1.trigger('click');
     elements.delete2.trigger('click');
-    NL.respondLast200(fixtures.empty);
+    NL.respondLast200(fixtures.deleted);
 
     // Modal should be hidden.
     expect(NL.v.record.deleteModal).not.toHaveClass('in');
@@ -171,6 +175,31 @@ describe('Record | Delete Record', function() {
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');
+
+  });
+
+
+  it('should remove the edit layer when delete succeeds', function() {
+
+    // ------------------------------------------------------------------------
+    // When the "Yes, delete" button is clicked and the request succeeds, the
+    // map layer with the deleted record's geometry should be removed.
+    // ------------------------------------------------------------------------
+
+    // Two layers at the start.
+    NL.assertVectorLayerCount(2);
+
+    // Delete, confirm.
+    elements.delete1.trigger('click');
+    elements.delete2.trigger('click');
+    NL.respondLast200(fixtures.deleted);
+
+    // Reload with just record 1.
+    NL.respondLast200(fixtures.records1);
+
+    // Edit layer should be deleted.
+    expect(NL.getVectorLayer('title2')).toBeUndefined();
+    NL.assertVectorLayerCount(1);
 
   });
 
@@ -187,7 +216,7 @@ describe('Record | Delete Record', function() {
     // Delete, confirm.
     elements.delete1.trigger('click');
     elements.delete2.trigger('click');
-    NL.respondLast200(fixtures.empty);
+    NL.respondLast200(fixtures.deleted);
 
     // Should refresh the exhibit.
     expect(vent).toHaveBeenCalledWith('refresh', {

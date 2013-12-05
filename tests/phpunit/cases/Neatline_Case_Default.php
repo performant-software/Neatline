@@ -485,11 +485,21 @@ SQL
      *
      * @param NeatlineRecord $record The record to load.
      * @param string $file The name of the fixture file.
+     * @param string $method The HTTP method.
      */
-    public function _writeRecordApiFixture($record, $file)
+    public function _writeRecordApiFixture($record, $file, $method='GET')
     {
+
         $this->resetRequest();
-        $this->_writeFixtureFromRoute('neatline/records/'.$record->id, $file);
+
+        // Apply the HTTP method.
+        $this->request->setmethod($method);
+
+        // Write the fixture.
+        $this->_writeFixtureFromRoute(
+            'neatline/records/'.$record->id, $file
+        );
+
     }
 
 
@@ -501,8 +511,15 @@ SQL
      */
     public function _writeRecordsApiFixture($exhibit, $file)
     {
+
+        // Thread in the `exhibit_id` GET parameter.
         $this->request->setQuery('exhibit_id', $exhibit->id);
-        $this->_writeFixtureFromRoute('neatline/records', $file);
+
+        // Write the fixture.
+        $this->_writeFixtureFromRoute(
+            'neatline/records', $file
+        );
+
     }
 
 
