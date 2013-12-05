@@ -252,17 +252,22 @@ _.extend(Neatline.Map.View.prototype, {
     }
 
     // TODO|dev
-    //if (!this.controls.edit.active) {
+    // Manifest the new coverage.
+    if (!this.controls.edit.active) {
 
-      //// Clear edit layer.
-      //this.editLayer.destroyFeatures();
+      // Clear existing features.
+      this.editLayer.destroyFeatures();
+      var coverage = model.get('coverage');
 
-      //// Rebuild features.
-      //if (_.isString(model.get('coverage'))) {
-        //this.editLayer.addFeatures(this.formatWkt.read(model.get('coverage')));
-      //}
+      if (_.isString(coverage)) {
 
-    //}
+        // Add new features, if any can be extracted.
+        var features = this.formatWkt.read(model.get('coverage'));
+        if (_.isArray(features)) this.editLayer.addFeatures(features);
+
+      }
+
+    }
 
     // Replace the model.
     this.editLayer.neatline.model = model;

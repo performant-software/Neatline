@@ -36,7 +36,9 @@ Neatline.module('Editor.Record', function(Record) {
      */
     init: function(options) {
 
+      // Set the module slug.
       this.slug = options.slug;
+
       this.hasRecord = false; // True if a record is bound to the form.
       this.activeTab = null;  // The hash of the active tab.
 
