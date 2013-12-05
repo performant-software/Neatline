@@ -88,7 +88,16 @@ module.exports = function(grunt) {
       },
 
       phpunit_application: {
-        command: '../../vendor/bin/phpunit --testsuite application',
+        command: '../../vendor/bin/phpunit -c phpunit-application.xml',
+        options: {
+          execOptions: {
+            cwd: 'tests/phpunit'
+          }
+        }
+      },
+
+      phpunit_features: {
+        command: '../../vendor/bin/phpunit -c phpunit-features.xml',
         options: {
           execOptions: {
             cwd: 'tests/phpunit'
@@ -97,7 +106,7 @@ module.exports = function(grunt) {
       },
 
       phpunit_migrations: {
-        command: '../../vendor/bin/phpunit --testsuite migrations',
+        command: '../../vendor/bin/phpunit -c phpunit-migrations.xml',
         options: {
           execOptions: {
             cwd: 'tests/phpunit'
@@ -510,7 +519,8 @@ module.exports = function(grunt) {
 
   // Run default PHPUnit suite.
   grunt.registerTask('phpunit', [
-    'shell:phpunit_application'
+    'shell:phpunit_application',
+    'shell:phpunit_features'
   ]);
 
   // Run migrations PHPUnit suite.
@@ -521,6 +531,7 @@ module.exports = function(grunt) {
   // Run all PHPUnit suites.
   grunt.registerTask('phpunit:all', [
     'shell:phpunit_application',
+    'shell:phpunit_features',
     'shell:phpunit_migrations'
   ]);
 

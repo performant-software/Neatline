@@ -1,0 +1,16 @@
+<phpunit bootstrap="bootstrap.php"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="true">
+
+    <testsuite name="features">
+        <directory>tests/unit</directory>
+    </testsuite>
+
+    <groups>
+        <include>
+            <group>features</group>
+        </include>
+    </groups>
+
+</phpunit>

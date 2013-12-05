@@ -1,0 +1,10 @@
+<phpunit bootstrap="bootstrap.php"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         verbose="true">
+
+    <testsuite name="migrations">
+        <directory>tests/migrations</directory>
+    </testsuite>
+
+</phpunit>

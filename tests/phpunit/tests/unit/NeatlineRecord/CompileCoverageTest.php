@@ -82,11 +82,13 @@ KML;
 
     /**
      * `save` should pass silently when no NeatlineFeatures coverage exists.
+     *
+     * @group features
      */
     public function testDoNothingWhenNoFeaturesCoverage()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -102,11 +104,13 @@ KML;
 
     /**
      * `save` should import regular WKT data from NeatlineFeatures.
+     *
+     * @group features
      */
     public function testImportFeaturesRegularWkt()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -126,11 +130,13 @@ KML;
 
     /**
      * `save` should import pipe-delimited WKT data from NeatlineFeatures.
+     *
+     * @group features
      */
     public function testImportFeaturesPipeDelimitedWkt()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -150,11 +156,13 @@ KML;
 
     /**
      * `save` should import KML data from NeatlineFeatures.
+     *
+     * @group features
      */
     public function testImportFeaturesKml()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
@@ -174,11 +182,13 @@ KML;
 
     /**
      * Data from Neatline Features shouldn't clobber existing coverages.
+     *
+     * @group features
      */
     public function testImportFeaturesPreserveExistingCoverages()
     {
 
-        $this->_skipIfNotPlugin('NeatlineFeatures');
+        $this->_installPluginOrSkip('NeatlineFeatures');
 
         $exhibit  = $this->_exhibit();
         $item     = $this->_item();
