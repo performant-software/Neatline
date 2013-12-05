@@ -103,15 +103,15 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
         // Convert SVG, update handler.
         var wkt = SVGtoWKT.convert(val);
-        Neatline.execute('EDITOR:MAP:updateWKT', wkt);
+        Neatline.execute('EDITOR:MAP:updateSvgWkt', wkt);
+
+        // Close the modal.
+        this.svgModal.modal('hide');
 
         // Flash success.
         Neatline.execute('EDITOR:notifySuccess',
           STRINGS.svg.parse.success
         );
-
-        // Close the modal.
-        this.svgModal.modal('hide');
 
       } catch (e) {
         Neatline.execute('EDITOR:notifyError',
@@ -135,8 +135,7 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     setPresenterStatus: function() {
       Neatline.vent.trigger(this.mapTabActive() ?
-        'deactivatePresenter' :
-        'activatePresenter'
+        'deactivatePresenter' : 'activatePresenter'
       );
     },
 

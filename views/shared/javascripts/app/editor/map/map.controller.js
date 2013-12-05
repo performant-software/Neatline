@@ -22,7 +22,7 @@ Neatline.module('Editor.Map', { startWithParent: false,
       'endEdit',
       'clearEditLayer',
       'updateEdit',
-      'updateWKT',
+      'updateSvgWkt',
       'updateModel'
     ],
 
@@ -74,12 +74,12 @@ Neatline.module('Editor.Map', { startWithParent: false,
 
 
     /**
-     * Update the WKT on the geometry handler.
+     * Update the WKT on the draw-SVG handler.
      *
      * @param {String} wkt: The WKT.
      */
-    updateWKT: function(wkt) {
-      this.view.updateWKT(wkt);
+    updateSvgWkt: function(wkt) {
+      this.view.updateSvgWkt(wkt);
     },
 
 

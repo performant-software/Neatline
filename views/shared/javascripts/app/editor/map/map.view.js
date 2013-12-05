@@ -223,11 +223,11 @@ _.extend(Neatline.Map.View.prototype, {
 
 
   /**
-   * Set the collection on the `Geometry` handler.
+   * Update the WKT rendered by the `Geometry` handler.
    *
    * @param {String} wkt: The WKT.
    */
-  updateWKT: function(wkt) {
+  updateSvgWkt: function(wkt) {
     var geometry = OpenLayers.Geometry.fromWKT(wkt);
     this.controls.svg.handler.setGeometry(geometry);
   },

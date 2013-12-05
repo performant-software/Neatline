@@ -519,7 +519,7 @@ describe('Record | Geometry Controls', function() {
   });
 
 
-  it('should remove all features on reset', function() {
+  it('should remove all features when geometry is cleared', function() {
 
     // ------------------------------------------------------------------------
     // When the "Clear all Geometry" button is clicked, all features on the
