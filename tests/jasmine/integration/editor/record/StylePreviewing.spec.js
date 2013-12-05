@@ -18,7 +18,7 @@ describe('Record | Style Previewing', function() {
   // --------------------------------------------------------------------------
 
 
-  var elements, def, tmp, sel, fixtures = {
+  var inputs, def, tmp, sel, fixtures = {
     record: read('EditorRecord.record.json')
   };
 
@@ -33,14 +33,14 @@ describe('Record | Style Previewing', function() {
   beforeEach(function() {
     NL.loadEditor();
     NL.showRecordForm(fixtures.record);
-    elements = NL.getRecordFormElements();
+    inputs = NL.getRecordFormElements();
   });
 
 
   describe('Presenter', function() {
 
     it('input `change`', function() {
-      elements.presenter.val('None').trigger('change');
+      inputs.presenter.val('None').trigger('change');
       var presenter = NL.v.map.editLayer.neatline.model.get('presenter');
       expect(presenter).toEqual('None');
     });
@@ -55,11 +55,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.fillColor.val('#ffffff').trigger('change');
+      inputs.fillColor.val('#ffffff').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.fillColor.val('#ffffff').trigger('keyup');
+      inputs.fillColor.val('#ffffff').trigger('keyup');
     });
 
     afterEach(function() {
@@ -77,11 +77,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.fillColorSelect.val('#ffffff').trigger('change');
+      inputs.fillColorSelect.val('#ffffff').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.fillColorSelect.val('#ffffff').trigger('keyup');
+      inputs.fillColorSelect.val('#ffffff').trigger('keyup');
     });
 
     afterEach(function() {
@@ -100,11 +100,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.strokeColor.val('#ffffff').trigger('change');
+      inputs.strokeColor.val('#ffffff').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.strokeColor.val('#ffffff').trigger('keyup');
+      inputs.strokeColor.val('#ffffff').trigger('keyup');
     });
 
     afterEach(function() {
@@ -122,11 +122,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.strokeColorSelect.val('#ffffff').trigger('change');
+      inputs.strokeColorSelect.val('#ffffff').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.strokeColorSelect.val('#ffffff').trigger('keyup');
+      inputs.strokeColorSelect.val('#ffffff').trigger('keyup');
     });
 
     afterEach(function() {
@@ -145,11 +145,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.fillOpacity.val(0.5).trigger('change');
+      inputs.fillOpacity.val(0.5).trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.fillOpacity.val(0.5).trigger('keyup');
+      inputs.fillOpacity.val(0.5).trigger('keyup');
     });
 
     afterEach(function() {
@@ -168,11 +168,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.fillOpacitySelect.val('0.5').trigger('change');
+      inputs.fillOpacitySelect.val('0.5').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.fillOpacitySelect.val('0.5').trigger('keyup');
+      inputs.fillOpacitySelect.val('0.5').trigger('keyup');
     });
 
     afterEach(function() {
@@ -193,11 +193,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.strokeOpacity.val(0.5).trigger('change');
+      inputs.strokeOpacity.val(0.5).trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.strokeOpacity.val(0.5).trigger('keyup');
+      inputs.strokeOpacity.val(0.5).trigger('keyup');
     });
 
     afterEach(function() {
@@ -215,11 +215,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.strokeOpacitySelect.val('0.5').trigger('change');
+      inputs.strokeOpacitySelect.val('0.5').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.strokeOpacitySelect.val('0.5').trigger('keyup');
+      inputs.strokeOpacitySelect.val('0.5').trigger('keyup');
     });
 
     afterEach(function() {
@@ -238,11 +238,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.strokeWidth.val(50).trigger('change');
+      inputs.strokeWidth.val(50).trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.strokeWidth.val(50).trigger('keyup');
+      inputs.strokeWidth.val(50).trigger('keyup');
     });
 
     afterEach(function() {
@@ -262,11 +262,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.pointRadius.val(50).trigger('change');
+      inputs.pointRadius.val(50).trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.pointRadius.val(50).trigger('keyup');
+      inputs.pointRadius.val(50).trigger('keyup');
     });
 
     afterEach(function() {
@@ -286,11 +286,11 @@ describe('Record | Style Previewing', function() {
     });
 
     it('input `change`', function() {
-      elements.pointImage.val('img.png').trigger('change');
+      inputs.pointImage.val('img.png').trigger('change');
     });
 
     it('input `keyup`', function() {
-      elements.pointImage.val('img.png').trigger('keyup');
+      inputs.pointImage.val('img.png').trigger('keyup');
     });
 
     afterEach(function() {

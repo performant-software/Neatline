@@ -35,7 +35,6 @@ describe('Record | Save Record', function() {
     // issued to the record API with the new data.
     // ------------------------------------------------------------------------
 
-    var id = NL.v.record.model.id;
     var inputs = NL.getRecordFormElements();
     var widgets = ['Widget2','Widget3'];
 
@@ -74,14 +73,16 @@ describe('Record | Save Record', function() {
     // Click "Save" button.
     elements.save.trigger('click');
 
-    // Route should be /record/:id, method PUT.
+    // URL should be /record/:id.
+    var id = NL.v.record.model.id;
     NL.assertLastRequestRoute(Neatline.g.neatline.records_api+'/'+id);
+
+    // Method should be PUT.
     NL.assertLastRequestMethod('PUT');
 
-    // Capture query parameters.
+    // Query should contain values.
     var params = NL.getLastRequestParams();
 
-    // Check the query string for updated values.
     expect(params.item_id).               toEqual('1');
     expect(params.slug).                  toEqual('2');
     expect(params.title).                 toEqual('3');

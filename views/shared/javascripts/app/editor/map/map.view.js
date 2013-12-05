@@ -251,7 +251,6 @@ _.extend(Neatline.Map.View.prototype, {
       this.layers.vector[model.id] = this.editLayer;
     }
 
-    // TODO|dev
     // Manifest the new coverage.
     if (!this.controls.edit.active) {
 
@@ -269,8 +268,8 @@ _.extend(Neatline.Map.View.prototype, {
 
     }
 
-    // Replace the model.
-    this.editLayer.neatline.model = model;
+    // Update the edit layer model to match the form model.
+    this.editLayer.neatline.model.set(model.changedAttributes());
 
     // Rebuild the style map.
     this.editLayer.styleMap = model.getStyleMap();
