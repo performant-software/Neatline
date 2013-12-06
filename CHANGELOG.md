@@ -2,15 +2,17 @@
 
 #### Added Features
 
+  - When Omeka items are imported into Neatline, raw WKT or KML values in the Dublin Core "Coverage" field are now imported Neatline's coverage field. (Previously, this only worked if the coverage on the item was created with the Neatline Features plugin.)
+
   - Adds a link to the exhibits browse page to the public navigation.
 
-  - Adds a "View the item in Omeka" link to the default `item.php` template.
+  - Adds a "View the item in Omeka" link to the default template used to represent Omeka items in Neatline exhibits.
 
-  - Makes it possible to add custom vector annotations to records that are associated with WMS layers.
+  - Makes it possible to add vector annotations onto records that have WMS layers.
 
 #### Performance Improvements
 
-  - Further optimizes the records API so that it avoids re-transmitting records that have already been pushed to the client by previous queries. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points, etc.
+  - Optimizes the records API so that it avoids re-transmitting records that have already been pushed to the client by previous queries. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points.
 
   - Patches up a memory leak on the map view caused by marooned references to deleted layers on the cursor control instances.
 
@@ -20,7 +22,7 @@
 
   - Fixes a bug that caused the Omeka item search feature in the record form to display the the title of an item's parent _collection_, not the item itself, when the item belonged to a collection.
 
-  - In the editor, when a modal window is open (eg, a record delete confirmation pop-up) and the route is changed, the modal is now automatically closed. 
+  - Fixes a bug that caused modal windows in the editor (eg, the record delete confirmation pop-up) to get stuck on the screen if the user changed the route while the modal was open. 
 
 ## v2.1.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.2...2.1.3)) ~ December 2, 2013
 

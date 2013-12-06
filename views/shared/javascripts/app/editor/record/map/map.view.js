@@ -16,10 +16,18 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
 
     events: {
+
+      // Toggle the presenter.
       'shown.bs.tab ul.nav a':  'onTabChange',
+
+      // Apply settings changes.
       'change div.map input':   'onControlChange',
       'keyup div.map input':    'onControlChange',
-      'click a[name="clear"]':  'onClearClick'
+      'click a[name="clear"]':  'onClearClick',
+
+      // Manifest new coverages.
+      'keyup textarea[name="coverage"]': 'onCoverageKeyup'
+
     },
 
     selectors: {
@@ -127,6 +135,17 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
      */
     onClearClick: function() {
       Neatline.execute('EDITOR:MAP:clearEditLayer');
+    },
+
+
+    /**
+     * Forward `keyup` events on the "Coverage" input to `change`, which will
+     * trigger a model update and render the new coverage on the map.
+     *
+     * @param {Object} e: The keyup event.
+     */
+    onCoverageKeyup: function(e) {
+      $(e.target).trigger('change');
     },
 
 

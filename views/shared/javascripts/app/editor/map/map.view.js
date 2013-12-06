@@ -262,7 +262,7 @@ _.extend(Neatline.Map.View.prototype, {
 
         // Add new features, if any can be extracted.
         var features = this.formatWkt.read(model.get('coverage'));
-        if (_.isArray(features)) this.editLayer.addFeatures(features);
+        if (features) this.editLayer.addFeatures(features);
 
       }
 

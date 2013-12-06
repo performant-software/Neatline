@@ -459,7 +459,7 @@ describe('Record | Geometry Controls', function() {
 
     // Edit feature, set new point coords.
     var feature = NL.v.map.editLayer.features[0];
-    NL.v.map.controls.edit.feature = feature;
+    NL.v.map.controls.edit.selectFeature(feature);
     feature.geometry.x = 2;
     feature.geometry.y = 3;
 
