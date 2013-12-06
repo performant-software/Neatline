@@ -10,6 +10,8 @@
 
   - Makes it possible to add vector annotations onto records that have WMS layers.
 
+  - In the editor, the map is now bidirectionally synchronized with the "Coverage" input on the record edit form. For example, if WKT is pasted into the input, the map will automatically rebuild the edit layer to display the new coverage.
+
 #### Performance Improvements
 
   - Optimizes the records API so that it avoids re-transmitting records that have already been pushed to the client by previous queries. This significantly improves performance in exhibits that have records with large quantities of metadata - e.g., map geometries derived from SVG documents with many thousands of points.
