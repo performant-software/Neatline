@@ -12,11 +12,14 @@
 ?>
 
 <?php
+
   echo head(array(
     'title' => __('Neatline | Browse Exhibits'),
     'content_class' => 'neatline'
   ));
+
   echo flash();
+
 ?>
 
 <div id="primary">
@@ -52,16 +55,14 @@
           <td class="title">
 
             <!-- Title. -->
-            <?php
-            if (is_allowed($e, 'editor')) {
+            <?php if (is_allowed($e, 'editor')) {
               echo nl_getExhibitLink(
                 $e, 'editor', null,
                 array('class' => 'editor'), false
               );
             } else {
               echo nl_getExhibitField('title');
-            }
-            ?>
+            } ?>
 
             <ul class="action-links group">
 
@@ -145,8 +146,7 @@
     <h2><?php echo __('You have no exhibits.'); ?></h2>
     <p><?php echo __('Get started by creating a new one!'); ?></p>
 
-    <a class="add big green button"
-      href="<?php echo url('neatline/add'); ?>">
+    <a class="add big green button" href="<?php echo url('neatline/add'); ?>">
       <?php echo __('Create an Exhibit'); ?>
     </a>
 

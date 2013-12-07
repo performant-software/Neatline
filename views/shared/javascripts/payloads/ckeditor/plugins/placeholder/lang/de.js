@@ -2,4 +2,4 @@
  Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
  For licensing, see LICENSE.md or http://ckeditor.com/license
 */
-CKEDITOR.plugins.setLang("placeholder","de",{title:"Platzhalter Einstellungen",toolbar:"Platzhalter erstellen",text:"Platzhalter Text",edit:"Platzhalter bearbeiten",textMissing:"Der Platzhalter muss einen Text beinhalten."});
+CKEDITOR.plugins.setLang("placeholder","de",{title:"Platzhalter Einstellungen",toolbar:"Platzhalter erstellen",name:"Placeholder Name",invalidName:"The placeholder can not be empty and can not contain any of following characters: [, ], <, >",pathName:"placeholder"});
