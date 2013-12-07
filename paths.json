@@ -1,7 +1,7 @@
 {
 
   "src": {
-    "shared":             "views/shared/javascripts/neatline",
+    "shared":             "views/shared/javascripts/app",
     "admin":              "views/admin/javascripts"
   },
 

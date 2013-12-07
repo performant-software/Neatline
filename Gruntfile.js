@@ -414,6 +414,7 @@ module.exports = function(grunt) {
           // RUBY
           '!Gemfile',
           '!Gemfile.lock',
+          '!Rakefile',
 
           // GRUNT
           '!.grunt/**',
@@ -436,11 +437,11 @@ module.exports = function(grunt) {
       options: {
         template: paths.jasmine+'/runner.tmpl',
         helpers: [
-          paths.vendor.js.jasmine_async,
           paths.vendor.js.jasmine_jquery,
+          paths.vendor.js.jasmine_async,
           paths.vendor.js.sinon,
-          paths.jasmine+'/assertions/*.js',
-          paths.jasmine+'/helpers/*.js'
+          paths.jasmine+'/helpers/*.js',
+          paths.jasmine+'/assertions/*.js'
         ]
       },
 

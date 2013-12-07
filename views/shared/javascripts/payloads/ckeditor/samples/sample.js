@@ -7,16 +7,15 @@
 // This file can be ignored and is not required to make use of CKEditor.
 
 (function() {
+	// Check for sample compliance.
 	CKEDITOR.on( 'instanceReady', function( ev ) {
-		// Check for sample compliance.
 		var editor = ev.editor,
 			meta = CKEDITOR.document.$.getElementsByName( 'ckeditor-sample-required-plugins' ),
 			requires = meta.length ? CKEDITOR.dom.element.get( meta[ 0 ] ).getAttribute( 'content' ).split( ',' ) : [],
-			missing = [],
-			i;
+			missing = [];
 
 		if ( requires.length ) {
-			for ( i = 0; i < requires.length; i++ ) {
+			for ( var i = 0; i < requires.length; i++ ) {
 				if ( !editor.plugins[ requires[ i ] ] )
 					missing.push( '<code>' + requires[ i ] + '</code>' );
 			}
@@ -30,21 +29,5 @@
 				warn.insertBefore( editor.container );
 			}
 		}
-
-		// Set icons.
-		var doc = new CKEDITOR.dom.document( document ),
-			icons = doc.find( '.button_icon' );
-
-		for ( i = 0; i < icons.count(); i++ ) {
-			var icon = icons.getItem( i ),
-				name = icon.getAttribute( 'data-icon' ),
-				style = CKEDITOR.skin.getIconStyle( name, ( CKEDITOR.lang.dir == 'rtl' ) );
-
-			icon.addClass( 'cke_button_icon' );
-			icon.addClass( 'cke_button__' + name + '_icon' );
-			icon.setAttribute( 'style', style );
-			icon.setStyle( 'float', 'none' );
-
-		}
-	} );
+	});
 })();
