@@ -396,7 +396,7 @@ SQL
      */
     protected function _getResponseArray()
     {
-        return json_decode($this->_getResponseBody());
+        return Zend_Json::decode($this->_getResponseBody());
     }
 
 

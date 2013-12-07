@@ -38,19 +38,19 @@ class ExhibitsControllerTest_AdminGet extends Neatline_Case_Default
         $exhibit->save();
 
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
-        $this->assertEquals(1,      $response->public);
-        $this->assertEquals('2',    $response->item_query);
-        $this->assertEquals('3',    $response->spatial_layers);
-        $this->assertEquals('4',    $response->spatial_layer);
-        $this->assertEquals('5',    $response->widgets);
-        $this->assertEquals('6',    $response->title);
-        $this->assertEquals('7',    $response->slug);
-        $this->assertEquals('8',    $response->narrative);
-        $this->assertEquals('9',    $response->styles);
-        $this->assertEquals('10',   $response->map_focus);
-        $this->assertEquals(11,     $response->map_zoom);
+        $this->assertEquals(1,      $json['public']);
+        $this->assertEquals('2',    $json['item_query']);
+        $this->assertEquals('3',    $json['spatial_layers']);
+        $this->assertEquals('4',    $json['spatial_layer']);
+        $this->assertEquals('5',    $json['widgets']);
+        $this->assertEquals('6',    $json['title']);
+        $this->assertEquals('7',    $json['slug']);
+        $this->assertEquals('8',    $json['narrative']);
+        $this->assertEquals('9',    $json['styles']);
+        $this->assertEquals('10',   $json['map_focus']);
+        $this->assertEquals(11,     $json['map_zoom']);
 
     }
 

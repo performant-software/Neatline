@@ -106,14 +106,14 @@ class ExhibitsControllerTest_AdminPut extends Neatline_Case_Default
 
         $this->_setPut();
         $this->dispatch('neatline/exhibits/'.$exhibit->id);
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should emit correct record.
-        $this->assertEquals($exhibit->id, $response->id);
+        $this->assertEquals($exhibit->id, $json['id']);
 
         // Should emit all attributes.
         foreach (array_keys($exhibit->toArray()) as $k) {
-            $this->assertObjectHasAttribute($k, $response);
+            $this->assertArrayHasKey($k, $json);
         }
 
     }

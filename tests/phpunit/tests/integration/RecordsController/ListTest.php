@@ -112,79 +112,79 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         $this->dispatch('neatline/records');
 
         // Get response, alias records.
-        $response = $this->_getResponseArray();
-        $r = $response->records;
+        $json = $this->_getResponseArray();
+        $r = $json['records'];
 
         // `numFound` should equal result size.
-        $this->assertEquals(2, $response->numFound);
+        $this->assertEquals(2, $json['numFound']);
 
         // Record 1:
-        $this->assertEquals($record1->id,   $r[0]->id);
-        $this->assertEquals($item1->id,     $r[0]->item_id);
-        $this->assertEquals('1',            $r[0]->slug);
-        $this->assertEquals('3',            $r[0]->title);
-        $this->assertEquals('5',            $r[0]->body);
-        $this->assertEquals('POINT(7 7)',   $r[0]->coverage);
-        $this->assertEquals('9',            $r[0]->tags);
-        $this->assertEquals('11',           $r[0]->widgets);
-        $this->assertEquals('13',           $r[0]->presenter);
-        $this->assertEquals('15',           $r[0]->fill_color);
-        $this->assertEquals('17',           $r[0]->fill_color_select);
-        $this->assertEquals('19',           $r[0]->stroke_color);
-        $this->assertEquals('21',           $r[0]->stroke_color_select);
-        $this->assertEquals(0.23,           $r[0]->fill_opacity);
-        $this->assertEquals(0.25,           $r[0]->fill_opacity_select);
-        $this->assertEquals(0.27,           $r[0]->stroke_opacity);
-        $this->assertEquals(0.29,           $r[0]->stroke_opacity_select);
-        $this->assertEquals(31,             $r[0]->stroke_width);
-        $this->assertEquals(33,             $r[0]->point_radius);
-        $this->assertEquals(35,             $r[0]->zindex);
-        $this->assertEquals(37,             $r[0]->weight);
-        $this->assertEquals('39',           $r[0]->start_date);
-        $this->assertEquals('41',           $r[0]->end_date);
-        $this->assertEquals('43',           $r[0]->after_date);
-        $this->assertEquals('45',           $r[0]->before_date);
-        $this->assertEquals('47',           $r[0]->point_image);
-        $this->assertEquals('49',           $r[0]->wms_address);
-        $this->assertEquals('51',           $r[0]->wms_layers);
-        $this->assertEquals(53,             $r[0]->min_zoom);
-        $this->assertEquals(55,             $r[0]->max_zoom);
-        $this->assertEquals(57,             $r[0]->map_zoom);
-        $this->assertEquals('59',           $r[0]->map_focus);
+        $this->assertEquals($record1->id,   $r[0]['id']);
+        $this->assertEquals($item1->id,     $r[0]['item_id']);
+        $this->assertEquals('1',            $r[0]['slug']);
+        $this->assertEquals('3',            $r[0]['title']);
+        $this->assertEquals('5',            $r[0]['body']);
+        $this->assertEquals('POINT(7 7)',   $r[0]['coverage']);
+        $this->assertEquals('9',            $r[0]['tags']);
+        $this->assertEquals('11',           $r[0]['widgets']);
+        $this->assertEquals('13',           $r[0]['presenter']);
+        $this->assertEquals('15',           $r[0]['fill_color']);
+        $this->assertEquals('17',           $r[0]['fill_color_select']);
+        $this->assertEquals('19',           $r[0]['stroke_color']);
+        $this->assertEquals('21',           $r[0]['stroke_color_select']);
+        $this->assertEquals(0.23,           $r[0]['fill_opacity']);
+        $this->assertEquals(0.25,           $r[0]['fill_opacity_select']);
+        $this->assertEquals(0.27,           $r[0]['stroke_opacity']);
+        $this->assertEquals(0.29,           $r[0]['stroke_opacity_select']);
+        $this->assertEquals(31,             $r[0]['stroke_width']);
+        $this->assertEquals(33,             $r[0]['point_radius']);
+        $this->assertEquals(35,             $r[0]['zindex']);
+        $this->assertEquals(37,             $r[0]['weight']);
+        $this->assertEquals('39',           $r[0]['start_date']);
+        $this->assertEquals('41',           $r[0]['end_date']);
+        $this->assertEquals('43',           $r[0]['after_date']);
+        $this->assertEquals('45',           $r[0]['before_date']);
+        $this->assertEquals('47',           $r[0]['point_image']);
+        $this->assertEquals('49',           $r[0]['wms_address']);
+        $this->assertEquals('51',           $r[0]['wms_layers']);
+        $this->assertEquals(53,             $r[0]['min_zoom']);
+        $this->assertEquals(55,             $r[0]['max_zoom']);
+        $this->assertEquals(57,             $r[0]['map_zoom']);
+        $this->assertEquals('59',           $r[0]['map_focus']);
 
         // Record 2:
-        $this->assertEquals($record2->id,   $r[1]->id);
-        $this->assertEquals($item2->id,     $r[1]->item_id);
-        $this->assertEquals('2',            $r[1]->slug);
-        $this->assertEquals('4',            $r[1]->title);
-        $this->assertEquals('6',            $r[1]->body);
-        $this->assertEquals('POINT(8 8)',   $r[1]->coverage);
-        $this->assertEquals('10',           $r[1]->tags);
-        $this->assertEquals('12',           $r[1]->widgets);
-        $this->assertEquals('14',           $r[1]->presenter);
-        $this->assertEquals('16',           $r[1]->fill_color);
-        $this->assertEquals('18',           $r[1]->fill_color_select);
-        $this->assertEquals('20',           $r[1]->stroke_color);
-        $this->assertEquals('22',           $r[1]->stroke_color_select);
-        $this->assertEquals(0.24,           $r[1]->fill_opacity);
-        $this->assertEquals(0.26,           $r[1]->fill_opacity_select);
-        $this->assertEquals(0.28,           $r[1]->stroke_opacity);
-        $this->assertEquals(0.30,           $r[1]->stroke_opacity_select);
-        $this->assertEquals(32,             $r[1]->stroke_width);
-        $this->assertEquals(34,             $r[1]->point_radius);
-        $this->assertEquals(36,             $r[1]->zindex);
-        $this->assertEquals(38,             $r[1]->weight);
-        $this->assertEquals('40',           $r[1]->start_date);
-        $this->assertEquals('42',           $r[1]->end_date);
-        $this->assertEquals('44',           $r[1]->after_date);
-        $this->assertEquals('46',           $r[1]->before_date);
-        $this->assertEquals('48',           $r[1]->point_image);
-        $this->assertEquals('50',           $r[1]->wms_address);
-        $this->assertEquals('52',           $r[1]->wms_layers);
-        $this->assertEquals(54,             $r[1]->min_zoom);
-        $this->assertEquals(56,             $r[1]->max_zoom);
-        $this->assertEquals(58,             $r[1]->map_zoom);
-        $this->assertEquals('60',           $r[1]->map_focus);
+        $this->assertEquals($record2->id,   $r[1]['id']);
+        $this->assertEquals($item2->id,     $r[1]['item_id']);
+        $this->assertEquals('2',            $r[1]['slug']);
+        $this->assertEquals('4',            $r[1]['title']);
+        $this->assertEquals('6',            $r[1]['body']);
+        $this->assertEquals('POINT(8 8)',   $r[1]['coverage']);
+        $this->assertEquals('10',           $r[1]['tags']);
+        $this->assertEquals('12',           $r[1]['widgets']);
+        $this->assertEquals('14',           $r[1]['presenter']);
+        $this->assertEquals('16',           $r[1]['fill_color']);
+        $this->assertEquals('18',           $r[1]['fill_color_select']);
+        $this->assertEquals('20',           $r[1]['stroke_color']);
+        $this->assertEquals('22',           $r[1]['stroke_color_select']);
+        $this->assertEquals(0.24,           $r[1]['fill_opacity']);
+        $this->assertEquals(0.26,           $r[1]['fill_opacity_select']);
+        $this->assertEquals(0.28,           $r[1]['stroke_opacity']);
+        $this->assertEquals(0.30,           $r[1]['stroke_opacity_select']);
+        $this->assertEquals(32,             $r[1]['stroke_width']);
+        $this->assertEquals(34,             $r[1]['point_radius']);
+        $this->assertEquals(36,             $r[1]['zindex']);
+        $this->assertEquals(38,             $r[1]['weight']);
+        $this->assertEquals('40',           $r[1]['start_date']);
+        $this->assertEquals('42',           $r[1]['end_date']);
+        $this->assertEquals('44',           $r[1]['after_date']);
+        $this->assertEquals('46',           $r[1]['before_date']);
+        $this->assertEquals('48',           $r[1]['point_image']);
+        $this->assertEquals('50',           $r[1]['wms_address']);
+        $this->assertEquals('52',           $r[1]['wms_layers']);
+        $this->assertEquals(54,             $r[1]['min_zoom']);
+        $this->assertEquals(56,             $r[1]['max_zoom']);
+        $this->assertEquals(58,             $r[1]['map_zoom']);
+        $this->assertEquals('60',           $r[1]['map_focus']);
 
     }
 
@@ -209,13 +209,12 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         $record3->save();
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
-        $records = $response->records;
+        $json = $this->_getResponseArray();
 
         // Should apply exhibit filter.
-        $this->assertEquals($record1->id, $records[0]->id);
-        $this->assertEquals($record2->id, $records[1]->id);
-        $this->assertCount(2, $response->records);
+        $this->assertEquals($record1->id, $json['records'][0]['id']);
+        $this->assertEquals($record2->id, $json['records'][1]['id']);
+        $this->assertCount(2, $json['records']);
 
     }
 
@@ -240,11 +239,11 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should apply zoom filter.
-        $this->assertEquals($record1->id, $response->records[0]->id);
-        $this->assertCount(1, $response->records);
+        $this->assertEquals($record1->id, $json['records'][0]['id']);
+        $this->assertCount(1, $json['records']);
 
     }
 
@@ -269,11 +268,11 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should apply zoom filter.
-        $this->assertEquals($record1->id, $response->records[0]->id);
-        $this->assertCount(1, $response->records);
+        $this->assertEquals($record1->id, $json['records'][0]['id']);
+        $this->assertCount(1, $json['records']);
 
     }
 
@@ -301,11 +300,11 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should apply query filter.
-        $this->assertEquals($record1->id, $response->records[0]->id);
-        $this->assertCount(1, $response->records);
+        $this->assertEquals($record1->id, $json['records'][0]['id']);
+        $this->assertCount(1, $json['records']);
 
     }
 
@@ -330,11 +329,11 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should apply tags filter.
-        $this->assertEquals($record1->id, $response->records[0]->id);
-        $this->assertCount(1, $response->records);
+        $this->assertEquals($record1->id, $json['records'][0]['id']);
+        $this->assertCount(1, $json['records']);
 
     }
 
@@ -359,11 +358,11 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should apply widget filter.
-        $this->assertEquals($record1->id, $response->records[0]->id);
-        $this->assertCount(1, $response->records);
+        $this->assertEquals($record1->id, $json['records'][0]['id']);
+        $this->assertCount(1, $json['records']);
 
     }
 
@@ -394,13 +393,13 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should order on `weight`.
-        $this->assertEquals($record3->id, $response->records[0]->id);
-        $this->assertEquals($record2->id, $response->records[1]->id);
-        $this->assertEquals($record1->id, $response->records[2]->id);
-        $this->assertCount(3, $response->records);
+        $this->assertEquals($record3->id, $json['records'][0]['id']);
+        $this->assertEquals($record2->id, $json['records'][1]['id']);
+        $this->assertEquals($record1->id, $json['records'][2]['id']);
+        $this->assertCount(3, $json['records']);
 
     }
 
@@ -429,11 +428,11 @@ class RecordsControllerTest_List extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Should apply limit filter.
-        $this->assertEquals($record2->id, $response->records[0]->id);
-        $this->assertCount(1, $response->records);
+        $this->assertEquals($record2->id, $json['records'][0]['id']);
+        $this->assertCount(1, $json['records']);
 
     }
 

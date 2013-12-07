@@ -61,11 +61,11 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
         $this->assertEquals($c2, $c1+1);
 
         // Should emit new id.
-        $response = $this->_getResponseArray();
-        $this->assertNotNull($response->id);
+        $json = $this->_getResponseArray();
+        $this->assertNotNull($json['id']);
 
         // Load the new record.
-        $record = $this->_records->find($response->id);
+        $record = $this->_records->find($json['id']);
 
         // Should update fields.
         $this->assertEquals($exhibit->id,   $record->exhibit_id);
@@ -161,14 +161,14 @@ class RecordsControllerTest_Post extends Neatline_Case_Default
         ));
 
         $this->dispatch('neatline/records');
-        $response = $this->_getResponseArray();
+        $json = $this->_getResponseArray();
 
         // Get the new record.
         $record = $this->_getLastRow($this->_records);
 
         // Should emit all attributes.
         foreach (array_keys($record->toArray()) as $k) {
-            $this->assertObjectHasAttribute($k, $response);
+            $this->assertArrayHasKey($k, $json);
         }
 
     }
