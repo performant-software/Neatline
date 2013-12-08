@@ -2,15 +2,15 @@
 
 #### Added Features
 
-  - When Omeka items are imported into Neatline, raw WKT or KML values in the Dublin Core "Coverage" field are now imported Neatline's coverage field. (Previously, this only worked if the coverage on the item was created with the Neatline Features plugin.)
+  - When Omeka items are imported into Neatline, plain-text WKT or KML values in the Dublin Core "Coverage" field are now automatically imported Neatline's `coverage` field and display on the map. (Previously, this only worked if the coverage on the item was created with the Neatline Features plugin.)
 
-  - Adds a link to the exhibits browse page to the public navigation.
+  - Adds a link to the Neatline exhibits browse page to the public navigation.
 
   - Adds a "View the item in Omeka" link to the default template used to represent Omeka items in Neatline exhibits.
 
-  - Makes it possible to add vector annotations onto records that have WMS layers.
+  - Makes it possible to add both vector annotations and WMS layers to the same Neatline record.
 
-  - In the editor, the map is now bidirectionally synchronized with the "Coverage" input on the record edit form. For example, if WKT is pasted into the input, the map will automatically rebuild the edit layer to display the new coverage.
+  - In the editor, the map is now bidirectionally synchronized with the "Coverage" input on the record edit form. For example, if WKT is pasted into the input, the map will automatically update the edit layer to display the new coverage.
 
 #### Performance Improvements
 

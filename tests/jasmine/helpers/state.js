@@ -14,6 +14,8 @@ var NL = (function(NL) {
 
   /**
    * Load neatline application.
+   *
+   * @param {String} fixture: The application HTML fixture.
    */
   NL.loadNeatline = function(fixture) {
     if (this.server) this.server.restore();
@@ -25,6 +27,8 @@ var NL = (function(NL) {
 
   /**
    * Load editor application.
+   *
+   * @param {String} fixture: The application HTML fixture.
    */
   NL.loadEditor = function(fixture) {
     if (this.server) this.server.restore();
