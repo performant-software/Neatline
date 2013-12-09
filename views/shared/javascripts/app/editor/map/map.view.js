@@ -110,7 +110,7 @@ _.extend(Neatline.Map.View.prototype, {
     // Reset controls.
     this.deactivateEditorControls();
     this.removeEditorControls();
-    this.activatePublicControls();
+    //this.activatePublicControls();
 
     // Release edit layer.
     if (this.editLayer) {
@@ -138,7 +138,7 @@ _.extend(Neatline.Map.View.prototype, {
     // ------------------------------------------------------------------------
 
     this.deactivateEditorControls();
-    this.activatePublicControls();
+    //this.activatePublicControls();
 
 
     // Set the active current editing mode.
@@ -217,7 +217,7 @@ _.extend(Neatline.Map.View.prototype, {
    * Deactivate the default cursor controls and switch on the `edit` control.
    */
   activateModifying: function() {
-    this.deactivatePublicControls();
+    //this.deactivatePublicControls();
     this.controls.edit.activate();
   },
 
