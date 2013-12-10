@@ -57269,9 +57269,12 @@ Neatline.module('Map', function(Map) {
       this.highlightControl.handlers.feature.stopDown = false;
       this.selectControl.handlers.feature.stopDown = false;
 
-      // Add to map, activate.
+      // Add the controls to the map.
       this.map.addControls([this.highlightControl, this.selectControl]);
-      this.activatePublicControls();
+
+      // Activate the controls
+      this.highlightControl.activate();
+      this.selectControl.activate();
 
     },
 
@@ -57405,24 +57408,6 @@ Neatline.module('Map', function(Map) {
 
     // CONTROLS
     // ------------------------------------------------------------------------
-
-
-    /**
-     * Activate the hover and click controls.
-     */
-    activatePublicControls: function() {
-      this.highlightControl.activate();
-      this.selectControl.activate();
-    },
-
-
-    /**
-     * Deactivate the hover and click controls.
-     */
-    deactivatePublicControls: function() {
-      this.highlightControl.deactivate();
-      this.selectControl.deactivate();
-    },
 
 
     /**
@@ -61301,22 +61286,22 @@ _.extend(Neatline.Map.View.prototype, {
 
       case 'modify':
         this.controls.edit.mode = modes.RESHAPE;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'rotate':
         this.controls.edit.mode = modes.ROTATE;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'resize':
         this.controls.edit.mode = modes.RESIZE;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'drag':
         this.controls.edit.mode = modes.DRAG;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'remove':
@@ -61341,14 +61326,6 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
-  },
-
-
-  /**
-   * Deactivate the default cursor controls and switch on the `edit` control.
-   */
-  activateModifying: function() {
-    this.controls.edit.activate();
   },
 
 

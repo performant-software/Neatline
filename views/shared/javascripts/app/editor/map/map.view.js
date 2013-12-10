@@ -168,22 +168,22 @@ _.extend(Neatline.Map.View.prototype, {
 
       case 'modify':
         this.controls.edit.mode = modes.RESHAPE;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'rotate':
         this.controls.edit.mode = modes.ROTATE;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'resize':
         this.controls.edit.mode = modes.RESIZE;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'drag':
         this.controls.edit.mode = modes.DRAG;
-        this.activateModifying();
+        this.controls.edit.activate();
         break;
 
       case 'remove':
@@ -208,14 +208,6 @@ _.extend(Neatline.Map.View.prototype, {
     this.controls.regPoly.handler.irregular = settings.poly.irreg;
 
 
-  },
-
-
-  /**
-   * Deactivate the default cursor controls and switch on the `edit` control.
-   */
-  activateModifying: function() {
-    this.controls.edit.activate();
   },
 
 

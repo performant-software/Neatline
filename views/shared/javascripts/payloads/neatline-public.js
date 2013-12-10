@@ -35971,9 +35971,12 @@ Neatline.module('Map', function(Map) {
       this.highlightControl.handlers.feature.stopDown = false;
       this.selectControl.handlers.feature.stopDown = false;
 
-      // Add to map, activate.
+      // Add the controls to the map.
       this.map.addControls([this.highlightControl, this.selectControl]);
-      this.activatePublicControls();
+
+      // Activate the controls
+      this.highlightControl.activate();
+      this.selectControl.activate();
 
     },
 
@@ -36107,24 +36110,6 @@ Neatline.module('Map', function(Map) {
 
     // CONTROLS
     // ------------------------------------------------------------------------
-
-
-    /**
-     * Activate the hover and click controls.
-     */
-    activatePublicControls: function() {
-      this.highlightControl.activate();
-      this.selectControl.activate();
-    },
-
-
-    /**
-     * Deactivate the hover and click controls.
-     */
-    deactivatePublicControls: function() {
-      this.highlightControl.deactivate();
-      this.selectControl.deactivate();
-    },
 
 
     /**
