@@ -33,9 +33,13 @@ A piece of text to introduce, narrate, accompany, or otherwise generally support
 
 And you had a record in your Neatline exhibit with a slug of `paris`, the word "Paris" narrative would be interactively linked with the location on the map, and vice versa.
 
+![Screenshot of Title, URL, and Narrative fields](http://neatline.org/wp-content/uploads/2013/12/creation-title-url-narrative.png)
+
 ## Widgets
 
 The combination of user-interface widgets that are "activated" for the exhibit. Since widgets are installed as separate "sub-plugins" in Omeka, there won't be any options available for selection by default. If you've installed the NeatlineWaypoints and NeatlineSimile sub-plugins, though, you'll see two options in the menu that appears when you click the field: "SIMILE Timeline" and "Waypoints." Just click one or both of the options (or neither), and a block will appear in the box, indicating that the widget has been enabled for the the exhibit.
+
+![Screenshot of Widgets field](http://neatline.org/wp-content/uploads/2013/12/creation-selectingwidgets.png)
 
 ## Base Layers
 
