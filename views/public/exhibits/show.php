@@ -16,7 +16,15 @@
   'bodyclass' => 'neatline show'
 )); ?>
 
+<!-- Exhibit title: -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
+
+<!-- "View Fullscreen" link: -->
+<?php echo nl_getExhibitLink(
+  null, 'fullscreen', __('View Fullscreen'), array('class' => 'nl-fullscreen')
+); ?>
+
+<!-- Exhibit and description : -->
 <?php echo nl_getExhibitMarkup(); ?>
 <?php echo nl_getNarrativeMarkup(); ?>
 

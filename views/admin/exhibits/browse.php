@@ -52,15 +52,14 @@
           <td class="title">
 
             <!-- Title. -->
-            <?php
-            if (is_allowed($e, 'editor')) {
-              echo nl_getExhibitLink(
-                $e, 'editor', null,
-                array('class' => 'editor'), false
-              );
-            } else {
-              echo nl_getExhibitField('title');
-            }
+            <?php if (is_allowed($e, 'editor')) {
+                echo nl_getExhibitLink(
+                  $e, 'editor', null,
+                  array('class' => 'editor'), false
+                );
+              } else {
+                echo nl_getExhibitField('title');
+              }
             ?>
 
             <ul class="action-links group">
@@ -70,7 +69,7 @@
                 <?php echo nl_getExhibitLink(
                   $e, 'show', __('Public View'),
                   array('class' => 'public'), true
-                );?>
+                ); ?>
               </li>
 
               <!-- Fullscreen View. -->
@@ -78,7 +77,7 @@
                 <?php echo nl_getExhibitLink(
                   $e, 'fullscreen', __('Fullscreen View'),
                   array('class' => 'fullscreen'), true
-                );?>
+                ); ?>
               </li>
 
               <!-- Exhibit Settings. -->
@@ -87,7 +86,7 @@
                   <?php echo nl_getExhibitLink(
                     $e, 'edit', __('Exhibit Settings'),
                     array('class' => 'edit'), false
-                  );?>
+                  ); ?>
                 </li>
               <?php endif; ?>
 
@@ -97,7 +96,7 @@
                   <?php echo nl_getExhibitLink(
                     $e, 'import-items', __('Import Items'),
                     array('class' => 'import-items'), false
-                  );?>
+                  ); ?>
                 </li>
               <?php endif; ?>
 
