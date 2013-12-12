@@ -32,7 +32,7 @@ First, install Omeka by following the instructions in the [Installation][install
 
 Once Omeka is up and running, install the Neatline plugin:
 
-  1. Download the most recent version of Neatline, unpack the `.zip` archive, and move the `Neatline` folder into `/plugins`.
+  1. Download the most recent version of [Neatline] [nlplugin], unpack the `.zip` archive, and move the `Neatline` folder into `/plugins`.
 
   2. In the Omeka administrative interface, click on the **Plugins** link on the top navigation bar and find the listing for Neatline.
 
