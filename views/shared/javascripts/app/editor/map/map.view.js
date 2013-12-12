@@ -32,7 +32,12 @@ _.extend(Neatline.Map.View.prototype, {
     // Set an arbitrarily high z-index value on the edit layer to ensure that
     // it can always be manipulated by the editing controls:
 
-    this.map.setLayerIndex(this.editLayer, 9999);
+    this.map.raiseLayer(this.editLayer, 9999);
+
+    // Reset the layers array on the highlight/select controls. This ensures
+    // that the edit layer is always "selectable" for modification.
+
+    this.updatePublicControls();
 
     // Flip on the `neatline.frozen` flag on the edit layer to exempt it from
     // the regular garbage collection process:
