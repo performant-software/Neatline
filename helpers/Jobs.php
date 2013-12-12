@@ -21,16 +21,12 @@ function nl_mountView()
             Zend_Registry::get('view') :
             new Omeka_View();
 
-    // (1) Omeka templates:
-    $view->addScriptPath(VIEW_SCRIPTS_DIR);
+    // Register templates:
+    $view->addScriptPath(VIEW_SCRIPTS_DIR);         // Omeka
+    $view->addScriptPath(NL_DIR.'/views/shared');   // Neatline
+    $view->addScriptPath(nl_getPublicThemeDir());   // Theme
 
-    // (2) Neatline templates:
-    $view->addScriptPath(NL_DIR.'/views/shared');
-
-    // (3) Theme templates:
-    $view->addScriptPath(nl_getPublicThemeDir());
-
-    // (Re)set the view.
+    // (Re)set the view:
     Zend_Registry::set('view', $view);
 
     return $view;
