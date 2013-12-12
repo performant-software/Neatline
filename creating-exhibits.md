@@ -45,10 +45,16 @@ The combination of user-interface widgets that are "activated" for the exhibit. 
 
 The base layers that are available in the exhibit. All of these layers will be accessible by way of the "layer switcher" tool displayed in the top right corner of the map in the editing environment and public view. Like with the "Widgets" field, click on the input to display a list of layers, any of which can be clicked and added to the list of selections.
 
+![Screenshot of Selecting Base Layers](http://neatline.org/wp-content/uploads/2013/12/creation-activemaplayers.png)
+
 ## Default Layer
 
 The default base layer that's displayed when an exhibit is first accessed. This is an important selection, since the default layer will often strongly influence the visual aesthetic of the exhibit of the exhibit.
 
+![Screenshot of Default Layer](http://neatline.org/wp-content/uploads/2013/12/creation-defaultmaplayer.png)
+
 ## Public
 
 If left unchecked, the exhibit will be visible in the Omeka administrative interface, but not on the public site. Check the box to publish the exhibit to the web.
+
+![Screenshot of Public Field](http://neatline.org/wp-content/uploads/2013/12/creation-wmsspatialqueryingpublic.png)
