@@ -29,6 +29,11 @@ _.extend(Neatline.Map.View.prototype, {
 
     this.editLayer = this.getOrCreateVectorLayer(model);
 
+    // Set an arbitrarily high z-index value on the edit layer to ensure that
+    // it can always be manipulated by the editing controls:
+
+    this.map.setLayerIndex(this.editLayer, 9999);
+
     // Flip on the `neatline.frozen` flag on the edit layer to exempt it from
     // the regular garbage collection process:
 
