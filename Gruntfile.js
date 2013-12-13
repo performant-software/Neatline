@@ -384,54 +384,6 @@ module.exports = function(grunt) {
 
     },
 
-    compress: {
-
-      dist: {
-        options: {
-          archive: 'pkg/Neatline-'+pkg.version+'.zip'
-        },
-        dest: 'Neatline/',
-        src: [
-
-          '**',
-
-          // GIT
-          '!.git/**',
-
-          // BOWER
-          '!bower.json',
-          '!bower_components/**',
-
-          // NPM
-          '!package.json',
-          '!node_modules/**',
-
-          // COMPOSER
-          '!composer.json',
-          '!composer.lock',
-          '!vendor/**',
-
-          // RUBY
-          '!Gemfile',
-          '!Gemfile.lock',
-          '!Rakefile',
-
-          // GRUNT
-          '!.grunt/**',
-          '!Gruntfile.js',
-          '!paths.json',
-
-          // DIST
-          '!pkg/**',
-
-          // TESTS
-          '!tests/**'
-
-        ]
-      }
-
-    },
-
     jasmine: {
 
       options: {
@@ -476,6 +428,54 @@ module.exports = function(grunt) {
           keepalive: true,
           port: 1337
         }
+      }
+
+    },
+
+    compress: {
+
+      dist: {
+        options: {
+          archive: 'pkg/Neatline-'+pkg.version+'.zip'
+        },
+        dest: 'Neatline/',
+        src: [
+
+          '**',
+
+          // GIT
+          '!.git/**',
+
+          // BOWER
+          '!bower.json',
+          '!bower_components/**',
+
+          // NPM
+          '!package.json',
+          '!node_modules/**',
+
+          // COMPOSER
+          '!composer.json',
+          '!composer.lock',
+          '!vendor/**',
+
+          // RUBY
+          '!Gemfile',
+          '!Gemfile.lock',
+          '!Rakefile',
+
+          // GRUNT
+          '!.grunt/**',
+          '!Gruntfile.js',
+          '!paths.json',
+
+          // DIST
+          '!pkg/**',
+
+          // TESTS
+          '!tests/**'
+
+        ]
       }
 
     }
