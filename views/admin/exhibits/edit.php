@@ -14,7 +14,6 @@
 <?php
   echo head(array(
     'title' => __('Neatline | Edit "%s"', nl_getExhibitField('title')),
-    'bodyclass' => 'edit'
   ));
 ?>
 

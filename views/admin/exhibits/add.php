@@ -13,8 +13,7 @@
 
 <?php
   echo head(array(
-    'title' => __('Neatline | Create an Exhibit'),
-    'bodyclass' => 'add'
+    'title' => __('Neatline | Create an Exhibit')
   ));
 ?>
 

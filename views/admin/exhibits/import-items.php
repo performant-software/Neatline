@@ -13,8 +13,7 @@
 
 <?php
   echo head(array(
-    'title' => __('Neatline | Import Items from Omeka'),
-    'content_class' => 'neatline'
+    'title' => __('Neatline | Import Items from Omeka')
   ));
 ?>
 

@@ -13,8 +13,7 @@
 
 <?php
   echo head(array(
-    'title' => __('Neatline | Browse Exhibits'),
-    'content_class' => 'neatline'
+    'title' => __('Neatline | Browse Exhibits')
   ));
   echo flash();
 ?>
