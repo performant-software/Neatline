@@ -549,6 +549,7 @@ module.exports = function(grunt) {
 
   // Run application tests.
   grunt.registerTask('test', [
+    'compile:min',
     'clean:fixtures',
     'phpunit:all',
     'jasmine'
