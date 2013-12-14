@@ -286,7 +286,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
     public function testSuccess()
     {
 
-        $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
+        $image = NL_TEST_DIR.'/mocks/image.jpg';
 
         $this->request->setMethod('POST')->setPost(array(
             'title'             => 'Title',
@@ -295,7 +295,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
             'widgets'           => array('Widget1', 'Widget2'),
             'spatial_layers'    => array('Layer1', 'Layer2'),
             'spatial_layer'     => 'Layer2',
-            'image_layer'       => $imagePath,
+            'image_layer'       => $image,
             'zoom_levels'       => '50',
             'wms_address'       => 'wms.org',
             'wms_layers'        => 'wms:layer',
@@ -318,7 +318,7 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertEquals('Widget1,Widget2',  $exhibit->widgets);
         $this->assertEquals('Layer1,Layer2',    $exhibit->spatial_layers);
         $this->assertEquals('Layer2',           $exhibit->spatial_layer);
-        $this->assertEquals($imagePath,         $exhibit->image_layer);
+        $this->assertEquals($image,             $exhibit->image_layer);
         $this->assertEquals(50,                 $exhibit->zoom_levels);
         $this->assertEquals('wms.org',          $exhibit->wms_address);
         $this->assertEquals('wms:layer',        $exhibit->wms_layers);

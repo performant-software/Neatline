@@ -15,10 +15,18 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
     public function setUp()
     {
+
         parent::setUp();
         $this->_mockPresenters();
         $this->_mockExhibitWidgets();
         $this->_mockLayers();
+
+        // Create a mock exhibit.
+        $this->exhibit = $this->_exhibit('slug');
+
+        // Cache the image fixture path.
+        $this->image = NL_TEST_DIR.'/mocks/image.jpg';
+
     }
 
 
@@ -28,16 +36,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testBaseMarkup()
     {
 
-        $exhibit = $this->_exhibit('slug');
-        $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
-
-        $exhibit->setArray(array(
+        $this->exhibit->setArray(array(
             'title'             => 'Title',
             'narrative'         => 'Narrative.',
             'widgets'           => 'Widget1,Widget2',
             'spatial_layers'    => 'Layer1,Layer3',
             'spatial_layer'     => 'Layer3',
-            'image_layer'       => $imagePath,
+            'image_layer'       => $this->image,
             'wms_address'       => 'wms.org',
             'wms_layers'        => 'wms:layer',
             'zoom_levels'       => 10,
@@ -45,9 +50,9 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'public'            => 1
         ));
 
-        $exhibit->save();
+        $this->exhibit->save();
 
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
 
         // Title:
         $this->assertXpath(
@@ -95,7 +100,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         // Image Layer:
         $this->assertXpath(
-            "//input[@name='image_layer'][@value='$imagePath']"
+            "//input[@name='image_layer'][@value='$this->image']"
         );
 
         // Zoom Levels:
@@ -132,15 +137,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoTitleError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Missing title.
         $this->request->setMethod('POST')->setPost(array(
             'title'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -157,15 +160,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoSlugError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Missing slug:
         $this->request->setMethod('POST')->setPost(array(
             'slug'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -182,15 +183,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testInvalidSlugWithSpacesError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Spaces:
         $this->request->setMethod('POST')->setPost(array(
             'slug' => 'slug with spaces'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -207,15 +206,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testInvalidSlugWithCapsError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Capitals:
         $this->request->setMethod('POST')->setPost(array(
             'slug' => 'Slug-With-Capitals'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -232,15 +229,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testInvalidSlugWithNonAlphasError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Non-alphanumerics:
         $this->request->setMethod('POST')->setPost(array(
             'slug' => 'slug#with%non&alphas!'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -256,16 +251,15 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testDuplicateSlugError()
     {
 
-        $exhibit1 = $this->_exhibit('slug-1');
-        $exhibit2 = $this->_exhibit('slug-2');
+        $otherExhibit = $this->_exhibit('different-slug');
 
         // Duplicate slug.
         $this->request->setMethod('POST')->setPost(array(
-            'slug' => 'slug-2'
+            'slug' => 'different-slug'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit1->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -281,8 +275,6 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testUnchangedSlug()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Unchanged slug.
         $this->request->setMethod('POST')->setPost(array(
             'title'           => 'title',
@@ -294,10 +286,10 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
 
         // Should save exhibit.
-        $this->assertEquals('title', $this->_reload($exhibit)->title);
+        $this->assertEquals('title', $this->_reload($this->exhibit)->title);
 
     }
 
@@ -308,15 +300,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoDefaultLayersError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Missing title.
         $this->request->setMethod('POST')->setPost(array(
             'spatial_layer'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -333,15 +323,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testNoZoomLevelsError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Missing zoom level count.
         $this->request->setMethod('POST')->setPost(array(
             'zoom_levels'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -358,15 +346,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testAlphaZoomLevelsError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Missing zoom level count.
         $this->request->setMethod('POST')->setPost(array(
             'zoom_levels' => 'alpha'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -383,15 +369,13 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testDecimalZoomLevelsError()
     {
 
-        $exhibit = $this->_exhibit();
-
         // Missing zoom level count.
         $this->request->setMethod('POST')->setPost(array(
             'zoom_levels' => '50.5'
         ));
 
         // Submit the form.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
         $this->assertAction('edit');
 
         // Should flash error.
@@ -408,9 +392,6 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
     public function testSuccess()
     {
 
-        $exhibit = $this->_exhibit();
-        $imagePath = NL_TEST_DIR.'/mocks/image.jpg';
-
         $this->request->setMethod('POST')->setPost(array(
             'title'             => 'Title',
             'slug'              => 'slug',
@@ -418,7 +399,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'widgets'           => array('Widget1', 'Widget2'),
             'spatial_layers'    => array('Layer1', 'Layer2'),
             'spatial_layer'     => 'Layer1',
-            'image_layer'       => $imagePath,
+            'image_layer'       => $this->image,
             'zoom_levels'       => '50',
             'wms_address'       => 'wms.org',
             'wms_layers'        => 'wms:layer',
@@ -427,8 +408,8 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         ));
 
         // Submit the form, _reload exhibit.
-        $this->dispatch('neatline/edit/'.$exhibit->id);
-        $exhibit = $this->_reload($exhibit);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
+        $exhibit = $this->_reload($this->exhibit);
 
         // Should set fields.
         $this->assertEquals('Title',            $exhibit->title);
@@ -437,7 +418,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->assertEquals('Widget1,Widget2',  $exhibit->widgets);
         $this->assertEquals('Layer1,Layer2',    $exhibit->spatial_layers);
         $this->assertEquals('Layer1',           $exhibit->spatial_layer);
-        $this->assertEquals($imagePath,         $exhibit->image_layer);
+        $this->assertEquals($this->image,       $exhibit->image_layer);
         $this->assertEquals(50,                 $exhibit->zoom_levels);
         $this->assertEquals('wms.org',          $exhibit->wms_address);
         $this->assertEquals('wms:layer',        $exhibit->wms_layers);
