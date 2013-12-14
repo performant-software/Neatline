@@ -41,9 +41,8 @@ class ExhibitsControllerTest_AdminAdd extends Neatline_Case_Default
         $this->assertAction('add');
 
         // Should flash error.
-        $this->assertXpath(
-            "//{$element}[@name='$name']
-              /following-sibling::ul[@class='error']"
+        $this->assertXpath( "//{$element}[@name='$name']
+            /following-sibling::ul[@class='error']"
         );
 
     }

@@ -21,11 +21,37 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
         $this->_mockExhibitWidgets();
         $this->_mockLayers();
 
+        // Cache the image fixture path.
+        $this->image = NL_TEST_DIR.'/mocks/image.jpg';
+
         // Create a mock exhibit.
         $this->exhibit = $this->_exhibit('slug');
 
-        // Cache the image fixture path.
-        $this->image = NL_TEST_DIR.'/mocks/image.jpg';
+    }
+
+
+    /**
+     * Submit the form, confirm that a new exhibit was not added.
+     *
+     * @param string $name The `name` attribute of the input with the error.
+     * @param string $element The input element type.
+     */
+    protected function _assertFormError($name, $element='input')
+    {
+
+        // Submit the form.
+        $e1 = $this->_exhibits->find($this->exhibit->id);
+        $this->dispatch('neatline/edit/'.$this->exhibit->id);
+        $e2 = $this->_exhibits->find($this->exhibit->id);
+
+        // Should not change exhibit.
+        $this->assertEquals($e1->toArray(), $e2->toArray());
+        $this->assertAction('edit');
+
+        // Should flash error.
+        $this->assertXpath("//{$element}[@name='$name']
+            /following-sibling::ul[@class='error']"
+        );
 
     }
 
@@ -142,14 +168,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'title'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="title"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('title');
 
     }
 
@@ -165,14 +184,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'slug'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('slug');
 
     }
 
@@ -188,14 +200,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'slug' => 'slug with spaces'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('slug');
 
     }
 
@@ -211,14 +216,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'slug' => 'Slug-With-Capitals'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('slug');
 
     }
 
@@ -234,14 +232,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'slug' => 'slug#with%non&alphas!'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('slug');
 
     }
 
@@ -258,14 +249,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'slug' => 'different-slug'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="slug"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('slug');
 
     }
 
@@ -305,14 +289,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'spatial_layer'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//select[@name="spatial_layer"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('spatial_layer', 'select');
 
     }
 
@@ -328,14 +305,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'zoom_levels'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="zoom_levels"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('zoom_levels');
 
     }
 
@@ -351,14 +321,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'zoom_levels' => 'alpha'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="zoom_levels"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('zoom_levels');
 
     }
 
@@ -374,14 +337,7 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
             'zoom_levels' => '50.5'
         ));
 
-        // Submit the form.
-        $this->dispatch('neatline/edit/'.$this->exhibit->id);
-        $this->assertAction('edit');
-
-        // Should flash error.
-        $this->assertXpath('//input[@name="zoom_levels"]/
-            following-sibling::ul[@class="error"]'
-        );
+        $this->_assertFormError('zoom_levels');
 
     }
 
