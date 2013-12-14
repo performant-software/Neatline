@@ -47,9 +47,9 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('text', 'title', array(
             'label'         => __('Title'),
             'description'   => __('A top-level heading for the exhibit, displayed in the page header in the public view for the exhibit.'),
-            'size'          => 40,
             'value'         => $this->exhibit->title,
             'required'      => true,
+            'size'          => 40,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
@@ -65,9 +65,9 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('text', 'slug', array(
             'label'         => __('URL Slug'),
             'description'   => __('A unique string used to form the public-facing URL for the exhibit. Can contain letters, numbers, and hyphens.'),
-            'size'          => 40,
             'value'         => $this->exhibit->slug,
             'required'      => true,
+            'size'          => 40,
             'filters'       => array('StringTrim'),
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
@@ -148,17 +148,17 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('text', 'image_layer', array(
             'label'         => __('Image Layer'),
             'description'   => __('To use a static image as the base layer of the exhibit, enter the web-accessible location of the image.'),
-            'size'          => 40,
-            'value'         => $this->exhibit->image_layer
+            'value'         => $this->exhibit->image_layer,
+            'size'          => 40
         ));
 
         // Zoom Levels:
         $this->addElement('text', 'zoom_levels', array(
             'label'         => __('Zoom Levels'),
             'description'   => __('Enter the number of zoom levels available for the static image.'),
-            'size'          => 40,
             'value'         => $this->exhibit->zoom_levels,
             'required'      => true,
+            'size'          => 40,
             'validators'    => array(
                 array('validator' => 'NotEmpty', 'breakChainOnFailure' => true, 'options' =>
                     array(
@@ -181,16 +181,16 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('text', 'wms_address', array(
             'label'         => __('WMS Address'),
             'description'   => __('To use a custom WMS layer as the base layer of the exhibit, enter (a) the address of the WMS server.'),
-            'size'          => 40,
-            'value'         => $this->exhibit->wms_address
+            'value'         => $this->exhibit->wms_address,
+            'size'          => 40
         ));
 
         // WMS Layers:
         $this->addElement('text', 'wms_layers', array(
             'label'         => __('WMS Layers'),
             'description'   => __('And (b) the comma-delimited list of layers.'),
-            'size'          => 40,
-            'value'         => $this->exhibit->wms_layers
+            'value'         => $this->exhibit->wms_layers,
+            'size'          => 40
         ));
 
         // Spatial Querying:
