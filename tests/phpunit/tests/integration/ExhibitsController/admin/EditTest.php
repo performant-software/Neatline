@@ -61,34 +61,36 @@ class ExhibitsControllerTest_AdminEdit extends Neatline_Case_Default
 
         // Narrative:
         $this->assertXpathContentContains(
-            '//textarea[@name="narrative"]',
-            'Narrative.'
+            '//textarea[@name="narrative"]', 'Narrative.'
         );
 
         // Widgets:
         $this->assertXpath(
-            '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget1"]'
+            '//select[@name="widgets[]"]
+              /option[@selected="selected"][@value="Widget1"]'
         );
         $this->assertXpath(
-            '//select[@name="widgets[]"]/
-            option[@selected="selected"][@value="Widget2"]'
+            '//select[@name="widgets[]"]
+              /option[@selected="selected"][@value="Widget2"]'
         );
 
         // Spatial Layers:
         $this->assertXpath(
-            '//select[@name="spatial_layers[]"]/optgroup/
-            option[@selected="selected"][@value="Layer1"]'
+            '//select[@name="spatial_layers[]"]
+              /optgroup
+              /option[@selected="selected"][@value="Layer1"]'
         );
         $this->assertXpath(
-            '//select[@name="spatial_layers[]"]/optgroup/
-            option[@selected="selected"][@value="Layer3"]'
+            '//select[@name="spatial_layers[]"]
+              /optgroup
+              /option[@selected="selected"][@value="Layer3"]'
         );
 
         // Spatial Layer:
         $this->assertXpath(
-            '//select[@name="spatial_layer"]/optgroup/
-            option[@selected="selected"][@value="Layer3"]'
+            '//select[@name="spatial_layer"]
+              /optgroup
+              /option[@selected="selected"][@value="Layer3"]'
         );
 
         // Image Layer:
