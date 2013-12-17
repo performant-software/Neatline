@@ -11,6 +11,8 @@ layout: default
   - Any kind of HTML-embeddable media can be put in the body - audio, video, etc.
   - Use the "Edit HTML" links to open a fullscreen WYSWYG editor for either of the fields.
   - All text fields are optional, but it's recommended to at least enter a title.
+  
+![Screenshot of Text tab](http://neatline.org/wp-content/uploads/2013/12/newitem-texttab.png)  
 
 ## Slug (optional)
 
@@ -28,10 +30,16 @@ The title is the top-level snippet of text used to label the record in pop-up bu
 
 If you want to add special formatting to the title (eg, make it bold, increase the size), click the "Edit HTML" link next to the field label. This will open a full-screen WYSWYG editor with a full load-out of formatting options. When you're done with the editor, click the **Minimize** button to return to the regular editing interface.
 
+![Screenshot of Title field](http://neatline.org/wp-content/uploads/2013/12/newitem-title.png)
+
 ## Body (optional)
 
 The body is a catch-all field designed to house the main textual content for the record. Depending on what kind of content you're working with and how you're structuring the user-interface for the exhibit, it might make sense to enter anything from a short little blurb all the way up to a 10,000-word scholaraly essay.
 
+![Screenshot of Body field](http://neatline.org/wp-content/uploads/2013/12/newitem-texttabaftereditinghtml.png) 
+
 Like with the title, click on the "Edit HTML" link to open up a full-screen WYSWYG editor for the field. Although it's generally a good idea to keep the formatting pretty minimal for the title, it fine to use much more elaborate and structural styling in the body - bullets and numbered lists, images, tables, etc.
 
 Also, you can use the body as a space to include any kind of embeddable third-party multimedia content - videos from YouTube or Vimeo, audio from SoundCloud, etc. Just click on the "Source" button at the top left of the editor to activate view-HTML mode, and paste in the embed code.
+
+![Screenshot of HTML editor](http://neatline.org/wp-content/uploads/2013/12/htmleditor.png )
