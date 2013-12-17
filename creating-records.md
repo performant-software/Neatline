@@ -19,6 +19,8 @@ The simplest way to add a new record is just to create one directly inside of th
 
 This will open up an empty editing form for the new record. **Important**: Keep in mind that the record won't actually be saved to the database until you click the "Save" button at the bottom of the form.
 
+![Screenshot of Widgets field](http://neatline.org/wp-content/uploads/2013/12/exhibitdash.png)
+
 ## Connecting a Neatline record with an Omeka item
 
 Once a record has been created in an exhibit, it can be "linked" back to an item in the Omeka collection:
