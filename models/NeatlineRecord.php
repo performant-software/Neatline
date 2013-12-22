@@ -310,15 +310,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Alias unmodified save (used for testing).
-     */
-    public function __save()
-    {
-        parent::__save();
-    }
-
-
-    /**
      * Associate the model with an ACL resource id.
      *
      * @return string The resource id.
