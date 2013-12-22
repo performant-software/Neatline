@@ -12,6 +12,7 @@
     , "bootstrap":              ">= 3.0.0"
     , "ace-builds":             ">= 1.0.0"
     , "spectrum":               ">= 1.1.0"
+    , "select2":                ">= 3.4.5"
     , "jasmine-jquery":         ">= 1.4.2"
     , "sinon":                  ">= 1.6.0"
 
