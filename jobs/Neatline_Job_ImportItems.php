@@ -20,20 +20,20 @@ class Neatline_Job_ImportItems extends Neatline_Job_MockView
     public function execute()
     {
 
-        $__records  = $this->_db->getTable('NeatlineRecord');
-        $__exhibits = $this->_db->getTable('NeatlineExhibit');
-        $__items    = $this->_db->getTable('Item');
+        $_records  = $this->_db->getTable('NeatlineRecord');
+        $_exhibits = $this->_db->getTable('NeatlineExhibit');
+        $_items    = $this->_db->getTable('Item');
 
         // Load the exhibit, alias the query.
-        $exhibit = $__exhibits->find($this->_options['exhibit_id']);
+        $exhibit = $_exhibits->find($this->_options['exhibit_id']);
         $query = $this->_options['query'];
 
         $i = 0;
-        while ($items = $__items->findBy($query, 10, $i)) {
+        while ($items = $_items->findBy($query, 10, $i)) {
             foreach ($items as $item) {
 
                 // Try to find an existing record.
-                $record = $__records->findBySql('exhibit_id=? && item_id=?',
+                $record = $_records->findBySql('exhibit_id=? && item_id=?',
                     array($exhibit->id, $item->id), true
                 );
 
