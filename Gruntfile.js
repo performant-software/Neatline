@@ -254,7 +254,6 @@ module.exports = function(grunt) {
           paths.vendor.js.ace,
           paths.vendor.js.ace_theme,
           paths.vendor.js.ace_mode,
-          paths.vendor.js.select2,
 
           // Neatline:
           paths.src.shared+'/*.js',

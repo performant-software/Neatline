@@ -55,7 +55,6 @@
       "ace":              "bower_components/ace-builds/src-noconflict/ace.js",
       "ace_theme":        "bower_components/ace-builds/src-noconflict/theme-clouds.js",
       "ace_mode":         "bower_components/ace-builds/src-noconflict/mode-css.js",
-      "select2":          "bower_components/select2/select2.js",
       "chosen":           "bower_components/chosen/public/chosen.jquery.js",
       "jasmine_jquery":   "bower_components/jasmine-jquery/lib/jasmine-jquery.js",
       "jasmine_async":    "bower_components/jasmine.async/src/jasmine.async.js",
