@@ -76,6 +76,19 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
+     * Get the routing parameters or the URL string for the exhibit.
+     *
+     * @param string $action The controller action.
+     */
+    public function getRecordUrl($action = 'show')
+    {
+        $urlHelper = new Omeka_View_Helper_Url;
+        $params = array('action' => $action, 'id' => $this->id);
+        return $urlHelper->url($params, 'neatlineActionId');
+    }
+
+
+    /**
      * Check whether a widget is enabled.
      *
      * @param string $widget The id of the widget.
@@ -255,19 +268,6 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         // Delete child records.
         $records->delete($rName, array('exhibit_id=?' => $this->id));
 
-    }
-
-
-    /**
-     * Get the routing parameters or the URL string for the exhibit.
-     *
-     * @param string $action The controller action.
-     */
-    public function getRecordUrl($action = 'show')
-    {
-        $urlHelper = new Omeka_View_Helper_Url;
-        $params = array('action' => $action, 'id' => $this->id);
-        return $urlHelper->url($params, 'neatlineActionId');
     }
 
 
