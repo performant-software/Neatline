@@ -14,13 +14,17 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
 
     /**
-     * Set default model and pagination page length.
+     * Set the default model, get tables.
      */
     public function init()
     {
         $this->_helper->db->setDefaultModelName('NeatlineExhibit');
         $this->_exhibits = $this->_helper->db->getTable('NeatlineExhibit');
     }
+
+
+    // REST API:
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -54,6 +58,27 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
         // Respond with exhibit data.
         echo Zend_Json::encode($exhibit->toArray());
+
+    }
+
+
+    // Admin CRUD actions:
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * Browse exhibits.
+     */
+    public function browseAction()
+    {
+
+        // By default, sort by added date.
+        if (!$this->_getParam('sort_field')) {
+            $this->_setParam('sort_field', 'added');
+            $this->_setParam('sort_dir', 'd');
+        }
+
+        parent::browseAction();
 
     }
 
@@ -149,20 +174,23 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
 
     /**
-     * Browse exhibits.
+     * Edit exhibit.
      */
-    public function browseAction()
+    public function editorAction()
     {
 
-        // By default, sort by added date.
-        if (!$this->_getParam('sort_field')) {
-            $this->_setParam('sort_field', 'added');
-            $this->_setParam('sort_dir', 'd');
-        }
+        // Assign exhibit to view.
+        $exhibit = $this->_helper->db->findById();
+        $this->view->neatline_exhibit = $exhibit;
 
-        parent::browseAction();
+        // Queue static assets.
+        nl_queueNeatlineEditor($exhibit);
 
     }
+
+
+    // Public views:
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -212,20 +240,8 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     }
 
 
-    /**
-     * Edit exhibit.
-     */
-    public function editorAction()
-    {
-
-        // Assign exhibit to view.
-        $exhibit = $this->_helper->db->findById();
-        $this->view->neatline_exhibit = $exhibit;
-
-        // Queue static assets.
-        nl_queueNeatlineEditor($exhibit);
-
-    }
+    // Helpers:
+    // ------------------------------------------------------------------------
 
 
     /**

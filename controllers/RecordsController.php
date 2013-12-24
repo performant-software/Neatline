@@ -14,7 +14,7 @@ class Neatline_RecordsController extends Neatline_Controller_Rest
 
 
     /**
-     * Set the controller model, get tables.
+     * Set the default model, get tables.
      */
     public function init()
     {
