@@ -120,7 +120,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         $css = nl_readCSS($this->styles);
 
         // Load records table.
-        $records = $this->getTable('NeatlineRecord');
+        $recordsTable = $this->getTable('NeatlineRecord');
 
         // Gather style columns.
         $valid = nl_getStyles();
@@ -154,8 +154,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
             }
 
             // Update records.
-            if (!empty($set)) $records->update(
-                $records->getTableName(), $set, $where
+            if (!empty($set)) $recordsTable->update(
+                $recordsTable->getTableName(), $set, $where
             );
 
         }
@@ -290,8 +290,8 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     {
 
         // Get records table and name.
-        $records = $this->getTable('NeatlineRecord');
-        $rName = $records->getTableName();
+        $recordsTable = $this->getTable('NeatlineRecord');
+        $rName = $recordsTable->getTableName();
 
         // Gather record expansion tables.
         foreach (nl_getRecordExpansions() as $expansion) {
@@ -307,7 +307,9 @@ class NeatlineExhibit extends Neatline_Row_Expandable
         }
 
         // Delete child records.
-        $records->delete($rName, array('exhibit_id=?' => $this->id));
+        $recordsTable->delete(
+            $rName, array('exhibit_id=?' => $this->id)
+        );
 
     }
 
