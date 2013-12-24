@@ -21,7 +21,7 @@
 
   <?php echo flash(); ?>
 
-  <form method="POST" action="#">
+  <form method="POST" action="#" class="import">
 
     <div id="search-range" class="field">
       <div class="two columns alpha">

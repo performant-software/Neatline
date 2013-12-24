@@ -11,8 +11,10 @@
 // TODO|dev
 jQuery(function($) {
 
+  var form = $('form.import');
+
   $('input[type="submit"]').click(function(e) {
-    console.log($('form').serializeArray());
+    console.log(form.serializeArray());
     e.preventDefault();
   });
 
