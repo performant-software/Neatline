@@ -33,6 +33,16 @@ function nl_queueEditForm()
 
 
 /**
+ * Include static files for the item import form.
+ */
+function nl_queueImportForm()
+{
+    // TODO|dev
+    queue_js_file('import-items');
+}
+
+
+/**
  * Include static files for the exhibit.
  *
  * @param NeatlineExhibit The exhibit.
