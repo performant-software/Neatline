@@ -70,14 +70,14 @@ function nl_defineAcl($acl)
         'editSelf',
         'editorSelf',
         'putSelf',
-        'import-itemsSelf',
+        'importSelf',
         'deleteSelf'
     ));
     $acl->allow('contributor', 'Neatline_Exhibits', array(
         'edit',
         'editor',
         'put',
-        'import-items',
+        'import',
         'delete'
     ), new Omeka_Acl_Assert_Ownership);
 

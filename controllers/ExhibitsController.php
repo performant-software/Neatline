@@ -135,7 +135,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     /**
      * Import items from Omeka.
      */
-    public function importItemsAction()
+    public function importAction()
     {
 
         $exhibit = $this->_helper->db->findById();

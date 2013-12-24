@@ -55,13 +55,13 @@ class ExhibitsControllerTest_AdminImportItems extends Neatline_Case_Default
     {
 
         // Import items.
-        $this->dispatch('neatline/import-items/'.$this->exhibit->id);
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
 
         $this->resetResponse();
         $this->resetRequest();
 
         // Reload the form.
-        $this->dispatch('neatline/import-items/'.$this->exhibit->id);
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
 
         // Should populate keywords, range, and tags:
         $this->assertXpath('//input[@name="range"][@value="1-10"]');
@@ -103,7 +103,7 @@ class ExhibitsControllerTest_AdminImportItems extends Neatline_Case_Default
         );
 
         // Import items.
-        $this->dispatch('neatline/import-items/'.$this->exhibit->id);
+        $this->dispatch('neatline/import/'.$this->exhibit->id);
 
     }
 

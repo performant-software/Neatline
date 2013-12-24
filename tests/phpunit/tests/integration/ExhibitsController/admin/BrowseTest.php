@@ -75,12 +75,12 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
             url('neatline/edit/'.$exhibit3->id).'"]');
 
         // Should show item import links.
-        $this->assertXpath('//a[@class="import-items"][@href="'.
-            url('neatline/import-items/'.$exhibit1->id).'"]');
-        $this->assertXpath('//a[@class="import-items"][@href="'.
-            url('neatline/import-items/'.$exhibit2->id).'"]');
-        $this->assertXpath('//a[@class="import-items"][@href="'.
-            url('neatline/import-items/'.$exhibit3->id).'"]');
+        $this->assertXpath('//a[@class="import"][@href="'.
+            url('neatline/import/'.$exhibit1->id).'"]');
+        $this->assertXpath('//a[@class="import"][@href="'.
+            url('neatline/import/'.$exhibit2->id).'"]');
+        $this->assertXpath('//a[@class="import"][@href="'.
+            url('neatline/import/'.$exhibit3->id).'"]');
 
         // Should show delete links.
         $this->assertXpath('//a[@class="delete-confirm"][@href="'.
