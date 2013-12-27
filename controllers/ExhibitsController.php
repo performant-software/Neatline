@@ -170,9 +170,6 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         $query = unserialize($exhibit->item_query);
         $_REQUEST = $query; $_GET = $query;
 
-        // Queue JS/CSS.
-        nl_queueImportForm();
-
     }
 
 

@@ -74,7 +74,7 @@ class ImportItemsTest extends Neatline_Case_Default
         $this->assertCount(1, $records);
 
         // Should recompile the record.
-        $this->assertNotNull($records[0]['omeka_body']);
+        $this->assertNotNull($records[0]['body']);
 
     }
 
@@ -142,7 +142,7 @@ class ImportItemsTest extends Neatline_Case_Default
 
         // Parse `body` HTML.
         $doc = new DOMDocument();
-        $doc->loadHTML($record->omeka_body);
+        $doc->loadHTML($record->body);
 
         // Query for the file link.
         $xpath = new DOMXpath($doc);

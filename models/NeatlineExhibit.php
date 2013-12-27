@@ -227,47 +227,6 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Create/update records linked to all items matched by a given query.
-     *
-     * @param array $query An items API query.
-     * @param integer $limit The number of items to process per page.
-     * @param integer $page The current page.
-     * @return integer The number of items processed.
-     */
-    public function importItems($query, $limit, $page)
-    {
-
-        // Get records and items tables.
-        $recordsTable   = $this->_db->getTable('NeatlineRecord');
-        $itemsTable     = $this->_db->getTable('Item');
-
-        // Query for items.
-        $items = $itemsTable->findBy($query, $limit, $page);
-
-        // Update/create records.
-        foreach ($items as $item) {
-
-            // Try to find an existing record.
-            $record = $recordsTable->findBySql('exhibit_id=? && item_id=?',
-                array($exhibit->id, $item->id), true
-            );
-
-            // Otherwise, create one.
-            if (!$record) {
-                $record = new NeatlineRecord($exhibit, $item);
-                $record->added = $item->added;
-            }
-
-            $record->save();
-
-        }
-
-        return count($items);
-
-    }
-
-
-    /**
      * Measure the size of the image defined by `image_layer`. Wrapped in a
      * try/catch so that it's possible to work with exhibits offline.
      */
