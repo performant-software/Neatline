@@ -23,7 +23,6 @@ require_once NL_DIR.'/models/abstract/Neatline_Table_Expandable.php';
 require_once NL_DIR.'/models/abstract/Neatline_Table_Expansion.php';
 
 // JOBS
-require_once NL_DIR.'/jobs/abstract/Neatline_Job_MockView.php';
 require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';
 require_once NL_DIR.'/jobs/Neatline_Job_UpgradeFrom1x.php';
 
@@ -47,7 +46,6 @@ require_once NL_DIR.'/helpers/Acl.php';
 require_once NL_DIR.'/helpers/Assets.php';
 require_once NL_DIR.'/helpers/Coverage.php';
 require_once NL_DIR.'/helpers/Globals.php';
-require_once NL_DIR.'/helpers/Jobs.php';
 require_once NL_DIR.'/helpers/Layers.php';
 require_once NL_DIR.'/helpers/Mysql.php';
 require_once NL_DIR.'/helpers/Plugins.php';

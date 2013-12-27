@@ -19,11 +19,6 @@
 function nl_getItemMarkup($record)
 {
 
-    // Ensure that all of the template directories are registered on the view,
-    // in case we're working inside a background process.
-
-    nl_mountView();
-
     // Get exhibit slug and tags.
     $slug = $record->getExhibit()->slug;
     $tags = nl_explode($record->tags);

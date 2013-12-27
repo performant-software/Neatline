@@ -10,14 +10,14 @@
  */
 
 
-class Neatline_Job_ImportItems extends Neatline_Job_MockView
+class Neatline_Job_ImportItems extends Omeka_Job_AbstractJob
 {
 
 
     /**
      * Import Omeka items.
      */
-    public function execute()
+    public function perform()
     {
 
         $_records  = $this->_db->getTable('NeatlineRecord');
