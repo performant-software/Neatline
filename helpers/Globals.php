@@ -32,7 +32,8 @@ function nl_globals($exhibit)
         // --------------------------------------------------------------------
         'records_api'       => public_url('neatline/records'),
         'exhibits_api'      => public_url('neatline/exhibits/'.$exhibit->id),
-        'items_api'         => public_url('items/browse'),
+        'items_search_api'  => public_url('items/browse'),
+        'items_body_api'    => public_url('neatline/items'),
 
         // CONSTANTS
         // --------------------------------------------------------------------

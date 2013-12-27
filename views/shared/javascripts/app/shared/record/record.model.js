@@ -70,7 +70,7 @@ Neatline.module('Shared.Record', function(Record) {
     fetchItem: function(cb) {
 
       // TODO|dev
-      $.ajax({});
+      $.get();
 
     },
 
