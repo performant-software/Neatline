@@ -150,7 +150,6 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
             // Import items.
             Zend_Registry::get('job_dispatcher')->sendLongRunning(
                 'Neatline_Job_ImportItems', array(
-                    'web_dir'       => nl_getWebDir(),
                     'exhibit_id'    => $exhibit->id,
                     'query'         => $post
                 )

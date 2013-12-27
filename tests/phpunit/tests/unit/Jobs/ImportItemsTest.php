@@ -28,7 +28,6 @@ class ImportItemsTest extends Neatline_Case_Default
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_Job_ImportItems', array(
 
-                'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $exhibit->id,
                 'query'         => array('range' => $item1->id)
 
@@ -62,7 +61,6 @@ class ImportItemsTest extends Neatline_Case_Default
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_Job_ImportItems', array(
 
-                'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $exhibit->id,
                 'query'         => array('range' => $item->id)
 
@@ -74,7 +72,7 @@ class ImportItemsTest extends Neatline_Case_Default
         $this->assertCount(1, $records);
 
         // Should recompile the record.
-        $this->assertNotNull($records[0]['body']);
+        $this->assertNotNull($records[0]['omeka_title']);
 
     }
 
@@ -97,7 +95,6 @@ class ImportItemsTest extends Neatline_Case_Default
         Zend_Registry::get('bootstrap')->getResource('jobs')->
             send('Neatline_Job_ImportItems', array(
 
-                'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $exhibit->id,
                 'query'         => array('range' => $item->id)
 
@@ -107,52 +104,6 @@ class ImportItemsTest extends Neatline_Case_Default
         // Should set `added` to match item.
         $record = $this->_getRecordsByExhibit($exhibit, true);
         $this->assertEquals('2000-01-01 00:00:00', $record->added);
-
-    }
-
-
-    /**
-     * The import job should manually update the `webDir` property on the
-     * filesystem adapter. This ensures that file links will point to the web-
-     * accessible URLs of the files, not the local filesystem.
-     */
-    public function testSetWebDirectory()
-    {
-
-        $item = $this->_item();
-
-        $exhibit = $this->_exhibit();
-
-        insert_files_for_item($item, 'Filesystem', array(
-            NL_TEST_DIR.'/mocks/file.txt'
-        ));
-
-        Zend_Registry::get('bootstrap')->getResource('jobs')->
-            send('Neatline_Job_ImportItems', array(
-
-                'web_dir'       => 'webDir',
-                'exhibit_id'    => $exhibit->id,
-                'query'         => array('range' => $item->id)
-
-            )
-        );
-
-        // Load the new record.
-        $record = $this->_getRecordsByExhibit($exhibit, true);
-
-        // Parse `body` HTML.
-        $doc = new DOMDocument();
-        $doc->loadHTML($record->body);
-
-        // Query for the file link.
-        $xpath = new DOMXpath($doc);
-        $anchor = $xpath->query('//a[@class="download-file"]')->item(0);
-
-        // Link should start with 'webDir/'
-        $this->assertEquals(
-            'webDir/',
-            substr($anchor->getAttribute('href'), 0, 7)
-        );
 
     }
 

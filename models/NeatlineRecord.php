@@ -23,6 +23,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $is_wms = 0;
     public $slug;
     public $title;
+    public $omeka_title;
     public $body;
     public $coverage;
     public $tags;
@@ -288,11 +289,8 @@ class NeatlineRecord extends Neatline_Row_Expandable
         $item = $this->getItem();
         if (!$item) return;
 
-        // Compile the title:
-        $this->title = metadata($item, array('Dublin Core', 'Title'));
-
-        // Compile the body:
-        $this->body = nl_getItemMarkup($this);
+        // Compile the item title:
+        $this->omeka_title = metadata($item, array('Dublin Core', 'Title'));
 
     }
 

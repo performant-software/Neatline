@@ -95,7 +95,6 @@ class ExhibitsControllerTest_AdminImportItems extends Neatline_Case_Default
         $jobs->expects($this->once())->method('sendLongRunning')->with(
             'Neatline_Job_ImportItems', array(
 
-                'web_dir'       => nl_getWebDir(),
                 'exhibit_id'    => $this->exhibit->id,
                 'query'         => $this->query
 
