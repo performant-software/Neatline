@@ -67,7 +67,17 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * Load the metadata for the Omeka item associated with the record.
+     */
+    fetchItem: function() {
+      // TODO
+    },
+
+
+    /**
      * Construct an OpenLayers style map object.
+     *
+     * @return {OpenLayers.StyleMap}: The style map.
      */
     getStyleMap: function() {
 
