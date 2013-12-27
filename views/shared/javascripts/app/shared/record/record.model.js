@@ -15,14 +15,54 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Construct the API url.
+     * Construct the REST API url. If the record hasn't been saved, use the
+     * generic `/records` endpoint, which handles the initial POST request. If
+     * an ID exists, use `/records/<id>`, which handles GET, PUT, and DELETE.
      *
      * @return {String}: The url.
      */
     url: function() {
       var url = Neatline.g.neatline.records_api;
-      if (this.id) url += ('/'+this.id);
+      if (this.id) url += ('/' + this.id);
       return url;
+    },
+
+
+    /**
+     * Plug in the templated style defaults.
+     *
+     * @return {Object}: The default attribute values.
+     */
+    defaults: function() {
+
+      var styles = Neatline.g.neatline.styles;
+
+      return {
+
+        // Assign the record to the exhibit:
+
+        exhibit_id: Neatline.g.neatline.exhibit.id,
+
+        // Provide default SVG style values:
+
+        presenter:              styles.presenter,
+        fill_color:             styles.fill_color,
+        fill_color_select:      styles.fill_color_select,
+        stroke_color:           styles.stroke_color,
+        stroke_color_select:    styles.stroke_color_select,
+        fill_opacity:           Number(styles.fill_opacity),
+        fill_opacity_select:    Number(styles.fill_opacity_select),
+        stroke_opacity:         Number(styles.stroke_opacity),
+        stroke_opacity_select:  Number(styles.stroke_opacity_select),
+        point_radius:           Number(styles.point_radius),
+        stroke_width:           Number(styles.stroke_width),
+
+        // By default, register an empty coverage:
+
+        coverage: null
+
+      };
+
     },
 
 
@@ -86,44 +126,6 @@ Neatline.module('Shared.Record', function(Record) {
         })
 
       });
-
-    },
-
-
-    /**
-     * Plug in the templated style defaults.
-     *
-     * @return {Object}: The default attribute values.
-     */
-    defaults: function() {
-
-      var styles = Neatline.g.neatline.styles;
-
-      return {
-
-        // Assign the record to the current exhibit:
-
-        exhibit_id: Neatline.g.neatline.exhibit.id,
-
-        // Provide default values for the SVG style map:
-
-        presenter:              styles.presenter,
-        fill_color:             styles.fill_color,
-        fill_color_select:      styles.fill_color_select,
-        stroke_color:           styles.stroke_color,
-        stroke_color_select:    styles.stroke_color_select,
-        fill_opacity:           Number(styles.fill_opacity),
-        fill_opacity_select:    Number(styles.fill_opacity_select),
-        stroke_opacity:         Number(styles.stroke_opacity),
-        stroke_opacity_select:  Number(styles.stroke_opacity_select),
-        point_radius:           Number(styles.point_radius),
-        stroke_width:           Number(styles.stroke_width),
-
-        // By default, register an empty coverage:
-
-        coverage: null
-
-      };
 
     }
 
