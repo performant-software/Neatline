@@ -55,11 +55,7 @@ Neatline.module('Shared.Record', function(Record) {
         stroke_opacity:         Number(styles.stroke_opacity),
         stroke_opacity_select:  Number(styles.stroke_opacity_select),
         point_radius:           Number(styles.point_radius),
-        stroke_width:           Number(styles.stroke_width),
-
-        // By default, register an empty coverage:
-
-        coverage: null
+        stroke_width:           Number(styles.stroke_width)
 
       };
 
