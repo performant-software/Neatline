@@ -166,9 +166,7 @@ SQL
     private function _queueMigration()
     {
         Zend_Registry::get('job_dispatcher')->sendLongRunning(
-            'Neatline_Job_UpgradeFrom1x', array(
-                'web_dir' => nl_getWebDir()
-            )
+            'Neatline_Job_UpgradeFrom1x'
         );
     }
 

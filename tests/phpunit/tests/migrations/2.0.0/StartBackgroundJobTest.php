@@ -24,9 +24,7 @@ class Migrate200Test_StartBackgroundJob extends Neatline_Case_Migrate
 
         // Should dispatch `Neatline_Job_UpgradeFrom1x`.
         $jobs->expects($this->once())->method('sendLongRunning')->with(
-            'Neatline_Job_UpgradeFrom1x', array(
-                'web_dir' => nl_getWebDir()
-            )
+            'Neatline_Job_UpgradeFrom1x'
         );
 
         $this->_upgrade();

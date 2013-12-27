@@ -27,6 +27,7 @@
     , "toastr":                 "davidmcclure/toastr"
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-dev"
+    , "Backbone.Mutators":      "asciidisco/Backbone.Mutators"
 
   }
 }
