@@ -41,7 +41,7 @@ Neatline.module('Shared.Record', function(Record) {
 
         // Assign the record to the exhibit:
 
-        exhibit_id: Neatline.g.neatline.exhibit.id,
+        exhibit_id:             Neatline.g.neatline.exhibit.id,
 
         // Provide default SVG style values:
 
@@ -64,9 +64,14 @@ Neatline.module('Shared.Record', function(Record) {
 
     /**
      * Load the metadata for the Omeka item associated with the record.
+     *
+     * @param {Function} cb: Called with the metadata.
      */
-    fetchItem: function() {
-      // TODO
+    fetchItem: function(cb) {
+
+      // TODO|dev
+      $.ajax({});
+
     },
 
 

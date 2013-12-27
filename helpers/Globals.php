@@ -28,11 +28,11 @@ function nl_globals($exhibit)
         // --------------------------------------------------------------------
         'exhibit'           => $exhibit->toArray(),
 
-        // API ROUTES
+        // API ENDPOINTS
         // --------------------------------------------------------------------
         'records_api'       => public_url('neatline/records'),
-        'exhibits_api'      => url('neatline/exhibits/'.$exhibit->id),
-        'items_api'         => url('items/browse'),
+        'exhibits_api'      => public_url('neatline/exhibits/'.$exhibit->id),
+        'items_api'         => public_url('items/browse'),
 
         // CONSTANTS
         // --------------------------------------------------------------------

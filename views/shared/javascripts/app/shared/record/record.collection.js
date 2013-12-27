@@ -94,7 +94,7 @@ Neatline.module('Shared.Record', function(Record) {
      *   data from the server, and pass the populated model to the callback.
      *
      * @param {Number} id: The model id.
-     * @param {Function} cb: Callback, called with the model.
+     * @param {Function} cb: Called with the model.
      */
     getOrFetch: function(id, cb) {
 
