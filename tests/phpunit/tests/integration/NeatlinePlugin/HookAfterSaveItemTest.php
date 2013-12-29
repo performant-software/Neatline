@@ -41,7 +41,7 @@ class NeatlinePluginTest_HookAfterSaveItem extends Neatline_Case_Default
 
         // Record should be compiled.
         $record = $this->_reload($record);
-        $this->assertEquals('title', $record->omeka_title);
+        $this->assertEquals('title', $record->item_title);
 
     }
 

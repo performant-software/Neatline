@@ -72,7 +72,7 @@ class ImportItemsTest extends Neatline_Case_Default
         $this->assertCount(1, $records);
 
         // Should recompile the record.
-        $this->assertNotNull($records[0]['omeka_title']);
+        $this->assertNotNull($records[0]['item_title']);
 
     }
 

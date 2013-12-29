@@ -23,7 +23,7 @@ Neatline.module('Shared.Record', function(Record) {
      */
     url: function() {
       var url = Neatline.g.neatline.records_api;
-      if (this.id) url += ('/' + this.id);
+      if (!this.isNew()) url += ('/' + this.id);
       return url;
     },
 
@@ -64,14 +64,9 @@ Neatline.module('Shared.Record', function(Record) {
 
     /**
      * Load the metadata for the Omeka item associated with the record.
-     *
-     * @param {Function} cb: Called with the metadata.
      */
-    fetchItem: function(cb) {
-
+    fetchItem: function() {
       // TODO|dev
-      $.get();
-
     },
 
 

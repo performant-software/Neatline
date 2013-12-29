@@ -22,7 +22,7 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
 
     /**
      * `compileItem` should write the "Title" element on the parent item to
-     * the `omeka_title` field.
+     * the `item_title` field.
      */
     public function testCompileItem()
     {
@@ -33,8 +33,8 @@ class NeatlineRecordTest_CompileItem extends Neatline_Case_Default
         $record = new NeatlineRecord($exhibit, $item);
         $record->save();
 
-        // `omeka_title` should be set.
-        $this->assertEquals('title', $record->omeka_title);
+        // `item_title` should be set.
+        $this->assertEquals('title', $record->item_title);
 
     }
 

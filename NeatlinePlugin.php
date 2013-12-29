@@ -91,7 +91,7 @@ SQL
             is_wms                  TINYINT(1) NOT NULL,
             slug                    VARCHAR(100) NULL,
             title                   MEDIUMTEXT NULL,
-            omeka_title             MEDIUMTEXT NULL,
+            item_title              MEDIUMTEXT NULL,
             body                    MEDIUMTEXT NULL,
             coverage                GEOMETRY NOT NULL,
             tags                    TEXT NULL,
