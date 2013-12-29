@@ -22,7 +22,7 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {String}: The url.
      */
     url: function() {
-      var url = Neatline.g.neatline.records_api;
+      var url = Neatline.g.neatline.record_api;
       if (!this.isNew()) url += ('/' + this.id);
       return url;
     },

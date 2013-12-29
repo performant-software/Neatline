@@ -75,7 +75,7 @@ describe('Record | Save Record', function() {
 
     // URL should be /record/:id.
     var id = NL.v.record.model.id;
-    NL.assertLastRequestRoute(Neatline.g.neatline.records_api+'/'+id);
+    NL.assertLastRequestRoute(Neatline.g.neatline.record_api+'/'+id);
 
     // Method should be PUT.
     NL.assertLastRequestMethod('PUT');

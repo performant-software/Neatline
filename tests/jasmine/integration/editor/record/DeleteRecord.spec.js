@@ -104,7 +104,7 @@ describe('Record | Delete Record', function() {
     elements.delete2.trigger('click');
 
     // Route should be /records/:id, method DELETE.
-    NL.assertLastRequestRoute(Neatline.g.neatline.records_api+'/'+id);
+    NL.assertLastRequestRoute(Neatline.g.neatline.record_api+'/'+id);
     NL.assertLastRequestMethod('DELETE');
 
   });

@@ -32,7 +32,7 @@ var NL = (function(NL) {
   NL.assertMapDynamicQuery = function() {
 
     // Should trigger GET request to /records.
-    this.assertLastRequestRoute(Neatline.g.neatline.records_api);
+    this.assertLastRequestRoute(Neatline.g.neatline.record_api);
     this.assertLastRequestMethod('GET');
 
     // Should filter on extent and zoom.
@@ -48,7 +48,7 @@ var NL = (function(NL) {
   NL.assertMapStaticQuery = function() {
 
     // Should trigger GET request to /records.
-    this.assertLastRequestRoute(Neatline.g.neatline.records_api);
+    this.assertLastRequestRoute(Neatline.g.neatline.record_api);
     this.assertLastRequestMethod('GET');
 
     // Should _not_ filter on extent and zoom.

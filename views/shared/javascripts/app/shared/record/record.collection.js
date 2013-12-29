@@ -23,7 +23,7 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {String}: The url.
      */
     url: function() {
-      return Neatline.g.neatline.records_api;
+      return Neatline.g.neatline.record_api;
     },
 
 

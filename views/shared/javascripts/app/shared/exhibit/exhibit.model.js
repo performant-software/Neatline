@@ -20,7 +20,7 @@ Neatline.module('Shared.Exhibit', function(Exhibit) {
      * @return {String}: The exhibits API endpoint.
      */
     url: function() {
-      return Neatline.g.neatline.exhibits_api;
+      return Neatline.g.neatline.exhibit_api;
     },
 
 

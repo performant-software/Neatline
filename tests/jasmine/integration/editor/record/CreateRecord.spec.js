@@ -111,7 +111,7 @@ describe('Record | Create Record', function() {
     elements.saveButton.trigger('click');
 
     // Route should be /record, method POST.
-    NL.assertLastRequestRoute(Neatline.g.neatline.records_api);
+    NL.assertLastRequestRoute(Neatline.g.neatline.record_api);
     NL.assertLastRequestMethod('POST');
 
     // Request should have exhibit id.

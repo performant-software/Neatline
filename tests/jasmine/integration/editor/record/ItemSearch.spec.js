@@ -40,7 +40,7 @@ describe('Record | Item Search', function() {
     NL.v.textTab.__ui.item.autocomplete('search', 'item');
 
     // Should produce GET request to /items/browse.
-    NL.assertLastRequestRoute(Neatline.g.neatline.items_search_api);
+    NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
     NL.assertLastRequestMethod('GET');
 
     // Should emit query and output format.
