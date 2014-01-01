@@ -42,15 +42,6 @@ module.exports = function(grunt) {
         stdout: true
       },
 
-      build_openlayers: {
-        command: 'python build.py full OpenLayers.js',
-        options: {
-          execOptions: {
-            cwd: paths.build.openlayers
-          }
-        }
-      },
-
       build_chosen: {
         command: 'npm install && bundle install && grunt build',
         options: {
@@ -467,7 +458,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean',
     'bower',
-    'shell:build_openlayers',
     'shell:build_chosen',
     'compile',
     'copy'

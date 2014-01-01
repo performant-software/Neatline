@@ -44,7 +44,7 @@
       "schema":           "bower_components/Backbone.Schema/dist/backbone.schema.js",
       "marionette":       "bower_components/marionette/lib/backbone.marionette.js",
       "safesync":         "bower_components/backbone-safesync/backbone-safesync.js",
-      "openlayers":       "bower_components/openlayers/build/OpenLayers.js",
+      "openlayers":       "bower_components/openlayers/OpenLayers.debug.js",
       "openlayers_geo":   "bower_components/openlayers-geometry/Geometry.js",
       "stamen":           "bower_components/stamen-neatline/stamen.neatline.js",
       "rivets":           "bower_components/rivets/dist/rivets.js",

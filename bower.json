@@ -19,7 +19,6 @@
     , "Backbone.Mutators":      "asciidisco/Backbone.Mutators"
     , "Backbone.Schema":        "DreamTheater/Backbone.Schema"
     , "backbone-safesync":      "amccloud/backbone-safesync"
-    , "openlayers":             "openlayers/openlayers#release-2.13.1"
     , "openlayers-geometry":    "davidmcclure/openlayers-geometry-handler"
     , "stamen-neatline":        "scholarslab/stamen-neatline"
     , "svg-to-wkt":             "davidmcclure/svg-to-wkt"
@@ -29,6 +28,7 @@
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-releases"
 
+    , "openlayers":             "http://openlayers.org/download/OpenLayers-2.13.1.zip"
     , "sinon":                  "http://sinonjs.org/releases/sinon-1.7.3.js"
 
   }
