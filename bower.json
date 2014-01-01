@@ -4,10 +4,11 @@
   , "dependencies": {
 
       "jquery":                 ">= 1.8.3"
+    , "jquery-ui":              ">= 1.10.3"
     , "underscore":             ">= 1.4.4"
     , "underscore.string":      ">= 2.3.0"
     , "backbone":               ">= 0.9.10"
-    , "marionette":             ">= 1.0.0-rc6"
+    , "marionette":             ">= 1.0.0"
     , "rivets":                 ">= 0.6.5"
     , "chosen":                 ">= 0.9.11"
     , "bootstrap":              ">= 3.0.0"
@@ -16,7 +17,8 @@
     , "jasmine-jquery":         ">= 1.4.2"
     , "sinon":                  ">= 1.6.0"
 
-    , "jquery-ui":              "jquery/jquery-ui"
+    , "Backbone.Mutators":      "asciidisco/Backbone.Mutators"
+    , "Backbone.Schema":        "DreamTheater/Backbone.Schema"
     , "backbone-safesync":      "amccloud/backbone-safesync"
     , "openlayers":             "openlayers/openlayers#release-2.13.1"
     , "openlayers-geometry":    "davidmcclure/openlayers-geometry-handler"
@@ -27,7 +29,6 @@
     , "toastr":                 "davidmcclure/toastr"
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-dev"
-    , "Backbone.Mutators":      "asciidisco/Backbone.Mutators"
 
   }
 }

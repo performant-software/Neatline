@@ -60,15 +60,6 @@ module.exports = function(grunt) {
         }
       },
 
-      build_jquery_ui: {
-        command: 'npm install && grunt build',
-        options: {
-          execOptions: {
-            cwd: paths.build.jquery_ui
-          }
-        }
-      },
-
       build_chosen: {
         command: 'npm install && bundle install && grunt build',
         options: {
@@ -207,6 +198,7 @@ module.exports = function(grunt) {
           paths.vendor.js.underscore_s,
           paths.vendor.js.backbone,
           paths.vendor.js.mutators,
+          paths.vendor.js.schema,
           paths.vendor.js.marionette,
           paths.vendor.js.safesync,
           paths.vendor.js.openlayers,
@@ -243,6 +235,7 @@ module.exports = function(grunt) {
           paths.vendor.js.backbone,
           paths.vendor.js.routefilter,
           paths.vendor.js.mutators,
+          paths.vendor.js.schema,
           paths.vendor.js.marionette,
           paths.vendor.js.openlayers,
           paths.vendor.js.openlayers_geo,
@@ -494,7 +487,6 @@ module.exports = function(grunt) {
     'bower',
     'shell:build_openlayers',
     'shell:build_ckeditor',
-    'shell:build_jquery_ui',
     'shell:build_chosen',
     'shell:build_sinon',
     'compile',
