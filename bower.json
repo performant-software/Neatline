@@ -29,6 +29,7 @@
     , "ckeditor":               "ckeditor/ckeditor-releases"
 
     , "openlayers":             "http://openlayers.org/download/OpenLayers-2.13.1.zip"
+    , "chosen":                 "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
     , "sinon":                  "http://sinonjs.org/releases/sinon-1.7.3.js"
 
   }

@@ -20,7 +20,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-shell');
 
   var pkg = grunt.file.readJSON('package.json');
@@ -28,27 +27,14 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    bower: {
-      install: {
-        options: {
-          copy: false
-        }
-      }
-    },
-
     shell: {
 
       options: {
         stdout: true
       },
 
-      build_chosen: {
-        command: 'npm install && bundle install && grunt build',
-        options: {
-          execOptions: {
-            cwd: paths.build.chosen
-          }
-        }
+      bower_install: {
+        command: 'bower install'
       },
 
       phpunit_application: {
@@ -93,7 +79,7 @@ module.exports = function(grunt) {
 
       chosen: {
         files: [{
-          src: paths.build.chosen+'/public/*.png',
+          src: paths.build.chosen+'/*.png',
           dest: paths.payloads.admin.css,
           expand: true,
           flatten: true
@@ -457,9 +443,8 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'bower',
-    'shell:build_chosen',
-    'compile',
+    'shell:bower_install',
+    'compile:min',
     'copy'
   ]);
 
