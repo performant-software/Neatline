@@ -14,6 +14,132 @@ Neatline.module('Shared.Record', function(Record) {
   Record.Model = Backbone.Model.extend({
 
 
+    mutators: {
+
+      /**
+       * Coerce `fill_opacity` to a number.
+       *
+       * @return {Number}
+       */
+      fill_opacity: {
+        get: function() {
+          return Number(this.attributes.fill_opacity);
+        }
+      },
+
+      /**
+       * Coerce `fill_opacity_select` to a number.
+       *
+       * @return {Number}
+       */
+      fill_opacity_select: {
+        get: function() {
+          return Number(this.attributes.fill_opacity_select);
+        }
+      },
+
+      /**
+       * Coerce `stroke_opacity` to a number.
+       *
+       * @return {Number}
+       */
+      stroke_opacity: {
+        get: function() {
+          return Number(this.attributes.stroke_opacity);
+        }
+      },
+
+      /**
+       * Coerce `stroke_opacity_select` to a number.
+       *
+       * @return {Number}
+       */
+      stroke_opacity_select: {
+        get: function() {
+          return Number(this.attributes.stroke_opacity_select);
+        }
+      },
+
+      /**
+       * Coerce `point_radius` to a number.
+       *
+       * @return {Number}
+       */
+      point_radius: {
+        get: function() {
+          return Number(this.attributes.point_radius);
+        }
+      },
+
+      /**
+       * Coerce `stroke_width` to a number.
+       *
+       * @return {Number}
+       */
+      stroke_width: {
+        get: function() {
+          return Number(this.attributes.stroke_width);
+        }
+      },
+
+      /**
+       * Coerce `zindex` to a number.
+       *
+       * @return {Number}
+       */
+      zindex: {
+        get: function() {
+          return Number(this.attributes.zindex);
+        }
+      },
+
+      /**
+       * Coerce `weight` to a number.
+       *
+       * @return {Number}
+       */
+      weight: {
+        get: function() {
+          return Number(this.attributes.weight);
+        }
+      },
+
+      /**
+       * Coerce `min_zoom` to a number.
+       *
+       * @return {Number}
+       */
+      min_zoom: {
+        get: function() {
+          return Number(this.attributes.min_zoom);
+        }
+      },
+
+      /**
+       * Coerce `max_zoom` to a number.
+       *
+       * @return {Number}
+       */
+      max_zoom: {
+        get: function() {
+          return Number(this.attributes.max_zoom);
+        }
+      },
+
+      /**
+       * Coerce `map_zoom` to a number.
+       *
+       * @return {Number}
+       */
+      map_zoom: {
+        get: function() {
+          return Number(this.attributes.map_zoom);
+        }
+      }
+
+    },
+
+
     /**
      * Construct the REST API endpoint for the record. If the record hasn't
      * been saved, use the generic `/records` endpoint, which handles the
@@ -51,12 +177,12 @@ Neatline.module('Shared.Record', function(Record) {
         fill_color_select:      styles.fill_color_select,
         stroke_color:           styles.stroke_color,
         stroke_color_select:    styles.stroke_color_select,
-        fill_opacity:           Number(styles.fill_opacity),
-        fill_opacity_select:    Number(styles.fill_opacity_select),
-        stroke_opacity:         Number(styles.stroke_opacity),
-        stroke_opacity_select:  Number(styles.stroke_opacity_select),
-        point_radius:           Number(styles.point_radius),
-        stroke_width:           Number(styles.stroke_width)
+        fill_opacity:           styles.fill_opacity,
+        fill_opacity_select:    styles.fill_opacity_select,
+        stroke_opacity:         styles.stroke_opacity,
+        stroke_opacity_select:  styles.stroke_opacity_select,
+        point_radius:           styles.point_radius,
+        stroke_width:           styles.stroke_width
 
       };
 

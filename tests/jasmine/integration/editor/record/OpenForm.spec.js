@@ -142,10 +142,10 @@ describe('Record | Open Form', function() {
     expect(inputs.fillColorSelect).     toHaveValue('#222222');
     expect(inputs.strokeColor).         toHaveValue('#333333');
     expect(inputs.strokeColorSelect).   toHaveValue('#444444');
-    expect(inputs.fillOpacity).         toHaveValue('0.50');
-    expect(inputs.fillOpacitySelect).   toHaveValue('0.60');
-    expect(inputs.strokeOpacity).       toHaveValue('0.70');
-    expect(inputs.strokeOpacitySelect). toHaveValue('0.80');
+    expect(inputs.fillOpacity).         toHaveValue('0.5');
+    expect(inputs.fillOpacitySelect).   toHaveValue('0.6');
+    expect(inputs.strokeOpacity).       toHaveValue('0.7');
+    expect(inputs.strokeOpacitySelect). toHaveValue('0.8');
     expect(inputs.strokeWidth).         toHaveValue('9');
     expect(inputs.pointRadius).         toHaveValue('10');
     expect(inputs.zindex).              toHaveValue('11');

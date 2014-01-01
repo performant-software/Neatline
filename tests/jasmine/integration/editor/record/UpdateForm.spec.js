@@ -78,14 +78,14 @@ describe('Record | Update Form', function() {
     expect(model.get('fill_color_select')).     toEqual('#888888');
     expect(model.get('stroke_color')).          toEqual('#999999');
     expect(model.get('stroke_color_select')).   toEqual('#999999');
-    expect(model.get('fill_opacity')).          toEqual('0.10');
-    expect(model.get('fill_opacity_select')).   toEqual('0.11');
-    expect(model.get('stroke_opacity')).        toEqual('0.12');
-    expect(model.get('stroke_opacity_select')). toEqual('0.13');
-    expect(model.get('stroke_width')).          toEqual('14');
-    expect(model.get('point_radius')).          toEqual('15');
-    expect(model.get('zindex')).                toEqual('16');
-    expect(model.get('weight')).                toEqual('17');
+    expect(model.get('fill_opacity')).          toEqual(0.10);
+    expect(model.get('fill_opacity_select')).   toEqual(0.11);
+    expect(model.get('stroke_opacity')).        toEqual(0.12);
+    expect(model.get('stroke_opacity_select')). toEqual(0.13);
+    expect(model.get('stroke_width')).          toEqual(14);
+    expect(model.get('point_radius')).          toEqual(15);
+    expect(model.get('zindex')).                toEqual(16);
+    expect(model.get('weight')).                toEqual(17);
     expect(model.get('start_date')).            toEqual('18');
     expect(model.get('end_date')).              toEqual('19');
     expect(model.get('after_date')).            toEqual('20');
@@ -93,10 +93,10 @@ describe('Record | Update Form', function() {
     expect(model.get('point_image')).           toEqual('22');
     expect(model.get('wms_address')).           toEqual('23');
     expect(model.get('wms_layers')).            toEqual('24');
-    expect(model.get('min_zoom')).              toEqual('25');
-    expect(model.get('max_zoom')).              toEqual('26');
+    expect(model.get('min_zoom')).              toEqual(25);
+    expect(model.get('max_zoom')).              toEqual(26);
     expect(model.get('map_focus')).             toEqual('27');
-    expect(model.get('map_zoom')).              toEqual('28');
+    expect(model.get('map_zoom')).              toEqual(28);
 
   });
 

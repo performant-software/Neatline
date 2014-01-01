@@ -44,7 +44,7 @@ describe('Record Form | Style Population', function() {
     expect(elements.minZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(NL.v.record.model.get('min_zoom')).toEqual('10');
+    expect(NL.v.record.model.get('min_zoom')).toEqual(10);
 
   });
 
@@ -63,7 +63,7 @@ describe('Record Form | Style Population', function() {
     expect(elements.maxZoom).toHaveValue('10');
 
     // Model should be updated.
-    expect(NL.v.record.model.get('max_zoom')).toEqual('10');
+    expect(NL.v.record.model.get('max_zoom')).toEqual(10);
 
   });
 
@@ -84,7 +84,7 @@ describe('Record Form | Style Population', function() {
 
     // Model should be updated.
     expect(NL.v.record.model.get('map_focus')).toEqual('1,2');
-    expect(NL.v.record.model.get('map_zoom')).toEqual('3');
+    expect(NL.v.record.model.get('map_zoom')).toEqual(3);
 
   });
 

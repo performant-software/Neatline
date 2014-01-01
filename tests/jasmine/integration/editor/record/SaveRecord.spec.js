@@ -95,14 +95,14 @@ describe('Record | Save Record', function() {
     expect(params.fill_color_select).     toEqual('#888888');
     expect(params.stroke_color).          toEqual('#999999');
     expect(params.stroke_color_select).   toEqual('#999999');
-    expect(params.fill_opacity).          toEqual('0.10');
-    expect(params.fill_opacity_select).   toEqual('0.11');
-    expect(params.stroke_opacity).        toEqual('0.12');
-    expect(params.stroke_opacity_select). toEqual('0.13');
-    expect(params.stroke_width).          toEqual('14');
-    expect(params.point_radius).          toEqual('15');
-    expect(params.zindex).                toEqual('16');
-    expect(params.weight).                toEqual('17');
+    expect(params.fill_opacity).          toEqual(0.10);
+    expect(params.fill_opacity_select).   toEqual(0.11);
+    expect(params.stroke_opacity).        toEqual(0.12);
+    expect(params.stroke_opacity_select). toEqual(0.13);
+    expect(params.stroke_width).          toEqual(14);
+    expect(params.point_radius).          toEqual(15);
+    expect(params.zindex).                toEqual(16);
+    expect(params.weight).                toEqual(17);
     expect(params.start_date).            toEqual('18');
     expect(params.end_date).              toEqual('19');
     expect(params.after_date).            toEqual('20');
@@ -110,10 +110,10 @@ describe('Record | Save Record', function() {
     expect(params.point_image).           toEqual('22');
     expect(params.wms_address).           toEqual('23');
     expect(params.wms_layers).            toEqual('24');
-    expect(params.min_zoom).              toEqual('25');
-    expect(params.max_zoom).              toEqual('26');
+    expect(params.min_zoom).              toEqual(25);
+    expect(params.max_zoom).              toEqual(26);
     expect(params.map_focus).             toEqual('27');
-    expect(params.map_zoom).              toEqual('28');
+    expect(params.map_zoom).              toEqual(28);
 
   });
 
