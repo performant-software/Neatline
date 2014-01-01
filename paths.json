@@ -64,7 +64,7 @@
     },
 
     "css": {
-      "jquery_ui":        "bower_components/jquery-ui/dist/jquery-ui.min.css",
+      "jquery_ui":        "bower_components/jquery-ui/themes/smoothness/jquery-ui.css",
       "openlayers":       "bower_components/openlayers/theme/default/style.css",
       "bootstrap":        "bower_components/bootstrap/dist/css/bootstrap.css",
       "toastr":           "bower_components/toastr/toastr.css",

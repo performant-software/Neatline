@@ -129,7 +129,7 @@ module.exports = function(grunt) {
 
       jquery_ui: {
         files: [{
-          src: paths.build.jquery_ui+'/dist/images/*',
+          src: paths.build.jquery_ui+'/themes/smoothness/images/*',
           dest: paths.payloads.shared.css+'/images',
           expand: true,
           flatten: true
