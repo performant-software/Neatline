@@ -156,36 +156,14 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Plug in the templated style defaults.
+     * Add new records to the current exhibit and apply the style defaults.
      *
-     * @return {Object}: The default attribute values.
+     * @return {Object}: The default attributes.
      */
     defaults: function() {
-
-      var styles = Neatline.g.neatline.styles;
-
-      return {
-
-        // Assign the record to the exhibit:
-
-        exhibit_id:             Neatline.g.neatline.exhibit.id,
-
-        // Provide default SVG style values:
-
-        presenter:              styles.presenter,
-        fill_color:             styles.fill_color,
-        fill_color_select:      styles.fill_color_select,
-        stroke_color:           styles.stroke_color,
-        stroke_color_select:    styles.stroke_color_select,
-        fill_opacity:           styles.fill_opacity,
-        fill_opacity_select:    styles.fill_opacity_select,
-        stroke_opacity:         styles.stroke_opacity,
-        stroke_opacity_select:  styles.stroke_opacity_select,
-        point_radius:           styles.point_radius,
-        stroke_width:           styles.stroke_width
-
-      };
-
+      return _.extend(Neatline.g.neatline.styles, {
+        exhibit_id: Neatline.g.neatline.exhibit.id
+      });
     },
 
 
