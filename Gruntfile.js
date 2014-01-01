@@ -51,15 +51,6 @@ module.exports = function(grunt) {
         }
       },
 
-      build_ckeditor: {
-        command: './build.sh',
-        options: {
-          execOptions: {
-            cwd: paths.build.ckeditor
-          }
-        }
-      },
-
       build_chosen: {
         command: 'npm install && bundle install && grunt build',
         options: {
@@ -129,7 +120,7 @@ module.exports = function(grunt) {
 
       ckeditor: {
         files: [{
-          cwd: paths.build.ckeditor+'/release/ckeditor/',
+          cwd: paths.build.ckeditor,
           src: '**',
           dest: paths.payloads.shared.js+'/ckeditor/',
           expand: true
@@ -477,7 +468,6 @@ module.exports = function(grunt) {
     'clean',
     'bower',
     'shell:build_openlayers',
-    'shell:build_ckeditor',
     'shell:build_chosen',
     'compile',
     'copy'

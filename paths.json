@@ -27,7 +27,7 @@
     "openlayers":         "bower_components/openlayers/build",
     "bootstrap":          "bower_components/bootstrap/dist",
     "chosen":             "bower_components/chosen",
-    "ckeditor":           "bower_components/ckeditor/dev/builder",
+    "ckeditor":           "bower_components/ckeditor",
     "jquery_ui":          "bower_components/jquery-ui"
   },
 

@@ -27,7 +27,7 @@
     , "jquery-draggable-input": "davidmcclure/jquery-draggable-input"
     , "toastr":                 "davidmcclure/toastr"
     , "jasmine.async":          "derickbailey/jasmine.async"
-    , "ckeditor":               "ckeditor/ckeditor-dev"
+    , "ckeditor":               "ckeditor/ckeditor-releases"
 
     , "sinon":                  "http://sinonjs.org/releases/sinon-1.7.3.js"
 
