@@ -28,7 +28,6 @@
     "bootstrap":          "bower_components/bootstrap/dist",
     "chosen":             "bower_components/chosen",
     "ckeditor":           "bower_components/ckeditor/dev/builder",
-    "sinon":              "bower_components/sinon",
     "jquery_ui":          "bower_components/jquery-ui"
   },
 
@@ -60,7 +59,7 @@
       "chosen":           "bower_components/chosen/public/chosen.jquery.js",
       "jasmine_jquery":   "bower_components/jasmine-jquery/lib/jasmine-jquery.js",
       "jasmine_async":    "bower_components/jasmine.async/src/jasmine.async.js",
-      "sinon":            "bower_components/sinon/pkg/sinon.js"
+      "sinon":            "bower_components/sinon/index.js"
     },
 
     "css": {

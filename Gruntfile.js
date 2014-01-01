@@ -69,15 +69,6 @@ module.exports = function(grunt) {
         }
       },
 
-      build_sinon: {
-        command: './build',
-        options: {
-          execOptions: {
-            cwd: paths.build.sinon
-          }
-        }
-      },
-
       phpunit_application: {
         command: '../../vendor/bin/phpunit -c phpunit-application.xml',
         options: {
@@ -488,7 +479,6 @@ module.exports = function(grunt) {
     'shell:build_openlayers',
     'shell:build_ckeditor',
     'shell:build_chosen',
-    'shell:build_sinon',
     'compile',
     'copy'
   ]);

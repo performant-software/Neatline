@@ -15,7 +15,6 @@
     , "ace-builds":             ">= 1.0.0"
     , "spectrum":               ">= 1.1.0"
     , "jasmine-jquery":         ">= 1.4.2"
-    , "sinon":                  ">= 1.6.0"
 
     , "Backbone.Mutators":      "asciidisco/Backbone.Mutators"
     , "Backbone.Schema":        "DreamTheater/Backbone.Schema"
@@ -29,6 +28,8 @@
     , "toastr":                 "davidmcclure/toastr"
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-dev"
+
+    , "sinon":                  "http://sinonjs.org/releases/sinon-1.7.3.js"
 
   }
 }
