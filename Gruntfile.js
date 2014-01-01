@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         stdout: true
       },
 
-      bower_install: {
+      bower: {
         command: 'bower install'
       },
 
@@ -334,7 +334,7 @@ module.exports = function(grunt) {
           paths.stylus.admin+'/**/*.styl',
           paths.stylus.shared+'/**/*.styl'
         ],
-        tasks: 'compile:concat'
+        tasks: 'compile'
       }
 
     },
@@ -443,9 +443,10 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'shell:bower_install',
+    'shell:bower',
     'compile:min',
-    'copy'
+    'copy',
+    'test'
   ]);
 
   // Concat static assets.
@@ -499,7 +500,6 @@ module.exports = function(grunt) {
 
   // Run application tests.
   grunt.registerTask('test', [
-    'compile:min',
     'clean:fixtures',
     'phpunit:all',
     'jasmine'
