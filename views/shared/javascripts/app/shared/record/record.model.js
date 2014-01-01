@@ -14,6 +14,27 @@ Neatline.module('Shared.Record', function(Record) {
   Record.Model = Backbone.Model.extend({
 
 
+    mutators: {
+
+      // TODO|dev
+      item_body: {
+        get: function() {
+          return this.itemBody;
+          this.fetchItem();
+        }
+      }
+
+    },
+
+
+    /**
+     * Track if lazy-loaded item body content.
+     */
+    initialize: function() {
+      this.itemBody = null;
+    },
+
+
     /**
      * Construct the REST API url. If the record hasn't been saved, use the
      * generic `/records` endpoint, which handles the initial POST request. If
@@ -64,9 +85,21 @@ Neatline.module('Shared.Record', function(Record) {
 
     /**
      * Load the metadata for the Omeka item associated with the record.
+     * TODO|dev
      */
     fetchItem: function() {
-      // TODO|dev
+
+      // Break if the record:
+      //  - Hasn't been saved (and thus has no ID to pass to the API).
+      //  - Isn't associated with an Omeka item.
+
+      if (this.isNew() || !this.has('item_id')) return;
+
+      // Lazy-load the item body.
+      $.get(Neatline.g.neatline.item_body_api+'/'+this.id, function(item) {
+        this.set('item_body', item);
+      });
+
     },
 
 
