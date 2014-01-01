@@ -23,8 +23,7 @@
     }
   },
 
-  "build": {
-    "openlayers":         "bower_components/openlayers/build",
+  "copy": {
     "bootstrap":          "bower_components/bootstrap/dist",
     "chosen":             "bower_components/chosen",
     "ckeditor":           "bower_components/ckeditor",

@@ -70,7 +70,7 @@ module.exports = function(grunt) {
 
       bootstrap: {
         files: [{
-          src: paths.build.bootstrap+'/fonts/*',
+          src: paths.copy.bootstrap+'/fonts/*',
           dest: 'views/shared/css/fonts/',
           expand: true,
           flatten: true
@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 
       chosen: {
         files: [{
-          src: paths.build.chosen+'/*.png',
+          src: paths.copy.chosen+'/*.png',
           dest: paths.payloads.admin.css,
           expand: true,
           flatten: true
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
 
       jquery_ui: {
         files: [{
-          src: paths.build.jquery_ui+'/themes/smoothness/images/*',
+          src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
           dest: paths.payloads.shared.css+'/images',
           expand: true,
           flatten: true
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
 
       ckeditor: {
         files: [{
-          cwd: paths.build.ckeditor,
+          cwd: paths.copy.ckeditor,
           src: '**',
           dest: paths.payloads.shared.js+'/ckeditor/',
           expand: true
