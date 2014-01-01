@@ -96,6 +96,26 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * TODO|dev
+     * Load the metadata for the Omeka item associated with the record.
+     */
+    fetchItem: function() {
+
+      // Break if unsaved or item-less.
+      if (this.isNew() || !this.has('item_id')) return;
+
+      // Consruct the item body API endpoint.
+      var itemUrl = Neatline.g.neatline.item_body_api+'/'+this.id;
+
+      // Lazy-load the item body.
+      $.get(itemUrl, _.bind(function(item) {
+        console.log(item);
+      }, this));
+
+    },
+
+
+    /**
      * Construct an OpenLayers style map object.
      *
      * @return {OpenLayers.StyleMap}: The style map.
