@@ -17,17 +17,7 @@ jQuery(function($) {
   // Instantiate CKEditor on the "Narrative" field.
 
   CKEDITOR.replace('narrative', {
-    allowedContent: true,
-    toolbar: [
-      ['Maximize', 'Source'],
-      ['Bold', 'Italic', 'Underline', 'RemoveFormat'],
-      ['Link', 'Unlink', 'Image', 'Iframe'],
-      ['Styles', 'Format', 'Font', 'FontSize'],
-      ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-      ['NumberedList', 'BulletedList'],
-      ['Outdent', 'Indent'],
-      ['Blockquote', 'CreateDiv'],
-    ]
+    allowedContent: true
   });
 
 });
