@@ -16,7 +16,6 @@
     , "spectrum":               ">= 1.1.0"
     , "jasmine-jquery":         ">= 1.4.2"
 
-    , "Backbone.Mutators":      "asciidisco/Backbone.Mutators"
     , "Backbone.Schema":        "DreamTheater/Backbone.Schema"
     , "backbone-safesync":      "amccloud/backbone-safesync"
     , "openlayers-geometry":    "davidmcclure/openlayers-geometry-handler"

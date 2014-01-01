@@ -14,128 +14,56 @@ Neatline.module('Shared.Record', function(Record) {
   Record.Model = Backbone.Model.extend({
 
 
-    mutators: {
+    /**
+     * Define the record schema.
+     */
+    initialize: function() {
 
-      /**
-       * Coerce `fill_opacity` to a number.
-       *
-       * @return {Number}
-       */
-      fill_opacity: {
-        get: function() {
-          return Number(this.attributes.fill_opacity);
-        }
-      },
+      var schema = new Backbone.Schema(this);
 
-      /**
-       * Coerce `fill_opacity_select` to a number.
-       *
-       * @return {Number}
-       */
-      fill_opacity_select: {
-        get: function() {
-          return Number(this.attributes.fill_opacity_select);
-        }
-      },
+      schema.define('fill_opacity', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `stroke_opacity` to a number.
-       *
-       * @return {Number}
-       */
-      stroke_opacity: {
-        get: function() {
-          return Number(this.attributes.stroke_opacity);
-        }
-      },
+      schema.define('fill_opacity_select', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `stroke_opacity_select` to a number.
-       *
-       * @return {Number}
-       */
-      stroke_opacity_select: {
-        get: function() {
-          return Number(this.attributes.stroke_opacity_select);
-        }
-      },
+      schema.define('stroke_opacity', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `point_radius` to a number.
-       *
-       * @return {Number}
-       */
-      point_radius: {
-        get: function() {
-          return Number(this.attributes.point_radius);
-        }
-      },
+      schema.define('stroke_opacity_select', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `stroke_width` to a number.
-       *
-       * @return {Number}
-       */
-      stroke_width: {
-        get: function() {
-          return Number(this.attributes.stroke_width);
-        }
-      },
+      schema.define('point_radius', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `zindex` to a number.
-       *
-       * @return {Number}
-       */
-      zindex: {
-        get: function() {
-          return Number(this.attributes.zindex);
-        }
-      },
+      schema.define('stroke_width', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `weight` to a number.
-       *
-       * @return {Number}
-       */
-      weight: {
-        get: function() {
-          return Number(this.attributes.weight);
-        }
-      },
+      schema.define('zindex', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `min_zoom` to a number.
-       *
-       * @return {Number}
-       */
-      min_zoom: {
-        get: function() {
-          return Number(this.attributes.min_zoom);
-        }
-      },
+      schema.define('weight', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `max_zoom` to a number.
-       *
-       * @return {Number}
-       */
-      max_zoom: {
-        get: function() {
-          return Number(this.attributes.max_zoom);
-        }
-      },
+      schema.define('min_zoom', {
+        type: 'number'
+      });
 
-      /**
-       * Coerce `map_zoom` to a number.
-       *
-       * @return {Number}
-       */
-      map_zoom: {
-        get: function() {
-          return Number(this.attributes.map_zoom);
-        }
-      }
+      schema.define('max_zoom', {
+        type: 'number'
+      });
+
+      schema.define('map_zoom', {
+        type: 'number'
+      });
 
     },
 
