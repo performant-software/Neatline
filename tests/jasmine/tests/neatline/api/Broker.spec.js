@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Broker', function() {
+describe('API | Broker', function() {
 
 
   var model1, model2;

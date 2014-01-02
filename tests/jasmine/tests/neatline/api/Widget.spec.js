@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Widget', function() {
+describe('API | Widget', function() {
 
 
   var view;

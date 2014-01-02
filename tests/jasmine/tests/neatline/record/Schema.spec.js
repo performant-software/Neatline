@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record', function() {
+describe('Record | Schema', function() {
 
 
   beforeEach(function() {
@@ -18,9 +18,9 @@ describe('Record', function() {
 
   it('should cast numeric fields to Numbers', function() {
 
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------
     // All numeric fields should be cast to Numbers on `get`.
-    // ------------------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     var record = new Neatline.Shared.Record.Model({
       fill_opacity:           '1',
