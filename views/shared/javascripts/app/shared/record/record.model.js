@@ -17,7 +17,7 @@ Neatline.module('Shared.Record', function(Record) {
     mutators: {
       item: {
         get: function() {
-          if (_.isString(this.item)) return this.item;
+          if (_.isString(this._item))return this._item;
           else this.fetchItem();
         }
       }
@@ -30,7 +30,7 @@ Neatline.module('Shared.Record', function(Record) {
      */
     initialize: function() {
 
-      this.item = null;
+      this._item = null;
 
       new Backbone.Schema(this).define({
         fill_opacity:           { type: 'number' },
@@ -77,7 +77,6 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * TODO|dev
      * Load the metadata for the Omeka item associated with the record.
      */
     fetchItem: function() {
@@ -85,13 +84,18 @@ Neatline.module('Shared.Record', function(Record) {
       // Break if unsaved or item-less.
       if (this.isNew() || !this.has('item_id')) return;
 
-      // Consruct the item body API endpoint.
+      // Construct the item body API endpoint.
       var itemUrl = Neatline.g.neatline.item_body_api+'/'+this.id;
 
-      // Lazy-load the item body.
-      $.get(itemUrl, _.bind(function(item) {
-        this.item = item;
+      // Load the item body.
+      $.get(itemUrl, _.bind(function(response) {
+
+        // Cache the response and bubble the new content out to markup that
+        // binds to `item` attribute on the model.
+
+        this._item = response;
         this.trigger('change:item');
+
       }, this));
 
     },

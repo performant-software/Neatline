@@ -15,5 +15,6 @@
   <a name="close" class="close">&times;</a>
   <div class="title" rv-html="record:title"></div>
   <div class="content body" rv-html="record:body" rv-show="record:body"></div>
+  <hr class="content" rv-show="record:item" />
   <div class="content item" rv-html="record:item" rv-show="record:item"></div>
 </script>
