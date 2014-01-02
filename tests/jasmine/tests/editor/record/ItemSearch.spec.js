@@ -48,7 +48,7 @@ describe('Record | Item Search', function() {
     NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
 
     // Respond with items list.
-    NL.respondXmlLast200(fixtures.items);
+    NL.respondLast200(fixtures.items, 'text/xml');
 
     // Get widget container and items.
     var items = elements.autocomplete.find('a');
@@ -75,7 +75,7 @@ describe('Record | Item Search', function() {
 
     // Enter item search query.
     NL.v.textTab.__ui.item.autocomplete('search', 'item');
-    NL.respondXmlLast200(fixtures.items);
+    NL.respondLast200(fixtures.items, 'text/xml');
 
     // Click on the first option.
     elements.autocomplete.find('a').first().click();

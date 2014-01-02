@@ -490,9 +490,8 @@ SQL
     public function _writeRecordApiFixture($record, $file, $method='GET')
     {
 
-        $this->resetRequest();
-
         // Apply the HTTP method.
+        $this->resetRequest();
         $this->request->setmethod($method);
 
         // Write the fixture.

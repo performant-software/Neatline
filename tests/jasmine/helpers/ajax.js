@@ -62,24 +62,12 @@ var NL = (function(NL) {
    * Respond 200 to the last AJAX call.
    *
    * @param {Object} response: The response body.
-   * @return {Object} response: The last request.
+   * @param {String} type: The content type.
+   * @return {Object} request: The last request.
    */
-  NL.respondLast200 = function(response) {
+  NL.respondLast200 = function(response, type) {
     var request = this.getLastRequest();
-    this.respond200(request, response);
-    return request;
-  };
-
-
-  /**
-   * Respond 200 to the last AJAX call with XML.
-   *
-   * @param {Object} response: The response body.
-   * @return {Object} response: The last request.
-   */
-  NL.respondXmlLast200 = function(response) {
-    var request = this.getLastRequest();
-    this.respond200(request, response, 'text/xml');
+    this.respond200(request, response, type);
     return request;
   };
 
