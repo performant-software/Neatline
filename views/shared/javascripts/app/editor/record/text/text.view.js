@@ -78,13 +78,12 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
 
     /**
-     * Bind item choice, disable editors.
+     * Bind an item autocomplete selection.
      *
      * @param {Object} event: The select event.
      * @param {Object} ui: The option.
      */
     onSelect: function(event, ui) {
-      this.__ui.title.val(ui.item.label).change();
       this.__ui.item.val(ui.item.value).change();
     },
 

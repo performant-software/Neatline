@@ -61,12 +61,12 @@ describe('Record | Item Search', function() {
   });
 
 
-  it('should populate id and title on item select', function() {
+  it('should populate "Omeka ID" on item select', function() {
 
     // ------------------------------------------------------------------------
-    // When an autocomplete result is selected, the "Omeka ID" and "Title"
-    // inputs should be populated and the `item_id` and `title` fields on the
-    // record model should be synchronized with the inputs.
+    // When an autocomplete result is selected, the "Omeka ID" inputs should
+    // be populated and the `item_id` and `title` fields on the record model
+    // should be synchronized with the inputs.
     // ------------------------------------------------------------------------
 
     // Get the id of the autocomplete result.
@@ -83,10 +83,6 @@ describe('Record | Item Search', function() {
     // Should populate id.
     expect(NL.v.textTab.__ui.item).toHaveValue(id);
     expect(NL.v.record.model.get('item_id')).toEqual(id);
-
-    // Should populate title.
-    expect(NL.v.textTab.__ui.title).toHaveValue('Item 1');
-    expect(NL.v.record.model.get('title')).toEqual('Item 1');
 
   });
 
