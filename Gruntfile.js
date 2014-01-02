@@ -356,8 +356,7 @@ module.exports = function(grunt) {
         src: paths.payloads.shared.js+'/neatline-public.js',
         options: {
           specs: [
-            paths.jasmine+'/integration/neatline/**/*.spec.js',
-            paths.jasmine+'/unit/neatline/**/*.spec.js'
+            paths.jasmine+'/tests/neatline/**/*.spec.js',
           ]
         }
       },
@@ -369,7 +368,7 @@ module.exports = function(grunt) {
         ],
         options: {
           specs: [
-            paths.jasmine+'/integration/editor/**/*.spec.js'
+            paths.jasmine+'/tests/editor/**/*.spec.js'
           ]
         }
       }

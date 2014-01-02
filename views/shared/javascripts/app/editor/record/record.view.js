@@ -91,6 +91,11 @@ Neatline.module('Editor.Record', function(Record) {
      */
     unbindRecord: function() {
 
+      // Unselect the record.
+      Neatline.vent.trigger('unselect', {
+        model: this.model, source: this.slug
+      });
+
       // Switch off map editing.
       Neatline.execute('EDITOR:MAP:endEdit', this.model);
 
@@ -99,11 +104,6 @@ Neatline.module('Editor.Record', function(Record) {
 
       // Refresh the map.
       Neatline.vent.trigger('refresh', { source: this.slug });
-
-      // Unselect the record.
-      Neatline.vent.trigger('unselect', {
-        model: this.model, source: this.slug
-      });
 
       // Unbind the model.
       this.hasRecord = false;
