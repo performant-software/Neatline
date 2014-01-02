@@ -156,6 +156,7 @@ module.exports = function(grunt) {
           paths.vendor.js.underscore,
           paths.vendor.js.underscore_s,
           paths.vendor.js.backbone,
+          paths.vendor.js.mutators,
           paths.vendor.js.schema,
           paths.vendor.js.marionette,
           paths.vendor.js.safesync,
@@ -192,6 +193,7 @@ module.exports = function(grunt) {
           paths.vendor.js.underscore_s,
           paths.vendor.js.backbone,
           paths.vendor.js.routefilter,
+          paths.vendor.js.mutators,
           paths.vendor.js.schema,
           paths.vendor.js.marionette,
           paths.vendor.js.openlayers,
@@ -443,8 +445,7 @@ module.exports = function(grunt) {
     'clean',
     'shell:bower',
     'compile:min',
-    'copy',
-    'test'
+    'copy'
   ]);
 
   // Concat static assets.

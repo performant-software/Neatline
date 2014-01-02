@@ -39,6 +39,7 @@
       "underscore_s":     "bower_components/underscore.string/lib/underscore.string.js",
       "backbone":         "bower_components/backbone/backbone.js",
       "routefilter":      "bower_components/backbone.routefilter/dist/backbone.routefilter.js",
+      "mutators":         "bower_components/Backbone.Mutators/backbone.mutators.js",
       "schema":           "bower_components/Backbone.Schema/dist/backbone.schema.js",
       "marionette":       "bower_components/marionette/lib/backbone.marionette.js",
       "safesync":         "bower_components/backbone-safesync/backbone-safesync.js",

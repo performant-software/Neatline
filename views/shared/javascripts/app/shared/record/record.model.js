@@ -14,6 +14,16 @@ Neatline.module('Shared.Record', function(Record) {
   Record.Model = Backbone.Model.extend({
 
 
+    mutators: {
+      item_body: {
+        get: function() {
+          if (_.isString(this.itemBody)) return this.itemBody;
+          else this.fetchItem();
+        }
+      }
+    },
+
+
     /**
      * Define the record schema.
      */
@@ -21,48 +31,18 @@ Neatline.module('Shared.Record', function(Record) {
 
       var schema = new Backbone.Schema(this);
 
-      schema.define('fill_opacity', {
-        type: 'number'
-      });
-
-      schema.define('fill_opacity_select', {
-        type: 'number'
-      });
-
-      schema.define('stroke_opacity', {
-        type: 'number'
-      });
-
-      schema.define('stroke_opacity_select', {
-        type: 'number'
-      });
-
-      schema.define('point_radius', {
-        type: 'number'
-      });
-
-      schema.define('stroke_width', {
-        type: 'number'
-      });
-
-      schema.define('zindex', {
-        type: 'number'
-      });
-
-      schema.define('weight', {
-        type: 'number'
-      });
-
-      schema.define('min_zoom', {
-        type: 'number'
-      });
-
-      schema.define('max_zoom', {
-        type: 'number'
-      });
-
-      schema.define('map_zoom', {
-        type: 'number'
+      schema.define({
+        fill_opacity:           { type: 'number' },
+        fill_opacity_select:    { type: 'number' },
+        stroke_opacity:         { type: 'number' },
+        stroke_opacity_select:  { type: 'number' },
+        point_radius:           { type: 'number' },
+        stroke_width:           { type: 'number' },
+        zindex:                 { type: 'number' },
+        weight:                 { type: 'number' },
+        min_zoom:               { type: 'number' },
+        max_zoom:               { type: 'number' },
+        map_zoom:               { type: 'number' }
       });
 
     },
@@ -108,8 +88,9 @@ Neatline.module('Shared.Record', function(Record) {
       var itemUrl = Neatline.g.neatline.item_body_api+'/'+this.id;
 
       // Lazy-load the item body.
-      $.get(itemUrl, _.bind(function(item) {
-        console.log(item);
+      $.get(itemUrl, _.bind(function(body) {
+        this.itemBody = body;
+        this.trigger('change:item_body');
       }, this));
 
     },
