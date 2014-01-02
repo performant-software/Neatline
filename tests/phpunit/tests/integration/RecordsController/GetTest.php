@@ -19,9 +19,8 @@ class RecordsControllerTest_Get extends Neatline_Case_Default
     public function testGet()
     {
 
-        $exhibit    = $this->_exhibit();
-        $item       = $this->_item();
-        $record     = new NeatlineRecord($exhibit, $item);
+        $item   = $this->_item();
+        $record = $this->_record(null, $item);
 
         $record->setArray(array(
             'slug'                  => '1',
