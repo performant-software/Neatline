@@ -158,36 +158,46 @@ describe('Presenters | Static Bubble', function() {
 
   describe('select', function() {
 
-    it('should show close "X" and body if body is non-null', function() {
+    it('should show close "X"', function() {
 
       // ----------------------------------------------------------------------
-      // When a record is selected and the record body content is non-null,
-      // the body and close "X" should be displayed.
+      // When a record is selected, the close "X" should be displayed.
       // ----------------------------------------------------------------------
 
-      Neatline.vent.trigger('select', { model: model1 });
-
-      // Body and close "X" should be visible.
-      expect(NL.v.bubble.$('.body')).toBeVisible();
-      expect(NL.v.bubble.$('.close')).toBeVisible();
-
-    });
-
-    it('should show close "X" but not body if body is null', function() {
-
-      // ----------------------------------------------------------------------
-      // When a record is selected and the record body content is null, the
-      // close "X" should be displayed but the body should stay hidden.
-      // ----------------------------------------------------------------------
-
-      model1.set('body', null);
       Neatline.vent.trigger('select', { model: model1 });
 
       // Close "X" should be visible.
       expect(NL.v.bubble.$('.close')).toBeVisible();
 
-      // Body should not be visible.
+    });
+
+    it('should show the body/item content when non-null', function() {
+
+      // ----------------------------------------------------------------------
+      // The body and item content should be displayed when it is non-null.
+      // ----------------------------------------------------------------------
+
+      Neatline.vent.trigger('select', { model: model1 });
+
+      // Body and item should be visible.
+      expect(NL.v.bubble.$('.body')).toBeVisible();
+      expect(NL.v.bubble.$('.item')).toBeVisible();
+
+    });
+
+    it('should not show the body/item content when null', function() {
+
+      // ----------------------------------------------------------------------
+      // The body and item content should not be displayed when it is null.
+      // ----------------------------------------------------------------------
+
+      model1.set('body', null);
+      model1.set('item', null);
+      Neatline.vent.trigger('select', { model: model1 });
+
+      // Body and item should not be visible.
       expect(NL.v.bubble.$('.body')).not.toBeVisible();
+      expect(NL.v.bubble.$('.item')).not.toBeVisible();
 
     });
 
@@ -230,6 +240,7 @@ describe('Presenters | Static Bubble', function() {
       // Should start responding to highlight events.
       expect(NL.v.bubble.$('.title')).toHaveText('title2');
       expect(NL.v.bubble.$('.body')).toHaveText('body2');
+      expect(NL.v.bubble.$('.item')).toHaveText('item2');
 
     });
 
