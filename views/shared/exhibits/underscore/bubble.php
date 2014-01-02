@@ -14,5 +14,6 @@
 <script id="static-bubble-template" type="text/template">
   <a name="close" class="close">&times;</a>
   <div class="title" rv-html="record:title"></div>
-  <div class="body" rv-html="record:body"></div>
+  <div class="content body" rv-html="record:body" rv-show="record:body"></div>
+  <div class="content item" rv-html="record:item" rv-show="record:item"></div>
 </script>

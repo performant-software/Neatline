@@ -131,11 +131,10 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
     select: function(model) {
       if (this.active) {
 
-        // Add classes.
-        if (model.get('body')) this.$el.addClass('body');
+        // Show bubble.
         this.$el.addClass('selected');
 
-        // Show bubble.
+        // Bind model.
         this.selected = true;
         this.bind(model);
 
@@ -148,10 +147,10 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
      */
     unselect: function() {
 
-      // Strip classes.
-      this.$el.removeClass('selected body');
-
       // Hide bubble.
+      this.$el.removeClass('selected');
+
+      // Unbind model.
       this.selected = false;
       this.unbind();
 
