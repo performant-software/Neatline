@@ -17,7 +17,7 @@ Neatline.module('Shared.Record', function(Record) {
     mutators: {
       item: {
         get: function() {
-          if (_.isString(this._item))return this._item;
+          if (_.isString(this.attributes.item))return this.attributes.item;
           else this.fetchItem();
         }
       }
@@ -25,12 +25,9 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
-     * Initialize the lazy-loaded item body container, define a schema to
-     * coerce numberic fields to Number instances.
+     * Coerce numberic fields to Number instances.
      */
     initialize: function() {
-
-      this._item = null;
 
       new Backbone.Schema(this).define({
         fill_opacity:           { type: 'number' },
@@ -89,13 +86,7 @@ Neatline.module('Shared.Record', function(Record) {
 
       // Load the item body.
       $.get(itemUrl, _.bind(function(response) {
-
-        // Cache the response and bubble the new content out to markup that
-        // binds to `item` attribute on the model.
-
-        this._item = response;
-        this.trigger('change:item');
-
+        this.set('item', response);
       }, this));
 
     },

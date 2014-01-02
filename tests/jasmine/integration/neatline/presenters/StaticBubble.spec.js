@@ -19,11 +19,17 @@ describe('Presenters | Static Bubble', function() {
     NL.loadNeatline();
 
     model1 = new Neatline.Shared.Record.Model({
-      presenter: 'StaticBubble', title: 'title1', body: 'body1'
+      presenter:  'StaticBubble',
+      title:      'title1',
+      body:       'body1',
+      item:       'item1'
     });
 
     model2 = new Neatline.Shared.Record.Model({
-      presenter: 'StaticBubble', title: 'title2', body: 'body2'
+      presenter:  'StaticBubble',
+      title:      'title2',
+      body:       'body2',
+      item:       'item2'
     });
 
   });
@@ -43,42 +49,60 @@ describe('Presenters | Static Bubble', function() {
 
   describe('highlight', function() {
 
-    it('should show the title, but not the body or close "X"', function() {
+    it('should bind record and show the title', function() {
 
       // ----------------------------------------------------------------------
       // When a record is highlighted, the the record should be bound to the
-      // bubble and the title should be displayed in the map container.  The
-      // body and close "X" should stay hidden.
+      // bubble and the title should be displayed in the map container.
       // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('highlight', { model: model1 });
 
-      // Title and body should be populated.
+      // Title and content should be populated.
       expect(NL.v.bubble.$('.title')).toHaveText('title1');
       expect(NL.v.bubble.$('.body')).toHaveText('body1');
+      expect(NL.v.bubble.$('.item')).toHaveText('item1');
 
       // Title should be visible.
       expect(NL.v.bubble.$('.title')).toBeVisible();
 
-      // Close "X' and body should be hidden.
+      // Close "X', body, and item should be hidden.
       expect(NL.v.bubble.$('.close')).not.toBeVisible();
       expect(NL.v.bubble.$('.body')).not.toBeVisible();
+      expect(NL.v.bubble.$('.item')).not.toBeVisible();
+
+    });
+
+    it('should not show the close "X" or the body/item', function() {
+
+      // ----------------------------------------------------------------------
+      // The record content - the Neatline body and item content - should not
+      // be displayed when the record is highlighted.
+      // ----------------------------------------------------------------------
+
+      Neatline.vent.trigger('highlight', { model: model1 });
+
+      // Close "X', body, and item should be hidden.
+      expect(NL.v.bubble.$('.close')).not.toBeVisible();
+      expect(NL.v.bubble.$('.body')).not.toBeVisible();
+      expect(NL.v.bubble.$('.item')).not.toBeVisible();
 
     });
 
     it('should not override a selected record', function() {
 
       // ----------------------------------------------------------------------
-      // When a record is selected and another reocrd is highlighted, the new
+      // When a record is selected and another record is highlighted, the new
       // highlighted record should not be rendered in the bubble.
       // ----------------------------------------------------------------------
 
       Neatline.vent.trigger('select', { model: model1 });
       Neatline.vent.trigger('highlight', { model: model2 });
 
-      // Title and body should not change.
+      // Title and body/item should not change.
       expect(NL.v.bubble.$('.title')).toHaveText('title1');
       expect(NL.v.bubble.$('.body')).toHaveText('body1');
+      expect(NL.v.bubble.$('.item')).toHaveText('item1');
 
     });
 
