@@ -10,3 +10,6 @@
  */
 
 ?>
+
+<input type="text" class="form-control" />
+<div rv-html="record:item"></div>
