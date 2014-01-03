@@ -32,6 +32,11 @@
       </a>
     </li>
     <li class="tab">
+      <a href="#record-item" data-toggle="tab" data-slug="item">
+        <span class="glyphicon glyphicon-link"></span> Item
+      </a>
+    </li>
+    <li class="tab">
       <a href="#record-map" data-toggle="tab" data-slug="map">
         <span class="glyphicon glyphicon-globe"></span> Map
       </a>
@@ -48,6 +53,11 @@
     <div class="tab-pane text" id="record-text">
       <?php echo $this->partial(
         'exhibits/underscore/partials/pane_text.php'
+      ); ?>
+    </div>
+    <div class="tab-pane item" id="record-item">
+      <?php echo $this->partial(
+        'exhibits/underscore/partials/pane_item.php'
       ); ?>
     </div>
     <div class="tab-pane map" id="record-map">
