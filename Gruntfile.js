@@ -265,6 +265,12 @@ module.exports = function(grunt) {
 
     uglify: {
 
+      options: {
+        beautify: {
+          quote_keys: true // Fixes Select2 breakage in PhantomJS.
+        }
+      },
+
       add_form: {
         src: '<%= concat.add_form.dest %>',
         dest: '<%= concat.add_form.dest %>'
