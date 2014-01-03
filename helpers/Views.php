@@ -75,11 +75,11 @@ function nl_getExhibitLink(
     } else $identifier = $exhibit->id;
 
     // Construct the exhibit route.
-    $route = 'neatline/' . $action . '/' . $identifier;
+    $route = 'neatline/'.$action.'/'.$identifier;
     $props['href'] = $public ? public_url($route) : url($route);
 
     // Return the anchor tag.
-    return '<a ' . tag_attributes($props) . '>' . $text . '</a>';
+    return '<a '.tag_attributes($props).'>'.$text.'</a>';
 
 }
 
