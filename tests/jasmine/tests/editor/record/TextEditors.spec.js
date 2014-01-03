@@ -33,8 +33,10 @@ describe('Record | Text Editors', function() {
     NL.showRecordForm(fixtures.record);
 
     elements = {
-      editTitleHtml:  NL.v.textTab.$('a[data-textarea="title"]'),
-      editBodyHtml:   NL.v.textTab.$('a[data-textarea="body"]')
+      title:      NL.v.textTab.$('textarea[name="title"]'),
+      body:       NL.v.textTab.$('textarea[name="body"]'),
+      editTitle:  NL.v.textTab.$('a[data-textarea="title"]'),
+      editBody:   NL.v.textTab.$('a[data-textarea="body"]')
     };
 
   });
@@ -75,10 +77,10 @@ describe('Record | Text Editors', function() {
 
   it('title', function() {
 
-    input = NL.v.textTab.__ui.title;
+    input = elements.title;
     input.val('<p>1</p>');
 
-    elements.editTitleHtml.click();
+    elements.editTitle.click();
     cke = CKEDITOR.instances.title;
 
   });
@@ -86,10 +88,10 @@ describe('Record | Text Editors', function() {
 
   it('body', function() {
 
-    input = NL.v.textTab.__ui.body;
+    input = elements.body;
     input.val('<p>1</p>');
 
-    elements.editBodyHtml.click();
+    elements.editBody.click();
     cke = CKEDITOR.instances.body;
 
   });

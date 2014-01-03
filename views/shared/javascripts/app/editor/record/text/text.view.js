@@ -20,9 +20,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
     },
 
     ui: {
-      item:   'input[name="item-id"]',
-      title:  'textarea[name="title"]',
-      body:   'textarea[name="body"]'
+      item: 'input[name="item-id"]'
     },
 
 
