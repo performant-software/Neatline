@@ -26,6 +26,7 @@
   "copy": {
     "bootstrap":          "bower_components/bootstrap/dist",
     "chosen":             "bower_components/chosen",
+    "select2":            "bower_components/select2",
     "ckeditor":           "bower_components/ckeditor",
     "jquery_ui":          "bower_components/jquery-ui"
   },
@@ -69,7 +70,8 @@
       "toastr":           "bower_components/toastr/toastr.css",
       "spectrum":         "bower_components/spectrum/spectrum.css",
       "chosen":           "bower_components/chosen/chosen.css",
-      "select2":          "bower_components/select2/select2.css"
+      "select2":          "bower_components/select2/select2.css",
+      "select2_bs":       "bower_components/select2/select2-bootstrap.css"
     }
 
   }

@@ -86,6 +86,15 @@ module.exports = function(grunt) {
         }]
       },
 
+      select2: {
+        files: [{
+          src: paths.copy.select2+'/*.png',
+          dest: paths.payloads.shared.css,
+          expand: true,
+          flatten: true
+        }]
+      },
+
       jquery_ui: {
         files: [{
           src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
@@ -255,6 +264,7 @@ module.exports = function(grunt) {
           paths.vendor.css.toastr,
           paths.vendor.css.spectrum,
           paths.vendor.css.select2,
+          paths.vendor.css.select2_bs,
           '<%= concat.neatline_public_css.src %>',
           paths.payloads.shared.css+'/neatline-editor.css'
         ],
