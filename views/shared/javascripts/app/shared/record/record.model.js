@@ -17,8 +17,8 @@ Neatline.module('Shared.Record', function(Record) {
     mutators: {
       item: {
         get: function() {
-          if (_.isString(this.attributes.item))return this.attributes.item;
-          else this.fetchItem();
+          if (_.isUndefined(this.attributes.item)) this.fetchItem();
+          return this.attributes.item;
         }
       }
     },
