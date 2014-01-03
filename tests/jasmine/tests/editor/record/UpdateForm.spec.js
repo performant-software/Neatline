@@ -66,7 +66,7 @@ describe('Record | Update Form', function() {
 
     var model = NL.v.map.editLayer.neatline.model;
 
-    expect(model.get('item_id')).               toEqual('1');
+    expect(model.get('item_id')).               toEqual(1);
     expect(model.get('slug')).                  toEqual('2');
     expect(model.get('title')).                 toEqual('3');
     expect(model.get('body')).                  toEqual('4');

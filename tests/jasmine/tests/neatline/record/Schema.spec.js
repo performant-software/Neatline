@@ -23,30 +23,32 @@ describe('Record | Schema', function() {
     // ----------------------------------------------------------------------
 
     var record = new Neatline.Shared.Record.Model({
-      fill_opacity:           '1',
-      fill_opacity_select:    '2',
-      stroke_opacity:         '3',
-      stroke_opacity_select:  '4',
-      point_radius:           '5',
-      stroke_width:           '6',
-      zindex:                 '7',
-      weight:                 '8',
-      min_zoom:               '9',
-      max_zoom:               '10',
-      map_zoom:               '11'
+      item_id:                '1',
+      fill_opacity:           '2',
+      fill_opacity_select:    '3',
+      stroke_opacity:         '4',
+      stroke_opacity_select:  '5',
+      point_radius:           '6',
+      stroke_width:           '7',
+      zindex:                 '8',
+      weight:                 '9',
+      min_zoom:               '10',
+      max_zoom:               '11',
+      map_zoom:               '12'
     });
 
-    expect(record.get('fill_opacity')).           toEqual(1);
-    expect(record.get('fill_opacity_select')).    toEqual(2);
-    expect(record.get('stroke_opacity')).         toEqual(3);
-    expect(record.get('stroke_opacity_select')).  toEqual(4);
-    expect(record.get('point_radius')).           toEqual(5);
-    expect(record.get('stroke_width')).           toEqual(6);
-    expect(record.get('zindex')).                 toEqual(7);
-    expect(record.get('weight')).                 toEqual(8);
-    expect(record.get('min_zoom')).               toEqual(9);
-    expect(record.get('max_zoom')).               toEqual(10);
-    expect(record.get('map_zoom')).               toEqual(11);
+    expect(record.get('item_id')).                toEqual(1);
+    expect(record.get('fill_opacity')).           toEqual(2);
+    expect(record.get('fill_opacity_select')).    toEqual(3);
+    expect(record.get('stroke_opacity')).         toEqual(4);
+    expect(record.get('stroke_opacity_select')).  toEqual(5);
+    expect(record.get('point_radius')).           toEqual(6);
+    expect(record.get('stroke_width')).           toEqual(7);
+    expect(record.get('zindex')).                 toEqual(8);
+    expect(record.get('weight')).                 toEqual(9);
+    expect(record.get('min_zoom')).               toEqual(10);
+    expect(record.get('max_zoom')).               toEqual(11);
+    expect(record.get('map_zoom')).               toEqual(12);
 
   });
 

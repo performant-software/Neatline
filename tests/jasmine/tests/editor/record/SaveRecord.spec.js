@@ -83,7 +83,7 @@ describe('Record | Save Record', function() {
     // Query should contain values.
     var params = NL.getLastRequestParams();
 
-    expect(params.item_id).               toEqual('1');
+    expect(params.item_id).               toEqual(1);
     expect(params.slug).                  toEqual('2');
     expect(params.title).                 toEqual('3');
     expect(params.body).                  toEqual('4');

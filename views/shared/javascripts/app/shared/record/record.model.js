@@ -30,6 +30,7 @@ Neatline.module('Shared.Record', function(Record) {
     initialize: function() {
 
       new Backbone.Schema(this).define({
+        item_id:                { type: 'number' },
         fill_opacity:           { type: 'number' },
         fill_opacity_select:    { type: 'number' },
         stroke_opacity:         { type: 'number' },

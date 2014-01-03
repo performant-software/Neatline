@@ -82,7 +82,7 @@ describe('Record | Item Search', function() {
 
     // Should populate id.
     expect(NL.v.textTab.__ui.item).toHaveValue(id);
-    expect(NL.v.record.model.get('item_id')).toEqual(id);
+    expect(NL.v.record.model.get('item_id')).toEqual(Number(id));
 
   });
 
