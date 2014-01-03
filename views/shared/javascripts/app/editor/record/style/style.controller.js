@@ -17,8 +17,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
     slug: 'EDITOR:RECORD:STYLE',
 
-    events: [{ 'EDITOR:RECORD:#style': 'activate' }],
-
 
     /**
      * Instantiate the view on the record form element.
@@ -27,14 +25,6 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
       this.view = new Style.View({
         el: Neatline.request('EDITOR:RECORD:getElement')
       });
-    },
-
-
-    /**
-     * Instantiate color pickers and integer draggers.
-     */
-    activate: function() {
-      this.view.buildWidgets();
     }
 
 

@@ -17,8 +17,6 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
     slug: 'EDITOR:RECORD:TEXT',
 
-    events: [{ 'EDITOR:RECORD:#text': 'activate' }],
-
 
     /**
      * Instantiate the view on the record form element.
@@ -27,14 +25,6 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
       this.view = new Text.View({
         el: Neatline.request('EDITOR:RECORD:getElement')
       });
-    },
-
-
-    /**
-     * Instantiate autocomplete and CKEditor.
-     */
-    activate: function() {
-      this.view.buildWidgets();
     }
 
 

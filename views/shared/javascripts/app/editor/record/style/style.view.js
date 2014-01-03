@@ -17,13 +17,16 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
     events: {
 
+      // Build UI widgets when tab is shown.
+      'shown.bs.tab a[data-slug="style"]': 'buildWidgets',
+
       // Set map-derived styles.
       'click a[name="set-min-zoom"]': 'onSetMinZoom',
       'click a[name="set-max-zoom"]': 'onSetMaxZoom',
       'click a[name="set-focus"]':    'onSetFocus',
 
       // Preview styles.
-      'keyup input.preview':          'onStyleKeyup'
+      'keyup input.preview': 'onStyleKeyup'
 
     },
 

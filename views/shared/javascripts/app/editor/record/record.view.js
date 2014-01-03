@@ -133,9 +133,8 @@ Neatline.module('Editor.Record', function(Record) {
       this.activeTab = $(event.target).attr('data-slug');
       var id = this.model.id || 'add';
 
-      // Update the route, notify tab views.
+      // Update the route.
       Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.activeTab);
-      Neatline.vent.trigger('EDITOR:RECORD:#'+this.activeTab);
 
     },
 
