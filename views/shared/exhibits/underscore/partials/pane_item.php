@@ -11,5 +11,5 @@
 
 ?>
 
-<input type="text" class="form-control" />
+<input rv-value="record:item_title" name="item-search" class="form-control" />
 <div rv-html="record:item"></div>

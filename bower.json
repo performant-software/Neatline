@@ -11,6 +11,7 @@
     , "marionette":             ">= 1.0.0"
     , "rivets":                 ">= 0.6.5"
     , "chosen":                 ">= 0.9.11"
+    , "select2":                ">= 3.4.5"
     , "bootstrap":              ">= 3.0.0"
     , "ace-builds":             ">= 1.0.0"
     , "spectrum":               ">= 1.1.0"

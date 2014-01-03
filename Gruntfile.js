@@ -178,7 +178,6 @@ module.exports = function(grunt) {
           paths.src.shared+'/presenter/None/*.js',
           paths.src.shared+'/presenter/StaticBubble/*.js'
 
-
         ],
         dest: paths.payloads.shared.js+'/neatline-public.js'
       },
@@ -208,6 +207,7 @@ module.exports = function(grunt) {
           paths.vendor.js.ace,
           paths.vendor.js.ace_theme,
           paths.vendor.js.ace_mode,
+          paths.vendor.js.select2,
 
           // Neatline:
           paths.src.shared+'/*.js',
@@ -254,7 +254,7 @@ module.exports = function(grunt) {
           paths.vendor.css.bootstrap,
           paths.vendor.css.toastr,
           paths.vendor.css.spectrum,
-          paths.vendor.css.chosen,
+          paths.vendor.css.select2,
           '<%= concat.neatline_public_css.src %>',
           paths.payloads.shared.css+'/neatline-editor.css'
         ],
