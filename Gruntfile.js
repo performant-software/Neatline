@@ -303,6 +303,29 @@ module.exports = function(grunt) {
 
     },
 
+    stylus: {
+
+      options: {
+        paths: [paths.stylus.shared]
+      },
+
+      neatline_public: {
+        src: paths.stylus.shared+'/public/**/*.styl',
+        dest: paths.payloads.shared.css+'/neatline-public.css'
+      },
+
+      neatline_editor: {
+        src: paths.stylus.shared+'/editor/**/*.styl',
+        dest: paths.payloads.shared.css+'/neatline-editor.css'
+      },
+
+      exhibit_form: {
+        src: paths.stylus.admin+'/exhibit-form.styl',
+        dest: paths.payloads.admin.css+'/exhibit-form.css'
+      }
+
+    },
+
     cssmin: {
 
       admin: {
@@ -317,24 +340,6 @@ module.exports = function(grunt) {
         dest: paths.payloads.shared.css,
         expand: true,
         src: '*.css'
-      }
-
-    },
-
-    stylus: {
-
-      compile: {
-        options: {
-          paths: [paths.stylus.shared]
-        },
-        files: {
-          'views/shared/css/payloads/neatline-public.css':
-            paths.stylus.shared+'/public/**/*.styl',
-          'views/shared/css/payloads/neatline-editor.css':
-            paths.stylus.shared+'/editor/**/*.styl',
-          'views/admin/css/payloads/exhibit-form.css':
-            paths.stylus.admin+'/exhibit-form.styl'
-        }
       }
 
     },
