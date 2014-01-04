@@ -11,6 +11,7 @@
 module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -19,7 +20,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-shell');
 
   var pkg = grunt.file.readJSON('package.json');
@@ -131,7 +131,9 @@ module.exports = function(grunt) {
       ],
 
       bower: 'bower_components',
+
       fonts: 'views/shared/css/fonts',
+
       pkg: 'pkg'
 
     },
@@ -466,14 +468,8 @@ module.exports = function(grunt) {
 
   // Concat static assets.
   grunt.registerTask('compile', [
-    'concat:add_form',
-    'concat:edit_form',
-    'concat:neatline_public',
-    'concat:neatline_editor',
     'stylus',
-    'concat:exhibit_form_css',
-    'concat:neatline_public_css',
-    'concat:neatline_editor_css'
+    'concat'
   ]);
 
   // Minify static assets.
