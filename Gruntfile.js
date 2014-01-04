@@ -455,8 +455,8 @@ module.exports = function(grunt) {
 
   });
 
-  // Run application tests.
-  grunt.registerTask('default', 'test');
+  // Run the tests by default.
+  grunt.registerTask('default', 'test:all');
 
   // Build the application.
   grunt.registerTask('build', [
@@ -511,6 +511,13 @@ module.exports = function(grunt) {
 
   // Run application tests.
   grunt.registerTask('test', [
+    'clean:fixtures',
+    'phpunit',
+    'jasmine'
+  ]);
+
+  // Run all tests.
+  grunt.registerTask('test:all', [
     'compile:min',
     'clean:fixtures',
     'phpunit:all',
