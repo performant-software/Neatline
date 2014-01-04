@@ -17,7 +17,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
     events: {
 
-      // Build UI widgets when tab is shown.
+      // Build the item search when the tab is shown.
       'shown.bs.tab a[data-slug="text"]': 'buildWidgets',
 
       // Show CKEditors on "Edit HTML" click.

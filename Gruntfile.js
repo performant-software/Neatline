@@ -514,16 +514,16 @@ module.exports = function(grunt) {
 
   // Run application tests.
   grunt.registerTask('test', [
-    'clean:fixtures',
     'compile:min',
+    'clean:fixtures',
     'phpunit:all',
     'jasmine'
   ]);
 
   // Spawn release package.
   grunt.registerTask('package', [
-    'compile:min',
     'clean:pkg',
+    'compile:min',
     'compress'
   ]);
 

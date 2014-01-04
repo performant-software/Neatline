@@ -17,7 +17,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
 
     events: {
 
-      // Build UI widgets when tab is shown.
+      // Build the UI widgets when the tab is shown.
       'shown.bs.tab a[data-slug="style"]': 'buildWidgets',
 
       // Set map-derived styles.
