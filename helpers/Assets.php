@@ -63,6 +63,7 @@ function nl_queueNeatlineEditor($exhibit)
 
     nl_queueGoogleMapsApi();
 
+    queue_css_file('fonts');
     queue_css_file('payloads/neatline-editor');
     queue_js_file('payloads/neatline-editor');
     queue_js_file('payloads/ckeditor/ckeditor');
