@@ -10,3 +10,6 @@
  */
 
 ?>
+
+<input type="hidden" name="item-search" class="form-control" />
+<div rv-html="record:item" class="well"></div>

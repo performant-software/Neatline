@@ -18,7 +18,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     events: {
 
       // Build the UI widgets when the tab is shown.
-      'shown.bs.tab a[data-slug="style"]': 'buildWidgets',
+      'shown.bs.tab a[data-slug="style"]': 'activate',
 
       // Set map-derived styles.
       'click a[name="set-min-zoom"]': 'onSetMinZoom',
@@ -41,7 +41,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     /**
      * Instantiate color pickers and draggers.
      */
-    buildWidgets: function() {
+    activate: function() {
 
       // COLORS
       this.$('input.color').spectrum({

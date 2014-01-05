@@ -22,6 +22,10 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
 
     },
 
+    ui: {
+      search: 'input[name="item-search"]'
+    },
+
 
     /**
      * Construct the item search.

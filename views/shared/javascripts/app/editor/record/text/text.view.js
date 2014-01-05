@@ -17,8 +17,8 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
     events: {
 
-      // Build the item search when the tab is shown.
-      'shown.bs.tab a[data-slug="text"]': 'buildWidgets',
+      // Build the item search when tab is shown.
+      'shown.bs.tab a[data-slug="text"]': 'activate',
 
       // Show CKEditors on "Edit HTML" click.
       'click a[data-textarea]': 'onEditHtmlClick'
@@ -33,7 +33,7 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
     /**
      * Construct the item search box.
      */
-    buildWidgets: function() {
+    activate: function() {
 
       // AUTOCOMPLETE
       this.__ui.item.autocomplete({
