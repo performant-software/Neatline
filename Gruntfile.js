@@ -308,7 +308,8 @@ module.exports = function(grunt) {
     stylus: {
 
       options: {
-        paths: [paths.stylus.shared]
+        paths: [paths.stylus.shared],
+        import: ['var']
       },
 
       neatline_public: {
