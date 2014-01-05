@@ -261,6 +261,7 @@ module.exports = function(grunt) {
 
       neatline_editor_css: {
         src: [
+          'views/shared/css/fonts.css',
           paths.vendor.css.jquery_ui,
           paths.vendor.css.bootstrap,
           paths.vendor.css.toastr,

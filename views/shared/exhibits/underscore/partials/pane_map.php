@@ -11,6 +11,10 @@
 
 ?>
 
+
+<legend>Drawing Tools</legend>
+
+
 <div class="radio">
   <label>
     <input type="radio" name="mode" value="pan" checked>
@@ -55,18 +59,18 @@
 
   <div class="form-group">
     <input type="text" class="form-control" name="sides" value="3" />
-    <?php echo __('Sides'); ?>
+    <label><?php echo __('Sides'); ?></label>
   </div>
 
   <div class="form-group">
     <input type="text" class="form-control" name="snap" value="15" />
-    <?php echo __('Snap Angle'); ?>
+    <label><?php echo __('Snap Angle'); ?></label>
   </div>
 
   <div class="checkbox">
     <label>
       <input type="checkbox" name="irreg">
-      <?php echo __('Irregular?'); ?>
+      <label><?php echo __('Irregular?'); ?></label>
     </label>
   </div>
 
@@ -131,7 +135,7 @@
 </a>
 
 
-<hr>
+<legend>Spatial Data</legend>
 
 
 <?php echo common('neatline/textarea', array(
