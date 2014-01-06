@@ -36,7 +36,7 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
       // Get the current form model.
       this.model = Neatline.request('EDITOR:RECORD:getModel');
 
-      // SELECT2
+      // Cosntruct Select2.
       this.__ui.search.select2({
 
         placeholder: 'Search Omeka items',
@@ -89,6 +89,16 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
         }
 
       });
+
+      // Update item id/title on select.
+      this.__ui.search.on('select2-selecting', _.bind(function(e) {
+        this.model.set({ item_id: e.object.id, item_title: e.object.text })
+      }, this));
+
+      // Unset item on clear.
+      this.__ui.search.on('select2-removed', _.bind(function(e) {
+        this.model.unset('item_id');
+      }, this));
 
     }
 
