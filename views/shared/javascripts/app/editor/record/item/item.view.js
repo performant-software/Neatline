@@ -28,10 +28,68 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
 
 
     /**
+     * TODO|dev
      * Construct the item search.
      */
     buildWidgets: function() {
-      // TODO
+
+      // Get the current form model.
+      this.model = Neatline.request('EDITOR:RECORD:getModel');
+
+      // SELECT2
+      this.__ui.search.select2({
+
+        placeholder: 'Search Omeka items',
+        allowClear: true,
+
+        ajax: {
+
+          // API endpoint.
+          url: Neatline.g.neatline.item_search_api,
+          dataType: 'xml',
+
+          // Query parameters.
+          data: function(term, page) {
+            return { output: 'omeka-xml', search: term, page: page }
+          },
+
+          // Parse XML response.
+          results: function(data) {
+
+            var items = [];
+
+            // Walk each item in the result set.
+            $(data).find('item').each(function(i, item) {
+
+              // Query for the title.
+              var title = $(item).find(
+                'item > elementSetContainer element[elementId="50"] text'
+              ).first().text();
+
+              // Query for the item id.
+              var itemId = $(item).attr('itemId');
+
+              // Add the list item.
+              items.push({ id: itemId, text: title });
+
+            });
+
+            // Get the pagination parameters.
+            var pageNumber = $(data).find('pageNumber').first().text();
+            var totalItems = $(data).find('totalResults').first().text();
+            var pageLength = $(data).find('perPage').first().text();
+
+            // Do any more pages exist?
+            var more = (pageNumber * pageLength) < totalItems;
+
+            return { results: items, more: more };
+
+          }
+
+        }
+
+      });
+
     }
 
 

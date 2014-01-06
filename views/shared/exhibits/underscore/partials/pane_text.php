@@ -11,6 +11,8 @@
 
 ?>
 
+<legend>Text Description</legend>
+
 <?php echo common('neatline/input', array(
     'name'  => 'item-id',
     'label' => 'Omeka ID',

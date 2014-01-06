@@ -36,8 +36,9 @@ describe('Record | Item Loading', function() {
 
     record.get('item');
 
-    // Should spawn request to items body API.
-    NL.assertLastRequestRoute(Neatline.g.neatline.item_body_api+'/1');
+    // Should spawn GET request to items body API.
+    var route = Neatline.g.neatline.item_body_api+'/1/record/1';
+    NL.assertLastRequestRoute(route);
     NL.assertLastRequestMethod('GET');
 
     // Respond with item.

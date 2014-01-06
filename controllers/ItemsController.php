@@ -29,7 +29,14 @@ class Neatline_ItemsController extends Neatline_Controller_Rest
      */
     public function getAction()
     {
-        echo nl_getItemMarkup($this->_helper->db->findById());
+
+        // Get the record, set the item ID.
+        $record = $this->_helper->db->findById();
+        $record->item_id = $this->_request->iid;
+
+        // Output the item metadata
+        echo nl_getItemMarkup($record);
+
     }
 
 

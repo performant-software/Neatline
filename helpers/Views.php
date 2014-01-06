@@ -23,7 +23,7 @@ function nl_getItemMarkup($record)
     $slug = $record->getExhibit()->slug;
     $tags = nl_explode($record->tags);
 
-    // Set the parent item on the view.
+    // Set the item on the view.
     set_current_record('item', $record->getItem());
 
     // First, try to render a `item-[tag].php` template in the exhibit theme.

@@ -13,6 +13,13 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
 {
 
 
+    public function setUp()
+    {
+        parent::setUp();
+        $this->_mockTheme();
+    }
+
+
     /**
      * GET should emit the item metadata HTML for the item associated with the
      * Neatline record with the passed ID.
@@ -20,13 +27,28 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
     public function testGet()
     {
 
-        $item   = $this->_item();
-        $record = $this->_record(null, $item);
+        $record = $this->_record();
+        $item1  = $this->_item();
+        $item2  = $this->_item();
 
-        $this->dispatch('neatline/items/'.$record->id);
+        // Request item 1 output.
+        $this->dispatch('neatline/items/'.$item1->id.'/record/'.$record->id);
+        $record->item_id = $item1->id;
 
         $this->assertEquals(
-            // Should emit parent item HTML.
+            // Should emit item 1 HTML.
+            nl_getItemMarkup($record), $this->_getResponseBody()
+        );
+
+        $this->resetRequest();
+        $this->resetResponse();
+
+        // Request item 2 output.
+        $this->dispatch('neatline/items/'.$item2->id.'/record/'.$record->id);
+        $record->item_id = $item2->id;
+
+        $this->assertEquals(
+            // Should emit item 2 HTML.
             nl_getItemMarkup($record), $this->_getResponseBody()
         );
 

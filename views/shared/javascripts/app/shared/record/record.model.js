@@ -82,8 +82,9 @@ Neatline.module('Shared.Record', function(Record) {
       // Break if unsaved or item-less.
       if (this.isNew() || !this.has('item_id')) return;
 
-      // Construct the item body API endpoint.
-      var itemUrl = Neatline.g.neatline.item_body_api+'/'+this.id;
+      // Query `/items/<item_id>/r/<record_id>`.
+      var itemUrl = Neatline.g.neatline.item_body_api+'/'+
+        this.get('item_id')+'/record/'+this.id;
 
       // Load the item body.
       $.get(itemUrl, _.bind(function(response) {
