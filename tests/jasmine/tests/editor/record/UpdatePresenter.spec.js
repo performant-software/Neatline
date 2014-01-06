@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Presenter Updating', function() {
+describe('Record | Update Presenter', function() {
 
 
   var elements, fixtures = {

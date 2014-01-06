@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Edit Layer Removal', function() {
+describe('Map | Remove Edit Layer', function() {
 
 
   var record3, fixtures = {

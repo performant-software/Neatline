@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | WMS Layer Updating', function() {
+describe('Map | Update WMS Layer', function() {
 
 
   var fixtures = {

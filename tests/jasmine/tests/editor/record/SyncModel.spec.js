@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Update Form', function() {
+describe('Record | Sync Model', function() {
 
 
   var fixtures = {
@@ -22,7 +22,7 @@ describe('Record | Update Form', function() {
   });
 
 
-  it('should update edit layer model', function() {
+  it('should sync the edit layer model', function() {
 
     // ------------------------------------------------------------------------
     // When the record form is updated, the corresponding attributes on the

@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Geometry Controls', function() {
+describe('Record | Draw Geometry', function() {
 
 
   var elements, fixtures = {

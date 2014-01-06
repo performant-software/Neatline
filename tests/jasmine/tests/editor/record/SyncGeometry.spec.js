@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Coverage Updating', function() {
+describe('Record | Sync Geometry', function() {
 
 
   var elements, fixtures = {
@@ -31,7 +31,7 @@ describe('Record | Coverage Updating', function() {
   });
 
 
-  it('should update coverage when the form model changes', function() {
+  it('should sync geometry when the form model changes', function() {
 
     // ------------------------------------------------------------------------
     // When the coverage attribute on the record for mmodel changes (eg, when
@@ -50,7 +50,7 @@ describe('Record | Coverage Updating', function() {
   });
 
 
-  it('should update coverage on coverage input `change`', function() {
+  it('should sync geometry on coverage input `change`', function() {
 
     // ------------------------------------------------------------------------
     // When a new coverage is entered into the "Coverage" textarea triggering
@@ -67,7 +67,7 @@ describe('Record | Coverage Updating', function() {
   });
 
 
-  it('should update coverage on coverage input `keyup`', function() {
+  it('should sync geometry on coverage input `keyup`', function() {
 
     // ------------------------------------------------------------------------
     // When a new coverage is entered into the "Coverage" textarea triggering
@@ -84,7 +84,7 @@ describe('Record | Coverage Updating', function() {
   });
 
 
-  it('should clear features when empty coverage entered', function() {
+  it('should clear geometry when empty coverage entered', function() {
 
     // ------------------------------------------------------------------------
     // When an empty coverage is entered into "Coverage" textarea, all of the
@@ -99,7 +99,7 @@ describe('Record | Coverage Updating', function() {
   });
 
 
-  it('should not update coverage when modify control is active', function() {
+  it('should not sync geometry when modify control is active', function() {
 
     // ------------------------------------------------------------------------
     // When the "Modify Shape" control is active, features on the edit layer

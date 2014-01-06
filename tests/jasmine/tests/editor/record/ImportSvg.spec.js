@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | SVG Import', function() {
+describe('Record | Import SVG', function() {
 
 
   var elements, fixtures = {
