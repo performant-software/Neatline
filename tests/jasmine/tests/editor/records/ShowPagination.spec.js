@@ -12,11 +12,11 @@ describe('Records | Show Pagination', function() {
 
 
   var fixtures = {
-    p12: read('EditorRecordsPagination.p12.json'),
-    p23: read('EditorRecordsPagination.p23.json'),
-    p34: read('EditorRecordsPagination.p34.json'),
-    p56: read('EditorRecordsPagination.p56.json'),
-    p6:  read('EditorRecordsPagination.p6.json')
+    p12: read('EditorRecordsShowPagination.p12.json'),
+    p23: read('EditorRecordsShowPagination.p23.json'),
+    p34: read('EditorRecordsShowPagination.p34.json'),
+    p56: read('EditorRecordsShowPagination.p56.json'),
+    p6:  read('EditorRecordsShowPagination.p6.json')
   };
 
 

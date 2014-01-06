@@ -13,7 +13,7 @@ describe('Record | Search Items', function() {
 
   var elements, fixtures = {
     record: read('EditorRecord.record.json'),
-    items:  read('EditorRecordItemSearch.items.xml')
+    items:  read('EditorRecordSearchItems.items.xml')
   };
 
 

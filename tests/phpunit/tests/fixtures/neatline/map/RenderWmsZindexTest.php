@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapWmsZindex extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapRenderWmsZindex extends Neatline_Case_Fixture
 {
 
 
@@ -38,7 +38,7 @@ class FixturesTest_NeatlineMapWmsZindex extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapWmsZindex.json'
+            'NeatlineMapRenderWmsZindex.json'
         );
 
     }

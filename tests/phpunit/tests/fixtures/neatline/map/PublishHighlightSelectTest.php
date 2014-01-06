@@ -9,19 +9,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorSearchInitialization extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapPublishHighlightSelect extends Neatline_Case_Fixture
 {
 
 
     public function testRecords()
     {
 
-        $record = $this->_record($this->exhibit);
-        $record->title = 'title';
+        $record  = $this->_record($this->exhibit);
+        $record->coverage = 'POINT(1 2)';
         $record->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorSearchInitialization.json'
+            'NeatlineMapPublishHighlightSelect.json'
         );
 
     }

@@ -13,23 +13,23 @@ describe('Map | Update WMS Layer', function() {
 
   var fixtures = {
     add: {
-      recordWms:    read('EditorMapWmsLayerUpdating.add.recordWms.json'),
-      recordsNoWms: read('EditorMapWmsLayerUpdating.add.recordsNoWms.json'),
-      recordsWms:   read('EditorMapWmsLayerUpdating.add.recordsWms.json')
+      recordWms:    read('EditorMapUpdateWmsLayer.add.recordWms.json'),
+      recordsNoWms: read('EditorMapUpdateWmsLayer.add.recordsNoWms.json'),
+      recordsWms:   read('EditorMapUpdateWmsLayer.add.recordsWms.json')
     },
     reload: {
-      record:       read('EditorMapWmsLayerUpdating.reload.record.json'),
-      records:      read('EditorMapWmsLayerUpdating.reload.records.json')
+      record:       read('EditorMapUpdateWmsLayer.reload.record.json'),
+      records:      read('EditorMapUpdateWmsLayer.reload.records.json')
     },
     update: {
-      records1:     read('EditorMapWmsLayerUpdating.update.records1.json'),
-      records2:     read('EditorMapWmsLayerUpdating.update.records2.json'),
-      record2:      read('EditorMapWmsLayerUpdating.update.record2.json')
+      records1:     read('EditorMapUpdateWmsLayer.update.records1.json'),
+      records2:     read('EditorMapUpdateWmsLayer.update.records2.json'),
+      record2:      read('EditorMapUpdateWmsLayer.update.record2.json')
     },
     remove: {
-      records1:     read('EditorMapWmsLayerUpdating.remove.records1.json'),
-      records2:     read('EditorMapWmsLayerUpdating.remove.records2.json'),
-      record2:      read('EditorMapWmsLayerUpdating.remove.record2.json')
+      records1:     read('EditorMapUpdateWmsLayer.remove.records1.json'),
+      records2:     read('EditorMapUpdateWmsLayer.remove.records2.json'),
+      record2:      read('EditorMapUpdateWmsLayer.remove.record2.json')
     }
   };
 

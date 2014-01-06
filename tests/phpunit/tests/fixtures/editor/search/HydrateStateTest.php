@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapSubscriptions extends Neatline_Case_Fixture
+class FixturesTest_EditorSearchInitialization extends Neatline_Case_Fixture
 {
 
 
@@ -17,22 +17,11 @@ class FixturesTest_NeatlineMapSubscriptions extends Neatline_Case_Fixture
     {
 
         $record = $this->_record($this->exhibit);
-
-        $record->setArray(array(
-            'point_radius'  => 1,
-            'coverage'      => 'POINT(1 2)',
-            'map_focus'     => '100,200',
-            'map_zoom'      => 10
-        ));
-
+        $record->title = 'title';
         $record->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapSubscriptions.records.json'
-        );
-
-        $this->_writeRecordApiFixture($record,
-            'NeatlineMapSubscriptions.record.json'
+            'EditorSearchHydrateState.json'
         );
 
     }

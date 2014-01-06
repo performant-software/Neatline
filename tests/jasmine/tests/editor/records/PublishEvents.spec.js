@@ -12,7 +12,7 @@ describe('Records | Publish Events', function() {
 
 
   var model, row, vent, fixtures = {
-    records: read('EditorRecordsPublications.json')
+    records: read('EditorRecordsPublishEvents.json')
   };
 
 

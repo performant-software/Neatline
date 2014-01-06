@@ -12,9 +12,9 @@ describe('Records | Show Records', function() {
 
 
   var fixtures = {
-    defaultList: read('EditorRecordsTemplating.defaultList.json'),
-    titleTags:   read('EditorRecordsTemplating.titleTags.json'),
-    emptyTitle:  read('EditorRecordsTemplating.emptyTitle.json')
+    defaultList: read('EditorRecordsShowRecords.defaultList.json'),
+    titleTags:   read('EditorRecordsShowRecords.titleTags.json'),
+    emptyTitle:  read('EditorRecordsShowRecords.emptyTitle.json')
   };
 
 

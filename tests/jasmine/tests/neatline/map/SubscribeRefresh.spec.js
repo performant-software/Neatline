@@ -13,12 +13,12 @@ describe('Map | Subscribe `refresh`', function() {
 
   var fixtures = {
     vector: {
-      original: read('NeatlineMapLayerRefreshing.vector.original.json'),
-      changed:  read('NeatlineMapLayerRefreshing.vector.changed.json')
+      original: read('NeatlineMapSubscribeRefresh.vector.original.json'),
+      changed:  read('NeatlineMapSubscribeRefresh.vector.changed.json')
     },
     wms: {
-      original: read('NeatlineMapLayerRefreshing.wms.original.json'),
-      changed:  read('NeatlineMapLayerRefreshing.wms.changed.json')
+      original: read('NeatlineMapSubscribeRefresh.wms.original.json'),
+      changed:  read('NeatlineMapSubscribeRefresh.wms.changed.json')
     }
   };
 

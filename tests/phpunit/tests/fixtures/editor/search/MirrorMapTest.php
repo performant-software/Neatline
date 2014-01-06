@@ -9,23 +9,20 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorRecordsTemplating extends Neatline_Case_Fixture
+class FixturesTest_EditorSearchMapMirroring extends Neatline_Case_Fixture
 {
 
 
-    public function testRecords()
+    public function testListRecords()
     {
 
         $record1 = $this->_record($this->exhibit);
         $record2 = $this->_record($this->exhibit);
         $record3 = $this->_record($this->exhibit);
 
-        $record1->title = 'title1';
-        $record2->title = 'title2';
-        $record3->title = 'title3';
-        $record1->body  = 'body1';
-        $record2->body  = 'body2';
-        $record3->body  = 'body3';
+        $record1->title = 'list1';
+        $record2->title = 'list2';
+        $record3->title = 'list3';
         $record1->added = '2003-01-01';
         $record2->added = '2002-01-01';
         $record3->added = '2001-01-01';
@@ -35,21 +32,32 @@ class FixturesTest_EditorRecordsTemplating extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsTemplating.defaultList.json'
+            'EditorSearchMirrorMap.list.json'
         );
 
-        $record1->title = '<tag>title</tag>';
+    }
+
+
+    public function testMapRecords()
+    {
+
+        $record1 = $this->_record($this->exhibit);
+        $record2 = $this->_record($this->exhibit);
+        $record3 = $this->_record($this->exhibit);
+
+        $record1->title = 'map1';
+        $record2->title = 'map2';
+        $record3->title = 'map3';
+        $record1->added = '2003-01-01';
+        $record2->added = '2002-01-01';
+        $record3->added = '2001-01-01';
+
         $record1->save();
+        $record2->save();
+        $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsTemplating.titleTags.json'
-        );
-
-        $record1->title = null;
-        $record1->save();
-
-        $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsTemplating.emptyTitle.json'
+            'EditorSearchMirrorMap.map.json'
         );
 
     }

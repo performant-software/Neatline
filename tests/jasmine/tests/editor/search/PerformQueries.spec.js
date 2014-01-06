@@ -12,7 +12,7 @@ describe('Search | Search Records', function() {
 
 
   var perPage, fixtures = {
-    records: read('EditorSearchQueryExecution.json')
+    records: read('EditorSearchPerformQueries.json')
   };
 
 

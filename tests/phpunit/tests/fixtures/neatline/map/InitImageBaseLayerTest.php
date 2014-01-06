@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapImageBaseLayer extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapInitImageBaseLayer extends Neatline_Case_Fixture
 {
 
 
@@ -22,7 +22,7 @@ class FixturesTest_NeatlineMapImageBaseLayer extends Neatline_Case_Fixture
         $this->exhibit->save();
 
         $this->_writeExhibitMarkupFixture($this->exhibit,
-            'NeatlineMapImageBaseLayer.html'
+            'NeatlineMapInitImageBaseLayer.html'
         );
 
     }

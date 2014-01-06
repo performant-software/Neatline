@@ -12,7 +12,7 @@ describe('Search | Hydrate State', function() {
 
 
   var perPage, fixtures = {
-    records: read('EditorSearchInitialization.json')
+    records: read('EditorSearchHydrateState.json')
   };
 
 

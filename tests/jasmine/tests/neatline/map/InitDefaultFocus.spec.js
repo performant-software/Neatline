@@ -12,7 +12,7 @@ describe('Map | Initialize Default Focus', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapDefaultFocus.html');
+    NL.loadNeatline('NeatlineMapInitDefaultFocus.html');
   });
 
 

@@ -12,7 +12,7 @@ describe('Map | Initialize Image Base Layer', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapImageBaseLayer.html');
+    NL.loadNeatline('NeatlineMapInitImageBaseLayer.html');
   });
 
 

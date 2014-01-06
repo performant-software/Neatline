@@ -12,7 +12,7 @@ describe('Map | Subscribe `highlight`', function() {
 
 
   var fixtures = {
-    records: readFixtures('NeatlineMapSubscriptions.records.json')
+    records: readFixtures('NeatlineMapSubscribe.records.json')
   };
 
 

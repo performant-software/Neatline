@@ -12,8 +12,8 @@ describe('Map | Remove Edit Layer', function() {
 
 
   var record3, fixtures = {
-    records12:  read('EditorMapEditLayerRemoval.records12.json'),
-    records123: read('EditorMapEditLayerRemoval.records123.json')
+    records12:  read('EditorMapRemoveEditLayer.records12.json'),
+    records123: read('EditorMapRemoveEditLayer.records123.json')
   };
 
 

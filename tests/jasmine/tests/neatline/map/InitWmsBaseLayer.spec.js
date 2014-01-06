@@ -12,7 +12,7 @@ describe('Map | Initialize WMS Base Layer', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapWmsBaseLayer.html');
+    NL.loadNeatline('NeatlineMapInitWmsBaseLayer.html');
   });
 
 

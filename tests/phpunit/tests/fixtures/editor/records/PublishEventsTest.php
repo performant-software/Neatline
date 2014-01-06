@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorRecordsPublications extends Neatline_Case_Fixture
+class FixturesTest_EditorRecordsPublishEvents extends Neatline_Case_Fixture
 {
 
 
@@ -22,7 +22,7 @@ class FixturesTest_EditorRecordsPublications extends Neatline_Case_Fixture
         $record->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsPublications.json'
+            'EditorRecordsPublishEvents.json'
         );
 
     }

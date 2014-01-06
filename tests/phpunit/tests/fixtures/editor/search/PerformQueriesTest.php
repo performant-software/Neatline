@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_EditorSearchQueryExecution extends Neatline_Case_Fixture
+class FixturesTest_EditorSearchPerformQueries extends Neatline_Case_Fixture
 {
 
 
@@ -32,7 +32,7 @@ class FixturesTest_EditorSearchQueryExecution extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorSearchQueryExecution.json'
+            'EditorSearchPerformQueries.json'
         );
 
     }

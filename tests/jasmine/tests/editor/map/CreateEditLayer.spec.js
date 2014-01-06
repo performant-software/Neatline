@@ -12,9 +12,9 @@ describe('Map | Create Edit Layer', function() {
 
 
   var record3, fixtures = {
-    records12:  read('EditorMapEditLayerCreation.records12.json'),
-    records123: read('EditorMapEditLayerCreation.records123.json'),
-    record3:    read('EditorMapEditLayerCreation.record3.json')
+    records12:  read('EditorMapCreateEditLayer.records12.json'),
+    records123: read('EditorMapCreateEditLayer.records123.json'),
+    record3:    read('EditorMapCreateEditLayer.record3.json')
   };
 
 

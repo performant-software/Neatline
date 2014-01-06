@@ -26,31 +26,31 @@ class FixturesTest_RecordsPagination extends Neatline_Case_Fixture
         // Records 1-2.
         $this->request->setQuery(array('limit' => '2', 'start' => '0'));
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsPagination.p12.json'
+            'EditorRecordsShowPagination.p12.json'
         );
 
         // Records 2-3.
         $this->request->setQuery(array('limit' => '2', 'start' => '1'));
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsPagination.p23.json'
+            'EditorRecordsShowPagination.p23.json'
         );
 
         // Records 3-4.
         $this->request->setQuery(array('limit' => '2', 'start' => '2'));
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsPagination.p34.json'
+            'EditorRecordsShowPagination.p34.json'
         );
 
         // Records 5-6.
         $this->request->setQuery(array('limit' => '2', 'start' => '4'));
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsPagination.p56.json'
+            'EditorRecordsShowPagination.p56.json'
         );
 
         // Record 6.
         $this->request->setQuery(array('limit' => '2', 'start' => '5'));
         $this->_writeRecordsApiFixture($this->exhibit,
-            'EditorRecordsPagination.p6.json'
+            'EditorRecordsShowPagination.p6.json'
         );
 
     }

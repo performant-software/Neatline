@@ -12,7 +12,7 @@ describe('Map | Render WMS Zindex', function() {
 
 
   var fixtures = {
-    records: read('NeatlineMapWmsZindex.json')
+    records: read('NeatlineMapRenderWmsZindex.json')
   };
 
 

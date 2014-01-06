@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapSubscribeRefresh extends Neatline_Case_Fixture
 {
 
 
@@ -32,7 +32,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapLayerRefreshing.vector.original.json'
+            'NeatlineMapSubscribeRefresh.vector.original.json'
         );
 
         $record1->coverage  = 'POINT(7 8)';
@@ -44,7 +44,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapLayerRefreshing.vector.changed.json'
+            'NeatlineMapSubscribeRefresh.vector.changed.json'
         );
 
     }
@@ -75,7 +75,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapLayerRefreshing.wms.original.json'
+            'NeatlineMapSubscribeRefresh.wms.original.json'
         );
 
         $record1->wms_address   = 'address4';
@@ -90,7 +90,7 @@ class FixturesTest_NeatlineMapLayerRefreshing extends Neatline_Case_Fixture
         $record3->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapLayerRefreshing.wms.changed.json'
+            'NeatlineMapSubscribeRefresh.wms.changed.json'
         );
 
     }

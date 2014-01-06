@@ -12,7 +12,7 @@ describe('Map | Render WMS Opacity', function() {
 
 
   var fixtures = {
-    records: read('NeatlineMapWmsOpacity.json')
+    records: read('NeatlineMapRenderWmsOpacity.json')
   };
 
 

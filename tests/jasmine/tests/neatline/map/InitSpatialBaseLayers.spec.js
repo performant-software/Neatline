@@ -12,7 +12,7 @@ describe('Map | Initialize Spatial Base Layers', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapSpatialBaseLayers.html');
+    NL.loadNeatline('NeatlineMapInitSpatialBaseLayers.html');
   });
 
 

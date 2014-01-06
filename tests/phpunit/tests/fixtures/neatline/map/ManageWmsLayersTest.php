@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapWmsLayerManagement extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapManageWmsLayers extends Neatline_Case_Fixture
 {
 
 
@@ -60,7 +60,7 @@ class FixturesTest_NeatlineMapWmsLayerManagement extends Neatline_Case_Fixture
         $this->request->setQuery(array('zoom' => 10));
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapWmsLayerManagement.1234.json'
+            'NeatlineMapManageWmsLayers.1234.json'
         );
 
         // Match records 3-6, with 1-4 already loaded.
@@ -74,7 +74,7 @@ class FixturesTest_NeatlineMapWmsLayerManagement extends Neatline_Case_Fixture
         )));
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapWmsLayerManagement.3456.json'
+            'NeatlineMapManageWmsLayers.3456.json'
         );
 
     }

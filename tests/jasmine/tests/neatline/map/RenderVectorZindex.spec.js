@@ -12,7 +12,7 @@ describe('Map | Render Vector Zindex', function() {
 
 
   var fixtures = {
-    records: read('NeatlineMapVectorZindex.json')
+    records: read('NeatlineMapRenderVectorZindex.json')
   };
 
 

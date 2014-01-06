@@ -12,7 +12,7 @@ describe('Map | Publish `(un)highlight` and `(un)select`', function() {
 
 
   var layer, feature, vent, fixtures = {
-    records: readFixtures('NeatlineMapPublications.json')
+    records: readFixtures('NeatlineMapPublishHighlightSelect.json')
   };
 
 

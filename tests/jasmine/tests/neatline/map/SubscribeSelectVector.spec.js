@@ -12,8 +12,8 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
 
   var model, fixtures = {
-    records: readFixtures('NeatlineMapSubscriptions.records.json'),
-    record:  readFixtures('NeatlineMapSubscriptions.record.json')
+    records: readFixtures('NeatlineMapSubscribe.records.json'),
+    record:  readFixtures('NeatlineMapSubscribe.record.json')
   };
 
 

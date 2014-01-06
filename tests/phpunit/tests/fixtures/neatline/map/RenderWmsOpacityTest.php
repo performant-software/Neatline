@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapWmsOpacity extends Neatline_Case_Fixture
+class FixturesTest_NeatlineRenderMapWmsOpacity extends Neatline_Case_Fixture
 {
 
 
@@ -27,7 +27,7 @@ class FixturesTest_NeatlineMapWmsOpacity extends Neatline_Case_Fixture
         $record->save();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapWmsOpacity.json'
+            'NeatlineMapRenderWmsOpacity.json'
         );
 
     }
