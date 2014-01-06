@@ -15,32 +15,15 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     mutators: {
-
       item: {
         get: function() {
 
-          // Load item, if it isn't cached.
+          // Load the item body, if it isn't already loaded.
           if (_.isUndefined(this.attributes.item)) this.fetchItem();
           return this.attributes.item;
 
         }
-      },
-
-      item_id: {
-        set: function(key, val, opt, set) {
-
-          set(key, val, opt); // Fall through to old setter.
-
-          // Clear the item, trigger reload.
-          this.unset('item', { silent: true });
-          this.trigger('change:item');
-
-        },
-        get: function() {
-          return this.attributes.item_id;
-        }
       }
-
     },
 
 

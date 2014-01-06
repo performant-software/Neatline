@@ -93,11 +93,12 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
       // Update item id/title on select.
       this.__ui.search.on('select2-selecting', _.bind(function(e) {
         this.model.set({ item_id: e.object.id, item_title: e.object.text })
+        // TODO: Trigger item reload.
       }, this));
 
       // Unset item on clear.
       this.__ui.search.on('select2-removed', _.bind(function(e) {
-        this.model.unset('item_id');
+        // TODO: Clear the item id/body.
       }, this));
 
     }

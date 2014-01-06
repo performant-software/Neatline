@@ -13,5 +13,8 @@
 
 <legend>Link to Omeka</legend>
 
+<!-- Search box. -->
 <input rv-value="record:item_title" name="item-search" class="form-control" />
+
+<!-- Preview well. -->
 <div rv-html="record:item" class="well item"></div>
