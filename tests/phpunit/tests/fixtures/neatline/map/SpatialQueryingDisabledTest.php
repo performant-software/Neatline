@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapDisableSpatialQuerying
+class FixturesTest_NeatlineMapSpatialQueryingDisabled
     extends Neatline_Case_Fixture
 {
 
@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapDisableSpatialQuerying
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture($exhibit,
-            'NeatlineMapDisableSpatialQuerying.html'
+            'NeatlineMapSpatialQueryingDisabled.html'
         );
 
     }

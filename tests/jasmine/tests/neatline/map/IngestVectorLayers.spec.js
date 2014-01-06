@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Manage Vector Layers', function() {
+describe('Map | Ingest Vector Layers', function() {
 
 
   var fixtures = {
-    _1234: read('NeatlineMapManageVectorLayers.1234.json'),
-    _3456: read('NeatlineMapManageVectorLayers.3456.json')
+    _1234: read('NeatlineMapIngestVectorLayers.1234.json'),
+    _3456: read('NeatlineMapIngestVectorLayers.3456.json')
   };
 
 

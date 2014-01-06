@@ -8,17 +8,17 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Enable Spatial Querying', function() {
+describe('Map | Spatial Querying Enabled', function() {
 
 
   var fixtures = {
-    one: readFixtures('NeatlineMapEnableSpatialQuerying.one.json'),
-    two: readFixtures('NeatlineMapEnableSpatialQuerying.two.json')
+    one: readFixtures('NeatlineMapSpatialQueryingEnabled.one.json'),
+    two: readFixtures('NeatlineMapSpatialQueryingEnabled.two.json')
   };
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapEnableSpatialQuerying.html');
+    NL.loadNeatline('NeatlineMapSpatialQueryingEnabled.html');
   });
 
 

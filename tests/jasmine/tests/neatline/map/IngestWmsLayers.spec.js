@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Manage WMS Layers', function() {
+describe('Map | Ingest WMS Layers', function() {
 
 
   var fixtures = {
-    _1234: read('NeatlineMapManageWmsLayers.1234.json'),
-    _3456: read('NeatlineMapManageWmsLayers.3456.json')
+    _1234: read('NeatlineMapIngestWmsLayers.1234.json'),
+    _3456: read('NeatlineMapIngestWmsLayers.3456.json')
   };
 
 

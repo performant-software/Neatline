@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Lazy Load Item', function() {
+describe('Record | Load Item', function() {
 
 
   var async = new AsyncSpec(this);

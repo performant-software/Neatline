@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapManageVectorLayers extends Neatline_Case_Fixture
+class FixturesTest_NeatlineMapIngestVectorLayers extends Neatline_Case_Fixture
 {
 
 
@@ -51,7 +51,7 @@ class FixturesTest_NeatlineMapManageVectorLayers extends Neatline_Case_Fixture
         ));
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapManageVectorLayers.1234.json'
+            'NeatlineMapIngestVectorLayers.1234.json'
         );
 
         // Match records 3-6, with 1-4 already loaded.
@@ -68,7 +68,7 @@ class FixturesTest_NeatlineMapManageVectorLayers extends Neatline_Case_Fixture
         ));
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapManageVectorLayers.3456.json'
+            'NeatlineMapIngestVectorLayers.3456.json'
         );
 
     }

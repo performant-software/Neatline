@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Typecast Numbers', function() {
+describe('Record | Schema', function() {
 
 
   beforeEach(function() {
