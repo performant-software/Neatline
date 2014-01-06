@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Records | Publications', function() {
+describe('Records | Publish Events', function() {
 
 
   var model, row, vent, fixtures = {

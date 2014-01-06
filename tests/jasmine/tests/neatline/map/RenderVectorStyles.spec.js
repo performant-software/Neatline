@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Vector Styles', function() {
+describe('Map | Render Vector Styles', function() {
 
 
   var layer1, layer2, fixtures = {

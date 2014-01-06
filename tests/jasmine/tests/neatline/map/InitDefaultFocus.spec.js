@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Default Focus', function() {
+describe('Map | Initialize Default Focus', function() {
 
 
   beforeEach(function() {
@@ -16,7 +16,7 @@ describe('Map | Default Focus', function() {
   });
 
 
-  it('should set exhibit default focus and zoom', function() {
+  it('should apply the exhibit default focus and zoom', function() {
 
     // ------------------------------------------------------------------------
     // When the exhibit starts, the viewport defined by the `map_focus` and

@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Preview Styles', function() {
+describe('Record | Sync Styles', function() {
 
 
   // --------------------------------------------------------------------------

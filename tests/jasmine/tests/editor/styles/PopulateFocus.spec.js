@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Styles | Set Focus', function() {
+describe('Styles | Populate Focus', function() {
 
 
   var elements, fixtures = {

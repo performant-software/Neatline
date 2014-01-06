@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Publications', function() {
+describe('Map | Publish `(un)highlight` and `(un)select`', function() {
 
 
   var layer, feature, vent, fixtures = {

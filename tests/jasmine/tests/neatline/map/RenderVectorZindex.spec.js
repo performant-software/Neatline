@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Vector Zindex', function() {
+describe('Map | Render Vector Zindex', function() {
 
 
   var fixtures = {

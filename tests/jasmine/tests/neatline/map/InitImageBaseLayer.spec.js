@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Image Base Layer', function() {
+describe('Map | Initialize Image Base Layer', function() {
 
 
   beforeEach(function() {

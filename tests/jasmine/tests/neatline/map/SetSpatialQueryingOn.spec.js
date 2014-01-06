@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Spatial Querying Enabled', function() {
+describe('Map | Set Spatial Querying On', function() {
 
 
   var fixtures = {

@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Spatial Querying Disabled', function() {
+describe('Map | Set Spatial Querying Off', function() {
 
 
   beforeEach(function() {

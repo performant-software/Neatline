@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Records | Templating', function() {
+describe('Records | Show Records', function() {
 
 
   var fixtures = {

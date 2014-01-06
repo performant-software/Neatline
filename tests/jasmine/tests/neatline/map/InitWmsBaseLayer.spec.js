@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | WMS Base Layer', function() {
+describe('Map | Initialize WMS Base Layer', function() {
 
 
   beforeEach(function() {

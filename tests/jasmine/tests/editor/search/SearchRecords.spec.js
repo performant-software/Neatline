@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Search | Query Execution', function() {
+describe('Search | Search Records', function() {
 
 
   var perPage, fixtures = {

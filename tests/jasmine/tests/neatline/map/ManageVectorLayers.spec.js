@@ -8,12 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | WMS Layer Management', function() {
+describe('Map | Render Vector Layers', function() {
 
 
   var fixtures = {
-    _1234: read('NeatlineMapWmsLayerManagement.1234.json'),
-    _3456: read('NeatlineMapWmsLayerManagement.3456.json')
+    _1234: read('NeatlineMapVectorLayerManagement.1234.json'),
+    _3456: read('NeatlineMapVectorLayerManagement.3456.json')
   };
 
 
@@ -25,7 +25,7 @@ describe('Map | WMS Layer Management', function() {
   it('should load layers when exhibit starts', function() {
 
     // ------------------------------------------------------------------------
-    // When the exhibit starts, the map should add WMS layers for records
+    // When the exhibit starts, the map should add vector layers for records
     // that arrive in the initial query.
     // ------------------------------------------------------------------------
 
@@ -39,12 +39,12 @@ describe('Map | WMS Layer Management', function() {
     var model5 = NL.v.map.records.findWhere({ title: 'title5' });
     var model6 = NL.v.map.records.findWhere({ title: 'title6' });
 
-    var layer1 = NL.getWmsLayer('title1');
-    var layer2 = NL.getWmsLayer('title2');
-    var layer3 = NL.getWmsLayer('title3');
-    var layer4 = NL.getWmsLayer('title4');
-    var layer5 = NL.getWmsLayer('title5');
-    var layer6 = NL.getWmsLayer('title6');
+    var layer1 = NL.getVectorLayer('title1');
+    var layer2 = NL.getVectorLayer('title2');
+    var layer3 = NL.getVectorLayer('title3');
+    var layer4 = NL.getVectorLayer('title4');
+    var layer5 = NL.getVectorLayer('title5');
+    var layer6 = NL.getVectorLayer('title6');
 
     // Should populate models.
     expect(model1).toBeDefined();
@@ -54,7 +54,7 @@ describe('Map | WMS Layer Management', function() {
     expect(model5).toBeUndefined();
     expect(model6).toBeUndefined();
 
-    // Should add layers.
+    // Should render layers.
     expect(layer1).toBeDefined();
     expect(layer2).toBeDefined();
     expect(layer3).toBeDefined();
@@ -62,15 +62,15 @@ describe('Map | WMS Layer Management', function() {
     expect(layer5).toBeUndefined();
     expect(layer6).toBeUndefined();
 
-    // Should render WMS services.
-    expect(layer1.url).toEqual('address1');
-    expect(layer1.params.LAYERS).toEqual('layers1');
-    expect(layer2.url).toEqual('address2');
-    expect(layer2.params.LAYERS).toEqual('layers2');
-    expect(layer3.url).toEqual('address3');
-    expect(layer3.params.LAYERS).toEqual('layers3');
-    expect(layer4.url).toEqual('address4');
-    expect(layer4.params.LAYERS).toEqual('layers4');
+    // Should render features.
+    expect(layer1.features[0].geometry.x).toEqual(0);
+    expect(layer1.features[0].geometry.y).toEqual(1);
+    expect(layer2.features[0].geometry.x).toEqual(0);
+    expect(layer2.features[0].geometry.y).toEqual(2);
+    expect(layer3.features[0].geometry.x).toEqual(0);
+    expect(layer3.features[0].geometry.y).toEqual(3);
+    expect(layer4.features[0].geometry.x).toEqual(0);
+    expect(layer4.features[0].geometry.y).toEqual(4);
 
     NL.assertVectorLayerCount(4);
 
@@ -101,12 +101,12 @@ describe('Map | WMS Layer Management', function() {
     var model5 = NL.v.map.records.findWhere({ title: 'title5' });
     var model6 = NL.v.map.records.findWhere({ title: 'title6' });
 
-    var layer1 = NL.getWmsLayer('title1');
-    var layer2 = NL.getWmsLayer('title2');
-    var layer3 = NL.getWmsLayer('title3');
-    var layer4 = NL.getWmsLayer('title4');
-    var layer5 = NL.getWmsLayer('title5');
-    var layer6 = NL.getWmsLayer('title6');
+    var layer1 = NL.getVectorLayer('title1');
+    var layer2 = NL.getVectorLayer('title2');
+    var layer3 = NL.getVectorLayer('title3');
+    var layer4 = NL.getVectorLayer('title4');
+    var layer5 = NL.getVectorLayer('title5');
+    var layer6 = NL.getVectorLayer('title6');
 
     // Should update models.
     expect(model1).toBeUndefined(); // Record 1 removed.
@@ -116,7 +116,7 @@ describe('Map | WMS Layer Management', function() {
     expect(model5).toBeDefined();   // Record 5 added.
     expect(model6).toBeDefined();   // Reocrd 6 added.
 
-    // Should add/remove layers.
+    // Should render layers.
     expect(layer1).toBeUndefined(); // Layer 1 removed.
     expect(layer2).toBeUndefined(); // Layer 2 removed.
     expect(layer3).toBeDefined();   // Layer 3 unchanged.
@@ -124,15 +124,15 @@ describe('Map | WMS Layer Management', function() {
     expect(layer5).toBeDefined();   // Layer 5 added.
     expect(layer6).toBeDefined();   // Layer 6 added.
 
-    // Should render WMS services.
-    expect(layer3.url).toEqual('address3');
-    expect(layer3.params.LAYERS).toEqual('layers3');
-    expect(layer4.url).toEqual('address4');
-    expect(layer4.params.LAYERS).toEqual('layers4');
-    expect(layer5.url).toEqual('address5');
-    expect(layer5.params.LAYERS).toEqual('layers5');
-    expect(layer6.url).toEqual('address6');
-    expect(layer6.params.LAYERS).toEqual('layers6');
+    // Should render features.
+    expect(layer3.features[0].geometry.x).toEqual(0);
+    expect(layer3.features[0].geometry.y).toEqual(3);
+    expect(layer4.features[0].geometry.x).toEqual(0);
+    expect(layer4.features[0].geometry.y).toEqual(4);
+    expect(layer5.features[0].geometry.x).toEqual(0);
+    expect(layer5.features[0].geometry.y).toEqual(5);
+    expect(layer6.features[0].geometry.x).toEqual(0);
+    expect(layer6.features[0].geometry.y).toEqual(6);
 
     NL.assertVectorLayerCount(4);
 
@@ -170,6 +170,30 @@ describe('Map | WMS Layer Management', function() {
     expect(layer2_1.id).toEqual(layer2_2.id);
     expect(layer3_1.id).toEqual(layer3_2.id);
     expect(layer4_1.id).toEqual(layer4_2.id);
+
+  });
+
+
+  it('should not garbage collect frozen layers', function() {
+
+    // ------------------------------------------------------------------------
+    // When the map is refreshed, vector layers associated with records that
+    // are not present in the new collection should _not_ be garbage collected
+    // if the `neatline.frozen` property is true.
+    // ------------------------------------------------------------------------
+
+    // Load records 1-4.
+    NL.refreshMap(fixtures._1234);
+
+    // Freeze record 1.
+    NL.getVectorLayer('title1').neatline.frozen = true;
+
+    // Load records 3-6.
+    NL.refreshMap(fixtures._3456);
+
+    // Should not remove frozen record 1.
+    expect(NL.getVectorLayer('title1')).toBeDefined();
+    NL.assertVectorLayerCount(5);
 
   });
 
