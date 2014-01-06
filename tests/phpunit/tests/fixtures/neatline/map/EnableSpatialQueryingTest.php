@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class FixturesTest_NeatlineMapSpatialQueryingEnabled
+class FixturesTest_NeatlineMapEnableSpatialQuerying
     extends Neatline_Case_Fixture
 {
 
@@ -26,7 +26,7 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
         $exhibit->save();
 
         $this->_writeExhibitMarkupFixture($exhibit,
-            'NeatlineMapSpatialQueryingEnabled.html'
+            'NeatlineMapEnableSpatialQuerying.html'
         );
 
     }
@@ -45,13 +45,13 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
         $record2->save();
  
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapSpatialQueryingEnabled.two.json'
+            'NeatlineMapEnableSpatialQuerying.two.json'
         );
 
         $record2->delete();
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapSpatialQueryingEnabled.one.json'
+            'NeatlineMapEnableSpatialQuerying.one.json'
         );
 
     }

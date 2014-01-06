@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Set Spatial Querying Off', function() {
+describe('Map | Disable Spatial Querying', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline('NeatlineMapSpatialQueryingDisabled.html');
+    NL.loadNeatline('NeatlineMapDisableSpatialQuerying.html');
   });
 
 
