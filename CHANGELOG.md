@@ -20,6 +20,10 @@
 
   - Fixes fullscreen, white "flashes" that occasionally occurred in the editor when using Chrome on Macbook Pros with retina displays, which were caused by a bug in Chrome related to CSS transitions on scrollable, fixed-position divs.
 
+#### User-Interface Changes
+
+  - Touches up the UI and styling in the editor interface - changes the body font, adds in fieldset legends in the "Map" and "Text" tabs, increases the height of the "Coverage" textarea, adds darkened background color to focused text inputs.
+
 #### Bug Fixes
 
   - Fixes a bug that caused the Omeka item search feature in the record form to display the the title of an item's parent _collection_, not the item itself, when the item belonged to a collection.
