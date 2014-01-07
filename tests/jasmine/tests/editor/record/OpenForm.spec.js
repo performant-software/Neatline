@@ -133,7 +133,6 @@ describe('Record | Open Form', function() {
     expect(inputs.slug).                toHaveValue('slug');
     expect(inputs.titleInput).          toHaveValue('title');
     expect(inputs.body).                toHaveValue('body');
-    expect(inputs.itemId).              toHaveValue('1');
     expect(inputs.coverage).            toHaveValue('POINT(1 2)');
     expect(inputs.tags).                toHaveValue('tags');
     expect(inputs.widgets.val()).       toEqual(['Widget1','Widget3']);

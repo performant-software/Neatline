@@ -14,13 +14,6 @@
 <legend>Text Description</legend>
 
 <?php echo common('neatline/input', array(
-    'name'  => 'item-id',
-    'label' => 'Omeka ID',
-    'bind'  => 'record:item_id',
-    'placeholder' => 'Search Omeka Items'
-)); ?>
-
-<?php echo common('neatline/input', array(
     'name'  => 'slug',
     'label' => 'Slug',
     'bind'  => 'record:slug'

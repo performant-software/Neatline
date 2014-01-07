@@ -17,78 +17,9 @@ Neatline.module('Editor.Record.Text', { startWithParent: false,
 
     events: {
 
-      // Build the item search when tab is shown.
-      'shown.bs.tab a[data-slug="text"]': 'activate',
-
       // Show CKEditors on "Edit HTML" click.
       'click a[data-textarea]': 'onEditHtmlClick'
 
-    },
-
-    ui: {
-      item: 'input[name="item-id"]'
-    },
-
-
-    /**
-     * Construct the item search box.
-     */
-    activate: function() {
-
-      // AUTOCOMPLETE
-      this.__ui.item.autocomplete({
-        source: _.bind(this.onSearch, this),
-        select: _.bind(this.onSelect, this)
-      });
-
-    },
-
-
-    /**
-     * Query for items.
-     *
-     * @param {Object} req: The search request, with `term` key.
-     * @param {Function} res: Callback that takes autocomplete options.
-     */
-    onSearch: function(req, res) {
-
-      // Request items.
-      $.get(Neatline.g.neatline.item_search_api, {
-        output: 'omeka-xml', search: req.term
-      }, function(xml) {
-
-        var items = [];
-
-        // Walk each item in the result set.
-        $(xml).find('item').each(function(i, item) {
-
-          // Query for the title.
-          var title = $(item).find(
-            'item > elementSetContainer element[elementId="50"] text'
-          ).first().text();
-
-          // Query for the item id.
-          var itemId = $(item).attr('itemId');
-
-          // Add the list item.
-          items.push({ label: title, value: itemId });
-
-        });
-
-        res(items);
-
-      });
-    },
-
-
-    /**
-     * Bind an item autocomplete selection.
-     *
-     * @param {Object} event: The select event.
-     * @param {Object} ui: The option.
-     */
-    onSelect: function(event, ui) {
-      this.__ui.item.val(ui.item.value).change();
     },
 
 
