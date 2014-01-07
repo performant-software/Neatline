@@ -44,6 +44,9 @@ Using **[Inkscape][inkscape]**:
 
 Once the SVG document is saved off, we can import it into Neatline:
 
+  
+![Screenshot of Draw SVG Tool](http://neatline.org/wp-content/uploads/2014/01/importingsvggeometrytool.png)
+
   1. Find the `.svg` file that was created in the previous step. Open it with a plain text editor or a code editor by right clicking on the file and choosing a program from the list of options in "Open With." It doesn't matter what you use - as long as you can get at the raw SVG output.
 
   2. You should see a soup of dense XML markup with lots of numbers. Copy the content of the entire document to the clipboard.
@@ -59,6 +62,8 @@ Once the SVG document is saved off, we can import it into Neatline:
   7. Now, you can drag the SVG document onto the map in the same way that you would drag out a regular polygon shape. Move the cursor to the location on the map where you want the _bottom left corner_ of the illustration to be location, click down, and move the cursor in any direction. The illustration will scale and rotate according to the position of the mouse.
 
   7. When the illustration is positioned correctly, release the mouse button to lock the geometry into place.
+
+![Screenshot of Draw SVG Tool Code Example](http://neatline.org/wp-content/uploads/2014/01/importingsvg-codeexample.png)
 
   **Tip**: It's easy to make mistakes when doing this, and it often takes a couple tries to get things right. If you mess up, it's easiest just to totally wipe out the previous attempt by clicking the "Clear all Geometry" button at the bottom of the form.
 
