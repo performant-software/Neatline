@@ -85,7 +85,7 @@ describe('Styles | Save Styles', function() {
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.exhibit.save.success
+      Neatline.g.neatline.strings.exhibit.save.success
     );
 
   });
@@ -107,7 +107,7 @@ describe('Styles | Save Styles', function() {
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.exhibit.save.error
+      Neatline.g.neatline.strings.exhibit.save.error
     );
 
   });

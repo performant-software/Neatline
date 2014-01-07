@@ -26,10 +26,12 @@ function nl_globals($exhibit)
 
         // EXHIBIT
         // --------------------------------------------------------------------
+
         'exhibit'           => $exhibit->toArray(),
 
         // API ENDPOINTS
         // --------------------------------------------------------------------
+
         'record_api'        => public_url('neatline/records'),
         'exhibit_api'       => public_url('neatline/exhibits/'.$exhibit->id),
         'item_search_api'   => public_url('items/browse'),
@@ -37,13 +39,61 @@ function nl_globals($exhibit)
 
         // CONSTANTS
         // --------------------------------------------------------------------
+
         'per_page'          => (int) get_plugin_ini('Neatline', 'per_page'),
         'styles'            => $styles->toArray(),
 
         // LAYERS
         // --------------------------------------------------------------------
-        'spatial_layers'    => nl_getLayersForExhibit($exhibit)
 
+        'spatial_layers'    => nl_getLayersForExhibit($exhibit),
+
+        // STRINGS
+        // --------------------------------------------------------------------
+
+        'strings' => array(
+
+            'record' => array(
+                'save' => array(
+                    'success' => __('The record was saved successfully!'),
+                    'error' => __('ERROR: The record was not saved.'),
+                ),
+                'remove' => array(
+                    'success' => __('The record was deleted successfully!'),
+                    'error' => __('ERROR:Tthe record was not deleted.'),
+                ),
+                'add' => array(
+                    'success' => __('The record was created successfully!'),
+                    'error' => __('ERROR: The record was not saved.'),
+                ),
+                'placeholders' => array(
+                    'title' => __('[Untitled]'),
+                )
+            ),
+
+            'exhibit' => array(
+                'save' => array(
+                    'success' => __('The exhibit was saved successfully!'),
+                    'error' => __('ERROR: The exhibit was not saved.'),
+                )
+            ),
+
+            'styles' => array(
+                'save' => array(
+                    'success' => __('The styles were saved successfully!'),
+                    'error' => __('ERROR: The styles were not saved.'),
+                )
+            ),
+
+            'svg' => array(
+                'parse' => array(
+                    'success' => __('SVG parsed successfully!'),
+                    'error' => __('ERROR: SVG could not be parsed.'),
+                )
+            )
+
+        )
+    
     ));
 
 }

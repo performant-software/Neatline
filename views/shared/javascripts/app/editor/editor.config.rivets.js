@@ -21,15 +21,25 @@ rivets.formatters.recordLink = function(id) {
 
 
 /**
- * If a record/tag title is null, inject a placeholder string.
+ * If a record title is null, inject a placeholder string.
  *
  * @param {String|null} title: The title.
  * @return {String}: If the title is null, return the placeholder.
  */
 rivets.formatters.recordTitle = function(title) {
-  title = _.string.truncate(title, 100);
-  return title ? _.string.stripTags(title) :
-    STRINGS.record.placeholders.title;
+
+  if (title) {
+
+    // Strip tags, limit length.
+    title = _.string.truncate(title, 100);
+    title = _.string.stripTags(title);
+    return title;
+
+  }
+
+  // If no title, show a placeholder.
+  else return Neatline.g.neatline.strings.record.placeholders.title;
+
 };
 
 

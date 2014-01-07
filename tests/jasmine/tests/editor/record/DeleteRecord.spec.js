@@ -126,7 +126,7 @@ describe('Record | Delete Record', function() {
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.remove.success
+      Neatline.g.neatline.strings.record.remove.success
     );
 
   });
@@ -148,7 +148,7 @@ describe('Record | Delete Record', function() {
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.remove.error
+      Neatline.g.neatline.strings.record.remove.error
     );
 
   });

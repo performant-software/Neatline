@@ -34,10 +34,10 @@
 
         <!-- Title. -->
         <span class="title">
-          <% if (!_.isEmpty(r.get('title'))) { %>
+          <% if (r.has('title')) { %>
             <%= _.string.stripTags(r.get('title')) %>
           <% } else { %>
-            <%= STRINGS.record.placeholders.title %>
+            <%= Neatline.g.neatline.strings.record.placeholders.title %>
           <% } %>
         </span>
 

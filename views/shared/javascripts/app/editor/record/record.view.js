@@ -184,7 +184,7 @@ Neatline.module('Editor.Record', function(Record) {
 
       // Flash success.
       Neatline.execute('EDITOR:notifySuccess',
-        STRINGS.record.save.success
+        Neatline.g.neatline.strings.record.save.success
       );
 
     },
@@ -195,7 +195,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onSaveError: function() {
       Neatline.execute('EDITOR:notifyError',
-        STRINGS.record.save.error
+        Neatline.g.neatline.strings.record.save.error
       );
     },
 
@@ -214,7 +214,7 @@ Neatline.module('Editor.Record', function(Record) {
 
       // FLash success.
       Neatline.execute('EDITOR:notifySuccess',
-        STRINGS.record.remove.success
+        Neatline.g.neatline.strings.record.remove.success
       );
 
     },
@@ -225,7 +225,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onDeleteError: function() {
       Neatline.execute('EDITOR:notifyError',
-        STRINGS.record.remove.error
+        Neatline.g.neatline.strings.record.remove.error
       );
     }
 

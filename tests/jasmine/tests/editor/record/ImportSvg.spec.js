@@ -132,7 +132,7 @@ describe('Record | Import SVG', function() {
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.svg.parse.success
+      Neatline.g.neatline.strings.svg.parse.success
     );
 
   });
@@ -169,7 +169,7 @@ describe('Record | Import SVG', function() {
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.svg.parse.error
+      Neatline.g.neatline.strings.svg.parse.error
     );
 
   });

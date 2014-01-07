@@ -19,7 +19,6 @@
 
 <!-- Exhibit. -->
 <?php echo $this->partial('exhibits/partials/exhibit.php'); ?>
-<?php echo $this->partial('exhibits/partials/strings.php'); ?>
 <?php echo $this->partial('exhibits/partials/loader.php'); ?>
 <?php echo $this->partial('exhibits/partials/modals.php'); ?>
 

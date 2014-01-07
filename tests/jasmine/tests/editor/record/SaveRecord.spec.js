@@ -134,7 +134,7 @@ describe('Record | Save Record', function() {
 
     // Should flash success.
     expect(toastr.info).toHaveBeenCalledWith(
-      STRINGS.record.save.success
+      Neatline.g.neatline.strings.record.save.success
     );
 
   });
@@ -156,7 +156,7 @@ describe('Record | Save Record', function() {
 
     // Should flash error.
     expect(toastr.error).toHaveBeenCalledWith(
-      STRINGS.record.save.error
+      Neatline.g.neatline.strings.record.save.error
     );
 
   });

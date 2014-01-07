@@ -118,12 +118,12 @@ Neatline.module('Editor.Record.Map', { startWithParent: false,
 
         // Flash success.
         Neatline.execute('EDITOR:notifySuccess',
-          STRINGS.svg.parse.success
+          Neatline.g.neatline.strings.svg.parse.success
         );
 
       } catch (e) {
         Neatline.execute('EDITOR:notifyError',
-          STRINGS.svg.parse.error
+          Neatline.g.neatline.strings.svg.parse.error
         );
       }
 

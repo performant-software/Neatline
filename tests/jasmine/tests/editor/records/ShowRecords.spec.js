@@ -79,7 +79,7 @@ describe('Records | Show Records', function() {
 
     // Should strip out HTML tags.
     expect($(rows[0]).find('.title')).toHaveText(
-      STRINGS.record.placeholders.title
+      Neatline.g.neatline.strings.record.placeholders.title
     );
 
   });

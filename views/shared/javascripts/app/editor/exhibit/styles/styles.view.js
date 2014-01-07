@@ -119,7 +119,7 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 
       // Flash success message.
       Neatline.execute('EDITOR:notifySuccess',
-        STRINGS.exhibit.save.success
+        Neatline.g.neatline.strings.exhibit.save.success
       );
 
     },
@@ -132,7 +132,7 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 
       // Flash error message.
       Neatline.execute('EDITOR:notifyError',
-        STRINGS.exhibit.save.error
+        Neatline.g.neatline.strings.exhibit.save.error
       );
 
     }

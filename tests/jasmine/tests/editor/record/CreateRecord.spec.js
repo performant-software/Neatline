@@ -47,11 +47,13 @@ describe('Record | Create Record', function() {
     // Record form should be visible.
     expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
 
-    // Form id should be empty.
+    // Record ID should be empty.
     expect(elements.leadId).toBeEmpty();
 
-    // Form title should display placeholder.
-    expect(elements.leadTitle).toHaveText(STRINGS.record.placeholders.title);
+    // Title should display placeholder.
+    expect(elements.leadTitle).toHaveText(
+      Neatline.g.neatline.strings.record.placeholders.title
+    );
 
     // Get the form model.
     var record = NL.v.record.model;
