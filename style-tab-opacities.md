@@ -20,14 +20,22 @@ layout: default
 
 The opacity of the "body" or "area" of points and polygons on the map (the area inside the lines, not including the lines themselves).
 
+![Screenshot of Fill Opacity Value](http://neatline.org/wp-content/uploads/2014/01/styleopacities-fill.png)
+
 ## Fill Opacity (Selected)
 
 The opacity of the "body" or "area" of points and polygons on the map _when the record is highlighted or selected_ (eg, when the cursor hovers or clicks on the shape).
+
+![Screenshot of Fill Opacity Value (Selected)](http://neatline.org/wp-content/uploads/2014/01/styleopacities-fillselected.png)
 
 ## Stroke Opacity
 
 The opacity of the lines that run around the edges of a shape on the map.
 
+![Screenshot of Stroke Opacity Value](http://neatline.org/wp-content/uploads/2014/01/styleopacities-stroke.png)
+
 ## Stroke Opacity (Selected)
 
 The opacity of the lines that run around the edges of a shape on the map _when the record is highlighted or selected_ (eg, when the cursor hovers or clicks on the shape).
+
+![Screenshot of Stroke Opacity Value (Selected)](http://neatline.org/wp-content/uploads/2014/01/styleopacities-strokeselected.png)
