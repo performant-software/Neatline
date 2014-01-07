@@ -18,11 +18,16 @@ The width, in pixels, of the lines that run around the edges of a shape on the m
 
 In some cases, it can be aesthetically pleasing to completely hide the lines, and just display the "area" of points and polygons on the map. To do this, just set the stroke width to 0.
 
+![Screenshot of Stroke Width Value](http://neatline.org/wp-content/uploads/2014/01/style-strokewidth.png)
+
 ## Point Radius
 
 The radius of individual points on the map. You'll almost always want this value to be greater than 0 - otherwise, points will be invisible, in which case they should probably just be deleted. If you're making use of the "Point Image" field to change the visual representation of points (see the "Editing Record Imagery" guide), this field will also determine the size of the image graphics overlayed on the map.
 
 **Important**: The point radius is a static value, meaning that the size of the points on the map _won't change with the zoom level of the map_, as a polygon or line would. This is because points are actually just dimensionless pairs of lat/lon coordinates. Since they're infinitely small and have no measurable "size" that can be correlated to the scale of the map, the points will always stay the same size, regardless of the zoom level of the map
+
+![Screenshot of Point Radius Value](http://neatline.org/wp-content/uploads/2014/01/style-pointradius.png)
+
 
 ## Z-Index
 
@@ -30,8 +35,12 @@ The "stacking" order of vector annotations and WMS layers on the map. For exampl
 
 Z-indexes are just relative numbers that control the display order, with higher numbers stacking above lower numbers. So, in this case, you could set the Z-Index on Manhattan to `1`, and the Z-Index on Central Park to `2`, and Central Park would always be displayed on top of Manhattan.
 
+![Screenshot of Z-Index Value](http://neatline.org/wp-content/uploads/2014/01/style-zindex.png)
+
 ## Order / Weight (Experimental, subject to change)
 
 The display order of a record relative to other records. This is similar to the "Z-Index," but designed to be used in situations where records need to be put into a specific, unambiguous sequence (ie, where no two records can be in the same position in the sequence, as opposed to stacking order, in which multiple records can exist on the same "layer" or "level"). For example, this field is automatically populated by the Neatline Waypoints plugin to store the display order of records in the waypoints panel, a list of clickable record titles displayed on the map.
 
 **Important**: For now, this is an abstract field that has no direct effect on out-of-the-box Neatline exhibits. It's included in the current version to make it possible for sub-plugins to store ordering information about records. Unless you're using a sub-plugin that makes use of the field, it usually makes sense just to leave it blank.
+
+![Screenshot of Order/Weight Value](http://neatline.org/wp-content/uploads/2014/01/style-orderweight.png)
