@@ -457,6 +457,10 @@ SQL
         fwrite($fixture, $body);
         fclose($fixture);
 
+        // Reset state.
+        $this->resetRequest();
+        $this->resetResponse();
+
     }
 
 
@@ -468,8 +472,6 @@ SQL
      */
     protected function _writeFixtureFromRoute($route, $file)
     {
-
-        $this->resetResponse();
 
         // Request the route.
         $this->dispatch($route);
@@ -491,8 +493,6 @@ SQL
     public function _writeRecordApiFixture($record, $file, $method='GET')
     {
 
-        $this->resetRequest();
-
         // Apply the HTTP method.
         $this->request->setmethod($method);
 
@@ -513,7 +513,7 @@ SQL
     public function _writeRecordsApiFixture($exhibit, $file)
     {
 
-        // Thread in the `exhibit_id` GET parameter.
+        // Add the `exhibit_id` GET parameter.
         $this->request->setQuery('exhibit_id', $exhibit->id);
 
         // Write the fixture.
