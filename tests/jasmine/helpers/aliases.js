@@ -36,8 +36,9 @@ var NL = (function(NL) {
       records:  Neatline.Editor.Exhibit.Records.__controller.view,
       styles:   Neatline.Editor.Exhibit.Styles.__controller.view,
       record:   Neatline.Editor.Record.__controller.view,
-      mapTab:   Neatline.Editor.Record.Map.__controller.view,
-      textTab:  Neatline.Editor.Record.Text.__controller.view
+      textTab:  Neatline.Editor.Record.Text.__controller.view,
+      itemTab:  Neatline.Editor.Record.Item.__controller.view,
+      mapTab:   Neatline.Editor.Record.Map.__controller.view
     };
   };
 
