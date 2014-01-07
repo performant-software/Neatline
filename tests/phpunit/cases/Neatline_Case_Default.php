@@ -469,8 +469,9 @@ SQL
     protected function _writeFixtureFromRoute($route, $file)
     {
 
-        // Request the route.
         $this->resetResponse();
+
+        // Request the route.
         $this->dispatch($route);
 
         // Write the fixture.
@@ -490,8 +491,9 @@ SQL
     public function _writeRecordApiFixture($record, $file, $method='GET')
     {
 
-        // Apply the HTTP method.
         $this->resetRequest();
+
+        // Apply the HTTP method.
         $this->request->setmethod($method);
 
         // Write the fixture.
