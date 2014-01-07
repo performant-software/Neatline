@@ -17,6 +17,8 @@ Select the "Navigate" radio button to enable the default panning interaction wit
 
 **Tip**: Think of Navigate as your "home base" - after sketching in new geometry with one of the drawing tools, it's usually easiest to reactivate "Navigate" mode, which has the effect of turning off any of the drawing or modification tools. This means that you don't accidentally add unwanted geometry the next time you click on the map.
 
+![Screenshot of Navigate Tool](http://neatline.org/wp-content/uploads/2014/01/newitem-drawregpolygon.png)
+
 ## Draw Point
 
 Use this control to lay down individual points on the map.
@@ -79,3 +81,5 @@ There are a couple of configuration options for the regular polygon tool:
   - **Irregular**: By default, all of the sides of the polygon are equal in length (eg, a 3-sided shape is always an equilateral triangle, a 4-sided shape is always a square, etc). Check this box to make it possible to create "skewed" shapes with sides of different lengths - rectangles instead of squares, ellipses instead of circles.
 
   **Tip**: This setting can have strange interactions with certain "Snap Angle" values - if you need to create an irregular shape, it's generally easiest to set the snap angle to 0, drag out the shape, and then rotate it as needed with the "Rotate Shape" tool.
+
+![Screenshot of Draw Regular Polygon Tool](http://neatline.org/wp-content/uploads/2014/01/newitem-drawregpolygon.png)
