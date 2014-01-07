@@ -98,6 +98,15 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * Clear out the cached item body and trigger change on the `item` key.
+     */
+    resetItem: function() {
+      this.attributes.item = undefined;
+      this.trigger('change:item');
+    },
+
+
+    /**
      * Construct an OpenLayers style map object.
      *
      * @return {OpenLayers.StyleMap}: The style map.

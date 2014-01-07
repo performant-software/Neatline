@@ -90,15 +90,23 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
 
       });
 
+      // Set current item selection.
+      if (this.model.get('item_id')) {
+        this.__ui.search.select2('data', {
+          id: this.model.get('item_id'),text: this.model.get('item_title')
+        });
+      }
+
       // Update item id/title on select.
       this.__ui.search.on('select2-selecting', _.bind(function(e) {
         this.model.set({ item_id: e.object.id, item_title: e.object.text })
-        // TODO: Trigger item reload.
+        this.model.resetItem();
       }, this));
 
       // Unset item on clear.
       this.__ui.search.on('select2-removed', _.bind(function(e) {
-        // TODO: Clear the item id/body.
+        this.model.set({ item_id: null, item_title: null })
+        this.model.resetItem();
       }, this));
 
     }
