@@ -53,7 +53,7 @@ Change the location of an existing point, line, or polygon.
 
   2. Click and drag on the control point to change the center position of the shape.
 
-![Screenshot of Drag Shape Tool](http://neatline.org/wp-content/uploads/2014/01/editinggeometry-rotateshape.png)
+![Screenshot of Drag Shape Tool](http://neatline.org/wp-content/uploads/2014/01/editinggeometry-dragtool.png)
 
 ## Delete Shape
 
