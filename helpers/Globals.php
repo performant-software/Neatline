@@ -93,7 +93,7 @@ function nl_globals($exhibit)
             )
 
         )
-    
+
     ));
 
 }

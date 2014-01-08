@@ -1,0 +1,53 @@
+{
+
+  "record": {
+
+    "save": {
+      "success": "The record was saved successfully!",
+      "error": "There was an error - the record was not saved."
+    },
+
+    "remove": {
+      "success": "The record was deleted successfully!",
+      "error": "There was an error - the record was not deleted."
+    },
+
+    "add": {
+      "success": "The record was created successfully!",
+      "error": "There was an error - the record was not saved."
+    },
+
+    "placeholders": {
+      "title": "[Untitled]"
+    }
+
+  },
+
+  "exhibit": {
+
+    "save": {
+      "success": "The exhibit was saved successfully!",
+      "error": "There was an error - exhibit was not saved."
+    }
+
+  },
+
+  "styles" : {
+
+    "save" : {
+      "success": "The styles were saved successfully!",
+      "error": "There was an error - the styles were not saved."
+    }
+
+  },
+
+  "svg" : {
+
+    "parse" : {
+      "success": "SVG parsed successfully!",
+      "error": "There was an error - SVG could not be parsed."
+    }
+
+  }
+
+}
