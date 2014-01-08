@@ -51,7 +51,7 @@ function nl_globals($exhibit)
         // STRINGS
         // --------------------------------------------------------------------
 
-        'strings'           => nl_getStrings()
+        'strings'           => nl_getStrings(NL_DIR.'/strings.json')
 
     ));
 
@@ -61,13 +61,14 @@ function nl_globals($exhibit)
 /**
  * Load and translate strings from `strings.json`.
  *
+ * @param string $file The location of the `strings.json` file.
  * @return array An array of strings for the front-end application.
  */
-function nl_getStrings()
+function nl_getStrings($file)
 {
 
     // Load the `strings.json` file.
-    $strings = Zend_Json::decode(file_get_contents(NL_DIR.'/strings.json'));
+    $strings = Zend_Json::decode(file_get_contents($file));
 
     // XXX: PHP 5.3+. Is that OK?
     // Translate the string values.
