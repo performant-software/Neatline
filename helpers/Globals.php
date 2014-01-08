@@ -51,49 +51,30 @@ function nl_globals($exhibit)
         // STRINGS
         // --------------------------------------------------------------------
 
-        'strings' => array(
-
-            'record' => array(
-                'save' => array(
-                    'success' => __('The record was saved successfully!'),
-                    'error' => __('ERROR: The record was not saved.'),
-                ),
-                'remove' => array(
-                    'success' => __('The record was deleted successfully!'),
-                    'error' => __('ERROR:Tthe record was not deleted.'),
-                ),
-                'add' => array(
-                    'success' => __('The record was created successfully!'),
-                    'error' => __('ERROR: The record was not saved.'),
-                ),
-                'placeholders' => array(
-                    'title' => __('[Untitled]'),
-                )
-            ),
-
-            'exhibit' => array(
-                'save' => array(
-                    'success' => __('The exhibit was saved successfully!'),
-                    'error' => __('ERROR: The exhibit was not saved.'),
-                )
-            ),
-
-            'styles' => array(
-                'save' => array(
-                    'success' => __('The styles were saved successfully!'),
-                    'error' => __('ERROR: The styles were not saved.'),
-                )
-            ),
-
-            'svg' => array(
-                'parse' => array(
-                    'success' => __('SVG parsed successfully!'),
-                    'error' => __('ERROR: SVG could not be parsed.'),
-                )
-            )
-
-        )
+        'strings'           => nl_getStrings()
 
     ));
+
+}
+
+
+/**
+ * Load and translate strings from `strings.json`.
+ *
+ * @return array An array of strings for the front-end application.
+ */
+function nl_getStrings()
+{
+
+    // Load the `strings.json` file.
+    $strings = Zend_Json::decode(file_get_contents(NL_DIR.'/strings.json'));
+
+    // XXX: PHP 5.3+. Is that OK?
+    // Translate the string values.
+    array_walk_recursive($strings, function(&$value) {
+        $value = __($value);
+    });
+
+    return $strings;
 
 }
