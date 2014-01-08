@@ -436,7 +436,6 @@ module.exports = function(grunt) {
           // RUBY
           '!Gemfile',
           '!Gemfile.lock',
-          '!Rakefile',
 
           // GRUNT
           '!.grunt/**',
