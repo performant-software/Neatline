@@ -12,11 +12,26 @@ layout: default
 
 ### Examples:
 
+**CE Dates**
+
   - `1564` - The year 1564.
   - `1564-04` - April, 1564.
   - `1564-04-23` - April 23, 1564.
   - `1564-04-23T08:30` - 8:30 AM on April 23, 1564.
   - `1564-04-23T08:30:15` - 15 seconds after 8:30 AM on April 23, 1564.
+  
+**BCE Dates**
+
+  - `-001563` - The year 1564 BCE.
+  - `-000563` - The year 564 BCE.
+  - `-000063` - The year 64 BCE.
+  - `-000003` - The year 4 BCE.	
+  - `-001563-04` - April, 1564 BCE.
+  - `-001563-04-23` - April 23, 1564 BCE.
+  
+  
+![Screenshot of Date Fields](http://neatline.org/wp-content/uploads/2014/01/style-dates.png)
+
 
 ## Start Date
 
@@ -28,7 +43,9 @@ The "first" or "beginning" date for an event. If the event is an instant (it hap
 
 The "last" or "finishing" date for an event.
 
-**If you're working with NeatlineSimile**: If you just enter a "Start Date" _and_ an "End Date" date, the record will be displayed as span (line) on the timeline.
+**If you're working with NeatlineSimile**: If you enter a "Start Date" _and_ an "End Date" date, the record will be displayed as a span (line) on the timeline.
+
+If you enter the same date for the "Start Date" and "End Date," the span will have width = 0 and will, therefore, be invisible on the timeline.
 
 ## After Date
 
