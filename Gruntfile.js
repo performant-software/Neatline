@@ -246,6 +246,17 @@ module.exports = function(grunt) {
         dest: paths.payloads.shared.js+'/neatline-editor.js'
       },
 
+      jasmine_helpers: {
+        src: [
+          paths.vendor.js.jasmine_async,
+          paths.vendor.js.jasmine_jquery,
+          paths.vendor.js.sinon,
+          paths.jasmine+'/assertions/*.js',
+          paths.jasmine+'/helpers/*.js'
+        ],
+        dest: paths.jasmine+'/payloads/vendor.js'
+      },
+
       exhibit_form_css: {
         src: [
           paths.vendor.css.chosen,
@@ -370,13 +381,7 @@ module.exports = function(grunt) {
 
       options: {
         template: paths.jasmine+'/runner.tmpl',
-        helpers: [
-          paths.vendor.js.jasmine_async,
-          paths.vendor.js.jasmine_jquery,
-          paths.vendor.js.sinon,
-          paths.jasmine+'/assertions/*.js',
-          paths.jasmine+'/helpers/*.js'
-        ]
+        helpers: paths.jasmine+'/payloads/vendor.js'
       },
 
       neatline: {

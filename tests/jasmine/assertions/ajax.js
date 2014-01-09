@@ -30,7 +30,7 @@ var NL = (function(NL) {
    */
   NL.assertLastRequestRoute = function(route) {
     var request = this.getLastRequest();
-    expect(_.string.startsWith(request.url, route)).toBeTruthy();
+    expect(request.url).toMatch('^'+route+'($|\\?.*)');
   };
 
 

@@ -90,15 +90,15 @@ Neatline.module('Shared.Record', function(Record) {
      */
     fetchItem: function() {
 
-      // Break if unsaved or item-less.
-      if (this.isNew() || !this.has('item_id')) return;
+      // Break if no parent item.
+      if (!this.has('item_id')) return;
 
-      // Query `/items/<item_id>/r/<record_id>`.
-      var itemUrl = Neatline.g.neatline.item_body_api+'/'+
-        this.get('item_id')+'/record/'+this.id;
+      // Query `/items/<item_id>`.
+      var url = Neatline.g.neatline.item_body_api+'/'+this.get('item_id');
+      var params = { record: this.id };
 
       // Load the item body.
-      $.get(itemUrl, _.bind(function(response) {
+      $.get(url, params, _.bind(function(response) {
         this.set('item', response);
       }, this));
 

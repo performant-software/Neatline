@@ -36,31 +36,15 @@ describe('Record | Get Item', function() {
 
     record.get('item');
 
-    // Should spawn GET request to items body API.
-    var route = Neatline.g.neatline.item_body_api+'/1/record/1';
-    NL.assertLastRequestRoute(route);
+    // Should generate GET request to the item body API.
+    NL.assertLastRequestRoute(Neatline.g.neatline.item_body_api+'/1');
     NL.assertLastRequestMethod('GET');
+
+    // Should request record-inflected body.
+    NL.assertLastRequestHasGetParameter('record', 1);
 
     // Respond with item.
     NL.respondLast200('item', 'text/html');
-
-  });
-
-
-  it('should not load the item when record is unsaved', function() {
-
-    // ------------------------------------------------------------------------
-    // If the record is unsaved, the item body should not be requested, since
-    // the record doesn't have an ID to pass to the API.
-    // ------------------------------------------------------------------------
-
-    // Record hasn't been saved, and has no id.
-    var record = new Neatline.Shared.Record.Model({ item_id: 1 });
-
-    var c1 = NL.server.requests.length;
-    record.get('item');
-    var c2 = NL.server.requests.length;
-    expect(c2).toEqual(c1);
 
   });
 

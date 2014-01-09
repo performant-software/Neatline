@@ -28,6 +28,7 @@
     , "toastr":                 "davidmcclure/toastr"
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-releases"
+    , "querystring":            "davidmcclure/querystring"
 
     , "chosen":                 "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
     , "openlayers":             "http://openlayers.org/download/OpenLayers-2.13.1.zip"
