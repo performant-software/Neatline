@@ -21,12 +21,10 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
 
     /**
-     * `nl_getItemMarkup` should first try to match `item-[tag]` templates in
-     * the exhibit-specific theme; if more than one tag on the record has a
-     * corresponding template, the template for the leftmost tag in the list
-     * should take precedence.
+     * First, match `item-[tag]` templates in the exhibit theme. If a template
+     * exists for more than one tag, the left-most tag takes precedence.
      */
-    public function testTagTemplate()
+    public function testRecordTagTemplate()
     {
 
         $exhibit    = $this->_exhibit('custom');
@@ -35,13 +33,13 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
 
         // `tag1` first.
         $record->tags = 'tag1,tag2';
-        $markup = nl_getItemMarkup($record);
-        $this->assertRegExp("/custom-{$item->id}-tag1/", $markup);
+        $markup = nl_getItemMarkup($item, $record);
+        $this->assertEquals("custom-{$item->id}-tag1", trim($markup));
 
         // `tag2` first.
         $record->tags = 'tag2,tag1';
-        $markup = nl_getItemMarkup($record);
-        $this->assertRegExp("/custom-{$item->id}-tag2/", $markup);
+        $markup = nl_getItemMarkup($item, $record);
+        $this->assertEquals("custom-{$item->id}-tag2", trim($markup));
 
     }
 
@@ -50,7 +48,7 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
      * If none of the `item-[tag]` templates matche the record, try to render
      * an `item` template in the exhibit-specific theme.
      */
-    public function testSlugTemplate()
+    public function testExhibitSlugTemplate()
     {
 
         $exhibit    = $this->_exhibit('custom');
@@ -58,32 +56,36 @@ class HelpersTest_GetItemMarkup extends Neatline_Case_Default
         $record     = $this->_record($exhibit, $item);
 
         // No tags.
-        $markup = nl_getItemMarkup($record);
-        $this->assertRegExp("/custom-{$item->id}/", $markup);
+        $markup = nl_getItemMarkup($item, $record);
+        $this->assertEquals("custom-{$item->id}", trim($markup));
 
         // No matching tags.
         $record->tags = 'tag3';
-        $markup = nl_getItemMarkup($record);
-        $this->assertRegExp("/custom-{$item->id}/", $markup);
+        $markup = nl_getItemMarkup($item, $record);
+        $this->assertEquals("custom-{$item->id}", trim($markup));
 
     }
 
 
     /**
-     * When none of the templates in the exhibit-specific theme matches the
-     * record, revert to the global `item` template, which is provided by the
-     * core plugin and can also be overridden in the theme.
+     * When no record is passed, or when a record is passed that doesn't match
+     * any custom templates, render the `item.php` template, which is provided
+     * in the plugin core and can be overridden in the theme.
      */
-    public function testDefaultTemplate()
+    public function testDefaultItemTemplate()
     {
 
         $exhibit    = $this->_exhibit('no-custom-theme');
         $item       = $this->_item();
         $record     = $this->_record($exhibit, $item);
 
-        // No custom templates.
-        $markup = nl_getItemMarkup($record);
-        $this->assertRegExp("/{$item->id}/", $markup);
+        // No record passed.
+        $markup = nl_getItemMarkup($item);
+        $this->assertEquals($item->id, trim($markup));
+
+        // No exhibit/record-specific templates.
+        $markup = nl_getItemMarkup($item, $record);
+        $this->assertEquals($item->id, trim($markup));
 
     }
 

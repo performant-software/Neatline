@@ -21,36 +21,89 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
 
 
     /**
-     * GET should emit the item metadata HTML for the item associated with the
-     * Neatline record with the passed ID.
+     * When a record is specified that matches a tag-specific template in the
+     * custom exhibit theme, GET should apply the tag template.
      */
-    public function testGet()
+    public function testRecordTagTemplate()
     {
 
-        $record = $this->_record();
-        $item1  = $this->_item();
-        $item2  = $this->_item();
+        $exhibit    = $this->_exhibit('custom');
+        $item       = $this->_item();
+        $record     = $this->_record($exhibit, $item);
 
-        // Request item 1 output.
-        $this->dispatch('neatline/items/'.$item1->id.'/record/'.$record->id);
-        $record->item_id = $item1->id;
+        // Assign `tag1`.
+        $record->tags = 'tag1';
+        $record->save();
 
-        $this->assertEquals(
-            // Should emit item 1 HTML.
-            nl_getItemMarkup($record), $this->_getResponseBody()
-        );
+        // Load the item body.
+        $this->request->setQuery(array('record' => $record->id));
+        $this->dispatch('neatline/items/'.$item->id);
 
-        $this->resetRequest();
-        $this->resetResponse();
+        // Should render the tag template.
+        $body = trim($this->_getResponseBody());
+        $this->assertEquals("custom-{$item->id}-tag1", $body);
 
-        // Request item 2 output.
-        $this->dispatch('neatline/items/'.$item2->id.'/record/'.$record->id);
-        $record->item_id = $item2->id;
+    }
 
-        $this->assertEquals(
-            // Should emit item 2 HTML.
-            nl_getItemMarkup($record), $this->_getResponseBody()
-        );
+
+    /**
+     * When a record is specified that matches a exhibit-generic template in
+     * the custom exhibit theme, GET should apply the exhibit template.
+     */
+    public function testExhibitSlugTemplate()
+    {
+
+        $exhibit    = $this->_exhibit('custom');
+        $item       = $this->_item();
+        $record     = $this->_record($exhibit, $item);
+
+        // Load the item body.
+        $this->request->setQuery(array('record' => $record->id));
+        $this->dispatch('neatline/items/'.$item->id);
+
+        // Should render the exhibit template.
+        $body = trim($this->_getResponseBody());
+        $this->assertEquals("custom-{$item->id}", $body);
+
+    }
+
+
+    /**
+     * When a record is specified that doesn't match any custom templates, GET
+     * should render the default template.
+     */
+    public function testDefaultItemTemplate()
+    {
+
+        $exhibit    = $this->_exhibit('no-custom-theme');
+        $item       = $this->_item();
+        $record     = $this->_record($exhibit, $item);
+
+        // Load the item body.
+        $this->request->setQuery(array('record' => $record->id));
+        $this->dispatch('neatline/items/'.$item->id);
+
+        // Should render the default template.
+        $body = trim($this->_getResponseBody());
+        $this->assertEquals($item->id, $body);
+
+    }
+
+
+    /**
+     * When a record isn't specified , GET should render the default template.
+     */
+    public function testNoRecordPassed()
+    {
+
+        $item = $this->_item();
+
+        // No record specified.
+        $this->dispatch('neatline/items/'.$item->id);
+
+        // Should render the default template.
+        $body = trim($this->_getResponseBody());
+        $this->assertEquals($item->id, $body);
 
     }
 

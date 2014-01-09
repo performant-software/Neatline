@@ -11,41 +11,44 @@
 
 
 /**
- * Compile the record `body` markup from the parent item.
+ * Compile item metadata for the lazy-loaded `item_body` record attribute.
  *
- * @param NeatlineRecord $record The record.
+ * @param Item $item The parent item.
+ * @param NeatlineRecord|null $record The record.
  * @return string The item metadata.
  */
-function nl_getItemMarkup($record)
+function nl_getItemMarkup($item, $record=null)
 {
 
-    // Get exhibit slug and tags.
-    $slug = $record->getExhibit()->slug;
-    $tags = nl_explode($record->tags);
-
     // Set the item on the view.
-    set_current_record('item', $record->getItem());
+    set_current_record('item', $item);
 
-    // First, try to render a `item-[tag].php` template in the exhibit theme.
+    if (!is_null($record)) {
 
-    foreach ($tags as $tag) { try {
-        return get_view()->render(
-            'exhibits/themes/'.$slug.'/item-'.$tag.'.php'
-        );
-    } catch (Exception $e) {}}
+        // Get exhibit slug and tags.
+        $slug = $record->getExhibit()->slug;
+        $tags = nl_explode($record->tags);
 
-    // Next, try to render a generic `item.php` template in the exhibit theme.
+        // First, try to render an exhibit-specific `item-[tag].php` template.
 
-    try {
-        return get_view()->render(
-            'exhibits/themes/'.$slug.'/item.php'
-        );
-    } catch (Exception $e) {}
+        foreach ($tags as $tag) { try {
+            return get_view()->render(
+                'exhibits/themes/'.$slug.'/item-'.$tag.'.php'
+            );
+        } catch (Exception $e) {}}
 
+        // Next, try to render an exhibit-specific `item.php` template.
 
-    // If no exhibit-specific templates can be found, fall back to the global
-    // `item.php` template, which is included in the core plugin and can also
-    // be overridden in the public theme:
+        try {
+            return get_view()->render(
+                'exhibits/themes/'.$slug.'/item.php'
+            );
+        } catch (Exception $e) {}
+
+    }
+
+    // Default to the global `item.php` template, which is included in the
+    // core plugin and can also be overridden in the public theme:
 
     return get_view()->render('exhibits/item.php');
 
@@ -69,7 +72,7 @@ function nl_getExhibitLink(
     $exhibit = $exhibit ? $exhibit : nl_getExhibit();
     $text = $text ? $text : nl_getExhibitField('title');
 
-    // Get the exhibit identifier.
+    // Get the exhibit identifier (`id` or `slug`).
     if (in_array($action, array('show', 'fullscreen'))) {
         $identifier = $exhibit->slug;
     } else $identifier = $exhibit->id;
