@@ -19,32 +19,67 @@ describe('Record | Get Item', function() {
   });
 
 
-  async.it('should load the item on first access', function(done) {
+  describe('should load the item on first access', function() {
 
-    // ------------------------------------------------------------------------
-    // When the `item` field is accessed for the first time, the item content
-    // should be lazy-loaded from the server and set on the model.
-    // ------------------------------------------------------------------------
+    async.it('when the record is saved', function(done) {
 
-    var record = new Neatline.Shared.Record.Model({ id: 1, item_id: 1 });
+      // ----------------------------------------------------------------------
+      // When the `item` field is accessed for the first time on a record that
+      // has been saved, the record-inflected item body should be loaded.
+      // ----------------------------------------------------------------------
 
-    // Should set `item` when loaded.
-    record.on('change:item', function() {
-      expect(record.get('item')).toEqual('item');
-      done();
+      // Saved.
+      var record = new Neatline.Shared.Record.Model({ id: 1, item_id: 1 });
+
+      // Should set `item` when loaded.
+      record.on('change:item', function() {
+        expect(record.get('item')).toEqual('item');
+        done();
+      });
+
+      record.get('item');
+
+      // Should generate GET request to the item body API.
+      NL.assertLastRequestRoute(Neatline.g.neatline.item_body_api+'/1');
+      NL.assertLastRequestMethod('GET');
+
+      // Should request record-inflected body.
+      NL.assertLastRequestHasGetParameter('record', 1);
+
+      // Respond with item.
+      NL.respondLast200('item', 'text/html');
+
     });
 
-    record.get('item');
+    async.it('when the record is saved', function(done) {
 
-    // Should generate GET request to the item body API.
-    NL.assertLastRequestRoute(Neatline.g.neatline.item_body_api+'/1');
-    NL.assertLastRequestMethod('GET');
+      // ----------------------------------------------------------------------
+      // When the `item` field is accessed for the first time on a record that
+      // has been _not_ saved, the default item body should be loaded.
+      // ----------------------------------------------------------------------
 
-    // Should request record-inflected body.
-    NL.assertLastRequestHasGetParameter('record', 1);
+      // Unsaved.
+      var record = new Neatline.Shared.Record.Model({ item_id: 1 });
 
-    // Respond with item.
-    NL.respondLast200('item', 'text/html');
+      // Should set `item` when loaded.
+      record.on('change:item', function() {
+        expect(record.get('item')).toEqual('item');
+        done();
+      });
+
+      record.get('item');
+
+      // Should generate GET request to the item body API.
+      NL.assertLastRequestRoute(Neatline.g.neatline.item_body_api+'/1');
+      NL.assertLastRequestMethod('GET');
+
+      // Should _not_ pass out non-existent id.
+      NL.assertNotLastRequestHasGetParameter('record');
+
+      // Respond with item.
+      NL.respondLast200('item', 'text/html');
+
+    });
 
   });
 
