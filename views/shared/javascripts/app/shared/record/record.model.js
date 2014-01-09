@@ -15,6 +15,13 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     mutators: {
+
+      title: {
+        get: function() {
+          return this.attributes.title || this.attributes.item_title;
+        }
+      },
+
       item: {
         get: function() {
 
@@ -24,6 +31,7 @@ Neatline.module('Shared.Record', function(Record) {
 
         }
       }
+
     },
 
 

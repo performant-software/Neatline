@@ -86,19 +86,22 @@ module.exports = function(grunt) {
         }]
       },
 
-      select2: {
+      jquery_ui: {
         files: [{
-          src: paths.copy.select2+'/*.png',
-          dest: paths.payloads.shared.css,
+          src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
+          dest: paths.payloads.shared.css+'/images',
           expand: true,
           flatten: true
         }]
       },
 
-      jquery_ui: {
+      select2: {
         files: [{
-          src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
-          dest: paths.payloads.shared.css+'/images',
+          src: [
+            paths.copy.select2+'/*.png',
+            paths.copy.select2+'/*.gif'
+          ],
+          dest: paths.payloads.shared.css,
           expand: true,
           flatten: true
         }]

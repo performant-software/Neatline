@@ -20,9 +20,11 @@
 
   - Fixes fullscreen, white "flashes" that occasionally occurred in the editor when using Chrome on Macbook Pros with retina displays, which were caused by a bug in Chrome related to CSS transitions on scrollable, fixed-position divs.
 
-#### User-Interface Changes
+#### User-Interface Improvements
 
   - Touches up the UI and styling in the editor interface - changes the body font, adds in fieldset legends in the "Map" and "Text" tabs, increases the height of the "Coverage" textarea, adds darkened background color to focused text inputs.
+
+  - Adds an interactive tag selection UI to the "Widgets" multiselect in the "Style" tab on the record form.
 
 #### Bug Fixes
 

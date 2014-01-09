@@ -12,7 +12,7 @@
 ?>
 
 <!-- Delete confirmation. -->
-<div id="delete-modal" class="modal fade" role="dialog" aria-hidden="true">
+<div id="delete-modal" class="modal" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -46,7 +46,7 @@
 </div>
 
 <!-- SVG import. -->
-<div id="svg-modal" class="modal fade" role="dialog" aria-hidden="true">
+<div id="svg-modal" class="modal" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 

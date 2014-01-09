@@ -45,9 +45,8 @@ describe('Record | Delete Record', function() {
     // Click on "Delete".
     elements.delete1.trigger('click');
 
-    // Modal and overlay should be visible.
-    expect($('body')).toContain('div.modal-backdrop.in');
-    expect(NL.v.record.deleteModal).toHaveClass('in');
+    // Modal should be visible.
+    expect(NL.v.record.deleteModal).toBeVisible();
 
   });
 
@@ -66,7 +65,7 @@ describe('Record | Delete Record', function() {
     elements.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(NL.v.record.deleteModal).not.toHaveClass('in');
+    expect(NL.v.record.deleteModal).not.toBeVisible();
 
   });
 

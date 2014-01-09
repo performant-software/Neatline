@@ -41,8 +41,7 @@ describe('Record | Import SVG', function() {
     elements.link.trigger('click');
 
     // Modal and overlay should be visible.
-    expect($('body')).toContain('div.modal-backdrop.in');
-    expect(NL.v.mapTab.svgModal).toHaveClass('in');
+    expect(NL.v.mapTab.svgModal).toBeVisible();
 
   });
 
@@ -61,7 +60,7 @@ describe('Record | Import SVG', function() {
     elements.cancel.trigger('click');
 
     // Modal should be closed.
-    expect(NL.v.mapTab.svgModal).not.toHaveClass('in');
+    expect(NL.v.mapTab.svgModal).not.toBeVisible();
 
   });
 

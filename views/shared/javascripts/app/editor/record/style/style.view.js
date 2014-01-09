@@ -31,6 +31,7 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
     },
 
     ui: {
+      widgets:  'select[name="widgets"]',
       minZoom:  'input[name="min-zoom"]',
       maxZoom:  'input[name="max-zoom"]',
       mapFocus: 'input[name="map-focus"]',
@@ -42,6 +43,9 @@ Neatline.module('Editor.Record.Style', { startWithParent: false,
      * Instantiate color pickers and draggers.
      */
     activate: function() {
+
+      // SELECT2
+      this.__ui.widgets.select2();
 
       // COLORS
       this.$('input.color').spectrum({
