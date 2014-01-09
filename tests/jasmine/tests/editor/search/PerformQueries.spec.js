@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Search | Search Records', function() {
+describe('Search | Perform Queries', function() {
 
 
   var perPage, fixtures = {
@@ -95,7 +95,7 @@ describe('Search | Search Records', function() {
     NL.assertLastRequestMethod('GET');
 
     // `query`=word, default `limit` and `start`.
-    NL.assertLastRequestHasGetParameter('query', 'word1+word2');
+    NL.assertLastRequestHasGetParameter('query', 'word1 word2');
     NL.assertLastRequestHasGetParameter('limit', perPage);
     NL.assertLastRequestHasGetParameter('start', '0');
 

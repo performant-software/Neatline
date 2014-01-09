@@ -222,6 +222,7 @@ module.exports = function(grunt) {
           paths.vendor.js.ace_theme,
           paths.vendor.js.ace_mode,
           paths.vendor.js.select2,
+          paths.vendor.js.uri,
 
           // Neatline:
           paths.src.shared+'/*.js',
@@ -246,10 +247,11 @@ module.exports = function(grunt) {
         dest: paths.payloads.shared.js+'/neatline-editor.js'
       },
 
-      jasmine_helpers: {
+      jasmine_vendor: {
         src: [
-          paths.vendor.js.jasmine_async,
+          paths.vendor.js.uri,
           paths.vendor.js.jasmine_jquery,
+          paths.vendor.js.jasmine_async,
           paths.vendor.js.sinon,
           paths.jasmine+'/assertions/*.js',
           paths.jasmine+'/helpers/*.js'

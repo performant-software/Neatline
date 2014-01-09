@@ -30,7 +30,7 @@ var NL = (function(NL) {
    */
   NL.assertLastRequestRoute = function(route) {
     var request = this.getLastRequest();
-    expect(request.url).toMatch('^'+route+'($|\\?.*)');
+    expect(URI(request.url).path()).toEqual(route);
   };
 
 
@@ -41,22 +41,27 @@ var NL = (function(NL) {
    * @param {String} val: The value.
    */
   NL.assertLastRequestHasGetParameter = function(key, val) {
+
     var request = this.getLastRequest();
-    if (val) expect(request.url).toContain(key+'='+val);
-    else expect(request.url).toContain(key);
+
+    // If value passed, check for key and value.
+    if (val) expect(URI(request.url).hasQuery(key, val)).toBeTruthy();
+
+    // Otherwise, just check for the existence of the key.
+    else expect(URI(request.url).hasQuery(key, true)).toBeTruthy();
+
   };
 
 
   /**
-   * Assert that the last request does not have a GET key/value.
+   * Assert that the last request has a GET key/value.
    *
    * @param {String} key: The key.
    * @param {String} val: The value.
    */
   NL.assertNotLastRequestHasGetParameter = function(key, val) {
     var request = this.getLastRequest();
-    if (val) expect(request.url).not.toContain(key+'='+val);
-    else expect(request.url).not.toContain(key);
+    expect(URI(request.url).hasQuery(key, false)).toBeTruthy();
   };
 
 

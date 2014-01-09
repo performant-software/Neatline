@@ -34,6 +34,7 @@
   "vendor": {
 
     "js": {
+
       "jquery":           "bower_components/jquery/jquery.js",
       "jquery_ui":        "bower_components/jquery-ui/ui/jquery-ui.js",
       "underscore":       "bower_components/underscore/underscore.js",
@@ -58,10 +59,13 @@
       "ace_mode":         "bower_components/ace-builds/src-noconflict/mode-css.js",
       "chosen":           "bower_components/chosen/chosen.jquery.js",
       "select2":          "bower_components/select2/select2.min.js",
+      "uri":              "bower_components/uri.js/src/URI.js",
+
       "jasmine_jquery":   "bower_components/jasmine-jquery/lib/jasmine-jquery.js",
       "jasmine_async":    "bower_components/jasmine.async/src/jasmine.async.js",
       "querystring":      "bower_components/querystring/querystring.js",
       "sinon":            "bower_components/sinon/index.js"
+
     },
 
     "css": {
