@@ -221,6 +221,7 @@ module.exports = function(grunt) {
           paths.vendor.js.ace_mode,
           paths.vendor.js.select2,
           paths.vendor.js.uri,
+          paths.vendor.js.markdown,
 
           // Neatline:
           paths.src.shared+'/*.js',
