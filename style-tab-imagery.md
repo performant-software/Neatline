@@ -9,6 +9,8 @@ layout: default
   - The "Point Image" field replaces the default circular graphic for points with any web-accessible image.
   - The "WMS Address/Layers" fields make it possible to overlay a WMS layer hosted by software like Geoserver.
 
+![Screenshot of Imagery Fields](http://neatline.org/wp-content/uploads/2014/01/style-imagery.png)
+
 ## Point Image
 
 By default, points on the map are represented with circle graphics, the size of which can be configured by the "Point Radius" field in the "Dimensions" field set. This field makes it possible to replace this default representation of the points with any random, web-accessible image. This makes it possible to place effectively any kind of graphic on the map - pins, icons, image thumbnails, etc.
