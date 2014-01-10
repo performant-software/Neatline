@@ -7014,7 +7014,7 @@ var NL = (function(NL) {
    */
   NL.assertLastRequestRoute = function(route) {
     var request = this.getLastRequest();
-    expect(request.url).toMatch('^'+route+'($|\\?.*)');
+    expect(URI(request.url).path()).toEqual(route);
   };
 
 

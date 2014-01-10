@@ -16,7 +16,25 @@ describe('Record | Select Item', function() {
   });
 
 
-  it('should');
+  describe('when the tab is shown', function() {
+    it('should set the current item when one exists');
+    it('should do nothing when no item has been set');
+  });
+
+  describe('when the dropdown is opened', function() {
+    it('should load all items when dropdown is opened');
+    it('should load results when search query is entered');
+  });
+
+  describe('when an item is selected', function() {
+    it('should set item id and title');
+    it('should (re)load item body preview');
+  });
+
+  describe('when the item is cleared', function() {
+    it('should unset the item id and title');
+    it('should unset the item body preview');
+  });
 
 
 });

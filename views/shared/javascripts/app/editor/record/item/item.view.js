@@ -93,7 +93,7 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
       // Set current item selection.
       if (this.model.get('item_id')) {
         this.__ui.search.select2('data', {
-          id: this.model.get('item_id'),text: this.model.get('item_title')
+          id: this.model.get('item_id'), text: this.model.get('item_title')
         });
       }
 
