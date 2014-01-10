@@ -9,6 +9,8 @@ layout: default
   - Neatline-infected CSS uses a custom set of rules that correspond to the properties on the record data model.
   - Groups of records are selected using the CSS class syntax, with record tags providing the class names.
 
+![Screenshot of Stylesheets](http://neatline.org/wp-content/uploads/2014/01/neatline-stylesheets.png)
+
 ## Quick reference (for the impatient)
 
 Neatline 2.0 makes it possible to use a simplified, Neatline-inflected dialect of CSS - integrated directly into the editing environment - to perform bulk updates on large groups of related records clustered together by tags (see the "Editing Record Groups" guide for more information about tags).
