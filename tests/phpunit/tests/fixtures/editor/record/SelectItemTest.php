@@ -13,6 +13,17 @@ class FixturesTest_EditorRecordSelectItem extends Neatline_Case_Fixture
 {
 
 
+    public function setUp()
+    {
+
+        parent::setUp();
+
+        // Delete the default "Foobar" item.
+        $this->db->getTable('Item')->find(1)->delete();
+
+    }
+
+
     public function testRecords()
     {
 

@@ -34,6 +34,11 @@ describe('Record | Select Item', function() {
   });
 
 
+  afterEach(function() {
+    NL.v.itemTab.__ui.search.select2('destroy')
+  });
+
+
   describe('when the tab is shown', function() {
 
     it('should set the current item when one exists', function() {
@@ -95,6 +100,7 @@ describe('Record | Select Item', function() {
 
       // When the items have been loaded...
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
+        expect(e.items.results.length).toEqual(5);
         expect(e.items.results[0].text).toEqual('title1 keyword');
         expect(e.items.results[1].text).toEqual('title2 keyword');
         expect(e.items.results[2].text).toEqual('title3 keyword');
@@ -107,17 +113,12 @@ describe('Record | Select Item', function() {
       NL.v.itemTab.__ui.search.select2('open');
 
       waitsFor(function() { // Wait for Select2 to requests items...
-
         return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
           return URI(u).path() == Neatline.g.neatline.item_search_api
         });
-
       });
 
       runs(function() { // When the items have been requested...
-
-        // Respond to the request.
-        NL.respondItemSearch200(fixtures.items.all);
 
         // Should generate GET request to the item search API.
         NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
@@ -127,15 +128,62 @@ describe('Record | Select Item', function() {
         NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
         NL.assertLastRequestHasGetParameter('page', 1);
 
+        // Respond to the request.
+        NL.respondItemSearch200(fixtures.items.all);
+        // Triggers `select2-loaded`.
+
       });
 
     });
 
-    it('should load results when search query is entered',  function() {
+    async.it('should load results when query is entered',  function(done) {
 
       // ----------------------------------------------------------------------
       // When a search query is entered, matching items should be loaded.
       // ----------------------------------------------------------------------
+
+      // When the dropdown is opened...
+      NL.v.itemTab.__ui.search.on('select2-open', function(e) {
+
+        // Enter a search query.
+        $('.select2-input').val('query').trigger('keyup-change');
+
+        waitsFor(function() { // Wait for Select2 to requests items...
+          return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
+            return URI(u).path() == Neatline.g.neatline.item_search_api
+          });
+        });
+
+        runs(function() { // When the items have been requested...
+
+          // Should generate GET request to the item search API.
+          NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
+          NL.assertLastRequestMethod('GET');
+
+          // Should request query, action context, and page.
+          NL.assertLastRequestHasGetParameter('search', 'query');
+          NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
+          NL.assertLastRequestHasGetParameter('page', 1);
+
+          // Respond to the request.
+          NL.respondItemSearch200(fixtures.items.search);
+          // Triggers `select2-loaded`.
+
+        });
+
+      });
+
+      // When the items have been loaded...
+      NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
+        expect(e.items.results.length).toEqual(3);
+        expect(e.items.results[0].text).toEqual('title1 keyword');
+        expect(e.items.results[1].text).toEqual('title2 keyword');
+        expect(e.items.results[2].text).toEqual('title3 keyword');
+        done();
+      });
+
+      // Open the dropdown.
+      NL.v.itemTab.__ui.search.select2('open');
 
     });
 
