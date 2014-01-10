@@ -209,7 +209,7 @@ SQL
 
         // Create record.
         $record = new NeatlineRecord($exhibit, $item);
-        $record->__save();
+        $record->save();
         return $record;
 
     }

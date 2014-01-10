@@ -31,9 +31,13 @@ describe('Record | Sync Styles', function() {
 
 
   beforeEach(function() {
+
     NL.loadEditor();
     NL.showRecordForm(fixtures.record);
+    NL.v.record.activateTab('map');
+
     inputs = NL.getRecordFormElements();
+
   });
 
 
