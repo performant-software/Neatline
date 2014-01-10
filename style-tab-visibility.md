@@ -10,6 +10,8 @@ layout: default
   - Use "Default Focus/Zoom" to set the location and zoom level that the map "snaps" to when the record is selected.
   - Use the "Use Current Viewport as Default" to use the current focus/zoom as the record default.
 
+![Screenshot of Visibility Fields](http://neatline.org/wp-content/uploads/2014/01/style-visibility.png)
+
 ## Min Zoom
 
 The zoom level "above" which the record will be visible, with zooming "in" being "higher" (eg, focusing on Spain is "higher" than focusing on Europe). For example, if the record has a point on the map and "Min Zoom" is `10`, then the point will be invisible when the map at zoom level `9`, and will become visible as soon as the map zooms to `10`.
