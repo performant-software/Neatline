@@ -82,12 +82,20 @@ function nl_getStrings($file)
 
 
 /**
- * Load Markdown documentation for for an editor input.
+ * Load Markdown documentation for editor inputs.
  *
- * @param string $input The input name.
- * @return string The Markdown content.
+ * @return array An array of slug => Markdown.
  */
-function nl_getInputDocs($input)
+function nl_getInputDocs()
 {
-    return file_get_contents(NL_DIR."/docs/ui/$input.md");
+
+    $docs = array();
+
+    // Walk all Markdown files.
+    foreach (glob(NL_DIR.'/docs/ui/*.md') as $file) {
+        $docs[basename($file, '.md')] = file_get_contents($file);
+    }
+
+    return $docs;
+
 }
