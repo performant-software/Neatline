@@ -11,6 +11,21 @@
 describe('Record | Select Item', function() {
 
 
+  var fixtures = {
+
+    record: {
+      noItem: read('EditorRecordSelectItem.noItem.record.json'),
+      item:   read('EditorRecordSelectItem.item.record.json')
+    },
+
+    items: {
+      search: read('EditorRecordSelectItem.search.items.xml'),
+      all:    read('EditorRecordSelectItem.all.items.xml')
+    }
+
+  };
+
+
   beforeEach(function() {
     NL.loadEditor();
   });

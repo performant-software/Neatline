@@ -14,13 +14,29 @@ class HelpersTest_Explode extends Neatline_Case_Default
 
 
     /**
-     * `nl_explode` should trim a string, scrub spaces, and split on ','.
+     * `nl_explode` should split on ','.
      */
-    public function testExplode()
+    public function testSplitOnComma()
     {
-        $this->assertEquals(array('1', '2', '3'), nl_explode('1,2,3'));
+        $this->assertEquals(array('1','2','3'), nl_explode('1,2,3'));
+    }
+
+
+    /**
+     * `nl_explode` should trim whitespace.
+     */
+    public function testTrimWhitespace()
+    {
         $this->assertEquals(array('1','2','3'), nl_explode(' 1,2,3 '));
-        $this->assertEquals(array('1','2','3'), nl_explode(' 1, 2, 3 '));
+    }
+
+
+    /**
+     * `nl_explode` should remove spaces.
+     */
+    public function testRemoveSpaces()
+    {
+        $this->assertEquals(array('1','2','3'), nl_explode('1, 2, 3'));
     }
 
 

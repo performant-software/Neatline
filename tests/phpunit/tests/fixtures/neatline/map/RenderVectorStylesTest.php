@@ -22,7 +22,7 @@ class FixturesTest_NeatlineMapVectorStyles extends Neatline_Case_Fixture
         $record1->coverage = 'GEOMETRYCOLLECTION(POINT(1 2),POINT(3 4))';
         $record2->coverage = 'GEOMETRYCOLLECTION(POINT(5 6),POINT(7 8))';
 
-        $record1->setArray(array(
+        $styles = array(
             'fill_color'            => '1',
             'fill_color_select'     => '2',
             'stroke_color'          => '3',
@@ -34,7 +34,10 @@ class FixturesTest_NeatlineMapVectorStyles extends Neatline_Case_Fixture
             'stroke_width'          => 9,
             'point_radius'          => 10,
             'point_image'           => '11'
-        ));
+        );
+
+        $record1->setArray($styles);
+        $record2->setArray($styles);
 
         $record1->save();
         $record2->save();
