@@ -62,5 +62,9 @@ The date _before which_ the record should be displayed in the exhibit.
 If both a "After Date" and a "Before Date" are defined, then the record will only be visible when the timeline is within the duration between the two dates. For example, if "After Date" is `2000`, and "Before Date" is `2010`, the record would be visible between those two dates, but not before `2000` or after `2010`. By stringing together collections of records with different after- and before-dates, it's possible to create complex time-series animations
 
 
+![Screenshot of Simile Timeline](http://neatline.org/wp-content/uploads/2014/01/style-similetimelineexample.png)
+
+
+
 [iso8601]: https://en.wikipedia.org/wiki/ISO_8601
 [neatline-simile]: https://github.com/scholarslab/nl-widget-Simile
