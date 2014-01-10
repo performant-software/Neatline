@@ -79,3 +79,15 @@ function nl_getStrings($file)
     return $strings;
 
 }
+
+
+/**
+ * Load Markdown documentation for for an editor input.
+ *
+ * @param string $input The input name.
+ * @return string The Markdown content.
+ */
+function nl_getInputDocs($input)
+{
+    return file_get_contents(NL_DIR."/docs/ui/$input.md");
+}
