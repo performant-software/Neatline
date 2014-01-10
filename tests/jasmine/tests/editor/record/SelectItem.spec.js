@@ -11,6 +11,9 @@
 describe('Record | Select Item', function() {
 
 
+  var async = new AsyncSpec(this);
+
+
   var fixtures = {
 
     record: {
@@ -42,11 +45,11 @@ describe('Record | Select Item', function() {
 
       var record = NL.recordFromJson(fixtures.record.item);
 
-      // Show the tab.
+      // Show the "Item" tab.
       NL.showRecordForm(fixtures.record.item);
       NL.v.record.activateTab('item');
 
-      // TODO|dev
+      // Should set the current item.
       expect(NL.v.itemTab.__ui.search.select2('data')).toEqual({
         id: record.get('item_id'), text: record.get('item_title')
       });
@@ -62,11 +65,11 @@ describe('Record | Select Item', function() {
 
       var record = NL.recordFromJson(fixtures.record.noItem);
 
-      // Show the tab.
+      // Show the "Item" tab.
       NL.showRecordForm(fixtures.record.noItem);
       NL.v.record.activateTab('item');
 
-      // TODO|dev
+      // Should leave the input empty.
       expect(NL.v.itemTab.__ui.search.select2('data')).toBeNull();
 
     });
@@ -75,9 +78,54 @@ describe('Record | Select Item', function() {
 
   describe('when the dropdown is opened', function() {
 
-    it('should load all items when dropdown is opened');
+    beforeEach(function() {
 
-    it('should load results when search query is entered');
+      // Show the "Item" tab.
+      NL.showRecordForm(fixtures.record.noItem);
+      NL.v.record.activateTab('item');
+
+    });
+
+    async.it('should load all items when dropdown is opened', function(done) {
+
+      // ----------------------------------------------------------------------
+      // When the search dropdown is opened, it should immediately load and
+      // display a (paginated) list of all items on the site.
+      // ----------------------------------------------------------------------
+
+      // When the dropdown is opened...
+      NL.v.itemTab.__ui.search.on('select2-open', function(e) {
+
+        // Respond to the request.
+        NL.respondLast200(fixtures.items.all);
+
+      });
+
+      // When the record response arrives...
+      NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
+
+        // Should generate GET request to the item search API.
+        NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
+        NL.assertLastRequestMethod('GET');
+
+        done();
+
+      });
+
+      // Open the dropdown.
+      NL.v.itemTab.__ui.search.select2('open');
+
+      done(); // TODO|dev
+
+    });
+
+    it('should load results when search query is entered',  function() {
+
+      // ----------------------------------------------------------------------
+      // When a search query is entered, matching items should be loaded.
+      // ----------------------------------------------------------------------
+
+    });
 
   });
 

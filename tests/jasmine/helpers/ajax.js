@@ -78,11 +78,20 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.respondMap200 = function(response) {
+
     _.each(this.server.requests, _.bind(function(request) {
-      var extent = _.string.include(request.url, 'extent');
-      var zoom   = _.string.include(request.url, 'zoom');
+
+      var url = URI(request.url);
+
+      // Check for `extent` and `zoom` params
+      var extent  = url.hasQuery('extent', true);
+      var zoom    = url.hasQuery('zoom', true);
+
+      // If both exist, inject the response.
       if (extent && zoom) this.respond200(request, response);
+
     }, this));
+
   };
 
 
@@ -92,11 +101,20 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.respondRecordList200 = function(response) {
+
     _.each(this.server.requests, _.bind(function(request) {
-      var start = _.string.include(request.url, 'start');
-      var limit = _.string.include(request.url, 'limit');
-      if (start && limit) this.respond200(request, response);
+
+      var url = URI(request.url);
+
+      // Check for `extent` and `zoom` params
+      var limit = url.hasQuery('limit', true);
+      var start = url.hasQuery('start', true);
+
+      // If both exist, inject the response.
+      if (extent && zoom) this.respond200(request, response);
+
     }, this));
+
   };
 
 
