@@ -59,7 +59,7 @@
       "chosen":           "bower_components/chosen/chosen.jquery.js",
       "select2":          "bower_components/select2/select2.min.js",
       "uri":              "bower_components/uri.js/src/URI.js",
-      "markdown":         "node_modules/lib/markdown.js",
+      "markdown":         "node_modules/markdown/lib/markdown.js",
 
       "jasmine_jquery":   "bower_components/jasmine-jquery/lib/jasmine-jquery.js",
       "jasmine_async":    "bower_components/jasmine.async/src/jasmine.async.js",
