@@ -98,7 +98,7 @@ describe('Record | Select Item', function() {
       // display a (paginated) list of all items on the site.
       // ----------------------------------------------------------------------
 
-      // When the items have been loaded...
+      // [3] When the items have been loaded...
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
         expect(e.items.results.length).toEqual(5);
         expect(e.items.results[0].text).toEqual('title1 keyword');
@@ -109,16 +109,14 @@ describe('Record | Select Item', function() {
         done();
       });
 
-      // Open the dropdown.
+      // [1] Open the dropdown.
       NL.v.itemTab.__ui.search.select2('open');
 
-      waitsFor(function() { // Wait for Select2 to requests items...
-        return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
-          return URI(u).path() == Neatline.g.neatline.item_search_api
-        });
-      });
+      // Wait for Select2 to requests items...
+      waitsFor(NL.itemsHaveBeenRequested);
 
-      runs(function() { // When the items have been requested...
+      // [2] When the items have been requested...
+      runs(function() {
 
         // Should generate GET request to the item search API.
         NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
@@ -142,19 +140,17 @@ describe('Record | Select Item', function() {
       // When a search query is entered, matching items should be loaded.
       // ----------------------------------------------------------------------
 
-      // When the dropdown is opened...
+      // [2] When the dropdown is opened...
       NL.v.itemTab.__ui.search.on('select2-open', function(e) {
 
         // Enter a search query.
         $('.select2-input').val('query').trigger('keyup-change');
 
-        waitsFor(function() { // Wait for Select2 to requests items...
-          return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
-            return URI(u).path() == Neatline.g.neatline.item_search_api
-          });
-        });
+        // Wait for Select2 to requests items...
+        waitsFor(NL.itemsHaveBeenRequested);
 
-        runs(function() { // When the items have been requested...
+        // [3] When the items have been requested...
+        runs(function() {
 
           // Should generate GET request to the item search API.
           NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
@@ -173,7 +169,7 @@ describe('Record | Select Item', function() {
 
       });
 
-      // When the items have been loaded...
+      // [4] When the items have been loaded...
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
         expect(e.items.results.length).toEqual(3);
         expect(e.items.results[0].text).toEqual('title1 keyword');
@@ -182,7 +178,7 @@ describe('Record | Select Item', function() {
         done();
       });
 
-      // Open the dropdown.
+      // [1] Open the dropdown.
       NL.v.itemTab.__ui.search.select2('open');
 
     });
@@ -190,6 +186,36 @@ describe('Record | Select Item', function() {
   });
 
   describe('when an item is selected', function() {
+
+    //async.beforeEach(function(done) {
+
+      //// [3] When the dropdown is opened...
+      //NL.v.itemTab.__ui.search.on('select2-open', function(e) {
+
+        //// Enter a search query.
+        //$('.select2-input').val('query').trigger('keyup-change');
+
+        //waitsFor(function() { // Wait for Select2 to requests items...
+          //return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
+            //return URI(u).path() == Neatline.g.neatline.item_search_api
+          //});
+        //});
+
+        //// [4] When the items have been requested...
+        //runs(function() {
+          //done();
+        //});
+
+      //});
+
+      //// [1] Show the "Item" tab.
+      //NL.showRecordForm(fixtures.record.noItem);
+      //NL.v.record.activateTab('item');
+
+      //// [2] Open the dropdown.
+      //NL.v.itemTab.__ui.search.select2('open');
+
+    //});
 
     it('should set item id and title');
 

@@ -134,6 +134,18 @@ var NL = (function(NL) {
 
 
   /**
+   * Have Omeka item search results been requested?
+   *
+   * @return {Boolean} True if items have been requested.
+   */
+  NL.itemsHaveBeenRequested = function() {
+    return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
+      return URI(u).path() == Neatline.g.neatline.item_search_api
+    });
+  };
+
+
+  /**
    * Respond 500 to a sinon request.
    *
    * @param {Object} request: The sinon request.
