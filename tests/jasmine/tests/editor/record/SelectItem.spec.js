@@ -93,29 +93,41 @@ describe('Record | Select Item', function() {
       // display a (paginated) list of all items on the site.
       // ----------------------------------------------------------------------
 
-      // When the dropdown is opened...
-      NL.v.itemTab.__ui.search.on('select2-open', function(e) {
-
-        // Respond to the request.
-        NL.respondLast200(fixtures.items.all);
-
-      });
-
-      // When the record response arrives...
+      // When the items have been loaded...
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
-
-        // Should generate GET request to the item search API.
-        NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
-        NL.assertLastRequestMethod('GET');
-
+        expect(e.items.results[0].text).toEqual('title1 keyword');
+        expect(e.items.results[1].text).toEqual('title2 keyword');
+        expect(e.items.results[2].text).toEqual('title3 keyword');
+        expect(e.items.results[3].text).toEqual('title4');
+        expect(e.items.results[4].text).toEqual('title5');
         done();
-
       });
 
       // Open the dropdown.
       NL.v.itemTab.__ui.search.select2('open');
 
-      done(); // TODO|dev
+      waitsFor(function() { // Wait for Select2 to requests items...
+
+        return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
+          return URI(u).path() == Neatline.g.neatline.item_search_api
+        });
+
+      });
+
+      runs(function() { // When the items have been requested...
+
+        // Respond to the request.
+        NL.respondItemSearch200(fixtures.items.all);
+
+        // Should generate GET request to the item search API.
+        NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
+        NL.assertLastRequestMethod('GET');
+
+        // Should request omeka-xml action context, first page.
+        NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
+        NL.assertLastRequestHasGetParameter('page', 1);
+
+      });
 
     });
 

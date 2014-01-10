@@ -78,20 +78,17 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.respondMap200 = function(response) {
-
     _.each(this.server.requests, _.bind(function(request) {
 
-      var url = URI(request.url);
-
       // Check for `extent` and `zoom` params
-      var extent  = url.hasQuery('extent', true);
-      var zoom    = url.hasQuery('zoom', true);
+      var route   = URI(request.url);
+      var extent  = route.hasQuery('extent', true);
+      var zoom    = route.hasQuery('zoom', true);
 
       // If both exist, inject the response.
       if (extent && zoom) this.respond200(request, response);
 
     }, this));
-
   };
 
 
@@ -101,20 +98,38 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.respondRecordList200 = function(response) {
-
     _.each(this.server.requests, _.bind(function(request) {
 
-      var url = URI(request.url);
-
       // Check for `extent` and `zoom` params
-      var limit = url.hasQuery('limit', true);
-      var start = url.hasQuery('start', true);
+      var route   = URI(request.url);
+      var limit   = route.hasQuery('limit', true);
+      var start   = route.hasQuery('start', true);
 
       // If both exist, inject the response.
-      if (extent && zoom) this.respond200(request, response);
+      if (limit && start) this.respond200(request, response);
 
     }, this));
+  };
 
+
+  /**
+   * TODO|dev
+   * Respond 200 to a item search request.
+   *
+   * @param {Object} response: The response body.
+   */
+  NL.respondItemSearch200 = function(response) {
+    _.each(this.server.requests, _.bind(function(request) {
+
+      // Check the route path.
+      var path = URI(request.url).path();
+
+      // If requesting items, inject the response.
+      if (path == Neatline.g.neatline.item_search_api) {
+        this.respond200(request, response);
+      }
+
+    }, this));
   };
 
 

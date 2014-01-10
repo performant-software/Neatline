@@ -371,6 +371,7 @@ module.exports = function(grunt) {
           '<%= concat.edit_form.src %>',
           '<%= concat.neatline_public.src %>',
           '<%= concat.neatline_editor.src %>',
+          '<%= concat.jasmine_vendor.src %>',
           paths.stylus.admin+'/**/*.styl',
           paths.stylus.shared+'/**/*.styl'
         ],
