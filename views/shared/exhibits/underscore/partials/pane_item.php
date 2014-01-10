@@ -17,7 +17,7 @@
 <input name="item-search" class="form-control" />
 
 <!-- Explanation. -->
-<div rv-hide="record:item" class="alert alert-info">
+<div rv-hide="record:item" class="alert alert-info info">
   <p><strong>No item currently selected.</strong> Each Neatline record can be
   linked with an item in the Omeka collection. Once an item has been selected,
   the item's medatata will be displayed below the Neatline "Title" and "Body"

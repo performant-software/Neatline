@@ -11,7 +11,7 @@
 describe('Record | Select Item', function() {
 
 
-  var fixtures = {
+  var elements, fixtures = {
 
     record: {
       noItem: read('EditorRecordSelectItem.noItem.record.json'),
@@ -27,7 +27,14 @@ describe('Record | Select Item', function() {
 
 
   beforeEach(function() {
+
     NL.loadEditor();
+
+    elements = {
+      preview: NL.v.itemTab.$('div.preview'),
+      infoBox: NL.v.itemTab.$('div.info')
+    };
+
   });
 
 
@@ -51,10 +58,16 @@ describe('Record | Select Item', function() {
       NL.showRecordForm(fixtures.record.item);
       NL.v.record.activateTab('item');
 
+      // Respond with item body.
+      NL.respondLast200('item', 'text/html');
+
       // Should set the current item.
       expect(NL.v.itemTab.__ui.search.select2('data')).toEqual({
         id: record.get('item_id'), text: record.get('item_title')
       });
+
+      // Should hide the info box.
+      expect(elements.infoBox).not.toBeVisible();
 
     });
 
@@ -73,6 +86,9 @@ describe('Record | Select Item', function() {
 
       // Should leave the input empty.
       expect(NL.v.itemTab.__ui.search.select2('data')).toBeNull();
+
+      // Should show the info box.
+      expect(elements.infoBox).toBeVisible();
 
     });
 
@@ -241,22 +257,56 @@ describe('Record | Select Item', function() {
     it('should (re)load item body preview', function() {
 
       // ----------------------------------------------------------------------
-      // When an item is selected, the item body preview should be reloaded.
+      // When an item is selected, the item preview should be populated.
       // ----------------------------------------------------------------------
 
       // Respond with item body.
       NL.respondLast200('item', 'text/html');
 
-      // Should update the preview.
-      expect(NL.v.itemTab.$('div.preview')).toHaveText('item');
+      // Should display the item preview.
+      expect(elements.preview).toHaveText('item');
+      expect(elements.preview).toBeVisible();
+
+      // Should hide the info box.
+      expect(elements.infoBox).not.toBeVisible();
 
     });
 
     describe('when the item is cleared', function() {
 
-      it('should unset the item id and title');
+      beforeEach(function() {
 
-      it('should unset the item body preview');
+        // Clear the selection.
+        $('.select2-search-choice-close').trigger('mousedown')
+
+      });
+
+      it('should unset the item id and title', function() {
+
+        // --------------------------------------------------------------------
+        // When the selection is cleared, the item id and title fields on the
+        // record model should be updated.
+        // --------------------------------------------------------------------
+
+        expect(NL.v.itemTab.model.get('item_title')).toBeNull();
+        expect(NL.v.itemTab.model.get('item_id')).toBeNull();
+
+      });
+
+      it('should unset the item body preview', function() {
+
+        // --------------------------------------------------------------------
+        // When the selection is cleared, the item preview should be cleared.
+        // --------------------------------------------------------------------
+
+        // Should hide the item preview.
+        expect(elements.preview).toBeEmpty();
+        expect(elements.preview).not.toBeVisible();
+
+        // Should show the info box.
+        expect(elements.infoBox).toBeVisible();
+
+      });
 
     });
 
