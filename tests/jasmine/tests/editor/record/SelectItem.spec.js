@@ -11,9 +11,6 @@
 describe('Record | Select Item', function() {
 
 
-  var async = new AsyncSpec(this);
-
-
   var fixtures = {
 
     record: {
@@ -83,6 +80,8 @@ describe('Record | Select Item', function() {
 
   describe('when the dropdown is opened', function() {
 
+    var async = new AsyncSpec(this);
+
     beforeEach(function() {
 
       // Show the "Item" tab.
@@ -128,7 +127,7 @@ describe('Record | Select Item', function() {
 
         // Respond to the request.
         NL.respondItemSearch200(fixtures.items.all);
-        // Triggers `select2-loaded`.
+        // Triggers `select2-loaded` (above).
 
       });
 
@@ -161,9 +160,9 @@ describe('Record | Select Item', function() {
           NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
           NL.assertLastRequestHasGetParameter('page', 1);
 
-          // Respond to the request.
+          // Respond to the items request.
           NL.respondItemSearch200(fixtures.items.search);
-          // Triggers `select2-loaded`.
+          // Triggers `select2-loaded` (below).
 
         });
 
@@ -187,47 +186,79 @@ describe('Record | Select Item', function() {
 
   describe('when an item is selected', function() {
 
-    //async.beforeEach(function(done) {
+    var async = new AsyncSpec(this);
 
-      //// [3] When the dropdown is opened...
-      //NL.v.itemTab.__ui.search.on('select2-open', function(e) {
+    async.beforeEach(function(done) {
 
-        //// Enter a search query.
-        //$('.select2-input').val('query').trigger('keyup-change');
+      // [2] When the dropdown is opened...
+      NL.v.itemTab.__ui.search.on('select2-open', function(e) {
 
-        //waitsFor(function() { // Wait for Select2 to requests items...
-          //return _.any(_.pluck(NL.server.requests, 'url'), function(u) {
-            //return URI(u).path() == Neatline.g.neatline.item_search_api
-          //});
-        //});
+        // Enter a search query.
+        $('.select2-input').val('query').trigger('keyup-change');
 
-        //// [4] When the items have been requested...
-        //runs(function() {
-          //done();
-        //});
+        // Wait for Select2 to requests items...
+        waitsFor(NL.itemsHaveBeenRequested);
 
-      //});
+        // [3] When the items have been requested...
+        runs(function() {
 
-      //// [1] Show the "Item" tab.
-      //NL.showRecordForm(fixtures.record.noItem);
-      //NL.v.record.activateTab('item');
+          // Respond to the items request.
+          NL.respondItemSearch200(fixtures.items.search);
+          // Triggers `select2-loaded` (below).
 
-      //// [2] Open the dropdown.
-      //NL.v.itemTab.__ui.search.select2('open');
+        });
 
-    //});
+      });
 
-    it('should set item id and title');
+      // [4] When the items have been loaded...
+      NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
 
-    it('should (re)load item body preview');
+        // Click on the first item result.
+        $('.select2-result-label').first().trigger('mouseup');
+        done();
 
-  });
+      });
 
-  describe('when the item is cleared', function() {
+      // [1] Select tab, open dropdown.
+      NL.showRecordForm(fixtures.record.noItem);
+      NL.v.record.activateTab('item');
+      NL.v.itemTab.__ui.search.select2('open');
 
-    it('should unset the item id and title');
+    });
 
-    it('should unset the item body preview');
+    it('should set item id and title', function() {
+
+      // ----------------------------------------------------------------------
+      // When an item is selected, the item id and title fields on the record
+      // model should be updated.
+      // ----------------------------------------------------------------------
+
+      expect(NL.v.itemTab.model.get('item_title')).toEqual('title1 keyword');
+      expect(NL.v.itemTab.model.get('item_id')).not.toBeUndefined();
+
+    });
+
+    it('should (re)load item body preview', function() {
+
+      // ----------------------------------------------------------------------
+      // When an item is selected, the item body preview should be reloaded.
+      // ----------------------------------------------------------------------
+
+      // Respond with item body.
+      NL.respondLast200('item', 'text/html');
+
+      // Should update the preview.
+      expect(NL.v.itemTab.$('div.preview')).toHaveText('item');
+
+    });
+
+    describe('when the item is cleared', function() {
+
+      it('should unset the item id and title');
+
+      it('should unset the item body preview');
+
+    });
 
   });
 
