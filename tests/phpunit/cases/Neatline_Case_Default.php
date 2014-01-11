@@ -43,10 +43,6 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
     }
 
 
-    // STATE MANAGEMENT
-    // ------------------------------------------------------------------------
-
-
     /**
      * Clear testing records. This needs to be done manually since the records
      * table is MyISAM (for spatial/fulltext indexes), and doesn't get cleared
@@ -60,6 +56,10 @@ SQL
 );
         parent::tearDown();
     }
+
+
+    // PLUGINS
+    // ------------------------------------------------------------------------
 
 
     /**
@@ -303,14 +303,40 @@ SQL
 
         // Create a testing-double job dispatcher.
         $jobs = $this->getMockBuilder('Omeka_Job_Dispatcher_Default')
-            ->disableOriginalConstructor()
-            ->getMock();
+            ->disableOriginalConstructor()->getMock();
 
         // Inject the mock.
         Zend_Registry::set('job_dispatcher', $jobs);
 
         return $jobs;
 
+    }
+
+
+    /**
+     * Register the mock theme scripts.
+     */
+    protected function _mockTheme()
+    {
+        get_view()->addScriptPath(NL_TEST_DIR.'/mocks/theme/neatline');
+    }
+
+
+    /**
+     * Register the mock layers JSON.
+     */
+    protected function _mockLayers()
+    {
+        Zend_Registry::set('layers', array(NL_TEST_DIR.'/mocks/layers'));
+    }
+
+
+    /**
+     * Register mock presenters filter callback.
+     */
+    protected function _mockPresenters()
+    {
+        add_filter('neatline_presenters', 'nl_mockPresenters');
     }
 
 
@@ -329,33 +355,6 @@ SQL
     protected function _mockRecordWidgets()
     {
         add_filter('neatline_record_widgets', 'nl_mockWidgets');
-    }
-
-
-    /**
-     * Register mock presenters filter callback.
-     */
-    protected function _mockPresenters()
-    {
-        add_filter('neatline_presenters', 'nl_mockPresenters');
-    }
-
-
-    /**
-     * Register the mock layers JSON.
-     */
-    protected function _mockLayers()
-    {
-        Zend_Registry::set('layers', array(NL_TEST_DIR.'/mocks/layers'));
-    }
-
-
-    /**
-     * Register the mock theme scripts.
-     */
-    protected function _mockTheme()
-    {
-        get_view()->addScriptPath(NL_TEST_DIR.'/mocks/theme/neatline');
     }
 
 
