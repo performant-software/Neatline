@@ -1,4 +1,0 @@
-$rows = array(
-  array('id' => '3','item_id' => '7','address' => 'active address','layers' => 'active layers'),
-  array('id' => '4','item_id' => '8','address' => 'inactive address','layers' => 'inactive layers')
-);

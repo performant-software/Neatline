@@ -1,3 +1,0 @@
-$rows = array(
-  array('id' => '1','item_id' => '9','order' => NULL,'size' => '12554','has_derivative_image' => '1','authentication' => '19c37b3da5853280322de5ce9e7c7a86','mime_type' => 'image/jpeg','type_os' => 'JPEG image data, EXIF standard','filename' => 'image.jpg','original_filename' => 'image.jpg','modified' => '2013-07-07 15:32:25','added' => '2013-07-07 21:32:25','stored' => '1','metadata' => '')
-);

@@ -23,7 +23,6 @@ define('NL_TEST_DIR', NL_DIR.'/tests/phpunit');
 require_once NL_TEST_DIR.'/cases/Neatline_Case_Default.php';
 require_once NL_TEST_DIR.'/cases/Neatline_Case_Migrate.php';
 require_once NL_TEST_DIR.'/cases/Neatline_Case_Fixture.php';
-require_once NL_TEST_DIR.'/cases/Neatline_Case_Migration_200.php';
 
 // Mock filter callbacks.
 require_once NL_TEST_DIR.'/mocks/filters.php';

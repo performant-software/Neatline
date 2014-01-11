@@ -1,4 +1,0 @@
-$rows = array(
-  array('id' => '22','record_id' => '10','record_type' => 'Item','element_id' => '50','html' => '0','text' => 'Item Title 1'),
-  array('id' => '24','record_id' => '11','record_type' => 'Item','element_id' => '50','html' => '0','text' => 'Inherited Item Title')
-);
