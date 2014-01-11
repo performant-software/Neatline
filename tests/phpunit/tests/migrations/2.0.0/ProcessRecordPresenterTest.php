@@ -10,7 +10,7 @@
  */
 
 class Migrate200Test_ProcessRecordPresenter
-    extends Neatline_Case_Migrate
+    extends Neatline_Case_Migration_200
 {
 
 

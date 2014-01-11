@@ -10,7 +10,7 @@
  */
 
 
-class Neatline_Case_Migrate extends Neatline_Case_Default
+class Neatline_Case_Migration_200 extends Neatline_Case_Default
 {
 
 

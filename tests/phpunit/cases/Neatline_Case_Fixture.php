@@ -22,8 +22,12 @@ class Neatline_Case_Fixture extends Neatline_Case_Default
      */
     public function setUp()
     {
+
         parent::setUp();
+
+        // Create a default exhibit.
         $this->exhibit = $this->_exhibit();
+
     }
 
 

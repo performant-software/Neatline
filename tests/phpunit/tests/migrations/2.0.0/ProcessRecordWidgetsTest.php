@@ -9,8 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class Migrate200Test_ProcessRecordWidgets
-    extends Neatline_Case_Migrate
+class Migrate200Test_ProcessRecordWidgets extends Neatline_Case_Migration_200
 {
 
 
