@@ -1,7 +1,8 @@
 <phpunit bootstrap="bootstrap.php"
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
-         verbose="true">
+         verbose="true"
+         colors="true">
 
     <testsuite name="application">
         <directory>tests/unit</directory>
