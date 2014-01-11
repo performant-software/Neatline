@@ -40,6 +40,7 @@ require_once NL_DIR.'/migrations/2.0-rc4/Neatline_Migration_20rc4.php';
 require_once NL_DIR.'/migrations/2.0.0/Neatline_Migration_200.php';
 require_once NL_DIR.'/migrations/2.0.2/Neatline_Migration_202.php';
 require_once NL_DIR.'/migrations/2.1.2/Neatline_Migration_212.php';
+require_once NL_DIR.'/migrations/2.2.0/Neatline_Migration_220.php';
 
 // HELPERS
 require_once NL_DIR.'/helpers/Acl.php';
