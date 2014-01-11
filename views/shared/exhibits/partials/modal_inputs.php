@@ -11,19 +11,20 @@
 
 ?>
 
-<?php foreach (nl_getInputDocs() as $name => $markdown): ?>
+<?php foreach (nl_getInputModals() as $name => $markdown): ?>
 
-  <div id="docs-modal-<?php echo $name; ?>" class="modal" role="dialog"
-    aria-hidden="true">
+  <div id="docs-modal-<?php echo $name; ?>" class="modal fade" role="dialog">
 
     <div class="modal-dialog">
       <div class="modal-content">
 
-        <div class="modal-body"><?php echo $markdown; ?></div>
+        <!-- Markdown body. -->
+        <div class="modal-body markdown"><?php echo $markdown; ?></div>
 
+        <!-- Close button. -->
         <div class="modal-footer">
-          <a name="close" class="btn btn-default" data-dismiss="modal">
-            <?php echo __('Close'); ?>
+          <a name="close" class="btn btn-primary btn-lg" data-dismiss="modal">
+            <?php echo __('Got it'); ?>
           </a>
         </div>
 

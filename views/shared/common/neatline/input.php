@@ -17,11 +17,15 @@
 
     <?php echo __($label); ?>
 
+    <!-- "Use Current" populator link. -->
     <?php if (isset($useCurrent) && $useCurrent): ?>
       ( <a class="label-link" name="set-<?php echo $name; ?>">
         <?php echo __('Use Current'); ?>
         </a> )
     <?php endif; ?>
+
+    <!-- Help modal link. -->
+    <?php echo common('neatline/help', array('name' => $name)); ?>
 
   </label>
 

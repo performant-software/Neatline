@@ -17,11 +17,15 @@
 
     <?php echo __($label); ?>
 
+    <!-- "Edit HTML" link. -->
     <?php if (isset($editHtml)): ?>
       ( <a class="label-link" data-textarea="<?php echo $editHtml; ?>">
           Edit HTML
         </a> )
     <?php endif; ?>
+
+    <!-- Help modal link. -->
+    <?php echo common('neatline/help', array('name' => $name)); ?>
 
   </label>
 

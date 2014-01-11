@@ -13,32 +13,39 @@
 
 <div class="form-group">
 
-  <label><?php echo __($label); ?></label>
+  <label>
 
-    <select
+    <?php echo __($label); ?>
 
-      class="form-control <?php echo @$class; ?>"
+    <!-- Help modal link. -->
+    <?php echo common('neatline/help', array('name' => $name)); ?>
 
-      <?php if (isset($name)): ?>
-        name="<?php echo $name; ?>"
-      <?php endif; ?>
+  </label>
 
-      <?php if (isset($multi) && $multi): ?>
-        multiple="multiple"
-      <?php endif; ?>
+  <select
 
-      <?php if (isset($bind)): ?>
-        rv-value="<?php echo $bind; ?>"
-      <?php endif; ?>
+    class="form-control <?php echo @$class; ?>"
 
-    >
+    <?php if (isset($name)): ?>
+      name="<?php echo $name; ?>"
+    <?php endif; ?>
 
-      <?php foreach ($options as $label => $val): ?>
-        <option value="<?php echo $val; ?>">
-          <?php echo $label; ?>
-        </option>
-      <?php endforeach; ?>
+    <?php if (isset($multi) && $multi): ?>
+      multiple="multiple"
+    <?php endif; ?>
 
-    </select>
+    <?php if (isset($bind)): ?>
+      rv-value="<?php echo $bind; ?>"
+    <?php endif; ?>
+
+  >
+
+    <?php foreach ($options as $label => $val): ?>
+      <option value="<?php echo $val; ?>">
+        <?php echo $label; ?>
+      </option>
+    <?php endforeach; ?>
+
+  </select>
 
 </div>
