@@ -862,7 +862,7 @@ SQL
 
     $db->query(<<<SQL
 
-    CREATE TABLE IF NOT EXISTS {$db->prefix}neatline_records (
+    CREATE TABLE IF NOT EXISTS {$db->prefix}neatline_data_records (
 
         id                          int(10) unsigned not null auto_increment,
         item_id                     int(10) unsigned NULL,
