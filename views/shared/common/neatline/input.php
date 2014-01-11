@@ -25,7 +25,11 @@
     <?php endif; ?>
 
     <!-- Help modal link. -->
-    <?php echo common('neatline/help', array('name' => $name)); ?>
+    <?php if (isset($modal)): ?>
+      <?php echo common('neatline/help', array(
+        'modal' => $modal, 'text' => '?'
+      )); ?>
+    <?php endif; ?>
 
   </label>
 

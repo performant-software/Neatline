@@ -15,6 +15,7 @@
 
 <?php echo common('neatline/input', array(
     'name'  => 'slug',
+    'modal' => 'slug',
     'label' => 'Slug',
     'bind'  => 'record:slug'
 )); ?>
@@ -22,6 +23,7 @@
 <?php echo common('neatline/textarea', array(
     'id'    => 'title',
     'name'  => 'title',
+    'modal' => 'title',
     'label' => 'Title',
     'bind'  => 'record:title',
     'editHtml' => 'title'
@@ -30,6 +32,7 @@
 <?php echo common('neatline/textarea', array(
     'id'    => 'body',
     'name'  => 'body',
+    'modal' => 'body',
     'label' => 'Body',
     'bind'  => 'record:body',
     'editHtml' => 'body'

@@ -92,8 +92,8 @@ function nl_getInputModals()
     $docs = array();
 
     // Walk all Markdown files.
-    foreach (glob(NL_DIR.'/docs/*.md') as $file) {
-        $docs[basename($file, '.md')] = file_get_contents($file);
+    foreach (glob(NL_DIR.'/docs/html/*.html') as $file) {
+        $docs[basename($file, '.html')] = file_get_contents($file);
     }
 
     return $docs;

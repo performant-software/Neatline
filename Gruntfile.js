@@ -10,6 +10,7 @@
 
 module.exports = function(grunt) {
 
+  grunt.loadNpmTasks('grunt-markdown');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -346,17 +347,33 @@ module.exports = function(grunt) {
     cssmin: {
 
       admin: {
+        src: '*.css',
         cwd: paths.payloads.admin.css,
         dest: paths.payloads.admin.css,
-        expand: true,
-        src: '*.css'
+        expand: true
       },
 
       shared: {
-        cwd: paths.payloads.shared.css,
+        src: '*.css',
         dest: paths.payloads.shared.css,
-        expand: true,
-        src: '*.css'
+        cwd: paths.payloads.shared.css,
+        expand: true
+      }
+
+    },
+
+    markdown: {
+
+      options: {
+        template: 'docs/template.html',
+      },
+
+      docs: {
+        src: 'docs/markdown/*.md',
+        dest: 'docs/html/',
+        ext: '.html',
+        flatten: true,
+        expand: true
       }
 
     },
@@ -370,6 +387,7 @@ module.exports = function(grunt) {
           '<%= concat.neatline_public.src %>',
           '<%= concat.neatline_editor.src %>',
           '<%= concat.jasmine_vendor.src %>',
+          '<%= markdown.docs.src %>',
           paths.stylus.admin+'/**/*.styl',
           paths.stylus.shared+'/**/*.styl'
         ],
@@ -478,6 +496,7 @@ module.exports = function(grunt) {
   // Concat static assets.
   grunt.registerTask('compile', [
     'stylus',
+    'markdown',
     'concat'
   ]);
 

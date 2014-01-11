@@ -11,4 +11,6 @@
 
 ?>
 
-<a href="#docs-modal-<?php echo $name; ?>" data-toggle="modal">?</a>
+<a href="#docs-modal-<?php echo $modal; ?>" data-toggle="modal">
+  <?php echo $text; ?>
+</a>
