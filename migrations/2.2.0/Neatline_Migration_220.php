@@ -60,7 +60,7 @@ SQL
     {
         $this->db->query(<<<SQL
         UPDATE {$this->db->prefix}neatline_records
-        SET title = NULL, SET body = NULL,
+        SET title = NULL, body = NULL
         WHERE item_id IS NOT NULL;
 SQL
 );

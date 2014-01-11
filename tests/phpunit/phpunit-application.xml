@@ -7,6 +7,7 @@
     <testsuite name="application">
         <directory>tests/unit</directory>
         <directory>tests/integration</directory>
+        <directory>tests/migration</directory>
         <directory>tests/fixtures</directory>
     </testsuite>
 

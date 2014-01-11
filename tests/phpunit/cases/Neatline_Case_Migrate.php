@@ -14,8 +14,8 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 {
 
 
-    protected $oldVersion = '2.0.2';
-    protected $newVersion = '2.2.0';
+    static protected $oldVersion = '2.0.2';
+    static protected $newVersion = '2.2.0';
 
 
     /**
@@ -35,18 +35,6 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
     {
         $this->_installNewSchema();
         parent::tearDown();
-    }
-
-
-    /**
-     * Install a schema by version number.
-     *
-     * @param string $version The version number.
-     */
-    public function _installSchema($version)
-    {
-        $slug = str_replace('.', '', $version);
-        call_user_func("nl_schema$slug");
     }
 
 
@@ -72,6 +60,18 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
+     * Install a schema by version number.
+     *
+     * @param string $version The version number.
+     */
+    public function _installSchema($version)
+    {
+        $slug = str_replace('.', '', $version);
+        call_user_func("nl_schema$slug");
+    }
+
+
+    /**
      * Install the previous schema.
      */
     public function _installOldSchema()
@@ -88,6 +88,19 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
     {
         $this->_clearSchema();
         $this->_installSchema(self::$newVersion);
+    }
+
+
+    /**
+     * Load a SQL fixture.
+     *
+     * @param string $fixture The name of the fixture.
+     */
+    public function _loadFixture($fixture)
+    {
+        $this->db->query(file_get_contents(
+            NL_TEST_DIR."/tests/migration/fixtures/$fixture.sql"
+        ));
     }
 
 
@@ -111,24 +124,13 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
-     * Fetch an exhibit by `title`.
+     * Fetch a record by `slug`.
      *
      * @param string $title
      */
-    protected function _getExhibitByTitle($title)
+    protected function _getRecordBySlug($slug)
     {
-        return $this->_exhibits->findBySql('title=?', array($title), true);
-    }
-
-
-    /**
-     * Fetch a record by `title`.
-     *
-     * @param string $title
-     */
-    protected function _getRecordByTitle($title)
-    {
-        return $this->_records->findBySql('title=?', array($title), true);
+        return $this->_records->findBySql('slug=?', array($slug), true);
     }
 
 
