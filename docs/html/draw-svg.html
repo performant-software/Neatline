@@ -1,0 +1,49 @@
+<h2 id="draw-svg">Draw SVG</h2>
+<p>The standard &quot;Draw Point/Line/Polygon&quot; tools are good for simple, diagrammatic shapes - dots, rectangles, circles, simple arrows, etc. The problem, though, is that they don&#39;t really scale well - what if you want to create a really smooth, intricate shape? Neatline exhibits are always exercises in information design, and there&#39;s a class of &quot;illustrative&quot; annotation that doesn&#39;t fit well into the blocky aesthetic supported by the standard-issue GIS tools. You could painstakingly sketch out complex illustrations using the line and polygon tools, but the resulting geometry is brittle and difficult to maintain. What if you decide later on that you want to change the drawing? You&#39;d have to manually reposition hundreds or thousands of points.</p>
+<p>To address this problem, Neatline 2.0 introduced the &quot;Draw SVG&quot; tool, which makes it possible to create high-fidelity, easily-maintained illustrations in specialized vector editing programs like <a href="http://www.adobe.com/products/illustrator.html">Adobe Illustrator</a> or <a href="http://inkscape.org/">Inkscape</a> (and even in-browser tools like <a href="http://svg-edit.googlecode.com/svn/branches/2.6/editor/svg-editor.html">SVG-Edit</a>) and import them directly into the Neatline editor. This way, you can do the difficult work of vector illustration in tools that are specifically designed for that task, and then drop the final products into Neatline exhibits. Later in, if you want to change something about the drawing, you can just go back to the original source file, make the change, and then update the Neatline exhibit with the new content.</p>
+<p>Neatline reads a commonly-used serialization format called SVG (Scalable Vector Graphics), a form of XML that encodes geometric information. To start, you&#39;ll need to save off your vector file as an SVG document.</p>
+<h3 id="generating-the-svg-document">Generating the SVG document</h3>
+<p>Using <strong><a href="http://www.adobe.com/products/illustrator.html">Adobe Illustrator</a></strong>: </p>
+<ol>
+<li><p>Click <strong>File</strong> &gt; <strong>Save As</strong>.</p>
+</li>
+<li><p>In the &quot;Format&quot; drop-down menu, select &quot;SVG (svg).&quot; The &quot;SVG Options&quot; modal should be displayed.</p>
+</li>
+<li><p>In the &quot;Fonts&quot; fieldset, set &quot;Type&quot; to <strong>Convert to outline</strong>. This ensures that means text elements in the document will be saved as raw geometric paths, not abstract <code>&lt;text&gt;</code> elements that can&#39;t be parsed by Neatline.</p>
+</li>
+<li><p>Click <strong>OK</strong> to save.</p>
+</li>
+</ol>
+<p>Using <strong><a href="http://inkscape.org/">Inkscape</a></strong>: </p>
+<ol>
+<li><p>Before saving, if you have any text elements in the document, first convert them to raw path elements by selecting them and entering Ctrl+Shift+C (see the <a href="http://wiki.inkscape.org/wiki/index.php/Inkscape_for_Adobe_Illustrator_users">documentation</a> for more inforation.)</p>
+</li>
+<li><p>Click <strong>File</strong> &gt; <strong>Save As</strong>.</p>
+</li>
+<li><p>In the dropdown menu for the format, select <strong>Plain SVG</strong>.</p>
+</li>
+<li><p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+<h3 id="importing-the-svg-into-neatline">Importing the SVG into Neatline</h3>
+<p>Once the SVG document is saved off, we can import it into Neatline:</p>
+<ol>
+<li><p>Find the <code>.svg</code> file that was created in the previous step. Open it with a plain text editor or a code editor by right clicking on the file and choosing a program from the list of options in &quot;Open With.&quot; It doesn&#39;t matter what you use - as long as you can get at the raw SVG output.</p>
+</li>
+<li><p>You should see a soup of dense XML markup with lots of numbers. Copy the content of the entire document to the clipboard.</p>
+</li>
+<li><p>Go back to the Neatline editor and click on the <strong>Enter Markup</strong> link next to the <strong>Draw SVG</strong> option.</p>
+</li>
+<li><p>Paste the SVG markup into the &quot;SVG&quot; box.</p>
+</li>
+<li><p>Optionally, set a custom &quot;Density&quot; value. This field controls the number of points that Neatline will generate when converting SVG <code>&lt;path&gt;</code> elements to hard-coded spatial coordinates - low numbers produce &quot;blocky&quot; shapes, high numbers produce &quot;smooth&quot; shapes.</p>
+</li>
+<li><p>Click <strong>Parse</strong>. Behind the scenes, Neatline converts the SVG markup into geospatial coordinates.</p>
+</li>
+<li><p>Now, you can drag the SVG document onto the map in the same way that you would drag out a regular polygon shape. Move the cursor to the location on the map where you want the <em>bottom left corner</em> of the illustration to be location, click down, and move the cursor in any direction. The illustration will scale and rotate according to the position of the mouse.</p>
+</li>
+<li><p>When the illustration is positioned correctly, release the mouse button to lock the geometry into place.</p>
+<p><strong>Tip</strong>: It&#39;s easy to make mistakes when doing this, and it often takes a couple tries to get things right. If you mess up, it&#39;s easiest just to totally wipe out the previous attempt by clicking the &quot;Clear all Geometry&quot; button at the bottom of the form.</p>
+</li>
+</ol>
+
