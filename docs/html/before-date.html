@@ -1,0 +1,24 @@
+<h2 id="before-date">Before Date</h2>
+<p>The date <em>before which</em> the record should be displayed in the exhibit.</p>
+<p><strong>If you&#39;re working with NeatlineSimile</strong>: If a &quot;Before Date&quot; is defined, then the record will only be displayed on the map when the timeline is centered on a date that falls before this date. Again, imagine you&#39;re working with a record that&#39;s plotted as a point on the map. If you set &quot;Before Date&quot; to <code>2000</code>, then the point will disappear when you scroll the timeline forward to 2001, and reappear when you scroll back to 1999.</p>
+<p>If both a &quot;After Date&quot; and a &quot;Before Date&quot; are defined, then the record will only be visible when the timeline is within the duration between the two dates. For example, if &quot;After Date&quot; is <code>2000</code>, and &quot;Before Date&quot; is <code>2010</code>, the record would be visible between those two dates, but not before <code>2000</code> or after <code>2010</code>. By stringing together collections of records with different after- and before-dates, it&#39;s possible to create complex time-series animations</p>
+<h3 id="examples">Examples</h3>
+<p>Dates need to follow the <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>standard:</p>
+<p><strong>CE Dates</strong></p>
+<ul>
+<li><code>1564</code> - The year 1564.</li>
+<li><code>1564-04</code> - April, 1564.</li>
+<li><code>1564-04-23</code> - April 23, 1564.</li>
+<li><code>1564-04-23T08:30</code> - 8:30 AM on April 23, 1564.</li>
+<li><code>1564-04-23T08:30:15</code> - 15 seconds after 8:30 AM on April 23, 1564.</li>
+</ul>
+<p><strong>BCE Dates</strong></p>
+<ul>
+<li><code>-001563</code> - The year 1564 BCE.</li>
+<li><code>-000563</code> - The year 564 BCE.</li>
+<li><code>-000063</code> - The year 64 BCE.</li>
+<li><code>-000003</code> - The year 4 BCE.    </li>
+<li><code>-001563-04</code> - April, 1564 BCE.</li>
+<li><code>-001563-04-23</code> - April 23, 1564 BCE.</li>
+</ul>
+

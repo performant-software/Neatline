@@ -1,0 +1,4 @@
+<h2 id="z-index">Z-Index</h2>
+<p>The &quot;stacking&quot; order of vector annotations and WMS layers on the map. For example, imagine you have one record that includes a polygon that traces the shape of Manhattan, and another record that traces the shape of Central Park. Since Central Park is contained inside of Manhattan, you&#39;ll want the Central Park polygon to be displayed &quot;on top of&quot; the Manhattan polygon - otherwise, it would be impossible for the user to click on Central Park. </p>
+<p>Z-indexes are just relative numbers that control the display order, with higher numbers stacking above lower numbers. So, in this case, you could set the Z-Index on Manhattan to <code>1</code>, and the Z-Index on Central Park to <code>2</code>, and Central Park would always be displayed on top of Manhattan.</p>
+

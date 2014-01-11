@@ -24,7 +24,7 @@
         <!-- Close button. -->
         <div class="modal-footer">
           <a name="close" class="btn btn-primary btn-lg" data-dismiss="modal">
-            <?php echo __('Got it'); ?>
+            <?php echo __('Close'); ?>
           </a>
         </div>
 

@@ -1,0 +1,33 @@
+<h2 id="tags">Tags</h2>
+<p>The tags field takes a comma-delimited list of one or more tags. For example:</p>
+<ul>
+<li><code>virginia</code></li>
+<li><code>precinct, democrat, 2004</code></li>
+<li><code>precinct, republican, 2012</code></li>
+<li><code>confederate, may_3</code></li>
+<li><code>union, may_4</code></li>
+</ul>
+<p>Neatline&#39;s tagging system provides a powerful and flexible way to slice and dice records into groups of related subsets. This can be useful for a number of reasons:</p>
+<ul>
+<li><p>Tags provide the &quot;selectors&quot; that makes it possible for the Neatline styling system to apply bulk updates to large collections of records. For example, you could do something like:</p>
+<pre><code class="lang-css">.virginia {
+  fill-color: #08c;
+}</code></pre>
+<p>This automatically updates the &quot;Fill Color&quot; of all records in the exhibit tagged with <code>virginia</code>, even if there are hundreds of thousands of them. For more infomation about this, head over to the &quot;Styling Exhibits with Neatline CSS&quot; guide.</p>
+</li>
+<li><p>You can filter the list of records in the content management pane in the editor with a query syntax. For example, you could search for:</p>
+<p><code>tags: precinct, democrat</code></p>
+<p>And just show the records that are tagged with both <code>precinct</code> and <code>democrat</code>.</p>
+</li>
+</ul>
+<h3 id="tag-requirements">Tag requirements</h3>
+<p>In order for the tags to work correctly, there are a couple important requirements:</p>
+<ol>
+<li><p>Tags <strong>can contain letters, numbers, and underscores (_), but no spaces or hyphens (-)</strong>. Technically, it&#39;s actually possible to use spaces and hyphens in tags, but it&#39;s strongly discouraged, because it effectively results in multiple taggings. For example, if you had a tag called <code>democrat-2012</code>, Neatline would consider the record to be tagged with <code>democrat</code>, <code>2012</code>, and <code>democrat-2012</code>. So, if you were to start using a more generalized tag called just <code>democrat</code>, queries for <code>democrat</code> would match the record, even though it&#39;s tagged with the more specific <code>democrat-2013</code>. This is confusing, but, unfortunately, the issue lies at the level of the fulltext searching system in the underlying MySQL database that we use to implement the feature. We&#39;re working on a fix for this - for now, if you need &quot;spaces&quot; in the tags, just use underscores (eg, <code>democrat_2012</code>).</p>
+</li>
+<li><p>Tags <strong>must be at least 4 characters in length</strong>. Again, this is actually a requirement that&#39;s built in to the fulltext searching system in MySQL. Really, though, this is a healthy constraint - tag names should be semantic and descriptive, so most tags should be longer than three letters anyway.</p>
+</li>
+<li><p>Tags <strong>must be separated by commas</strong>, or else Neatline won&#39;t know where one tag stops and another starts.</p>
+</li>
+</ol>
+

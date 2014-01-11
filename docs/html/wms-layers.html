@@ -1,0 +1,13 @@
+<h2 id="wms-layers">WMS Layers</h2>
+<p>A comma-delimited list of layers on the served defined by &quot;WMS Layers,&quot; such as:</p>
+<p><code>hotchkiss:fredericksburg,hotchkiss:chancellorsville</code></p>
+<p>Once a WMS address and layers, Neatline will automatically overlay the requested layers on top of the base layer. WMS layers react to many of the same styling, visibility, ordering settings that can be used to configure the behavior of regular vector annotations:</p>
+<ul>
+<li><p>Use the &quot;Fill Opacity&quot; field to control the opacity of the WMS overlay.</p>
+</li>
+<li><p>If an &quot;After Date&quot; or &quot;Before Date&quot; is defined for the record, the WMS layers will appear and disappear as the timeline is dragged in and out of the visibility interval defined by the date fields. For example, if the &quot;After Date&quot; is set to <code>2000</code>, the WMS layer will be invisible when the timeline is focused at <code>1999</code>.</p>
+</li>
+<li><p>If a &quot;Min Zoom&quot; or &quot;Max Zoom&quot; is defined for the record, the WMS layer will appear and disappear as the map is zoomed in and out of the visibility interval defined by the zoom fields. For example, if &quot;Min Zoom&quot; is set to <code>10</code>, the WMS layer will be invisible when the map is at zoom level <code>9</code>.</p>
+</li>
+</ul>
+
