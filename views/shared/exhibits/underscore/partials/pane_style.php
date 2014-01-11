@@ -24,6 +24,7 @@
 
   <?php echo common('neatline/select', array(
       'name'    => 'widgets',
+      'modal'   => 'widgets',
       'label'   => 'Widgets',
       'bind'    => 'record:widgets | commaDelimited',
       'options' => nl_getRecordWidgets(),
