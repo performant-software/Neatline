@@ -22,14 +22,23 @@ function nl_getStrings($file)
     // Load the `strings.json` file.
     $strings = Zend_Json::decode(file_get_contents($file));
 
-    // XXX: PHP 5.3+. Is that OK?
     // Translate the string values.
-    array_walk_recursive($strings, function(&$value) {
-        $value = __($value);
-    });
+    array_walk_recursive($strings, 'nl_translate');
 
     return $strings;
 
+}
+
+
+/**
+ * Translate an individual string. Used as a callback to translate all of the
+ * strings in the array derived from the `strings.json` file in-place.
+ *
+ * @param string $string The string to be translated, passed by reference.
+ */
+function nl_translate(&$string)
+{
+    $string = __($string);
 }
 
 
