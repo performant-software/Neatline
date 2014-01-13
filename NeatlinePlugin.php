@@ -76,7 +76,7 @@ SQL
         // by way of version 2.0.
 
         if ($old <= '2.0.0') throw new Exception(
-            "Can't upgrade from 1.x. Update to 2.0 first"
+            "Can't upgrade directly to 2.2.0 from 1.x! Update to 2.0 first."
         );
 
         // Otherwise, run 2.x migrations normally.
