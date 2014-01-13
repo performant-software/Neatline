@@ -2,7 +2,11 @@
 
 #### Added Features
 
+  - Adds a new interface for linking Neatline records to Omeka items that makes it possible to browse the entire collection of items, run full-text searches, and instantaneously preview the Omeka content (metadata, images, etc.) as it will appear in the public Neatline exhibit.
+
   - When Omeka items are imported into Neatline, plain-text WKT or KML values in the Dublin Core "Coverage" field are now automatically imported Neatline's `coverage` field and display on the map. (Previously, this only worked if the coverage on the item was created with the Neatline Features plugin.)
+
+  - Adds a system of interactive documentation that builds reference materials for each individual input and control in the editor directly into the interface. Now, the heading for each input is followed by a **?** button that, when clicked, overlays a document with information about what the control does, how to use it, and how it interacts with other functionality in the editor.
 
   - Adds a link to the Neatline exhibits browse page to the public navigation.
 
