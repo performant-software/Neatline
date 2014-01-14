@@ -15,6 +15,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     static protected $oldVersion = '2.0.2';
+    static protected $newVersion = '2.2.0';
 
 
     /**
@@ -32,7 +33,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
      */
     public function tearDown()
     {
-        $this->_installCurrentSchema();
+        $this->_installSchema(self::$newVersion);
         parent::tearDown();
     }
 
@@ -72,11 +73,12 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
-     * Install the current schema.
+     * Migration from the old version.
      */
-    public function _installCurrentSchema()
+    protected function _upgrade()
     {
-        $this->helper->pluginBroker->callHook('install', array(), 'Neatline');
+        $args = array('old_version' => self::$oldVersion);
+        $this->helper->pluginBroker->callHook('upgrade', $args, 'Neatline');
     }
 
 
@@ -90,16 +92,6 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
         $this->db->query(file_get_contents(
             NL_TEST_DIR."/tests/migration/fixtures/$fixture.sql"
         ));
-    }
-
-
-    /**
-     * Migration from the old version.
-     */
-    protected function _upgrade()
-    {
-        $args = array('old_version' => self::$oldVersion);
-        $this->helper->pluginBroker->callHook('upgrade', $args, 'Neatline');
     }
 
 
