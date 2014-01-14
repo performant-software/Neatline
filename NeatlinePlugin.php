@@ -72,26 +72,42 @@ SQL
 
         $old = $args['old_version'];
 
-        // Block migrations from pre-2.0 versions, which have to be upgraded
-        // by way of version 2.0.
+        // If the plugin is being upgraded from the 1.x series, just run the
+        // 2.0.0 migration, which encompasses the alpha migrations.
 
-        if ($old <= '2.0.0') throw new Exception(
-            "Can't upgrade directly to 2.2.0 from 1.x! Update to 2.0 first."
-        );
+        if (version_compare($old, '1.1.3', '<=')) {
+            new Neatline_Migration_200($this, $this->_db);
+        }
 
         // Otherwise, run 2.x migrations normally.
 
         else {
 
-            if ($old < '2.0.2') {
+            if (version_compare($old, '2.0-alpha2', '<')) {
+                new Neatline_Migration_20alpha2($this, $this->_db);
+            }
+
+            if (version_compare($old, '2.0-rc1', '<')) {
+                new Neatline_Migration_20rc1($this, $this->_db);
+            }
+
+            if (version_compare($old, '2.0-rc3', '<')) {
+                new Neatline_Migration_20rc3($this, $this->_db);
+            }
+
+            if (version_compare($old, '2.0-rc4', '<')) {
+                new Neatline_Migration_20rc4($this, $this->_db);
+            }
+
+            if (version_compare($old, '2.0.2', '<')) {
                 new Neatline_Migration_202($this, $this->_db);
             }
 
-            if ($old < '2.1.2') {
+            if (version_compare($old, '2.1.2', '<')) {
                 new Neatline_Migration_212($this, $this->_db);
             }
 
-            if ($old < '2.2.0') {
+            if (version_compare($old, '2.2.0', '<')) {
                 new Neatline_Migration_220($this, $this->_db);
             }
 

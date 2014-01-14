@@ -130,7 +130,7 @@ SQL;
 
         // (Re)install the up-to-date Neatline tables.
 
-        $this->plugin->hookInstall();
+        nl_schema200();
 
         // Install the SIMILE exhibit expansion table.
 

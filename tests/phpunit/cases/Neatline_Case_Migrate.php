@@ -114,7 +114,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
         $this->helper->pluginBroker->setCurrentPluginDirName('Neatline');
         $plugin = new NeatlinePlugin();
 
-        // Upgrade from 1.1.3 -> 2.0.0.
+        // Run the migration.
         $plugin->hookUpgrade(array(
             'old_version' => self::$oldVersion,
             'new_version' => self::$newVersion

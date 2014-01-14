@@ -13,7 +13,6 @@ abstract class Neatline_Migration_Abstract
 {
 
 
-    protected $plugin;
     protected $db;
 
 
@@ -24,20 +23,12 @@ abstract class Neatline_Migration_Abstract
 
 
     /**
-     * Store plugin and database, call `migrate`.
-     *
-     * @param NeatlinePlugin $plugin The plugin manager class.
-     * @param $db Omeka_Db $db The database connection.
-     * @param boolean $start If true, start migration automatically.
+     * Get the database, call `migrate`.
      */
-    public function __construct($plugin, $db, $start=true)
+    public function __construct()
     {
-
-        $this->plugin = $plugin;
-        $this->db = $db;
-
-        if ($start) $this->migrate();
-
+        $this->db = get_db();
+        $this->migrate();
     }
 
 
