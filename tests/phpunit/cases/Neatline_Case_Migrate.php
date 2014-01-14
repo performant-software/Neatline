@@ -15,7 +15,6 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     static protected $oldVersion = '2.0.2';
-    static protected $newVersion = '2.2.0';
 
 
     /**
@@ -29,11 +28,11 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
-     * Restore the new schema.
+     * Reinstall the current schema.
      */
     public function tearDown()
     {
-        $this->_installSchema(self::$newVersion);
+        $this->_installCurrentSchema();
         parent::tearDown();
     }
 
@@ -73,6 +72,15 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
+     * Install the current schema.
+     */
+    public function _installCurrentSchema()
+    {
+        $this->helper->pluginBroker->callHook('install', array(), 'Neatline');
+    }
+
+
+    /**
      * Load a SQL fixture.
      *
      * @param string $fixture The name of the fixture.
@@ -86,21 +94,12 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
-     * Trigger the `upgrade` hook.
+     * Migration from the old version.
      */
     protected function _upgrade()
     {
-
-        // Create plugin manager class.
-        $this->helper->pluginBroker->setCurrentPluginDirName('Neatline');
-        $plugin = new NeatlinePlugin();
-
-        // Run the migration.
-        $plugin->hookUpgrade(array(
-            'old_version' => self::$oldVersion,
-            'new_version' => self::$newVersion
-        ));
-
+        $args = array('old_version' => self::$oldVersion);
+        $this->helper->pluginBroker->callHook('upgrade', $args, 'Neatline');
     }
 
 

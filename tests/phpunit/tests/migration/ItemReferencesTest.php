@@ -9,7 +9,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class MigrateTest_Titles extends Neatline_Case_Migrate
+class MigrateTest_ItemReferences extends Neatline_Case_Migrate
 {
 
 

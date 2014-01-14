@@ -1,0 +1,4 @@
+; Rename this file to `migration.ini` and provide old and new versions between
+; which Neatline should be migrated before each test case.
+
+old="2.0.2"
