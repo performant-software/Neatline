@@ -18,9 +18,13 @@ class Neatline_Migration_220 extends Neatline_Migration_Abstract
      */
     public function migrate()
     {
+
+        $this->_backupRecordsTable('220');
+
         $this->_addItemTitleField();
         $this->_copyItemTitles();
         $this->_unsetRecordFields();
+
     }
 
 
