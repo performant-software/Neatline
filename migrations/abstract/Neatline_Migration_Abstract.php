@@ -39,7 +39,7 @@ abstract class Neatline_Migration_Abstract
      */
     protected function _backupExhibitsTable($suffix)
     {
-        $this->_backuptable("{$this->db->prefix}neatline_exhibits", $suffix);
+        $this->_backupTable("{$this->db->prefix}neatline_exhibits", $suffix);
     }
 
 
@@ -50,7 +50,7 @@ abstract class Neatline_Migration_Abstract
      */
     protected function _backupRecordsTable($suffix)
     {
-        $this->_backuptable("{$this->db->prefix}neatline_records", $suffix);
+        $this->_backupTable("{$this->db->prefix}neatline_records", $suffix);
     }
 
 
@@ -62,14 +62,19 @@ abstract class Neatline_Migration_Abstract
      */
     protected function _backupTable($table, $suffix)
     {
+
+        // Copy the table.
         $this->db->query(<<<SQL
         CREATE TABLE {$table}_{$suffix} LIKE $table
 SQL
 );
+
+        // Duplicate the rows.
         $this->db->query(<<<SQL
         INSERT INTO {$table}_{$suffix} SELECT * FROM $table
 SQL
 );
+
     }
 
 

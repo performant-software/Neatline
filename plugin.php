@@ -48,6 +48,7 @@ require_once NL_DIR.'/helpers/Assets.php';
 require_once NL_DIR.'/helpers/Coverage.php';
 require_once NL_DIR.'/helpers/Globals.php';
 require_once NL_DIR.'/helpers/Layers.php';
+require_once NL_DIR.'/helpers/Migrations.php';
 require_once NL_DIR.'/helpers/Mysql.php';
 require_once NL_DIR.'/helpers/Plugins.php';
 require_once NL_DIR.'/helpers/Schemas.php';

@@ -76,42 +76,12 @@ SQL
         // 2.0.0 migration, which encompasses the alpha migrations.
 
         if (version_compare($old, '1.1.3', '<=')) {
-            new Neatline_Migration_200($this, $this->_db);
+            new Neatline_Migration_200();
         }
 
         // Otherwise, run 2.x migrations normally.
 
-        else {
-
-            if (version_compare($old, '2.0-alpha2', '<')) {
-                new Neatline_Migration_20alpha2($this, $this->_db);
-            }
-
-            if (version_compare($old, '2.0-rc1', '<')) {
-                new Neatline_Migration_20rc1($this, $this->_db);
-            }
-
-            if (version_compare($old, '2.0-rc3', '<')) {
-                new Neatline_Migration_20rc3($this, $this->_db);
-            }
-
-            if (version_compare($old, '2.0-rc4', '<')) {
-                new Neatline_Migration_20rc4($this, $this->_db);
-            }
-
-            if (version_compare($old, '2.0.2', '<')) {
-                new Neatline_Migration_202($this, $this->_db);
-            }
-
-            if (version_compare($old, '2.1.2', '<')) {
-                new Neatline_Migration_212($this, $this->_db);
-            }
-
-            if (version_compare($old, '2.2.0', '<')) {
-                new Neatline_Migration_220($this, $this->_db);
-            }
-
-        }
+        else nl_run2xMigrations($old);
 
     }
 

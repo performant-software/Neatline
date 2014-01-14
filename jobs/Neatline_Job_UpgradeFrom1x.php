@@ -24,7 +24,7 @@ class Neatline_Job_UpgradeFrom1x extends Omeka_Job_AbstractJob
         $helper->migrateData();
 
         // Migrate to 2.x.
-        nl_run2xMigrations();
+        nl_run2xMigrations('2.0.0');
 
     }
 
