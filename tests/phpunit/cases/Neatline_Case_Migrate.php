@@ -24,7 +24,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->_installOldSchema();
+        $this->_installSchema(self::$oldVersion);
     }
 
 
@@ -33,7 +33,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
      */
     public function tearDown()
     {
-        $this->_installNewSchema();
+        $this->_installSchema(self::$newVersion);
         parent::tearDown();
     }
 
@@ -66,28 +66,9 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
      */
     public function _installSchema($version)
     {
+        $this->_clearSchema();
         $slug = str_replace('.', '', $version);
         call_user_func("nl_schema$slug");
-    }
-
-
-    /**
-     * Install the previous schema.
-     */
-    public function _installOldSchema()
-    {
-        $this->_clearSchema();
-        $this->_installSchema(self::$oldVersion);
-    }
-
-
-    /**
-     * Install the current schema.
-     */
-    public function _installNewSchema()
-    {
-        $this->_clearSchema();
-        $this->_installSchema(self::$newVersion);
     }
 
 
