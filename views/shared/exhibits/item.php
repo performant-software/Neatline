@@ -20,6 +20,8 @@
   <?php echo files_for_item(); ?>
 <?php endif; ?>
 
+<hr />
+
 <!-- Link. -->
 <?php echo link_to(
   get_current_record('item'), 'show', 'View the item in Omeka'
