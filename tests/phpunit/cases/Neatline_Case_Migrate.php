@@ -39,6 +39,46 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
+     * Install a schema by version number.
+     *
+     * @param string $version The version number.
+     */
+    protected function _installSchema($version)
+    {
+
+        // Drop all tables.
+        $this->_clearSchema();
+
+        // Install new schema.
+        $slug = str_replace(array('.', '-'), '', $version);
+        call_user_func("nl_schema$slug");
+
+    }
+
+
+    /**
+     * Drop all Neatline tables.
+     */
+    protected function _clearSchema()
+    {
+
+        // Show all tables in the installation.
+        foreach ($this->db->query('SHOW TABLES')->fetchAll() as $row) {
+
+            // Extract the table name.
+            $table = array_values($row)[0];
+
+            // If the table is a Neatline table, drop it.
+            if (in_array('neatline', explode('_', $table))) {
+                $this->db->query("DROP TABLE $table");
+            }
+
+        }
+
+    }
+
+
+    /**
      * Migration from the old version.
      */
     protected function _upgrade()
