@@ -425,9 +425,9 @@ SQL
 
 
 /**
- * 2.0.0-rc4 schema.
+ * 2.0-rc4 schema.
  */
-function nl_schema200rc4()
+function nl_schema20rc4()
 {
 
     $db = get_db();
@@ -526,9 +526,9 @@ SQL
 
 
 /**
- * 2.0.0-rc3 schema.
+ * 2.0-rc3 schema.
  */
-function nl_schema200rc3()
+function nl_schema20rc3()
 {
 
     $db = get_db();
@@ -622,9 +622,9 @@ SQL
 
 
 /**
- * 2.0.0-rc1 schema.
+ * 2.0-rc1 schema.
  */
-function nl_schema200rc1()
+function nl_schema20rc1()
 {
 
     $db = get_db();

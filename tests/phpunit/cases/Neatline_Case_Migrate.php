@@ -39,40 +39,6 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     /**
-     * Drop all Neatline tables.
-     */
-    protected function _clearSchema()
-    {
-
-        // Show all tables in the installation.
-        foreach ($this->db->query('SHOW TABLES')->fetchAll() as $row) {
-
-            // Extract the raw name.
-            $table = array_values($row)[0];
-
-            if (in_array('neatline', explode('_', $table))) {
-                $this->db->query("DROP TABLE $table");
-            }
-
-        }
-
-    }
-
-
-    /**
-     * Install a schema by version number.
-     *
-     * @param string $version The version number.
-     */
-    public function _installSchema($version)
-    {
-        $this->_clearSchema();
-        $slug = str_replace('.', '', $version);
-        call_user_func("nl_schema$slug");
-    }
-
-
-    /**
      * Migration from the old version.
      */
     protected function _upgrade()
@@ -87,7 +53,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
      *
      * @param string $fixture The name of the fixture.
      */
-    public function _loadFixture($fixture)
+    protected function _loadFixture($fixture)
     {
         $this->db->query(file_get_contents(
             NL_TEST_DIR."/tests/migration/fixtures/$fixture.sql"

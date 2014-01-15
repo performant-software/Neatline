@@ -10,4 +10,5 @@ _SpecRunner.html
 
 /layers
 !/layers/default.json
+/tests/phpunit/migration.ini
 /tests/phpunit/plugins.ini

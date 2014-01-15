@@ -40,6 +40,9 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
         // Register Neatline partials.
         get_view()->addScriptPath(NL_DIR.'/views/shared');
 
+        // Upgrade version.
+        $this->_runMigration();
+
     }
 
 
@@ -58,6 +61,90 @@ SQL
     }
 
 
+    // MIGRATIONS
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * TODO|dev
+     * Migrate from the version defined in the `migration.ini` file.
+     */
+    protected function _runMigration()
+    {
+
+        // If a `migration.ini` file exists.
+        if (file_exists(NL_TEST_DIR.'/migration.ini')) {
+
+            // Parse `migration.ini`.
+            $migration = new Zend_Config_Ini(NL_TEST_DIR.'/migration.ini');
+
+            // Migrate from the old version.
+            $this->_upgradeFrom($migration->oldVersion);
+
+        }
+
+    }
+
+
+    /**
+     * Migrate from a previous schema version.
+     *
+     * @param string $version The version to upgrade from.
+     */
+    protected function _upgradeFrom($version)
+    {
+
+        // Install the old schema.
+        $this->_installSchema($version);
+
+        // Upgrade from the old version.
+        $this->helper->pluginBroker->callHook('upgrade',
+            array('old_version' => $version), 'Neatline'
+        );
+
+    }
+
+
+    /**
+     * Install a schema by version number.
+     *
+     * @param string $version The version number.
+     */
+    protected function _installSchema($version)
+    {
+
+        // Drop all tables.
+        $this->_clearSchema();
+
+        // Install new schema.
+        $slug = str_replace(array('.', '-'), '', $version);
+        call_user_func("nl_schema$slug");
+
+    }
+
+
+    /**
+     * Drop all Neatline tables.
+     */
+    protected function _clearSchema()
+    {
+
+        // Show all tables in the installation.
+        foreach ($this->db->query('SHOW TABLES')->fetchAll() as $row) {
+
+            // Extract the table name.
+            $table = array_values($row)[0];
+
+            // If the table is a Neatline table, drop it.
+            if (in_array('neatline', explode('_', $table))) {
+                $this->db->query("DROP TABLE $table");
+            }
+
+        }
+
+    }
+
+
     // PLUGINS
     // ------------------------------------------------------------------------
 
@@ -68,7 +155,7 @@ SQL
     protected function _installSiblingPlugins()
     {
 
-        // If a `plugin.ini` file exists.
+        // If a `plugins.ini` file exists.
         if (file_exists(NL_TEST_DIR.'/plugins.ini')) {
 
             // Parse `plugins.ini`.
