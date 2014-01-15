@@ -72,16 +72,29 @@ SQL
 
         $old = $args['old_version'];
 
-        // If the plugin is being upgraded from the 1.x series, just run the
-        // 2.0.0 migration, which encompasses the alpha migrations.
+        // If trying to upgrade from a pre-2.0 release, throw an error.
 
-        if (version_compare($old, '1.1.3', '<=')) {
-            new Neatline_Migration_200();
-        }
+        if (version_compare($old, '2.0.0', '<')) throw new Exception(
+            "Can't upgrade directly from $old. Upgrade to version 2.0 first!"
+        );
 
         // Otherwise, run 2.x migrations normally.
 
-        else nl_run2xMigrations($old);
+        else {
+
+            if (version_compare($old, '2.0.2', '<')) {
+                new Neatline_Migration_202();
+            }
+
+            if (version_compare($old, '2.1.2', '<')) {
+                new Neatline_Migration_212();
+            }
+
+            if (version_compare($old, '2.2.0', '<')) {
+                new Neatline_Migration_220();
+            }
+
+        }
 
     }
 
