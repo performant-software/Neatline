@@ -465,6 +465,17 @@ SQL
 
 
     /**
+     * Fetch a record by `slug`.
+     *
+     * @param string $title
+     */
+    protected function _getRecordBySlug($slug)
+    {
+        return $this->_records->findBySql('slug=?', array($slug), true);
+    }
+
+
+    /**
      * Get the body of the last response.
      *
      * @return array The response body.
