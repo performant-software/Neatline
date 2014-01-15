@@ -98,8 +98,8 @@ SQL
         $this->_installSchema($version);
 
         // Upgrade from the old version.
-        $this->helper->pluginBroker->callHook('upgrade',
-            array('old_version' => $version), 'Neatline'
+        $this->helper->pluginBroker->callHook(
+            'upgrade', array('old_version' => $version), 'Neatline'
         );
 
     }
