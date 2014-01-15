@@ -17,5 +17,5 @@
 <!-- Files. -->
 <?php if (metadata('item', 'has files')): ?>
   <h3><?php echo __('Files'); ?></h3>
-  <?php echo files_for_item(array('imageSize' => 'fullsize')); ?>
+  <?php echo files_for_item(); ?>
 <?php endif; ?>
