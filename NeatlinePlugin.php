@@ -74,9 +74,12 @@ SQL
 
         // If trying to upgrade from a pre-2.0 release, throw an error.
 
-        if (version_compare($old, '2.0.0', '<')) throw new Exception(
-            "Can't upgrade directly from $old. Upgrade to version 2.0 first!"
-        );
+        if (version_compare($old, '2.0.0', '<')) {
+            throw new Omeka_Plugin_Installer_Exception(
+                "Pre-2.0 versions of Neatline can't be upgraded directly to
+                version 2.2. Upgrade to version 2.0 first!"
+            );
+        }
 
         // Otherwise, run 2.x migrations normally.
 
