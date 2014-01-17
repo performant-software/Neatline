@@ -10,21 +10,31 @@
 
 module.exports = function(grunt) {
 
-  grunt.loadNpmTasks('grunt-markdown');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-compress');
+
+  // File utilities:
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-markdown');
+
+  // Directory utilities:
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+
+  // Test runners:
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-copy');
+
+  // Filesystem helpers:
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-shell');
 
+  // Config files:
   var pkg = grunt.file.readJSON('package.json');
   var paths = grunt.file.readJSON('paths.json');
+
 
   grunt.initConfig({
 
@@ -475,6 +485,7 @@ module.exports = function(grunt) {
 
   });
 
+
   // Run the tests by default.
   grunt.registerTask('default', 'test:all');
 
@@ -545,5 +556,6 @@ module.exports = function(grunt) {
     'compile:min',
     'compress'
   ]);
+
 
 };
