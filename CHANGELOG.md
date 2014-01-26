@@ -188,15 +188,15 @@
 
   - Just before executing a query, the records API will now pass out the fully-formed `Omeka_Db_Select` instance by way of the `neatline_query_records` filter, which can be used by sub-plugins to implement custom API parameters.
 
-  - For consistency with the rest of the theme, exhibit-specific themes now need to define a ```show.php``` file in order to override the default template, instead of ```template.php```.
+  - For consistency with the rest of the theme, exhibit-specific themes now need to define a `show.php` file in order to override the default template, instead of `template.php`.
 
-  - Previously, custom templates for Omeka items imported into Neatline exhibits could be defined under ```neatline/exhibits``` in the public theme. Now, the code will instead look for these templates under the _exhibit-specific_ theme directory for the exhibit. For example, if an exhibit has a URL slug of ```exhibit-slug```, the item templates will now be searched for under ```neatline/exhibits/themes/exhibit-slug```, along with the rest of the exhibit-specific assets.
+  - Previously, custom templates for Omeka items imported into Neatline exhibits could be defined under `neatline/exhibits` in the public theme. Now, the code will instead look for these templates under the _exhibit-specific_ theme directory for the exhibit. For example, if an exhibit has a URL slug of `exhibit-slug`, the item templates will now be searched for under `neatline/exhibits/themes/exhibit-slug`, along with the rest of the exhibit-specific assets.
 
-  - Previously, all layer definitions were included in a single ```layers.json``` file in the top-level plugin directory. This file has been moved to ```/layers/default.json```, and, instead of adding layers to ```defaults.json```, it's now possible to provide definitions for any number of layer groups in separate files. Eg, ```wms.json```, ```tilestream.json```, etc.
+  - Previously, all layer definitions were included in a single `layers.json` file in the top-level plugin directory. This file has been moved to `/layers/default.json`, and, instead of adding layers to `defaults.json`, it's now possible to provide definitions for any number of layer groups in separate files. Eg, `wms.json`, `tilestream.json`, etc.
 
 #### Bug Fixes
 
-  - Fixes bug found by [Mark Olson](mailto:mark.olson@duke.edu) in the SVG-to-WKT conversion library that was causing SVG documents with complex polygonal elements (eg ```<polygon>```, ```<polyline>```) to fail to parse when pasted into the Neatline editor.
+  - Fixes bug found by [Mark Olson](mailto:mark.olson@duke.edu) in the SVG-to-WKT conversion library that was causing SVG documents with complex polygonal elements (eg `<polygon>`, `<polyline>`) to fail to parse when pasted into the Neatline editor.
 
   - Previously, exhibits marked public were not getting filtered out of the public browse listings, and were visible to all users. This is fixed.
 
@@ -222,17 +222,17 @@
 
   - Makes it possible to create custom themes for individual Neatline exhibits:
 
-    - Themes are defined by creating a directory with a name that matches an exhibit slug under ```neatline/exhibits/themes/```, relative to the root of the public theme. For example, if an exhibit has a slug of ```exhibit-slug```, Neatline will load theme assets from ```neatline/exhibits/themes/exhibit-slug```.
+    - Themes are defined by creating a directory with a name that matches an exhibit slug under `neatline/exhibits/themes/`, relative to the root of the public theme. For example, if an exhibit has a slug of `exhibit-slug`, Neatline will load theme assets from `neatline/exhibits/themes/exhibit-slug`.
 
-    - Inside the theme directory, a ```tempalate.php``` file can be defined. If present, this template will be rendered instead of the default ```show.php``` that ships with Neatline.
+    - Inside the theme directory, a `tempalate.php` file can be defined. If present, this template will be rendered instead of the default `show.php` that ships with Neatline.
 
-    - All ```.js``` and ```.css``` files in the directory will be queued in the public view for the exhibit after the core application assets.
+    - All `.js` and `.css` files in the directory will be queued in the public view for the exhibit after the core application assets.
 
-  - The exhibits controller now respects the two separate options for admin and public page lengths (```per_page_admin```, ```per_page_public```).
+  - The exhibits controller now respects the two separate options for admin and public page lengths (`per_page_admin`, `per_page_public`).
 
 #### Changed Features
 
-  - In the ```item.php``` template used to determine the structure of the compiled item metadata in Neatline records, moves the file display below the default metadata output to conform with Omeka's default item show view.
+  - In the `item.php` template used to determine the structure of the compiled item metadata in Neatline records, moves the file display below the default metadata output to conform with Omeka's default item show view.
 
   - When the static bubble is displayed in response to the cursor hovering on a map feature, and then the cursor leaves the exhibit without first leaving the feature (eg, when the edge of the map occludes part of the feature), hide the static bubble as if the feature had been unselected. This prevents the bubble from getting "stuck" until the cursor re-enters the exhibit.
 
