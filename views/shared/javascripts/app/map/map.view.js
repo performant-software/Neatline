@@ -213,11 +213,18 @@ Neatline.module('Map', function(Map) {
       var w = this.exhibit.image_width;
 
       var image = new OpenLayers.Layer.Image(
+
+        // Title, image URL, and dimensions.
         this.exhibit.title, this.exhibit.image_layer,
         new OpenLayers.Bounds(0, 0, w, h),
-        new OpenLayers.Size(w/5, h/5), {
+        new OpenLayers.Size(w/5, h/5),
+
+        {
+          // Add pan padding around the edges of the image 
+          maxExtent: new OpenLayers.Bounds(-1000, -1000, w+1000, h+1000),
           numZoomLevels: this.exhibit.zoom_levels
         }
+
       );
 
       this.map.addLayer(image);
