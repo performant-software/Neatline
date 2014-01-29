@@ -221,7 +221,7 @@ Neatline.module('Map', function(Map) {
 
         {
           // Add pan padding around the edges of the image 
-          maxExtent: new OpenLayers.Bounds(-1000, -1000, w+1000, h+1000),
+          maxExtent: new OpenLayers.Bounds(-w*2, -h*2, w*2, h*2),
           numZoomLevels: this.exhibit.zoom_levels
         }
 
