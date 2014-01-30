@@ -108,7 +108,9 @@ SQL
      */
     protected function _skipIfPlugin($pluginName)
     {
-        if (plugin_is_active($pluginName)) $this->markTestSkipped();
+        if (plugin_is_active($pluginName)) {
+            $this->markTestSkipped("Plugin $pluginName must be installed");
+        }
     }
 
 
