@@ -93,11 +93,16 @@ SQL
      */
     protected function _installPluginOrSkip($pluginName)
     {
+
+        // Break if already isntalled.
+        if (plugin_is_active($pluginName)) return;
+
         try {
             $this->helper->setUp($pluginName);
         } catch (Exception $e) {
             $this->markTestSkipped("Plugin $pluginName can't be installed.");
         }
+
     }
 
 
