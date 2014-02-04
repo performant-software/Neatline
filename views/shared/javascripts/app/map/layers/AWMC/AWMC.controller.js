@@ -36,7 +36,6 @@ Neatline.module('Map.Layers.AWMC', function(AWMC) {
         'http://a.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png'
       ], {
         sphericalMercator: true,
-        isBaseLayer: json.properties.isBaseLayer,
         wrapDateLine: true
       });
 

@@ -69,139 +69,14 @@
       "properties": {
         "provider": "terrain"
       }
-    }
-
-  ],
-
-  "Ancient World Mapping Center Tiles": [
+    },
 
     {
       "title": "AWMC Base Map",
       "id": "AwmcBase",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.map-knmctlkh",
-        "isBaseLayer": true
-      }
-    },
-
-    {
-      "title": "AWMC Coast Outline",
-      "id": "AwmcCoastOutline",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.eoupu8fr",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Roads",
-      "id": "AwmcRoads",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.awmc-roads",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Benthos Water",
-      "id": "AwmcBenthosWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.s5l5l8fr",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Inland Water",
-      "id": "AwmcInlandWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.awmc-inland-water",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC River Polygons",
-      "id": "AwmcRiverPolygons",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.9e3lerk9",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Water Course Center Lines",
-      "id": "AwmcWaterCourseCenterLines",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.awmc-water-courses",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Base Open Water Polygons",
-      "id": "AwmcBaseOpenWaterPolygons",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.h0rdaemi",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Archaic Water",
-      "id": "AwmcArchaicWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.yyuba9k9",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Classical Water",
-      "id": "AwmcClassicalWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.l5xc4n29",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Hellenistic Water",
-      "id": "AwmcHellenisticWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.gq0ssjor",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Roman Water",
-      "id": "AwmcRomanWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.ymnrvn29",
-        "isBaseLayer": false
-      }
-    },
-
-    {
-      "title": "AWMC Late Antiquity Water",
-      "id": "AwmcLateAntiquityWater",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.t12it3xr",
-        "isBaseLayer": false
+        "id": "isawnyu.map-knmctlkh"
       }
     }
 
