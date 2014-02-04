@@ -5,15 +5,13 @@
     {
       "title": "OpenStreetMap",
       "id": "OpenStreetMap",
-      "type": "OpenStreetMap",
-      "isBaseLayer": true
+      "type": "OpenStreetMap"
     },
 
     {
       "title": "Google Physical",
       "id": "GooglePhysical",
       "type": "Google",
-      "isBaseLayer": true,
       "properties": {
         "provider": "physical"
       }
@@ -23,7 +21,6 @@
       "title": "Google Streets",
       "id": "GoogleStreets",
       "type": "Google",
-      "isBaseLayer": true,
       "properties": {
         "provider": "streets"
       }
@@ -33,7 +30,6 @@
       "title": "Google Hybrid",
       "id": "GoogleHybrid",
       "type": "Google",
-      "isBaseLayer": true,
       "properties": {
         "provider": "hybrid"
       }
@@ -43,7 +39,6 @@
       "title": "Google Satellite",
       "id": "GoogleSatellite",
       "type": "Google",
-      "isBaseLayer": true,
       "properties": {
         "provider": "satellite"
       }
@@ -53,7 +48,6 @@
       "title": "Stamen Toner",
       "id": "StamenToner",
       "type": "Stamen",
-      "isBaseLayer": true,
       "properties": {
         "provider": "toner"
       }
@@ -63,7 +57,6 @@
       "title": "Stamen Watercolor",
       "id": "StamenWatercolor",
       "type": "Stamen",
-      "isBaseLayer": true,
       "properties": {
         "provider": "watercolor"
       }
@@ -73,7 +66,6 @@
       "title": "Stamen Terrain",
       "id": "StamenTerrain",
       "type": "Stamen",
-      "isBaseLayer": true,
       "properties": {
         "provider": "terrain"
       }
@@ -83,7 +75,6 @@
       "title": "AWMC Base Map",
       "id": "AwmcBase",
       "type": "AWMC",
-      "isBaseLayer": true,
       "properties": {
         "id": "isawnyu.map-knmctlkh"
       }
