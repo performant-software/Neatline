@@ -1,7 +1,7 @@
 /*!
  * URI.js - Mutating URLs
  *
- * Version: 1.12.0
+ * Version: 1.11.2
  *
  * Author: Rodney Rehm
  * Web: http://medialize.github.com/URI.js/
@@ -52,8 +52,6 @@ function URI(url, base) {
 
     return this;
 };
-
-URI.version = '1.12.0';
 
 var p = URI.prototype;
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -171,7 +169,7 @@ URI.duplicateQueryParameters = false;
 // state: replaces + with %20 (space in query strings)
 URI.escapeQuerySpace = true;
 // static properties
-URI.protocol_expression = /^[a-z][a-z0-9.+-]*$/i;
+URI.protocol_expression = /^[a-z][a-z0-9-+-]*$/i;
 URI.idn_expression = /[^a-z0-9\.-]/i;
 URI.punycode_expression = /(xn--)/i;
 // well, 333.444.555.666 matches, but it sure ain't no IPv4 - do we care?
@@ -180,19 +178,8 @@ URI.ip4_expression = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
 // source: http://forums.intermapper.com/viewtopic.php?p=1096#1096
 // specification: http://www.ietf.org/rfc/rfc4291.txt
 URI.ip6_expression = /^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/;
-// expression used is "gruber revised" (@gruber v2) determined to be the
-// best solution in a regex-golf we did a couple of ages ago at
-// * http://mathiasbynens.be/demo/url-regex
-// * http://rodneyrehm.de/t/url-regex.html
+// gruber revised expression - http://rodneyrehm.de/t/url-regex.html
 URI.find_uri_expression = /\b((?:[a-z][\w-]+:(?:\/{1,3}|[a-z0-9%])|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/ig;
-URI.findUri = {
-    // valid "scheme://" or "www."
-    start: /\b(?:([a-z][a-z0-9.+-]*:\/\/)|www\.)/gi,
-    // everything up to the next whitespace
-    end: /[\s\r\n]|$/,
-    // trim trailing punctuation captured by end RegExp
-    trim: /[`!()\[\]{};:'".,<>?«»“”„‘’]+$/
-};
 // http://www.iana.org/assignments/uri-schemes.html
 // http://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers#Well-known_ports
 URI.defaultPorts = {
@@ -769,43 +756,13 @@ URI.commonPath = function(one, two) {
     return one.substring(0, pos + 1);
 };
 
-URI.withinString = function(string, callback, options) {
-    options || (options = {});
-    var _start = options.start || URI.findUri.start;
-    var _end = options.end || URI.findUri.end;
-    var _trim = options.trim || URI.findUri.trim;
-    var _attributeOpen = /[a-z0-9-]=["']?$/i;
+URI.withinString = function(string, callback) {
+    // expression used is "gruber revised" (@gruber v2) determined to be the best solution in
+    // a regex sprint we did a couple of ages ago at
+    // * http://mathiasbynens.be/demo/url-regex
+    // * http://rodneyrehm.de/t/url-regex.html
 
-    _start.lastIndex = 0;
-    while (true) {
-        var match = _start.exec(string);
-        if (!match) {
-            break;
-        }
-        
-        var start = match.index;
-        if (options.ignoreHtml) {
-            // attribut(e=["']?$)
-            var attributeOpen = string.slice(Math.max(start - 3, 0), start);
-            if (attributeOpen && _attributeOpen.test(attributeOpen)) {
-                continue;
-            }
-        }
-        
-        var end = start + string.slice(start).search(_end);
-        var slice = string.slice(start, end).replace(_trim, '');
-        if (options.ignore && options.ignore.test(slice)) {
-            continue;
-        }
-        
-        end = start + slice.length;
-        var result = callback(slice, start, end, string);
-        string = string.slice(0, start) + result + string.slice(end);
-        _start.lastIndex = start + result.length;
-    }
-
-    _start.lastIndex = 0;
-    return string;
+    return string.replace(URI.find_uri_expression, callback);
 };
 
 URI.ensureValidHostname = function(v) {
@@ -1060,8 +1017,8 @@ p.protocol = function(v, build) {
             // accept trailing ://
             v = v.replace(/:(\/\/)?$/, '');
 
-            if (!v.match(URI.protocol_expression)) {
-                throw new TypeError("Protocol '" + v + "' contains characters other than [A-Z0-9.+-] or doesn't start with [A-Z]");
+            if (v.match(/[^a-zA-z0-9\.+-]/)) {
+                throw new TypeError("Protocol '" + v + "' contains characters other than [A-Z0-9.+-]");
             }
         }
     }
@@ -1661,7 +1618,6 @@ p.normalizePath = function(build) {
 
     var _was_relative;
     var _path = this._parts.path;
-    var _leadingParents = '';
     var _parent, _pos;
 
     // handle relative paths
@@ -1675,24 +1631,16 @@ p.normalizePath = function(build) {
         .replace(/(\/(\.\/)+)|(\/\.$)/g, '/')
         .replace(/\/{2,}/g, '/');
 
-    // remember leading parents
-    if (_was_relative) {
-        _leadingParents = _path.substring(1).match(/^(\.\.\/)+/) || '';
-        if (_leadingParents) {
-            _leadingParents = _leadingParents[0];
-        }
-    }
-
     // resolve parents
     while (true) {
-        _parent = _path.indexOf('/..');
+        _parent = _path.indexOf('/../');
         if (_parent === -1) {
             // no more ../ to resolve
             break;
         } else if (_parent === 0) {
-            // top level cannot be relative, skip it
+            // top level cannot be relative...
             _path = _path.substring(3);
-            continue;
+            break;
         }
 
         _pos = _path.substring(0, _parent).lastIndexOf('/');
@@ -1704,7 +1652,7 @@ p.normalizePath = function(build) {
 
     // revert to relative
     if (_was_relative && this.is('relative')) {
-        _path = _leadingParents + _path.substring(1);
+        _path = _path.substring(1);
     }
 
     _path = URI.recodePath(_path);
@@ -1833,15 +1781,13 @@ p.absoluteTo = function(base) {
         resolved._parts[p] = base._parts[p];
     }
     
-    if (!resolved._parts.path) {
-        resolved._parts.path = base._parts.path;
-        if (!resolved._parts.query) {
-            resolved._parts.query = base._parts.query;
+    properties = ['query', 'path'];
+    for (i = 0; p = properties[i]; i++) {
+        if (!resolved._parts[p] && base._parts[p]) {
+            resolved._parts[p] = base._parts[p];
         }
-    } else if (resolved._parts.path.substring(-2) === '..') {
-        resolved._parts.path += '/';
     }
-    
+
     if (resolved.path().charAt(0) !== '/') {
         basedir = base.directory();
         resolved._parts.path = (basedir ? (basedir + '/') : '') + resolved._parts.path;

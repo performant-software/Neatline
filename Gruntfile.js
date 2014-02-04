@@ -74,8 +74,8 @@ module.exports = function(grunt) {
         files: [{
           src: paths.copy.bootstrap+'/fonts/*',
           dest: 'views/shared/css/fonts/',
-          flatten: true,
-          expand: true
+          expand: true,
+          flatten: true
         }]
       },
 
@@ -83,8 +83,8 @@ module.exports = function(grunt) {
         files: [{
           src: paths.copy.chosen+'/*.png',
           dest: paths.payloads.admin.css,
-          flatten: true,
-          expand: true
+          expand: true,
+          flatten: true
         }]
       },
 
@@ -92,32 +92,20 @@ module.exports = function(grunt) {
         files: [{
           src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
           dest: paths.payloads.shared.css+'/images',
-          flatten: true,
-          expand: true
+          expand: true,
+          flatten: true
         }]
       },
 
-      select2_admin: {
-        files: [{
-          src: [
-            paths.copy.select2+'/*.png',
-            paths.copy.select2+'/*.gif'
-          ],
-          dest: paths.payloads.admin.css,
-          flatten: true,
-          expand: true
-        }]
-      },
-
-      select2_shared: {
+      select2: {
         files: [{
           src: [
             paths.copy.select2+'/*.png',
             paths.copy.select2+'/*.gif'
           ],
           dest: paths.payloads.shared.css,
-          flatten: true,
-          expand: true
+          expand: true,
+          flatten: true
         }]
       },
 
@@ -159,9 +147,8 @@ module.exports = function(grunt) {
 
       add_form: {
         src: [
-          paths.vendor.js.select2,
-          paths.vendor.js.underscore_s,
           paths.vendor.js.chosen,
+          paths.vendor.js.underscore_s,
           paths.src.admin+'/exhibit-form.js',
           paths.src.admin+'/slug-autogen.js'
         ],
@@ -170,7 +157,6 @@ module.exports = function(grunt) {
 
       edit_form: {
         src: [
-          paths.vendor.js.select2,
           paths.vendor.js.chosen,
           paths.src.admin+'/exhibit-form.js'
         ],
@@ -277,7 +263,6 @@ module.exports = function(grunt) {
 
       exhibit_form_css: {
         src: [
-          paths.vendor.css.select2,
           paths.vendor.css.chosen,
           paths.payloads.admin.css+'/exhibit-form.css'
         ],
