@@ -10,9 +10,9 @@
 
 jQuery(function($) {
 
-  // Instantiate Chosen on layers and widgets selects.
+  // Instantiate Select2 on layers and widgets selects.
 
-  $('.chosen').chosen();
+  $('.select2').select2();
 
   // Instantiate CKEditor on the "Narrative" field.
 

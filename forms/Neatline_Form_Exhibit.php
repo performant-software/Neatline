@@ -111,7 +111,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('multiselect', 'widgets', array(
             'label'         => __('Widgets'),
             'description'   => __('Select the user-interface widgets available in the exhibit.'),
-            'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'chosen'),
+            'attribs'       => array('data-placeholder' => 'Select one or more widgets', 'class' => 'select2'),
             'multiOptions'  => array_flip(nl_getExhibitWidgets()),
             'value'         => nl_explode($this->exhibit->widgets),
         ));
@@ -120,7 +120,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('multiselect', 'spatial_layers', array(
             'label'         => __('Active Map Layers'),
             'description'   => __('Choose the collection of spatial layers that should be available in the layer picker widget.'),
-            'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
+            'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'select2'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->spatial_layers)
         ));
@@ -129,7 +129,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
         $this->addElement('select', 'spatial_layer', array(
             'label'         => __('Default Map Layer'),
             'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
-            'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
+            'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'select2'),
             'multiOptions'  => nl_getLayersForSelect(),
             'value'         => nl_explode($this->exhibit->spatial_layer),
             'required'      => true,
