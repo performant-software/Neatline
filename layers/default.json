@@ -80,7 +80,8 @@
       "id": "AwmcBase",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.map-knmctlkh"
+        "id": "isawnyu.map-knmctlkh",
+        "isBaseLayer": true
       }
     },
 
@@ -89,7 +90,8 @@
       "id": "AwmcCoastOutline",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.eoupu8fr"
+        "id": "isawnyu.eoupu8fr",
+        "isBaseLayer": false
       }
     },
 
@@ -98,7 +100,8 @@
       "id": "AwmcRoads",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.awmc-roads"
+        "id": "isawnyu.awmc-roads",
+        "isBaseLayer": false
       }
     },
 
@@ -107,7 +110,8 @@
       "id": "AwmcBenthosWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.s5l5l8fr"
+        "id": "isawnyu.s5l5l8fr",
+        "isBaseLayer": false
       }
     },
 
@@ -116,7 +120,8 @@
       "id": "AwmcInlandWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.awmc-inland-water"
+        "id": "isawnyu.awmc-inland-water",
+        "isBaseLayer": false
       }
     },
 
@@ -125,7 +130,8 @@
       "id": "AwmcRiverPolygons",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.9e3lerk9"
+        "id": "isawnyu.9e3lerk9",
+        "isBaseLayer": false
       }
     },
 
@@ -134,7 +140,8 @@
       "id": "AwmcWaterCourseCenterLines",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.awmc-water-courses"
+        "id": "isawnyu.awmc-water-courses",
+        "isBaseLayer": false
       }
     },
 
@@ -143,7 +150,8 @@
       "id": "AwmcBaseOpenWaterPolygons",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.h0rdaemi"
+        "id": "isawnyu.h0rdaemi",
+        "isBaseLayer": false
       }
     },
 
@@ -152,7 +160,8 @@
       "id": "AwmcArchaicWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.yyuba9k9"
+        "id": "isawnyu.yyuba9k9",
+        "isBaseLayer": false
       }
     },
 
@@ -161,7 +170,8 @@
       "id": "AwmcClassicalWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.l5xc4n29"
+        "id": "isawnyu.l5xc4n29",
+        "isBaseLayer": false
       }
     },
 
@@ -170,7 +180,8 @@
       "id": "AwmcHellenisticWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.gq0ssjor"
+        "id": "isawnyu.gq0ssjor",
+        "isBaseLayer": false
       }
     },
 
@@ -179,7 +190,8 @@
       "id": "AwmcRomanWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.ymnrvn29"
+        "id": "isawnyu.ymnrvn29",
+        "isBaseLayer": false
       }
     },
 
@@ -188,7 +200,8 @@
       "id": "AwmcLateAntiquityWater",
       "type": "AWMC",
       "properties": {
-        "id": "isawnyu.t12it3xr"
+        "id": "isawnyu.t12it3xr",
+        "isBaseLayer": false
       }
     }
 
