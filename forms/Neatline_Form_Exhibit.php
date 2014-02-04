@@ -118,7 +118,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
 
         // Available Map Layers:
         $this->addElement('multiselect', 'spatial_layers', array(
-            'label'         => __('Active Map Layers'),
+            'label'         => __('Enabled Spatial Layers'),
             'description'   => __('Choose the collection of spatial layers that should be available in the layer picker widget.'),
             'attribs'       => array('data-placeholder' => 'Select one or more layers', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),
@@ -127,7 +127,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
 
         // Default Map Layer:
         $this->addElement('select', 'spatial_layer', array(
-            'label'         => __('Default Map Layer'),
+            'label'         => __('Default Spatial Layer'),
             'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
             'multiOptions'  => nl_getLayersForSelect(),

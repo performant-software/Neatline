@@ -74,8 +74,8 @@ module.exports = function(grunt) {
         files: [{
           src: paths.copy.bootstrap+'/fonts/*',
           dest: 'views/shared/css/fonts/',
-          expand: true,
-          flatten: true
+          flatten: true,
+          expand: true
         }]
       },
 
@@ -83,8 +83,8 @@ module.exports = function(grunt) {
         files: [{
           src: paths.copy.chosen+'/*.png',
           dest: paths.payloads.admin.css,
-          expand: true,
-          flatten: true
+          flatten: true,
+          expand: true
         }]
       },
 
@@ -92,8 +92,8 @@ module.exports = function(grunt) {
         files: [{
           src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
           dest: paths.payloads.shared.css+'/images',
-          expand: true,
-          flatten: true
+          flatten: true,
+          expand: true
         }]
       },
 
@@ -104,8 +104,8 @@ module.exports = function(grunt) {
             paths.copy.select2+'/*.gif'
           ],
           dest: paths.payloads.shared.css,
-          expand: true,
-          flatten: true
+          flatten: true,
+          expand: true
         }]
       },
 
