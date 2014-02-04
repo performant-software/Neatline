@@ -8,5 +8,12 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+Neatline.module('Map.Layers.AWMC', function(AWMC) {
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+  AWMC.addInitializer(function() {
+    AWMC.__controller = new AWMC.Controller();
+  });
+
+
+});
