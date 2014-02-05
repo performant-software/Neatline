@@ -111,8 +111,7 @@ describe('Record | Sync Geometry', function() {
     var feature = NL.v.map.editLayer.features[0];
 
     // Check "Modify Shape".
-    elements.pan.removeAttr('checked');
-    elements.modify.attr('checked', 'checked').trigger('change');
+    elements.modify.prop('checked', true).trigger('change');
 
     // Move the point.
     NL.v.map.controls.edit.selectFeature(feature);
