@@ -49,8 +49,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Point".
-    elements.pan.removeAttr('checked');
-    elements.point.attr('checked', 'checked').trigger('change');
+    elements.point.prop('checked', true).trigger('change');
 
     // "Draw Point" should be active.
     expect(NL.v.map.controls.point.active).toBeTruthy();
@@ -65,8 +64,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Line".
-    elements.pan.removeAttr('checked');
-    elements.line.attr('checked', 'checked').trigger('change');
+    elements.line.prop('checked', true).trigger('change');
 
     // "Draw Line" should be active.
     expect(NL.v.map.controls.line.active).toBeTruthy();
@@ -81,8 +79,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Polygon".
-    elements.pan.removeAttr('checked');
-    elements.poly.attr('checked', 'checked').trigger('change');
+    elements.poly.prop('checked', true).trigger('change');
 
     // "Draw Polygon" should be active.
     expect(NL.v.map.controls.poly.active).toBeTruthy();
@@ -97,8 +94,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw SVG".
-    elements.pan.removeAttr('checked');
-    elements.svg.attr('checked', 'checked').trigger('change');
+    elements.svg.prop('checked', true).trigger('change');
 
     // "Draw SVG" should be active.
     expect(NL.v.map.controls.svg.active).toBeTruthy();
@@ -114,8 +110,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Draw Regular Polygon".
-    elements.pan.removeAttr('checked');
-    elements.regPoly.attr('checked', 'checked').trigger('change');
+    elements.regPoly.prop('checked', true).trigger('change');
 
     // "Draw Regular Polygon" should be active.
     expect(NL.v.map.controls.regPoly.active).toBeTruthy();
@@ -201,13 +196,13 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Set irregular.
-    NL.v.mapTab.__ui.irreg.attr('checked', 'checked').trigger('change');
+    NL.v.mapTab.__ui.irreg.prop('checked', true).trigger('change');
 
     // "Irregular" be active.
     expect(NL.v.map.controls.regPoly.handler.irregular).toEqual(true);
 
     // Unset irregular.
-    NL.v.mapTab.__ui.irreg.removeAttr('checked').trigger('change');
+    NL.v.mapTab.__ui.irreg.prop('checked', false).trigger('change');
 
     // "Irregular" should be inactive.
     expect(NL.v.map.controls.regPoly.handler.irregular).toEqual(false);
@@ -223,8 +218,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Modify Shape".
-    elements.pan.removeAttr('checked');
-    elements.modify.attr('checked', 'checked').trigger('change');
+    elements.modify.prop('checked', true).trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -245,8 +239,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Rotate Shape".
-    elements.pan.removeAttr('checked');
-    elements.rotate.attr('checked', 'checked').trigger('change');
+    elements.rotate.prop('checked', true).trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -267,8 +260,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Resize Shape".
-    elements.pan.removeAttr('checked');
-    elements.resize.attr('checked', 'checked').trigger('change');
+    elements.resize.prop('checked', true).trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -289,8 +281,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Drag Shape".
-    elements.pan.removeAttr('checked');
-    elements.drag.attr('checked', 'checked').trigger('change');
+    elements.drag.prop('checked', true).trigger('change');
 
     // Edit control should be active.
     expect(NL.v.map.controls.edit.active).toBeTruthy();
@@ -311,8 +302,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Check "Delete Shape".
-    elements.pan.removeAttr('checked');
-    elements.remove.attr('checked', 'checked').trigger('change');
+    elements.remove.prop('checked', true).trigger('change');
 
     // "Delete Shape" should be active.
     expect(NL.v.map.controls.remove.active).toBeTruthy();
@@ -546,8 +536,7 @@ describe('Record | Draw Geometry', function() {
     // ------------------------------------------------------------------------
 
     // Activate "Draw Polygon".
-    elements.pan[0].checked = false;
-    elements.poly[0].checked = true;
+    elements.poly.prop('checked', true).trigger('change');
 
     // Activate "Text" tab.
     NL.v.record.activateTab('text');
