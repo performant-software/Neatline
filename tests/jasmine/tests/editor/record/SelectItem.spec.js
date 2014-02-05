@@ -66,6 +66,10 @@ describe('Record | Select Item', function() {
         id: record.get('item_id'), text: record.get('item_title')
       });
 
+      // Should display the item preview.
+      expect(elements.preview).toHaveText('item');
+      expect(elements.preview).toBeVisible();
+
       // Should hide the info box.
       expect(elements.infoBox).not.toBeVisible();
 
@@ -111,7 +115,7 @@ describe('Record | Select Item', function() {
       // display a (paginated) list of all items on the site.
       // ----------------------------------------------------------------------
 
-      // [3] When the items have been loaded...
+      // When the items finish loading:
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
         expect(e.items.results.length).toEqual(5);
         expect(e.items.results[0].text).toEqual('title1 keyword');
@@ -122,14 +126,10 @@ describe('Record | Select Item', function() {
         done();
       });
 
-      // [1] Open the dropdown.
+      // Open the dropdown.
       NL.v.itemTab.__ui.search.select2('open');
 
-      // Wait for Select2 to requests items...
-      waitsFor(NL.itemsHaveBeenRequested);
-
-      // [2] When the items have been requested...
-      runs(function() {
+      setTimeout(function() { // Wait for Select2 to issue the request.
 
         // Should generate GET request to the item search API.
         NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
@@ -143,7 +143,7 @@ describe('Record | Select Item', function() {
         NL.respondItemSearch200(fixtures.items.all);
         // Triggers `select2-loaded` (above).
 
-      });
+      }, 200);
 
     });
 
@@ -153,36 +153,7 @@ describe('Record | Select Item', function() {
       // When a search query is entered, matching items should be loaded.
       // ----------------------------------------------------------------------
 
-      // [2] When the dropdown is opened...
-      NL.v.itemTab.__ui.search.on('select2-open', function(e) {
-
-        // Enter a search query.
-        $('.select2-input').val('query').trigger('keyup-change');
-
-        // Wait for Select2 to requests items...
-        waitsFor(NL.itemsHaveBeenRequested);
-
-        // [3] When the items have been requested...
-        runs(function() {
-
-          // Should generate GET request to the item search API.
-          NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
-          NL.assertLastRequestMethod('GET');
-
-          // Should request query, action context, and page.
-          NL.assertLastRequestHasGetParameter('search', 'query');
-          NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
-          NL.assertLastRequestHasGetParameter('page', 1);
-
-          // Respond to the items request.
-          NL.respondItemSearch200(fixtures.items.search);
-          // Triggers `select2-loaded` (below).
-
-        });
-
-      });
-
-      // [4] When the items have been loaded...
+      // When the items have been loaded...
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
         expect(e.items.results.length).toEqual(3);
         expect(e.items.results[0].text).toEqual('title1 keyword');
@@ -191,8 +162,26 @@ describe('Record | Select Item', function() {
         done();
       });
 
-      // [1] Open the dropdown.
+      // Open the dropdown, enter search query.
       NL.v.itemTab.__ui.search.select2('open');
+      $('.select2-input').val('query').trigger('input');
+
+      setTimeout(function() { // Wait for Select2 to issue the request.
+
+        // Should generate GET request to the item search API.
+        NL.assertLastRequestRoute(Neatline.g.neatline.item_search_api);
+        NL.assertLastRequestMethod('GET');
+
+        // Should request query, action context, and page.
+        NL.assertLastRequestHasGetParameter('search', 'query');
+        NL.assertLastRequestHasGetParameter('output', 'omeka-xml');
+        NL.assertLastRequestHasGetParameter('page', 1);
+
+        // Respond to the items request.
+        NL.respondItemSearch200(fixtures.items.search);
+        // Triggers `select2-loaded` (above).
+
+      }, 200);
 
     });
 
@@ -201,26 +190,6 @@ describe('Record | Select Item', function() {
   describe('when an item is selected', function() {
 
     beforeEach(function(done) {
-
-      // [2] When the dropdown is opened...
-      NL.v.itemTab.__ui.search.on('select2-open', function(e) {
-
-        // Enter a search query.
-        $('.select2-input').val('query').trigger('keyup-change');
-
-        // Wait for Select2 to requests items...
-        waitsFor(NL.itemsHaveBeenRequested);
-
-        // [3] When the items have been requested...
-        runs(function() {
-
-          // Respond to the items request.
-          NL.respondItemSearch200(fixtures.items.search);
-          // Triggers `select2-loaded` (below).
-
-        });
-
-      });
 
       // [4] When the items have been loaded...
       NL.v.itemTab.__ui.search.on('select2-loaded', function(e) {
@@ -231,10 +200,21 @@ describe('Record | Select Item', function() {
 
       });
 
-      // [1] Select tab, open dropdown.
+      // Select the "Item" tab.
       NL.showRecordForm(fixtures.record.noItem);
       NL.v.record.activateTab('item');
+
+      // Open the dropdown, enter search query.
       NL.v.itemTab.__ui.search.select2('open');
+      $('.select2-input').val('query').trigger('input');
+
+      setTimeout(function() { // Wait for Select2 to issue the request.
+
+        // [3] Respond to the items request.
+        NL.respondItemSearch200(fixtures.items.search);
+        // Triggers `select2-loaded` (above).
+
+      }, 200);
 
     });
 

@@ -28,7 +28,6 @@ Neatline.module('Editor.Record.Item', { startWithParent: false,
 
 
     /**
-     * TODO|dev
      * Construct the item search.
      */
     buildWidgets: function() {

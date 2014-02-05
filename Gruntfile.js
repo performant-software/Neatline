@@ -147,8 +147,8 @@ module.exports = function(grunt) {
 
       add_form: {
         src: [
-          paths.vendor.js.chosen,
           paths.vendor.js.underscore_s,
+          paths.vendor.js.chosen,
           paths.src.admin+'/exhibit-form.js',
           paths.src.admin+'/slug-autogen.js'
         ],
@@ -191,8 +191,8 @@ module.exports = function(grunt) {
           paths.src.shared+'/broker/*.js',
           paths.src.shared+'/map/**/*.js',
           paths.src.shared+'/presenter/*.js',
-          paths.src.shared+'/presenter/None/*.js',
-          paths.src.shared+'/presenter/StaticBubble/*.js'
+          paths.src.shared+'/presenter/StaticBubble/*.js',
+          paths.src.shared+'/presenter/None/*.js'
 
         ],
         dest: paths.payloads.shared.js+'/neatline-public.js'
@@ -236,8 +236,8 @@ module.exports = function(grunt) {
           paths.src.shared+'/broker/*.js',
           paths.src.shared+'/map/**/*.js',
           paths.src.shared+'/presenter/*.js',
-          paths.src.shared+'/presenter/None/*.js',
           paths.src.shared+'/presenter/StaticBubble/*.js',
+          paths.src.shared+'/presenter/None/*.js',
 
           // Editor:
           paths.src.shared+'/editor/*.js',
