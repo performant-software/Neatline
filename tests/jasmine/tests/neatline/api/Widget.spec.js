@@ -30,7 +30,7 @@ describe('API | Widget', function() {
     // ------------------------------------------------------------------------
 
     var inst = new view();
-    expect($('#neatline-map')).toContain('#widget');
+    expect($('#neatline-map')).toContainElement('#widget');
 
   });
 
@@ -45,7 +45,7 @@ describe('API | Widget', function() {
     $('body').append($('<div id="widget"></div>'));
 
     var inst = new view();
-    expect($('#neatline-map')).not.toContain('#widget');
+    expect($('#neatline-map')).not.toContainElement('#widget');
 
   });
 

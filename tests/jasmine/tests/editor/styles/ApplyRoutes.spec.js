@@ -8,7 +8,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Styles | Router', function() {
+describe('Styles | Apply Routes', function() {
 
 
   var elements, fixtures = {
@@ -33,8 +33,8 @@ describe('Styles | Router', function() {
     NL.respondLast200(fixtures.exhibit);
 
     // Tabs, styles form should be visible.
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.exhibit.$el);
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.styles.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.exhibit.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.styles.$el);
 
     // "Styles" tab should be active.
     expect(elements.styles).toHaveClass('active');

@@ -96,8 +96,6 @@ describe('Record | Select Item', function() {
 
   describe('when the dropdown is opened', function() {
 
-    var async = new AsyncSpec(this);
-
     beforeEach(function() {
 
       // Show the "Item" tab.
@@ -106,7 +104,7 @@ describe('Record | Select Item', function() {
 
     });
 
-    async.it('should load all items when dropdown is opened', function(done) {
+    it('should load all items when dropdown is opened', function(done) {
 
       // ----------------------------------------------------------------------
       // When the search dropdown is opened, it should immediately load and
@@ -149,7 +147,7 @@ describe('Record | Select Item', function() {
 
     });
 
-    async.it('should load results when query is entered',  function(done) {
+    it('should load results when query is entered',  function(done) {
 
       // ----------------------------------------------------------------------
       // When a search query is entered, matching items should be loaded.
@@ -202,9 +200,7 @@ describe('Record | Select Item', function() {
 
   describe('when an item is selected', function() {
 
-    var async = new AsyncSpec(this);
-
-    async.beforeEach(function(done) {
+    beforeEach(function(done) {
 
       // [2] When the dropdown is opened...
       NL.v.itemTab.__ui.search.on('select2-open', function(e) {

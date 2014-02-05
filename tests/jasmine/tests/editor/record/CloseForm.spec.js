@@ -42,8 +42,8 @@ describe('Record | Close Form', function() {
     elements.close.trigger('click');
 
     // Records list should be visible.
-    expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
+    expect(NL.v.editor.__ui.editor).not.toContainHtml(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.records.$el);
 
   });
 

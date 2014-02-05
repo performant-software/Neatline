@@ -16,7 +16,7 @@ var NL = (function(NL) {
    * Spy on `Neatline.vent.trigger`.
    */
   NL.getEventSpy = function() {
-    return spyOn(Neatline.vent, 'trigger').andCallThrough();
+    return spyOn(Neatline.vent, 'trigger').and.callThrough();
   };
 
 
@@ -24,7 +24,7 @@ var NL = (function(NL) {
    * Spy on `Neatline.execute`.
    */
   NL.getCommandSpy = function() {
-    return spyOn(Neatline, 'execute').andCallThrough();
+    return spyOn(Neatline, 'execute').and.callThrough();
   };
 
 

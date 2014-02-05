@@ -169,8 +169,8 @@ describe('Record | Delete Record', function() {
     expect(NL.v.record.deleteModal).not.toHaveClass('in');
 
     // Form should be closed.
-    expect(NL.v.editor.__ui.editor).not.toContain(NL.v.record.$el);
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
+    expect(NL.v.editor.__ui.editor).not.toContainHtml(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.records.$el);
 
     // Records list should be displayed.
     expect(Backbone.history.fragment).toEqual('records');

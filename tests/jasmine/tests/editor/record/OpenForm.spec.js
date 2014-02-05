@@ -35,7 +35,7 @@ describe('Record | Open Form', function() {
     afterEach(function() {
 
       // The form should be displayed and populated with data.
-      expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+      expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
       expect(NL.v.record.model.id).toEqual(model.id);
 
     });
@@ -201,7 +201,7 @@ describe('Record | Open Form', function() {
     NL.clickOnMapFeature(feature1);
 
     // Record form should be displayed.
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
     expect(NL.v.record.model.get('title')).toEqual('title1');
 
     // Trigger click on Record 2 feature.

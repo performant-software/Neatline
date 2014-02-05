@@ -30,9 +30,9 @@ describe('Records | Apply Routes', function() {
     afterEach(function() {
 
       // Tabs, search, records should be visible.
-      expect(NL.v.editor.__ui.editor).toContain(NL.v.exhibit.$el);
-      expect(NL.v.editor.__ui.editor).toContain(NL.v.search.$el);
-      expect(NL.v.editor.__ui.editor).toContain(NL.v.records.$el);
+      expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.exhibit.$el);
+      expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.search.$el);
+      expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.records.$el);
 
       // "Records" tab should be active.
       expect(elements.records).toHaveClass('active');

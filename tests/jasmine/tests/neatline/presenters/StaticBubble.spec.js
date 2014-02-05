@@ -42,7 +42,7 @@ describe('Presenters | Static Bubble', function() {
     // appended to the map container and invisible.
     // ------------------------------------------------------------------------
 
-    expect(NL.v.map.$el).toContain(NL.v.bubble.$el);
+    expect(NL.v.map.$el).toContainHtml(NL.v.bubble.$el);
     expect(NL.v.bubble.$el).not.toBeVisible();
 
   });

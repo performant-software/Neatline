@@ -120,14 +120,15 @@ describe('Styles | Save Styles', function() {
     // should be refreshed to manifest the new styles on the map.
     // ------------------------------------------------------------------------
 
-    spyOn(Neatline.vent, 'trigger').andCallThrough();
+
+    var vent = NL.getEventSpy();
 
     // Click on "Save".
     elements.save.trigger('click');
     NL.respondLast200(fixtures.exhibit);
 
     // Should refresh the exhibit.
-    expect(Neatline.vent.trigger).toHaveBeenCalledWith('refresh', {
+    expect(vent).toHaveBeenCalledWith('refresh', {
       source: Neatline.Editor.Exhibit.Styles.ID
     });
 

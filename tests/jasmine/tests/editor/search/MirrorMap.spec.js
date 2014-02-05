@@ -131,7 +131,7 @@ describe('Search | Mirror Map', function() {
     NL.v.search.__ui.search.val('map:').trigger('keyup');
 
     // Pagination should not be visible.
-    expect(NL.v.records.$el).not.toContain('.pagination');
+    expect(NL.v.records.$el).not.toContainHtml('.pagination');
 
   });
 

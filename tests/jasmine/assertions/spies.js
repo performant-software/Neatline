@@ -19,8 +19,8 @@ var NL = (function(NL) {
    * @param {String} event: The event.
    */
   NL.assertEventNotCalled = function(spy, event) {
-    var calls = _.map(spy.calls, function(call) { return call.args[0] });
-    expect(_.contains(calls, event)).toBeFalsy();
+    var events = _.map(spy.calls.allArgs(), function(args) { return args[0] });
+    expect(_.contains(events, event)).toBeFalsy();
   };
 
 

@@ -19,9 +19,6 @@ describe('Record | Edit HTML', function() {
   // --------------------------------------------------------------------------
 
 
-  var async = new AsyncSpec(this);
-
-
   var elements, cke, input, fixtures = {
     record: read('EditorRecord.record.json')
   };
@@ -42,7 +39,7 @@ describe('Record | Edit HTML', function() {
   });
 
 
-  async.afterEach(function(done) {
+  afterEach(function(done) {
 
     // When editor is started.
     // -----------------------

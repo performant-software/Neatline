@@ -36,7 +36,7 @@ describe('Record | Apply Routes', function() {
     NL.navigate(href);
 
     // Record form should be visible, "Text" tab active.
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
     NL.assertActiveTab('text');
 
   });
@@ -54,7 +54,7 @@ describe('Record | Apply Routes', function() {
       NL.navigate(href+'/'+slug);
 
       // Record form should be visible, requested tab active.
-      expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+      expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
       NL.assertActiveTab(slug);
 
     });
@@ -72,7 +72,7 @@ describe('Record | Apply Routes', function() {
     NL.navigate('record/add');
 
     // Record form should be visible, "Text" tab active.
-    expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+    expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
     NL.assertActiveTab('text');
 
   });
@@ -90,7 +90,7 @@ describe('Record | Apply Routes', function() {
       NL.navigate('record/add/'+slug);
 
       // Record form should be visible, requested tab active.
-      expect(NL.v.editor.__ui.editor).toContain(NL.v.record.$el);
+      expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
       NL.assertActiveTab(slug);
 
     });

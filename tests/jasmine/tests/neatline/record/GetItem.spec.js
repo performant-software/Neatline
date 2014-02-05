@@ -11,9 +11,6 @@
 describe('Record | Get Item', function() {
 
 
-  var async = new AsyncSpec(this);
-
-
   beforeEach(function() {
     NL.loadNeatline();
   });
@@ -21,7 +18,7 @@ describe('Record | Get Item', function() {
 
   describe('should load the item on first access', function() {
 
-    async.it('when the record is saved', function(done) {
+    it('when the record is saved', function(done) {
 
       // ----------------------------------------------------------------------
       // When the `item` field is accessed for the first time on a record that
@@ -51,7 +48,7 @@ describe('Record | Get Item', function() {
 
     });
 
-    async.it('when the record is saved', function(done) {
+    it('when the record is saved', function(done) {
 
       // ----------------------------------------------------------------------
       // When the `item` field is accessed for the first time on a record that
