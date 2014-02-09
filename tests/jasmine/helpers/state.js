@@ -55,7 +55,6 @@ var NL = (function(NL) {
     this.server = sinon.fakeServer.create();
     this.startApplication();
     this.aliasEditor();
-    this.navigate('');
   };
 
 
@@ -63,8 +62,8 @@ var NL = (function(NL) {
    * (Re)start the application.
    */
   NL.startApplication = function() {
-    window.location.hash = null;
     Backbone.history.stop();
+    window.location.hash = '';
     this.stopApplication();
     Neatline.start();
   };
