@@ -28,6 +28,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Filesystem helpers:
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-shell');
 
@@ -38,14 +39,16 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    bower: {
+      install: {
+        options: { copy: false }
+      }
+    },
+
     shell: {
 
       options: {
         stdout: true
-      },
-
-      bower: {
-        command: 'bower install'
       },
 
       phpunit_application: {
@@ -492,7 +495,7 @@ module.exports = function(grunt) {
   // Build the application.
   grunt.registerTask('build', [
     'clean',
-    'shell:bower',
+    'bower',
     'compile:min',
     'copy'
   ]);
