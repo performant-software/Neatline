@@ -24,13 +24,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Test runners:
+  grunt.loadNpmTasks('grunt-phpunit');
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-connect');
 
   // Filesystem helpers:
   grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-shell');
 
   // Config files:
   var pkg = grunt.file.readJSON('package.json');
@@ -43,32 +43,6 @@ module.exports = function(grunt) {
       install: {
         options: { copy: false }
       }
-    },
-
-    shell: {
-
-      options: {
-        stdout: true
-      },
-
-      phpunit_application: {
-        command: '../../vendor/bin/phpunit -c phpunit-application.xml',
-        options: {
-          execOptions: {
-            cwd: 'tests/phpunit'
-          }
-        }
-      },
-
-      phpunit_features: {
-        command: '../../vendor/bin/phpunit -c phpunit-features.xml',
-        options: {
-          execOptions: {
-            cwd: 'tests/phpunit'
-          }
-        }
-      }
-
     },
 
     copy: {
@@ -402,6 +376,31 @@ module.exports = function(grunt) {
 
     },
 
+    phpunit: {
+
+      options: {
+        bin: 'vendor/bin/phpunit',
+        bootstrap: 'tests/phpunit/bootstrap.php',
+        followOutput: true,
+        colors: true
+      },
+
+      application: {
+        dir: 'tests/phpunit',
+        options: {
+          configuration: 'tests/phpunit/phpunit-application.xml'
+        }
+      },
+
+      features: {
+        dir: 'tests/phpunit',
+        options: {
+          configuration: 'tests/phpunit/phpunit-features.xml'
+        }
+      }
+
+    },
+
     jasmine: {
 
       options: {
@@ -490,7 +489,7 @@ module.exports = function(grunt) {
 
 
   // Run the tests by default.
-  grunt.registerTask('default', 'test:all');
+  grunt.registerTask('default', 'test');
 
   // Build the application.
   grunt.registerTask('build', [
@@ -514,18 +513,6 @@ module.exports = function(grunt) {
     'cssmin'
   ]);
 
-  // Run default PHPUnit suite.
-  grunt.registerTask('phpunit', [
-    'shell:phpunit_application',
-    'shell:phpunit_features'
-  ]);
-
-  // Run all PHPUnit suites.
-  grunt.registerTask('phpunit:all', [
-    'shell:phpunit_application',
-    'shell:phpunit_features'
-  ]);
-
   // Mount public Jasmine suite.
   grunt.registerTask('jasmine:neatline:server', [
     'jasmine:neatline:build',
@@ -538,18 +525,11 @@ module.exports = function(grunt) {
     'connect'
   ]);
 
-  // Run application tests.
-  grunt.registerTask('test', [
-    'clean:fixtures',
-    'phpunit',
-    'jasmine'
-  ]);
-
   // Run all tests.
-  grunt.registerTask('test:all', [
+  grunt.registerTask('test', [
     'compile:min',
     'clean:fixtures',
-    'phpunit:all',
+    'phpunit',
     'jasmine'
   ]);
 

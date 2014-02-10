@@ -12,12 +12,13 @@
  */
 
 
-// Load the Omeka bootstrap.
-require_once '../../../../application/tests/bootstrap.php';
-
-// Assign directory globals.
-define('NL_DIR', PLUGIN_DIR.'/Neatline');
+// Populate directory globals.
+define('NL_DIR', dirname(dirname(dirname(__FILE__))));
 define('NL_TEST_DIR', NL_DIR.'/tests/phpunit');
+define('OMEKA_DIR', dirname(dirname(NL_DIR)));
+
+// Load the Omeka bootstrap.
+require_once OMEKA_DIR.'/application/tests/bootstrap.php';
 
 // Generic test cases.
 require_once NL_TEST_DIR.'/cases/Neatline_Case_Default.php';
