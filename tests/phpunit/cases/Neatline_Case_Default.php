@@ -28,10 +28,7 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
 
         // Install plugins.
         $this->helper = new Omeka_Test_Helper_Plugin;
-        $this->helper->setUp('Neatline');
-
-        // Install sibling plugins.
-        $this->_installSiblingPlugins();
+        $this->_installPlugins();
 
         // Alias Neatline tables.
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
@@ -63,22 +60,22 @@ SQL
 
 
     /**
-     * Install all plugins listed in the `plugins.ini` file.
+     * Install all plugins listed in the `plugins.json` file.
      */
-    protected function _installSiblingPlugins()
+    protected function _installPlugins()
     {
 
-        // If a `plugins.ini` file exists.
-        if (file_exists(NL_TEST_DIR.'/plugins.ini')) {
+        // If a `plugins.json` file exists.
+        if (file_exists(NL_TEST_DIR.'/plugins.json')) {
 
-            // Parse `plugins.ini`.
-            $config = new Zend_Config_Ini(NL_TEST_DIR.'/plugins.ini');
+            // Parse `plugins.json`.
+            $config = Zend_Json::decode(file_get_contents(
+                NL_TEST_DIR.'/plugins.json'
+            ));
 
             // Install each of the siblings.
-            if (!is_null($config->plugins)) {
-                foreach ($config->plugins as $plugin) {
-                    $this->_installPluginOrSkip($plugin);
-                }
+            foreach ($config['plugins'] as $plugin) {
+                $this->_installPluginOrSkip($plugin);
             }
 
         }
