@@ -69,15 +69,6 @@
       "properties": {
         "provider": "terrain"
       }
-    },
-
-    {
-      "title": "AWMC Base Map",
-      "id": "AwmcBase",
-      "type": "AWMC",
-      "properties": {
-        "id": "isawnyu.map-knmctlkh"
-      }
     }
 
   ]
