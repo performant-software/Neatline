@@ -26,17 +26,22 @@ function nl_defineAcl($acl)
 {
 
 
-    // Register resources.
+    // Exhibits resource.
     if (!$acl->has('Neatline_Exhibits')) {
         $acl->addResource('Neatline_Exhibits');
     }
+
+    // Records resource.
     if (!$acl->has('Neatline_Records')) {
         $acl->addResource('Neatline_Records');
     }
 
 
-    // Public:
+    // Anonymous:
     // ------------------------------------------------------------------------
+
+    // Anyone can view items.
+    $acl->allow(null, 'Items', array('get'));
 
     // Anyone can view exhibits.
     $acl->allow(null, 'Neatline_Exhibits', array(
@@ -101,5 +106,6 @@ function nl_defineAcl($acl)
     // Supers and admins can do everything.
     $acl->allow(array('super', 'admin'), 'Neatline_Exhibits');
     $acl->allow(array('super', 'admin'), 'Neatline_Records');
+
 
 }

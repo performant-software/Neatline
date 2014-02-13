@@ -37,7 +37,7 @@ class Neatline_ItemsController extends Neatline_Controller_Rest
         // If a record is specified, load it.
         if (!is_null($this->_request->record)) {
             $rTable = $this->_helper->db->getTable('NeatlineRecord');
-            $record = $rTable->find( $this->_request->record);
+            $record = $rTable->find($this->_request->record);
         }
 
         // Output the item metadata

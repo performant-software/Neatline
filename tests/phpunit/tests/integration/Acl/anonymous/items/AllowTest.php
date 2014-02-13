@@ -19,15 +19,15 @@ class AclTest_AnonymousItemsAllow extends Neatline_Case_Default
     public function setUp()
     {
         parent::setUp();
-        $this->item = insert_item();
+        $this->item = insert_item(array('public' => true));
         $this->_logout();
     }
 
 
     /**
-     * Anonymous users should be able to GET items.
+     * Anonymous users should be able to GET public items.
      */
-    public function testCanGetItems()
+    public function testCanGetPublicItems()
     {
         $this->dispatch('neatline/items/'.$this->item->id);
         $this->assertNotAction('login');
