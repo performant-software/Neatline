@@ -1,4 +1,10 @@
-## v2.2.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.3...2.2.0)) ~ Pending
+## v2.2.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.0...2.2.1)) ~ February 13, 2014
+
+#### Bug Fixes
+
+  - Fixes problem with the ACL that was blocking anonymous users from viewing the Neatline-inflected item metadata.
+
+## v2.2.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.3...2.2.0)) ~ January 15, 2014
 
 #### Added Features
 
