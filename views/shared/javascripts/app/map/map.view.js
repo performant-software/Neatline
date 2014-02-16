@@ -590,6 +590,7 @@ Neatline.module('Map', function(Map) {
           // OpenLayers configuration.
           displayOutsideMaxExtent: true,
           opacity: Number(record.get('fill_opacity')),
+          transitionEffect: 'map-resize',
           isBaseLayer: false,
 
           neatline: {
