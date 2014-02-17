@@ -583,7 +583,8 @@ Neatline.module('Map', function(Map) {
 
           // WMS request parameters.
           layers: record.get('wms_layers'),
-          transparent: true
+          transparent: true,
+          tiled: true
 
         }, {
 
