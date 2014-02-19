@@ -101,7 +101,6 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
     {
 
         // Set admin page length to 2.
-        set_option('per_page_public', 10);
         set_option('per_page_admin', 2);
 
         $exhibit1 = $this->_exhibit('slug1');
