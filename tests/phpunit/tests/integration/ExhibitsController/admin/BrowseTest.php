@@ -121,12 +121,14 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
         // Page 1.
         $this->dispatch('neatline');
 
-        // Should list first two exhibits.
-        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
+        // Should list exhibits 1-2.
         $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug1').'"]');
         $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug2').'"]');
+
+        // Should _just_ list exhibits 1-2.
+        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
 
         // Should show pagination.
         $this->assertXpath('//div[@class="pagination"]');
@@ -135,12 +137,14 @@ class ExhibitsControllerTest_AdminBrowse extends Neatline_Case_Default
         $this->resetResponse();
         $this->dispatch('neatline?page=2');
 
-        // Should show next two exhibits.
-        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
+        // SHould list exhibits 3-4.
         $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug3').'"]');
         $this->assertXpath('//a[@class="public"][@href="'.
             public_url('neatline/show/slug4').'"]');
+
+        // Should _just_ list exhibits 3-4.
+        $this->assertXpath('//table[@class="neatline"]/tbody/tr', 2);
 
     }
 
