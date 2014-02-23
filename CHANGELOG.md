@@ -1,3 +1,11 @@
+## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2)) ~ Pending
+
+#### Performance Improvements
+
+  - Changes the MIME type for WMS layer image tiles from `image/png` to `image/png8`, which visually almost identical and load much faster.
+
+  - Adds `tiled=true` to WMS layer requests, which is necessary in order for Geoserver to return cached tiles.
+
 ## v2.2.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.0...2.2.1)) ~ February 13, 2014
 
 #### Bug Fixes
