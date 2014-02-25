@@ -16,8 +16,13 @@
 function nl_setLayerSources()
 {
     Zend_Registry::set('layers', array(
-        nl_getPublicThemeDir().'/layers',   // In the public theme.
-        NL_DIR.'/layers'                    // In the plugin.
+
+        // Default layers in the plugin:
+        NL_DIR.'/layers',
+
+        // Custom layers in public theme:
+        nl_getPublicThemeDir().'/layers'
+
     ));
 }
 
