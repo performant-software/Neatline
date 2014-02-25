@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.AWMC', function(AWMC) {
+Neatline.module('Map.Layers.Mapbox', function(Mapbox) {
 
 
-  AWMC.addInitializer(function() {
-    AWMC.__controller = new AWMC.Controller();
+  Mapbox.addInitializer(function() {
+    Mapbox.__controller = new Mapbox.Controller();
   });
 
 

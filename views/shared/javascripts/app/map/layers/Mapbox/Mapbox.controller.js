@@ -8,32 +8,32 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.AWMC', function(AWMC) {
+Neatline.module('Map.Layers.Mapbox', function(Mapbox) {
 
 
-  AWMC.Controller = Neatline.Shared.Controller.extend({
+  Mapbox.Controller = Neatline.Shared.Controller.extend({
 
 
     slug: 'MAP:LAYERS',
 
-    requests: ['AWMC'],
+    requests: ['Mapbox'],
 
 
     /**
-     * Construct an OpenStreetMap layer.
+     * Construct a Mapbox layer.
      *
      * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer.OSM}: The OSM layer.
+     * @return {OpenLayers.Layer.XYZ}: The Mapbox layer.
      */
-    AWMC: function(json) {
+    Mapbox: function(json) {
 
       var id = json.properties.id;
 
       var layer =  new OpenLayers.Layer.XYZ(json.title, [
         'http://a.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png',
-        'http://a.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png',
-        'http://a.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png',
-        'http://a.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png'
+        'http://b.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png',
+        'http://c.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png',
+        'http://d.tiles.mapbox.com/v3/'+id+'/${z}/${x}/${y}.png'
       ], {
         sphericalMercator: true,
         wrapDateLine: true
