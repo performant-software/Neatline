@@ -1994,7 +1994,7 @@ return URI;
 /*!
 Jasmine-jQuery: a set of jQuery helpers for Jasmine tests.
 
-Version 2.0.2
+Version 2.1.0
 
 https://github.com/velesin/jasmine-jquery
 
@@ -2121,8 +2121,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         success: function (data, status, $xhr) {
           htmlText = $xhr.responseText
         }
-      }).fail(function () {
-          throw new Error('Fixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + errorThrown.message + ')')
+      }).fail(function ($xhr, status, err) {
+          throw new Error('Fixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + err.message + ')')
       })
 
       var scripts = $($.parseHTML(htmlText, true)).find('script[src]') || [];
@@ -2136,8 +2136,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             success: function (data, status, $xhr) {
                 htmlText += '<script>' + $xhr.responseText + '</script>'
             },
-            error: function (jqXHR, status, errorThrown) {
-                throw new Error('Script could not be loaded: ' + scriptSrc + ' (status: ' + status + ', message: ' + errorThrown.message + ')')
+            error: function ($xhr, status, err) {
+                throw new Error('Script could not be loaded: ' + scriptSrc + ' (status: ' + status + ', message: ' + err.message + ')')
             }
         });
       })
@@ -2248,8 +2248,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       success: function (data) {
         self.fixturesCache_[relativeUrl] = data
       },
-      error: function (jqXHR, status, errorThrown) {
-        throw new Error('JSONFixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + errorThrown.message + ')')
+      error: function ($xhr, status, err) {
+        throw new Error('JSONFixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + err.message + ')')
       }
     })
   }

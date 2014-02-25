@@ -35,7 +35,7 @@
 
     "js": {
 
-      "jquery":           "bower_components/jquery/jquery.js",
+      "jquery":           "bower_components/jquery/dist/jquery.js",
       "jquery_ui":        "bower_components/jquery-ui/ui/jquery-ui.js",
       "underscore":       "bower_components/underscore/underscore.js",
       "underscore_s":     "bower_components/underscore.string/lib/underscore.string.js",
