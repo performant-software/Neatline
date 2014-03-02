@@ -24,11 +24,12 @@
   },
 
   "copy": {
-    "bootstrap":          "bower_components/bootstrap/dist",
+    "bootstrap":          "bower_components/bootstrap",
+    "openlayers":         "bower_components/openlayers_themes",
     "chosen":             "bower_components/chosen",
     "select2":            "bower_components/select2",
-    "ckeditor":           "bower_components/ckeditor",
-    "jquery_ui":          "bower_components/jquery-ui"
+    "jquery_ui":          "bower_components/jquery-ui",
+    "ckeditor":           "bower_components/ckeditor"
   },
 
   "vendor": {

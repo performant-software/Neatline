@@ -27,6 +27,7 @@
     , "jquery-draggable-input": "davidmcclure/jquery-draggable-input"
     , "toastr":                 "davidmcclure/toastr"
     , "select2":                "davidmcclure/select2#feature/loading-event"
+    , "openlayers_themes":      "developmentseed/openlayers_themes"
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-releases"
 

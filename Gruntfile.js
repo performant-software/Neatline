@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 
       bootstrap: {
         files: [{
-          src: paths.copy.bootstrap+'/fonts/*',
+          src: paths.copy.bootstrap+'/dist/fonts/*',
           dest: 'views/shared/css/fonts/',
           flatten: true,
           expand: true
