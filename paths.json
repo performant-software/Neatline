@@ -5,23 +5,23 @@
     "admin":              "views/admin/javascripts"
   },
 
-  "jasmine":              "tests/jasmine",
-
   "stylus": {
     "shared":             "views/shared/css/stylus",
     "admin":              "views/admin/css/stylus"
   },
 
   "payloads": {
-    "admin": {
-      "js":               "views/admin/javascripts/payloads",
-      "css":              "views/admin/css/payloads"
+    "js": {
+      "shared":           "views/shared/javascripts/payloads",
+      "admin":            "views/admin/javascripts/payloads"
     },
-    "shared": {
-      "js":               "views/shared/javascripts/payloads",
-      "css":              "views/shared/css/payloads"
+    "css": {
+      "shared":           "views/shared/css/payloads",
+      "admin":            "views/admin/css/payloads"
     }
   },
+
+  "jasmine":              "tests/jasmine",
 
   "copy": {
     "bootstrap":          "bower_components/bootstrap",

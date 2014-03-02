@@ -59,7 +59,7 @@ module.exports = function(grunt) {
       chosen: {
         files: [{
           src: paths.copy.chosen+'/*.png',
-          dest: paths.payloads.admin.css,
+          dest: paths.payloads.css.admin,
           flatten: true,
           expand: true
         }]
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
       jquery_ui: {
         files: [{
           src: paths.copy.jquery_ui+'/themes/smoothness/images/*',
-          dest: paths.payloads.shared.css+'/images',
+          dest: paths.payloads.css.shared+'/images',
           flatten: true,
           expand: true
         }]
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
             paths.copy.select2+'/*.png',
             paths.copy.select2+'/*.gif'
           ],
-          dest: paths.payloads.shared.css,
+          dest: paths.payloads.css.shared,
           flatten: true,
           expand: true
         }]
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
         files: [{
           cwd: paths.copy.ckeditor,
           src: '**',
-          dest: paths.payloads.shared.js+'/ckeditor/',
+          dest: paths.payloads.js.shared+'/ckeditor/',
           expand: true
         }]
       }
@@ -100,10 +100,10 @@ module.exports = function(grunt) {
     clean: {
 
       payloads: [
-        paths.payloads.shared.js,
-        paths.payloads.shared.css,
-        paths.payloads.admin.js,
-        paths.payloads.admin.css
+        paths.payloads.js.shared,
+        paths.payloads.css.shared,
+        paths.payloads.js.admin,
+        paths.payloads.css.admin
       ],
 
       fixtures: [
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
           paths.src.admin+'/exhibit-form.js',
           paths.src.admin+'/slug-autogen.js'
         ],
-        dest: paths.payloads.admin.js+'/add-form.js'
+        dest: paths.payloads.js.admin+'/add-form.js'
       },
 
       edit_form: {
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
           paths.vendor.js.chosen,
           paths.src.admin+'/exhibit-form.js'
         ],
-        dest: paths.payloads.admin.js+'/edit-form.js'
+        dest: paths.payloads.js.admin+'/edit-form.js'
       },
 
       neatline_public: {
@@ -172,7 +172,7 @@ module.exports = function(grunt) {
           paths.src.shared+'/presenter/None/*.js'
 
         ],
-        dest: paths.payloads.shared.js+'/neatline-public.js'
+        dest: paths.payloads.js.shared+'/neatline-public.js'
       },
 
       neatline_editor: {
@@ -223,7 +223,7 @@ module.exports = function(grunt) {
           paths.src.shared+'/editor/map/*.js',
 
         ],
-        dest: paths.payloads.shared.js+'/neatline-editor.js'
+        dest: paths.payloads.js.shared+'/neatline-editor.js'
       },
 
       jasmine_vendor: {
@@ -241,17 +241,17 @@ module.exports = function(grunt) {
       exhibit_form_css: {
         src: [
           paths.vendor.css.chosen,
-          paths.payloads.admin.css+'/exhibit-form.css'
+          paths.payloads.css.admin+'/exhibit-form.css'
         ],
-        dest: paths.payloads.admin.css+'/exhibit-form.css'
+        dest: paths.payloads.css.admin+'/exhibit-form.css'
       },
 
       neatline_public_css: {
         src: [
           paths.vendor.css.openlayers,
-          paths.payloads.shared.css+'/neatline-public.css'
+          paths.payloads.css.shared+'/neatline-public.css'
         ],
-        dest: paths.payloads.shared.css+'/neatline-public.css'
+        dest: paths.payloads.css.shared+'/neatline-public.css'
       },
 
       neatline_editor_css: {
@@ -263,9 +263,9 @@ module.exports = function(grunt) {
           paths.vendor.css.select2,
           paths.vendor.css.select2_bs,
           '<%= concat.neatline_public_css.src %>',
-          paths.payloads.shared.css+'/neatline-editor.css'
+          paths.payloads.css.shared+'/neatline-editor.css'
         ],
-        dest: paths.payloads.shared.css+'/neatline-editor.css'
+        dest: paths.payloads.css.shared+'/neatline-editor.css'
       }
 
     },
@@ -309,17 +309,17 @@ module.exports = function(grunt) {
 
       neatline_public: {
         src: paths.stylus.shared+'/public/**/*.styl',
-        dest: paths.payloads.shared.css+'/neatline-public.css'
+        dest: paths.payloads.css.shared+'/neatline-public.css'
       },
 
       neatline_editor: {
         src: paths.stylus.shared+'/editor/**/*.styl',
-        dest: paths.payloads.shared.css+'/neatline-editor.css'
+        dest: paths.payloads.css.shared+'/neatline-editor.css'
       },
 
       exhibit_form: {
         src: paths.stylus.admin+'/exhibit-form.styl',
-        dest: paths.payloads.admin.css+'/exhibit-form.css'
+        dest: paths.payloads.css.admin+'/exhibit-form.css'
       }
 
     },
@@ -328,15 +328,15 @@ module.exports = function(grunt) {
 
       admin: {
         src: '*.css',
-        cwd: paths.payloads.admin.css,
-        dest: paths.payloads.admin.css,
+        cwd: paths.payloads.css.admin,
+        dest: paths.payloads.css.admin,
         expand: true
       },
 
       shared: {
         src: '*.css',
-        dest: paths.payloads.shared.css,
-        cwd: paths.payloads.shared.css,
+        dest: paths.payloads.css.shared,
+        cwd: paths.payloads.css.shared,
         expand: true
       }
 
@@ -409,7 +409,7 @@ module.exports = function(grunt) {
       },
 
       neatline: {
-        src: paths.payloads.shared.js+'/neatline-public.js',
+        src: paths.payloads.js.shared+'/neatline-public.js',
         options: {
           specs: paths.jasmine+'/tests/neatline/**/*.spec.js'
         }
@@ -417,8 +417,8 @@ module.exports = function(grunt) {
 
       editor: {
         src: [
-          paths.payloads.shared.js+'/ckeditor/ckeditor.js',
-          paths.payloads.shared.js+'/neatline-editor.js'
+          paths.payloads.js.shared+'/ckeditor/ckeditor.js',
+          paths.payloads.js.shared+'/neatline-editor.js'
         ],
         options: {
           specs: paths.jasmine+'/tests/editor/**/*.spec.js'
