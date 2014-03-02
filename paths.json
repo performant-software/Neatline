@@ -28,8 +28,8 @@
     "bootstrap":          "bower_components/bootstrap",
     "openlayers":         "bower_components/openlayers_themes",
     "chosen":             "bower_components/chosen",
-    "select2":            "bower_components/select2",
     "jquery_ui":          "bower_components/jquery-ui",
+    "select2":            "bower_components/select2",
     "ckeditor":           "bower_components/ckeditor"
   },
 

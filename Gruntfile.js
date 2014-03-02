@@ -56,6 +56,15 @@ module.exports = function(grunt) {
         }]
       },
 
+      openlayers: {
+        files: [{
+          src: paths.copy.openlayers+'/dark/*',
+          dest: 'views/shared/images/dark',
+          flatten: true,
+          expand: true
+        }]
+      },
+
       chosen: {
         files: [{
           src: paths.copy.chosen+'/*.png',
@@ -112,11 +121,10 @@ module.exports = function(grunt) {
         paths.jasmine+'/fixtures/*.xml'
       ],
 
-      bower: 'bower_components',
-
-      fonts: 'views/shared/css/fonts',
-
-      pkg: 'pkg'
+      bower:  'bower_components',
+      fonts:  'views/shared/css/fonts',
+      images: 'views/shared/images',
+      dist:   'pkg'
 
     },
 
@@ -535,7 +543,7 @@ module.exports = function(grunt) {
 
   // Spawn release package.
   grunt.registerTask('package', [
-    'clean:pkg',
+    'clean:dist',
     'compile:min',
     'compress'
   ]);
