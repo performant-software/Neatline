@@ -126,8 +126,8 @@ module.exports = function(grunt) {
         src: [
           paths.vendor.js.underscore_s,
           paths.vendor.js.chosen,
-          paths.src.admin+'/exhibit-form.js',
-          paths.src.admin+'/slug-autogen.js'
+          paths.src.js.admin+'/exhibit-form.js',
+          paths.src.js.admin+'/slug-autogen.js'
         ],
         dest: paths.payloads.js.admin+'/add-form.js'
       },
@@ -135,7 +135,7 @@ module.exports = function(grunt) {
       edit_form: {
         src: [
           paths.vendor.js.chosen,
-          paths.src.admin+'/exhibit-form.js'
+          paths.src.js.admin+'/exhibit-form.js'
         ],
         dest: paths.payloads.js.admin+'/edit-form.js'
       },
@@ -159,17 +159,17 @@ module.exports = function(grunt) {
           paths.vendor.js.rivets,
 
           // Neatline:
-          paths.src.shared+'/*.js',
-          paths.src.shared+'/shared/*.js',
-          paths.src.shared+'/shared/exhibit/exhibit.model.js',
-          paths.src.shared+'/shared/record/record.model.js',
-          paths.src.shared+'/shared/record/record.collection.js',
-          paths.src.shared+'/shared/widget/*.js',
-          paths.src.shared+'/broker/*.js',
-          paths.src.shared+'/map/**/*.js',
-          paths.src.shared+'/presenter/*.js',
-          paths.src.shared+'/presenter/StaticBubble/*.js',
-          paths.src.shared+'/presenter/None/*.js'
+          paths.src.js.shared+'/*.js',
+          paths.src.js.shared+'/shared/*.js',
+          paths.src.js.shared+'/shared/exhibit/exhibit.model.js',
+          paths.src.js.shared+'/shared/record/record.model.js',
+          paths.src.js.shared+'/shared/record/record.collection.js',
+          paths.src.js.shared+'/shared/widget/*.js',
+          paths.src.js.shared+'/broker/*.js',
+          paths.src.js.shared+'/map/**/*.js',
+          paths.src.js.shared+'/presenter/*.js',
+          paths.src.js.shared+'/presenter/StaticBubble/*.js',
+          paths.src.js.shared+'/presenter/None/*.js'
 
         ],
         dest: paths.payloads.js.shared+'/neatline-public.js'
@@ -204,23 +204,23 @@ module.exports = function(grunt) {
           paths.vendor.js.uri,
 
           // Neatline:
-          paths.src.shared+'/*.js',
-          paths.src.shared+'/shared/*.js',
-          paths.src.shared+'/shared/exhibit/exhibit.model.js',
-          paths.src.shared+'/shared/record/record.model.js',
-          paths.src.shared+'/shared/record/record.collection.js',
-          paths.src.shared+'/shared/widget/*.js',
-          paths.src.shared+'/broker/*.js',
-          paths.src.shared+'/map/**/*.js',
-          paths.src.shared+'/presenter/*.js',
-          paths.src.shared+'/presenter/StaticBubble/*.js',
-          paths.src.shared+'/presenter/None/*.js',
+          paths.src.js.shared+'/*.js',
+          paths.src.js.shared+'/shared/*.js',
+          paths.src.js.shared+'/shared/exhibit/exhibit.model.js',
+          paths.src.js.shared+'/shared/record/record.model.js',
+          paths.src.js.shared+'/shared/record/record.collection.js',
+          paths.src.js.shared+'/shared/widget/*.js',
+          paths.src.js.shared+'/broker/*.js',
+          paths.src.js.shared+'/map/**/*.js',
+          paths.src.js.shared+'/presenter/*.js',
+          paths.src.js.shared+'/presenter/StaticBubble/*.js',
+          paths.src.js.shared+'/presenter/None/*.js',
 
           // Editor:
-          paths.src.shared+'/editor/*.js',
-          paths.src.shared+'/editor/exhibit/**/*.js',
-          paths.src.shared+'/editor/record/**/*.js',
-          paths.src.shared+'/editor/map/*.js',
+          paths.src.js.shared+'/editor/*.js',
+          paths.src.js.shared+'/editor/exhibit/**/*.js',
+          paths.src.js.shared+'/editor/record/**/*.js',
+          paths.src.js.shared+'/editor/map/*.js',
 
         ],
         dest: paths.payloads.js.shared+'/neatline-editor.js'
@@ -303,22 +303,22 @@ module.exports = function(grunt) {
     stylus: {
 
       options: {
-        paths: [paths.stylus.shared],
+        paths: [paths.src.styl.shared],
         import: ['var']
       },
 
       neatline_public: {
-        src: paths.stylus.shared+'/public/**/*.styl',
+        src: paths.src.styl.shared+'/public/**/*.styl',
         dest: paths.payloads.css.shared+'/neatline-public.css'
       },
 
       neatline_editor: {
-        src: paths.stylus.shared+'/editor/**/*.styl',
+        src: paths.src.styl.shared+'/editor/**/*.styl',
         dest: paths.payloads.css.shared+'/neatline-editor.css'
       },
 
       exhibit_form: {
-        src: paths.stylus.admin+'/exhibit-form.styl',
+        src: paths.src.styl.admin+'/exhibit-form.styl',
         dest: paths.payloads.css.admin+'/exhibit-form.css'
       }
 
@@ -368,8 +368,8 @@ module.exports = function(grunt) {
           '<%= concat.neatline_editor.src %>',
           '<%= concat.jasmine_vendor.src %>',
           '<%= markdown.docs.src %>',
-          paths.stylus.admin+'/**/*.styl',
-          paths.stylus.shared+'/**/*.styl'
+          paths.src.styl.admin+'/**/*.styl',
+          paths.src.styl.shared+'/**/*.styl'
         ],
         tasks: 'compile'
       }

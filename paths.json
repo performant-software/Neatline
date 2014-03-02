@@ -1,13 +1,14 @@
 {
 
   "src": {
-    "shared":             "views/shared/javascripts/app",
-    "admin":              "views/admin/javascripts"
-  },
-
-  "stylus": {
-    "shared":             "views/shared/css/stylus",
-    "admin":              "views/admin/css/stylus"
+    "js": {
+      "shared":           "views/shared/javascripts/app",
+      "admin":            "views/admin/javascripts"
+    },
+    "styl": {
+      "shared":           "views/shared/css/stylus",
+      "admin":            "views/admin/css/stylus"
+    }
   },
 
   "payloads": {
