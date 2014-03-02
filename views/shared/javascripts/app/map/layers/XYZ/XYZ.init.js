@@ -8,11 +8,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Map.Layers.Mapbox', function(Mapbox) {
+Neatline.module('Map.Layers.XYZ', function(XYZ) {
 
 
-  Mapbox.addInitializer(function() {
-    Mapbox.__controller = new Mapbox.Controller();
+  XYZ.addInitializer(function() {
+    XYZ.__controller = new XYZ.Controller();
   });
 
 
