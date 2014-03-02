@@ -544,9 +544,13 @@ SQL
      */
     protected function _writeExhibitMarkupFixture($exhibit, $file)
     {
+
+        $this->dispatch(); // Mount the template/asset directories.
+
         get_view()->neatline_exhibit = $exhibit;
         $html = get_view()->partial('exhibits/partials/exhibit.php');
         $this->_writeFixture($html, $file);
+
     }
 
 
@@ -558,9 +562,13 @@ SQL
      */
     protected function _writeEditorMarkupFixture($exhibit, $file)
     {
+
+        $this->dispatch(); // Mount the template/asset directories.
+
         get_view()->neatline_exhibit = $exhibit;
         $html = get_view()->partial('exhibits/partials/editor_core.php');
         $this->_writeFixture($html, $file);
+
     }
 
 

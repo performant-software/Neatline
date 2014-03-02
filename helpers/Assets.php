@@ -142,3 +142,14 @@ function nl_getPublicThemeDir()
 {
     return PUBLIC_THEME_DIR.'/'.get_option('public_theme').'/neatline';
 }
+
+
+/**
+ * Get the path to the OpenLayers theme.
+ *
+ * @return string The theme path.
+ */
+function nl_getOpenLayersThemeDir()
+{
+    return dirname(img('dark/slider.png')).'/';
+}

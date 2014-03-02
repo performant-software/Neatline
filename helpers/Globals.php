@@ -51,7 +51,12 @@ function nl_globals($exhibit)
         // STRINGS
         // --------------------------------------------------------------------
 
-        'strings'           => nl_getStrings(NL_DIR.'/strings.json')
+        'strings'           => nl_getStrings(NL_DIR.'/strings.json'),
+
+        // OPENLAYERS
+        // --------------------------------------------------------------------
+
+        'openlayers_theme'  => nl_getOpenLayersThemeDir()
 
     ));
 

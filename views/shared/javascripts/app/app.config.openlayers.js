@@ -11,4 +11,4 @@
 /**
  * OpenLayers theme image source.
  */
-OpenLayers.ImgPath = 'http://js.mapbox.com/theme/dark/';
+//OpenLayers.ImgPath = Neatline.g.neatline.openlayers_theme;

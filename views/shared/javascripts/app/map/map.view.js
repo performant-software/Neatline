@@ -97,6 +97,10 @@ Neatline.module('Map', function(Map) {
      */
     _initOpenLayers: function() {
 
+      // Set the theme directory.
+      OpenLayers.ImgPath = Neatline.g.neatline.openlayers_theme;
+
+      // Spin up the map instance.
       this.map = new OpenLayers.Map(this.el, {
 
         theme: null,
