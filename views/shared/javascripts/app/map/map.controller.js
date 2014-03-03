@@ -34,6 +34,8 @@ Neatline.module('Map', function(Map) {
       'getMap',
       'getRecords',
       'getVectorLayer',
+      'getVectorLayers',
+      'getWmsLayers',
       'getCenter',
       'getZoom'
     ],
@@ -156,6 +158,26 @@ Neatline.module('Map', function(Map) {
      */
     getVectorLayer: function(model) {
       return this.view.getOrCreateVectorLayer(model);
+    },
+
+
+    /**
+     * Get all vector layers on the map.
+     *
+     * @return {Array}: The vector layers.
+     */
+    getVectorLayers: function() {
+      return this.view.getVectorLayers();
+    },
+
+
+    /**
+     * Get all WMS layers on the map.
+     *
+     * @return {Array}: The vector layers.
+     */
+    getWmsLayers: function() {
+      return this.view.getWmsLayers();
     },
 
 
