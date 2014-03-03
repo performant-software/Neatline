@@ -37,9 +37,6 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
         $this->_records  = $this->db->getTable('NeatlineRecord');
 
-        // Register Neatline partials.
-        get_view()->addScriptPath(NL_DIR.'/views/shared');
-
     }
 
 
@@ -316,10 +313,12 @@ SQL
 
 
     /**
-     * Register the mock theme scripts.
+     * Register the mock theme templates. Add the default Neatline directory
+     * first, wich ensures that the mock templates will take precedence.
      */
     protected function _mockTheme()
     {
+        get_view()->addScriptPath(NL_DIR.'/views/shared');
         get_view()->addScriptPath(NL_TEST_DIR.'/mocks/theme/neatline');
     }
 
