@@ -34,6 +34,7 @@ Neatline.module('Map', function(Map) {
 
       this.slug = options.slug;
 
+      // Start the map.
       this._initGlobals();
       this._initOpenLayers();
       this._initControls();
@@ -41,6 +42,7 @@ Neatline.module('Map', function(Map) {
       this._initBaseLayers();
       this._initViewport();
 
+      // Request records.
       this.publishPosition();
 
     },
