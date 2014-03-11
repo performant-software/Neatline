@@ -104,7 +104,7 @@ function nl_queueExhibitTheme($exhibit)
  */
 function nl_queueGoogleMapsApi()
 {
-    nl_appendScript('http://maps.google.com/maps/api/js?sensor=false');
+    nl_appendScript('//maps.google.com/maps/api/js?sensor=false');
 }
 
 
