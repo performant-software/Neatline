@@ -7477,7 +7477,7 @@ var NL = (function(NL) {
    * @param {String} event: The event.
    */
   NL.assertEventNotCalled = function(spy, event) {
-    var events = _.map(spy.calls.allArgs(), function(args) { return args[0] });
+    var events = _.map(spy.calls.allArgs(), function(a) { return a[0]; });
     expect(_.contains(events, event)).toBeFalsy();
   };
 
@@ -7602,7 +7602,6 @@ var NL = (function(NL) {
 
 
   /**
-   * TODO|dev
    * Respond 200 to a item search request.
    *
    * @param {Object} response: The response body.

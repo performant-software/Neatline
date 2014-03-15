@@ -113,7 +113,6 @@ var NL = (function(NL) {
 
 
   /**
-   * TODO|dev
    * Respond 200 to a item search request.
    *
    * @param {Object} response: The response body.
