@@ -151,5 +151,5 @@ function nl_getPublicThemeDir()
  */
 function nl_getOpenLayersThemeDir()
 {
-    return dirname(img('dark/slider.png')).'/';
+    return url('plugins/Neatline/views/shared/images/dark/');
 }
