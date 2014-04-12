@@ -22,6 +22,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
 
   // Test runners:
   grunt.loadNpmTasks('grunt-phpunit');
@@ -106,6 +107,19 @@ module.exports = function(grunt) {
 
     },
 
+    symlink: {
+
+      options: {
+        overwrite: true
+      },
+
+      hook: {
+        src: 'pre-commit',
+        dest: '.git/hooks/pre-commit'
+      }
+
+    },
+
     clean: {
 
       payloads: [
@@ -124,6 +138,7 @@ module.exports = function(grunt) {
       bower:  'bower_components',
       fonts:  'views/shared/css/fonts',
       images: 'views/shared/images',
+      hook:   '.git/hooks/pre-commit',
       dist:   'pkg'
 
     },
@@ -504,7 +519,8 @@ module.exports = function(grunt) {
     'clean',
     'bower',
     'compile:min',
-    'copy'
+    'copy',
+    'symlink'
   ]);
 
   // Concat static assets.
