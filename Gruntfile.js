@@ -11,29 +11,9 @@
 module.exports = function(grunt) {
 
 
-  // File utilities:
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
-  grunt.loadNpmTasks('grunt-markdown');
+  require('load-grunt-tasks')(grunt);
 
-  // Directory utilities:
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-compress');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-symlink');
-
-  // Test runners:
-  grunt.loadNpmTasks('grunt-phpunit');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-
-  // Filesystem helpers:
-  grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-
-  // Config files:
+  // Read configuration files:
   var pkg = grunt.file.readJSON('package.json');
   var paths = grunt.file.readJSON('paths.json');
 
