@@ -375,9 +375,9 @@ module.exports = function(grunt) {
           '<%= concat.neatline_public.src %>',
           '<%= concat.neatline_editor.src %>',
           '<%= concat.jasmine_vendor.src %>',
-          '<%= markdown.docs.src %>',
-          paths.src.styl.admin+'/**/*.styl',
-          paths.src.styl.shared+'/**/*.styl'
+          '<%= stylus.neatline_public.src %>',
+          '<%= stylus.neatline_editor.src %>',
+          '<%= stylus.exhibit_form.src %>',
         ],
         tasks: 'compile'
       }
