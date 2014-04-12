@@ -510,7 +510,6 @@ module.exports = function(grunt) {
   // Concat static assets.
   grunt.registerTask('compile', [
     'stylus',
-    'markdown',
     'concat'
   ]);
 
