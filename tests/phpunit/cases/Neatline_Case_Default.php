@@ -1,6 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80: */
 
 /**
  * @package     omeka
@@ -106,7 +106,7 @@ SQL
     protected function _skipIfPlugin($pluginName)
     {
         if (plugin_is_active($pluginName)) {
-            $this->markTestSkipped("Plugin $pluginName must be installed");
+            $this->markTestSkipped("Plugin $pluginName must be installed.");
         }
     }
 

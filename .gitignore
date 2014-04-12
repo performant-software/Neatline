@@ -10,4 +10,3 @@ _SpecRunner.html
 /layers
 !/layers/default.json
 /tests/phpunit/plugins.json
-/tests/jasmine/suites.json

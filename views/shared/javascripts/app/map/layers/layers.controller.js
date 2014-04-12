@@ -27,11 +27,7 @@ Neatline.module('Map.Layers', function(Layers) {
      * @return {OpenLayers.Layer|null}: The layer.
      */
     getLayer: function(json) {
-      try {
-        return Neatline.request('MAP:LAYERS:'+json.type, json);
-      } catch (e) {
-        return null;
-      }
+      return Neatline.request('MAP:LAYERS:'+json.type, json);
     }
 
 
