@@ -7153,7 +7153,7 @@ if (typeof module == "object" && typeof require == "function") {
 return sinon;}.call(typeof window != 'undefined' && window || {}));
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7225,7 +7225,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7346,7 +7346,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7429,7 +7429,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7465,7 +7465,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7496,7 +7496,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7669,7 +7669,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7719,7 +7719,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7742,7 +7742,7 @@ jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/payloads';
 var read = readFixtures;
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -7934,7 +7934,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -8021,7 +8021,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -8074,7 +8074,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka
@@ -8109,7 +8109,7 @@ var NL = (function(NL) {
 })(NL || {});
 
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * @package     omeka

@@ -1,5 +1,5 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
+/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
 
 /**
  * Monkey patch editing methods into the public map view.
