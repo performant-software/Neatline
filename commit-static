@@ -1,0 +1,21 @@
+#!/bin/sh
+
+SHARED_JS=views/shared/javascripts/payloads/*.js
+SHARED_CSS=views/shared/css/payloads/*.css
+ADMIN_JS=views/admin/javascripts/payloads/*.js
+ADMIN_CSS=views/admin/css/payloads/*.css
+
+STATIC=$(git ls-files $SHARED_JS $SHARED_CSS $ADMIN_JS $ADMIN_CSS)
+
+# Expose the payloads.
+git update-index --no-assume-unchanged $STATIC
+
+# Compile.
+grunt compile:min
+
+# Commit.
+git add $STATIC
+git commit -m "Committing minifed payloads."
+
+# Conceal the payloads.
+git update-index --assume-unchanged $STATIC

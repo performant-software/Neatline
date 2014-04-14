@@ -87,19 +87,6 @@ module.exports = function(grunt) {
 
     },
 
-    symlink: {
-
-      options: {
-        overwrite: true
-      },
-
-      hook: {
-        src: 'pre-commit',
-        dest: '.git/hooks/pre-commit'
-      }
-
-    },
-
     clean: {
 
       payloads: [
@@ -118,7 +105,6 @@ module.exports = function(grunt) {
       bower:  'bower_components',
       fonts:  'views/shared/css/fonts',
       images: 'views/shared/images',
-      hook:   '.git/hooks/pre-commit',
       dist:   'pkg'
 
     },
