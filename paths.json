@@ -2,7 +2,7 @@
 
   "src": {
     "js": {
-      "shared":           "views/shared/javascripts/app",
+      "shared":           "views/shared/javascripts/src",
       "admin":            "views/admin/javascripts"
     },
     "styl": {
