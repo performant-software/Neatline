@@ -11,14 +11,14 @@
     }
   },
 
-  "payloads": {
+  "dist": {
     "js": {
-      "shared":           "views/shared/javascripts/payloads",
-      "admin":            "views/admin/javascripts/payloads"
+      "shared":           "views/shared/javascripts/dist",
+      "admin":            "views/admin/javascripts/dist"
     },
     "css": {
-      "shared":           "views/shared/css/payloads",
-      "admin":            "views/admin/css/payloads"
+      "shared":           "views/shared/css/dist",
+      "admin":            "views/admin/css/dist"
     }
   },
 

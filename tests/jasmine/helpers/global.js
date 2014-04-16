@@ -13,7 +13,7 @@
  * Set the fixtures path.
  */
 jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures';
-jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/payloads';
+jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/dist';
 
 
 /**
