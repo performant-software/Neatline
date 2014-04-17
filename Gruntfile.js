@@ -485,8 +485,7 @@ module.exports = function(grunt) {
     'clean',
     'bower',
     'compile:min',
-    'copy',
-    'symlink'
+    'copy'
   ]);
 
   // Concat static assets.
@@ -516,7 +515,6 @@ module.exports = function(grunt) {
 
   // Run all tests.
   grunt.registerTask('test', [
-    'compile:min',
     'clean:fixtures',
     'phpunit',
     'jasmine'
