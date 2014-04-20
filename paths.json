@@ -68,17 +68,6 @@
       "querystring":      "bower_components/querystring/querystring.js",
       "sinon":            "bower_components/sinon/index.js"
 
-    },
-
-    "css": {
-      "jquery_ui":        "bower_components/jquery-ui/themes/smoothness/jquery-ui.css",
-      "openlayers":       "bower_components/openlayers/theme/default/style.css",
-      "bootstrap":        "bower_components/bootstrap/dist/css/bootstrap.css",
-      "toastr":           "bower_components/toastr/toastr.css",
-      "spectrum":         "bower_components/spectrum/spectrum.css",
-      "chosen":           "bower_components/chosen/chosen.css",
-      "select2":          "bower_components/select2/select2.css",
-      "select2_bs":       "bower_components/select2/select2-bootstrap.css"
     }
 
   }

@@ -225,36 +225,6 @@ module.exports = function(grunt) {
           paths.jasmine+'/helpers/*.js'
         ],
         dest: paths.jasmine+'/dist/vendor.js'
-      },
-
-      exhibit_form_css: {
-        src: [
-          paths.vendor.css.chosen,
-          paths.dist.css.admin+'/exhibit-form.css'
-        ],
-        dest: paths.dist.css.admin+'/exhibit-form.css'
-      },
-
-      neatline_public_css: {
-        src: [
-          paths.vendor.css.openlayers,
-          paths.dist.css.shared+'/neatline-public.css'
-        ],
-        dest: paths.dist.css.shared+'/neatline-public.css'
-      },
-
-      neatline_editor_css: {
-        src: [
-          paths.vendor.css.jquery_ui,
-          paths.vendor.css.bootstrap,
-          paths.vendor.css.toastr,
-          paths.vendor.css.spectrum,
-          paths.vendor.css.select2,
-          paths.vendor.css.select2_bs,
-          '<%= concat.neatline_public_css.src %>',
-          paths.dist.css.shared+'/neatline-editor.css'
-        ],
-        dest: paths.dist.css.shared+'/neatline-editor.css'
       }
 
     },
@@ -292,17 +262,18 @@ module.exports = function(grunt) {
     stylus: {
 
       options: {
-        paths: [paths.src.styl.shared],
+        'include css': true,
+        paths: [paths.src.styl.shared, 'bower_components'],
         import: ['var']
       },
 
       neatline_public: {
-        src: paths.src.styl.shared+'/public/**/*.styl',
+        src: paths.src.styl.shared+'/public.styl',
         dest: paths.dist.css.shared+'/neatline-public.css'
       },
 
       neatline_editor: {
-        src: paths.src.styl.shared+'/editor/**/*.styl',
+        src: paths.src.styl.shared+'/editor.styl',
         dest: paths.dist.css.shared+'/neatline-editor.css'
       },
 
