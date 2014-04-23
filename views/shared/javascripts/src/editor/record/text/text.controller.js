@@ -8,27 +8,29 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record.Text', { startWithParent: false,
+Neatline.module('Editor.Record.Text', {
+  startWithParent: false,
   define: function(Text) {
 
 
-  Text.Controller = Neatline.Shared.Controller.extend({
+    Text.Controller = Neatline.Shared.Controller.extend({
 
 
-    slug: 'EDITOR:RECORD:TEXT',
+      slug: 'EDITOR:RECORD:TEXT',
 
 
-    /**
-     * Instantiate the view on the record form element.
-     */
-    init: function() {
-      this.view = new Text.View({
-        el: Neatline.request('EDITOR:RECORD:getElement')
-      });
-    }
+      /**
+       * Instantiate the view on the record form element.
+       */
+      init: function() {
+        this.view = new Text.View({
+          el: Neatline.request('EDITOR:RECORD:getElement')
+        });
+      }
 
 
-  });
+    });
 
 
-}});
+  }
+});

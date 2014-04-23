@@ -8,51 +8,53 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record.Text', { startWithParent: false,
+Neatline.module('Editor.Record.Text', {
+  startWithParent: false,
   define: function(Text) {
 
 
-  Text.View = Neatline.Shared.View.extend({
+    Text.View = Neatline.Shared.View.extend({
 
 
-    events: {
+      events: {
 
-      // Show CKEditors on "Edit HTML" click.
-      'click a[data-textarea]': 'onEditHtmlClick'
+        // Show CKEditors on "Edit HTML" click.
+        'click a[data-textarea]': 'onEditHtmlClick'
 
-    },
+      },
 
 
-    /**
-     * Display a fullscreen CKEditor for a textarea.
-     *
-     * @param {Object} e: The click event.
-     */
-    onEditHtmlClick: function(e) {
+      /**
+       * Display a fullscreen CKEditor for a textarea.
+       *
+       * @param {Object} e: The click event.
+       */
+      onEditHtmlClick: function(e) {
 
-      // Instantiate the editor.
-      var id = $(e.target).attr('data-textarea');
-      var ckeditor = CKEDITOR.replace(id);
-      var textarea = $('#'+id);
+        // Instantiate the editor.
+        var id = $(e.target).attr('data-textarea');
+        var ckeditor = CKEDITOR.replace(id);
+        var textarea = $('#'+id);
 
-      // When the editor is started.
-      ckeditor.on('instanceReady', function() {
+        // When the editor is started.
+        ckeditor.on('instanceReady', function() {
 
-        // Maximize by default.
-        ckeditor.execCommand('maximize');
+          // Maximize by default.
+          ckeditor.execCommand('maximize');
 
-        // Destroy on minimize.
-        ckeditor.on('maximize', function() {
-          ckeditor.destroy();
-          textarea.change();
+          // Destroy on minimize.
+          ckeditor.on('maximize', function() {
+            ckeditor.destroy();
+            textarea.change();
+          });
+
         });
 
-      });
-
-    }
+      }
 
 
-  });
+    });
 
 
-}});
+  }
+});

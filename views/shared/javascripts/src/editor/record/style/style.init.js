@@ -8,24 +8,26 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record.Style', { startWithParent: false,
+Neatline.module('Editor.Record.Style', {
+  startWithParent: false,
   define: function(Style) {
 
 
-  /**
-   * Start the tab after the form.
-   */
-  Neatline.Editor.Record.on('start', function() {
-    Style.start();
-  });
+    /**
+     * Start the tab after the form.
+     */
+    Neatline.Editor.Record.on('start', function() {
+      Style.start();
+    });
 
 
-  /**
-   * Instantiate the tab view.
-   */
-  Style.addInitializer(function() {
-    Style.__controller = new Style.Controller();
-  });
+    /**
+     * Instantiate the tab view.
+     */
+    Style.addInitializer(function() {
+      Style.__controller = new Style.Controller();
+    });
 
 
-}});
+  }
+});

@@ -8,106 +8,108 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor', { startWithParent: false,
+Neatline.module('Editor', {
+  startWithParent: false,
   define: function(Editor) {
 
 
-  Editor.Controller = Neatline.Shared.Controller.extend({
+    Editor.Controller = Neatline.Shared.Controller.extend({
 
 
-    slug: 'EDITOR',
+      slug: 'EDITOR',
 
-    events: [
-      { 'ROUTER:before': 'closeModals' }
-    ],
+      events: [
+        { 'ROUTER:before': 'closeModals' }
+      ],
 
-    commands: [
-      'display',
-      'notifySuccess',
-      'notifyError',
-      'setRoute'
-    ],
+      commands: [
+        'display',
+        'notifySuccess',
+        'notifyError',
+        'setRoute'
+      ],
 
-    requests: [
-      'getContainer'
-    ],
-
-
-    /**
-     * Create the view.
-     */
-    init: function() {
-      this.view = new Editor.View({ el: 'body' });
-    },
+      requests: [
+        'getContainer'
+      ],
 
 
-    /**
-     * Display a list of views in the editor container.
-     *
-     * @param {Array} views: The views, in display order.
-     */
-    display: function(views) {
-
-      // Clear the editor container.
-      this.view.__ui.editor.children().detach();
-
-      // Show each of the views.
-      _.each(views, _.bind(function(v) {
-        Neatline.execute(v+':display', this.view.__ui.editor);
-      }, this));
-
-    },
+      /**
+       * Create the view.
+       */
+      init: function() {
+        this.view = new Editor.View({ el: 'body' });
+      },
 
 
-    /**
-     * Flash a success notification.
-     *
-     * @param {String} message: The message.
-     */
-    notifySuccess: function(message) {
-      this.view.notifySuccess(message);
-    },
+      /**
+       * Display a list of views in the editor container.
+       *
+       * @param {Array} views: The views, in display order.
+       */
+      display: function(views) {
+
+        // Clear the editor container.
+        this.view.__ui.editor.children().detach();
+
+        // Show each of the views.
+        _.each(views, _.bind(function(v) {
+          Neatline.execute(v+':display', this.view.__ui.editor);
+        }, this));
+
+      },
 
 
-    /**
-     * Flash an error notification.
-     *
-     * @param {String} message: The message.
-     */
-    notifyError: function(message) {
-      this.view.notifyError(message);
-    },
+      /**
+       * Flash a success notification.
+       *
+       * @param {String} message: The message.
+       */
+      notifySuccess: function(message) {
+        this.view.notifySuccess(message);
+      },
 
 
-    /**
-     * Update the route hash without adding to the history.
-     *
-     * @param {String} route: The new route.
-     */
-    setRoute: function(route) {
-      Backbone.history.navigate(route, { replace: true });
-    },
+      /**
+       * Flash an error notification.
+       *
+       * @param {String} message: The message.
+       */
+      notifyError: function(message) {
+        this.view.notifyError(message);
+      },
 
 
-    /**
-     * Close all open modals.
-     */
-    closeModals: function() {
-      $('.modal').modal('hide');
-    },
+      /**
+       * Update the route hash without adding to the history.
+       *
+       * @param {String} route: The new route.
+       */
+      setRoute: function(route) {
+        Backbone.history.navigate(route, { replace: true });
+      },
 
 
-    /**
-     * Return the editor container div.
-     *
-     * @return {Object}: The container.
-     */
-    getContainer: function() {
-      return this.view.__ui.editor;
-    }
+      /**
+       * Close all open modals.
+       */
+      closeModals: function() {
+        $('.modal').modal('hide');
+      },
 
 
-  });
+      /**
+       * Return the editor container div.
+       *
+       * @return {Object}: The container.
+       */
+      getContainer: function() {
+        return this.view.__ui.editor;
+      }
 
 
-}});
+    });
+
+
+  }
+});

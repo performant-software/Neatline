@@ -8,24 +8,26 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Record.Map', { startWithParent: false,
+Neatline.module('Editor.Record.Map', {
+  startWithParent: false,
   define: function(Map) {
 
 
-  Map.Controller = Neatline.Shared.Controller.extend({
+    Map.Controller = Neatline.Shared.Controller.extend({
 
 
-    /**
-     * Instantiate the view on the record form element.
-     */
-    init: function() {
-      this.view = new Map.View({
-        el: Neatline.request('EDITOR:RECORD:getElement')
-      });
-    }
+      /**
+       * Instantiate the view on the record form element.
+       */
+      init: function() {
+        this.view = new Map.View({
+          el: Neatline.request('EDITOR:RECORD:getElement')
+        });
+      }
 
 
-  });
+    });
 
 
-}});
+  }
+});

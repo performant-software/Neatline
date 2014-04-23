@@ -8,92 +8,94 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Editor.Map', { startWithParent: false,
+Neatline.module('Editor.Map', {
+  startWithParent: false,
   define: function(Map) {
 
 
-  Map.Controller = Neatline.Shared.Controller.extend({
+    Map.Controller = Neatline.Shared.Controller.extend({
 
 
-    slug: 'EDITOR:MAP',
+      slug: 'EDITOR:MAP',
 
-    commands: [
-      'startEdit',
-      'endEdit',
-      'clearEditLayer',
-      'updateEdit',
-      'updateSvgWkt',
-      'updateModel'
-    ],
-
-
-    /**
-     * Alias the public map view.
-     */
-    init: function() {
-      this.view = Neatline.Map.__controller.view;
-    },
+      commands: [
+        'startEdit',
+        'endEdit',
+        'clearEditLayer',
+        'updateEdit',
+        'updateSvgWkt',
+        'updateModel'
+      ],
 
 
-    /**
-     * Start map edit when a record form is opened.
-     *
-     * @param {Object} model: The record model.
-     */
-    startEdit: function(model) {
-      this.view.startEdit(model);
-    },
+      /**
+       * Alias the public map view.
+       */
+      init: function() {
+        this.view = Neatline.Map.__controller.view;
+      },
 
 
-    /**
-     * End map edit when a record form is closed.
-     *
-     * @param {Object} model: The record model.
-     */
-    endEdit: function(model) {
-      this.view.endEdit();
-    },
+      /**
+       * Start map edit when a record form is opened.
+       *
+       * @param {Object} model: The record model.
+       */
+      startEdit: function(model) {
+        this.view.startEdit(model);
+      },
 
 
-    /**
-     * Empty the edit layer.
-     */
-    clearEditLayer: function() {
-      this.view.clearEditLayer();
-    },
+      /**
+       * End map edit when a record form is closed.
+       *
+       * @param {Object} model: The record model.
+       */
+      endEdit: function(model) {
+        this.view.endEdit();
+      },
 
 
-    /**
-     * Update the map edit controls.
-     *
-     * @param {Object} settings: The new form settings.
-     */
-    updateEdit: function(settings) {
-      this.view.updateEdit(settings);
-    },
+      /**
+       * Empty the edit layer.
+       */
+      clearEditLayer: function() {
+        this.view.clearEditLayer();
+      },
 
 
-    /**
-     * Update the WKT on the draw-SVG handler.
-     *
-     * @param {String} wkt: The WKT.
-     */
-    updateSvgWkt: function(wkt) {
-      this.view.updateSvgWkt(wkt);
-    },
+      /**
+       * Update the map edit controls.
+       *
+       * @param {Object} settings: The new form settings.
+       */
+      updateEdit: function(settings) {
+        this.view.updateEdit(settings);
+      },
 
 
-    /**
-     * Update edit layer model.
-     *
-     * @param {Object} model: The updated model.
-     */
-    updateModel: function(model) {
-      this.view.updateModel(model);
-    }
+      /**
+       * Update the WKT on the draw-SVG handler.
+       *
+       * @param {String} wkt: The WKT.
+       */
+      updateSvgWkt: function(wkt) {
+        this.view.updateSvgWkt(wkt);
+      },
 
 
-  });
+      /**
+       * Update edit layer model.
+       *
+       * @param {Object} model: The updated model.
+       */
+      updateModel: function(model) {
+        this.view.updateModel(model);
+      }
 
 
-}});
+    });
+
+
+  }
+});
