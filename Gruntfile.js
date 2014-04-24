@@ -113,8 +113,8 @@ module.exports = function(grunt) {
 
       add_form: {
         src: [
-          paths.vendor.js.underscore_s,
-          paths.vendor.js.chosen,
+          paths.vendor.underscore_s,
+          paths.vendor.chosen,
           paths.src.js.admin+'/exhibit-form.js',
           paths.src.js.admin+'/slug-autogen.js'
         ],
@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 
       edit_form: {
         src: [
-          paths.vendor.js.chosen,
+          paths.vendor.chosen,
           paths.src.js.admin+'/exhibit-form.js'
         ],
         dest: paths.dist.js.admin+'/edit-form.js'
@@ -133,19 +133,19 @@ module.exports = function(grunt) {
         src: [
 
           // Vendor:
-          paths.vendor.js.jquery,
-          paths.vendor.js.jquery_ui,
-          paths.vendor.js.underscore,
-          paths.vendor.js.underscore_s,
-          paths.vendor.js.backbone,
-          paths.vendor.js.mutators,
-          paths.vendor.js.schema,
-          paths.vendor.js.marionette,
-          paths.vendor.js.safesync,
-          paths.vendor.js.openlayers,
-          paths.vendor.js.openlayers_geo,
-          paths.vendor.js.stamen,
-          paths.vendor.js.rivets,
+          paths.vendor.jquery,
+          paths.vendor.jquery_ui,
+          paths.vendor.underscore,
+          paths.vendor.underscore_s,
+          paths.vendor.backbone,
+          paths.vendor.mutators,
+          paths.vendor.schema,
+          paths.vendor.marionette,
+          paths.vendor.safesync,
+          paths.vendor.openlayers,
+          paths.vendor.openlayers_geo,
+          paths.vendor.stamen,
+          paths.vendor.rivets,
 
           // Neatline:
           paths.src.js.shared+'/*.js',
@@ -168,29 +168,29 @@ module.exports = function(grunt) {
         src: [
 
           // Vendor:
-          paths.vendor.js.jquery,
-          paths.vendor.js.jquery_ui,
-          paths.vendor.js.underscore,
-          paths.vendor.js.underscore_s,
-          paths.vendor.js.backbone,
-          paths.vendor.js.routefilter,
-          paths.vendor.js.mutators,
-          paths.vendor.js.schema,
-          paths.vendor.js.marionette,
-          paths.vendor.js.openlayers,
-          paths.vendor.js.openlayers_geo,
-          paths.vendor.js.stamen,
-          paths.vendor.js.rivets,
-          paths.vendor.js.svgtowkt,
-          paths.vendor.js.draggable,
-          paths.vendor.js.toastr,
-          paths.vendor.js.spectrum,
-          paths.vendor.js.bootstrap,
-          paths.vendor.js.ace,
-          paths.vendor.js.ace_theme,
-          paths.vendor.js.ace_mode,
-          paths.vendor.js.select2,
-          paths.vendor.js.uri,
+          paths.vendor.jquery,
+          paths.vendor.jquery_ui,
+          paths.vendor.underscore,
+          paths.vendor.underscore_s,
+          paths.vendor.backbone,
+          paths.vendor.routefilter,
+          paths.vendor.mutators,
+          paths.vendor.schema,
+          paths.vendor.marionette,
+          paths.vendor.openlayers,
+          paths.vendor.openlayers_geo,
+          paths.vendor.stamen,
+          paths.vendor.rivets,
+          paths.vendor.svgtowkt,
+          paths.vendor.draggable,
+          paths.vendor.toastr,
+          paths.vendor.spectrum,
+          paths.vendor.bootstrap,
+          paths.vendor.ace,
+          paths.vendor.ace_theme,
+          paths.vendor.ace_mode,
+          paths.vendor.select2,
+          paths.vendor.uri,
 
           // Neatline:
           paths.src.js.shared+'/*.js',
@@ -217,10 +217,10 @@ module.exports = function(grunt) {
 
       jasmine_vendor: {
         src: [
-          paths.vendor.js.uri,
-          paths.vendor.js.jasmine_jquery,
-          paths.vendor.js.jasmine_async,
-          paths.vendor.js.sinon,
+          paths.vendor.uri,
+          paths.vendor.jasmine_jquery,
+          paths.vendor.jasmine_async,
+          paths.vendor.sinon,
           paths.jasmine+'/assertions/*.js',
           paths.jasmine+'/helpers/*.js'
         ],
