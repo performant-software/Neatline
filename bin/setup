@@ -7,15 +7,10 @@ ADMIN_CSS=views/admin/css/dist/*.css
 
 STATIC=$(git ls-files $SHARED_JS $SHARED_CSS $ADMIN_JS $ADMIN_CSS)
 
-# Expose the payloads.
-git update-index --no-assume-unchanged $STATIC
+# Build Neatline.
+npm install
+composer install
+grunt build
 
-# Compile.
-grunt compile:min
-
-# Commit.
-git add $STATIC
-git commit -m "Committing minifed payloads."
-
-# Conceal the payloads.
+# By default, ignore compiled payloads.
 git update-index --assume-unchanged $STATIC

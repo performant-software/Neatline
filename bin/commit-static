@@ -1,0 +1,16 @@
+#!/bin/sh
+
+source ./bin/setup
+
+# Expose the payloads.
+git update-index --no-assume-unchanged $STATIC
+
+# Compile.
+grunt compile:min
+
+# Commit.
+git add $STATIC
+git commit -m "Committing minifed payloads."
+
+# Conceal the payloads.
+git update-index --assume-unchanged $STATIC
