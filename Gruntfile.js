@@ -11,6 +11,10 @@
 module.exports = function(grunt) {
 
 
+  // CONFIGURATION
+  // --------------------------------------------------------------------------
+
+
   // Read configuration files:
   var paths = grunt.file.readJSON('paths.json');
   var pkg = grunt.file.readJSON('package.json');
@@ -22,6 +26,10 @@ module.exports = function(grunt) {
       pkg: pkg
     }
   });
+
+
+  // TASKS
+  // --------------------------------------------------------------------------
 
 
   // Run the tests by default.
