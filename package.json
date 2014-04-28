@@ -19,5 +19,6 @@
     , "grunt-contrib-watch":    ">= 0.2.0"
     , "grunt-browserify":       ">= 2.0.7"
     , "load-grunt-tasks":       ">= 0.4.0"
+    , "load-grunt-config":      ">= 0.8.0"
   }
 }
