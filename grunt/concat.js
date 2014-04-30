@@ -8,6 +8,56 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
+var nVendor = [
+  '<%= paths.vendor.jquery %>',
+  '<%= paths.vendor.jquery_ui %>',
+  '<%= paths.vendor.underscore %>',
+  '<%= paths.vendor.underscore_s %>',
+  '<%= paths.vendor.backbone %>',
+  '<%= paths.vendor.mutators %>',
+  '<%= paths.vendor.schema %>',
+  '<%= paths.vendor.marionette %>',
+  '<%= paths.vendor.safesync %>',
+  '<%= paths.vendor.openlayers %>',
+  '<%= paths.vendor.openlayers_geo %>',
+  '<%= paths.vendor.stamen %>',
+  '<%= paths.vendor.rivets %>'
+];
+
+var nSrc = [
+  '<%= paths.src.js.shared %>/*.js',
+  '<%= paths.src.js.shared %>/shared/*.js',
+  '<%= paths.src.js.shared %>/shared/exhibit/exhibit.model.js',
+  '<%= paths.src.js.shared %>/shared/record/record.model.js',
+  '<%= paths.src.js.shared %>/shared/record/record.collection.js',
+  '<%= paths.src.js.shared %>/shared/widget/*.js',
+  '<%= paths.src.js.shared %>/broker/*.js',
+  '<%= paths.src.js.shared %>/map/**/*.js',
+  '<%= paths.src.js.shared %>/presenter/*.js',
+  '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js'
+];
+
+var eVendor = [
+  '<%= paths.vendor.routefilter %>',
+  '<%= paths.vendor.svgtowkt %>',
+  '<%= paths.vendor.draggable %>',
+  '<%= paths.vendor.toastr %>',
+  '<%= paths.vendor.spectrum %>',
+  '<%= paths.vendor.bootstrap %>',
+  '<%= paths.vendor.ace %>',
+  '<%= paths.vendor.ace_theme %>',
+  '<%= paths.vendor.ace_mode %>',
+  '<%= paths.vendor.select2 %>',
+  '<%= paths.vendor.uri %>'
+];
+
+var eSrc = [
+  '<%= paths.src.js.shared %>/editor/*.js',
+  '<%= paths.src.js.shared %>/editor/exhibit/**/*.js',
+  '<%= paths.src.js.shared %>/editor/record/**/*.js',
+  '<%= paths.src.js.shared %>/editor/map/*.js'
+];
+
 module.exports = {
 
   add_form: {
@@ -29,88 +79,12 @@ module.exports = {
   },
 
   neatline_public: {
-    src: [
-
-      // Vendor:
-      '<%= paths.vendor.jquery %>',
-      '<%= paths.vendor.jquery_ui %>',
-      '<%= paths.vendor.underscore %>',
-      '<%= paths.vendor.underscore_s %>',
-      '<%= paths.vendor.backbone %>',
-      '<%= paths.vendor.mutators %>',
-      '<%= paths.vendor.schema %>',
-      '<%= paths.vendor.marionette %>',
-      '<%= paths.vendor.safesync %>',
-      '<%= paths.vendor.openlayers %>',
-      '<%= paths.vendor.openlayers_geo %>',
-      '<%= paths.vendor.stamen %>',
-      '<%= paths.vendor.rivets %>',
-
-      // Neatline:
-      '<%= paths.src.js.shared %>/*.js',
-      '<%= paths.src.js.shared %>/shared/*.js',
-      '<%= paths.src.js.shared %>/shared/exhibit/exhibit.model.js',
-      '<%= paths.src.js.shared %>/shared/record/record.model.js',
-      '<%= paths.src.js.shared %>/shared/record/record.collection.js',
-      '<%= paths.src.js.shared %>/shared/widget/*.js',
-      '<%= paths.src.js.shared %>/broker/*.js',
-      '<%= paths.src.js.shared %>/map/**/*.js',
-      '<%= paths.src.js.shared %>/presenter/*.js',
-      '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js',
-      '<%= paths.src.js.shared %>/presenter/None/*.js'
-
-    ],
+    src: [].concat(nVendor, nSrc),
     dest: '<%= paths.dist.js.shared %>/neatline-public.js'
   },
 
   neatline_editor: {
-    src: [
-
-      // Vendor:
-      '<%= paths.vendor.jquery %>',
-      '<%= paths.vendor.jquery_ui %>',
-      '<%= paths.vendor.underscore %>',
-      '<%= paths.vendor.underscore_s %>',
-      '<%= paths.vendor.backbone %>',
-      '<%= paths.vendor.routefilter %>',
-      '<%= paths.vendor.mutators %>',
-      '<%= paths.vendor.schema %>',
-      '<%= paths.vendor.marionette %>',
-      '<%= paths.vendor.openlayers %>',
-      '<%= paths.vendor.openlayers_geo %>',
-      '<%= paths.vendor.stamen %>',
-      '<%= paths.vendor.rivets %>',
-      '<%= paths.vendor.svgtowkt %>',
-      '<%= paths.vendor.draggable %>',
-      '<%= paths.vendor.toastr %>',
-      '<%= paths.vendor.spectrum %>',
-      '<%= paths.vendor.bootstrap %>',
-      '<%= paths.vendor.ace %>',
-      '<%= paths.vendor.ace_theme %>',
-      '<%= paths.vendor.ace_mode %>',
-      '<%= paths.vendor.select2 %>',
-      '<%= paths.vendor.uri %>',
-
-      // Neatline:
-      '<%= paths.src.js.shared %>/*.js',
-      '<%= paths.src.js.shared %>/shared/*.js',
-      '<%= paths.src.js.shared %>/shared/exhibit/exhibit.model.js',
-      '<%= paths.src.js.shared %>/shared/record/record.model.js',
-      '<%= paths.src.js.shared %>/shared/record/record.collection.js',
-      '<%= paths.src.js.shared %>/shared/widget/*.js',
-      '<%= paths.src.js.shared %>/broker/*.js',
-      '<%= paths.src.js.shared %>/map/**/*.js',
-      '<%= paths.src.js.shared %>/presenter/*.js',
-      '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js',
-      '<%= paths.src.js.shared %>/presenter/None/*.js',
-
-      // Editor:
-      '<%= paths.src.js.shared %>/editor/*.js',
-      '<%= paths.src.js.shared %>/editor/exhibit/**/*.js',
-      '<%= paths.src.js.shared %>/editor/record/**/*.js',
-      '<%= paths.src.js.shared %>/editor/map/*.js',
-
-    ],
+    src: [].concat(nVendor, eVendor, nSrc, eSrc),
     dest: '<%= paths.dist.js.shared %>/neatline-editor.js'
   },
 

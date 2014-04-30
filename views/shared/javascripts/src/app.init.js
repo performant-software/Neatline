@@ -8,4 +8,4 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline = new Backbone.Marionette.Application();
+Neatline = new Marionette.Application();
