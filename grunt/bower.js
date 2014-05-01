@@ -11,7 +11,10 @@
 module.exports = {
 
   install: {
-    options: { copy: false }
+    options: {
+      verbose: true,
+      copy: false
+    }
   }
 
 };
