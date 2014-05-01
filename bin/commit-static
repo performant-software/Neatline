@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ./bin/setup
+STATIC=$(git ls-files **/dist/*)
 
 # Expose the payloads.
 git update-index --no-assume-unchanged $STATIC

@@ -1,11 +1,6 @@
 #!/bin/sh
 
-SHARED_JS=views/shared/javascripts/dist/*.js
-SHARED_CSS=views/shared/css/dist/*.css
-ADMIN_JS=views/admin/javascripts/dist/*.js
-ADMIN_CSS=views/admin/css/dist/*.css
-
-STATIC=$(git ls-files $SHARED_JS $SHARED_CSS $ADMIN_JS $ADMIN_CSS)
+STATIC=$(git ls-files **/dist/*)
 
 # Build Neatline.
 npm install
