@@ -40,7 +40,11 @@ class Neatline_Acl_Assert_RecordOwnership implements Zend_Acl_Assert_Interface
 
 
     /**
-     * Does the user own the record or the exhibit?
+     * Does the user own the record?
+     *
+     * @param User $user The user.
+     * @param NeatlineRecord $record The record.
+     * @return boolean
      */
     private function _userOwnsRecord($user, $record)
     {
