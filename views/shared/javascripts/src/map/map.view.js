@@ -1,6 +1,4 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
-
 /**
  * @package     omeka
  * @subpackage  neatline
@@ -226,7 +224,7 @@ Neatline.module('Map', function(Map) {
         new OpenLayers.Size(w/5, h/5),
 
         {
-          // Add pan padding around the edges of the image 
+          // Add pan padding around the edges of the image
           maxExtent: new OpenLayers.Bounds(-w*2, -h*2, w*2, h*2),
           numZoomLevels: this.exhibit.zoom_levels
         }

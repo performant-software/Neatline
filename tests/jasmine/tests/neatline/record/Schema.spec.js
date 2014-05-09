@@ -1,6 +1,4 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80: */
-
 /**
  * @package     omeka
  * @subpackage  neatline
@@ -18,9 +16,9 @@ describe('Record | Schema', function() {
 
   it('should cast numeric fields to Numbers', function() {
 
-    // ----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // All numeric fields should be cast to Numbers on `get`.
-    // ----------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     var record = new Neatline.Shared.Record.Model({
       item_id:                '1',

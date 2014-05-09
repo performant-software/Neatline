@@ -1,10 +1,6 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80: */
-
 /**
- * PHPUnit runner.
- *
  * @package     omeka
  * @subpackage  neatline
  * @copyright   2012 Rector and Board of Visitors, University of Virginia

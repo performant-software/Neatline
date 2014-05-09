@@ -1,7 +1,5 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80: */
-
 /**
  * @package     omeka
  * @subpackage  neatline
@@ -43,7 +41,7 @@ class FixturesTest_NeatlineMapSpatialQueryingEnabled
 
         $record1->save();
         $record2->save();
- 
+
         $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapSpatialQueryingEnabled.two.json'
         );
