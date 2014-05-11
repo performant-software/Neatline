@@ -566,7 +566,7 @@ Neatline.module('Map', function(Map) {
       this.map.addLayer(layer);
 
       // (3) Apply the z-index.
-      if (record.has('zindex')) {
+      if (_.isNumber(record.get('zindex'))) {
         this.setZIndex(layer, record.get('zindex'));
       }
 
@@ -616,7 +616,7 @@ Neatline.module('Map', function(Map) {
       this.map.addLayer(layer);
 
       // (3) Apply the z-index.
-      if (record.has('zindex')) {
+      if (_.isNumber(record.get('zindex'))) {
         this.setZIndex(layer, record.get('zindex'));
       }
 
