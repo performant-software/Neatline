@@ -6,6 +6,10 @@
 
   - Adds `tiled=true` to WMS layer requests, which is necessary in order for Geoserver to return cached tiles.
 
+#### Bug Fixes
+
+  - Fixes a bug that occasionally caused WMS layers with undefined zindexes to slip "below" the base layer when the exhibit started.
+
 ## v2.2.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.0...2.2.1)) ~ February 13, 2014
 
 #### Bug Fixes
@@ -48,7 +52,7 @@
 
   - Fixes a bug that caused the Omeka item search feature in the record form to display the the title of an item's parent _collection_, not the item itself, when the item belonged to a collection.
 
-  - Fixes a bug that caused modal windows in the editor (eg, the record delete confirmation pop-up) to get stuck on the screen if the user changed the route while the modal was open. 
+  - Fixes a bug that caused modal windows in the editor (eg, the record delete confirmation pop-up) to get stuck on the screen if the user changed the route while the modal was open.
 
 ## v2.1.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.1.2...2.1.3)) ~ December 2, 2013
 
