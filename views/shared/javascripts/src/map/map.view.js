@@ -414,7 +414,7 @@ Neatline.module('Map', function(Map) {
       // last push will be manifested immediately on the map. For example, if
       // the user had just added a WMS layer to a record, this causes the edit
       // layer record to be re-pushed with the new WMS fields, and the new WMS
-      // layer to be mounted immediately.
+      // layer to be instantiated immediately.
 
       if (!refresh) params.existing = this.getVectorLayerIds();
 
@@ -566,7 +566,9 @@ Neatline.module('Map', function(Map) {
       this.map.addLayer(layer);
 
       // (3) Apply the z-index.
-      this.setZIndex(layer, record.get('zindex'));
+      if (record.has('zindex')) {
+        this.setZIndex(layer, record.get('zindex'));
+      }
 
       return layer;
 
@@ -614,7 +616,9 @@ Neatline.module('Map', function(Map) {
       this.map.addLayer(layer);
 
       // (3) Apply the z-index.
-      this.setZIndex(layer, record.get('zindex'));
+      if (record.has('zindex')) {
+        this.setZIndex(layer, record.get('zindex'));
+      }
 
       return layer;
 
