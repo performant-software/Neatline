@@ -101,6 +101,33 @@ KML;
 
 
     /**
+     * When no NeatlineFeatures coverage exists but a regular DC "Coverage"
+     * value is present, import the DC value.
+     *
+     * @group features
+     */
+    public function testImportDublinCoreWhenNoFeaturesCoverage()
+    {
+
+        $this->_installPluginOrSkip('NeatlineFeatures');
+
+        $exhibit  = $this->_exhibit();
+        $item     = $this->_item();
+
+        $this->_addCoverageElement($item, 'POINT(1 2)');
+
+        $record = new NeatlineRecord($exhibit, $item);
+        $record->save();
+
+        // Should import WKT.
+        $this->assertEquals(
+            nl_extractWkt('POINT(1 2)'), $record->coverage
+        );
+
+    }
+
+
+    /**
      * `save` should import regular WKT data from NeatlineFeatures.
      *
      * @group features
