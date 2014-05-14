@@ -259,13 +259,19 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
                 // Import from Neatline Features.
                 $wkt = nl_getNeatlineFeaturesWkt($this);
-                if (is_string($wkt)) $this->coverage = $wkt;
+                if (is_string($wkt)) {
+                    $this->coverage = $wkt;
+                }
 
-            } else {
+            }
+            if (!$this->coverage) {
 
                 // Import frome DC Coverage element.
-                $coverage = metadata($item, array('Dublin Core', 'Coverage'));
-                $this->coverage = nl_extractWkt($coverage);
+                try {
+                    $coverage = metadata($item, array('Dublin Core', 'Coverage'));
+                    $this->coverage = nl_extractWkt($coverage);
+                } catch (Exception $e) {
+                }
 
             }
 

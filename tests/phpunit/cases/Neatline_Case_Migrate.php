@@ -64,7 +64,8 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
         foreach ($this->db->query('SHOW TABLES')->fetchAll() as $row) {
 
             // Extract the table name.
-            $table = array_values($row)[0];
+            $rv    = array_values($row);
+            $table = $rv[0];
 
             // If the table is a Neatline table, drop it.
             if (in_array('neatline', explode('_', $table))) {
