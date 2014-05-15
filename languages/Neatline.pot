@@ -1,344 +1,373 @@
-# Translation for the Neatline plugin for Omeka.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: Neatline\n"
-"Report-Msgid-Bugs-To: http://github.com/scholarslab/Neatline/issues\n"
-"POT-Creation-Date: 2012-07-26 11:45-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-
-#: controllers/ExhibitsController.php:274
+#: controllers/ExhibitsController.php:272
 #, php-format
 msgid "The exhibit \"%s\" was successfully deleted!"
 msgstr ""
 
-#: controllers/ExhibitsController.php:287
+#: controllers/ExhibitsController.php:285
 #, php-format
 msgid "This will delete \"%s\" and its associated metadata."
 msgstr ""
 
-#: controllers/ExhibitsController.php:298
+#: controllers/ExhibitsController.php:296
 msgid "The item import was successfully started!"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:49
+#: forms/Neatline_Form_Exhibit.php:46
+msgid "Title"
+msgstr ""
+
+#: forms/Neatline_Form_Exhibit.php:47
 msgid ""
 "A top-level heading for the exhibit, displayed in the page header in the "
 "public view for the exhibit."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:57
+#: forms/Neatline_Form_Exhibit.php:55
 msgid "Enter a title."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:66
+#: forms/Neatline_Form_Exhibit.php:64
 msgid "URL Slug"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:67
+#: forms/Neatline_Form_Exhibit.php:65
 msgid ""
 "A unique string used to form the public-facing URL for the exhibit. Can "
 "contain letters, numbers, and hyphens."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:76
+#: forms/Neatline_Form_Exhibit.php:74
 msgid "Enter a slug."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:84
+#: forms/Neatline_Form_Exhibit.php:82
 msgid "The slug can only contain letters, numbers, and hyphens."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:95
+#: forms/Neatline_Form_Exhibit.php:93
 msgid "The slug is already in use."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:104
+#: forms/Neatline_Form_Exhibit.php:102
 msgid "Narrative"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:105
+#: forms/Neatline_Form_Exhibit.php:103
 msgid "A long-format prose narrative to accompany exhibit."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:112
+#: forms/Neatline_Form_Exhibit.php:110
 msgid "Widgets"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:113
+#: forms/Neatline_Form_Exhibit.php:111
 msgid "Select the user-interface widgets available in the exhibit."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:121
-msgid "Active Map Layers"
+#: forms/Neatline_Form_Exhibit.php:119
+msgid "Enabled Spatial Layers"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:122
+#: forms/Neatline_Form_Exhibit.php:120
 msgid ""
 "Choose the collection of spatial layers that should be available in the "
 "layer picker widget."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:130
-msgid "Default Map Layer"
+#: forms/Neatline_Form_Exhibit.php:128
+msgid "Default Spatial Layer"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:131
+#: forms/Neatline_Form_Exhibit.php:129
 msgid ""
 "Select which of the spatial layers should be visible by default when the "
 "exhibit starts."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:140
+#: forms/Neatline_Form_Exhibit.php:138
 msgid "Select a layer."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:149
+#: forms/Neatline_Form_Exhibit.php:147
 msgid "Image Layer"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:150
+#: forms/Neatline_Form_Exhibit.php:148
 msgid ""
 "To use a static image as the base layer of the exhibit, enter the web-"
 "accessible location of the image."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:157
+#: forms/Neatline_Form_Exhibit.php:155
 msgid "Zoom Levels"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:158
+#: forms/Neatline_Form_Exhibit.php:156
 msgid "Enter the number of zoom levels available for the static image."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:166
+#: forms/Neatline_Form_Exhibit.php:164
 msgid "Enter a zoom level count."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:173
+#: forms/Neatline_Form_Exhibit.php:171
 msgid "Must be an integer."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:182
+#: forms/Neatline_Form_Exhibit.php:180
 msgid "WMS Address"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:183
+#: forms/Neatline_Form_Exhibit.php:181
 msgid ""
 "To use a custom WMS layer as the base layer of the exhibit, enter (a) the "
 "address of the WMS server."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:190
+#: forms/Neatline_Form_Exhibit.php:188
 msgid "WMS Layers"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:191
+#: forms/Neatline_Form_Exhibit.php:189
 msgid "And (b) the comma-delimited list of layers."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:198
+#: forms/Neatline_Form_Exhibit.php:196
 msgid "Spatial Querying"
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:199
+#: forms/Neatline_Form_Exhibit.php:197
 msgid ""
 "If checked, the map will continously update to display just the records that "
 "fall inside the current viewport."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:206
+#: forms/Neatline_Form_Exhibit.php:203 views/admin/exhibits/browse.php:36
+msgid "Public"
+msgstr ""
+
+#: forms/Neatline_Form_Exhibit.php:204
 msgid ""
 "By default, exhibits are visible only to site administrators. Check here to "
 "publish the exhibit to the public site."
 msgstr ""
 
-#: forms/Neatline_Form_Exhibit.php:212
+#: forms/Neatline_Form_Exhibit.php:210
 msgid "Save Exhibit"
 msgstr ""
 
-#: views/admin/exhibits/add.php:16
+#: views/admin/exhibits/add.php:14
 msgid "Neatline | Create an Exhibit"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:16 views/public/exhibits/browse.php:15
-#: views/public/exhibits/browse.php:22
+#: views/admin/exhibits/browse.php:14 views/public/exhibits/browse.php:13
+#: views/public/exhibits/browse.php:20
 msgid "Neatline | Browse Exhibits"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:27 views/admin/exhibits/browse.php:148
+#: views/admin/exhibits/browse.php:25 views/admin/exhibits/browse.php:146
 msgid "Create an Exhibit"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:35
+#: views/admin/exhibits/browse.php:33
 msgid "Exhibit"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:36
+#: views/admin/exhibits/browse.php:34
 msgid "Created"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:37
+#: views/admin/exhibits/browse.php:35
 msgid "# Items"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:69
+#: views/admin/exhibits/browse.php:67
 msgid "Public View"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:77
+#: views/admin/exhibits/browse.php:75
 msgid "Fullscreen View"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:86
+#: views/admin/exhibits/browse.php:84
 msgid "Exhibit Settings"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:96 views/admin/exhibits/import.php:108
+#: views/admin/exhibits/browse.php:94 views/admin/exhibits/import.php:106
 msgid "Import Items"
 msgstr ""
 
-#: views/admin/exhibits/browse.php:143
+#: views/admin/exhibits/browse.php:104
+#: views/shared/exhibits/underscore/partials/form_actions.php:21
+msgid "Delete"
+msgstr ""
+
+#: views/admin/exhibits/browse.php:126
+msgid "Yes"
+msgstr ""
+
+#: views/admin/exhibits/browse.php:126
+msgid "No"
+msgstr ""
+
+#: views/admin/exhibits/browse.php:141
 msgid "You have no exhibits."
 msgstr ""
 
-#: views/admin/exhibits/browse.php:144
+#: views/admin/exhibits/browse.php:142
 msgid "Get started by creating a new one!"
 msgstr ""
 
-#: views/admin/exhibits/edit.php:16
+#: views/admin/exhibits/edit.php:14
 #, php-format
 msgid "Neatline | Edit \"%s\""
 msgstr ""
 
-#: views/admin/exhibits/import.php:16
+#: views/admin/exhibits/import.php:14
 msgid "Neatline | Import Items from Omeka"
 msgstr ""
 
-#: views/admin/exhibits/import.php:30
+#: views/admin/exhibits/import.php:28
 msgid "Search by a Range of ID#s (eg: 1-4, 156, 79)"
 msgstr ""
 
-#: views/public/exhibits/show.php:24
+#: views/admin/exhibits/import.php:45
+msgid "Search By Collection"
+msgstr ""
+
+#: views/admin/exhibits/import.php:65
+msgid "Search By Type"
+msgstr ""
+
+#: views/admin/exhibits/import.php:85
+msgid "Search By Tags"
+msgstr ""
+
+#: views/public/exhibits/show.php:22
 msgid "View Fullscreen"
 msgstr ""
 
-#: views/shared/common/neatline/input.php:23
+#: views/shared/common/neatline/input.php:21
 msgid "Use Current"
 msgstr ""
 
-#: views/shared/common/neatline/save.php:17
-#: views/shared/exhibits/underscore/partials/form_actions.php:18
+#: views/shared/common/neatline/save.php:15
+#: views/shared/exhibits/underscore/partials/form_actions.php:16
 msgid "Save"
 msgstr ""
 
-#: views/shared/exhibits/partials/editor_header.php:20
+#: views/shared/exhibits/item.php:17
+msgid "Files"
+msgstr ""
+
+#: views/shared/exhibits/partials/editor_header.php:18
 #, php-format
 msgid "Neatline Editor: %s"
 msgstr ""
 
-#: views/shared/exhibits/partials/loader.php:15
+#: views/shared/exhibits/partials/loader.php:13
 msgid "Loading"
 msgstr ""
 
-#: views/shared/exhibits/partials/modal_delete.php:26
+#: views/shared/exhibits/partials/modal_delete.php:18
+msgid "Are you sure?"
+msgstr ""
+
+#: views/shared/exhibits/partials/modal_delete.php:24
 msgid ""
 "This will delete the record from the database and remove all\n"
 "            associated metadata. This action cannot be undone."
 msgstr ""
 
-#: views/shared/exhibits/partials/modal_delete.php:39
+#: views/shared/exhibits/partials/modal_delete.php:33
+#: views/shared/exhibits/partials/modal_svg.php:40
+msgid "Cancel"
+msgstr ""
+
+#: views/shared/exhibits/partials/modal_delete.php:37
 msgid "Yes, delete"
 msgstr ""
 
-#: views/shared/exhibits/partials/modal_inputs.php:27
+#: views/shared/exhibits/partials/modal_inputs.php:25
 msgid "Close"
 msgstr ""
 
-#: views/shared/exhibits/partials/modal_svg.php:20
+#: views/shared/exhibits/partials/modal_svg.php:18
 msgid "Enter SVG"
 msgstr ""
 
-#: views/shared/exhibits/partials/modal_svg.php:46
+#: views/shared/exhibits/partials/modal_svg.php:44
 msgid "Parse"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:22
+#: views/shared/exhibits/underscore/partials/pane_map.php:20
 msgid "Navigate"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:36
+#: views/shared/exhibits/underscore/partials/pane_map.php:34
 msgid "Draw Point"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:50
+#: views/shared/exhibits/underscore/partials/pane_map.php:48
 msgid "Draw Line"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:64
+#: views/shared/exhibits/underscore/partials/pane_map.php:62
 msgid "Draw Polygon"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:78
+#: views/shared/exhibits/underscore/partials/pane_map.php:76
 msgid "Draw Regular Polygon"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:93
+#: views/shared/exhibits/underscore/partials/pane_map.php:91
 msgid "Sides"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:104
+#: views/shared/exhibits/underscore/partials/pane_map.php:102
 msgid "Snap Angle"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:116
+#: views/shared/exhibits/underscore/partials/pane_map.php:114
 msgid "Irregular?"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:133
+#: views/shared/exhibits/underscore/partials/pane_map.php:131
 msgid "Draw SVG"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:135
+#: views/shared/exhibits/underscore/partials/pane_map.php:133
 msgid "Enter Markup"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:151
+#: views/shared/exhibits/underscore/partials/pane_map.php:149
 msgid "Modify Shape"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:165
+#: views/shared/exhibits/underscore/partials/pane_map.php:163
 msgid "Rotate Shape"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:179
+#: views/shared/exhibits/underscore/partials/pane_map.php:177
 msgid "Resize Shape"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:193
+#: views/shared/exhibits/underscore/partials/pane_map.php:191
 msgid "Drag Shape"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:207
+#: views/shared/exhibits/underscore/partials/pane_map.php:205
 msgid "Delete Shape"
 msgstr ""
 
-#: views/shared/exhibits/underscore/partials/pane_map.php:218
+#: views/shared/exhibits/underscore/partials/pane_map.php:216
 msgid "Clear all Geometry"
 msgstr ""
 
-#: views/shared/exhibits/underscore/records.php:19
+#: views/shared/exhibits/underscore/records.php:17
 msgid "New Record"
 msgstr ""
 
-#: views/shared/exhibits/underscore/styles.php:17
+#: views/shared/exhibits/underscore/styles.php:15
 msgid "Stylesheet"
 msgstr ""
