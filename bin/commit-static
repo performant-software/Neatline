@@ -9,8 +9,8 @@ git update-index --no-assume-unchanged $STATIC
 grunt compile:min
 
 # Commit.
-git add $STATIC
-git commit -m "Committing minifed payloads."
+git add --force $STATIC
+git commit -am "Committing minifed payloads."
 
 # Conceal the payloads.
 git update-index --assume-unchanged $STATIC
