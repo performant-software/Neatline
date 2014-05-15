@@ -1,5 +1,11 @@
 ## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2)) ~ Pending
 
+#### Improved Support for Working with NeatlineFeatures and CsvImport
+
+Previously, if NeatlineFeatures were enabled, you couldn't use the CsvImport
+plugin to add WKT data into the coverage field and then have those features
+import into Neatline successfully. We've lifted that restriction.
+
 #### Performance Improvements
 
   - Changes the MIME type for WMS layer image tiles from `image/png` to `image/png8`, which visually almost identical and load much faster.
