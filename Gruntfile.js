@@ -17,6 +17,8 @@ module.exports = function(grunt) {
   var paths = grunt.file.readJSON('paths.json');
   var pkg = grunt.file.readJSON('package.json');
 
+  require('time-grunt')(grunt);
+
   // Load the task configurations.
   require('load-grunt-config')(grunt, {
     data: {

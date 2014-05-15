@@ -17,36 +17,34 @@ module.exports = {
 
       '**',
 
-      // GIT
       '!.git/**',
 
-      // BOWER
       '!bower.json',
       '!bower_components/**',
 
-      // NPM
       '!package.json',
       '!node_modules/**',
 
-      // COMPOSER
+      '*.phar',
       '!composer.json',
       '!composer.lock',
       '!vendor/**',
 
-      // RUBY
       '!Gemfile',
       '!Gemfile.lock',
 
-      // GRUNT
       '!.grunt/**',
       '!Gruntfile.js',
       '!paths.json',
+      '!grunt/**',
 
-      // DIST
       '!pkg/**',
 
-      // TESTS
-      '!tests/**'
+      '!tests/**',
+
+      '!docs/**',
+
+      '!bin/**'
 
     ]
   }
