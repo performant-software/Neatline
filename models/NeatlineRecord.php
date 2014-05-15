@@ -1,11 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -259,15 +257,24 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
             if (plugin_is_active('NeatlineFeatures')) {
 
-                // Import from Neatline Features.
+                // Try to import a value from Neatline Features.
                 $wkt = nl_getNeatlineFeaturesWkt($this);
-                if (is_string($wkt)) $this->coverage = $wkt;
+                if (is_string($wkt)) {
+                    $this->coverage = $wkt;
+                }
 
-            } else {
+            }
 
-                // Import frome DC Coverage element.
-                $coverage = metadata($item, array('Dublin Core', 'Coverage'));
-                $this->coverage = nl_extractWkt($coverage);
+            if (!$this->coverage) {
+
+                // If a coverage wasn't gethered from Features (either because
+                // it isn't installed, or there isn't a Features-managed value
+                // for the item), just look for a vanilla DC "Coverage" value.
+
+                try {
+                    $coverage = metadata($item, array('Dublin Core', 'Coverage'));
+                    $this->coverage = nl_extractWkt($coverage);
+                } catch (Exception $e) {}
 
             }
 

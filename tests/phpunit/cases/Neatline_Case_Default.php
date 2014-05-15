@@ -1,11 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -36,9 +34,6 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
         // Alias Neatline tables.
         $this->_exhibits = $this->db->getTable('NeatlineExhibit');
         $this->_records  = $this->db->getTable('NeatlineRecord');
-
-        // Register Neatline partials.
-        get_view()->addScriptPath(NL_DIR.'/views/shared');
 
     }
 
@@ -109,7 +104,7 @@ SQL
     protected function _skipIfPlugin($pluginName)
     {
         if (plugin_is_active($pluginName)) {
-            $this->markTestSkipped("Plugin $pluginName must be installed");
+            $this->markTestSkipped("Plugin $pluginName must be installed.");
         }
     }
 
@@ -316,10 +311,12 @@ SQL
 
 
     /**
-     * Register the mock theme scripts.
+     * Register the mock theme templates. Add the default Neatline directory
+     * first, wich ensures that the mock templates will take precedence.
      */
     protected function _mockTheme()
     {
+        get_view()->addScriptPath(NL_DIR.'/views/shared');
         get_view()->addScriptPath(NL_TEST_DIR.'/mocks/theme/neatline');
     }
 
@@ -544,9 +541,13 @@ SQL
      */
     protected function _writeExhibitMarkupFixture($exhibit, $file)
     {
+
+        $this->dispatch(); // Mount the template/asset directories.
+
         get_view()->neatline_exhibit = $exhibit;
         $html = get_view()->partial('exhibits/partials/exhibit.php');
         $this->_writeFixture($html, $file);
+
     }
 
 
@@ -558,9 +559,13 @@ SQL
      */
     protected function _writeEditorMarkupFixture($exhibit, $file)
     {
+
+        $this->dispatch(); // Mount the template/asset directories.
+
         get_view()->neatline_exhibit = $exhibit;
         $html = get_view()->partial('exhibits/partials/editor_core.php');
         $this->_writeFixture($html, $file);
+
     }
 
 

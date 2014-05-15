@@ -1,10 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -82,7 +80,7 @@ describe('Map | Update WMS Layer', function() {
   it('should reload an existing WMS layer for the form record', function() {
 
     // ------------------------------------------------------------------------
-    // When the record being edited already has a WMS layer and the record is 
+    // When the record being edited already has a WMS layer and the record is
     // re-saved without changes to the WMS fields, the WMS layer should be re-
     // loaded without modification.
     // ------------------------------------------------------------------------
@@ -123,7 +121,7 @@ describe('Map | Update WMS Layer', function() {
   it('should update an existing WMS layer for the form record', function() {
 
     // ------------------------------------------------------------------------
-    // When the record being edited already has a WMS layer and the record is 
+    // When the record being edited already has a WMS layer and the record is
     // re-saved _with_ changes to the WMS fields, the WMS layer should be re-
     // loaded with the new values.
     // ------------------------------------------------------------------------
@@ -164,7 +162,7 @@ describe('Map | Update WMS Layer', function() {
   it('should remove an existing WMS layer for the form record', function() {
 
     // ------------------------------------------------------------------------
-    // When the record being edited already has a WMS layer and the record is 
+    // When the record being edited already has a WMS layer and the record is
     // re-saved with empty WMS fields, the WMS layer should be removed.
     // ------------------------------------------------------------------------
 

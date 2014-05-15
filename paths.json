@@ -1,83 +1,70 @@
 {
 
   "src": {
-    "shared":             "views/shared/javascripts/app",
-    "admin":              "views/admin/javascripts"
+    "js": {
+      "shared":           "views/shared/javascripts/src",
+      "admin":            "views/admin/javascripts"
+    },
+    "styl": {
+      "shared":           "views/shared/css/stylus",
+      "admin":            "views/admin/css/stylus"
+    }
+  },
+
+  "dist": {
+    "js": {
+      "shared":           "views/shared/javascripts/dist",
+      "admin":            "views/admin/javascripts/dist"
+    },
+    "css": {
+      "shared":           "views/shared/css/dist",
+      "admin":            "views/admin/css/dist"
+    }
   },
 
   "jasmine":              "tests/jasmine",
 
-  "stylus": {
-    "shared":             "views/shared/css/stylus",
-    "admin":              "views/admin/css/stylus"
-  },
-
-  "payloads": {
-    "admin": {
-      "js":               "views/admin/javascripts/payloads",
-      "css":              "views/admin/css/payloads"
-    },
-    "shared": {
-      "js":               "views/shared/javascripts/payloads",
-      "css":              "views/shared/css/payloads"
-    }
-  },
-
   "copy": {
-    "bootstrap":          "bower_components/bootstrap/dist",
+    "bootstrap":          "bower_components/bootstrap",
+    "openlayers":         "bower_components/openlayers_themes",
     "chosen":             "bower_components/chosen",
+    "jquery_ui":          "bower_components/jquery-ui",
     "select2":            "bower_components/select2",
-    "ckeditor":           "bower_components/ckeditor",
-    "jquery_ui":          "bower_components/jquery-ui"
+    "ckeditor":           "bower_components/ckeditor"
   },
 
   "vendor": {
 
-    "js": {
+    "jquery":           "bower_components/jquery/dist/jquery.js",
+    "jquery_ui":        "bower_components/jquery-ui/ui/jquery-ui.js",
+    "underscore":       "bower_components/underscore/underscore.js",
+    "underscore_s":     "bower_components/underscore.string/lib/underscore.string.js",
+    "backbone":         "bower_components/backbone/backbone.js",
+    "routefilter":      "bower_components/backbone.routefilter/dist/backbone.routefilter.js",
+    "mutators":         "bower_components/Backbone.Mutators/backbone.mutators.js",
+    "schema":           "bower_components/Backbone.Schema/dist/backbone.schema.js",
+    "marionette":       "bower_components/marionette/lib/backbone.marionette.js",
+    "safesync":         "bower_components/backbone-safesync/backbone-safesync.js",
+    "openlayers":       "bower_components/openlayers/OpenLayers.debug.js",
+    "openlayers_geo":   "bower_components/openlayers-geometry/Geometry.js",
+    "stamen":           "bower_components/stamen-neatline/stamen.neatline.js",
+    "rivets":           "bower_components/rivets/dist/rivets.js",
+    "svgtowkt":         "bower_components/svg-to-wkt/svg-to-wkt.js",
+    "draggable":        "bower_components/jquery-draggable-input/jquery-draggable-input.js",
+    "toastr":           "bower_components/toastr/toastr.js",
+    "spectrum":         "bower_components/spectrum/spectrum.js",
+    "bootstrap":        "bower_components/bootstrap/dist/js/bootstrap.js",
+    "ace":              "bower_components/ace-builds/src-noconflict/ace.js",
+    "ace_theme":        "bower_components/ace-builds/src-noconflict/theme-clouds.js",
+    "ace_mode":         "bower_components/ace-builds/src-noconflict/mode-css.js",
+    "chosen":           "bower_components/chosen/chosen.jquery.js",
+    "select2":          "bower_components/select2/select2.js",
+    "uri":              "bower_components/uri.js/src/URI.js",
 
-      "jquery":           "bower_components/jquery/jquery.js",
-      "jquery_ui":        "bower_components/jquery-ui/ui/jquery-ui.js",
-      "underscore":       "bower_components/underscore/underscore.js",
-      "underscore_s":     "bower_components/underscore.string/lib/underscore.string.js",
-      "backbone":         "bower_components/backbone/backbone.js",
-      "routefilter":      "bower_components/backbone.routefilter/dist/backbone.routefilter.js",
-      "mutators":         "bower_components/Backbone.Mutators/backbone.mutators.js",
-      "schema":           "bower_components/Backbone.Schema/dist/backbone.schema.js",
-      "marionette":       "bower_components/marionette/lib/backbone.marionette.js",
-      "safesync":         "bower_components/backbone-safesync/backbone-safesync.js",
-      "openlayers":       "bower_components/openlayers/OpenLayers.debug.js",
-      "openlayers_geo":   "bower_components/openlayers-geometry/Geometry.js",
-      "stamen":           "bower_components/stamen-neatline/stamen.neatline.js",
-      "rivets":           "bower_components/rivets/dist/rivets.js",
-      "svgtowkt":         "bower_components/svg-to-wkt/svg-to-wkt.js",
-      "draggable":        "bower_components/jquery-draggable-input/jquery-draggable-input.js",
-      "toastr":           "bower_components/toastr/toastr.js",
-      "spectrum":         "bower_components/spectrum/spectrum.js",
-      "bootstrap":        "bower_components/bootstrap/dist/js/bootstrap.js",
-      "ace":              "bower_components/ace-builds/src-noconflict/ace.js",
-      "ace_theme":        "bower_components/ace-builds/src-noconflict/theme-clouds.js",
-      "ace_mode":         "bower_components/ace-builds/src-noconflict/mode-css.js",
-      "chosen":           "bower_components/chosen/chosen.jquery.js",
-      "select2":          "bower_components/select2/select2.js",
-      "uri":              "bower_components/uri.js/src/URI.js",
-
-      "jasmine_jquery":   "bower_components/jasmine-jquery/lib/jasmine-jquery.js",
-      "jasmine_async":    "bower_components/jasmine.async/src/jasmine.async.js",
-      "querystring":      "bower_components/querystring/querystring.js",
-      "sinon":            "bower_components/sinon/index.js"
-
-    },
-
-    "css": {
-      "jquery_ui":        "bower_components/jquery-ui/themes/smoothness/jquery-ui.css",
-      "openlayers":       "bower_components/openlayers/theme/default/style.css",
-      "bootstrap":        "bower_components/bootstrap/dist/css/bootstrap.css",
-      "toastr":           "bower_components/toastr/toastr.css",
-      "spectrum":         "bower_components/spectrum/spectrum.css",
-      "chosen":           "bower_components/chosen/chosen.css",
-      "select2":          "bower_components/select2/select2.css",
-      "select2_bs":       "bower_components/select2/select2-bootstrap.css"
-    }
+    "jasmine_jquery":   "bower_components/jasmine-jquery/lib/jasmine-jquery.js",
+    "jasmine_async":    "bower_components/jasmine.async/src/jasmine.async.js",
+    "querystring":      "bower_components/querystring/querystring.js",
+    "sinon":            "bower_components/sinon/index.js"
 
   }
 

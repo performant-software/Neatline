@@ -1,0 +1,11 @@
+#!/bin/sh
+
+STATIC=$(git ls-files **/dist/*)
+
+# Build Neatline.
+npm install
+composer install
+grunt build
+
+# By default, ignore compiled payloads.
+git update-index --assume-unchanged $STATIC

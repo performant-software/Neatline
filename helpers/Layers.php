@@ -1,11 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -16,8 +14,13 @@
 function nl_setLayerSources()
 {
     Zend_Registry::set('layers', array(
-        nl_getPublicThemeDir().'/layers',   // In the public theme.
-        NL_DIR.'/layers'                    // In the plugin.
+
+        // Default layers in the plugin:
+        NL_DIR.'/layers',
+
+        // Custom layers in public theme:
+        nl_getPublicThemeDir().'/layers'
+
     ));
 }
 

@@ -1,11 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -15,9 +13,9 @@
  */
 function nl_queueAddForm()
 {
-    queue_css_file('payloads/exhibit-form');
-    queue_js_file('payloads/ckeditor/ckeditor');
-    queue_js_file('payloads/add-form');
+    queue_css_file('dist/exhibit-form');
+    queue_js_file('dist/ckeditor/ckeditor');
+    queue_js_file('dist/add-form');
 }
 
 
@@ -26,9 +24,9 @@ function nl_queueAddForm()
  */
 function nl_queueEditForm()
 {
-    queue_css_file('payloads/exhibit-form');
-    queue_js_file('payloads/ckeditor/ckeditor');
-    queue_js_file('payloads/edit-form');
+    queue_css_file('dist/exhibit-form');
+    queue_js_file('dist/ckeditor/ckeditor');
+    queue_js_file('dist/edit-form');
 }
 
 
@@ -42,8 +40,8 @@ function nl_queueNeatlinePublic($exhibit)
 
     nl_queueGoogleMapsApi();
 
-    queue_css_file('payloads/neatline-public');
-    queue_js_file('payloads/neatline-public');
+    queue_css_file('dist/neatline-public');
+    queue_js_file('dist/neatline-public');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_public_static', array(
@@ -63,10 +61,9 @@ function nl_queueNeatlineEditor($exhibit)
 
     nl_queueGoogleMapsApi();
 
-    queue_css_file('fonts');
-    queue_css_file('payloads/neatline-editor');
-    queue_js_file('payloads/neatline-editor');
-    queue_js_file('payloads/ckeditor/ckeditor');
+    queue_css_file('dist/neatline-editor');
+    queue_js_file('dist/neatline-editor');
+    queue_js_file('dist/ckeditor/ckeditor');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_editor_static', array(
@@ -104,7 +101,7 @@ function nl_queueExhibitTheme($exhibit)
  */
 function nl_queueGoogleMapsApi()
 {
-    nl_appendScript('http://maps.google.com/maps/api/js?sensor=false');
+    nl_appendScript('//maps.google.com/maps/api/js?sensor=false');
 }
 
 
@@ -141,4 +138,15 @@ function nl_getExhibitThemeDir($exhibit)
 function nl_getPublicThemeDir()
 {
     return PUBLIC_THEME_DIR.'/'.get_option('public_theme').'/neatline';
+}
+
+
+/**
+ * Get the path to the OpenLayers theme.
+ *
+ * @return string The theme path.
+ */
+function nl_getOpenLayersThemeDir()
+{
+    return public_url('plugins/Neatline/views/shared/images/dark/');
 }

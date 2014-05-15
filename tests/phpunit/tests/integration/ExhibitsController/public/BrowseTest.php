@@ -1,11 +1,9 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -58,48 +56,91 @@ class ExhibitsControllerTest_PublicBrowse extends Neatline_Case_Default
     public function testPagination()
     {
 
-        // Set public page length to 2.
         set_option('per_page_public', 2);
-        set_option('per_page_admin', 10);
 
         $exhibit1 = $this->_exhibit('slug1');
         $exhibit2 = $this->_exhibit('slug2');
         $exhibit3 = $this->_exhibit('slug3');
         $exhibit4 = $this->_exhibit('slug4');
+        $exhibit5 = $this->_exhibit('slug5');
+        $exhibit6 = $this->_exhibit('slug6');
 
-        $exhibit1->added = '2004-01-01';
-        $exhibit2->added = '2003-01-01';
-        $exhibit3->added = '2002-01-01';
-        $exhibit4->added = '2001-01-01';
+        $url1 = public_url('neatline/show/slug1');
+        $url2 = public_url('neatline/show/slug2');
+        $url3 = public_url('neatline/show/slug3');
+        $url4 = public_url('neatline/show/slug4');
+        $url5 = public_url('neatline/show/slug5');
+        $url6 = public_url('neatline/show/slug6');
+
+        $exhibit1->added = '2006-01-01';
+        $exhibit2->added = '2005-01-01';
+        $exhibit3->added = '2004-01-01';
+        $exhibit4->added = '2003-01-01';
+        $exhibit5->added = '2002-01-01';
+        $exhibit6->added = '2001-01-01';
 
         $exhibit1->save();
         $exhibit2->save();
         $exhibit3->save();
         $exhibit4->save();
+        $exhibit5->save();
+        $exhibit6->save();
+
+        // --------------------------------------------------------------------
 
         // Page 1.
         $this->dispatch('neatline');
 
-        // Should list first two exhibits.
-        $this->assertXpath('//a[@class="neatline"]', 2);
-        $this->assertXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug1').'"]');
-        $this->assertXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug2').'"]');
+        // Should just list exhibits 1-2.
+        $this->assertXpath('//a[@href="'.$url1.'"]');
+        $this->assertXpath('//a[@href="'.$url2.'"]');
+        $this->assertNotXpath('//a[@href="'.$url3.'"]');
+        $this->assertNotXpath('//a[@href="'.$url4.'"]');
+        $this->assertNotXpath('//a[@href="'.$url5.'"]');
+        $this->assertNotXpath('//a[@href="'.$url6.'"]');
 
-        // Should show pagination.
-        $this->assertXpath('//div[@class="pagination"]');
+        // Should link to page 2.
+        $this->assertXpath('//a[@href="'.url('neatline?page=2').'"]');
+
+        $this->resetResponse();
+        $this->resetRequest();
+
+        // --------------------------------------------------------------------
 
         // Page 2.
-        $this->resetResponse();
         $this->dispatch('neatline?page=2');
 
-        // Should show next two exhibits.
-        $this->assertXpath('//a[@class="neatline"]', 2);
-        $this->assertXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug3').'"]');
-        $this->assertXpath('//a[@class="neatline"][@href="'.
-            public_url('neatline/show/slug4').'"]');
+        // Should just list exhibits 3-4.
+        $this->assertNotXpath('//a[@href="'.$url1.'"]');
+        $this->assertNotXpath('//a[@href="'.$url2.'"]');
+        $this->assertXpath('//a[@href="'.$url3.'"]');
+        $this->assertXpath('//a[@href="'.$url4.'"]');
+        $this->assertNotXpath('//a[@href="'.$url5.'"]');
+        $this->assertNotXpath('//a[@href="'.$url6.'"]');
+
+        // Should link to page 3.
+        $this->assertXpath('//a[@href="'.url('neatline?page=3').'"]');
+
+        $this->resetResponse();
+        $this->resetRequest();
+
+        // --------------------------------------------------------------------
+
+        // Page 3.
+        $this->dispatch('neatline?page=3');
+
+        // Should just list exhibits 5-6.
+        $this->assertNotXpath('//a[@href="'.$url1.'"]');
+        $this->assertNotXpath('//a[@href="'.$url2.'"]');
+        $this->assertNotXpath('//a[@href="'.$url3.'"]');
+        $this->assertNotXpath('//a[@href="'.$url4.'"]');
+        $this->assertXpath('//a[@href="'.$url5.'"]');
+        $this->assertXpath('//a[@href="'.$url6.'"]');
+
+        // Should link back to page 2.
+        $this->assertXpath('//a[@href="'.url('neatline?page=2').'"]');
+
+        // --------------------------------------------------------------------
 
     }
 

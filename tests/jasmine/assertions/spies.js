@@ -1,10 +1,8 @@
 
-/* vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2 cc=80; */
-
 /**
  * @package     omeka
  * @subpackage  neatline
- * @copyright   2012 Rector and Board of Visitors, University of Virginia
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
@@ -19,7 +17,7 @@ var NL = (function(NL) {
    * @param {String} event: The event.
    */
   NL.assertEventNotCalled = function(spy, event) {
-    var events = _.map(spy.calls.allArgs(), function(args) { return args[0] });
+    var events = _.map(spy.calls.allArgs(), function(a) { return a[0]; });
     expect(_.contains(events, event)).toBeFalsy();
   };
 

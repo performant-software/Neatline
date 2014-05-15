@@ -10,7 +10,6 @@
     , "backbone":               ">= 0.9.10"
     , "marionette":             ">= 1.0.0"
     , "rivets":                 ">= 0.6.5"
-    , "chosen":                 ">= 0.9.11"
     , "bootstrap":              ">= 3.0.0"
     , "ace-builds":             ">= 1.0.0"
     , "spectrum":               ">= 1.1.0"
@@ -27,10 +26,11 @@
     , "jquery-draggable-input": "davidmcclure/jquery-draggable-input"
     , "toastr":                 "davidmcclure/toastr"
     , "select2":                "davidmcclure/select2#feature/loading-event"
+    , "openlayers_themes":      "developmentseed/openlayers_themes"
     , "jasmine.async":          "derickbailey/jasmine.async"
     , "ckeditor":               "ckeditor/ckeditor-releases"
 
-    , "chosen":                 "https://github.com/harvesthq/chosen/releases/download/1.0.0/chosen_v1.0.0.zip"
+    , "chosen":                 "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip"
     , "openlayers":             "http://openlayers.org/download/OpenLayers-2.13.1.zip"
     , "sinon":                  "http://sinonjs.org/releases/sinon-1.7.3.js"
 
