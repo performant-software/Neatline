@@ -14,7 +14,6 @@ git clone https://github.com/omeka/Omeka.git $OMEKA_DIR
 cd $OMEKA_DIR && git checkout $OMEKA_BRANCH
 cd $PLUGIN_DIR
 
-
 # move configuration files
 mv $OMEKA_DIR/application/config/config.ini.changeme $OMEKA_DIR/application/config/config.ini
 mv $OMEKA_DIR/application/tests/config.ini.changeme $OMEKA_DIR/application/tests/config.ini
