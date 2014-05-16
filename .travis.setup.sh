@@ -33,7 +33,7 @@ sed -i 's/256M/512M/' $OMEKA_DIR/application/tests/bootstrap.php
 cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
 bundle install
 npm install
+composer install
 bower install -f
 grunt build
-
 
