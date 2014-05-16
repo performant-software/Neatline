@@ -25,6 +25,7 @@ Once all of that is in place, we're ready
 
    * `plugin.ini`
    * `package.json`
+   * `bower.json`
 
 1. `git commit -am "Version $VERSION"`
 
