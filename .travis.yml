@@ -5,18 +5,22 @@ php:
   - 5.3
   - 5.4
   - 5.5
+  - 5.6
 
 env:
   - OMEKA_BRANCH=master
 
 before_script:
+  - npm install -g grunt-cli
+  - npm install -g bower
   - ./.travis.setup.sh
 
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
-script: ./.travis.tests.sh
+script:
+  - ./.travis.tests.sh
 
 notifications:
   irc: "irc.freenode.org#slab"
