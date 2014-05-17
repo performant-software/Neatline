@@ -28,6 +28,15 @@ sed -i 's/paths.maildir = ""/paths.maildir = "\/tmp"/' $OMEKA_DIR/application/te
 sed -i 's/paths.imagemagick = ""/paths.imagemagick = "\/usr\/bin\/"/' $OMEKA_DIR/application/tests/config.ini
 sed -i 's/256M/512M/' $OMEKA_DIR/application/tests/bootstrap.php
 
+phpver=`php -v | grep -Eow '^PHP [^ ]+' | gawk '{ print $2 }'`
+echo "PHP version: $phpver..."
+if [ $(version $phpver) -gt $(version 5.3.1) ]; then
+  # composer is only available on 5.3.2+
+  composer install
+fi
+
+phpenv rehash # refresh the path, just in case
+
 # symlink the plugin
 cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
 bundle install
