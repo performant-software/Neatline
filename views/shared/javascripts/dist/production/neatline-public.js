@@ -139,7 +139,7 @@
         var n = !0, r = "width" === t ? e.offsetWidth : e.offsetHeight, s = Be(e), a = "border-box" === K.css(e, "boxSizing", !1, s);
         if (r <= 0 || null == r) {
             if (((r = b(e, t, s)) < 0 || null == r) && (r = e.style[t]), ze.test(r)) return r;
-            n = a && (Z.boxSizingReliable() || r === e.style[t]), r = parseFloat(r) || 0;
+            n = a && (Y.boxSizingReliable() || r === e.style[t]), r = parseFloat(r) || 0;
         }
         return r + x(e, t, i || (a ? "border" : "content"), n, s) + "px";
     }
@@ -289,7 +289,7 @@
     function U(e) {
         return K.isWindow(e) ? e : 9 === e.nodeType && e.defaultView;
     }
-    var G = [], H = G.slice, j = G.concat, V = G.push, W = G.indexOf, q = {}, X = q.toString, Y = q.hasOwnProperty, Z = {}, $ = e.document, K = function(e, t) {
+    var G = [], H = G.slice, j = G.concat, V = G.push, W = G.indexOf, q = {}, X = q.toString, Z = q.hasOwnProperty, Y = {}, $ = e.document, K = function(e, t) {
         return new K.fn.init(e, t);
     }, Q = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, J = /^-ms-/, ee = /-([\da-z])/gi, te = function(e, t) {
         return t.toUpperCase();
@@ -361,7 +361,7 @@
             return !K.isArray(e) && e - parseFloat(e) + 1 >= 0;
         },
         "isPlainObject": function(e) {
-            return "object" === K.type(e) && !e.nodeType && !K.isWindow(e) && !(e.constructor && !Y.call(e.constructor.prototype, "isPrototypeOf"));
+            return "object" === K.type(e) && !e.nodeType && !K.isWindow(e) && !(e.constructor && !Z.call(e.constructor.prototype, "isPrototypeOf"));
         },
         "isEmptyObject": function(e) {
             var t;
@@ -422,7 +422,7 @@
             }, r.guid = e.guid = e.guid || K.guid++, r;
         },
         "now": Date.now,
-        "support": Z
+        "support": Y
     }), K.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function(e, t) {
         q["[object " + t + "]"] = t.toLowerCase();
     });
@@ -581,7 +581,7 @@
                 if (d += y, r && y !== d) {
                     for (p = 0; c = i[p++]; ) c(m, g, a, o);
                     if (n) {
-                        if (d > 0) for (;y--; ) m[y] || g[y] || (g[y] = Y.call(l));
+                        if (d > 0) for (;y--; ) m[y] || g[y] || (g[y] = Z.call(l));
                         g = f(g);
                     }
                     $.apply(l, g), h && !n && g.length > 0 && d + i.length > 1 && t.uniqueSort(l);
@@ -592,7 +592,7 @@
         }
         var v, L, O, b, w, C, S, x, _, E, N, P, T, M, F, A, k, I, R, D = "sizzle" + 1 * new Date(), z = e.document, B = 0, U = 0, G = i(), H = i(), j = i(), V = function(e, t) {
             return e === t && (N = !0), 0;
-        }, W = 1 << 31, q = {}.hasOwnProperty, X = [], Y = X.pop, Z = X.push, $ = X.push, K = X.slice, Q = function(e, t) {
+        }, W = 1 << 31, q = {}.hasOwnProperty, X = [], Z = X.pop, Y = X.push, $ = X.push, K = X.slice, Q = function(e, t) {
             for (var i = 0, n = e.length; i < n; i++) if (e[i] === t) return i;
             return -1;
         }, J = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", ee = "[\\x20\\t\\r\\n\\f]", te = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+", ie = te.replace("w", "w#"), ne = "\\[" + ee + "*(" + te + ")(?:" + ee + "*([*^$|!~]?=)" + ee + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + ie + "))|)" + ee + "*\\]", re = ":(" + te + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + ne + ")*)|.*)\\)|)", se = new RegExp(ee + "+", "g"), ae = new RegExp("^" + ee + "+|((?:^|[^\\\\])(?:\\\\.)*)" + ee + "+$", "g"), oe = new RegExp("^" + ee + "*," + ee + "*"), le = new RegExp("^" + ee + "*([>+~]|" + ee + ")" + ee + "*"), he = new RegExp("=" + ee + "*([^\\]'\"]*?)" + ee + "*\\]", "g"), ue = new RegExp(re), pe = new RegExp("^" + ie + "$"), ce = {
@@ -615,7 +615,7 @@
         } catch (e) {
             $ = {
                 "apply": X.length ? function(e, t) {
-                    Z.apply(e, K.call(t));
+                    Y.apply(e, K.call(t));
                 } : function(e, t) {
                     for (var i = e.length, n = 0; e[i++] = t[n++]; ) ;
                     e.length = i - 1;
@@ -1405,10 +1405,10 @@
     !function() {
         var e = $.createDocumentFragment().appendChild($.createElement("div")), t = $.createElement("input");
         t.setAttribute("type", "radio"), t.setAttribute("checked", "checked"), t.setAttribute("name", "t"), 
-        e.appendChild(t), Z.checkClone = e.cloneNode(!0).cloneNode(!0).lastChild.checked, 
-        e.innerHTML = "<textarea>x</textarea>", Z.noCloneChecked = !!e.cloneNode(!0).lastChild.defaultValue;
+        e.appendChild(t), Y.checkClone = e.cloneNode(!0).cloneNode(!0).lastChild.checked, 
+        e.innerHTML = "<textarea>x</textarea>", Y.noCloneChecked = !!e.cloneNode(!0).lastChild.defaultValue;
     }();
-    Z.focusinBubbles = "onfocusin" in e;
+    Y.focusinBubbles = "onfocusin" in e;
     var we = /^key/, Ce = /^(?:mouse|pointer|contextmenu)|click/, Se = /^(?:focusinfocus|focusoutblur)$/, xe = /^([^.]*)(?:\.(.+)|)$/;
     K.event = {
         "global": {},
@@ -1448,7 +1448,7 @@
             }
         },
         "trigger": function(t, i, n, r) {
-            var s, a, o, l, h, u, p, c = [ n || $ ], d = Y.call(t, "type") ? t.type : t, f = Y.call(t, "namespace") ? t.namespace.split(".") : [];
+            var s, a, o, l, h, u, p, c = [ n || $ ], d = Z.call(t, "type") ? t.type : t, f = Z.call(t, "namespace") ? t.namespace.split(".") : [];
             if (a = o = n = n || $, 3 !== n.nodeType && 8 !== n.nodeType && !Se.test(d + K.event.triggered) && (d.indexOf(".") >= 0 && (d = (f = d.split(".")).shift(), 
             f.sort()), h = d.indexOf(":") < 0 && "on" + d, t = t[K.expando] ? t : new K.Event(d, "object" == typeof t && t), 
             t.isTrigger = r ? 2 : 3, t.namespace = f.join("."), t.namespace_re = t.namespace ? new RegExp("(^|\\.)" + f.join("\\.(?:.*\\.|)") + "(\\.|$)") : null, 
@@ -1596,7 +1596,7 @@
                 e.type = t), i;
             }
         };
-    }), Z.focusinBubbles || K.each({
+    }), Y.focusinBubbles || K.each({
         "focus": "focusin",
         "blur": "focusout"
     }, function(e, t) {
@@ -1667,7 +1667,7 @@
     ke.th = ke.td, K.extend({
         "clone": function(e, t, i) {
             var n, r, s, a, o = e.cloneNode(!0), l = K.contains(e.ownerDocument, e);
-            if (!(Z.noCloneChecked || 1 !== e.nodeType && 11 !== e.nodeType || K.isXMLDoc(e))) for (a = g(o), 
+            if (!(Y.noCloneChecked || 1 !== e.nodeType && 11 !== e.nodeType || K.isXMLDoc(e))) for (a = g(o), 
             n = 0, r = (s = g(e)).length; n < r; n++) v(s[n], a[n]);
             if (t) if (i) for (s = s || g(e), a = a || g(o), n = 0, r = s.length; n < r; n++) m(s[n], a[n]); else m(e, o);
             return (a = g(o, "script")).length > 0 && y(a, !l && g(e, "script")), o;
@@ -1765,7 +1765,7 @@
         "domManip": function(e, t) {
             e = j.apply([], e);
             var i, n, r, s, a, o, l = 0, h = this.length, u = this, p = h - 1, c = e[0], y = K.isFunction(c);
-            if (y || h > 1 && "string" == typeof c && !Z.checkClone && Te.test(c)) return this.each(function(i) {
+            if (y || h > 1 && "string" == typeof c && !Y.checkClone && Te.test(c)) return this.each(function(i) {
                 var n = u.eq(i);
                 y && (e[0] = c.call(this, i, n.html())), n.domManip(e, t);
             });
@@ -1803,8 +1803,8 @@
         }
         var i, n, r = $.documentElement, s = $.createElement("div"), a = $.createElement("div");
         a.style && (a.style.backgroundClip = "content-box", a.cloneNode(!0).style.backgroundClip = "", 
-        Z.clearCloneStyle = "content-box" === a.style.backgroundClip, s.style.cssText = "border:0;width:0;height:0;top:0;left:-9999px;margin-top:1px;position:absolute", 
-        s.appendChild(a), e.getComputedStyle && K.extend(Z, {
+        Y.clearCloneStyle = "content-box" === a.style.backgroundClip, s.style.cssText = "border:0;width:0;height:0;top:0;left:-9999px;margin-top:1px;position:absolute", 
+        s.appendChild(a), e.getComputedStyle && K.extend(Y, {
             "pixelPosition": function() {
                 return t(), i;
             },
@@ -1869,7 +1869,7 @@
                 void 0 === i) return a && "get" in a && void 0 !== (r = a.get(e, !1, n)) ? r : l[t];
                 "string" == (s = typeof i) && (r = He.exec(i)) && (i = (r[1] + 1) * r[2] + parseFloat(K.css(e, t)), 
                 s = "number"), null != i && i === i && ("number" !== s || K.cssNumber[o] || (i += "px"), 
-                Z.clearCloneStyle || "" !== i || 0 !== t.indexOf("background") || (l[t] = "inherit"), 
+                Y.clearCloneStyle || "" !== i || 0 !== t.indexOf("background") || (l[t] = "inherit"), 
                 a && "set" in a && void 0 === (i = a.set(e, i, n)) || (l[t] = i));
             }
         },
@@ -1891,7 +1891,7 @@
                 return S(0, i, n ? x(e, t, n, "border-box" === K.css(e, "boxSizing", !1, r), r) : 0);
             }
         };
-    }), K.cssHooks.marginRight = w(Z.reliableMarginRight, function(e, t) {
+    }), K.cssHooks.marginRight = w(Y.reliableMarginRight, function(e, t) {
         if (t) return K.swap(e, {
             "display": "inline-block"
         }, b, [ e, "marginRight" ]);
@@ -1966,7 +1966,7 @@
             return .5 - Math.cos(e * Math.PI) / 2;
         }
     }, K.fx = N.prototype.init, K.fx.step = {};
-    var qe, Xe, Ye = /^(?:toggle|show|hide)$/, Ze = new RegExp("^(?:([+-])=|)(" + ve + ")([a-z%]*)$", "i"), $e = /queueHooks$/, Ke = [ function(e, t, i) {
+    var qe, Xe, Ze = /^(?:toggle|show|hide)$/, Ye = new RegExp("^(?:([+-])=|)(" + ve + ")([a-z%]*)$", "i"), $e = /queueHooks$/, Ke = [ function(e, t, i) {
         var n, r, s, a, o, l, h, u = this, p = {}, c = e.style, d = e.nodeType && Oe(e), f = fe.get(e, "fxshow");
         i.queue || (null == (o = K._queueHooks(e, "fx")).unqueued && (o.unqueued = 0, l = o.empty.fire, 
         o.empty.fire = function() {
@@ -1980,7 +1980,7 @@
         i.overflow && (c.overflow = "hidden", u.always(function() {
             c.overflow = i.overflow[0], c.overflowX = i.overflow[1], c.overflowY = i.overflow[2];
         }));
-        for (n in t) if (r = t[n], Ye.exec(r)) {
+        for (n in t) if (r = t[n], Ze.exec(r)) {
             if (delete t[n], s = s || "toggle" === r, r === (d ? "hide" : "show")) {
                 if ("show" !== r || !f || void 0 === f[n]) continue;
                 d = !0;
@@ -2001,7 +2001,7 @@
         }
     } ], Qe = {
         "*": [ function(e, t) {
-            var i = this.createTween(e, t), n = i.cur(), r = Ze.exec(t), s = r && r[3] || (K.cssNumber[e] ? "" : "px"), a = (K.cssNumber[e] || "px" !== s && +n) && Ze.exec(K.css(i.elem, e)), o = 1, l = 20;
+            var i = this.createTween(e, t), n = i.cur(), r = Ye.exec(t), s = r && r[3] || (K.cssNumber[e] ? "" : "px"), a = (K.cssNumber[e] || "px" !== s && +n) && Ye.exec(K.css(i.elem, e)), o = 1, l = 20;
             if (a && a[3] !== s) {
                 s = s || a[3], r = r || [], a = +n || 1;
                 do {
@@ -2112,9 +2112,9 @@
         });
     }, function() {
         var e = $.createElement("input"), t = $.createElement("select"), i = t.appendChild($.createElement("option"));
-        e.type = "checkbox", Z.checkOn = "" !== e.value, Z.optSelected = i.selected, t.disabled = !0, 
-        Z.optDisabled = !i.disabled, (e = $.createElement("input")).value = "t", e.type = "radio", 
-        Z.radioValue = "t" === e.value;
+        e.type = "checkbox", Y.checkOn = "" !== e.value, Y.optSelected = i.selected, t.disabled = !0, 
+        Y.optDisabled = !i.disabled, (e = $.createElement("input")).value = "t", e.type = "radio", 
+        Y.radioValue = "t" === e.value;
     }();
     var Je, et = K.expr.attrHandle;
     K.fn.extend({
@@ -2141,7 +2141,7 @@
         "attrHooks": {
             "type": {
                 "set": function(e, t) {
-                    if (!Z.radioValue && "radio" === t && K.nodeName(e, "input")) {
+                    if (!Y.radioValue && "radio" === t && K.nodeName(e, "input")) {
                         var i = e.value;
                         return e.setAttribute("type", t), i && (e.value = i), t;
                     }
@@ -2187,7 +2187,7 @@
                 }
             }
         }
-    }), Z.optSelected || (K.propHooks.selected = {
+    }), Y.optSelected || (K.propHooks.selected = {
         "get": function(e) {
             var t = e.parentNode;
             return t && t.parentNode && t.parentNode.selectedIndex, null;
@@ -2257,7 +2257,7 @@
             },
             "select": {
                 "get": function(e) {
-                    for (var t, i, n = e.options, r = e.selectedIndex, s = "select-one" === e.type || r < 0, a = s ? null : [], o = s ? r + 1 : n.length, l = r < 0 ? o : s ? r : 0; l < o; l++) if (((i = n[l]).selected || l === r) && (Z.optDisabled ? !i.disabled : null === i.getAttribute("disabled")) && (!i.parentNode.disabled || !K.nodeName(i.parentNode, "optgroup"))) {
+                    for (var t, i, n = e.options, r = e.selectedIndex, s = "select-one" === e.type || r < 0, a = s ? null : [], o = s ? r + 1 : n.length, l = r < 0 ? o : s ? r : 0; l < o; l++) if (((i = n[l]).selected || l === r) && (Y.optDisabled ? !i.disabled : null === i.getAttribute("disabled")) && (!i.parentNode.disabled || !K.nodeName(i.parentNode, "optgroup"))) {
                         if (t = K(i).val(), s) return t;
                         a.push(t);
                     }
@@ -2274,7 +2274,7 @@
             "set": function(e, t) {
                 if (K.isArray(t)) return e.checked = K.inArray(K(e).val(), t) >= 0;
             }
-        }, Z.checkOn || (K.valHooks[this].get = function(e) {
+        }, Y.checkOn || (K.valHooks[this].get = function(e) {
             return null === e.getAttribute("value") ? "on" : e.value;
         });
     }), K.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error contextmenu".split(" "), function(e, t) {
@@ -2537,9 +2537,9 @@
     }, _t = K.ajaxSettings.xhr();
     e.attachEvent && e.attachEvent("onunload", function() {
         for (var e in St) St[e]();
-    }), Z.cors = !!_t && "withCredentials" in _t, Z.ajax = _t = !!_t, K.ajaxTransport(function(e) {
+    }), Y.cors = !!_t && "withCredentials" in _t, Y.ajax = _t = !!_t, K.ajaxTransport(function(e) {
         var t;
-        if (Z.cors || _t && !e.crossDomain) return {
+        if (Y.cors || _t && !e.crossDomain) return {
             "send": function(i, n) {
                 var r, s = e.xhr(), a = ++Ct;
                 if (s.open(e.type, e.url, e.async, e.username, e.password), e.xhrFields) for (r in e.xhrFields) s[r] = e.xhrFields[r];
@@ -2703,7 +2703,7 @@
             }, t, r, arguments.length, null);
         };
     }), K.each([ "top", "left" ], function(e, t) {
-        K.cssHooks[t] = w(Z.pixelPosition, function(e, i) {
+        K.cssHooks[t] = w(Y.pixelPosition, function(e, i) {
             if (i) return i = b(e, t), ze.test(i) ? K(e).position()[t] + "px" : i;
         });
     }), K.each({
@@ -4641,13 +4641,13 @@
             });
         },
         "_generateHTML": function(e) {
-            var t, i, n, r, s, a, o, l, h, u, p, c, d, f, y, m, g, v, L, O, b, w, C, S, x, _, E, N, P, T, M, F, A, k, I, R, D, z, B, U = new Date(), G = this._daylightSavingAdjust(new Date(U.getFullYear(), U.getMonth(), U.getDate())), H = this._get(e, "isRTL"), j = this._get(e, "showButtonPanel"), V = this._get(e, "hideIfNoPrevNext"), W = this._get(e, "navigationAsDateFormat"), q = this._getNumberOfMonths(e), X = this._get(e, "showCurrentAtPos"), Y = this._get(e, "stepMonths"), Z = 1 !== q[0] || 1 !== q[1], $ = this._daylightSavingAdjust(e.currentDay ? new Date(e.currentYear, e.currentMonth, e.currentDay) : new Date(9999, 9, 9)), K = this._getMinMaxDate(e, "min"), Q = this._getMinMaxDate(e, "max"), J = e.drawMonth - X, ee = e.drawYear;
+            var t, i, n, r, s, a, o, l, h, u, p, c, d, f, y, m, g, v, L, O, b, w, C, S, x, _, E, N, P, T, M, F, A, k, I, R, D, z, B, U = new Date(), G = this._daylightSavingAdjust(new Date(U.getFullYear(), U.getMonth(), U.getDate())), H = this._get(e, "isRTL"), j = this._get(e, "showButtonPanel"), V = this._get(e, "hideIfNoPrevNext"), W = this._get(e, "navigationAsDateFormat"), q = this._getNumberOfMonths(e), X = this._get(e, "showCurrentAtPos"), Z = this._get(e, "stepMonths"), Y = 1 !== q[0] || 1 !== q[1], $ = this._daylightSavingAdjust(e.currentDay ? new Date(e.currentYear, e.currentMonth, e.currentDay) : new Date(9999, 9, 9)), K = this._getMinMaxDate(e, "min"), Q = this._getMinMaxDate(e, "max"), J = e.drawMonth - X, ee = e.drawYear;
             if (J < 0 && (J += 12, ee--), Q) for (t = this._daylightSavingAdjust(new Date(Q.getFullYear(), Q.getMonth() - q[0] * q[1] + 1, Q.getDate())), 
             t = K && t < K ? K : t; this._daylightSavingAdjust(new Date(ee, J, 1)) > t; ) --J < 0 && (J = 11, 
             ee--);
-            for (e.drawMonth = J, e.drawYear = ee, i = this._get(e, "prevText"), i = W ? this.formatDate(i, this._daylightSavingAdjust(new Date(ee, J - Y, 1)), this._getFormatConfig(e)) : i, 
+            for (e.drawMonth = J, e.drawYear = ee, i = this._get(e, "prevText"), i = W ? this.formatDate(i, this._daylightSavingAdjust(new Date(ee, J - Z, 1)), this._getFormatConfig(e)) : i, 
             n = this._canAdjustMonth(e, -1, ee, J) ? "<a class='ui-datepicker-prev ui-corner-all' data-handler='prev' data-event='click' title='" + i + "'><span class='ui-icon ui-icon-circle-triangle-" + (H ? "e" : "w") + "'>" + i + "</span></a>" : V ? "" : "<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' title='" + i + "'><span class='ui-icon ui-icon-circle-triangle-" + (H ? "e" : "w") + "'>" + i + "</span></a>", 
-            r = this._get(e, "nextText"), r = W ? this.formatDate(r, this._daylightSavingAdjust(new Date(ee, J + Y, 1)), this._getFormatConfig(e)) : r, 
+            r = this._get(e, "nextText"), r = W ? this.formatDate(r, this._daylightSavingAdjust(new Date(ee, J + Z, 1)), this._getFormatConfig(e)) : r, 
             s = this._canAdjustMonth(e, 1, ee, J) ? "<a class='ui-datepicker-next ui-corner-all' data-handler='next' data-event='click' title='" + r + "'><span class='ui-icon ui-icon-circle-triangle-" + (H ? "w" : "e") + "'>" + r + "</span></a>" : V ? "" : "<a class='ui-datepicker-next ui-corner-all ui-state-disabled' title='" + r + "'><span class='ui-icon ui-icon-circle-triangle-" + (H ? "w" : "e") + "'>" + r + "</span></a>", 
             a = this._get(e, "currentText"), o = this._get(e, "gotoCurrent") && e.currentDay ? $ : G, 
             a = W ? this.formatDate(a, o, this._getFormatConfig(e)) : a, l = e.inline ? "" : "<button type='button' class='ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all' data-handler='hide' data-event='click'>" + this._get(e, "closeText") + "</button>", 
@@ -4658,7 +4658,7 @@
             v = this._get(e, "selectOtherMonths"), L = this._getDefaultDate(e), O = "", w = 0; w < q[0]; w++) {
                 for (C = "", this.maxRows = 4, S = 0; S < q[1]; S++) {
                     if (x = this._daylightSavingAdjust(new Date(ee, J, e.selectedDay)), _ = " ui-corner-all", 
-                    E = "", Z) {
+                    E = "", Y) {
                         if (E += "<div class='ui-datepicker-group", q[1] > 1) switch (S) {
                           case 0:
                             E += " ui-datepicker-group-first", _ = " ui-corner-" + (H ? "right" : "left");
@@ -4677,7 +4677,7 @@
                     N = p ? "<th class='ui-datepicker-week-col'>" + this._get(e, "weekHeader") + "</th>" : "", 
                     b = 0; b < 7; b++) P = (b + u) % 7, N += "<th" + ((b + u + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + "><span title='" + c[P] + "'>" + d[P] + "</span></th>";
                     for (E += N + "</tr></thead><tbody>", T = this._getDaysInMonth(ee, J), ee === e.selectedYear && J === e.selectedMonth && (e.selectedDay = Math.min(e.selectedDay, T)), 
-                    M = (this._getFirstDayOfMonth(ee, J) - u + 7) % 7, F = Math.ceil((M + T) / 7), A = Z && this.maxRows > F ? this.maxRows : F, 
+                    M = (this._getFirstDayOfMonth(ee, J) - u + 7) % 7, F = Math.ceil((M + T) / 7), A = Y && this.maxRows > F ? this.maxRows : F, 
                     this.maxRows = A, k = this._daylightSavingAdjust(new Date(ee, J, 1 - M)), I = 0; I < A; I++) {
                         for (E += "<tr>", R = p ? "<td class='ui-datepicker-week-col'>" + this._get(e, "calculateWeek")(k) + "</td>" : "", 
                         b = 0; b < 7; b++) D = m ? m.apply(e.input ? e.input[0] : null, [ k ]) : [ !0, "" ], 
@@ -4685,7 +4685,7 @@
                         k.setDate(k.getDate() + 1), k = this._daylightSavingAdjust(k);
                         E += R + "</tr>";
                     }
-                    ++J > 11 && (J = 0, ee++), C += E += "</tbody></table>" + (Z ? "</div>" + (q[0] > 0 && S === q[1] - 1 ? "<div class='ui-datepicker-row-break'></div>" : "") : "");
+                    ++J > 11 && (J = 0, ee++), C += E += "</tbody></table>" + (Y ? "</div>" + (q[0] > 0 && S === q[1] - 1 ? "<div class='ui-datepicker-row-break'></div>" : "") : "");
                 }
                 O += C;
             }
@@ -8848,7 +8848,7 @@
                     ft.apply(e, arguments);
                 }
                 if (this instanceof t) {
-                    var s = Z(i.prototype), a = i.apply(s, e || arguments);
+                    var s = Y(i.prototype), a = i.apply(s, e || arguments);
                     return ge(a) ? a : s;
                 }
                 return i.apply(r, e || arguments);
@@ -8889,7 +8889,7 @@
                 s[a] = X(e, t, i, n, r);
             }), c && (h(n), h(r)), s) : s;
         }
-        function Z(e, t) {
+        function Y(e, t) {
             return ge(e) ? Lt(e) : {};
         }
         function $(e, t, i) {
@@ -8934,7 +8934,7 @@
                 if ((s || u) && (f || (f = p(arguments)), s && ft.apply(f, s), u && f.length < o)) return n |= 16, 
                 K([ i, c ? n : -4 & n, f, null, a, o ]);
                 if (f || (f = arguments), h && (i = e[d]), this instanceof t) {
-                    e = Z(i.prototype);
+                    e = Y(i.prototype);
                     var y = i.apply(e, f);
                     return ge(y) ? y : e;
                 }
@@ -9341,13 +9341,13 @@
         function qe() {
             return this.__wrapped__;
         }
-        var Xe = (i = i ? J.defaults(Y.Object(), i, J.pick(Y, F)) : Y).Array, Ye = i.Boolean, Ze = i.Date, $e = i.Function, Ke = i.Math, Qe = i.Number, Je = i.Object, et = i.RegExp, tt = i.String, it = i.TypeError, nt = [], rt = Je.prototype, st = i._, at = rt.toString, ot = et("^" + tt(at).replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/toString| for [^\]]+/g, ".*?") + "$"), lt = Ke.ceil, ht = i.clearTimeout, ut = Ke.floor, pt = $e.prototype.toString, ct = he(ct = Je.getPrototypeOf) && ct, dt = rt.hasOwnProperty, ft = nt.push, yt = i.setTimeout, mt = nt.splice, gt = nt.unshift, vt = function() {
+        var Xe = (i = i ? J.defaults(Z.Object(), i, J.pick(Z, F)) : Z).Array, Ze = i.Boolean, Ye = i.Date, $e = i.Function, Ke = i.Math, Qe = i.Number, Je = i.Object, et = i.RegExp, tt = i.String, it = i.TypeError, nt = [], rt = Je.prototype, st = i._, at = rt.toString, ot = et("^" + tt(at).replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/toString| for [^\]]+/g, ".*?") + "$"), lt = Ke.ceil, ht = i.clearTimeout, ut = Ke.floor, pt = $e.prototype.toString, ct = he(ct = Je.getPrototypeOf) && ct, dt = rt.hasOwnProperty, ft = nt.push, yt = i.setTimeout, mt = nt.splice, gt = nt.unshift, vt = function() {
             try {
                 var e = {}, t = he(t = Je.defineProperty) && t, i = t(e, e, e) && t;
             } catch (e) {}
             return i;
         }(), Lt = he(Lt = Je.create) && Lt, Ot = he(Ot = Xe.isArray) && Ot, bt = i.isFinite, wt = i.isNaN, Ct = he(Ct = Je.keys) && Ct, St = Ke.max, xt = Ke.min, _t = i.parseInt, Et = Ke.random, Nt = {};
-        Nt[I] = Xe, Nt[R] = Ye, Nt[D] = Ze, Nt[z] = $e, Nt[U] = Je, Nt[B] = Qe, Nt[G] = et, 
+        Nt[I] = Xe, Nt[R] = Ze, Nt[D] = Ye, Nt[z] = $e, Nt[U] = Je, Nt[B] = Qe, Nt[G] = et, 
         Nt[H] = tt, y.prototype = f.prototype;
         var Pt = f.support = {};
         Pt.funcDecomp = !he(i.WinRTError) && T.test(c), Pt.funcNames = "string" == typeof $e.name, 
@@ -9359,7 +9359,7 @@
             "imports": {
                 "_": f
             }
-        }, Lt || (Z = function() {
+        }, Lt || (Y = function() {
             function e() {}
             return function(t) {
                 if (ge(t)) {
@@ -9425,9 +9425,9 @@
             (dt.call(e, i) ? e[i] : e[i] = []).push(t);
         }), Vt = se(function(e, t, i) {
             e[i] = t;
-        }), Wt = Ee, qt = Ce, Xt = he(Xt = Ze.now) && Xt || function() {
-            return new Ze().getTime();
-        }, Yt = 8 == _t(O + "08") ? _t : function(e, t) {
+        }), Wt = Ee, qt = Ce, Xt = he(Xt = Ye.now) && Xt || function() {
+            return new Ye().getTime();
+        }, Zt = 8 == _t(O + "08") ? _t : function(e, t) {
             return _t(Le(e) ? e.replace(N, "") : e, t || 0);
         };
         return f.after = function(e, t) {
@@ -9465,7 +9465,7 @@
                 return e;
             };
         }, f.countBy = Ht, f.create = function(e, t) {
-            var i = Z(e);
+            var i = Y(e);
             return t ? Dt(i, t) : i;
         }, f.createCallback = function(e, t, i) {
             var n = typeof e;
@@ -9652,7 +9652,7 @@
             var r = Mt(e);
             if (null == i) if (r) i = []; else {
                 var s = e && e.constructor, a = s && s.prototype;
-                i = Z(a);
+                i = Y(a);
             }
             return t && (t = f.createCallback(t, n, 4), (r ? xe : Ut)(e, function(e, n, r) {
                 return t(i, e, n, r);
@@ -9733,7 +9733,7 @@
             return -1;
         }, f.mixin = je, f.noConflict = function() {
             return i._ = st, this;
-        }, f.noop = Ve, f.now = Xt, f.parseInt = Yt, f.random = function(e, t, i) {
+        }, f.noop = Ve, f.now = Xt, f.parseInt = Zt, f.random = function(e, t, i) {
             var n = null == e, r = null == t;
             if (null == i && ("boolean" == typeof e && r ? (i = e, e = 1) : r || "boolean" != typeof t || (i = t, 
             r = !0)), n && r && (t = 1), e = +e || 0, r ? (t = e, e = 0) : t = +t || 0, i || e % 1 || t % 1) {
@@ -9844,13 +9844,13 @@
         "\t": "t",
         "\u2028": "u2028",
         "\u2029": "u2029"
-    }, Y = q[typeof window] && window || this, Z = q[typeof exports] && exports && !exports.nodeType && exports, $ = q[typeof module] && module && !module.nodeType && module, K = $ && $.exports === Z && Z, Q = q[typeof global] && global;
-    !Q || Q.global !== Q && Q.window !== Q || (Y = Q);
+    }, Z = q[typeof window] && window || this, Y = q[typeof exports] && exports && !exports.nodeType && exports, $ = q[typeof module] && module && !module.nodeType && module, K = $ && $.exports === Y && Y, Q = q[typeof global] && global;
+    !Q || Q.global !== Q && Q.window !== Q || (Z = Q);
     var J = c();
-    "function" == typeof define && "object" == typeof define.amd && define.amd ? (Y._ = J, 
+    "function" == typeof define && "object" == typeof define.amd && define.amd ? (Z._ = J, 
     define(function() {
         return J;
-    })) : Z && $ ? K ? ($.exports = J)._ = J : Z._ = J : Y._ = J;
+    })) : Y && $ ? K ? ($.exports = J)._ = J : Y._ = J : Z._ = J;
 }.call(this), function(e, t) {
     "use strict";
     function i(e, t) {
@@ -37993,7 +37993,7 @@ OpenLayers.Rico.Corner = {
         "slug": "MAP",
         "events": [ "highlight", "unhighlight", "select", "unselect", "setFilter", "removeFilter", "refresh" ],
         "commands": [ "load", "updateSize", "showHighlight", "hideHighlight" ],
-        "requests": [ "getMap", "getRecords", "getVectorLayer", "getVectorLayers", "getWmsLayers", "getCenter", "getZoom" ],
+        "requests": [ "getMap", "getRecords", "getVectorLayer", "getVectorLayers", "getWmsLayers", "getCenter", "getZoom", "getMinZoom", "getExtent" ],
         "init": function() {
             this.view = new Neatline.Map.View({
                 "slug": this.slug
@@ -38052,6 +38052,18 @@ OpenLayers.Rico.Corner = {
         },
         "getZoom": function() {
             return this.view.map.getZoom();
+        },
+        "getMinZoom": function() {
+            var e = this.view.map.baseLayer;
+            if (e) {
+                if (e.minZoomLevel) return e.minZoomLevel;
+                if (e.zoomOffset) return e.zoomOffset;
+                if (this.view.otherZoomOffset) return this.view.otherZoomOffset;
+            }
+            return 0;
+        },
+        "getExtent": function() {
+            return this.view.map.getExtent().toString();
         }
     });
 }), Neatline.module("Map", function(e) {
@@ -38085,8 +38097,9 @@ OpenLayers.Rico.Corner = {
                 "projection": "EPSG:900913",
                 "theme": null,
                 "zoomMethod": null,
-                "panMethod": null,
                 "fallThrough": !0,
+                "panMethod": null,
+                "restrictedExtent": _.isString(this.exhibit.map_restricted_extent) ? new OpenLayers.Bounds.fromString(this.exhibit.map_restricted_extent) : null,
                 "controls": [ new OpenLayers.Control.PanZoom(), new OpenLayers.Control.Navigation({
                     "dragPanOptions": {
                         "enableKinetic": !1
@@ -38135,36 +38148,69 @@ OpenLayers.Rico.Corner = {
         },
         "_addImageLayer": function(e, t) {
             var i = new OpenLayers.Layer.Image(this.exhibit.title, this.exhibit.image_layer, new OpenLayers.Bounds(0, 0, e, t), new OpenLayers.Size(e / 5, t / 5), {
-                "maxExtent": new OpenLayers.Bounds(2 * -e, 2 * -t, 2 * e, 2 * t),
+                "maxExtent": new OpenLayers.Bounds(-e, -t, 2 * e, 2 * t),
                 "numZoomLevels": this.exhibit.zoom_levels,
                 "minResolution": .5
             });
             this.map.addLayer(i);
+            var n = this.getZoomLimits(), r = _.isNumber(n.minZ) ? n.minZ : 0, s = _.isNumber(n.maxZ) ? n.maxZ : i.numZoomLevels - 1;
+            i.numZoomLevels = Math.abs(s - r + 1), i.resolutions = i.resolutions.splice(r, Math.abs(s - r + 1)), 
+            this.baseLayerIsImage = !0, this.imageFocus = [ e / 2, t / 2 ], this.otherZoomOffset = r;
         },
         "_initWmsLayer": function() {
-            var e = this.exhibit.wms_address.split("/").pop(), t = this.exhibit.wms_layers || e, i = new OpenLayers.Layer.WMS(this.exhibit.title, this.exhibit.wms_address, {
-                "layers": t,
+            var e, t, i, n = this.exhibit.wms_address.split("/").pop(), r = this.exhibit.wms_layers || n, s = new OpenLayers.Layer.WMS(this.exhibit.title, this.exhibit.wms_address, {
+                "layers": r,
                 "transparent": "false",
                 "format": "image/png"
             }, {
-                "isBaseLayer": !1,
+                "isBaseLayer": "no_spatial_layer" === this.exhibit.spatial_layer,
                 "visibility": !0
             });
-            this.map.addLayer(i);
+            this.map.addLayer(s), e = this.getZoomLimits(), t = _.isNumber(e.minZ) ? e.minZ : 0, 
+            i = _.isNumber(e.maxZ) ? e.maxZ : s.numZoomLevels - 1, s.numZoomLevels = Math.abs(i - t + 1), 
+            s.resolutions = s.resolutions.splice(t, Math.abs(i - t + 1)), this.otherZoomOffset = t;
         },
         "_initSpatialLayers": function() {
-            var e = {};
-            _.each(Neatline.g.neatline.spatial_layers, function(t) {
-                var i = Neatline.request("MAP:LAYERS:getLayer", t);
-                _.isObject(i) && (e[t.id] = i);
-            }), _.each(_.values(e), _.bind(function(e) {
+            var e, t, i, n = {};
+            _.each(Neatline.g.neatline.spatial_layers, function(e) {
+                var t = Neatline.request("MAP:LAYERS:getLayer", e);
+                _.isObject(t) && (n[e.id] = t);
+            }), _.each(_.values(n), _.bind(function(e) {
                 this.map.addLayer(e), this.map.setLayerIndex(e, 0);
-            }, this)), this.map.setBaseLayer(e[this.exhibit.spatial_layer]), this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+            }, this)), null === (e = this.getZoomLimits()).minZ && null === e.maxZ || (this.map.numZoomLevels = null), 
+            _.each(n, function(r, s) {
+                switch (t = _.isNumber(e.minZ) ? e.minZ : n[s].MIN_ZOOM_LEVEL || 0, i = _.isNumber(e.maxZ) ? e.maxZ : n[s].MAX_ZOOM_LEVEL || r.numZoomLevels - 1, 
+                n[s].numZoomLevels = Math.abs(i - t + 1), n[s].resolutions = n[s].resolutions.splice(t, Math.abs(i - t + 1)), 
+                s) {
+                  case "GooglePhysical":
+                  case "GoogleSatellite":
+                  case "GoogleStreets":
+                  case "GoogleHybrid":
+                    n[s].minZoomLevel = t;
+                    break;
+
+                  case "OpenStreetMap":
+                  case "StamenToner":
+                  case "StamenTerrain":
+                  case "StamenWatercolor":
+                    n[s].zoomOffset = t;
+                }
+            }.bind(this)), this.exhibit.spatial_layer && "no_spatial_layer" !== this.exhibit.spatial_layer && this.map.setBaseLayer(n[this.exhibit.spatial_layer]), 
+            this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+        },
+        "getZoomLimits": function() {
+            return {
+                "minZ": _.isNumber(this.exhibit.map_min_zoom) ? this.exhibit.map_min_zoom : null,
+                "maxZ": _.isNumber(this.exhibit.map_max_zoom) ? this.exhibit.map_max_zoom : null
+            };
         },
         "_initViewport": function() {
             var e = Neatline.g.neatline.exhibit.map_focus, t = Neatline.g.neatline.exhibit.map_zoom;
-            _.isString(e) && _.isNumber(t) ? (this.setFocus(e), this.setZoom(t)) : (this.map.zoomTo(this.options.defaultZoom), 
-            this.geolocate());
+            t = _.isNumber(t) ? t : this.options.defaultZoom, this.baseLayerIsImage && (t = Math.min(t, this.exhibit.zoom_levels - 1));
+            var i = this.getZoomLimits();
+            _.isNumber(i.maxZ) && t > i.maxZ && (t = i.maxZ), _.isNumber(i.minZ) && (t = Math.max(0, t - i.minZ)), 
+            _.isString(e) ? this.setFocus(e) : _.isString(this.exhibit.map_restricted_extent) ? this.map.zoomToExtent(this.exhibit.map_restricted_extent) : this.baseLayerIsImage ? this.map.setCenter(this.imageFocus, t, !1, !0) : this.geolocate(), 
+            this.map.zoomTo(t);
         },
         "updatePublicControls": function() {
             var e = this.getVectorLayers();
@@ -38191,15 +38237,18 @@ OpenLayers.Rico.Corner = {
         "geolocate": function() {
             var e = new OpenLayers.Control.Geolocate({
                 "bind": !0,
-                "watch": !1
+                "watch": !1,
+                "failure": function() {
+                    this.map.setCenter([ 0, 0 ], this.map.getZoom(), !1, !0);
+                }.bind(this)
             });
             this.map.addControl(e), e.activate();
         },
         "publishPosition": function() {
             var e = {};
-            this.exhibit.spatial_querying && _.extend(e, {
+            this.exhibit.spatial_querying && null !== this.map.getExtent() && _.extend(e, {
                 "extent": this.getExtentAsWKT(),
-                "zoom": this.getZoom()
+                "zoom": this.getMinZoom() + this.getZoom()
             }), this.loadRecords(e), this.loading = !0;
         },
         "loadRecords": function(e) {
@@ -38379,6 +38428,10 @@ OpenLayers.Rico.Corner = {
         },
         "getZoom": function(e) {
             return this.map.getZoom();
+        },
+        "getMinZoom": function() {
+            var e = this.getZoomLimits();
+            return _.isNumber(e.minZ) ? e.minZ : 0;
         },
         "getExtentAsWKT": function() {
             var e = this.map.getExtent().toGeometry(), t = new OpenLayers.Feature.Vector(e);

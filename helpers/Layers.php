@@ -53,7 +53,7 @@ function nl_getLayers()
  *
  * @return array The select options.
  */
-function nl_getLayersForSelect()
+function nl_getLayersForSelect($include_none = false)
 {
 
     $groups = nl_getLayers();
@@ -70,6 +70,10 @@ function nl_getLayersForSelect()
             $options[$group][$layer['id']] = $layer['title'];
         }
 
+    }
+
+    if ($include_none) {
+        $options['no_spatial_layer'] = __('None (Image or WMS as Default)');
     }
 
     return $options;

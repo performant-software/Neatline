@@ -121,10 +121,13 @@ Neatline.module('Map', function(Map) {
         projection: "EPSG:900913",
         theme: null,
         zoomMethod: null,
-        panMethod: null,
 
         // Don't swallow cursor events.
         fallThrough: true,
+        panMethod: null,
+        restrictedExtent: _.isString(this.exhibit.map_restricted_extent) ?
+            new OpenLayers.Bounds.fromString(this.exhibit.map_restricted_extent) :
+            null,
 
         controls: [
           new OpenLayers.Control.PanZoom(),
@@ -284,7 +287,7 @@ Neatline.module('Map', function(Map) {
 
         {
           // Add pan padding around the edges of the image
-          maxExtent: new OpenLayers.Bounds(-w*2, -h*2, w*2, h*2),
+          maxExtent: new OpenLayers.Bounds(-w, -h, w*2, h*2),
           numZoomLevels: this.exhibit.zoom_levels,
           minResolution: 0.5
         }
@@ -292,6 +295,17 @@ Neatline.module('Map', function(Map) {
       );
 
       this.map.addLayer(image);
+
+      var zoomLimits = this.getZoomLimits();
+      var minZ = _.isNumber(zoomLimits.minZ) ? zoomLimits.minZ : 0 ;
+      var maxZ = _.isNumber(zoomLimits.maxZ) ? zoomLimits.maxZ : image.numZoomLevels - 1;
+      image.numZoomLevels = Math.abs(maxZ - minZ + 1);
+
+      image.resolutions = image.resolutions.splice(minZ, Math.abs(maxZ - minZ + 1));
+
+      this.baseLayerIsImage = true;
+      this.imageFocus = [w/2.0, h/2.0];
+      this.otherZoomOffset = minZ;
     },
 
 
@@ -299,12 +313,13 @@ Neatline.module('Map', function(Map) {
      * Construct an individual WMS base layer.
      */
     _initWmsLayer: function() {
-
       var segments = this.exhibit.wms_address.split("/");
       var slug = segments.pop();
 
       // if there's a layer specified, use it, otherwise use the slug
       var layers = this.exhibit.wms_layers || slug;
+
+      var zoomLimits, minZ, maxZ;
 
       var wms = new OpenLayers.Layer.WMS(
         this.exhibit.title,
@@ -314,11 +329,18 @@ Neatline.module('Map', function(Map) {
           transparent: "false",
           format: "image/png"
         },
-        {isBaseLayer: false, visibility: true}
+        {isBaseLayer: this.exhibit.spatial_layer === "no_spatial_layer", visibility: true}
       );
 
       this.map.addLayer(wms);
 
+      zoomLimits = this.getZoomLimits();
+      minZ = _.isNumber(zoomLimits.minZ) ? zoomLimits.minZ : 0 ;
+      maxZ = _.isNumber(zoomLimits.maxZ) ? zoomLimits.maxZ : wms.numZoomLevels - 1;
+      wms.numZoomLevels = Math.abs(maxZ - minZ + 1);
+      wms.resolutions = wms.resolutions.splice(minZ, Math.abs(maxZ - minZ + 1));
+
+      this.otherZoomOffset = minZ;
     },
 
 
@@ -326,8 +348,8 @@ Neatline.module('Map', function(Map) {
      * Construct spatial base layers.
      */
     _initSpatialLayers: function() {
-
       var layers = {};
+      var zoomLimits, minZ, maxZ;
 
       // Build array of base layer instances.
       _.each(Neatline.g.neatline.spatial_layers, function(json) {
@@ -335,20 +357,71 @@ Neatline.module('Map', function(Map) {
         if (_.isObject(layer)) layers[json.id] = layer;
       });
 
+
       // Add the layers, set indices to 0.
       _.each(_.values(layers), _.bind(function(layer) {
         this.map.addLayer(layer);
         this.map.setLayerIndex(layer, 0);
       }, this));
 
+      zoomLimits = this.getZoomLimits();
+
+      //if any user defined zoom limits, null out default numZoomLevels on map object
+      if (zoomLimits.minZ !== null || zoomLimits.maxZ !== null){
+        this.map.numZoomLevels = null;
+      }
+
+      _.each(layers, function(layer,layerType){
+
+          // Need to accommodate if only min or max is set. Default to MIN/MAX constants set on some layers (Google/Bing/etc)
+          // or 0/number of zoom levels - 1 for others (OSM based)
+          minZ = _.isNumber(zoomLimits.minZ) ? zoomLimits.minZ : layers[layerType].MIN_ZOOM_LEVEL || 0 ;
+          maxZ = _.isNumber(zoomLimits.maxZ) ? zoomLimits.maxZ : layers[layerType].MAX_ZOOM_LEVEL || layer.numZoomLevels - 1;
+
+          layers[layerType].numZoomLevels = Math.abs(maxZ - minZ + 1);
+          layers[layerType].resolutions = layers[layerType].resolutions.splice(minZ, Math.abs(maxZ - minZ + 1));
+
+          // Depending on the type of layer, need to set different layer options for limiting zoom levels
+          switch (layerType){
+            case "GooglePhysical":
+            case "GoogleSatellite":
+            case "GoogleStreets":
+            case "GoogleHybrid":
+              layers[layerType].minZoomLevel = minZ;
+              break;
+            case "OpenStreetMap":
+            case "StamenToner":
+            case "StamenTerrain":
+            case "StamenWatercolor":
+              layers[layerType].zoomOffset = minZ;
+              break;
+
+          }
+
+      }.bind(this));
+
       // Set default base layer.
-      this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
+      if (this.exhibit.spatial_layer && this.exhibit.spatial_layer !== "no_spatial_layer")
+        this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
 
       // Add layer switcher.
       this.map.addControl(new OpenLayers.Control.LayerSwitcher());
 
     },
 
+    /**
+     * Get max and min zoom levels if set.
+     * @returns Object with min and max zoom levels {minZoom,maxZoom}
+     */
+    getZoomLimits: function(){
+      var minZoom = _.isNumber(this.exhibit.map_min_zoom) ? this.exhibit.map_min_zoom: null;
+      var maxZoom = _.isNumber(this.exhibit.map_max_zoom) ? this.exhibit.map_max_zoom: null;
+
+      return  {
+        "minZ": minZoom,
+        "maxZ": maxZoom
+      }
+    },
 
     /**
      * Set the starting focus and zoom.
@@ -357,18 +430,35 @@ Neatline.module('Map', function(Map) {
 
       var focus = Neatline.g.neatline.exhibit.map_focus;
       var zoom  = Neatline.g.neatline.exhibit.map_zoom;
+      zoom = _.isNumber(zoom) ? zoom : this.options.defaultZoom;
+
+      if (this.baseLayerIsImage) {
+        zoom = Math.min(zoom, this.exhibit.zoom_levels - 1);
+      }
+
+      var zoomLimits = this.getZoomLimits();
+      if (_.isNumber(zoomLimits.maxZ) && zoom > zoomLimits.maxZ) {
+        zoom = zoomLimits.maxZ;
+      }
+      if (_.isNumber(zoomLimits.minZ)) {
+        zoom = Math.max(0, zoom - zoomLimits.minZ);
+      }
 
       // Apply default focus, if one exists.
-      if (_.isString(focus) && _.isNumber(zoom)) {
+      if (_.isString(focus)) {
         this.setFocus(focus);
-        this.setZoom(zoom);
-      }
-
-      else {
+      } else if (_.isString(this.exhibit.map_restricted_extent)) {
+        // Otherwise, if a restricted extent is defined, use that to set focus.
+        this.map.zoomToExtent(this.exhibit.map_restricted_extent);
+      } else if (this.baseLayerIsImage) {
+        // For image base layers, fall back on center rather than geolocation.
+        this.map.setCenter(this.imageFocus, zoom, false, true);
+      } else {
         // Otherwise, geolocate.
-        this.map.zoomTo(this.options.defaultZoom);
         this.geolocate();
       }
+
+      this.map.zoomTo(zoom);
 
     },
 
@@ -449,7 +539,6 @@ Neatline.module('Map', function(Map) {
 
     },
 
-
     /**
      * Set the focus.
      *
@@ -478,11 +567,17 @@ Neatline.module('Map', function(Map) {
 
       // Construct the control.
       var geolocate = new OpenLayers.Control.Geolocate({
-        bind: true, watch: false
+        bind: true,
+        watch: false,
+        failure: function() {
+          // Keep zoom the same, but force a zoom change; otherwise some layer types will show blank.
+          this.map.setCenter([0, 0], this.map.getZoom(), false, true);
+        }.bind(this)
       });
 
       // Geolocate.
       this.map.addControl(geolocate);
+
       geolocate.activate();
 
     },
@@ -501,8 +596,8 @@ Neatline.module('Map', function(Map) {
       var params = {};
 
       // Filter by extent and zoom.
-      if (this.exhibit.spatial_querying) _.extend(params, {
-        extent: this.getExtentAsWKT(), zoom: this.getZoom()
+      if (this.exhibit.spatial_querying && this.map.getExtent() !== null ) _.extend(params, {
+        extent: this.getExtentAsWKT(), zoom: this.getMinZoom() + this.getZoom()
       });
 
       this.loadRecords(params);
@@ -1150,6 +1245,17 @@ Neatline.module('Map', function(Map) {
      */
     getZoom: function(model) {
       return this.map.getZoom();
+    },
+
+
+    /**
+    * Get the minimum zoom level.
+    *
+    * @return {Number}: The minimum zoom level.
+    */
+    getMinZoom: function() {
+      var zoomLimits = this.getZoomLimits();
+      return _.isNumber(zoomLimits.minZ) ? zoomLimits.minZ : 0;
     },
 
 

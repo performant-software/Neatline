@@ -136,7 +136,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'label'         => __('Default Spatial Layer'),
             'description'   => __('Select which of the spatial layers should be visible by default when the exhibit starts.'),
             'attribs'       => array('data-placeholder' => 'Select a layer', 'class' => 'chosen'),
-            'multiOptions'  => nl_getLayersForSelect(),
+            'multiOptions'  => nl_getLayersForSelect(true),
             'value'         => nl_explode($this->exhibit->spatial_layer),
             'required'      => true,
             'validators'    => array(

@@ -143,7 +143,8 @@ Neatline.module('Editor.Record.Style', {
        */
       _setCurrentZoom: function(element) {
         var zoom = Neatline.request('MAP:getZoom');
-        element.val(zoom).change();
+        var minZoom = Neatline.request('MAP:getMinZoom');
+        element.val(minZoom + zoom).change();
       }
 
 

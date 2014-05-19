@@ -34,6 +34,9 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $styles;
     public $map_focus;
     public $map_zoom;
+    public $map_min_zoom;
+    public $map_max_zoom;
+    public $map_restricted_extent;
     public $accessible_url;
 
 
