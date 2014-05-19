@@ -43,6 +43,9 @@ function nl_schema220()
         styles                  TEXT NULL,
         map_focus               VARCHAR(100) NULL,
         map_zoom                INT(10) UNSIGNED NULL,
+        zoomify_address         TEXT NULL,
+        zoomify_height          SMALLINT UNSIGNED NULL,
+        zoomify_width           SMALLINT UNSIGNED NULL,
 
         PRIMARY KEY             (id)
 

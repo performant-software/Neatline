@@ -200,9 +200,13 @@ Neatline.module('Map', function(Map) {
       var isImg = _.isString(this.exhibit.image_layer);
       var isWms = _.isString(this.exhibit.wms_address) &&
                   _.isString(this.exhibit.wms_layers);
+      var isZoomify = _.isString(this.exhibit.zoomify_address) &&
+                  _.isNumber(this.exhibit.zoomify_width) &&
+                  _.isNumber(this.exhibit.zoomify_height);
 
       if (isImg) this._initImageLayer();
       else if (isWms) this._initWmsLayer();
+      else if (isZoomify) this._initZoomifyLayer();
       else this._initSpatialLayers();
 
     },
@@ -251,6 +255,32 @@ Neatline.module('Map', function(Map) {
 
     },
 
+    /**
+     * Construct a Zoomify base layer.
+     */
+    _initZoomifyLayer: function() {
+      
+      var h = this.exhibit.zoomify_height;
+      var w = this.exhibit.zoomify_width;
+    
+      //create Zoomify OpenLayers Layer, set name to exhibit title and point to address
+      var zoomify = new OpenLayers.Layer.Zoomify(this.exhibit.title , this.exhibit.zoomify_address,
+        new OpenLayers.Size(w,h)
+      );
+
+      //set some map options to correspond with height and width of zoomified image
+
+      this.map.setOptions({
+        maxExtent: new OpenLayers.Bounds(0,0,w,h),
+        maxResolution: Math.pow(2, zoomify.numberOfTiers-1),
+        numZoomLevels: zoomify.numberOfTiers,
+        units:'pixels'
+      });
+
+      this.map.addLayer(zoomify);
+      this.map.setBaseLayer(zoomify);
+      this.map.zoomToMaxExtent();
+    },
 
     /**
      * Construct spatial base layers.
