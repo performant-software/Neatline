@@ -21,10 +21,6 @@ module.exports = {
 
       '!bower.json',
       '!bower_components/**',
-      '!views/**/bower.json',
-      '!views/**/composer.json',
-      '!views/**/README*.md',
-      '!views/**/CHANGES*.md',
 
       '!package.json',
       '!node_modules/**',
