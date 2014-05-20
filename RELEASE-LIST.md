@@ -29,11 +29,12 @@ The detailed answer is to do these steps.
 
 1. `git flow release start $VERSION`
 
-1. Bump the version number by editing:
+1. Bump the version number by editing `plugin.ini`.
 
-   * `plugin.ini`
-   * `package.json`
-   * `bower.json`
+1. And by calling these commands:
+
+   * `npm version $VERSION`
+   * `bower version $VERSION`
 
 1. `git commit -am "Version $VERSION"`
 
