@@ -9,4 +9,10 @@ if [ -z $OMEKA_DIR ]; then
 fi
 
 grunt
+ec1=$?
+
+grunt jasmine
+ec2=$?
+
+[[ "$ec1" -eq "0" && "$ec2" -eq "0" ]]
 
