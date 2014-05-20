@@ -25,6 +25,10 @@ git flow release start $VERSION
 # Bump the version number everywhere.
 npm version $VERSION
 bower version $VERSION
+  # (Because npm and bower both automatically commit their changes, with no
+  # option not to. And they use different formats for the commit messages.
+  # Because they're just helpful like that. SERENITY NOW!)
+git reset HEAD^^
 sed --in-place=.release --expression='s/^version.*/version="'"$VERSION"'"/' plugin.ini
 git commit --all --message="Bumped version to $VERSION"
 
