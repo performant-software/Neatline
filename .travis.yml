@@ -8,9 +8,10 @@ php:
 
 env:
   - OMEKA_BRANCH=master
+  - HHVM=true
+  - HHVM=false
 
 before_script:
-  - phpenv config-add tests/phpunit/travis.php.ini
   - npm install -g grunt-cli
   - npm install -g bower
   - ./.travis.setup.sh

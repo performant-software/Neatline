@@ -35,6 +35,15 @@ if [ $(version $phpver) -gt $(version 5.3.1) ]; then
   composer install
 fi
 
+if [ $(version $phpver) != 'hhvm' ]; then
+  phpenv config-add tests/phpunit/travis.php.ini;
+fi
+
+echo "php version $phpver"
+echo "Omeka Dir: `ls -lah .`"
+
+
+
 phpenv rehash # refresh the path, just in case
 
 # symlink the plugin
