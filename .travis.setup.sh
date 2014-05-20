@@ -39,6 +39,7 @@ phpenv rehash # refresh the path, just in case
 
 # symlink the plugin
 cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
+ls $OMEKA_DIR/themes
 bundle install
 npm install
 bower install -f

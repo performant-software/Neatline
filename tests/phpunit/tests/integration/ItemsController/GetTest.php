@@ -83,8 +83,8 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
 
         // Should render the default template.
         $body = trim($this->_getResponseBody());
-        //$this->assertEquals($item->id, $body);
-        $this->assertQueryContentContains('#dublin-core-subject p', '[no text]');
+        $this->assertEquals($item->id, $body);
+        //$this->assertQueryContentContains('#dublin-core-subject p', '[no text]');
 
     }
 
@@ -102,8 +102,8 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
 
         // Should render the default template.
         $body = trim($this->_getResponseBody());
-        //$this->assertEquals($item->id, $body);
-        $this->assertQueryContentContains('#dublin-core-subject p', '[no text]');
+        $this->assertEquals($item->id, $body);
+        //$this->assertQueryContentContains('#dublin-core-subject p', '[no text]');
     }
 
 
