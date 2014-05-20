@@ -17,6 +17,14 @@ Specifically, this means:
 
 Once all of that is in place, we're ready
 
+Now the easy way is to use the `bin/release` script:
+
+```bash
+./bin/release 42.0.13
+```
+
+The detailed answer is to do these steps.
+
 1. `VERSION=42.0.13` — We'll use this value later.
 
 1. `git flow release start $VERSION`
@@ -43,8 +51,6 @@ Once all of that is in place, we're ready
 1. `grunt package`
 
 1. `git commit` for the updated assets
-
-1. rename the package file to include the version, not the date-stamp
 
 1. quick check the zip
 
