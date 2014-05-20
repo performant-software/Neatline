@@ -74,3 +74,17 @@ npm install
 bower install -f
 grunt build
 
+# Set up the site in Apache.
+echo "Set up web site."
+sudo apt-get clean
+sudo apt-get update
+sudo apt-get install apache2 libapache2-mod-php5 php5-mysql
+sudo cp /etc/apache2/sites-available/default /etc/apache2/sites-available/omeka
+ESCAPED_DIR=$(echo $OMEKA_DIR | sed 's|/|\\/|g')
+sudo sed -i 's|/var/www|'$ESCAPED_DIR'|' /etc/apache2/sites-available/omeka
+sudo sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/sites-available/omeka
+sudo a2dissite default && sudo a2ensite omeka
+sudo a2enmod php5
+sudo a2enmod rewrite
+sudo /etc/init.d/apache2 restart
+
