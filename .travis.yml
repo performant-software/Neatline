@@ -8,8 +8,6 @@ php:
 
 env:
   - OMEKA_BRANCH=master
-  - HHVM=true
-  - HHVM=false
 
 before_script:
   - npm install -g grunt-cli
