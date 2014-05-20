@@ -8,7 +8,7 @@ export PLUGIN_DIR=`pwd`
 export OMEKA_DIR=`pwd`/omeka
 
 mysql -e "create database IF NOT EXISTS omeka_test;" -uroot;
-git clone https://github.com/omeka/Omeka.git $OMEKA_DIR
+git clone --recursive https://github.com/omeka/Omeka.git $OMEKA_DIR
 
 # check out the correct branch
 cd $OMEKA_DIR && git checkout $OMEKA_BRANCH
