@@ -25,7 +25,7 @@ describe('API | Layers', function() {
       type: 'LayerType'
     });
 
-    expect(layer).toBeUndefined();
+    expect(layer).toBeNull();
 
   });
 
