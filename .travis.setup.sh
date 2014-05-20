@@ -46,6 +46,26 @@ echo "Omeka Dir: `ls -lah .`"
 
 phpenv rehash # refresh the path, just in case
 
+# Now we set up the running Omeka instance for Cukes.
+cat <<EOF > $OMEKA_DIR/db.ini
+[database]
+host     = "localhost"
+username = "root"
+password = ""
+dbname   = "omeka"
+prefix   = "omeka_"
+charset  = "utf8"
+EOF
+cp $OMEKA_DIR/.htaccess.changeme $OMEKA_DIR/.htaccess
+sed -i 's/[; ]*debug.exceptions *=.*/debug.exceptions = true/' $OMEKA_DIR/application/config/config.ini 
+
+mysql -uroot -e "CREATE DATABASE omeka CHARACTER SET = 'utf8' COLLATE = 'utf8_unicode_ci';"
+gzip -cd $PLUGIN_DIR/tests/fixtures/db-dump.sql.gz | mysql -uroot omeka
+
+# This has to be changed because sometimes Omeka passes empty strings into
+# databases.
+echo "SET GLOBAL sql_mode='';" | mysql -uroot
+
 # symlink the plugin
 cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
 ls $OMEKA_DIR/themes
