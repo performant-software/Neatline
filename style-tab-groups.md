@@ -5,6 +5,7 @@ layout: default
 
 ## At a glance
 
+  - The Tag and Presenter options are on the Style tab of the Neatline editor.
   - Use tags to slice and dice large collections into subsets of related records.
   - Tags can be used as the "selectors" for Neatline's stylesheet system, which uses a simplified dialect of CSS.
   - Each record is assigned to a "Presenter," which controls how the record's content is displayed.
