@@ -41,7 +41,7 @@ A comma-delimited list of layers on the served defined by "WMS Layers," such as:
 
 `hotchkiss:fredericksburg,hotchkiss:chancellorsville`
 
-Once a WMS address and layers, Neatline will automatically overlay the requested layers on top of the base layer. WMS layers react to many of the same styling, visibility, ordering settings that can be used to configure the behavior of regular vector annotations:
+Once a WMS address and layer name has been entered, Neatline will automatically overlay the requested layers on top of the base layer. WMS layers react to many of the same styling, visibility, ordering settings that can be used to configure the behavior of regular vector annotations:
 
   - Use the "Fill Opacity" field to control the opacity of the WMS overlay.
 
