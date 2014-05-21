@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-# Working with Exhibits
+# Managing Exhibits
 
 ## At a glance
 
