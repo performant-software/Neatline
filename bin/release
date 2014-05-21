@@ -46,9 +46,15 @@ fi
 
 ./bin/commit-static
 grunt package
+
+STATIC=$(git ls-files **/dist/*)
+git update-index --no-assume-unchanged $STATIC
+git add --force $STATIC
 if git status --short | egrep '^[MA]' ; then
     git commit --all --message "Updated assets."
 fi
+git update-index --assume-unchanged $STATIC
+
 echo "Created pkg/Neatline-${VERSION}.zip"
 
 git flow release finish $VERSION
