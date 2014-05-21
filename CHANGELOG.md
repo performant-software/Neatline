@@ -1,4 +1,15 @@
-## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2)) ~ Pending
+
+
+## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4))
+
+This includes the HTML documentation in the distribution packages.
+
+## v2.2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.2...2.2.3))
+
+This just fixes a bug in the way we specified JavaScript dependencies for
+Bower.
+
+## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2))
 
 #### Improved Support for Working with NeatlineFeatures and CsvImport
 
