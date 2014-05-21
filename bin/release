@@ -38,13 +38,17 @@ git commit --all --message="Bumped version to $VERSION"
 tx pull --force
 grunt pot
 grunt po2mo
-git commit --all --message="Updated i18n."
+if git status --short | egrep '^[MA]' ; then
+    git commit --all --message="Updated i18n."
+fi
 
 # TODO: Include hook for updating CHANGELOG.md
 
 ./bin/commit-static
 grunt package
-git commit --all --message "Updated assets."
+if git status --short | egrep '^[MA]' ; then
+    git commit --all --message "Updated assets."
+fi
 echo "Created pkg/Neatline-${VERSION}.zip"
 
 git flow release finish $VERSION
