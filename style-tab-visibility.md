@@ -16,7 +16,7 @@ layout: default
 
 The zoom level "above" which the record will be visible, with zooming "in" being "higher" (eg, focusing on Spain is "higher" than focusing on Europe). For example, if the record has a point on the map and "Min Zoom" is `10`, then the point will be invisible when the map at zoom level `9`, and will become visible as soon as the map zooms to `10`.
 
-To set the value, just zoom the map the the level that you want to use for the value, and click the "Use Current" button next to the field title to automatically insert the current zoom offset into the input.
+To set the value, just zoom the map to the level that you want to use for the value, and click the "Use Current" button next to the field title to automatically insert the current zoom offset into the input.
 
 ## Max Zoom
 
@@ -34,4 +34,4 @@ If no values are provided for these fields, Neatline will fall back on an automa
 
   - If the record is represented with a single point, Neatline will always zoom in to the _highest possible zoom level_, since points are effectively dimensionless, infinitely-small dots. This is often undesirable. To fix, just zoom the map back to a reasonable level and click "Use Current Viewport as Default."
 
-  - Even when the record is represented by lines or polygons that result in a fairly reasonable automatic focus, there are times when you want to tweak the default viewport, perhaps to situate the record in the context of some other nearby feature on the map. For example, imagine that the record represents the location of a battle that was affected by the presence hill to the north of the battle site. You might want the default focus of the record to be zoomed back a bit and moved up to the north so that the hill appears in the default viewport of the record for the battle.
+  - Even when the record is represented by lines or polygons that result in a fairly reasonable automatic focus, there are times when you want to tweak the default viewport, perhaps to situate the record in the context of some other nearby feature on the map. For example, imagine that the record represents the location of a battle that was affected by the presence of a hill to the north of the battle site. You might want the default focus of the record to be zoomed back a bit and moved up to the north so that the hill appears in the default viewport of the record for the battle.

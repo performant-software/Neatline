@@ -15,7 +15,7 @@ layout: default
 
 By default, points on the map are represented with circle graphics, the size of which can be configured by the "Point Radius" field in the "Dimensions" field set. This field makes it possible to replace this default representation of the points with any random, web-accessible image. This makes it possible to place effectively any kind of graphic on the map - pins, icons, image thumbnails, etc.
 
-Once a "Point Image" is provided, the points continue to behave just like regular points in all other ways. For example, you can change the size of the point-images by changing the "Point Radius" field, and you can configure the opacities by changing the "Fill Opacity" and "Fill Opacity (Selected)" fields. 
+Once a "Point Image" is provided, the points continue to behave just like regular points in all other ways. For example, you can change the size of the point-images by changing the "Point Radius" field, and you can configure the opacities by changing the "Fill Opacity" and "Fill Opacity (Selected)" fields.
 
 Point images can be the web-accessible location of any image. For example, to use the Neatline logo:
 
@@ -23,7 +23,7 @@ Point images can be the web-accessible location of any image. For example, to us
 
 **Important**: Since we're really just changing the cosmetic appearance of the points, there are some restrictions:
 
-  - Like regular points, point-images will always stay the same size (the value of "Point Radius"), no matter what the zoom level of the map. If you need an image to scale depending on the zoom level, you'll need to use a WMS overlay hosted by Geoserber (see below).
+  - Like regular points, point-images will always stay the same size (the value of "Point Radius"), no matter what the zoom level of the map. If you need an image to scale depending on the zoom level, you'll need to use a WMS overlay hosted by Geoserver (see below).
 
   - Point-images can't be "rotated" - they will always have the exact orientation of the source image. Again, if you find youself wanting to pivot the image to make it line up with something on the underlying base layer, you're probably looking for the type of functionality provided by a WMS overlay.
 

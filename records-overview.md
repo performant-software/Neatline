@@ -29,9 +29,9 @@ All records share a common data model. Similar to elements on Omeka items, all f
   - **Stroke Color**: The color of the lines running around the edges of polygons on the map.
   - **Stroke Color (Selected)**: The color of the lines when the record is highlighted or selected.
   - **Fill Opacity**: The opacity (translucency) of the polygons on the map.
-  - **Fill Opacity (Selected)**: The opacity of map polygons when the recors is highlighted or selected.
+  - **Fill Opacity (Selected)**: The opacity of map polygons when the record is highlighted or selected.
   - **Stroke Opacity**: The opacity of lines running around the edges of polygons on the map.
-  - **Stroke Opacity (Selected)**: The lines opacity when the record is highlighted or selected.
+  - **Stroke Opacity (Selected)**: The line's opacity when the record is highlighted or selected.
   - **Stroke Width**: The thickness, in pixels, of the lines around polygons.
   - **Point Radius**: The size of individual points on the map.
   - **Z-Index**: The "stacking" order of records when displayed on the map.
@@ -50,7 +50,7 @@ All records share a common data model. Similar to elements on Omeka items, all f
 
 ## Neatline records vs. Omeka items
 
-Even though all records share the same data model, they can be divided into two basic categories - _exhibit-specific_ records that exist just inside of a single exhibit, and _item-backed_ records that link back to items in the Omeka collection. The two types behave exactly the same, with one exception - if a Neatline record is associted with an Omeka item, the record's "Title" and "Body" fields will be automatically compiled from the content in the Omeka item. The title will be filled in with the item's Dublin Core "Title" field, and the "Body" will be populated with the compiled metadata output of the entire item. Once the association is established, the content in the Neatline record will be automatically updated whenever the Omeka record is changed.
+Even though all records share the same data model, they can be divided into two basic categories - _exhibit-specific_ records that exist just inside of a single exhibit, and _item-backed_ records that link back to items in the Omeka collection. The two types behave exactly the same, with one exception - if a Neatline record is associated with an Omeka item, the record's "Title" and "Body" fields will be automatically compiled from the content in the Omeka item. The title will be filled in with the item's Dublin Core "Title" field, and the "Body" will be populated with the compiled metadata output of the entire item. Once the association is established, the content in the Neatline record will be automatically updated whenever the Omeka record is changed.
 
 Why does Neatline make this distinction? Why aren't records just the same thing as items? In the early stages of development, there actually was a one-to-one correspondence between Omeka items and Neatline records - records were just the direct instantiations of Omeka items in a specific Neatline exhibit. The problem, though, is that Neatline exhibits often require a body of "annotative" or "supporting" information that doesn't really fit well in the context of an archival collection. For example, imagine you're working with a collection of correspondence - each letter in the collection is represented by a canonical Dublin Core record in Omeka. Then, when you pull the letters into a Neatline exhibit, you start to sketch in arrows, brackets, flowcharts, and other little bits of presentational information to support the core archival objects.
 

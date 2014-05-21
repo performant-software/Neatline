@@ -44,7 +44,7 @@ Just like the "Draw Point" radio button, except that the points are connected by
   **Tip**: This feature has the effect of creating _extremely_ dense geometry, which is very difficult to maintain (eg, if you decide later on that you want to change the shape of the line, you would have to manually move hundrds or thousands of individual points). If you need smooth, curvy shapes, always see if you can use the "Draw SVG" feature, which makes it possible to import easily-maintained vector graphics created in programs like Adobe Illustrator and Inkscape.
 
   4. When you're ready to lay down the final point, move your cursor to the place where you want the line to end and _double click_. This "completes" the line.
-  
+
 ![Screenshot of Line Drawing Tool](http://neatline.org/wp-content/uploads/2013/12/newitem-linedrawing.png)  
 
 ## Draw Polygon
@@ -56,7 +56,7 @@ Just like "Draw Line," except that the shape defined by the points is "closed" i
   2. Click again to lay a second point. Keep on clicking until to add multiple points. Like with the point tool, you can draw smooth shapes by holding down Shift, clicking down on the map, and dragging the cursor.
 
   4. When you're ready to lay down the final point, move your cursor to the place where you want the last corner of the shapee and double click. This "closes" the polygon.
-  
+
 ![Screenshot of Polygon Drawing Tool](http://neatline.org/wp-content/uploads/2013/12/newitem-drawpolygon-inprogress.png)
 
 
@@ -72,7 +72,7 @@ Just like "Draw Line," except that the shape defined by the points is "closed" i
 
 There are a couple of configuration options for the regular polygon tool:
 
-  - **Sides**: The number of sides on the polygon. For example, `3` will draw triandles, `4` squares, etc. As this number gets higher, the resulting shape will smooth out into a circle/ellipse. This is a good way to create circular shapes with "real" diameters that will expand and shrink with the zoom level of the map (as opposed to the circles used to represent points, which are "dimensionless" and always stay the same size - see the "Draw Point" section). Don't go overboard with the number of sides - in most cases, 30-50 sides is more than enough to create a smooth shape.
+  - **Sides**: The number of sides on the polygon. For example, `3` will draw triangles, `4` squares, etc. As this number gets higher, the resulting shape will smooth out into a circle/ellipse. This is a good way to create circular shapes with "real" diameters that will expand and shrink with the zoom level of the map (as opposed to the circles used to represent points, which are "dimensionless" and always stay the same size - see the "Draw Point" section). Don't go overboard with the number of sides - in most cases, 30-50 sides is more than enough to create a smooth shape.
 
   - **Snap Angle**: As you drag the cursor away from the center point, the rotation of the polygon will "snap" into a series of fixed angles. This makes it possible to create a series of shapes with the exact same orientation on the map (eg, a series of rectangles with sides that are all perfectly aligned with the cardinal directions). This field controls the size of the angle between each of the consecutive rotations.
 

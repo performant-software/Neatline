@@ -5,7 +5,7 @@ layout: default
 
 ## At a glance
 
-  - Neatline 2.0 makes it possible to use a dialect of CSS to perform bulk updates on large groups of records. 
+  - Neatline 2.0 makes it possible to use a dialect of CSS to perform bulk updates on large groups of records.
   - Neatline-infected CSS uses a custom set of rules that correspond to the properties on the record data model.
   - Groups of records are selected using the CSS class syntax, with record tags providing the class names.
 
@@ -81,7 +81,7 @@ Neatline CSS is syntactically identical to regular CSS, but semantically a bit d
 
 Neatline 2.0 makes it possible to work with _really_ large collections of records - as many as about 1,000,000 in a single exhibit. That level of scalability is liberating, but it also introduces some interesting new content management challenges. If the map can _display_ that many records, there also need to be new tools that make it possible to effectively update and maintain content at that scale.
 
-For example, imagine you're plotting returns from the last four presidental election. You import a big collection of about 800,000 records, 200,000 for each of the four elections. Each record represents an individual precinct somewhere in the country with a dot on the map, scaled according to how many votes were cast at the location and shared red or blue depending on which party won more votes. Once the data is loaded into Neatline, you realize that you want to change the shade of blue used to represent the democratic precincts. How do you do that, short of manually making the change on all **~400,000** democratic records?
+For example, imagine you're plotting returns from the last four presidental elections. You import a big collection of about 800,000 records, 200,000 for each of the four elections. Each record represents an individual precinct somewhere in the country with a dot on the map, scaled according to how many votes were cast at the location and shared red or blue depending on which party won more votes. Once the data is loaded into Neatline, you realize that you want to change the shade of blue used to represent the democratic precincts. How do you do that, short of manually making the change on all **~400,000** democratic records?
 
 This is obviously a problem with really massive data sets, but, as you work with Neatline, you'll find that this type of problem rears its head surprisingly quickly, even with quite small exhibits in the 50- to 100-record range. The essence of the problem is this - records are almost never "unique snowflakes" in the exhibit. They almost always exist as part of some kind of general taxonomy or grouping in the exhibit - `democratic`, `2012`, `northeast`, etc. And, in almost every case, those groupings should share some common attributes. All democratic records should be the same shade of blue; all precincts from 2004 should be visible on the map during the same range of dates; all precinct records should have the same basic opacity settings; ad infinitum.
 
@@ -94,7 +94,7 @@ We can map this out schematically. Here's a list of all the "categories" in the 
 - **Republican**: Fill Color
 - **2000**: After Date, Before Date
 - **2004**: After Date, Before Date
-- **2008**: After Date, Before Date 
+- **2008**: After Date, Before Date
 - **2012**: After Date, Before Date
 
 How do we keep the groups synchronized? Really, this is a familiar problem - it's almost exactly the same task as styling web pages with [CSS][css] (Cascading Style Sheets), a simple styling language that makes it possible to "select" specific parts of a page and apply a set of rules to those elements. In Neatline 2.0, it's possible to use a simplified dialect of CSS - integrated directly into the editing environment - to model these kinds of relationships among records and keep them in sync.
@@ -124,28 +124,28 @@ Now, when I click "Save" at the bottom of the form, Neatline will update the "Fi
   after-date: 2000;
   before-date: 2004;
 }
- 
+
 .2004 {
   after-date: 2004;
   before-date: 2008;
 }
- 
+
 .2008 {
   after-date: 2008;
   before-date: 2012;
 }
- 
+
 .2012 {
   after-date: 2012;
   before-date: 2016;
 }
 {% endhighlight %}
 
-Likewise, when I click "Save," Neatline will update the "After Date" and "Before Date" fields on each record depending on which of the election-season is assigned to it.
+Likewise, when I click "Save," Neatline will update the "After Date" and "Before Date" fields on each record depending on which election-season is assigned to it.
 
 ## Auto-updating stylesheet values
 
-This is all fine and well, but what if we don't actually know what value we want to use? In each of these cases, we're working with fields that have fairly "semantic" values that we can reason about in the abstract (eg, `2004` just means what it means). This isn't always true, though, notably in the case of colors, where it's impossible to reason in the abstract about which specific hexadecimal value you want to use. For example, I know that I want the democratic precincts to be "blue" and the republican precints to be "red," but I don't know that I want to use the `#206bbf` and `#9d0000`.
+This is all fine and well, but what if we don't actually know what value we want to use? In each of these cases, we're working with fields that have fairly "semantic" values that we can reason about in the abstract (eg, `2004` just means what it means). This isn't always true, though, notably in the case of colors, where it's impossible to reason in the abstract about which specific hexadecimal value you want to use. For example, I know that I want the democratic precincts to be "blue" and the republican precints to be "red," but I don't know that I want to use `#206bbf` and `#9d0000`.
 
 You could always just open one of the individual record forms, use the built-in color pickers to find a color that works well, and copy and paste it back into the stylesheet. This is sort of awkward, though. To fix this, Neatline makes it possible to just "activate" a set of styles for a tag in the stylesheet _without providing a concrete value_, and then set the value for the entire group of tagged records by making a change to an individual record.
 
@@ -161,7 +161,7 @@ We do this with the special `auto` value:
 }
 {% endhighlight %}
 
-Once this is in place, I can just open up any of the individual republican precinct records and pick a shade of red for that specific record. When I click "Save," Neatline recognizes that the "Fill Color" style has been enabled for the `republican` tag, and that the record being saved is tagged as `republican`. When this happens, Neatline does two things. First, it _update the stylesheet with the new value_:
+Once this is in place, I can just open up any of the individual republican precinct records and pick a shade of red for that specific record. When I click "Save," Neatline recognizes that the "Fill Color" style has been enabled for the `republican` tag, and that the record being saved is tagged as `republican`. When this happens, Neatline does two things. First,it _updates the stylesheet with the new value_:
 
 {% highlight css %}
 .republican {
@@ -183,17 +183,17 @@ Here's the complete stylesheet:
   after-date: 2000;
   before-date: 2004;
 }
- 
+
 .2004 {
   after-date: 2004;
   before-date: 2008;
 }
- 
+
 .2008 {
   after-date: 2008;
   before-date: 2012;
 }
- 
+
 .2012 {
   after-date: 2012;
   before-date: 2016;

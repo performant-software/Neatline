@@ -51,17 +51,17 @@ So far, we've manually created individual Neatline records and associated them w
 
 This takes you to the item import form. Think of this as a "search" form - you can use any of the available inputs to define a "query" on the Omeka archive that determines which items will be imported into the exhibit. For example, if you have a large archive with multiple collections, you might just be interested in working with one individual collection, and don't want to clutter up the Neatline exhibit with all of the other unrelated items. The fields here work just like the corresponding options in the Omeka advanced search form:
 
-  - Use **Search by a Range of ID#s** to specify an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is a good way to import the entire collection all at once - just enter in an indiscriminate query like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import all the items on the site. This is fine for experimentation, but in the long run, we generally recommend slicing and dicing the items in to groups with collections or tags, which often prevents content management problems down the road.
+  - Use **Search by a Range of ID#s** to specify an individual ID (not so useful) or a range of id's (more useful), and all items with ID's that fall within the specified range will be imported. This is a good way to import the entire collection all at once - just enter in an indiscriminate query like "1-1000," which, as long as you have fewer than 1,000 items in your collection, will import all the items on the site. This is fine for experimentation, but in the long run, we generally recommend slicing and dicing the items into groups with collections or tags, which often prevents content management problems down the road.
 
   - Use **Search By Collection** to import to items in a given collection.
 
   - Use **Search By Type** to import items of a given type
 
-  - Use **Search By Tags** to constrain the import to items that are tagged with **all** of the listed tags. 
+  - Use **Search By Tags** to constrain the import to items that are tagged with **all** of the listed tags.
 
 (Keep in mind that the fields are `AND`'ed together, not `OR`'ed - so, if you select a collection and enter a tag, the import will only match items that are _both_ in the collection _and_ have the tag.)
 
-Once you've defined a search query, click "Import Items" to kick off the import. You'll be taken back to the exhibits browse page, and you'll see a success notification saying that "The item import was successfully started!"
+Once you've defined a search query, click "Import Items" to kick off the import. You'll be taken back to the exhibit's browse page, and you'll see a success notification saying that "The item import was successfully started!"
 
 **Important**: Behind the scenes, this actually kicks off a "background process" that does the heavy lifting of importing the items. This is necessary because it can sometimes take up to 30-40 seconds to import really large collections of items (many thousands), and the process can fail if the web request times out (smaller imports, up to about 1,000 items, will generally finish in just a couple of seconds). When you're first redirected to the exhibits browse view, though, the "# Items" counter for the exhibit will probably still be the same as it was before, since the import was started at the same moment that you were redirected. Rrefresh the page, though, and you'll see the effect of the background process as it fills in the items.
 

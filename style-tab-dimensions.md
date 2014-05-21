@@ -14,7 +14,7 @@ layout: default
 
 ## Stroke Width
 
-The width, in pixels, of the lines that run around the edges of a shape on the map. Generally, it makes senes to keep this value in the range of 0-10 - anything more and the lines will start to "clump" together and blot out the shape of the polygon, especially when the map is zoomed back away from the vectors.
+The width, in pixels, of the lines that run around the edges of a shape on the map. Generally, it makes sense to keep this value in the range of 0-10 - anything more and the lines will start to "clump" together and blot out the shape of the polygon, especially when the map is zoomed back away from the vectors.
 
 In some cases, it can be aesthetically pleasing to completely hide the lines, and just display the "area" of points and polygons on the map. To do this, just set the stroke width to 0.
 
@@ -31,7 +31,7 @@ The radius of individual points on the map. You'll almost always want this value
 
 ## Z-Index
 
-The "stacking" order of vector annotations and WMS layers on the map. For example, imagine you have one record that includes a polygon that traces the shape of Manhattan, and another record that traces the shape of Central Park. Since Central Park is contained inside of Manhattan, you'll want the Central Park polygon to be displayed "on top of" the Manhattan polygon - otherwise, it would be impossible for the user to click on Central Park. 
+The "stacking" order of vector annotations and WMS layers on the map. For example, imagine you have one record that includes a polygon that traces the shape of Manhattan, and another record that traces the shape of Central Park. Since Central Park is contained inside of Manhattan, you'll want the Central Park polygon to be displayed "on top of" the Manhattan polygon - otherwise, it would be impossible for the user to click on Central Park.
 
 Z-indexes are just relative numbers that control the display order, with higher numbers stacking above lower numbers. So, in this case, you could set the Z-Index on Manhattan to `1`, and the Z-Index on Central Park to `2`, and Central Park would always be displayed on top of Manhattan.
 
