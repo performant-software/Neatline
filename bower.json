@@ -2,7 +2,7 @@
   "name": "Neatline",
   "version": "2.2.4",
   "dependencies": {
-    "jquery": "~ 1.8.3",
+    "jquery": "~ 2.1.1",
     "jquery-ui": "~ 1.10.3",
     "underscore": "~ 1.4.4",
     "underscore.string": "~ 2.3.0",
