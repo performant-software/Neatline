@@ -2,7 +2,7 @@
 require 'fileutils'
 
 def get_static_files
-  `git ls-files **/dist/*`
+  `git ls-files **/dist/*`.lines.map(&:strip).to_a
 end
 
 def set_assumed_unchanged(files, on)
@@ -12,7 +12,7 @@ def set_assumed_unchanged(files, on)
     flag = '--no-assume-unchanged'
   end
 
-  sh %{git update-index #{flag} #{files}}
+  files.each { |f| sh %{git update-index #{flag} #{f}} }
 end
 
 def has_changes
@@ -22,50 +22,6 @@ end
 
 def commit_all(message)
   sh %{git commit --all --message "#{message}"} if has_changes
-end
-
-def bump_versions(version)
-  sh %{npm version #{version}}
-  sh %{bower version #{version}}
-
-  # (npm and bower both automatically commit their changes, with no option not
-  # to. And they use different formats for the commit messages. Because they're
-  # just helpful like that. SERENITY NOW!)
-  sh %{git tag --delete "#{version}"}
-  sh %{git tag --delete "v#{version}"}
-  sh %{git reset HEAD^^}
-  sh %{sed --in-place=.release --expression='s/^version.*/version="#{version}"/' plugin.ini}
-  commit_all("Bumped version to #{version}.")
-end
-
-def update_i18n()
-  sh %{tx pull --force}
-  sh %{grunt pot}
-  sh %{grunt po2mo}
-  commit_all("Updated i18n.")
-end
-
-def generate_package()
-  static_files = get_static_files
-  set_assumed_unchanged(static_files, false)
-
-  sh %{grunt package}
-  sh %{git add --force #{static_files}}
-
-  commit_all("Updated assets.")
-  set_assumed_unchanged(static_files, true)
-end
-
-def release_gbye()
-  puts "Done."
-  puts "All changes are local."
-  puts "Nothing has been pushed."
-  puts "You can handle that."
-  puts
-  puts "    git push"
-  puts "    git push --tags"
-  puts
-  puts "Also, please check the package file before uploading to http://omeka.org/wp-admin."
 end
 
 namespace :neatline do
@@ -87,7 +43,7 @@ namespace :neatline do
 
     sh %{grunt compile:min}
 
-    sh %{git add --force #{static_files}}
+    static_files.each { |f| sh %{git add --force #{f}} }
     commit_all("Committing minified payloads.")
 
     set_assumed_unchanged(static_files, true)
@@ -98,20 +54,69 @@ namespace :neatline do
     version = args[:version]
 
     puts "Releasing Neatline #{version}"
-
     sh %{git flow release start #{version}}
 
-    bump_versions(version)
-    update_i18n()
+    Rake::Task["neatline:version"].invoke(version)
+    Rake::Task["neatline:i18n"].invoke
 
     # TODO: Include hook for updating CHANGELOG.md
 
-    generate_package()
+    Rake::Task["neatline:package"].invoke
 
     puts "Created pkg/Neatline-#{version}.zip"
     sh %{git flow release finish #{version}}
 
     FileUtils.rm('plugin.ini.release')
-    release_gbye()
+    Rake::Task["neatline:print_gbye"]
+  end
+
+  desc 'Set the version number everywhere it needs to be set.'
+  task :version, [:version] do |t, args|
+    version = args[:version]
+
+    sh %{npm version #{version}}
+    sh %{bower version #{version}}
+
+    # (npm and bower both automatically commit their changes, with no option not
+    # to. And they use different formats for the commit messages. Because they're
+    # just helpful like that. SERENITY NOW!)
+    sh %{git tag --delete "#{version}"}
+    sh %{git tag --delete "v#{version}"}
+    sh %{git reset HEAD^^}
+    sh %{sed --in-place=.release --expression='s/^version.*/version="#{version}"/' plugin.ini}
+
+    commit_all("Bumped version to #{version}.")
+  end
+
+  desc 'Update i18n.'
+  task :i18n do
+    sh %{tx pull --force}
+    sh %{grunt pot}
+    sh %{grunt po2mo}
+    commit_all("Updated i18n.")
+  end
+
+  task :print_gbye do
+    puts "Done."
+    puts "All changes are local."
+    puts "Nothing has been pushed."
+    puts "You can handle that."
+    puts
+    puts "    git push"
+    puts "    git push --tags"
+    puts
+    puts "Also, please check the package file before uploading to http://omeka.org/wp-admin."
+  end
+
+  desc 'Regenerate static assets and create the package file.'
+  task :package do
+    static_files = get_static_files
+    set_assumed_unchanged(static_files, false)
+
+    sh %{grunt package}
+    static_files.each { |f| sh %{git add --force #{f}} }
+
+    commit_all("Updated assets.")
+    set_assumed_unchanged(static_files, true)
   end
 end
