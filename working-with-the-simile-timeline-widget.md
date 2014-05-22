@@ -6,7 +6,7 @@ layout: default
 ## At a glance
 
  - bullet point summary
- 
+
 ## Definition
 The SIMILE Timeline web widget allows users of Neatline to add interactive timeline components to their Neatline exhibits. The widget is open source software originally developed as part of the SIMILE project with funding from the Andrew W. Mellon Foundation.
 
@@ -25,7 +25,7 @@ The settings that control the timeline's appearance are found in the Plugins tab
 ![Screenshot of Widget Settings](http://neatline.org/wp-content/uploads/2014/05/similetimeline2.png)
 
 ### Default Date
-The default date setting centers the timeline on the date entered. The default value for this setting is the current date/time, as defined by the server on which the Omeka + Neatline software is running. 
+The default date setting centers the timeline on the date entered. The default value for this setting is the current date/time, as defined by the server on which the Omeka + Neatline software is running.
 
 SIMILE Neatline requires the ISO-8601 date format for all dates entered. The format is YYYY-MM-DDTHH:MM:SS, where T is the delimiter alerting the software that a Time value follows.
 
@@ -51,7 +51,7 @@ The default value for Tape Height is 10 pixels. The max value is 500 pixels. The
 
 
 ## Adding an Item Record to the Timeline
-To include a Neatline item on the timeline, on the Style tab in the Neatline Item editor, select SIMILE Timeline in the Widget drop down box and populate the Date fields on the Style tab. The Title of the Neatline item record will appear as the label on the event point or tape, and the color value will match those selected for the point or shape drawn to represent the event on the map.
+To include a Neatline item on the timeline, on the Style tab in the Neatline Item editor, select SIMILE Timeline in the Widget drop down box and populate the Date fields on the Style tab. The Title of the Neatline item record will appear as the label on the event point or tape, and the color value will match that selected for the point or shape drawn to represent the event on the map.
 
 ![Screenshot of Adding an Item Record to the Timeline](http://neatline.org/wp-content/uploads/2014/05/similetimeline3.png)
 
@@ -62,7 +62,7 @@ The dates that mark the beginning and end of an event, a person's life, the exis
 
 To render an event as a single point on the timeline, fill in only the Start Date.
 
-If both Start and End Dates for an event are populated, SIMILE Timeline will create an event tape on the timeline. 
+If both Start and End Dates for an event are populated, SIMILE Timeline will create an event tape on the timeline.
 
 **NOTE:** if the Start and End Dates are the same value, the span will have width of 0 pixels and will not be visible.
 
@@ -118,6 +118,3 @@ To remove an item from the timeline, click the *X* on the Simile Timeline widget
 From the Neatline Browse Exhibits Screen, select Exhibit Settings, scroll down to Widgets, then click the *X* on the SIMILE Timeline widget selection. Once SIMILE Timeline has been deselected, scroll to the bottom of the screen and click the Save Exhibit button to save the settings.
 
 ![Screenshot of Exhibit Settings](http://neatline.org/wp-content/uploads/2014/05/similetimeline5.png)
-
-
-
