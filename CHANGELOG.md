@@ -1,21 +1,21 @@
 
+## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
 
-## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4))
+#### Bug Fixes
 
-This includes the HTML documentation in the distribution packages.
+  - Re-includes the compiled documentation HTML in the release package, which fixes the inline documentation modals in the editor.
 
-## v2.2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.2...2.2.3))
+## v2.2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.2...2.2.3)) ~ May 16, 2014
 
-This just fixes a bug in the way we specified JavaScript dependencies for
-Bower.
+#### Bug Fixes
 
-## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2))
+  - Fixes a bug caused by dependency mismatches in the bower components that broke the Javascript build in the editor.
 
-#### Improved Support for Working with NeatlineFeatures and CsvImport
+## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2)) ~ May 15, 2014
 
-Previously, if NeatlineFeatures were enabled, you couldn't use the CsvImport
-plugin to add WKT data into the coverage field and then have those features
-import into Neatline successfully. We've lifted that restriction.
+#### Changed Features
+
+  - Previously, if NeatlineFeatures were enabled, you couldn't use the CsvImport plugin to add WKT data into the coverage field and then have those features import into Neatline successfully. We've lifted that restriction.
 
 #### Performance Improvements
 
