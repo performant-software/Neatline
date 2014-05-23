@@ -115,6 +115,9 @@ Hours, minutes, and seconds may also be rendered for BCE dates in the same manne
 ## Removing a Neatline Item from the Timeline
 To remove an item from the timeline, click the *X* on the Simile Timeline widget selection on the Item Record's Style tab and save the item record.
 
+![Screenshot of Removing an Item from the Timeline](http://neatline.org/wp-content/uploads/2014/05/removingfromtimeline.png)
+
+
 
 ## Disabling SIMILE Timeline for an Exhibit
 From the Neatline Browse Exhibits Screen, select Exhibit Settings, scroll down to Widgets, then click the *X* on the SIMILE Timeline widget selection. Once SIMILE Timeline has been deselected, scroll to the bottom of the screen and click the Save Exhibit button to save the settings.
