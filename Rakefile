@@ -28,13 +28,9 @@ namespace :neatline do
 
   desc 'Sets up the development environment.'
   task :setup do
-    static_files = get_static_files
-
     sh %{npm install}
     sh %{composer install}
     sh %{grunt build}
-
-    set_assumed_unchanged(static_files, true)
   end
 
 
@@ -44,21 +40,13 @@ namespace :neatline do
     # Compress the payloads.
     sh %{grunt compile:min}
 
-    if has_changes
+    # Stage and commit the changes.
+    sh %{git add --force views/**/dist/**}
+    commit_all("Committing compiled assets.")
 
-      # Stage and commit the changes.
-      sh %{git add --force views/**/dist/**}
-      commit_all("commit")
-
-      # Untrack the payloads.
-      sh %{git rm -r --cached views/**/dist/**}
-      commit_all("reset")
-
-      # Reset and commit once.
-      sh %{git reset --soft HEAD~2}
-      commit_all("Committing static assets.")
-
-    end
+    # Untrack the payloads.
+    sh %{git rm -r --cached views/**/dist/**}
+    commit_all("Untracking compiled assets.")
 
   end
 
