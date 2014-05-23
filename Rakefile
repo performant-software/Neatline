@@ -17,11 +17,11 @@ end
 
 def has_changes
   status = `git status --short`
-  status.match(/^[MA]/) || status.match(/^.[MA]/)
+  status.match(/^[MA]/) || status.match(/^.[MA]/) if has_changes
 end
 
 def commit_all(message)
-  sh %{git commit --all --message "#{message}"} if has_changes
+  sh %{git commit --all --message "#{message}"}
 end
 
 namespace :neatline do
@@ -44,17 +44,21 @@ namespace :neatline do
     # Compress the payloads.
     sh %{grunt compile:min}
 
-    # Stage and commit the changes.
-    sh %{git add --force views/**/dist/**}
-    commit_all("commit")
+    if has_changes
 
-    # Untrack the payloads.
-    sh %{git rm -r --cached views/**/dist/**}
-    commit_all("reset")
+      # Stage and commit the changes.
+      sh %{git add --force views/**/dist/**}
+      commit_all("commit")
 
-    # Reset and commit once.
-    sh %{git reset --soft HEAD~2}
-    commit_all("Committing static assets.")
+      # Untrack the payloads.
+      sh %{git rm -r --cached views/**/dist/**}
+      commit_all("reset")
+
+      # Reset and commit once.
+      sh %{git reset --soft HEAD~2}
+      commit_all("Committing static assets.")
+
+    end
 
   end
 
