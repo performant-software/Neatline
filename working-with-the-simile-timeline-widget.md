@@ -49,6 +49,8 @@ Tape Height is the value, in pixels, that defines the height of the tape represe
 
 The default value for Tape Height is 10 pixels. The max value is 500 pixels. The min value is 0 pixels. Please note that the actual viable range for Tape Height is between 3 pixels and about 40 pixels, depending on the value selected for Track Height and the number of items on the timeline.
 
+![Annotated Screenshot of Timeline Definitions](http://neatline.org/wp-content/uploads/2014/05/timelinedefs.png)
+
 
 ## Adding an Item Record to the Timeline
 To include a Neatline item on the timeline, on the Style tab in the Neatline Item editor, select SIMILE Timeline in the Widget drop down box and populate the Date fields on the Style tab. The Title of the Neatline item record will appear as the label on the event point or tape, and the color value will match that selected for the point or shape drawn to represent the event on the map.
