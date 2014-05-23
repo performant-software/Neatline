@@ -25,6 +25,7 @@ def commit_all(message)
 end
 
 namespace :neatline do
+
   desc 'Sets up the development environment.'
   task :setup do
     static_files = get_static_files
@@ -119,4 +120,5 @@ namespace :neatline do
     commit_all("Updated assets.")
     set_assumed_unchanged(static_files, true)
   end
+
 end
