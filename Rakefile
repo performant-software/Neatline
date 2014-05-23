@@ -37,17 +37,25 @@ namespace :neatline do
     set_assumed_unchanged(static_files, true)
   end
 
+
   desc 'Regenerates static files and commits any changes.'
   task :commit_static do
-    static_files = get_static_files
-    set_assumed_unchanged(static_files, false)
 
+    # Compress the payloads.
     sh %{grunt compile:min}
 
-    static_files.each { |f| sh %{git add --force #{f}} }
-    commit_all("Committing minified payloads.")
+    # Stage and commit the changes.
+    sh %{git add --force views/**/dist/**}
+    commit_all("commit")
 
-    set_assumed_unchanged(static_files, true)
+    # Untrack the payloads.
+    sh %{git rm -r --cached views/**/dist/**}
+    commit_all("reset")
+
+    # Reset and commit once.
+    sh %{git reset --soft HEAD~2}
+    commit_all("Committing static assets.")
+
   end
 
   desc 'This creates a release branch, processes the release, and closes the branch without pushing it to github.'
