@@ -44,11 +44,12 @@ fi
 
 # TODO: Include hook for updating CHANGELOG.md
 
-./bin/commit-static
-grunt package
 
+# Package it up and store the changes.
 STATIC=$(git ls-files **/dist/*)
 git update-index --no-assume-unchanged $STATIC
+grunt package
+
 git add --force $STATIC
 if git status --short | egrep '^[MA]' ; then
     git commit --all --message "Updated assets."
