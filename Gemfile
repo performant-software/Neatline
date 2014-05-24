@@ -1,4 +1,4 @@
+
 source 'https://rubygems.org'
+gem 'git'
 gem 'jasmine'
-gem 'juicer'
-gem 'json'

@@ -17,11 +17,11 @@ end
 
 def has_changes
   status = `git status --short`
-  status.match(/^[MA]/) || status.match(/^.[MA]/) if has_changes
+  status.match(/^[MA]/) || status.match(/^.[MA]/)
 end
 
 def commit_all(message)
-  sh %{git commit --all --message "#{message}"}
+  sh %{git commit --all --message "#{message}"} if has_changes
 end
 
 namespace :neatline do
@@ -40,7 +40,7 @@ namespace :neatline do
     # Compress the payloads.
     sh %{grunt compile:min}
 
-    # Stage and commit the changes.
+    # Commit the new payloads.
     sh %{git add --force views/**/dist/**}
     commit_all("Committing compiled assets.")
 
@@ -48,9 +48,13 @@ namespace :neatline do
     sh %{git rm -r --cached views/**/dist/**}
     commit_all("Untracking compiled assets.")
 
+    # Roll the two into a single commit.
+    sh %{git reset --soft HEAD~2}
+    commit_all("Committing compiled assets.")
+
   end
 
-  desc 'This creates a release branch, processes the release, and closes the branch without pushing it to github.'
+  desc 'Creates release branch, bumps version, pulls translations, packages.'
   task :release, [:version] do |t, args|
     version = args[:version]
 
@@ -78,9 +82,9 @@ namespace :neatline do
     sh %{npm version #{version}}
     sh %{bower version #{version}}
 
-    # (npm and bower both automatically commit their changes, with no option not
-    # to. And they use different formats for the commit messages. Because they're
-    # just helpful like that. SERENITY NOW!)
+    # npm and bower both automatically commit their changes, with no option
+    # not to. And they use different formats for the commit messages. Because
+    # they're just helpful like that. SERENITY NOW!
     sh %{git tag --delete "#{version}"}
     sh %{git tag --delete "v#{version}"}
     sh %{git reset HEAD^^}
@@ -106,7 +110,7 @@ namespace :neatline do
     puts "    git push"
     puts "    git push --tags"
     puts
-    puts "Also, please check the package file before uploading to http://omeka.org/wp-admin."
+    puts "Also, please check the package file before uploading to omeka.org."
   end
 
   desc 'Regenerate static assets and create the package file.'
