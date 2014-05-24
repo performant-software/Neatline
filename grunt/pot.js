@@ -7,6 +7,7 @@
  */
 
 module.exports = {
+
   options: {
     text_domain: 'Neatline',
     dest: 'languages/',
@@ -37,4 +38,5 @@ module.exports = {
     ],
     expand: true
   }
+
 };

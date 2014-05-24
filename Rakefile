@@ -26,13 +26,13 @@ end
 
 namespace :neatline do
 
+  # DONE
   desc 'Sets up the development environment.'
   task :setup do
     sh %{npm install}
     sh %{composer install}
     sh %{grunt build}
   end
-
 
   desc 'Regenerates static files and commits any changes.'
   task :commit_static do
