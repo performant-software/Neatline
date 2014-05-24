@@ -1,0 +1,37 @@
+
+default:
+  - 'test'
+
+build:
+  - 'clean'
+  - 'bower'
+  - 'compile:min'
+  - 'copy'
+
+compile:
+  - 'stylus'
+  - 'concat'
+
+compile:min:
+  - 'compile'
+  - 'uglify'
+  - 'cssmin'
+
+jasmine:neatline:browser:
+  - 'jasmine:neatline:build'
+  - 'connect'
+
+jasmine:editor:browser:
+  - 'jasmine:editor:build'
+  - 'connect'
+
+test:
+  - 'compile:min'
+  - 'clean:fixtures'
+  - 'phpunit'
+  - 'jasmine'
+
+package:
+  - 'clean:dist'
+  - 'compile:min'
+  - 'compress'
