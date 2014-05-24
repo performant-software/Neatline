@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       sh.exec('git commit -am "Committing payloads."');
 
       // Untrack the payloads.
-      sh.exec('git rm -r ' + dist);
+      sh.exec('git rm -r --cached ' + dist);
       sh.exec('git commit -am "Untracking payloads."');
 
       // Reset to original HEAD.

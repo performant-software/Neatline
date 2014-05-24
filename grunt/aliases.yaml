@@ -17,6 +17,10 @@ compile:min:
   - 'uglify'
   - 'cssmin'
 
+shrinkwrap:
+  - 'compile:min'
+  - 'commit-static'
+
 jasmine:neatline:browser:
   - 'jasmine:neatline:build'
   - 'connect'

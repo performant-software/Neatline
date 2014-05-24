@@ -118964,7 +118964,6 @@ rivets.adapters[':'] = {
  */
 
 Neatline = new Marionette.Application();
-console.log('Testing change!');
 
 
 /**
