@@ -57,13 +57,13 @@ module.exports = function(grunt) {
   ]);
 
   // Mount public Jasmine suite.
-  grunt.registerTask('jasmine:neatline:server', [
+  grunt.registerTask('jasmine:neatline:browser', [
     'jasmine:neatline:build',
     'connect'
   ]);
 
   // Mount editor Jasmine suite.
-  grunt.registerTask('jasmine:editor:server', [
+  grunt.registerTask('jasmine:editor:browser', [
     'jasmine:editor:build',
     'connect'
   ]);

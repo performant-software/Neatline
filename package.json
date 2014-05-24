@@ -1,6 +1,6 @@
 {
   "name": "Neatline",
-  "version": "2.2.4",
+  "version": "3.0.0",
   "private": false,
   "devDependencies": {
     "grunt": "^0.4.5",
