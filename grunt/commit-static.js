@@ -7,7 +7,6 @@
  */
 
 var sh = require('execSync');
-var glob = require('glob');
 var path = require('path');
 
 module.exports = function(grunt) {

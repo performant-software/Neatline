@@ -4,7 +4,6 @@
   "private": false,
   "devDependencies": {
     "execSync": "^1.0.1-pre",
-    "glob": "^4.0.0",
     "grunt": "^0.4.5",
     "grunt-bower-task": ">= 0.3.4",
     "grunt-browserify": ">= 2.0.7",
