@@ -14,13 +14,18 @@ module.exports = function(grunt) {
   var pkg = grunt.file.readJSON('package.json');
 
   require('time-grunt')(grunt);
+  require('jit-grunt')(grunt);
 
   // Load the task configurations.
   require('load-grunt-config')(grunt, {
+
+    loadGruntTasks: false,
+
     data: {
       paths: paths,
       pkg: pkg
     }
+
   });
 
 

@@ -21,6 +21,7 @@
     "grunt-phpunit": ">= 0.3.2",
     "grunt-po2mo": "^0.1.0",
     "grunt-pot": "^0.1.2",
+    "jit-grunt": "^0.7.0",
     "load-grunt-config": ">= 0.8.0",
     "time-grunt": "^0.3.1"
   }
