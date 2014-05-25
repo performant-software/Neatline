@@ -17,6 +17,10 @@ compile:min:
   - 'cssmin'
   - 'uglify'
 
+freeze:
+  - 'compile:min'
+  - 'copy-payloads'
+
 jasmine:neatline:browser:
   - 'jasmine:neatline:build'
   - 'connect'
