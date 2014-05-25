@@ -22,10 +22,14 @@
     "grunt-phpunit": ">= 0.3.2",
     "grunt-po2mo": "^0.1.0",
     "grunt-pot": "^0.1.2",
+    "grunt-version": "^0.3.0",
     "jit-grunt": "^0.7.0",
     "load-grunt-config": ">= 0.8.0",
     "lodash": "^2.4.1",
     "shelljs": "^0.3.0",
     "time-grunt": "^0.3.1"
+  },
+  "dependencies": {
+    "grunt-bump": "0.0.14"
   }
 }

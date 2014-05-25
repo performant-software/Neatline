@@ -34,6 +34,7 @@ namespace :neatline do
     sh %{grunt build}
   end
 
+  # DONE
   desc 'Regenerates static files and commits any changes.'
   task :commit_static do
 

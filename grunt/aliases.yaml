@@ -36,6 +36,5 @@ test:
   - 'jasmine'
 
 package:
-  - 'clean:dist'
-  - 'compile:min'
+  - 'freeze'
   - 'compress'
