@@ -13,10 +13,15 @@ module.exports = function(grunt) {
   var paths = grunt.file.readJSON('paths.json');
   var pkg = grunt.file.readJSON('package.json');
 
+  // Time the task executions.
   require('time-grunt')(grunt);
-  require('jit-grunt')(grunt);
 
-  // Load the task configurations.
+  // Just load the tasks we need.
+  require('jit-grunt')(grunt, {
+    bower: 'grunt-bower-task'
+  });
+
+  // Load the task definitions.
   require('load-grunt-config')(grunt, {
 
     loadGruntTasks: false,
