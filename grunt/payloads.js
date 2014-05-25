@@ -7,7 +7,6 @@
  */
 
 require('shelljs/global');
-var sh = require('execSync');
 var path = require('path');
 var glob = require('glob');
 var _ = require('lodash');
@@ -25,9 +24,13 @@ module.exports = function(grunt) {
       );
 
       _.each(devs, function(dev) {
+
+        // Get the corresponding /dist.
         var dist = path.dirname(dev) + '/dist';
-        rm('-rf', dist);      // Remove /dist.
-        cp('-r', dev, dist);  // Copy /dev -> /dist.
+
+        // Make /dev the new /dist.
+        rm('-rf', dist); mkdir(dist);
+        cp('-r', dev+'/**', dist);
 
       });
 
