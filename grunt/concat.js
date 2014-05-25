@@ -9,7 +9,7 @@
 var nVen = [ // Public vendor.
   '<%= paths.vendor.jquery %>',
   '<%= paths.vendor.jquery_ui %>',
-  '<%= paths.vendor.underscore %>',
+  '<%= paths.vendor.lodash %>',
   '<%= paths.vendor.underscore_s %>',
   '<%= paths.vendor.backbone %>',
   '<%= paths.vendor.mutators %>',
