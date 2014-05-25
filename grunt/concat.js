@@ -58,7 +58,7 @@ var editorSource = [
 
 module.exports = {
 
-  add_form: {
+  addForm: {
     src: [
       '<%= paths.vendor.underscore_s %>',
       '<%= paths.vendor.chosen %>',
@@ -68,7 +68,7 @@ module.exports = {
     dest: '<%= paths.dist.js.admin %>/add-form.js'
   },
 
-  edit_form: {
+  editForm: {
     src: [
       '<%= paths.vendor.chosen %>',
       '<%= paths.src.js.admin %>/exhibit-form.js'
@@ -76,7 +76,7 @@ module.exports = {
     dest: '<%= paths.dist.js.admin %>/edit-form.js'
   },
 
-  neatline_public: {
+  neatlinePublic: {
     src: [].concat(
       publicVendor,
       publicSource
@@ -84,7 +84,7 @@ module.exports = {
     dest: '<%= paths.dist.js.shared %>/neatline-public.js'
   },
 
-  neatline_editor: {
+  neatlineEditor: {
     src: [].concat(
       publicVendor,
       editorVendor,
@@ -94,7 +94,7 @@ module.exports = {
     dest: '<%= paths.dist.js.shared %>/neatline-editor.js'
   },
 
-  jasmine_vendor: {
+  jasmineVendor: {
     src: [
       '<%= paths.vendor.uri %>',
       '<%= paths.vendor.jasmine_jquery %>',

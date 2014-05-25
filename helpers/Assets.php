@@ -99,6 +99,19 @@ function nl_queueExhibitTheme($exhibit)
 
 
 /**
+ * Append a script to the <head> tag.
+ *
+ * @param string $script The script location.
+ */
+function nl_appendScript($script)
+{
+    get_view()->headScript()->appendScript(
+        '', 'text/javascript', array('src' => $script)
+    );
+}
+
+
+/**
  * Include the Google Maps API.
  */
 function nl_queueGoogleMapsApi()
@@ -115,19 +128,6 @@ function nl_queueLiveReload()
     if (APPLICATION_ENV == 'development') {
         nl_appendScript('//localhost:35729/livereload.js');
     }
-}
-
-
-/**
- * Append a script to the <head> tag.
- *
- * @param string $script The script location.
- */
-function nl_appendScript($script)
-{
-    get_view()->headScript()->appendScript(
-        '', 'text/javascript', array('src' => $script)
-    );
 }
 
 

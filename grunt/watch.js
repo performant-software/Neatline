@@ -14,14 +14,14 @@ module.exports = {
 
   payload: {
     files: [
-      '<%= concat.add_form.src %>',
-      '<%= concat.edit_form.src %>',
-      '<%= concat.neatline_public.src %>',
-      '<%= concat.neatline_editor.src %>',
-      '<%= concat.jasmine_vendor.src %>',
-      '<%= stylus.neatline_public.src %>',
-      '<%= stylus.neatline_editor.src %>',
-      '<%= stylus.exhibit_form.src %>',
+      '<%= concat.addForm.src %>',
+      '<%= concat.editForm.src %>',
+      '<%= concat.neatlinePublic.src %>',
+      '<%= concat.neatlineEditor.src %>',
+      '<%= concat.jasmineVendor.src %>',
+      '<%= stylus.neatlinePublic.src %>',
+      '<%= stylus.neatlineEditor.src %>',
+      '<%= stylus.exhibitForm.src %>',
     ],
     tasks: 'compile'
   }

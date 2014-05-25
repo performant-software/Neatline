@@ -13,9 +13,9 @@ compile:
   - 'concat'
 
 compile:min:
-  - 'compile'
-  - 'uglify'
+  - 'stylus'
   - 'cssmin'
+  - 'uglify'
 
 jasmine:neatline:browser:
   - 'jasmine:neatline:build'
