@@ -8,9 +8,10 @@
 
 module.exports = {
 
-  files: {
-    src: 'languages/*.po',
-    expand: true
+  neatline: {
+    options: {
+      targetDir: 'languages'
+    }
   }
 
 };

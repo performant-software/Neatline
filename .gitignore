@@ -11,4 +11,5 @@ _SpecRunner.html
 !/layers/default.json
 /tests/phpunit/plugins.json
 
+.transifexrc
 dev

@@ -76,6 +76,7 @@ namespace :neatline do
     Rake::Task["neatline:print_gbye"]
   end
 
+  # DONE
   desc 'Set the version number everywhere it needs to be set.'
   task :version, [:version] do |t, args|
     version = args[:version]
