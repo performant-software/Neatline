@@ -39,6 +39,7 @@ function nl_queueNeatlinePublic($exhibit)
 {
 
     nl_queueGoogleMapsApi();
+    nl_queueLiveReload();
 
     queue_css_file('dist/neatline-public');
     queue_js_file('dist/neatline-public');
@@ -60,6 +61,7 @@ function nl_queueNeatlineEditor($exhibit)
 {
 
     nl_queueGoogleMapsApi();
+    nl_queueLiveReload();
 
     queue_css_file('dist/neatline-editor');
     queue_js_file('dist/neatline-editor');
@@ -102,6 +104,17 @@ function nl_queueExhibitTheme($exhibit)
 function nl_queueGoogleMapsApi()
 {
     nl_appendScript('//maps.google.com/maps/api/js?sensor=false');
+}
+
+
+/**
+ * Include the livereload script.
+ */
+function nl_queueLiveReload()
+{
+    if (APPLICATION_ENV == 'development') {
+        nl_appendScript('//localhost:35729/livereload.js');
+    }
 }
 
 
