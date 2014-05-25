@@ -13,12 +13,12 @@
 
   "dist": {
     "js": {
-      "shared":           "views/shared/javascripts/_dist",
-      "admin":            "views/admin/javascripts/_dist"
+      "shared":           "views/shared/javascripts/dist",
+      "admin":            "views/admin/javascripts/dist"
     },
     "css": {
-      "shared":           "views/shared/css/_dist",
-      "admin":            "views/admin/css/_dist"
+      "shared":           "views/shared/css/dist",
+      "admin":            "views/admin/css/dist"
     }
   },
 

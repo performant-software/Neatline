@@ -9,46 +9,13 @@
 
 
 /**
- * Get the name of directory that contains the static payloads.
- *
- * @return string The directory name.
- */
-function nl_getDistDir()
-{
-    return file_exists(NL_DIR.'/.git') ? '_dist' : 'dist';
-}
-
-
-/**
- * Queue a CSS file, threading in the correct distribution directory.
- *
- * @param string The file path.
- */
-function nl_queueDistCss($path)
-{
-    queue_css_file(nl_getDistDir().'/'.$path);
-}
-
-
-/**
- * Queue a Javascript file, threading in the correct distribution directory.
- *
- * @param string The file path.
- */
-function nl_queueDistJs($path)
-{
-    queue_js_file(nl_getDistDir().'/'.$path);
-}
-
-
-/**
  * Include static files for the exhibit add form.
  */
 function nl_queueAddForm()
 {
-    nl_queueDistCss('exhibit-form');
-    nl_queueDistJs('ckeditor/ckeditor');
-    nl_queueDistJs('add-form');
+    queue_css_file('dist/exhibit-form');
+    queue_js_file('dist/ckeditor/ckeditor');
+    queue_js_file('dist/add-form');
 }
 
 
@@ -57,9 +24,9 @@ function nl_queueAddForm()
  */
 function nl_queueEditForm()
 {
-    nl_queueDistCss('exhibit-form');
-    nl_queueDistJs('ckeditor/ckeditor');
-    nl_queueDistJs('edit-form');
+    queue_css_file('dist/exhibit-form');
+    queue_js_file('dist/ckeditor/ckeditor');
+    queue_js_file('dist/edit-form');
 }
 
 
@@ -73,8 +40,8 @@ function nl_queueNeatlinePublic($exhibit)
 
     nl_queueGoogleMapsApi();
 
-    nl_queueDistCss('neatline-public');
-    nl_queueDistJs('neatline-public');
+    queue_css_file('dist/neatline-public');
+    queue_js_file('dist/neatline-public');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_public_static', array(
@@ -94,9 +61,9 @@ function nl_queueNeatlineEditor($exhibit)
 
     nl_queueGoogleMapsApi();
 
-    nl_queueDistCss('neatline-editor');
-    nl_queueDistJs('neatline-editor');
-    nl_queueDistJs('ckeditor/ckeditor');
+    queue_css_file('dist/neatline-editor');
+    queue_js_file('dist/neatline-editor');
+    queue_js_file('dist/ckeditor/ckeditor');
     queue_js_file('bootstrap');
 
     fire_plugin_hook('neatline_editor_static', array(

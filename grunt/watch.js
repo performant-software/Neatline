@@ -8,6 +8,10 @@
 
 module.exports = {
 
+  options: {
+    livereload: true
+  },
+
   payload: {
     files: [
       '<%= concat.add_form.src %>',
