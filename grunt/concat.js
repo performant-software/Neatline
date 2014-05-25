@@ -6,7 +6,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-var nVen = [ // Public vendor.
+var publicVendor = [
   '<%= paths.vendor.jquery %>',
   '<%= paths.vendor.jquery_ui %>',
   '<%= paths.vendor.lodash %>',
@@ -22,7 +22,7 @@ var nVen = [ // Public vendor.
   '<%= paths.vendor.rivets %>'
 ];
 
-var nSrc = [ // Public application.
+var publicSource = [
   '<%= paths.src.js.shared %>/*.js',
   '<%= paths.src.js.shared %>/shared/*.js',
   '<%= paths.src.js.shared %>/shared/exhibit/exhibit.model.js',
@@ -35,7 +35,7 @@ var nSrc = [ // Public application.
   '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js'
 ];
 
-var eVen = [ // Editor vendor.
+var editorVendor = [
   '<%= paths.vendor.routefilter %>',
   '<%= paths.vendor.svgtowkt %>',
   '<%= paths.vendor.draggable %>',
@@ -49,7 +49,7 @@ var eVen = [ // Editor vendor.
   '<%= paths.vendor.uri %>'
 ];
 
-var eSrc = [ // Editor application.
+var editorSource = [
   '<%= paths.src.js.shared %>/editor/*.js',
   '<%= paths.src.js.shared %>/editor/exhibit/**/*.js',
   '<%= paths.src.js.shared %>/editor/record/**/*.js',
@@ -77,12 +77,20 @@ module.exports = {
   },
 
   neatline_public: {
-    src: [].concat(nVen, nSrc),
+    src: [].concat(
+      publicVendor,
+      publicSource
+    ),
     dest: '<%= paths.dist.js.shared %>/neatline-public.js'
   },
 
   neatline_editor: {
-    src: [].concat(nVen, eVen, nSrc, eSrc),
+    src: [].concat(
+      publicVendor,
+      editorVendor,
+      publicSource,
+      editorSource
+    ),
     dest: '<%= paths.dist.js.shared %>/neatline-editor.js'
   },
 
