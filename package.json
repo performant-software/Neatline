@@ -29,8 +29,5 @@
     "lodash": "^2.4.1",
     "shelljs": "^0.3.0",
     "time-grunt": "^0.3.1"
-  },
-  "dependencies": {
-    "grunt-bump": "0.0.14"
   }
 }

@@ -13,6 +13,9 @@ module.exports = {
   },
 
   omeka: {
+    options: {
+      prefix: '[^_]version="'
+    },
     src: 'plugin.ini'
   }
 

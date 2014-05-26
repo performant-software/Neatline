@@ -103,6 +103,7 @@ namespace :neatline do
     commit_all("Updated i18n.")
   end
 
+  # DONE
   task :print_gbye do
     puts "Done."
     puts "All changes are local."
@@ -115,6 +116,7 @@ namespace :neatline do
     puts "Also, please check the package file before uploading to omeka.org."
   end
 
+  # DONE
   desc 'Regenerate static assets and create the package file.'
   task :package do
     static_files = get_static_files
