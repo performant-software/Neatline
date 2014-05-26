@@ -17,21 +17,21 @@ Once all of that is in place, we're ready to go.
 
 ## Create a new release
 
-1. Bump the `version` in the `package.json` file to the new version.
+- Bump the `version` in the `package.json` file to the new version.
 
-1. Run `grunt release`. Behind the scenes, this task:
+- Run `grunt release`. Behind the scenes, this task:
 
-  - Propagates the version in `package.json` into `bower.json` and `plugin.ini`.
+  - Bumps the version in `bower.json` and `plugin.ini`.
   - Minifies the static payloads and copies them into the `/dist` directories.
   - Generates a `.zip` archive under the `pkg` directory.
   - Commits the changes.
-  - Generates a new tag for the release
+  - Tags the release.
 
-1. Hallway test the zip.
+- Hallway test the zip.
 
-1. `git push`
+- `git push`
 
-1. `git push --tags`
+- `git push --tags`
 
-1. Upload the zip to http://omeka.org/add-ons/plugins/.
+- Upload the zip to http://omeka.org/add-ons/plugins/.
 
