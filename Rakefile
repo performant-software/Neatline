@@ -1,20 +1,6 @@
 
 require 'fileutils'
 
-def get_static_files
-  `git ls-files **/dist/*`.lines.map(&:strip).to_a
-end
-
-def set_assumed_unchanged(files, on)
-  if on
-    flag = '--assume-unchanged'
-  else
-    flag = '--no-assume-unchanged'
-  end
-
-  files.each { |f| sh %{git update-index #{flag} #{f}} }
-end
-
 def has_changes
   status = `git status --short`
   status.match(/^[MA]/) || status.match(/^.[MA]/)
@@ -26,33 +12,11 @@ end
 
 namespace :neatline do
 
-  # DONE
   desc 'Sets up the development environment.'
   task :setup do
     sh %{npm install}
     sh %{composer install}
     sh %{grunt build}
-  end
-
-  # DONE
-  desc 'Regenerates static files and commits any changes.'
-  task :commit_static do
-
-    # Compress the payloads.
-    sh %{grunt compile:min}
-
-    # Commit the new payloads.
-    sh %{git add --force views/**/dist/**}
-    commit_all("Committing compiled assets.")
-
-    # Untrack the payloads.
-    sh %{git rm -r --cached views/**/dist/**}
-    commit_all("Untracking compiled assets.")
-
-    # Roll the two into a single commit.
-    sh %{git reset --soft HEAD~2}
-    commit_all("Committing compiled assets.")
-
   end
 
   desc 'Creates release branch, bumps version, pulls translations, packages.'
@@ -76,7 +40,6 @@ namespace :neatline do
     Rake::Task["neatline:print_gbye"]
   end
 
-  # DONE
   desc 'Set the version number everywhere it needs to be set.'
   task :version, [:version] do |t, args|
     version = args[:version]
@@ -103,7 +66,6 @@ namespace :neatline do
     commit_all("Updated i18n.")
   end
 
-  # DONE
   task :print_gbye do
     puts "Done."
     puts "All changes are local."
@@ -116,17 +78,9 @@ namespace :neatline do
     puts "Also, please check the package file before uploading to omeka.org."
   end
 
-  # DONE
   desc 'Regenerate static assets and create the package file.'
   task :package do
-    static_files = get_static_files
-    set_assumed_unchanged(static_files, false)
-
     sh %{grunt package}
-    static_files.each { |f| sh %{git add --force #{f}} }
-
-    commit_all("Updated assets.")
-    set_assumed_unchanged(static_files, true)
   end
 
 end
