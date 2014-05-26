@@ -41,5 +41,6 @@ package:
   - 'compress'
 
 release:
+  - 'package'
   - 'gitcommit:release'
   - 'gittag:release'
