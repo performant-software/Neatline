@@ -36,7 +36,10 @@ test:
   - 'jasmine'
 
 package:
-  - 'po2mo'
   - 'version'
   - 'freeze'
   - 'compress'
+
+release:
+  - 'gitcommit:release'
+  - 'gittag:release'

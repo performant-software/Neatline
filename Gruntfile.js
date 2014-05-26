@@ -18,7 +18,9 @@ module.exports = function(grunt) {
 
   // Just load the tasks we need.
   require('jit-grunt')(grunt, {
-    bower: 'grunt-bower-task'
+    bower:      'grunt-bower-task',
+    gitcommit:  'grunt-git',
+    gittag:     'grunt-git'
   });
 
   // Load the task definitions.
