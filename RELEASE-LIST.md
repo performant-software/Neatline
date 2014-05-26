@@ -13,55 +13,25 @@ Specifically, this means:
 * You have [Transifex Client](http://docs.transifex.com/developer/client/)
   installed and configured.
 
-* You have run `git flow init` in the Neatline directory.
+Once all of that is in place, we're ready to go.
 
-Once all of that is in place, we're ready
+## Create a new release
 
-Now the easy way is to use the `bin/release` script:
+1. Bump the `version` in the `package.json` file to the new version.
 
-```bash
-./bin/release 42.0.13
-```
+1. Run `grunt release`. Behind the scenes, this task:
 
-The detailed answer is to do these steps.
+  - Propagates the version in `package.json` into `bower.json` and `plugin.ini`.
+  - Minifies the static payloads and copies them into the `/dist` directories.
+  - Generates a `.zip` archive under the `pkg` directory.
+  - Commits the changes.
+  - Generates a new tag for the release
 
-1. `VERSION=42.0.13` — We'll use this value later.
-
-1. `git flow release start $VERSION`
-
-1. Bump the version number by editing `plugin.ini`.
-
-1. And by calling these commands:
-
-   * `npm version $VERSION`
-   * `bower version $VERSION`
-
-1. `git commit -am "Version $VERSION"`
-
-1. Update i18n:
-
-   * `tx pull --force`
-   * `grunt pot`
-   * `grunt po2mo`
-   * `git commit` (if there are new translations)
-
-1. Update the `CHANGELOG.md`
-
-1. `./bin/commit-static`
-
-1. `grunt package`
-
-1. `git commit` for the updated assets
-
-1. quick check the zip
-
-1. test the zip
-
-1. `git flow release finish $VERSION`
+1. Hallway test the zip.
 
 1. `git push`
 
 1. `git push --tags`
 
-1. upload the zip to http://omeka.org/add-ons/plugins/.
+1. Upload the zip to http://omeka.org/add-ons/plugins/.
 
