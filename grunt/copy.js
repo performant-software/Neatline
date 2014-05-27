@@ -11,7 +11,9 @@ module.exports = {
   bootstrap: {
     files: [{
       src: '<%= paths.copy.bootstrap %>/dist/fonts/*',
-      dest: 'views/shared/css/fonts/',
+      // Can't cordon this off inside the development/production directories
+      // because Bootstrap is harcoded to load fonts from ../fonts/.
+      dest: 'views/shared/css/dist/fonts/',
       flatten: true,
       expand: true
     }]
