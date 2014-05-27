@@ -12,4 +12,4 @@ _SpecRunner.html
 /tests/phpunit/plugins.json
 
 .transifexrc
-dist/development
+views/**/dist/development
