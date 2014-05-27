@@ -7,4 +7,3 @@
  */
 
 Neatline = new Marionette.Application();
-console.log('dev!');
