@@ -121,10 +121,16 @@ function nl_queueFullscreen()
  */
 function nl_queueExhibitTheme($exhibit)
 {
+
+    // Form the theme directory path.
+    $theme = "exhibits/themes/$exhibit->slug";
+
+    // Include `style.css` and/or `script.js`, if they exist.
     try {
-        queue_css_file('style', null, false,"exhibits/themes/$exhibit->slug");
-        queue_js_file('script', "exhibits/themes/$exhibit->slug");
+        queue_css_file('style', null, false, $theme);
+        queue_js_file('script', $theme);
     } catch (Exception $e) {}
+
 }
 
 
