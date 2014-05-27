@@ -15,24 +15,24 @@ module.exports = function(grunt) {
 
   grunt.registerTask(
     'copy-payloads',
-    'Copy the /dev payloads into /dist.',
+    'Copy the /development payloads into /production.',
     function() {
 
-      // Glob all of the /dev directories.
+      // Glob all of the /development directories.
       var devs = glob.sync(
-        path.resolve(__dirname, '../views/**/dev')
+        path.resolve(__dirname, '../views/**/dist/development')
       );
 
       _.each(devs, function(dev) {
 
-        // Get the corresponding /dist.
-        var dist = path.dirname(dev) + '/dist';
+        // Get the corresponding /production.
+        var prod = path.dirname(dev) + '/production';
 
-        // Empty out /dist.
-        rm('-rf', dist); mkdir(dist);
+        // Empty out /production.
+        rm('-rf', prod); mkdir(prod);
 
-        // Copy /dev -> /dist.
-        cp('-r', dev + '/**', dist);
+        // Copy /development -> /production.
+        cp('-r', dev + '/**', prod);
 
       });
 

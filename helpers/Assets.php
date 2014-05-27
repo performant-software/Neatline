@@ -16,9 +16,9 @@
 function nl_queueDistJs($path)
 {
     if (APPLICATION_ENV == 'development') {
-        queue_js_file('dev/'.$path);
+        queue_js_file('dist/development/'.$path);
     } else {
-        queue_js_file('dist/'.$path);
+        queue_js_file('dist/production/'.$path);
     }
 }
 
@@ -31,9 +31,9 @@ function nl_queueDistJs($path)
 function nl_queueDistCss($path)
 {
     if (APPLICATION_ENV == 'development') {
-        queue_css_file('dev/'.$path);
+        queue_css_file('dist/development/'.$path);
     } else {
-        queue_css_file('dist/'.$path);
+        queue_css_file('dist/production/'.$path);
     }
 }
 

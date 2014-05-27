@@ -7723,7 +7723,7 @@ var NL = (function(NL) {
  * Set the fixtures path.
  */
 jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures';
-jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/dist';
+jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/dist/development';
 
 
 /**
