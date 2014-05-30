@@ -12,7 +12,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
 
 
     /**
-     * SHOW should load exhibits by id.
+     * EDITOR should load exhibits by id.
      */
     public function testLoadExhibit()
     {
@@ -23,7 +23,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
 
 
     /**
-     * EDITOR should display editor and exhibit containers.
+     * EDITOR should display the editor and exhibit containers.
      */
     public function testBaseMarkup()
     {
