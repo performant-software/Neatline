@@ -22,7 +22,7 @@ Once all of that is in place, we're ready to go.
 - Run `grunt release`. Behind the scenes, this task:
 
   - Bumps the version in `bower.json` and `plugin.ini`.
-  - Minifies the static payloads and copies them into the `/dist` directories.
+  - Minifies the static payloads and copies them into the distribution directories.
   - Generates a `.zip` archive under the `pkg` directory.
   - Commits the changes.
   - Tags the release.

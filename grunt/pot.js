@@ -20,21 +20,9 @@ module.exports = {
 
   files: {
     src: [
-      '*.php',
-      'assertions/*.php',
-      'assertions/**/*.php',
-      'controllers/*.php',
-      'controllers/**/*.php',
-      'forms/*.php',
-      'forms/**/*.php',
-      'helpers/*.php',
-      'helpers/**/*.php',
-      'jobs/*.php',
-      'jobs/**/*.php',
-      'models/*.php',
-      'models/**/*.php',
-      'views/*.php',
-      'views/**/*.php'
+      '**/*.php',
+      '!bower_components/**',
+      '!node_modules/**'
     ],
     expand: true
   }

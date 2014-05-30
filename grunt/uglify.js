@@ -29,7 +29,7 @@ module.exports = {
     dest: '<%= concat.neatlinePublic.dest %>'
   },
 
-  neatline_editor: {
+  neatlineEditor: {
     src: '<%= concat.neatlineEditor.src %>',
     dest: '<%= concat.neatlineEditor.dest %>'
   }
