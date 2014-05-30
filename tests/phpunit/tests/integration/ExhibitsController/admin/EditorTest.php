@@ -34,4 +34,29 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
     }
 
 
+    /**
+     * EDITOR should load development assets when the Omeka `APPLICATION_ENV`
+     * environment variable is set to `development`.
+     */
+    public function testLoadDevelopmentAssets()
+    {
+
+        // TODO
+        // set the env variable
+        // hit the page
+        // check for the assets
+
+    }
+
+
+    /**
+     * EDITOR should load production assets when the Omeka `APPLICATION_ENV`
+     * environment variable is set to anything other than `development`.
+     */
+    public function testLoadProductionAssets()
+    {
+        // TODO
+    }
+
+
 }
