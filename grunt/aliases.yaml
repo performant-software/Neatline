@@ -36,8 +36,9 @@ test:
   - 'jasmine'
 
 package:
-  - 'version'
   - 'freeze'
+  - 'version'
+  - 'po2mo'
   - 'compress'
 
 release:
