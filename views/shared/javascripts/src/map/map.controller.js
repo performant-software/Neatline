@@ -37,7 +37,8 @@ Neatline.module('Map', function(Map) {
       'getVectorLayers',
       'getWmsLayers',
       'getCenter',
-      'getZoom'
+      'getZoom',
+      'getExtent'
     ],
 
 
@@ -215,8 +216,17 @@ Neatline.module('Map', function(Map) {
      */
     getZoom: function() {
       return this.view.map.getZoom();
-    }
+    },
 
+
+    /**
+     * Emit the current map extent.
+     *
+     * @return {String}: The extent of the map in string format.
+     */
+    getExtent: function() {
+      return this.view.map.getExtent().toString();
+    }
 
   });
 

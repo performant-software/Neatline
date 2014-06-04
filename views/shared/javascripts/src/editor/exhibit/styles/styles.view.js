@@ -18,13 +18,15 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
 
     events: {
       'click a[name="set-focus"]':  'onSetFocus',
+      'click a[name="set-restricted-extent"]':  'onSetRestrictedExtent',
       'click a[name="save"]':       'save'
     },
 
     ui: {
       styles:   '#styles',
       mapFocus: 'input[name="map-focus"]',
-      mapZoom:  'input[name="map-zoom"]'
+      mapZoom:  'input[name="map-zoom"]',
+      restrictedExtent: 'input[name="restricted-extent"]'
     },
 
 
@@ -93,6 +95,14 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
       this.__ui.mapZoom.val(zoom).change();
     },
 
+
+    /**
+     * Populate "Restricted Map Extent" with current map bounds.
+     */
+    onSetRestrictedExtent: function() {
+      var extent  = Neatline.request('MAP:getExtent');
+      this.__ui.restrictedExtent.val(extent).change();
+    },
 
     /**
      * Save the settings.
