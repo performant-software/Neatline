@@ -52,12 +52,23 @@
       'bind'  => 'exhibit:map_min_zoom'
   )); ?>
 
+  <?php echo common('neatline/button', array(
+      'name'  => 'set-min-zoom',
+      'icon'  => 'icon-map-marker',
+      'text'  => 'Set Minimum Zoom to Current'
+  )); ?>
+
   <?php echo common('neatline/input', array(
       'name'  => 'map-max-zoom',
       'label' => 'Maximum Map Zoom',
       'bind'  => 'exhibit:map_max_zoom'
   )); ?>
 
+  <?php echo common('neatline/button', array(
+      'name'  => 'set-max-zoom',
+      'icon'  => 'icon-map-marker',
+      'text'  => 'Set Maximum Zoom to Current'
+  )); ?>
 
   <?php echo common('neatline/save'); ?>
 

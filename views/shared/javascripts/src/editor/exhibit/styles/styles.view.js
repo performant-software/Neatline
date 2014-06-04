@@ -19,6 +19,8 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
     events: {
       'click a[name="set-focus"]':  'onSetFocus',
       'click a[name="set-restricted-extent"]':  'onSetRestrictedExtent',
+      'click a[name="set-min-zoom"]':  'onSetMinZoom',
+      'click a[name="set-max-zoom"]':  'onSetMaxZoom',
       'click a[name="save"]':       'save'
     },
 
@@ -26,6 +28,8 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
       styles:   '#styles',
       mapFocus: 'input[name="map-focus"]',
       mapZoom:  'input[name="map-zoom"]',
+      minMapZoom:  'input[name="map-min-zoom"]',
+      maxMapZoom:  'input[name="map-max-zoom"]',
       restrictedExtent: 'input[name="restricted-extent"]'
     },
 
@@ -95,6 +99,16 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
       this.__ui.mapZoom.val(zoom).change();
     },
 
+
+    onSetMinZoom: function() {
+        var zoom = Neatline.request('MAP:getZoom');
+        this.__ui.minMapZoom.val(zoom).change();
+    },
+    
+    onSetMaxZoom: function() {
+        var zoom = Neatline.request('MAP:getZoom');
+        this.__ui.maxMapZoom.val(zoom).change();
+    },
 
     /**
      * Populate "Restricted Map Extent" with current map bounds.
