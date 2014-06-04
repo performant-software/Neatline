@@ -106,6 +106,9 @@ Neatline.module('Map', function(Map) {
         theme: null,
         zoomMethod: null,
         panMethod:  null,
+        restrictedExtent: _.isString(this.exhibit.restricted_extent) ? 
+            new OpenLayers.Bounds.fromString(this.exhibit.restricted_extent) : 
+            null,
 
         controls: [
           new OpenLayers.Control.PanZoom(),
@@ -197,6 +200,10 @@ Neatline.module('Map', function(Map) {
      */
     _initBaseLayers: function() {
 
+      // Check if min/max zoom levels have been set, as they need to be implemented
+      // at the layer level, and not the map
+      this.options.zoomLimits = this.getZoomLimits();
+      
       var isImg = _.isString(this.exhibit.image_layer);
       var isWms = _.isString(this.exhibit.wms_address) &&
                   _.isString(this.exhibit.wms_layers);
@@ -258,6 +265,7 @@ Neatline.module('Map', function(Map) {
     _initSpatialLayers: function() {
 
       var layers = {};
+      var definedMinZ, definedMaxZ;
 
       // Build array of base layer instances.
       _.each(Neatline.g.neatline.spatial_layers, function(json) {
@@ -265,11 +273,54 @@ Neatline.module('Map', function(Map) {
         if (_.isObject(layer)) layers[json.id] = layer;
       });
 
+
       // Add the layers, set indices to 0.
       _.each(_.values(layers), _.bind(function(layer) {
         this.map.addLayer(layer);
         this.map.setLayerIndex(layer, 0);
       }, this));
+
+      if (this.options.zoomLimits){
+
+        // Need to explicitly null out the numZoomLevels option on the map object 
+        // (which otherwise defaults to 16), so as to not override the settings on the given layer
+        this.map.numZoomLevels = null;
+        
+        definedMinZ = this.options.zoomLimits.minZoom;
+        definedMaxZ = this.options.zoomLimits.maxZoom; 
+
+        _.each(layers, function(layer,layerType){
+           
+            // Need to accommodate if only min or max is set. Default to MIN/MAX constants set on some layers (Google/Bing/etc)
+            // or 0/number of zoom levels - 1 for others (OSM based)
+            var minZ = _.isNumber(definedMinZ) ? definedMinZ : layers[layerType].MIN_ZOOM_LEVEL || 0 ;
+            var maxZ = _.isNumber(definedMaxZ) ? definedMaxZ : layers[layerType].MAX_ZOOM_LEVEL || layer.numZoomLevels - 1;
+            
+            layers[layerType].numZoomLevels = Math.abs(maxZ - minZ + 1);
+            layers[layerType].resolutions = layers[layerType].resolutions.splice(minZ, maxZ +1);
+            
+            // Depending on the type of layer, need to set different layer options for limiting zoom levels
+            switch (layerType){
+              
+              case "GooglePhysical":
+              case "GoogleSatellite":
+              case "GoogleStreets":
+              case "GoogleHybrid":
+                layers[layerType].minZoomLevel = minZ;
+                break;
+               
+              case "OpenStreetMap":
+              case "StamenToner":
+              case "StamenTerrain":
+              case "StamenWatercolor":
+                layers[layerType].zoomOffset = minZ;
+                break;
+
+            }
+
+        });
+
+      }
 
       // Set default base layer.
       this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
@@ -279,6 +330,20 @@ Neatline.module('Map', function(Map) {
 
     },
 
+    /**
+     * Get max and min zoom levels if set.
+     * @returns Object with min and max zoom levels {minZoom,maxZoom}
+     */
+    getZoomLimits: function(){
+      
+      var minZoom = _.isNumber(this.exhibit.map_min_zoom) ? this.exhibit.map_min_zoom: null;
+      var maxZoom = _.isNumber(this.exhibit.map_max_zoom) ? this.exhibit.map_max_zoom: null;
+      
+      return minZoom === null && maxZoom === null ? null : {
+        "minZoom": minZoom, 
+        "maxZoom": maxZoom
+      }
+    },
 
     /**
      * Set the starting focus and zoom.
@@ -362,7 +427,6 @@ Neatline.module('Map', function(Map) {
       Neatline.vent.trigger('MAP:focused');
 
     },
-
 
     /**
      * Set the focus and zoom of the map.
