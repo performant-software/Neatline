@@ -14,11 +14,11 @@ describe('API | Layers', function() {
   });
 
 
-  it('should return `null` when a handler does not exist', function() {
+  it('should return nothing when a handler does not exist', function() {
 
     // ------------------------------------------------------------------------
     // When a layer is requested with a type that is not supported by any of
-    // the handlers, the request should return `null`.
+    // the handlers, the request should return `undefined`.
     // ------------------------------------------------------------------------
 
     var layer = Neatline.request('MAP:LAYERS:getLayer', {

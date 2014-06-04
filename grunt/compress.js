@@ -29,7 +29,7 @@ module.exports = {
       '!package.json',
       '!node_modules/**',
 
-      '*.phar',
+      '!*.phar',
       '!composer.json',
       '!composer.lock',
       '!vendor/**',
@@ -42,12 +42,9 @@ module.exports = {
       '!paths.json',
       '!grunt/**',
 
+      '!RELEASE-LIST.md',
       '!pkg/**',
-
       '!tests/**',
-
-      '!docs/**',
-
       '!bin/**'
 
     ]
