@@ -1,0 +1,78 @@
+#!/bin/bash
+
+set -e
+
+# Take the VERSION string from the command line as an env var or option. Either
+# of these will work:
+#
+# VERSION=3.14 ./bin/release
+# ./bin/release 3.14
+VERSION=${VERSION=$1}
+
+if [[ "$VERSION" == "" ]]; then
+  cat <<EOM
+Usage:
+    VERSION=3.14 $0
+    $0 3.14
+EOM
+  exit 1
+fi
+
+echo "Releasing Neatline $VERSION."
+
+git flow release start $VERSION
+
+# Bump the version number everywhere.
+npm version $VERSION
+bower version $VERSION
+  # (Because npm and bower both automatically commit their changes, with no
+  # option not to. And they use different formats for the commit messages.
+  # Because they're just helpful like that. SERENITY NOW!)
+git tag --delete "$VERSION"
+git tag --delete "v$VERSION"
+git reset HEAD^^
+sed --in-place=.release --expression='s/^version.*/version="'"$VERSION"'"/' plugin.ini
+git commit --all --message="Bumped version to $VERSION"
+
+# Update i18n.
+tx pull --force
+grunt pot
+grunt po2mo
+if git status --short | egrep '^[MA]' ; then
+    git commit --all --message="Updated i18n."
+fi
+
+# TODO: Include hook for updating CHANGELOG.md
+
+
+# Package it up and store the changes.
+STATIC=$(git ls-files **/dist/*)
+git update-index --no-assume-unchanged $STATIC
+grunt package
+
+git add --force $STATIC
+if git status --short | egrep '^[MA]' ; then
+    git commit --all --message "Updated assets."
+fi
+git update-index --assume-unchanged $STATIC
+
+echo "Created pkg/Neatline-${VERSION}.zip"
+
+git flow release finish $VERSION
+
+# Clean up
+unset -e
+rm -f plugin.ini.release
+
+# Farewell, cruel world.
+cat <<EOM
+Done.
+All changes are local.
+Nothing has been pushed.
+You can handle that.
+
+    git push
+    git push --tags
+
+Also, please check the package file before uploading to http://omeka.org/wp-admin.
+EOM
