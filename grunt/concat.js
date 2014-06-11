@@ -46,6 +46,7 @@ var editorVendor = [
   '<%= paths.vendor.ace_theme %>',
   '<%= paths.vendor.ace_mode %>',
   '<%= paths.vendor.select2 %>',
+  '<%= paths.vendor.underscore_s %>',
   '<%= paths.vendor.uri %>'
 ];
 
