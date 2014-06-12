@@ -1,6 +1,6 @@
 # [NeatlineText][plugin]
 
-**NeatlineText** is a extension to the Neatline plugin that makes it possible to connect paragraphs, sentences, and words in text documents with annotations in Neatline exhibits.
+**NeatlineText** is an extension to the Neatline plugin that makes it possible to connect paragraphs, sentences, and words in text documents with annotations in Neatline exhibits.
 
 For example, imagine you're making an interactive edition of Walt Whitman's "[Salut au Monde][salut-au-monde]," and want to wire up the locations in this passage with annotations on the map:
 
@@ -42,7 +42,7 @@ You have two options in creating the text to which you're attaching Neatline rec
 
 1. In the "Exhibit Settings," enter the text into the "Narrative" field. You could type directly in here or copy from a different file.
 2. Click "Source" in order to directly edit the HTML markup.
-3. Within the "Source" view, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type <span data-neatline-slug="north-america"> before the words I want to link and </span> after those words:
+3. Within the "Source" view, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type `<span data-neatline-slug="north-america">` before the words I want to link and `</span>` after those words:
 
     ```
     I see them welding State to State, city to city, through <span data-neatline-slug="north-america">North America</span>;
@@ -50,16 +50,16 @@ You have two options in creating the text to which you're attaching Neatline rec
 
 4. After you've linked the texts you wish to, click save at the bottom of the page.
 
-![Narrative](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.narrative.jpg)
+![Narrative](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.html.inline.png)
 
-*Note:* We typically use`<span>` elements because they do create any visual changes in the document in themselves. However, you could use others elements, such as `<div>`. Neatline looks for the attribute `data-neatline-slug` rather than the element. If you are in doubt of which element to use, use `<span>`.
+*Note:* We typically use`<span>` elements because they do not create any visual changes in the document in themselves. However, you could use others elements, such as `<div>`. Neatline looks for the attribute `data-neatline-slug` rather than the element. If you are in doubt of which element to use, use `<span>`.
 
 #### Editing Longer Texts with a Text Editor
 
 Alternatively, especially for longer texts, it may be easier to add the elements with the `data-neatline-slug` attribute within a text editor such as Sublime Text or Notepad++.
 
 1. Copy in or compose the text document.
-2. Editing the HTML, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type <span data-neatline-slug="north-america"> before the words I want to link and </span> after those words:
+2. Editing the HTML, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type `<span data-neatline-slug="north-america">` before the words I want to link and `</span>` after those words:
 
     ![html in editor](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.html.png)
 
