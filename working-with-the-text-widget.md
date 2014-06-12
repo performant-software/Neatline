@@ -80,10 +80,11 @@ There are two ways to go about this:
 
   - **Omeka themes**: To make it easy to get up and running, we've built a really simple starter theme called [Neatlight][neatlight], which is specifically designed to house NeatlineText exhibits. Think of Neatlight as the Neatline equivalent of the default "Thanks Roy" theme that ships with Omeka - it's a simple, no-frills foundation that can be easily adapted and expanded.
 
-  - **Neatline themes**: The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the documentation, and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure].
+  - **Neatline themes**: The other approach is to use Neatline's exhibit-specific themeing system, which makes it possible to create completely separate themes for each individual Neatline exhibit. For more information about this, check out the [documentation][theme_docs], and take a look at [David McClure's fork of the Neatlight theme][neatlight-mcclure], which contains the source code for the custom themes used in projects at [neatline.dclure.org][neatline-dclure].
 
 [plugin]: http://omeka.org/add-ons/plugins/neatlinetext
 [salut-au-monde]: http://www.bartelby.com/142/74.html
 [neatlight]: https://github.com/scholarslab/neatlight
 [neatlight-mcclure]: https://github.com/davidmcclure/neatlight/tree/master/neatline/exhibits/themes
 [neatline-dclure]: http://neatline.dclure.org
+[theme_docs]: http://www.scholarslab.org/geospatial-and-temporal/theming-neatline-exhibits
