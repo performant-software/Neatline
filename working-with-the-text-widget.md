@@ -30,30 +30,43 @@ I see them in Asia and in Africa.
 
 First, create records in the Neatline exhibit for each of the geographic entities that you want to represent on the map - North America, Great Britain, etc. - and fill in the "Slug" field in the "Text" tab with some sort of semantic, easy-to-remember string:
 
-![Slug](http://dclure.org/wp-content/uploads/2014/03/slug.jpg)
+![Slug](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.slug_.jpg)
 
-Think of the slug as a plain-text, human-readable identifier that can be used to reference the record in other contexts. Like, for instance, attributes in HTML markup! Which brings us to...
+Think of the slug as a plain-text, human-readable identifier that can be used to reference the record in other contexts, for instance, in HTML markup.
 
 ### Step 2: Create the Narrative
 
-You have two options in creating the text to which you're attaching Neatline records. For shorter texts, from the "Exhibit Settings," enter the text into the "Narrative" field. Then, click "Source" in order to directly edit the HTML markup.
+You have two options in creating the text to which you're attaching Neatline records. You can easily edit shorter texts within the built in editor of the "Exhibit Settings" page. While you can edit longer texts within that same editor, you may find it more comfortable to work within a familiar text editor, such as Notepad++, TextMate, or Sublime Text.
 
-![Narrative](http://dclure.org/wp-content/uploads/2014/03/narrative.jpg)
+#### Editing a Shorter Text within the Built-in Editor
 
-Wrap sections of the text with elements with `data-neatline-slug` attributes that point at the record slugs:
+1. In the "Exhibit Settings," enter the text into the "Narrative" field. You could type directly in here or copy from a different file.
+2. Click "Source" in order to directly edit the HTML markup.
+3. Within the "Source" view, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type <span data-neatline-slug="north-america"> before the words I want to link and </span> after those words:
 
-```html
-I see the tracks of the rail-roads of the earth;
-I see them welding State to State, city to city, through <span data-neatline-slug="north-america">North America</span>;
-I see them in <span data-neatline-slug="great-britain">Great Britain</span>, I see them in <span data-neatline-slug="europe">Europe</span>;
-I see them in <span data-neatline-slug="asia">Asia</span> and in <span data-neatline-slug="africa">Africa</span>.
-```
+    ```
+    I see them welding State to State, city to city, through <span data-neatline-slug="north-america">North America</span>;
+    ```
 
-In this case we're using `<span>` elements, since we're wrapping short inline strings, but you could add the `data-neatline-slug` attributes to any element at all - `<p>`'s, `<div>`'s, etc. The plugin searches for the existence of the attribute, not the element type.
+4. After you've linked the texts you wish to, click save at the bottom of the page.
 
-Alternatively, especially for longer texts, it may be easier to add the elements with the `data-neatline-slug` attribute within a text editor. In that case, fire up your favorite text editor, copy in the text document, and edit the HTML as needed. Once you've finished, copy the HTML markup into the "Narrative" input on the "Exhibit Settings" page. Make sure you've clicked "Source" in the editor before copying, since you're copying in raw HTML markup.
+![Narrative](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.narrative.jpg)
 
-And that's it. Now, when you open up the exhibit, NeatlineText will automatically create bi-directional connections between the spans in the text document and the corresponding records in Neatline. Out of the box, the plugin implements two basic interactions:
+*Note:* We typically use`<span>` elements because they do create any visual changes in the document in themselves. However, you could use others elements, such as `<div>`. Neatline looks for the attribute `data-neatline-slug` rather than the element. If you are in doubt of which element to use, use `<span>`.
+
+#### Editing Longer Texts with a Text Editor
+
+Alternatively, especially for longer texts, it may be easier to add the elements with the `data-neatline-slug` attribute within a text editor such as Sublime Text or Notepad++.
+
+1. Copy in or compose the text document.
+2. Editing the HTML, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type <span data-neatline-slug="north-america"> before the words I want to link and </span> after those words:
+
+    ![html in editor](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.html.png)
+
+3. Open up the "Exhibit Settings" again and click "Source" in the editor. Copy in the HTML from your text editor into the "Narrative" input. You need to click "Source" so that it will understand the markup you've written.
+4. Click save at the bottom of the page.
+
+Now, when you open up the exhibit, NeatlineText will automatically create bi-directional connections between the spans in the text document and the corresponding records in Neatline. Out of the box, the plugin implements two basic interactions:
 
   - **Highlighting**: When the user hovers the cursor over a span in the text, any corresponding objects in the Neatline exhibit (shapes on the map, waypoints, etc.) will be highlighted. And vice versa - when the cursor hovers on an object in the exhibit, the span(s) in the text will highlight.
 
