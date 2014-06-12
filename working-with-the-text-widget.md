@@ -28,7 +28,7 @@ I see them in Asia and in Africa.
 
 ### Step 1: Create the Neatline records
 
-First, create records in the Neatline exhibit for each of the geographic entities that you want to represent on the map - North America, Great Britain, etc. - and fill in the "Slug" field in the "Text" tab with some sort of semantic, easy-to-remember string:
+First, create records in the Neatline exhibit for each of the geographic entities that you want to represent on the map - North America, Great Britain, etc. - and fill in the "Slug" field in the "Text" tab with a semantic, easy-to-remember string:
 
 ![Slug](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.slug_.jpg)
 
@@ -40,15 +40,16 @@ You have two options in creating the text to which you're attaching Neatline rec
 
 #### Editing a Shorter Text within the Built-in Editor
 
-1. In the "Exhibit Settings," enter the text into the "Narrative" field. You could type directly in here or copy from a different file.
-2. Click "Source" in order to directly edit the HTML markup.
-3. Within the "Source" view, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type `<span data-neatline-slug="north-america">` before the words I want to link and `</span>` after those words:
+1. In the "Exhibit Settings," click the Full Screen button (![Full Screen Button Image](http://neatline.org/wp-content/uploads/2014/06/fullscreen-button.png)) to open a larger text editing window or enter the text into the "Narrative" field text window. You could type the text directly in the window or copy from a file.
+2. Click "Source" in order to view and edit the HTML markup.
+3. In the "Source" view, enclose sections of the text to which you wish to link  map annotations with HTML elements containing a `data-neatline-slug` attribute, setting the value of the `data-neatline-slug` attribute equal to the slug of the record with which the text is associated.<br /><br />For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' type `<span data-neatline-slug="north-america">` before the words you want to link and `</span>` after those words:
 
     ```
     I see them welding State to State, city to city, through <span data-neatline-slug="north-america">North America</span>;
     ```
 
-4. After you've linked the texts you wish to, click save at the bottom of the page.
+4. After you've linked the all sections of the text you wish to, click the Full Screen Button again to close the full screen editor, if it is open
+5. Click the green Save Exhibit button at the bottom of the page.
 
 ![Narrative](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.html.inline.png)
 
@@ -58,19 +59,22 @@ You have two options in creating the text to which you're attaching Neatline rec
 
 Alternatively, especially for longer texts, it may be easier to add the elements with the `data-neatline-slug` attribute within a text editor such as Sublime Text or Notepad++.
 
-1. Copy in or compose the text document.
-2. Editing the HTML, wrap sections of the text with elements with `data-neatline-slug` attributes, setting the value equal to the slug of the record with which the text is associated. For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type `<span data-neatline-slug="north-america">` before the words I want to link and `</span>` after those words:
+
+1. Open your text editor of choice.
+2. Copy in or compose the text document.
+3. Editing the HTML, wrap sections of the text with elements with `data-neatline-slug` attributes as in the example above, setting the value equal to the slug of the record with which the text is associated.<br /><br /> For example, to link the words 'North America' to the record to which I assigned the slug 'north-america,' I would type `<span data-neatline-slug="north-america">` before the words I want to link and `</span>` after those words:
 
     ![html in editor](http://neatline.org/wp-content/uploads/2014/06/neatlinetext.html.png)
 
-3. Open up the "Exhibit Settings" again and click "Source" in the editor. Copy in the HTML from your text editor into the "Narrative" input. You need to click "Source" so that it will understand the markup you've written.
-4. Click save at the bottom of the page.
+3. Open up the "Exhibit Settings," scroll down to the "Narrative" text box, and click the "Source" button in the editor. You must click "Source" so that the editor will understand the HTML markup you've written.
+4. Copy and paste the HTML from your text editor into the "Narrative" text box. 
+5. Click the green Save Exhibit button at the bottom of the page.
 
 Now, when you open up the exhibit, NeatlineText will automatically create bi-directional connections between the spans in the text document and the corresponding records in Neatline. Out of the box, the plugin implements two basic interactions:
 
   - **Highlighting**: When the user hovers the cursor over a span in the text, any corresponding objects in the Neatline exhibit (shapes on the map, waypoints, etc.) will be highlighted. And vice versa - when the cursor hovers on an object in the exhibit, the span(s) in the text will highlight.
 
-  - **Selecting**: When the user clicks on a span in the text, the Neatline exhibit will "focus" around the corresponding record in the exhibit - the map will pan and zoom to frame the annotation, the timeline will scroll to show the span, etc. And likewise, when the user selects a record in the Neatline exhibit, the text will automatically scroll to display the corresponding span.
+  - **Selecting**: When the user clicks on a highlighted span in the text, the Neatline exhibit will "focus" around the corresponding record in the exhibit - the map will pan and zoom to frame the annotation, the timeline will scroll to show the span, etc. And likewise, when the user selects a record in the Neatline exhibit, the text will automatically scroll to display the corresponding span.
 
 ## Theming
 
