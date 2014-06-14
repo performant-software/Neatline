@@ -16,8 +16,27 @@ Neatline.module('Editor.Record.Text', {
 
       events: {
 
+        // Auto-slugify the slug field.
+        'input input[name="slug"]': 'onSlugInput',
+
         // Show CKEditors on "Edit HTML" click.
         'click a[data-textarea]': 'onEditHtmlClick'
+
+      },
+
+
+      /**
+       * When the "Slug" field is changed, auto-slugify the value.
+       *
+       * @param {Object} e: The input event.
+       */
+      onSlugInput: function(e) {
+
+        var input = $(e.target);
+
+        // Replace spaces with strings, slugify.
+        var value = input.val().replace(' ', '-');
+        input.val(_.string.slugify(value));
 
       },
 

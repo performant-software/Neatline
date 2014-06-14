@@ -1,4 +1,10 @@
 
+## v2.2.5 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.2.5)) ~ Pending
+
+#### Added Features
+
+  - When the value is changed in the "Slug" field in the record form, the value is now automatically "slugified" to prevent slugs with spaces, capitals, etc.
+
 ## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
 
 #### Bug Fixes
