@@ -2008,7 +2008,7 @@
 /*!
 Jasmine-jQuery: a set of jQuery helpers for Jasmine tests.
 
-Version 2.1.0
+Version 2.0.5
 
 https://github.com/velesin/jasmine-jquery
 
@@ -2489,12 +2489,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       toHaveText: function () {
         return {
           compare: function (actual, text) {
-            var trimmedText = $.trim($(actual).text())
+            var actualText = $(actual).text()
+            var trimmedText = $.trim(actualText)
 
             if (text && $.isFunction(text.test)) {
-              return { pass: text.test(trimmedText) }
+              return { pass: text.test(actualText) || text.test(trimmedText) }
             } else {
-              return { pass: trimmedText == text }
+              return { pass: (actualText == text || trimmedText == text) }
             }
           }
         }
@@ -2737,7 +2738,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        if (b instanceof $ || jasmine.isDomNode(b)) {
          var $b = $(b)
 
-         if (a instanceof jQuery)
+         if (a instanceof $)
            return a.length == $b.length && $b.is(a)
 
          return $(b).is(a);
@@ -2746,7 +2747,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     })
 
     jasmine.getEnv().addCustomEqualityTester(function (a, b) {
-     if (a instanceof jQuery && b instanceof jQuery && a.size() == b.size())
+     if (a instanceof $ && b instanceof $ && a.size() == b.size())
         return a.is(b)
     })
   })
@@ -2817,7 +2818,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     return jasmine.getJSONFixtures().proxyCallTo_('read', arguments)[url]
   }
 }(window, window.jasmine, window.jQuery);
-
 
 this.AsyncSpec = (function(global){
 

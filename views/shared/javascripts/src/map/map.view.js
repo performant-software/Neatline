@@ -64,7 +64,7 @@ Neatline.module('Map', function(Map) {
       /**
        * WKT reader/writer.
        */
-      this.formatWkt = new OpenLayers.Format.WKT();
+      //this.formatWkt = new OpenLayers.Format.WKT();
 
       /**
        * A nested object that contains references to all vector and WMS layers
@@ -97,25 +97,25 @@ Neatline.module('Map', function(Map) {
      */
     _initOpenLayers: function() {
 
-      // Set the theme directory.
-      OpenLayers.ImgPath = Neatline.g.neatline.openlayers_theme;
+      //// Set the theme directory.
+      //OpenLayers.ImgPath = Neatline.g.neatline.openlayers_theme;
 
-      // Spin up the map instance.
-      this.map = new OpenLayers.Map(this.el, {
+      //// Spin up the map instance.
+      //this.map = new OpenLayers.Map(this.el, {
 
-        theme: null,
-        zoomMethod: null,
-        panMethod:  null,
+        //theme: null,
+        //zoomMethod: null,
+        //panMethod:  null,
 
-        controls: [
-          new OpenLayers.Control.PanZoom(),
-          new OpenLayers.Control.Navigation({
-            dragPanOptions: { enableKinetic: false },
-            documentDrag: true
-          })
-        ]
+        //controls: [
+          //new OpenLayers.Control.PanZoom(),
+          //new OpenLayers.Control.Navigation({
+            //dragPanOptions: { enableKinetic: false },
+            //documentDrag: true
+          //})
+        //]
 
-      });
+      //});
 
     },
 
@@ -125,45 +125,45 @@ Neatline.module('Map', function(Map) {
      */
     _initControls: function() {
 
-      // Bind highlight/select callbacks to the view.
-      _.bindAll(this, 'onBeforeHighlight', 'onHighlight', 'onUnhighlight',
-        'onSelect', 'onUnselect');
+      //// Bind highlight/select callbacks to the view.
+      //_.bindAll(this, 'onBeforeHighlight', 'onHighlight', 'onUnhighlight',
+        //'onSelect', 'onUnselect');
 
-      // Build the hover control, bind callbacks.
-      this.highlightControl = new OpenLayers.Control.SelectFeature(
-        this.getVectorLayers(), {
+      //// Build the hover control, bind callbacks.
+      //this.highlightControl = new OpenLayers.Control.SelectFeature(
+        //this.getVectorLayers(), {
 
-          hover: true,
-          renderIntent: 'temporary',
-          highlightOnly: true,
+          //hover: true,
+          //renderIntent: 'temporary',
+          //highlightOnly: true,
 
-          eventListeners: {
-            beforefeaturehighlighted: this.onBeforeHighlight,
-            featurehighlighted:       this.onHighlight,
-            featureunhighlighted:     this.onUnhighlight
-          }
+          //eventListeners: {
+            //beforefeaturehighlighted: this.onBeforeHighlight,
+            //featurehighlighted:       this.onHighlight,
+            //featureunhighlighted:     this.onUnhighlight
+          //}
 
-        }
-      );
+        //}
+      //);
 
-      // Build the click control, bind callbacks.
-      this.selectControl = new OpenLayers.Control.SelectFeature(
-        this.getVectorLayers(), {
-          onSelect:   this.onSelect,
-          onUnselect: this.onUnselect
-        }
-      );
+      //// Build the click control, bind callbacks.
+      //this.selectControl = new OpenLayers.Control.SelectFeature(
+        //this.getVectorLayers(), {
+          //onSelect:   this.onSelect,
+          //onUnselect: this.onUnselect
+        //}
+      //);
 
-      // Enable panning when cursor is over feature.
-      this.highlightControl.handlers.feature.stopDown = false;
-      this.selectControl.handlers.feature.stopDown = false;
+      //// Enable panning when cursor is over feature.
+      //this.highlightControl.handlers.feature.stopDown = false;
+      //this.selectControl.handlers.feature.stopDown = false;
 
-      // Add the controls to the map.
-      this.map.addControls([this.highlightControl, this.selectControl]);
+      //// Add the controls to the map.
+      //this.map.addControls([this.highlightControl, this.selectControl]);
 
-      // Activate the controls
-      this.highlightControl.activate();
-      this.selectControl.activate();
+      //// Activate the controls
+      //this.highlightControl.activate();
+      //this.selectControl.activate();
 
     },
 
@@ -174,11 +174,11 @@ Neatline.module('Map', function(Map) {
      */
     _initEvents: function() {
 
-      // When the map is panned or zoomed.
-      this.map.events.register('moveend', this.map, _.bind(function() {
-        if (this.exhibit.spatial_querying) this.publishPosition();
-        Neatline.vent.trigger('MAP:move');
-      }, this));
+      //// When the map is panned or zoomed.
+      //this.map.events.register('moveend', this.map, _.bind(function() {
+        //if (this.exhibit.spatial_querying) this.publishPosition();
+        //Neatline.vent.trigger('MAP:move');
+      //}, this));
 
     },
 
@@ -213,25 +213,25 @@ Neatline.module('Map', function(Map) {
      */
     _initImageLayer: function() {
 
-      var h = this.exhibit.image_height;
-      var w = this.exhibit.image_width;
+      //var h = this.exhibit.image_height;
+      //var w = this.exhibit.image_width;
 
-      var image = new OpenLayers.Layer.Image(
+      //var image = new OpenLayers.Layer.Image(
 
-        // Title, image URL, and dimensions.
-        this.exhibit.title, this.exhibit.image_layer,
-        new OpenLayers.Bounds(0, 0, w, h),
-        new OpenLayers.Size(w/5, h/5),
+        //// Title, image URL, and dimensions.
+        //this.exhibit.title, this.exhibit.image_layer,
+        //new OpenLayers.Bounds(0, 0, w, h),
+        //new OpenLayers.Size(w/5, h/5),
 
-        {
-          // Add pan padding around the edges of the image
-          maxExtent: new OpenLayers.Bounds(-w*2, -h*2, w*2, h*2),
-          numZoomLevels: this.exhibit.zoom_levels
-        }
+        //{
+          //// Add pan padding around the edges of the image
+          //maxExtent: new OpenLayers.Bounds(-w*2, -h*2, w*2, h*2),
+          //numZoomLevels: this.exhibit.zoom_levels
+        //}
 
-      );
+      //);
 
-      this.map.addLayer(image);
+      //this.map.addLayer(image);
 
     },
 
@@ -241,13 +241,13 @@ Neatline.module('Map', function(Map) {
      */
     _initWmsLayer: function() {
 
-      var wms = new OpenLayers.Layer.WMS(
-        this.exhibit.title, this.exhibit.wms_address,
-        { layers: this.exhibit.wms_layers },
-        { maxZoomLevel: 20 }
-      );
+      //var wms = new OpenLayers.Layer.WMS(
+        //this.exhibit.title, this.exhibit.wms_address,
+        //{ layers: this.exhibit.wms_layers },
+        //{ maxZoomLevel: 20 }
+      //);
 
-      this.map.addLayer(wms);
+      //this.map.addLayer(wms);
 
     },
 
@@ -257,25 +257,25 @@ Neatline.module('Map', function(Map) {
      */
     _initSpatialLayers: function() {
 
-      var layers = {};
+      //var layers = {};
 
-      // Build array of base layer instances.
-      _.each(Neatline.g.neatline.spatial_layers, function(json) {
-        var layer = Neatline.request('MAP:LAYERS:getLayer', json);
-        if (_.isObject(layer)) layers[json.id] = layer;
-      });
+      //// Build array of base layer instances.
+      //_.each(Neatline.g.neatline.spatial_layers, function(json) {
+        //var layer = Neatline.request('MAP:LAYERS:getLayer', json);
+        //if (_.isObject(layer)) layers[json.id] = layer;
+      //});
 
-      // Add the layers, set indices to 0.
-      _.each(_.values(layers), _.bind(function(layer) {
-        this.map.addLayer(layer);
-        this.map.setLayerIndex(layer, 0);
-      }, this));
+      //// Add the layers, set indices to 0.
+      //_.each(_.values(layers), _.bind(function(layer) {
+        //this.map.addLayer(layer);
+        //this.map.setLayerIndex(layer, 0);
+      //}, this));
 
-      // Set default base layer.
-      this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
+      //// Set default base layer.
+      //this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
 
-      // Add layer switcher.
-      this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+      //// Add layer switcher.
+      //this.map.addControl(new OpenLayers.Control.LayerSwitcher());
 
     },
 
@@ -285,19 +285,19 @@ Neatline.module('Map', function(Map) {
      */
     _initViewport: function() {
 
-      var focus = Neatline.g.neatline.exhibit.map_focus;
-      var zoom  = Neatline.g.neatline.exhibit.map_zoom;
+      //var focus = Neatline.g.neatline.exhibit.map_focus;
+      //var zoom  = Neatline.g.neatline.exhibit.map_zoom;
 
-      // Apply default focus, if one exists.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
-      }
+      //// Apply default focus, if one exists.
+      //if (_.isString(focus) && _.isNumber(zoom)) {
+        //this.setViewport(focus, zoom);
+      //}
 
-      else {
-        // Otherwise, geolocate.
-        this.map.zoomTo(this.options.defaultZoom);
-        this.geolocate();
-      }
+      //else {
+        //// Otherwise, geolocate.
+        //this.map.zoomTo(this.options.defaultZoom);
+        //this.geolocate();
+      //}
 
     },
 
@@ -380,14 +380,14 @@ Neatline.module('Map', function(Map) {
      */
     geolocate: function() {
 
-      // Construct the control.
-      var geolocate = new OpenLayers.Control.Geolocate({
-        bind: true, watch: false
-      });
+      //// Construct the control.
+      //var geolocate = new OpenLayers.Control.Geolocate({
+        //bind: true, watch: false
+      //});
 
-      // Geolocate.
-      this.map.addControl(geolocate);
-      geolocate.activate();
+      //// Geolocate.
+      //this.map.addControl(geolocate);
+      //geolocate.activate();
 
     },
 
@@ -449,18 +449,18 @@ Neatline.module('Map', function(Map) {
      */
     ingestRecords: function(records) {
 
-      if (this.map.dragging) return;
+      //if (this.map.dragging) return;
 
-      // Build layers.
-      this.ingestVectorLayers(records);
-      this.ingestWmsLayers(records);
+      //// Build layers.
+      //this.ingestVectorLayers(records);
+      //this.ingestWmsLayers(records);
 
-      // Publish collection, update controls.
-      Neatline.vent.trigger('MAP:ingest', records);
-      this.updatePublicControls();
+      //// Publish collection, update controls.
+      //Neatline.vent.trigger('MAP:ingest', records);
+      //this.updatePublicControls();
 
-      // End the load.
-      this.loading = false;
+      //// End the load.
+      //this.loading = false;
 
     },
 
@@ -540,37 +540,37 @@ Neatline.module('Map', function(Map) {
      */
     buildVectorLayer: function(record) {
 
-      // Build the layer.
-      var layer = new OpenLayers.Layer.Vector(record.get('title'), {
+      //// Build the layer.
+      //var layer = new OpenLayers.Layer.Vector(record.get('title'), {
 
-        displayInLayerSwitcher: false,
-        styleMap: record.getStyleMap(),
+        //displayInLayerSwitcher: false,
+        //styleMap: record.getStyleMap(),
 
-        neatline: {
-          model: record,
-          frozen: false
-        }
+        //neatline: {
+          //model: record,
+          //frozen: false
+        //}
 
-      });
+      //});
 
-      // Add features.
-      if (record.get('coverage')) {
-        layer.addFeatures(this.formatWkt.read(record.get('coverage')));
-      }
+      //// Add features.
+      //if (record.get('coverage')) {
+        //layer.addFeatures(this.formatWkt.read(record.get('coverage')));
+      //}
 
-      // (1) Apply filters.
-      this.filterLayer(layer);
+      //// (1) Apply filters.
+      //this.filterLayer(layer);
 
-      // (2) Add to the map.
-      this.layers.vector[record.id] = layer;
-      this.map.addLayer(layer);
+      //// (2) Add to the map.
+      //this.layers.vector[record.id] = layer;
+      //this.map.addLayer(layer);
 
-      // (3) Apply the z-index.
-      if (_.isNumber(record.get('zindex'))) {
-        this.setZIndex(layer, record.get('zindex'));
-      }
+      //// (3) Apply the z-index.
+      //if (_.isNumber(record.get('zindex'))) {
+        //this.setZIndex(layer, record.get('zindex'));
+      //}
 
-      return layer;
+      //return layer;
 
     },
 
@@ -583,44 +583,44 @@ Neatline.module('Map', function(Map) {
      */
     buildWmsLayer: function(record) {
 
-      // Build the layer.
-      var layer = new OpenLayers.Layer.WMS(
-        record.get('title'), record.get('wms_address'), {
+      //// Build the layer.
+      //var layer = new OpenLayers.Layer.WMS(
+        //record.get('title'), record.get('wms_address'), {
 
-          // WMS request parameters.
-          layers: record.get('wms_layers'),
-          format: 'image/png8',
-          transparent: true,
-          tiled: true
+          //// WMS request parameters.
+          //layers: record.get('wms_layers'),
+          //format: 'image/png8',
+          //transparent: true,
+          //tiled: true
 
-        }, {
+        //}, {
 
-          // OpenLayers configuration.
-          displayOutsideMaxExtent: true,
-          opacity: Number(record.get('fill_opacity')),
-          transitionEffect: 'map-resize',
-          isBaseLayer: false,
+          //// OpenLayers configuration.
+          //displayOutsideMaxExtent: true,
+          //opacity: Number(record.get('fill_opacity')),
+          //transitionEffect: 'map-resize',
+          //isBaseLayer: false,
 
-          neatline: {
-            model: record
-          }
+          //neatline: {
+            //model: record
+          //}
 
-        }
-      );
+        //}
+      //);
 
-      // (1) Apply filters.
-      this.filterLayer(layer);
+      //// (1) Apply filters.
+      //this.filterLayer(layer);
 
-      // (2) Add to the map.
-      this.layers.wms[record.id] = layer;
-      this.map.addLayer(layer);
+      //// (2) Add to the map.
+      //this.layers.wms[record.id] = layer;
+      //this.map.addLayer(layer);
 
-      // (3) Apply the z-index.
-      if (_.isNumber(record.get('zindex'))) {
-        this.setZIndex(layer, record.get('zindex'));
-      }
+      //// (3) Apply the z-index.
+      //if (_.isNumber(record.get('zindex'))) {
+        //this.setZIndex(layer, record.get('zindex'));
+      //}
 
-      return layer;
+      //return layer;
 
     },
 
@@ -655,15 +655,15 @@ Neatline.module('Map', function(Map) {
      */
     removeVectorLayer: function(layer) {
 
-      // Remove the layer from the map.
-      this.map.removeLayer(layer);
-      delete this.layers.vector[layer.neatline.model.id];
+      //// Remove the layer from the map.
+      //this.map.removeLayer(layer);
+      //delete this.layers.vector[layer.neatline.model.id];
 
-      // Pluck the layer out of the cursor controls.
-      OpenLayers.Util.removeItem(this.highlightControl.layers, layer);
-      OpenLayers.Util.removeItem(this.selectControl.layers, layer);
+      //// Pluck the layer out of the cursor controls.
+      //OpenLayers.Util.removeItem(this.highlightControl.layers, layer);
+      //OpenLayers.Util.removeItem(this.selectControl.layers, layer);
 
-      layer.destroy();
+      //layer.destroy();
 
     },
 
@@ -980,7 +980,7 @@ Neatline.module('Map', function(Map) {
      * @return {Number}: The zoom level.
      */
     getZoom: function(model) {
-      return this.map.getZoom();
+      //return this.map.getZoom();
     },
 
 
@@ -990,9 +990,9 @@ Neatline.module('Map', function(Map) {
      * @return {String}: The WKT string.
      */
     getExtentAsWKT: function() {
-      var extent = this.map.getExtent().toGeometry();
-      var vector = new OpenLayers.Feature.Vector(extent);
-      return this.formatWkt.write(vector);
+      //var extent = this.map.getExtent().toGeometry();
+      //var vector = new OpenLayers.Feature.Vector(extent);
+      //return this.formatWkt.write(vector);
     },
 
 

@@ -17,7 +17,7 @@ var publicVendor = [
   '<%= paths.vendor.marionette %>',
   '<%= paths.vendor.safesync %>',
   '<%= paths.vendor.openlayers %>',
-  '<%= paths.vendor.openlayers_geo %>',
+  //'<%= paths.vendor.openlayers_geo %>',
   '<%= paths.vendor.stamen %>',
   '<%= paths.vendor.rivets %>'
 ];
