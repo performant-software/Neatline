@@ -117,6 +117,9 @@ Neatline.module('Map', function(Map) {
 
       //});
 
+      // Spin up the map instance.
+      this.map = new ol.Map({ target: this.el });
+
     },
 
 
