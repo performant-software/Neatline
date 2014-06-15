@@ -21,6 +21,10 @@ freeze:
   - 'compile:min'
   - 'copy-payloads'
 
+capistrano:
+  - 'freeze'
+  - 'gitcommit:static'
+
 jasmine:neatline:browser:
   - 'jasmine:neatline:build'
   - 'connect'

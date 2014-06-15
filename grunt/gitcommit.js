@@ -15,6 +15,15 @@ module.exports = {
     files: {
       src: '.'
     }
+  },
+
+  static: {
+    options: {
+      message: 'Committing static assets.'
+    },
+    files: {
+      src: '.'
+    }
   }
 
 };
