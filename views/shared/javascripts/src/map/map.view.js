@@ -280,6 +280,26 @@ Neatline.module('Map', function(Map) {
       //// Add layer switcher.
       //this.map.addControl(new OpenLayers.Control.LayerSwitcher());
 
+      var layers = {};
+
+      // Build array of base layer instances.
+      _.each(Neatline.g.neatline.spatial_layers, function(json) {
+        var layer = Neatline.request('MAP:LAYERS:getLayer', json);
+        if (_.isObject(layer)) layers[json.id] = layer;
+      });
+
+      // Add the layers, set indices to 0.
+      _.each(_.values(layers), _.bind(function(layer) {
+        this.map.addLayer(layer);
+        //this.map.setLayerIndex(layer, 0);
+      }, this));
+
+      // Set default base layer.
+      //this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
+
+      // Add layer switcher.
+      //this.map.addControl(new OpenLayers.Control.LayerSwitcher());
+
     },
 
 
@@ -301,6 +321,16 @@ Neatline.module('Map', function(Map) {
         //this.map.zoomTo(this.options.defaultZoom);
         //this.geolocate();
       //}
+
+      // Create the view.
+      this.view = new ol.View2D({
+        zoom: this.options.defaultZoom,
+        center: [0, 0]
+      });
+
+      // Apply the view.
+      this.map.setView(this.view);
+      // TODO: Set default focus and zoom.
 
     },
 
