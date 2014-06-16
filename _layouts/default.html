@@ -7,7 +7,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>    
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     {% if page.description %}
     <meta name="description" content="{{ page.description }}">
     {% endif %}
@@ -15,15 +15,39 @@
     <link rel="icon" type="image/png" href="http://neatline.org/wp-content/themes/neatline-wp-theme/images/favicon.png">
 
     <!-- Style Sheets -->
+
     <link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,600,400italic,600italic|Cabin:400,600,400italic" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="http://neatline.org/wp-content/themes/neatline-wp-theme/style.css">
     <link rel="stylesheet" href="syntax.css">
+    <link rel="stylesheet" href="search.css">
+
 </head>
 <body>
     <header role="banner" class="container">
         <h1 id="logo">
             <a href="http://neatline.org/" title="Home"><img src="http://neatline.org/wp-content/themes/neatline-wp-theme/images/neatline-logo-rgb.png" alt="Neatline.org" /></a>
         </h1>
+
+        <!-- Google Search Box -->
+
+        <div id="custom_search">
+            <script>
+              (function() {
+              var cx = '009145345920904867543:m5mfiftxziw';
+              var gcse = document.createElement('script');
+              gcse.type = 'text/javascript';
+              gcse.async = true;
+              gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+              '//www.google.com/cse/cse.js?cx=' + cx;
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(gcse, s);
+              })();
+            </script>
+            <gcse:searchbox-only resultsUrl="results.html"></gcse:searchbox-only>
+        </div>
+
+        <!-- end Google Search Box -->
+
         <nav id="sitenav">
             <ul id="menu-main-menu" class="menu">
                 <li><a href="http://neatline.org/about/">About</a></li>
@@ -39,6 +63,7 @@
         <div id="primary">
         {{ content }}
         </div>
+
         <div id="secondary">
           <h2>Getting Started</h2>
           <ul>
@@ -73,8 +98,10 @@
             <li><a href="neatline-stylesheets.html">Using Neatline Stylesheets</a></li>
           </ul>
 
-        </div>
+          </div>
+
     </div>
+
 
     <footer role="contentinfo" class="container">
         <div class="attribution">
@@ -92,6 +119,7 @@
           </ul>
           <a id="slab-logo" href="http://www.scholarslab.org/"><img src="http://static.scholarslab.org/images/logos/slab/slab-logo-black-200px.png" title="Scholars' Lab" alt="Scholars' Lab"/></a>
         </div>
+
     </footer>
 
 </body>
