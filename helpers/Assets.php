@@ -73,7 +73,7 @@ function nl_queueNeatlinePublic($exhibit)
 
     nl_queueDistCss('neatline-public');
     nl_queueDistJs('neatline-public');
-    queue_js_file('bootstrap');
+    queue_js_file('neatline-bootstrap');
 
     fire_plugin_hook('neatline_public_static', array(
         'exhibit' => $exhibit
@@ -96,7 +96,7 @@ function nl_queueNeatlineEditor($exhibit)
     nl_queueDistCss('neatline-editor');
     nl_queueDistJs('neatline-editor');
     nl_queueDistJs('ckeditor/ckeditor');
-    queue_js_file('bootstrap');
+    queue_js_file('neatline-bootstrap');
 
     fire_plugin_hook('neatline_editor_static', array(
         'exhibit' => $exhibit
