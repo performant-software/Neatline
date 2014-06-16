@@ -1,0 +1,26 @@
+#custom_search {
+    float: right;
+    width: 250px;
+    position: absolute;
+    right: 0;
+}
+
+
+input.gsc-search-button-v2 {
+    /* fix sizing of submit button so icon appears  29 h, 54 w?*/
+    height: 30px !important;
+    width: 70px !important;
+}
+
+.gsc-input-box {
+    /* style the input box */
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.gsc-selected-option-container,
+.gsc-orderby,
+.gsc-orderby-label {
+    visibility: hidden;
+}
