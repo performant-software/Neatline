@@ -1,51 +1,51 @@
 
 default:
-  - 'test'
+  - test
 
 build:
-  - 'clean'
-  - 'bower'
-  - 'compile:min'
-  - 'copy'
+  - clean
+  - bower
+  - compile:min
+  - copy
 
 compile:
-  - 'stylus'
-  - 'concat'
+  - stylus
+  - concat
 
 compile:min:
-  - 'stylus'
-  - 'cssmin'
-  - 'uglify'
+  - stylus
+  - cssmin
+  - uglify
 
 freeze:
-  - 'compile:min'
-  - 'copy-payloads'
+  - compile:min
+  - copy-payloads
 
 capistrano:
-  - 'freeze'
-  - 'gitcommit:static'
+  - freeze
+  - gitcommit:static
 
 jasmine:neatline:browser:
-  - 'jasmine:neatline:build'
-  - 'connect'
+  - jasmine:neatline:build
+  - connect
 
 jasmine:editor:browser:
-  - 'jasmine:editor:build'
-  - 'connect'
+  - jasmine:editor:build
+  - connect
 
 test:
-  - 'compile:min'
-  - 'clean:fixtures'
-  - 'phpunit'
-  - 'jasmine'
+  - compile:min
+  - clean:fixtures
+  - phpunit
+  - jasmine
 
 package:
-  - 'freeze'
-  - 'version'
-  - 'po2mo'
-  - 'compress'
+  - freeze
+  - version
+  - po2mo
+  - compress
 
 release:
-  - 'package'
-  - 'gitcommit:release'
-  - 'gittag:release'
+  - package
+  - gitcommit:release
+  - gittag:release
