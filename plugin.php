@@ -43,6 +43,7 @@ require_once NL_DIR.'/helpers/Plugins.php';
 require_once NL_DIR.'/helpers/Schemas.php';
 require_once NL_DIR.'/helpers/Strings.php';
 require_once NL_DIR.'/helpers/Styles.php';
+require_once NL_DIR.'/helpers/Validators.php';
 require_once NL_DIR.'/helpers/Views.php';
 
 // Vendor:
