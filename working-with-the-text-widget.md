@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # [NeatlineText][plugin]
 
 **NeatlineText** is an extension to the Neatline plugin that makes it possible to connect paragraphs, sentences, and words in text documents with annotations in Neatline exhibits.
