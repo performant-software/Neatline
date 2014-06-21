@@ -35,7 +35,18 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
       // geometric extent of the record's geometry.
       // ----------------------------------------------------------------------
 
-      // TODO
+      NL.respondMap200(fixtures.records);
+      NL.setMapZoom(1);
+
+      // Select a record with no focus or zoom
+      var model = NL.recordFromJson(fixtures.noFocusNoZoom);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should center on extent.
+      NL.assertMapFocus(1, 2);
+
+      // Should zoom on extent.
+      expect(NL.getMapZoom()).toBeGreaterThan(1);
 
     });
 

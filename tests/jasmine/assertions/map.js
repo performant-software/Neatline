@@ -28,7 +28,7 @@ var NL = (function(NL) {
    * @param {Number} zoom: The zoom.
    */
   NL.assertMapZoom = function(zoom) {
-    expect(this.v.map.map.getZoom()).toEqual(zoom);
+    expect(NL.getMapZoom()).toEqual(zoom);
   };
 
 

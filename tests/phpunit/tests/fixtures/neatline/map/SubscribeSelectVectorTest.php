@@ -18,7 +18,8 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $noFocusNoZoom = $this->_record($this->exhibit);
 
         $noFocusNoZoom->setArray(array(
-            'coverage' => 'POINT(1 2)'
+            'title'     => 'noFocusNoZoom',
+            'coverage'  => 'POINT(1 2)'
         ));
 
         $noFocusNoZoom->save();
@@ -32,6 +33,7 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $focusNoZoom = $this->_record($this->exhibit);
 
         $focusNoZoom->setArray(array(
+            'title'     => 'focusNoZoom',
             'coverage'  => 'POINT(3 4)',
             'map_focus' => '100,200'
         ));
@@ -47,6 +49,7 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $zoomNoFocus = $this->_record($this->exhibit);
 
         $zoomNoFocus->setArray(array(
+            'title'     => 'zoomNoFocus',
             'coverage'  => 'POINT(5 6)',
             'map_zoom'  => '10'
         ));
@@ -62,6 +65,7 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $focusAndZoom = $this->_record($this->exhibit);
 
         $focusAndZoom->setArray(array(
+            'title'     => 'focusAndZoom',
             'coverage'  => 'POINT(7 8)',
             'map_focus' => '100,200',
             'map_zoom'  => '10'

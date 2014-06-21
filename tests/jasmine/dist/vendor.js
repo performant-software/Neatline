@@ -7258,7 +7258,7 @@ var NL = (function(NL) {
    * @param {Number} zoom: The zoom.
    */
   NL.assertMapZoom = function(zoom) {
-    expect(this.v.map.map.getZoom()).toEqual(zoom);
+    expect(NL.getMapZoom()).toEqual(zoom);
   };
 
 
@@ -7895,6 +7895,16 @@ var NL = (function(NL) {
    */
   NL.setMapZoom = function(zoom) {
     this.v.map.map.zoomTo(zoom);
+  };
+
+
+  /**
+   * Get the current map zoom level.
+   *
+   * @param {Number} zoom: The zoom level.
+   */
+  NL.getMapZoom = function(zoom) {
+    return this.v.map.map.getZoom();
   };
 
 
