@@ -9,9 +9,15 @@
 describe('Map | Subscribe `select` (Vector Layers)', function() {
 
 
-  var model, fixtures = {
-    records: readFixtures('NeatlineMapSubscribe.records.json'),
-    record:  readFixtures('NeatlineMapSubscribe.record.json')
+  var slug = 'NeatlineMapSubscribeSelectVector'
+
+
+  var fixtures = {
+    records:        readFixtures(slug+'.records.json'),
+    noFocusNoZoom:  readFixtures(slug+'.noFocusNoZoom.json'),
+    focusNoZoom:    readFixtures(slug+'.focusNoZoom.json'),
+    zoomNoFocus:    readFixtures(slug+'.zoomNoFocus.json'),
+    focusAndZoom:   readFixtures(slug+'.focusAndZoom.json')
   };
 
 
@@ -78,10 +84,10 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     NL.respondMap200(fixtures.records);
 
     // Get layer, cache request count.
-    var layer = NL.v.map.getVectorLayers()[0];
+    var model = NL.recordFromJson(fixtures.focusAndZoom);
     var count = NL.server.requests.count;
 
-    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    Neatline.vent.trigger('select', { model: model });
 
     // Should not load record from server.
     expect(NL.server.requests.count).toEqual(count);
@@ -102,7 +108,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // ------------------------------------------------------------------------
 
     // Create model with no vector layer.
-    var model = NL.recordFromJson(fixtures.record);
+    var model = NL.recordFromJson(fixtures.focusAndZoom);
     var count = NL.server.requests.count;
 
     Neatline.vent.trigger('select', { model: model });
@@ -112,8 +118,8 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
     // New layer should be created for model.
     var layer = NL.v.map.getVectorLayers()[0];
-    expect(layer.features[0].geometry.x).toEqual(1);
-    expect(layer.features[0].geometry.y).toEqual(2);
+    expect(layer.features[0].geometry.x).toEqual(7);
+    expect(layer.features[0].geometry.y).toEqual(8);
 
     // Map should focus.
     NL.assertMapFocus(100, 200);
