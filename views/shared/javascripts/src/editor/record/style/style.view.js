@@ -20,9 +20,11 @@ Neatline.module('Editor.Record.Style', {
         'shown.bs.tab a[data-slug="style"]': 'activate',
 
         // Set map-derived styles.
-        'click a[name="set-min-zoom"]': 'onSetMinZoom',
-        'click a[name="set-max-zoom"]': 'onSetMaxZoom',
-        'click a[name="set-focus"]':    'onSetFocus',
+        'click a[name="set-min-zoom"]':   'onSetMinZoom',
+        'click a[name="set-max-zoom"]':   'onSetMaxZoom',
+        'click a[name="set-map-focus"]':  'onSetMapFocus',
+        'click a[name="set-map-zoom"]':   'onSetMapZoom',
+        'click a[name="set-focus"]':      'onSetFocus',
 
         // Preview styles.
         'keyup input.preview': 'onStyleKeyup'
@@ -76,8 +78,7 @@ Neatline.module('Editor.Record.Style', {
        * Populate "Min Zoom" with current map value.
        */
       onSetMinZoom: function() {
-        var zoom = Neatline.request('MAP:getZoom');
-        this.__ui.minZoom.val(zoom).change();
+        this._setCurrentZoom(this.__ui.minZoom);
       },
 
 
@@ -85,8 +86,23 @@ Neatline.module('Editor.Record.Style', {
        * Populate "Max Zoom" with current map value.
        */
       onSetMaxZoom: function() {
-        var zoom = Neatline.request('MAP:getZoom');
-        this.__ui.maxZoom.val(zoom).change();
+        this._setCurrentZoom(this.__ui.maxZoom);
+      },
+
+
+      /**
+       * Populate "Default Focus" with current map value.
+       */
+      onSetMapFocus: function() {
+        this._setCurrentFocus(this.__ui.mapFocus);
+      },
+
+
+      /**
+       * Populate "Default Zoom" with current map value.
+       */
+      onSetMapZoom: function(e) {
+        this._setCurrentZoom(this.__ui.mapZoom);
       },
 
 
@@ -94,10 +110,8 @@ Neatline.module('Editor.Record.Style', {
        * Populate default focus and zoom with current map center.
        */
       onSetFocus: function() {
-        var center  = Neatline.request('MAP:getCenter');
-        var zoom    = Neatline.request('MAP:getZoom');
-        this.__ui.mapFocus.val(center.lon+','+center.lat).change();
-        this.__ui.mapZoom.val(zoom).change();
+        this.onSetMapFocus();
+        this.onSetMapZoom();
       },
 
 
@@ -108,6 +122,28 @@ Neatline.module('Editor.Record.Style', {
        */
       onStyleKeyup: function(e) {
         $(e.target).trigger('change');
+      },
+
+
+      /**
+       * Set the current map focus as the value of an input.
+       *
+       * @param {Object} element: The element.
+       */
+      _setCurrentFocus: function(element) {
+        var center = Neatline.request('MAP:getCenter');
+        element.val(center.lon+','+center.lat).change();
+      },
+
+
+      /**
+       * Set the current map zoom as the value of an input.
+       *
+       * @param {Object} element: The element.
+       */
+      _setCurrentZoom: function(element) {
+        var zoom = Neatline.request('MAP:getZoom');
+        element.val(zoom).change();
       }
 
 
