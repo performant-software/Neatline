@@ -28,17 +28,20 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
   describe('should apply a default focus and zoom', function() {
 
+    beforeEach(function() {
+      NL.setMapZoom(1);
+    });
+
     it('no focus and no zoom', function() {
 
       // ----------------------------------------------------------------------
-      // When neither a custom focus nor zoom is provided, center around the
-      // geometric extent of the record's geometry.
+      // When neither a custom focus nor zoom is provided, the viewport should
+      // center around the geometric extent of the record's geometry.
       // ----------------------------------------------------------------------
 
       NL.respondMap200(fixtures.records);
-      NL.setMapZoom(1);
 
-      // Select a record with no focus or zoom
+      // Select a record with no focus or zoom.
       var model = NL.recordFromJson(fixtures.noFocusNoZoom);
       Neatline.vent.trigger('select', { model: model });
 
@@ -54,10 +57,20 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
       // ----------------------------------------------------------------------
       // When a record has a defined focus but no zoom, the focus should be
-      // applied and the zoom should stay unchanged.
+      // applied and the viewport should zoom to fit the geometry.
       // ----------------------------------------------------------------------
 
-      // TODO
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with a focus but no zoom.
+      var model = NL.recordFromJson(fixtures.focusNoZoom);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should apply focus.
+      NL.assertMapFocus(100, 200);
+
+      // Should zoom on extent.
+      expect(NL.getMapZoom()).toBeGreaterThan(1);
 
     });
 
@@ -65,10 +78,20 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
       // ----------------------------------------------------------------------
       // When a record has a defined zoom but no focus, the zoom should be
-      // applied and the map should focus on the geometric centroid.
+      // applied and the viewport should focus on the geometric center.
       // ----------------------------------------------------------------------
 
-      // TODO
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with a zoom but no focus.
+      var model = NL.recordFromJson(fixtures.zoomNoFocus);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should center on extent.
+      NL.assertMapFocus(5, 6);
+
+      // Should apply zoom.
+      NL.assertMapZoom(10);
 
     });
 
@@ -78,7 +101,17 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
       // When both a custom focus and zoom are provided, apply both.
       // ----------------------------------------------------------------------
 
-      // TODO
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with a focus and zoom.
+      var model = NL.recordFromJson(fixtures.focusAndZoom);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should apply focus.
+      NL.assertMapFocus(100, 200);
+
+      // Should zoom on extent.
+      NL.assertMapZoom(10);
 
     });
 

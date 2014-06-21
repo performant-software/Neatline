@@ -346,18 +346,33 @@ Neatline.module('Map', function(Map) {
       // Get a layer for the model.
       var layer = this.getOrCreateVectorLayer(model);
 
-      // Try to get a custom focus.
+      // Does the layer have geometry that can be focused on?
+      var canFocus = model.get('coverage') && !model.get('is_wms');
+
+      // Try to get custom focus/zoom.
       var focus = model.get('map_focus');
       var zoom  = model.get('map_zoom');
 
-      // If focus is defined, apply.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
+      // If a custom zoom is set, apply it.
+      if (_.isNumber(zoom)) {
+        this.setZoom(zoom);
       }
 
-      // Otherwise, fit to viewport.
-      else if (model.get('coverage') && !model.get('is_wms')) {
-        this.map.zoomToExtent(layer.getDataExtent());
+      // Otherwise, zoom around the geometry.
+      else if (canFocus) {
+        var zoom = this.map.getZoomForExtent(layer.getDataExtent());
+        this.setZoom(zoom);
+      }
+
+      // If a custom focus is set, apply it.
+      if (_.isString(focus)) {
+        this.setFocus(focus);
+      }
+
+      // Otherwise, focus around the geometry.
+      else if (canFocus) {
+        var center = layer.getDataExtent().getCenterLonLat();
+        this.setFocus(center);
       }
 
       Neatline.vent.trigger('MAP:focused');
@@ -379,10 +394,11 @@ Neatline.module('Map', function(Map) {
     /**
      * Set the focus.
      *
-     * @param {String} focus: Comma-delimited lat/lon.
+     * @param {Array|String} focus: An array (or comma-delimited) lon/lat.
      */
     setFocus: function(focus) {
-      this.map.setCenter(focus.split(','));
+      if (_.isString(focus)) focus = focus.split(',');
+      this.map.setCenter(focus);
     },
 
 
