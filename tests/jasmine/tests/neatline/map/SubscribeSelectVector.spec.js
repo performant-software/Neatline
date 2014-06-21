@@ -20,6 +20,54 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
   });
 
 
+  describe('should apply a default focus and zoom', function() {
+
+    it('no focus and no zoom', function() {
+
+      // ----------------------------------------------------------------------
+      // When neither a custom focus nor zoom is provided, center around the
+      // geometric extent of the record's geometry.
+      // ----------------------------------------------------------------------
+
+      // TODO
+
+    });
+
+    it('focus but no zoom', function() {
+
+      // ----------------------------------------------------------------------
+      // When a record has a defined focus but no zoom, the focus should be
+      // applied and the zoom should stay unchanged.
+      // ----------------------------------------------------------------------
+
+      // TODO
+
+    });
+
+    it('zoom but no focus', function() {
+
+      // ----------------------------------------------------------------------
+      // When a record has a defined zoom but no focus, the zoom should be
+      // applied and the map should focus on the geometric centroid.
+      // ----------------------------------------------------------------------
+
+      // TODO
+
+    });
+
+    it('focus and zoom', function() {
+
+      // ----------------------------------------------------------------------
+      // When both a custom focus and zoom are provided, apply both.
+      // ----------------------------------------------------------------------
+
+      // TODO
+
+    });
+
+  });
+
+
   it('should focus when a layer already exists', function() {
 
     // ------------------------------------------------------------------------
@@ -39,7 +87,8 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     expect(NL.server.requests.count).toEqual(count);
 
     // Map should focus.
-    NL.assertMapViewport(100, 200, 10);
+    NL.assertMapFocus(100, 200);
+    NL.assertMapZoom(10);
 
   });
 
@@ -67,7 +116,8 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     expect(layer.features[0].geometry.y).toEqual(2);
 
     // Map should focus.
-    NL.assertMapViewport(100, 200, 10);
+    NL.assertMapFocus(100, 200);
+    NL.assertMapZoom(10);
 
   });
 
@@ -115,7 +165,8 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     NL.clickOnMapFeature(feature);
 
     // Focus should be unchanged.
-    NL.assertMapViewport(200, 300, 15);
+    NL.assertMapFocus(200, 300);
+    NL.assertMapZoom(15);
 
   });
 

@@ -225,7 +225,8 @@ describe('Record | Open Form', function() {
     NL.click($(NL.getRecordListRows()[1]));
 
     // Should focus on record.
-    NL.assertMapViewport(100, 200, 10);
+    NL.assertMapFocus(100, 200);
+    NL.assertMapZoom(10);
 
   });
 

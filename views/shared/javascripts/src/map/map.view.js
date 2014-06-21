@@ -290,7 +290,8 @@ Neatline.module('Map', function(Map) {
 
       // Apply default focus, if one exists.
       if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
+        this.setFocus(focus);
+        this.setZoom(zoom);
       }
 
       else {
@@ -372,6 +373,26 @@ Neatline.module('Map', function(Map) {
      */
     setViewport: function(focus, zoom) {
       this.map.setCenter(focus.split(','), zoom);
+    },
+
+
+    /**
+     * Set the focus.
+     *
+     * @param {String} focus: Comma-delimited lat/lon.
+     */
+    setFocus: function(focus) {
+      this.map.setCenter(focus.split(','));
+    },
+
+
+    /**
+     * Set the zoom.
+     *
+     * @param {Number} zoom: The zoom value.
+     */
+    setZoom: function(zoom) {
+      this.map.zoomTo(zoom);
     },
 
 
