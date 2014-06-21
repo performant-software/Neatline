@@ -26,13 +26,13 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
   });
 
 
-  describe('should apply a default focus and zoom', function() {
+  describe('should focus and zoom on the record', function() {
 
     beforeEach(function() {
       NL.setMapZoom(1);
     });
 
-    it('no focus and no zoom', function() {
+    it('no focus, no zoom', function() {
 
       // ----------------------------------------------------------------------
       // When neither a custom focus nor zoom is provided, the viewport should
@@ -45,15 +45,15 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
       var model = NL.recordFromJson(fixtures.noFocusNoZoom);
       Neatline.vent.trigger('select', { model: model });
 
-      // Should center on extent.
+      // Should auto-focus.
       NL.assertMapFocus(1, 2);
 
-      // Should zoom on extent.
+      // Should auto-zoom.
       expect(NL.getMapZoom()).toBeGreaterThan(1);
 
     });
 
-    it('focus but no zoom', function() {
+    it('focus, no zoom', function() {
 
       // ----------------------------------------------------------------------
       // When a record has a defined focus but no zoom, the focus should be
@@ -66,15 +66,15 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
       var model = NL.recordFromJson(fixtures.focusNoZoom);
       Neatline.vent.trigger('select', { model: model });
 
-      // Should apply focus.
+      // Should apply custom focus.
       NL.assertMapFocus(100, 200);
 
-      // Should zoom on extent.
+      // Should auto-zoom.
       expect(NL.getMapZoom()).toBeGreaterThan(1);
 
     });
 
-    it('zoom but no focus', function() {
+    it('zoom, no focus', function() {
 
       // ----------------------------------------------------------------------
       // When a record has a defined zoom but no focus, the zoom should be
@@ -87,10 +87,10 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
       var model = NL.recordFromJson(fixtures.zoomNoFocus);
       Neatline.vent.trigger('select', { model: model });
 
-      // Should center on extent.
+      // Should auto-focus.
       NL.assertMapFocus(5, 6);
 
-      // Should apply zoom.
+      // Should apply custom zoom.
       NL.assertMapZoom(10);
 
     });
@@ -107,10 +107,10 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
       var model = NL.recordFromJson(fixtures.focusAndZoom);
       Neatline.vent.trigger('select', { model: model });
 
-      // Should apply focus.
+      // Should apply custom focus.
       NL.assertMapFocus(100, 200);
 
-      // Should zoom on extent.
+      // Should apply custom zoom.
       NL.assertMapZoom(10);
 
     });
