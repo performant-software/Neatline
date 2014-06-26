@@ -34,7 +34,6 @@ jasmine:editor:browser:
   - connect
 
 test:
-  - compile:min
   - clean:fixtures
   - phpunit
   - jasmine

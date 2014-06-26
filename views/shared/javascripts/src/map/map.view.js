@@ -126,8 +126,13 @@ Neatline.module('Map', function(Map) {
     _initControls: function() {
 
       // Bind highlight/select callbacks to the view.
-      _.bindAll(this, 'onBeforeHighlight', 'onHighlight', 'onUnhighlight',
-        'onSelect', 'onUnselect');
+      _.bindAll(this, [
+        'onBeforeHighlight',
+        'onHighlight',
+        'onUnhighlight',
+        'onSelect',
+        'onUnselect'
+      ]);
 
       // Build the hover control, bind callbacks.
       this.highlightControl = new OpenLayers.Control.SelectFeature(
