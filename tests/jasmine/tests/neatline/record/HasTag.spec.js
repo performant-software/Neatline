@@ -9,11 +9,40 @@
 describe('Record | Has Tag', function() {
 
 
-  it('should return true when the tag is present', function() {
+  it('one tag', function() {
 
-    // ------------------------------------------------------------------------
-    // TODO|dev
-    // ------------------------------------------------------------------------
+    var record = new Neatline.Shared.Record.Model({
+      tags: 'tag1'
+    });
+
+    expect(record.hasTag('tag1')).toBeTruthy();
+    expect(record.hasTag('tag2')).toBeFalsy();
+
+  });
+
+
+  it('multiple tags', function() {
+
+    var record = new Neatline.Shared.Record.Model({
+      tags: 'tag1, tag2'
+    });
+
+    expect(record.hasTag('tag1')).toBeTruthy();
+    expect(record.hasTag('tag2')).toBeTruthy();
+    expect(record.hasTag('tag3')).toBeFalsy();
+
+  });
+
+
+  it('untrimmed tags', function() {
+
+    var record = new Neatline.Shared.Record.Model({
+      tags: ' tag1 , tag2 '
+    });
+
+    expect(record.hasTag('tag1')).toBeTruthy();
+    expect(record.hasTag('tag2')).toBeTruthy();
+    expect(record.hasTag('tag3')).toBeFalsy();
 
   });
 

@@ -119,7 +119,14 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Boolean}
      */
     hasTag: function(tag) {
-      console.log(tag);
+
+      // Split and trim the tags.
+      var trimmed = _.map(this.get('tags').split(','), function(tag) {
+        return _.string.trim(tag);
+      });
+
+      return _.contains(trimmed, tag);
+
     },
 
 
