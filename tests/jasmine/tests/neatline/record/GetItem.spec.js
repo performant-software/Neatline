@@ -9,11 +9,6 @@
 describe('Record | Get Item', function() {
 
 
-  beforeEach(function() {
-    NL.loadNeatline();
-  });
-
-
   describe('should load the item on first access', function() {
 
     it('when the record is saved', function(done) {

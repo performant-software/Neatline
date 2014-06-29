@@ -113,6 +113,17 @@ Neatline.module('Shared.Record', function(Record) {
 
 
     /**
+     * Is the record tagged with a given tag?
+     *
+     * @param {String} tag: The tag.
+     * @return {Boolean}
+     */
+    hasTag: function(tag) {
+      console.log(tag);
+    },
+
+
+    /**
      * Construct an OpenLayers style map object.
      *
      * @return {OpenLayers.StyleMap}: The style map.
