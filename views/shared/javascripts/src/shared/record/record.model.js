@@ -24,7 +24,7 @@ Neatline.module('Shared.Record', function(Record) {
         get: function() {
 
           // Load the item body, if it isn't already loaded.
-          if (_.isUndefined(this.attributes.item)) this.fetchItem();
+          if (_.isUndefined(this.attributes.item)) this.loadItem();
           return this.attributes.item;
 
         }
@@ -85,8 +85,10 @@ Neatline.module('Shared.Record', function(Record) {
 
     /**
      * Load the metadata for the Omeka item associated with the record.
+     *
+     * @param {Function} cb
      */
-    fetchItem: function() {
+    loadItem: function(cb) {
 
       // Break if no parent item.
       if (!this.has('item_id')) return;
@@ -98,6 +100,7 @@ Neatline.module('Shared.Record', function(Record) {
       // Load the item body.
       $.get(url, params, _.bind(function(response) {
         this.set('item', response);
+        if (cb) cb(response);
       }, this));
 
     },
