@@ -272,8 +272,15 @@ class NeatlineRecord extends Neatline_Row_Expandable
                 // for the item), just look for a vanilla DC "Coverage" value.
 
                 try {
-                    $coverage = metadata($item, array('Dublin Core', 'Coverage'));
+
+                    // Try to get a "Coverage" value.
+                    $coverage = metadata(
+                        $item, array('Dublin Core', 'Coverage')
+                    );
+
+                    // Try to convert it to WKT.
                     $this->coverage = nl_extractWkt($coverage);
+
                 } catch (Exception $e) {}
 
             }
