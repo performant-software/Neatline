@@ -1,6 +1,10 @@
 {
   "name": "Neatline",
   "version": "2.2.4",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scholarslab/neatline"
+  },
   "private": false,
   "devDependencies": {
     "glob": "^4.0.0",
