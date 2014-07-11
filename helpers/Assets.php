@@ -125,9 +125,11 @@ function nl_queueExhibitTheme($exhibit)
     // Form the theme directory path.
     $theme = "exhibits/themes/$exhibit->slug";
 
-    // Include `style.css` and/or `script.js`, if they exist.
-    try {
+    try { // Include `style.css`.
         queue_css_file('style', null, false, $theme);
+    } catch (Exception $e) {}
+
+    try { // Include `script.js`.
         queue_js_file('script', $theme);
     } catch (Exception $e) {}
 
