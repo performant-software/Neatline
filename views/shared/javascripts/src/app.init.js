@@ -7,3 +7,10 @@
  */
 
 Neatline = new Marionette.Application();
+
+/**
+ * Start the router after the modules start.
+ */
+Neatline.on('initialize:after', function() {
+  Backbone.history.start();
+});
