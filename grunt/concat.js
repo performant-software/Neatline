@@ -32,7 +32,8 @@ var publicSource = [
   '<%= paths.src.js.shared %>/broker/*.js',
   '<%= paths.src.js.shared %>/map/**/*.js',
   '<%= paths.src.js.shared %>/presenter/*.js',
-  '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js'
+  '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js',
+  '<%= paths.src.js.shared %>/records/*.js'
 ];
 
 var editorVendor = [

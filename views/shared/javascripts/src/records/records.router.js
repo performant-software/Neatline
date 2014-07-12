@@ -18,12 +18,31 @@ Neatline.module('Records', function(Records) {
 
 
     /**
+     * Create a shell collection to fetch records.
+     */
+    initialize: function() {
+      this.records = new Neatline.Shared.Record.Collection();
+    },
+
+
+    /**
      * Select a record.
      *
      * @param {String} id: The record id.
      */
     'record/:id': function(id) {
-      console.log(id);
+
+      // Load the model.
+      this.records.getOrFetch(id, function(model) {
+
+        // Select the requested record.
+        Neatline.vent.trigger('select', {
+          model:  model,
+          source: 'RECORDS'
+        });
+
+      });
+
     }
 
 
