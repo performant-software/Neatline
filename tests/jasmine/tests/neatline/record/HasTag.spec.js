@@ -47,4 +47,10 @@ describe('Record | Has Tag', function() {
   });
 
 
+  it('no tags', function() {
+    var record = new Neatline.Shared.Record.Model();
+    expect(record.hasTag('tag')).toBeFalsy();
+  });
+
+
 });
