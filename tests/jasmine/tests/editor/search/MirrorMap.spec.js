@@ -77,7 +77,7 @@ describe('Search | Mirror Map', function() {
     NL.respondMap200(fixtures.map);
 
     // Request route with `map:` as query.
-    NL.navigate('records/search/query=map:');
+    NL.navigate('browse/search/query=map:');
 
     // List should synchronize with map.
     var recordRows = NL.getRecordListRows();

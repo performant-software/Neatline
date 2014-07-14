@@ -21,7 +21,7 @@ describe('Record | Create Record', function() {
     NL.respondRecordList200(fixtures.records);
 
     elements = {
-      addButton:    NL.v.records.$('a[href="#record/add"]'),
+      addButton:    NL.v.records.$('a[href="#edit/add"]'),
       closeButton:  NL.v.record.$('a[name="close"]'),
       saveButton:   NL.v.record.$('a[name="save"]'),
       styleTab:     NL.v.record.$('a[href="#record-style"]'),
@@ -151,13 +151,13 @@ describe('Record | Create Record', function() {
     // ------------------------------------------------------------------------
     // When a record is saved, the URL hash should be updated to point to the
     // id-specific resource for the record. For example, if the "Text" tab is
-    // active, the route should change from `#record/add/text` to:
+    // active, the route should change from `#edit/add/text` to:
     //
-    // `#record/<id>/text`
+    // `#edit/<id>/text`
     //
     // When the "Map" tab is active:
     //
-    // `#record/<id>/map`
+    // `#edit/<id>/map`
     //
     // etc.
     // ------------------------------------------------------------------------
@@ -165,7 +165,7 @@ describe('Record | Create Record', function() {
     _.each(NL.getTabSlugs(), function(slug) {
 
       // Open new form with the tab.
-      NL.navigate('record/add/'+slug);
+      NL.navigate('edit/add/'+slug);
 
       // Click "Save".
       elements.saveButton.trigger('click');
@@ -173,7 +173,7 @@ describe('Record | Create Record', function() {
 
       // Route should be updated.
       var id = $.parseJSON(fixtures.record).id;
-      expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
+      expect(Backbone.history.fragment).toEqual('edit/'+id+'/'+slug);
 
     });
 

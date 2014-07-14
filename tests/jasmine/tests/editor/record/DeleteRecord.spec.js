@@ -22,7 +22,7 @@ describe('Record | Delete Record', function() {
     NL.respondAll200(fixtures.records12);
 
     // Open form for record 2.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title2').id);
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title2').id);
 
     elements = {
       delete1:  NL.v.record.$('a[href="#delete-modal"]'),
@@ -79,7 +79,7 @@ describe('Record | Delete Record', function() {
     elements.delete1.trigger('click');
 
     // Navigate back to browse.
-    NL.navigate('records');
+    NL.navigate('browse');
 
     // Modal should be hidden.
     expect(NL.v.record.deleteModal).not.toHaveClass('in');
@@ -171,7 +171,7 @@ describe('Record | Delete Record', function() {
     expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.records.$el);
 
     // Records list should be displayed.
-    expect(Backbone.history.fragment).toEqual('records');
+    expect(Backbone.history.fragment).toEqual('browse');
 
   });
 

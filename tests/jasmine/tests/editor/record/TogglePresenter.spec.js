@@ -78,7 +78,7 @@ describe('Record | Toggle Presenter', function() {
     var vent = NL.getEventSpy();
 
     // Request record map tab.
-    NL.navigate('record/add/map');
+    NL.navigate('edit/add/map');
 
     // Presenter should deactivate.
     expect(vent).toHaveBeenCalledWith('deactivatePresenter');

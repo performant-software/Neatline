@@ -132,7 +132,7 @@ Neatline.module('Editor.Record', function(Record) {
       var id = this.model.id || 'add';
 
       // Update the route.
-      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.activeTab);
+      Neatline.execute('EDITOR:setRoute', 'edit/'+id+'/'+this.activeTab);
 
     },
 
@@ -174,7 +174,7 @@ Neatline.module('Editor.Record', function(Record) {
 
       // Update the route.
       Neatline.execute('EDITOR:setRoute',
-        'record/'+this.model.id+'/'+this.activeTab
+        'edit/'+this.model.id+'/'+this.activeTab
       );
 
       // Refresh the exhibit.

@@ -8222,7 +8222,7 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.showRecordList = function(response) {
-    this.navigate('records');
+    this.navigate('browse');
     this.respondLast200(response);
   };
 
@@ -8233,7 +8233,7 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.showRecordForm = function(response) {
-    this.navigate('record/'+JSON.parse(response).id);
+    this.navigate('edit/'+JSON.parse(response).id);
     this.respondLast200(response);
   };
 

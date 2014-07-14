@@ -42,19 +42,19 @@ describe('Records | Apply Routes', function() {
     });
 
     it('default', function() {
-      NL.navigate('records');
+      NL.navigate('browse');
     });
 
     it('query', function() {
-      NL.navigate('records/search/query=test');
+      NL.navigate('browse/search/query=test');
     });
 
     it('start', function() {
-      NL.navigate('records/search/start=50');
+      NL.navigate('browse/search/start=50');
     });
 
     it('query and start', function() {
-      NL.navigate('records/search/query=test/start=50');
+      NL.navigate('browse/search/query=test/start=50');
     });
 
   });

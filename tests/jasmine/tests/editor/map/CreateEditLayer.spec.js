@@ -38,7 +38,7 @@ describe('Map | Create Edit Layer', function() {
       NL.assertVectorLayerCount(3);
 
       // Open edit form for record 3.
-      NL.navigate('record/'+record3.id);
+      NL.navigate('edit/'+record3.id);
 
       // Record 3 layer should be converted to the edit layer.
       expect(NL.v.map.editLayer.id).toEqual(NL.getVectorLayer('title3').id);
@@ -62,7 +62,7 @@ describe('Map | Create Edit Layer', function() {
       NL.assertVectorLayerCount(2);
 
       // Open edit form for record 3.
-      NL.navigate('record/'+record3.id);
+      NL.navigate('edit/'+record3.id);
 
       // Should add new layer for record 3.
       var record3Layer = NL.getVectorLayer('title3');
@@ -94,7 +94,7 @@ describe('Map | Create Edit Layer', function() {
       NL.assertVectorLayerCount(2);
 
       // Open edit form for record 3.
-      NL.navigate('record/'+record3.id);
+      NL.navigate('edit/'+record3.id);
 
       // Respond to record list request.
       NL.respondLast200(fixtures.record3);
@@ -121,7 +121,7 @@ describe('Map | Create Edit Layer', function() {
       NL.assertVectorLayerCount(2);
 
       // Open edit form for record 3.
-      NL.navigate('record/'+record3.id);
+      NL.navigate('edit/'+record3.id);
 
       // Respond to record list request.
       NL.respondLast200(fixtures.record3);
@@ -149,7 +149,7 @@ describe('Map | Create Edit Layer', function() {
     NL.respondMap200(fixtures.records123);
 
     // Add new record.
-    NL.navigate('record/add');
+    NL.navigate('edit/add');
 
     // Map should create new layer for unsaved record.
     expect(NL.v.map.layers.vector[undefined]).toBeDefined();

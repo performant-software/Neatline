@@ -202,7 +202,7 @@ describe('Record | Import SVG', function() {
     elements.link.trigger('click');
 
     // Navigate back to browse.
-    NL.navigate('records');
+    NL.navigate('browse');
 
     // Modal should be hidden.
     expect(NL.v.mapTab.svgModal).not.toHaveClass('in');
