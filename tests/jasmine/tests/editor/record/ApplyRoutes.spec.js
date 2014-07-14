@@ -60,14 +60,14 @@ describe('Record | Apply Routes', function() {
   });
 
 
-  it('#edit/add', function() {
+  it('#edit/new', function() {
 
     // ------------------------------------------------------------------------
-    // When `#edit/add` is requested, the record form should be displayed
+    // When `#edit/new` is requested, the record form should be displayed
     // and the "Text' tab should be activated by default.
     // ------------------------------------------------------------------------
 
-    NL.navigate('edit/add');
+    NL.navigate('edit/new');
 
     // Record form should be visible, "Text" tab active.
     expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
@@ -76,16 +76,16 @@ describe('Record | Apply Routes', function() {
   });
 
 
-  it('#edit/add/:tab', function() {
+  it('#edit/new/:tab', function() {
 
     // ------------------------------------------------------------------------
-    // When `#edit/add/:tab` route is requested, the record form should be
+    // When `#edit/new/:tab` route is requested, the record form should be
     // displayed and the requested tab should be activated.
     // ------------------------------------------------------------------------
 
     _.each(NL.getTabSlugs(), function(slug) {
 
-      NL.navigate('edit/add/'+slug);
+      NL.navigate('edit/new/'+slug);
 
       // Record form should be visible, requested tab active.
       expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);

@@ -149,7 +149,7 @@ describe('Map | Create Edit Layer', function() {
     NL.respondMap200(fixtures.records123);
 
     // Add new record.
-    NL.navigate('edit/add');
+    NL.navigate('edit/new');
 
     // Map should create new layer for unsaved record.
     expect(NL.v.map.layers.vector[undefined]).toBeDefined();

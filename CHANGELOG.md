@@ -1,9 +1,9 @@
 
 ## v2.2.5 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.2.5)) ~ Pending
 
-#### Added Features
+#### Changed Features
 
-  - When the value is changed in the "Slug" field in the record form, the value is now automatically "slugified" to prevent slugs with spaces, capitals, etc.
+  - The routes in the editor have been updated to be more semantic. Now, the default record-browse view is at `#browse`, and search and pagination parameters are provided with `#browse/query=search-query` and `#browse/start=100`.
 
 ## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
 

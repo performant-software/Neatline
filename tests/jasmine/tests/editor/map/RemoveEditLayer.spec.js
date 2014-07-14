@@ -79,7 +79,7 @@ describe('Map | Remove Edit Layer', function() {
     NL.respondAll200(fixtures.records123);
 
     // Add new record.
-    NL.navigate('edit/add');
+    NL.navigate('edit/new');
 
     // Should add new layer.
     NL.assertVectorLayerCount(4);

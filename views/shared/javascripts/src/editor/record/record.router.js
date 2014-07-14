@@ -13,8 +13,8 @@ Neatline.module('Editor.Record', function(Record) {
 
 
     routes: {
-      'edit/add':       'edit/add',
-      'edit/add/:tab':  'edit/add/:tab',
+      'edit/new':       'edit/new',
+      'edit/new/:tab':  'edit/new/:tab',
       'edit/:id':       'edit/:id',
       'edit/:id/:tab':  'edit/:id/:tab'
     },
@@ -23,7 +23,7 @@ Neatline.module('Editor.Record', function(Record) {
     /**
      * Show add record form.
      */
-    'edit/add': function() {
+    'edit/new': function() {
       Neatline.execute('EDITOR:display', ['EDITOR:RECORD']);
       Neatline.execute('EDITOR:RECORD:bindNewRecord', 'text');
     },
@@ -34,7 +34,7 @@ Neatline.module('Editor.Record', function(Record) {
      *
      * @param {String} tab: The active tab.
      */
-    'edit/add/:tab': function(tab) {
+    'edit/new/:tab': function(tab) {
       Neatline.execute('EDITOR:display', ['EDITOR:RECORD']);
       Neatline.execute('EDITOR:RECORD:bindNewRecord', tab);
     },

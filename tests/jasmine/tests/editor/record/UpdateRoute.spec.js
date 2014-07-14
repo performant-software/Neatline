@@ -26,16 +26,16 @@ describe('Record | Update Route', function() {
     // route should update to provide a link to the current tab. For example,
     // when the "Text" tab is active, the route should be:
     //
-    // `#edit/add/text`
+    // `#edit/new/text`
     //
     // When the "Map" tab is active:
     //
-    // `#edit/add/map`
+    // `#edit/new/map`
     //
     // etc.
     // ------------------------------------------------------------------------
 
-    NL.navigate('edit/add');
+    NL.navigate('edit/new');
 
     _.each(NL.getTabSlugs(), function(slug) {
 
@@ -44,7 +44,7 @@ describe('Record | Update Route', function() {
       tab.trigger('click');
 
       // Route should update.
-      expect(Backbone.history.fragment).toEqual('edit/add/'+slug);
+      expect(Backbone.history.fragment).toEqual('edit/new/'+slug);
 
     });
 

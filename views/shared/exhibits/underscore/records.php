@@ -12,7 +12,7 @@
 <script id="record-list-template" type="text/template">
 
   <!-- Add record link. -->
-  <a href="#edit/add" class="btn btn-primary btn-lg add">
+  <a href="#edit/new" class="btn btn-primary btn-lg add">
     <span class="glyphicon glyphicon-file"></span>
     <?php echo __('New Record'); ?>
   </a>

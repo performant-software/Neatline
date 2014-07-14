@@ -129,7 +129,7 @@ Neatline.module('Editor.Record', function(Record) {
 
       // Get the tab slug and id.
       this.activeTab = $(event.target).attr('data-slug');
-      var id = this.model.id || 'add';
+      var id = this.model.id || 'new';
 
       // Update the route.
       Neatline.execute('EDITOR:setRoute', 'edit/'+id+'/'+this.activeTab);
