@@ -26,58 +26,38 @@ Neatline.module('Events', function(Events) {
      * Initialize the record trackers.
      */
     init: function() {
-      this.highlighted = {};
-      this.selected = {};
+      this.highlighted = null;
+      this.selected = null;
     },
 
 
     /**
-     * Unhighlight currently-highlighted records.
+     * Unhighlight a currently-highlighted model.
      *
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
 
-      // Unhighlight all currently-highlighted records.
-      if (!args.allowMultiple) {
-        this.unhighlightAll();
+      // Unhighlight current.
+      if (!_.isNull(this.highlighted)) {
+        Neatline.vent.trigger('unhighlight', {
+          model: this.highlighted, source: this.slug
+        });
       }
 
-      // Register the new record.
-      this.highlighted[args.model.id] = args.model;
+      // Set new current.
+      this.highlighted = args.model;
 
     },
 
 
     /**
-     * Unhighlight a currently-highlighted record by ID.
-     *
-     * @param {Number|String} id: The record ID.
-     */
-    unhighlightById: function(id) {
-      if (_.has(this.highlighted, id)) {
-        this.publish('unhighlight', this.highlighted[id]);
-      }
-    },
-
-
-    /**
-     * Unhighlight all currently-highlighted records.
-     */
-    unhighlightAll: function() {
-      _.each(this.highlighted, _.bind(function(model, id) {
-        this.unhighlightById(id);
-      }, this));
-    },
-
-
-    /**
-     * De-register a currently-highlighted model.
+     * Clear the currently-highlighted model.
      *
      * @param {Object} args: Event arguments.
      */
     unhighlight: function(args) {
-      delete this.highlighted[args.model.id];
+      this.highlighted = null;
     },
 
 
@@ -88,36 +68,16 @@ Neatline.module('Events', function(Events) {
      */
     select: function(args) {
 
-      // Unselect all currently-selected records.
-      if (!args.allowMultiple) {
-        this.unselectAll();
+      // Unselect current.
+      if (!_.isNull(this.selected)) {
+        Neatline.vent.trigger('unselect', {
+          model: this.selected, source: this.slug
+        });
       }
 
-      // Register the new record.
-      this.selected[args.model.id] = args.model;
+      // Set new current.
+      this.selected = args.model;
 
-    },
-
-
-    /**
-     * Unselect a currently-selected record by ID.
-     *
-     * @param {Number|String} id: The record ID.
-     */
-    unselectById: function(id) {
-      if (_.has(this.selected, id)) {
-        this.publish('unselect', this.selected[id]);
-      }
-    },
-
-
-    /**
-     * Unselect all currently-selected records.
-     */
-    unselectAll: function() {
-      _.each(this.selected, _.bind(function(model, id) {
-        this.unselectById(id);
-      }, this));
     },
 
 
@@ -127,20 +87,7 @@ Neatline.module('Events', function(Events) {
      * @param {Object} args: Event arguments.
      */
     unselect: function(args) {
-      delete this.selected[args.model.id];
-    },
-
-
-    /**
-     * Publish an event.
-     *
-     * @param {String} event: The event.
-     * @param {Object} model: The record model.
-     */
-    publish: function(event, model) {
-      Neatline.vent.trigger(event, {
-        model: model, source: this.slug
-      });
+      this.selected = null;
     }
 
 

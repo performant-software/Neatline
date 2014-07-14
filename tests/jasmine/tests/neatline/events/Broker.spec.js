@@ -65,69 +65,6 @@ describe('API | Events', function() {
 
     });
 
-    it('should not unhighlight when `allowMultiple` is passed', function() {
-
-      // ----------------------------------------------------------------------
-      // When `allowMultiple` set to true, the currently highlighted record(s)
-      // should _not_ be unhighlighted.
-      // ----------------------------------------------------------------------
-
-      var vent = NL.getEventSpy();
-
-      Neatline.vent.trigger('highlight', {
-        model: model1, allowMultiple: true, source: 'SRC1'
-      });
-      Neatline.vent.trigger('highlight', {
-        model: model2, allowMultiple: true, source: 'SRC2'
-      });
-      Neatline.vent.trigger('highlight', {
-        model: model3, allowMultiple: true, source: 'SRC3'
-      });
-
-      NL.assertEventNotCalled(vent, 'unhighlight');
-
-    });
-
-    it('should unhighlight all records after `allowMultiple`', function() {
-
-      // ----------------------------------------------------------------------
-      // When multiple records are simultaneously highlighted as a result of
-      // multiple `highlight` events with `allowMultiple` set to true, a new
-      // `highlight` event _without_ `allowMultiple` should cause all of the
-      // previously-highlighted records to be unhighlighted.
-      // ----------------------------------------------------------------------
-
-      var vent = NL.getEventSpy();
-
-      // Multiple highlight models 1-3.
-      Neatline.vent.trigger('highlight', {
-        model: model1, allowMultiple: true, source: 'SRC1'
-      });
-      Neatline.vent.trigger('highlight', {
-        model: model2, allowMultiple: true, source: 'SRC2'
-      });
-      Neatline.vent.trigger('highlight', {
-        model: model3, allowMultiple: true, source: 'SRC3'
-      });
-
-      // Exclusive highlight model 4.
-      Neatline.vent.trigger('highlight', {
-        model: model4, source: 'SRC4'
-      });
-
-      // Should unhighlight models 1-3.
-      expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model: model1, source: 'EVENTS'
-      });
-      expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model: model2, source: 'EVENTS'
-      });
-      expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model: model3, source: 'EVENTS'
-      });
-
-    });
-
   });
 
 
@@ -195,69 +132,6 @@ describe('API | Events', function() {
 
       expect(vent).toHaveBeenCalledWith('unselect', {
         model: model1, source: 'EVENTS'
-      });
-
-    });
-
-    it('should not unselect when `allowMultiple` is passed', function() {
-
-      // ----------------------------------------------------------------------
-      // When `allowMultiple` set to true, the currently selected record(s)
-      // should _not_ be unhighlighted.
-      // ----------------------------------------------------------------------
-
-      var vent = NL.getEventSpy();
-
-      Neatline.vent.trigger('select', {
-        model: model1, allowMultiple: true, source: 'SRC1'
-      });
-      Neatline.vent.trigger('select', {
-        model: model2, allowMultiple: true, source: 'SRC2'
-      });
-      Neatline.vent.trigger('select', {
-        model: model3, allowMultiple: true, source: 'SRC3'
-      });
-
-      NL.assertEventNotCalled(vent, 'unselect');
-
-    });
-
-    it('should unselect all records after `allowMultiple`', function() {
-
-      // ----------------------------------------------------------------------
-      // When multiple records are simultaneously selected as a result of
-      // multiple `select` events with `allowMultiple` set to true, a new
-      // `select` event _without_ `allowMultiple` should cause all of the
-      // previously-highlighted records to be unselected.
-      // ----------------------------------------------------------------------
-
-      var vent = NL.getEventSpy();
-
-      // Multiple select models 1-3.
-      Neatline.vent.trigger('select', {
-        model: model1, allowMultiple: true, source: 'SRC1'
-      });
-      Neatline.vent.trigger('select', {
-        model: model2, allowMultiple: true, source: 'SRC2'
-      });
-      Neatline.vent.trigger('select', {
-        model: model3, allowMultiple: true, source: 'SRC3'
-      });
-
-      // Exclusive select model 4.
-      Neatline.vent.trigger('select', {
-        model: model4, source: 'SRC4'
-      });
-
-      // Should unselect models 1-3.
-      expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model1, source: 'EVENTS'
-      });
-      expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model2, source: 'EVENTS'
-      });
-      expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model3, source: 'EVENTS'
       });
 
     });
