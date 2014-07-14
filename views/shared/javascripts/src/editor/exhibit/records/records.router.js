@@ -14,7 +14,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
     routes: {
       '': 'browse',
-      'browse(/search)(/query=:q)(/start=:s)': 'browse'
+      'browse(/query=:q)(/start=:s)': 'browse'
     },
 
 

@@ -51,7 +51,7 @@ describe('Records | Show Pagination', function() {
     it('with search query', function() {
 
       // Load records 1-2.
-      NL.navigate('browse/search/query=x+y/start=0');
+      NL.navigate('browse/query=x+y/start=0');
       NL.respondLast200(fixtures.p12);
 
       // << disabled, >> enabled.
@@ -59,15 +59,15 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextEnabled();
 
       // << links to query page 1, >> to next page.
-      NL.assertPaginationPrevRoute('#browse/search/query=x+y');
-      NL.assertPaginationNextRoute('#browse/search/query=x+y/start=2');
+      NL.assertPaginationPrevRoute('#browse/query=x+y');
+      NL.assertPaginationNextRoute('#browse/query=x+y/start=2');
 
     });
 
     it('without search query', function() {
 
       // Load records 1-2.
-      NL.navigate('browse/search/start=0');
+      NL.navigate('browse/start=0');
       NL.respondLast200(fixtures.p12);
 
       // << disabled, >> enabled.
@@ -76,7 +76,7 @@ describe('Records | Show Pagination', function() {
 
       // << links to page 1, >> to next page.
       NL.assertPaginationPrevRoute('#browse');
-      NL.assertPaginationNextRoute('#browse/search/start=2');
+      NL.assertPaginationNextRoute('#browse/start=2');
 
     });
 
@@ -91,7 +91,7 @@ describe('Records | Show Pagination', function() {
     it('with search query', function() {
 
       // Load records 2-3.
-      NL.navigate('browse/search/query=x+y/start=1');
+      NL.navigate('browse/query=x+y/start=1');
       NL.respondLast200(fixtures.p23);
 
       // << enabled, >> enabled.
@@ -99,15 +99,15 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextEnabled();
 
       // << links to page 1, >> links to next page.
-      NL.assertPaginationPrevRoute('#browse/search/query=x+y');
-      NL.assertPaginationNextRoute('#browse/search/query=x+y/start=3');
+      NL.assertPaginationPrevRoute('#browse/query=x+y');
+      NL.assertPaginationNextRoute('#browse/query=x+y/start=3');
 
     });
 
     it('without search query', function() {
 
       // Load records 2-3.
-      NL.navigate('browse/search/start=1');
+      NL.navigate('browse/start=1');
       NL.respondLast200(fixtures.p23);
 
       // << enabled, >> enabled.
@@ -116,7 +116,7 @@ describe('Records | Show Pagination', function() {
 
       // << links to page 1, >> links to next page.
       NL.assertPaginationPrevRoute('#browse');
-      NL.assertPaginationNextRoute('#browse/search/start=3');
+      NL.assertPaginationNextRoute('#browse/start=3');
 
     });
 
@@ -131,7 +131,7 @@ describe('Records | Show Pagination', function() {
     it('with search query', function() {
 
       // Load records 3-4.
-      NL.navigate('browse/search/query=x+y/start=2');
+      NL.navigate('browse/query=x+y/start=2');
       NL.respondLast200(fixtures.p34);
 
       // << enabled, >> enabled.
@@ -139,15 +139,15 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextEnabled();
 
       // << links to page 1, >> links to next page.
-      NL.assertPaginationPrevRoute('#browse/search/query=x+y');
-      NL.assertPaginationNextRoute('#browse/search/query=x+y/start=4');
+      NL.assertPaginationPrevRoute('#browse/query=x+y');
+      NL.assertPaginationNextRoute('#browse/query=x+y/start=4');
 
     });
 
     it('without search query', function() {
 
       // Load records 3-4.
-      NL.navigate('browse/search/start=2');
+      NL.navigate('browse/start=2');
       NL.respondLast200(fixtures.p34);
 
       // << enabled, >> enabled.
@@ -156,7 +156,7 @@ describe('Records | Show Pagination', function() {
 
       // << links to page 1, >> links to next page.
       NL.assertPaginationPrevRoute('#browse');
-      NL.assertPaginationNextRoute('#browse/search/start=4');
+      NL.assertPaginationNextRoute('#browse/start=4');
 
     });
 
@@ -171,7 +171,7 @@ describe('Records | Show Pagination', function() {
     it('with search query', function() {
 
       // Load records 5-6.
-      NL.navigate('browse/search/query=x+y/start=4');
+      NL.navigate('browse/query=x+y/start=4');
       NL.respondLast200(fixtures.p56);
 
       // << enabled, >> disabled.
@@ -179,15 +179,15 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextDisabled();
 
       // << links to previous page, >> links to current page.
-      NL.assertPaginationPrevRoute('#browse/search/query=x+y/start=2');
-      NL.assertPaginationNextRoute('#browse/search/query=x+y/start=4');
+      NL.assertPaginationPrevRoute('#browse/query=x+y/start=2');
+      NL.assertPaginationNextRoute('#browse/query=x+y/start=4');
 
     });
 
     it('without search query', function() {
 
       // Load records 5-6.
-      NL.navigate('browse/search/start=4');
+      NL.navigate('browse/start=4');
       NL.respondLast200(fixtures.p56);
 
       // << enabled, >> disabled.
@@ -195,8 +195,8 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextDisabled();
 
       // << links to previous page, >> links to current page.
-      NL.assertPaginationPrevRoute('#browse/search/start=2');
-      NL.assertPaginationNextRoute('#browse/search/start=4');
+      NL.assertPaginationPrevRoute('#browse/start=2');
+      NL.assertPaginationNextRoute('#browse/start=4');
 
     });
 
@@ -211,7 +211,7 @@ describe('Records | Show Pagination', function() {
     it('with search query', function() {
 
       // Load record 6.
-      NL.navigate('browse/search/query=x+y/start=5');
+      NL.navigate('browse/query=x+y/start=5');
       NL.respondLast200(fixtures.p6);
 
       // << enabled, >> disabled.
@@ -219,15 +219,15 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextDisabled();
 
       // << links to previous page, >> links to current page.
-      NL.assertPaginationPrevRoute('#browse/search/query=x+y/start=3');
-      NL.assertPaginationNextRoute('#browse/search/query=x+y/start=5');
+      NL.assertPaginationPrevRoute('#browse/query=x+y/start=3');
+      NL.assertPaginationNextRoute('#browse/query=x+y/start=5');
 
     });
 
     it('without search query', function() {
 
       // Load record 6.
-      NL.navigate('browse/search/start=5');
+      NL.navigate('browse/start=5');
       NL.respondLast200(fixtures.p6);
 
       // << enabled, >> disabled.
@@ -235,8 +235,8 @@ describe('Records | Show Pagination', function() {
       NL.assertPaginationNextDisabled();
 
       // << links to previous page, >> links to next page.
-      NL.assertPaginationPrevRoute('#browse/search/start=3');
-      NL.assertPaginationNextRoute('#browse/search/start=5');
+      NL.assertPaginationPrevRoute('#browse/start=3');
+      NL.assertPaginationNextRoute('#browse/start=5');
 
     });
 

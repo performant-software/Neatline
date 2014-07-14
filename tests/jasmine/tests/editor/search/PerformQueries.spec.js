@@ -156,7 +156,7 @@ describe('Search | Perform Queries', function() {
       NL.v.search.__ui.search.val('word1').trigger('keyup');
 
       expect(Backbone.history.fragment).toEqual(
-        'browse/search/query=word1'
+        'browse/query=word1'
       );
 
     });
@@ -167,7 +167,7 @@ describe('Search | Perform Queries', function() {
 
       // Spaces replaced with `+`.
       expect(Backbone.history.fragment).toEqual(
-        'browse/search/query=word1+word2+word3'
+        'browse/query=word1+word2+word3'
       );
 
     });

@@ -22,8 +22,8 @@ if (
 ) {
 
   // Base fragment.
-  var prevUrl = '#browse/search';
-  var nextUrl = '#browse/search';
+  var prevUrl = '#browse';
+  var nextUrl = '#browse';
 
   // Add existing query.
   if (!_.isEmpty(query)) {

@@ -28,23 +28,23 @@ describe('Search | Hydrate State', function() {
     // ------------------------------------------------------------------------
 
     it('single-word query', function() {
-      NL.navigate('browse/search/query=word');
+      NL.navigate('browse/query=word');
       expect(NL.v.search.__ui.search).toHaveValue('word');
     });
 
     it('multiple-word query', function() {
-      NL.navigate('browse/search/query=word1+word2');
+      NL.navigate('browse/query=word1+word2');
       expect(NL.v.search.__ui.search).toHaveValue('word1 word2');
     });
 
     it('tags query', function() {
-      NL.navigate('browse/search/query=tags:+tag1,+tag2');
+      NL.navigate('browse/query=tags:+tag1,+tag2');
       expect(NL.v.search.__ui.search).toHaveValue('tags: tag1, tag2');
       expect(NL.v.search.__ui.search).toHaveClass('bold');
     });
 
     it('map-mirror query', function() {
-      NL.navigate('browse/search/query=map:');
+      NL.navigate('browse/query=map:');
       expect(NL.v.search.__ui.search).toHaveValue('map:');
       expect(NL.v.search.__ui.search).toHaveClass('bold');
     });
@@ -62,7 +62,7 @@ describe('Search | Hydrate State', function() {
 
     // Initialize with `map:` query.
     var c1 = NL.server.requests.length;
-    NL.navigate('browse/search/query=map:');
+    NL.navigate('browse/query=map:');
     var c2 = NL.server.requests.length;
 
     // No GET request.
@@ -115,9 +115,9 @@ describe('Search | Hydrate State', function() {
     });
 
 
-    it('#browse/search/start=X', function() {
+    it('#browse/start=X', function() {
 
-      NL.navigate('browse/search/start=10');
+      NL.navigate('browse/start=10');
 
       // Should trigger GET request to /records.
       NL.assertLastRequestRoute(Neatline.g.neatline.record_api);
@@ -130,9 +130,9 @@ describe('Search | Hydrate State', function() {
     });
 
 
-    it('#browse/search/query=X', function() {
+    it('#browse/query=X', function() {
 
-      NL.navigate('browse/search/query=keywords');
+      NL.navigate('browse/query=keywords');
 
       // Should trigger GET request to /records.
       NL.assertLastRequestRoute(Neatline.g.neatline.record_api);
@@ -146,9 +146,9 @@ describe('Search | Hydrate State', function() {
     });
 
 
-    it('#browse/search/query=tags:X,Y', function() {
+    it('#browse/query=tags:X,Y', function() {
 
-      NL.navigate('browse/search/query=tags:+tag1,+tag2');
+      NL.navigate('browse/query=tags:+tag1,+tag2');
 
       // Should trigger GET request to /records.
       NL.assertLastRequestRoute(Neatline.g.neatline.record_api);
@@ -165,9 +165,9 @@ describe('Search | Hydrate State', function() {
     });
 
 
-    it('#browse/search/query=X/start=Y', function() {
+    it('#browse/query=X/start=Y', function() {
 
-      NL.navigate('browse/search/query=keywords/start=10');
+      NL.navigate('browse/query=keywords/start=10');
 
       // Should trigger GET request to /records.
       NL.assertLastRequestRoute(Neatline.g.neatline.record_api);
@@ -181,9 +181,9 @@ describe('Search | Hydrate State', function() {
     });
 
 
-    it('#browse/search/query=tags/start=X', function() {
+    it('#browse/query=tags/start=X', function() {
 
-      NL.navigate('browse/search/query=tags:+tag1,+tag2/start=10');
+      NL.navigate('browse/query=tags:+tag1,+tag2/start=10');
 
       // Should trigger GET request to /records.
       NL.assertLastRequestRoute(Neatline.g.neatline.record_api);

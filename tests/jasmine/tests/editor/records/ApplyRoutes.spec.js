@@ -46,15 +46,15 @@ describe('Records | Apply Routes', function() {
     });
 
     it('query', function() {
-      NL.navigate('browse/search/query=test');
+      NL.navigate('browse/query=test');
     });
 
     it('start', function() {
-      NL.navigate('browse/search/start=50');
+      NL.navigate('browse/start=50');
     });
 
     it('query and start', function() {
-      NL.navigate('browse/search/query=test/start=50');
+      NL.navigate('browse/query=test/start=50');
     });
 
   });
