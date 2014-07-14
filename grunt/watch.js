@@ -17,7 +17,9 @@ module.exports = {
       'views/**/*.js',
       'views/**/*.styl',
       'views/**/*.php',
-      '!views/**/dist/**'
+      '!views/**/dist/**',
+      'tests/**/*.js',
+      '!tests/**/dist/**'
     ],
     tasks: 'compile'
   }
