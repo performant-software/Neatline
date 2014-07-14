@@ -16,10 +16,10 @@ describe('API | Events', function() {
 
     NL.loadNeatline();
 
-    model1 = new Neatline.Shared.Record.Model();
-    model2 = new Neatline.Shared.Record.Model();
-    model3 = new Neatline.Shared.Record.Model();
-    model4 = new Neatline.Shared.Record.Model();
+    model1 = new Neatline.Shared.Record.Model({ id: 1 });
+    model2 = new Neatline.Shared.Record.Model({ id: 2 });
+    model3 = new Neatline.Shared.Record.Model({ id: 3 });
+    model4 = new Neatline.Shared.Record.Model({ id: 4 });
 
   });
 
