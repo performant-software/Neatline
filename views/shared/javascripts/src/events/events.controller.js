@@ -6,13 +6,13 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Broker', function(Broker) {
+Neatline.module('Events', function(Events) {
 
 
-  Broker.Controller = Neatline.Shared.Controller.extend({
+  Events.Controller = Neatline.Shared.Controller.extend({
 
 
-    slug: 'BROKER',
+    slug: 'EVENTS',
 
     events: [
       'highlight',

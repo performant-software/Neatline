@@ -6,7 +6,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('API | Broker', function() {
+describe('API | Events', function() {
 
 
   var model1, model2;
@@ -51,7 +51,7 @@ describe('API | Broker', function() {
       Neatline.vent.trigger('highlight', { model: model2, source: 'SRC2' });
 
       expect(vent).toHaveBeenCalledWith('unhighlight', {
-        model: model1, source: 'BROKER'
+        model: model1, source: 'EVENTS'
       });
 
     });
@@ -111,7 +111,7 @@ describe('API | Broker', function() {
       Neatline.vent.trigger('select', { model: model2, source: 'SRC2' });
 
       expect(vent).toHaveBeenCalledWith('unselect', {
-        model: model1, source: 'BROKER'
+        model: model1, source: 'EVENTS'
       });
 
     });

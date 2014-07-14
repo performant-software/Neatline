@@ -9,6 +9,12 @@
 describe('Record | Has Tag', function() {
 
 
+  it('no tags', function() {
+    var record = new Neatline.Shared.Record.Model();
+    expect(record.hasTag('tag')).toBeFalsy();
+  });
+
+
   it('one tag', function() {
 
     var record = new Neatline.Shared.Record.Model({
@@ -44,12 +50,6 @@ describe('Record | Has Tag', function() {
     expect(record.hasTag('tag2')).toBeTruthy();
     expect(record.hasTag('tag3')).toBeFalsy();
 
-  });
-
-
-  it('no tags', function() {
-    var record = new Neatline.Shared.Record.Model();
-    expect(record.hasTag('tag')).toBeFalsy();
   });
 
 

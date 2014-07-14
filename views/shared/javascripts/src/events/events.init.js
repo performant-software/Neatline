@@ -6,11 +6,11 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Broker', function(Broker) {
+Neatline.module('Events', function(Events) {
 
 
-  Broker.addInitializer(function() {
-    Broker.__controller = new Broker.Controller();
+  Events.addInitializer(function() {
+    Events.__controller = new Events.Controller();
   });
 
 
