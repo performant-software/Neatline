@@ -24,11 +24,11 @@ describe('API | Events', function() {
 
   describe('highlight', function() {
 
-    it('should do nothing when no record is highlighted', function() {
+    it('should do nothing when no records are highlighted', function() {
 
       // ----------------------------------------------------------------------
-      // When no record is currently highlighted, the broker should do nothing
-      // when a new record is highlighted.
+      // When no records area currently highlighted, the broker should do
+      // nothing when a new record is highlighted.
       // ----------------------------------------------------------------------
 
       var vent = NL.getEventSpy();
@@ -38,11 +38,11 @@ describe('API | Events', function() {
 
     });
 
-    it('should unhighlight a currently-highlighted record', function() {
+    it('should unhighlight currently-highlighted records', function() {
 
       // ----------------------------------------------------------------------
-      // When a record is highlighted and then another record is highlighted,
-      // the broker should unhighlight the previously-highlighted record.
+      // When records are highlighted and then another record is highlighted,
+      // the broker should unhighlight the previously-highlighted records.
       // ----------------------------------------------------------------------
 
       var vent = NL.getEventSpy();
@@ -56,12 +56,14 @@ describe('API | Events', function() {
 
     });
 
+    it('should not unhighlight when `allowMultiple` is passed');
+
   });
 
 
   describe('unhighlight', function() {
 
-    it('should unregister the record', function() {
+    it('should de-register the record in the highlight list', function() {
 
       // ----------------------------------------------------------------------
       // When a record is unhighlighted by an application module, the broker
@@ -98,11 +100,11 @@ describe('API | Events', function() {
 
     });
 
-    it('should unselect a currently-selected record', function() {
+    it('should unselect currently-selected records', function() {
 
       // ----------------------------------------------------------------------
-      // When a record is selected and then another record is selected, the
-      // broker should unselect the previously-selected record.
+      // When records are selected and then another record is selected, the
+      // broker should unselect the previously-selected records.
       // ----------------------------------------------------------------------
 
       var vent = NL.getEventSpy();
@@ -116,12 +118,14 @@ describe('API | Events', function() {
 
     });
 
+    it('should not unselect when `allowMultiple` is passed');
+
   });
 
 
   describe('unselect', function() {
 
-    it('should unregister the record', function() {
+    it('should de-register the record in the select list', function() {
 
       // ----------------------------------------------------------------------
       // When a record is unselected by an application module, the broker
