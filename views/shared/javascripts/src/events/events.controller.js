@@ -40,9 +40,7 @@ Neatline.module('Events', function(Events) {
 
       // Unhighlight current.
       if (!_.isNull(this.highlighted)) {
-        Neatline.vent.trigger('unhighlight', {
-          model: this.highlighted, source: this.slug
-        });
+        this.publish('unhighlight', this.highlighted);
       }
 
       // Set new current.
@@ -70,9 +68,7 @@ Neatline.module('Events', function(Events) {
 
       // Unselect current.
       if (!_.isNull(this.selected)) {
-        Neatline.vent.trigger('unselect', {
-          model: this.selected, source: this.slug
-        });
+        this.publish('unselect', this.selected);
       }
 
       // Set new current.
@@ -88,6 +84,19 @@ Neatline.module('Events', function(Events) {
      */
     unselect: function(args) {
       this.selected = null;
+    },
+
+
+    /**
+     * Publish an event.
+     *
+     * @param {String} event: The event.
+     * @param {Object} model: The record model.
+     */
+    publish: function(event, model) {
+      Neatline.vent.trigger(event, {
+        model: model, source: this.slug
+      });
     }
 
 
