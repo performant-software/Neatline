@@ -146,16 +146,43 @@ describe('Record | Create Record', function() {
   });
 
 
-  it('should update the route after save', function() {
+  it('should update default route after save', function() {
+
+    // ------------------------------------------------------------------------
+    // When the record form is on the "Text" tab (the default route) and the
+    // record is saved, the route should change from:
+    //
+    // `#edit/new`
+    //
+    // To:
+    //
+    // `#edit/<id>`
+    // ------------------------------------------------------------------------
+
+    // Open new form.
+    NL.navigate('edit/new');
+
+    // Click "Save".
+    elements.saveButton.trigger('click');
+    NL.respondLast200(fixtures.record);
+
+    // Route should be updated.
+    var id = $.parseJSON(fixtures.record).id;
+    expect(Backbone.history.fragment).toEqual('edit/'+id);
+
+  });
+
+
+  it('should update tab routes after save', function() {
 
     // ------------------------------------------------------------------------
     // When a record is saved, the URL hash should be updated to point to the
     // id-specific resource for the record. For example, if the "Text" tab is
-    // active, the route should change from `#edit/new/text` to:
+    // active, the route should change from:
     //
-    // `#edit/<id>/text`
+    // `#edit/new/map`
     //
-    // When the "Map" tab is active:
+    // To:
     //
     // `#edit/<id>/map`
     //
