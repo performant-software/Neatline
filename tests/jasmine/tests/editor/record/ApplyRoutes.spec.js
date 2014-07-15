@@ -47,7 +47,7 @@ describe('Record | Apply Routes', function() {
     // displayed and the requested tab should be activated.
     // ------------------------------------------------------------------------
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       NL.navigate(href+'/'+slug);
 
@@ -83,7 +83,7 @@ describe('Record | Apply Routes', function() {
     // displayed and the requested tab should be activated.
     // ------------------------------------------------------------------------
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       NL.navigate('edit/new/'+slug);
 

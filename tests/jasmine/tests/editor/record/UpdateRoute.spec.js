@@ -37,7 +37,7 @@ describe('Record | Update Route', function() {
 
     NL.navigate('edit/new');
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       // Click on the tab.
       var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
@@ -70,7 +70,7 @@ describe('Record | Update Route', function() {
     NL.showRecordForm(fixtures.record);
     var id = NL.v.record.model.id;
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       // Click on the tab.
       var tab = NL.v.record.$('a[href="#record-'+slug+'"]')

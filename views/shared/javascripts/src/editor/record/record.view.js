@@ -127,12 +127,15 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onTabChange: function(event) {
 
-      // Get the tab slug and id.
+      // Get the record route.
+      var route = 'edit/' + (this.model.id || 'new');
+
+      // If we're not on "Text," add the tab.
       this.activeTab = $(event.target).attr('data-slug');
-      var id = this.model.id || 'new';
+      if (this.activeTab !== 'text') route += '/' + this.activeTab;
 
       // Update the route.
-      Neatline.execute('EDITOR:setRoute', 'edit/'+id+'/'+this.activeTab);
+      Neatline.execute('EDITOR:setRoute', route);
 
     },
 

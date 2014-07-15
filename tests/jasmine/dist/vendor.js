@@ -8008,14 +8008,20 @@ var NL = (function(NL) {
 
 
   /**
-   * Get an array of all the record form tab slugs.
+   * Get all record form tab slugs that generate separate routes.
    *
    * @return {Array}: The slugs.
    */
-  NL.getTabSlugs = function() {
-    return _.map(this.v.record.__ui.tabs, function(tab) {
+  NL.getRoutableTabSlugs = function() {
+
+    // Get all slugs.
+    var slugs = _.map(this.v.record.__ui.tabs, function(tab) {
       return $(tab).attr('data-slug');
     });
+
+    // Remove 'text', which has the same route as the form.
+    return _.without(slugs, 'text');
+
   };
 
 

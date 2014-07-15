@@ -162,7 +162,7 @@ describe('Record | Create Record', function() {
     // etc.
     // ------------------------------------------------------------------------
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       // Open new form with the tab.
       NL.navigate('edit/new/'+slug);
