@@ -152,11 +152,7 @@ describe('Record | Create Record', function() {
     // When the record form is on the "Text" tab (the default route) and the
     // record is saved, the route should change from:
     //
-    // `#edit/new`
-    //
-    // To:
-    //
-    // `#edit/<id>`
+    // `#edit/new` -> `#edit/<id>`
     // ------------------------------------------------------------------------
 
     // Open new form.
@@ -180,13 +176,7 @@ describe('Record | Create Record', function() {
     // id-specific resource for the record. For example, if the "Text" tab is
     // active, the route should change from:
     //
-    // `#edit/new/map`
-    //
-    // To:
-    //
-    // `#edit/<id>/map`
-    //
-    // etc.
+    // `#edit/new/map` -> `#edit/<id>/map`
     // ------------------------------------------------------------------------
 
     _.each(NL.getRoutableTabSlugs(), function(slug) {
