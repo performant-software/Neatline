@@ -91,11 +91,38 @@ describe('Record | Update Route', function() {
     // ------------------------------------------------------------------------
 
     it('for an unsaved record', function() {
-      // TODO
+
+      NL.navigate('edit/new');
+
+      _.each(NL.getRoutableTabSlugs(), function(slug) {
+
+        // Click the routable tab, then back to "Text".
+        NL.clickTab(slug);
+        NL.clickTab('text');
+
+        // Should revert back to default route.
+        expect(Backbone.history.fragment).toEqual('edit/new');
+
+      });
+
     });
 
     it('for a saved record', function() {
-      // TODO
+
+      NL.showRecordForm(fixtures.record);
+      var id = NL.v.record.model.id;
+
+      _.each(NL.getRoutableTabSlugs(), function(slug) {
+
+        // Click the routable tab, then back to "Text".
+        NL.clickTab(slug);
+        NL.clickTab('text');
+
+        // Should revert back to default route.
+        expect(Backbone.history.fragment).toEqual('edit/'+id);
+
+      });
+
     });
 
   });
