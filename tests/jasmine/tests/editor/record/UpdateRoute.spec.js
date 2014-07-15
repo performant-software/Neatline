@@ -41,9 +41,7 @@ describe('Record | Update Route', function() {
 
       _.each(NL.getRoutableTabSlugs(), function(slug) {
 
-        // Click on the tab.
-        var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
-        tab.trigger('click');
+        NL.clickTab(slug);
 
         // Route should update.
         expect(Backbone.history.fragment).toEqual('edit/new/'+slug);
@@ -73,9 +71,7 @@ describe('Record | Update Route', function() {
 
       _.each(NL.getRoutableTabSlugs(), function(slug) {
 
-        // Click on the tab.
-        var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
-        tab.trigger('click');
+        NL.clickTab(slug);
 
         // Route should update.
         expect(Backbone.history.fragment).toEqual('edit/'+id+'/'+slug);

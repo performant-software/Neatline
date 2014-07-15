@@ -84,6 +84,17 @@ var NL = (function(NL) {
   };
 
 
+  /**
+   * Click on one of the record form tabs.
+   *
+   * @param {String} slug: The slug of the tab to click.
+   */
+  NL.clickTab = function(slug) {
+    var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
+    tab.trigger('click');
+  };
+
+
   return NL;
 
 
