@@ -100,9 +100,7 @@ Neatline.module('Events', function(Events) {
      */
     setRoute: function(model) {
       if (!Neatline.Editor) {
-        Backbone.history.navigate('record/'+model.id, {
-          replace: true
-        });
+        Backbone.history.navigate('record/'+model.id);
       }
     }
 
