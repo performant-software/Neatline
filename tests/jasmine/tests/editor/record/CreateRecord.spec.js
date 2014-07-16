@@ -164,7 +164,7 @@ describe('Record | Create Record', function() {
 
     // Route should be updated.
     var id = $.parseJSON(fixtures.record).id;
-    expect(Backbone.history.fragment).toEqual('edit/'+id);
+    NL.assertRoute('edit/'+id);
 
   });
 
@@ -190,7 +190,7 @@ describe('Record | Create Record', function() {
 
       // Route should be updated.
       var id = $.parseJSON(fixtures.record).id;
-      expect(Backbone.history.fragment).toEqual('edit/'+id+'/'+slug);
+      NL.assertRoute('edit/'+id+'/'+slug);
 
     });
 

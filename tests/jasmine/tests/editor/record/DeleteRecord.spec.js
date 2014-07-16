@@ -171,7 +171,7 @@ describe('Record | Delete Record', function() {
     expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.records.$el);
 
     // Records list should be displayed.
-    expect(Backbone.history.fragment).toEqual('browse');
+    NL.assertRoute('browse');
 
   });
 

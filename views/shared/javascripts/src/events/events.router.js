@@ -35,14 +35,14 @@ Neatline.module('Events', function(Events) {
     'record/:id': function(id) {
 
       // Load the model.
-      this.records.getOrFetch(id, function(model) {
+      this.records.getOrFetch(id, _.bind(function(model) {
 
         // Select the requested record.
         Neatline.vent.trigger('select', {
           model: model, source: this.slug
         });
 
-      });
+      }, this));
 
     }
 

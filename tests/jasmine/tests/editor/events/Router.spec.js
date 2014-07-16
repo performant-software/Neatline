@@ -15,32 +15,8 @@ describe('Events | Router', function() {
 
 
   beforeEach(function() {
-    NL.loadNeatline();
+    NL.loadEditor();
     record = NL.recordFromJson(fixtures.record);
-  });
-
-
-  it('should select the record referenced in the route', function(done) {
-
-    // ------------------------------------------------------------------------
-    // When a `#record/<id>` route is matched, the record with the requested
-    // ID should be selected.
-    // ------------------------------------------------------------------------
-
-    var vent = NL.getEventSpy();
-
-    // Listen for record select.
-    Neatline.vent.on('select', function(args) {
-      expect(args.model.id).toEqual(record.id);
-      done();
-    });
-
-    // Hit the route.
-    NL.navigate('record/'+record.id);
-
-    // Respond with the JSON.
-    NL.respondLast200(fixtures.record);
-
   });
 
 
@@ -48,11 +24,11 @@ describe('Events | Router', function() {
 
     // ------------------------------------------------------------------------
     // When a record is selected, the route should be updated to point to the
-    // selected record.
+    // selected record's edit form.
     // ------------------------------------------------------------------------
 
     Neatline.vent.trigger('select', { model: record });
-    NL.assertRoute('record/'+record.id);
+    NL.assertRoute('edit/'+record.id);
 
   });
 

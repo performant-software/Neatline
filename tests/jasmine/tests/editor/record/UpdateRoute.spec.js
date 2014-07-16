@@ -44,7 +44,7 @@ describe('Record | Update Route', function() {
         NL.clickTab(slug);
 
         // Route should update.
-        expect(Backbone.history.fragment).toEqual('edit/new/'+slug);
+        NL.assertRoute('edit/new/'+slug);
 
       });
 
@@ -74,7 +74,7 @@ describe('Record | Update Route', function() {
         NL.clickTab(slug);
 
         // Route should update.
-        expect(Backbone.history.fragment).toEqual('edit/'+id+'/'+slug);
+        NL.assertRoute('edit/'+id+'/'+slug);
 
       });
 
@@ -101,7 +101,7 @@ describe('Record | Update Route', function() {
         NL.clickTab('text');
 
         // Should revert back to default route.
-        expect(Backbone.history.fragment).toEqual('edit/new');
+        NL.assertRoute('edit/new');
 
       });
 
@@ -119,7 +119,7 @@ describe('Record | Update Route', function() {
         NL.clickTab('text');
 
         // Should revert back to default route.
-        expect(Backbone.history.fragment).toEqual('edit/'+id);
+        NL.assertRoute('edit/'+id);
 
       });
 
