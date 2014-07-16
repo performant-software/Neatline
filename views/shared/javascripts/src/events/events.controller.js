@@ -99,9 +99,11 @@ Neatline.module('Events', function(Events) {
      * @param {Object} model: The currently-selected model.
      */
     setRoute: function(model) {
-      Backbone.history.navigate('record/'+model.id, {
-        replace: true
-      });
+      if (!Neatline.Editor) {
+        Backbone.history.navigate('record/'+model.id, {
+          replace: true
+        });
+      }
     }
 
 
