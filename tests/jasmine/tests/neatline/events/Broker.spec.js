@@ -6,7 +6,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('API | Events', function() {
+describe('Events | Event Broker', function() {
 
 
   var model1, model2, model3;

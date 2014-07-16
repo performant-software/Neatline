@@ -7483,6 +7483,33 @@ var NL = (function(NL) {
 
 
   /**
+   * Assert the current route fragment.
+   *
+   * @param {String} fragment: The route.
+   */
+  NL.assertRoute = function(fragment) {
+    expect(Backbone.history.fragment).toEqual(fragment);
+  };
+
+
+  return NL;
+
+
+})(NL || {});
+
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+
+var NL = (function(NL) {
+
+
+  /**
    * Assert the event aggregator was _not_ called with a given event.
    *
    * @param {Object} spy: A spy on `Neatline.vent.trigger`.
@@ -8008,14 +8035,31 @@ var NL = (function(NL) {
 
 
   /**
-   * Get an array of all the record form tab slugs.
+   * Get all record form tab slugs that generate separate routes.
    *
    * @return {Array}: The slugs.
    */
-  NL.getTabSlugs = function() {
-    return _.map(this.v.record.__ui.tabs, function(tab) {
+  NL.getRoutableTabSlugs = function() {
+
+    // Get all slugs.
+    var slugs = _.map(this.v.record.__ui.tabs, function(tab) {
       return $(tab).attr('data-slug');
     });
+
+    // Remove 'text', which has the same route as the form.
+    return _.without(slugs, 'text');
+
+  };
+
+
+  /**
+   * Click on one of the record form tabs.
+   *
+   * @param {String} slug: The slug of the tab to click.
+   */
+  NL.clickTab = function(slug) {
+    var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
+    tab.trigger('click');
   };
 
 
@@ -8222,7 +8266,7 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.showRecordList = function(response) {
-    this.navigate('records');
+    this.navigate('browse');
     this.respondLast200(response);
   };
 
@@ -8233,7 +8277,7 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.showRecordForm = function(response) {
-    this.navigate('record/'+JSON.parse(response).id);
+    this.navigate('edit/'+JSON.parse(response).id);
     this.respondLast200(response);
   };
 

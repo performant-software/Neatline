@@ -49,7 +49,7 @@ describe('Map | Update WMS Layer', function() {
     NL.respondMap200(fixtures.add.recordsNoWms);
 
     // Open edit form, get the edit layer.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title').id);
     var vectorLayer1 = NL.getVectorLayer('title');
 
     // 1 vector layer, 0 WMS.
@@ -89,7 +89,7 @@ describe('Map | Update WMS Layer', function() {
     NL.respondMap200(fixtures.reload.records);
 
     // Open edit form, get the edit layer.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title').id);
     var vectorLayer1 = NL.getVectorLayer('title');
 
     // 1 vector layer, 1 WMS.
@@ -130,7 +130,7 @@ describe('Map | Update WMS Layer', function() {
     NL.respondMap200(fixtures.update.records1);
 
     // Open edit form, get the edit layer.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title').id);
     var vectorLayer1 = NL.getVectorLayer('title');
 
     // 1 vector layer, 1 WMS.
@@ -170,7 +170,7 @@ describe('Map | Update WMS Layer', function() {
     NL.respondMap200(fixtures.remove.records1);
 
     // Open edit form, get the edit layer.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title').id);
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title').id);
     var vectorLayer1 = NL.getVectorLayer('title');
 
     // 1 vector layer, 1 WMS.

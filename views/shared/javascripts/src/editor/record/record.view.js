@@ -121,19 +121,13 @@ Neatline.module('Editor.Record', function(Record) {
 
 
     /**
-     * Update the route.
+     * Cache the active tab, update the route.
      *
      * @param {Object} event: The `shown` event.
      */
     onTabChange: function(event) {
-
-      // Get the tab slug and id.
       this.activeTab = $(event.target).attr('data-slug');
-      var id = this.model.id || 'add';
-
-      // Update the route.
-      Neatline.execute('EDITOR:setRoute', 'record/'+id+'/'+this.activeTab);
-
+      this.updateRoute();
     },
 
 
@@ -172,10 +166,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     onSaveSuccess: function() {
 
-      // Update the route.
-      Neatline.execute('EDITOR:setRoute',
-        'record/'+this.model.id+'/'+this.activeTab
-      );
+      this.updateRoute();
 
       // Refresh the exhibit.
       Neatline.vent.trigger('refresh', { source: this.slug });
@@ -225,6 +216,21 @@ Neatline.module('Editor.Record', function(Record) {
       Neatline.execute('EDITOR:notifyError',
         Neatline.g.neatline.strings.record.remove.error
       );
+    },
+
+
+    /**
+     * Set the current route.
+     */
+    updateRoute: function() {
+
+      // Construct the new route.
+      var route = 'edit/' + (this.model.id || 'new');
+      if (this.activeTab !== 'text') route += '/' + this.activeTab;
+
+      // Set the new route.
+      Neatline.execute('EDITOR:setRoute', route);
+
     }
 
 

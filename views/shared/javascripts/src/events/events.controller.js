@@ -68,6 +68,8 @@ Neatline.module('Events', function(Events) {
      */
     select: function(args) {
 
+      this.setRoute(args.model);
+
       // Unselect current.
       if (!_.isNull(this.selected)) {
         Neatline.vent.trigger('unselect', {
@@ -88,6 +90,18 @@ Neatline.module('Events', function(Events) {
      */
     unselect: function(args) {
       this.selected = null;
+    },
+
+
+    /**
+     * Point the route at a record.
+     *
+     * @param {Object} model: The currently-selected model.
+     */
+    setRoute: function(model) {
+      if (!Neatline.Editor) {
+        Backbone.history.navigate('record/'+model.id);
+      }
     }
 
 

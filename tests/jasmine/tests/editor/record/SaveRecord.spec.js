@@ -71,7 +71,7 @@ describe('Record | Save Record', function() {
     // Click "Save" button.
     elements.save.trigger('click');
 
-    // URL should be /record/:id.
+    // URL should be /edit/:id.
     var id = NL.v.record.model.id;
     NL.assertLastRequestRoute(Neatline.g.neatline.record_api+'/'+id);
 

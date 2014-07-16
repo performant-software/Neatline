@@ -103,7 +103,7 @@ Neatline.module('Editor.Record', function(Record) {
      */
     navToForm: function(args) {
       if (!this.view.hasRecord) {
-        this.router.navigate('record/'+args.model.id, true);
+        this.router.navigate('edit/'+args.model.id, true);
       }
     },
 

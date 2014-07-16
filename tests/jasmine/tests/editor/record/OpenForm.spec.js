@@ -62,7 +62,7 @@ describe('Record | Open Form', function() {
       model = NL.getRecordListModelAtIndex(0);
 
       // Request an already-loaded record.
-      NL.navigate('record/'+model.id);
+      NL.navigate('edit/'+model.id);
 
     });
 
@@ -76,7 +76,7 @@ describe('Record | Open Form', function() {
       model = NL.recordFromJson(fixtures.record);
 
       // Request unloaded record.
-      NL.navigate('record/999');
+      NL.navigate('edit/999');
 
       // Respond to the GET request.
       NL.respondLast200(fixtures.record);
@@ -170,13 +170,13 @@ describe('Record | Open Form', function() {
     // ------------------------------------------------------------------------
 
     // Open first record.
-    NL.navigate('record/'+NL.getRecordListModelAtIndex(0).id);
+    NL.navigate('edit/'+NL.getRecordListModelAtIndex(0).id);
 
     // Null out `widgets` field.
     NL.getRecordListModelAtIndex(1).set('widgets', null);
 
     // Open the form, get elements.
-    NL.navigate('record/'+NL.getRecordListModelAtIndex(1).id);
+    NL.navigate('edit/'+NL.getRecordListModelAtIndex(1).id);
     var inputs = NL.getRecordFormElements();
 
     // All widgets should be deselected.

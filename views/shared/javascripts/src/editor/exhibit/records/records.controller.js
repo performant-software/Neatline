@@ -69,7 +69,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * Navigate to the record list.
      */
     navToList: function() {
-      this.router.navigate('records', true);
+      this.router.navigate('browse', true);
     },
 
 

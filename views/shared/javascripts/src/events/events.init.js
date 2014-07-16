@@ -11,6 +11,7 @@ Neatline.module('Events', function(Events) {
 
   Events.addInitializer(function() {
     Events.__controller = new Events.Controller();
+    Events.__router = new Events.Router();
   });
 
 

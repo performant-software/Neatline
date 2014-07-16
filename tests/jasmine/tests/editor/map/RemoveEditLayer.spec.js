@@ -30,7 +30,7 @@ describe('Map | Remove Edit Layer', function() {
     NL.respondAll200(fixtures.records123);
 
     // Open edit form for record 3.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title3').id);
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title3').id);
 
     // Load map without record 3.
     NL.refreshMap(fixtures.records12);
@@ -52,8 +52,8 @@ describe('Map | Remove Edit Layer', function() {
     NL.respondAll200(fixtures.records123);
 
     // Open edit form for record 3.
-    NL.navigate('record/'+NL.getRecordListModelByTitle('title3').id);
-    NL.navigate('records');
+    NL.navigate('edit/'+NL.getRecordListModelByTitle('title3').id);
+    NL.navigate('browse');
 
     // Respond to map refresh.
     NL.respondMap200(fixtures.records123);
@@ -79,13 +79,13 @@ describe('Map | Remove Edit Layer', function() {
     NL.respondAll200(fixtures.records123);
 
     // Add new record.
-    NL.navigate('record/add');
+    NL.navigate('edit/new');
 
     // Should add new layer.
     NL.assertVectorLayerCount(4);
 
     // Close without saving.
-    NL.navigate('records');
+    NL.navigate('browse');
 
     // Respond to map refresh.
     NL.respondMap200(fixtures.records123);
