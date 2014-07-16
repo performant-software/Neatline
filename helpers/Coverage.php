@@ -19,11 +19,13 @@ function nl_extractWkt($coverage) {
     $wkt = null;
 
     // Get coverage format.
-    $format = geoPHP::detectFormat($coverage);
+    if (Validator::isValidWkt($coverage)) {
+        $format = geoPHP::detectFormat($coverage);
 
-    // Convert / reduce to WKT.
-    if (in_array($format, array('wkt', 'kml'))) {
-        $wkt = geoPHP::load($coverage)->out('wkt');
+        // Convert / reduce to WKT.
+        if (in_array($format, array('wkt', 'kml'))) {
+            $wkt = geoPHP::load($coverage)->out('wkt');
+        }
     }
 
     return $wkt;
