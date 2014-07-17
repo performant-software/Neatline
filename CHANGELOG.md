@@ -5,7 +5,7 @@
 
   - It's now possible to "hard link" to inidividual records in exhibits. For example, if a record has an ID of "36", the route fragment `#record/36` will cause the exhibit to automatically focus on that record when the page load. Likewise, manually selecting a record in the exhibit will update the route.
 
-  - Previously, the default zoom and focus settings for a record could only be set as a pair - eg, if one value was defined, and the other wasn't, the defined value wouldn't be applied when the record was selected. Now, it's possible to set both values independently. For example, you could set the default zoom of a record to a certain level, but leave the focus empty, and Neatline will zoom to the provided level and auto-compute a focus position; or vice versa.
+  - Previously, the default zoom and focus settings for a record could only be set as a pair - if one value was defined, and the other wasn't, the defined value wouldn't be applied when the record was selected. Now, it's possible to set both values independently. For example, you could set the default zoom level, but leave the focus empty, and Neatline will zoom to the provided level and fall back on an auto-computed focus position; or vice versa.
 
 #### Changed Features
 
