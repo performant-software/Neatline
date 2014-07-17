@@ -5,6 +5,7 @@ if [ -z $OMEKA_BRANCH ]; then
 fi
 
 export PLUGIN_DIR=`pwd`
+export NL_DIR=`pwd`
 export OMEKA_DIR=`pwd`/omeka
 
 mysql -e "create database IF NOT EXISTS omeka_test;" -uroot;

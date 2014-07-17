@@ -4,9 +4,17 @@ if [ -z $PLUGIN_DIR ]; then
   PLUGIN_DIR=`pwd`
 fi
 
-if [ -z $OMEKA_DIR ]; then
-  export OMEKA_DIR=`pwd`/omeka
+if [ -z $NL_DIR ]; then
+    NL_DIR=`pwd`
 fi
+
+if [ -z $OMEKA_DIR ]; then
+  OMEKA_DIR=`pwd`/omeka
+fi
+
+export PLUGIN_DIR
+export NL_DIR
+export OMEKA_DIR
 
 grunt
 ec1=$?
