@@ -1,10 +1,27 @@
-## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2)) ~ Pending
 
-#### Improved Support for Working with NeatlineFeatures and CsvImport
+## v2.2.5 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.2.5)) ~ Pending
 
-Previously, if NeatlineFeatures were enabled, you couldn't use the CsvImport
-plugin to add WKT data into the coverage field and then have those features
-import into Neatline successfully. We've lifted that restriction.
+#### Changed Features
+
+  - The routes in the editor have been updated to be more semantic. Now, the default record-browse view is at `#browse`, and search and pagination parameters are provided with `#browse/query=search-query` and `#browse/start=100`.
+
+## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
+
+#### Bug Fixes
+
+  - Re-includes the compiled documentation HTML in the release package, which fixes the inline documentation modals in the editor.
+
+## v2.2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.2...2.2.3)) ~ May 16, 2014
+
+#### Bug Fixes
+
+  - Fixes a bug caused by dependency mismatches in the bower components that broke the Javascript build in the editor.
+
+## v2.2.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.1...2.2.2)) ~ May 15, 2014
+
+#### Changed Features
+
+  - Previously, if NeatlineFeatures were enabled, you couldn't use the CsvImport plugin to add WKT data into the coverage field and then have those features import into Neatline successfully. We've lifted that restriction.
 
 #### Performance Improvements
 

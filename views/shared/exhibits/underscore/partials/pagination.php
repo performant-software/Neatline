@@ -22,8 +22,8 @@ if (
 ) {
 
   // Base fragment.
-  var prevUrl = '#records/search';
-  var nextUrl = '#records/search';
+  var prevUrl = '#browse';
+  var nextUrl = '#browse';
 
   // Add existing query.
   if (!_.isEmpty(query)) {
@@ -42,7 +42,7 @@ if (
   if (prevStart > 0) {
     prevUrl += '/start=' + prevStart;
   } else {
-    if (_.isEmpty(query)) prevUrl = '#records';
+    if (_.isEmpty(query)) prevUrl = '#browse';
     if (records.metadata.start == 0) prevActive = false;
   }
 

@@ -158,6 +158,16 @@ var NL = (function(NL) {
 
 
   /**
+   * Get the current map zoom level.
+   *
+   * @param {Number} zoom: The zoom level.
+   */
+  NL.getMapZoom = function(zoom) {
+    return this.v.map.map.getZoom();
+  };
+
+
+  /**
    * Get a vector layer by record title.
    *
    * @param {String} title: The record title.

@@ -10,3 +10,6 @@ _SpecRunner.html
 /layers
 !/layers/default.json
 /tests/phpunit/plugins.json
+
+.transifexrc
+views/**/dist/development

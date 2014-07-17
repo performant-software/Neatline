@@ -9,11 +9,6 @@
 describe('Record | Schema', function() {
 
 
-  beforeEach(function() {
-    NL.loadNeatline();
-  });
-
-
   it('should cast numeric fields to Numbers', function() {
 
     // ------------------------------------------------------------------------

@@ -11,16 +11,24 @@ var NL = (function(NL) {
 
 
   /**
-   * Assert the current viewport zoom and focus.
+   * Assert the current viewport focus.
    *
    * @param {Number} lon: The focus longitude.
    * @param {Number} lat: The focus latitude.
-   * @param {Number} zoom: The zoom.
    */
-  NL.assertMapViewport = function(lon, lat, zoom) {
+  NL.assertMapFocus = function(lon, lat) {
     expect(this.v.map.map.getCenter().lon).toEqual(lon);
     expect(this.v.map.map.getCenter().lat).toEqual(lat);
-    expect(this.v.map.map.getZoom()).toEqual(zoom);
+  };
+
+
+  /**
+   * Assert the current viewport zoom.
+   *
+   * @param {Number} zoom: The zoom.
+   */
+  NL.assertMapZoom = function(zoom) {
+    expect(NL.getMapZoom()).toEqual(zoom);
   };
 
 

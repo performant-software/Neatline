@@ -24,10 +24,10 @@ describe('Record | Apply Routes', function() {
   });
 
 
-  it('#record/:id', function() {
+  it('#edit/:id', function() {
 
     // ------------------------------------------------------------------------
-    // When `#record/:id` is requested, the record form should be displayed
+    // When `#edit/:id` is requested, the record form should be displayed
     // and the "Text" tab should be activated by default.
     // ------------------------------------------------------------------------
 
@@ -40,14 +40,14 @@ describe('Record | Apply Routes', function() {
   });
 
 
-  it('#record/:id/:tab', function() {
+  it('#edit/:id/:tab', function() {
 
     // ------------------------------------------------------------------------
-    // When `#record/:id/:tab` is requested, the record form should be
+    // When `#edit/:id/:tab` is requested, the record form should be
     // displayed and the requested tab should be activated.
     // ------------------------------------------------------------------------
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       NL.navigate(href+'/'+slug);
 
@@ -60,14 +60,14 @@ describe('Record | Apply Routes', function() {
   });
 
 
-  it('#record/add', function() {
+  it('#edit/new', function() {
 
     // ------------------------------------------------------------------------
-    // When `#record/add` is requested, the record form should be displayed
+    // When `#edit/new` is requested, the record form should be displayed
     // and the "Text' tab should be activated by default.
     // ------------------------------------------------------------------------
 
-    NL.navigate('record/add');
+    NL.navigate('edit/new');
 
     // Record form should be visible, "Text" tab active.
     expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);
@@ -76,16 +76,16 @@ describe('Record | Apply Routes', function() {
   });
 
 
-  it('#record/add/:tab', function() {
+  it('#edit/new/:tab', function() {
 
     // ------------------------------------------------------------------------
-    // When `#record/add/:tab` route is requested, the record form should be
+    // When `#edit/new/:tab` route is requested, the record form should be
     // displayed and the requested tab should be activated.
     // ------------------------------------------------------------------------
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
-      NL.navigate('record/add/'+slug);
+      NL.navigate('edit/new/'+slug);
 
       // Record form should be visible, requested tab active.
       expect(NL.v.editor.__ui.editor).toContainHtml(NL.v.record.$el);

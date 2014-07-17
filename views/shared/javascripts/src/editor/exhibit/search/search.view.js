@@ -67,7 +67,7 @@ Neatline.module('Editor.Exhibit.Search', function(Search) {
      */
     getUrlFromQuery: function() {
       var query = this.getQueryForUrl();
-      return (query != '') ? 'records/search/query='+query : 'records';
+      return (query != '') ? 'browse/query='+query : 'browse';
     },
 
 

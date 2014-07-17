@@ -20,9 +20,11 @@ describe('Record | Populate Styles', function() {
     NL.showRecordForm(fixtures.record);
 
     elements = _.extend(NL.getRecordFormElements(), {
-      setMinZoom: NL.v.record.$('a[name="set-min-zoom"]'),
-      setMaxZoom: NL.v.record.$('a[name="set-max-zoom"]'),
-      setFocus:   NL.v.record.$('a[name="set-focus"]')
+      setMinZoom:   NL.v.record.$('a[name="set-min-zoom"]'),
+      setMaxZoom:   NL.v.record.$('a[name="set-max-zoom"]'),
+      setMapFocus:  NL.v.record.$('a[name="set-map-focus"]'),
+      setMapZoom:   NL.v.record.$('a[name="set-map-zoom"]'),
+      setFocus:     NL.v.record.$('a[name="set-focus"]')
     });
 
   });
@@ -62,6 +64,44 @@ describe('Record | Populate Styles', function() {
 
     // Model should be updated.
     expect(NL.v.record.model.get('max_zoom')).toEqual(10);
+
+  });
+
+
+  it('should populate default focus', function() {
+
+    // ------------------------------------------------------------------------
+    // When the "Use Current" link for "Default Focus" is clicked, the input
+    // should be populated with the current focus.
+    // ------------------------------------------------------------------------
+
+    NL.setMapCenter(1, 2);
+    elements.setMapFocus.trigger('click');
+
+    // Input should be updated.
+    expect(elements.mapFocus).toHaveValue('1,2');
+
+    // Model should be updated.
+    expect(NL.v.record.model.get('map_focus')).toEqual('1,2');
+
+  });
+
+
+  it('should populate default zoom', function() {
+
+    // ------------------------------------------------------------------------
+    // When the "Use Current" link for "Default Zoom" is clicked, the input
+    // should be populated with the current zoom.
+    // ------------------------------------------------------------------------
+
+    NL.setMapZoom(10);
+    elements.setMapZoom.trigger('click');
+
+    // Input should be updated.
+    expect(elements.mapZoom).toHaveValue('10');
+
+    // Model should be updated.
+    expect(NL.v.record.model.get('map_zoom')).toEqual(10);
 
   });
 

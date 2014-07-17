@@ -13,47 +13,25 @@ Specifically, this means:
 * You have [Transifex Client](http://docs.transifex.com/developer/client/)
   installed and configured.
 
-* You have run `git flow init` in the Neatline directory.
+Once all of that is in place, we're ready to go.
 
-Once all of that is in place, we're ready
+## Create a new release
 
-1. `VERSION=42.0.13` — We'll use this value later.
+- Bump the `version` in the `package.json` file to the new version.
 
-1. `git flow release start $VERSION`
+- Run `grunt release`. Behind the scenes, this task:
 
-1. Bump the version number by editing:
+  - Bumps the version in `bower.json` and `plugin.ini`.
+  - Minifies the static payloads and copies them into the distribution directories.
+  - Generates a `.zip` archive under the `pkg` directory.
+  - Commits the changes.
+  - Tags the release.
 
-   * `plugin.ini`
-   * `package.json`
+- Hallway test the zip.
 
-1. `git commit -am "Version $VERSION"`
+- `git push`
 
-1. Update i18n:
+- `git push --tags`
 
-   * `tx pull --force`
-   * `grunt pot`
-   * `grunt po2mo`
-   * `git commit` (if there are new translations)
-
-1. Update the `CHANGELOG.md`
-
-1. `./bin/commit-static`
-
-1. `grunt package`
-
-1. `git commit` for the updated assets
-
-1. rename the package file to include the version, not the date-stamp
-
-1. quick check the zip
-
-1. test the zip
-
-1. `git flow release finish $VERSION`
-
-1. `git push`
-
-1. `git push --tags`
-
-1. upload the zip to http://omeka.org/add-ons/plugins/.
+- Upload the zip to http://omeka.org/add-ons/plugins/.
 

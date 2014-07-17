@@ -9,14 +9,112 @@
 describe('Map | Subscribe `select` (Vector Layers)', function() {
 
 
-  var model, fixtures = {
-    records: readFixtures('NeatlineMapSubscribe.records.json'),
-    record:  readFixtures('NeatlineMapSubscribe.record.json')
+  var slug = 'NeatlineMapSubscribeSelectVector'
+
+
+  var fixtures = {
+    records:        readFixtures(slug+'.records.json'),
+    noFocusNoZoom:  readFixtures(slug+'.noFocusNoZoom.json'),
+    focusNoZoom:    readFixtures(slug+'.focusNoZoom.json'),
+    zoomNoFocus:    readFixtures(slug+'.zoomNoFocus.json'),
+    focusAndZoom:   readFixtures(slug+'.focusAndZoom.json')
   };
 
 
   beforeEach(function() {
     NL.loadNeatline();
+  });
+
+
+  describe('should focus and zoom on the record', function() {
+
+    beforeEach(function() {
+      NL.setMapZoom(1);
+    });
+
+    it('no focus, no zoom', function() {
+
+      // ----------------------------------------------------------------------
+      // When neither a custom focus nor zoom is provided, the viewport should
+      // center around the geometric extent of the record's geometry.
+      // ----------------------------------------------------------------------
+
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with no focus or zoom.
+      var model = NL.recordFromJson(fixtures.noFocusNoZoom);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should auto-focus.
+      NL.assertMapFocus(1, 2);
+
+      // Should auto-zoom.
+      expect(NL.getMapZoom()).toBeGreaterThan(1);
+
+    });
+
+    it('focus, no zoom', function() {
+
+      // ----------------------------------------------------------------------
+      // When a record has a defined focus but no zoom, the focus should be
+      // applied and the viewport should zoom to fit the geometry.
+      // ----------------------------------------------------------------------
+
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with a focus but no zoom.
+      var model = NL.recordFromJson(fixtures.focusNoZoom);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should apply custom focus.
+      NL.assertMapFocus(100, 200);
+
+      // Should auto-zoom.
+      expect(NL.getMapZoom()).toBeGreaterThan(1);
+
+    });
+
+    it('zoom, no focus', function() {
+
+      // ----------------------------------------------------------------------
+      // When a record has a defined zoom but no focus, the zoom should be
+      // applied and the viewport should focus on the geometric center.
+      // ----------------------------------------------------------------------
+
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with a zoom but no focus.
+      var model = NL.recordFromJson(fixtures.zoomNoFocus);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should auto-focus.
+      NL.assertMapFocus(5, 6);
+
+      // Should apply custom zoom.
+      NL.assertMapZoom(10);
+
+    });
+
+    it('focus and zoom', function() {
+
+      // ----------------------------------------------------------------------
+      // When both a custom focus and zoom are provided, apply both.
+      // ----------------------------------------------------------------------
+
+      NL.respondMap200(fixtures.records);
+
+      // Select a record with a focus and zoom.
+      var model = NL.recordFromJson(fixtures.focusAndZoom);
+      Neatline.vent.trigger('select', { model: model });
+
+      // Should apply custom focus.
+      NL.assertMapFocus(100, 200);
+
+      // Should apply custom zoom.
+      NL.assertMapZoom(10);
+
+    });
+
   });
 
 
@@ -30,16 +128,17 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     NL.respondMap200(fixtures.records);
 
     // Get layer, cache request count.
-    var layer = NL.v.map.getVectorLayers()[0];
+    var model = NL.recordFromJson(fixtures.focusAndZoom);
     var count = NL.server.requests.count;
 
-    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    Neatline.vent.trigger('select', { model: model });
 
     // Should not load record from server.
     expect(NL.server.requests.count).toEqual(count);
 
     // Map should focus.
-    NL.assertMapViewport(100, 200, 10);
+    NL.assertMapFocus(100, 200);
+    NL.assertMapZoom(10);
 
   });
 
@@ -53,7 +152,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     // ------------------------------------------------------------------------
 
     // Create model with no vector layer.
-    var model = NL.recordFromJson(fixtures.record);
+    var model = NL.recordFromJson(fixtures.focusAndZoom);
     var count = NL.server.requests.count;
 
     Neatline.vent.trigger('select', { model: model });
@@ -63,11 +162,12 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
     // New layer should be created for model.
     var layer = NL.v.map.getVectorLayers()[0];
-    expect(layer.features[0].geometry.x).toEqual(1);
-    expect(layer.features[0].geometry.y).toEqual(2);
+    expect(layer.features[0].geometry.x).toEqual(7);
+    expect(layer.features[0].geometry.y).toEqual(8);
 
     // Map should focus.
-    NL.assertMapViewport(100, 200, 10);
+    NL.assertMapFocus(100, 200);
+    NL.assertMapZoom(10);
 
   });
 
@@ -115,7 +215,8 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
     NL.clickOnMapFeature(feature);
 
     // Focus should be unchanged.
-    NL.assertMapViewport(200, 300, 15);
+    NL.assertMapFocus(200, 300);
+    NL.assertMapZoom(15);
 
   });
 

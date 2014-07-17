@@ -126,8 +126,13 @@ Neatline.module('Map', function(Map) {
     _initControls: function() {
 
       // Bind highlight/select callbacks to the view.
-      _.bindAll(this, 'onBeforeHighlight', 'onHighlight', 'onUnhighlight',
-        'onSelect', 'onUnselect');
+      _.bindAll(this, [
+        'onBeforeHighlight',
+        'onHighlight',
+        'onUnhighlight',
+        'onSelect',
+        'onUnselect'
+      ]);
 
       // Build the hover control, bind callbacks.
       this.highlightControl = new OpenLayers.Control.SelectFeature(
@@ -150,7 +155,7 @@ Neatline.module('Map', function(Map) {
       this.selectControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
           onSelect:   this.onSelect,
-          onUnselect: this.onUnselect
+          onUnselect: this.onUnselect,
         }
       );
 
@@ -290,7 +295,8 @@ Neatline.module('Map', function(Map) {
 
       // Apply default focus, if one exists.
       if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
+        this.setFocus(focus);
+        this.setZoom(zoom);
       }
 
       else {
@@ -345,18 +351,33 @@ Neatline.module('Map', function(Map) {
       // Get a layer for the model.
       var layer = this.getOrCreateVectorLayer(model);
 
-      // Try to get a custom focus.
+      // Does the layer have geometry that can be focused on?
+      var canFocus = model.get('coverage') && !model.get('is_wms');
+
+      // Try to get custom focus/zoom.
       var focus = model.get('map_focus');
       var zoom  = model.get('map_zoom');
 
-      // If focus is defined, apply.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
+      // If a custom zoom is set, apply it.
+      if (_.isNumber(zoom)) {
+        this.setZoom(zoom);
       }
 
-      // Otherwise, fit to viewport.
-      else if (model.get('coverage') && !model.get('is_wms')) {
-        this.map.zoomToExtent(layer.getDataExtent());
+      // Otherwise, zoom around the geometry.
+      else if (canFocus) {
+        var zoom = this.map.getZoomForExtent(layer.getDataExtent());
+        this.setZoom(zoom);
+      }
+
+      // If a custom focus is set, apply it.
+      if (_.isString(focus)) {
+        this.setFocus(focus);
+      }
+
+      // Otherwise, focus around the geometry.
+      else if (canFocus) {
+        var center = layer.getDataExtent().getCenterLonLat();
+        this.setFocus(center);
       }
 
       Neatline.vent.trigger('MAP:focused');
@@ -372,6 +393,27 @@ Neatline.module('Map', function(Map) {
      */
     setViewport: function(focus, zoom) {
       this.map.setCenter(focus.split(','), zoom);
+    },
+
+
+    /**
+     * Set the focus.
+     *
+     * @param {Array|String} focus: An array (or comma-delimited) lon/lat.
+     */
+    setFocus: function(focus) {
+      if (_.isString(focus)) focus = focus.split(',');
+      this.map.setCenter(focus);
+    },
+
+
+    /**
+     * Set the zoom.
+     *
+     * @param {Number} zoom: The zoom value.
+     */
+    setZoom: function(zoom) {
+      this.map.zoomTo(zoom);
     },
 
 

@@ -13,12 +13,12 @@
 
   "dist": {
     "js": {
-      "shared":           "views/shared/javascripts/dist",
-      "admin":            "views/admin/javascripts/dist"
+      "shared":           "views/shared/javascripts/dist/development",
+      "admin":            "views/admin/javascripts/dist/development"
     },
     "css": {
-      "shared":           "views/shared/css/dist",
-      "admin":            "views/admin/css/dist"
+      "shared":           "views/shared/css/dist/development",
+      "admin":            "views/admin/css/dist/development"
     }
   },
 
@@ -37,7 +37,7 @@
 
     "jquery":           "bower_components/jquery/dist/jquery.js",
     "jquery_ui":        "bower_components/jquery-ui/ui/jquery-ui.js",
-    "underscore":       "bower_components/underscore/underscore.js",
+    "lodash":           "bower_components/lodash/dist/lodash.js",
     "underscore_s":     "bower_components/underscore.string/lib/underscore.string.js",
     "backbone":         "bower_components/backbone/backbone.js",
     "routefilter":      "bower_components/backbone.routefilter/dist/backbone.routefilter.js",

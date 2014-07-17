@@ -9,11 +9,6 @@
 describe('Record | Get Title', function() {
 
 
-  beforeEach(function() {
-    NL.loadNeatline();
-  });
-
-
   it('no record title, no item title -> `undefined`', function() {
 
     // ------------------------------------------------------------------------

@@ -215,14 +215,16 @@
     'name'  => 'map-focus',
     'modal' => 'map-focus',
     'label' => 'Default Focus',
-    'bind'  => 'record:map_focus'
+    'bind'  => 'record:map_focus',
+    'useCurrent' => true
 )); ?>
 
 <?php echo common('neatline/input', array(
     'name'  => 'map-zoom',
     'modal' => 'map-zoom',
     'label' => 'Default Zoom',
-    'bind'  => 'record:map_zoom'
+    'bind'  => 'record:map_zoom',
+    'useCurrent' => true
 )); ?>
 
 <?php echo common('neatline/button', array(

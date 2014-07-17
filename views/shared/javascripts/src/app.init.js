@@ -7,3 +7,11 @@
  */
 
 Neatline = new Marionette.Application();
+
+
+/**
+ * Match routes once Neatline is running.
+ */
+Neatline.on('initialize:after', function() {
+  Backbone.history.start();
+});
