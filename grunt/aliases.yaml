@@ -13,7 +13,7 @@ compile:
   - concat
 
 compile:min:
-  - stylus
+  - compile
   - cssmin
   - uglify
 
