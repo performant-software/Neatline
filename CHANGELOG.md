@@ -1,13 +1,21 @@
 
-## v2.2.5 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.2.5)) ~ Pending
+## v2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.2.5)) ~ Pending
 
 #### Added Features
 
   - It's now possible to "hard link" to inidividual records in exhibits. For example, if a record has an ID of "36", the route fragment `#record/36` will cause the exhibit to automatically focus on that record when the page load. Likewise, manually selecting a record in the exhibit will update the route.
 
+  - Previously, the default zoom and focus settings for a record could only be set as a pair - eg, if one value was defined, and the other wasn't, the defined value wouldn't be applied when the record was selected. Now, it's possible to set both values independently. For example, you could set the default zoom of a record to a certain level, but leave the focus empty, and Neatline will zoom to the provided level and auto-compute a focus position; or vice versa.
+
 #### Changed Features
 
   - The routes in the editor have been updated to be more semantic. Now, the default record-browse view is at `#browse`, and search and pagination parameters are provided with `#browse/query=search-query` and `#browse/start=100`.
+
+#### Bug Fixes
+
+  - Fixes a problem that was causing the layer switcher to be covered by the Waypoints container when the exhibit was using a Google base layer.
+
+  - Fixes a bug that caused Omeka item imports to fail if an item had a "Coverage" value that started with the letter "p" but was _not_ a valid WKT string.
 
 ## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
 
