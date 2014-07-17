@@ -30,20 +30,10 @@ sed -i 's/256M/512M/' $OMEKA_DIR/application/tests/bootstrap.php
 
 phpver=`php -v | grep -Eow '^PHP [^ ]+' | gawk '{ print $2 }'`
 echo "PHP version: $phpver..."
-if [ $(version $phpver) -gt $(version 5.3.1) ]; then
-  # composer is only available on 5.3.2+
-  composer install
-fi
-
-if [ $(version $phpver) != 'hhvm' ]; then
-  phpenv config-add tests/phpunit/travis.php.ini;
-fi
+composer install
+# phpenv config-add tests/phpunit/travis.php.ini;		# for hhvm
 
 echo "php version $phpver"
-echo "Omeka Dir: `ls -lah .`"
-
-
-
 phpenv rehash # refresh the path, just in case
 
 # Now we set up the running Omeka instance for Cukes.
@@ -68,7 +58,8 @@ echo "SET GLOBAL sql_mode='';" | mysql -uroot
 
 # symlink the plugin
 cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
-ls $OMEKA_DIR/themes
+# ls $OMEKA_DIR/themes
+echo "BOWER VERSION: $(bower --version)"
 bundle install
 npm install
 bower install -f
