@@ -81,6 +81,18 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
         $this->request->setQuery(array('record' => $record->id));
         $this->dispatch('neatline/items/'.$item->id);
 
+        echo "OMEKA_DIR   = " . OMEKA_DIR   . "\n";
+        echo "NL_DIR      = " . NL_DIR      . "\n";
+        echo "NL_TEST_DIR = " . NL_TEST_DIR . "\n";
+        if (file_exists(NL_TEST_DIR . '/mocks/theme/neatline/exhibits/item.php')) {
+            echo "ITEM TEMPLATE EXISTS.\n";
+        } else {
+            echo "ITEM TEMPLATE MISSING.\n";
+        }
+        foreach (get_view()->getScriptPaths() as $p) {
+            echo "SCRIPT PATH = <$p>\n";
+        }
+
         // Should render the default template.
         $body = trim($this->_getResponseBody());
         $this->assertEquals($item->id, $body);
