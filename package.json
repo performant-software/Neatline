@@ -31,6 +31,7 @@
     "load-grunt-config": ">= 0.8.0",
     "lodash": "^2.4.1",
     "shelljs": "^0.3.0",
-    "time-grunt": "^0.3.1"
+    "time-grunt": "^0.3.1",
+    "tmp": "0.0.23"
   }
 }
