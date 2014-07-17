@@ -1,6 +1,10 @@
 
 ## v2.2.5 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.2.5)) ~ Pending
 
+#### Added Features
+
+  - It's now possible to "hard link" to inidividual records in exhibits. For example, if a record has an ID of "36", the route fragment `#record/36` will cause the exhibit to automatically focus on that record when the page load. Likewise, manually selecting a record in the exhibit will update the route.
+
 #### Changed Features
 
   - The routes in the editor have been updated to be more semantic. Now, the default record-browse view is at `#browse`, and search and pagination parameters are provided with `#browse/query=search-query` and `#browse/start=100`.
