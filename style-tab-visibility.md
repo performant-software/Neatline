@@ -28,9 +28,9 @@ Like with "Min Zoom," click the "Use Current" button next to the field title to 
 
 These two fields define the focus location and zoom level that the map "snaps" to when the record is selected. For example, if the record is represented by a vector annotation on the map, and the user clicks on the title of the record in the Waypoints panel, the map will move to the location and zoom level defined by these fields. Think of these fields as a related pair that work together to set the record's "framing" or "home base" in the exhibit.
 
-To set a default focus and zoom, just move the map to the exact location and zoom level that you want to use, and click the "Use Current Viewport as Default" to insert the current values into the inputs.
+To set a default focus and zoom, just move the map to the exact location and zoom level that you want to use, and click the "Use Current Viewport as Default" to insert the current values into the inputs. Or, you can also set the values of the fields individually by clicking the "Use Current" links next to the field labels. If a zoom is set but the focus is left empty, Neatline will apply the custom zoom level when the record is selected, and auto-center the map to frame the record's geometry on the map. Or, vice versa, if a focus is set but the zoom is empty, Neatline will apply the custom focus and auto-zoom the map to the "closest" level at which all of the record's geometry is visible in the viewport.
 
-If no values are provided for these fields, Neatline will fall back on an automatically-computed focus location by centering the map around the geometric extent of the record's vector annotations on the map. This can often work well without any modification, but there are a couple of cases when you might want to explicitly set a custom focus:
+If no values are provided for these fields, Neatline will use automatically-computed values for both fields. This can often work well without any modification, but there are a couple of cases when you might want to explicitly set a custom focus:
 
   - If the record is represented with a single point, Neatline will always zoom in to the _highest possible zoom level_, since points are effectively dimensionless, infinitely-small dots. This is often undesirable. To fix, just zoom the map back to a reasonable level and click "Use Current Viewport as Default."
 
