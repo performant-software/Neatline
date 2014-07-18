@@ -325,7 +325,7 @@ Neatline.module('Map', function(Map) {
 
       // Re-select the previously-selected model
       if (!_.isNull(this.selectedModel)) {
-        this.selectByModel(this.selectedModel);
+        this.select(this.selectedModel);
       }
 
     },
@@ -807,11 +807,11 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Highglight all features on a layer, identified by record id.
+     * Highlight all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    highlightByModel: function(model) {
+    highlight: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
@@ -829,11 +829,30 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Apply the `temporary` render intent to a record's vector features
+     * without actually highlighting it.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderHighlightIntent: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      // Highlight features.
+      _.each(layer.features, _.bind(function(feature) {
+        layer.drawFeature(feature, 'temporary');
+      }, this));
+
+    },
+
+
+    /**
      * Unhighglight all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    unhighlightByModel: function(model) {
+    unhighlight: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
@@ -851,11 +870,29 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Apply the `default` render intent to a record's vector features.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderDefaultIntent: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      // Highlight features.
+      _.each(layer.features, _.bind(function(feature) {
+        layer.drawFeature(feature, 'default');
+      }, this));
+
+    },
+
+
+    /**
      * Select all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    selectByModel: function(model) {
+    select: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -880,7 +917,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    unselectByModel: function(model) {
+    unselect: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -925,7 +962,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Highlight sibling features.
-      this.highlightByModel(evt.feature.layer.neatline.model);
+      this.highlight(evt.feature.layer.neatline.model);
 
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
@@ -947,7 +984,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unhighlight sibling features.
-      this.unhighlightByModel(evt.feature.layer.neatline.model);
+      this.unhighlight(evt.feature.layer.neatline.model);
 
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
@@ -969,7 +1006,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Select sibling features.
-      this.selectByModel(feature.layer.neatline.model);
+      this.select(feature.layer.neatline.model);
 
       // Publish `select` event.
       Neatline.vent.trigger('select', {
@@ -990,7 +1027,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unselect sibling features.
-      this.unselectByModel(feature.layer.neatline.model);
+      this.unselect(feature.layer.neatline.model);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
