@@ -134,7 +134,7 @@ Neatline.module('Map', function(Map) {
      * Apply the `temporary` render intent on a model's features.
      */
     renderHighlightIntent: function(model) {
-      this.view.map.renderHighlightIntent(model);
+      this.view.renderHighlightIntent(model);
     },
 
 
@@ -142,7 +142,7 @@ Neatline.module('Map', function(Map) {
      * Apply the `default` render intent on a model's features.
      */
     renderDefaultIntent: function(model) {
-      this.view.map.renderDefaultIntent(model);
+      this.view.renderDefaultIntent(model);
     },
 
 
