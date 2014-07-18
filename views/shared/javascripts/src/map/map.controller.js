@@ -25,7 +25,9 @@ Neatline.module('Map', function(Map) {
     ],
 
     commands: [
-      'updateSize'
+      'updateSize',
+      'highlight',
+      'unhighlight'
     ],
 
     requests: [
