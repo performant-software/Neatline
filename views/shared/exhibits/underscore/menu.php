@@ -23,7 +23,7 @@
   <ul class="nav nav-pills">
 
     <li class="tab" data-slug="records">
-      <a href="#records">
+      <a href="#browse">
         <span class="glyphicon glyphicon-list"></span>
         Records
       </a>
