@@ -15,11 +15,17 @@
  */
 function nl_queueDistJs($path)
 {
-    if (APPLICATION_ENV == 'development') {
-        queue_js_file('dist/development/'.$path);
-    } else {
+
+    if (APPLICATION_ENV == 'production') {
         queue_js_file('dist/production/'.$path);
     }
+
+    else try {
+        queue_js_file('dist/development/'.$path);
+    } catch (InvalidArgumentException $e) {
+        queue_js_file('dist/production/'.$path);
+    }
+
 }
 
 
@@ -30,11 +36,17 @@ function nl_queueDistJs($path)
  */
 function nl_queueDistCss($path)
 {
-    if (APPLICATION_ENV == 'development') {
-        queue_css_file('dist/development/'.$path);
-    } else {
+
+    if (APPLICATION_ENV == 'production') {
         queue_css_file('dist/production/'.$path);
     }
+
+    else try {
+        queue_css_file('dist/development/'.$path);
+    } catch (InvalidArgumentException $e) {
+        queue_css_file('dist/production/'.$path);
+    }
+
 }
 
 
