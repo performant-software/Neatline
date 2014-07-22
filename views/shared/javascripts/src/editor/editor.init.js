@@ -20,14 +20,6 @@ Neatline.module('Editor', {
 
 
     /**
-     * Start recording history once Neatline is running.
-     */
-    Neatline.on('initialize:after', function() {
-      Backbone.history.start();
-    });
-
-
-    /**
      * Spin up the editor controller.
      */
     Editor.addInitializer(function() {

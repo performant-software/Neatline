@@ -21,7 +21,7 @@ describe('Record | Create Record', function() {
     NL.respondRecordList200(fixtures.records);
 
     elements = {
-      addButton:    NL.v.records.$('a[href="#record/add"]'),
+      addButton:    NL.v.records.$('a[href="#edit/new"]'),
       closeButton:  NL.v.record.$('a[name="close"]'),
       saveButton:   NL.v.record.$('a[name="save"]'),
       styleTab:     NL.v.record.$('a[href="#record-style"]'),
@@ -146,26 +146,43 @@ describe('Record | Create Record', function() {
   });
 
 
-  it('should update the route after save', function() {
+  it('should update default route after save', function() {
+
+    // ------------------------------------------------------------------------
+    // When the record form is on the "Text" tab (the default route) and the
+    // record is saved, the route should change from:
+    //
+    // `#edit/new` -> `#edit/<id>`
+    // ------------------------------------------------------------------------
+
+    // Open new form.
+    NL.navigate('edit/new');
+
+    // Click "Save".
+    elements.saveButton.trigger('click');
+    NL.respondLast200(fixtures.record);
+
+    // Route should be updated.
+    var id = $.parseJSON(fixtures.record).id;
+    NL.assertRoute('edit/'+id);
+
+  });
+
+
+  it('should update tab routes after save', function() {
 
     // ------------------------------------------------------------------------
     // When a record is saved, the URL hash should be updated to point to the
     // id-specific resource for the record. For example, if the "Text" tab is
-    // active, the route should change from `#record/add/text` to:
+    // active, the route should change from:
     //
-    // `#record/<id>/text`
-    //
-    // When the "Map" tab is active:
-    //
-    // `#record/<id>/map`
-    //
-    // etc.
+    // `#edit/new/map` -> `#edit/<id>/map`
     // ------------------------------------------------------------------------
 
-    _.each(NL.getTabSlugs(), function(slug) {
+    _.each(NL.getRoutableTabSlugs(), function(slug) {
 
       // Open new form with the tab.
-      NL.navigate('record/add/'+slug);
+      NL.navigate('edit/new/'+slug);
 
       // Click "Save".
       elements.saveButton.trigger('click');
@@ -173,7 +190,7 @@ describe('Record | Create Record', function() {
 
       // Route should be updated.
       var id = $.parseJSON(fixtures.record).id;
-      expect(Backbone.history.fragment).toEqual('record/'+id+'/'+slug);
+      NL.assertRoute('edit/'+id+'/'+slug);
 
     });
 

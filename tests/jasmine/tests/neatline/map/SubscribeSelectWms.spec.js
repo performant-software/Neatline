@@ -38,7 +38,8 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
     Neatline.vent.trigger('select', { model: model });
 
     // Map should not focus.
-    NL.assertMapViewport(200, 300, 15);
+    NL.assertMapFocus(200, 300);
+    NL.assertMapZoom(15);
 
   });
 
@@ -59,7 +60,8 @@ describe('Map | Subscribe `select` (WMS Layers)', function() {
     Neatline.vent.trigger('select', { model: model });
 
     // Map should focus.
-    NL.assertMapViewport(100, 200, 10);
+    NL.assertMapFocus(100, 200);
+    NL.assertMapZoom(10);
 
   });
 

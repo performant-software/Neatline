@@ -1,0 +1,51 @@
+
+default:
+  - compile:min
+  - test
+
+build:
+  - clean
+  - bower
+  - compile:min
+  - copy
+
+compile:
+  - stylus
+  - concat
+
+compile:min:
+  - stylus
+  - cssmin
+  - uglify
+
+freeze:
+  - compile:min
+  - copy-payloads
+
+capistrano:
+  - freeze
+  - gitcommit:static
+
+jasmine:neatline:browser:
+  - jasmine:neatline:build
+  - connect
+
+jasmine:editor:browser:
+  - jasmine:editor:build
+  - connect
+
+test:
+  - clean:fixtures
+  - phpunit
+  - jasmine
+
+package:
+  - freeze
+  - version
+  - po2mo
+  - compress
+
+release:
+  - package
+  - gitcommit:release
+  - gittag:release

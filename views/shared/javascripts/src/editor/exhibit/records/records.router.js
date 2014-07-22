@@ -13,8 +13,8 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
 
     routes: {
-      '': 'records',
-      'records(/search)(/query=:q)(/start=:s)': 'records'
+      '': 'browse',
+      'browse(/query=:q)(/start=:s)': 'browse'
     },
 
 
@@ -24,7 +24,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {String} query: The search query.
      * @param {String} start: The paging offset.
      */
-    records: function(query, start) {
+    browse: function(query, start) {
 
       Neatline.execute('EDITOR:display', [
         'EDITOR:EXHIBIT',

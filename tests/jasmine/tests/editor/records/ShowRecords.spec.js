@@ -44,9 +44,9 @@ describe('Records | Show Records', function() {
     var record3 = NL.getRecordListModelByTitle('title3');
 
     // Should link to edit forms.
-    expect($(rows[0]).attr('href')).toEqual('#record/'+record1.id);
-    expect($(rows[1]).attr('href')).toEqual('#record/'+record2.id);
-    expect($(rows[2]).attr('href')).toEqual('#record/'+record3.id);
+    expect($(rows[0]).attr('href')).toEqual('#edit/'+record1.id);
+    expect($(rows[1]).attr('href')).toEqual('#edit/'+record2.id);
+    expect($(rows[2]).attr('href')).toEqual('#edit/'+record3.id);
 
   });
 

@@ -126,8 +126,13 @@ Neatline.module('Map', function(Map) {
     _initControls: function() {
 
       // Bind highlight/select callbacks to the view.
-      _.bindAll(this, 'onBeforeHighlight', 'onHighlight', 'onUnhighlight',
-        'onSelect', 'onUnselect');
+      _.bindAll(this, [
+        'onBeforeHighlight',
+        'onHighlight',
+        'onUnhighlight',
+        'onSelect',
+        'onUnselect'
+      ]);
 
       // Build the hover control, bind callbacks.
       this.highlightControl = new OpenLayers.Control.SelectFeature(
@@ -150,7 +155,7 @@ Neatline.module('Map', function(Map) {
       this.selectControl = new OpenLayers.Control.SelectFeature(
         this.getVectorLayers(), {
           onSelect:   this.onSelect,
-          onUnselect: this.onUnselect
+          onUnselect: this.onUnselect,
         }
       );
 
@@ -290,7 +295,8 @@ Neatline.module('Map', function(Map) {
 
       // Apply default focus, if one exists.
       if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
+        this.setFocus(focus);
+        this.setZoom(zoom);
       }
 
       else {
@@ -319,7 +325,7 @@ Neatline.module('Map', function(Map) {
 
       // Re-select the previously-selected model
       if (!_.isNull(this.selectedModel)) {
-        this.selectByModel(this.selectedModel);
+        this.select(this.selectedModel);
       }
 
     },
@@ -345,18 +351,33 @@ Neatline.module('Map', function(Map) {
       // Get a layer for the model.
       var layer = this.getOrCreateVectorLayer(model);
 
-      // Try to get a custom focus.
+      // Does the layer have geometry that can be focused on?
+      var canFocus = model.get('coverage') && !model.get('is_wms');
+
+      // Try to get custom focus/zoom.
       var focus = model.get('map_focus');
       var zoom  = model.get('map_zoom');
 
-      // If focus is defined, apply.
-      if (_.isString(focus) && _.isNumber(zoom)) {
-        this.setViewport(focus, zoom);
+      // If a custom zoom is set, apply it.
+      if (_.isNumber(zoom)) {
+        this.setZoom(zoom);
       }
 
-      // Otherwise, fit to viewport.
-      else if (model.get('coverage') && !model.get('is_wms')) {
-        this.map.zoomToExtent(layer.getDataExtent());
+      // Otherwise, zoom around the geometry.
+      else if (canFocus) {
+        var zoom = this.map.getZoomForExtent(layer.getDataExtent());
+        this.setZoom(zoom);
+      }
+
+      // If a custom focus is set, apply it.
+      if (_.isString(focus)) {
+        this.setFocus(focus);
+      }
+
+      // Otherwise, focus around the geometry.
+      else if (canFocus) {
+        var center = layer.getDataExtent().getCenterLonLat();
+        this.setFocus(center);
       }
 
       Neatline.vent.trigger('MAP:focused');
@@ -372,6 +393,27 @@ Neatline.module('Map', function(Map) {
      */
     setViewport: function(focus, zoom) {
       this.map.setCenter(focus.split(','), zoom);
+    },
+
+
+    /**
+     * Set the focus.
+     *
+     * @param {Array|String} focus: An array (or comma-delimited) lon/lat.
+     */
+    setFocus: function(focus) {
+      if (_.isString(focus)) focus = focus.split(',');
+      this.map.setCenter(focus);
+    },
+
+
+    /**
+     * Set the zoom.
+     *
+     * @param {Number} zoom: The zoom value.
+     */
+    setZoom: function(zoom) {
+      this.map.zoomTo(zoom);
     },
 
 
@@ -765,11 +807,11 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Highglight all features on a layer, identified by record id.
+     * Highlight all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    highlightByModel: function(model) {
+    highlight: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
@@ -787,11 +829,30 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Apply the `temporary` render intent to a record's vector features
+     * without actually highlighting it.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderHighlightIntent: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      // Highlight features.
+      _.each(layer.features, _.bind(function(feature) {
+        layer.drawFeature(feature, 'temporary');
+      }, this));
+
+    },
+
+
+    /**
      * Unhighglight all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    unhighlightByModel: function(model) {
+    unhighlight: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer || this.modelIsSelected(model)) return;
@@ -809,11 +870,29 @@ Neatline.module('Map', function(Map) {
 
 
     /**
+     * Apply the `default` render intent to a record's vector features.
+     *
+     * @param {Object} model: The record model.
+     */
+    renderDefaultIntent: function(model) {
+
+      var layer = this.layers.vector[model.id];
+      if (!layer) return;
+
+      // Highlight features.
+      _.each(layer.features, _.bind(function(feature) {
+        layer.drawFeature(feature, 'default');
+      }, this));
+
+    },
+
+
+    /**
      * Select all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    selectByModel: function(model) {
+    select: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -838,7 +917,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    unselectByModel: function(model) {
+    unselect: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -883,7 +962,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Highlight sibling features.
-      this.highlightByModel(evt.feature.layer.neatline.model);
+      this.highlight(evt.feature.layer.neatline.model);
 
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
@@ -905,7 +984,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unhighlight sibling features.
-      this.unhighlightByModel(evt.feature.layer.neatline.model);
+      this.unhighlight(evt.feature.layer.neatline.model);
 
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
@@ -927,7 +1006,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Select sibling features.
-      this.selectByModel(feature.layer.neatline.model);
+      this.select(feature.layer.neatline.model);
 
       // Publish `select` event.
       Neatline.vent.trigger('select', {
@@ -948,7 +1027,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unselect sibling features.
-      this.unselectByModel(feature.layer.neatline.model);
+      this.unselect(feature.layer.neatline.model);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {

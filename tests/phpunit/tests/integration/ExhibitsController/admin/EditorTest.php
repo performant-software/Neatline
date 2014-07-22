@@ -12,7 +12,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
 
 
     /**
-     * SHOW should load exhibits by id.
+     * EDITOR should load exhibits by id.
      */
     public function testLoadExhibit()
     {
@@ -23,7 +23,7 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
 
 
     /**
-     * EDITOR should display editor and exhibit containers.
+     * EDITOR should display the editor and exhibit containers.
      */
     public function testBaseMarkup()
     {
@@ -31,6 +31,31 @@ class ExhibitsControllerTest_AdminEditor extends Neatline_Case_Default
         $this->dispatch('neatline/editor/'.$exhibit->id);
         $this->assertQuery('#neatline');
         $this->assertQuery('#editor');
+    }
+
+
+    /**
+     * EDITOR should load development assets when the Omeka `APPLICATION_ENV`
+     * environment variable is set to `development`.
+     */
+    public function testLoadDevelopmentAssets()
+    {
+
+        // TODO
+        // set the env variable
+        // hit the page
+        // check for the assets
+
+    }
+
+
+    /**
+     * EDITOR should load production assets when the Omeka `APPLICATION_ENV`
+     * environment variable is set to anything other than `development`.
+     */
+    public function testLoadProductionAssets()
+    {
+        // TODO
     }
 
 

@@ -19,18 +19,13 @@ Neatline.module('Map.Layers', function(Layers) {
 
     /**
      * Dispatch a layer request to the appropriate handler. If no handler
-     * exists for the passed type and the request fails, return null.
+     * exists for the passed type and the request fails, return undefined.
      *
      * @param {Object} json: The layer definition.
-     * @return {OpenLayers.Layer|null}: The layer.
+     * @return {OpenLayers.Layer|undefined}: The layer.
      */
     getLayer: function(json) {
-      var layer = null;
-      try {
-        layer = Neatline.request('MAP:LAYERS:'+json.type, json);
-      } catch (_) {
-      }
-      return layer;
+      return Neatline.request('MAP:LAYERS:'+json.type, json);
     }
 
 

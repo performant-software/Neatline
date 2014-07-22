@@ -34,6 +34,7 @@ module.exports = {
       '!composer.lock',
       '!vendor/**',
 
+      '!Rakefile',
       '!Gemfile',
       '!Gemfile.lock',
 

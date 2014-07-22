@@ -14,24 +14,24 @@ module.exports = {
     }
   },
 
-  add_form: {
-    src: '<%= concat.add_form.dest %>',
-    dest: '<%= concat.add_form.dest %>'
+  addForm: {
+    src: '<%= concat.addForm.src %>',
+    dest: '<%= concat.addForm.dest %>'
   },
 
-  edit_form: {
-    src: '<%= concat.edit_form.dest %>',
-    dest: '<%= concat.edit_form.dest %>'
+  editForm: {
+    src: '<%= concat.editForm.src %>',
+    dest: '<%= concat.editForm.dest %>'
   },
 
-  neatline_public: {
-    src: '<%= concat.neatline_public.dest %>',
-    dest: '<%= concat.neatline_public.dest %>'
+  neatlinePublic: {
+    src: '<%= concat.neatlinePublic.src %>',
+    dest: '<%= concat.neatlinePublic.dest %>'
   },
 
-  neatline_editor: {
-    src: '<%= concat.neatline_editor.dest %>',
-    dest: '<%= concat.neatline_editor.dest %>'
+  neatlineEditor: {
+    src: '<%= concat.neatlineEditor.src %>',
+    dest: '<%= concat.neatlineEditor.dest %>'
   }
 
 };

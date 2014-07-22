@@ -9,8 +9,30 @@
 describe('Record | Get Item', function() {
 
 
-  beforeEach(function() {
-    NL.loadNeatline();
+  describe('loadItem', function() {
+
+    it('should pass the item body to the callback', function(done) {
+
+      // ----------------------------------------------------------------------
+      // When `loadItem` is called directly, the item body should be loaded
+      // and passed to the provided callback.
+      // ----------------------------------------------------------------------
+
+      var record = new Neatline.Shared.Record.Model({
+        id: 1, item_id: 1
+      });
+
+      // Request the item body.
+      record.loadItem(function(body) {
+        expect(body).toEqual('item');
+        done();
+      });
+
+      // Respond with item.
+      NL.respondLast200('item', 'text/html');
+
+    });
+
   });
 
 
@@ -24,7 +46,9 @@ describe('Record | Get Item', function() {
       // ----------------------------------------------------------------------
 
       // Saved.
-      var record = new Neatline.Shared.Record.Model({ id: 1, item_id: 1 });
+      var record = new Neatline.Shared.Record.Model({
+        id: 1, item_id: 1
+      });
 
       // Should set `item` when loaded.
       record.on('change:item', function() {
@@ -54,7 +78,9 @@ describe('Record | Get Item', function() {
       // ----------------------------------------------------------------------
 
       // Unsaved.
-      var record = new Neatline.Shared.Record.Model({ item_id: 1 });
+      var record = new Neatline.Shared.Record.Model({
+        item_id: 1
+      });
 
       // Should set `item` when loaded.
       record.on('change:item', function() {

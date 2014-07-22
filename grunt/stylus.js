@@ -14,17 +14,17 @@ module.exports = {
     import: ['var']
   },
 
-  neatline_public: {
+  neatlinePublic: {
     src: '<%= paths.src.styl.shared %>/public.styl',
     dest: '<%= paths.dist.css.shared %>/neatline-public.css'
   },
 
-  neatline_editor: {
+  neatlineEditor: {
     src: '<%= paths.src.styl.shared %>/editor.styl',
     dest: '<%= paths.dist.css.shared %>/neatline-editor.css'
   },
 
-  exhibit_form: {
+  exhibitForm: {
     src: '<%= paths.src.styl.admin %>/exhibit-form.styl',
     dest: '<%= paths.dist.css.admin %>/exhibit-form.css'
   }
