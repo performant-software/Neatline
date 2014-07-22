@@ -26,8 +26,8 @@ Neatline.module('Map', function(Map) {
 
     commands: [
       'updateSize',
-      'renderHighlightIntent',
-      'renderDefaultIntent'
+      'showHighlight',
+      'hideHighlight'
     ],
 
     requests: [
@@ -133,7 +133,7 @@ Neatline.module('Map', function(Map) {
     /**
      * Apply the `temporary` render intent on a model's features.
      */
-    renderHighlightIntent: function(model) {
+    showHighlight: function(model) {
       this.view.renderHighlightIntent(model);
     },
 
@@ -141,7 +141,7 @@ Neatline.module('Map', function(Map) {
     /**
      * Apply the `default` render intent on a model's features.
      */
-    renderDefaultIntent: function(model) {
+    hideHighlight: function(model) {
       this.view.renderDefaultIntent(model);
     },
 
