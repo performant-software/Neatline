@@ -15,7 +15,7 @@ Neatline.module('Events', function(Events) {
     slug: 'EVENTS',
 
     routes: {
-      'record/:id': 'record/:id'
+      'records/:id': 'records/:id'
     },
 
 
@@ -32,7 +32,7 @@ Neatline.module('Events', function(Events) {
      *
      * @param {String} id: The record id.
      */
-    'record/:id': function(id) {
+    'records/:id': function(id) {
 
       // Load the model.
       this.records.getOrFetch(id, _.bind(function(model) {
