@@ -5,17 +5,31 @@
 
   - It's now possible to "hard link" to inidividual records in exhibits. For example, if a record has an ID of "36", the route fragment `#records/36` will cause the exhibit to automatically focus on that record when the page load. Likewise, manually selecting a record in the exhibit will update the route.
 
-  - Previously, the default zoom and focus settings for a record could only be set as a pair - if one value was defined, and the other wasn't, the defined value wouldn't be applied when the record was selected. Now, both values can be set independently. For example, you could set a default zoom level, but leave the focus empty, and Neatline will zoom to the provided level and fall back on an auto-computed focus position; or vice versa.
+  - It's now possible to set the set the "Default Focus" value for a record independently of the "Default Zoom" value. If a focus is set, but not a zoom, the custom focus will be applied when the record is selected, and a zoom will be auto-computed based on the size of the record's geometry.
+
+  - Vice versa, the "Default Zoom" value can now be set independently of the "Default Focus." If a zoom is set, but not a focus, the custom zoom will be applied when the record is selected, and a focus will be auto-computed around the bounding box of the record's geometry.
 
 #### Changed Features
 
-  - The routes in the editor have been updated to be more semantic. Now, the default record-browse view is at `#browse`, and search and pagination parameters are provided with `#browse/query=search-query` and `#browse/start=100`.
+  - The routes in the editor have been updated to be more semantic. Now, the starting list of records is at `#browse`, and search and pagination parameters are provided with `#browse/query=search-query` and `#browse/start=100`.
 
 #### Bug Fixes
 
   - Fixes a problem that was causing the layer switcher to be covered by the Waypoints container when the exhibit was using a Google base layer.
 
   - Fixes a bug that caused Omeka item imports to fail if an item had a "Coverage" value that started with the letter "p" but was _not_ a valid WKT string.
+
+#### Development Workflow
+
+  - Changes the process by which compiled Javascript and CSS payloads are committed to git:
+
+  - Instead of building the payloads into `/dist` directories, everything now goes into `/dist/development` directories.
+
+  - All of these directories are .gitignored, making it impossible for transient changes to the payloads during development to get accidentally sucked in commits.
+
+  - When a release is ready, run `grunt freeze`, which copies all of the `/dist/development` directories to sibling `dist/production` directories. The production directories are tracked, so any changes will get vacuumed up in the next commit.
+
+  - In the plugin, when queuing the assets, Neatline just branches on the `APPLICATION_ENV` global, and loads from `dist/development` or `dist/production` depending on the environment. This setting is toggled in [Omeka's `.htaccess` file](https://github.com/omeka/Omeka/blob/master/.htaccess.changeme#L14), making it easy to hallway test the exact files that will be used in production.
 
 ## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
 
