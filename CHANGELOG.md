@@ -23,13 +23,13 @@
 
   - Changes the process by which compiled Javascript and CSS payloads are committed to git:
 
-  - Instead of building the payloads into `/dist` directories, everything now goes into `/dist/development` directories.
+    - Instead of building the payloads into `/dist` directories, everything now goes into `/dist/development` directories.
 
-  - All of these directories are .gitignored, making it impossible for transient changes to the payloads during development to get accidentally sucked in commits.
+    - All of these directories are .gitignored, making it impossible for transient changes to the payloads during development to get accidentally sucked in commits.
 
-  - When a release is ready, run `grunt freeze`, which copies all of the `/dist/development` directories to sibling `dist/production` directories. The production directories are tracked, so any changes will get vacuumed up in the next commit.
+    - When a release is ready, run `grunt freeze`, which copies all of the `/dist/development` directories to sibling `dist/production` directories. The production directories are tracked, so any changes will get vacuumed up in the next commit.
 
-  - In the plugin, when queuing the assets, Neatline just branches on the `APPLICATION_ENV` global, and loads from `dist/development` or `dist/production` depending on the environment. This setting is toggled in [Omeka's `.htaccess` file](https://github.com/omeka/Omeka/blob/master/.htaccess.changeme#L14), making it easy to hallway test the exact files that will be used in production.
+    - In the plugin, when queuing the assets, Neatline just branches on the `APPLICATION_ENV` global, and loads from `dist/development` or `dist/production` depending on the environment. This setting is toggled in [Omeka's `.htaccess` file](https://github.com/omeka/Omeka/blob/master/.htaccess.changeme#L14), making it easy to hallway test the exact files that will be used in production.
 
 ## v2.2.4 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.3...2.2.4)) ~ May 21, 2014
 
