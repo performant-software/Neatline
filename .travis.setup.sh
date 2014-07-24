@@ -51,6 +51,7 @@ cp $OMEKA_DIR/.htaccess.changeme $OMEKA_DIR/.htaccess
 sed -i 's/[; ]*debug.exceptions *=.*/debug.exceptions = true/' $OMEKA_DIR/application/config/config.ini 
 
 mysql -uroot -e "CREATE DATABASE omeka CHARACTER SET = 'utf8' COLLATE = 'utf8_unicode_ci';"
+mysql -uroot -e "CREATE DATABASE test_omeka CHARACTER SET = 'utf8' COLLATE = 'utf8_unicode_ci';"
 gzip -cd $PLUGIN_DIR/tests/fixtures/db-dump.sql.gz | mysql -uroot omeka
 
 # This has to be changed because sometimes Omeka passes empty strings into
