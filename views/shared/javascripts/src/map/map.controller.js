@@ -25,7 +25,9 @@ Neatline.module('Map', function(Map) {
     ],
 
     commands: [
-      'updateSize'
+      'updateSize',
+      'showHighlight',
+      'hideHighlight'
     ],
 
     requests: [
@@ -53,7 +55,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
-      this.view.highlightByModel(args.model);
+      this.view.highlight(args.model);
     },
 
 
@@ -63,7 +65,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} args: Event arguments.
      */
     unhighlight: function(args) {
-      this.view.unhighlightByModel(args.model);
+      this.view.unhighlight(args.model);
     },
 
 
@@ -76,7 +78,7 @@ Neatline.module('Map', function(Map) {
     select: function(args) {
       if (args.source !== this.slug) {
         this.view.focusByModel(args.model);
-        this.view.selectByModel(args.model);
+        this.view.select(args.model);
       }
     },
 
@@ -87,7 +89,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} args: Event arguments.
      */
     unselect: function(args) {
-      this.view.unselectByModel(args.model);
+      this.view.unselect(args.model);
     },
 
 
@@ -125,6 +127,22 @@ Neatline.module('Map', function(Map) {
      */
     updateSize: function() {
       this.view.map.updateSize();
+    },
+
+
+    /**
+     * Apply the `temporary` render intent on a model's features.
+     */
+    showHighlight: function(model) {
+      this.view.renderHighlightIntent(model);
+    },
+
+
+    /**
+     * Apply the `default` render intent on a model's features.
+     */
+    hideHighlight: function(model) {
+      this.view.renderDefaultIntent(model);
     },
 
 

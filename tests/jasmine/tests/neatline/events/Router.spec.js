@@ -36,7 +36,7 @@ describe('Events | Router', function() {
     });
 
     // Hit the route.
-    NL.navigate('record/'+record.id);
+    NL.navigate('records/'+record.id);
 
     // Respond with the JSON.
     NL.respondLast200(fixtures.record);
@@ -52,7 +52,7 @@ describe('Events | Router', function() {
     // ------------------------------------------------------------------------
 
     Neatline.vent.trigger('select', { model: record });
-    NL.assertRoute('record/'+record.id);
+    NL.assertRoute('records/'+record.id);
 
   });
 

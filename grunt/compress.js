@@ -17,14 +17,13 @@ module.exports = {
 
       '**',
 
+      // Exclude un-minified files.
+      '!views/**/dist/development/**',
+
       '!.git/**',
 
       '!bower.json',
       '!bower_components/**',
-      '!views/**/bower.json',
-      '!views/**/composer.json',
-      '!views/**/README*.md',
-      '!views/**/CHANGES*.md',
 
       '!package.json',
       '!node_modules/**',
@@ -46,7 +45,7 @@ module.exports = {
       '!RELEASE-LIST.md',
       '!pkg/**',
       '!tests/**',
-      '!bin/**'
+      '!setup'
 
     ]
   }

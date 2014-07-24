@@ -8,6 +8,10 @@
 
 module.exports = {
 
+  options: {
+    ignoreEmpty: true
+  },
+
   release: {
     options: {
       message: 'Version <%= pkg.version %>.'

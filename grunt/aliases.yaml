@@ -1,5 +1,6 @@
 
 default:
+  - compile:min
   - test
 
 build:
