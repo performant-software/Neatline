@@ -90,7 +90,12 @@ class ItemsControllerTest_Get extends Neatline_Case_Default
             echo "ITEM TEMPLATE MISSING.\n";
         }
         foreach (get_view()->getScriptPaths() as $p) {
-            echo "SCRIPT PATH = <$p>\n";
+            echo "SCRIPT PATH = <$p> ";
+            if (file_exists($p . '/exhibits/item.php')) {
+                echo "FOUND\n";
+            } else {
+                echo "NOT FOUND\n";
+            }
         }
 
         // Should render the default template.
