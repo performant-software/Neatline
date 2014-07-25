@@ -105,7 +105,10 @@ Neatline.module('Map', function(Map) {
 
         theme: null,
         zoomMethod: null,
-        panMethod:  null,
+        panMethod: null,
+
+        // Don't swallow cursor events.
+        fallThrough: true,
 
         controls: [
           new OpenLayers.Control.PanZoom(),
