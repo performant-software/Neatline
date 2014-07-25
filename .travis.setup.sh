@@ -1,12 +1,13 @@
 #! /usr/bin/env bash
 
 if [ -z $OMEKA_BRANCH ]; then
-  OMEKA_BRANCH=stable-2.2
+  OMEKA_BRANCH=master
 fi
 
-export PLUGIN_DIR=`pwd`
-export NL_DIR=`pwd`
-export OMEKA_DIR=`pwd`/omeka
+REPO_DIR=`pwd`
+export OMEKA_DIR=$REPO_DIR/../omeka
+export NL_DIR=$OMEKA_DIR/plugins/Neatline
+export PLUGIN_DIR=$NL_DIR
 
 mysql -e "create database IF NOT EXISTS omeka_test;" -uroot;
 git clone --recursive https://github.com/omeka/Omeka.git $OMEKA_DIR
@@ -59,7 +60,7 @@ gzip -cd $PLUGIN_DIR/tests/fixtures/db-dump.sql.gz | mysql -uroot omeka
 echo "SET GLOBAL sql_mode='';" | mysql -uroot
 
 # symlink the plugin
-cd $OMEKA_DIR/plugins && ln -s $PLUGIN_DIR
+cd $OMEKA_DIR/plugins && ln -s $REPO_DIR
 # ls $OMEKA_DIR/themes
 echo "BOWER VERSION: $(bower --version)"
 bundle install

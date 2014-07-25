@@ -1,20 +1,22 @@
 #! /usr/bin/env bash
 
-if [ -z $PLUGIN_DIR ]; then
-  PLUGIN_DIR=`pwd`
+REPO_DIR=`pwd`
+
+if [ -z $OMEKA_DIR ]; then
+    OMEKA_DIR=$REPO_DIR/../omeka
 fi
 
 if [ -z $NL_DIR ]; then
-    NL_DIR=`pwd`
+    NL_DIR=$OMEKA_DIR/plugins/Neatline
 fi
 
-if [ -z $OMEKA_DIR ]; then
-  OMEKA_DIR=`pwd`/omeka
+if [ -z $PLUGIN_DIR ]; then
+    PLUGIN_DIR=$NL_DIR
 fi
 
-export PLUGIN_DIR
-export NL_DIR
 export OMEKA_DIR
+export NL_DIR
+export PLUGIN_DIR
 
 grunt
 ec1=$?
