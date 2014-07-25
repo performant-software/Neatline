@@ -14,7 +14,7 @@ git clone --recursive https://github.com/omeka/Omeka.git $OMEKA_DIR
 
 # check out the correct branch
 cd $OMEKA_DIR && git checkout $OMEKA_BRANCH
-cd $PLUGIN_DIR
+cd $REPO_DIR
 
 # move configuration files
 mv $OMEKA_DIR/application/config/config.ini.changeme $OMEKA_DIR/application/config/config.ini
@@ -53,7 +53,7 @@ sed -i 's/[; ]*debug.exceptions *=.*/debug.exceptions = true/' $OMEKA_DIR/applic
 
 mysql -uroot -e "CREATE DATABASE omeka CHARACTER SET = 'utf8' COLLATE = 'utf8_unicode_ci';"
 mysql -uroot -e "CREATE DATABASE test_omeka CHARACTER SET = 'utf8' COLLATE = 'utf8_unicode_ci';"
-gzip -cd $PLUGIN_DIR/tests/fixtures/db-dump.sql.gz | mysql -uroot omeka
+gzip -cd $REPO_DIR/tests/fixtures/db-dump.sql.gz | mysql -uroot omeka
 
 # This has to be changed because sometimes Omeka passes empty strings into
 # databases.
