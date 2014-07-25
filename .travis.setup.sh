@@ -1,7 +1,8 @@
 #! /usr/bin/env bash
 
 if [ -z $OMEKA_BRANCH ]; then
-  OMEKA_BRANCH=master
+  # OMEKA_BRANCH=master
+  OMEKA_BRANCH=printf-debug
 fi
 
 REPO_DIR=`pwd`
@@ -10,10 +11,11 @@ export NL_DIR=$OMEKA_DIR/plugins/Neatline
 export PLUGIN_DIR=$NL_DIR
 
 mysql -e "create database IF NOT EXISTS omeka_test;" -uroot;
-git clone --recursive https://github.com/omeka/Omeka.git $OMEKA_DIR
+# git clone --recursive https://github.com/omeka/Omeka.git $OMEKA_DIR
+git clone --recursive https://github.com/erochest/Omeka.git $OMEKA_DIR
 
 # check out the correct branch
-cd $OMEKA_DIR && git checkout $OMEKA_BRANCH
+cd $OMEKA_DIR && git checkout $OMEKA_BRANCH && git submodule update
 cd $REPO_DIR
 
 # move configuration files
