@@ -63,6 +63,7 @@ echo "SET GLOBAL sql_mode='';" | mysql -uroot
 cd $OMEKA_DIR/plugins && ln -s $REPO_DIR
 # ls $OMEKA_DIR/themes
 echo "BOWER VERSION: $(bower --version)"
+cd $REPO_DIR
 bundle install
 npm install
 bower install -f
