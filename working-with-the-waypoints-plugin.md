@@ -8,7 +8,6 @@ The Neatline Waypoints widget allows the creation of contextual reference points
 
 ## Enabling Waypoints for an Exhibit
 To enable the waypoints widget, on the exhibit settings screen, select the widget from the drop down selection box.
-
 ![Screenshot of Exhibit Settings](http://neatline.org/wp-content/uploads/2014/06/enablingwaypoints.png)
 
 ## Adding a Waypoint For a Record
@@ -16,7 +15,9 @@ To include a Neatline record on the waypoints sidebar
 
 1. Create the Neatline record.
 2. On the Style tab of the record, click the Widgets field and select Waypoints from the drop down box.
-![Screenshot of Selecting Waypoints Plugin for a Record](http://neatline.org/wp-content/uploads/2014/07/addingwaypointforrecord.png)
+
+    ![Screenshot of Selecting Waypoints Plugin for a Record](http://neatline.org/wp-content/uploads/2014/07/addingwaypointforrecord.png)
+
 3. Save the record.
 
 ## Removing a Waypoint For a Record
@@ -24,7 +25,8 @@ To remove a Neatline record from the waypoints sidebar
 
 1. Open the Neatline record editor.
 2. On the Style tab, deselect Waypoints from the drop down box by clicking on the small *X* on the plugin label.
-![Screenshot of Deselecting Waypoints for a Record](http://neatline.org/wp-content/uploads/2014/06/deselectingwaypointsonrecord.png)
+
+    ![Screenshot of Deselecting Waypoints for a Record](http://neatline.org/wp-content/uploads/2014/06/deselectingwaypointsonrecord.png)
 3. Save the record.
 
 ## Waypoint Settings
