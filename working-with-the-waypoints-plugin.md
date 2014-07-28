@@ -8,6 +8,7 @@ The Neatline Waypoints widget allows the creation of contextual reference points
 
 ## Enabling Waypoints for an Exhibit
 To enable the waypoints widget, on the exhibit settings screen, select the widget from the drop down selection box.
+
 ![Screenshot of Exhibit Settings](http://neatline.org/wp-content/uploads/2014/06/enablingwaypoints.png)
 
 ## Adding a Waypoint For a Record
