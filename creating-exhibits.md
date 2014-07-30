@@ -23,7 +23,7 @@ A string of letters, numbers, and hyphens used to form the last part of the publ
 
 ## Narrative
 
-A piece of text to introduce, narrate, accompany, or otherwise generally support the exhibit. This could be anything from a short blurb up to a long-format scholaraly essay or a monograph. How you use this field will often depend on how the site theme lays out the public-facing exhibit views - if the narrative is positioned below the exhibit, you might just want a snippet of introductory content; if it's placed to the site of the exhibit and given more room, it might make sense to add more content.  In practice, it often make sense to modify the theme according to the needs of the project - if you need a lot of supporting text, build the theme to accommodate it.
+A piece of text to introduce, narrate, accompany, or otherwise generally support the exhibit. This could be anything from a short blurb up to a long-format scholarly essay or a monograph. How you use this field will often depend on how the site theme lays out the public-facing exhibit views - if the narrative is positioned below the exhibit, you might just want a snippet of introductory content; if it's placed to the site of the exhibit and given more room, it might make sense to add more content.  In practice, it often make sense to modify the theme according to the needs of the project - if you need a lot of supporting text, build the theme to accommodate it.
 
 **Tip**: The "Narrative" field integrates tightly with the NeatlineNarrative widget, which makes it possible to connect individual paragraphs, sentences, and words in the "Narrative" content with records in the exhibit. For example, if "Narrative" contained markup like this:
 
@@ -37,7 +37,7 @@ And you had a record in your Neatline exhibit with a slug of `paris`, the word "
 
 ## Widgets
 
-The combination of user-interface widgets that are "activated" for the exhibit. Since widgets are installed as separate "sub-plugins" in Omeka, there won't be any options available for selection by default. If you've installed the NeatlineWaypoints and NeatlineSimile sub-plugins, though, you'll see two options in the menu that appears when you click the field: "SIMILE Timeline" and "Waypoints." Just click one or both of the options (or neither), and a block will appear in the box, indicating that the widget has been enabled for the the exhibit.
+The combination of user-interface widgets that are "activated" for the exhibit. Since widgets are installed as separate "sub-plugins" in Omeka, there won't be any options available for selection by default. If you've installed the NeatlineWaypoints and NeatlineSimile sub-plugins, though, you'll see two options in the menu that appears when you click the field: "SIMILE Timeline" and "Waypoints." Just click one or both of the options (or neither), and a block will appear in the box, indicating that the widget has been enabled for the exhibit.
 
 ![Screenshot of Widgets field](http://neatline.org/wp-content/uploads/2013/12/creation-selectingwidgets.png)
 
