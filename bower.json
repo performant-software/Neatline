@@ -30,7 +30,6 @@
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
     "openlayers": "http://openlayers.org/download/OpenLayers-2.13.1.zip",
     "sinon": "http://sinonjs.org/releases/sinon-1.7.3.js",
-    "lodash": "~2.4.1",
-    "q": "~1.0.1"
+    "lodash": "~2.4.1"
   }
 }
