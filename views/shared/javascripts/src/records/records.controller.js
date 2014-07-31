@@ -31,7 +31,11 @@ Neatline.module('Records', function(Records) {
         this.records.update({}, this.ready);
       }
 
-      else this.ready();
+      // Otherwise, we're ready immediately, since queries will be forwarded
+      // to the server as they come in.
+      else {
+        this.ready();
+      }
 
     },
 

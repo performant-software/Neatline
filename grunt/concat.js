@@ -19,7 +19,8 @@ var publicVendor = [
   '<%= paths.vendor.openlayers %>',
   '<%= paths.vendor.openlayers_geo %>',
   '<%= paths.vendor.stamen %>',
-  '<%= paths.vendor.rivets %>'
+  '<%= paths.vendor.rivets %>',
+  '<%= paths.vendor.q %>'
 ];
 
 var publicSource = [
