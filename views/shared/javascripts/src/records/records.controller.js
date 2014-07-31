@@ -28,7 +28,7 @@ Neatline.module('Records', function(Records) {
       // If spatial querying is disabled, then we need to load the entire
       // collection of records at once.
       if (!Neatline.g.neatline.exhibit.spatial_querying) {
-        this.records.update({}, this.ready);
+        this.records.update().then(this.ready);
       }
 
       // Otherwise, we're ready immediately, since queries will be forwarded
