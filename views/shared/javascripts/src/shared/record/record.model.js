@@ -87,8 +87,11 @@ Neatline.module('Shared.Record', function(Record) {
      * Load the metadata for the Omeka item associated with the record.
      *
      * @param {Function} cb
+     * @return {Promise}
      */
     loadItem: function(cb) {
+
+      var deferred = Q.defer();
 
       // Break if no parent item.
       if (!this.has('item_id')) return;
@@ -100,8 +103,10 @@ Neatline.module('Shared.Record', function(Record) {
       // Load the item body.
       $.get(url, params, _.bind(function(response) {
         this.set('item', response);
-        if (cb) cb(response);
+        deferred.resolve(response);
       }, this));
+
+      return deferred.promise;
 
     },
 
