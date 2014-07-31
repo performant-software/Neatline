@@ -23,7 +23,7 @@ describe('Record | Get Item', function() {
       });
 
       // Request the item body.
-      record.loadItem().then(function(body) {
+      record.loadItem(function(body) {
         expect(body).toEqual('item');
         done();
       });
