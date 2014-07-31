@@ -64,6 +64,8 @@ Neatline.module('Shared.Record', function(Record) {
      */
     update: function(params, cb) {
 
+      params = params || {};
+
       // Merge the exhibit id.
       params.exhibit_id = Neatline.g.neatline.exhibit.id;
 

@@ -30,6 +30,7 @@ var publicSource = [
   '<%= paths.src.js.shared %>/shared/record/record.collection.js',
   '<%= paths.src.js.shared %>/shared/widget/*.js',
   '<%= paths.src.js.shared %>/events/*.js',
+  '<%= paths.src.js.shared %>/records/*.js',
   '<%= paths.src.js.shared %>/map/**/*.js',
   '<%= paths.src.js.shared %>/presenter/*.js',
   '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js'
