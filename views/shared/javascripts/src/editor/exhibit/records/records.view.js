@@ -45,7 +45,7 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} params: The query parameters.
      */
     load: function(params) {
-      this.records.update(params).then(_.bind(function(records) {
+      this.records.update(params, _.bind(function(records) {
         this.ingest(records);
       }, this));
     },

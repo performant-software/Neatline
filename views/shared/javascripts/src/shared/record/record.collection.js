@@ -60,21 +60,17 @@ Neatline.module('Shared.Record', function(Record) {
      * Fetch a subset of the collection from the server.
      *
      * @param {Object} params: Query parameters.
-     * @return {Promise}
+     * @param {Function} cb: Called when `fetch` completes.
      */
-    update: function(params) {
+    update: function(params, cb) {
 
       params = params || {};
-      var deferred = Q.defer();
 
       // Merge the exhibit id.
       params.exhibit_id = Neatline.g.neatline.exhibit.id;
 
       // Form the default query parameters.
-      var options = {
-        data:     $.param(params),
-        success:  deferred.resolve
-      };
+      var options = { data: $.param(params), success: cb };
 
       // If we're telling the server not to re-transmit existing records (eg,
       // the update is feeding the map), then we do NOT want to automatically
@@ -84,7 +80,6 @@ Neatline.module('Shared.Record', function(Record) {
       if (_.isArray(params.existing)) options.remove = false;
 
       this.fetch(options);
-      return deferred.promise;
 
     },
 

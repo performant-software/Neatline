@@ -483,7 +483,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} params: Hash with `extent` and `zoom`.
      */
     loadRecords: function(params) {
-      this.records.update(params).then(_.bind(function(records) {
+      this.records.update(params, _.bind(function(records) {
         this.ingestRecords(records);
       }, this));
     },
