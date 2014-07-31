@@ -184,8 +184,11 @@ Neatline.module('Map', function(Map) {
 
       // When the map is panned or zoomed.
       this.map.events.register('moveend', this.map, _.bind(function() {
+
+        // Request new records if spatial query is enabled.
         if (this.exhibit.spatial_querying) this.publishPosition();
         Neatline.vent.trigger('MAP:move');
+
       }, this));
 
     },
