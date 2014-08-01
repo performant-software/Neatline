@@ -13,7 +13,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterExtent
 
 
     /**
-     * `queryRecords` should filter on record coverages by extent.
+     * `extent` ~ Match records that overlap with the passed bounding box.
      */
     public function testFilterExtent()
     {

@@ -13,7 +13,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterZoom
 
 
     /**
-     * `queryRecords` should filter on zoom.
+     * `zoom` ~ Match records that are visible at a given zoom level.
      */
     public function testFilterZoom()
     {

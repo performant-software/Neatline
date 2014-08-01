@@ -13,7 +13,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterWidget
 
 
     /**
-     * `queryRecords` should filter on a widget query.
+     * `widget` ~ Match records that are activated on a widget.
      */
     public function testFilterWidget()
     {

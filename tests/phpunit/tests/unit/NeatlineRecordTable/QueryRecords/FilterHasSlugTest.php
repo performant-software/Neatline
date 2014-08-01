@@ -7,36 +7,32 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class NeatlineRecordTableTest_QueryRecordsFilterTags
+class NeatlineRecordTableTest_QueryRecordsFilterHasSlug
     extends Neatline_Case_Default
 {
 
 
     /**
-     * `tags` ~ Match records tagged with all comma-delimited values.
+     * `hasSlug` ~ Match records that have non-empty slugs.
      */
-    public function testFilterTags()
+    public function testFilterHasSlug()
     {
 
         $exhibit = $this->_exhibit();
         $record1 = new NeatlineRecord($exhibit);
         $record2 = new NeatlineRecord($exhibit);
-        $record3 = new NeatlineRecord($exhibit);
-
-        $record1->tags = 'tag1';
-        $record2->tags = 'tag1,tag2';
-        $record3->tags = 'tag3';
+        $record1->slug = 'slug';
+        $record2->slug = null;
 
         $record1->save();
         $record2->save();
-        $record3->save();
 
-        // Query for tag1 and tag2.
+        // Query for `hasSlug`.
         $result = $this->_records->queryRecords(array(
-            'exhibit_id' => $exhibit->id, 'tags' => array('tag1', 'tag2')
+            'exhibit_id' => $exhibit->id,'hasSlug' => true
         ));
 
-        $this->assertEquals($record2->id, $result['records'][0]['id']);
+        $this->assertEquals($result['records'][0]['id'], $record1->id);
         $this->assertCount(1, $result['records']);
 
     }

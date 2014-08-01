@@ -94,6 +94,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $this->filterQuery();
         $this->filterWidget();
         $this->filterOrder();
+        $this->filterHasSlug();
         $this->filterPlugins();
     }
 
@@ -251,6 +252,17 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             $this->select->reset(Zend_Db_Select::ORDER);
             $this->select->order($this->params['order']);
 
+        }
+    }
+
+
+    /**
+     * Match records with slugs.
+     */
+    protected function filterHasSlug()
+    {
+        if (isset($this->params['hasSlug'])) {
+            $this->select->where('slug IS NOT NULL');
         }
     }
 
