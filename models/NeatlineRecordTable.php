@@ -95,6 +95,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $this->filterWidget();
         $this->filterOrder();
         $this->filterHasSlug();
+        $this->filterHasDate();
         $this->filterPlugins();
     }
 
@@ -262,7 +263,24 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
     protected function filterHasSlug()
     {
         if (isset($this->params['hasSlug'])) {
+
             $this->select->where('slug IS NOT NULL');
+
+        }
+    }
+
+
+    /**
+     * Match records with dates.
+     */
+    protected function filterHasDate()
+    {
+        if (isset($this->params['hasDate'])) {
+
+            $this->select->where(
+                'start_date IS NOT NULL OR end_date IS NOT NULL'
+            );
+
         }
     }
 
