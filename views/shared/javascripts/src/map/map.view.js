@@ -187,7 +187,7 @@ Neatline.module('Map', function(Map) {
 
         // Request new records if spatial query is enabled.
         if (this.exhibit.spatial_querying) this.publishPosition();
-        Neatline.vent.trigger('MAP:move');
+        Neatline.vent.trigger('MAP:moveend');
 
       }, this));
 
