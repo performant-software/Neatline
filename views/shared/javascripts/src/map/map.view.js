@@ -182,7 +182,12 @@ Neatline.module('Map', function(Map) {
      */
     _initEvents: function() {
 
-      // When the map is panned or zoomed.
+      // `movestart`
+      this.map.events.register('movestart', this.map, _.bind(function() {
+        Neatline.vent.trigger('MAP:moveStart');
+      }, this));
+
+      // `moveend`
       this.map.events.register('moveend', this.map, _.bind(function() {
 
         // Request new records if spatial query is enabled.
