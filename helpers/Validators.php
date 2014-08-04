@@ -12,18 +12,32 @@
  */
 class Validator
 {
+
     /**
      * Tests if a given string contains valid WKT
      *
-     * @param string $coverage Coverage string to test
-     *
-     * @return boolean if the string is found
+     * @param string $coverage Coverage string to test.
+     * @return boolean True if the coverage is WKT.
      */
     static function isValidWkt($coverage)
     {
+
+        $parts = array(
+            'point',
+            'linestring',
+            'polygon',
+            'multipoint',
+            'multilinestring',
+            'multipolygon',
+            'geometrycollection'
+        );
+
         return (bool) preg_match(
-            '#(point|linestring|polygon|multipoint|multilinestring|multipolygon|geometrycollection)#',
+            '/^\s*('.implode('|', $parts).')/',
             strtolower($coverage)
         );
+
     }
+
+
 }

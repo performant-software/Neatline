@@ -11,21 +11,39 @@ class HelpersTest_ExtractWkt extends Neatline_Case_Default
 {
 
 
+    const KML = <<<KML
+    <kml xmlns="http://earth.google.com/kml/2.0">
+        <Folder>
+            <Placemark>
+                <Point><coordinates>1,2</coordinates></Point>
+            </Placemark>
+        </Folder>
+    </kml>
+KML;
+
+
     /**
-     * `nl_extractWkt` should allow an existing WKT value.
+     * If a WKT string is passed, it should be returned unchanged.
      */
-    public function testExtractValueWKT()
+    public function testReturnWkt()
     {
-        $this->assertNotNull(nl_extractWkt('POINT (13 42)'));
+        $this->assertEquals(
+            'POINT(1 2)',
+            nl_extractWkt('POINT(1 2)')
+        );
     }
 
 
     /**
-     * `nl_extractWkt` should return null for a non-WKT value.
+     * If a KML document is passed, it should be converted it WKT.
+     * @group test
      */
-    public function testIgnoreNonWKT()
+    public function testConvertKml()
     {
-        $this->assertNull(nl_extractWkt('Paris'));
+        $this->assertEquals(
+            geoPHP::load('POINT(1 2)')->out('wkt'),
+            nl_extractWkt(self::KML)
+        );
     }
 
 

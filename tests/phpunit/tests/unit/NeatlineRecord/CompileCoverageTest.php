@@ -257,29 +257,6 @@ KML;
 
 
     /**
-     * `save` should no set a coverage when "Coverage" is not WKT or KML.
-     */
-    public function testDoNothingWhenInvalidDublinCoreCoverage()
-    {
-
-        $this->_skipIfPlugin('NeatlineFeatures');
-
-        $exhibit  = $this->_exhibit();
-        $item     = $this->_item();
-
-        // Set invalid "Coverage".
-        $this->_addCoverageElement($item, 'invalid');
-
-        $record = new NeatlineRecord($exhibit, $item);
-        $record->save();
-
-        // Should not set coverage.
-        $this->assertNull($record->coverage);
-
-    }
-
-
-    /**
      * `save` should import WKT from the "Coverage" element.
      */
     public function testImportDublinCoreWkt()
@@ -347,6 +324,30 @@ KML;
         // Shouldn't modify existing coverage.
         $this->assertEquals(
             'POINT(3 4)', $record->coverage
+        );
+
+    }
+
+
+    // Format conversion:
+    // ------------------------------------------------------------------------
+
+
+    /**
+     * If a KML value is set on the record, it should be converted to WKT.
+     */
+    public function testConvertKmlToWkt()
+    {
+
+        $record = new NeatlineRecord();
+
+        // Set a valid KML string.
+        $record->coverage = self::KML;
+        $record->save();
+
+        // Should convert the KML to WKT.
+        $this->assertEquals(
+            nl_extractWkt(self::KML), $record->coverage
         );
 
     }
