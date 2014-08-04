@@ -246,7 +246,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function compileCoverage()
     {
 
-        // Get parent item.
         $item = $this->getItem();
 
         // Only try to import coverage values if (a) a parent item is defined
