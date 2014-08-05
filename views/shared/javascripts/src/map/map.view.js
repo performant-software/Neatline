@@ -608,7 +608,8 @@ Neatline.module('Map', function(Map) {
 
       // Add features.
       if (record.get('coverage')) {
-        layer.addFeatures(this.formatWkt.read(record.get('coverage')));
+        var features = this.formatWkt.read(record.get('coverage'));
+        layer.addFeatures(features);
       }
 
       // (1) Apply filters.
