@@ -7,7 +7,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-class HelpersTest_ExtractWkt extends Neatline_Case_Default
+class HelpersTest_GetWkt extends Neatline_Case_Default
 {
 
 
@@ -29,7 +29,7 @@ KML;
     {
         $this->assertEquals(
             'POINT(1 2)',
-            nl_extractWkt('POINT(1 2)')
+            nl_getWkt('POINT(1 2)')
         );
     }
 
@@ -41,7 +41,7 @@ KML;
     {
         $this->assertEquals(
             geoPHP::load('POINT(1 2)')->out('wkt'),
-            nl_extractWkt(self::KML)
+            nl_getWkt(self::KML)
         );
     }
 
@@ -51,7 +51,7 @@ KML;
      */
     public function testIgnoreInvalid()
     {
-        $this->assertNull(nl_extractWkt('Paris'));
+        $this->assertNull(nl_getWkt('Paris'));
     }
 
 

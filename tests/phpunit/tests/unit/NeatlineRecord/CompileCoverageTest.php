@@ -121,7 +121,7 @@ KML;
 
         // Should import WKT.
         $this->assertEquals(
-            nl_extractWkt('POINT(1 2)'), $record->coverage
+            'POINT(1 2)', $record->coverage
         );
 
     }
@@ -199,7 +199,7 @@ KML;
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
-            nl_extractWkt(self::KML), $record->coverage
+            nl_getWkt(self::KML), $record->coverage
         );
 
     }
@@ -297,7 +297,7 @@ KML;
 
         // Should import WKT.
         $this->assertEquals(
-            nl_extractWkt('POINT(1 2)'), $record->coverage
+            'POINT(1 2)', $record->coverage
         );
 
     }
@@ -321,7 +321,7 @@ KML;
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
-            nl_extractWkt(self::KML), $record->coverage
+            nl_getWkt(self::KML), $record->coverage
         );
 
     }

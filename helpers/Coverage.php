@@ -36,7 +36,7 @@ function nl_kml2wkt($kml) {
  * @param string $coverage A coverage.
  * @return string|null WKT.
  */
-function nl_extractWkt($coverage) {
+function nl_getWkt($coverage) {
 
     $wkt = null;
 

@@ -278,7 +278,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
                     );
 
                     // Try to convert it to WKT.
-                    $this->coverage = nl_extractWkt($coverage);
+                    $this->coverage = nl_getWkt($coverage);
 
                 } catch (Exception $e) {}
 
