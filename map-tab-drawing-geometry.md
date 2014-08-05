@@ -44,7 +44,7 @@ Just like the "Draw Point" radio button, except that the points are connected by
   3. When you're ready to lay down the final point, move your cursor to the place where you want the line to end and _double click_. This "completes" the line.
 
 
-  **Tip**: This feature has the effect of creating _extremely_ dense geometry, which is very difficult to maintain (eg, if you decide later on that you want to change the shape of the line, you would have to manually move hundrds or thousands of individual points). If you need smooth, curvy shapes, always see if you can use the "Draw SVG" feature, which makes it possible to import easily-maintained vector graphics created in programs like Adobe Illustrator and Inkscape.
+  **Tip**: This feature has the effect of creating _extremely_ dense geometry, which is very difficult to maintain (eg, if you decide later on that you want to change the shape of the line, you would have to manually move hundreds or thousands of individual points). If you need smooth, curvy shapes, always see if you can use the "Draw SVG" feature, which makes it possible to import easily-maintained vector graphics created in programs like Adobe Illustrator and Inkscape.
 
   
 ![Screenshot of Line Drawing Tool](http://neatline.org/wp-content/uploads/2013/12/newitem-linedrawing.png)  
@@ -57,14 +57,14 @@ Just like "Draw Line," except that the shape defined by the points is "closed" i
 
   2. Click again to lay a second point. Keep on clicking until to add multiple points. Like with the point tool, you can draw smooth shapes by holding down Shift, clicking down on the map, and dragging the cursor.
 
-  3. When you're ready to lay down the final point, move your cursor to the place where you want the last corner of the shapee and double click. This "closes" the polygon.
+  3. When you're ready to lay down the final point, move your cursor to the place where you want the last corner of the shape and double click. This "closes" the polygon.
 
 ![Screenshot of Polygon Drawing Tool](http://neatline.org/wp-content/uploads/2013/12/newitem-drawpolygon-inprogress.png)
 
 
 ## Draw Regular Polygon
 
-"Draw Regular Polygon" creates closed shapes just like the regular "Draw Polygon" tools, but it doesn't let you manually position the individual pionts - instead, it automatically creates a polygon with a given number of sides. This is useful if you want to create consistently-shaped geometric primitives (triangles, squares, circles, etc.), and it can also be a good way to sketch in basic components of more complex shapes:
+"Draw Regular Polygon" creates closed shapes just like the regular "Draw Polygon" tools, but it doesn't let you manually position the individual points - instead, it automatically creates a polygon with a given number of sides. This is useful if you want to create consistently-shaped geometric primitives (triangles, squares, circles, etc.), and it can also be a good way to sketch in basic components of more complex shapes:
 
   1. Select the "Draw Polygon" radio button and move your cursor to the place on the map where you want to position the _center_ of the polygon.
 
