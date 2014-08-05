@@ -25,7 +25,7 @@ Point images can be the web-accessible location of any image. For example, to us
 
   - Like regular points, point-images will always stay the same size (the value of "Point Radius"), no matter what the zoom level of the map. If you need an image to scale depending on the zoom level, you'll need to use a WMS overlay hosted by Geoserver (see below).
 
-  - Point-images can't be "rotated" - they will always have the exact orientation of the source image. Again, if you find youself wanting to pivot the image to make it line up with something on the underlying base layer, you're probably looking for the type of functionality provided by a WMS overlay.
+  - Point-images can't be "rotated" - they will always have the exact orientation of the source image. Again, if you find yourself wanting to pivot the image to make it line up with something on the underlying base layer, you're probably looking for the type of functionality provided by a WMS overlay.
 
 **Tip**: When preparing images for use as point-images, try to use image types like `*.png` that support transparency. Otherwise, you'll have unsightly white or black boxes filling in the negative space surrounding the graphics.
 
