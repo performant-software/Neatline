@@ -32,7 +32,7 @@ Using **[Adobe Illustrator][illustrator]**:
 
 Using **[Inkscape][inkscape]**:
 
-  1. Before saving, if you have any text elements in the document, first convert them to raw path elements by selecting them and entering Ctrl+Shift+C (see the [documentation][inkscape-docs] for more inforation.)
+  1. Before saving, if you have any text elements in the document, first convert them to raw path elements by selecting them and entering Ctrl+Shift+C (see the [documentation][inkscape-docs] for more information.)
 
   2. Click **File** > **Save As**.
 
