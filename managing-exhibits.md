@@ -19,7 +19,7 @@ Click on the exhibit title to open up the editing environment for the exhibit, w
 
 ## Public View
 
-Click here to view the the exhibit as it appears on the public-facing version of the website.
+Click here to view the exhibit as it appears on the public-facing version of the website.
 
 ## Exhibit Settings
 
