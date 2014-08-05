@@ -30,7 +30,7 @@ Neatline's tagging system provides a powerful and flexible way to slice and dice
   }
   {% endhighlight %}
 
-  This automatically updates the "Fill Color" of all records in the exhibit tagged with `virginia`, even if there are hundreds of thousands of them. For more infomation about this, head over to the "Styling Exhibits with Neatline CSS" guide.
+  This automatically updates the "Fill Color" of all records in the exhibit tagged with `virginia`, even if there are hundreds of thousands of them. For more information about this, head over to the "Styling Exhibits with Neatline CSS" guide.
 
   - You can filter the list of records in the content management pane in the editor with a query syntax. For example, you could search for:
 
