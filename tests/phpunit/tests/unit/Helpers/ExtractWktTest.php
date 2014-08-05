@@ -35,8 +35,7 @@ KML;
 
 
     /**
-     * If a KML document is passed, it should be converted it WKT.
-     * @group test
+     * If a KML document is passed, it should be converted to WKT.
      */
     public function testConvertKml()
     {
