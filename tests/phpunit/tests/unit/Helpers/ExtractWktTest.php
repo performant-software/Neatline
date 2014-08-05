@@ -46,4 +46,13 @@ KML;
     }
 
 
+    /**
+     * If the passed value is neither WKT nor KML, return null.
+     */
+    public function testIgnoreInvalid()
+    {
+        $this->assertNull(nl_extractWkt('Paris'));
+    }
+
+
 }
