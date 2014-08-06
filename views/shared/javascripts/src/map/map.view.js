@@ -452,24 +452,10 @@ Neatline.module('Map', function(Map) {
     /**
      * Publish a request for new records. If spatial querying is enabled,
      * filter on the current focus and zoom of the map.
-     *
-     * @param {Boolean} refresh: If true, don't pass back a list of `existing`
-     * record IDs, triggering a full re-push of all matching records.
      */
-    publishPosition: function(refresh) {
+    publishPosition: function() {
 
-      refresh = refresh || false;
       var params = {};
-
-      // If the map is being refreshed, don't send a list of existing record
-      // IDs to the server. This causes the server to re-transmit all matching
-      // records, which guarantees that any changes in record data since the
-      // last push will be manifested immediately on the map. For example, if
-      // the user had just added a WMS layer to a record, this causes the edit
-      // layer record to be re-pushed with the new WMS fields, and the new WMS
-      // layer to be instantiated immediately.
-
-      if (!refresh) params.existing = this.getVectorLayerIds();
 
       // Filter by extent and zoom.
       if (this.exhibit.spatial_querying) _.extend(params, {
@@ -525,18 +511,23 @@ Neatline.module('Map', function(Map) {
      */
     ingestVectorLayers: function(records) {
 
-      // Build new layers.
-      records.each(_.bind(function(record) {
+      var oldIds = this.getVectorLayerIds();
+      var newIds = _.pluck(records.models, 'id');
 
-        // Add layer if one doesn't exist.
-        if (!_.has(this.layers.vector, record.id)) {
-          this.buildVectorLayer(record);
+      // Build new layers.
+      _.each(_.difference(newIds, oldIds), _.bind(function(id) {
+
+        var record = records.get(id);
+
+        // Add a layer if the record has a coverage.
+        if (record.get('coverage')) {
+          this.buildVectorLayer(records.get(id));
         }
 
       }, this));
 
-      // Garbage-collect stale layers.
-      _.each(records.metadata.removed, _.bind(function(id) {
+      // Garbage collect stale layers.
+      _.each(_.difference(oldIds, newIds), _.bind(function(id) {
 
         // Get a vector layer with the id.
         var layer = this.layers.vector[id];
@@ -558,21 +549,23 @@ Neatline.module('Map', function(Map) {
      */
     ingestWmsLayers: function(records) {
 
+      var oldIds = this.getWmsLayerIds();
+      var newIds = _.pluck(records.models, 'id');
+
       // Build new layers.
-      records.each(_.bind(function(record) {
+      _.each(_.difference(newIds, oldIds), _.bind(function(id) {
 
-        // Does the layer have a WMS address / layers?
-        var isWms = record.get('wms_address') && record.get('wms_layers');
+        var record = records.get(id);
 
-        // Add layer if one doesn't exist.
-        if (isWms && !_.has(this.layers.wms, record.id)) {
+        // Add a layer if the record has WMS parameters.
+        if (record.get('wms_address') && record.get('wms_layers')) {
           this.buildWmsLayer(record);
         }
 
       }, this));
 
-      // Garbage-collect stale layers.
-      _.each(records.metadata.removed, _.bind(function(id) {
+      // Garbage collect stale layers.
+      _.each(_.difference(oldIds, newIds), _.bind(function(id) {
 
         // Get a WMS layer with the id.
         var layer = this.layers.wms[id];
@@ -1098,12 +1091,12 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Get the ids of all current vector layers.
+     * Get the IDs of all current vector layers.
      *
      * @return {Array}: The array of ids.
      */
     getVectorLayerIds: function() {
-      return _.keys(this.layers.vector);
+      return _.map(_.keys(this.layers.vector), Number);
     },
 
 
@@ -1114,6 +1107,16 @@ Neatline.module('Map', function(Map) {
      */
     getWmsLayers: function() {
       return _.values(this.layers.wms);
+    },
+
+
+    /**
+     * Get the IDs of all current WMS layers.
+     *
+     * @return {Array}: The array of ids.
+     */
+    getWmsLayerIds: function() {
+      return _.map(_.keys(this.layers.wms), Number);
     }
 
 
