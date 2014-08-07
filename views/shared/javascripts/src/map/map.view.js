@@ -177,24 +177,31 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * If spatial querying is enabled, issue a request for new layers that
-     * fall within the updated viewport extent when the map is moved.
+     * Publish move start/end events onto the public channel. If spatial
+     * querying is enabled, request new layers when a move ends.
      */
     _initEvents: function() {
 
       // `movestart`
-      this.map.events.register('movestart', this.map, _.bind(function() {
-        Neatline.vent.trigger('MAP:moveStart');
-      }, this));
+      this.map.events.register(
+        'movestart', this.map, _.bind(function(event) {
+
+          // Forward the event to the public channel.
+          Neatline.vent.trigger('MAP:moveStart', event);
+
+        }, this)
+      );
 
       // `moveend`
-      this.map.events.register('moveend', this.map, _.bind(function() {
+      this.map.events.register(
+        'moveend', this.map, _.bind(function(event) {
 
-        // Request new records if spatial query is enabled.
-        if (this.exhibit.spatial_querying) this.publishPosition();
-        Neatline.vent.trigger('MAP:moveEnd');
+          // Request new records if spatial query is enabled.
+          if (this.exhibit.spatial_querying) this.publishPosition();
+          Neatline.vent.trigger('MAP:moveEnd', event);
 
-      }, this));
+        }, this)
+      );
 
     },
 
