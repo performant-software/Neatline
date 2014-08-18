@@ -69,6 +69,7 @@ npm install
 bower install -f
 grunt build
 
+
 # Set up the site in Apache.
 echo "Set up web site."
 sudo apt-get clean
