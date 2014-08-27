@@ -1,5 +1,11 @@
 
-## v2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.3.0)) ~ Pending
+## v2.3.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.3.0...2.3.1)) ~ Pending
+
+#### Bug Fixes
+
+  - Fixed bug that made it impossible to use the exhibit stylesheets to style tag selectors that included underscores.
+
+## v2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.3.0)) ~ July 28, 2014
 
 #### Added Features
 
