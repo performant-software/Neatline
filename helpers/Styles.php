@@ -37,7 +37,7 @@ function nl_readCSS($css)
     foreach ($matches[0] as $set) {
 
         // Match selector.
-        $re = '/\.(?P<selector>[a-z0-9-]+)\s*\{/';
+        $re = '/\.(?P<selector>[a-z0-9-_]+)\s*\{/';
         preg_match($re, $set, $matches);
         $selector = $matches['selector'];
         $styles[$selector] = array();

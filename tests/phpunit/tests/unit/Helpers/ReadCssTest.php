@@ -38,4 +38,22 @@ class HelpersTest_ReadCss extends Neatline_Case_Default
     }
 
 
+    /**
+     * Selectors with underscores should be extracted.
+     * @regression
+     */
+    public function testAllowUnderscoreInSelectors()
+    {
+        $this->assertEquals(array(
+            'tag_with_underscores' => array(
+                'prop' => 'val'
+            )
+        ), nl_readCSS("
+            .tag_with_underscores {
+                prop: val;
+            }
+        "));
+    }
+
+
 }
