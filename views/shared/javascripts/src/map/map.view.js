@@ -643,7 +643,7 @@ Neatline.module('Map', function(Map) {
 
           // WMS request parameters.
           layers: record.get('wms_layers'),
-          format: 'image/png8',
+          format: 'image/png',
           transparent: true,
           tiled: true
 
