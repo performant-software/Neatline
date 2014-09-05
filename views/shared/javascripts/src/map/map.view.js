@@ -640,8 +640,8 @@ Neatline.module('Map', function(Map) {
 
           // WMS request parameters.
           layers: record.get('wms_layers'),
-          format: 'image/png8',
           transparent: true,
+          format: 'image/png',
           tiled: true
 
         }, {
