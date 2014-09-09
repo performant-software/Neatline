@@ -404,17 +404,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Set the focus and zoom of the map.
-     *
-     * @param {String} focus: Comma-delimited lat/lon.
-     * @param {Number} zoom: The zoom value.
-     */
-    setViewport: function(focus, zoom) {
-      this.map.setCenter(focus.split(','), zoom);
-    },
-
-
-    /**
      * Set the focus.
      *
      * @param {Array|String} focus: An array (or comma-delimited) lon/lat.
