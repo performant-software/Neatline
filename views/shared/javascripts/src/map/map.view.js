@@ -79,9 +79,14 @@ Neatline.module('Map', function(Map) {
       this.filters = {};
 
       /**
-       * The currently-selected record.
+       * The model for the currently-selected vector layer.
        */
-      this.selectedModel = null;
+      this.selectedVectorModel = null;
+
+      /**
+       * The model for the currently-selected WMS layer.
+       */
+      this.selectedWmsModel = null;
 
       /**
        * True when records are being loaded from the server.
@@ -342,8 +347,8 @@ Neatline.module('Map', function(Map) {
       this.selectControl.setLayer(layers);
 
       // Re-select the previously-selected model
-      if (!_.isNull(this.selectedModel)) {
-        this.select(this.selectedModel);
+      if (!_.isNull(this.selectedVectorModel)) {
+        this.selectVector(this.selectedVectorModel);
       }
 
     },
@@ -812,10 +817,10 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    highlight: function(model) {
+    highlightVector: function(model) {
 
       var layer = this.layers.vector[model.id];
-      if (!layer || this.modelIsSelected(model)) return;
+      if (!layer || this.vectorModelIsSelected(model)) return;
 
       this.stopPropagation = true;
 
@@ -835,7 +840,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    renderHighlightIntent: function(model) {
+    renderVectorHighlightIntent: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -847,16 +852,30 @@ Neatline.module('Map', function(Map) {
 
     },
 
+    /**
+     * Highlight WMS layer for a record, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    highlightWms: function(model) {
+
+      var layer = this.layers.wms[model.id];
+      if (!layer) return;
+
+      layer.setOpacity(model.get('fill_opacity_select'));
+
+    },
+
 
     /**
      * Unhighglight all features on a layer, identified by record id.
      *
      * @param {Object} model: The record model.
      */
-    unhighlight: function(model) {
+    unhighlightVector: function(model) {
 
       var layer = this.layers.vector[model.id];
-      if (!layer || this.modelIsSelected(model)) return;
+      if (!layer || this.vectorModelIsSelected(model)) return;
 
       this.stopPropagation = true;
 
@@ -869,13 +888,27 @@ Neatline.module('Map', function(Map) {
 
     },
 
+    /**
+     * Unhighlight WMS layer for a record, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    unhighlightWms: function(model) {
+
+      var layer = this.layers.wms[model.id];
+      if (!layer || this.wmsModelIsSelected(model)) return;
+
+      layer.setOpacity(model.get('fill_opacity'));
+
+    },
+
 
     /**
      * Apply the `default` render intent to a record's vector features.
      *
      * @param {Object} model: The record model.
      */
-    renderDefaultIntent: function(model) {
+    renderVectorDefaultIntent: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -893,7 +926,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    select: function(model) {
+    selectVector: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -908,7 +941,22 @@ Neatline.module('Map', function(Map) {
       this.stopPropagation = false;
 
       // Track selected model.
-      this.selectedModel = model;
+      this.selectedVectorModel = model;
+
+    },
+
+    /**
+     * Select WMS layer of a record, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    selectWms: function(model) {
+
+      var layer = this.layers.wms[model.id];
+      if (!layer) return;
+
+      layer.setOpacity(model.get('fill_opacity_select'));
+      this.selectedWmsModel = model;
 
     },
 
@@ -918,7 +966,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    unselect: function(model) {
+    unselectVector: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -933,7 +981,22 @@ Neatline.module('Map', function(Map) {
       this.stopPropagation = false;
 
       // Clear selected model.
-      this.selectedModel = null;
+      this.selectedVectorModel = null;
+
+    },
+
+    /**
+     * Unselect WMS layer of a record, identified by record id.
+     *
+     * @param {Object} model: The record model.
+     */
+    unselectWms: function(model) {
+
+      var layer = this.layers.wms[model.id];
+      if (!layer) return;
+
+      layer.setOpacity(model.get('fill_opacity'));
+      this.selectedWmsModel = null;
 
     },
 
@@ -963,7 +1026,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Highlight sibling features.
-      this.highlight(evt.feature.layer.neatline.model);
+      this.highlightVector(evt.feature.layer.neatline.model);
 
       // Publish `highlight` event.
       Neatline.vent.trigger('highlight', {
@@ -985,7 +1048,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unhighlight sibling features.
-      this.unhighlight(evt.feature.layer.neatline.model);
+      this.unhighlightVector(evt.feature.layer.neatline.model);
 
       // Publish `unhighlight` event.
       Neatline.vent.trigger('unhighlight', {
@@ -1007,7 +1070,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Select sibling features.
-      this.select(feature.layer.neatline.model);
+      this.selectVector(feature.layer.neatline.model);
 
       // Publish `select` event.
       Neatline.vent.trigger('select', {
@@ -1028,7 +1091,7 @@ Neatline.module('Map', function(Map) {
       if (this.stopPropagation) return;
 
       // Unselect sibling features.
-      this.unselect(feature.layer.neatline.model);
+      this.unselectVector(feature.layer.neatline.model);
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
@@ -1048,9 +1111,19 @@ Neatline.module('Map', function(Map) {
      *
      * @return {Object}: A record model.
      */
-    modelIsSelected: function(model) {
-      if (this.selectedModel) return this.selectedModel.id == model.id;
-      else return false;
+    vectorModelIsSelected: function(model) {
+      return this.selectedVectorModel &&
+        (this.selectedVectorModel.id == model.id);
+    },
+
+    /**
+     * Is the passed model the same as the currently-selected model?
+     *
+     * @return {Object}: A record model.
+     */
+    wmsModelIsSelected: function(model) {
+      return this.selectedWmsModel &&
+        (this.selectedWmsModel.id == model.id);
     },
 
 
