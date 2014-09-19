@@ -28,6 +28,20 @@ Neatline.module('Shared.Record', function(Record) {
           return this.attributes.item;
 
         }
+      },
+
+      tags: {
+        get: function() {
+
+          var tags = this.attributes.tags;
+          if (!tags) return [];
+
+          // Split and trim the tags.
+          else return _.map(tags.split(','), function(tag) {
+            return _.string.trim(tag);
+          });
+
+        }
       }
 
     },
@@ -122,17 +136,7 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Boolean}
      */
     hasTag: function(tag) {
-
-      var tags = this.get('tags');
-      if (!tags) return false;
-
-      // Split and trim the tags.
-      var trimmed = _.map(this.get('tags').split(','), function(tag) {
-        return _.string.trim(tag);
-      });
-
-      return _.contains(trimmed, tag);
-
+      return _.contains(this.get('tags'), tag);
     },
 
 
