@@ -75,20 +75,20 @@ describe('Map | Render WMS Opacity', function() {
 
   //});
 
-  it('should lower opacity on unselect', function() {
+  //it('should lower opacity on unselect', function() {
 
-    // ------------------------------------------------------------------------
-    // WMS layer opacities should be set from the `fill_opacity_select` field.
-    // ------------------------------------------------------------------------
+    //// ------------------------------------------------------------------------
+    //// WMS layer opacities should be set from the `fill_opacity_select` field.
+    //// ------------------------------------------------------------------------
 
-    var layer = NL.v.map.getWmsLayers()[0];
-    Neatline.vent.trigger('select', { model: layer.neatline.model });
-    Neatline.vent.trigger('unselect', { model: layer.neatline.model });
+    //var layer = NL.v.map.getWmsLayers()[0];
+    //Neatline.vent.trigger('select', { model: layer.neatline.model });
+    //Neatline.vent.trigger('unselect', { model: layer.neatline.model });
 
-    // Should lower opacity to the default for the WMS layer.
-    expect(layer.opacity).toEqual(0.5);
+    //// Should lower opacity to the default for the WMS layer.
+    //expect(layer.opacity).toEqual(0.5);
 
-  });
+  //});
 
   it('should not unhighlight a selected record', function() {
 

@@ -42,6 +42,22 @@ describe('Map | Subscribe `select`', function() {
   });
 
 
+  it('should select a WMS layer', function() {
+
+    // ------------------------------------------------------------------------
+    // If the record has a WMS layer, the opacity should be bumped up to the
+    // "Fill Opacity (Selected)" value.
+    // ------------------------------------------------------------------------
+
+    NL.respondMap200(fixtures.records);
+    var layer = NL.v.map.getWmsLayers()[0];
+
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    expect(layer.opacity).toEqual(0.6);
+
+  });
+
+
   describe('should focus and zoom on the record', function() {
 
     beforeEach(function() {
