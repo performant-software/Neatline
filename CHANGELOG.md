@@ -1,6 +1,10 @@
 
 ## v2.3.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.3.0...2.3.1)) ~ Pending
 
+#### Added Features
+
+  - When a record with a WMS layer is selected, the "selected" fill opacity will be applied to the image tiles.
+
 #### Bug Fixes
 
   - Fixed bug that made it impossible to use the exhibit stylesheets to style tag selectors that included underscores.
