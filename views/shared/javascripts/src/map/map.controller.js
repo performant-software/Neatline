@@ -55,8 +55,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
-      this.view.highlightVector(args.model);
-      this.view.highlightWms(args.model);
+      this.view.highlight(args.model);
     },
 
 
@@ -66,8 +65,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} args: Event arguments.
      */
     unhighlight: function(args) {
-      this.view.unhighlightVector(args.model);
-      this.view.unhighlightWms(args.model);
+      this.view.unhighlight(args.model);
 
     },
 
@@ -81,8 +79,7 @@ Neatline.module('Map', function(Map) {
     select: function(args) {
       if (args.source !== this.slug) {
         this.view.focusByModel(args.model);
-        this.view.selectVector(args.model);
-        this.view.selectWms(args.model);
+        this.view.select(args.model);
       }
     },
 
@@ -93,8 +90,7 @@ Neatline.module('Map', function(Map) {
      * @param {Object} args: Event arguments.
      */
     unselect: function(args) {
-      this.view.unselectVector(args.model);
-      this.view.unselectWms(args.model);
+      this.view.unselect(args.model);
     },
 
 
