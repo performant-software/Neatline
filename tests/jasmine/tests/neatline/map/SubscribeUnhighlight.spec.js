@@ -39,8 +39,8 @@ describe('Map | Subscribe `unhighlight`', function() {
   it('should not unhighlight vector layer for selected record', function() {
 
     // ------------------------------------------------------------------------
-    // When `unhighlight` is triggered with a record that is selected on on
-    // the map, the features should not be unhighlighted.
+    // When `unhighlight` is triggered with a record that is selected on the
+    // map, the features should not be unhighlighted.
     // ------------------------------------------------------------------------
 
     NL.respondMap200(fixtures.records);
@@ -66,6 +66,23 @@ describe('Map | Subscribe `unhighlight`', function() {
     Neatline.vent.trigger('highlight', { model: layer.neatline.model });
     Neatline.vent.trigger('unhighlight', { model: layer.neatline.model });
     expect(layer.opacity).toEqual(0.5);
+
+  });
+
+
+  it('should unhighlight a WMS layer for a selected record', function() {
+
+    // ------------------------------------------------------------------------
+    // When `unhighlight` is triggered with a record that is selected on the
+    // map, the opacity should not be changed.
+    // ------------------------------------------------------------------------
+
+    NL.respondMap200(fixtures.records);
+    var layer = NL.v.map.getWmsLayers()[0];
+
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    Neatline.vent.trigger('unhighlight', { model: layer.neatline.model });
+    expect(layer.opacity).toEqual(0.6);
 
   });
 
