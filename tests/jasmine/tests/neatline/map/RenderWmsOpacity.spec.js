@@ -61,19 +61,19 @@ describe('Map | Render WMS Opacity', function() {
 
   //});
 
-  it('should bump opacity on select', function() {
+  //it('should bump opacity on select', function() {
 
-    // ------------------------------------------------------------------------
-    // WMS layer opacities should be set from the `fill_opacity_select` field.
-    // ------------------------------------------------------------------------
+    //// ------------------------------------------------------------------------
+    //// WMS layer opacities should be set from the `fill_opacity_select` field.
+    //// ------------------------------------------------------------------------
 
-    var layer = NL.v.map.getWmsLayers()[0];
-    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    //var layer = NL.v.map.getWmsLayers()[0];
+    //Neatline.vent.trigger('select', { model: layer.neatline.model });
 
-    // Should apply the selected opacity to the WMS layer.
-    expect(layer.opacity).toEqual(0.8);
+    //// Should apply the selected opacity to the WMS layer.
+    //expect(layer.opacity).toEqual(0.8);
 
-  });
+  //});
 
   it('should lower opacity on unselect', function() {
 

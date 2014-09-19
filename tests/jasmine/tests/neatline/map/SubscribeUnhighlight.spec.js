@@ -19,7 +19,7 @@ describe('Map | Subscribe `unhighlight`', function() {
   });
 
 
-  it('should unhighlight features for highlighted layer', function() {
+  it('should unhighlight vector layer', function() {
 
     // ------------------------------------------------------------------------
     // When `unhighlight` is triggered with a record that has a vector layer
@@ -36,7 +36,7 @@ describe('Map | Subscribe `unhighlight`', function() {
   });
 
 
-  it('should not unhighlight features for selected layer', function() {
+  it('should not unhighlight vector layer for selected record', function() {
 
     // ------------------------------------------------------------------------
     // When `unhighlight` is triggered with a record that is selected on on
