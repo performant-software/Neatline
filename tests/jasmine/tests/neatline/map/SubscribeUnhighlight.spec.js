@@ -53,4 +53,21 @@ describe('Map | Subscribe `unhighlight`', function() {
   });
 
 
+  it('should unhighlight a WMS layer', function() {
+
+    // ------------------------------------------------------------------------
+    // When `unhighlight` is triggered with a record that has a WMS layer on
+    // the map, the default opacity should be applied to the WMS layer.
+    // ------------------------------------------------------------------------
+
+    NL.respondMap200(fixtures.records);
+    var layer = NL.v.map.getWmsLayers()[0];
+
+    Neatline.vent.trigger('highlight', { model: layer.neatline.model });
+    Neatline.vent.trigger('unhighlight', { model: layer.neatline.model });
+    expect(layer.opacity).toEqual(0.5);
+
+  });
+
+
 });

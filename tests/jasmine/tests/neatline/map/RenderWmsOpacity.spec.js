@@ -21,7 +21,7 @@ describe('Map | Render WMS Opacity', function() {
   });
 
 
-  it('should render the starting opacity', function() {
+  it('should render the default WMS opacity', function() {
 
     // ------------------------------------------------------------------------
     // WMS layer opacities should be set from the `fill_opacity` field.
@@ -32,34 +32,34 @@ describe('Map | Render WMS Opacity', function() {
 
   });
 
-  it('should bump opacity on highlight', function() {
+  //it('should bump opacity on highlight', function() {
 
-    // ------------------------------------------------------------------------
-    // WMS layer opacities should be set from the `fill_opacity_select` field.
-    // ------------------------------------------------------------------------
+    //// ------------------------------------------------------------------------
+    //// WMS layer opacities should be set from the `fill_opacity_select` field.
+    //// ------------------------------------------------------------------------
 
-    var layer = NL.v.map.getWmsLayers()[0];
-    Neatline.vent.trigger('highlight', { model: layer.neatline.model });
+    //var layer = NL.v.map.getWmsLayers()[0];
+    //Neatline.vent.trigger('highlight', { model: layer.neatline.model });
 
-    // Should apply the selected opacity to the WMS layer.
-    expect(layer.opacity).toEqual(0.8);
+    //// Should apply the selected opacity to the WMS layer.
+    //expect(layer.opacity).toEqual(0.8);
 
-  });
+  //});
 
-    it('should lower opacity on unhighlight', function() {
+    //it('should lower opacity on unhighlight', function() {
 
-    // ------------------------------------------------------------------------
-    // WMS layer opacities should be set from the `fill_opacity_select` field.
-    // ------------------------------------------------------------------------
+    //// ------------------------------------------------------------------------
+    //// WMS layer opacities should be set from the `fill_opacity_select` field.
+    //// ------------------------------------------------------------------------
 
-    var layer = NL.v.map.getWmsLayers()[0];
-    Neatline.vent.trigger('highlight', { model: layer.neatline.model });
-    Neatline.vent.trigger('unhighlight', { model: layer.neatline.model });
+    //var layer = NL.v.map.getWmsLayers()[0];
+    //Neatline.vent.trigger('highlight', { model: layer.neatline.model });
+    //Neatline.vent.trigger('unhighlight', { model: layer.neatline.model });
 
-    // Should lower opacity to the default for the WMS layer.
-    expect(layer.opacity).toEqual(0.5);
+    //// Should lower opacity to the default for the WMS layer.
+    //expect(layer.opacity).toEqual(0.5);
 
-  });
+  //});
 
   it('should bump opacity on select', function() {
 

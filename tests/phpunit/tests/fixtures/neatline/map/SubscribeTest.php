@@ -17,10 +17,14 @@ class FixturesTest_NeatlineMapSubscribe extends Neatline_Case_Fixture
         $record = $this->_record($this->exhibit);
 
         $record->setArray(array(
-            'point_radius'  => 1,
-            'coverage'      => 'POINT(1 2)',
-            'map_focus'     => '100,200',
-            'map_zoom'      => 10
+            'point_radius'          => 1,
+            'coverage'              => 'POINT(1 2)',
+            'map_focus'             => '100,200',
+            'map_zoom'              => 10,
+            'fill_opacity'          => 0.5,
+            'fill_opacity_select'   => 0.6,
+            'wms_address'           => 'address',
+            'wms_layers'            => 'layers'
         ));
 
         $record->save();
