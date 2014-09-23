@@ -8,17 +8,6 @@
 
 
 /**
- * Construct the URL fragment for a record edit form.
- *
- * @param {Number} id: The record id.
- * @return {String}: The URL fragment.
- */
-rivets.formatters.recordLink = function(id) {
-  return '#records/'+id;
-};
-
-
-/**
  * If a record title is null, inject a placeholder string.
  *
  * @param {String|null} title: The title.

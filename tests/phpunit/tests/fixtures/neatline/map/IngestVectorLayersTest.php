@@ -52,17 +52,11 @@ class FixturesTest_NeatlineMapIngestVectorLayers extends Neatline_Case_Fixture
             'NeatlineMapIngestVectorLayers.1234.json'
         );
 
-        // Match records 3-6, with 1-4 already loaded.
+        // Match records 3-6.
         // --------------------------------------------------------------------
 
         $this->request->setQuery(array(
-            'extent'    => 'LINESTRING(0 3,0 6)',
-            'existing'  => array(
-                $record1->id,
-                $record2->id,
-                $record3->id,
-                $record4->id
-            )
+            'extent' => 'LINESTRING(0 3,0 6)'
         ));
 
         $this->_writeRecordsApiFixture($this->exhibit,

@@ -72,4 +72,24 @@ class ExhibitsControllerTest_PublicShow extends Neatline_Case_Default
     }
 
 
+    /**
+     * SHOW should load development assets when the Omeka `APPLICATION_ENV`
+     * environment variable is set to `development`.
+     */
+    public function testLoadDevelopmentAssets()
+    {
+        // TODO
+    }
+
+
+    /**
+     * SHOW should load production assets when the Omeka `APPLICATION_ENV`
+     * environment variable is set to anything other than `development`.
+     */
+    public function testLoadProductionAssets()
+    {
+        // TODO
+    }
+
+
 }

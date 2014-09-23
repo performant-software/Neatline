@@ -13,8 +13,8 @@ class NeatlineRecordTableTest_QueryRecordsFilterExhibit
 
 
     /**
-     * `queryRecords` should get records that belong to the passed exhibit.
-     * Records in other exhibits should be excluded.
+     * `exhibit_id` ~ Match records that belong to the exhibit with the passed
+     * ID. Records in other exhibits should be excluded.
      */
     public function testFilterExhibit()
     {

@@ -13,8 +13,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterQuery
 
 
     /**
-     * `queryRecords` should search for keywords in the `title`, `body`, and
-     * `slug` fields.
+     * `query` ~ Fulltext search in `title`, `body`, and `slug`.
      */
     public function testFilterQuery()
     {

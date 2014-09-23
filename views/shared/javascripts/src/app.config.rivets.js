@@ -20,6 +20,7 @@ rivets.adapters[':'] = {
     return obj.get(keypath)
   },
   publish: function(obj, keypath, value) {
+    if (value === '') value = null;
     obj.set(keypath, value)
   }
 }

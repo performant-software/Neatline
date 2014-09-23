@@ -14,14 +14,15 @@ describe('Map | Initialize Default Focus', function() {
   });
 
 
-  it('should apply the exhibit default focus and zoom', function() {
+  it('should apply the exhibit default focus', function() {
 
     // ------------------------------------------------------------------------
-    // When the exhibit starts, the viewport defined by the `map_focus` and
-    // `map_zoom` should be manifested on the map.
+    // When the exhibit starts, the focus defined by `map_focus` should be
+    // manifested on the map.
     // ------------------------------------------------------------------------
 
-    NL.assertMapViewport(1, 2, 10);
+    NL.assertMapFocus(1, 2);
+    NL.assertMapZoom(10);
 
   });
 

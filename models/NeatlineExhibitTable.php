@@ -56,5 +56,18 @@ class NeatlineExhibitTable extends Neatline_Table_Expandable
         return $this->findBySql('slug=?', array($slug), true);
     }
 
+    /**
+     * Return the columns to be used for creating an HTML select of Neatlines.
+     *
+     * @return array
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function _getColumnPairs()
+    {
+        return array(
+            'neatline_exhibits.id',
+            'neatline_exhibits.title'
+        );
+    }
 
 }

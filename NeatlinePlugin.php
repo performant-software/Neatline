@@ -27,7 +27,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'public_navigation_main',
         'admin_navigation_main',
         'neatline_globals',
-        'neatline_presenters'
+        'neatline_presenters',
+        'exhibit_layouts'
     );
 
 
@@ -144,7 +145,6 @@ SQL
         $records->syncItem($args['record']);
     }
 
-
     // FILTERS
     // ------------------------------------------------------------------------
 
@@ -202,5 +202,18 @@ SQL
         ));
     }
 
-
+    /**
+     * Register the exhibit layout for Nealtine.
+     *
+     * @return void
+     * @author Eric Rochester <erochest@virginia.edu>
+     **/
+    public function filterExhibitLayouts($layouts)
+    {
+        $layouts['neatline'] = array(
+            'name'        => __('Neatline'),
+            'description' => __('Embed a Neatline exhibit.')
+        );
+        return $layouts;
+    }
 }

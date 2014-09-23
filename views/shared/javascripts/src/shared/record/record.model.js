@@ -24,8 +24,22 @@ Neatline.module('Shared.Record', function(Record) {
         get: function() {
 
           // Load the item body, if it isn't already loaded.
-          if (_.isUndefined(this.attributes.item)) this.fetchItem();
+          if (_.isUndefined(this.attributes.item)) this.loadItem();
           return this.attributes.item;
+
+        }
+      },
+
+      tags: {
+        get: function() {
+
+          var tags = this.attributes.tags;
+          if (!tags) return [];
+
+          // Split and trim the tags.
+          else return _.map(tags.split(','), function(tag) {
+            return _.string.trim(tag);
+          });
 
         }
       }
@@ -85,8 +99,10 @@ Neatline.module('Shared.Record', function(Record) {
 
     /**
      * Load the metadata for the Omeka item associated with the record.
+     *
+     * @param {Function} cb
      */
-    fetchItem: function() {
+    loadItem: function(cb) {
 
       // Break if no parent item.
       if (!this.has('item_id')) return;
@@ -98,6 +114,7 @@ Neatline.module('Shared.Record', function(Record) {
       // Load the item body.
       $.get(url, params, _.bind(function(response) {
         this.set('item', response);
+        if (cb) cb(response);
       }, this));
 
     },
@@ -109,6 +126,17 @@ Neatline.module('Shared.Record', function(Record) {
     resetItem: function() {
       this.attributes.item = undefined;
       this.trigger('change:item');
+    },
+
+
+    /**
+     * Is the record tagged with a given tag?
+     *
+     * @param {String} tag: The tag.
+     * @return {Boolean}
+     */
+    hasTag: function(tag) {
+      return _.contains(this.get('tags'), tag);
     },
 
 

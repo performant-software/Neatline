@@ -121,7 +121,7 @@ KML;
 
         // Should import WKT.
         $this->assertEquals(
-            nl_extractWkt('POINT(1 2)'), $record->coverage
+            'POINT(1 2)', $record->coverage
         );
 
     }
@@ -199,7 +199,7 @@ KML;
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
-            nl_extractWkt(self::KML), $record->coverage
+            nl_getWkt(self::KML), $record->coverage
         );
 
     }
@@ -237,7 +237,7 @@ KML;
 
 
     /**
-     * `save` should not set a coverage when "Coverage" is empty.
+     * `save` should do nothing when "Coverage" is empty.
      */
     public function testDoNothingWhenNoDublinCoreCoverage()
     {
@@ -257,7 +257,7 @@ KML;
 
 
     /**
-     * `save` should no set a coverage when "Coverage" is not WKT or KML.
+     * `save` should do nothing when "Coverage" is not WKT or KML.
      */
     public function testDoNothingWhenInvalidDublinCoreCoverage()
     {
@@ -297,7 +297,7 @@ KML;
 
         // Should import WKT.
         $this->assertEquals(
-            nl_extractWkt('POINT(1 2)'), $record->coverage
+            'POINT(1 2)', $record->coverage
         );
 
     }
@@ -321,7 +321,7 @@ KML;
 
         // Should import KML and convert to WKT.
         $this->assertEquals(
-            nl_extractWkt(self::KML), $record->coverage
+            nl_getWkt(self::KML), $record->coverage
         );
 
     }

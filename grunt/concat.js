@@ -6,10 +6,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-var nVen = [ // Public vendor.
+var publicVendor = [
   '<%= paths.vendor.jquery %>',
   '<%= paths.vendor.jquery_ui %>',
-  '<%= paths.vendor.underscore %>',
+  '<%= paths.vendor.lodash %>',
   '<%= paths.vendor.underscore_s %>',
   '<%= paths.vendor.backbone %>',
   '<%= paths.vendor.mutators %>',
@@ -22,20 +22,21 @@ var nVen = [ // Public vendor.
   '<%= paths.vendor.rivets %>'
 ];
 
-var nSrc = [ // Public application.
+var publicSource = [
   '<%= paths.src.js.shared %>/*.js',
   '<%= paths.src.js.shared %>/shared/*.js',
   '<%= paths.src.js.shared %>/shared/exhibit/exhibit.model.js',
   '<%= paths.src.js.shared %>/shared/record/record.model.js',
   '<%= paths.src.js.shared %>/shared/record/record.collection.js',
   '<%= paths.src.js.shared %>/shared/widget/*.js',
-  '<%= paths.src.js.shared %>/broker/*.js',
+  '<%= paths.src.js.shared %>/events/*.js',
+  '<%= paths.src.js.shared %>/records/*.js',
   '<%= paths.src.js.shared %>/map/**/*.js',
   '<%= paths.src.js.shared %>/presenter/*.js',
   '<%= paths.src.js.shared %>/presenter/StaticBubble/*.js'
 ];
 
-var eVen = [ // Editor vendor.
+var editorVendor = [
   '<%= paths.vendor.routefilter %>',
   '<%= paths.vendor.svgtowkt %>',
   '<%= paths.vendor.draggable %>',
@@ -46,10 +47,11 @@ var eVen = [ // Editor vendor.
   '<%= paths.vendor.ace_theme %>',
   '<%= paths.vendor.ace_mode %>',
   '<%= paths.vendor.select2 %>',
+  '<%= paths.vendor.underscore_s %>',
   '<%= paths.vendor.uri %>'
 ];
 
-var eSrc = [ // Editor application.
+var editorSource = [
   '<%= paths.src.js.shared %>/editor/*.js',
   '<%= paths.src.js.shared %>/editor/exhibit/**/*.js',
   '<%= paths.src.js.shared %>/editor/record/**/*.js',
@@ -58,7 +60,7 @@ var eSrc = [ // Editor application.
 
 module.exports = {
 
-  add_form: {
+  addForm: {
     src: [
       '<%= paths.vendor.underscore_s %>',
       '<%= paths.vendor.chosen %>',
@@ -68,7 +70,7 @@ module.exports = {
     dest: '<%= paths.dist.js.admin %>/add-form.js'
   },
 
-  edit_form: {
+  editForm: {
     src: [
       '<%= paths.vendor.chosen %>',
       '<%= paths.src.js.admin %>/exhibit-form.js'
@@ -76,17 +78,25 @@ module.exports = {
     dest: '<%= paths.dist.js.admin %>/edit-form.js'
   },
 
-  neatline_public: {
-    src: [].concat(nVen, nSrc),
+  neatlinePublic: {
+    src: [].concat(
+      publicVendor,
+      publicSource
+    ),
     dest: '<%= paths.dist.js.shared %>/neatline-public.js'
   },
 
-  neatline_editor: {
-    src: [].concat(nVen, eVen, nSrc, eSrc),
+  neatlineEditor: {
+    src: [].concat(
+      publicVendor,
+      editorVendor,
+      publicSource,
+      editorSource
+    ),
     dest: '<%= paths.dist.js.shared %>/neatline-editor.js'
   },
 
-  jasmine_vendor: {
+  jasmineVendor: {
     src: [
       '<%= paths.vendor.uri %>',
       '<%= paths.vendor.jasmine_jquery %>',

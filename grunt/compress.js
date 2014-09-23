@@ -17,6 +17,9 @@ module.exports = {
 
       '**',
 
+      // Exclude un-minified files.
+      '!views/**/dist/development/**',
+
       '!.git/**',
 
       '!bower.json',
@@ -30,6 +33,7 @@ module.exports = {
       '!composer.lock',
       '!vendor/**',
 
+      '!Rakefile',
       '!Gemfile',
       '!Gemfile.lock',
 
@@ -41,7 +45,7 @@ module.exports = {
       '!RELEASE-LIST.md',
       '!pkg/**',
       '!tests/**',
-      '!bin/**'
+      '!setup'
 
     ]
   }

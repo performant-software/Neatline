@@ -2008,7 +2008,7 @@
 /*!
 Jasmine-jQuery: a set of jQuery helpers for Jasmine tests.
 
-Version 2.1.0
+Version 2.0.5
 
 https://github.com/velesin/jasmine-jquery
 
@@ -2489,12 +2489,13 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       toHaveText: function () {
         return {
           compare: function (actual, text) {
-            var trimmedText = $.trim($(actual).text())
+            var actualText = $(actual).text()
+            var trimmedText = $.trim(actualText)
 
             if (text && $.isFunction(text.test)) {
-              return { pass: text.test(trimmedText) }
+              return { pass: text.test(actualText) || text.test(trimmedText) }
             } else {
-              return { pass: trimmedText == text }
+              return { pass: (actualText == text || trimmedText == text) }
             }
           }
         }
@@ -2737,7 +2738,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
        if (b instanceof $ || jasmine.isDomNode(b)) {
          var $b = $(b)
 
-         if (a instanceof jQuery)
+         if (a instanceof $)
            return a.length == $b.length && $b.is(a)
 
          return $(b).is(a);
@@ -2746,7 +2747,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     })
 
     jasmine.getEnv().addCustomEqualityTester(function (a, b) {
-     if (a instanceof jQuery && b instanceof jQuery && a.size() == b.size())
+     if (a instanceof $ && b instanceof $ && a.size() == b.size())
         return a.is(b)
     })
   })
@@ -2817,7 +2818,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     return jasmine.getJSONFixtures().proxyCallTo_('read', arguments)[url]
   }
 }(window, window.jasmine, window.jQuery);
-
 
 this.AsyncSpec = (function(global){
 
@@ -7241,16 +7241,24 @@ var NL = (function(NL) {
 
 
   /**
-   * Assert the current viewport zoom and focus.
+   * Assert the current viewport focus.
    *
    * @param {Number} lon: The focus longitude.
    * @param {Number} lat: The focus latitude.
-   * @param {Number} zoom: The zoom.
    */
-  NL.assertMapViewport = function(lon, lat, zoom) {
+  NL.assertMapFocus = function(lon, lat) {
     expect(this.v.map.map.getCenter().lon).toEqual(lon);
     expect(this.v.map.map.getCenter().lat).toEqual(lat);
-    expect(this.v.map.map.getZoom()).toEqual(zoom);
+  };
+
+
+  /**
+   * Assert the current viewport zoom.
+   *
+   * @param {Number} zoom: The zoom.
+   */
+  NL.assertMapZoom = function(zoom) {
+    expect(NL.getMapZoom()).toEqual(zoom);
   };
 
 
@@ -7454,6 +7462,33 @@ var NL = (function(NL) {
     expect(label.parent('li')).toHaveClass('active');
     expect(panel).toHaveClass('active');
 
+  };
+
+
+  return NL;
+
+
+})(NL || {});
+
+
+/**
+ * @package     omeka
+ * @subpackage  neatline
+ * @copyright   2014 Rector and Board of Visitors, University of Virginia
+ * @license     http://www.apache.org/licenses/LICENSE-2.0.html
+ */
+
+
+var NL = (function(NL) {
+
+
+  /**
+   * Assert the current route fragment.
+   *
+   * @param {String} fragment: The route.
+   */
+  NL.assertRoute = function(fragment) {
+    expect(Backbone.history.fragment).toEqual(fragment);
   };
 
 
@@ -7723,7 +7758,7 @@ var NL = (function(NL) {
  * Set the fixtures path.
  */
 jasmine.getFixtures().fixturesPath = 'tests/jasmine/fixtures';
-jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/dist';
+jasmine.getStyleFixtures().fixturesPath = 'views/shared/css/dist/development';
 
 
 /**
@@ -7891,6 +7926,16 @@ var NL = (function(NL) {
 
 
   /**
+   * Get the current map zoom level.
+   *
+   * @param {Number} zoom: The zoom level.
+   */
+  NL.getMapZoom = function(zoom) {
+    return this.v.map.map.getZoom();
+  };
+
+
+  /**
    * Get a vector layer by record title.
    *
    * @param {String} title: The record title.
@@ -7990,14 +8035,31 @@ var NL = (function(NL) {
 
 
   /**
-   * Get an array of all the record form tab slugs.
+   * Get all record form tab slugs that generate separate routes.
    *
    * @return {Array}: The slugs.
    */
-  NL.getTabSlugs = function() {
-    return _.map(this.v.record.__ui.tabs, function(tab) {
+  NL.getRoutableTabSlugs = function() {
+
+    // Get all slugs.
+    var slugs = _.map(this.v.record.__ui.tabs, function(tab) {
       return $(tab).attr('data-slug');
     });
+
+    // Remove 'text', which has the same route as the form.
+    return _.without(slugs, 'text');
+
+  };
+
+
+  /**
+   * Click on one of the record form tabs.
+   *
+   * @param {String} slug: The slug of the tab to click.
+   */
+  NL.clickTab = function(slug) {
+    var tab = NL.v.record.$('a[href="#record-'+slug+'"]')
+    tab.trigger('click');
   };
 
 
@@ -8204,7 +8266,7 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.showRecordList = function(response) {
-    this.navigate('records');
+    this.navigate('browse');
     this.respondLast200(response);
   };
 
@@ -8215,7 +8277,7 @@ var NL = (function(NL) {
    * @param {Object} response: The response body.
    */
   NL.showRecordForm = function(response) {
-    this.navigate('record/'+JSON.parse(response).id);
+    this.navigate('edit/'+JSON.parse(response).id);
     this.respondLast200(response);
   };
 

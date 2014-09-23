@@ -29,6 +29,9 @@ Neatline.module('Editor.Record.Text', {
        */
       onEditHtmlClick: function(e) {
 
+        // Allow all HTML tags.
+        CKEDITOR.config.allowedContent = true;
+
         // Instantiate the editor.
         var id = $(e.target).attr('data-textarea');
         var ckeditor = CKEDITOR.replace(id);

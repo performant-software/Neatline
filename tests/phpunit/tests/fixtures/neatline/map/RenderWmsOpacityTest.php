@@ -19,7 +19,8 @@ class FixturesTest_NeatlineRenderMapWmsOpacity extends Neatline_Case_Fixture
         $record->setArray(array(
             'wms_address'   => 'address',
             'wms_layers'    => 'layers',
-            'fill_opacity'  => 0.5
+            'fill_opacity'  => 0.5,
+            'fill_opacity_select' => 0.8
         ));
 
         $record->save();

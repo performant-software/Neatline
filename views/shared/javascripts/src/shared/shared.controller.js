@@ -18,13 +18,17 @@ Neatline.module('Shared', function(Shared) {
 
 
     /**
-     * Bind events and call the userland initializer.
+     * Bind events and call initializer.
      */
     initialize: function() {
+
       this._initEvents();
       this._initCommands();
       this._initRequests();
-      this.init();
+
+      // Call the userland initalizer.
+      this.init.apply(this, arguments);
+
     },
 
 

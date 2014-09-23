@@ -9,22 +9,44 @@
 
 
 /**
- * Convert a raw coverage value to WKT.
+ * Convert KML -> WKT.
  *
- * @param string $coverage The raw coverage.
+ * @param string $wkt The coverage.
  * @return string|null The WKT.
  */
-function nl_extractWkt($coverage) {
+function nl_kml2wkt($kml) {
 
     $wkt = null;
 
-    // Get coverage format.
-    $format = geoPHP::detectFormat($coverage);
-
-    // Convert / reduce to WKT.
-    if (in_array($format, array('wkt', 'kml'))) {
-        $wkt = geoPHP::load($coverage)->out('wkt');
+    // Is the input valid KML?
+    if (geoPHP::detectFormat($kml) == 'kml') {
+        $geo = geoPHP::load($kml);
+        $wkt = geoPHP::geometryReduce($geo)->out('wkt');
     }
+
+    return $wkt;
+
+}
+
+
+/**
+ * Given a raw coverage value, try to extract a valid WKT string. If the value
+ * is already WKT, return it unchanged. If it's KML, convert it to WKT.
+ *
+ * @param string $coverage A coverage.
+ * @return string|null WKT.
+ */
+function nl_getWkt($coverage) {
+
+    $wkt = null;
+
+    // Return existing WKT.
+    if (Validator::isValidWkt($coverage)) {
+        return $coverage;
+    }
+
+    // Otherwise, KML -> WKT.
+    else $wkt = nl_kml2wkt($coverage);
 
     return $wkt;
 
@@ -54,8 +76,8 @@ function nl_getNeatlineFeaturesWkt($record) {
     if ($result) {
 
         // If KML, convert to WKT.
-        if (strpos($result, '<kml') !== false) {
-            $result = nl_extractWkt(trim($result));
+        if (geoPHP::detectFormat($result) == 'kml') {
+            $result = nl_kml2wkt(trim($result));
         }
 
         // If WKT, implode and wrap as `GEOMETRYCOLLECTION`.

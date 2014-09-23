@@ -9,79 +9,31 @@
 module.exports = function(grunt) {
 
 
-  // CONFIGURATION
-  // --------------------------------------------------------------------------
-
-
   // Read configuration files:
   var paths = grunt.file.readJSON('paths.json');
   var pkg = grunt.file.readJSON('package.json');
 
+  // Time the task executions.
   require('time-grunt')(grunt);
 
-  // Load the task configurations.
+  // Just load the tasks we need.
+  require('jit-grunt')(grunt, {
+    bower:      'grunt-bower-task',
+    gitcommit:  'grunt-git',
+    gittag:     'grunt-git'
+  });
+
+  // Load the task definitions.
   require('load-grunt-config')(grunt, {
+
+    loadGruntTasks: false,
+
     data: {
       paths: paths,
       pkg: pkg
     }
+
   });
-
-
-  // TASKS
-  // --------------------------------------------------------------------------
-
-
-  // Run the tests by default.
-  grunt.registerTask('default', 'test');
-
-  // Build the application.
-  grunt.registerTask('build', [
-    'clean',
-    'bower',
-    'compile:min',
-    'copy'
-  ]);
-
-  // Concat static assets.
-  grunt.registerTask('compile', [
-    'stylus',
-    'concat'
-  ]);
-
-  // Minify static assets.
-  grunt.registerTask('compile:min', [
-    'compile',
-    'uglify',
-    'cssmin'
-  ]);
-
-  // Mount public Jasmine suite.
-  grunt.registerTask('jasmine:neatline:server', [
-    'jasmine:neatline:build',
-    'connect'
-  ]);
-
-  // Mount editor Jasmine suite.
-  grunt.registerTask('jasmine:editor:server', [
-    'jasmine:editor:build',
-    'connect'
-  ]);
-
-  // Run all tests.
-  grunt.registerTask('test', [
-    'compile:min',
-    'clean:fixtures',
-    'phpunit',
-    'jasmine'
-  ]);
-
-  // Spawn release package.
-  grunt.registerTask('package', [
-    'clean:dist',
-    'compile:min',
-    'compress'
-  ]);
 
 
 };

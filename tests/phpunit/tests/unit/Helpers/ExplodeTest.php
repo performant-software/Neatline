@@ -12,7 +12,7 @@ class HelpersTest_Explode extends Neatline_Case_Default
 
 
     /**
-     * `nl_explode` should split on ','.
+     * Split on ','.
      */
     public function testSplitOnComma()
     {
@@ -21,7 +21,7 @@ class HelpersTest_Explode extends Neatline_Case_Default
 
 
     /**
-     * `nl_explode` should trim whitespace.
+     * Trim whitespace.
      */
     public function testTrimWhitespace()
     {
@@ -30,7 +30,7 @@ class HelpersTest_Explode extends Neatline_Case_Default
 
 
     /**
-     * `nl_explode` should remove spaces.
+     * Remove spaces.
      */
     public function testRemoveSpaces()
     {

@@ -29,9 +29,9 @@ describe('Map | Render WMS Zindex', function() {
     NL.respondMap200(fixtures.records);
 
     // Get the WMS layers.
-    var layer1 = NL.getVectorLayer('title1');
-    var layer2 = NL.getVectorLayer('title2');
-    var layer3 = NL.getVectorLayer('title3');
+    var layer1 = NL.getWmsLayer('title1');
+    var layer2 = NL.getWmsLayer('title2');
+    var layer3 = NL.getWmsLayer('title3');
 
     // Get the indexes for the layers.
     var index1 = NL.v.map.map.getLayerIndex(layer1);

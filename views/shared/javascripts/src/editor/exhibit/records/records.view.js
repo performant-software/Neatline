@@ -63,7 +63,9 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
 
       // Render record list.
       this.$el.html(this.template({
-        records: records, limit: Neatline.g.neatline.per_page, query: query
+        query: query,
+        limit: Neatline.g.neatline.per_page,
+        records: records
       }));
 
       this.records = records;
@@ -107,7 +109,8 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} e: A DOM event.
      */
     getModelByEvent: function(e) {
-      return this.records.get(Number($(e.currentTarget).attr('data-id')));
+      var id = Number($(e.currentTarget).attr('data-id'));
+      return this.records.get(id);
     },
 
 
@@ -118,7 +121,9 @@ Neatline.module('Editor.Exhibit.Records', function(Records) {
      * @param {Object} model: A record model.
      */
     publish: function(event, model) {
-      Neatline.vent.trigger(event, { model: model, source: this.slug });
+      Neatline.vent.trigger(event, {
+        model: model, source: this.slug
+      });
     }
 
 

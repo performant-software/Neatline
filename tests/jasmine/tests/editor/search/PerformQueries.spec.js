@@ -152,13 +152,8 @@ describe('Search | Perform Queries', function() {
     // ------------------------------------------------------------------------
 
     it('one word', function() {
-
       NL.v.search.__ui.search.val('word1').trigger('keyup');
-
-      expect(Backbone.history.fragment).toEqual(
-        'records/search/query=word1'
-      );
-
+      NL.assertRoute('browse/query=word1');
     });
 
     it('multiple words', function() {
@@ -166,18 +161,16 @@ describe('Search | Perform Queries', function() {
       NL.v.search.__ui.search.val('word1 word2 word3').trigger('keyup');
 
       // Spaces replaced with `+`.
-      expect(Backbone.history.fragment).toEqual(
-        'records/search/query=word1+word2+word3'
-      );
+      NL.assertRoute('browse/query=word1+word2+word3');
 
     });
 
-    it('multiple words', function() {
+    it('empty query', function() {
 
       NL.v.search.__ui.search.val('').trigger('keyup');
 
       // Search parameters stripped away.
-      expect(Backbone.history.fragment).toEqual('records');
+      NL.assertRoute('browse');
 
     });
 
