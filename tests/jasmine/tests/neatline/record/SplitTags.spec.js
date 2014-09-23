@@ -6,7 +6,7 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Record | Get Tags', function() {
+describe('Record | Split Tags', function() {
 
 
   it('should return an empty array when no tags', function() {
@@ -16,7 +16,7 @@ describe('Record | Get Tags', function() {
     // ------------------------------------------------------------------------
 
     var record = new Neatline.Shared.Record.Model();
-    expect(record.get('tags')).toEqual([]);
+    expect(record.splitTags('tags')).toEqual([]);
 
   });
 
@@ -31,7 +31,7 @@ describe('Record | Get Tags', function() {
       tags: 'tag1, tag2, tag3'
     });
 
-    expect(record.get('tags')).toEqual([
+    expect(record.splitTags('tags')).toEqual([
       'tag1',
       'tag2',
       'tag3'
