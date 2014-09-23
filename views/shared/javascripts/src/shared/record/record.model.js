@@ -122,7 +122,7 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Boolean}
      */
     hasTag: function(tag) {
-      return _.contains(this.get('tags'), tag);
+      return _.contains(this.splitTags(), tag);
     },
 
 
