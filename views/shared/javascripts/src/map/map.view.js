@@ -485,7 +485,6 @@ Neatline.module('Map', function(Map) {
       this.map.setCenter(focus);
     },
 
-
     /**
      * Set the zoom.
      *
