@@ -12,9 +12,9 @@
 <div id="neatline" class="<?php echo nl_getExhibitWidgetClasses(); ?>">
   <div id="neatline-map" class="neatline-block"></div>
   <!-- Plugin templates. -->
-<?php fire_plugin_hook('neatline_public_templates', array(
-  'exhibit' => nl_getExhibit()
-)); ?>
+  <?php fire_plugin_hook('neatline_public_templates', array(
+      'exhibit' => nl_getExhibit()
+      )); ?>
 </div>
 
 <!-- Globals constants. -->
