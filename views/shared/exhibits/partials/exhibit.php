@@ -11,6 +11,10 @@
 
 <div id="neatline" class="<?php echo nl_getExhibitWidgetClasses(); ?>">
   <div id="neatline-map" class="neatline-block"></div>
+  <!-- Plugin templates. -->
+<?php fire_plugin_hook('neatline_public_templates', array(
+  'exhibit' => nl_getExhibit()
+)); ?>
 </div>
 
 <!-- Globals constants. -->
@@ -22,8 +26,3 @@
 
 <!-- Underscore templates. -->
 <?php echo $this->partial('exhibits/underscore/bubble.php'); ?>
-
-<!-- Plugin templates. -->
-<?php fire_plugin_hook('neatline_public_templates', array(
-  'exhibit' => nl_getExhibit()
-)); ?>
