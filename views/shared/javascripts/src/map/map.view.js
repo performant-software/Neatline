@@ -231,10 +231,6 @@ Neatline.module('Map', function(Map) {
      */
     _initBaseLayers: function() {
 
-      // Check if min/max zoom levels have been set, as they need to be implemented
-      // at the layer level, and not the map
-      this.options.zoomLimits = this.getZoomLimits();
-      
       var isImg = _.isString(this.exhibit.image_layer);
       var isWms = _.isString(this.exhibit.wms_address) &&
                   _.isString(this.exhibit.wms_layers);
@@ -278,15 +274,21 @@ Neatline.module('Map', function(Map) {
      * Construct an individual WMS base layer.
      */
     _initWmsLayer: function() {
-
+      var zoomLimits, minZ, maxZ;
+    
       var wms = new OpenLayers.Layer.WMS(
         this.exhibit.title, this.exhibit.wms_address,
         { layers: this.exhibit.wms_layers },
         { maxZoomLevel: 20 }
       );
-
+      
       this.map.addLayer(wms);
 
+      zoomLimits = this.getZoomLimits();  
+      minZ = _.isNumber(zoomLimits.minZ) ? zoomLimits.minZ : 0 ;
+      maxZ = _.isNumber(zoomLimits.maxZ) ? zoomLimits.maxZ : wms.numZoomLevels - 1; 
+      wms.numZoomLevels = Math.abs(maxZ - minZ + 1);
+      wms.resolutions = wms.resolutions.splice(minZ, maxZ +1);
     },
 
 
@@ -294,9 +296,8 @@ Neatline.module('Map', function(Map) {
      * Construct spatial base layers.
      */
     _initSpatialLayers: function() {
-
       var layers = {};
-      var definedMinZ, definedMaxZ;
+      var zoomLimits, minZ, maxZ;
 
       // Build array of base layer instances.
       _.each(Neatline.g.neatline.spatial_layers, function(json) {
@@ -311,47 +312,43 @@ Neatline.module('Map', function(Map) {
         this.map.setLayerIndex(layer, 0);
       }, this));
 
-      if (this.options.zoomLimits){
+      zoomLimits = this.getZoomLimits();
 
-        // Need to explicitly null out the numZoomLevels option on the map object 
-        // (which otherwise defaults to 16), so as to not override the settings on the given layer
-        this.map.numZoomLevels = null;
-        
-        definedMinZ = this.options.zoomLimits.minZoom;
-        definedMaxZ = this.options.zoomLimits.maxZoom; 
+      //if any user defined zoom limits, null out default numZoomLevels on map object
+      if (zoomLimits.minZ !== null || zoomLimits.maxZ !== null){
+          this.map.numZoomLevels = null;
+      }        
 
-        _.each(layers, function(layer,layerType){
+      _.each(layers, function(layer,layerType){
            
-            // Need to accommodate if only min or max is set. Default to MIN/MAX constants set on some layers (Google/Bing/etc)
-            // or 0/number of zoom levels - 1 for others (OSM based)
-            var minZ = _.isNumber(definedMinZ) ? definedMinZ : layers[layerType].MIN_ZOOM_LEVEL || 0 ;
-            var maxZ = _.isNumber(definedMaxZ) ? definedMaxZ : layers[layerType].MAX_ZOOM_LEVEL || layer.numZoomLevels - 1;
-            
-            layers[layerType].numZoomLevels = Math.abs(maxZ - minZ + 1);
-            layers[layerType].resolutions = layers[layerType].resolutions.splice(minZ, maxZ +1);
-            
-            // Depending on the type of layer, need to set different layer options for limiting zoom levels
-            switch (layerType){
-              
-              case "GooglePhysical":
-              case "GoogleSatellite":
-              case "GoogleStreets":
-              case "GoogleHybrid":
-                layers[layerType].minZoomLevel = minZ;
-                break;
-               
-              case "OpenStreetMap":
-              case "StamenToner":
-              case "StamenTerrain":
-              case "StamenWatercolor":
-                layers[layerType].zoomOffset = minZ;
-                break;
+        // Need to accommodate if only min or max is set. Default to MIN/MAX constants set on some layers (Google/Bing/etc)
+        // or 0/number of zoom levels - 1 for others (OSM based)
+        minZ = _.isNumber(zoomLimits.minZ) ? zoomLimits.minZ : layers[layerType].MIN_ZOOM_LEVEL || 0 ;
+        maxZ = _.isNumber(zoomLimits.maxZ) ? zoomLimits.maxZ : layers[layerType].MAX_ZOOM_LEVEL || layer.numZoomLevels - 1;
+        
+        layers[layerType].numZoomLevels = Math.abs(maxZ - minZ + 1);
+        layers[layerType].resolutions = layers[layerType].resolutions.splice(minZ, maxZ +1);
+        
+        // Depending on the type of layer, need to set different layer options for limiting zoom levels
+        switch (layerType){
+          
+          case "GooglePhysical":
+          case "GoogleSatellite":
+          case "GoogleStreets":
+          case "GoogleHybrid":
+            layers[layerType].minZoomLevel = minZ;
+            break;
+           
+          case "OpenStreetMap":
+          case "StamenToner":
+          case "StamenTerrain":
+          case "StamenWatercolor":
+            layers[layerType].zoomOffset = minZ;
+            break;
 
-            }
+        }
 
-        });
-
-      }
+      });
 
       // Set default base layer.
       this.map.setBaseLayer(layers[this.exhibit.spatial_layer]);
@@ -370,9 +367,9 @@ Neatline.module('Map', function(Map) {
       var minZoom = _.isNumber(this.exhibit.map_min_zoom) ? this.exhibit.map_min_zoom: null;
       var maxZoom = _.isNumber(this.exhibit.map_max_zoom) ? this.exhibit.map_max_zoom: null;
       
-      return minZoom === null && maxZoom === null ? null : {
-        "minZoom": minZoom, 
-        "maxZoom": maxZoom
+      return  {
+        "minZ": minZoom, 
+        "maxZ": maxZoom
       }
     },
 
@@ -523,9 +520,9 @@ Neatline.module('Map', function(Map) {
     publishPosition: function() {
 
       var params = {};
-
+     
       // Filter by extent and zoom.
-      if (this.exhibit.spatial_querying) _.extend(params, {
+      if (this.exhibit.spatial_querying && this.map.getExtent() !== null ) _.extend(params, {
         extent: this.getExtentAsWKT(), zoom: this.getZoom()
       });
 
