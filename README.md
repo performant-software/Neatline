@@ -1,4 +1,4 @@
-![Neatline Logo](http://neatline.org/wp-content/themes/neatline-wp-theme/images/neatline-logo-rgb.png)
+![Neatline Logo](http://neatline.org/images/neatline-logo-rgb.png)
 
 # Neatline
 
