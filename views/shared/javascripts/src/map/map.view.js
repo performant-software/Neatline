@@ -959,7 +959,7 @@ Neatline.module('Map', function(Map) {
 
         this.stopPropagation = true;
 
-        // Select features.
+        // Unselect features.
         _.each(layer.features, _.bind(function(feature) {
           this.selectControl.unselect(feature);
         }, this));

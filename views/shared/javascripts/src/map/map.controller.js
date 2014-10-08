@@ -66,7 +66,6 @@ Neatline.module('Map', function(Map) {
      */
     unhighlight: function(args) {
       this.view.unhighlight(args.model);
-
     },
 
 
