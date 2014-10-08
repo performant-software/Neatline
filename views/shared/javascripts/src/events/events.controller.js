@@ -21,6 +21,11 @@ Neatline.module('Events', function(Events) {
       'unselect'
     ],
 
+    commands: [
+      'unhighlightCurrent',
+      'unselectCurrent'
+    ],
+
 
     /**
      * Initialize the record trackers.
@@ -37,17 +42,8 @@ Neatline.module('Events', function(Events) {
      * @param {Object} args: Event arguments.
      */
     highlight: function(args) {
-
-      // Unhighlight current.
-      if (!_.isNull(this.highlighted)) {
-        Neatline.vent.trigger('unhighlight', {
-          model: this.highlighted, source: this.slug
-        });
-      }
-
-      // Set new current.
+      this.unhighlightCurrent();
       this.highlighted = args.model;
-
     },
 
 
@@ -67,19 +63,9 @@ Neatline.module('Events', function(Events) {
      * @param {Object} args: Event arguments.
      */
     select: function(args) {
-
       this.setRoute(args.model);
-
-      // Unselect current.
-      if (!_.isNull(this.selected)) {
-        Neatline.vent.trigger('unselect', {
-          model: this.selected, source: this.slug
-        });
-      }
-
-      // Set new current.
+      this.unselectCurrent();
       this.selected = args.model;
-
     },
 
 
@@ -102,6 +88,30 @@ Neatline.module('Events', function(Events) {
       if (!Neatline.Editor) {
         Backbone.history.navigate('records/'+model.id, {
           replace: true
+        });
+      }
+    },
+
+
+    /**
+     * Unhighlight the currently-highlighted record.
+     */
+    unhighlightCurrent: function() {
+      if (!_.isNull(this.highlighted)) {
+        Neatline.vent.trigger('unhighlight', {
+          model: this.highlighted, source: this.slug
+        });
+      }
+    },
+
+
+    /**
+     * Unselect the currently-selected record.
+     */
+    unselectCurrent: function() {
+      if (!_.isNull(this.selected)) {
+        Neatline.vent.trigger('unselect', {
+          model: this.selected, source: this.slug
         });
       }
     }
