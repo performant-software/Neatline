@@ -15,7 +15,7 @@
   <a name="close" class="close">&times;</a>
 
   <!-- Title. -->
-  <div class="title" rv-html="record:title | recordTitle"></div>
+  <div class="title" rv-html="record:title"></div>
 
   <!-- Body / Item. -->
   <div class="content body" rv-html="record:body" rv-show="record:body"></div>

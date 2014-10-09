@@ -18,32 +18,32 @@ describe('API | Widget', function() {
   });
 
 
-  it('should append view when widget is not templated', function() {
+  it('should append to map when container is not templated', function() {
 
     // ------------------------------------------------------------------------
-    // When a widget is started and an element for the widget view element is
-    // not attached to the DOM (which is the case when a container for the the
-    // widget has not been explicitly templated by the theme), an element for
-    // the widget should be appended to the map container.
+    // When a widget is started and a container for the view is not attached
+    // to the DOM, the widget should be appended to the map container.
     // ------------------------------------------------------------------------
 
     var inst = new view();
-    expect($('#neatline-map')).toContainElement('#widget');
+    expect($('#neatline-map')).toContainElement(inst.$el);
 
   });
 
 
-  it('should not append view when widget is templated', function() {
+  it('should use existing container when one is templated', function() {
 
     // ------------------------------------------------------------------------
-    // When a view element _is_ provided by the theme, the view element should
+    // When a container _is_ provided by the theme, the view element should
     // not be appended to the exhibit.
     // ------------------------------------------------------------------------
 
-    $('body').append($('<div id="widget"></div>'));
+    var existing = $('<div id="widget"></div>');
+    $('body').append(existing);
 
     var inst = new view();
-    expect($('#neatline-map')).not.toContainElement('#widget');
+    expect($('#neatline-map')).not.toContainElement(inst.$el);
+    expect(existing.get(0)).toEqual(inst.el);
 
   });
 

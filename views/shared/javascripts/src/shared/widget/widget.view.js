@@ -16,17 +16,33 @@ Neatline.module('Shared.Widget', function(Widget) {
 
 
     /**
-     * On startup, check to see if the view element is attached to the DOM
-     * (which is the case if an element with the view's `id` is directly
-     * templated on the page). If not, append the view element to the core
-     * `#neatline-map` container.
+     * When a widget view is started, check to see if there is already an
+     * element on the page with the view's `id`. If so, just attach the view
+     * directly to the existing element. Otherwise, once a new element has
+     * created for the view, append the widget to the map container.
      *
      * @param {Object} options
      */
-    initialize: function(options) {
-      if (!$('#'+this.id).length) this.$el.appendTo($('#neatline-map'));
-      Widget.View.__super__.initialize.call(this, options);
-    },
+    constructor: function(options) {
+
+      options = options || {};
+
+      // Does an element already exist?
+      var el = $('#'+this.id);
+      var exists = el.length;
+
+      // If so, attach the view to it.
+      if (exists) options.el = el;
+
+      // Start the view.
+      Widget.View.__super__.constructor.call(this, options);
+
+      // Append to the map, if not in DOM.
+      if (!$.contains(document, this.$el.get(0))) {
+        this.$el.appendTo($('#neatline-map'));
+      }
+
+    }
 
 
   });
