@@ -16,33 +16,15 @@ Neatline.module('Shared.Widget', function(Widget) {
 
 
     /**
-     * When a widget view is started, check to see if there is already an
-     * element on the page with the view's `id`. If so, just attach the view
-     * directly to the existing element. Otherwise, once a new element has
-     * created for the view, append the widget to the map container.
+     * TODO|bandaid
+     * Inject the widget container into the map.
      *
      * @param {Object} options
      */
-    constructor: function(options) {
-
-      options = options || {};
-
-      // Does an element already exist?
-      var el = $('#'+this.id);
-      var exists = el.length;
-
-      // If so, attach the view to it.
-      if (exists) options.el = el;
-
-      // Start the view.
-      Widget.View.__super__.constructor.call(this, options);
-
-      // Append to the map, if not in DOM.
-      if (!$.contains(document, this.$el.get(0))) {
-        this.$el.appendTo($('#neatline-map'));
-      }
-
-    }
+    initialize: function(options) {
+      this.$el.appendTo($('#neatline-map'));
+      Widget.View.__super__.initialize.call(this, options);
+    },
 
 
   });
