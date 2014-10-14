@@ -16,7 +16,7 @@ layout: default
 
 ## Slug (optional)
 
-The slug is a plain-text identifier for the record - think of it as a human-readable ID that can be used to reference the record from without. Specifically, the Neatline Narrative plugin - which makes it possible to connect text documents to Neatline exhibits - makes it possible to connect individual paragraphs, sentences, or words in a text with individual Neatline records. For example, in the exhibit "Narrative" field, you might have something like this:
+The slug is a plain-text identifier for the record - think of it as a human-readable ID that can be used to reference the record from without. Specifically, the NeatlineText plugin - which makes it possible to connect text documents to Neatline exhibits - makes it possible to connect individual paragraphs, sentences, or words in a text with individual Neatline records. For example, in the exhibit "Narrative" field, you might have something like this:
 
 ```html
 ... <span data-neatline-slug="paris">Paris</span> ...
