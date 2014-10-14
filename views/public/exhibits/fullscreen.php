@@ -20,12 +20,9 @@
     echo $matches[0];
 ?>
 
-        <div role="main">
+        <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
 
-            <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
+        <?php echo nl_getExhibitMarkup(); ?>
 
-            <?php echo nl_getExhibitMarkup(); ?>
-
-        </div>
     </body>
 </html>
