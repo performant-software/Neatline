@@ -9,11 +9,23 @@
 
 ?>
 
-<?php echo head(array(
-  'title' => nl_getExhibitField('title'),
-  'bodyclass' => 'neatline fullscreen'
-)); ?>
+<?php
 
-<?php echo nl_getExhibitMarkup(); ?>
+    $header = head(array(
+      'title' => nl_getExhibitField('title'),
+      'bodyclass' => 'neatline fullscreen'
+      ));
 
-<?php echo foot(); ?>
+    preg_match('/.*<body.*>/simU', $header, $matches);
+    echo $matches[0];
+?>
+
+        <div role="main">
+
+            <?php fire_plugin_hook('public_content_top', array('view'=>$this)); ?>
+
+            <?php echo nl_getExhibitMarkup(); ?>
+
+        </div>
+    </body>
+</html>
