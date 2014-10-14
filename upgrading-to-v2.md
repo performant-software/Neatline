@@ -15,7 +15,7 @@ Neatline 2.0, which was released on July 2, 2013, is a major update to the proje
 
   - **[A high-performance, real-time spatial querying system](http://dclure.org/logs/neatline-one-million-records/)** (the map loads just the subset of information that it needs to fill in the viewport at any given moment) that makes it possible to work with really large collections of records – as many as about 1,000,000 in a single exhibit;
 
-  - **[The ability to import SVG vector graphics](http://dclure.org/logs/neatline-drawing-svg-on-maps/)** created in programs like Adobe Illustrator or Inkscape and interactively “drag” them into position as first-class geometry in a Neatline exhibit;
+  - **[The ability to import SVG vector graphics](http://dclure.org/logs/neatline-drawing-svg-on-maps/)** created in programs like Adobe Illustrator or Inkscape and interactively "drag" them into position as first-class geometry in a Neatline exhibit;
 
   - **[A Neatline-flavored dialect of CSS](http://dclure.org/logs/interactive-css-in-neatline-2-0/)**, integrated into the editing environment, that makes it possible to quickly perform bulk updates on large collections of tagged records;
 
@@ -27,7 +27,7 @@ Neatline 2.0, which was released on July 2, 2013, is a major update to the proje
 
   - **An exhibit-specific theming system**, which makes it possible for designers and developers to completely customize the appearance, layout, and interactivity of Neatline projects on a per-exhibit basis;
 
-  - **A new programming API and “sub-plugin” system** that makes it possible for developers to add custom functionality – everything from simple user-interface widgets (sliders, legends, scrollers, forward-and-backward buttons, etc.) up to really extensive modifications that expand the core data model and add totally new interactions.
+  - **A new programming API and "sub-plugin" system** that makes it possible for developers to add custom functionality – everything from simple user-interface widgets (sliders, legends, scrollers, forward-and-backward buttons, etc.) up to really extensive modifications that expand the core data model and add totally new interactions.
 
 ## What's different
 
