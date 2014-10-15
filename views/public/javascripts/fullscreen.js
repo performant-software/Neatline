@@ -14,9 +14,6 @@ $(function() {
 
   body.css('margin', 0);
 
-  exhibit.detach();
-  $('body').empty().append(exhibit);
-
   var position = function() {
     map.css('height', $(window).height());
     Neatline.execute('MAP:updateSize');
