@@ -232,6 +232,7 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
         // Queue static assets.
         nl_queueNeatlinePublic($exhibit);
         nl_queueExhibitTheme($exhibit);
+        nl_queueFullscreen($exhibit);
 
     }
 
