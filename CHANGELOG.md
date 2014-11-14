@@ -11,6 +11,8 @@
 
   - Fixed bug that made it impossible to use the exhibit stylesheets to style tag selectors that included underscores.
 
+  - Fixed bug that caused vector geometries to displace away from Google baselayers at the highest zoom level.
+
 ## v2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.3.0)) ~ July 28, 2014
 
 #### Added Features
