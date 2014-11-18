@@ -11,7 +11,8 @@ module.exports = {
   options: {
     beautify: {
       quote_keys: true // Fixes Select2 breakage in PhantomJS.
-    }
+    },
+    sourceMap: true
   },
 
   addForm: {
