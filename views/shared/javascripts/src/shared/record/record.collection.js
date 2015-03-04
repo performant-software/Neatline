@@ -64,20 +64,13 @@ Neatline.module('Shared.Record', function(Record) {
      */
     update: function(params, cb) {
 
+      params = params || {};
+
       // Merge the exhibit id.
       params.exhibit_id = Neatline.g.neatline.exhibit.id;
 
-      // Form the default query parameters.
-      var options = { data: $.param(params), success: cb };
-
-      // If we're telling the server not to re-transmit existing records (eg,
-      // the update is feeding the map), then we do NOT want to automatically
-      // remove all records that aren't present in the result - just the ones
-      // that the server explicitly flags as removed.
-
-      if (_.isArray(params.existing)) options.remove = false;
-
-      this.fetch(options);
+      // Query for new records.
+      this.fetch({ data: $.param(params), success: cb });
 
     },
 

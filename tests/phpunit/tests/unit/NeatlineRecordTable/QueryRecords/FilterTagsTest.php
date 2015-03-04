@@ -13,7 +13,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterTags
 
 
     /**
-     * `queryRecords` should filter on a tags query.
+     * `tags` ~ Match records tagged with all comma-delimited values.
      */
     public function testFilterTags()
     {

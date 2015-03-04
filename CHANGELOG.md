@@ -1,5 +1,19 @@
 
-## v2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.3.0)) ~ Pending
+## v2.4.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.3.0...2.4.0)) ~ March 4, 2015
+
+#### Added Features
+
+  - When a record with a WMS layer is selected, the "selected" fill opacity will be applied to the image tiles.
+
+  - Makes it possible for themes to provide custom containers for widgets. For example, a theme could template an element with `id="simile"`, and the SIMILE widget would render the timeline inside of that element, instead of constructing a new element and appending it to the exhibit.
+
+#### Bug Fixes
+
+  - Fixed bug that made it impossible to use the exhibit stylesheets to style tag selectors that included underscores.
+
+  - Fixed bug that caused vector geometries to displace away from Google baselayers at the highest zoom level.
+
+## v2.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.2.4...2.3.0)) ~ July 28, 2014
 
 #### Added Features
 

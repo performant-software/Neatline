@@ -84,6 +84,28 @@ function nl_getExhibitLink(
 
 }
 
+/**
+ * Returns a link to a Neatline exhibit.
+ *
+ * @param NeatlineExhibit|null $exhibit The exhibit record.
+ * @param string $action The action for the link.
+ * @return string The URL.
+ */
+function nl_getExhibitUrl($exhibit, $action, $public=true)
+{
+    $exhibit = $exhibit ? $exhibit : nl_getExhibit();
+
+    if (in_array($action, array('show', 'fullscreen'))) {
+        $identifier = $exhibit->slug;
+    } else {
+        $identifier = $exhibit->id;
+    }
+
+    $route = 'neatline/'.$action.'/'.$identifier;
+    $href  = $public ? public_url($route) : url($route);
+
+    return $href;
+}
 
 /**
  * Count the records in an exhibit.

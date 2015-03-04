@@ -1,6 +1,6 @@
 {
   "name": "Neatline",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "dependencies": {
     "jquery": "~ 2.1.1",
     "jquery-ui": "~ 1.10.4",
@@ -28,7 +28,7 @@
     "jasmine.async": "derickbailey/jasmine.async",
     "ckeditor": "ckeditor/ckeditor-releases#standard/stable",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
-    "openlayers": "http://openlayers.org/download/OpenLayers-2.13.1.zip",
+    "openlayers": "http://github.com/openlayers/openlayers/releases/download/release-2.13.1/OpenLayers-2.13.1.zip",
     "sinon": "http://sinonjs.org/releases/sinon-1.7.3.js",
     "lodash": "~2.4.1"
   }

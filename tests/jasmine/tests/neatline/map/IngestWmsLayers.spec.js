@@ -70,7 +70,7 @@ describe('Map | Ingest WMS Layers', function() {
     expect(layer4.url).toEqual('address4');
     expect(layer4.params.LAYERS).toEqual('layers4');
 
-    NL.assertVectorLayerCount(4);
+    NL.assertWmsLayerCount(4);
 
   });
 
@@ -132,7 +132,7 @@ describe('Map | Ingest WMS Layers', function() {
     expect(layer6.url).toEqual('address6');
     expect(layer6.params.LAYERS).toEqual('layers6');
 
-    NL.assertVectorLayerCount(4);
+    NL.assertWmsLayerCount(4);
 
   });
 
@@ -147,21 +147,21 @@ describe('Map | Ingest WMS Layers', function() {
     // Load records 1-4 at start.
     NL.respondMap200(fixtures._1234);
 
-    var layer1_1 = NL.getVectorLayer('title1');
-    var layer2_1 = NL.getVectorLayer('title2');
-    var layer3_1 = NL.getVectorLayer('title3');
-    var layer4_1 = NL.getVectorLayer('title4');
+    var layer1_1 = NL.getWmsLayer('title1');
+    var layer2_1 = NL.getWmsLayer('title2');
+    var layer3_1 = NL.getWmsLayer('title3');
+    var layer4_1 = NL.getWmsLayer('title4');
 
     // Records 1-4 re-pushed.
     NL.refreshMap(fixtures._1234);
 
-    var layer1_2 = NL.getVectorLayer('title1');
-    var layer2_2 = NL.getVectorLayer('title2');
-    var layer3_2 = NL.getVectorLayer('title3');
-    var layer4_2 = NL.getVectorLayer('title4');
+    var layer1_2 = NL.getWmsLayer('title1');
+    var layer2_2 = NL.getWmsLayer('title2');
+    var layer3_2 = NL.getWmsLayer('title3');
+    var layer4_2 = NL.getWmsLayer('title4');
 
     // Still just 4 layers.
-    NL.assertVectorLayerCount(4);
+    NL.assertWmsLayerCount(4);
 
     // Layers should not be changed.
     expect(layer1_1.id).toEqual(layer1_2.id);

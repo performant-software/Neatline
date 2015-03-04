@@ -94,6 +94,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         $this->filterQuery();
         $this->filterWidget();
         $this->filterOrder();
+        $this->filterHasSlug();
+        $this->filterHasDate();
         $this->filterPlugins();
     }
 
@@ -103,7 +105,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
      */
     public function afterQuery()
     {
-        $this->excludeExisting();
         $this->countRecords();
     }
 
@@ -256,6 +257,34 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
 
 
     /**
+     * Match records with slugs.
+     */
+    protected function filterHasSlug()
+    {
+        if (isset($this->params['hasSlug'])) {
+
+            $this->select->where('slug IS NOT NULL');
+
+        }
+    }
+
+
+    /**
+     * Match records with dates.
+     */
+    protected function filterHasDate()
+    {
+        if (isset($this->params['hasDate'])) {
+
+            $this->select->where(
+                'start_date IS NOT NULL OR end_date IS NOT NULL'
+            );
+
+        }
+    }
+
+
+    /**
      * Pass the select to plugins for modification.
      */
     protected function filterPlugins()
@@ -284,50 +313,6 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         // Count the total result size.
         $this->result['numFound'] = $this->select->columns('COUNT(*)')->
             query()->fetchColumn();
-
-    }
-
-
-    /**
-     * Don't re-transmit records that the client has already loaded. If an
-     * array of `existing` record ids is included in the query:
-     *
-     *  (1) Remove any records in the result set with ids in `existing`.
-     *
-     *  (2) If there are any ids in `existing` that are absent from the new
-     *      result set, return those ids as an array under a `removed` key.
-     */
-    protected function excludeExisting()
-    {
-
-        if (isset($this->params['existing'])) {
-
-            $omittedIds = array();
-            $newRecords = array();
-
-            foreach ($this->result['records'] as $record) {
-
-                // If the record is new, add it to the result set.
-                if (!in_array($record['id'], $this->params['existing'])) {
-                    $newRecords[] = $record;
-                }
-
-                // Otherwise, register duplicate.
-                else $omittedIds[] = $record['id'];
-
-            }
-
-            // Return the list of removed ids.
-            $removed = array_diff($this->params['existing'], $omittedIds);
-            $this->result['removed'] = array_values($removed);
-
-            // Just return the new records.
-            $this->result['records'] = $newRecords;
-
-        }
-
-        // By default, no records removed.
-        else $this->result['removed'] = array();
 
     }
 

@@ -118,7 +118,7 @@ Neatline.module('Map', function(Map) {
      */
     refresh: function() {
       this.view.removeAllLayers();
-      this.view.publishPosition(true);
+      this.view.publishPosition();
     },
 
 
@@ -134,7 +134,7 @@ Neatline.module('Map', function(Map) {
      * Apply the `temporary` render intent on a model's features.
      */
     showHighlight: function(model) {
-      this.view.renderHighlightIntent(model);
+      this.view.renderVectorHighlightIntent(model);
     },
 
 
@@ -142,7 +142,7 @@ Neatline.module('Map', function(Map) {
      * Apply the `default` render intent on a model's features.
      */
     hideHighlight: function(model) {
-      this.view.renderDefaultIntent(model);
+      this.view.renderVectorDefaultIntent(model);
     },
 
 

@@ -73,13 +73,21 @@ Neatline.module('Map', function(Map) {
       this.layers = { vector: {}, wms: {} };
 
       /**
+       * An object that keeps references to the currently-selected
+       *
+       * contains references to all vector and WMS layers
+       * currently on the map, keyed by record id.
+       */
+      this.selected = { vector: {}, wms: {} };
+
+      /**
        * An object that contains references to all filters registered on the
        * map, keyed by filter slug.
        */
       this.filters = {};
 
       /**
-       * The currently-selected record.
+       * The model for the currently-selected layer.
        */
       this.selectedModel = null;
 
@@ -105,7 +113,10 @@ Neatline.module('Map', function(Map) {
 
         theme: null,
         zoomMethod: null,
-        panMethod:  null,
+        panMethod: null,
+
+        // Don't swallow cursor events.
+        fallThrough: true,
 
         controls: [
           new OpenLayers.Control.PanZoom(),
@@ -174,16 +185,31 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * If spatial querying is enabled, issue a request for new layers that
-     * fall within the updated viewport extent when the map is moved.
+     * Publish move start/end events onto the public channel. If spatial
+     * querying is enabled, request new layers when a move ends.
      */
     _initEvents: function() {
 
-      // When the map is panned or zoomed.
-      this.map.events.register('moveend', this.map, _.bind(function() {
-        if (this.exhibit.spatial_querying) this.publishPosition();
-        Neatline.vent.trigger('MAP:move');
-      }, this));
+      // `movestart`
+      this.map.events.register(
+        'movestart', this.map, _.bind(function(event) {
+
+          // Forward the event to the public channel.
+          Neatline.vent.trigger('MAP:moveStart', event);
+
+        }, this)
+      );
+
+      // `moveend`
+      this.map.events.register(
+        'moveend', this.map, _.bind(function(event) {
+
+          // Request new records if spatial query is enabled.
+          if (this.exhibit.spatial_querying) this.publishPosition();
+          Neatline.vent.trigger('MAP:moveEnd', event);
+
+        }, this)
+      );
 
     },
 
@@ -386,17 +412,6 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Set the focus and zoom of the map.
-     *
-     * @param {String} focus: Comma-delimited lat/lon.
-     * @param {Number} zoom: The zoom value.
-     */
-    setViewport: function(focus, zoom) {
-      this.map.setCenter(focus.split(','), zoom);
-    },
-
-
-    /**
      * Set the focus.
      *
      * @param {Array|String} focus: An array (or comma-delimited) lon/lat.
@@ -441,24 +456,10 @@ Neatline.module('Map', function(Map) {
     /**
      * Publish a request for new records. If spatial querying is enabled,
      * filter on the current focus and zoom of the map.
-     *
-     * @param {Boolean} refresh: If true, don't pass back a list of `existing`
-     * record IDs, triggering a full re-push of all matching records.
      */
-    publishPosition: function(refresh) {
+    publishPosition: function() {
 
-      refresh = refresh || false;
       var params = {};
-
-      // If the map is being refreshed, don't send a list of existing record
-      // IDs to the server. This causes the server to re-transmit all matching
-      // records, which guarantees that any changes in record data since the
-      // last push will be manifested immediately on the map. For example, if
-      // the user had just added a WMS layer to a record, this causes the edit
-      // layer record to be re-pushed with the new WMS fields, and the new WMS
-      // layer to be instantiated immediately.
-
-      if (!refresh) params.existing = this.getVectorLayerIds();
 
       // Filter by extent and zoom.
       if (this.exhibit.spatial_querying) _.extend(params, {
@@ -514,18 +515,23 @@ Neatline.module('Map', function(Map) {
      */
     ingestVectorLayers: function(records) {
 
-      // Build new layers.
-      records.each(_.bind(function(record) {
+      var oldIds = this.getVectorLayerIds();
+      var newIds = _.pluck(records.models, 'id');
 
-        // Add layer if one doesn't exist.
-        if (!_.has(this.layers.vector, record.id)) {
-          this.buildVectorLayer(record);
+      // Build new layers.
+      _.each(_.difference(newIds, oldIds), _.bind(function(id) {
+
+        var record = records.get(id);
+
+        // Add a layer if the record has a coverage.
+        if (record.get('coverage')) {
+          this.buildVectorLayer(records.get(id));
         }
 
       }, this));
 
-      // Garbage-collect stale layers.
-      _.each(records.metadata.removed, _.bind(function(id) {
+      // Garbage collect stale layers.
+      _.each(_.difference(oldIds, newIds), _.bind(function(id) {
 
         // Get a vector layer with the id.
         var layer = this.layers.vector[id];
@@ -547,21 +553,23 @@ Neatline.module('Map', function(Map) {
      */
     ingestWmsLayers: function(records) {
 
+      var oldIds = this.getWmsLayerIds();
+      var newIds = _.pluck(records.models, 'id');
+
       // Build new layers.
-      records.each(_.bind(function(record) {
+      _.each(_.difference(newIds, oldIds), _.bind(function(id) {
 
-        // Does the layer have a WMS address / layers?
-        var isWms = record.get('wms_address') && record.get('wms_layers');
+        var record = records.get(id);
 
-        // Add layer if one doesn't exist.
-        if (isWms && !_.has(this.layers.wms, record.id)) {
+        // Add a layer if the record has WMS parameters.
+        if (record.get('wms_address') && record.get('wms_layers')) {
           this.buildWmsLayer(record);
         }
 
       }, this));
 
-      // Garbage-collect stale layers.
-      _.each(records.metadata.removed, _.bind(function(id) {
+      // Garbage collect stale layers.
+      _.each(_.difference(oldIds, newIds), _.bind(function(id) {
 
         // Get a WMS layer with the id.
         var layer = this.layers.wms[id];
@@ -597,7 +605,8 @@ Neatline.module('Map', function(Map) {
 
       // Add features.
       if (record.get('coverage')) {
-        layer.addFeatures(this.formatWkt.read(record.get('coverage')));
+        var features = this.formatWkt.read(record.get('coverage'));
+        layer.addFeatures(features);
       }
 
       // (1) Apply filters.
@@ -631,8 +640,8 @@ Neatline.module('Map', function(Map) {
 
           // WMS request parameters.
           layers: record.get('wms_layers'),
-          format: 'image/png8',
           transparent: true,
+          format: 'image/png',
           tiled: true
 
         }, {
@@ -807,23 +816,32 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Highlight all features on a layer, identified by record id.
+     * Highlight all layers for a record, identified by id.
      *
      * @param {Object} model: The record model.
      */
     highlight: function(model) {
 
+      if (this.modelIsSelected(model)) return;
+
+      // Try to highlight a vector layer.
       var layer = this.layers.vector[model.id];
-      if (!layer || this.modelIsSelected(model)) return;
+      if (layer) {
 
-      this.stopPropagation = true;
+        this.stopPropagation = true;
 
-      // Highlight features.
-      _.each(layer.features, _.bind(function(feature) {
-        this.highlightControl.highlight(feature);
-      }, this));
+        // Highlight features.
+        _.each(layer.features, _.bind(function(feature) {
+          this.highlightControl.highlight(feature);
+        }, this));
 
-      this.stopPropagation = false;
+        this.stopPropagation = false;
+
+      }
+
+      // Set the selected WMS opacity.
+      var layer = this.layers.wms[model.id];
+      if (layer) layer.setOpacity(model.get('fill_opacity_select'));
 
     },
 
@@ -834,7 +852,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    renderHighlightIntent: function(model) {
+    renderVectorHighlightIntent: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -848,23 +866,32 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Unhighglight all features on a layer, identified by record id.
+     * Unhighglight all layers for a record, identified by id.
      *
      * @param {Object} model: The record model.
      */
     unhighlight: function(model) {
 
+      if (this.modelIsSelected(model)) return;
+
+      // Try to unhighlight a vector layer.
       var layer = this.layers.vector[model.id];
-      if (!layer || this.modelIsSelected(model)) return;
+      if (layer) {
 
-      this.stopPropagation = true;
+        this.stopPropagation = true;
 
-      // Unhighlight features.
-      _.each(layer.features, _.bind(function(feature) {
-        this.highlightControl.unhighlight(feature);
-      }, this));
+        // Unhighlight features.
+        _.each(layer.features, _.bind(function(feature) {
+          this.highlightControl.unhighlight(feature);
+        }, this));
 
-      this.stopPropagation = false;
+        this.stopPropagation = false;
+
+      }
+
+      // Set the default WMS opacity.
+      var layer = this.layers.wms[model.id];
+      if (layer) layer.setOpacity(model.get('fill_opacity'));
 
     },
 
@@ -874,7 +901,7 @@ Neatline.module('Map', function(Map) {
      *
      * @param {Object} model: The record model.
      */
-    renderDefaultIntent: function(model) {
+    renderVectorDefaultIntent: function(model) {
 
       var layer = this.layers.vector[model.id];
       if (!layer) return;
@@ -888,50 +915,64 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Select all features on a layer, identified by record id.
+     * Select all layers for a record, identified by id.
      *
      * @param {Object} model: The record model.
      */
     select: function(model) {
 
+      // Try to select a vector layer.
       var layer = this.layers.vector[model.id];
-      if (!layer) return;
+      if (layer) {
 
-      this.stopPropagation = true;
+        this.stopPropagation = true;
 
-      // Select features.
-      _.each(layer.features, _.bind(function(feature) {
-        this.selectControl.select(feature);
-      }, this));
+        // Select features.
+        _.each(layer.features, _.bind(function(feature) {
+          this.selectControl.select(feature);
+        }, this));
 
-      this.stopPropagation = false;
+        this.stopPropagation = false;
 
-      // Track selected model.
+      }
+
+      // Set the selected WMS opacity.
+      var layer = this.layers.wms[model.id];
+      if (layer) layer.setOpacity(model.get('fill_opacity_select'));
+
+      // Track the model.
       this.selectedModel = model;
 
     },
 
 
     /**
-     * Unselect all features on a layer, identified by record id.
+     * Unselect all layer for a record, identified by id.
      *
      * @param {Object} model: The record model.
      */
     unselect: function(model) {
 
+      // Try to select a vector layer.
       var layer = this.layers.vector[model.id];
-      if (!layer) return;
+      if (layer) {
 
-      this.stopPropagation = true;
+        this.stopPropagation = true;
 
-      // Unselect features.
-      _.each(layer.features, _.bind(function(feature) {
-        this.selectControl.unselect(feature);
-      }, this));
+        // Unselect features.
+        _.each(layer.features, _.bind(function(feature) {
+          this.selectControl.unselect(feature);
+        }, this));
 
-      this.stopPropagation = false;
+        this.stopPropagation = false;
 
-      // Clear selected model.
+      }
+
+      // Set the selected WMS opacity.
+      var layer = this.layers.wms[model.id];
+      if (layer) layer.setOpacity(model.get('fill_opacity'));
+
+      // Clear the model.
       this.selectedModel = null;
 
     },
@@ -1048,8 +1089,7 @@ Neatline.module('Map', function(Map) {
      * @return {Object}: A record model.
      */
     modelIsSelected: function(model) {
-      if (this.selectedModel) return this.selectedModel.id == model.id;
-      else return false;
+      return this.selectedModel && (this.selectedModel.id == model.id);
     },
 
 
@@ -1086,12 +1126,12 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Get the ids of all current vector layers.
+     * Get the IDs of all current vector layers.
      *
      * @return {Array}: The array of ids.
      */
     getVectorLayerIds: function() {
-      return _.keys(this.layers.vector);
+      return _.map(_.keys(this.layers.vector), Number);
     },
 
 
@@ -1102,6 +1142,16 @@ Neatline.module('Map', function(Map) {
      */
     getWmsLayers: function() {
       return _.values(this.layers.wms);
+    },
+
+
+    /**
+     * Get the IDs of all current WMS layers.
+     *
+     * @return {Array}: The array of ids.
+     */
+    getWmsLayerIds: function() {
+      return _.map(_.keys(this.layers.wms), Number);
     }
 
 

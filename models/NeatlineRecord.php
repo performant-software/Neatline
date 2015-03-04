@@ -246,7 +246,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public function compileCoverage()
     {
 
-        // Get parent item.
         $item = $this->getItem();
 
         // Only try to import coverage values if (a) a parent item is defined
@@ -273,13 +272,13 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
                 try {
 
-                    // Try to get a "Coverage" value.
+                    // Try to get a DC "Coverage" value.
                     $coverage = metadata(
                         $item, array('Dublin Core', 'Coverage')
                     );
 
                     // Try to convert it to WKT.
-                    $this->coverage = nl_extractWkt($coverage);
+                    $this->coverage = nl_getWkt($coverage);
 
                 } catch (Exception $e) {}
 
@@ -287,7 +286,7 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
         }
 
-        // Track whether the record has a coverage.
+        // Track if a coverage is present.
         $this->is_coverage = $this->coverage ? 1 : 0;
 
     }

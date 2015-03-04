@@ -16,16 +16,16 @@ describe('Map | Render WMS Opacity', function() {
 
   beforeEach(function() {
     NL.loadNeatline();
+    NL.respondMap200(fixtures.records);
+
   });
 
 
-  it('should render opacities', function() {
+  it('should render the default WMS opacity', function() {
 
     // ------------------------------------------------------------------------
     // WMS layer opacities should be set from the `fill_opacity` field.
     // ------------------------------------------------------------------------
-
-    NL.respondMap200(fixtures.records);
 
     // Should set WMS layer opacity.
     expect(NL.v.map.getWmsLayers()[0].opacity).toEqual(0.5);

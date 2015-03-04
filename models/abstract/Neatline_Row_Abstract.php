@@ -45,9 +45,19 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
      */
     public function setNotEmpty($key, $val)
     {
-        if (is_array($val)) $val = implode(',', $val);
-        if (is_string($val) && trim($val) == '') $this->$key = null;
+
+        // Implode arrays to strings.
+        if (is_array($val)) {
+            $val = implode(',', $val);
+        }
+
+        // Set NULL instead of empty string.
+        if (is_string($val) && trim($val) == '') {
+            $this->$key = null;
+        }
+
         else $this->$key = $val;
+
     }
 
 
@@ -58,7 +68,9 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
      */
     public function setArray($values)
     {
-        foreach ($values as $key => $val) $this->setNotEmpty($key, $val);
+        foreach ($values as $key => $val) {
+            $this->setNotEmpty($key, $val);
+        }
     }
 
 

@@ -25,7 +25,7 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $noFocusNoZoom->save();
 
         $this->_writeRecordApiFixture($noFocusNoZoom,
-            'NeatlineMapSubscribeSelectVector.noFocusNoZoom.json'
+            'NeatlineMapSubscribeSelect.noFocusNoZoom.json'
         );
 
         // --------------------------------------------------------------------
@@ -41,7 +41,7 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $focusNoZoom->save();
 
         $this->_writeRecordApiFixture($focusNoZoom,
-            'NeatlineMapSubscribeSelectVector.focusNoZoom.json'
+            'NeatlineMapSubscribeSelect.focusNoZoom.json'
         );
 
         // --------------------------------------------------------------------
@@ -57,7 +57,7 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $zoomNoFocus->save();
 
         $this->_writeRecordApiFixture($zoomNoFocus,
-            'NeatlineMapSubscribeSelectVector.zoomNoFocus.json'
+            'NeatlineMapSubscribeSelect.zoomNoFocus.json'
         );
 
         // --------------------------------------------------------------------
@@ -74,13 +74,31 @@ class FixturesTest_NeatlineMapSubscribeSelectVector
         $focusAndZoom->save();
 
         $this->_writeRecordApiFixture($focusAndZoom,
-            'NeatlineMapSubscribeSelectVector.focusAndZoom.json'
+            'NeatlineMapSubscribeSelect.focusAndZoom.json'
+        );
+
+        // --------------------------------------------------------------------
+
+        $wms = $this->_record($this->exhibit);
+
+        $focusAndZoom->setArray(array(
+            'title'                 => 'wms',
+            'wms_address'           => 'address',
+            'wms_layers'            => 'layers',
+            'fill_opacity'          => '0.5',
+            'fill_opacity_select'   => '0.6'
+        ));
+
+        $focusAndZoom->save();
+
+        $this->_writeRecordApiFixture($focusAndZoom,
+            'NeatlineMapSubscribeSelect.wms.json'
         );
 
         // --------------------------------------------------------------------
 
         $this->_writeRecordsApiFixture($this->exhibit,
-            'NeatlineMapSubscribeSelectVector.records.json'
+            'NeatlineMapSubscribeSelect.records.json'
         );
 
     }

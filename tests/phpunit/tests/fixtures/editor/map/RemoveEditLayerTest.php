@@ -36,12 +36,11 @@ class FixturesTest_EditorMapRemoveEditLayer extends Neatline_Case_Fixture
             'EditorMapRemoveEditLayer.records123.json'
         );
 
-        // Match just records 1-2, with 1-3 already loaded.
+        // Match records 1-2.
         // --------------------------------------------------------------------
 
         $this->request->setQuery(array(
-            'extent'    => 'LINESTRING(0 1,0 2)',
-            'existing'  => array($record1->id, $record2->id, $record3->id)
+            'extent' => 'LINESTRING(0 1,0 2)'
         ));
 
         $this->_writeRecordsApiFixture($this->exhibit,

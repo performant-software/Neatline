@@ -13,7 +13,7 @@ class NeatlineRecordTableTest_QueryRecordsFilterOrder
 
 
     /**
-     * `queryRecords` should sort records on the order column.
+     * `order` ~ Sort the results on the provided column / direction.
      */
     public function testFilterOrder()
     {

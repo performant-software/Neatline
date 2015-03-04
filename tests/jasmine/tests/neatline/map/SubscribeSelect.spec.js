@@ -6,10 +6,10 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-describe('Map | Subscribe `select` (Vector Layers)', function() {
+describe('Map | Subscribe `select`', function() {
 
 
-  var slug = 'NeatlineMapSubscribeSelectVector'
+  var slug = 'NeatlineMapSubscribeSelect'
 
 
   var fixtures = {
@@ -23,6 +23,38 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
 
   beforeEach(function() {
     NL.loadNeatline();
+  });
+
+
+  it('should select a vector layer', function() {
+
+    // ------------------------------------------------------------------------
+    // When `select` is triggered with a record that has a vector layer on the
+    // map, the map should select the features.
+    // ------------------------------------------------------------------------
+
+    NL.respondMap200(fixtures.records);
+    var layer = NL.v.map.getVectorLayers()[0];
+
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    NL.assertSelectIntent(layer);
+
+  });
+
+
+  it('should select a WMS layer', function() {
+
+    // ------------------------------------------------------------------------
+    // If the record has a WMS layer, the opacity should be bumped up to the
+    // "Fill Opacity (Selected)" value.
+    // ------------------------------------------------------------------------
+
+    NL.respondMap200(fixtures.records);
+    var layer = NL.v.map.getWmsLayers()[0];
+
+    Neatline.vent.trigger('select', { model: layer.neatline.model });
+    expect(layer.opacity).toEqual(0.6);
+
   });
 
 
@@ -118,7 +150,7 @@ describe('Map | Subscribe `select` (Vector Layers)', function() {
   });
 
 
-  it('should focus when a layer already exists', function() {
+  it('should focus on existing layer when one exists', function() {
 
     // ------------------------------------------------------------------------
     // When `select` is triggered with a record that has a vector layer on the

@@ -61,15 +61,10 @@ class FixturesTest_NeatlineMapIngestWmsLayers extends Neatline_Case_Fixture
             'NeatlineMapIngestWmsLayers.1234.json'
         );
 
-        // Match records 3-6, with 1-4 already loaded.
+        // Match records 3-6.
         // --------------------------------------------------------------------
 
-        $this->request->setQuery(array('zoom' => 11, 'existing'  => array(
-            $record1->id,
-            $record2->id,
-            $record3->id,
-            $record4->id
-        )));
+        $this->request->setQuery(array('zoom' => 11));
 
         $this->_writeRecordsApiFixture($this->exhibit,
             'NeatlineMapIngestWmsLayers.3456.json'

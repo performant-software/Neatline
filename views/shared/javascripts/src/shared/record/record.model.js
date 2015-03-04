@@ -122,16 +122,24 @@ Neatline.module('Shared.Record', function(Record) {
      * @return {Boolean}
      */
     hasTag: function(tag) {
+      return _.contains(this.splitTags(), tag);
+    },
+
+
+    /**
+     * Split the comma-delimited tag string.
+     *
+     * @return {Array}
+     */
+    splitTags: function() {
 
       var tags = this.get('tags');
-      if (!tags) return false;
+      if (!tags) return [];
 
       // Split and trim the tags.
-      var trimmed = _.map(this.get('tags').split(','), function(tag) {
+      else return _.map(tags.split(','), function(tag) {
         return _.string.trim(tag);
       });
-
-      return _.contains(trimmed, tag);
 
     },
 
