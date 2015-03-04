@@ -1,5 +1,5 @@
 
-## v2.4.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.3.0...2.4.0)) ~ Pending
+## v2.4.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.3.0...2.4.0)) ~ March 4, 2015
 
 #### Added Features
 

@@ -243,8 +243,10 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
 
     /**
      * Return the pagination page length.
+     *
+     * Currently, $pluralName is ignored.
      */
-    protected function _getBrowseRecordsPerPage()
+    protected function _getBrowseRecordsPerPage($pluralName=null)
     {
         if (is_admin_theme()) return (int) get_option('per_page_admin');
         else return (int) get_option('per_page_public');
