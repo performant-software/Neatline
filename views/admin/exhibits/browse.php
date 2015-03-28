@@ -10,6 +10,11 @@
 ?>
 
 <?php
+    queue_js_file('clippy');
+    queue_css_file('clippy');
+?>
+
+<?php
   echo head(array(
     'title' => __('Neatline | Browse Exhibits')
   ));
@@ -149,5 +154,32 @@
   <?php endif; ?>
 
 </div>
+
+<script>
+  clippy.load('Clippy', function(agent) {
+    var phrases = [
+        "It looks like you\'re creating a Neatline Exhibit. Need some help?",
+        "Sometimes I just pop up for no reason in particular, like now for instance.",
+    ];
+
+    agent.show();
+
+    setInterval(getPhrase, 5000);
+
+    var me = jQuery(this);
+
+    me.click(function() {
+        agent.speak('It looks like you were trying to kill me. Well I\'m back from the dead, so you can suck it.');
+    });
+
+    function getPhrase() {
+        var random = Math.floor(Math.random() * phrases.length);
+        var phrase = phrases[random];
+        agent.speak(phrase);
+        agent.animate();
+    }
+
+});
+</script>
 
 <?php echo foot(); ?>

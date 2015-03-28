@@ -48,7 +48,8 @@ var editorVendor = [
   '<%= paths.vendor.ace_mode %>',
   '<%= paths.vendor.select2 %>',
   '<%= paths.vendor.underscore_s %>',
-  '<%= paths.vendor.uri %>'
+  '<%= paths.vendor.uri %>',
+  '<%= paths.vendor.clippy %>
 ];
 
 var editorSource = [
