@@ -27,7 +27,8 @@ Neatline.module('Shared.Record', function(Record) {
           if (_.isUndefined(this.attributes.item)) this.loadItem();
           return this.attributes.item;
 
-        }
+        },
+        transient: true
       }
 
     },
