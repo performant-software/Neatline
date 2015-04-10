@@ -13,3 +13,4 @@ _SpecRunner.html
 
 .transifexrc
 views/**/dist/development
+tests/jasmine/dist
