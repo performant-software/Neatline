@@ -32,6 +32,11 @@ module.exports = {
   neatlineEditor: {
     src: '<%= concat.neatlineEditor.src %>',
     dest: '<%= concat.neatlineEditor.dest %>'
+  },
+
+  jasmineVendor: {
+    src: '<%= concat.jasmineVendor.src %>',
+    dest: '<%= concat.jasmineVendor.dest %>'
   }
 
 };
