@@ -166,7 +166,7 @@ function nl_appendScript($script)
  */
 function nl_queueGoogleMapsApi()
 {
-    nl_appendScript('//maps.google.com/maps/api/js?sensor=false');
+    nl_appendScript('//maps.google.com/maps/api/js?v=3.20&sensor=false');
 }
 
 
