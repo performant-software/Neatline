@@ -16,7 +16,7 @@
     "uri.js": "~ 1.13.1",
     "svg-to-wkt": "~ 0.1.0",
     "Backbone.Mutators": "asciidisco/Backbone.Mutators",
-    "Backbone.Schema": "DreamTheater/Backbone.Schema",
+    "Backbone.Schema": "DreamTheater/Backbone.Schema#d4cdb00aeed2fd6eb431ed111456e0c439105c2a",
     "backbone-safesync": "amccloud/backbone-safesync",
     "openlayers-geometry": "davidmcclure/openlayers-geometry-handler",
     "stamen-neatline": "scholarslab/stamen-neatline",
@@ -31,5 +31,8 @@
     "openlayers": "http://github.com/openlayers/openlayers/releases/download/release-2.13.1/OpenLayers-2.13.1.zip",
     "sinon": "http://sinonjs.org/releases/sinon-1.7.3.js",
     "lodash": "~2.4.1"
+  },
+  "resolutions": {
+    "underscore": "~ 1.6.0"
   }
 }
