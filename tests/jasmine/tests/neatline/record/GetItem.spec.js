@@ -113,7 +113,9 @@ describe('Record | Get Item', function() {
     // ------------------------------------------------------------------------
 
     // Record with no parent item.
-    var record = new Neatline.Shared.Record.Model({ id: 1 });
+    var record = new Neatline.Shared.Record.Model({
+      id: 1
+    });
 
     var c1 = NL.server.requests.length;
     record.get('item');
@@ -130,7 +132,9 @@ describe('Record | Get Item', function() {
     // not be reloaded by subsequent requests for the `item` key.
     // ------------------------------------------------------------------------
 
-    var record = new Neatline.Shared.Record.Model({ id: 1, item_id: 1 });
+    var record = new Neatline.Shared.Record.Model({
+      id: 1, item_id: 1
+    });
 
     record.get('item');
 

@@ -27,22 +27,26 @@ Neatline.module('Map.Layers.Google', function(Google) {
       switch (json.properties.provider) {
       case 'physical':
         return new OpenLayers.Layer.Google(json.title, {
-          type: google.maps.MapTypeId.TERRAIN
+          type: google.maps.MapTypeId.TERRAIN,
+          useTiltImages: false
         });
       case 'streets':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.ROADMAP,
-          numZoomLevels: 21
+          numZoomLevels: 19,
+          useTiltImages: false
         });
       case 'satellite':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.SATELLITE,
-          numZoomLevels: 21
+          numZoomLevels: 19,
+          useTiltImages: false
         });
       case 'hybrid':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.HYBRID,
-          numZoomLevels: 21
+          numZoomLevels: 19,
+          useTiltImages: false
         });
       }
     }

@@ -27,7 +27,7 @@ Neatline.module('Shared.Record', function(Record) {
           if (_.isUndefined(this.attributes.item)) this.loadItem();
           return this.attributes.item;
 
-        }
+        },
       }
 
     },
@@ -53,6 +53,16 @@ Neatline.module('Shared.Record', function(Record) {
         map_zoom:               { type: 'number' }
       });
 
+    },
+
+
+    /**
+     * Remove the lazy-loaded `item` content before saving.
+     *
+     * @return {Object}: The record values.
+     */
+    toJSON: function() {
+      return _.omit(_.clone(this.attributes), 'item');
     },
 
 

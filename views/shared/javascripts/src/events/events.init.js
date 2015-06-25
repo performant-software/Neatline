@@ -6,13 +6,19 @@
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html
  */
 
-Neatline.module('Events', function(Events) {
+Neatline.module('Events', {
+  startWithParent: false,
+  define: function(Events) {
 
+    Neatline.on('initialize:after', function() {
+      Events.start();
+      Backbone.history.start();
+    });
 
-  Events.addInitializer(function() {
-    Events.__controller = new Events.Controller();
-    Events.__router = new Events.Router();
-  });
+    Events.addInitializer(function() {
+      Events.__controller = new Events.Controller();
+      Events.__router = new Events.Router();
+    });
 
-
+  }
 });

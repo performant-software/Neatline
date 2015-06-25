@@ -116,6 +116,28 @@ describe('Record | Save Record', function() {
   });
 
 
+  it('should not serialize the item markup', function() {
+
+    // ------------------------------------------------------------------------
+    // Lazy-loaded item markup should be excluded from the request.
+    // ------------------------------------------------------------------------
+
+    record = NL.v.record.model;
+
+    // Load the item body.
+    record.set('item_id', 1);
+    record.get('item');
+    NL.respondLast200('item', 'text/html');
+
+    // Click "Save" button.
+    elements.save.trigger('click');
+    var params = NL.getLastRequestParams();
+
+    expect(params.item).not.toBeDefined();
+
+  });
+
+
   it('should flash a notification when the save succeeds', function() {
 
     // ------------------------------------------------------------------------

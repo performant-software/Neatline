@@ -47,6 +47,10 @@ Neatline.module('Editor.Exhibit.Styles', function(Styles) {
       this.styles.getSession().setUseWorker(false);
       this.styles.getSession().setMode('ace/mode/css');
 
+      // Clobber weird Ace warning: http://stackoverflow.com/q/28936479
+      // TODO: Is this actually a problem?
+      this.styles.$blockScrolling = Infinity;
+
       // Configure Ace.
       this.styles.renderer.setShowGutter(false);
       this.styles.setHighlightActiveLine(false);
