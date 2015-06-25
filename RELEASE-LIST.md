@@ -17,6 +17,8 @@ Once all of that is in place, we're ready to go.
 
 ## Create a new release
 
+- `git flow release start $VERSION`
+
 - Bump the `version` in the `package.json` file to the new version.
 
 - Update the `CHANGELOG.md`.
@@ -31,7 +33,9 @@ Once all of that is in place, we're ready to go.
 
 - Hallway test the zip.
 
-- `git push`
+- `git flow release finish $VERSION`
+
+- `git push --all`
 
 - `git push --tags`
 
