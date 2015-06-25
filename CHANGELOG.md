@@ -1,4 +1,15 @@
 
+## v2.4.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.0...2.4.1)) ~ June 25, 2015
+
+#### Bug Fixes
+
+- Fixed a problem with item serialization;
+- Fixed a problem with timing issues when going directly to a hard-linked item
+  (#355);
+- Fixed problem with loading an barely compatible version of Google Maps
+  (#363); and
+- Fixed problem with the zoom levels on some Google Maps (#362).
+
 ## v2.4.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.3.0...2.4.0)) ~ March 4, 2015
 
 #### Added Features
