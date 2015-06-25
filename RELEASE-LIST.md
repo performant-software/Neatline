@@ -19,6 +19,8 @@ Once all of that is in place, we're ready to go.
 
 - Bump the `version` in the `package.json` file to the new version.
 
+- Update the `CHANGELOG.md`.
+
 - Run `grunt release`. Behind the scenes, this task:
 
   - Bumps the version in `bower.json` and `plugin.ini`.
