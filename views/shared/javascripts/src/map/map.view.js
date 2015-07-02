@@ -13,6 +13,7 @@ Neatline.module('Map', function(Map) {
 
 
     el: '#neatline-map',
+    tags: null,
 
     options: {
       defaultZoom: 6
@@ -478,6 +479,13 @@ Neatline.module('Map', function(Map) {
      * @param {Object} params: Hash with `extent` and `zoom`.
      */
     loadRecords: function(params) {
+      if (params['tags'] === null) {
+        this.tags = null;
+      } else if (params['tags'] === undefined && this.tags != null) {
+        params['tags'] = this.tags;
+      } else {
+        this.tags = params['tags'];
+      }
       this.records.update(params, _.bind(function(records) {
         this.ingestRecords(records);
       }, this));
