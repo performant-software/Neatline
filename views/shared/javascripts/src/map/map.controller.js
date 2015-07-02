@@ -25,6 +25,7 @@ Neatline.module('Map', function(Map) {
     ],
 
     commands: [
+      'load',
       'updateSize',
       'showHighlight',
       'hideHighlight'
@@ -121,6 +122,15 @@ Neatline.module('Map', function(Map) {
       this.view.publishPosition();
     },
 
+
+    /**
+     * Load map layers
+     *
+     * @param {Object} params: Hash with `extent`, `zoom`, and `tags`.
+     */
+    load: function(params) {
+      this.view.loadRecords(params);
+    },
 
     /**
      * Refresh the map after it is resized.
