@@ -1,4 +1,10 @@
 
+## v2.4.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.1...2.4.2)) ~ July 13, 2015
+
+#### Bug Fixes
+
+- Added `MAP:load` front-end route back (#361).
+
 ## v2.4.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.0...2.4.1)) ~ June 25, 2015
 
 #### Bug Fixes
