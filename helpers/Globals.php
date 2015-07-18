@@ -38,6 +38,7 @@ function nl_globals($exhibit)
         // CONSTANTS
         // --------------------------------------------------------------------
 
+        'wms_mime'          => get_plugin_ini('Neatline', 'wms_mime'),
         'per_page'          => (int) get_plugin_ini('Neatline', 'per_page'),
         'styles'            => $styles->toArray(),
 
