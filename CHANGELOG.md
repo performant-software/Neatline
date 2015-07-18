@@ -4,7 +4,7 @@
 
 #### Added Features
 
-
+  - Makes it possible to set a `wms_mime` property in the `plugin.ini` file, which controls the MIME type requested when the map loads WMS tiles (by default, `image/png`). This makes it possible to request custom MIME types that cut down on the size of the tiles, when the backend supports it. Eg, Geoserver supports `image/png8`, which is significantly lighter.
 
 ## v2.4.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.1...2.4.2)) ~ July 13, 2015
 
