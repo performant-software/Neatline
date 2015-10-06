@@ -218,7 +218,7 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
         if (isset($this->params['query'])) {
 
             $this->select->where(
-                "MATCH (title, body, slug) AGAINST (?)",
+                "MATCH (item_title, title, body, slug) AGAINST (?)",
                 $this->params['query']
             );
 
