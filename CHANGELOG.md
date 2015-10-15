@@ -1,6 +1,6 @@
 
 
-## v2.4.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.2...2.4.3)) ~ PENDING
+## v2.5.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.2...2.5.0)) ~ PENDING
 
 #### Added Features
 
