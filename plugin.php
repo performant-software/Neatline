@@ -25,6 +25,7 @@ require_once NL_DIR.'/migrations/abstract/Neatline_Migration_Abstract.php';
 require_once NL_DIR.'/migrations/2.0.2/Neatline_Migration_202.php';
 require_once NL_DIR.'/migrations/2.1.2/Neatline_Migration_212.php';
 require_once NL_DIR.'/migrations/2.2.0/Neatline_Migration_220.php';
+require_once NL_DIR.'/migrations/2.4.3/Neatline_Migration_243.php';
 
 // Helper classes:
 require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';

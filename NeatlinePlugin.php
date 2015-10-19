@@ -41,7 +41,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookInstall()
     {
-        nl_schema220();
+        nl_schema243();
     }
 
 
@@ -94,6 +94,10 @@ SQL
 
             if (version_compare($old, '2.2.0', '<')) {
                 new Neatline_Migration_220();
+            }
+
+            if (version_compare($old, '2.4.3', '<')) {
+                new Neatline_Migration_243();
             }
 
         }

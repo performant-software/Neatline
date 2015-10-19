@@ -63,6 +63,11 @@ Neatline.module('Map', function(Map) {
       this.exhibit = Neatline.g.neatline.exhibit;
 
       /**
+       * Alias the WMS mimetype.
+       */
+      this.wmsMime = Neatline.g.neatline.wms_mime;
+
+      /**
        * WKT reader/writer.
        */
       this.formatWkt = new OpenLayers.Format.WKT();
@@ -649,7 +654,7 @@ Neatline.module('Map', function(Map) {
           // WMS request parameters.
           layers: record.get('wms_layers'),
           transparent: true,
-          format: 'image/png',
+          format: this.wmsMime,
           tiled: true
 
         }, {
