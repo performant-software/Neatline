@@ -24,15 +24,18 @@ class NeatlineRecordTableTest_QueryRecordsFilterQuery
         $record2 = new NeatlineRecord($exhibit);
         $record3 = new NeatlineRecord($exhibit);
 
-        $record1->title = 'title1';
-        $record2->title = 'title2';
-        $record3->title = 'title3';
-        $record1->body  = 'body1';
-        $record2->body  = 'body2';
-        $record3->body  = 'body3';
-        $record1->slug  = 'slug1';
-        $record2->slug  = 'slug2';
-        $record3->slug  = 'slug3';
+        $record1->item_title = 'item_title1';
+        $record2->item_title = 'item_title2';
+        $record3->item_title = 'item_title3';
+        $record1->title      = 'title1';
+        $record2->title      = 'title2';
+        $record3->title      = 'title3';
+        $record1->body       = 'body1';
+        $record2->body       = 'body2';
+        $record3->body       = 'body3';
+        $record1->slug       = 'slug1';
+        $record2->slug       = 'slug2';
+        $record3->slug       = 'slug3';
 
         $record1->save();
         $record2->save();

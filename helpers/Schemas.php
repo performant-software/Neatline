@@ -17,7 +17,6 @@ function nl_schema243()
 {
 
     $db = get_db();
-
     $db->query(<<<SQL
 
     CREATE TABLE IF NOT EXISTS {$db->prefix}neatline_exhibits (
@@ -52,8 +51,7 @@ function nl_schema243()
 
 SQL
 );
-
-    get_db()->query(<<<SQL
+    $db->query(<<<SQL
 
     CREATE TABLE IF NOT EXISTS {$db->prefix}neatline_records (
 

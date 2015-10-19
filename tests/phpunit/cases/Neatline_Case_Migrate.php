@@ -13,7 +13,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
 
 
     static protected $oldVersion = '2.0.2';
-    static protected $newVersion = '2.2.0';
+    static protected $newVersion = '2.4.3';
 
 
     /**
@@ -61,7 +61,7 @@ class Neatline_Case_Migrate extends Neatline_Case_Default
     {
 
         // Show all tables in the installation.
-        foreach ($this->db->query('SHOW TABLES')->fetchAll() as $row) {
+        foreach (get_db()->query('SHOW TABLES')->fetchAll() as $row) {
 
             // Extract the table name.
             $rv    = array_values($row);

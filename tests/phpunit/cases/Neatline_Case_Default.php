@@ -45,7 +45,8 @@ abstract class Neatline_Case_Default extends Omeka_Test_AppTestCase
      */
     public function tearDown()
     {
-        $this->db->query(<<<SQL
+        $db = get_db();
+        $db->query(<<<SQL
         DELETE FROM {$this->db->prefix}neatline_records WHERE 1=1
 SQL
 );
