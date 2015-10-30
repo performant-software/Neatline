@@ -42,11 +42,9 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
 
     /**
-     * Hide the bubble and publish the `unselect` event.
+     * Publish the `unselect` event.
      */
     onClose: function() {
-
-      this.unselect()
 
       // Publish `unselect` event.
       Neatline.vent.trigger('unselect', {
@@ -143,16 +141,20 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
     /**
      * Unselect and hide the bubble.
+     *
+     * @param {Object} model: The record model.
      */
-    unselect: function() {
+    unselect: function(model) {
+      if (this.model && this.model.id == model.id) {
 
-      // Hide bubble.
-      this.$el.removeClass('selected');
+        // Hide bubble.
+        this.$el.removeClass('selected');
 
-      // Unbind model.
-      this.selected = false;
-      this.unbind();
+        // Unbind model.
+        this.selected = false;
+        this.unbind();
 
+      }
     },
 
 

@@ -17,6 +17,7 @@ describe('Presenters | Static Bubble', function() {
     NL.loadNeatline();
 
     model1 = new Neatline.Shared.Record.Model({
+      id:         1,
       presenter:  'StaticBubble',
       title:      'title1',
       body:       'body1',
@@ -24,6 +25,7 @@ describe('Presenters | Static Bubble', function() {
     });
 
     model2 = new Neatline.Shared.Record.Model({
+      id:         2,
       presenter:  'StaticBubble',
       title:      'title2',
       body:       'body2',
@@ -209,9 +211,13 @@ describe('Presenters | Static Bubble', function() {
       Neatline.vent.trigger('select', { model: model1 });
       Neatline.vent.trigger('select', { model: model2 });
 
-      // Title and body should change.
+      // Bubble should be visible.
+      expect(NL.v.bubble.$el).toBeVisible();
+
+      // Content should change.
       expect(NL.v.bubble.$('.title')).toHaveText('title2');
       expect(NL.v.bubble.$('.body')).toHaveText('body2');
+      expect(NL.v.bubble.$('.item')).toHaveText('item2');
 
     });
 
