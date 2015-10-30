@@ -2,7 +2,7 @@
 /**
  * MultiLineString: A collection of LineStrings
  */
-class MultiLineString extends getPHP_Collection
+class MultiLineString extends geoPHP_Collection
 {
   protected $geom_type = 'MultiLineString';
 

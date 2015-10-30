@@ -4,9 +4,14 @@
  * Polygon: A polygon is a plane figure that is bounded by a closed path, 
  * composed of a finite sequence of straight line segments
  */
-class Polygon extends getPHP_Collection
+class Polygon extends geoPHP_Collection
 {
   protected $geom_type = 'Polygon';
+
+  // The boundary of a polygin is it's outer ring
+  public function boundary() {
+    return $this->exteriorRing();
+  }
 
   public function area($exterior_only = FALSE, $signed = FALSE) {
     if ($this->isEmpty()) return 0;
@@ -149,7 +154,7 @@ class Polygon extends getPHP_Collection
     $vertices = $this->getPoints();
 
     // Check if the point sits exactly on a vertex
-    if (pointOnVertex($point, $vertices)) {
+    if ($this->pointOnVertex($point, $vertices)) {
       return $pointOnVertex ? TRUE : FALSE;
     }
   

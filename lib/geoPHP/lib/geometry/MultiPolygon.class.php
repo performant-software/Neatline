@@ -2,7 +2,7 @@
 /**
  * MultiPolygon: A collection of Polygons
  */
-class MultiPolygon extends getPHP_Collection
+class MultiPolygon extends geoPHP_Collection 
 {
   protected $geom_type = 'MultiPolygon';
 }

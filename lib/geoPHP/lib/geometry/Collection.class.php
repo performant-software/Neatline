@@ -8,7 +8,7 @@
  * is a Collection. For example a LingString is a collection
  * of Points. A Polygon is a collection of LineStrings etc.
  */
-abstract class getPHP_Collection extends Geometry
+abstract class geoPHP_Collection extends Geometry
 {
   public $components = array();
 
