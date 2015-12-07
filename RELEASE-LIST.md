@@ -23,6 +23,8 @@ Once all of that is in place, we're ready to go.
 
 - Update the `CHANGELOG.md`.
 
+- Run `grunt build` and `grunt copy`, just to be sure.
+
 - Run `grunt release`. Behind the scenes, this task:
 
   - Bumps the version in `bower.json` and `plugin.ini`.
