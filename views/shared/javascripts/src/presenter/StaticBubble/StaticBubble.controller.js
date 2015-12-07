@@ -65,9 +65,11 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
 
     /**
      * Unselect the bubble.
+     *
+     * @param {Object} model: The record model.
      */
-    unselect: function() {
-      this.view.unselect();
+    unselect: function(model) {
+      this.view.unselect(model);
     },
 
 

@@ -1,11 +1,12 @@
 {
   "name": "Neatline",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/scholarslab/neatline"
   },
   "private": false,
+  "license": "Apache-2.0",
   "devDependencies": {
     "glob": "^4.0.0",
     "grunt": "^0.4.5",

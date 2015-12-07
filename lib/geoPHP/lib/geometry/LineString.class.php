@@ -3,7 +3,7 @@
  * LineString. A collection of Points representing a line.
  * A line can have more than one segment.
  */
-class LineString extends getPHP_Collection
+class LineString extends geoPHP_Collection
 {
   protected $geom_type = 'LineString';
 
