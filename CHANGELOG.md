@@ -1,6 +1,13 @@
 
 
-## v2.5.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.2...2.5.0)) ~ PENDING
+## v2.5.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.0...2.5.1))
+
+#### Bug Fixes
+
+  - Upgraded geoPHP
+  - Only close static bubble if the you unselect the bubble's record (several issues, e.g., #375).
+
+## v2.5.0 ([commits](https://github.com/scholarslab/Neatline/compare/2.4.2...2.5.0))
 
 #### Added Features
 
