@@ -191,8 +191,7 @@ Neatline.module('Map', function(Map) {
 
 
     /**
-     * Publish move start/end events onto the public channel. If spatial
-     * querying is enabled, request new layers when a move ends.
+     * Publish move start/end events onto the public channel.
      */
     _initEvents: function() {
 
@@ -209,9 +208,8 @@ Neatline.module('Map', function(Map) {
       // `moveend`
       this.map.events.register(
         'moveend', this.map, _.bind(function(event) {
-
-          // Request new records if spatial query is enabled.
-          if (this.exhibit.spatial_querying) this.publishPosition();
+	
+	        this.publishPosition();
           Neatline.vent.trigger('MAP:moveEnd', event);
 
         }, this)
@@ -468,9 +466,13 @@ Neatline.module('Map', function(Map) {
       var params = {};
 
       // Filter by extent and zoom.
-      if (this.exhibit.spatial_querying) _.extend(params, {
+      if (this.exhibit.spatial_querying) { _.extend(params, {
         extent: this.getExtentAsWKT(), zoom: this.getZoom()
-      });
+      }) }
+      else { _.extend(params, {
+		    zoom: this.getZoom()
+        })
+      };
 
       this.loadRecords(params);
       this.loading = true;
