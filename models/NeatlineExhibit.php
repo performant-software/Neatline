@@ -25,6 +25,9 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $zoom_levels = 20;
     public $wms_address;
     public $wms_layers;
+    public $zoomify_address; 
+    public $zoomify_width;
+    public $zoomify_height;
     public $widgets;
     public $title;
     public $slug;

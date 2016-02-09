@@ -190,6 +190,30 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'value'         => $this->exhibit->wms_layers,
             'size'          => 40
         ));
+        
+        // Zoomify Address:
+        $this->addElement('text', 'zoomify_address', array(
+            'label'         => __('Zoomify Address'),
+            'description'   => __('To use a custom Zoomify layer as the base layer of the exhibit, enter (a) the address of the Zoomified image folder,'),
+            'value'         => $this->exhibit->zoomify_address,
+            'size'          => 40
+        ));
+
+        // Zoomify Width:
+        $this->addElement('text', 'zoomify_width', array(
+            'label'         => __('Zoomify Width'),
+            'description'   => __('(b) the Width of the image as specified in the ImageProperties.xml,'),
+            'value'         => $this->exhibit->zoomify_width,
+            'size'          => 40
+        ));
+
+        // Zoomify Height:
+        $this->addElement('text', 'zoomify_height', array(
+            'label'         => __('Zoomify Height'),
+            'description'   => __('and (c) the Height of the image as specified in the ImageProperties.xml.'),
+            'value'         => $this->exhibit->zoomify_height,
+            'size'          => 40
+        ));
 
         // Spatial Querying:
         $this->addElement('checkbox', 'spatial_querying', array(
@@ -221,6 +245,9 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'zoom_levels',
             'wms_address',
             'wms_layers',
+            'zoomify_address',
+            'zoomify_width',
+            'zoomify_height',
             'spatial_querying',
             'public'
         ), 'fields');
