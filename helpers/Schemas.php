@@ -148,7 +148,10 @@ function nl_schema220()
         styles                  TEXT NULL,
         map_focus               VARCHAR(100) NULL,
         map_zoom                INT(10) UNSIGNED NULL,
-
+        restricted_extent       VARCHAR(100) NULL,
+        map_min_zoom            INT(10) UNSIGNED NULL,
+        map_max_zoom            INT(10) UNSIGNED NULL,
+        
         PRIMARY KEY             (id)
 
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
