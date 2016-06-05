@@ -19,19 +19,30 @@ class Neatline_Acl_Assert_RecordOwnership implements Zend_Acl_Assert_Interface
         Zend_Acl_Role_Interface $role = null,
         Zend_Acl_Resource_Interface $resource = null,
         $privilege = null
-    )
-    {
+    ) {
 
-        $allPriv = $privilege . 'All';
+        if (!($role instanceof User)) {
+            return false;
+        }
+
         $selfPriv = $privilege . 'Self';
+        $allPriv  = $privilege . 'All';
 
-        if (!($role instanceof User)) return false;
+        $allowedSelf = $acl->isAllowed($role, $resource, $selfPriv);
+        $allowedAll  = $acl->isAllowed($role, $resource, $allPriv);
+
+        // If the resource is a model instance, check that the user is allowed
+        // to edit any instance, or, if not, that they own the instance.
+
+        if ($resource instanceof Omeka_Record_AbstractRecord) {
+            $ownsRecord = $this->_userOwnsRecord($role, $resource);
+            return $allowedAll || ($allowedSelf && $ownsRecord);
+        }
+
+        // Otherwise, fall back on the generic privileges.
 
         else {
-            $allowedAll  = $acl->isAllowed($role, $resource, $allPriv);
-            $allowedSelf = $acl->isAllowed($role, $resource, $selfPriv);
-            $ownsRecord  = $this->_userOwnsRecord($role, $resource);
-            return $allowedAll || ($allowedSelf && $ownsRecord);
+            return $allowedAll || $allowedSelf;
         }
 
     }
