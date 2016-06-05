@@ -311,12 +311,15 @@ class NeatlineRecord extends Neatline_Row_Expandable
     /**
      * Before saving, compile the coverage and item reference.
      */
-    public function save()
+    public function save($throwIfInvalid = true)
     {
+
         $this->compileWms();
         $this->compileCoverage();
         $this->compileItem();
-        parent::save();
+
+        parent::save($throwIfInvalid);
+
     }
 
 
