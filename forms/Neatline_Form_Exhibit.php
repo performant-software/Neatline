@@ -105,6 +105,14 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'attribs'       => array('rows' => '10')
         ));
 
+        // Accessible URL:
+        $this->addElement('text', 'accessible_url', array(
+            'label'         => __('Accessible Alternative URL'),
+            'description'   => __('Provide a URL to an accessible alternative format representation of the exhibit.'),
+            'value'         => $this->exhibit->accessible_url,
+            'size'          => 40
+        ));
+
         // Widgets:
         $this->addElement('multiselect', 'widgets', array(
             'label'         => __('Widgets'),
@@ -214,6 +222,7 @@ class Neatline_Form_Exhibit extends Omeka_Form
             'title',
             'slug',
             'narrative',
+            'accessible_url',
             'widgets',
             'spatial_layers',
             'spatial_layer',

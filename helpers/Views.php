@@ -108,6 +108,25 @@ function nl_getExhibitUrl($exhibit, $action, $public=true)
 }
 
 /**
+ * Returns a link to an accessible alternative to a Neatline exhibit.
+ *
+ * @param NeatlineExhibit|null $exhibit The exhibit record.
+ */
+function nl_getExhibitAccessibleURL($exhibit=null, $text)
+{
+    $exhibit = $exhibit ? $exhibit : nl_getExhibit();
+    $accessible_url = nl_getExhibitField('accessible_url');
+
+    if (empty($accessible_url)) { 
+        return null;
+    } 
+
+    $link = '<a class="nl-hidden" id="accessible-link" href="' . $accessible_url . '">'. $text . '</a> ';
+  
+    return $link;
+}
+
+/**
  * Count the records in an exhibit.
  *
  * @param NeatlineExhibit $exhibit The exhibit record.

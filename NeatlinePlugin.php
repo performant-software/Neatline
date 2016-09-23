@@ -102,6 +102,10 @@ SQL
                 new Neatline_Migration_243();
             }
 
+            if (version_compare($old, '2.5.2', '<')) {
+                new Neatline_Migration_252();
+            }
+
         }
 
     }

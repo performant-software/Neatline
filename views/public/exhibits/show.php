@@ -17,6 +17,9 @@
 <!-- Exhibit title: -->
 <h1><?php echo nl_getExhibitField('title'); ?></h1>
 
+<!-- Link to accessible alternative representation -->
+<?php echo nl_getExhibitAccessibleURL(null, __('Accessible Alternative')); ?> 
+
 <!-- "View Fullscreen" link: -->
 <?php echo nl_getExhibitLink(
   null, 'fullscreen', __('View Fullscreen'), array('class' => 'nl-fullscreen')
