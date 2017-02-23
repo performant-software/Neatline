@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="<%= style %>">
 <% }) %>
 <% with (scripts) { %>
-  <% [].concat(jasmine, src, boot, vendor, helpers, specs, reporters).forEach(function(script){ %>
+  <% [].concat(jasmine, boot, src, vendor, helpers, specs, reporters).forEach(function(script){ %>
   <script src="<%= script %>"></script>
   <% }) %>
 <% }; %>

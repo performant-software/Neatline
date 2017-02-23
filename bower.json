@@ -28,8 +28,8 @@
     "jasmine.async": "derickbailey/jasmine.async",
     "ckeditor": "ckeditor/ckeditor-releases#standard/stable",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
-    "openlayers": "http://github.com/openlayers/openlayers/releases/download/release-2.13.1/OpenLayers-2.13.1.zip",
-    "sinon": "http://sinonjs.org/releases/sinon-1.7.3.js",
+    "openlayers": "https://github.com/openlayers/ol2/releases/download/release-2.13.1/OpenLayers-2.13.1.zip",
+    "sinon": "http://sinonjs.org/releases/sinon-1.17.7.js",
     "lodash": "~2.4.1"
   },
   "resolutions": {
