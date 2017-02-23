@@ -274,7 +274,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     /**
      * Measure the image layer when the exhibit is * saved.
      */
-    protected function beforeSave()
+    protected function beforeSave($args)
     {
         $this->compileImageSize();
     }
@@ -298,6 +298,5 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     {
         return 'Neatline_Exhibits';
     }
-
 
 }

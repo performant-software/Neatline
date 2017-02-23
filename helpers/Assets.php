@@ -166,7 +166,18 @@ function nl_appendScript($script)
  */
 function nl_queueGoogleMapsApi()
 {
-    nl_appendScript('//maps.google.com/maps/api/js?v=3.20&sensor=false');
+    // If the Geolocation plugin is installed, and configured with 
+    // a Google API key, it will be injected into the public header,
+    // so don't add a key for Neatline.
+    if (get_option('geolocation_api_key')) {
+        return;
+    }
+    else {
+        $api_version = '3';
+        $key = get_option('neatline_googlemaps_apikey');
+        $script = "//maps.googleapis.com/maps/api/js?v=$api_version&key=$key";
+        nl_appendScript($script);
+    }
 }
 
 
