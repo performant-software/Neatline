@@ -19,7 +19,9 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'define_acl',
         'initialize',
         'define_routes',
-        'after_save_item'
+        'after_save_item',
+        'config_form',
+        'config'
     );
 
 
@@ -135,6 +137,25 @@ SQL
         $args['router']->addConfig(new Zend_Config_Ini(
             NL_DIR.'/routes.ini'
         ));
+    }
+
+    /**
+     * Shows plugin configuration page.
+     */
+    public function hookConfigForm($args)
+    {
+        $view = $args['view'];
+        include 'config_form.php';
+    }
+
+    /**
+     * Saves plugin configuration page.
+     *
+     * @param array Options set in the config form.
+     */
+    public function hookConfig($args)
+    {
+        set_option('neatline_googlemaps_apikey', $_POST['neatline_googlemaps_apikey']);
     }
 
 

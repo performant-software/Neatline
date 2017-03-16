@@ -14,5 +14,4 @@ _SpecRunner.html
 /tests/phpunit/plugins.json
 
 .transifexrc
-views/**/dist/development
 tests/jasmine/dist
