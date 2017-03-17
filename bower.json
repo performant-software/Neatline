@@ -28,7 +28,7 @@
     "jasmine.async": "derickbailey/jasmine.async",
     "ckeditor": "ckeditor/ckeditor-releases#standard/stable",
     "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
-    "openlayers": "./ol2.zip",
+    "openlayers": "https://github.com/scholarslab/ol2/releases/download/neatline-custom/ol2.zip",
     "sinon": "http://sinonjs.org/releases/sinon-1.17.7.js",
     "lodash": "~2.4.1"
   },
