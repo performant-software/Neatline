@@ -117,6 +117,8 @@ Neatline.module('Map', function(Map) {
       // Spin up the map instance.
       this.map = new OpenLayers.Map(this.el, {
 
+        // Always use web mercator
+        projection: "EPSG:900913",
         theme: null,
         zoomMethod: null,
         panMethod: null,
@@ -226,7 +228,7 @@ Neatline.module('Map', function(Map) {
      *
      * - If `image_layer` is defined, create a static image layer.
      *
-     * - If both `wms_address` and `wms_layers` are defined, create an
+     * - If `wms_address` is defined, create an
      *   individual WMS layer.
      *
      * - If no exhibit-specific layers are defined, add the the regular
@@ -235,13 +237,13 @@ Neatline.module('Map', function(Map) {
     _initBaseLayers: function() {
 
       var isImg = _.isString(this.exhibit.image_layer);
-      var isWms = _.isString(this.exhibit.wms_address) &&
-                  _.isString(this.exhibit.wms_layers);
+      var isWms = _.isString(this.exhibit.wms_address);
 
       if (isImg) this._initImageLayer();
       else if (isWms) this._initWmsLayer();
-      else this._initSpatialLayers();
 
+      // Always initialize spatial layers
+      this._initSpatialLayers();
     },
 
 
@@ -278,10 +280,21 @@ Neatline.module('Map', function(Map) {
      */
     _initWmsLayer: function() {
 
+      var segments = this.exhibit.wms_address.split("/");
+      var slug = segments.pop();
+      
+      // if there's a layer specified, use it, otherwise use the slug
+      var layers = this.exhibit.wms_layers || slug;
+      
       var wms = new OpenLayers.Layer.WMS(
-        this.exhibit.title, this.exhibit.wms_address,
-        { layers: this.exhibit.wms_layers },
-        { maxZoomLevel: 20 }
+        this.exhibit.title, 
+        this.exhibit.wms_address,
+        {
+          layers: layers,
+          transparent: "false",
+          format: "image/png"
+        },
+        {isBaseLayer: false, visibility: true}
       );
 
       this.map.addLayer(wms);
@@ -575,7 +588,7 @@ Neatline.module('Map', function(Map) {
         var record = records.get(id);
 
         // Add a layer if the record has WMS parameters.
-        if (record.get('wms_address') && record.get('wms_layers')) {
+        if (record.get('wms_address')) {
           this.buildWmsLayer(record);
         }
 
@@ -647,12 +660,16 @@ Neatline.module('Map', function(Map) {
      */
     buildWmsLayer: function(record) {
 
+      var segments = record.get('wms_address').split("/");
+      var slug = segments.pop();
+      var layers = record.get('wms_layers') || slug;
+
       // Build the layer.
       var layer = new OpenLayers.Layer.WMS(
         record.get('title'), record.get('wms_address'), {
 
           // WMS request parameters.
-          layers: record.get('wms_layers'),
+          layers: layers,
           transparent: true,
           format: this.wmsMime,
           tiled: true
