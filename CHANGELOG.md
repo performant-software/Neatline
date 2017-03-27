@@ -1,3 +1,14 @@
+## v2.5.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.1...2.5.2))
+
+#### Added Features
+
+  - Makes it possible to set a `googlemaps_api_key` in the plugin configuration, which although not needed for Neatline to function, does prevent some javascript errors. Also, detects if the geolocation plugin is installed, and if it is, uses the API key set in that plugin rather than injecting the same script into the header twice.
+
+#### Bug Fixes
+
+  - Fixes an issue with google maps as base layers, which was caused by the latest released version of OpenLayers 2 not including a fix which is included in the master branch of that library. Does so by creating a custom release of ol2, hosted in Scholar's Lab's github organization.
+  - Fixes an issue with loading WMS maps from mapwarper as base layers on exhibits, by setting the projection to Web Mercator for all maps.
+  - Tested against Omeka 2.5
 
 
 ## v2.5.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.0...2.5.1))
