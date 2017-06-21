@@ -145,7 +145,7 @@ Neatline.module('Presenter.StaticBubble', function(StaticBubble) {
      * @param {Object} model: The record model.
      */
     unselect: function(model) {
-      if (this.model && this.model.id == model.id) {
+      if (!model || (this.model && this.model.id == model.id)) {
 
         // Hide bubble.
         this.$el.removeClass('selected');

@@ -10,7 +10,6 @@
 
 _.extend(Neatline.Map.View.prototype, {
 
-
   /**
    * Construct edit layer and controls for a record.
    *
@@ -99,8 +98,23 @@ _.extend(Neatline.Map.View.prototype, {
 
     };
 
-    this.map.addControls(_.values(this.controls));
+    var view = this;
 
+    for (var key in this.controls) {
+      if (["point", "line", "poly"].includes(key)) {
+        var control = this.controls[key];
+        control.events.register("activate", null, function() {
+          view.highlightControl.deactivate();
+          view.selectControl.deactivate();
+        });
+        control.events.register("deactivate", null, function() {
+          view.highlightControl.activate();
+          view.selectControl.activate();
+        });
+      }
+    }
+
+    this.map.addControls(_.values(this.controls));
 
   },
 

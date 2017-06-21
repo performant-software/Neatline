@@ -207,8 +207,8 @@ Neatline.module('Shared.Record', function(Record) {
         'temporary': new OpenLayers.Style({
           fillColor:        fillColorSelect,
           strokeColor:      strokeColorSelect,
-          fillOpacity:      fillOpacitySelect,
-          graphicOpacity:   fillOpacitySelect,
+          fillOpacity:      (1.0 + fillOpacitySelect) / 2.0,
+          graphicOpacity:   (1.0 + fillOpacitySelect) / 2.0,
           strokeOpacity:    strokeOpacitySelect,
           strokeWidth:      strokeWidth,
           pointRadius:      pointRadius,
