@@ -43,7 +43,7 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookInstall()
     {
-        nl_schema243();
+        nl_schema252();
     }
 
 
