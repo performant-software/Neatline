@@ -35,7 +35,7 @@ Once all of that is in place, we're ready to go.
 
 - Hallway test the zip.
 
-  - Is the CKEditor in `views/shared/javascripts/dist/production/ckeditor`?
+- Is the CKEditor in `views/shared/javascripts/dist/production/ckeditor`?
 
 - `git flow release finish $VERSION`
 
