@@ -277,7 +277,9 @@ class NeatlineExhibit extends Neatline_Row_Expandable
      */
     protected function beforeSave($args)
     {
-        $this->compileImageSize();
+        if (ini_get('allow_url_fopen')) {
+            $this->compileImageSize();
+        }
     }
 
 

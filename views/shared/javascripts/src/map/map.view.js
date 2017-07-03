@@ -255,6 +255,26 @@ Neatline.module('Map', function(Map) {
       var h = this.exhibit.image_height;
       var w = this.exhibit.image_width;
 
+      // workaround in case of missing image dimensions due to php allow_url_fopen flag set to Off
+      if (!h || !w) {
+        var img = new Image();
+        var view = this;
+        img.onload = function(){
+            h = this.height;
+            w = this.width;
+            view._addImageLayer(w, h);
+        };
+        img.src = this.exhibit.image_layer;
+      }
+      else {
+        this._addImageLayer(w, h);
+      }
+    },
+
+    /**
+     * Given image dimensions, finish constructing a static image base layer.
+     */
+    _addImageLayer: function(w, h) {
       var image = new OpenLayers.Layer.Image(
 
         // Title, image URL, and dimensions.
@@ -265,13 +285,13 @@ Neatline.module('Map', function(Map) {
         {
           // Add pan padding around the edges of the image
           maxExtent: new OpenLayers.Bounds(-w*2, -h*2, w*2, h*2),
-          numZoomLevels: this.exhibit.zoom_levels
+          numZoomLevels: this.exhibit.zoom_levels,
+          minResolution: 0.5
         }
 
       );
 
       this.map.addLayer(image);
-
     },
 
 
@@ -282,12 +302,12 @@ Neatline.module('Map', function(Map) {
 
       var segments = this.exhibit.wms_address.split("/");
       var slug = segments.pop();
-      
+
       // if there's a layer specified, use it, otherwise use the slug
       var layers = this.exhibit.wms_layers || slug;
-      
+
       var wms = new OpenLayers.Layer.WMS(
-        this.exhibit.title, 
+        this.exhibit.title,
         this.exhibit.wms_address,
         {
           layers: layers,
