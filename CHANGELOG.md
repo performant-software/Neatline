@@ -1,3 +1,11 @@
+## v2.5.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.2...2.5.3))
+
+#### Bug Fixes
+
+- Provides workaround for when configuration settings prevent calculating image dimensions
+- Sets a minimum zoom extent on image layers to refine zoom level granularity
+
+
 ## v2.5.2 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.1...2.5.2))
 
 #### Added Features
@@ -441,4 +449,3 @@
   - Uses [Grunt](http://gruntjs.com/) to manage dependencies, build the application, compile static assets, and run tests.
 
   - Moves to [Stylus](https://github.com/learnboost/stylus) for all application stylesheets.
-
