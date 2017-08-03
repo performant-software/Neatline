@@ -71,15 +71,6 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
-     * Add search visibility for Neatline records.
-     */
-    protected function _initializeMixins()
-    {
-        $this->_mixins[] = new Mixin_Search($this);
-    }
-
-
-    /**
      * Set record search text.
      */
     protected function afterSave($args)

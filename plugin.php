@@ -30,6 +30,7 @@ require_once NL_DIR.'/migrations/2.5.2/Neatline_Migration_252.php';
 
 // Helper classes:
 require_once NL_DIR.'/jobs/Neatline_Job_ImportItems.php';
+require_once NL_DIR.'/jobs/Neatline_Job_DuplicateRecords.php';
 require_once NL_DIR.'/controllers/abstract/Neatline_Controller_Rest.php';
 require_once NL_DIR.'/assertions/Neatline_Acl_Assert_RecordOwnership.php';
 require_once NL_DIR.'/forms/Neatline_Form_Exhibit.php';

@@ -237,6 +237,55 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     }
 
 
+    /**
+     *
+     */
+    public function duplicateAction()
+    {
+
+        $exhibit = $this->_helper->db->findById();
+        if (!$exhibit) throw new Omeka_Controller_Exception_404;
+
+        $clone = clone $exhibit;
+        $slugSuffix = 1;
+        $newSlug = '';
+        do {
+          $newSlug = $clone->slug . '-' . $slugSuffix++;
+        } while ($this->_exhibits->findBySlug($newSlug));
+        $clone->slug = $newSlug;
+        $clone->added = date('Y-m-d G:i:s');
+        $clone->published = $clone->public ? date('Y-m-d G:i:s') : NULL;
+        $titleSuffix = '';
+        if (current_user()) {
+          $clone->setOwner(current_user());
+          $clone->owner_id = current_user()->id;
+          $titleSuffix = __(' (%s copy)', current_user()->username);
+        }
+        else {
+          $titleSuffix = __(' (Copy)');
+        }
+        $clone->title = $clone->title . $titleSuffix;
+        $clone->save();
+
+        Zend_Registry::get('job_dispatcher')->sendLongRunning(
+            'Neatline_Job_DuplicateRecords', array(
+                'exhibit_id'           => $exhibit->id,
+                'adopting_exhibit_id'  => $clone->id,
+                'owner_id'             => current_user() ? current_user()->id : NULL
+            )
+        );
+
+        // Flash success.
+        $this->_helper->flashMessenger(
+            $this->_getDuplicateStartedMessage(), 'success'
+        );
+
+        // Redirect to browse.
+        $this->_helper->redirector('browse');
+
+    }
+
+
     // Helpers:
     // ------------------------------------------------------------------------
 
@@ -296,6 +345,15 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     protected function _getImportStartedMessage()
     {
         return __('The item import was successfully started!');
+    }
+
+
+    /**
+     * Set the duplication started message.
+     */
+    protected function _getDuplicateStartedMessage()
+    {
+        return __('The exhibit duplication was successfully started!');
     }
 
 
