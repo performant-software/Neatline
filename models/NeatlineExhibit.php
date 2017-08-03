@@ -38,6 +38,30 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
+     * Add search visibility for Neatline exhibits.
+     */
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_Search($this);
+    }
+
+
+    /**
+     * Set exhibit search text.
+     */
+    protected function afterSave($args)
+    {
+        if ($this->private) {
+          $this->setSearchTextPrivate();
+        }
+
+        $this->setSearchTextTitle($this->title);
+        $this->addSearchText($this->title);
+        $this->addSearchText($this->narrative);
+    }
+
+
+    /**
      * If the exhibit is being published to the public site for the first
      * time, set the `published` timestamp.
      *
@@ -81,6 +105,11 @@ class NeatlineExhibit extends Neatline_Row_Expandable
      */
     public function getRecordUrl($action = 'show')
     {
+        if ($action = 'show') {
+          $params = array('action' => $action, 'slug' => $this->slug);
+          return public_url($params, 'neatline');
+        }
+
         $urlHelper = new Omeka_View_Helper_Url;
         $params = array('action' => $action, 'id' => $this->id);
         return $urlHelper->url($params, 'neatlineActionId');

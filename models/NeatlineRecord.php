@@ -71,6 +71,39 @@ class NeatlineRecord extends Neatline_Row_Expandable
 
 
     /**
+     * Add search visibility for Neatline records.
+     */
+    protected function _initializeMixins()
+    {
+        $this->_mixins[] = new Mixin_Search($this);
+    }
+
+
+    /**
+     * Set record search text.
+     */
+    protected function afterSave($args)
+    {
+        if ($this->private) {
+          $this->setSearchTextPrivate();
+        }
+
+        $this->setSearchTextTitle($this->title);
+        $this->addSearchText($this->title);
+        $this->addSearchText($this->body);
+    }
+
+
+    /**
+     * Generate the URL to be used for the record in search results
+     */
+    public function getRecordUrl($action = 'show')
+    {
+        return $this->getExhibit()->getRecordUrl() . "#records/" . $this->id;
+    }
+
+
+    /**
      * Set exhibit and item references.
      *
      * @param NeatlineExhibit $exhibit The exhibit record.

@@ -30,7 +30,8 @@ class NeatlinePlugin extends Omeka_Plugin_AbstractPlugin
         'admin_navigation_main',
         'neatline_globals',
         'neatline_presenters',
-        'exhibit_layouts'
+        'exhibit_layouts',
+        'search_record_types'
     );
 
 
@@ -244,5 +245,16 @@ SQL
             'description' => __('Embed a Neatline exhibit.')
         );
         return $layouts;
+    }
+
+
+    /**
+     * Add NeatlineExhibit and NeatlineRecord as searchable types.
+     */
+    public function filterSearchRecordTypes($recordTypes)
+    {
+      $recordTypes['NeatlineExhibit'] = __('Neatline Exhibit');
+      $recordTypes['NeatlineRecord'] = __('Neatline Record');
+      return $recordTypes;
     }
 }
