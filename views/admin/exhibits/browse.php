@@ -97,6 +97,16 @@
                 </li>
               <?php endif; ?>
 
+              <!-- Duplicate. -->
+              <?php if (is_allowed($e, 'duplicate')): ?>
+                <li>
+                  <?php echo nl_getExhibitLink(
+                    $e, 'duplicate', __('Duplicate'),
+                    array('class' => 'duplicate'), false
+                  ); ?>
+                </li>
+              <?php endif; ?>
+
               <!-- Delete. -->
               <?php if (is_allowed($e, 'delete')): ?>
                 <li>

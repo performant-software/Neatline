@@ -38,15 +38,6 @@ class NeatlineExhibit extends Neatline_Row_Expandable
 
 
     /**
-     * Add search visibility for Neatline exhibits.
-     */
-    protected function _initializeMixins()
-    {
-        $this->_mixins[] = new Mixin_Search($this);
-    }
-
-
-    /**
      * Set exhibit search text.
      */
     protected function afterSave($args)

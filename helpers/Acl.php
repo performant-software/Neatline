@@ -74,14 +74,16 @@ function nl_defineAcl($acl)
         'editorSelf',
         'putSelf',
         'importSelf',
-        'deleteSelf'
+        'deleteSelf',
+        'duplicateAll'
     ));
     $acl->allow('contributor', 'Neatline_Exhibits', array(
         'edit',
         'editor',
         'put',
         'import',
-        'delete'
+        'delete',
+        'duplicate'
     ), new Omeka_Acl_Assert_Ownership);
 
     // Contributors can create their own records.

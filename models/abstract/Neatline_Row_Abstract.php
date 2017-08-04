@@ -20,6 +20,7 @@ abstract class Neatline_Row_Abstract extends Omeka_Record_AbstractRecord
     protected function _initializeMixins()
     {
         $this->_mixins[] = new Mixin_Owner($this);
+        $this->_mixins[] = new Mixin_Search($this);
     }
 
 
