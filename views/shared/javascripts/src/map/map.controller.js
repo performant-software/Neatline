@@ -38,7 +38,9 @@ Neatline.module('Map', function(Map) {
       'getVectorLayers',
       'getWmsLayers',
       'getCenter',
-      'getZoom'
+      'getZoom',
+      'getMinZoom',
+      'getExtent'
     ],
 
 
@@ -224,8 +226,33 @@ Neatline.module('Map', function(Map) {
      */
     getZoom: function() {
       return this.view.map.getZoom();
-    }
+    },
 
+
+    /**
+     * Emit the minimum zoom level.
+     *
+     * @return {Number}: The minimum zoom level.
+     */
+    getMinZoom: function() {
+      var base = this.view.map.baseLayer;
+      if (base) {
+        if (base.minZoomLevel) return base.minZoomLevel;
+        if (base.zoomOffset) return base.zoomOffset;
+        if (this.view.otherZoomOffset) return this.view.otherZoomOffset;
+      }
+      return 0;
+    },
+
+
+    /**
+     * Emit the current map extent.
+     *
+     * @return {String}: The extent of the map in string format.
+     */
+    getExtent: function() {
+      return this.view.map.getExtent().toString();
+    }
 
   });
 
