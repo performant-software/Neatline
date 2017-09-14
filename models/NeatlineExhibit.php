@@ -39,12 +39,21 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     public $map_restricted_extent;
     public $accessible_url;
 
+    protected function _initializeMixins()
+    {
+        parent::_initializeMixins();
+        $this->_mixins[] = new Mixin_Timestamp($this, 'added', null);
+    }
 
     /**
      * Set exhibit search text.
      */
     protected function afterSave($args)
     {
+        // reinitialize mixins, otherwise a duplicate exhibit will incorrectly populate search text for the original
+        $this->_mixins = [];
+        $this->_initializeMixins();
+
         if ($this->private) {
           $this->setSearchTextPrivate();
         }
