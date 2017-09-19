@@ -1,3 +1,19 @@
+## 2.6.0
+([commits](https://github.com/scholarslab/Neatline/compare/2.5.3...2.6.0))
+
+#### Bug Fixes
+
+- Prevents a case in which a WKT string imported from Omeka item's coverage field could be rejected in the backend but appear temporarily on the map.
+- Uses Omeka's timestamp mixin to prevent a configuration-specific database error during exhibit creation.
+
+#### Added Features
+
+- Adds Neatline Exhibit and Neatline Record to the types of records that can be made searchable in the Search pane of Omeka's settings.
+- Enables duplication of exhibits. A user may click "Duplicate" in the Neatline admin table below an exhibit that they have permission to view, creating their own copy; the duplicating user becomes the owner of the new exhibit, whose title includes their username.
+- Adds Restricted Map Extent, Minimum Map Zoom, and Maximum Map Zoom fields to the Styles pane in the exhibit editor, allowing users to constrain the range of zoom and pan possible in the exhibit map.
+- Allows users to select "None (Image or WMS as Default)" in the Default Spatial Layer field when creating an exhibit. If this value is chosen and a URL is supplied in the Image Layer field, the exhibit map will use the image as its base layer; if Image Layer is left blank, the map will use WMS for its base; if the WMS fields are left blank, the map will use the first of the Enabled Spatial Layers or have no layers if none are enabled.
+
+
 ## v2.5.3 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.2...2.5.3))
 
 #### Bug Fixes
