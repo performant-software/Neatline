@@ -33,19 +33,19 @@ Neatline.module('Map.Layers.Google', function(Google) {
       case 'streets':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.ROADMAP,
-          numZoomLevels: 19,
+          numZoomLevels: 22,
           useTiltImages: false
         });
       case 'satellite':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.SATELLITE,
-          numZoomLevels: 19,
+          numZoomLevels: 21,
           useTiltImages: false
         });
       case 'hybrid':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.HYBRID,
-          numZoomLevels: 19,
+          numZoomLevels: 21,
           useTiltImages: false
         });
       }
