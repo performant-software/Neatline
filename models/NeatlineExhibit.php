@@ -51,7 +51,7 @@ class NeatlineExhibit extends Neatline_Row_Expandable
     protected function afterSave($args)
     {
         // reinitialize mixins, otherwise a duplicate exhibit will incorrectly populate search text for the original
-        $this->_mixins = [];
+        $this->_mixins = array();
         $this->_initializeMixins();
 
         if ($this->private) {
