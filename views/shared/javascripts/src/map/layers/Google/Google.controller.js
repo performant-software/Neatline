@@ -28,6 +28,7 @@ Neatline.module('Map.Layers.Google', function(Google) {
       case 'physical':
         return new OpenLayers.Layer.Google(json.title, {
           type: google.maps.MapTypeId.TERRAIN,
+          numZoomLevels: 22,
           useTiltImages: false
         });
       case 'streets':

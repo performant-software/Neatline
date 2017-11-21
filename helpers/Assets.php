@@ -102,7 +102,7 @@ function nl_queueNeatlinePublic($exhibit)
 function nl_queueNeatlineEditor($exhibit)
 {
 
-    nl_queueGoogleMapsApi();
+    nl_queueGoogleMapsApi(false);
     nl_queueLiveReload();
 
     nl_queueDistCss('neatline-editor');
@@ -163,13 +163,15 @@ function nl_appendScript($script)
 
 /**
  * Include the Google Maps API.
+ *
+ * @param boolean $expectGeolocation If true, check for Geolocation plugin and defer to its Google Maps API instance
  */
-function nl_queueGoogleMapsApi()
+function nl_queueGoogleMapsApi($expectGeolocation = true)
 {
-    // If the Geolocation plugin is installed, and configured with 
+    // If the Geolocation plugin is installed, and configured with
     // a Google API key, it will be injected into the public header,
     // so don't add a key for Neatline.
-    if (get_option('geolocation_api_key')) {
+    if ($expectGeolocation && get_option('geolocation_api_key') && plugin_is_active('Geolocation')) {
         return;
     }
     else {
