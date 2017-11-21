@@ -177,6 +177,7 @@ function nl_queueGoogleMapsApi($expectGeolocation = true)
     else {
         $api_version = '3';
         $key = get_option('neatline_googlemaps_apikey');
+        if (!$key && plugin_is_active('Geolocation')) $key = get_option('geolocation_api_key');
         $script = "//maps.googleapis.com/maps/api/js?v=$api_version&key=$key";
         nl_appendScript($script);
     }
