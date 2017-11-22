@@ -51593,27 +51593,28 @@ OpenLayers.Rico.Corner = {
               case "physical":
                 return new OpenLayers.Layer.Google(e.title, {
                     "type": google.maps.MapTypeId.TERRAIN,
+                    "numZoomLevels": 22,
                     "useTiltImages": !1
                 });
 
               case "streets":
                 return new OpenLayers.Layer.Google(e.title, {
                     "type": google.maps.MapTypeId.ROADMAP,
-                    "numZoomLevels": 19,
+                    "numZoomLevels": 22,
                     "useTiltImages": !1
                 });
 
               case "satellite":
                 return new OpenLayers.Layer.Google(e.title, {
                     "type": google.maps.MapTypeId.SATELLITE,
-                    "numZoomLevels": 19,
+                    "numZoomLevels": 21,
                     "useTiltImages": !1
                 });
 
               case "hybrid":
                 return new OpenLayers.Layer.Google(e.title, {
                     "type": google.maps.MapTypeId.HYBRID,
-                    "numZoomLevels": 19,
+                    "numZoomLevels": 21,
                     "useTiltImages": !1
                 });
             }

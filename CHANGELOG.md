@@ -1,3 +1,12 @@
+## 2.6.1 ([commits](https://github.com/scholarslab/Neatline/compare/2.6.0...2.6.1))
+
+#### Bug Fixes
+
+- Corrects values for number of zoom levels passed to Google Maps layer types during initialization
+- Revises PHP syntax for backward compatibility
+- Adjusts Neatline's check for Geolocation plugin presence when determining whether to load Google Maps API
+
+
 ## 2.6.0
 ([commits](https://github.com/scholarslab/Neatline/compare/2.5.3...2.6.0))
 
