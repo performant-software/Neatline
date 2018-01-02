@@ -51,6 +51,13 @@ class NeatlineRecord extends Neatline_Row_Expandable
     public $map_zoom;
     public $map_focus;
 
+    protected function _initializeMixins()
+    {
+        parent::_initializeMixins();
+        $this->_mixins[] = new Mixin_Timestamp($this, 'added', null);
+    }
+
+
 
     /**
      * Required style attributes set in `styles.ini`.
