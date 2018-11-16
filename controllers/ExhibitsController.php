@@ -70,13 +70,13 @@ class Neatline_ExhibitsController extends Neatline_Controller_Rest
     public function browseAction()
     {
 
+        parent::browseAction();
+
         // By default, sort by added date.
         if (!$this->_getParam('sort_field')) {
             $this->_setParam('sort_field', 'added');
             $this->_setParam('sort_dir', 'd');
         }
-
-        parent::browseAction();
 
     }
 
