@@ -163,8 +163,8 @@ class NeatlineRecordTable extends Neatline_Table_Expandable
             $bb = $this->params['extent'];
 
             $this->select->where(
-                "MBRIntersects(coverage, GeomFromText('$bb')) OR
-                is_wms = 1" // Always match WMS layers.
+                "MBRIntersects(coverage, GeomFromText('?')) OR
+                is_wms = 1", $bb // Always match WMS layers.
             );
 
             // Omit records with empty coverages.
