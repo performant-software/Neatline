@@ -19,7 +19,7 @@ function nl_setGeometry($coverage)
 {
 	$coverage_or_default = $coverage ?: "POINT(0 0)";
     return new Zend_Db_Expr("COALESCE(
-        GeomFromText('{$coverage_or_default}'), GeomFromText('POINT(0 0)')
+        ST_GeomFromText('{$coverage_or_default}'), ST_GeomFromText('POINT(0 0)')
     )");
 }
 
@@ -32,5 +32,5 @@ function nl_setGeometry($coverage)
  */
 function nl_getGeometry($column)
 {
-    return new Zend_Db_Expr('NULLIF(AsText(coverage), "POINT(0 0)")');
+    return new Zend_Db_Expr('NULLIF(ST_AsText(coverage), "POINT(0 0)")');
 }
