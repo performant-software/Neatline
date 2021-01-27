@@ -165,6 +165,7 @@ SQL
     public function hookConfig($args)
     {
         set_option('neatline_googlemaps_apikey', $_POST['neatline_googlemaps_apikey']);
+        set_option('neatline_exhibitblock_height', $_POST['neatline_exhibitblock_height']);
     }
 
 
