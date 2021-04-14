@@ -25,6 +25,14 @@ Neatline.module('Map.Layers.Stamen', function(Stamen) {
      */
     Stamen: function(json) {
       var layer = new OpenLayers.Layer.Stamen(json.properties.provider);
+      
+      // fix for new stamen schema http://maps.stamen.com/
+      var newStamenUrl = "//stamen-tiles-${S}.a.ssl.fastly.net/" + json.properties.provider + "/${z}/${x}/${y}.png" 
+      var subdomains = ["a","b","c","d"];
+      var Urls = [];
+      if (-1 < newStamenUrl.indexOf("${S}")) for (var a = 0; a < subdomains.length; a++) Urls.push(newStamenUrl.replace("${S}", subdomains[a])); else Urls.push(newStamenUrl);
+      layer.setUrl(Urls);
+      
       layer.name = json.title;
       return layer;
     }
