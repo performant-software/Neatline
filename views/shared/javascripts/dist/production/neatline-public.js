@@ -36900,9 +36900,9 @@ OpenLayers.Rico.Corner = {
             return "$" + e.toLowerCase();
         });
     }
-    var r = " a. b. c. d.".split(" "), s = function(e, t, i, n) {
+    var r = "a b c d".split(), s = function(e, t, i, n) {
         return {
-            "url": [ "http://{S}tile.stamen.com/", e, "/{Z}/{X}/{Y}.", t ].join(""),
+            "url": [ "//stamen-tiles-{S}.a.ssl.fastly.net/", e, "/{Z}/{X}/{Y}.", t ].join(""),
             "type": t,
             "subdomains": r.slice(),
             "minZoom": i,

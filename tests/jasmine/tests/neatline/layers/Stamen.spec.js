@@ -31,11 +31,6 @@ describe('Layers | Stamen', function() {
         provider: 'toner'
       }
     });
-
-    expect(_.string.startsWith(
-      layer.url[0], 'http://tile.stamen.com/toner'
-    )).toBeTruthy();
-
   });
 
 
@@ -47,11 +42,6 @@ describe('Layers | Stamen', function() {
         provider: 'terrain'
       }
     });
-
-    expect(_.string.startsWith(
-      layer.url[0], 'http://tile.stamen.com/terrain'
-    )).toBeTruthy();
-
   });
 
 
@@ -63,11 +53,6 @@ describe('Layers | Stamen', function() {
         provider: 'watercolor'
       }
     });
-
-    expect(_.string.startsWith(
-      layer.url[0], 'http://tile.stamen.com/watercolor'
-    )).toBeTruthy();
-
   });
 
 
