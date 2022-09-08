@@ -1,9 +1,5 @@
 # Neatline status update
-Neatline user/developer support and development is on hiatus while we seek a different institution to take over its future maintenance, development, and support.
-
-We regret the difficulties this causes current users. Unfortunately, we do not have the resources to continue providing these public services at an acceptable level.
-
-We are unable to provide user or developer support, and will not be able to make further changes or updates to the code or documentation.
+Neatline is currently in the process of moving to a new home with Performant Software! More info will be forthcoming from Performant; you can direct any questions in the mean time to [Performant’s contact page](https://www.performantsoftware.com/contact.html).
 
 # Neatline
 
